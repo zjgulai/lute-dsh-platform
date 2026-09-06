@@ -100,7 +100,7 @@ window.__ModuleLoader__.load({
 			var catState = useState("");
 			var cat = catState[0];
 			var setCat = catState[1];
-			var openState = useState(true);
+			var openState = useState(false);
 			var open = openState[0];
 			var setOpen = openState[1];
 			var hintState = useState(null);
