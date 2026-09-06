@@ -69,14 +69,19 @@ window.__ModuleLoader__.load({
 			".ovpRoot .ovpCard:hover { border-color:color-mix(in srgb, var(--dsw-alias-brand-primary) 65%, var(--dsw-alias-border-l1)); background:color-mix(in srgb, var(--dsw-alias-brand-primary) 6%, var(--dsw-alias-bg-layer-2)); }",
 			".ovpRoot .ovpCard:hover:before { opacity:1; transform:scaleY(1); }",
 			".ovpRoot .ovpCard:focus-visible { outline:2px solid var(--dsw-alias-brand-primary); outline-offset:1px; }",
-			".ovpRoot .ovpCardTop { display:flex; align-items:center; justify-content:space-between; gap:6px; }",
+			".ovpRoot .ovpCardTop { display:flex; align-items:center; justify-content:space-between; gap:6px; min-width:0; }",
+			".ovpRoot .ovpCardTitleWrap { min-width:0; flex:1; }",
+			".ovpRoot .ovpCardTitle { max-width:100%; }",
+			".ovpRoot .ovpRight { flex-wrap:nowrap; }",
 			".ovpRoot .ovpCardTitleWrap { display:inline-flex; align-items:center; gap:5px; min-width:0; }",
 			".ovpRoot .ovpCardIcon { flex:none; width:18px; height:18px; border-radius:5px; object-fit:contain; }",
 			".ovpRoot .ovpCardTitle { font-size:12px; font-weight:500; line-height:18px; color:var(--dsw-alias-label-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; transition:color .12s ease; }",
 			".ovpRoot .ovpCard:hover .ovpCardTitle { color:var(--dsw-alias-brand-primary); }",
 			".ovpRoot .ovpCardDesc { margin:0; font-size:11px; line-height:16px; color:var(--dsw-alias-label-secondary); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }",
 			".ovpRoot .ovpTag { flex:none; font-size:10px; line-height:14px; padding:0 5px; border-radius:999px; color:var(--dsw-alias-state-warn-primary); background:color-mix(in srgb, var(--dsw-alias-state-warn-primary) 10%, transparent); border:1px solid color-mix(in srgb, var(--dsw-alias-state-warn-primary) 30%, transparent); }",
-			".ovpRoot .ovpShort { flex:none; border:none; background:transparent; cursor:pointer; font-size:10px; line-height:14px; padding:1px 6px; border-radius:6px; color:var(--dsw-alias-label-tertiary); }",
+			".ovpRoot .ovpRight { flex:none; display:inline-flex; align-items:center; gap:4px; margin-left:auto; }",
+			".ovpRoot .ovpShort { border:none; background:transparent; cursor:pointer; font-size:10px; line-height:14px; padding:1px 6px; border-radius:6px; color:var(--dsw-alias-label-tertiary); opacity:0; transition:opacity .12s ease; }",
+			".ovpRoot .ovpCard:hover .ovpShort { opacity:1; }",
 			".ovpRoot .ovpShort:hover { background:var(--dsw-alias-interactive-bg-hover); color:var(--dsw-alias-label-primary); }",
 			".ovpRoot .ovpLoading { font-size:11px; line-height:16px; color:var(--dsw-alias-label-tertiary); padding:2px 2px 6px; }",
 			"@keyframes ovpIn { from { opacity:0; transform:translateY(-3px); } to { opacity:1; transform:none; } }",
@@ -316,6 +321,7 @@ window.__ModuleLoader__.load({
 												it.icon ? React.createElement("img", { className: "ovpCardIcon", src: it.icon, alt: "" }) : null,
 												React.createElement("span", { className: "ovpCardTitle" }, it.title)
 											),
+														React.createElement("div", { className: "ovpRight" },
 														it.toolGap ? React.createElement("span", { className: "ovpTag" }, "需外部工具") : null,
 														React.createElement("span", {
 															className: "ovpShort",
@@ -323,7 +329,7 @@ window.__ModuleLoader__.load({
 															title: "填入简短引导（不带结构化模板）",
 															onClick: function (e) { e.stopPropagation(); clickShort(it); }
 														}, "简")
-
+													)
 													),
 													it.descriptionZh
 														? React.createElement("p", { className: "ovpCardDesc" }, it.descriptionZh)
@@ -344,7 +350,10 @@ window.__ModuleLoader__.load({
 			}
 		}
 
-function OverseasSkillsPage() {
+function OverseasSkillsPage(props) {
+			props = props || {};
+			var endpoint = props.endpoint || "/list";
+			var showCred = props.showCred !== false;
 			var groupsState = useState(null);
 			var groups = groupsState[0];
 			var setGroups = groupsState[1];
@@ -396,12 +405,12 @@ function OverseasSkillsPage() {
 			};
 
 			useEffect(function () {
-				loadCred();
+				if (showCred) loadCred();
 			}, [loadCred]);
 
 			useEffect(function () {
 				var controller = new AbortController();
-				fetch(API + "/list", { signal: controller.signal, headers: { accept: "application/json" } })
+				fetch(API + endpoint, { signal: controller.signal, headers: { accept: "application/json" } })
 					.then(function (r) {
 						if (!r.ok) throw new Error("HTTP " + r.status);
 						return r.json();
@@ -505,7 +514,7 @@ function OverseasSkillsPage() {
 			return React.createElement(
 				"div",
 				{ className: "ovsRoot", "data-plugin": "dsh-overseas-skills" },
-				React.createElement(
+				showCred ? React.createElement(
 					"div",
 					{ className: "ovsCred" },
 					React.createElement(
@@ -536,7 +545,7 @@ function OverseasSkillsPage() {
 						cred.saving ? "保存中…" : "保存 Exa Key"
 					),
 					cred.msg ? React.createElement("div", { className: "ovsHint" }, cred.msg) : null
-				),
+				) : null,
 				React.createElement("input", {
 					className: "ovsSearch",
 					type: "search",
@@ -627,8 +636,8 @@ function OverseasSkillsPage() {
 			}, "dsh-overseas-skills: css");
 			ctx.effect(function () {
 				return ctx.locale.register(NS, {
-					zh: { nav: "出海技能" },
-					en: { nav: "Overseas Skills" }
+					zh: { nav: "出海技能", fsnav: "AI全栈技能" },
+					en: { nav: "Overseas Skills", fsnav: "AI Full-Stack Skills" }
 				});
 			}, "dsh-overseas-skills: locale");
 						ctx.slots.inject("conversation.input.dock", function () {
@@ -656,7 +665,23 @@ ctx.slots.inject("settings.section", function () {
 					OverseasSkillsPage
 				);
 			});
-		};
+		ctx.slots.inject("settings.section", function () {
+			return ctx.slots.register(
+				{
+					name: "settings.section",
+					id: "fullstack-skills",
+					order: 27,
+					label: function () {
+						return ctx.locale.bind(NS)("fsnav");
+					},
+					locale: NS
+				},
+				function FullstackSkillsPage() {
+					return React.createElement(OverseasSkillsPage, { endpoint: "/fullstack-list", showCred: false });
+				}
+			);
+		});
+	};
 		return module.exports;
 	}
 });
