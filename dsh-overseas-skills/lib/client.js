@@ -44,6 +44,7 @@ window.__ModuleLoader__.load({
 			".ovsRoot .ovsCredBtn:disabled { opacity:.55; cursor:default; }",
 			".ovsRoot .ovsHint { font-size:11px; line-height:16px; color:var(--dsw-alias-label-secondary); }",
 			"@media (prefers-reduced-motion: reduce) { .ovsRoot .ovsSwitch, .ovsRoot .ovsSwitchKnob { transition:none; } }",
+			"[data-plugin=\"dsh-overseas-skills\"].ovpStack { display:flex; flex-direction:column; gap:8px; }",
 			'[data-plugin="dsh-overseas-skills"].ovpRoot { box-sizing:border-box; width:100%; max-width:calc(var(--dsh-composer-card-max-width, 952px) + 48px); margin:0 auto; display:flex; flex-direction:column; gap:8px; padding:8px 10px 10px; min-width:0; border:1px solid var(--dsw-alias-border-l1); border-radius:14px; background:linear-gradient(180deg, color-mix(in srgb, var(--dsw-alias-brand-primary) 5%, transparent) 0%, transparent 64px), var(--dsw-alias-bg-layer-1); }',
 			".ovpRoot .ovpHead { display:flex; align-items:center; gap:8px; }",
 			".ovpRoot .ovpDot { flex:none; width:8px; height:8px; border-radius:50%; background:linear-gradient(135deg, var(--dsw-alias-brand-primary), color-mix(in srgb, var(--dsw-alias-brand-primary) 55%, #7c9cff)); box-shadow:0 0 0 3px color-mix(in srgb, var(--dsw-alias-brand-primary) 16%, transparent); }",
@@ -89,6 +90,8 @@ window.__ModuleLoader__.load({
 		].join("\n");
 
 				function OverseasPalette(props) {
+				var endpoint = props && props.endpoint ? props.endpoint : "/list";
+				var label = props && props.label ? props.label : "出海技能";
 			var sessionId = props && props.sessionId;
 			var inputActions = props && props.inputActions;
 			var groupsState = useState(null);
@@ -119,7 +122,7 @@ window.__ModuleLoader__.load({
 				var fullCache = null;
 				var loadAll = function () {
 					if (fullCache) return Promise.resolve(fullCache);
-					return fetch(API + "/list", { signal: controller.signal, headers: { accept: "application/json" } })
+					return fetch(API + endpoint, { signal: controller.signal, headers: { accept: "application/json" } })
 						.then(function (r) { return r.ok ? r.json() : null; })
 						.then(function (d) { if (d && Array.isArray(d.groups)) fullCache = d; return d; })
 						.catch(function () { return null; });
@@ -254,7 +257,7 @@ window.__ModuleLoader__.load({
 						"div",
 						{ className: "ovpHead" },
 						React.createElement("span", { className: "ovpDot" }),
-						React.createElement("span", { className: "ovpLabel" }, "出海技能"),
+						React.createElement("span", { className: "ovpLabel" }, label),
 						groups && groups.length > 0
 							? React.createElement(
 									"span",
@@ -345,9 +348,18 @@ window.__ModuleLoader__.load({
 				return React.createElement(
 					"div",
 					{ className: "ovpRoot", "data-plugin": "dsh-overseas-skills" },
-					React.createElement("div", { className: "ovsError" }, "出海技能面板渲染失败：" + (e && e.message ? e.message : String(e)))
+					React.createElement("div", { className: "ovsError" }, label + "面板渲染失败：" + (e && e.message ? e.message : String(e)))
 				);
 			}
+		}
+
+		function OverseasPaletteStack(props) {
+			return React.createElement(
+				"div",
+				{ className: "ovpStack", "data-plugin": "dsh-overseas-skills" },
+				React.createElement(OverseasPalette, props),
+				React.createElement(OverseasPalette, Object.assign({}, props, { endpoint: "/fullstack-list", label: "AI全栈技能" }))
+			);
 		}
 
 function OverseasSkillsPage(props) {
@@ -648,7 +660,7 @@ function OverseasSkillsPage(props) {
 						order: 200,
 						locale: NS
 					},
-					OverseasPalette
+					OverseasPaletteStack
 				);
 			});
 ctx.slots.inject("settings.section", function () {
