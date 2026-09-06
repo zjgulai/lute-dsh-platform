@@ -1,0 +1,24 @@
+name: gtm-gtm-strategy-planner
+version: "1.1.0"
+description: Plan and execute Go-to-Market strategies for product launches and market expansion
+category: gtm-promotion
+complexity: complex
+workflows:
+  - product-launch
+dependencies:
+  hard: []
+  soft:
+    - pp-product-research-matrix
+    - gtm-icp-profiler
+  provides:
+    - bm-marketing-content-suite
+    - gtm-outreach-automation
+  parallel: []
+author: lute-skills-creator
+license: MIT
+tags:
+  - gtm
+  - strategy
+  - market-entry
+  - product-launch
+  - go-to-market

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>路特创新 × agentic system — 方案预览</title>
+<style>
+  :root { --green:#58B848; --bar-gray:#A8A8A8; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:28px 32px 40px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif; background:#f4f4f5; color:#1c1c1e; }
+  h1 { font-size:20px; font-weight:700; margin:0 0 6px; letter-spacing:.2px; }
+  .sub { font-size:13px; color:#6b6b6f; margin:0 0 22px; line-height:1.6; }
+  .sub b { color:#3a3a3e; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; max-width:1200px; }
+  .card { background:#fff; border:1px solid #e6e6e9; border-radius:14px; padding:20px 22px 18px; box-shadow:0 2px 10px rgba(0,0,0,.05); }
+  .card-head { display:flex; align-items:baseline; gap:10px; margin-bottom:4px; }
+  .card-tag { font-size:12px; font-weight:700; color:#fff; background:var(--green); padding:2px 9px; border-radius:6px; letter-spacing:.4px; }
+  .card-title { font-size:16px; font-weight:700; }
+  .card-note { font-size:12px; color:#71717a; line-height:1.6; margin:0 0 14px; }
+
+  /* brand row primitive */
+  .row { display:inline-flex; align-items:center; gap:10px; }
+  .sw { display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:10px; }
+  .theme-dark { background:#1a1c1f; color:#e8e8ea; }
+  .theme-light { background:#ffffff; color:#1c1c1e; border:1px solid #e3e3e6; }
+  .rb-mark { color:currentColor; }
+  .rb-name { color:var(--green); font-weight:600; font-size:13px; line-height:18px; letter-spacing:2px; white-space:nowrap; }
+  .lbl { margin:10px 0 6px; font-size:11px; color:#8a8a90; letter-spacing:.5px; }
+
+  /* ---- Option A: capsule chip ---- */
+  .chip-a {
+    display:inline-flex; align-items:center; gap:6px; height:20px; padding:0 9px;
+    border-radius:999px; font-size:10.5px; font-weight:600; letter-spacing:.8px; white-space:nowrap;
+  }
+  .chip-a::before { content:""; width:5px; height:5px; border-radius:50%; background:var(--green); }
+  .theme-dark .chip-a { color:#ffffff; background:rgba(88,184,72,.16); border:1px solid rgba(88,184,72,.55); box-shadow:inset 0 1px 0 rgba(255,255,255,.10); }
+  .theme-light .chip-a { color:#2c7a2f; background:rgba(88,184,72,.12); border:1px solid rgba(88,184,72,.48); }
+
+  /* ---- Option B: glow glass bar ---- */
+  .glow-b {
+    position:relative; z-index:0; display:inline-flex; padding:3px 11px; border-radius:6px;
+    font-size:13px; font-weight:700; letter-spacing:1px; white-space:nowrap;
+  }
+  .glow-b::before {
+    content:""; position:absolute; inset:0; border-radius:6px; z-index:-1;
+    background:linear-gradient(120deg, rgba(88,184,72,.30), rgba(88,184,72,.05));
+    -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+    border:1px solid rgba(88,184,72,.38);
+    box-shadow:0 0 16px rgba(88,184,72,.35), inset 0 1px 0 rgba(255,255,255,.18);
+  }
+  .theme-dark .glow-b { color:#ffffff; }
+  .theme-light .glow-b { color:#1f5d1f; }
+
+  .swatch { display:inline-flex; gap:8px; align-items:center; margin-top:12px; font-size:11px; color:#71717a; }
+  .dot { width:12px; height:12px; border-radius:4px; display:inline-block; }
+  .divider { grid-column:1 / -1; height:1px; background:#e6e6e9; margin-top:6px; }
+  .foot { margin-top:18px; font-size:12px; color:#8a8a90; max-width:1200px; }
+  .thumbs { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+</style>
+</head>
+<body>
+
+<h1>路特创新 × “agentic system” — 方案预览</h1>
+<p class="sub">依据品牌皮肤源码精确还原：<b>R∞T 字标</b>（stroke currentColor + 三条绿/灰/绿圆角条）+ <b>路特创新</b>（品牌绿 <b>#58B848</b>、600 字重、13px、字距 2px）。新增单词 <b>agentic system</b> 置于其右侧，并带背景图层。下方每个方案都给出<b>深色 / 浅色</b>两态（你的当前页面主题对应其一）。</p>
+
+<div class="grid">
+
+  <!-- ================= Option A ================= -->
+  <div class="card">
+    <div class="card-head"><span class="card-tag">方案 A</span><span class="card-title">品牌绿胶囊 · Capsule</span></div>
+    <p class="card-note">圆角胶囊微标签，左侧一个品牌绿圆点。轻盈、克制、专业，像一枚“能力徽章”；字体小一号、与 路特创新 同轴对齐，侧重信息层级与精致感。</p>
+
+    <div class="lbl">深色主题 · 真实尺寸</div>
+    <div class="sw theme-dark">
+      <svg class="rb-mark" width="46" height="24" viewBox="0 0 61 32" fill="none" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6.5 20 V3 H14.5 C18.6 3 21.5 5.9 21.5 9.8 C21.5 13.7 18.6 16.5 14 16.5 H6.5"/><path d="M14 16.5 L20.5 20"/>
+          <path d="M32.75 11.75 C32.75 6.3 25.5 6.3 25.5 11.75 C25.5 17.2 32.75 17.2 32.75 11.75 C32.75 6.3 40 6.3 40 11.75 C40 17.2 32.75 17.2 32.75 11.75"/>
+          <path d="M45.5 3 H57"/><path d="M51.25 3 V20"/>
+        </g>
+        <rect x="6.5" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/><rect x="25.5" y="26" width="16.5" height="5" rx="2.5" fill="#A8A8A8"/><rect x="44" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/>
+      </svg>
+      <span class="rb-name">路特创新</span>
+      <span class="chip-a">agentic system</span>
+    </div>
+
+    <div class="lbl">浅色主题 · 真实尺寸</div>
+    <div class="sw theme-light">
+      <svg class="rb-mark" width="46" height="24" viewBox="0 0 61 32" fill="none" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6.5 20 V3 H14.5 C18.6 3 21.5 5.9 21.5 9.8 C21.5 13.7 18.6 16.5 14 16.5 H6.5"/><path d="M14 16.5 L20.5 20"/>
+          <path d="M32.75 11.75 C32.75 6.3 25.5 6.3 25.5 11.75 C25.5 17.2 32.75 17.2 32.75 11.75 C32.75 6.3 40 6.3 40 11.75 C40 17.2 32.75 17.2 32.75 11.75"/>
+          <path d="M45.5 3 H57"/><path d="M51.25 3 V20"/>
+        </g>
+        <rect x="6.5" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/><rect x="25.5" y="26" width="16.5" height="5" rx="2.5" fill="#A8A8A8"/><rect x="44" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/>
+      </svg>
+      <span class="rb-name">路特创新</span>
+      <span class="chip-a">agentic system</span>
+    </div>
+
+    <div class="swatch"><span class="dot" style="background:#58B848"></span>#58B848 品牌绿为底 · 胶囊描边 rgba(88,184,72,.48)</div>
+  </div>
+
+  <!-- ================= Option B ================= -->
+  <div class="card">
+    <div class="card-head"><span class="card-tag">方案 B</span><span class="card-title">辉光玻璃层 · Glow Glass</span></div>
+    <p class="card-note">单词本身叠加一层品牌绿“玻璃辉光”（渐变绿 + 毛玻璃 + 柔和外发光），像一道能量条。更富 AI／未来感与科技张力，适合作为“系统能力”的视觉强调，紧贴主品牌字标。</p>
+
+    <div class="lbl">深色主题 · 真实尺寸</div>
+    <div class="sw theme-dark">
+      <svg class="rb-mark" width="46" height="24" viewBox="0 0 61 32" fill="none" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6.5 20 V3 H14.5 C18.6 3 21.5 5.9 21.5 9.8 C21.5 13.7 18.6 16.5 14 16.5 H6.5"/><path d="M14 16.5 L20.5 20"/>
+          <path d="M32.75 11.75 C32.75 6.3 25.5 6.3 25.5 11.75 C25.5 17.2 32.75 17.2 32.75 11.75 C32.75 6.3 40 6.3 40 11.75 C40 17.2 32.75 17.2 32.75 11.75"/>
+          <path d="M45.5 3 H57"/><path d="M51.25 3 V20"/>
+        </g>
+        <rect x="6.5" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/><rect x="25.5" y="26" width="16.5" height="5" rx="2.5" fill="#A8A8A8"/><rect x="44" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/>
+      </svg>
+      <span class="rb-name">路特创新</span>
+      <span class="glow-b">agentic&nbsp;system</span>
+    </div>
+
+    <div class="lbl">浅色主题 · 真实尺寸</div>
+    <div class="sw theme-light">
+      <svg class="rb-mark" width="46" height="24" viewBox="0 0 61 32" fill="none" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6.5 20 V3 H14.5 C18.6 3 21.5 5.9 21.5 9.8 C21.5 13.7 18.6 16.5 14 16.5 H6.5"/><path d="M14 16.5 L20.5 20"/>
+          <path d="M32.75 11.75 C32.75 6.3 25.5 6.3 25.5 11.75 C25.5 17.2 32.75 17.2 32.75 11.75 C32.75 6.3 40 6.3 40 11.75 C40 17.2 32.75 17.2 32.75 11.75"/>
+          <path d="M45.5 3 H57"/><path d="M51.25 3 V20"/>
+        </g>
+        <rect x="6.5" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/><rect x="25.5" y="26" width="16.5" height="5" rx="2.5" fill="#A8A8A8"/><rect x="44" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/>
+      </svg>
+      <span class="rb-name">路特创新</span>
+      <span class="glow-b">agentic&nbsp;system</span>
+    </div>
+
+    <div class="swatch"><span class="dot" style="background:linear-gradient(120deg,rgba(88,184,72,.30),rgba(88,184,72,.05))"></span>渐变绿玻璃层 + blur(6px) + 外发光 16px</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="foot">
+    <b>放置说明：</b>本预览按<b>侧栏品牌行</b>（R∞T 字标 + 路特创新）右侧呈现——附件所示“路特创新”通常即此位。
+    若你指的是<b>新会话空态 hero</b>（R∞T 标 + English tagline），同一置式可平移到该处；请确认目标位。<br>
+    <b>落地：</b>在 <code>dsh-root-brand</code> 的 <code>SidebarRootName</code>（或 hero）旁新增该徽标，注入集成到 <code>BRAND_CSS</code>（用 <code>--dsw-alias-state-business-primary</code> / <code>#58B848</code>），构建后生效。
+  </div>
+
+<!-- extra spacing so full page captures the footer -->
+<div style="height:4px"></div>
+</body>
+</html>

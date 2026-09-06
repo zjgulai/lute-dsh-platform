@@ -1,0 +1,398 @@
+{
+  "categories": [
+    {
+      "key": "brand",
+      "title": "品牌战略与管理"
+    },
+    {
+      "key": "pr",
+      "title": "公关与传播"
+    },
+    {
+      "key": "social-ops",
+      "title": "社媒运营"
+    }
+  ],
+  "skills": [
+    {
+      "name": "analytics",
+      "title": "数据分析与追踪",
+      "category": "analytics-finance",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "GA4/GTM 埋点、事件追踪与转化测量搭建和审计",
+      "toolGap": ""
+    },
+    {
+      "name": "attribution",
+      "title": "归因与转化分析",
+      "category": "analytics-finance",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "归因模型、MMM 与增量实验，厘清哪个渠道真在驱动营收",
+      "toolGap": ""
+    },
+    {
+      "name": "brand-governance-os",
+      "title": "品牌治理系统",
+      "category": "brand",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "品牌审批、QA 与培训的治理操作系统",
+      "toolGap": ""
+    },
+    {
+      "name": "brand-measurement-dashboard",
+      "title": "品牌健康度量仪表盘",
+      "category": "brand",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "品牌健康 KPI 框架与报告系统",
+      "toolGap": ""
+    },
+    {
+      "name": "brand-narrative-playbook",
+      "title": "品牌叙事手册",
+      "category": "brand",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "保持各受众信息一致的品牌叙事模板",
+      "toolGap": ""
+    },
+    {
+      "name": "brand-voice-glossary",
+      "title": "品牌语调语汇表",
+      "category": "brand",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "语调、措辞与惯用语体系，保证文风统一",
+      "toolGap": ""
+    },
+    {
+      "name": "experience-system-blueprint",
+      "title": "品牌体验系统蓝图",
+      "category": "brand",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "把品牌平台翻译成多触点体验的文档模式",
+      "toolGap": ""
+    },
+    {
+      "name": "campaign-planning",
+      "title": "营销活动策划",
+      "category": "content-gtm",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "营销活动策略、brief、KPI 与工作计划制定",
+      "toolGap": ""
+    },
+    {
+      "name": "channel-integration",
+      "title": "跨渠道整合",
+      "category": "content-gtm",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "跨渠道同步信息、节奏与统一度量",
+      "toolGap": ""
+    },
+    {
+      "name": "performance-tracking",
+      "title": "活动效果追踪",
+      "category": "content-gtm",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "活动度量框架、仪表盘与优化循环",
+      "toolGap": ""
+    },
+    {
+      "name": "co-marketing",
+      "title": "联合营销伙伴合作",
+      "category": "content-gtm",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "联名营销伙伴筛选、联合活动策划与交叉推广",
+      "toolGap": ""
+    },
+    {
+      "name": "battlecard-library",
+      "title": "竞品战卡库",
+      "category": "research-selection",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "竞品战卡模板体系：标签、分发与销售赋能",
+      "toolGap": ""
+    },
+    {
+      "name": "executive-briefing-kit",
+      "title": "竞品高管简报套件",
+      "category": "research-selection",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "把竞品情报打包成高管级简报的框架",
+      "toolGap": ""
+    },
+    {
+      "name": "market-signal-tracker",
+      "title": "市场信号追踪",
+      "category": "research-selection",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "市场与竞品信号的登记、评分与行动派发机制",
+      "toolGap": ""
+    },
+    {
+      "name": "win-loss-dataset",
+      "title": "赢单输单数据集",
+      "category": "research-selection",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "结构化沉淀赢单/输单定性与定量数据",
+      "toolGap": ""
+    },
+    {
+      "name": "competitor-profiling",
+      "title": "竞品画像与研究",
+      "category": "research-selection",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "按竞品 URL 清单生成结构化竞品档案与市场格局",
+      "toolGap": ""
+    },
+    {
+      "name": "case-studies",
+      "title": "客户案例创作",
+      "category": "content-gtm",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "证明 ROI 的客户成功故事创作",
+      "toolGap": ""
+    },
+    {
+      "name": "editorial-ops",
+      "title": "编辑运营",
+      "category": "content-gtm",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "多渠道编辑日历、审核与产能管理",
+      "toolGap": ""
+    },
+    {
+      "name": "seo-writing",
+      "title": "SEO 内容写作",
+      "category": "content-gtm",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "面向搜索的内容规划与写作",
+      "toolGap": ""
+    },
+    {
+      "name": "storytelling",
+      "title": "故事化叙事",
+      "category": "content-gtm",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "把产品价值讲成有张力的故事",
+      "toolGap": ""
+    },
+    {
+      "name": "thought-leadership",
+      "title": "思想领导力内容",
+      "category": "content-gtm",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "高管 POV、前瞻文章与主题演讲内容",
+      "toolGap": ""
+    },
+    {
+      "name": "webinars",
+      "title": "网络研讨会",
+      "category": "content-gtm",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "网络研讨会的策划、制作与再利用",
+      "toolGap": ""
+    },
+    {
+      "name": "whitepapers",
+      "title": "白皮书",
+      "category": "content-gtm",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "研究型白皮书与技术深度内容生产",
+      "toolGap": ""
+    },
+    {
+      "name": "influencer-marketing",
+      "title": "网红营销全链路",
+      "category": "content-gtm",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "网红/创作者合作的找、签、brief、合规与 ROI 衡量",
+      "toolGap": ""
+    },
+    {
+      "name": "insights-repository-kit",
+      "title": "洞察库治理",
+      "category": "research-selection",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "调研产物的治理、检索与复用工具模式",
+      "toolGap": ""
+    },
+    {
+      "name": "market-scenario-modeler",
+      "title": "市场情景建模（TAM/SAM/SOM）",
+      "category": "research-selection",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "TAM/SAM/SOM 建模、敏感性分析与情景推演",
+      "toolGap": ""
+    },
+    {
+      "name": "participant-operations-hub",
+      "title": "调研参与者运营",
+      "category": "research-selection",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "调研招募、排期、同意与激励的运营与护栏",
+      "toolGap": ""
+    },
+    {
+      "name": "research-brief-blueprint",
+      "title": "调研简报蓝图",
+      "category": "research-selection",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "市场调研项目立项的标准模板与检查清单",
+      "toolGap": ""
+    },
+    {
+      "name": "co-marketing-governance",
+      "title": "联合营销治理",
+      "category": "content-gtm",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "联合营销项目、MDF 与合作伙伴合规治理",
+      "toolGap": ""
+    },
+    {
+      "name": "joint-solution-blueprint",
+      "title": "联合方案蓝图",
+      "category": "content-gtm",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "共同构建的方案、集成与市场进入文档",
+      "toolGap": ""
+    },
+    {
+      "name": "partner-ecosystem-map",
+      "title": "伙伴生态地图",
+      "category": "content-gtm",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "伙伴版图、覆盖与协同的可视化工具",
+      "toolGap": ""
+    },
+    {
+      "name": "partner-revenue-desk",
+      "title": "伙伴营收台",
+      "category": "content-gtm",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "伙伴营收的追踪、归因与加速运营模型",
+      "toolGap": ""
+    },
+    {
+      "name": "crisis-playbooks",
+      "title": "危机公关手册",
+      "category": "pr",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "危机预批工作流、审批与响应手册",
+      "toolGap": ""
+    },
+    {
+      "name": "media-database",
+      "title": "媒体资料库",
+      "category": "pr",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "记者研究、分层与维护的资料库",
+      "toolGap": ""
+    },
+    {
+      "name": "messaging-frameworks",
+      "title": "公关信息框架",
+      "category": "pr",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "信息屋、关键声明与证明点体系",
+      "toolGap": ""
+    },
+    {
+      "name": "public-relations",
+      "title": "公关与媒体关系",
+      "category": "pr",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "媒体关系、记者拓展、新闻劫持与播客预热",
+      "toolGap": ""
+    },
+    {
+      "name": "social-content",
+      "title": "社媒内容创作与发布",
+      "category": "social-ops",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "多平台社媒内容创作、改写与创意变体测试",
+      "toolGap": ""
+    },
+    {
+      "name": "social-operations",
+      "title": "社媒运营与洞察",
+      "category": "social-ops",
+      "categoryTitle": "",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "社媒日历、渠道路线图、社区互动、趋势与舆情洞察",
+      "toolGap": ""
+    }
+  ]
+}

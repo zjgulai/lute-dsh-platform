@@ -1,0 +1,28 @@
+{
+  "total": 22,
+  "strictTop1": 15,
+  "looseTop3": 20,
+  "avgRank": 1.55,
+  "fails": [
+    {
+      "q": "把这个月订单 CSV 整理成月度复盘报告",
+      "expect": "ecommerce-monthly-review",
+      "rank": 4,
+      "top": [
+        "ecommerce-analytics-controller",
+        "ecommerce-business-insights",
+        "ecommerce-daily-report"
+      ]
+    },
+    {
+      "q": "监控 Twitter 上关于我们品牌的讨论和舆情",
+      "expect": "brand-mention-tracking",
+      "rank": 4,
+      "top": [
+        "amazon-prelaunch-trend-scout",
+        "amazon-competitor-monitor",
+        "product-data-deep-analysis"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+skill:
+  name: semantic-document-chunker
+  version: "1.1.0"
+  description: 智能文档分块，保持语义边界
+  author: pdf2skills-project
+
+components:
+  main: SKILL.md
+  references:
+    - references/anchor-splitting.md
+    - references/header-patterns.md
+    - references/llm-prompts.md
+    - references/dfm-rules.md
+  examples:
+    - examples/book-chunking.md
+    - examples/paper-chunking.md
+    - examples/workflow-example.md
+
+embedded_skills:
+  - name: header-tree-analyzer
+    description: 标题树分析器，内嵌于主 Skill
+
+config:
+  max_tokens: 8000
+  max_iterations: 3
+  anchor_length: 30
+  chars_per_token: 2.0
+
+tags:
+  - document-processing
+  - text-chunking
+  - markdown
+  - rag
+
+qa:
+  iron_law_tested: false
+  evaluated_score: null
+  optimized: false

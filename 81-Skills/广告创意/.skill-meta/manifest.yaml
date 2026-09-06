@@ -1,0 +1,27 @@
+skill:
+  name: mkt-ad-creative
+  version: "1.1.0"
+  type: technique
+  parent_skill: mkt-main-hub
+  related_skills:
+    - mkt-paid-ads
+    - mkt-copywriting
+    - mkt-launch-strategy
+  triggers:
+    - 广告文案
+    - 投放文案
+    - 创意概念
+    - A/B测试文案
+    - 广告标题
+  capabilities:
+    - 投放文案生成
+    - 创意概念发想
+    - 多版本A/B测试文案
+    - 广告标题优化
+  output_formats:
+    - text
+  complexity: standard
+  metadata:
+    last_updated: "2026-09-03"
+    author: coreyhaines31
+    source: https://github.com/coreyhaines31/marketingskills

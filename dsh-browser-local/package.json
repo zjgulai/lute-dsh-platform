@@ -1,0 +1,74 @@
+{
+  "name": "@yuxianglin/dsh-bridge-browser",
+  "description": "Local alpha.1 port of dsh-bridge-browser: rc apiproxy surface replaced by the Typert Gateway compat layer.",
+  "version": "0.0.3-alpha.1-port",
+  "author": "Yuxiang Lin",
+  "license": "MIT",
+  "private": true,
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./protocol": {
+      "types": "./lib/types/protocol.d.ts",
+      "default": "./lib/protocol.js"
+    },
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/protocol.js",
+    "lib/types/**/*.d.ts",
+    "cordis.patch.yml",
+    "src"
+  ],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/dsh-agent": "*",
+    "@deepseek-ai/dsh-tools": "*",
+    "@deepseek-ai/dsh-home-paths": "*",
+    "@deepseek-ai/dsh-host-webserver": "*",
+    "@deepseek-ai/dsh-llm": "*",
+    "@deepseek-ai/schemastery": "*"
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "^3.18.1",
+    "ws": "^8.21.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc -b --pretty false",
+    "build": "tsc -b --pretty false && tsdown"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.0",
+    "@types/ws": "^8.18.1",
+    "playwright-core": "^1.61.1",
+    "tsdown": "0.22.2",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8",
+    "@deepseek-ai/cordis": "/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/cordis",
+    "@deepseek-ai/dsh-agent": "/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-agent",
+    "@deepseek-ai/dsh-attachment": "/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-attachment",
+    "@deepseek-ai/dsh-home-paths": "/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-home-paths",
+    "@deepseek-ai/dsh-host-webserver": "/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-host-webserver",
+    "@deepseek-ai/dsh-invariants": "/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-invariants",
+    "@deepseek-ai/dsh-llm": "/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-llm",
+    "@deepseek-ai/dsh-session": "/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-session",
+    "@deepseek-ai/dsh-tools": "/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-tools",
+    "@deepseek-ai/dsh-api-gateway": "/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-api-gateway",
+    "@deepseek-ai/schemastery": "/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/schemastery"
+  }
+}

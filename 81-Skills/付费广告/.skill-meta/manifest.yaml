@@ -1,0 +1,28 @@
+skill:
+  name: mkt-paid-ads
+  version: "1.0.0"
+  type: technique
+  parent_skill: mkt-main-hub
+  related_skills:
+    - mkt-ad-creative
+    - mkt-cro-optimization
+    - mkt-launch-strategy
+  triggers:
+    - 付费广告
+    - 广告优化
+    - 出价策略
+    - 预算分配
+    - ROAS提升
+  capabilities:
+    - 预算分配策略
+    - 出价策略优化
+    - 受众定向优化
+    - 投放数据分析
+  output_formats:
+    - text
+    - markdown
+  complexity: standard
+  metadata:
+    last_updated: "2026-04-08"
+    author: coreyhaines31
+    source: https://github.com/coreyhaines31/marketingskills

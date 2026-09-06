@@ -1,0 +1,454 @@
+{
+ "1688-sourcing": {
+  "summaryZh": "1688 平台选品寻源与供应商对接（需外部工具接入）"
+ },
+ "product-supplier-sourcing": {
+  "summaryZh": "阿里等 B2B 平台搜品比价，锁定供应商与工厂"
+ },
+ "dropshipping-supplier-integrator": {
+  "summaryZh": "多供应商代发：订单路由、库存同步与利润跟踪"
+ },
+ "supplier-performance-manager": {
+  "summaryZh": "按季度评分卡跟踪供应商绩效与交期表现"
+ },
+ "aliexpress-supplier-evaluator": {
+  "summaryZh": "五项可信信号评估海外供应商可靠性"
+ },
+ "sales-negotiator": {
+  "summaryZh": "B2B 谈判策略：锚定、让步、BATNA 与合同条款"
+ },
+ "competitor-deep-analysis": {
+  "summaryZh": "多层情报与评论挖掘，找市场空白与战略优势"
+ },
+ "competitive-landscape": {
+  "summaryZh": "波特五力等框架绘制市场竞品格局"
+ },
+ "review-analyst-agent": {
+  "summaryZh": "大规模评论分析：共性问题与改进优先级"
+ },
+ "review-summarizer": {
+  "summaryZh": "批量评论聚合摘要，提炼要点与结论（需外部工具）"
+ },
+ "people-research": {
+  "summaryZh": "个人职业背景、履历与公开信息调研"
+ },
+ "social-network-mapper": {
+  "summaryZh": "社交互动关系图谱与社群聚类"
+ },
+ "product-selection": {
+  "summaryZh": "行业→消费者→选品→供应商的循证选品流程"
+ },
+ "alibaba-amazon-market-intel": {
+  "summaryZh": "亚马逊平台数据查询与市场情报（需外部工具）"
+ },
+ "org-structure-research": {
+  "summaryZh": "组织架构、汇报关系与员工画像调研"
+ },
+ "jungle-scout-deep-dive-analyzer": {
+  "summaryZh": "Jungle Scout 类目与商品深度分析（需 Jungle Scout）"
+ },
+ "market-signal-tracker": {
+  "summaryZh": "市场与竞品信号登记、评分与行动派发"
+ },
+ "battlecard-library": {
+  "summaryZh": "竞品战卡模板：标签、分发与销售赋能"
+ },
+ "executive-briefing-kit": {
+  "summaryZh": "竞品情报打包成高管级简报"
+ },
+ "win-loss-dataset": {
+  "summaryZh": "赢单/输单定性与定量数据沉淀"
+ },
+ "insights-repository-kit": {
+  "summaryZh": "调研产物治理、检索与复用"
+ },
+ "market-scenario-modeler": {
+  "summaryZh": "TAM/SAM/SOM 建模与情景推演"
+ },
+ "participant-operations-hub": {
+  "summaryZh": "调研招募、排期、同意与激励运营"
+ },
+ "research-brief-blueprint": {
+  "summaryZh": "调研项目立项模板与检查清单"
+ },
+ "video-prompt-guide": {
+  "summaryZh": "视频生成提示词统一路由：场景、分镜与重生成"
+ },
+ "image-prompt-guide": {
+  "summaryZh": "AI 生图/修图提示词与工具路由"
+ },
+ "higgsfield-guide": {
+  "summaryZh": "Higgsfield 文生图、图生视频与进度管理"
+ },
+ "content-breakdown": {
+  "summaryZh": "爆款内容拆解：结构、钩子与复用套路（需外部工具）"
+ },
+ "product-launch-planner": {
+  "summaryZh": "预发布 waitlist、分级优先与多渠道发布策划"
+ },
+ "product-marketing-context": {
+  "summaryZh": "产品定位、卖点与营销背景文档沉淀"
+ },
+ "product-marketing-brief": {
+  "summaryZh": "产品规格与客户洞察合成营销简报"
+ },
+ "vibe-marketing": {
+  "summaryZh": "氛围式营销内容快速生成、测试与迭代"
+ },
+ "content-strategy": {
+  "summaryZh": "受众、内容支柱、渠道与选题策略"
+ },
+ "social-media-publisher": {
+  "summaryZh": "多平台社媒内容一键发布（需外部工具）"
+ },
+ "social-media-content-creator": {
+  "summaryZh": "LinkedIn/X/IG/TikTok 平台原生内容创作与复用"
+ },
+ "influencer-campaign-manager": {
+  "summaryZh": "网红合作端到端管理与多渠道 ROI 衡量"
+ },
+ "xiaohongshu-content-creator": {
+  "summaryZh": "面向 CES 算法的小红书种草内容创作"
+ },
+ "marketing-ideas": {
+  "summaryZh": "140+ 已验证打法，按品类提供增长创意"
+ },
+ "marketing-psychology": {
+  "summaryZh": "70+ 心理模型驱动转化（稀缺、锚定、互惠）"
+ },
+ "instagram-marketing": {
+  "summaryZh": "Instagram 内容与投放运营（需外部工具）"
+ },
+ "remotion": {
+  "summaryZh": "Remotion 代码化视频最佳实践（需外部工具）"
+ },
+ "campaign-planning": {
+  "summaryZh": "营销活动策略、brief、KPI 与工作计划"
+ },
+ "channel-integration": {
+  "summaryZh": "跨渠道信息、节奏与度量统一"
+ },
+ "co-marketing": {
+  "summaryZh": "联名伙伴筛选、联合活动策划与交叉推广"
+ },
+ "case-studies": {
+  "summaryZh": "证明 ROI 的客户成功故事创作"
+ },
+ "editorial-ops": {
+  "summaryZh": "编辑日历、审核与产能管理"
+ },
+ "seo-writing": {
+  "summaryZh": "面向搜索的内容规划与写作"
+ },
+ "storytelling": {
+  "summaryZh": "把产品价值讲成有张力的故事"
+ },
+ "thought-leadership": {
+  "summaryZh": "高管 POV、前瞻文章与主题演讲内容"
+ },
+ "webinars": {
+  "summaryZh": "网络研讨会策划、制作与内容再利用"
+ },
+ "whitepapers": {
+  "summaryZh": "研究型白皮书与技术深度内容"
+ },
+ "influencer-marketing": {
+  "summaryZh": "网红找签 brief、合规与 ROI 全链路"
+ },
+ "co-marketing-governance": {
+  "summaryZh": "联名项目、MDF 与伙伴合规治理"
+ },
+ "joint-solution-blueprint": {
+  "summaryZh": "联合方案、集成与市场进入文档"
+ },
+ "partner-ecosystem-map": {
+  "summaryZh": "伙伴版图、覆盖与协同可视化"
+ },
+ "partner-revenue-desk": {
+  "summaryZh": "伙伴营收追踪、归因与加速"
+ },
+ "brand-governance-os": {
+  "summaryZh": "品牌审批、QA 与培训治理系统"
+ },
+ "brand-measurement-dashboard": {
+  "summaryZh": "品牌健康 KPI 框架与报告系统"
+ },
+ "brand-narrative-playbook": {
+  "summaryZh": "跨受众一致的品牌叙事模板"
+ },
+ "experience-system-blueprint": {
+  "summaryZh": "品牌平台翻译成多触点体验蓝图"
+ },
+ "crisis-playbooks": {
+  "summaryZh": "危机预批工作流、审批与响应手册"
+ },
+ "media-database": {
+  "summaryZh": "记者研究、分层与维护资料库"
+ },
+ "messaging-frameworks": {
+  "summaryZh": "信息屋、关键声明与证明点体系"
+ },
+ "public-relations": {
+  "summaryZh": "媒体关系、记者拓展与播客预热"
+ },
+ "social-operations": {
+  "summaryZh": "社媒日历、路线图、社区互动与舆情洞察"
+ },
+ "product-description-generator": {
+  "summaryZh": "多语种产品描述批量生成（需外部工具）"
+ },
+ "programmatic-seo-strategist": {
+  "summaryZh": "模板页+自有数据规模化长尾流量"
+ },
+ "serp-ranking-analyzer": {
+  "summaryZh": "SERP 排名因素与意图信号深度分析"
+ },
+ "amz-hot-keywords": {
+  "summaryZh": "亚马逊热词挖掘与词频分析（需外部工具）"
+ },
+ "ab-test-setup": {
+  "summaryZh": "着陆页、邮件与素材 A/B 实验设计与实施"
+ },
+ "google-shopping-feed-optimizer": {
+  "summaryZh": "Google Merchant Center 信息源搭建优化"
+ },
+ "seo-keyword-research": {
+  "summaryZh": "高价值关键词、意图分类与主题簇挖掘"
+ },
+ "tiktok-ads-strategy": {
+  "summaryZh": "创意优先的 TikTok 投放、Spark Ads 与竞价"
+ },
+ "warehouse-fulfillment-workflow": {
+  "summaryZh": "拣货、打包、打单仓库作业标准化"
+ },
+ "ecommerce-gdpr-compliance": {
+  "summaryZh": "Cookie 同意、SAR 与删除权合规落地"
+ },
+ "multi-currency-checkout": {
+  "summaryZh": "本地货币定价、自动汇率与取整"
+ },
+ "multi-location-order-router": {
+  "summaryZh": "多仓路由、拆单与缺货队列引擎"
+ },
+ "multichannel-inventory-sync": {
+  "summaryZh": "Shopify/Amazon/eBay 库存与订单统一"
+ },
+ "invoice-generator": {
+  "summaryZh": "税务合规 PDF 发票与顺序编号"
+ },
+ "chargeback-dispute-manager": {
+  "summaryZh": "欺诈评分+证据自动化预防处理拒付"
+ },
+ "social-commerce-sync": {
+  "summaryZh": "Meta/TikTok/Pinterest 商品目录与库存同步"
+ },
+ "return-policy-designer": {
+  "summaryZh": "按类目设计退货窗口、补货费与规则"
+ },
+ "buy-now-pay-later-setup": {
+  "summaryZh": "Klarna/Afterpay/Affirm 分期接入"
+ },
+ "amazon-brand-protection": {
+  "summaryZh": "品牌注册与 IP 工具打击跟卖假货"
+ },
+ "amazon-fba-inventory-optimizer": {
+  "summaryZh": "IPI 分数、补货限额与仓储费管理"
+ },
+ "payment-fraud-detector": {
+  "summaryZh": "风险评分、3DS 与人工审核防欺诈"
+ },
+ "returns-exchange-automator": {
+  "summaryZh": "自助退换门户、动态路由与自动退款"
+ },
+ "etsy-pod-automation": {
+  "summaryZh": "Printify 全流程：设计、建 Listing、发布推广"
+ },
+ "tiktok-shop-setup": {
+  "summaryZh": "TikTok Shop 开店：目录、订单与达人计划"
+ },
+ "tariff-search": {
+  "summaryZh": "HS 编码与进口关税查询（TurtleClassify）"
+ },
+ "sales-tax-vat-automator": {
+  "summaryZh": "全球销售税/VAT/GST 计算与申报"
+ },
+ "creating-financial-models": {
+  "summaryZh": "DCF、敏感性、蒙特卡洛财务建模套件"
+ },
+ "ecommerce-financial-dashboard": {
+  "summaryZh": "损益表、资产负债表与现金流仪表盘"
+ },
+ "ecommerce-sales-dashboard": {
+  "summaryZh": "营收、AOV、转化率与渠道表现追踪"
+ },
+ "ecommerce-budget-forecaster": {
+  "summaryZh": "滚动 12 个月营收/营销/库存预算"
+ },
+ "dynamic-pricing-engine": {
+  "summaryZh": "按需求、竞品价与库存自动调价"
+ },
+ "profit-margin-analyzer": {
+  "summaryZh": "按产品/渠道/细分核算毛利与净利"
+ },
+ "freemium-upgrade-optimizer": {
+  "summaryZh": "付费墙时机、文案与定价结构优化"
+ },
+ "sycm-analysis-skill": {
+  "summaryZh": "浏览器会话读取淘宝生意参谋周报"
+ },
+ "marketing-roas-analyzer": {
+  "summaryZh": "全渠道投放 ROAS 归因与预算再分配"
+ },
+ "dcf-valuation": {
+  "summaryZh": "现金流折现估值：内在价值与目标价"
+ },
+ "analytics": {
+  "summaryZh": "GA4/GTM 埋点、事件追踪与转化测量"
+ },
+ "attribution": {
+  "summaryZh": "归因模型、MMM 与增量实验找真渠道"
+ },
+ "product-review-intelligence-collector": {
+  "summaryZh": "多平台评论自动采集与多维分析"
+ },
+ "seasonal-campaign-automator": {
+  "summaryZh": "BFCM、大促旺季营销编排自动化"
+ },
+ "checkout-flow-optimizer": {
+  "summaryZh": "地址补全、快捷支付与字段精简"
+ },
+ "helpdesk-order-integration": {
+  "summaryZh": "工单对接订单数据与 VIP 路由"
+ },
+ "customer-retention-automator": {
+  "summaryZh": "行为触发+分层激励防流失"
+ },
+ "customer-ltv-calculator": {
+  "summaryZh": "历史与预测 LTV 驱动留存召回"
+ },
+ "customer-winback-automator": {
+  "summaryZh": "多阶段召回流失客户并分层折扣"
+ },
+ "customer-rfm-analyzer": {
+  "summaryZh": "RFM 分群与队列留存网格"
+ },
+ "review-request-automator": {
+  "summaryZh": "三步式购后评价请求与激励"
+ },
+ "cart-abandonment-recovery": {
+  "summaryZh": "邮件+短信序列赢回弃购用户",
+  "title": "弃购挽回"
+ },
+ "lifecycle-marketing-automator": {
+  "summaryZh": "七阶段生命周期个性化触达"
+ },
+ "referral-program-builder": {
+  "summaryZh": "推荐链接、分级激励与防作弊"
+ },
+ "coupon-discount-manager": {
+  "summaryZh": "折扣码生成、限额与有效期管理"
+ },
+ "discount-promotion-engine": {
+  "summaryZh": "数量折扣、买赠与购物车促销"
+ },
+ "loyalty-points-designer": {
+  "summaryZh": "积分+VIP 分层提升留存与 LTV"
+ },
+ "b2b-payment-terms-optimizer": {
+  "summaryZh": "净账期、信用额度与自动开票"
+ },
+ "lark-tools": {
+  "summaryZh": "飞书多维表格、文档、日历、任务与邮件操作"
+ },
+ "create-website": {
+  "summaryZh": "需求直达完整 HTML 网站/落地页"
+ },
+ "internal-comms": {
+  "summaryZh": "内部通报、周报与 FAQ 结构化模板"
+ },
+ "doc-coauthoring": {
+  "summaryZh": "共写文档、提案与技术规格的流程"
+ },
+ "docx": {
+  "summaryZh": "DOCX 文档读写与格式处理（需外部工具）"
+ },
+ "gmail-assistant": {
+  "summaryZh": "Gmail 撰写、整理、管理与送达验证"
+ },
+ "pdf": {
+  "summaryZh": "PDF 解析与生成处理（需外部工具）"
+ },
+ "pptx": {
+  "summaryZh": "PPTX 演示文稿生成与编辑（需外部工具）"
+ },
+ "xlsx": {
+  "summaryZh": "xlsx 表格读写与数据处理（需外部工具）"
+ },
+ "skill-vetter": {
+  "summaryZh": "技能安装前权限与可疑模式安全审查"
+ },
+ "skill-finder": {
+  "summaryZh": "按能力描述检索推荐 DSH 技能/插件（需外部工具）"
+ },
+ "self-improvement": {
+  "summaryZh": "智能体从会话沉淀与自我学习（需外部工具）"
+ },
+ "accio-mcp-cli": {
+  "summaryZh": "CLI 调用 Twitter/Gmail/Notion 等 MCP 工具"
+ },
+ "amazon-prelaunch-ad-budget": {
+  "summaryZh": "上线前亚马逊广告预算测算与 ACoS 场景",
+  "title": "上线前广告预算"
+ },
+ "amazon-prelaunch-competitor-teardown": {
+  "summaryZh": "拆解竞品 ASIN：营收、价格史与关键词",
+  "title": "上线前竞品拆解"
+ },
+ "amazon-prelaunch-demand-check": {
+  "summaryZh": "验证亚马逊真实需求与首批订货量",
+  "title": "上线前需求验证"
+ },
+ "amazon-prelaunch-demand-mirror": {
+  "summaryZh": "把任意产品映射到亚马逊需求信号",
+  "title": "上线前需求映射"
+ },
+ "amazon-prelaunch-listing-builder": {
+  "summaryZh": "搜索量数据构建关键词优化的 Listing",
+  "title": "上线前Listing构建"
+ },
+ "amazon-prelaunch-margin-check": {
+  "summaryZh": "产品经济性测算与 GO/NO-GO 结论",
+  "title": "上线前利润测算"
+ },
+ "amazon-prelaunch-trend-scout": {
+  "summaryZh": "发现快速上升的亚马逊利基与黑马品牌",
+  "title": "上线前趋势侦察"
+ },
+ "ai-content-images": {
+  "summaryZh": "长文拆成 1–10 张图文卡片，12 种视觉风格、8 种布局"
+ },
+ "grill-me": {
+  "summaryZh": "开发前决策树逐轮澄清需求与范围"
+ },
+ "tdd": {
+  "summaryZh": "失败测试→最小实现→转绿的纵向开发循环"
+ },
+ "to-spec": {
+  "summaryZh": "已澄清需求综合为本地可追踪规格"
+ },
+ "build-ai-report": {
+  "summaryZh": "Excel 只读分析→清洗→结论→离线 HTML 报表"
+ },
+ "dsh-motion-deck": {
+  "summaryZh": "主题/大纲生成每页带动画的 HTML 演示文稿"
+ },
+ "feishu-digital-employee": {
+  "summaryZh": "飞书数字员工：任务、会议室、日程 MCP 实操"
+ },
+ "find-plugins": {
+  "summaryZh": "按能力需求检索推荐 DSH 插件"
+ },
+ "product-launch-video": {
+  "summaryZh": "一句话生成产品发布视频全流程"
+ }
+}

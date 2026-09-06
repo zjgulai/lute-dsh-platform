@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Build output
+lib/
+dist/
+*.tsbuildinfo
+*.tgz
+.pnpm-store/
+
+# TypeScript type tests
+types/**/tsconfig.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+
+# Test / coverage
+coverage/
+.nyc_output/
+.artifacts/
+
+# Cordis / dsh local profile artifacts (never ship these)
+.cordis/
+*.local.yml
+
+# Developer-local process helper; contains machine-specific paths/PIDs.
+restart-web.sh

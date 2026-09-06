@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>业务预设 · LUTE Agentic System</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap bar">
+    <span class="logo">LUTE <b>Agentic System</b></span>
+    <nav>
+      <a href="index.html">总览</a>
+      <a href="plugins.html">插件能力图谱</a>
+      <a href="skills.html">技能库</a>
+      <a class="on" href="presets.html">业务预设</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero" style="padding:34px 40px">
+    <h1>业务预设（数字员工）</h1>
+    <p>预设 = 给 AI 换一个「职业」。选了角色，AI 就带着这个岗位的系统提示词、专属技能和工具上岗。开箱即用，一句话就能开始工作。共有 7 个业务数字员工 + 4 个出厂基础模式。</p>
+    <div class="chips">
+      <span>👤 7 个业务数字员工</span><span>⚙ 4 个出厂基础模式</span><span>🎯 新会话选择即生效</span><span>📲 飞书可远程切 /preset</span>
+    </div>
+  </div>
+
+  <section>
+    <h2>怎么使用 <span class="tag">三步</span></h2>
+    <table>
+      <tr><th style="width:60px">步骤</th><th>操作</th></tr>
+      <tr><td>1</td><td>新会话时在预设选择器选一个角色（或对已绑定的飞书机器人用 /preset 切换）</td></tr>
+      <tr><td>2</td><td>像对真人下属一样提需求（预设已带专属技能，自动启用）</td></tr>
+      <tr><td>3</td><td>成果直接产出（报告 HTML / 视频 MP4 / 图文卡片 / 任务创建…）</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>7 个业务数字员工</h2>
+    <div class="grid">
+      <div class="card key">
+        <h3>AI 产品开发工程师 <span class="ver">3 技能</span></h3>
+        <p class="desc">AI WebApp 产品开发全流程：先澄清需求、再写规格、最后测试驱动开发——一套规范的「从想法到可交付」流程。</p>
+        <div class="flow"><span class="f">grill-me 澄清</span><span class="arr">→</span><span class="f">to-spec 写规格</span><span class="arr">→</span><span class="f">tdd 开发</span></div>
+        <h4 style="margin-top:12px">自带技能 (3)</h4>
+        <ul>
+          <li><b>grill-me</b>：开发前用决策树逐轮澄清方向、用户选择、范围边界，不跑偏</li>
+          <li><b>to-spec</b>：把聊清楚的需求写成可追踪规格书</li>
+          <li><b>tdd</b>：先写失败测试 → 最小实现 → 测试转绿，稳扎稳打</li>
+        </ul>
+        <div class="example"><b>场景：</b>「我要一个团队周报收集小程序」→ 它先问清需求边界，再出规格，再开发。</div>
+      </div>
+
+      <div class="card">
+        <h3>LLM Wiki 全栈工程师 <span class="ver">1 技能</span></h3>
+        <p class="desc">面向企业知识库项目的分阶段开发工程师，会按能力缺口推荐插件。</p>
+        <ul>
+          <li>企业知识库项目分阶段推进（需求→架构→实现→验收）</li>
+          <li><b>find-plugins</b>：需要某个能力时推荐现成插件</li>
+        </ul>
+        <div class="example"><b>场景：</b>「给公司搭一个内部知识库项目」</div>
+      </div>
+
+      <div class="card key">
+        <h3>AI 数据叙事分析师 <span class="ver">1 技能</span></h3>
+        <p class="desc">读 Excel 讲数据故事：数据剖析 → 清洗口径 → 结论提炼 → 图表选型 → 离线 HTML 报表 → 双端验收。适合「把数据变成能讲的故事」。</p>
+        <div class="flow"><span class="f">剖析</span><span class="arr">→</span><span class="f">清洗口径</span><span class="arr">→</span><span class="f">提炼结论</span><span class="arr">→</span><span class="f">图表选型</span><span class="arr">→</span><span class="f">HTML 报表</span><span class="arr">→</span><span class="f">双端验收</span></div>
+        <ul>
+          <li>只读分析本地 Excel（.xlsx/.xlsm），不改原数据</li>
+          <li>产出离线 HTML 报表（**不联网也能看**），图表自带</li>
+        </ul>
+        <div class="example"><b>场景：</b>丢给它一个销售 Excel：「分析上季度销售情况，出份报告」→ 得到一份带图表的 HTML 报告。</div>
+      </div>
+
+      <div class="card">
+        <h3>AI 内容视觉编辑 <span class="ver">1 技能</span></h3>
+        <p class="desc">长文变图文卡片：1–10 张知识卡片，12 种视觉风格 × 8 种布局 × 3 套配色。</p>
+        <div class="row"><span class="k">自带技能</span><span class="v">ai-content-images（1 个）</span></div>
+        <div class="example"><b>场景：</b>「把这篇产品介绍做成微信图文卡片」</div>
+      </div>
+
+      <div class="card key">
+        <h3>AI 产品视频导演 <span class="ver">1 技能</span></h3>
+        <p class="desc">一句话出宣传片：自动生成简报 → 设计规范 → 分镜 → 源码 → 验收过的 MP4，全流程从空白目录开始。</p>
+        <div class="flow"><span class="f">简报</span><span class="arr">→</span><span class="f">设计规范</span><span class="arr">→</span><span class="f">分镜</span><span class="arr">→</span><span class="f">源码</span><span class="arr">→</span><span class="f">MP4</span></div>
+        <ul>
+          <li>产品发布片 / 功能预告片 / 应用宣传片 / 网站展示视频</li>
+          <li>产出的是验收过的 MP4，不是半成品</li>
+        </ul>
+        <div class="example"><b>场景：</b>「给新 App 做个 60 秒发布预告片」</div>
+      </div>
+
+      <div class="card">
+        <h3>DSH 动效演示导演 <span class="ver">1 技能</span></h3>
+        <p class="desc">大纲变动效演示文稿：8 页单文件 HTML，每页有动画，结构完整视觉突出（不出 pptx）。</p>
+        <ul>
+          <li>演示文稿主题/内容大纲/会议材料 → 8 页动效 HTML</li>
+          <li>内置动效运行适配器，不依赖外部工具</li>
+        </ul>
+        <div class="example"><b>场景：</b>「把这份会议材料做成带动效的演示页」</div>
+      </div>
+
+      <div class="card key">
+        <h3>飞书数字员工 <span class="badge b-ext" style="margin-left:8px">重点</span></h3>
+        <p class="desc">住在飞书里的员工：处理飞书数字员工对话，用飞书 MCP 创建真实任务——发布、安排、指派一条龙。配合 dsh-im 飞书机器人使用。</p>
+        <ul>
+          <li><b>飞书里说「安排一个任务给张三」→ 真实在飞书里建任务</b></li>
+          <li>普通寒暄只回复不建任务（有分寸，不乱建）</li>
+          <li>时间解析 MCP：自然语言时间（「明天下午」）自动转具体时间</li>
+          <li>群聊清醒严肃，私聊轻松自然</li>
+        </ul>
+        <div class="row"><span class="k">自带技能</span><span class="v">feishu-digital-employee + 飞书 MCP + 时间解析 MCP</span></div>
+        <div class="row"><span class="k">怎么触发</span><span class="v"><span class="badge b-ext">飞书消息</span>（dsh-im 机器人绑定此预设）+ 新会话选此预设</span></div>
+        <div class="example"><b>业务场景：</b>团队在飞书里 @机器人：「周五前让设计组出三版新首页」——真实飞书任务自动创建并指派。</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>4 个出厂基础模式 <span class="tag">非业务角色，随桌面附带</span></h2>
+    <table>
+      <tr><th style="width:180px">模式</th><th>定位</th><th style="width:220px">适合什么时候用</th></tr>
+      <tr><td>标准模式（standard）</td><td>默认通用智能体，能力最全</td><td>日常任务，绝大多数场景</td></tr>
+      <tr><td>极简模式（minimal）</td><td>轻量快速，少开销</td><td>简单问答、快速操作</td></tr>
+      <tr><td>创造模式（cordis）</td><td>面向组合与插件开发</td><td>写插件、调装配</td></tr>
+      <tr><td>PTC 模式（ptc）</td><td>特定工作流模板</td><td>对应工作流场景</td></tr>
+    </table>
+    <p class="note" style="margin-top:12px">业务数字员工与基础模式可以随时切换；对飞书机器人用 /preset 命令也能远程换角色。</p>
+  </section>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span><b>LUTE Agentic System</b> · 业务预设</span>
+    <span>7 数字员工 + 4 基础模式 · 更新 2026-08-30</span>
+    <a href="index.html">← 返回总览</a>
+  </div>
+</footer>
+</body>
+</html>

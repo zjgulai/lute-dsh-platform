@@ -1,0 +1,13 @@
+# Your patch layer for this dsh profile, applied after every bundle layer:
+# a top-level YAML array of loader patch entries (id-targeted config
+# overrides, disables, and insert lists; `!!js` expressions allowed).
+- id: dsh-memory
+  config:
+    python: /Users/lute/.dsh/aeis-venv/bin/python
+
+# Local adaptation of oil-oil/dsh-theme (0.1.0-local.1): module and token
+# surface migrated from Harness 0.1.0-rc.6 to this Desktop's 0.1.2-alpha.1.
+# Source: /Users/lute/project/Magpie-Horch/dsh-theme-local
+- insert:
+    - id: dsh-theme
+      name: dsh-theme

@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" />
+    <title>LUTE Agentic System</title>
+    <script type="module" crossorigin src="./assets/desktop-dialog-C6qDR3Sk.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-CbXtAM7H.js">
+    <link rel="modulepreload" crossorigin href="./assets/DesktopFrame-uOj0T9GT.js">
+    <link rel="modulepreload" crossorigin href="./assets/addEventListener-Bd4JDkiQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/scroll-area-Dzpbb0Zp.js">
+    <link rel="stylesheet" crossorigin href="./assets/DesktopFrame-Bk-6FzWf.css">
+  <link rel="stylesheet" crossorigin href="./assets/dsh-theme.css"></head>
+  <body><div id="root"></div></body>
+</html>

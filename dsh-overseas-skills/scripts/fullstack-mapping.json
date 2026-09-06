@@ -1,0 +1,43 @@
+{
+  "categories": [
+    { "key": "fs-clarify", "title": "需求澄清" },
+    { "key": "fs-spec", "title": "规格规划" },
+    { "key": "fs-architecture", "title": "架构设计" },
+    { "key": "fs-implement", "title": "实现" },
+    { "key": "fs-quality", "title": "质量排查" },
+    { "key": "fs-infra", "title": "工程基建" },
+    { "key": "fs-collab", "title": "协作复盘" },
+    { "key": "fs-writing", "title": "写作内容" }
+  ],
+  "skills": [
+    { "src": "productivity/grilling", "name": "grilling", "title": "无情访谈", "cat": "fs-clarify", "summaryZh": "连续追问打磨方案与设计，产出更锋利的计划" },
+    { "src": "productivity/grill-me", "name": "grill-me", "title": "方案访谈（转发）", "cat": "fs-clarify", "summaryZh": "转发器：调用 grilling 执行无情访谈" },
+    { "src": "engineering/grill-with-docs", "name": "grill-with-docs", "title": "文档式访谈", "cat": "fs-clarify", "summaryZh": "访谈+落档：调用 grilling 与 domain-modeling，产出 ADR 与词汇表" },
+    { "src": "productivity/wait-what", "name": "wait-what", "title": "打断纠偏", "cat": "fs-clarify", "summaryZh": "感觉不对劲时停下核对假设、指出问题再继续" },
+    { "src": "productivity/to-questionnaire", "name": "to-questionnaire", "title": "访谈转问卷", "cat": "fs-clarify", "summaryZh": "把访谈问题整理为问卷文档" },
+    { "src": "engineering/research", "name": "research", "title": "一手资料调研", "cat": "fs-clarify", "summaryZh": "针对高可信一手资料调研并沉淀为 Markdown 结论" },
+    { "src": "productivity/teach", "name": "teach", "title": "概念教学", "cat": "fs-clarify", "summaryZh": "把一个概念教到用户真正理解并验证理解" },
+    { "src": "engineering/to-spec", "name": "to-spec", "title": "对话转规格", "cat": "fs-spec", "summaryZh": "把当前对话综合为规格并发布到项目 issue tracker" },
+    { "src": "engineering/to-tickets", "name": "to-tickets", "title": "规格转任务卡", "cat": "fs-spec", "summaryZh": "把计划/规格拆成 tracer-bullet 任务卡，声明阻塞依赖" },
+    { "src": "engineering/wayfinder", "name": "wayfinder", "title": "巨型工程地图", "cat": "fs-spec", "summaryZh": "把超大工程规划为 issue 上的决策票地图" },
+    { "src": "engineering/ask-matt", "name": "ask-matt", "title": "技能路由顾问", "cat": "fs-spec", "summaryZh": "技能路由器：根据处境推荐本技能集内合适的技能/流程" },
+    { "src": "engineering/wizard", "name": "wizard", "title": "人类操作向导", "cat": "fs-spec", "summaryZh": "生成引导人类完成专属步骤的交互式 bash 向导" },
+    { "src": "engineering/codebase-design", "name": "codebase-design", "title": "代码库深模块设计", "cat": "fs-architecture", "summaryZh": "深模块设计词汇：设计与改进模块接口" },
+    { "src": "engineering/domain-modeling", "name": "domain-modeling", "title": "领域建模", "cat": "fs-architecture", "summaryZh": "建立并打磨项目领域模型（术语/ADR/词汇表）" },
+    { "src": "engineering/improve-codebase-architecture", "name": "improve-codebase-architecture", "title": "架构深化扫描", "cat": "fs-architecture", "summaryZh": "扫描深化机会→HTML 报告→逐项访谈" },
+    { "src": "engineering/prototype", "name": "prototype", "title": "一次性原型", "cat": "fs-architecture", "summaryZh": "一次性原型验证设计问题，用完即弃" },
+    { "src": "engineering/implement", "name": "implement", "title": "规格实施", "cat": "fs-implement", "summaryZh": "按规格或任务卡实施一段工作" },
+    { "src": "engineering/tdd", "name": "tdd", "title": "TDD 测试先行", "cat": "fs-implement", "summaryZh": "测试先行开发（红-绿-重构）" },
+    { "src": "engineering/code-review", "name": "code-review", "title": "代码评审", "cat": "fs-quality", "summaryZh": "沿标准×可疑双轴评审相对固定点的改动" },
+    { "src": "engineering/diagnosing-bugs", "name": "diagnosing-bugs", "title": "Bug 诊断", "cat": "fs-quality", "summaryZh": "硬 bug 与性能回归的诊断循环" },
+    { "src": "engineering/resolving-merge-conflicts", "name": "resolving-merge-conflicts", "title": "合并冲突消解", "cat": "fs-quality", "summaryZh": "消解进行中的 git 合并/变基冲突" },
+    { "src": "engineering/triage", "name": "triage", "title": "Issue 分诊", "cat": "fs-quality", "summaryZh": "按状态机对 issue 与外部 PR 分诊/归类/验证" },
+    { "src": "engineering/setup-matt-pocock-skills", "name": "setup-matt-pocock-skills", "title": "技能集仓库接线", "cat": "fs-infra", "summaryZh": "为工程技能集配置仓库（issue tracker/分诊标签/领域文档）" },
+    { "src": "misc/setup-pre-commit", "name": "setup-pre-commit", "title": "Pre-commit 配置", "cat": "fs-infra", "summaryZh": "配置 pre-commit 钩子" },
+    { "src": "misc/git-guardrails-claude-code", "name": "git-guardrails-claude-code", "title": "Git 操作护栏", "cat": "fs-infra", "summaryZh": "git 操作护栏（防危险操作）" },
+    { "src": "misc/migrate-to-shoehorn", "name": "migrate-to-shoehorn", "title": "Shoehorn 结构迁移", "cat": "fs-infra", "summaryZh": "把代码迁移到 shoehorn 结构" },
+    { "src": "misc/scaffold-exercises", "name": "scaffold-exercises", "title": "练习脚手架", "cat": "fs-infra", "summaryZh": "脚手架练习题（workshop 用）" },
+    { "src": "productivity/handoff", "name": "handoff", "title": "会话交接", "cat": "fs-collab", "summaryZh": "把会话交接给新 agent 的交接文档" },
+    { "src": "productivity/writing-for-agents", "name": "writing-for-agents", "title": "Agent 文档写作", "cat": "fs-writing", "summaryZh": "为 AI agent 编写清晰文档/指令" }
+  ]
+}

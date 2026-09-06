@@ -1,0 +1,23 @@
+# Your patch layer for this dsh profile, applied after every bundle layer:
+# a top-level YAML array of loader patch entries (id-targeted config
+# overrides, disables, and insert lists; `!!js` expressions allowed).
+- id: modlens
+  config:
+    readImageTool: false
+
+- id: dsh-memory
+  config:
+    python: /Users/lute/.dsh/aeis-venv/bin/python
+    dbPath: /Users/lute/.dsh/profiles/desktop/data/lingshu.db
+    # P2 记忆收敛：Noema 为主持久记忆；LingShu 降载（brain→core 12 工具）
+    # 并关闭自动记忆（消除双写与上下文税），显式 lingshu_* 调用仍可用。
+    tools: core
+    memory:
+      userMessage: false
+
+# Local adaptation of oil-oil/dsh-theme (0.1.0-local.1): module and token
+# surface migrated from Harness 0.1.0-rc.6 to this Desktop's 0.1.2-alpha.1.
+# Source: /Users/lute/project/Magpie-Horch/dsh-theme-local
+- insert:
+    - id: dsh-theme
+      name: dsh-theme

@@ -1,0 +1,28 @@
+0000000000000000000000000000000000000000 b3df8f31686aa1dc762aedcaeb4de95989360473 dsh-agent <agent@local> 1788110038 -0700	commit (initial): P1-1: P0 补丁清单 + 锚点校验脚本 + 既有补丁脚本收编
+b3df8f31686aa1dc762aedcaeb4de95989360473 ddcdeb2fbc5c999cfd9807c1df9bf4cbf21650e4 dsh-agent <agent@local> 1788110241 -0700	commit: P1: manifest 更新 + apply-patches 增 3 条（noema×2 + dshmarket）+ P1-2 实证结论
+ddcdeb2fbc5c999cfd9807c1df9bf4cbf21650e4 266ae92f5f37f24d05b4652352f4f7eff6f6443d dsh-agent <agent@local> 1788110822 -0700	commit: P2: 记忆收敛（Noema 主 + LingShu core/关自动记忆）
+266ae92f5f37f24d05b4652352f4f7eff6f6443d 84087070103601da14563bb9262fcd8dc01b8487 dsh-agent <agent@local> 1788111491 -0700	commit: 上游 PR/issue 清单：desktop 7 项 + 核心包 10 项 + 第三方 5 项
+84087070103601da14563bb9262fcd8dc01b8487 aed586a985cb24081b644f9e55850ed476a57ef7 dsh-agent <agent@local> 1788111627 -0700	commit: 上游投稿包：13 条 GitHub-ready issue（A×5 B×5 C×3）
+aed586a985cb24081b644f9e55850ed476a57ef7 e3fd816bcf85d016664bc2e1b8ed96049a74e607 dsh-agent <agent@local> 1788112378 -0700	commit: P2/P3 批次：override 健康检查并入 verify + 组合词汇 linter + A-1 PR diff
+e3fd816bcf85d016664bc2e1b8ed96049a74e607 cdfd6e6f87b1d984a82d0d9f90c96d56fc6f1612 dsh-agent <agent@local> 1788112967 -0700	commit: 收尾批：LAN HTTPS 状态修复 + chatui .orig 归档删除
+cdfd6e6f87b1d984a82d0d9f90c96d56fc6f1612 79b79693e8114d5a898c6d6c63e76c82d9321f77 dsh-agent <agent@local> 1788113322 -0700	commit: 收尾批：linter 保存钩子（lintFile 导出重构 + dsh-preset-lint-local 插件 + 接线）
+79b79693e8114d5a898c6d6c63e76c82d9321f77 5a45df22e5db24736aa510f84f6eabe1da213987 dsh-agent <agent@local> 1788113632 -0700	commit: 收尾批：三栈收敛（modlens 工具门 + provider 保留）
+5a45df22e5db24736aa510f84f6eabe1da213987 1e641650e1de5bb4b2389dd5e4c3ffbc14e6d70a dsh-agent <agent@local> 1788114176 -0700	commit: 终验批：P0-3/P0-4 验证通过 + overlay 预设平面惰性失效发现 + checkout 直补
+1e641650e1de5bb4b2389dd5e4c3ffbc14e6d70a 372655700dca848abedb987f7ab15c2e4c07194a dsh-agent <agent@local> 1788115730 -0700	commit: UI 修复：composer 权限药丸上移（row flex-wrap nowrap）
+372655700dca848abedb987f7ab15c2e4c07194a 3f3e7ee8937b0d83dbb932441ff505c75e7cbf35 dsh-agent <agent@local> 1788115837 -0700	commit: UI 修复验收：药丸距底 6px + vision 引擎状态备注
+3f3e7ee8937b0d83dbb932441ff505c75e7cbf35 47a6083f8bbb8fb691fe291ea214902803219b37 dsh-agent <agent@local> 1788174213 -0700	commit: 第二轮方案执行：回归防护清单 + A-8 overlay 提案 + vision 配置（非机密部分）+ 纪律注释
+47a6083f8bbb8fb691fe291ea214902803219b37 20fa0480b23fad8e00128420e2c3fb10be9f466b dsh-agent <agent@local> 1788176047 -0700	commit: 品牌重放脚本：brand-replay.sh + 词标载荷（升级后一键恢复 ROOT/LUTE 品牌）
+20fa0480b23fad8e00128420e2c3fb10be9f466b eb04d55662072cb30bd22339cb529d84946d7d23 dsh-agent <agent@local> 1788176242 -0700	commit: C 组补充投稿：composer nowrap 回归 / writeClipboard 兜底 / deepresearch rc.2 钉死
+eb04d55662072cb30bd22339cb529d84946d7d23 c35dbf2e58cf99ab08c45a134921ec45f10b2638 dsh-agent <agent@local> 1788259731 -0700	commit: P0 可移植性改造：manifest + 脚本参数化 + file:相对路径 + C 形态汇编器
+c35dbf2e58cf99ab08c45a134921ec45f10b2638 89331c07be7453aaf2b43cf5ded2f1c20918b56d dsh-agent <agent@local> 1788259950 -0700	commit: C 形态汇编器修复：输出至 dist/ + 排除自引用；产出 496M 完整包
+89331c07be7453aaf2b43cf5ded2f1c20918b56d d752853e5c5cccc8222b36e4f0199c127d6a669c dsh-agent <agent@local> 1788260420 -0700	commit: 打包加固：备份归档(18+15) + 技能标题补丁补记 + install.sh 冲突/回滚 + SHA256SUMS
+d752853e5c5cccc8222b36e4f0199c127d6a669c e8ba9fc3cf66b65d1aae44104e663882d4e08955 dsh-agent <agent@local> 1788260610 -0700	commit: 收尾：dsh-context 归类改名(apply-patches 第10条) + 投稿清单 submission-guide
+e8ba9fc3cf66b65d1aae44104e663882d4e08955 be422bfa4b70ab0ce482517082a5f30603445185 dsh-agent <agent@local> 1788332209 -0700	commit: 第四轮执行：新组件审计 + dsh-skill-subset 白名单25（技能税治理）
+be422bfa4b70ab0ce482517082a5f30603445185 2dce5c986f0a56a727e6e27f6a6c8b5f2c15f182 dsh-agent <agent@local> 1788332508 -0700	commit: 修正 dsh-skill-subset：组合无该行导致 id 覆盖惰性失效 → 改 insert 内联 config
+2dce5c986f0a56a727e6e27f6a6c8b5f2c15f182 c13355eed68dc42b9e3d12df975caf03324a10d3 dsh-agent <agent@local> 1788333594 -0700	commit: 技能泄漏治理：禁用 reverse-skill 行 + 移出 6 个 agent-scope 白名单外技能
+c13355eed68dc42b9e3d12df975caf03324a10d3 51de6fda415aa3cf51d5e61e7c6f17d5d43ddc8e dsh-agent <agent@local> 1788335430 -0700	commit: 白名单4缺失终局：移除4个SKILL.md的disable-model-invocation（分层覆盖机制定案）
+51de6fda415aa3cf51d5e61e7c6f17d5d43ddc8e 0f86c1e466e5f714b7915b4363d42412e5d70b43 dsh-agent <agent@local> 1788335475 -0700	commit: 技能税治理验收：模型目录=恰好25条白名单
+0f86c1e466e5f714b7915b4363d42412e5d70b43 4d237f21ae437d4d6b5673952402417e3473f7ca dsh-agent <agent@local> 1788337737 -0700	commit: 出海技能面板字号层级精细化：13/12/11/10 阶梯，清除600字重，锚定chips
+4d237f21ae437d4d6b5673952402417e3473f7ca fd7c91a36e565ec8ce87f3da4da734cdee69205c dsh-agent <agent@local> 1788338055 -0700	commit: 字号层级验证记录：三级阶梯实测达标
+fd7c91a36e565ec8ce87f3da4da734cdee69205c d623582d5d0c5a1af6bc13837142bda6929a6b0c dsh-agent <agent@local> 1788338361 -0700	commit: 出海技能卡片紧凑化：3列+间距收紧
+d623582d5d0c5a1af6bc13837142bda6929a6b0c c82f8f157f0e2addc428ca374463df87fe914e62 dsh-agent <agent@local> 1788338460 -0700	commit: 3列紧凑化验证：墨迹聚类确认三列布局

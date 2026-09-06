@@ -1,0 +1,14 @@
+{
+  "skills": [
+    {
+      "name": "anysearch",
+      "title": "AnySearch 实时搜索",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "summaryZh": "统一实时搜索：网页/垂直领域/批量搜索与整页提取，服务信息检索、事实核查与深度研究",
+      "toolGap": "",
+      "icon": ""
+    }
+  ]
+}

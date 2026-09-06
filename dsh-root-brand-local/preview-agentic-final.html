@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>agentic system — 宿主真实约束下的最终形态</title>
+<style>
+  /* ==== 宿主 dsh-client-ui-sidebar 布局（关键规则原样复刻） ==== */
+  .logoRow { box-sizing:border-box; flex:none; justify-content:flex-end; align-items:center; gap:8px; height:60px; margin-bottom:8px; padding:8px 0 8px 4px; display:flex; overflow:hidden; }
+  .brand { min-width:0; cursor:pointer; flex:1; align-items:center; padding:0; display:inline-flex; overflow:hidden; }
+  .brandIdentity { align-items:center; gap:8px; min-width:0; height:24px; display:inline-flex; }
+  .brandMark { flex:none; justify-content:center; align-items:center; display:inline-flex; }
+  .brandName { letter-spacing:.04em; align-items:center; gap:6px; min-width:0; height:24px; display:inline-flex; }
+  .iconButton { width:28px; height:28px; flex:none; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; color:#9a9aa0; }
+
+  /* ==== 插件 CSS（与 brand.tsx BRAND_CSS 一致） ==== */
+  [data-plugin="dsh-root-brand"].dsh-rb-name {
+    display:flex; flex-direction:column; align-items:flex-start; gap:3px;
+    min-width:0; max-width:100%;
+    color:#58B848; font-weight:600; font-size:12px; line-height:18px;
+    letter-spacing:1.2px; white-space:nowrap;
+  }
+  [data-plugin="dsh-root-brand"] .dsh-rb-agentic {
+    display:inline-flex; align-items:center; gap:4px; width:fit-content;
+    height:17px; padding:0 7px; border-radius:999px;
+    font-size:9px; font-weight:600; line-height:1; letter-spacing:.3px;
+    text-transform:lowercase; white-space:nowrap; flex:0 0 auto;
+    color:var(--label,#e8e8ea);
+    background:linear-gradient(120deg, rgba(88,184,72,.34), rgba(88,184,72,.12));
+    border:1px solid rgba(88,184,72,.65);
+    box-shadow:0 0 8px rgba(88,184,72,.28), inset 0 1px 0 rgba(255,255,255,.10);
+  }
+  [data-plugin="dsh-root-brand"] .dsh-rb-agentic::before {
+    content:""; width:4px; height:4px; border-radius:50%; background:#58B848;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; padding:26px 30px 36px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif; background:#f4f4f5; color:#1c1c1e; }
+  h1 { font-size:18px; font-weight:700; margin:0 0 6px; }
+  .sub { font-size:12.5px; color:#6b6b6f; margin:0 0 18px; line-height:1.6; }
+  .sub b { color:#3a3a3e; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; max-width:1160px; }
+  .card { background:#fff; border:1px solid #e6e6e9; border-radius:14px; padding:18px 20px; box-shadow:0 2px 10px rgba(0,0,0,.05); }
+  .card-head { display:flex; align-items:baseline; gap:8px; margin-bottom:4px; font-weight:700; font-size:14px; }
+  .card-tag { font-size:11px; font-weight:700; color:#fff; background:#58B848; padding:2px 8px; border-radius:5px; }
+  .card-note { font-size:12px; color:#71717a; margin:0 0 14px; line-height:1.6; }
+  .lbl { margin:12px 0 6px; font-size:11px; color:#8a8a90; letter-spacing:.5px; }
+  .sidebar { width:232px; border-radius:12px; padding:12px; }
+  .sidebar.light { background:#ffffff; border:1px solid #e3e3e6; --label:#1c1c1e; }
+  .sidebar.dark { background:#1a1c1f; --label:#e8e8ea; }
+  .mk { color:currentColor; }
+  /* hero 宽度对照：一行右侧 */
+  .heroRow { display:flex; align-items:center; gap:12px; padding:16px 18px; border-radius:12px; }
+  .heroRow.light { background:#ffffff; border:1px solid #e3e3e6; --label:#1c1c1e; }
+  .heroRow.dark { background:#1a1c1f; --label:#e8e8ea; }
+  .heroName { color:#58B848; font-weight:600; font-size:20px; letter-spacing:1.5px; white-space:nowrap; }
+  .divider { grid-column:1/-1; height:1px; background:#e6e6e9; margin:6px 0 0; }
+  .foot { margin-top:16px; font-size:12px; color:#8a8a90; max-width:1160px; line-height:1.6; }
+  .tick { color:#2e9e3f; font-weight:700; }
+  code { background:#ececee; padding:1px 5px; border-radius:4px; font-size:11px; }
+</style>
+</head>
+<body>
+<h1>最终形态 — 按宿主真实约束（名字槽 ≈114px）渲染</h1>
+<p class="sub">实测宿主：mark 由 <code>sidebar.brand.mark</code> 固定 <b>size=24（宽约46px）</b>；品牌行 <code>overflow:hidden</code>；名字槽剩余约 <b>114px</b>。「路特创新(≈53px) + 完整胶囊(≈84px)」一行需要 ≈150px —— <b>一行物理不可行</b>。故徽标定为「路特创新」下方<b>第二行子标签</b>（左对齐、fit-content、纯渐变+描边+辉光蒙版，不用 backdrop-filter）。</p>
+
+<div class="grid">
+  <div class="card">
+    <div class="card-head"><span class="card-tag">侧栏 · 最终</span> 两行子标签（深/浅）</div>
+    <div class="lbl">深色（232px 真实侧栏）</div>
+    <div class="sidebar dark">
+      <div class="logoRow">
+        <div class="brand"><div class="brandIdentity">
+          <span class="brandMark"><svg class="mk" width="46" height="24" viewBox="0 0 61 32" fill="none"><g stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 20 V3 H14.5 C18.6 3 21.5 5.9 21.5 9.8 C21.5 13.7 18.6 16.5 14 16.5 H6.5"/><path d="M14 16.5 L20.5 20"/><path d="M32.75 11.75 C32.75 6.3 25.5 6.3 25.5 11.75 C25.5 17.2 32.75 17.2 32.75 11.75 C32.75 6.3 40 6.3 40 11.75 C40 17.2 32.75 17.2 32.75 11.75"/><path d="M45.5 3 H57"/><path d="M51.25 3 V20"/></g><rect x="6.5" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/><rect x="25.5" y="26" width="16.5" height="5" rx="2.5" fill="#A8A8A8"/><rect x="44" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/></svg></span>
+          <span class="brandName"><span data-plugin="dsh-root-brand" class="dsh-rb-name">路特创新<span class="dsh-rb-agentic">agentic system</span></span></span>
+        </div></div>
+        <span class="iconButton">⏸</span>
+      </div>
+    </div>
+    <div class="lbl">浅色（232px 真实侧栏）</div>
+    <div class="sidebar light">
+      <div class="logoRow">
+        <div class="brand"><div class="brandIdentity">
+          <span class="brandMark"><svg class="mk" width="46" height="24" viewBox="0 0 61 32" fill="none"><g stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 20 V3 H14.5 C18.6 3 21.5 5.9 21.5 9.8 C21.5 13.7 18.6 16.5 14 16.5 H6.5"/><path d="M14 16.5 L20.5 20"/><path d="M32.75 11.75 C32.75 6.3 25.5 6.3 25.5 11.75 C25.5 17.2 32.75 17.2 32.75 11.75 C32.75 6.3 40 6.3 40 11.75 C40 17.2 32.75 17.2 32.75 11.75"/><path d="M45.5 3 H57"/><path d="M51.25 3 V20"/></g><rect x="6.5" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/><rect x="25.5" y="26" width="16.5" height="5" rx="2.5" fill="#A8A8A8"/><rect x="44" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/></svg></span>
+          <span class="brandName"><span data-plugin="dsh-root-brand" class="dsh-rb-name">路特创新<span class="dsh-rb-agentic">agentic system</span></span></span>
+        </div></div>
+        <span class="iconButton">⏸</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="card-tag">2.6× 特写</span> 蒙版细节</div>
+    <div style="display:flex;gap:16px;align-items:flex-start;margin-top:6px">
+      <div>
+        <div style="background:#1a1c1f;border-radius:10px;padding:14px 18px;transform:scale(2.2);transform-origin:left top;color:#e8e8ea;--label:#e8e8ea">
+          <span data-plugin="dsh-root-brand" class="dsh-rb-name">路特创新<span class="dsh-rb-agentic">agentic system</span></span>
+        </div>
+        <div class="lbl">深色 2.2×</div>
+      </div>
+      <div>
+        <div style="background:#fff;border:1px solid #e3e3e6;border-radius:10px;padding:14px 18px;transform:scale(2.2);transform-origin:left top;color:#1c1c1e;--label:#1c1c1e">
+          <span data-plugin="dsh-root-brand" class="dsh-rb-name">路特创新<span class="dsh-rb-agentic">agentic system</span></span>
+        </div>
+        <div class="lbl">浅色 2.2×</div>
+      </div>
+    </div>
+    <p class="card-note" style="margin-top:10px">绿底渐变胶囊（34%→12%）+ 65% 描边 + 8px 辉光 + 绿色圆点，无 backdrop-filter，Electron 下稳定渲染。</p>
+  </div>
+
+  <div class="card" style="grid-column:1/-1">
+    <div class="card-head"><span class="card-tag">对照</span> hero 宽度（560px）下可以「一行右侧」</div>
+    <p class="card-note">如果你想看「右侧一行」的完整效果，可把同一徽标放在 hero 品牌行（空间宽裕）——参考样式如上；侧栏因空间限制维持两行子标签。此对照仅作展示，默认不在 hero 重复添加。</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="heroRow dark">
+        <svg width="58" height="30" viewBox="0 0 61 32" fill="none" style="color:#e8e8ea"><g stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 20 V3 H14.5 C18.6 3 21.5 5.9 21.5 9.8 C21.5 13.7 18.6 16.5 14 16.5 H6.5"/><path d="M14 16.5 L20.5 20"/><path d="M32.75 11.75 C32.75 6.3 25.5 6.3 25.5 11.75 C25.5 17.2 32.75 17.2 32.75 11.75 C32.75 6.3 40 6.3 40 11.75 C40 17.2 32.75 17.2 32.75 11.75"/><path d="M45.5 3 H57"/><path d="M51.25 3 V20"/></g><rect x="6.5" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/><rect x="25.5" y="26" width="16.5" height="5" rx="2.5" fill="#A8A8A8"/><rect x="44" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/></svg>
+        <span class="heroName">路特创新</span>
+        <span class="dsh-rb-agentic">agentic system</span>
+      </div>
+      <div class="heroRow light">
+        <svg width="58" height="30" viewBox="0 0 61 32" fill="none" style="color:#1c1c1e"><g stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 20 V3 H14.5 C18.6 3 21.5 5.9 21.5 9.8 C21.5 13.7 18.6 16.5 14 16.5 H6.5"/><path d="M14 16.5 L20.5 20"/><path d="M32.75 11.75 C32.75 6.3 25.5 6.3 25.5 11.75 C25.5 17.2 32.75 17.2 32.75 11.75 C32.75 6.3 40 6.3 40 11.75 C40 17.2 32.75 17.2 32.75 11.75"/><path d="M45.5 3 H57"/><path d="M51.25 3 V20"/></g><rect x="6.5" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/><rect x="25.5" y="26" width="16.5" height="5" rx="2.5" fill="#A8A8A8"/><rect x="44" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/></svg>
+        <span class="heroName">路特创新</span>
+        <span class="dsh-rb-agentic">agentic system</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="foot">
+    <span class="tick">本版改动：</span>① 徽标改「第二行子标签」（column 布局，不再依赖 wrap 随机性）② 去掉 backdrop-filter（Electron 合成不稳定）③ 蒙版强化为 34%→12% 渐变 + 65% 描边 + 8px 辉光 ④ width:fit-content 防拉伸。
+    已 <code>pnpm build</code>（9.54kB）＋测试 5/5，安装副本已同步。重启后即为上图左侧形态。
+  </div>
+</div>
+</body>
+</html>

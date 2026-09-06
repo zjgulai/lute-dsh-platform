@@ -1,0 +1,17 @@
+skill:
+  name: standard-skill
+  version: "1.0.0"
+  structure_version: "1.0"
+directories:
+  references:
+    exists: true
+    count: 1
+    files:
+      - patterns.md
+  tests:
+    exists: true
+    count: 0
+compatibility:
+  claude: { status: "native" }
+  cursor: { status: "native" }
+  kimi: { status: "native" }

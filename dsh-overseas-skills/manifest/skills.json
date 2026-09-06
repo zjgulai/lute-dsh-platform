@@ -1,0 +1,2293 @@
+{
+  "categories": [
+    {
+      "key": "sourcing",
+      "title": "货源与选品",
+      "skills": [
+        {
+          "name": "1688-sourcing",
+          "title": "1688采购",
+          "category": "sourcing",
+          "categoryTitle": "货源与选品",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "product-supplier-sourcing",
+          "title": "产品供应商寻源",
+          "category": "sourcing",
+          "categoryTitle": "货源与选品",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "dropshipping-supplier-integrator",
+          "title": "代发货供应商集成",
+          "category": "sourcing",
+          "categoryTitle": "货源与选品",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "supplier-performance-manager",
+          "title": "供应商绩效管理",
+          "category": "sourcing",
+          "categoryTitle": "货源与选品",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "aliexpress-supplier-evaluator",
+          "title": "速卖通供应商评估器",
+          "category": "sourcing",
+          "categoryTitle": "货源与选品",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "sales-negotiator",
+          "title": "销售谈判专家",
+          "category": "sourcing",
+          "categoryTitle": "货源与选品",
+          "toolBacked": false,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "key": "research-selection",
+      "title": "市场调研与分析",
+      "skills": [
+        {
+          "name": "product-attribute-analyzer",
+          "title": "产品属性分析器",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "scenario-driven-product-scout",
+          "title": "场景驱动选品",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "bestseller-pattern-decoder",
+          "title": "畅销模式解码器",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "company-research",
+          "title": "公司调研",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "competitor-deep-analysis",
+          "title": "竞品深度分析",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "competitive-landscape",
+          "title": "竞争格局分析",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "customer-voice-analyzer",
+          "title": "客户声音分析",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "cross-border-selection",
+          "title": "跨境选品",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "review-analyst-agent",
+          "title": "评论分析助手",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "review-summarizer",
+          "title": "评论摘要生成器",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "trend-stage-timing-analyzer",
+          "title": "趋势阶段时机分析器",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "people-research",
+          "title": "人物背景调研",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "social-network-mapper",
+          "title": "社交关系图谱分析",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "market-insight-product-selection",
+          "title": "市场洞察与选品",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "market-viability-logic-auditor",
+          "title": "市场可行性审查",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "product-selection",
+          "title": "选品分析",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "alibaba-amazon-market-intel",
+          "title": "亚马逊数据查询",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "org-structure-research",
+          "title": "组织架构调研",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "jungle-scout-deep-dive-analyzer",
+          "title": "Jungle Scout深度分析器",
+          "category": "research-selection",
+          "categoryTitle": "市场调研与分析",
+          "toolBacked": true,
+          "importable": false
+        }
+      ]
+    },
+    {
+      "key": "design",
+      "title": "产品设计与视觉",
+      "skills": [
+        {
+          "name": "video-prompt-guide",
+          "title": "视频生成指南",
+          "category": "design",
+          "categoryTitle": "产品设计与视觉",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "image-prompt-guide",
+          "title": "图像生成指南",
+          "category": "design",
+          "categoryTitle": "产品设计与视觉",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "ai-product-designer",
+          "title": "AI产品设计师",
+          "category": "design",
+          "categoryTitle": "产品设计与视觉",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "higgsfield-guide",
+          "title": "Higgsfield AI 创作",
+          "category": "design",
+          "categoryTitle": "产品设计与视觉",
+          "toolBacked": false,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "key": "content-gtm",
+      "title": "内容创作与营销",
+      "skills": [
+        {
+          "name": "content-breakdown",
+          "title": "爆款内容拆解",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "product-launch-planner",
+          "title": "产品发布规划器",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "product-marketing-context",
+          "title": "产品营销背景",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "product-marketing-brief",
+          "title": "产品营销简报",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "ecommerce-marketing",
+          "title": "电商营销调度器",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "vibe-marketing",
+          "title": "氛围营销",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "content-strategy",
+          "title": "内容策略",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "social-media-publisher",
+          "title": "社交媒体发布器",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "social-media-content-creator",
+          "title": "社交媒体内容创作者",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "influencer-campaign-manager",
+          "title": "网红营销管理",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "copywriting",
+          "title": "文案撰写",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "xiaohongshu-content-creator",
+          "title": "小红书内容创作助手",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "launch-strategy",
+          "title": "新品上市策略",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "marketing-ideas",
+          "title": "营销创意",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "marketing-psychology",
+          "title": "营销心理学",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "instagram-marketing",
+          "title": "Instagram营销",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "remotion",
+          "title": "Remotion 最佳实践",
+          "category": "content-gtm",
+          "categoryTitle": "内容创作与营销",
+          "toolBacked": true,
+          "importable": false
+        }
+      ]
+    },
+    {
+      "key": "seo-ads",
+      "title": "流量获取与广告",
+      "skills": [
+        {
+          "name": "product-description-generator",
+          "title": "产品描述生成器",
+          "category": "seo-ads",
+          "categoryTitle": "流量获取与广告",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "programmatic-seo-strategist",
+          "title": "程序化SEO策略",
+          "category": "seo-ads",
+          "categoryTitle": "流量获取与广告",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "ecommerce-seo-optimizer",
+          "title": "电商SEO优化器",
+          "category": "seo-ads",
+          "categoryTitle": "流量获取与广告",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "serp-ranking-analyzer",
+          "title": "搜索结果排名分析",
+          "category": "seo-ads",
+          "categoryTitle": "流量获取与广告",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "amz-product-optimizer",
+          "title": "亚马逊产品优化",
+          "category": "seo-ads",
+          "categoryTitle": "流量获取与广告",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "amz-hot-keywords",
+          "title": "亚马逊热门关键词",
+          "category": "seo-ads",
+          "categoryTitle": "流量获取与广告",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "amazon-listing-expert",
+          "title": "亚马逊Listing专家",
+          "category": "seo-ads",
+          "categoryTitle": "流量获取与广告",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "amazon-ppc-campaign-manager",
+          "title": "亚马逊PPC广告管理",
+          "category": "seo-ads",
+          "categoryTitle": "流量获取与广告",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "ab-test-setup",
+          "title": "A/B测试设置",
+          "category": "seo-ads",
+          "categoryTitle": "流量获取与广告",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "etsy-seo-optimizer",
+          "title": "Etsy SEO优化器",
+          "category": "seo-ads",
+          "categoryTitle": "流量获取与广告",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "google-shopping-feed-optimizer",
+          "title": "Google 购物信息源优化器",
+          "category": "seo-ads",
+          "categoryTitle": "流量获取与广告",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "seo-keyword-research",
+          "title": "SEO关键词研究",
+          "category": "seo-ads",
+          "categoryTitle": "流量获取与广告",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "seo-competitor-analysis",
+          "title": "SEO竞争对手分析",
+          "category": "seo-ads",
+          "categoryTitle": "流量获取与广告",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "seo-page-audit",
+          "title": "SEO页面审核",
+          "category": "seo-ads",
+          "categoryTitle": "流量获取与广告",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "tiktok-ads-strategy",
+          "title": "TikTok广告策略",
+          "category": "seo-ads",
+          "categoryTitle": "流量获取与广告",
+          "toolBacked": false,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "key": "store-ops",
+      "title": "店铺运营与基建",
+      "skills": [
+        {
+          "name": "warehouse-fulfillment-workflow",
+          "title": "仓库发货工作流",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "ecommerce-gdpr-compliance",
+          "title": "电商 GDPR 合规管理",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "multi-currency-checkout",
+          "title": "多币种结账",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "multi-location-order-router",
+          "title": "多仓库订单路由",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "multichannel-inventory-sync",
+          "title": "多渠道库存同步",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "invoice-generator",
+          "title": "发票生成器",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "chargeback-dispute-manager",
+          "title": "拒付与争议管理",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "social-commerce-sync",
+          "title": "社交电商渠道同步",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "return-policy-designer",
+          "title": "退货政策设计师",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "buy-now-pay-later-setup",
+          "title": "先买后付设置",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "amazon-brand-protection",
+          "title": "亚马逊品牌保护",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "amazon-fba-inventory-optimizer",
+          "title": "亚马逊FBA库存优化器",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "optimize-ecommerce-page-conversion",
+          "title": "优化电商页面转化率",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "payment-fraud-detector",
+          "title": "支付欺诈检测器",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "returns-exchange-automator",
+          "title": "自动兑换处理",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "etsy-pod-automation",
+          "title": "Etsy按需印刷自动化",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "tiktok-shop-setup",
+          "title": "TikTok店铺设置",
+          "category": "store-ops",
+          "categoryTitle": "店铺运营与基建",
+          "toolBacked": false,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "key": "shipping-tariff",
+      "title": "物流与关税",
+      "skills": [
+        {
+          "name": "tariff-search",
+          "title": "关税与HS编码查询",
+          "category": "shipping-tariff",
+          "categoryTitle": "物流与关税",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "international-shipping-customs",
+          "title": "国际货运与清关",
+          "category": "shipping-tariff",
+          "categoryTitle": "物流与关税",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "sales-tax-vat-automator",
+          "title": "销售税与增值税自动化工具",
+          "category": "shipping-tariff",
+          "categoryTitle": "物流与关税",
+          "toolBacked": false,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "key": "analytics-finance",
+      "title": "数据分析与财务",
+      "skills": [
+        {
+          "name": "creating-financial-models",
+          "title": "创建财务模型",
+          "category": "analytics-finance",
+          "categoryTitle": "数据分析与财务",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "ecommerce-financial-dashboard",
+          "title": "电商财务仪表盘",
+          "category": "analytics-finance",
+          "categoryTitle": "数据分析与财务",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "ecommerce-sales-dashboard",
+          "title": "电商销售仪表板",
+          "category": "analytics-finance",
+          "categoryTitle": "数据分析与财务",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "ecommerce-budget-forecaster",
+          "title": "电商预算预测器",
+          "category": "analytics-finance",
+          "categoryTitle": "数据分析与财务",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "dynamic-pricing-engine",
+          "title": "动态定价引擎",
+          "category": "analytics-finance",
+          "categoryTitle": "数据分析与财务",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "inventory-demand-forecaster",
+          "title": "库存需求预测器",
+          "category": "analytics-finance",
+          "categoryTitle": "数据分析与财务",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "profit-margin-analyzer",
+          "title": "利润率分析器",
+          "category": "analytics-finance",
+          "categoryTitle": "数据分析与财务",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "freemium-upgrade-optimizer",
+          "title": "免费转付费转化优化",
+          "category": "analytics-finance",
+          "categoryTitle": "数据分析与财务",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "sycm-analysis-skill",
+          "title": "生意参谋分析",
+          "category": "analytics-finance",
+          "categoryTitle": "数据分析与财务",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "marketing-roas-analyzer",
+          "title": "营销ROAS分析",
+          "category": "analytics-finance",
+          "categoryTitle": "数据分析与财务",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "dcf-valuation",
+          "title": "DCF估值",
+          "category": "analytics-finance",
+          "categoryTitle": "数据分析与财务",
+          "toolBacked": false,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "key": "crm-retention",
+      "title": "客户生命周期与留存",
+      "skills": [
+        {
+          "name": "product-review-intelligence-collector",
+          "title": "产品评论智能采集",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "email-automation-flow-builder",
+          "title": "电子邮件自动化流程构建器",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "seasonal-campaign-automator",
+          "title": "季节性活动自动化",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "checkout-flow-optimizer",
+          "title": "结账流程优化器",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "helpdesk-order-integration",
+          "title": "客服与订单系统集成",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "customer-retention-automator",
+          "title": "客户留存自动化器",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "customer-ltv-calculator",
+          "title": "客户生命周期价值计算器",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "customer-winback-automator",
+          "title": "客户赢回自动化",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "customer-rfm-analyzer",
+          "title": "客户RFM分析器",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "review-request-automator",
+          "title": "评审请求自动处理",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "cart-abandonment-recovery",
+          "title": "FARE",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "lifecycle-marketing-automator",
+          "title": "全生命周期营销自动化",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "referral-program-builder",
+          "title": "推荐计划搭建",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "coupon-discount-manager",
+          "title": "优惠券折扣管理器",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "discount-promotion-engine",
+          "title": "折扣促销引擎",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "loyalty-points-designer",
+          "title": "忠诚度积分设计",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "b2b-payment-terms-optimizer",
+          "title": "B2B付款账期优化",
+          "category": "crm-retention",
+          "categoryTitle": "客户生命周期与留存",
+          "toolBacked": false,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "key": "productivity",
+      "title": "文档与办公效率",
+      "skills": [
+        {
+          "name": "lark-tools",
+          "title": "飞书工具",
+          "category": "productivity",
+          "categoryTitle": "文档与办公效率",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "create-website",
+          "title": "快速建站",
+          "category": "productivity",
+          "categoryTitle": "文档与办公效率",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "internal-comms",
+          "title": "内部沟通",
+          "category": "productivity",
+          "categoryTitle": "文档与办公效率",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "doc-coauthoring",
+          "title": "文档协同编辑",
+          "category": "productivity",
+          "categoryTitle": "文档与办公效率",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "docx",
+          "title": "DOCX 文档处理",
+          "category": "productivity",
+          "categoryTitle": "文档与办公效率",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "gmail-assistant",
+          "title": "Gmail助手",
+          "category": "productivity",
+          "categoryTitle": "文档与办公效率",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "pdf",
+          "title": "PDF 文档处理",
+          "category": "productivity",
+          "categoryTitle": "文档与办公效率",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "pptx",
+          "title": "PPTX 演示文稿处理",
+          "category": "productivity",
+          "categoryTitle": "文档与办公效率",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "xlsx",
+          "title": "xlsx 表格处理",
+          "category": "productivity",
+          "categoryTitle": "文档与办公效率",
+          "toolBacked": true,
+          "importable": false
+        }
+      ]
+    },
+    {
+      "key": "agent-tools",
+      "title": "Agent 管理与基建",
+      "skills": [
+        {
+          "name": "skill-vetter",
+          "title": "技能安全审查",
+          "category": "agent-tools",
+          "categoryTitle": "Agent 管理与基建",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "skill-finder",
+          "title": "技能查找器",
+          "category": "agent-tools",
+          "categoryTitle": "Agent 管理与基建",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "skill-creator",
+          "title": "技能创建器",
+          "category": "agent-tools",
+          "categoryTitle": "Agent 管理与基建",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "self-improvement",
+          "title": "智能体自我学习",
+          "category": "agent-tools",
+          "categoryTitle": "Agent 管理与基建",
+          "toolBacked": true,
+          "importable": false
+        },
+        {
+          "name": "accio-mcp-cli",
+          "title": "MCP命令行网关",
+          "category": "agent-tools",
+          "categoryTitle": "Agent 管理与基建",
+          "toolBacked": false,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "key": "other",
+      "title": "其他",
+      "skills": [
+        {
+          "name": "amazon-prelaunch-ad-budget",
+          "title": "amazon-prelaunch-ad-budget",
+          "category": "other",
+          "categoryTitle": "其他",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "amazon-prelaunch-competitor-teardown",
+          "title": "amazon-prelaunch-competitor-teardown",
+          "category": "other",
+          "categoryTitle": "其他",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "amazon-prelaunch-demand-check",
+          "title": "amazon-prelaunch-demand-check",
+          "category": "other",
+          "categoryTitle": "其他",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "amazon-prelaunch-demand-mirror",
+          "title": "amazon-prelaunch-demand-mirror",
+          "category": "other",
+          "categoryTitle": "其他",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "amazon-prelaunch-listing-builder",
+          "title": "amazon-prelaunch-listing-builder",
+          "category": "other",
+          "categoryTitle": "其他",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "amazon-prelaunch-margin-check",
+          "title": "amazon-prelaunch-margin-check",
+          "category": "other",
+          "categoryTitle": "其他",
+          "toolBacked": false,
+          "importable": true
+        },
+        {
+          "name": "amazon-prelaunch-trend-scout",
+          "title": "amazon-prelaunch-trend-scout",
+          "category": "other",
+          "categoryTitle": "其他",
+          "toolBacked": false,
+          "importable": true
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "1688-sourcing",
+      "title": "1688采购",
+      "category": "sourcing",
+      "categoryTitle": "货源与选品",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "product-supplier-sourcing",
+      "title": "产品供应商寻源",
+      "category": "sourcing",
+      "categoryTitle": "货源与选品",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "在阿里等 B2B 平台搜索产品、比价并发现供应商与工厂",
+      "toolGap": "供应商搜索工具"
+    },
+    {
+      "name": "dropshipping-supplier-integrator",
+      "title": "代发货供应商集成",
+      "category": "sourcing",
+      "categoryTitle": "货源与选品",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "多供应商代发订单自动路由、库存同步与利润跟踪"
+    },
+    {
+      "name": "supplier-performance-manager",
+      "title": "供应商绩效管理",
+      "category": "sourcing",
+      "categoryTitle": "货源与选品",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用加权评分卡按季度跟踪供应商绩效与交期"
+    },
+    {
+      "name": "aliexpress-supplier-evaluator",
+      "title": "速卖通供应商评估器",
+      "category": "sourcing",
+      "categoryTitle": "货源与选品",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用 5 项可信信号评估海外供应商的可靠性"
+    },
+    {
+      "name": "sales-negotiator",
+      "title": "销售谈判专家",
+      "category": "sourcing",
+      "categoryTitle": "货源与选品",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "为 B2B 谈判做准备：锚定、让步、BATNA 与合同条款"
+    },
+    {
+      "name": "product-attribute-analyzer",
+      "title": "产品属性分析器",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用 3 维标签分析热销品属性与销量加权市场份额"
+    },
+    {
+      "name": "scenario-driven-product-scout",
+      "title": "场景驱动选品",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "按「三大购物场景」+20 种差异化策略产出选品创意"
+    },
+    {
+      "name": "bestseller-pattern-decoder",
+      "title": "畅销模式解码器",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "解码畅销品的定价、主图、标题与 A+ 内容套路"
+    },
+    {
+      "name": "company-research",
+      "title": "公司调研",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "调研公司背景、财务、竞品、新闻与关键人物",
+      "toolGap": ""
+    },
+    {
+      "name": "competitor-deep-analysis",
+      "title": "竞品深度分析",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "多层情报与评论挖掘，找出市场空白与战略优势"
+    },
+    {
+      "name": "competitive-landscape",
+      "title": "竞争格局分析",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用波特五力等框架绘制市场竞品格局"
+    },
+    {
+      "name": "customer-voice-analyzer",
+      "title": "客户声音分析",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "从评论提取人物画像、场景、痛点与购买动机"
+    },
+    {
+      "name": "cross-border-selection",
+      "title": "跨境选品",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "抓取亚马逊等平台数据辅助跨境选品分析"
+    },
+    {
+      "name": "review-analyst-agent",
+      "title": "评论分析助手",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "大规模分析产品评论，找出共性问题与改进优先级"
+    },
+    {
+      "name": "review-summarizer",
+      "title": "评论摘要生成器",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "trend-stage-timing-analyzer",
+      "title": "趋势阶段时机分析器",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "判断产品处于增长早期、峰值还是饱和期"
+    },
+    {
+      "name": "people-research",
+      "title": "人物背景调研",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "调研个人的职业背景、履历、专业领域与公开信息",
+      "toolGap": ""
+    },
+    {
+      "name": "social-network-mapper",
+      "title": "社交关系图谱分析",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "基于社交平台互动构建关系图谱与社群聚类"
+    },
+    {
+      "name": "market-insight-product-selection",
+      "title": "市场洞察与选品",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "多信号+客户声音验证需求与竞争，输出选品短名单",
+      "toolGap": "供应商搜索工具"
+    },
+    {
+      "name": "market-viability-logic-auditor",
+      "title": "市场可行性审查",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "product-selection",
+      "title": "选品分析",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "行业→消费者→选品→供应商匹配的循证选品流程",
+      "toolGap": "供应商搜索工具"
+    },
+    {
+      "name": "alibaba-amazon-market-intel",
+      "title": "亚马逊数据查询",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "org-structure-research",
+      "title": "组织架构调研",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "调研公司组织架构、汇报关系与员工画像",
+      "toolGap": ""
+    },
+    {
+      "name": "jungle-scout-deep-dive-analyzer",
+      "title": "Jungle Scout深度分析器",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "video-prompt-guide",
+      "title": "视频生成指南",
+      "category": "design",
+      "categoryTitle": "产品设计与视觉",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "视频生成统一路由：产品场景、单/多分镜与重新生成"
+    },
+    {
+      "name": "image-prompt-guide",
+      "title": "图像生成指南",
+      "category": "design",
+      "categoryTitle": "产品设计与视觉",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "AI 生图/修图提示词与工具路由，覆盖电商套图等场景"
+    },
+    {
+      "name": "ai-product-designer",
+      "title": "AI产品设计师",
+      "category": "design",
+      "categoryTitle": "产品设计与视觉",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "生成服装、配饰、家居类目的产品设计图（需设计图需求）"
+    },
+    {
+      "name": "higgsfield-guide",
+      "title": "Higgsfield AI 创作",
+      "category": "design",
+      "categoryTitle": "产品设计与视觉",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用 Higgsfield 平台文生图、图生视频及进度管理"
+    },
+    {
+      "name": "content-breakdown",
+      "title": "爆款内容拆解",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "product-launch-planner",
+      "title": "产品发布规划器",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "策划预发布等待名单、分级优先与多渠道发布"
+    },
+    {
+      "name": "product-marketing-context",
+      "title": "产品营销背景",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "沉淀产品定位、卖点与营销背景文档，避免重复交代"
+    },
+    {
+      "name": "product-marketing-brief",
+      "title": "产品营销简报",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "把产品规格与客户洞察合成为营销简报"
+    },
+    {
+      "name": "ecommerce-marketing",
+      "title": "电商营销调度器",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "vibe-marketing",
+      "title": "氛围营销",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用「氛围式」方式快速生成、测试并迭代营销内容"
+    },
+    {
+      "name": "content-strategy",
+      "title": "内容策略",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "规划受众分析、内容支柱、渠道与选题的内容策略"
+    },
+    {
+      "name": "social-media-publisher",
+      "title": "社交媒体发布器",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "social-media-content-creator",
+      "title": "社交媒体内容创作者",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "为 LinkedIn/X/IG/TikTok 创作平台原生内容与复用"
+    },
+    {
+      "name": "influencer-campaign-manager",
+      "title": "网红营销管理",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "端到端管理网红合作与多渠道 ROI 衡量"
+    },
+    {
+      "name": "copywriting",
+      "title": "文案撰写",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用 AIDA 模型撰写首页、落地页与定价页等营销文案"
+    },
+    {
+      "name": "xiaohongshu-content-creator",
+      "title": "小红书内容创作助手",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "面向 CES 算法的小红书种草内容创作"
+    },
+    {
+      "name": "launch-strategy",
+      "title": "新品上市策略",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "分阶段发布策略：Product Hunt、公告、GTM 与持续造势"
+    },
+    {
+      "name": "marketing-ideas",
+      "title": "营销创意",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "140+ 已验证的营销打法，按品类提供增长创意"
+    },
+    {
+      "name": "marketing-psychology",
+      "title": "营销心理学",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用 70+ 心理模型（稀缺、锚定、互惠）驱动转化"
+    },
+    {
+      "name": "instagram-marketing",
+      "title": "Instagram营销",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "remotion",
+      "title": "Remotion 最佳实践",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "product-description-generator",
+      "title": "产品描述生成器",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "programmatic-seo-strategist",
+      "title": "程序化SEO策略",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用模板页+自有数据规模化获取长尾搜索流量"
+    },
+    {
+      "name": "ecommerce-seo-optimizer",
+      "title": "电商SEO优化器",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "元标签、结构化数据与抓取管理优化产品页搜索排名"
+    },
+    {
+      "name": "serp-ranking-analyzer",
+      "title": "搜索结果排名分析",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "深度分析 SERP 排名因素与意图信号"
+    },
+    {
+      "name": "amz-product-optimizer",
+      "title": "亚马逊产品优化",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "amz-hot-keywords",
+      "title": "亚马逊热门关键词",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "amazon-listing-expert",
+      "title": "亚马逊Listing专家",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用「4+2」要点、「X+1」图片与 A+ 结构打造高转化 Listing"
+    },
+    {
+      "name": "amazon-ppc-campaign-manager",
+      "title": "亚马逊PPC广告管理",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "规划并优化 SP/SB/SD 广告，诊断 ACoS 与预算"
+    },
+    {
+      "name": "ab-test-setup",
+      "title": "A/B测试设置",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "为着陆页、邮件与广告素材设计并实施 A/B 实验"
+    },
+    {
+      "name": "etsy-seo-optimizer",
+      "title": "Etsy SEO优化器",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用 eRank 数据优化 Etsy 关键词、标题与标签",
+      "toolGap": "eRank"
+    },
+    {
+      "name": "google-shopping-feed-optimizer",
+      "title": "Google 购物信息源优化器",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "搭建并优化 Google Merchant Center 商品信息源"
+    },
+    {
+      "name": "seo-keyword-research",
+      "title": "SEO关键词研究",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "挖掘高价值关键词、意图分类与主题簇"
+    },
+    {
+      "name": "seo-competitor-analysis",
+      "title": "SEO竞争对手分析",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "分析竞品的关键词、外链与内容策略"
+    },
+    {
+      "name": "seo-page-audit",
+      "title": "SEO页面审核",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "单页 SEO 体检，0-100 评分与优先级建议"
+    },
+    {
+      "name": "tiktok-ads-strategy",
+      "title": "TikTok广告策略",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "创意优先的 TikTok 广告测试、Spark Ads 与竞价优化"
+    },
+    {
+      "name": "warehouse-fulfillment-workflow",
+      "title": "仓库发货工作流",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "拣货、打包、打单等仓库作业流程标准化"
+    },
+    {
+      "name": "ecommerce-gdpr-compliance",
+      "title": "电商 GDPR 合规管理",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "Cookie 同意、SAR 请求与删除权等合规落地"
+    },
+    {
+      "name": "multi-currency-checkout",
+      "title": "多币种结账",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "本地货币定价、自动汇率与本地化取整"
+    },
+    {
+      "name": "multi-location-order-router",
+      "title": "多仓库订单路由",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "多仓路由、拆单与缺货队列的订单引擎"
+    },
+    {
+      "name": "multichannel-inventory-sync",
+      "title": "多渠道库存同步",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "Shopify/Amazon/eBay 等渠道库存与订单统一"
+    },
+    {
+      "name": "invoice-generator",
+      "title": "发票生成器",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "生成税务合规的品牌 PDF 发票与顺序编号"
+    },
+    {
+      "name": "chargeback-dispute-manager",
+      "title": "拒付与争议管理",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用欺诈评分与证据自动化预防并处理拒付"
+    },
+    {
+      "name": "social-commerce-sync",
+      "title": "社交电商渠道同步",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "同步 Meta/TikTok/Pinterest 商品目录与库存",
+      "toolGap": "Meta/TikTok 商务 API"
+    },
+    {
+      "name": "return-policy-designer",
+      "title": "退货政策设计师",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "按类目设计退货窗口、补货费与政策规则"
+    },
+    {
+      "name": "buy-now-pay-later-setup",
+      "title": "先买后付设置",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "接入 Klarna/Afterpay/Affirm 分期支付提升客单价"
+    },
+    {
+      "name": "amazon-brand-protection",
+      "title": "亚马逊品牌保护",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用品牌注册与 IP 工具打击跟卖与假货"
+    },
+    {
+      "name": "amazon-fba-inventory-optimizer",
+      "title": "亚马逊FBA库存优化器",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "管理 IPI 分数、补货限额与仓储费"
+    },
+    {
+      "name": "optimize-ecommerce-page-conversion",
+      "title": "优化电商页面转化率",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "按转化基准优化 Shopify 页面（首页/集合/PDP）"
+    },
+    {
+      "name": "payment-fraud-detector",
+      "title": "支付欺诈检测器",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "风险评分、3DS 与人工审核的多层防欺诈"
+    },
+    {
+      "name": "returns-exchange-automator",
+      "title": "自动兑换处理",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "自助退换门户、动态路由与自动退款"
+    },
+    {
+      "name": "etsy-pod-automation",
+      "title": "Etsy按需印刷自动化",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "Printify 全流程：设计、建 Listing、发布与推广",
+      "toolGap": "Printify API"
+    },
+    {
+      "name": "tiktok-shop-setup",
+      "title": "TikTok店铺设置",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "TikTok Shop 开店：目录同步、订单与达人计划",
+      "toolGap": "TikTok Shop API"
+    },
+    {
+      "name": "tariff-search",
+      "title": "关税与HS编码查询",
+      "category": "shipping-tariff",
+      "categoryTitle": "物流与关税",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用 TurtleClassify 查 HS 编码与进口关税",
+      "toolGap": "TurtleClassify API"
+    },
+    {
+      "name": "international-shipping-customs",
+      "title": "国际货运与清关",
+      "category": "shipping-tariff",
+      "categoryTitle": "物流与关税",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "跨境物流：HS 分类、DDP/DDU 与清关文件"
+    },
+    {
+      "name": "sales-tax-vat-automator",
+      "title": "销售税与增值税自动化工具",
+      "category": "shipping-tariff",
+      "categoryTitle": "物流与关税",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "全球销售税/VAT/GST 计算与申报自动化"
+    },
+    {
+      "name": "creating-financial-models",
+      "title": "创建财务模型",
+      "category": "analytics-finance",
+      "categoryTitle": "数据分析与财务",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "DCF、敏感性、蒙特卡洛等财务建模套件"
+    },
+    {
+      "name": "ecommerce-financial-dashboard",
+      "title": "电商财务仪表盘",
+      "category": "analytics-finance",
+      "categoryTitle": "数据分析与财务",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "集成损益表、资产负债表与现金流仪表盘"
+    },
+    {
+      "name": "ecommerce-sales-dashboard",
+      "title": "电商销售仪表板",
+      "category": "analytics-finance",
+      "categoryTitle": "数据分析与财务",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "跟踪营收、AOV、转化率与渠道表现"
+    },
+    {
+      "name": "ecommerce-budget-forecaster",
+      "title": "电商预算预测器",
+      "category": "analytics-finance",
+      "categoryTitle": "数据分析与财务",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "滚动 12 个月营收/营销/库存预算"
+    },
+    {
+      "name": "dynamic-pricing-engine",
+      "title": "动态定价引擎",
+      "category": "analytics-finance",
+      "categoryTitle": "数据分析与财务",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "按需求、竞品价与库存自动调价"
+    },
+    {
+      "name": "inventory-demand-forecaster",
+      "title": "库存需求预测器",
+      "category": "analytics-finance",
+      "categoryTitle": "数据分析与财务",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "安全库存与补货点计算，防断货"
+    },
+    {
+      "name": "profit-margin-analyzer",
+      "title": "利润率分析器",
+      "category": "analytics-finance",
+      "categoryTitle": "数据分析与财务",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "按产品/渠道/细分核算毛利与净利"
+    },
+    {
+      "name": "freemium-upgrade-optimizer",
+      "title": "免费转付费转化优化",
+      "category": "analytics-finance",
+      "categoryTitle": "数据分析与财务",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "优化付费墙时机、文案与定价结构"
+    },
+    {
+      "name": "sycm-analysis-skill",
+      "title": "生意参谋分析",
+      "category": "analytics-finance",
+      "categoryTitle": "数据分析与财务",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用浏览器会话读取淘宝生意参谋周报数据",
+      "toolGap": "生意参谋登录态"
+    },
+    {
+      "name": "marketing-roas-analyzer",
+      "title": "营销ROAS分析",
+      "category": "analytics-finance",
+      "categoryTitle": "数据分析与财务",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "全渠道投放与 ROAS 归因、预算再分配"
+    },
+    {
+      "name": "dcf-valuation",
+      "title": "DCF估值",
+      "category": "analytics-finance",
+      "categoryTitle": "数据分析与财务",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "现金流折现估值，输出内在价值与目标价"
+    },
+    {
+      "name": "product-review-intelligence-collector",
+      "title": "产品评论智能采集",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "自动采集多平台评论并做多维分析"
+    },
+    {
+      "name": "email-automation-flow-builder",
+      "title": "电子邮件自动化流程构建器",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "搭建欢迎/购后/弃购/召回邮件流程",
+      "toolGap": "Klaviyo"
+    },
+    {
+      "name": "seasonal-campaign-automator",
+      "title": "季节性活动自动化",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "BFCM、大促等旺季营销编排自动化"
+    },
+    {
+      "name": "checkout-flow-optimizer",
+      "title": "结账流程优化器",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "地址自动补全、快捷支付与字段精简"
+    },
+    {
+      "name": "helpdesk-order-integration",
+      "title": "客服与订单系统集成",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "工单系统对接订单数据与 VIP 路由"
+    },
+    {
+      "name": "customer-retention-automator",
+      "title": "客户留存自动化器",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "行为触发+分层激励的防流失活动",
+      "toolGap": "Klaviyo"
+    },
+    {
+      "name": "customer-ltv-calculator",
+      "title": "客户生命周期价值计算器",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "计算历史与预测 LTV，驱动留存与召回"
+    },
+    {
+      "name": "customer-winback-automator",
+      "title": "客户赢回自动化",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "多阶段召回流失客户并分层折扣"
+    },
+    {
+      "name": "customer-rfm-analyzer",
+      "title": "客户RFM分析器",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "RFM 分群与队列留存网格驱动复购"
+    },
+    {
+      "name": "review-request-automator",
+      "title": "评审请求自动处理",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "三步式购后评价请求与激励设计"
+    },
+    {
+      "name": "cart-abandonment-recovery",
+      "title": "FARE",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "邮件+短信序列赢回弃购用户"
+    },
+    {
+      "name": "lifecycle-marketing-automator",
+      "title": "全生命周期营销自动化",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "按 7 个生命周期阶段做个性化触达",
+      "toolGap": "Klaviyo"
+    },
+    {
+      "name": "referral-program-builder",
+      "title": "推荐计划搭建",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "推荐链接、分级激励与防作弊"
+    },
+    {
+      "name": "coupon-discount-manager",
+      "title": "优惠券折扣管理器",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "折扣码批量生成、限额与有效期管理"
+    },
+    {
+      "name": "discount-promotion-engine",
+      "title": "折扣促销引擎",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "数量折扣、买一送一与购物车级促销"
+    },
+    {
+      "name": "loyalty-points-designer",
+      "title": "忠诚度积分设计",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "积分+VIP 分层提升留存与 LTV"
+    },
+    {
+      "name": "b2b-payment-terms-optimizer",
+      "title": "B2B付款账期优化",
+      "category": "crm-retention",
+      "categoryTitle": "客户生命周期与留存",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "净账期、信用额度与自动开票"
+    },
+    {
+      "name": "lark-tools",
+      "title": "飞书工具",
+      "category": "productivity",
+      "categoryTitle": "文档与办公效率",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "操作飞书多维表格、文档、日历、任务与邮件",
+      "toolGap": ""
+    },
+    {
+      "name": "create-website",
+      "title": "快速建站",
+      "category": "productivity",
+      "categoryTitle": "文档与办公效率",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "从需求直接生成完整 HTML 网站/落地页"
+    },
+    {
+      "name": "internal-comms",
+      "title": "内部沟通",
+      "category": "productivity",
+      "categoryTitle": "文档与办公效率",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用结构化模板写内部通报、周报与 FAQ"
+    },
+    {
+      "name": "doc-coauthoring",
+      "title": "文档协同编辑",
+      "category": "productivity",
+      "categoryTitle": "文档与办公效率",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "结构化流程共写文档、提案与技术规格"
+    },
+    {
+      "name": "docx",
+      "title": "DOCX 文档处理",
+      "category": "productivity",
+      "categoryTitle": "文档与办公效率",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "gmail-assistant",
+      "title": "Gmail助手",
+      "category": "productivity",
+      "categoryTitle": "文档与办公效率",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "撰写、整理与管理 Gmail 邮件并验证送达",
+      "toolGap": "Gmail MCP"
+    },
+    {
+      "name": "pdf",
+      "title": "PDF 文档处理",
+      "category": "productivity",
+      "categoryTitle": "文档与办公效率",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "pptx",
+      "title": "PPTX 演示文稿处理",
+      "category": "productivity",
+      "categoryTitle": "文档与办公效率",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "xlsx",
+      "title": "xlsx 表格处理",
+      "category": "productivity",
+      "categoryTitle": "文档与办公效率",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "skill-vetter",
+      "title": "技能安全审查",
+      "category": "agent-tools",
+      "categoryTitle": "Agent 管理与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "安装前对技能做权限与可疑模式安全审查"
+    },
+    {
+      "name": "skill-finder",
+      "title": "技能查找器",
+      "category": "agent-tools",
+      "categoryTitle": "Agent 管理与基建",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "skill-creator",
+      "title": "技能创建器",
+      "category": "agent-tools",
+      "categoryTitle": "Agent 管理与基建",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "self-improvement",
+      "title": "智能体自我学习",
+      "category": "agent-tools",
+      "categoryTitle": "Agent 管理与基建",
+      "toolBacked": true,
+      "importable": false
+    },
+    {
+      "name": "accio-mcp-cli",
+      "title": "MCP命令行网关",
+      "category": "agent-tools",
+      "categoryTitle": "Agent 管理与基建",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用 CLI 发现并调用 Twitter/Gmail/Notion 等 MCP 工具",
+      "toolGap": "accio-mcp-cli 二进制"
+    },
+    {
+      "name": "amazon-prelaunch-ad-budget",
+      "title": "amazon-prelaunch-ad-budget",
+      "category": "other",
+      "categoryTitle": "其他",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "上线前亚马逊广告预算测算与 ACoS 场景",
+      "toolGap": "Jungle Scout MCP"
+    },
+    {
+      "name": "amazon-prelaunch-competitor-teardown",
+      "title": "amazon-prelaunch-competitor-teardown",
+      "category": "other",
+      "categoryTitle": "其他",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "拆解竞品 ASIN：营收、价格史与关键词",
+      "toolGap": "Jungle Scout MCP"
+    },
+    {
+      "name": "amazon-prelaunch-demand-check",
+      "title": "amazon-prelaunch-demand-check",
+      "category": "other",
+      "categoryTitle": "其他",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "验证亚马逊真实需求与首批订货量",
+      "toolGap": "Jungle Scout MCP"
+    },
+    {
+      "name": "amazon-prelaunch-demand-mirror",
+      "title": "amazon-prelaunch-demand-mirror",
+      "category": "other",
+      "categoryTitle": "其他",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "把任意产品映射到亚马逊需求信号",
+      "toolGap": "Jungle Scout MCP"
+    },
+    {
+      "name": "amazon-prelaunch-listing-builder",
+      "title": "amazon-prelaunch-listing-builder",
+      "category": "other",
+      "categoryTitle": "其他",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "用搜索量数据构建关键词优化的 Listing",
+      "toolGap": "Jungle Scout MCP"
+    },
+    {
+      "name": "amazon-prelaunch-margin-check",
+      "title": "amazon-prelaunch-margin-check",
+      "category": "other",
+      "categoryTitle": "其他",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "测算产品经济性并给出 GO/NO-GO 结论",
+      "toolGap": "Jungle Scout MCP"
+    },
+    {
+      "name": "amazon-prelaunch-trend-scout",
+      "title": "amazon-prelaunch-trend-scout",
+      "category": "other",
+      "categoryTitle": "其他",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "发现快速上升的亚马逊利基与黑马品牌",
+      "toolGap": "Jungle Scout MCP"
+    }
+  ]
+}

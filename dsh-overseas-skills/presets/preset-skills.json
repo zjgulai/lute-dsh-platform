@@ -1,0 +1,91 @@
+{
+  "presets": [
+    {
+      "id": "ai-content-image-studio",
+      "title": "视觉创意主理人",
+      "skills": [
+        {
+          "name": "ai-content-images",
+          "title": "AI 图文卡片",
+          "descriptionZh": "将长文拆成 1–10 张图文卡片，保留 12 种视觉风格、8 种布局和 3 套配色。用户提到图文卡片、知识卡片、微信图文、文章可视化、image cards 或要求生成系列信息图时使用。"
+        }
+      ]
+    },
+    {
+      "id": "ai-product-developer",
+      "title": "全栈开发架构师",
+      "skills": [
+        {
+          "name": "grill-me",
+          "title": "需求澄清（决策树）",
+          "descriptionZh": "在开发前用决策树逐轮澄清产品方向、用户选择和范围边界，直到双方确认共同理解。"
+        },
+        {
+          "name": "tdd",
+          "title": "TDD 纵向开发循环",
+          "descriptionZh": "通过用户可观察的公开 seam 严格执行一个失败测试、最小实现、同一测试转绿的纵向开发循环。"
+        },
+        {
+          "name": "to-spec",
+          "title": "需求规格生成",
+          "descriptionZh": "把已经讨论清楚的产品需求综合为本地可追踪规格，不重新访谈用户，也不依赖外部 Issue 系统。"
+        }
+      ]
+    },
+    {
+      "id": "ai-report-analyst",
+      "title": "研报数据分析师",
+      "skills": [
+        {
+          "name": "build-ai-report",
+          "title": "Excel 数据分析与报表",
+          "descriptionZh": "只读分析本地 Excel 工作簿，完成数据剖析、清洗口径、结论提炼、图表选型、离线 HTML 报表生成和双端验收。用户要求理解或分析 .xlsx/.xlsm 数据、把 Excel 变成可视化报告、更新 Epoch AI 演示报表、选择合适图表或核对报表数据时使用。"
+        }
+      ]
+    },
+    {
+      "id": "dsh-motion-deck-studio",
+      "title": "动画演示动效师",
+      "skills": [
+        {
+          "name": "dsh-motion-deck",
+          "title": "HTML 动效演示文稿",
+          "descriptionZh": "当用户提供一段演示文稿主题、内容大纲或会议材料，希望生成结构完整、视觉突出、每页有动画的 HTML 演示文稿时使用；从新内容生成 8 页单文件 HTML，不生成 pptx，也不改写已有案例。"
+        }
+      ]
+    },
+    {
+      "id": "feishu-digital-employee",
+      "title": "飞书行政中枢",
+      "skills": [
+        {
+          "name": "feishu-digital-employee",
+          "title": "飞书数字员工",
+          "descriptionZh": "在 DeepSeek Harness 中处理飞书数字员工对话，并使用飞书 MCP 创建真实任务、查询空闲会议室、预订会议室并创建日程。用户要求在飞书发布、安排、指派或创建任务、查询/预订会议室时使用；普通寒暄只回复，不调用工具。"
+        }
+      ]
+    },
+    {
+      "id": "llm-wiki-fullstack",
+      "title": "知识图谱架构师",
+      "skills": [
+        {
+          "name": "find-plugins",
+          "title": "DSH 插件检索推荐",
+          "descriptionZh": "按用户描述的能力需求检索并推荐公共 DeepSeek Harness 插件，安装前给出流行备选"
+        }
+      ]
+    },
+    {
+      "id": "product-video-director",
+      "title": "爆款视频总导演",
+      "skills": [
+        {
+          "name": "product-launch-video",
+          "title": "产品发布视频生成",
+          "descriptionZh": "当用户用一句话要求生成产品发布片、功能预告片、应用宣传片或网站展示视频时使用；从空白目录自动生成简报、设计规范、分镜、HyperFrames 源码和经过验收的 MP4，而不是重渲染仓库内已有案例。"
+        }
+      ]
+    }
+  ]
+}

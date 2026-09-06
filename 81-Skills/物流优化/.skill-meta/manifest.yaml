@@ -1,0 +1,29 @@
+skill:
+  name: scm-logistics-optimizer
+  version: "1.0.0"
+  type: technique
+  parent_skill: scm-main-hub
+  related_skills:
+    - scm-inventory-forecaster
+    - scm-supplier-evaluator
+  triggers:
+    - 物流优化
+    - 运输路线
+    - 成本测算
+    - 承运商选择
+    - 物流方案
+    - 关务合规
+  capabilities:
+    - 路线方案生成
+    - 成本时效测算
+    - 承运商评估
+    - 关务合规
+    - 异常处理预案
+  output_formats:
+    - text
+    - markdown
+  complexity: standard
+  metadata:
+    last_updated: "2026-04-08"
+    author: jnMetaCode
+    source: https://github.com/jnMetaCode/agency-agents-zh

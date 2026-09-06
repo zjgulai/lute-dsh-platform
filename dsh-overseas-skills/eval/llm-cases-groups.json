@@ -1,0 +1,638 @@
+[
+ [
+  {
+   "query": "帮我看看现在 TikTok 上什么品类在涨，选 3 个值得做的",
+   "expect": "market-insight-product-selection",
+   "negative": [
+    "product-selection"
+   ],
+   "cluster": "research-selection",
+   "difficulty": "basic"
+  },
+  {
+   "query": "评估一下这个速卖通卖家靠不靠谱",
+   "expect": "aliexpress-supplier-evaluator",
+   "negative": [
+    "supplier-performance-manager"
+   ],
+   "cluster": "sourcing",
+   "difficulty": "basic"
+  },
+  {
+   "query": "帮我找一批高价值关键词并分类搜索意图",
+   "expect": "seo-keyword-research",
+   "negative": [
+    "seo-competitor-analysis"
+   ],
+   "cluster": "seo-ads",
+   "difficulty": "basic"
+  },
+  {
+   "query": "给我的 LinkedIn 和 X 各写一篇产品发布内容",
+   "expect": "social-media-content-creator",
+   "negative": [
+    "xiaohongshu-content-creator"
+   ],
+   "cluster": "content-gtm",
+   "difficulty": "basic"
+  },
+  {
+   "query": "做一个老带新的推荐计划，给推荐人发奖励",
+   "expect": "referral-program-builder",
+   "negative": [
+    "loyalty-points-designer"
+   ],
+   "cluster": "crm-retention",
+   "difficulty": "basic"
+  },
+  {
+   "query": "帮我搭一套欢迎邮 + 购后邮 + 弃购挽回的邮件流程",
+   "expect": "email-automation-flow-builder",
+   "negative": [
+    "lifecycle-marketing-automator"
+   ],
+   "cluster": "crm-retention",
+   "difficulty": "basic"
+  },
+  {
+   "query": "帮我把商品目录同步到 TikTok Shop 和 Facebook",
+   "expect": "social-commerce-sync",
+   "negative": [
+    "tiktok-shop-setup"
+   ],
+   "cluster": "store-ops",
+   "difficulty": "basic"
+  },
+  {
+   "query": "我的广告花费越来越高，帮我看看哪些渠道的 ROI 不行",
+   "expect": "marketing-roas-analyzer",
+   "negative": [
+    "dynamic-pricing-engine"
+   ],
+   "cluster": "analytics-finance",
+   "difficulty": "boundary"
+  },
+  {
+   "query": "Build me a welcome + abandoned cart email flow for my Shopify store",
+   "expect": "email-automation-flow-builder",
+   "negative": [
+    "cart-abandonment-recovery"
+   ],
+   "cluster": "crm-retention",
+   "difficulty": "boundary"
+  },
+  {
+   "query": "发一批限时折扣码给老客户，限制每人用一次",
+   "expect": "coupon-discount-manager",
+   "negative": [
+    "discount-promotion-engine"
+   ],
+   "cluster": "crm-retention",
+   "difficulty": "boundary"
+  }
+ ],
+ [
+  {
+   "query": "我想从零开始做一个完整选品：先看行业，再看消费者，最后定产品找供应商",
+   "expect": "product-selection",
+   "negative": [
+    "market-insight-product-selection"
+   ],
+   "cluster": "research-selection",
+   "difficulty": "basic"
+  },
+  {
+   "query": "客户一直压价，帮我准备下一轮 B2B 谈判策略",
+   "expect": "sales-negotiator",
+   "negative": [],
+   "cluster": "sourcing",
+   "difficulty": "basic"
+  },
+  {
+   "query": "分析一下这个竞争对手的 SEO：他靠哪些词和外链排上来",
+   "expect": "seo-competitor-analysis",
+   "negative": [
+    "seo-keyword-research"
+   ],
+   "cluster": "seo-ads",
+   "difficulty": "basic"
+  },
+  {
+   "query": "帮我写产品落地页的文案，突出卖点",
+   "expect": "copywriting",
+   "negative": [
+    "content-strategy"
+   ],
+   "cluster": "content-gtm",
+   "difficulty": "basic"
+  },
+  {
+   "query": "批量生成 1000 个折扣码，设有效期和限额",
+   "expect": "coupon-discount-manager",
+   "negative": [
+    "discount-promotion-engine"
+   ],
+   "cluster": "crm-retention",
+   "difficulty": "basic"
+  },
+  {
+   "query": "购物车弃购率很高，帮我做挽回邮件和短信",
+   "expect": "cart-abandonment-recovery",
+   "negative": [
+    "email-automation-flow-builder"
+   ],
+   "cluster": "crm-retention",
+   "difficulty": "basic"
+  },
+  {
+   "query": "我要在 TikTok Shop 开店，帮我做目录和订单配置",
+   "expect": "tiktok-shop-setup",
+   "negative": [
+    "social-commerce-sync"
+   ],
+   "cluster": "store-ops",
+   "difficulty": "basic"
+  },
+  {
+   "query": "库存老断货，帮我预测下个月要补多少，顺便算下安全库存",
+   "expect": "inventory-demand-forecaster",
+   "negative": [
+    "multichannel-inventory-sync"
+   ],
+   "cluster": "analytics-finance",
+   "difficulty": "boundary"
+  },
+  {
+   "query": "Write a XHS (Xiaohongshu) seeding note for our pet feeder",
+   "expect": "xiaohongshu-content-creator",
+   "negative": [
+    "social-media-content-creator"
+   ],
+   "cluster": "content-gtm",
+   "difficulty": "basic"
+  },
+  {
+   "query": "帮我设计召回沉睡客户的邮件序列，按历史消费分层折扣",
+   "expect": "customer-winback-automator",
+   "negative": [
+    "customer-retention-automator",
+    "lifecycle-marketing-automator"
+   ],
+   "cluster": "crm-retention",
+   "difficulty": "boundary"
+  }
+ ],
+ [
+  {
+   "query": "抓一下亚马逊上筋膜枪类目的爆款数据，帮我做选品参考",
+   "expect": "cross-border-selection",
+   "negative": [
+    "market-insight-product-selection"
+   ],
+   "cluster": "research-selection",
+   "difficulty": "basic"
+  },
+  {
+   "query": "我有一款筋膜枪，算一下上亚马逊的利润空间和定价",
+   "expect": "profit-margin-analyzer",
+   "negative": [
+    "dcf-valuation"
+   ],
+   "cluster": "analytics-finance",
+   "difficulty": "basic"
+  },
+  {
+   "query": "给我的产品页做一次 SEO 体检，打个分",
+   "expect": "seo-page-audit",
+   "negative": [
+    "ecommerce-seo-optimizer"
+   ],
+   "cluster": "seo-ads",
+   "difficulty": "basic"
+  },
+  {
+   "query": "我们下季度内容要做什么？帮我规划内容支柱和渠道",
+   "expect": "content-strategy",
+   "negative": [
+    "copywriting"
+   ],
+   "cluster": "content-gtm",
+   "difficulty": "basic"
+  },
+  {
+   "query": "配置一个买二送一 + 满 300 减 50 的促销规则",
+   "expect": "discount-promotion-engine",
+   "negative": [
+    "coupon-discount-manager"
+   ],
+   "cluster": "crm-retention",
+   "difficulty": "basic"
+  },
+  {
+   "query": "BFCM 大促要来了，帮我排折扣和渠道节奏",
+   "expect": "seasonal-campaign-automator",
+   "negative": [],
+   "cluster": "crm-retention",
+   "difficulty": "basic"
+  },
+  {
+   "query": "我有个新品想法，帮我判断值不值得做，顺便看看供应商",
+   "expect": "market-insight-product-selection",
+   "negative": [
+    "product-selection"
+   ],
+   "cluster": "research-selection",
+   "difficulty": "boundary"
+  },
+  {
+   "query": "帮我做一份竞品公司的组织架构图，顺便看看他们团队的背景",
+   "expect": "org-structure-research",
+   "negative": [
+    "people-research"
+   ],
+   "cluster": "research-selection",
+   "difficulty": "boundary"
+  },
+  {
+   "query": "Set up a referral program with tracking links and rewards",
+   "expect": "referral-program-builder",
+   "negative": [
+    "loyalty-points-designer"
+   ],
+   "cluster": "crm-retention",
+   "difficulty": "basic"
+  },
+  {
+   "query": "帮我规划从首访到复购的全生命周期触达策略",
+   "expect": "lifecycle-marketing-automator",
+   "negative": [
+    "customer-retention-automator"
+   ],
+   "cluster": "crm-retention",
+   "difficulty": "boundary"
+  }
+ ],
+ [
+  {
+   "query": "万圣节快到了，帮我想一些 Etsy 上的节日产品创意",
+   "expect": "scenario-driven-product-scout",
+   "negative": [
+    "product-selection"
+   ],
+   "cluster": "research-selection",
+   "difficulty": "basic"
+  },
+  {
+   "query": "给我算一下这家公司值多少钱（用现金流折现）",
+   "expect": "dcf-valuation",
+   "negative": [
+    "profit-margin-analyzer"
+   ],
+   "cluster": "analytics-finance",
+   "difficulty": "basic"
+  },
+  {
+   "query": "为什么这个词我排不上去？帮我解剖一下搜索结果页",
+   "expect": "serp-ranking-analyzer",
+   "negative": [
+    "seo-page-audit"
+   ],
+   "cluster": "seo-ads",
+   "difficulty": "basic"
+  },
+  {
+   "query": "新品要发布了，帮我策划 waiting list 和 Product Hunt 节奏",
+   "expect": "product-launch-planner",
+   "negative": [
+    "launch-strategy"
+   ],
+   "cluster": "content-gtm",
+   "difficulty": "basic"
+  },
+  {
+   "query": "帮我分析店铺客户的 RFM 分层，做复购方案",
+   "expect": "customer-rfm-analyzer",
+   "negative": [],
+   "cluster": "crm-retention",
+   "difficulty": "basic"
+  },
+  {
+   "query": "结账页转化率低，帮我精简字段和加快捷支付",
+   "expect": "checkout-flow-optimizer",
+   "negative": [
+    "optimize-ecommerce-page-conversion"
+   ],
+   "cluster": "crm-retention",
+   "difficulty": "basic"
+  },
+  {
+   "query": "帮我写产品描述，顺便把亚马逊关键词埋进去",
+   "expect": "amazon-listing-expert",
+   "negative": [
+    "copywriting"
+   ],
+   "cluster": "seo-ads",
+   "difficulty": "boundary"
+  },
+  {
+   "query": "Find me 3 winning products trending on TikTok right now",
+   "expect": "market-insight-product-selection",
+   "negative": [
+    "product-selection"
+   ],
+   "cluster": "research-selection",
+   "difficulty": "boundary"
+  },
+  {
+   "query": "Audit my single product page SEO and give it a score",
+   "expect": "seo-page-audit",
+   "negative": [
+    "ecommerce-seo-optimizer"
+   ],
+   "cluster": "seo-ads",
+   "difficulty": "basic"
+  },
+  {
+   "query": "我要在 1688 上找工厂，帮我先看行业再筛产品再找供应商",
+   "expect": "product-selection",
+   "negative": [
+    "product-supplier-sourcing"
+   ],
+   "cluster": "research-selection",
+   "difficulty": "boundary"
+  }
+ ],
+ [
+  {
+   "query": "在阿里国际站上帮我找卖宠物自动喂食器的工厂，比一下价",
+   "expect": "product-supplier-sourcing",
+   "negative": [
+    "dropshipping-supplier-integrator"
+   ],
+   "cluster": "sourcing",
+   "difficulty": "basic"
+  },
+  {
+   "query": "帮我做未来 12 个月的电商营收和营销预算",
+   "expect": "ecommerce-budget-forecaster",
+   "negative": [
+    "creating-financial-models"
+   ],
+   "cluster": "analytics-finance",
+   "difficulty": "basic"
+  },
+  {
+   "query": "我店铺所有商品页的元标签和结构化数据都要优化",
+   "expect": "ecommerce-seo-optimizer",
+   "negative": [
+    "seo-page-audit"
+   ],
+   "cluster": "seo-ads",
+   "difficulty": "basic"
+  },
+  {
+   "query": "我产品要发大版本，帮我做完整的 GTM 上市策略",
+   "expect": "launch-strategy",
+   "negative": [
+    "product-launch-planner"
+   ],
+   "cluster": "content-gtm",
+   "difficulty": "basic"
+  },
+  {
+   "query": "现有客户流失率高了，帮我设计防流失活动",
+   "expect": "customer-retention-automator",
+   "negative": [
+    "customer-winback-automator"
+   ],
+   "cluster": "crm-retention",
+   "difficulty": "basic"
+  },
+  {
+   "query": "我 Shopify 首页和 PDP 转化都不行，按基准帮我优化",
+   "expect": "optimize-ecommerce-page-conversion",
+   "negative": [
+    "checkout-flow-optimizer"
+   ],
+   "cluster": "store-ops",
+   "difficulty": "basic"
+  },
+  {
+   "query": "竞品都在打折，我该跟吗？顺便算下我还有多少利润空间",
+   "expect": "dynamic-pricing-engine",
+   "negative": [
+    "profit-margin-analyzer"
+   ],
+   "cluster": "analytics-finance",
+   "difficulty": "boundary"
+  },
+  {
+   "query": "Help me source a factory for pet feeders on Alibaba and compare prices",
+   "expect": "product-supplier-sourcing",
+   "negative": [
+    "dropshipping-supplier-integrator"
+   ],
+   "cluster": "sourcing",
+   "difficulty": "basic"
+  },
+  {
+   "query": "我产品的关键词排名一直上不去，帮我看看竞品都是怎么做的",
+   "expect": "seo-competitor-analysis",
+   "negative": [
+    "seo-keyword-research",
+    "seo-page-audit"
+   ],
+   "cluster": "seo-ads",
+   "difficulty": "boundary"
+  },
+  {
+   "query": "帮我看现在亚马逊哪些类目在涨，适合我们进入",
+   "expect": "market-insight-product-selection",
+   "negative": [
+    "cross-border-selection"
+   ],
+   "cluster": "research-selection",
+   "difficulty": "boundary"
+  }
+ ],
+ [
+  {
+   "query": "我有一批代发订单来自 3 个供应商，想自动路由和同步库存",
+   "expect": "dropshipping-supplier-integrator",
+   "negative": [
+    "product-supplier-sourcing"
+   ],
+   "cluster": "sourcing",
+   "difficulty": "basic"
+  },
+  {
+   "query": "做一个包含损益表和现金流的财务仪表盘",
+   "expect": "ecommerce-financial-dashboard",
+   "negative": [
+    "ecommerce-sales-dashboard"
+   ],
+   "cluster": "analytics-finance",
+   "difficulty": "basic"
+  },
+  {
+   "query": "我想用模板页批量做 500 个长尾落地页",
+   "expect": "programmatic-seo-strategist",
+   "negative": [
+    "seo-keyword-research"
+   ],
+   "cluster": "seo-ads",
+   "difficulty": "basic"
+  },
+  {
+   "query": "找 10 个网红帮我带货，怎么管理合作和算 ROI",
+   "expect": "influencer-campaign-manager",
+   "negative": [],
+   "cluster": "content-gtm",
+   "difficulty": "basic"
+  },
+  {
+   "query": "半年没买的客户怎么拉回来？帮我做召回",
+   "expect": "customer-winback-automator",
+   "negative": [
+    "customer-retention-automator"
+   ],
+   "cluster": "crm-retention",
+   "difficulty": "basic"
+  },
+  {
+   "query": "这套产品要发美国，帮我查 HS 编码和进口关税",
+   "expect": "tariff-search",
+   "negative": [
+    "international-shipping-customs"
+   ],
+   "cluster": "shipping-tariff",
+   "difficulty": "basic"
+  },
+  {
+   "query": "欧盟卖货，帮我检查隐私合规和 Cookie 同意怎么做",
+   "expect": "ecommerce-gdpr-compliance",
+   "negative": [
+    "international-shipping-customs"
+   ],
+   "cluster": "store-ops",
+   "difficulty": "boundary"
+  },
+  {
+   "query": "What's the import duty and HS code for shipping LED lamps to the US?",
+   "expect": "tariff-search",
+   "negative": [
+    "international-shipping-customs"
+   ],
+   "cluster": "shipping-tariff",
+   "difficulty": "basic"
+  },
+  {
+   "query": "帮我给新品列一批长尾关键词，做成内容选题",
+   "expect": "seo-keyword-research",
+   "negative": [
+    "programmatic-seo-strategist"
+   ],
+   "cluster": "seo-ads",
+   "difficulty": "boundary"
+  },
+  {
+   "query": "帮我抓亚马逊爆款数据做一份选品清单",
+   "expect": "cross-border-selection",
+   "negative": [
+    "market-insight-product-selection"
+   ],
+   "cluster": "research-selection",
+   "difficulty": "boundary"
+  }
+ ],
+ [
+  {
+   "query": "这个供应商交期老是不稳定，帮我做一套季度评分卡",
+   "expect": "supplier-performance-manager",
+   "negative": [],
+   "cluster": "sourcing",
+   "difficulty": "basic"
+  },
+  {
+   "query": "我想每天看营收、AOV 和转化率的看板",
+   "expect": "ecommerce-sales-dashboard",
+   "negative": [
+    "ecommerce-financial-dashboard"
+   ],
+   "cluster": "analytics-finance",
+   "difficulty": "basic"
+  },
+  {
+   "query": "写一条小红书种草笔记，卖宠物自动喂食器",
+   "expect": "xiaohongshu-content-creator",
+   "negative": [
+    "social-media-content-creator"
+   ],
+   "cluster": "content-gtm",
+   "difficulty": "basic"
+  },
+  {
+   "query": "帮我设计一套积分 + VIP 分层会员体系",
+   "expect": "loyalty-points-designer",
+   "negative": [
+    "referral-program-builder"
+   ],
+   "cluster": "crm-retention",
+   "difficulty": "basic"
+  },
+  {
+   "query": "算一下我们客户的终身价值，用来定 VIP 门槛",
+   "expect": "customer-ltv-calculator",
+   "negative": [
+    "customer-rfm-analyzer"
+   ],
+   "cluster": "crm-retention",
+   "difficulty": "basic"
+  },
+  {
+   "query": "跨境物流整体怎么配？DDP 还是 DDU、清关文件怎么做",
+   "expect": "international-shipping-customs",
+   "negative": [
+    "tariff-search"
+   ],
+   "cluster": "shipping-tariff",
+   "difficulty": "basic"
+  },
+  {
+   "query": "帮我分析评论里的差评，找出产品改进点，顺便看哪些卖点值得写进文案",
+   "expect": "review-analyst-agent",
+   "negative": [
+    "customer-voice-analyzer"
+   ],
+   "cluster": "research-selection",
+   "difficulty": "boundary"
+  },
+  {
+   "query": "Analyze my customer reviews and summarize the main complaints",
+   "expect": "review-analyst-agent",
+   "negative": [
+    "customer-voice-analyzer"
+   ],
+   "cluster": "research-selection",
+   "difficulty": "boundary"
+  },
+  {
+   "query": "给我店铺的每个类目页设计一套促销规则（满减+买赠）",
+   "expect": "discount-promotion-engine",
+   "negative": [
+    "coupon-discount-manager"
+   ],
+   "cluster": "crm-retention",
+   "difficulty": "boundary"
+  },
+  {
+   "query": "圣诞季到了，帮我想 10 个节日礼品创意",
+   "expect": "scenario-driven-product-scout",
+   "negative": [
+    "marketing-ideas"
+   ],
+   "cluster": "research-selection",
+   "difficulty": "boundary"
+  }
+ ]
+]

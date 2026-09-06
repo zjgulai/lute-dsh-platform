@@ -1,0 +1,59 @@
+{
+  "name": "dsh-theme",
+  "description": "Live theme editor for DeepSeek Harness with curated palettes and typography controls.",
+  "version": "0.1.0-local.1",
+  "private": true,
+  "license": "MIT",
+  "author": "oil-oil",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oil-oil/dsh-theme.git"
+  },
+  "homepage": "https://github.com/oil-oil/dsh-theme#readme",
+  "bugs": {
+    "url": "https://github.com/oil-oil/dsh-theme/issues"
+  },
+  "packageManager": "pnpm@10.16.1",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "README.md",
+    "README.zh.md",
+    "docs/theme-design.md",
+    "assets/readme/deepseek-harness.svg",
+    "lib/index.js",
+    "lib/client.js",
+    "lib/client.js.map",
+    "cordis.patch.yml"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-theme"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "tsdown && node scripts/validate-build.mjs",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "tsdown": "^0.22.14",
+    "vitest": "^4.1.10"
+  }
+}

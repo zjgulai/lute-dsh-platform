@@ -1,0 +1,27 @@
+skill:
+  name: SEO内容优化
+  version: "1.1.0"
+  type: technique
+  parent_skill: seo-main-hub
+  related_skills:
+    - seo-technical-audit
+    - seo-competitor-analyzer
+  triggers:
+    - 内容SEO优化
+    - 关键词密度分析
+    - Title优化
+    - Meta描述
+    - 内部链接
+  capabilities:
+    - 关键词分析
+    - 页面元素优化
+    - 内容质量评估
+    - 内部链接策略
+  output_formats:
+    - text
+    - markdown
+  complexity: standard
+  metadata:
+    last_updated: "2026-09-03"
+    author: AgriciDaniel
+    source: https://github.com/AgriciDaniel/claude-seo

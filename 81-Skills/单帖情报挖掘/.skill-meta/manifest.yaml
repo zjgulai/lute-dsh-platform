@@ -1,0 +1,29 @@
+name: voc-single-post-intelligence-mining
+version: "2.1.2"
+description: Single post intelligence mining for Reddit, forums, and social media comments. Extract structured insights, evidence layers, and actionable business recommendations from individual posts.
+category: data-analytics
+complexity: complex
+workflows:
+  - product-research
+  - brand-marketing
+  - daily-operations
+dependencies:
+  hard: []
+  soft:
+    - da-voc-sentiment-analyzer
+    - da-social-sentiment-tracker
+  provides:
+    - pp-jtbd-analyzer
+    - pp-competitor-intelligence
+    - bm-brand-voice-extractor
+  parallel: []
+author: lute-skills-creator
+license: MIT
+tags:
+  - voc
+  - sentiment-analysis
+  - social-listening
+  - reddit
+  - forum-mining
+  - customer-insights
+  - evidence-extraction

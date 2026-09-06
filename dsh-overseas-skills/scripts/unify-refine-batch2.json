@@ -1,0 +1,207 @@
+{
+  "product-supplier-sourcing": {
+    "notUse": [
+      "供应商背景调查与验厂走 supplier-evaluation；速卖通专项走 aliexpress-supplier-evaluator；季度绩效跟踪走 supplier-performance-manager；谈判策略走 sales-negotiator"
+    ]
+  },
+  "dropshipping-supplier-integrator": {
+    "notUse": [
+      "代发供应商寻源走 product-supplier-sourcing；绩效管理走 supplier-performance-manager；退货处理走 returns-exchange-automator；多渠道库存同步走 multichannel-inventory-sync"
+    ]
+  },
+  "supplier-performance-manager": {
+    "notUse": [
+      "新供应商准入评估走 supplier-evaluation 或 aliexpress-supplier-evaluator；寻源走 product-supplier-sourcing；合同谈判走 sales-negotiator"
+    ]
+  },
+  "aliexpress-supplier-evaluator": {
+    "notUse": [
+      "1688 供应商背景调查走 supplier-evaluation；通用寻源走 product-supplier-sourcing；绩效跟踪走 supplier-performance-manager"
+    ]
+  },
+  "sales-negotiator": {
+    "notUse": [
+      "供应商评估走 supplier-evaluation；采购寻源走 product-supplier-sourcing；B2B 账期条款走 b2b-payment-terms-optimizer"
+    ]
+  },
+  "competitor-deep-analysis": {
+    "notUse": [
+      "竞品画像档案走 competitor-profiling；战卡制作走 battlecard-library；赢输数据沉淀走 win-loss-dataset；市场信号登记走 market-signal-tracker"
+    ]
+  },
+  "competitive-landscape": {
+    "notUse": [
+      "单竞品深挖走 competitor-deep-analysis；高管简报走 executive-briefing-kit；TAM/SAM/SOM 建模走 market-scenario-modeler"
+    ]
+  },
+  "review-analyst-agent": {
+    "notUse": [
+      "客户声音六维映射走 customer-voice-analyzer；情感分析走 voc-sentiment-analyzer；多平台评论采集走 product-review-intelligence-collector"
+    ]
+  },
+  "people-research": {
+    "notUse": [
+      "公司级调研走 company-research；组织架构走 org-structure-research；社交关系图谱走 social-network-mapper"
+    ]
+  },
+  "social-network-mapper": {
+    "notUse": [
+      "人物背景走 people-research；组织架构走 org-structure-research；单帖评论挖掘走 single-post-intel-mining"
+    ]
+  },
+  "product-selection": {
+    "notUse": [
+      "单一品类趋势判断走 market-insight-product-selection；场景创意发散走 scenario-driven-product-scout；品类可行性报告走 cross-border-category-feasibility；供应商匹配走 product-supplier-sourcing"
+    ]
+  },
+  "org-structure-research": {
+    "notUse": [
+      "人物背景走 people-research；公司财务画像走 company-research；关系图谱走 social-network-mapper"
+    ]
+  },
+  "battlecard-library": {
+    "notUse": [
+      "竞品深挖走 competitor-deep-analysis；高管简报走 executive-briefing-kit；画像档案走 competitor-profiling"
+    ]
+  },
+  "executive-briefing-kit": {
+    "notUse": [
+      "战卡模板走 battlecard-library；深度分析走 competitor-deep-analysis；赢输数据走 win-loss-dataset"
+    ]
+  },
+  "market-signal-tracker": {
+    "notUse": [
+      "单次深度调研走 competitor-deep-analysis；舆情监测走 brand-mention-tracking；赢输沉淀走 win-loss-dataset"
+    ]
+  },
+  "win-loss-dataset": {
+    "notUse": [
+      "竞品分析走 competitor-deep-analysis；信号追踪走 market-signal-tracker；高管简报走 executive-briefing-kit"
+    ]
+  },
+  "insights-repository-kit": {
+    "notUse": [
+      "调研立项走 research-brief-blueprint；情景建模走 market-scenario-modeler；知识抽取走 knowledge-extraction-expert"
+    ]
+  },
+  "market-scenario-modeler": {
+    "notUse": [
+      "调研立项模板走 research-brief-blueprint；选品决策走 product-selection；财务模型走 creating-financial-models"
+    ]
+  },
+  "participant-operations-hub": {
+    "notUse": [
+      "调研立项走 research-brief-blueprint；洞察沉淀走 insights-repository-kit；ICP 画像走 icp-profiler"
+    ]
+  },
+  "research-brief-blueprint": {
+    "notUse": [
+      "具体调研执行走 market-scenario-modeler 或 competitor-deep-analysis；参与者运营走 participant-operations-hub；洞察入库走 insights-repository-kit"
+    ]
+  },
+  "warehouse-fulfillment-workflow": {
+    "notUse": [
+      "库存预测走 inventory-demand-forecaster；运输路线与承运商走 international-shipping-customs；运单追踪走 shipment-tracking；多渠道库存同步走 multichannel-inventory-sync"
+    ]
+  },
+  "ecommerce-gdpr-compliance": {
+    "notUse": [
+      "支付合规走 payment-fraud-detector；退货政策走 return-policy-designer；销售税合规走 sales-tax-vat-automator"
+    ]
+  },
+  "multi-currency-checkout": {
+    "notUse": [
+      "销售税计算走 sales-tax-vat-automator；结账流程优化走 checkout-flow-optimizer；先买后付走 buy-now-pay-later-setup"
+    ]
+  },
+  "multi-location-order-router": {
+    "notUse": [
+      "多渠道库存同步走 multichannel-inventory-sync；仓库作业流程走 warehouse-fulfillment-workflow；国际物流走 international-shipping-customs"
+    ]
+  },
+  "multichannel-inventory-sync": {
+    "notUse": [
+      "库存需求预测走 inventory-demand-forecaster；仓库发货走 warehouse-fulfillment-workflow；订单路由走 multi-location-order-router"
+    ]
+  },
+  "invoice-generator": {
+    "notUse": [
+      "销售税/VAT 计算走 sales-tax-vat-automator；财务模型走 creating-financial-models；账期条款走 b2b-payment-terms-optimizer"
+    ]
+  },
+  "chargeback-dispute-manager": {
+    "notUse": [
+      "支付欺诈预防走 payment-fraud-detector；退货自动处理走 returns-exchange-automator；客服工单集成走 helpdesk-order-integration"
+    ]
+  },
+  "social-commerce-sync": {
+    "notUse": [
+      "社媒内容走 social-content；TikTok 店铺设置走 tiktok-shop-setup；商品信息源优化走 google-shopping-feed-optimizer"
+    ]
+  },
+  "return-policy-designer": {
+    "notUse": [
+      "退换自动处理走 returns-exchange-automator；拒付争议走 chargeback-dispute-manager；客户召回走 customer-winback-automator"
+    ]
+  },
+  "buy-now-pay-later-setup": {
+    "notUse": [
+      "多币种结账走 multi-currency-checkout；结账流程优化走 checkout-flow-optimizer；支付欺诈走 payment-fraud-detector"
+    ]
+  },
+  "amazon-brand-protection": {
+    "notUse": [
+      "Listing 优化走 amz-product-optimizer；竞品监控走 amazon-competitor-monitor；跟卖价格监控走 platform-price-monitor"
+    ]
+  },
+  "amazon-fba-inventory-optimizer": {
+    "notUse": [
+      "库存需求预测走 inventory-demand-forecaster；补货与安全库存走 inventory-demand-forecaster；多渠道库存走 multichannel-inventory-sync"
+    ]
+  },
+  "payment-fraud-detector": {
+    "notUse": [
+      "拒付争议处理走 chargeback-dispute-manager；结账流程走 checkout-flow-optimizer；先买后付风控走 buy-now-pay-later-setup"
+    ]
+  },
+  "returns-exchange-automator": {
+    "notUse": [
+      "退货政策设计走 return-policy-designer；客户赢回走 customer-winback-automator；客服工单走 helpdesk-order-integration"
+    ]
+  },
+  "etsy-pod-automation": {
+    "notUse": [
+      "Etsy SEO 走 etsy-seo-optimizer；多平台 Listing 走 multi-platform-listing-generator；产品创意走 scenario-driven-product-scout"
+    ]
+  },
+  "tiktok-shop-setup": {
+    "notUse": [
+      "TikTok 广告走 tiktok-ads-strategy；社媒内容走 social-content；网红合作走 influencer-marketing"
+    ]
+  },
+  "tariff-search": {
+    "notUse": [
+      "运输路线/承运商/关务方案走 international-shipping-customs；销售税/VAT 计算走 sales-tax-vat-automator；运单追踪走 shipment-tracking"
+    ]
+  },
+  "sales-tax-vat-automator": {
+    "notUse": [
+      "关税 HS 编码走 tariff-search；多币种定价走 multi-currency-checkout；财务对账走 creating-financial-models"
+    ]
+  },
+  "video-prompt-guide": {
+    "notUse": [
+      "爆款视频脚本分析走 viral-video-analyzer；图像提示词走 image-prompt-guide；产品概念设计走 ai-product-designer；动效演示走 dsh-motion-deck"
+    ]
+  },
+  "image-prompt-guide": {
+    "notUse": [
+      "视频提示词走 video-prompt-guide；品牌 Logo 走 brand-logo-designer；产品概念三方案走 ai-product-designer"
+    ]
+  },
+  "higgsfield-guide": {
+    "notUse": [
+      "通用图像生成走 image-prompt-guide；视频提示词走 video-prompt-guide；产品发布视频走 product-launch-video"
+    ]
+  }
+}

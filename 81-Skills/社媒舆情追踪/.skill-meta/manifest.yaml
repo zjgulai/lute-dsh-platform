@@ -1,0 +1,23 @@
+name: da-social-sentiment-tracker
+version: "1.0.2"
+description: Track and analyze brand sentiment across social media platforms
+category: data-insights
+complexity: standard
+workflows:
+  - daily-operations
+  - brand-marketing
+dependencies:
+  hard: []  # 无强依赖
+  soft: []  # 无软依赖
+  provides:  # 输出供下游使用
+    - bm-marketing-content-suite  # 舆情洞察用于内容策划
+  parallel:  # 可并行执行
+    - da-voc-sentiment-analyzer  # 站内+站外舆情可并行
+author: lute-skills-creator
+license: MIT
+tags:
+  - social-media
+  - sentiment
+  - brand-monitoring
+  - reputation
+  - listening

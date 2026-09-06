@@ -1,0 +1,61 @@
+# Your patch layer for this dsh profile, applied after every bundle layer:
+# a top-level YAML array of loader patch entries (id-targeted config
+# overrides, disables, and insert lists; `!!js` expressions allowed).
+# 技能税治理（会话白名单）：组合里原本没有 dsh-skill-subset 行，必须用 insert
+# 挂载（id-targeted config 覆盖对不存在的行是惰性 no-op——2026-09-02 实测 hidden=0）。
+# 挂载后：正注册下方 25 技能（编码核心+电商主线），其余全部遮蔽（hideOthers: true）。
+# 注意 8 个编码核心技能（dsh-desktop-diagnostics / editing-cordis-compositions /
+# cordis-plugin-development / archify / understand*4）不在 ~/.dsh/skills/，由预设/应用
+# 内置提供：正注册会跳过，但因在 wanted 名单内不会被遮蔽，保持原生可见。
+- insert:
+    - id: dsh-skill-subset
+      name: dsh-skill-subset
+      config:
+        hideOthers: true
+        skills:
+          - dsh-desktop-diagnostics
+          - editing-cordis-compositions
+          - cordis-plugin-development
+          - build-deepseek-harness-plugin
+          - dsh-plugin-acquire
+          - macos-harness
+          - genui
+          - archify
+          - understand
+          - understand-chat
+          - understand-diff
+          - understand-explain
+          - explore-unknowns
+          - write-spec
+          - lark-tools
+          - cross-border-selection
+          - market-insight-product-selection
+          - product-attribute-analyzer
+          - product-launch-planner
+          - scenario-driven-product-scout
+          - dropshipping-supplier-integrator
+          - sales-negotiator
+          - etsy-seo-optimizer
+          - amazon-listing-expert
+          - product-selection
+
+- id: modlens
+  config:
+    readImageTool: false
+
+- id: dsh-memory
+  config:
+    python: /Users/lute/.dsh/aeis-venv/bin/python
+    dbPath: /Users/lute/.dsh/profiles/desktop/data/lingshu.db
+    # P2 记忆收敛：Noema 为主持久记忆；LingShu 降载（brain→core 12 工具）
+    # 并关闭自动记忆（消除双写与上下文税），显式 lingshu_* 调用仍可用。
+    tools: core
+    memory:
+      userMessage: false
+
+# Local adaptation of oil-oil/dsh-theme (0.1.0-local.1): module and token
+# surface migrated from Harness 0.1.0-rc.6 to this Desktop's 0.1.2-alpha.1.
+# Source: /Users/lute/project/Magpie-Horch/dsh-theme-local
+- insert:
+    - id: dsh-theme
+      name: dsh-theme

@@ -1,0 +1,36 @@
+skill:
+  name: mece-knowledge-extractor
+  version: "1.0.0"
+  description: MECE 原则知识提取器，从文本中提取结构化知识单元
+  author: pdf2skills-project
+
+components:
+  main: SKILL.md
+  references:
+    - references/sku-schema.md
+    - references/mece-principles.md
+    - references/prompt-engineering.md
+
+embedded_skills:
+  - name: density-aware-extractor
+    description: 密度感知提取器，内嵌于主 Skill
+  - name: structured-knowledge-parser
+    description: 结构化知识解析器，内嵌于主 Skill
+
+config:
+  language: "zh"
+  output_language: "English"
+  rate_limit: 3.0
+  validate_schema: true
+  min_execution_body_length: 50
+
+tags:
+  - knowledge-extraction
+  - mece
+  - sku
+  - structured-data
+
+qa:
+  iron_law_tested: false
+  evaluated_score: null
+  optimized: false

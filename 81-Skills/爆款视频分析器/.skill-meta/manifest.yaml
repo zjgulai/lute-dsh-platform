@@ -1,0 +1,22 @@
+name: bm-viral-video-analyzer
+version: "1.0.0"
+description: Analyze and optimize video content for viral potential and engagement
+category: brand-marketing
+complexity: standard
+workflows:
+  - brand-marketing
+dependencies:
+  hard: []  # 无强依赖
+  soft:  # 软依赖
+    - bm-marketing-content-suite  # 内容用于视频脚本
+  provides:  # 输出供下游使用
+    - bm-seo-geo-optimizer  # 视频用于搜索优化
+  parallel: []  # 无可并行skill
+author: lute-skills-creator
+license: MIT
+tags:
+  - video
+  - viral
+  - content-optimization
+  - tiktok
+  - engagement

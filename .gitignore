@@ -1,0 +1,55 @@
+# —— LUTE Agentic System · monorepo 白名单式 .gitignore ——
+# 策略：默认忽略全部 → 恢复目录 → 仅纳入经审批的目录与根级元文件
+# （一次性补丁脚本/预览 HTML/构建产物/临时文件不入库）
+
+*
+!*/
+!.gitignore
+!README.md
+!CHANGELOG.md
+!LICENSE
+!.github/**
+!docs/**
+!doc/**
+!_doc-notes/**
+!packaging/**
+!81-Skills/**
+!dsh-overseas-skills/**
+!dsh-overseas-tools/**
+!dsh-wanzh-hulian/**
+!dsh-skill-subset/**
+!dsh-patches/**
+!dsh-loopx-plugin/**
+!dsh-memory-local/**
+!dsh-noema-local/**
+!dsh-auto-compact-local/**
+!dsh-deepresearch-local/**
+!dsh-agent-team-gui-local/**
+!dsh-bridge-protocol-local/**
+!dsh-browser-extension-local/**
+!dsh-browser-local/**
+!dsh-file-upload-local/**
+!dsh-preset-lint-local/**
+!dsh-rename-conversations/**
+!dsh-renderer-heal/**
+!dsh-reverse-skill-local/**
+!dsh-root-brand-local/**
+!dsh-skill-title-fix/**
+!dsh-theme-local/**
+!archify-local/**
+!explore-unknowns-local/**
+!write-spec-local/**
+!deepseek-harness-studio-presets/**
+
+# —— 纳入目录内的常见排除 ——
+node_modules/
+staging/
+dist/
+generated/
+*.tgz
+.env
+.env.*
+credentials*
+*.shn#
+.DS_Store
+*.log

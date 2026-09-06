@@ -1,0 +1,123 @@
+{
+  "schema": "lexical-run.v1",
+  "total": 132,
+  "strictTop1": 105,
+  "looseTop3": 113,
+  "avgRank": 4.36,
+  "fails": [
+    {
+      "query": "帮我看看现在 TikTok 上什么品类在涨，选 3 个值得做的",
+      "expect": "market-insight-product-selection",
+      "rank": 16,
+      "difficulty": "basic"
+    },
+    {
+      "query": "我有一款筋膜枪，算一下上亚马逊的利润空间和定价",
+      "expect": "profit-margin-analyzer",
+      "rank": 10,
+      "difficulty": "basic"
+    },
+    {
+      "query": "给我的 LinkedIn 和 X 各写一篇产品发布内容",
+      "expect": "social-media-content-creator",
+      "rank": 6,
+      "difficulty": "basic"
+    },
+    {
+      "query": "我有个新品想法，帮我判断值不值得做，顺便看看供应商",
+      "expect": "market-insight-product-selection",
+      "rank": 31,
+      "difficulty": "boundary"
+    },
+    {
+      "query": "帮我写产品描述，顺便把亚马逊关键词埋进去",
+      "expect": "amazon-listing-expert",
+      "rank": 10,
+      "difficulty": "boundary"
+    },
+    {
+      "query": "竞品都在打折，我该跟吗？顺便算下我还有多少利润空间",
+      "expect": "dynamic-pricing-engine",
+      "rank": 17,
+      "difficulty": "boundary"
+    },
+    {
+      "query": "我的广告花费越来越高，帮我看看哪些渠道的 ROI 不行",
+      "expect": "marketing-roas-analyzer",
+      "rank": 14,
+      "difficulty": "boundary"
+    },
+    {
+      "query": "Find me 3 winning products trending on TikTok right now",
+      "expect": "market-insight-product-selection",
+      "rank": 23,
+      "difficulty": "boundary"
+    },
+    {
+      "query": "Help me source a factory for pet feeders on Alibaba and compare prices",
+      "expect": "product-supplier-sourcing",
+      "rank": 4,
+      "difficulty": "basic"
+    },
+    {
+      "query": "Analyze my customer reviews and summarize the main complaints",
+      "expect": "review-analyst-agent",
+      "rank": 14,
+      "difficulty": "boundary"
+    },
+    {
+      "query": "Build me a welcome + abandoned cart email flow for my Shopify store",
+      "expect": "email-automation-flow-builder",
+      "rank": 81,
+      "difficulty": "boundary"
+    },
+    {
+      "query": "Write a XHS (Xiaohongshu) seeding note for our pet feeder",
+      "expect": "xiaohongshu-content-creator",
+      "rank": 35,
+      "difficulty": "basic"
+    },
+    {
+      "query": "Set up a referral program with tracking links and rewards",
+      "expect": "referral-program-builder",
+      "rank": 92,
+      "difficulty": "basic"
+    },
+    {
+      "query": "Audit my single product page SEO and give it a score",
+      "expect": "seo-page-audit",
+      "rank": 10,
+      "difficulty": "basic"
+    },
+    {
+      "query": "帮我给新品列一批长尾关键词，做成内容选题",
+      "expect": "seo-keyword-research",
+      "rank": 8,
+      "difficulty": "boundary"
+    },
+    {
+      "query": "给我店铺的每个类目页设计一套促销规则（满减+买赠）",
+      "expect": "discount-promotion-engine",
+      "rank": 5,
+      "difficulty": "boundary"
+    },
+    {
+      "query": "帮我看现在亚马逊哪些类目在涨，适合我们进入",
+      "expect": "market-insight-product-selection",
+      "rank": 58,
+      "difficulty": "boundary"
+    },
+    {
+      "query": "给 CEO 写一篇行业前瞻的观点文章",
+      "expect": "thought-leadership",
+      "rank": 4,
+      "difficulty": "basic"
+    },
+    {
+      "query": "把这篇文章改写成 LinkedIn 帖子和 TikTok 短视频脚本",
+      "expect": "social-content",
+      "rank": 17,
+      "difficulty": "basic"
+    }
+  ]
+}

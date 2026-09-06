@@ -1,0 +1,22 @@
+name: so-amazon-competitor-monitor
+version: "1.1.0"
+description: Monitor Amazon competitor activities including price changes, promotions, and listing updates
+category: sales-operations
+complexity: standard
+workflows:
+  - daily-operations
+dependencies:
+  hard: []  # 无强依赖
+  soft:  # 软依赖
+    - so-ecommerce-price-monitor  # 价格监控用于竞品分析
+  provides:  # 输出供下游使用
+    - pp-competitor-intelligence  # 监控数据用于情报分析
+  parallel: []  # 无可并行skill
+author: lute-skills-creator
+license: MIT
+tags:
+  - amazon
+  - competitor
+  - monitoring
+  - price-tracking
+  - asin

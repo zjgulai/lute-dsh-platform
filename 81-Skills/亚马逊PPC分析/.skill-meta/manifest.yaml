@@ -1,0 +1,22 @@
+name: so-amazon-ppc-analyzer
+version: "1.0.0"
+description: Analyze and optimize Amazon PPC advertising campaigns for better ROAS and lower ACoS
+category: sales-operations
+complexity: standard
+workflows:
+  - daily-operations
+dependencies:
+  hard: []  # 无强依赖
+  soft:  # 软依赖
+    - da-claude-ecom  # 整体销售数据分析
+    - so-amazon-listing-optimizer  # Listing质量影响广告
+  provides: []  # 下游无直接依赖本skill
+  parallel: []  # 无可并行skill
+author: lute-skills-creator
+license: MIT
+tags:
+  - amazon
+  - ppc
+  - advertising
+  - roas
+  - acos

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>技能库 · LUTE Agentic System</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap bar">
+    <span class="logo">LUTE <b>Agentic System</b></span>
+    <nav>
+      <a href="index.html">总览</a>
+      <a href="plugins.html">插件能力图谱</a>
+      <a class="on" href="skills.html">技能库</a>
+      <a href="presets.html">业务预设</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero" style="padding:34px 40px">
+    <h1>技能库</h1>
+    <p>技能 = AI 的专项本领，共 25 个。你不需要记名字——只要在对话里说出要干什么，AI 会自动拿出对应的本领。按「来源」分四类：个人技能、Agent 技能、内置技能、预设绑定技能。触发方式主要有四种：<b>语言触发</b>、<b>工具触发</b>、<b>自动运行</b>、<b>预设绑定</b>。</p>
+    <div class="chips">
+      <span>🗣 语言触发为主</span><span>🔧 工具触发</span><span>👤 预设绑定</span><span>⚡ 部分自动运行</span>
+    </div>
+  </div>
+
+  <section>
+    <h2>触发机制速览 <span class="tag">业务语言版</span></h2>
+    <table>
+      <tr><th style="width:170px">触发方式</th><th>白话解释</th><th style="width:240px">典型例子</th></tr>
+      <tr><td><span class="badge b-lang">语言触发</span></td><td>你在对话里提到相关任务，AI 自动拿出对应本领</td><td>「画个架构图」→ archify 技能</td></tr>
+      <tr><td><span class="badge b-tool">工具触发</span></td><td>AI 干活时把技能当工具调用</td><td>搜索、读图、记忆读写</td></tr>
+      <tr><td><span class="badge b-auto">自动运行</span></td><td>你什么都不用说，后台自动做</td><td>对话自动沉淀记忆</td></tr>
+      <tr><td><span class="badge b-ext">预设绑定</span></td><td>选择某个数字员工角色，自动带上它的专属技能</td><td>选「AI 数据叙事分析师」→ 自带 Excel 报表技能</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>个人技能 <span class="tag">你为 AI 安装的通用本领 · 4 个</span></h2>
+    <div class="grid">
+      <div class="card">
+        <h3>dsh-plugin-acquire <span class="ver">采集</span></h3>
+        <p class="desc">插件获取闭环：给一个插件链接（GitHub/npm），AI 自动完成形态识别 → 评估 → 安装 → 测试 → 写说明文档。</p>
+        <ul><li>覆盖全流程并留证据：评估表、分层测试报告、README.usage.md</li><li>内置崩溃级阻断检查，防「装了就崩」</li></ul>
+        <div class="row"><span class="k">怎么用</span><span class="v">说「帮我装这个插件：链接」</span></div>
+        <div class="row"><span class="k">触发</span><span class="v"><span class="badge b-lang">语言/斜杠指令</span>（/dsh-plugin-acquire + 链接）</span></div>
+        <div class="example"><b>实测：</b>本机 archify / dsh-im 都是这样采编安装并留档的。</div>
+      </div>
+      <div class="card">
+        <h3>build-deepseek-harness-plugin</h3>
+        <p class="desc">插件开发全流程：创建、改造、迁移、评审、调试、发布 DeepSeek Harness 插件。</p>
+        <ul><li>Cordis 装配、官方插件替换、Web Client bundle、Slot、Theme Token 等</li><li>改 schema 后界面不更新、GitHub 安装等调试知识</li></ul>
+        <div class="row"><span class="k">触发</span><span class="v"><span class="badge b-lang">语言触发</span>（插件开发任务）</span></div>
+        <div class="example"><b>场景：</b>「帮我写一个每天自动整理会话的插件」</div>
+      </div>
+      <div class="card">
+        <h3>genui</h3>
+        <p class="desc">回复内交互 UI 渲染：表格、图表、表单、问卷、3D 等（与 genui 插件配套）。</p>
+        <div class="row"><span class="k">触发</span><span class="v"><span class="badge b-auto">AI 自动</span>（结构化表达时）</span></div>
+        <div class="example"><b>场景：</b>结果需要可视化时自动上表格/看板。</div>
+      </div>
+      <div class="card">
+        <h3>macos-harness</h3>
+        <p class="desc">控制整台 Mac：截图、点击、输入、Apple 事件、浏览器控制、文件操作——AI 的「手」。</p>
+        <ul><li>摄像头级像素输入、目标定位、CDP 浏览器控制</li><li>权限（屏幕录制/辅助功能）检测与授权引导</li></ul>
+        <div class="row"><span class="k">触发</span><span class="v"><span class="badge b-lang">语言触发</span>（操作电脑类任务）</span></div>
+        <div class="example"><b>场景：</b>「打开访达把这个文件拖到那个文件夹」「帮我登录这个网页」</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Agent 技能 <span class="tag">代码理解与系统诊断 · 12 个</span></h2>
+    <p class="lead">understand 系列（8 个）负责「读懂代码」；dsh-desktop-diagnostics 负责「修好系统」；agent-reach 负责「联系其他 AI」。全都靠语言触发——你说了对应的需求，它就上手。</p>
+    <table>
+      <tr><th style="width:200px">技能</th><th>本领</th><th style="width:210px">什么时候用</th><th style="width:120px">触发</th></tr>
+      <tr><td>understand</td><td>扫描代码库，生成交互式知识图谱（架构/组件/关系）</td><td>刚接手一个陌生项目、想快速看懂</td><td><span class="badge b-lang">语言触发</span></td></tr>
+      <tr><td>understand-chat</td><td>基于知识图谱问答代码库</td><td>「这个模块谁调用、改这里影响什么」</td><td><span class="badge b-lang">语言触发</span></td></tr>
+      <tr><td>understand-diff</td><td>分析 git diff / PR 改动与影响面</td><td>评审代码、看改动会不会出问题</td><td><span class="badge b-lang">语言触发</span></td></tr>
+      <tr><td>understand-explain</td><td>深挖某个文件/函数/模块的来龙去脉</td><td>读不懂某段关键逻辑</td><td><span class="badge b-lang">语言触发</span></td></tr>
+      <tr><td>understand-domain</td><td>提取业务领域知识，生成领域流程图</td><td>理清业务边界与流程</td><td><span class="badge b-lang">语言触发</span></td></tr>
+      <tr><td>understand-figma</td><td>分析 Figma 设计稿，生成设计知识图谱</td><td>把设计稿变可检索的页面/组件/设计体系</td><td><span class="badge b-lang">语言触发</span></td></tr>
+      <tr><td>understand-knowledge</td><td>分析 LLM 维基知识库，生成知识图谱</td><td>梳理大段知识文档</td><td><span class="badge b-lang">语言触发</span></td></tr>
+      <tr><td>understand-dashboard</td><td>可视化看板（知识图谱网页版）</td><td>把图谱变成能点能看的大屏</td><td><span class="badge b-lang">语言触发</span></td></tr>
+      <tr><td>understand-onboard</td><td>新人上手引导</td><td>新同事快速熟悉代码库</td><td><span class="badge b-lang">语言触发</span></td></tr>
+      <tr><td>dsh-desktop-diagnostics</td><td>桌面端诊断修复：启动失败、插件不兼容、界面功能 bug</td><td>应用进恢复模式、某功能点了没反应</td><td><span class="badge b-lang">语言触发</span></td></tr>
+      <tr><td>agent-reach</td><td>跨会话联系其他 agent</td><td>需要多个 AI 会话协作</td><td><span class="badge b-lang">语言触发</span></td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>内置技能 <span class="tag">随插件一起装好的本领 · 2 个</span></h2>
+    <div class="grid">
+      <div class="card key">
+        <h3>archify · 画图本领 <span class="ver">随 archify 插件 · 2.14</span></h3>
+        <p class="desc">五种专业图（架构/工作流/时序/数据流/生命周期）+ Mermaid 美化转换，自包含 HTML 产物，可导出。</p>
+        <ul>
+          <li>自然语言或 Mermaid 输入，自动排版、自动补标签</li>
+          <li>读代码取证再落图，可验证不瞎编</li>
+          <li>9 项质量检查全过才交付</li>
+        </ul>
+        <div class="row"><span class="k">触发</span><span class="v"><span class="badge b-lang">语言触发</span>（「画架构图」类需求）</span></div>
+        <div class="example"><b>实测：</b>validate 9 项 0 错 0 警 + deliver 637KB HTML 一次通过。</div>
+      </div>
+      <div class="card">
+        <h3>genui（插件内置版）</h3>
+        <p class="desc">与个人技能 genui 同源，插件自带副本保证开箱可用。</p>
+        <div class="row"><span class="k">触发</span><span class="v"><span class="badge b-auto">AI 自动</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>预设绑定技能 <span class="tag">选了数字员工就自动带上 · 9 个</span></h2>
+    <table>
+      <tr><th style="width:190px">技能</th><th>所属数字员工</th><th>本领（业务语言）</th><th style="width:130px">怎么触发</th></tr>
+      <tr><td>to-spec</td><td>AI 产品开发工程师</td><td>把聊清楚的需求写成可追踪规格书（不重新访谈、不依赖外部 Issue）</td><td><span class="badge b-ext">预设绑定</span></td></tr>
+      <tr><td>tdd</td><td>AI 产品开发工程师</td><td>测试驱动开发：先写测试 → 最小实现 → 测试转绿</td><td><span class="badge b-ext">预设绑定</span></td></tr>
+      <tr><td>grill-me</td><td>AI 产品开发工程师</td><td>开发前用决策树逐轮澄清方向、用户选择、范围边界，不跑偏</td><td><span class="badge b-ext">预设绑定</span></td></tr>
+      <tr><td>find-plugins</td><td>LLM Wiki 全栈工程师</td><td>按能力需求推荐公开插件</td><td><span class="badge b-ext">预设绑定</span></td></tr>
+      <tr><td>build-ai-report</td><td>AI 数据叙事分析师</td><td>读 Excel 出分析报告：剖析 → 清洗 → 图表 → 离线 HTML 报表 → 双端验收</td><td><span class="badge b-ext">预设绑定</span></td></tr>
+      <tr><td>ai-content-images</td><td>AI 内容视觉编辑</td><td>长文拆成 1–10 张图文卡片（12 风格 × 8 布局 × 3 配色）</td><td><span class="badge b-ext">预设绑定</span></td></tr>
+      <tr><td>product-launch-video</td><td>AI 产品视频导演</td><td>一句话出产品宣传片：简报 → 规范 → 分镜 → 源码 → MP4</td><td><span class="badge b-ext">预设绑定</span></td></tr>
+      <tr><td>dsh-motion-deck</td><td>DSH 动效演示导演</td><td>大纲变 8 页动效 HTML 演示文稿，结构完整每页有动画</td><td><span class="badge b-ext">预设绑定</span></td></tr>
+      <tr><td>feishu-digital-employee</td><td>飞书数字员工</td><td>飞书里建任务：发布/安排/指派真实任务（非寒暄不建）</td><td><span class="badge b-ext">预设绑定</span> + <span class="badge b-ext">外部消息</span></td></tr>
+    </table>
+    <p class="note" style="margin-top:12px">预设绑定技能不需要你记名字——选对数字员工角色，AI 自然就会这些本领。数字员工介绍见「业务预设」页。</p>
+  </section>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span><b>LUTE Agentic System</b> · 技能库</span>
+    <span>25 技能 · 4 类来源 · 更新 2026-08-30</span>
+    <a href="index.html">← 返回总览</a>
+  </div>
+</footer>
+</body>
+</html>

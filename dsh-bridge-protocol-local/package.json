@@ -1,0 +1,23 @@
+{
+  "name": "@yuxianglin/dsh-bridge-browser",
+  "version": "0.0.3-alpha.1-port",
+  "description": "Protocol-only stub of the alpha.1-ported dsh-bridge-browser (wire types + constants only; no host plugin, no devDeps).",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/protocol.js"
+    },
+    "./protocol": {
+      "types": "./lib/types/protocol.d.ts",
+      "default": "./lib/protocol.js"
+    },
+    "./package.json": "./package.json",
+    "./src/*": "./src/*"
+  },
+  "files": [
+    "lib",
+    "src"
+  ]
+}

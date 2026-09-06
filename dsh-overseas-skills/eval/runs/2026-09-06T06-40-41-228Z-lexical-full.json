@@ -1,0 +1,19 @@
+{
+  "total": 228,
+  "strictTop1": 227,
+  "looseTop3": 227,
+  "avgRank": 1.06,
+  "fails": [
+    {
+      "q": "帮我竞品画像与结构化研究档案（81 版内容待接入）",
+      "expect": "competitor-profiling",
+      "rank": 15,
+      "top": [
+        "seo-controller",
+        "viral-video-analyzer",
+        "company-research"
+      ],
+      "difficulty": "easy"
+    }
+  ]
+}

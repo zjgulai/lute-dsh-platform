@@ -1,0 +1,24 @@
+name: pp-jtbd-analyzer
+version: "1.0.0"
+description: Apply Jobs-to-be-Done framework to uncover customer needs and product opportunities
+category: product-planning
+complexity: complex
+workflows:
+  - product-launch
+dependencies:
+  hard: []  # 无强依赖
+  soft:  # 软依赖
+    - da-voc-sentiment-analyzer  # 评价数据用于需求分析
+    - pp-product-research-matrix  # 选品方向用于需求验证
+  provides:  # 输出供下游使用
+    - so-amazon-listing-optimizer  # 用户任务用于卖点提炼
+  parallel:  # 可并行执行
+    - pp-competitor-intelligence  # 需求+竞争分析可并行
+author: lute-skills-creator
+license: MIT
+tags:
+  - jtbd
+  - customer-needs
+  - user-research
+  - jobs-to-be-done
+  - product-opportunity

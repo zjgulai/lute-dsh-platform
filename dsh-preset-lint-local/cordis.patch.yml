@@ -1,0 +1,3 @@
+- insert:
+    - id: preset-lint-hook
+      name: dsh-preset-lint-local

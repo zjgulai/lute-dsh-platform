@@ -1,0 +1,584 @@
+---
+name: product-selection
+title: "选品分析"
+description: "- Product selection workflow: industry research → consumer research → product selection → supplier matching. Evidence-first, multi-source validation. Use when user wants to select products, find trending items, analyze categories, discover follow-sell opportunities, or asks \\\\\\\"what to sell\\\\\\\", \\\\\\\"which products\\\\\\\", \\\\\\\"hot products\\\\\\\". Works with product-supplier-sourcing skill. 边界：全流程循证选品（行业→消费者→选品→供应商）；单一品类趋势判断走 market-insight-product-selection 【需供应商搜索工具】"
+always_apply: false
+disable-model-invocation: true
+whenToUse: "全流程循证选品（行业→消费者→选品→供应商）；单一品类趋势判断走 market-insight-product-selection"
+---
+
+
+# Product Selection
+
+
+> ⚠️ **环境说明（DSH）**：本机无 product_supplier_search 工具。供应商匹配环节请用通用 web 检索完成，并标注检索来源。
+
+Comprehensive **product selection workflow** with evidence-first methodology. Guides you through industry analysis, consumer research, product discovery, and supplier matching based on user's starting point.
+
+## When to Use
+
+- User wants **product selection**, **trending products**, **category analysis**, or **follow-sell opportunities**
+- Questions like: "what to sell", "which products are trending", "how to choose a category", "find hot products for [market]"
+- User asks about **selection methodology** or **data sources**
+- Coordinates with `product-supplier-sourcing` skill for concrete product/supplier retrieval
+
+---
+
+## Execution Flow (start point depends on context)
+
+| User's Starting Point | Action |
+|----------------------|--------|
+| **No industry specified** | Start from **Step 1** (Industry Research) + **Step 2** (Consumer Research) → then Step 3 |
+| **Industry specified, no specific category** | Start from **Step 2** (Consumer Research) → then Step 3 — even with industry, consumer insights are needed to select specific product categories |
+| **Industry + Category specified** | Jump to **Step 3** (Product Selection) |
+| **Product(s) identified + supplier request** | Execute **Step 4** (Supplier Matching) — only when explicitly requested |
+
+**Key Rules**: 
+- Step 2 (consumer research) is critical for category selection within an industry — skip only if user specifies both industry AND specific category
+- Step 4 (supplier) runs **ONLY** when user explicitly mentions "supplier", "factory", "manufacturer", or "sourcing". Terms like "find products" or "hot products" do NOT trigger Step 4.
+
+---
+
+## Core Principles
+
+1. **User intent overrides skill**: Follow user's specific requirements (platform, market, timeframe, format) even if they differ from this guide
+2. **Evidence first**: Every conclusion needs data support; cite sources and methods
+3. **Multi-source validation**: Use ≥2 data source types for trend/industry conclusions (e.g., platform data + third-party tools + social/reviews)
+4. **Explicit data gaps**: State what data is missing and suggest next collection steps instead of guessing
+
+---
+
+## Step 1: Industry Research
+
+**Trigger**: User has NOT specified industry/category.
+
+**Goal**: Identify promising industries/categories for product selection.
+
+### Selection Criteria (priority order)
+
+| Criterion | What to Look For | Why It Matters |
+|-----------|-----------------|----------------|
+| **Traffic trend** | Growing traffic (faster than sales growth = room for new sellers) | Indicates market demand is expanding |
+| **Sales trend** | Increasing sales volume/GMV | Validates monetization potential |
+| **Competition intensity** | Low concentration (no monopoly by top 10 sellers) | Entry barrier for new sellers |
+| **New listing rate** | Moderate new product rate (10-20% annually) | Shows innovation space without saturation |
+| **Compliance** | No policy/legal restrictions | Risk mitigation |
+
+### Data Sources
+
+| Dimension | Common Tools/Sources |
+|-----------|---------------------|
+| Traffic trends | SimilarWeb, Jungle Scout, Helium 10 |
+| Sales trends | Amazon Brand Analytics, ecommerceDB, Statista |
+| Concentration | Manual calculation from marketplace data |
+| New listings | Platform analytics (Seller Central insights) |
+
+**Output Format**:
+```
+Industry: [Category Name]
+Conclusion: [Promising/Not Recommended]
+Evidence:
+  - Traffic: [Trend data + source]
+  - Sales: [Trend data + source]
+  - Concentration: [Top 10 share + source]
+  - New listings: [Rate + source]
+Data Gaps: [List any missing data points]
+```
+
+---
+
+## Step 2: Consumer Research
+
+**Trigger**: 
+- **Required** when industry is not pre-specified (pairs with Step 1)
+- **Also required** when industry is specified but specific product category is not — consumer insights guide category selection within the industry
+
+**Goal**: Identify consumer pain points, unmet needs, and product opportunities to guide category/product selection.
+
+### Research Method
+
+1. **Extract complaints/needs** from:
+   - E-commerce reviews (Amazon, eBay, Walmart, etc.)
+   - Social discussions (Reddit, Facebook groups, TikTok comments)
+   - Q&A platforms (Quora, specialized forums)
+   - App reviews (for digital/smart products)
+
+2. **Use specialized skills for review analysis**:
+   - **`review-summarizer` skill**: For scraping and summarizing reviews from Amazon, Google, Yelp, TripAdvisor
+     - Generates sentiment analysis, pros/cons, complaint frequency
+     - Supports multi-platform comparison
+   - **`review-analyst-agent` skill**: For deep analysis and prioritization
+     - Identifies top complaints with frequency/severity
+     - Extracts feature requests
+     - Provides actionable improvement recommendations
+     - Use when you need structured analysis with priority matrix
+
+3. **Categorize pain points**:
+   - Quality issues (durability, materials, craftsmanship)
+   - Design/functionality gaps (missing features, poor UX)
+   - Price sensitivity (overpriced, poor value perception)
+   - Delivery/service problems (shipping, returns, support)
+   - Safety/compliance concerns
+
+4. **Map to product opportunities**:
+   - **Improvement opportunities**: Better quality/features than existing products
+   - **Gap-filling opportunities**: Unmet needs in the market
+   - **Differentiation opportunities**: Unique value proposition
+   - **Follow-sell opportunities**: Products with complaints that can be addressed
+
+### Integration with Review Analysis Skills
+
+**When to use each skill**:
+
+| Scenario | Recommended Skill | Why |
+|----------|------------------|-----|
+| Quick review summary for 1-2 products | `review-summarizer` | Fast scraping + basic sentiment |
+| Deep analysis for category selection | `review-analyst-agent` | Structured output with priority matrix |
+| Multi-platform comparison | `review-summarizer` | Supports Amazon, Google, Yelp, TripAdvisor |
+| Competitor pain point analysis | `review-analyst-agent` | Identifies improvement opportunities |
+
+**Example workflow**:
+```
+1. User specifies industry: "Home & Kitchen"
+2. Use review-analyst-agent to analyze top products in that industry
+3. Extract top complaints (e.g., "poor battery life", "leaks easily")
+4. Map complaints to product categories (e.g., "rechargeable kitchen scales", "leak-proof containers")
+5. Proceed to Step 3 with category focus
+```
+
+**Output Format**:
+```
+### Consumer Research Summary
+
+**Sources Analyzed**: 
+- [Platform 1]: [Number] reviews
+- [Platform 2]: [Number] posts/comments
+
+**Top Pain Points** (by frequency):
+
+1. [Pain Point 1] — Frequency: [X]% of complaints
+   - Sources: [Platform + sample reviews/posts]
+   - Severity: [High/Medium/Low]
+   - Product Category Opportunity: [Specific category to target]
+   - Product Direction: [How to address this]
+  
+2. [Pain Point 2] — Frequency: [X]% of complaints
+   - Sources: [Platform + sample reviews/posts]
+   - Severity: [High/Medium/Low]
+   - Product Category Opportunity: [Specific category to target]
+   - Product Direction: [How to address this]
+
+**Feature Requests**: 
+- [Request 1] — Frequency: [X] mentions
+- [Request 2] — Frequency: [X] mentions
+
+**Recommended Categories for Step 3**:
+1. [Category 1] — Addresses pain points: [#1, #3]
+2. [Category 2] — Addresses pain points: [#2, #4]
+```
+
+---
+
+## Step 3: Product Selection
+
+**Trigger**: Industry specified OR after completing Steps 1-2.
+
+**Goal**: Identify specific products to follow-sell, develop, or list.
+
+### Approach 1: E-commerce Platform Analysis
+
+**Target**: Find products with proven demand but manageable competition.
+
+**Selection Logic**:
+- **Sweet spot**: BSR rank 100-5,000 (varies by category)
+- **Avoid**: Top 20 (too competitive), BSR > 10,000 (uncertain demand)
+- **Check**: Review count (300-1,000 = validated), rating (4.0-4.5 = room for improvement)
+
+**Tools & Platforms**:
+
+| Tool/Platform | Use Case | Key Metrics |
+|--------------|----------|-------------|
+| Amazon Best Sellers | Identify trending products | BSR, review count, price |
+| Jungle Scout / Helium 10 | Sales estimation, keyword research | Monthly revenue, search volume |
+| Kalodata | TikTok Shop analysis | GMV, engagement |
+| 1688.com | Supply chain reference (China) | Factory pricing, MOQ |
+
+**Concrete Steps**:
+1. Filter category by Step 1/2 criteria (industry + consumer pain points)
+2. Export products in target BSR range (use `product_supplier_search` if available, or manual export)
+3. **Competitive analysis** (use `competitive-landscape` skill for deeper analysis):
+   - Identify top 5-10 competitors in the BSR range
+   - Analyze differentiation opportunities (product features, pricing, positioning)
+   - Use `review-analyst-agent` to find their weaknesses (top complaints)
+   - Map improvement opportunities (e.g., "Competitor has battery complaint → source better battery")
+4. Calculate: Estimated sales × margin - fees = profit
+5. Rank by: (Profit potential × Demand validation × Differentiation feasibility) / Competition level
+
+**Integration with Competitive Analysis**:
+- **Use `competitive-landscape` skill** when you need to:
+  - Understand competitive intensity (Porter's Five Forces)
+  - Identify positioning gaps (positioning map)
+  - Develop differentiation strategy
+- **Use `review-analyst-agent`** to find competitor weaknesses:
+  - Extract top complaints from competitor products
+  - Identify improvement opportunities
+  - Prioritize which issues to solve in your product selection
+
+### Approach 2: Advertising & Traffic Analysis
+
+**Target**: Products with strong recent marketing momentum.
+
+**Selection Logic**:
+- **Ad frequency**: Seen in ads ≥10 times in past 30 days (use Pipiads/Minea)
+- **Engagement**: High CTR/comments/shares relative to ad spend
+- **Freshness**: Launched within past 6 months (less saturated)
+
+**Tools**:
+
+| Tool | Coverage | Key Signals |
+|------|----------|-------------|
+| Pipiads | TikTok ads | Likes, comments, ad frequency |
+| Minea | Meta, TikTok, Pinterest ads | Engagement, estimated revenue |
+| Google Trends | Search behavior | Search volume trend, geographic interest |
+
+**Concrete Steps**:
+1. Search category keywords in ad intelligence tools
+2. Filter: 10+ appearances in past 30 days, engagement rate > 5%
+3. Cross-check with `product_supplier_search` (intent_type=product) to find supply options
+4. Validate on destination marketplace (check if already saturated)
+
+### Approach 3: Crowdfunding Signal Mining
+
+**Target**: Innovative products for early follow-sell or white-label opportunities.
+
+**Selection Logic**:
+- **Funding level**: 200-500% of goal (validated interest, not yet mass market)
+- **Backer count**: 500-5,000 (niche demand, scalable)
+- **Timeline**: Projects ending in 1-3 months (time to source & launch)
+
+**Platforms**:
+- Kickstarter / Indiegogo (innovation signal)
+
+**⚠️ Caution**:
+- **High risk**: Crowdfunding success ≠ marketplace success
+- **IP concerns**: Check for patents before copying
+- **Long development**: Expect 6-12 month sourcing/development cycle
+
+**When to use**: Only for users with product development capability and higher risk tolerance.
+
+---
+
+## Step 4: Supplier Matching
+
+**⚠️ CRITICAL**: Execute ONLY when user explicitly requests suppliers/factories/manufacturers/sourcing.
+
+**Goal**: Match selected products to qualified suppliers.
+
+### Matching Process
+
+1. **Prepare product specs**:
+   - Product name/category
+   - Key features (from Step 3 selection)
+   - Target price range
+   - MOQ constraints
+
+2. **Search suppliers**:
+   - **Primary**: Call `product_supplier_search` (intent_type=supplier, query in English)
+     - This searches **alibaba.com** by default (per `product-supplier-sourcing` skill)
+     - **Output must include**: 
+       - Clickable supplier links: `[Supplier Name](https://alibaba.com/company/...)`
+       - Product thumbnails if available: `<img src="..." width="80">`
+       - Direct store links for each supplier
+   - **Secondary**: If alibaba.com unsuitable, try:
+     - 1688.com (domestic China supply, lower MOQ)
+     - Made-in-China, Global Sources (alternative B2B platforms)
+     - Direct factory outreach (trade shows, referrals)
+
+3. **Qualification criteria**:
+   - Trade assurance / verified status
+   - MOQ matches your budget
+   - Production capacity (order size flexibility)
+   - Sample policy (can order samples before bulk)
+   - Communication responsiveness
+
+**Output Format**:
+```
+Product: [Name from Step 3]
+Target Specs: [Key features/requirements]
+
+Supplier 1: **[Company name](https://alibaba.com/company/...)** 
+  Platform: alibaba.com
+  MOQ: [Quantity + price]
+  Lead time: [Days]
+  Qualification: [Verified/Trade Assurance/Years]
+  Store Link: [Visit Store](https://alibaba.com/company/...)
+  
+Supplier 2: ...
+
+Next Steps:
+  - Request samples from top 2-3 suppliers
+  - Compare quality/pricing
+  - Negotiate terms (MOQ, payment, customization)
+```
+
+**Visual Presentation** (if products shown):
+- Include product thumbnails: `<img src="..." width="80">`
+- Verify image URLs are valid (no broken links)
+- Make all product/supplier names clickable
+- See `product-supplier-sourcing` skill for detailed formatting requirements
+
+---
+
+## Selecting the Right Approach
+
+| User Goal | Recommended Approach(es) | Reasoning | Required Skills |
+|-----------|-------------------------|-----------|-----------------|
+| Quick follow-sell (low risk) | Approach 1 (E-commerce) | Validated demand, established products | `review-analyst-agent` for competitor analysis |
+| Trend-driven (fast-moving) | Approach 2 (Advertising) | Captures emerging trends, viral products | — |
+| Innovation/differentiation | Approach 3 (Crowdfunding) | Early-mover advantage, unique products | — |
+| Brand building | Approach 1 + 2 combined | Mix proven products + trending items | `review-analyst-agent` + `competitive-landscape` |
+| Gap-filling | Approach 1 + Step 2 emphasis | Find unmet needs in established markets | `review-analyst-agent` (critical for finding gaps) |
+
+**Default**: If user doesn't specify, recommend **Approach 1** (lowest risk, most accessible data).
+
+---
+
+## Tool Integration
+
+### Using `product_supplier_search` (from `product-supplier-sourcing` skill)
+
+**When in Step 3 (Product Selection)**:
+```
+intent_type: "product"
+query: "[product category/name] [key attributes]" (in English)
+```
+Example: `query: "wireless earbuds, waterproof, noise cancelling"`
+
+**When in Step 4 (Supplier Matching)**:
+```
+intent_type: "supplier"
+query: "[product category] [optional: region/industry]" (in English)
+```
+Example: `query: "consumer electronics, Shenzhen"`
+
+**Important**: This tool searches **alibaba.com only**. If user requests other platforms (1688, Amazon, etc.), see `product-supplier-sourcing` skill for fallback strategies.
+
+### Output Requirements (see `product-supplier-sourcing` skill for full details)
+
+When presenting product or supplier search results:
+
+1. **Include product thumbnails**:
+   - Display images inline with controlled size: `<img src="..." width="80">`
+   - Check image URL validity before displaying
+   - If image unavailable, use placeholder: 📦 or `[No Image]`
+
+2. **Include clickable links**:
+   - Product name: `[Product Name](https://alibaba.com/product/...)`
+   - Supplier: `[Supplier Name](https://alibaba.com/company/...)`
+   - Detail link: `[View Details](https://alibaba.com/product/...)`
+
+3. **Example product table format**:
+   ```markdown
+   | Thumbnail | Product | Price | MOQ | Supplier | Link |
+   |-----------|---------|-------|-----|----------|------|
+   | <img src="..." width="80"> | **[Product A](link)** | $5-$8 | 100 pcs | [Supplier X](link) | [Details](link) |
+   ```
+
+4. **Image validation checklist**:
+   - ✅ Verify image URL starts with `https://` or `http://`
+   - ✅ Use `width="80"` for consistent sizing
+   - ✅ If image URL invalid, omit image but keep product link
+   - ❌ Never display broken image links
+   - ❌ Never exceed `width="150"` in tables
+
+---
+
+## Output Structure
+
+### Comprehensive Selection Report
+
+```markdown
+## 1. Selection Scope
+- Market: [Target marketplace/region]
+- Category: [If specified, or "TBD after industry research"]
+- Goal: [Follow-sell / Brand building / Innovation]
+- Supplier required: [Yes/No]
+
+## 2. Industry Analysis (if Step 1 executed)
+### Selected Industry: [Name]
+- Traffic trend: [Data + source]
+- Sales trend: [Data + source]
+- Competition: [Concentration data]
+- New listings: [Rate + source]
+- **Conclusion**: [Why this industry is promising/risky]
+- **Data gaps**: [What's missing]
+
+## 3. Consumer Insights (if Step 2 executed)
+### Analysis Sources
+- [Platform 1]: [Number] reviews/posts analyzed
+- [Platform 2]: [Number] reviews/posts analyzed
+- **Skills used**: [review-summarizer / review-analyst-agent]
+
+### Top Pain Points (by frequency)
+1. [Pain point] — [X]% of complaints
+   - **Severity**: [High/Medium/Low]
+   - **Product category opportunity**: [Specific category]
+   - **Product direction**: [How to address]
+   - **Sample evidence**: "[Quote from review]"
+
+2. [Pain point] — [X]% of complaints
+   - [Same structure]
+
+### Feature Requests
+- [Request 1] — [X] mentions
+- [Request 2] — [X] mentions
+
+### Recommended Categories for Selection
+1. [Category 1] — Addresses pain points: [#1, #3]
+2. [Category 2] — Addresses pain points: [#2, #4]
+
+## 4. Product Candidates (Step 3 - REQUIRED)
+### Approach Used: [E-commerce / Advertising / Crowdfunding]
+
+### Competitive Landscape
+**Skills used**: [competitive-landscape / review-analyst-agent]
+
+- **Porter's Five Forces summary** (if deep analysis):
+  - New entrants: [Low/Medium/High]
+  - Competition intensity: [Low/Medium/High]
+  - Key finding: [Insight]
+
+- **Competitor weakness analysis** (from reviews):
+  - Competitor A: Top complaint = "[Issue]" ([X]% of reviews)
+  - Competitor B: Top complaint = "[Issue]" ([X]% of reviews)
+  - **Opportunity**: Address these issues in product selection
+
+### Product Selection Results
+
+| Thumbnail | Product | BSR/Rank | Est. Sales | Price | Competition | Improvement Opportunity | Link |
+|-----------|---------|----------|------------|-------|-------------|------------------------|------|
+| <img src="..." width="80"> | **[Product Name](link)** | [Data] | [Data] | [$] | [Low/Med/High] | [What to improve vs. competitors] | [View Details](link) |
+
+**Note**: 
+- Include product thumbnails with `width="80"` for visual scanning
+- Verify image URLs are valid before displaying
+- All product names must be clickable links to source pages
+- Add "View Details" link for quick access
+
+**Recommendation**: [Top 3 products with reasoning]
+- Product 1: [Why] — Addresses pain point: [#1], competitor weakness: [Issue]
+- Product 2: [Why] — Addresses pain point: [#2]
+- Product 3: [Why] — Differentiation opportunity: [Gap in positioning]
+
+**Risk notes**: [Competition, seasonality, compliance issues]
+
+## 5. Supplier Options (only if Step 4 executed)
+[See Step 4 output format above]
+
+## 6. Next Steps
+- [ ] [Specific action 1]
+- [ ] [Specific action 2]
+- [ ] Deep dive on competitor reviews (use `review-analyst-agent`)
+- [ ] Validate positioning gap (use `competitive-landscape`)
+```
+
+### Citation Requirements
+
+Every conclusion must include:
+- **Data source**: Tool/platform name
+- **Timeframe**: When data was collected
+- **Method**: How the conclusion was derived
+
+Example: ❌ "This product is trending" → ✅ "This product has 150% sales growth in past 30 days (Source: Jungle Scout, accessed 2024-03-07)"
+
+---
+
+## Validation Checklist
+
+Before finalizing output:
+
+- [ ] Starting point determined correctly:
+  - No industry specified → Step 1 + 2
+  - Industry specified, no category → Step 2 + 3
+  - Industry + category specified → Step 3
+- [ ] Step 2 (consumer research) executed when needed (unless user provides both industry AND category)
+- [ ] Step 4 executed ONLY if user explicitly requested suppliers
+- [ ] Review analysis skills used in Step 2 (`review-summarizer` or `review-analyst-agent`)
+- [ ] Competitive analysis considered in Step 3 (competitor weaknesses, positioning gaps)
+- [ ] All conclusions have data sources cited
+- [ ] Multi-source validation used for trend claims (≥2 sources)
+- [ ] Data gaps explicitly stated (not hidden)
+- [ ] Quantitative criteria used (not vague terms like "popular")
+- [ ] Risk factors mentioned (competition, seasonality, compliance)
+- [ ] Actionable next steps provided
+- [ ] **Product thumbnails included** in output tables (with `width="80"`)
+- [ ] **All image URLs validated** (no broken links)
+- [ ] **All product/supplier names are clickable links** to source pages
+- [ ] **Image size controlled** (not oversized in tables)
+
+---
+
+## Common Pitfalls to Avoid
+
+❌ **Don't**:
+- Skip Step 2 (consumer research) when user only specifies industry — category selection needs consumer insights
+- Run supplier search (Step 4) when user only asked for "products"
+- State "this is a hot product" without sales/trend data
+- Recommend products without analyzing competitor weaknesses
+- Ignore data gaps and sound overconfident
+- Mix up `product-supplier-sourcing` (alibaba.com) with 1688/other platforms
+- Select products without checking review pain points
+- **Present products without images or links** — always include thumbnails and clickable links
+- **Use broken/invalid image URLs** — check validity before displaying
+- **Display oversized images** — use `width="80"` in tables
+
+✅ **Do**:
+- Start from the right step based on user context (see Execution Flow)
+- Use `review-analyst-agent` to understand consumer pain points in Step 2
+- Use `competitive-landscape` to identify positioning gaps in Step 3
+- Analyze competitor reviews to find improvement opportunities
+- Cite specific data sources and timeframes
+- Quantify criteria (BSR ranges, sales thresholds, complaint frequencies)
+- State what you can't verify and suggest how to get that data
+- Align tool capabilities with user expectations
+- **Include product thumbnails** (`<img src="..." width="80">`) for visual scanning
+- **Make all product/supplier names clickable links** to source pages
+- **Verify image URLs** before displaying (avoid broken links)
+- **Control image size** in tables (`width="80"` recommended)
+
+---
+
+## Dependencies
+
+### Core Skills
+- **`product-supplier-sourcing` skill**: Provides `product_supplier_search` tool (alibaba.com) for product/supplier retrieval
+
+### Consumer Research Skills (Step 2)
+- **`review-summarizer` skill**: Multi-platform review scraping and summarization (Amazon, Google, Yelp, TripAdvisor)
+- **`review-analyst-agent` skill**: Deep review analysis with priority matrix and actionable recommendations
+
+### Competitive Analysis Skills (Step 3)
+- **`competitive-landscape` skill**: Porter's Five Forces, positioning maps, differentiation strategies
+
+### Optional Tools
+- **`chart-design-guide.md`**: Reference for visualizing trends (if generating charts from collected data)
+
+---
+
+## Advanced: Data Visualization
+
+If you collect sufficient time-series or comparison data and need to visualize trends:
+
+See `chart-design-guide.md` in this skill directory for:
+- Chart type selection (trend lines, bar charts, radar charts)
+- Seaborn/Matplotlib implementation
+- When to use tables vs. charts
+
+**When to visualize**:
+- Comparing 5+ categories (use bar chart)
+- Showing 3-month+ trends (use line chart)
+- Multi-factor product comparison (use radar chart)
+
+**When NOT to visualize**:
+- Only 2-3 data points (use table)
+- Data from screenshots/third-party tools (just cite the source)

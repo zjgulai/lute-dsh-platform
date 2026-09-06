@@ -1,0 +1,28 @@
+skill:
+  name: scm-inventory-forecaster
+  version: "1.0.0"
+  type: technique
+  parent_skill: scm-main-hub
+  related_skills:
+    - scm-supplier-evaluator
+    - scm-logistics-optimizer
+  triggers:
+    - 库存预测
+    - 安全库存
+    - 补货计划
+    - 备货规划
+    - 需求预测
+    - 库存预警
+  capabilities:
+    - 需求预测
+    - 安全库存计算
+    - 补货决策支持
+    - 大促备货规划
+  output_formats:
+    - text
+    - markdown
+  complexity: standard
+  metadata:
+    last_updated: "2026-04-08"
+    author: jnMetaCode
+    source: https://github.com/jnMetaCode/agency-agents-zh

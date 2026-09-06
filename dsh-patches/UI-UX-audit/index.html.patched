@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>DeepSeek Harness</title>
+    <script type="module" crossorigin src="./assets/index-D-eoFxDP.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/vendor-CCJJTK99.js">
+    <link rel="stylesheet" crossorigin href="./assets/vendor-BNsW4eBh.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-CsBy6quH.css">
+  
+    <style>
+      #dsh-fatal-error { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--dsw-static-neutral-bluish-950, #1b1b1c); color: var(--dsw-static-neutral-00, #fff); z-index: 999999; padding: 40px; font-family: system-ui, sans-serif; box-sizing: border-box; }
+      #dsh-fatal-error.visible { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+      #dsh-fatal-error h1 { color: var(--dsw-static-red-400, #f25a5a); margin-bottom: 16px; }
+      #dsh-fatal-error pre { background: var(--dsw-static-neutral-bluish-900, #2c2c2e); padding: 16px; border-radius: 8px; max-width: 800px; width: 100%; overflow: auto; text-align: left; font-size: 13px; color: var(--dsw-static-neutral-bluish-400, #adb2b8); white-space: pre-wrap; word-break: break-all; }
+      #dsh-fatal-error button { margin-top: 24px; padding: 8px 16px; background: var(--dsw-static-blue-600, #2563eb); border: none; color: #fff; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; }
+      #dsh-fatal-error button:hover { background: var(--dsw-static-blue-500, #3b82f6); }
+    </style>
+    <script>
+      window.addEventListener('error', function(e) {
+        if (e.message && e.message.includes('ResizeObserver')) return;
+        document.getElementById('dsh-fatal-error').classList.add('visible');
+        document.getElementById('dsh-fatal-error-msg').innerText = e.error ? e.error.stack : e.message;
+        document.getElementById('root').style.display = 'none';
+      });
+      window.addEventListener('unhandledrejection', function(e) {
+        if (e.reason && e.reason.message && e.reason.message.includes('aborted')) return;
+        document.getElementById('dsh-fatal-error').classList.add('visible');
+        document.getElementById('dsh-fatal-error-msg').innerText = e.reason ? (e.reason.stack || e.reason) : 'Promise rejected without reason.';
+        document.getElementById('root').style.display = 'none';
+      });
+    </script>
+</head>
+  <body>
+    <div id="dsh-fatal-error">
+      <h1>UI Encountered a Fatal Error</h1>
+      <p style="margin-bottom: 24px; color: var(--dsw-static-neutral-bluish-500, #979da6);">The application crashed. Please copy the details below and try restarting.</p>
+      <pre id="dsh-fatal-error-msg"></pre>
+      <button onclick="location.reload()">Reload Application</button>
+    </div>
+
+    <div id="root"></div>
+  </body>
+</html>

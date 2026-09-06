@@ -1,0 +1,328 @@
+{
+  "categories": [
+    {
+      "key": "fs-clarify",
+      "title": "需求澄清"
+    },
+    {
+      "key": "fs-spec",
+      "title": "规格规划"
+    },
+    {
+      "key": "fs-architecture",
+      "title": "架构设计"
+    },
+    {
+      "key": "fs-implement",
+      "title": "实现"
+    },
+    {
+      "key": "fs-quality",
+      "title": "质量排查"
+    },
+    {
+      "key": "fs-infra",
+      "title": "工程基建"
+    },
+    {
+      "key": "fs-collab",
+      "title": "协作复盘"
+    },
+    {
+      "key": "fs-writing",
+      "title": "写作内容"
+    }
+  ],
+  "skills": [
+    {
+      "name": "grilling",
+      "title": "无情访谈",
+      "category": "fs-clarify",
+      "categoryTitle": "需求澄清",
+      "toolBacked": false,
+      "summaryZh": "连续追问打磨方案与设计，产出更锋利的计划",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "grill-me",
+      "title": "方案访谈（转发）",
+      "category": "fs-clarify",
+      "categoryTitle": "需求澄清",
+      "toolBacked": false,
+      "summaryZh": "转发器：调用 grilling 执行无情访谈",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "grill-with-docs",
+      "title": "文档式访谈",
+      "category": "fs-clarify",
+      "categoryTitle": "需求澄清",
+      "toolBacked": false,
+      "summaryZh": "访谈+落档：调用 grilling 与 domain-modeling，产出 ADR 与词汇表",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "wait-what",
+      "title": "打断纠偏",
+      "category": "fs-clarify",
+      "categoryTitle": "需求澄清",
+      "toolBacked": false,
+      "summaryZh": "感觉不对劲时停下核对假设、指出问题再继续",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "to-questionnaire",
+      "title": "访谈转问卷",
+      "category": "fs-clarify",
+      "categoryTitle": "需求澄清",
+      "toolBacked": false,
+      "summaryZh": "把访谈问题整理为问卷文档",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "research",
+      "title": "一手资料调研",
+      "category": "fs-clarify",
+      "categoryTitle": "需求澄清",
+      "toolBacked": false,
+      "summaryZh": "针对高可信一手资料调研并沉淀为 Markdown 结论",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "teach",
+      "title": "概念教学",
+      "category": "fs-clarify",
+      "categoryTitle": "需求澄清",
+      "toolBacked": false,
+      "summaryZh": "把一个概念教到用户真正理解并验证理解",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "to-spec",
+      "title": "对话转规格",
+      "category": "fs-spec",
+      "categoryTitle": "规格规划",
+      "toolBacked": false,
+      "summaryZh": "把当前对话综合为规格并发布到项目 issue tracker",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "to-tickets",
+      "title": "规格转任务卡",
+      "category": "fs-spec",
+      "categoryTitle": "规格规划",
+      "toolBacked": false,
+      "summaryZh": "把计划/规格拆成 tracer-bullet 任务卡，声明阻塞依赖",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "wayfinder",
+      "title": "巨型工程地图",
+      "category": "fs-spec",
+      "categoryTitle": "规格规划",
+      "toolBacked": false,
+      "summaryZh": "把超大工程规划为 issue 上的决策票地图",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "ask-matt",
+      "title": "技能路由顾问",
+      "category": "fs-spec",
+      "categoryTitle": "规格规划",
+      "toolBacked": false,
+      "summaryZh": "技能路由器：根据处境推荐本技能集内合适的技能/流程",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "wizard",
+      "title": "人类操作向导",
+      "category": "fs-spec",
+      "categoryTitle": "规格规划",
+      "toolBacked": false,
+      "summaryZh": "生成引导人类完成专属步骤的交互式 bash 向导",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "codebase-design",
+      "title": "代码库深模块设计",
+      "category": "fs-architecture",
+      "categoryTitle": "架构设计",
+      "toolBacked": false,
+      "summaryZh": "深模块设计词汇：设计与改进模块接口",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "domain-modeling",
+      "title": "领域建模",
+      "category": "fs-architecture",
+      "categoryTitle": "架构设计",
+      "toolBacked": false,
+      "summaryZh": "建立并打磨项目领域模型（术语/ADR/词汇表）",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "improve-codebase-architecture",
+      "title": "架构深化扫描",
+      "category": "fs-architecture",
+      "categoryTitle": "架构设计",
+      "toolBacked": false,
+      "summaryZh": "扫描深化机会→HTML 报告→逐项访谈",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "prototype",
+      "title": "一次性原型",
+      "category": "fs-architecture",
+      "categoryTitle": "架构设计",
+      "toolBacked": false,
+      "summaryZh": "一次性原型验证设计问题，用完即弃",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "implement",
+      "title": "规格实施",
+      "category": "fs-implement",
+      "categoryTitle": "实现",
+      "toolBacked": false,
+      "summaryZh": "按规格或任务卡实施一段工作",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "tdd",
+      "title": "TDD 测试先行",
+      "category": "fs-implement",
+      "categoryTitle": "实现",
+      "toolBacked": false,
+      "summaryZh": "测试先行开发（红-绿-重构）",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "code-review",
+      "title": "代码评审",
+      "category": "fs-quality",
+      "categoryTitle": "质量排查",
+      "toolBacked": false,
+      "summaryZh": "沿标准×可疑双轴评审相对固定点的改动",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "diagnosing-bugs",
+      "title": "Bug 诊断",
+      "category": "fs-quality",
+      "categoryTitle": "质量排查",
+      "toolBacked": false,
+      "summaryZh": "硬 bug 与性能回归的诊断循环",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "resolving-merge-conflicts",
+      "title": "合并冲突消解",
+      "category": "fs-quality",
+      "categoryTitle": "质量排查",
+      "toolBacked": false,
+      "summaryZh": "消解进行中的 git 合并/变基冲突",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "triage",
+      "title": "Issue 分诊",
+      "category": "fs-quality",
+      "categoryTitle": "质量排查",
+      "toolBacked": false,
+      "summaryZh": "按状态机对 issue 与外部 PR 分诊/归类/验证",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "setup-matt-pocock-skills",
+      "title": "技能集仓库接线",
+      "category": "fs-infra",
+      "categoryTitle": "工程基建",
+      "toolBacked": false,
+      "summaryZh": "为工程技能集配置仓库（issue tracker/分诊标签/领域文档）",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "setup-pre-commit",
+      "title": "Pre-commit 配置",
+      "category": "fs-infra",
+      "categoryTitle": "工程基建",
+      "toolBacked": false,
+      "summaryZh": "配置 pre-commit 钩子",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "git-guardrails-claude-code",
+      "title": "Git 操作护栏",
+      "category": "fs-infra",
+      "categoryTitle": "工程基建",
+      "toolBacked": false,
+      "summaryZh": "git 操作护栏（防危险操作）",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "migrate-to-shoehorn",
+      "title": "Shoehorn 结构迁移",
+      "category": "fs-infra",
+      "categoryTitle": "工程基建",
+      "toolBacked": false,
+      "summaryZh": "把代码迁移到 shoehorn 结构",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "scaffold-exercises",
+      "title": "练习脚手架",
+      "category": "fs-infra",
+      "categoryTitle": "工程基建",
+      "toolBacked": false,
+      "summaryZh": "脚手架练习题（workshop 用）",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "handoff",
+      "title": "会话交接",
+      "category": "fs-collab",
+      "categoryTitle": "协作复盘",
+      "toolBacked": false,
+      "summaryZh": "把会话交接给新 agent 的交接文档",
+      "toolGap": "",
+      "icon": ""
+    },
+    {
+      "name": "writing-for-agents",
+      "title": "Agent 文档写作",
+      "category": "fs-writing",
+      "categoryTitle": "写作内容",
+      "toolBacked": false,
+      "summaryZh": "为 AI agent 编写清晰文档/指令",
+      "toolGap": "",
+      "icon": ""
+    }
+  ]
+}

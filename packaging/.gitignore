@@ -1,0 +1,3 @@
+# 生成物不入库（Magpie-Horch 根暂非 git 仓库；未来纳入版本管理时生效）
+staging/
+release/

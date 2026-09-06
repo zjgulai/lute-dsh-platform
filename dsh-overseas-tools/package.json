@@ -1,0 +1,21 @@
+{
+  "name": "dsh-overseas-tools",
+  "version": "0.1.0",
+  "description": "出海技能外部工具接入：exa_search（凭据 overseas.exa，缺 Key 优雅降级）+ Jungle Scout / Klaviyo 凭据位预留。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "cordis.patch.yml"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "license": "MIT"
+}

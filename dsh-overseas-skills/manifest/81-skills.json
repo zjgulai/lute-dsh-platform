@@ -1,0 +1,721 @@
+{
+  "categories": [
+    {
+      "key": "knowledge-engineering",
+      "title": "知识工程",
+      "icon": "🧠"
+    },
+    {
+      "key": "skill-engineering",
+      "title": "技能工程",
+      "icon": "🛠️"
+    },
+    {
+      "key": "ecommerce-analytics",
+      "title": "电商数据分析",
+      "icon": "📊"
+    }
+  ],
+  "skills": [
+    {
+      "name": "geo-optimizer",
+      "title": "GEO优化器",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "summaryZh": "优化AI搜索可见性、Product Schema 与 AI Shopping 占位，用于生成式引擎时代的SEO。",
+      "toolGap": "",
+      "icon": "🌐"
+    },
+    {
+      "name": "gtm-strategy-planning",
+      "title": "GTM战略规划",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "summaryZh": "规划并执行产品上市与市场扩张的 Go-to-Market 战略。",
+      "toolGap": "",
+      "icon": "🗺️"
+    },
+    {
+      "name": "jtbd-analyzer",
+      "title": "JTBD分析器",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "summaryZh": "用 Jobs-to-be-Done 框架分析用户任务、购买动机、痛点与产品机会。",
+      "toolGap": "",
+      "icon": "🧗"
+    },
+    {
+      "name": "llm-tech-research",
+      "title": "LLM技术调研",
+      "category": "skill-engineering",
+      "categoryTitle": "技能工程",
+      "toolBacked": false,
+      "summaryZh": "当用户需要追踪 Cursor、Claude Code、Claude Code Skills 及相邻主题（MCP、Agen",
+      "toolGap": "",
+      "icon": "🤖"
+    },
+    {
+      "name": "mece-knowledge-extractor",
+      "title": "MECE知识提取器",
+      "category": "knowledge-engineering",
+      "categoryTitle": "知识工程",
+      "toolBacked": false,
+      "summaryZh": "当用户需要按 MECE 原则从文本中提取结构化知识单元（SKU）、保证互斥且完备时使用。",
+      "toolGap": "",
+      "icon": "🧱"
+    },
+    {
+      "name": "seo-controller",
+      "title": "SEO主控",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "summaryZh": "统筹技术审计、内容优化、竞品分析、multilingual-seo与GEO五大模块，为跨境电商独立站提供完整SEO整合方案。",
+      "toolGap": "",
+      "icon": "🧭"
+    },
+    {
+      "name": "skill-optimizer",
+      "title": "Skill优化器",
+      "category": "skill-engineering",
+      "categoryTitle": "技能工程",
+      "toolBacked": false,
+      "summaryZh": "读取 lute-skills-eval 生成的结构化评估报告，执行自动修复和人机协作优化。",
+      "toolGap": "",
+      "icon": "🔧"
+    },
+    {
+      "name": "skill-family-manager",
+      "title": "Skill家族管理",
+      "category": "skill-engineering",
+      "categoryTitle": "技能工程",
+      "toolBacked": false,
+      "summaryZh": "当用户需要管理多个 Skills、按项目分组切换、解决上下文污染，或提及「Skill管理」「项目配置」「Skill切换」「上下文治理」时使用。",
+      "toolGap": "",
+      "icon": "👨‍👩‍👧‍👦"
+    },
+    {
+      "name": "skill-structure-doctor",
+      "title": "Skill结构医生",
+      "category": "skill-engineering",
+      "categoryTitle": "技能工程",
+      "toolBacked": false,
+      "summaryZh": "当用户需要检测 Skill 目录结构问题或执行目录结构自动修复时使用，支持单 Skill 和批量模式。",
+      "toolGap": "",
+      "icon": "🩺"
+    },
+    {
+      "name": "skill-evaluator",
+      "title": "Skill评估师",
+      "category": "skill-engineering",
+      "categoryTitle": "技能工程",
+      "toolBacked": false,
+      "summaryZh": "当用户需要对 Skill 做质量评估、六维度评分、schema 合规检查、routing quality 诊断或生成结构化评估报告时使用。",
+      "toolGap": "",
+      "icon": "⭐"
+    },
+    {
+      "name": "voc-sentiment-analyzer",
+      "title": "VOC情感分析器",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "summaryZh": "分析客户评价以提取痛点、情感模式与可执行洞察。",
+      "toolGap": "",
+      "icon": "💗"
+    },
+    {
+      "name": "amazon-sorftime-research",
+      "title": "亚马逊Sorftime调研",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "summaryZh": "用 Sorftime 数据做亚马逊类目与商品深度调研，辅助选品验证。",
+      "toolGap": "Sorftime 账号",
+      "icon": "🔬"
+    },
+    {
+      "name": "amazon-competitor-monitor",
+      "title": "亚马逊竞品监控",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "summaryZh": "监控亚马逊竞品价格、促销与 Listing 变更，用于快速应对市场变化。",
+      "toolGap": "",
+      "icon": "👀"
+    },
+    {
+      "name": "product-data-deep-analysis",
+      "title": "产品数据深度分析",
+      "category": "ecommerce-analytics",
+      "categoryTitle": "电商数据分析",
+      "toolBacked": false,
+      "summaryZh": "基于产品与市场数据生成深度分析报告，提供进入决策、情景模拟和优先动作备忘录。",
+      "toolGap": "",
+      "icon": "📉"
+    },
+    {
+      "name": "product-research-matrix",
+      "title": "产品调研矩阵",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "summaryZh": "用多维选品矩阵做系统化产品调研与机会评估，支撑数据驱动的选品决策。",
+      "toolGap": "",
+      "icon": "🧮"
+    },
+    {
+      "name": "paid-advertising",
+      "title": "付费广告",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "summaryZh": "审计并优化多平台付费广告账户，覆盖预算分配、出价策略、受众优化和 ROAS 提升。",
+      "toolGap": "",
+      "icon": "📣"
+    },
+    {
+      "name": "supplier-evaluation",
+      "title": "供应商评估",
+      "category": "sourcing",
+      "categoryTitle": "货源与选品",
+      "toolBacked": false,
+      "summaryZh": "当用户需要做 1688 供应商背景调查、验厂评估与准入决策时使用，输出供应商画像与风险建议。",
+      "toolGap": "",
+      "icon": "🏭"
+    },
+    {
+      "name": "supply-chain-controller",
+      "title": "供应链主控",
+      "category": "shipping-tariff",
+      "categoryTitle": "物流与关税",
+      "toolBacked": false,
+      "summaryZh": "当用户需要统筹多个供应链环节（inventory-demand-forecaster+supplier-evaluati",
+      "toolGap": "",
+      "icon": "🔗"
+    },
+    {
+      "name": "cold-email",
+      "title": "冷邮件",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "summaryZh": "设计冷邮件外联与跟进策略，覆盖B2B外联、销售开发、合作邀约和跟进序列。",
+      "toolGap": "",
+      "icon": "🥶"
+    },
+    {
+      "name": "single-post-intel-mining",
+      "title": "单帖情报挖掘",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "summaryZh": "对 Reddit、论坛与社媒评论串做单帖/单页情报挖掘，产出可存储、可解释、可行动的洞察。",
+      "toolGap": "",
+      "icon": "⛏️"
+    },
+    {
+      "name": "brand-logo-designer",
+      "title": "品牌Logo设计师",
+      "category": "design",
+      "categoryTitle": "产品设计与视觉",
+      "toolBacked": false,
+      "summaryZh": "为 Momcozy 或子品牌设计 Logo，确保在竞品视觉中占据认知空白、提高记忆度和品牌识别。",
+      "toolGap": "",
+      "icon": "🎨"
+    },
+    {
+      "name": "brand-mention-tracking",
+      "title": "社媒舆情追踪",
+      "category": "social-ops",
+      "categoryTitle": "社媒运营",
+      "toolBacked": false,
+      "summaryZh": "当用户需要跨平台追踪品牌声量、情感趋势与舆情风险时使用。",
+      "toolGap": "",
+      "icon": "📡"
+    },
+    {
+      "name": "outreach-automation",
+      "title": "外联自动化",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "summaryZh": "设计 GTM 外联自动化，覆盖 ICP → prospect → outreach → cadence → follow",
+      "toolGap": "",
+      "icon": "🤝"
+    },
+    {
+      "name": "multi-platform-listing-generator",
+      "title": "多平台Listing生成器",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "summaryZh": "从同一产品信息生成 Amazon、Shopify、eBay 等多平台优化 Listing。",
+      "toolGap": "",
+      "icon": "🗂️"
+    },
+    {
+      "name": "multilingual-seo",
+      "title": "多语言SEO",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "summaryZh": "配置hreflang、多语言站点架构与地域定向，用于跨境多语言SEO。",
+      "toolGap": "",
+      "icon": "🌍"
+    },
+    {
+      "name": "tech-pack-generator",
+      "title": "工艺包生成器",
+      "category": "design",
+      "categoryTitle": "产品设计与视觉",
+      "toolBacked": false,
+      "summaryZh": "当用户需要把母婴产品资料整理成工厂能沟通、能导入生产的技术包（Tech Pack）， 提及\"工艺包生成器\"、\"tech ",
+      "toolGap": "",
+      "icon": "📐"
+    },
+    {
+      "name": "platform-price-monitor",
+      "title": "平台价格监控",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "summaryZh": "当用户需要监控Amazon、eBay、AliExpress等电商平台竞品价格变化时使用。",
+      "toolGap": "",
+      "icon": "⚡"
+    },
+    {
+      "name": "ad-creative",
+      "title": "广告创意",
+      "category": "seo-ads",
+      "categoryTitle": "流量获取与广告",
+      "toolBacked": false,
+      "summaryZh": "生成广告创意文案与创意概念，覆盖投放文案、多版本A/B测试文案和广告标题优化。",
+      "toolGap": "",
+      "icon": "💡"
+    },
+    {
+      "name": "file-history-manager",
+      "title": "文件历史管理",
+      "category": "productivity",
+      "categoryTitle": "文档与办公效率",
+      "toolBacked": false,
+      "summaryZh": "当用户需要恢复文件、查看历史版本、回退到之前的状态或创建备份点时使用。",
+      "toolGap": "",
+      "icon": "🗃️"
+    },
+    {
+      "name": "terminology-standardizer",
+      "title": "术语标准化器",
+      "category": "knowledge-engineering",
+      "categoryTitle": "知识工程",
+      "toolBacked": false,
+      "summaryZh": "当用户需要统一多来源数据中的术语表达、合并同义词与标签变体、构建受控词表，或提到\"术语标准化\"、\"术语统一\"、\"标签归一",
+      "toolGap": "",
+      "icon": "📚"
+    },
+    {
+      "name": "viral-video-analyzer",
+      "title": "爆款视频分析器",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "summaryZh": "分析视频内容的传播潜力与互动表现，并优化脚本与结构。",
+      "toolGap": "",
+      "icon": "🎬"
+    },
+    {
+      "name": "shipment-tracking",
+      "title": "物流追踪",
+      "category": "shipping-tariff",
+      "categoryTitle": "物流与关税",
+      "toolBacked": false,
+      "summaryZh": "当用户需要查询运单号对应的物流状态、轨迹记录、预计到达时间或异常预警时使用。",
+      "toolGap": "",
+      "icon": "📬"
+    },
+    {
+      "name": "icp-profiler",
+      "title": "理想客户画像",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "summaryZh": "定义并刻画理想客户画像（ICP），用于指导营销定向、销售与产品决策。",
+      "toolGap": "",
+      "icon": "👤"
+    },
+    {
+      "name": "ecommerce-csv-processing",
+      "title": "电商CSV处理",
+      "category": "ecommerce-analytics",
+      "categoryTitle": "电商数据分析",
+      "toolBacked": false,
+      "summaryZh": "当用户需要对电商平台（淘宝/京东/拼多多/抖音/Shopify/Amazon）导出的订单CSV进行字段映射、数据清洗、去",
+      "toolGap": "",
+      "icon": "🧾"
+    },
+    {
+      "name": "ecommerce-price-monitor",
+      "title": "电商价格监控",
+      "category": "store-ops",
+      "categoryTitle": "店铺运营与基建",
+      "toolBacked": false,
+      "summaryZh": "当用户需要跨电商平台监控并对比竞品价格、做定价决策时使用。",
+      "toolGap": "",
+      "icon": "💰"
+    },
+    {
+      "name": "ecommerce-analytics-controller",
+      "title": "电商分析主控",
+      "category": "ecommerce-analytics",
+      "categoryTitle": "电商数据分析",
+      "toolBacked": false,
+      "summaryZh": "当用户需要分析电商订单数据、生成经营报告（日报/周报/月度复盘/季度战略/大促分析）或不确定该调用哪个数据分析子Skill时使用。",
+      "toolGap": "",
+      "icon": "🎛️"
+    },
+    {
+      "name": "ecommerce-quarterly-strategy",
+      "title": "电商季度战略",
+      "category": "ecommerce-analytics",
+      "categoryTitle": "电商数据分析",
+      "toolBacked": false,
+      "summaryZh": "当用户需要做季度电商经营复盘、季度战略规划、年度目标中期评估、季度销售趋势与增长驱动分析、全年目标完成预测或投资人/管理层季度汇报时使用。",
+      "toolGap": "",
+      "icon": "📅"
+    },
+    {
+      "name": "ecommerce-daily-report",
+      "title": "电商日报",
+      "category": "ecommerce-analytics",
+      "categoryTitle": "电商数据分析",
+      "toolBacked": false,
+      "summaryZh": "当用户需要生成电商日报/周报时使用：输入1-7天订单CSV，输出日常经营报告、异常预警、关键指标追踪。",
+      "toolGap": "",
+      "icon": "📰"
+    },
+    {
+      "name": "ecommerce-monthly-review",
+      "title": "电商月度复盘",
+      "category": "ecommerce-analytics",
+      "categoryTitle": "电商数据分析",
+      "toolBacked": false,
+      "summaryZh": "当用户需要做月度电商经营复盘、评估月度KPI完成情况、对比本月与上月的环比数据，或准备月度运营会议材料时使用。",
+      "toolGap": "",
+      "icon": "🗓️"
+    },
+    {
+      "name": "ecommerce-ml-modeling-advisor",
+      "title": "电商机器学习建模顾问",
+      "category": "ecommerce-analytics",
+      "categoryTitle": "电商数据分析",
+      "toolBacked": false,
+      "summaryZh": "当用户需要把电商预测、分群、推荐、优惠券定向、流失、LTV、风险、VOC 聚类或复购问题转化为 ML 建模方案时使用。",
+      "toolGap": "",
+      "icon": "🧠"
+    },
+    {
+      "name": "ecommerce-business-insights",
+      "title": "电商经营洞察",
+      "category": "ecommerce-analytics",
+      "categoryTitle": "电商数据分析",
+      "toolBacked": false,
+      "summaryZh": "当用户需要从电商订单/销售/客户/渠道 CSV 生成经营复盘报告、拆解 KPI 树、分析 GMV/转化率/AOV/复购率",
+      "toolGap": "",
+      "icon": "🔎"
+    },
+    {
+      "name": "knowledge-similarity-analyzer",
+      "title": "知识相似度分析器",
+      "category": "knowledge-engineering",
+      "categoryTitle": "知识工程",
+      "toolBacked": false,
+      "summaryZh": "当用户需要找出知识库中的重复条目、检测知识冲突、判断知识单元是否相关或独立、或做知识融合前的相似度评估时使用。",
+      "toolGap": "",
+      "icon": "🧬"
+    },
+    {
+      "name": "knowledge-extraction-expert",
+      "title": "知识萃取专家",
+      "category": "knowledge-engineering",
+      "categoryTitle": "知识工程",
+      "toolBacked": false,
+      "summaryZh": "当用户需要深度消化一本书、将书中知识转化为可执行的行为系统时使用。",
+      "toolGap": "",
+      "icon": "📖"
+    },
+    {
+      "name": "competitor-alternative-analysis",
+      "title": "竞品替代分析",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "summaryZh": "做竞品替代方案与差异化定位，覆盖竞品分析、替代方案矩阵、定位策略和竞争话术。",
+      "toolGap": "",
+      "icon": "🔀"
+    },
+    {
+      "name": "web-scraping-plan-designer",
+      "title": "网页采集方案设计",
+      "category": "productivity",
+      "categoryTitle": "文档与办公效率",
+      "toolBacked": false,
+      "summaryZh": "当用户有一个网页或页面样本、需要设计低维护成本的数据采集方案（采集字段设计、指标字典、自动化采集PRD）时使用。",
+      "toolGap": "",
+      "icon": "🕸️"
+    },
+    {
+      "name": "marketing-content-suite",
+      "title": "营销内容套件",
+      "category": "content-gtm",
+      "categoryTitle": "内容创作与营销",
+      "toolBacked": false,
+      "summaryZh": "为广告、邮件、社媒和落地页等渠道生成全套营销内容。",
+      "toolGap": "",
+      "icon": "🧰"
+    },
+    {
+      "name": "semantic-bucketer",
+      "title": "语义分桶器",
+      "category": "knowledge-engineering",
+      "categoryTitle": "知识工程",
+      "toolBacked": false,
+      "summaryZh": "当用户需要将大量知识单元（SKU）按标签重叠度自动分组、用 Union-Find 处理传递关系或对超大桶做递归细分时使用。",
+      "toolGap": "",
+      "icon": "🪣"
+    },
+    {
+      "name": "semantic-density-analyzer",
+      "title": "语义密度分析器",
+      "category": "knowledge-engineering",
+      "categoryTitle": "知识工程",
+      "toolBacked": false,
+      "summaryZh": "当用户需要评估文本的知识密度、识别高价值内容区域、生成知识热力图或为 RAG 系统筛选内容时使用。",
+      "toolGap": "",
+      "icon": "🌡️"
+    },
+    {
+      "name": "semantic-doc-chunker",
+      "title": "语义文档分块器",
+      "category": "knowledge-engineering",
+      "categoryTitle": "知识工程",
+      "toolBacked": false,
+      "summaryZh": "当用户有一个较长的 Markdown 文档（书籍、论文、技术文档）需要按章节和语义边界切分成保持段落完整、带层级结构的文",
+      "toolGap": "",
+      "icon": "✂️"
+    },
+    {
+      "name": "cross-border-category-feasibility",
+      "title": "跨境品类可行性报告",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "summaryZh": "当用户需要生成跨境电商品类的完整商业可行性报告、判断一个品类是否值得进入跨境市场时使用。",
+      "toolGap": "",
+      "icon": "📋"
+    },
+    {
+      "name": "cross-border-intel-radar",
+      "title": "跨境电商情报雷达",
+      "category": "research-selection",
+      "categoryTitle": "市场调研与分析",
+      "toolBacked": false,
+      "summaryZh": "当用户需要生成跨境电商领域 Claude Skills 每日/每周情报简报时使用。",
+      "toolGap": "",
+      "icon": "🛰️"
+    },
+    {
+      "name": "anchor-text-splitter",
+      "title": "锚点文本分割器",
+      "category": "knowledge-engineering",
+      "categoryTitle": "知识工程",
+      "toolBacked": false,
+      "summaryZh": "当用户需要基于锚点标记精确分割文本时使用，支持 OCR 容错与模糊匹配定位。",
+      "toolGap": "",
+      "icon": "⚓"
+    }
+  ],
+  "overrides": [
+    {
+      "name": "ai-product-designer",
+      "title": "AI产品设计师",
+      "icon": "🎨",
+      "summaryZh": "为 Momcozy 生成围绕真实微时刻、单手交互、隐蔽佩戴的新品概念方案。"
+    },
+    {
+      "name": "etsy-seo-optimizer",
+      "title": "Etsy优化器",
+      "icon": "🏷️",
+      "summaryZh": "优化 Etsy Listing，将 Etsy 作为品牌入口、定制化试验场和 Pinterest 协同流量通道。"
+    },
+    {
+      "name": "product-attribute-analyzer",
+      "title": "产品属性分析器",
+      "icon": "🧩",
+      "summaryZh": "分析品类中哪些属性组合真正贡献销量，判断空白组合是伪机会还是真需求机会。"
+    },
+    {
+      "name": "market-insight-product-selection",
+      "title": "市场洞察选品",
+      "icon": "🔭",
+      "summaryZh": "为 Momcozy 在 Amazon 与 Shopify DTC 之间做新品方向判断，考虑品牌协同、复购潜力、渠道打法和竞争空白。"
+    },
+    {
+      "name": "scenario-driven-product-scout",
+      "title": "场景选品侦察",
+      "icon": "🎁",
+      "summaryZh": "从真实生活场景、身份迁移和反直觉时刻中发现新产品机会。"
+    },
+    {
+      "name": "cross-border-selection",
+      "title": "跨境选品",
+      "icon": "🌏",
+      "summaryZh": "当用户需要从公开或授权的商品详情页抽取并校验 SKU 级跨境电商数据时使用。"
+    },
+    {
+      "name": "customer-voice-analyzer",
+      "title": "客户之声分析器",
+      "icon": "🗣️",
+      "summaryZh": "整合多平台用户反馈（Amazon评论、Reddit、TikTok、YouTube、Facebook等），生成可执行的改品、文案和竞品策略洞察。"
+    },
+    {
+      "name": "company-research",
+      "title": "公司调研",
+      "icon": "🏢",
+      "summaryZh": "当用户需要对一家具名公司做公司级调研、尽职调查或融资估值核查时使用：给出公司画像、融资历程、估值逻辑、团队治理、业务与竞"
+    },
+    {
+      "name": "inventory-demand-forecaster",
+      "title": "库存预测",
+      "icon": "📦",
+      "summaryZh": "当用户需要进行库存预测、安全库存计算、补货规划或大促备货时使用。"
+    },
+    {
+      "name": "bestseller-pattern-decoder",
+      "title": "畅销款规律解码器",
+      "icon": "🔓",
+      "summaryZh": "拆解 Amazon 畅销款，找出头部套路、有效规律和未解决的遗憾空间，生成差异化窗口报告。"
+    },
+    {
+      "name": "trend-stage-timing-analyzer",
+      "title": "趋势时机分析器",
+      "icon": "⏱️",
+      "summaryZh": "判断品类或子趋势应该立即进入、延后观察还是避免跟进，结合公开趋势与私有先行指标。"
+    },
+    {
+      "name": "amazon-ppc-campaign-manager",
+      "title": "亚马逊PPC分析",
+      "icon": "📈",
+      "summaryZh": "诊断并优化 Amazon PPC / Amazon Ads，降低 ACoS、提升 ROAS 并识别浪费花费。"
+    },
+    {
+      "name": "seo-competitor-analysis",
+      "title": "SEO竞品分析",
+      "icon": "⚔️",
+      "summaryZh": "分析竞品SEO策略、关键词差距与反向链接，用于制定超越策略。"
+    },
+    {
+      "name": "amazon-listing-expert",
+      "title": "亚马逊Listing专家",
+      "icon": "📝",
+      "summaryZh": "为 Amazon 母婴产品创建或重写 Listing，围绕购买心理、决策中断点和品牌优势提升转化。"
+    },
+    {
+      "name": "optimize-ecommerce-page-conversion",
+      "title": "转化率优化",
+      "icon": "🎯",
+      "summaryZh": "做转化率优化（CRO），覆盖着陆页优化、转化漏斗分析、A/B测试方案和用户行为优化。"
+    },
+    {
+      "name": "copywriting",
+      "title": "营销文案",
+      "icon": "✍️",
+      "summaryZh": "撰写营销文案，覆盖销售文案、品牌故事、产品描述（含电商详情页/Listing文案）和Landing Page文案。"
+    },
+    {
+      "name": "social-content",
+      "title": "社媒内容",
+      "icon": "📱",
+      "summaryZh": "批量生成社交媒体内容，支持Instagram、Facebook、LinkedIn、Twitter/X、TikTok。"
+    },
+    {
+      "name": "email-automation-flow-builder",
+      "title": "邮件序列",
+      "icon": "✉️",
+      "summaryZh": "设计邮件营销序列自动化，覆盖欢迎序列、弃购挽回、复购激活和节日促销。"
+    },
+    {
+      "name": "performance-tracking",
+      "title": "大促效果分析",
+      "icon": "🧨",
+      "summaryZh": "电商大促活动效果分析：输入活动期订单CSV，输出活动效果评估、ROI分析、流量转化分析、优化建议。"
+    },
+    {
+      "name": "brand-voice-glossary",
+      "title": "品牌声音提取器",
+      "icon": "🎙️",
+      "summaryZh": "从现有内容和品牌素材中提取并定义品牌声音指南，帮助建立一致的品牌沟通风格。"
+    },
+    {
+      "name": "international-shipping-customs",
+      "title": "物流优化",
+      "icon": "🚚",
+      "summaryZh": "当用户需要规划运输路线、平衡成本与时效、选择承运商或做关务合规时使用。"
+    },
+    {
+      "name": "ecommerce-marketing",
+      "title": "营销主控",
+      "icon": "🎛️",
+      "toolBacked": false,
+      "summaryZh": "营销技能包主协调器，整合ad-creative、付费优化、social-content、邮件营销、增长策略等营销技能。"
+    },
+    {
+      "name": "amz-product-optimizer",
+      "title": "亚马逊Listing优化",
+      "icon": "🔧",
+      "toolBacked": false,
+      "summaryZh": "优化亚马逊商品 Listing 的标题、卖点与关键词布局，用于提升搜索可见性与转化。"
+    },
+    {
+      "name": "skill-creator",
+      "title": "Skill创建器",
+      "icon": "🏗️",
+      "toolBacked": false,
+      "summaryZh": "当用户需要创建 Agent Skill、把流程固化成可复用技能、或询问 Iron Law Testing / CSO 优"
+    },
+    {
+      "name": "ecommerce-seo-optimizer",
+      "title": "SEO内容优化",
+      "icon": "📄",
+      "summaryZh": "优化商品页/文章页的关键词密度、Title/Meta 与内链，用于提升关键词排名与内容质量。"
+    },
+    {
+      "name": "seo-page-audit",
+      "title": "SEO技术审计",
+      "icon": "🩺",
+      "summaryZh": "用 Lighthouse、PageSpeed Insights 或自定义爬虫诊断网站结构、速度、移动适配与索引问题。"
+    },
+    {
+      "name": "launch-strategy",
+      "title": "上市策略",
+      "icon": "🚀",
+      "summaryZh": "制定产品发布策略与增长实验，覆盖GTM方案、冷启动、渠道分发和增长实验设计。"
+    },
+    {
+      "name": "market-viability-logic-auditor",
+      "title": "市场可行性审计",
+      "icon": "⚖️",
+      "toolBacked": false,
+      "summaryZh": "判断新品方向是否值得进入，在风险、利润、品类生命周期和品牌能力匹配之间做严格裁决。"
+    },
+    {
+      "name": "competitor-profiling",
+      "title": "竞品情报",
+      "icon": "🕵️",
+      "summaryZh": "从多源收集并分析竞品情报，用于定位、策略与市场进入决策。"
+    }
+  ]
+}

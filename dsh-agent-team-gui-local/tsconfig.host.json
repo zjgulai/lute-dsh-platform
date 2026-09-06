@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "lib/tsconfig.host.tsbuildinfo",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "include": [
+    "src/index.ts",
+    "src/rpc.ts",
+    "src/spec.ts",
+    "src/types.ts",
+    "src/tools/**/*.ts"
+  ]
+}

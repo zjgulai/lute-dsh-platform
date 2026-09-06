@@ -1,0 +1,791 @@
+{
+  "deferred": [],
+  "categories": [
+    {
+      "key": "knowledge-engineering",
+      "title": "知识工程",
+      "icon": "🧠"
+    },
+    {
+      "key": "skill-engineering",
+      "title": "技能工程",
+      "icon": "🛠️"
+    },
+    {
+      "key": "ecommerce-analytics",
+      "title": "电商数据分析",
+      "icon": "📊"
+    }
+  ],
+  "aliases": {
+    "mkt-ad-creative": "ad-creative",
+    "mkt-email-sequence": "email-automation-flow-builder",
+    "mkt-social-content": "social-content",
+    "mkt-cold-email": "cold-email",
+    "mkt-paid-ads": "paid-advertising",
+    "mkt-cro-optimization": "optimize-ecommerce-page-conversion",
+    "mkt-copywriting": "copywriting",
+    "mkt-content-suite": "marketing-content-suite",
+    "mkt-master": "ecommerce-marketing",
+    "marketing-controller": "ecommerce-marketing",
+    "seo-technical-audit": "seo-page-audit",
+    "seo-content-optimization": "ecommerce-seo-optimizer",
+    "amazon-listing-optimizer": "amz-product-optimizer",
+    "amazon-sorftime": "amazon-sorftime-research",
+    "mkt-influencer": "influencer-campaign-manager",
+    "mkt-email": "email-automation-flow-builder",
+    "brand-voice": "brand-voice-glossary",
+    "cross-border-intelligence": "cross-border-intel-radar"
+  },
+  "skills": [
+    {
+      "src": "AI产品设计师",
+      "name": "ai-product-designer",
+      "class": "A",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "🎨"
+    },
+    {
+      "src": "Etsy优化器",
+      "name": "etsy-seo-optimizer",
+      "class": "A",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "🏷️"
+    },
+    {
+      "src": "产品属性分析器",
+      "name": "product-attribute-analyzer",
+      "class": "A",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "🧩"
+    },
+    {
+      "src": "市场洞察选品",
+      "name": "market-insight-product-selection",
+      "class": "A",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "🔭"
+    },
+    {
+      "src": "场景选品侦察",
+      "name": "scenario-driven-product-scout",
+      "class": "A",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "🎁"
+    },
+    {
+      "src": "跨境选品",
+      "name": "cross-border-selection",
+      "class": "A",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "🌏"
+    },
+    {
+      "src": "客户之声分析器",
+      "name": "customer-voice-analyzer",
+      "class": "A",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "🗣️"
+    },
+    {
+      "src": "公司调研",
+      "name": "company-research",
+      "class": "A",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "🏢"
+    },
+    {
+      "src": "库存预测",
+      "name": "inventory-demand-forecaster",
+      "class": "A",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "📦"
+    },
+    {
+      "src": "畅销款规律解码器",
+      "name": "bestseller-pattern-decoder",
+      "class": "A",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "🔓"
+    },
+    {
+      "src": "趋势时机分析器",
+      "name": "trend-stage-timing-analyzer",
+      "class": "A",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "⏱️"
+    },
+    {
+      "src": "亚马逊PPC分析",
+      "name": "amazon-ppc-campaign-manager",
+      "class": "A",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "📈"
+    },
+    {
+      "src": "SEO竞品分析",
+      "name": "seo-competitor-analysis",
+      "class": "A",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "⚔️"
+    },
+    {
+      "src": "亚马逊Listing专家",
+      "name": "amazon-listing-expert",
+      "class": "A",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "📝"
+    },
+    {
+      "src": "转化率优化",
+      "name": "optimize-ecommerce-page-conversion",
+      "class": "B",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "🎯",
+      "catalogUpdate": {
+        "title": "转化率优化"
+      }
+    },
+    {
+      "src": "营销文案",
+      "name": "copywriting",
+      "class": "B",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "✍️",
+      "catalogUpdate": {
+        "title": "营销文案"
+      }
+    },
+    {
+      "src": "社媒内容",
+      "name": "social-content",
+      "class": "B",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "📱",
+      "catalogUpdate": {
+        "title": "社媒内容"
+      }
+    },
+    {
+      "src": "邮件序列",
+      "name": "email-automation-flow-builder",
+      "class": "B",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "✉️",
+      "catalogUpdate": {
+        "title": "邮件序列"
+      }
+    },
+    {
+      "src": "大促效果分析",
+      "name": "performance-tracking",
+      "class": "B",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "🧨",
+      "catalogUpdate": {
+        "title": "大促效果分析"
+      }
+    },
+    {
+      "src": "品牌声音提取器",
+      "name": "brand-voice-glossary",
+      "class": "B",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "🎙️",
+      "catalogUpdate": {
+        "title": "品牌声音提取器"
+      }
+    },
+    {
+      "src": "物流优化",
+      "name": "international-shipping-customs",
+      "class": "B",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "🚚",
+      "catalogUpdate": {
+        "title": "物流优化"
+      }
+    },
+    {
+      "src": "营销主控",
+      "name": "ecommerce-marketing",
+      "class": "B",
+      "action": "create",
+      "keepFlags": false,
+      "icon": "🎛️",
+      "catalogUpdate": {
+        "title": "营销主控",
+        "toolBacked": false
+      }
+    },
+    {
+      "src": "亚马逊Listing优化",
+      "name": "amz-product-optimizer",
+      "class": "B",
+      "action": "create",
+      "keepFlags": false,
+      "icon": "🔧",
+      "catalogUpdate": {
+        "title": "亚马逊Listing优化",
+        "toolBacked": false
+      }
+    },
+    {
+      "src": "Skill创建器",
+      "name": "skill-creator",
+      "class": "B",
+      "action": "create",
+      "keepFlags": false,
+      "icon": "🏗️",
+      "catalogUpdate": {
+        "title": "Skill创建器",
+        "toolBacked": false
+      }
+    },
+    {
+      "src": "SEO内容优化",
+      "name": "ecommerce-seo-optimizer",
+      "class": "B",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "📄",
+      "catalogUpdate": {
+        "title": "SEO内容优化"
+      }
+    },
+    {
+      "src": "SEO技术审计",
+      "name": "seo-page-audit",
+      "class": "B",
+      "action": "overwrite",
+      "keepFlags": true,
+      "icon": "🩺",
+      "catalogUpdate": {
+        "title": "SEO技术审计"
+      }
+    },
+    {
+      "src": "上市策略",
+      "name": "launch-strategy",
+      "class": "B",
+      "action": "overwrite",
+      "icon": "🚀",
+      "catalogUpdate": {
+        "title": "上市策略"
+      },
+      "summaryZh": "产品发布策略与增长实验：GTM 方案、冷启动、渠道分发与增长实验设计"
+    },
+    {
+      "src": "市场可行性审计",
+      "name": "market-viability-logic-auditor",
+      "class": "B",
+      "action": "overwrite",
+      "icon": "⚖️",
+      "catalogUpdate": {
+        "title": "市场可行性审计",
+        "toolBacked": false
+      },
+      "summaryZh": "新品方向 Go/No-Go 进入裁决：风险、利润、品类生命周期与品牌能力匹配的严格审计"
+    },
+    {
+      "src": "竞品情报",
+      "name": "competitor-profiling",
+      "class": "B",
+      "action": "overwrite",
+      "icon": "🕵️",
+      "catalogUpdate": {
+        "title": "竞品情报"
+      },
+      "summaryZh": "多源竞品情报收集与分析：定位、策略与市场进入决策"
+    },
+    {
+      "src": "GEO优化器",
+      "name": "geo-optimizer",
+      "class": "C",
+      "action": "create",
+      "category": "seo-ads",
+      "icon": "🌐",
+      "toolGap": ""
+    },
+    {
+      "src": "GTM战略规划",
+      "name": "gtm-strategy-planning",
+      "class": "C",
+      "action": "create",
+      "category": "content-gtm",
+      "icon": "🗺️",
+      "toolGap": ""
+    },
+    {
+      "src": "JTBD分析器",
+      "name": "jtbd-analyzer",
+      "class": "C",
+      "action": "create",
+      "category": "research-selection",
+      "icon": "🧗",
+      "toolGap": ""
+    },
+    {
+      "src": "LLM技术调研",
+      "name": "llm-tech-research",
+      "class": "C",
+      "action": "create",
+      "category": "skill-engineering",
+      "icon": "🤖",
+      "toolGap": ""
+    },
+    {
+      "src": "MECE知识提取器",
+      "name": "mece-knowledge-extractor",
+      "class": "C",
+      "action": "create",
+      "category": "knowledge-engineering",
+      "icon": "🧱",
+      "toolGap": ""
+    },
+    {
+      "src": "SEO主控",
+      "name": "seo-controller",
+      "class": "C",
+      "action": "create",
+      "category": "seo-ads",
+      "icon": "🧭",
+      "toolGap": ""
+    },
+    {
+      "src": "Skill优化器",
+      "name": "skill-optimizer",
+      "class": "C",
+      "action": "create",
+      "category": "skill-engineering",
+      "icon": "🔧",
+      "toolGap": ""
+    },
+    {
+      "src": "Skill家族管理",
+      "name": "skill-family-manager",
+      "class": "C",
+      "action": "create",
+      "category": "skill-engineering",
+      "icon": "👨‍👩‍👧‍👦",
+      "toolGap": ""
+    },
+    {
+      "src": "Skill结构医生",
+      "name": "skill-structure-doctor",
+      "class": "C",
+      "action": "create",
+      "category": "skill-engineering",
+      "icon": "🩺",
+      "toolGap": ""
+    },
+    {
+      "src": "Skill评估师",
+      "name": "skill-evaluator",
+      "class": "C",
+      "action": "create",
+      "category": "skill-engineering",
+      "icon": "⭐",
+      "toolGap": ""
+    },
+    {
+      "src": "VOC情感分析器",
+      "name": "voc-sentiment-analyzer",
+      "class": "C",
+      "action": "create",
+      "category": "research-selection",
+      "icon": "💗",
+      "toolGap": ""
+    },
+    {
+      "src": "亚马逊Sorftime调研",
+      "name": "amazon-sorftime-research",
+      "class": "C",
+      "action": "create",
+      "category": "research-selection",
+      "icon": "🔬",
+      "toolGap": "Sorftime 账号"
+    },
+    {
+      "src": "亚马逊竞品监控",
+      "name": "amazon-competitor-monitor",
+      "class": "C",
+      "action": "create",
+      "category": "research-selection",
+      "icon": "👀",
+      "toolGap": ""
+    },
+    {
+      "src": "产品数据深度分析",
+      "name": "product-data-deep-analysis",
+      "class": "C",
+      "action": "create",
+      "category": "ecommerce-analytics",
+      "icon": "📉",
+      "toolGap": ""
+    },
+    {
+      "src": "产品调研矩阵",
+      "name": "product-research-matrix",
+      "class": "C",
+      "action": "create",
+      "category": "research-selection",
+      "icon": "🧮",
+      "toolGap": ""
+    },
+    {
+      "src": "付费广告",
+      "name": "paid-advertising",
+      "class": "C",
+      "action": "create",
+      "category": "seo-ads",
+      "icon": "📣",
+      "toolGap": ""
+    },
+    {
+      "src": "供应商评估",
+      "name": "supplier-evaluation",
+      "class": "C",
+      "action": "create",
+      "category": "sourcing",
+      "icon": "🏭",
+      "toolGap": ""
+    },
+    {
+      "src": "供应链主控",
+      "name": "supply-chain-controller",
+      "class": "C",
+      "action": "create",
+      "category": "shipping-tariff",
+      "icon": "🔗",
+      "toolGap": ""
+    },
+    {
+      "src": "冷邮件",
+      "name": "cold-email",
+      "class": "C",
+      "action": "create",
+      "category": "content-gtm",
+      "icon": "🥶",
+      "toolGap": ""
+    },
+    {
+      "src": "单帖情报挖掘",
+      "name": "single-post-intel-mining",
+      "class": "C",
+      "action": "create",
+      "category": "research-selection",
+      "icon": "⛏️",
+      "toolGap": ""
+    },
+    {
+      "src": "品牌Logo设计师",
+      "name": "brand-logo-designer",
+      "class": "C",
+      "action": "create",
+      "category": "design",
+      "icon": "🎨",
+      "toolGap": ""
+    },
+    {
+      "src": "社媒舆情追踪",
+      "name": "brand-mention-tracking",
+      "class": "C",
+      "action": "create",
+      "category": "social-ops",
+      "icon": "📡",
+      "toolGap": ""
+    },
+    {
+      "src": "外联自动化",
+      "name": "outreach-automation",
+      "class": "C",
+      "action": "create",
+      "category": "content-gtm",
+      "icon": "🤝",
+      "toolGap": ""
+    },
+    {
+      "src": "多平台Listing生成器",
+      "name": "multi-platform-listing-generator",
+      "class": "C",
+      "action": "create",
+      "category": "seo-ads",
+      "icon": "🗂️",
+      "toolGap": ""
+    },
+    {
+      "src": "多语言SEO",
+      "name": "multilingual-seo",
+      "class": "C",
+      "action": "create",
+      "category": "seo-ads",
+      "icon": "🌍",
+      "toolGap": ""
+    },
+    {
+      "src": "工艺包生成器",
+      "name": "tech-pack-generator",
+      "class": "C",
+      "action": "create",
+      "category": "design",
+      "icon": "📐",
+      "toolGap": ""
+    },
+    {
+      "src": "平台价格监控",
+      "name": "platform-price-monitor",
+      "class": "C",
+      "action": "create",
+      "category": "store-ops",
+      "icon": "⚡",
+      "toolGap": ""
+    },
+    {
+      "src": "广告创意",
+      "name": "ad-creative",
+      "class": "C",
+      "action": "create",
+      "category": "seo-ads",
+      "icon": "💡",
+      "toolGap": ""
+    },
+    {
+      "src": "文件历史管理",
+      "name": "file-history-manager",
+      "class": "C",
+      "action": "create",
+      "category": "productivity",
+      "icon": "🗃️",
+      "toolGap": ""
+    },
+    {
+      "src": "术语标准化器",
+      "name": "terminology-standardizer",
+      "class": "C",
+      "action": "create",
+      "category": "knowledge-engineering",
+      "icon": "📚",
+      "toolGap": ""
+    },
+    {
+      "src": "爆款视频分析器",
+      "name": "viral-video-analyzer",
+      "class": "C",
+      "action": "create",
+      "category": "content-gtm",
+      "icon": "🎬",
+      "toolGap": ""
+    },
+    {
+      "src": "物流追踪",
+      "name": "shipment-tracking",
+      "class": "C",
+      "action": "create",
+      "category": "shipping-tariff",
+      "icon": "📬",
+      "toolGap": ""
+    },
+    {
+      "src": "理想客户画像",
+      "name": "icp-profiler",
+      "class": "C",
+      "action": "create",
+      "category": "research-selection",
+      "icon": "👤",
+      "toolGap": ""
+    },
+    {
+      "src": "电商CSV处理",
+      "name": "ecommerce-csv-processing",
+      "class": "C",
+      "action": "create",
+      "category": "ecommerce-analytics",
+      "icon": "🧾",
+      "toolGap": ""
+    },
+    {
+      "src": "电商价格监控",
+      "name": "ecommerce-price-monitor",
+      "class": "C",
+      "action": "create",
+      "category": "store-ops",
+      "icon": "💰",
+      "toolGap": ""
+    },
+    {
+      "src": "电商分析主控",
+      "name": "ecommerce-analytics-controller",
+      "class": "C",
+      "action": "create",
+      "category": "ecommerce-analytics",
+      "icon": "🎛️",
+      "toolGap": ""
+    },
+    {
+      "src": "电商季度战略",
+      "name": "ecommerce-quarterly-strategy",
+      "class": "C",
+      "action": "create",
+      "category": "ecommerce-analytics",
+      "icon": "📅",
+      "toolGap": ""
+    },
+    {
+      "src": "电商日报",
+      "name": "ecommerce-daily-report",
+      "class": "C",
+      "action": "create",
+      "category": "ecommerce-analytics",
+      "icon": "📰",
+      "toolGap": ""
+    },
+    {
+      "src": "电商月度复盘",
+      "name": "ecommerce-monthly-review",
+      "class": "C",
+      "action": "create",
+      "category": "ecommerce-analytics",
+      "icon": "🗓️",
+      "toolGap": ""
+    },
+    {
+      "src": "电商机器学习建模顾问",
+      "name": "ecommerce-ml-modeling-advisor",
+      "class": "C",
+      "action": "create",
+      "category": "ecommerce-analytics",
+      "icon": "🧠",
+      "toolGap": ""
+    },
+    {
+      "src": "电商经营洞察",
+      "name": "ecommerce-business-insights",
+      "class": "C",
+      "action": "create",
+      "category": "ecommerce-analytics",
+      "icon": "🔎",
+      "toolGap": ""
+    },
+    {
+      "src": "知识相似度分析器",
+      "name": "knowledge-similarity-analyzer",
+      "class": "C",
+      "action": "create",
+      "category": "knowledge-engineering",
+      "icon": "🧬",
+      "toolGap": ""
+    },
+    {
+      "src": "知识萃取专家",
+      "name": "knowledge-extraction-expert",
+      "class": "C",
+      "action": "create",
+      "category": "knowledge-engineering",
+      "icon": "📖",
+      "toolGap": ""
+    },
+    {
+      "src": "竞品替代分析",
+      "name": "competitor-alternative-analysis",
+      "class": "C",
+      "action": "create",
+      "category": "research-selection",
+      "icon": "🔀",
+      "toolGap": ""
+    },
+    {
+      "src": "网页采集方案设计",
+      "name": "web-scraping-plan-designer",
+      "class": "C",
+      "action": "create",
+      "category": "productivity",
+      "icon": "🕸️",
+      "toolGap": ""
+    },
+    {
+      "src": "营销内容套件",
+      "name": "marketing-content-suite",
+      "class": "C",
+      "action": "create",
+      "category": "content-gtm",
+      "icon": "🧰",
+      "toolGap": ""
+    },
+    {
+      "src": "语义分桶器",
+      "name": "semantic-bucketer",
+      "class": "C",
+      "action": "create",
+      "category": "knowledge-engineering",
+      "icon": "🪣",
+      "toolGap": ""
+    },
+    {
+      "src": "语义密度分析器",
+      "name": "semantic-density-analyzer",
+      "class": "C",
+      "action": "create",
+      "category": "knowledge-engineering",
+      "icon": "🌡️",
+      "toolGap": ""
+    },
+    {
+      "src": "语义文档分块器",
+      "name": "semantic-doc-chunker",
+      "class": "C",
+      "action": "create",
+      "category": "knowledge-engineering",
+      "icon": "✂️",
+      "toolGap": ""
+    },
+    {
+      "src": "跨境品类可行性报告",
+      "name": "cross-border-category-feasibility",
+      "class": "C",
+      "action": "create",
+      "category": "research-selection",
+      "icon": "📋",
+      "toolGap": ""
+    },
+    {
+      "src": "跨境电商情报雷达",
+      "name": "cross-border-intel-radar",
+      "class": "C",
+      "action": "create",
+      "category": "research-selection",
+      "icon": "🛰️",
+      "toolGap": ""
+    },
+    {
+      "src": "锚点文本分割器",
+      "name": "anchor-text-splitter",
+      "class": "C",
+      "action": "create",
+      "category": "knowledge-engineering",
+      "icon": "⚓",
+      "toolGap": ""
+    }
+  ]
+}

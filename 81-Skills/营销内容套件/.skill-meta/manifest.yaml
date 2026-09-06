@@ -1,0 +1,27 @@
+name: bm-marketing-content-suite
+version: "1.1.0"
+description: Generate comprehensive marketing content across multiple channels and formats
+category: brand-marketing
+complexity: standard
+workflows:
+  - product-launch
+  - brand-marketing
+dependencies:
+  hard: []
+  soft:
+    - bm-brand-voice-extractor
+    - da-social-sentiment-tracker
+    - gtm-gtm-strategy-planner
+  provides:
+    - bm-viral-video-analyzer
+    - bm-seo-geo-optimizer
+    - gtm-outreach-automation
+  parallel: []
+author: lute-skills-creator
+license: MIT
+tags:
+  - marketing
+  - content
+  - copywriting
+  - multi-channel
+  - social-media

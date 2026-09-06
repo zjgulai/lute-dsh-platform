@@ -1,0 +1,22 @@
+name: 品牌声音提取器
+version: "1.1.0"
+description: Extract and define brand voice guidelines from existing content and brand materials
+category: brand-marketing
+complexity: standard
+workflows:
+  - brand-marketing
+dependencies:
+  hard: []  # 无强依赖
+  soft:  # 软依赖
+    - gtm-icp-profiler  # 客户画像用于语调匹配
+  provides:  # 输出供下游使用
+    - bm-marketing-content-suite  # 语调用于内容生成
+  parallel: []  # 无可并行skill
+author: lute-skills-creator
+license: MIT
+tags:
+  - brand
+  - voice
+  - guidelines
+  - tone
+  - personality

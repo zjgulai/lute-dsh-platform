@@ -1,0 +1,23 @@
+name: da-amazon-sorftime-research
+version: "1.0.0"
+description: Conduct in-depth Amazon category and product research using Sorftime data
+category: data-insights
+complexity: complex
+workflows:
+  - product-launch
+dependencies:
+  hard: []  # 无强依赖，支持CSV/SP-API/Keepa多数据源
+  soft:  # 软依赖
+    - pp-product-research-matrix  # 选品方向用于类目深度分析
+  provides:  # 输出供下游使用
+    - pp-jtbd-analyzer  # 类目数据用于需求验证
+  parallel: []  # 无可并行skill
+author: lute-skills-creator
+license: MIT
+tags:
+  - amazon
+  - sorftime
+  - product-research
+  - category-analysis
+  - voc
+  - keyword-research

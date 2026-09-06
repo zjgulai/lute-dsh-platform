@@ -1,0 +1,6 @@
+name: lute-skills-manage
+version: "1.0.0"
+description: Claude Skills项目管理器，支持按项目切换Skill组合
+type: tool
+author: xingkongliang
+source: https://github.com/xingkongliang/skills-manager

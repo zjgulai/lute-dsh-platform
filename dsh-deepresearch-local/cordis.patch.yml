@@ -1,0 +1,10 @@
+- insert:
+    - id: deepresearch
+      name: '@deepseek-ai/dsh-deepresearch'
+      config:
+        runnerEnabled: true
+        maxProjects: 1000
+        maxQuestions: 6
+        maxCriteriaPerQuestion: 3
+        maxEvidencePerProject: 200
+        maxReportChars: 200000

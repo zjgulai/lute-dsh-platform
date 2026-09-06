@@ -1,0 +1,8 @@
+node_modules/
+*.tgz
+*.tsbuildinfo
+.DS_Store
+.pnpm-store/
+.vite/
+.vite-host/
+.tmp/

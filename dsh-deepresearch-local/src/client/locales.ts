@@ -1,0 +1,562 @@
+/**
+ * `deepresearch` namespace dictionaries (view copy + slot tab label).
+ *
+ * Mirrors the locale pattern of `@deepseek-ai/dsh-client-ui-trajectory`
+ * (`src/client/locales.ts`): the key set is declared once as
+ * `DeepResearchKey`, both dictionaries are typed `Record<DeepResearchKey,
+ * string>`, and the namespace is merged into `LocaleNamespaceMap` so
+ * registering `locale: NS` puts the typed `t` seat on the component props.
+ */
+
+/** Dictionary namespace owned by this plugin. */
+export const NS = 'deepresearch'
+
+/** The deep-research dictionary key set (the source of truth for both locales). */
+export type DeepResearchKey =
+  // view / tab
+  | 'view.deepResearch'
+  // library
+  | 'library.title'
+  | 'library.back'
+  | 'library.backAria'
+  | 'library.projectCount'
+  | 'library.filterAria'
+  | 'filter.all'
+  | 'filter.planning'
+  | 'filter.investigating'
+  | 'filter.done'
+  // toolbar
+  | 'toolbar.search'
+  | 'toolbar.searchAria'
+  | 'toolbar.sortAria'
+  | 'toolbar.sortRecent'
+  | 'toolbar.sortTitle'
+  | 'toolbar.gridView'
+  | 'toolbar.listView'
+  // actions
+  | 'action.start'
+  | 'action.startShort'
+  | 'action.cancel'
+  | 'action.creating'
+  | 'action.createPlan'
+  | 'action.saveChanges'
+  | 'action.confirmStart'
+  | 'action.savePartial'
+  | 'action.complete'
+  // empty states
+  | 'empty.none'
+  | 'empty.noMatch'
+  | 'empty.hintStart'
+  | 'empty.hintNoMatch'
+  // project card
+  | 'card.openAria'
+  | 'card.evidence'
+  // composer
+  | 'composer.title'
+  | 'composer.subtitle'
+  | 'composer.closeAria'
+  | 'composer.question'
+  | 'composer.required'
+  | 'composer.questionPlaceholder'
+  | 'composer.context'
+  | 'composer.contextCount'
+  | 'composer.contextHint'
+  | 'composer.goal'
+  | 'composer.goalPlaceholder'
+  | 'composer.depth'
+  | 'depth.quick'
+  | 'depth.standard'
+  | 'depth.deep'
+  | 'composer.constraints'
+  | 'composer.constraintsPlaceholder'
+  | 'composer.seed'
+  | 'composer.seedPlaceholder'
+  | 'composer.footer'
+  // workspace
+  | 'workspace.back'
+  | 'workspace.delete'
+  | 'delete.title'
+  | 'delete.body'
+  | 'delete.confirm'
+  | 'overlay.crashTitle'
+  | 'overlay.crashHint'
+  | 'overlay.crashBack'
+  | 'stepper.plan'
+  | 'stepper.investigate'
+  | 'stepper.report'
+  // plan
+  | 'plan.title'
+  | 'plan.subtitle'
+  | 'plan.confirmed'
+  | 'plan.goal'
+  | 'plan.constraints'
+  | 'plan.criteria'
+  | 'plan.dependsOn'
+  | 'plan.dependsOnChip'
+  | 'plan.dependsOnHint'
+  | 'plan.failedTitle'
+  | 'plan.failedHint'
+  | 'plan.retry'
+  | 'plan.stopped'
+  | 'plan.stoppedHint'
+  // metrics
+  | 'metric.subQuestions'
+  | 'metric.evidence'
+  | 'metric.searchBudget'
+  | 'metric.fetchBudget'
+  | 'metric.running'
+  | 'metric.waiting'
+  // investigate
+  | 'investigate.title'
+  | 'investigate.subtitle'
+  | 'investigate.running'
+  | 'investigate.readyTitle'
+  | 'investigate.readyHint'
+  | 'investigate.incompleteTitle'
+  | 'investigate.incompleteHint'
+  | 'investigate.stop'
+  | 'investigate.stopReason'
+  | 'investigate.continue'
+  | 'investigate.pausedHint'
+  | 'investigate.writeReport'
+  | 'investigate.dependsOn'
+  | 'investigate.waitingOn'
+  | 'investigate.waitingStatus'
+  | 'investigate.questions'
+  | 'investigate.scouts'
+  | 'investigate.verifying'
+  | 'investigate.tools'
+  | 'investigate.handoff'
+  | 'investigate.dependencySummary'
+  | 'investigate.summary'
+  | 'investigate.warning'
+  | 'investigate.gaps'
+  | 'investigate.draft'
+  | 'investigate.scoutDraft'
+  | 'investigate.evaluatorDraft'
+  | 'investigate.queued'
+  | 'investigate.queuedHint'
+  | 'investigate.evaluating'
+  | 'investigate.evidenceCount'
+  | 'investigate.coverage'
+  | 'investigate.toolsUsed'
+  | 'investigate.capReached'
+  | 'investigate.activeNow'
+  | 'investigate.toolSearch'
+  | 'investigate.toolFetch'
+  | 'investigate.toolRead'
+  | 'coverage.missing'
+  | 'coverage.partial'
+  | 'coverage.covered'
+  | 'coverage.conflicted'
+  | 'coverage.blocked'
+  | 'verify.pass'
+  | 'verify.warning'
+  | 'verify.fail'
+  // evidence
+  | 'evidence.title'
+  | 'evidence.sourcesTitle'
+  | 'evidence.empty'
+  | 'evidence.open'
+  | 'confidence.high'
+  | 'confidence.medium'
+  | 'confidence.low'
+  // report
+  | 'report.title'
+  | 'report.subtitle'
+  | 'report.placeholder'
+  | 'report.limitations'
+  | 'report.limitationsPlaceholder'
+  | 'report.limitationsEmpty'
+  | 'limitation.partialFallback'
+  | 'limitation.blockedFallback'
+  | 'limitation.conflictedFallback'
+  | 'limitation.missingFallback'
+  | 'report.writing'
+  | 'report.empty'
+  | 'report.retry'
+  // default plan template
+  | 'planTemplate.define'
+  | 'planTemplate.defineCriteria'
+  | 'planTemplate.search'
+  | 'planTemplate.searchCriteria'
+  | 'planTemplate.crossValidate'
+  | 'planTemplate.crossValidateCriteria'
+  | 'planTemplate.synthesize'
+  | 'planTemplate.synthesizeCriteria'
+  // phase labels
+  | 'phase.planning'
+  | 'phase.awaitingPlanConfirm'
+  | 'phase.investigating'
+  | 'phase.readyForReport'
+  | 'phase.incomplete'
+  | 'phase.writing'
+  | 'phase.done'
+  | 'phase.failed'
+  | 'phase.aborted'
+  // status labels
+  | 'status.pending'
+  | 'status.running'
+  | 'status.covered'
+  | 'status.partial'
+  | 'status.blocked'
+  | 'status.failed'
+
+declare module '@deepseek-ai/dsh-client-ui-slots' {
+  interface LocaleNamespaceMap {
+    /** The deep research view copy. */
+    'deepresearch': DeepResearchKey
+  }
+}
+
+/** Simplified Chinese dictionary (the key-set source of truth). */
+export const zh: Record<DeepResearchKey, string> = {
+  'view.deepResearch': '深度研究',
+  'library.title': '研究资料库',
+  'library.back': '对话',
+  'library.backAria': '返回对话',
+  'library.projectCount': '{count} 个研究项目',
+  'library.filterAria': '研究状态筛选',
+  'filter.all': '全部',
+  'filter.planning': '计划中',
+  'filter.investigating': '调查中',
+  'filter.done': '已完成',
+  'toolbar.search': '搜索研究',
+  'toolbar.searchAria': '搜索研究',
+  'toolbar.sortAria': '研究排序',
+  'toolbar.sortRecent': '最近更新',
+  'toolbar.sortTitle': '按标题',
+  'toolbar.gridView': '网格视图',
+  'toolbar.listView': '列表视图',
+  'action.start': '发起研究',
+  'action.startShort': '发起研究',
+  'action.cancel': '取消',
+  'action.creating': '创建中…',
+  'action.createPlan': '创建研究计划',
+  'action.saveChanges': '保存修改',
+  'action.confirmStart': '确认并开始',
+  'action.savePartial': '保存为部分完成',
+  'action.complete': '完成研究',
+  'empty.none': '还没有研究项目',
+  'empty.noMatch': '没有匹配的研究项目',
+  'empty.hintStart': '从一个值得深入的问题开始。',
+  'empty.hintNoMatch': '试试其他关键词或清除搜索条件。',
+  'card.openAria': '打开研究：{title}',
+  'card.evidence': '{count} 条证据 · {date}',
+  'composer.title': '发起深度研究',
+  'composer.subtitle': '描述问题，先生成一份可审查、可修改的研究计划。',
+  'composer.closeAria': '关闭',
+  'composer.question': '研究问题',
+  'composer.required': '必填',
+  'composer.questionPlaceholder': '你想深入研究什么？',
+  'composer.context': '添加研究背景',
+  'composer.contextCount': ' · {count}',
+  'composer.contextHint': '目标、深度、限制和已有材料',
+  'composer.goal': '研究目标',
+  'composer.goalPlaceholder': '希望最终得到什么',
+  'composer.depth': '研究深度',
+  'depth.quick': '快速',
+  'depth.standard': '标准',
+  'depth.deep': '深入',
+  'composer.constraints': '限制与要求',
+  'composer.constraintsPlaceholder': '时间、地域、来源或输出约束',
+  'composer.seed': '已有材料',
+  'composer.seedPlaceholder': '粘贴已有笔记或摘录（可选）',
+  'composer.footer': '计划 → 调查 → 报告',
+  'workspace.back': '深度研究',
+  'workspace.delete': '删除',
+  'delete.title': '删除研究',
+  'delete.body': '「{title}」会从资料库里永久移除，包括计划和证据。',
+  'delete.confirm': '删除',
+  'overlay.crashTitle': '深度研究界面加载失败',
+  'overlay.crashHint': '这通常是旧数据字段不完整导致的。你可以返回资料库重试，或删除该项目后重新创建。',
+  'overlay.crashBack': '返回资料库',
+  'stepper.plan': '1 计划',
+  'stepper.investigate': '2 调查',
+  'stepper.report': '3 报告',
+  'plan.title': '研究计划',
+  'plan.subtitle': '确认后，编排器按子问题和验收标准派出 Scout / Evaluator，再用写作包撰写报告。',
+  'plan.confirmed': '已确认',
+  'plan.goal': '研究目标',
+  'plan.constraints': '约束',
+  'plan.criteria': '子问题与验收标准',
+  'plan.dependsOn': '依赖',
+  'plan.dependsOnChip': '需先完成 {label}',
+  'plan.dependsOnHint': '上游子问题完成后才会执行；开始时会带上前面题的简要结论，避免重复搜索。',
+  'plan.failedTitle': '研究计划生成失败',
+  'plan.failedHint': '后台规划 Agent 未能提交计划。查看下方错误后删除该项目并重新创建。',
+  'plan.retry': '重新生成计划',
+  'plan.stopped': '计划已停止',
+  'plan.stoppedHint': '运行已安全停止，可以继续生成计划。',
+  'metric.subQuestions': '子问题',
+  'metric.evidence': '证据',
+  'metric.searchBudget': '检索预算',
+  'metric.fetchBudget': '抓取预算',
+  'metric.running': '进行中',
+  'metric.waiting': '等待依赖',
+  'investigate.title': '调查看板',
+  'investigate.subtitle': 'Scout 检索原文，Evaluator 过审后才写入证据。此页自动刷新过程。',
+  'investigate.running': '调查进行中：Scout 检索 / Evaluator 核验。',
+  'investigate.readyTitle': '调查已收束',
+  'investigate.readyHint': '子问题已落地。部分覆盖和未通过的标准记在限制里，报告会接着写。',
+  'investigate.incompleteTitle': '调查未完成',
+  'investigate.incompleteHint': '部分标准只部分覆盖或被拒绝，已记入限制。',
+  'investigate.stop': '停止调查',
+  'investigate.stopReason': '用户停止了调查。',
+  'investigate.continue': '继续调查',
+  'investigate.pausedHint': '运行已安全停止，计划、证据和检查点均已保留。',
+  'investigate.writeReport': '撰写报告',
+  'investigate.dependsOn': '依赖 {count} 个上游问题',
+  'investigate.waitingOn': '等待上游：{list}',
+  'investigate.waitingStatus': '等待依赖',
+  'investigate.questions': '子问题',
+  'investigate.scouts': 'Scout',
+  'investigate.verifying': '核验中',
+  'investigate.tools': '工具',
+  'investigate.handoff': '交接摘要',
+  'investigate.dependencySummary': '上游线索',
+  'investigate.summary': '摘要',
+  'investigate.warning': '警告',
+  'investigate.gaps': '缺口',
+  'investigate.draft': '草稿',
+  'investigate.scoutDraft': 'Scout 草稿',
+  'investigate.evaluatorDraft': 'Evaluator 草稿',
+  'investigate.queued': '排队中',
+  'investigate.queuedHint': '编排器按依赖和并行上限派出 Scout，检索和核验过程会写在这张卡片上。',
+  'investigate.evaluating': 'Evaluator 正在核验候选人',
+  'investigate.evidenceCount': '{count} 条证据',
+  'investigate.coverage': '验收标准',
+  'investigate.toolsUsed': '{used}/{cap} 工具',
+  'investigate.capReached': '已达上限',
+  'investigate.activeNow': '进行中',
+  'investigate.toolSearch': '搜索',
+  'investigate.toolFetch': '抓取',
+  'investigate.toolRead': '读原文',
+  'coverage.missing': '未覆盖',
+  'coverage.partial': '部分覆盖',
+  'coverage.covered': '已覆盖',
+  'coverage.conflicted': '有冲突',
+  'coverage.blocked': '受阻',
+  'verify.pass': '通过',
+  'verify.warning': '警告',
+  'verify.fail': '未通过',
+  'evidence.title': '来源证据',
+  'evidence.sourcesTitle': '来源',
+  'evidence.empty': '后台研究 Agent 正在检索来源；保存证据后会自动显示在这里。',
+  'evidence.open': '打开来源',
+  'confidence.high': '高',
+  'confidence.medium': '中',
+  'confidence.low': '低',
+  'report.title': '综合报告',
+  'report.subtitle': '根据已核验证据撰写综合报告，并在正文中引用来源。',
+  'report.placeholder': 'Markdown 研究报告…',
+  'report.limitations': '限制与未解决问题',
+  'report.limitationsPlaceholder': '每行一项限制',
+  'report.limitationsEmpty': '目前没有部分覆盖或被拒绝的标准。',
+  'limitation.partialFallback': '证据不足，该标准只部分满足。',
+  'limitation.blockedFallback': '核验未通过，该标准被拒绝。',
+  'limitation.conflictedFallback': '来源结论冲突，尚未形成一致判断。',
+  'limitation.missingFallback': '该标准仍未覆盖。',
+  'report.writing': '后台研究 Agent 正在整理证据并撰写报告…',
+  'report.empty': '报告尚未生成。',
+  'report.retry': '重新撰写报告',
+  'planTemplate.define': '界定核心问题：{question}',
+  'planTemplate.defineCriteria': '明确回答范围、关键概念和判定标准',
+  'planTemplate.search': '检索并筛选权威来源',
+  'planTemplate.searchCriteria': '至少获得两个相互独立且可追溯的来源',
+  'planTemplate.crossValidate': '交叉验证关键结论',
+  'planTemplate.crossValidateCriteria': '识别一致结论、冲突信息和证据缺口',
+  'planTemplate.synthesize': '综合证据并形成报告',
+  'planTemplate.synthesizeCriteria': '引用来源并说明限制与不确定性',
+  'phase.planning': '计划中',
+  'phase.awaitingPlanConfirm': '待确认',
+  'phase.investigating': '调查中',
+  'phase.readyForReport': '可写报告',
+  'phase.incomplete': '部分完成',
+  'phase.writing': '撰写中',
+  'phase.done': '已完成',
+  'phase.failed': '失败',
+  'phase.aborted': '已停止',
+  'status.pending': '待处理',
+  'status.running': '调查中',
+  'status.covered': '已覆盖',
+  'status.partial': '部分覆盖',
+  'status.blocked': '受阻',
+  'status.failed': '失败',
+}
+
+/** English dictionary. */
+export const en: Record<DeepResearchKey, string> = {
+  'view.deepResearch': 'Deep Research',
+  'library.title': 'Research Library',
+  'library.back': 'Chat',
+  'library.backAria': 'Back to chat',
+  'library.projectCount': '{count} research projects',
+  'library.filterAria': 'Filter by research status',
+  'filter.all': 'All',
+  'filter.planning': 'Planning',
+  'filter.investigating': 'Investigating',
+  'filter.done': 'Done',
+  'toolbar.search': 'Search research',
+  'toolbar.searchAria': 'Search research',
+  'toolbar.sortAria': 'Sort research',
+  'toolbar.sortRecent': 'Recently updated',
+  'toolbar.sortTitle': 'By title',
+  'toolbar.gridView': 'Grid view',
+  'toolbar.listView': 'List view',
+  'action.start': 'Start research',
+  'action.startShort': 'Start research',
+  'action.cancel': 'Cancel',
+  'action.creating': 'Creating…',
+  'action.createPlan': 'Create research plan',
+  'action.saveChanges': 'Save changes',
+  'action.confirmStart': 'Confirm & start',
+  'action.savePartial': 'Save as partially complete',
+  'action.complete': 'Complete research',
+  'empty.none': 'No research projects yet',
+  'empty.noMatch': 'No matching research projects',
+  'empty.hintStart': 'Start with a question worth digging into.',
+  'empty.hintNoMatch': 'Try different keywords or clear the search.',
+  'card.openAria': 'Open research: {title}',
+  'card.evidence': '{count} evidence · {date}',
+  'composer.title': 'Start Deep Research',
+  'composer.subtitle': 'Describe the question; a reviewable, editable research plan is generated first.',
+  'composer.closeAria': 'Close',
+  'composer.question': 'Research question',
+  'composer.required': 'required',
+  'composer.questionPlaceholder': 'What would you like to research in depth?',
+  'composer.context': 'Add research context',
+  'composer.contextCount': ' · {count}',
+  'composer.contextHint': 'Goal, depth, constraints, and existing material',
+  'composer.goal': 'Research goal',
+  'composer.goalPlaceholder': 'What you want to end up with',
+  'composer.depth': 'Research depth',
+  'depth.quick': 'Quick',
+  'depth.standard': 'Standard',
+  'depth.deep': 'Deep',
+  'composer.constraints': 'Constraints & requirements',
+  'composer.constraintsPlaceholder': 'Time, region, source, or output constraints',
+  'composer.seed': 'Existing material',
+  'composer.seedPlaceholder': 'Paste existing notes or excerpts (optional)',
+  'composer.footer': 'Plan → Investigate → Report',
+  'workspace.back': 'Deep Research',
+  'workspace.delete': 'Delete',
+  'delete.title': 'Delete research',
+  'delete.body': '“{title}” will be removed from the library, including its plan and evidence.',
+  'delete.confirm': 'Delete',
+  'overlay.crashTitle': 'Deep Research failed to load',
+  'overlay.crashHint': 'This is usually caused by incomplete stored fields. Go back to the library and retry, or delete the project and start again.',
+  'overlay.crashBack': 'Back to library',
+  'stepper.plan': '1 Plan',
+  'stepper.investigate': '2 Investigate',
+  'stepper.report': '3 Report',
+  'plan.title': 'Research plan',
+  'plan.subtitle': 'Once confirmed, the orchestrator runs Scout / Evaluator per criterion, then writes the report from the verified pack.',
+  'plan.confirmed': 'Confirmed',
+  'plan.goal': 'Research goal',
+  'plan.constraints': 'Constraints',
+  'plan.criteria': 'Sub-questions & acceptance criteria',
+  'plan.dependsOn': 'Depends on',
+  'plan.dependsOnChip': 'Needs {label} first',
+  'plan.dependsOnHint': 'Runs only after the listed upstream sub-questions finish. When it starts, it gets a short summary of their confirmed findings.',
+  'plan.failedTitle': 'Research plan generation failed',
+  'plan.failedHint': 'The background planning agent did not submit a plan. Review the error below, then delete this project and create it again.',
+  'plan.retry': 'Retry planning',
+  'plan.stopped': 'Planning stopped',
+  'plan.stoppedHint': 'The run stopped safely. You can retry planning.',
+  'metric.subQuestions': 'Sub-questions',
+  'metric.evidence': 'Evidence',
+  'metric.searchBudget': 'Search budget',
+  'metric.fetchBudget': 'Fetch budget',
+  'metric.running': 'Running',
+  'metric.waiting': 'Waiting on deps',
+  'investigate.title': 'Investigation board',
+  'investigate.subtitle': 'Scouts fetch sources; the Evaluator accepts evidence. This page refreshes the live process.',
+  'investigate.running': 'Investigation in progress: Scout search / Evaluator review.',
+  'investigate.readyTitle': 'Investigation settled',
+  'investigate.readyHint': 'Sub-questions have landed. Partial and rejected criteria are recorded as limitations; the report comes next.',
+  'investigate.incompleteTitle': 'Investigation incomplete',
+  'investigate.incompleteHint': 'Some criteria are only partial or were rejected, and are recorded as limitations.',
+  'investigate.stop': 'Stop investigation',
+  'investigate.stopReason': 'The user stopped the investigation.',
+  'investigate.continue': 'Continue investigation',
+  'investigate.pausedHint': 'The run stopped safely. Completed plans, evidence, and checkpoints were preserved.',
+  'investigate.writeReport': 'Write report',
+  'investigate.dependsOn': 'Depends on {count} upstream question(s)',
+  'investigate.waitingOn': 'Waiting on: {list}',
+  'investigate.waitingStatus': 'Waiting on deps',
+  'investigate.questions': 'Sub-questions',
+  'investigate.scouts': 'Scouts',
+  'investigate.verifying': 'Verifying',
+  'investigate.tools': 'tools',
+  'investigate.handoff': 'Handoff',
+  'investigate.dependencySummary': 'Upstream clues',
+  'investigate.summary': 'Summary',
+  'investigate.warning': 'Warning',
+  'investigate.gaps': 'Gaps',
+  'investigate.draft': 'Draft',
+  'investigate.scoutDraft': 'Scout draft',
+  'investigate.evaluatorDraft': 'Evaluator draft',
+  'investigate.queued': 'Queued',
+  'investigate.queuedHint': 'The orchestrator dispatches Scouts by dependency and parallelism. Search and review appear on this card.',
+  'investigate.evaluating': 'Evaluator is reviewing candidates',
+  'investigate.evidenceCount': '{count} evidence',
+  'investigate.coverage': 'Coverage',
+  'investigate.toolsUsed': '{used}/{cap} tools',
+  'investigate.capReached': 'cap reached',
+  'investigate.activeNow': 'In progress',
+  'investigate.toolSearch': 'Search',
+  'investigate.toolFetch': 'Fetch',
+  'investigate.toolRead': 'Read source',
+  'coverage.missing': 'Missing',
+  'coverage.partial': 'Partial',
+  'coverage.covered': 'Covered',
+  'coverage.conflicted': 'Conflicted',
+  'coverage.blocked': 'Blocked',
+  'verify.pass': 'PASS',
+  'verify.warning': 'WARNING',
+  'verify.fail': 'FAIL',
+  'evidence.title': 'Source evidence',
+  'evidence.sourcesTitle': 'Sources',
+  'evidence.empty': 'The background research agent is finding sources. Saved evidence appears here automatically.',
+  'evidence.open': 'Open source',
+  'confidence.high': 'High',
+  'confidence.medium': 'Medium',
+  'confidence.low': 'Low',
+  'report.title': 'Synthesis report',
+  'report.subtitle': 'Write from verified evidence and cite sources in the report.',
+  'report.placeholder': 'Markdown research report…',
+  'report.limitations': 'Limitations & open questions',
+  'report.limitationsPlaceholder': 'One limitation per line',
+  'report.limitationsEmpty': 'No partially covered or rejected criteria.',
+  'limitation.partialFallback': 'Evidence is incomplete, so this criterion is only partially met.',
+  'limitation.blockedFallback': 'Verification rejected this criterion.',
+  'limitation.conflictedFallback': 'Sources disagree, so this criterion is still unresolved.',
+  'limitation.missingFallback': 'This criterion is still uncovered.',
+  'report.writing': 'The background research agent is synthesizing evidence and writing the report…',
+  'report.empty': 'No report has been generated yet.',
+  'report.retry': 'Retry report writing',
+  'planTemplate.define': 'Define the core question: {question}',
+  'planTemplate.defineCriteria': 'Clarify the answer scope, key concepts, and success criteria',
+  'planTemplate.search': 'Search and filter authoritative sources',
+  'planTemplate.searchCriteria': 'Obtain at least two independent, traceable sources',
+  'planTemplate.crossValidate': 'Cross-validate key conclusions',
+  'planTemplate.crossValidateCriteria': 'Identify consistent conclusions, conflicting information, and evidence gaps',
+  'planTemplate.synthesize': 'Synthesize evidence and produce a report',
+  'planTemplate.synthesizeCriteria': 'Cite sources and state limitations and uncertainty',
+  'phase.planning': 'Planning',
+  'phase.awaitingPlanConfirm': 'Awaiting confirmation',
+  'phase.investigating': 'Investigating',
+  'phase.readyForReport': 'Report ready',
+  'phase.incomplete': 'Partially complete',
+  'phase.writing': 'Writing',
+  'phase.done': 'Done',
+  'phase.failed': 'Failed',
+  'phase.aborted': 'Stopped',
+  'status.pending': 'Pending',
+  'status.running': 'Investigating',
+  'status.covered': 'Covered',
+  'status.partial': 'Partially covered',
+  'status.blocked': 'Blocked',
+  'status.failed': 'Failed',
+}

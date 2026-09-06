@@ -1,0 +1,110 @@
+# Skill Evaluation Report
+# Legacy static review; provenance repaired without rerunning subjective scores.
+
+eval_info:
+  skill_name: "da-voc-sentiment-analyzer"
+  skill_path: "skills/da-voc-sentiment-analyzer"
+  eval_date: "2026-04-10"
+  provenance_repaired_on: "2026-08-21"
+  schema_version: "1.1.0"
+  evaluator: "lute-skills-eval@2.0.0"
+  evidence_grade: "L1-static-manual"
+  source_type: "legacy_manual_review"
+  review_status: "provenance_repaired_not_rerun"
+
+scores:
+  overall: 88
+  status: "good"
+  threshold_check:
+    target: 85
+    passed: true
+
+  breakdown:
+    schema_compliance:
+      score: 85
+      weight: 20
+      weighted: 17.0
+      status: "good"
+    frontmatter_quality:
+      score: 88
+      weight: 25
+      weighted: 22.0
+      status: "good"
+    body_quality:
+      score: 82
+      weight: 30
+      weighted: 24.6
+      status: "good"
+    methodology_audit:
+      score: 78
+      weight: 15
+      weighted: 11.7
+      status: "good"
+    quality_gate:
+      score: 85
+      weight: 10
+      weighted: 8.5
+      status: "good"
+    directory_structure:
+      score: 100
+      weight: 5
+      weighted: 5.0
+      status: "excellent"
+
+issues:
+  schema_compliance:
+    - id: "S001"
+      severity: "warning"
+      field: "name"
+      message: "name与文件夹名不一致，manifest中为da-voc-sentiment-analyzer，但SKILL.md中为voc-sentiment-analyzer"
+      fix_type: "auto"
+      fix_action: "sync_name_in_skill_md"
+
+  frontmatter_quality:
+    - id: "F001"
+      severity: "info"
+      field: "description"
+      message: "description详细，包含触发条件和When Not to Use"
+      fix_type: "none"
+
+  body_quality:
+    - id: "B001"
+      severity: "info"
+      field: "content"
+      message: "内容完整，有痛点优先级和卖点提炼"
+      fix_type: "none"
+    - id: "B002"
+      severity: "warning"
+      field: "related_skills"
+      message: "相关Skills链接仍为旧名称（无前缀）"
+      fix_type: "auto"
+      fix_action: "update_skill_links"
+
+  methodology_audit:
+    - id: "M001"
+      severity: "info"
+      message: "VOC分析方法完整，有情感分布和痛点聚类"
+      fix_type: "none"
+
+  quality_gate:
+    []
+
+  directory_structure:
+    []
+
+optimization_plan:
+  auto_fixable:
+    - id: "S001"
+      action: "同步SKILL.md中的name与manifest.yaml一致"
+    - id: "B002"
+      action: "更新相关Skills链接为带前缀的新名称"
+
+  manual_review:
+    []
+
+  expected_improvement:
+    after_auto_fix: 88
+    after_all_fixes: 88
+
+status: "legacy_static_review"
+recommendation: "历史静态评分为88且与85分门槛一致；本次只修复 provenance，未重新评分，也不构成执行质量证据。"

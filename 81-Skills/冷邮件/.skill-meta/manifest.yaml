@@ -1,0 +1,29 @@
+skill:
+  name: 冷邮件
+  version: "1.1.0"
+  type: technique
+  parent_skill: mkt-main-hub
+  related_skills:
+    - mkt-email-sequence
+    - mkt-copywriting
+    - mkt-launch-strategy
+  triggers:
+    - 冷邮件
+    - B2B外联
+    - 销售开发
+    - cold outreach
+    - 跟进邮件
+  capabilities:
+    - 个性化冷邮件撰写
+    - 跟进序列设计
+    - 回复模板
+    - 外联策略制定
+  output_formats:
+    - text
+    - markdown
+  complexity: standard
+  metadata:
+    last_updated: "2026-09-03"
+    license: MIT
+    author: coreyhaines31
+    source: https://github.com/coreyhaines31/marketingskills

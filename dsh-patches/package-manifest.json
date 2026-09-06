@@ -1,0 +1,39 @@
+{
+  "name": "dsh-desktop-lute-bundle",
+  "version": "2.0.4",
+  "description": "DSH Desktop「完整打包」资产清单与排除清单（C 形态重打包依据）",
+  "include": {
+    "app": {
+      "path": "/Applications/DSH Desktop.app",
+      "note": "补丁已在 Contents/Resources/app.asar.unpacked（桌面 asarUnpack 官方机制，非 hack）；asar 仅 4.9M，unpacked 267M",
+      "portable": "macOS 固定安装路径 + adhoc 签名（打包后需重新授权 TCC：录屏/辅助功能）"
+    },
+    "profile": {
+      "path": "~/.dsh/profiles/desktop",
+      "files": ["package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", "cordis.patch.yml", "apply-patches.mjs"],
+      "node_modules": "474M，可经 pnpm install 按 lockfile 重装（不打包）",
+      "deps_note": "8 个 file: 依赖指向 ~/project/Magpie-Horch（已改相对路径 ../../../project/Magpie-Horch/...）"
+    },
+    "vendors": {
+      "root": "~/project/Magpie-Horch",
+      "dirs": ["dsh-memory-local", "dsh-deepresearch-local", "dsh-theme-local", "dsh-root-brand-local", "dsh-agent-team-gui-local", "dsh-noema-local", "dsh-preset-lint-local", "dsh-patches", "archify-local"],
+      "note": "真实 fork 源，随包复制；_doc-notes 为归档笔记可选"
+    },
+    "skills": ["~/.dsh/skills", "~/.agents/skills"],
+    "presets": "~/.dsh/.agent-presets（7 个，customSkillDirs 用 baseUrl 相对，可移植）",
+    "config": {
+      "include": "settings.yaml（需脱敏 apiKeyEnv 引用）",
+      "exclude": ".credentials.yaml、.modlens/config.json（凭据）"
+    }
+  },
+  "exclude": {
+    "data": ["~/.dsh/sessions", "~/.dsh/storages", "~/.dsh/profiles/desktop/data", "~/.agent-memory"],
+    "credentials": ["~/.dsh/.credentials.yaml", "~/.modlens/config.json"],
+    "note": "数据/凭据/记忆库不随包（用户决策）；需迁移时单独导出"
+  },
+  "engines": {
+    "lingshu_aeis": "~/.dsh/aeis-venv（43M Python venv，绝对路径 shebang 不可移植）→ 目标机 pip 重建，脚本 aeis-venv-rebuild.sh",
+    "noema": "Rust 二进制经 optionalDependencies 平台包（dsh-noema-darwin-arm64 等）→ 目标机 npm 自动重装"
+  },
+  "replay_scripts": ["verify-patches.sh(23锚点)", "brand-replay.sh(11锚点)", "apply-patches.mjs(9条)", "chatui-apply-fixes.sh", "lint-preset.mjs"]
+}

@@ -1,0 +1,1601 @@
+{
+  "schema": "routing-benchmark-full.v1",
+  "cases": [
+    {
+      "query": "帮我1688 平台选品寻源与供应商对接（需外部工具接入）",
+      "expect": "1688-sourcing",
+      "cluster": "sourcing",
+      "difficulty": "easy",
+      "title": "1688采购"
+    },
+    {
+      "query": "帮我阿里等 B2B 平台搜品比价，锁定供应商与工厂",
+      "expect": "product-supplier-sourcing",
+      "cluster": "sourcing",
+      "difficulty": "easy",
+      "title": "产品供应商寻源"
+    },
+    {
+      "query": "帮我多供应商代发：订单路由、库存同步与利润跟踪",
+      "expect": "dropshipping-supplier-integrator",
+      "cluster": "sourcing",
+      "difficulty": "easy",
+      "title": "代发货供应商集成"
+    },
+    {
+      "query": "帮我按季度评分卡跟踪供应商绩效与交期表现",
+      "expect": "supplier-performance-manager",
+      "cluster": "sourcing",
+      "difficulty": "easy",
+      "title": "供应商绩效管理"
+    },
+    {
+      "query": "帮我五项可信信号评估海外供应商可靠性",
+      "expect": "aliexpress-supplier-evaluator",
+      "cluster": "sourcing",
+      "difficulty": "easy",
+      "title": "速卖通供应商评估器"
+    },
+    {
+      "query": "帮我B2B 谈判策略：锚定、让步、BATNA 与合同条款",
+      "expect": "sales-negotiator",
+      "cluster": "sourcing",
+      "difficulty": "easy",
+      "title": "销售谈判专家"
+    },
+    {
+      "query": "帮我分析品类中哪些属性组合真正贡献销量，判断空白组合是伪机会还是真需求机会。",
+      "expect": "product-attribute-analyzer",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "产品属性分析器"
+    },
+    {
+      "query": "帮我从真实生活场景、身份迁移和反直觉时刻中发现新产品机会。",
+      "expect": "scenario-driven-product-scout",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "场景选品侦察"
+    },
+    {
+      "query": "帮我拆解 Amazon 畅销款，找出头部套路、有效规律和未解决的遗憾空间，生成差异化窗口报告。",
+      "expect": "bestseller-pattern-decoder",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "畅销款规律解码器"
+    },
+    {
+      "query": "帮我当用户需要对一家具名公司做公司级调研、尽职调查或融资估值核查时使用：给出公司画像、融资历程、估值逻辑、团队治理、业务",
+      "expect": "company-research",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "公司调研"
+    },
+    {
+      "query": "帮我多层情报与评论挖掘，找市场空白与战略优势",
+      "expect": "competitor-deep-analysis",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "竞品深度分析"
+    },
+    {
+      "query": "帮我波特五力等框架绘制市场竞品格局",
+      "expect": "competitive-landscape",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "竞争格局分析"
+    },
+    {
+      "query": "帮我整合多平台用户反馈（Amazon评论、Reddit、TikTok、YouTube、Facebook等），生成可执行的",
+      "expect": "customer-voice-analyzer",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "客户之声分析器"
+    },
+    {
+      "query": "帮我当用户需要从公开或授权的商品详情页抽取并校验 SKU 级跨境电商数据时使用。",
+      "expect": "cross-border-selection",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "跨境选品"
+    },
+    {
+      "query": "帮我大规模评论分析：共性问题与改进优先级",
+      "expect": "review-analyst-agent",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "评论分析助手"
+    },
+    {
+      "query": "帮我批量评论聚合摘要，提炼要点与结论（需外部工具）",
+      "expect": "review-summarizer",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "评论摘要生成器"
+    },
+    {
+      "query": "帮我判断品类或子趋势应该立即进入、延后观察还是避免跟进，结合公开趋势与私有先行指标。",
+      "expect": "trend-stage-timing-analyzer",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "趋势时机分析器"
+    },
+    {
+      "query": "帮我个人职业背景、履历与公开信息调研",
+      "expect": "people-research",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "人物背景调研"
+    },
+    {
+      "query": "帮我社交互动关系图谱与社群聚类",
+      "expect": "social-network-mapper",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "社交关系图谱分析"
+    },
+    {
+      "query": "帮我为 Momcozy 在 Amazon 与 Shopify DTC 之间做新品方向判断，考虑品牌协同、复购潜力、渠道打",
+      "expect": "market-insight-product-selection",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "市场洞察选品"
+    },
+    {
+      "query": "帮我新品方向 Go/No-Go 裁决审计（81 版内容待接入）",
+      "expect": "market-viability-logic-auditor",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "市场可行性审计"
+    },
+    {
+      "query": "帮我行业→消费者→选品→供应商的循证选品流程",
+      "expect": "product-selection",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "选品分析"
+    },
+    {
+      "query": "帮我亚马逊平台数据查询与市场情报（需外部工具）",
+      "expect": "alibaba-amazon-market-intel",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "亚马逊数据查询"
+    },
+    {
+      "query": "帮我组织架构、汇报关系与员工画像调研",
+      "expect": "org-structure-research",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "组织架构调研"
+    },
+    {
+      "query": "帮我Jungle Scout 类目与商品深度分析（需 Jungle Scout）",
+      "expect": "jungle-scout-deep-dive-analyzer",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "Jungle Scout深度分析器"
+    },
+    {
+      "query": "帮我视频生成提示词统一路由：场景、分镜与重生成",
+      "expect": "video-prompt-guide",
+      "cluster": "design",
+      "difficulty": "easy",
+      "title": "视频生成指南"
+    },
+    {
+      "query": "帮我AI 生图/修图提示词与工具路由",
+      "expect": "image-prompt-guide",
+      "cluster": "design",
+      "difficulty": "easy",
+      "title": "图像生成指南"
+    },
+    {
+      "query": "帮我为 Momcozy 生成围绕真实微时刻、单手交互、隐蔽佩戴的新品概念方案。",
+      "expect": "ai-product-designer",
+      "cluster": "design",
+      "difficulty": "medium",
+      "title": "AI产品设计师"
+    },
+    {
+      "query": "帮我Higgsfield 文生图、图生视频与进度管理",
+      "expect": "higgsfield-guide",
+      "cluster": "design",
+      "difficulty": "easy",
+      "title": "Higgsfield AI 创作"
+    },
+    {
+      "query": "帮我爆款内容拆解：结构、钩子与复用套路（需外部工具）",
+      "expect": "content-breakdown",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "爆款内容拆解"
+    },
+    {
+      "query": "帮我预发布 waitlist、分级优先与多渠道发布策划",
+      "expect": "product-launch-planner",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "产品发布规划器"
+    },
+    {
+      "query": "帮我产品定位、卖点与营销背景文档沉淀",
+      "expect": "product-marketing-context",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "产品营销背景"
+    },
+    {
+      "query": "帮我产品规格与客户洞察合成营销简报",
+      "expect": "product-marketing-brief",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "产品营销简报"
+    },
+    {
+      "query": "帮我营销技能包主协调器，整合ad-creative、付费优化、social-content、邮件营销、增长策略等营销技能",
+      "expect": "ecommerce-marketing",
+      "cluster": "content-gtm",
+      "difficulty": "medium",
+      "title": "营销主控"
+    },
+    {
+      "query": "帮我氛围式营销内容快速生成、测试与迭代",
+      "expect": "vibe-marketing",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "氛围营销"
+    },
+    {
+      "query": "帮我受众、内容支柱、渠道与选题策略",
+      "expect": "content-strategy",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "内容策略"
+    },
+    {
+      "query": "帮我多平台社媒内容一键发布（需外部工具）",
+      "expect": "social-media-publisher",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "社交媒体发布器"
+    },
+    {
+      "query": "帮我LinkedIn/X/IG/TikTok 平台原生内容创作与复用",
+      "expect": "social-media-content-creator",
+      "cluster": "content-gtm",
+      "difficulty": "medium",
+      "title": "社交媒体内容创作者"
+    },
+    {
+      "query": "帮我网红合作端到端管理与多渠道 ROI 衡量",
+      "expect": "influencer-campaign-manager",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "网红营销管理"
+    },
+    {
+      "query": "帮我撰写营销文案，覆盖销售文案、品牌故事、产品描述（含电商详情页/Listing文案）和Landing Page文案。",
+      "expect": "copywriting",
+      "cluster": "content-gtm",
+      "difficulty": "medium",
+      "title": "营销文案"
+    },
+    {
+      "query": "帮我面向 CES 算法的小红书种草内容创作",
+      "expect": "xiaohongshu-content-creator",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "小红书内容创作助手"
+    },
+    {
+      "query": "帮我新品上市分阶段发布策略（81 版内容待接入）",
+      "expect": "launch-strategy",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "上市策略"
+    },
+    {
+      "query": "帮我140+ 已验证打法，按品类提供增长创意",
+      "expect": "marketing-ideas",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "营销创意"
+    },
+    {
+      "query": "帮我70+ 心理模型驱动转化（稀缺、锚定、互惠）",
+      "expect": "marketing-psychology",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "营销心理学"
+    },
+    {
+      "query": "帮我Instagram 内容与投放运营（需外部工具）",
+      "expect": "instagram-marketing",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "Instagram营销"
+    },
+    {
+      "query": "帮我Remotion 代码化视频最佳实践（需外部工具）",
+      "expect": "remotion",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "Remotion 最佳实践"
+    },
+    {
+      "query": "帮我多语种产品描述批量生成（需外部工具）",
+      "expect": "product-description-generator",
+      "cluster": "seo-ads",
+      "difficulty": "easy",
+      "title": "产品描述生成器"
+    },
+    {
+      "query": "帮我模板页+自有数据规模化长尾流量",
+      "expect": "programmatic-seo-strategist",
+      "cluster": "seo-ads",
+      "difficulty": "easy",
+      "title": "程序化SEO策略"
+    },
+    {
+      "query": "帮我优化商品页/文章页的关键词密度、Title/Meta 与内链，用于提升关键词排名与内容质量。",
+      "expect": "ecommerce-seo-optimizer",
+      "cluster": "seo-ads",
+      "difficulty": "medium",
+      "title": "SEO内容优化"
+    },
+    {
+      "query": "帮我SERP 排名因素与意图信号深度分析",
+      "expect": "serp-ranking-analyzer",
+      "cluster": "seo-ads",
+      "difficulty": "easy",
+      "title": "搜索结果排名分析"
+    },
+    {
+      "query": "帮我优化亚马逊商品 Listing 的标题、卖点与关键词布局，用于提升搜索可见性与转化。",
+      "expect": "amz-product-optimizer",
+      "cluster": "seo-ads",
+      "difficulty": "medium",
+      "title": "亚马逊Listing优化"
+    },
+    {
+      "query": "帮我亚马逊热词挖掘与词频分析（需外部工具）",
+      "expect": "amz-hot-keywords",
+      "cluster": "seo-ads",
+      "difficulty": "easy",
+      "title": "亚马逊热门关键词"
+    },
+    {
+      "query": "帮我为 Amazon 母婴产品创建或重写 Listing，围绕购买心理、决策中断点和品牌优势提升转化。",
+      "expect": "amazon-listing-expert",
+      "cluster": "seo-ads",
+      "difficulty": "medium",
+      "title": "亚马逊Listing专家"
+    },
+    {
+      "query": "帮我诊断并优化 Amazon PPC / Amazon Ads，降低 ACoS、提升 ROAS 并识别浪费花费。",
+      "expect": "amazon-ppc-campaign-manager",
+      "cluster": "seo-ads",
+      "difficulty": "medium",
+      "title": "亚马逊PPC分析"
+    },
+    {
+      "query": "帮我着陆页、邮件与素材 A/B 实验设计与实施",
+      "expect": "ab-test-setup",
+      "cluster": "seo-ads",
+      "difficulty": "easy",
+      "title": "A/B测试设置"
+    },
+    {
+      "query": "帮我优化 Etsy Listing，将 Etsy 作为品牌入口、定制化试验场和 Pinterest 协同流量通道。",
+      "expect": "etsy-seo-optimizer",
+      "cluster": "seo-ads",
+      "difficulty": "medium",
+      "title": "Etsy优化器"
+    },
+    {
+      "query": "帮我Google Merchant Center 信息源搭建优化",
+      "expect": "google-shopping-feed-optimizer",
+      "cluster": "seo-ads",
+      "difficulty": "medium",
+      "title": "Google 购物信息源优化器"
+    },
+    {
+      "query": "帮我高价值关键词、意图分类与主题簇挖掘",
+      "expect": "seo-keyword-research",
+      "cluster": "seo-ads",
+      "difficulty": "easy",
+      "title": "SEO关键词研究"
+    },
+    {
+      "query": "帮我分析竞品SEO策略、关键词差距与反向链接，用于制定超越策略。",
+      "expect": "seo-competitor-analysis",
+      "cluster": "seo-ads",
+      "difficulty": "medium",
+      "title": "SEO竞品分析"
+    },
+    {
+      "query": "帮我用 Lighthouse、PageSpeed Insights 或自定义爬虫诊断网站结构、速度、移动适配与索引问题。",
+      "expect": "seo-page-audit",
+      "cluster": "seo-ads",
+      "difficulty": "medium",
+      "title": "SEO技术审计"
+    },
+    {
+      "query": "帮我创意优先的 TikTok 投放、Spark Ads 与竞价",
+      "expect": "tiktok-ads-strategy",
+      "cluster": "seo-ads",
+      "difficulty": "easy",
+      "title": "TikTok广告策略"
+    },
+    {
+      "query": "帮我拣货、打包、打单仓库作业标准化",
+      "expect": "warehouse-fulfillment-workflow",
+      "cluster": "store-ops",
+      "difficulty": "easy",
+      "title": "仓库发货工作流"
+    },
+    {
+      "query": "帮我Cookie 同意、SAR 与删除权合规落地",
+      "expect": "ecommerce-gdpr-compliance",
+      "cluster": "store-ops",
+      "difficulty": "easy",
+      "title": "电商 GDPR 合规管理"
+    },
+    {
+      "query": "帮我本地货币定价、自动汇率与取整",
+      "expect": "multi-currency-checkout",
+      "cluster": "store-ops",
+      "difficulty": "easy",
+      "title": "多币种结账"
+    },
+    {
+      "query": "帮我多仓路由、拆单与缺货队列引擎",
+      "expect": "multi-location-order-router",
+      "cluster": "store-ops",
+      "difficulty": "easy",
+      "title": "多仓库订单路由"
+    },
+    {
+      "query": "帮我Shopify/Amazon/eBay 库存与订单统一",
+      "expect": "multichannel-inventory-sync",
+      "cluster": "store-ops",
+      "difficulty": "easy",
+      "title": "多渠道库存同步"
+    },
+    {
+      "query": "帮我税务合规 PDF 发票与顺序编号",
+      "expect": "invoice-generator",
+      "cluster": "store-ops",
+      "difficulty": "easy",
+      "title": "发票生成器"
+    },
+    {
+      "query": "帮我欺诈评分+证据自动化预防处理拒付",
+      "expect": "chargeback-dispute-manager",
+      "cluster": "store-ops",
+      "difficulty": "easy",
+      "title": "拒付与争议管理"
+    },
+    {
+      "query": "帮我Meta/TikTok/Pinterest 商品目录与库存同步",
+      "expect": "social-commerce-sync",
+      "cluster": "store-ops",
+      "difficulty": "medium",
+      "title": "社交电商渠道同步"
+    },
+    {
+      "query": "帮我按类目设计退货窗口、补货费与规则",
+      "expect": "return-policy-designer",
+      "cluster": "store-ops",
+      "difficulty": "easy",
+      "title": "退货政策设计师"
+    },
+    {
+      "query": "帮我Klarna/Afterpay/Affirm 分期接入",
+      "expect": "buy-now-pay-later-setup",
+      "cluster": "store-ops",
+      "difficulty": "easy",
+      "title": "先买后付设置"
+    },
+    {
+      "query": "帮我品牌注册与 IP 工具打击跟卖假货",
+      "expect": "amazon-brand-protection",
+      "cluster": "store-ops",
+      "difficulty": "easy",
+      "title": "亚马逊品牌保护"
+    },
+    {
+      "query": "帮我IPI 分数、补货限额与仓储费管理",
+      "expect": "amazon-fba-inventory-optimizer",
+      "cluster": "store-ops",
+      "difficulty": "easy",
+      "title": "亚马逊FBA库存优化器"
+    },
+    {
+      "query": "帮我做转化率优化（CRO），覆盖着陆页优化、转化漏斗分析、A/B测试方案和用户行为优化。",
+      "expect": "optimize-ecommerce-page-conversion",
+      "cluster": "store-ops",
+      "difficulty": "medium",
+      "title": "转化率优化"
+    },
+    {
+      "query": "帮我风险评分、3DS 与人工审核防欺诈",
+      "expect": "payment-fraud-detector",
+      "cluster": "store-ops",
+      "difficulty": "easy",
+      "title": "支付欺诈检测器"
+    },
+    {
+      "query": "帮我自助退换门户、动态路由与自动退款",
+      "expect": "returns-exchange-automator",
+      "cluster": "store-ops",
+      "difficulty": "easy",
+      "title": "自动兑换处理"
+    },
+    {
+      "query": "帮我Printify 全流程：设计、建 Listing、发布推广",
+      "expect": "etsy-pod-automation",
+      "cluster": "store-ops",
+      "difficulty": "medium",
+      "title": "Etsy按需印刷自动化"
+    },
+    {
+      "query": "帮我TikTok Shop 开店：目录、订单与达人计划",
+      "expect": "tiktok-shop-setup",
+      "cluster": "store-ops",
+      "difficulty": "easy",
+      "title": "TikTok店铺设置"
+    },
+    {
+      "query": "帮我HS 编码与进口关税查询（TurtleClassify）",
+      "expect": "tariff-search",
+      "cluster": "shipping-tariff",
+      "difficulty": "easy",
+      "title": "关税与HS编码查询"
+    },
+    {
+      "query": "帮我当用户需要规划运输路线、平衡成本与时效、选择承运商或做关务合规时使用。",
+      "expect": "international-shipping-customs",
+      "cluster": "shipping-tariff",
+      "difficulty": "medium",
+      "title": "物流优化"
+    },
+    {
+      "query": "帮我全球销售税/VAT/GST 计算与申报",
+      "expect": "sales-tax-vat-automator",
+      "cluster": "shipping-tariff",
+      "difficulty": "easy",
+      "title": "销售税与增值税自动化工具"
+    },
+    {
+      "query": "帮我DCF、敏感性、蒙特卡洛财务建模套件",
+      "expect": "creating-financial-models",
+      "cluster": "analytics-finance",
+      "difficulty": "easy",
+      "title": "创建财务模型"
+    },
+    {
+      "query": "帮我损益表、资产负债表与现金流仪表盘",
+      "expect": "ecommerce-financial-dashboard",
+      "cluster": "analytics-finance",
+      "difficulty": "easy",
+      "title": "电商财务仪表盘"
+    },
+    {
+      "query": "帮我营收、AOV、转化率与渠道表现追踪",
+      "expect": "ecommerce-sales-dashboard",
+      "cluster": "analytics-finance",
+      "difficulty": "easy",
+      "title": "电商销售仪表板"
+    },
+    {
+      "query": "帮我滚动 12 个月营收/营销/库存预算",
+      "expect": "ecommerce-budget-forecaster",
+      "cluster": "analytics-finance",
+      "difficulty": "easy",
+      "title": "电商预算预测器"
+    },
+    {
+      "query": "帮我按需求、竞品价与库存自动调价",
+      "expect": "dynamic-pricing-engine",
+      "cluster": "analytics-finance",
+      "difficulty": "easy",
+      "title": "动态定价引擎"
+    },
+    {
+      "query": "帮我当用户需要进行库存预测、安全库存计算、补货规划或大促备货时使用。",
+      "expect": "inventory-demand-forecaster",
+      "cluster": "analytics-finance",
+      "difficulty": "medium",
+      "title": "库存预测"
+    },
+    {
+      "query": "帮我按产品/渠道/细分核算毛利与净利",
+      "expect": "profit-margin-analyzer",
+      "cluster": "analytics-finance",
+      "difficulty": "easy",
+      "title": "利润率分析器"
+    },
+    {
+      "query": "帮我付费墙时机、文案与定价结构优化",
+      "expect": "freemium-upgrade-optimizer",
+      "cluster": "analytics-finance",
+      "difficulty": "easy",
+      "title": "免费转付费转化优化"
+    },
+    {
+      "query": "帮我浏览器会话读取淘宝生意参谋周报",
+      "expect": "sycm-analysis-skill",
+      "cluster": "analytics-finance",
+      "difficulty": "easy",
+      "title": "生意参谋分析"
+    },
+    {
+      "query": "帮我全渠道投放 ROAS 归因与预算再分配",
+      "expect": "marketing-roas-analyzer",
+      "cluster": "analytics-finance",
+      "difficulty": "easy",
+      "title": "营销ROAS分析"
+    },
+    {
+      "query": "帮我现金流折现估值：内在价值与目标价",
+      "expect": "dcf-valuation",
+      "cluster": "analytics-finance",
+      "difficulty": "easy",
+      "title": "DCF估值"
+    },
+    {
+      "query": "帮我多平台评论自动采集与多维分析",
+      "expect": "product-review-intelligence-collector",
+      "cluster": "crm-retention",
+      "difficulty": "easy",
+      "title": "产品评论智能采集"
+    },
+    {
+      "query": "帮我设计邮件营销序列自动化，覆盖欢迎序列、弃购挽回、复购激活和节日促销。",
+      "expect": "email-automation-flow-builder",
+      "cluster": "crm-retention",
+      "difficulty": "medium",
+      "title": "邮件序列"
+    },
+    {
+      "query": "帮我BFCM、大促旺季营销编排自动化",
+      "expect": "seasonal-campaign-automator",
+      "cluster": "crm-retention",
+      "difficulty": "easy",
+      "title": "季节性活动自动化"
+    },
+    {
+      "query": "帮我地址补全、快捷支付与字段精简",
+      "expect": "checkout-flow-optimizer",
+      "cluster": "crm-retention",
+      "difficulty": "easy",
+      "title": "结账流程优化器"
+    },
+    {
+      "query": "帮我工单对接订单数据与 VIP 路由",
+      "expect": "helpdesk-order-integration",
+      "cluster": "crm-retention",
+      "difficulty": "easy",
+      "title": "客服与订单系统集成"
+    },
+    {
+      "query": "帮我行为触发+分层激励防流失",
+      "expect": "customer-retention-automator",
+      "cluster": "crm-retention",
+      "difficulty": "easy",
+      "title": "客户留存自动化器"
+    },
+    {
+      "query": "帮我历史与预测 LTV 驱动留存召回",
+      "expect": "customer-ltv-calculator",
+      "cluster": "crm-retention",
+      "difficulty": "easy",
+      "title": "客户生命周期价值计算器"
+    },
+    {
+      "query": "帮我多阶段召回流失客户并分层折扣",
+      "expect": "customer-winback-automator",
+      "cluster": "crm-retention",
+      "difficulty": "easy",
+      "title": "客户赢回自动化"
+    },
+    {
+      "query": "帮我RFM 分群与队列留存网格",
+      "expect": "customer-rfm-analyzer",
+      "cluster": "crm-retention",
+      "difficulty": "easy",
+      "title": "客户RFM分析器"
+    },
+    {
+      "query": "帮我三步式购后评价请求与激励",
+      "expect": "review-request-automator",
+      "cluster": "crm-retention",
+      "difficulty": "easy",
+      "title": "评审请求自动处理"
+    },
+    {
+      "query": "帮我邮件+短信序列赢回弃购用户",
+      "expect": "cart-abandonment-recovery",
+      "cluster": "crm-retention",
+      "difficulty": "easy",
+      "title": "弃购挽回"
+    },
+    {
+      "query": "帮我七阶段生命周期个性化触达",
+      "expect": "lifecycle-marketing-automator",
+      "cluster": "crm-retention",
+      "difficulty": "easy",
+      "title": "全生命周期营销自动化"
+    },
+    {
+      "query": "帮我推荐链接、分级激励与防作弊",
+      "expect": "referral-program-builder",
+      "cluster": "crm-retention",
+      "difficulty": "easy",
+      "title": "推荐计划搭建"
+    },
+    {
+      "query": "帮我折扣码生成、限额与有效期管理",
+      "expect": "coupon-discount-manager",
+      "cluster": "crm-retention",
+      "difficulty": "easy",
+      "title": "优惠券折扣管理器"
+    },
+    {
+      "query": "帮我数量折扣、买赠与购物车促销",
+      "expect": "discount-promotion-engine",
+      "cluster": "crm-retention",
+      "difficulty": "easy",
+      "title": "折扣促销引擎"
+    },
+    {
+      "query": "帮我积分+VIP 分层提升留存与 LTV",
+      "expect": "loyalty-points-designer",
+      "cluster": "crm-retention",
+      "difficulty": "easy",
+      "title": "忠诚度积分设计"
+    },
+    {
+      "query": "帮我净账期、信用额度与自动开票",
+      "expect": "b2b-payment-terms-optimizer",
+      "cluster": "crm-retention",
+      "difficulty": "easy",
+      "title": "B2B付款账期优化"
+    },
+    {
+      "query": "帮我飞书多维表格、文档、日历、任务与邮件操作",
+      "expect": "lark-tools",
+      "cluster": "productivity",
+      "difficulty": "easy",
+      "title": "飞书工具"
+    },
+    {
+      "query": "帮我需求直达完整 HTML 网站/落地页",
+      "expect": "create-website",
+      "cluster": "productivity",
+      "difficulty": "easy",
+      "title": "快速建站"
+    },
+    {
+      "query": "帮我内部通报、周报与 FAQ 结构化模板",
+      "expect": "internal-comms",
+      "cluster": "productivity",
+      "difficulty": "easy",
+      "title": "内部沟通"
+    },
+    {
+      "query": "帮我共写文档、提案与技术规格的流程",
+      "expect": "doc-coauthoring",
+      "cluster": "productivity",
+      "difficulty": "easy",
+      "title": "文档协同编辑"
+    },
+    {
+      "query": "帮我DOCX 文档读写与格式处理（需外部工具）",
+      "expect": "docx",
+      "cluster": "productivity",
+      "difficulty": "easy",
+      "title": "DOCX 文档处理"
+    },
+    {
+      "query": "帮我Gmail 撰写、整理、管理与送达验证",
+      "expect": "gmail-assistant",
+      "cluster": "productivity",
+      "difficulty": "easy",
+      "title": "Gmail助手"
+    },
+    {
+      "query": "帮我PDF 解析与生成处理（需外部工具）",
+      "expect": "pdf",
+      "cluster": "productivity",
+      "difficulty": "easy",
+      "title": "PDF 文档处理"
+    },
+    {
+      "query": "帮我PPTX 演示文稿生成与编辑（需外部工具）",
+      "expect": "pptx",
+      "cluster": "productivity",
+      "difficulty": "easy",
+      "title": "PPTX 演示文稿处理"
+    },
+    {
+      "query": "帮我xlsx 表格读写与数据处理（需外部工具）",
+      "expect": "xlsx",
+      "cluster": "productivity",
+      "difficulty": "easy",
+      "title": "xlsx 表格处理"
+    },
+    {
+      "query": "帮我技能安装前权限与可疑模式安全审查",
+      "expect": "skill-vetter",
+      "cluster": "agent-tools",
+      "difficulty": "easy",
+      "title": "技能安全审查"
+    },
+    {
+      "query": "帮我按能力描述检索推荐 DSH 技能/插件（需外部工具）",
+      "expect": "skill-finder",
+      "cluster": "agent-tools",
+      "difficulty": "easy",
+      "title": "技能查找器"
+    },
+    {
+      "query": "帮我当用户需要创建 Agent Skill、把流程固化成可复用技能、或询问 Iron Law Testing / CSO",
+      "expect": "skill-creator",
+      "cluster": "agent-tools",
+      "difficulty": "medium",
+      "title": "Skill创建器"
+    },
+    {
+      "query": "帮我智能体从会话沉淀与自我学习（需外部工具）",
+      "expect": "self-improvement",
+      "cluster": "agent-tools",
+      "difficulty": "easy",
+      "title": "智能体自我学习"
+    },
+    {
+      "query": "帮我CLI 调用 Twitter/Gmail/Notion 等 MCP 工具",
+      "expect": "accio-mcp-cli",
+      "cluster": "agent-tools",
+      "difficulty": "medium",
+      "title": "MCP命令行网关"
+    },
+    {
+      "query": "帮我上线前亚马逊广告预算测算与 ACoS 场景",
+      "expect": "amazon-prelaunch-ad-budget",
+      "cluster": "other",
+      "difficulty": "easy",
+      "title": "上线前广告预算"
+    },
+    {
+      "query": "帮我拆解竞品 ASIN：营收、价格史与关键词",
+      "expect": "amazon-prelaunch-competitor-teardown",
+      "cluster": "other",
+      "difficulty": "easy",
+      "title": "上线前竞品拆解"
+    },
+    {
+      "query": "帮我验证亚马逊真实需求与首批订货量",
+      "expect": "amazon-prelaunch-demand-check",
+      "cluster": "other",
+      "difficulty": "easy",
+      "title": "上线前需求验证"
+    },
+    {
+      "query": "帮我把任意产品映射到亚马逊需求信号",
+      "expect": "amazon-prelaunch-demand-mirror",
+      "cluster": "other",
+      "difficulty": "easy",
+      "title": "上线前需求映射"
+    },
+    {
+      "query": "帮我搜索量数据构建关键词优化的 Listing",
+      "expect": "amazon-prelaunch-listing-builder",
+      "cluster": "other",
+      "difficulty": "easy",
+      "title": "上线前Listing构建"
+    },
+    {
+      "query": "帮我产品经济性测算与 GO/NO-GO 结论",
+      "expect": "amazon-prelaunch-margin-check",
+      "cluster": "other",
+      "difficulty": "easy",
+      "title": "上线前利润测算"
+    },
+    {
+      "query": "帮我发现快速上升的亚马逊利基与黑马品牌",
+      "expect": "amazon-prelaunch-trend-scout",
+      "cluster": "other",
+      "difficulty": "easy",
+      "title": "上线前趋势侦察"
+    },
+    {
+      "query": "帮我GA4/GTM 埋点、事件追踪与转化测量",
+      "expect": "analytics",
+      "cluster": "analytics-finance",
+      "difficulty": "easy",
+      "title": "数据分析与追踪"
+    },
+    {
+      "query": "帮我归因模型、MMM 与增量实验找真渠道",
+      "expect": "attribution",
+      "cluster": "analytics-finance",
+      "difficulty": "easy",
+      "title": "归因与转化分析"
+    },
+    {
+      "query": "帮我品牌审批、QA 与培训治理系统",
+      "expect": "brand-governance-os",
+      "cluster": "brand",
+      "difficulty": "easy",
+      "title": "品牌治理系统"
+    },
+    {
+      "query": "帮我品牌健康 KPI 框架与报告系统",
+      "expect": "brand-measurement-dashboard",
+      "cluster": "brand",
+      "difficulty": "easy",
+      "title": "品牌健康度量仪表盘"
+    },
+    {
+      "query": "帮我跨受众一致的品牌叙事模板",
+      "expect": "brand-narrative-playbook",
+      "cluster": "brand",
+      "difficulty": "easy",
+      "title": "品牌叙事手册"
+    },
+    {
+      "query": "帮我从现有内容和品牌素材中提取并定义品牌声音指南，帮助建立一致的品牌沟通风格。",
+      "expect": "brand-voice-glossary",
+      "cluster": "brand",
+      "difficulty": "medium",
+      "title": "品牌声音提取器"
+    },
+    {
+      "query": "帮我品牌平台翻译成多触点体验蓝图",
+      "expect": "experience-system-blueprint",
+      "cluster": "brand",
+      "difficulty": "easy",
+      "title": "品牌体验系统蓝图"
+    },
+    {
+      "query": "帮我营销活动策略、brief、KPI 与工作计划",
+      "expect": "campaign-planning",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "营销活动策划"
+    },
+    {
+      "query": "帮我跨渠道信息、节奏与度量统一",
+      "expect": "channel-integration",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "跨渠道整合"
+    },
+    {
+      "query": "帮我电商大促活动效果分析：输入活动期订单CSV，输出活动效果评估、ROI分析、流量转化分析、优化建议。",
+      "expect": "performance-tracking",
+      "cluster": "content-gtm",
+      "difficulty": "medium",
+      "title": "大促效果分析"
+    },
+    {
+      "query": "帮我联名伙伴筛选、联合活动策划与交叉推广",
+      "expect": "co-marketing",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "联合营销伙伴合作"
+    },
+    {
+      "query": "帮我竞品战卡模板：标签、分发与销售赋能",
+      "expect": "battlecard-library",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "竞品战卡库"
+    },
+    {
+      "query": "帮我竞品情报打包成高管级简报",
+      "expect": "executive-briefing-kit",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "竞品高管简报套件"
+    },
+    {
+      "query": "帮我市场与竞品信号登记、评分与行动派发",
+      "expect": "market-signal-tracker",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "市场信号追踪"
+    },
+    {
+      "query": "帮我赢单/输单定性与定量数据沉淀",
+      "expect": "win-loss-dataset",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "赢单输单数据集"
+    },
+    {
+      "query": "帮我多源竞品情报收集与分析，做定位、策略与市场进入决策",
+      "expect": "competitor-profiling",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "竞品情报"
+    },
+    {
+      "query": "帮我证明 ROI 的客户成功故事创作",
+      "expect": "case-studies",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "客户案例创作"
+    },
+    {
+      "query": "帮我编辑日历、审核与产能管理",
+      "expect": "editorial-ops",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "编辑运营"
+    },
+    {
+      "query": "帮我面向搜索的内容规划与写作",
+      "expect": "seo-writing",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "SEO 内容写作"
+    },
+    {
+      "query": "帮我把产品价值讲成有张力的故事",
+      "expect": "storytelling",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "故事化叙事"
+    },
+    {
+      "query": "帮我高管 POV、前瞻文章与主题演讲内容",
+      "expect": "thought-leadership",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "思想领导力内容"
+    },
+    {
+      "query": "帮我网络研讨会策划、制作与内容再利用",
+      "expect": "webinars",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "网络研讨会"
+    },
+    {
+      "query": "帮我研究型白皮书与技术深度内容",
+      "expect": "whitepapers",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "白皮书"
+    },
+    {
+      "query": "帮我网红找签 brief、合规与 ROI 全链路",
+      "expect": "influencer-marketing",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "网红营销全链路"
+    },
+    {
+      "query": "帮我调研产物治理、检索与复用",
+      "expect": "insights-repository-kit",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "洞察库治理"
+    },
+    {
+      "query": "帮我TAM/SAM/SOM 建模与情景推演",
+      "expect": "market-scenario-modeler",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "市场情景建模（TAM/SAM/SOM）"
+    },
+    {
+      "query": "帮我调研招募、排期、同意与激励运营",
+      "expect": "participant-operations-hub",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "调研参与者运营"
+    },
+    {
+      "query": "帮我调研项目立项模板与检查清单",
+      "expect": "research-brief-blueprint",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "调研简报蓝图"
+    },
+    {
+      "query": "帮我联名项目、MDF 与伙伴合规治理",
+      "expect": "co-marketing-governance",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "联合营销治理"
+    },
+    {
+      "query": "帮我联合方案、集成与市场进入文档",
+      "expect": "joint-solution-blueprint",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "联合方案蓝图"
+    },
+    {
+      "query": "帮我伙伴版图、覆盖与协同可视化",
+      "expect": "partner-ecosystem-map",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "伙伴生态地图"
+    },
+    {
+      "query": "帮我伙伴营收追踪、归因与加速",
+      "expect": "partner-revenue-desk",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "伙伴营收台"
+    },
+    {
+      "query": "帮我危机预批工作流、审批与响应手册",
+      "expect": "crisis-playbooks",
+      "cluster": "pr",
+      "difficulty": "easy",
+      "title": "危机公关手册"
+    },
+    {
+      "query": "帮我记者研究、分层与维护资料库",
+      "expect": "media-database",
+      "cluster": "pr",
+      "difficulty": "easy",
+      "title": "媒体资料库"
+    },
+    {
+      "query": "帮我信息屋、关键声明与证明点体系",
+      "expect": "messaging-frameworks",
+      "cluster": "pr",
+      "difficulty": "easy",
+      "title": "公关信息框架"
+    },
+    {
+      "query": "帮我媒体关系、记者拓展与播客预热",
+      "expect": "public-relations",
+      "cluster": "pr",
+      "difficulty": "easy",
+      "title": "公关与媒体关系"
+    },
+    {
+      "query": "帮我批量生成社交媒体内容，支持Instagram、Facebook、LinkedIn、Twitter/X、TikTok。",
+      "expect": "social-content",
+      "cluster": "social-ops",
+      "difficulty": "medium",
+      "title": "社媒内容"
+    },
+    {
+      "query": "帮我社媒日历、路线图、社区互动与舆情洞察",
+      "expect": "social-operations",
+      "cluster": "social-ops",
+      "difficulty": "easy",
+      "title": "社媒运营与洞察"
+    },
+    {
+      "query": "帮我优化AI搜索可见性、Product Schema 与 AI Shopping 占位，用于生成式引擎时代的SEO。",
+      "expect": "geo-optimizer",
+      "cluster": "seo-ads",
+      "difficulty": "medium",
+      "title": "GEO优化器"
+    },
+    {
+      "query": "帮我规划并执行产品上市与市场扩张的 Go-to-Market 战略。",
+      "expect": "gtm-strategy-planning",
+      "cluster": "content-gtm",
+      "difficulty": "medium",
+      "title": "GTM战略规划"
+    },
+    {
+      "query": "帮我用 Jobs-to-be-Done 框架分析用户任务、购买动机、痛点与产品机会。",
+      "expect": "jtbd-analyzer",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "JTBD分析器"
+    },
+    {
+      "query": "帮我当用户需要追踪 Cursor、Claude Code、Claude Code Skills 及相邻主题（MCP、Ag",
+      "expect": "llm-tech-research",
+      "cluster": "skill-engineering",
+      "difficulty": "medium",
+      "title": "LLM技术调研"
+    },
+    {
+      "query": "帮我当用户需要按 MECE 原则从文本中提取结构化知识单元（SKU）、保证互斥且完备时使用。",
+      "expect": "mece-knowledge-extractor",
+      "cluster": "knowledge-engineering",
+      "difficulty": "medium",
+      "title": "MECE知识提取器"
+    },
+    {
+      "query": "帮我统筹技术审计、内容优化、竞品分析、multilingual-seo与GEO五大模块，为跨境电商独立站提供完整SEO整",
+      "expect": "seo-controller",
+      "cluster": "seo-ads",
+      "difficulty": "medium",
+      "title": "SEO主控"
+    },
+    {
+      "query": "帮我读取 lute-skills-eval 生成的结构化评估报告，执行自动修复和人机协作优化。",
+      "expect": "skill-optimizer",
+      "cluster": "skill-engineering",
+      "difficulty": "medium",
+      "title": "Skill优化器"
+    },
+    {
+      "query": "帮我当用户需要管理多个 Skills、按项目分组切换、解决上下文污染，或提及「Skill管理」「项目配置」「Skill切",
+      "expect": "skill-family-manager",
+      "cluster": "skill-engineering",
+      "difficulty": "medium",
+      "title": "Skill家族管理"
+    },
+    {
+      "query": "帮我当用户需要检测 Skill 目录结构问题或执行目录结构自动修复时使用，支持单 Skill 和批量模式。",
+      "expect": "skill-structure-doctor",
+      "cluster": "skill-engineering",
+      "difficulty": "medium",
+      "title": "Skill结构医生"
+    },
+    {
+      "query": "帮我当用户需要对 Skill 做质量评估、六维度评分、schema 合规检查、routing quality 诊断或生成",
+      "expect": "skill-evaluator",
+      "cluster": "skill-engineering",
+      "difficulty": "medium",
+      "title": "Skill评估师"
+    },
+    {
+      "query": "帮我分析客户评价以提取痛点、情感模式与可执行洞察。",
+      "expect": "voc-sentiment-analyzer",
+      "cluster": "research-selection",
+      "difficulty": "easy",
+      "title": "VOC情感分析器"
+    },
+    {
+      "query": "帮我用 Sorftime 数据做亚马逊类目与商品深度调研，辅助选品验证。",
+      "expect": "amazon-sorftime-research",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "亚马逊Sorftime调研"
+    },
+    {
+      "query": "帮我监控亚马逊竞品价格、促销与 Listing 变更，用于快速应对市场变化。",
+      "expect": "amazon-competitor-monitor",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "亚马逊竞品监控"
+    },
+    {
+      "query": "帮我基于产品与市场数据生成深度分析报告，提供进入决策、情景模拟和优先动作备忘录。",
+      "expect": "product-data-deep-analysis",
+      "cluster": "ecommerce-analytics",
+      "difficulty": "medium",
+      "title": "产品数据深度分析"
+    },
+    {
+      "query": "帮我用多维选品矩阵做系统化产品调研与机会评估，支撑数据驱动的选品决策。",
+      "expect": "product-research-matrix",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "产品调研矩阵"
+    },
+    {
+      "query": "帮我审计并优化多平台付费广告账户，覆盖预算分配、出价策略、受众优化和 ROAS 提升。",
+      "expect": "paid-advertising",
+      "cluster": "seo-ads",
+      "difficulty": "medium",
+      "title": "付费广告"
+    },
+    {
+      "query": "帮我当用户需要做 1688 供应商背景调查、验厂评估与准入决策时使用，输出供应商画像与风险建议。",
+      "expect": "supplier-evaluation",
+      "cluster": "sourcing",
+      "difficulty": "medium",
+      "title": "供应商评估"
+    },
+    {
+      "query": "帮我当用户需要统筹多个供应链环节（inventory-demand-forecaster+supplier-evalua",
+      "expect": "supply-chain-controller",
+      "cluster": "shipping-tariff",
+      "difficulty": "medium",
+      "title": "供应链主控"
+    },
+    {
+      "query": "帮我设计冷邮件外联与跟进策略，覆盖B2B外联、销售开发、合作邀约和跟进序列。",
+      "expect": "cold-email",
+      "cluster": "content-gtm",
+      "difficulty": "medium",
+      "title": "冷邮件"
+    },
+    {
+      "query": "帮我对 Reddit、论坛与社媒评论串做单帖/单页情报挖掘，产出可存储、可解释、可行动的洞察。",
+      "expect": "single-post-intel-mining",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "单帖情报挖掘"
+    },
+    {
+      "query": "帮我为 Momcozy 或子品牌设计 Logo，确保在竞品视觉中占据认知空白、提高记忆度和品牌识别。",
+      "expect": "brand-logo-designer",
+      "cluster": "design",
+      "difficulty": "medium",
+      "title": "品牌Logo设计师"
+    },
+    {
+      "query": "帮我当用户需要跨平台追踪品牌声量、情感趋势与舆情风险时使用。",
+      "expect": "brand-mention-tracking",
+      "cluster": "social-ops",
+      "difficulty": "easy",
+      "title": "社媒舆情追踪"
+    },
+    {
+      "query": "帮我设计 GTM 外联自动化，覆盖 ICP → prospect → outreach → cadence → foll",
+      "expect": "outreach-automation",
+      "cluster": "content-gtm",
+      "difficulty": "medium",
+      "title": "外联自动化"
+    },
+    {
+      "query": "帮我从同一产品信息生成 Amazon、Shopify、eBay 等多平台优化 Listing。",
+      "expect": "multi-platform-listing-generator",
+      "cluster": "seo-ads",
+      "difficulty": "medium",
+      "title": "多平台Listing生成器"
+    },
+    {
+      "query": "帮我配置hreflang、多语言站点架构与地域定向，用于跨境多语言SEO。",
+      "expect": "multilingual-seo",
+      "cluster": "seo-ads",
+      "difficulty": "medium",
+      "title": "多语言SEO"
+    },
+    {
+      "query": "帮我当用户需要把母婴产品资料整理成工厂能沟通、能导入生产的技术包（Tech Pack），",
+      "expect": "tech-pack-generator",
+      "cluster": "design",
+      "difficulty": "medium",
+      "title": "工艺包生成器"
+    },
+    {
+      "query": "帮我当用户需要监控Amazon、eBay、AliExpress等电商平台竞品价格变化时使用。",
+      "expect": "platform-price-monitor",
+      "cluster": "store-ops",
+      "difficulty": "medium",
+      "title": "平台价格监控"
+    },
+    {
+      "query": "帮我生成广告创意文案与创意概念，覆盖投放文案、多版本A/B测试文案和广告标题优化。",
+      "expect": "ad-creative",
+      "cluster": "seo-ads",
+      "difficulty": "medium",
+      "title": "广告创意"
+    },
+    {
+      "query": "帮我当用户需要恢复文件、查看历史版本、回退到之前的状态或创建备份点时使用。",
+      "expect": "file-history-manager",
+      "cluster": "productivity",
+      "difficulty": "medium",
+      "title": "文件历史管理"
+    },
+    {
+      "query": "帮我当用户需要统一多来源数据中的术语表达、合并同义词与标签变体、构建受控词表，或提到\"术语标准化\"、\"术语统一\"、\"标签",
+      "expect": "terminology-standardizer",
+      "cluster": "knowledge-engineering",
+      "difficulty": "medium",
+      "title": "术语标准化器"
+    },
+    {
+      "query": "帮我分析视频内容的传播潜力与互动表现，并优化脚本与结构。",
+      "expect": "viral-video-analyzer",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "爆款视频分析器"
+    },
+    {
+      "query": "帮我当用户需要查询运单号对应的物流状态、轨迹记录、预计到达时间或异常预警时使用。",
+      "expect": "shipment-tracking",
+      "cluster": "shipping-tariff",
+      "difficulty": "medium",
+      "title": "物流追踪"
+    },
+    {
+      "query": "帮我定义并刻画理想客户画像（ICP），用于指导营销定向、销售与产品决策。",
+      "expect": "icp-profiler",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "理想客户画像"
+    },
+    {
+      "query": "帮我当用户需要对电商平台（淘宝/京东/拼多多/抖音/Shopify/Amazon）导出的订单CSV进行字段映射、数据清洗",
+      "expect": "ecommerce-csv-processing",
+      "cluster": "ecommerce-analytics",
+      "difficulty": "medium",
+      "title": "电商CSV处理"
+    },
+    {
+      "query": "帮我当用户需要跨电商平台监控并对比竞品价格、做定价决策时使用。",
+      "expect": "ecommerce-price-monitor",
+      "cluster": "store-ops",
+      "difficulty": "easy",
+      "title": "电商价格监控"
+    },
+    {
+      "query": "帮我当用户需要分析电商订单数据、生成经营报告（日报/周报/月度复盘/季度战略/大促分析）或不确定该调用哪个数据分析子Sk",
+      "expect": "ecommerce-analytics-controller",
+      "cluster": "ecommerce-analytics",
+      "difficulty": "medium",
+      "title": "电商分析主控"
+    },
+    {
+      "query": "帮我当用户需要生成电商日报/周报时使用：输入1-7天订单CSV，输出日常经营报告、异常预警、关键指标追踪。",
+      "expect": "ecommerce-daily-report",
+      "cluster": "ecommerce-analytics",
+      "difficulty": "medium",
+      "title": "电商日报"
+    },
+    {
+      "query": "帮我当用户需要做月度电商经营复盘、评估月度KPI完成情况、对比本月与上月的环比数据，或准备月度运营会议材料时使用。",
+      "expect": "ecommerce-monthly-review",
+      "cluster": "ecommerce-analytics",
+      "difficulty": "medium",
+      "title": "电商月度复盘"
+    },
+    {
+      "query": "帮我当用户需要把电商预测、分群、推荐、优惠券定向、流失、LTV、风险、VOC 聚类或复购问题转化为 ML 建模方案时使用",
+      "expect": "ecommerce-ml-modeling-advisor",
+      "cluster": "ecommerce-analytics",
+      "difficulty": "medium",
+      "title": "电商机器学习建模顾问"
+    },
+    {
+      "query": "帮我当用户需要从电商订单/销售/客户/渠道 CSV 生成经营复盘报告、拆解 KPI 树、分析 GMV/转化率/AOV/复",
+      "expect": "ecommerce-business-insights",
+      "cluster": "ecommerce-analytics",
+      "difficulty": "medium",
+      "title": "电商经营洞察"
+    },
+    {
+      "query": "帮我当用户需要找出知识库中的重复条目、检测知识冲突、判断知识单元是否相关或独立、或做知识融合前的相似度评估时使用。",
+      "expect": "knowledge-similarity-analyzer",
+      "cluster": "knowledge-engineering",
+      "difficulty": "medium",
+      "title": "知识相似度分析器"
+    },
+    {
+      "query": "帮我当用户需要深度消化一本书、将书中知识转化为可执行的行为系统时使用。",
+      "expect": "knowledge-extraction-expert",
+      "cluster": "knowledge-engineering",
+      "difficulty": "medium",
+      "title": "知识萃取专家"
+    },
+    {
+      "query": "帮我做竞品替代方案与差异化定位，覆盖竞品分析、替代方案矩阵、定位策略和竞争话术。",
+      "expect": "competitor-alternative-analysis",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "竞品替代分析"
+    },
+    {
+      "query": "帮我当用户有一个网页或页面样本、需要设计低维护成本的数据采集方案（采集字段设计、指标字典、自动化采集PRD）时使用。",
+      "expect": "web-scraping-plan-designer",
+      "cluster": "productivity",
+      "difficulty": "medium",
+      "title": "网页采集方案设计"
+    },
+    {
+      "query": "帮我为广告、邮件、社媒和落地页等渠道生成全套营销内容。",
+      "expect": "marketing-content-suite",
+      "cluster": "content-gtm",
+      "difficulty": "easy",
+      "title": "营销内容套件"
+    },
+    {
+      "query": "帮我当用户需要将大量知识单元（SKU）按标签重叠度自动分组、用 Union-Find 处理传递关系或对超大桶做递归细分时",
+      "expect": "semantic-bucketer",
+      "cluster": "knowledge-engineering",
+      "difficulty": "medium",
+      "title": "语义分桶器"
+    },
+    {
+      "query": "帮我当用户需要评估文本的知识密度、识别高价值内容区域、生成知识热力图或为 RAG 系统筛选内容时使用。",
+      "expect": "semantic-density-analyzer",
+      "cluster": "knowledge-engineering",
+      "difficulty": "medium",
+      "title": "语义密度分析器"
+    },
+    {
+      "query": "帮我当用户有一个较长的 Markdown 文档（书籍、论文、技术文档）需要按章节和语义边界切分成保持段落完整、带层级结构",
+      "expect": "semantic-doc-chunker",
+      "cluster": "knowledge-engineering",
+      "difficulty": "medium",
+      "title": "语义文档分块器"
+    },
+    {
+      "query": "帮我当用户需要生成跨境电商品类的完整商业可行性报告、判断一个品类是否值得进入跨境市场时使用。",
+      "expect": "cross-border-category-feasibility",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "跨境品类可行性报告"
+    },
+    {
+      "query": "帮我当用户需要生成跨境电商领域 Claude Skills 每日/每周情报简报时使用。",
+      "expect": "cross-border-intel-radar",
+      "cluster": "research-selection",
+      "difficulty": "medium",
+      "title": "跨境电商情报雷达"
+    },
+    {
+      "query": "帮我当用户需要基于锚点标记精确分割文本时使用，支持 OCR 容错与模糊匹配定位。",
+      "expect": "anchor-text-splitter",
+      "cluster": "knowledge-engineering",
+      "difficulty": "medium",
+      "title": "锚点文本分割器"
+    },
+    {
+      "query": "帮我长文拆成 1–10 张图文卡片，12 种视觉风格、8 种布局",
+      "expect": "ai-content-images",
+      "cluster": "preset-ai-content-image-studio",
+      "difficulty": "medium",
+      "title": "AI 图文卡片"
+    },
+    {
+      "query": "帮我开发前决策树逐轮澄清需求与范围",
+      "expect": "grill-me",
+      "cluster": "preset-ai-product-developer",
+      "difficulty": "easy",
+      "title": "需求澄清（决策树）"
+    },
+    {
+      "query": "帮我失败测试→最小实现→转绿的纵向开发循环",
+      "expect": "tdd",
+      "cluster": "preset-ai-product-developer",
+      "difficulty": "easy",
+      "title": "TDD 纵向开发循环"
+    },
+    {
+      "query": "帮我已澄清需求综合为本地可追踪规格",
+      "expect": "to-spec",
+      "cluster": "preset-ai-product-developer",
+      "difficulty": "easy",
+      "title": "需求规格生成"
+    },
+    {
+      "query": "帮我Excel 只读分析→清洗→结论→离线 HTML 报表",
+      "expect": "build-ai-report",
+      "cluster": "preset-ai-report-analyst",
+      "difficulty": "easy",
+      "title": "Excel 数据分析与报表"
+    },
+    {
+      "query": "帮我主题/大纲生成每页带动画的 HTML 演示文稿",
+      "expect": "dsh-motion-deck",
+      "cluster": "preset-dsh-motion-deck-studio",
+      "difficulty": "easy",
+      "title": "HTML 动效演示文稿"
+    },
+    {
+      "query": "帮我飞书数字员工：任务、会议室、日程 MCP 实操",
+      "expect": "feishu-digital-employee",
+      "cluster": "preset-feishu-digital-employee",
+      "difficulty": "easy",
+      "title": "飞书数字员工"
+    },
+    {
+      "query": "帮我按能力需求检索推荐 DSH 插件",
+      "expect": "find-plugins",
+      "cluster": "preset-llm-wiki-fullstack",
+      "difficulty": "easy",
+      "title": "DSH 插件检索推荐"
+    },
+    {
+      "query": "帮我一句话生成产品发布视频全流程",
+      "expect": "product-launch-video",
+      "cluster": "preset-product-video-director",
+      "difficulty": "easy",
+      "title": "产品发布视频生成"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "dsh-wanzh-hulian",
+  "version": "0.1.0",
+  "description": "万物互联：设置页新增「万物互联」页，统一管理 MCP / API / 企业应用 / 知识库连接。首个连接：得到大脑知识库（可开关 + 双层开关 + 凭证双通道）。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/catalog.js",
+    "lib/client.js",
+    "cordis.patch.yml"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-slots"
+      ]
+    }
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "react": "^18.3.0"
+  }
+}

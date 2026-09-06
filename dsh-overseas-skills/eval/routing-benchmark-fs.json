@@ -1,0 +1,179 @@
+{
+ "schema": "routing-benchmark-fs.v1",
+ "cases": [
+  {
+   "query": "帮我连续追问打磨方案与设计，产出更锋利的计划",
+   "expect": "grilling",
+   "cluster": "fs-clarify",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我转发器：调用 grilling 执行无情访谈",
+   "expect": "grill-me",
+   "cluster": "fs-clarify",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我访谈+落档：调用 grilling 与 domain-modeling，产出 ADR 与词汇表",
+   "expect": "grill-with-docs",
+   "cluster": "fs-clarify",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我感觉不对劲时停下核对假设、指出问题再继续",
+   "expect": "wait-what",
+   "cluster": "fs-clarify",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我把访谈问题整理为问卷文档",
+   "expect": "to-questionnaire",
+   "cluster": "fs-clarify",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我针对高可信一手资料调研并沉淀为 Markdown 结论",
+   "expect": "research",
+   "cluster": "fs-clarify",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我把一个概念教到用户真正理解并验证理解",
+   "expect": "teach",
+   "cluster": "fs-clarify",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我把当前对话综合为规格并发布到项目 issue tracker",
+   "expect": "to-spec",
+   "cluster": "fs-spec",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我把计划/规格拆成 tracer-bullet 任务卡，声明阻塞依赖",
+   "expect": "to-tickets",
+   "cluster": "fs-spec",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我把超大工程规划为 issue 上的决策票地图",
+   "expect": "wayfinder",
+   "cluster": "fs-spec",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我技能路由器：根据处境推荐本技能集内合适的技能/流程",
+   "expect": "ask-matt",
+   "cluster": "fs-spec",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我生成引导人类完成专属步骤的交互式 bash 向导",
+   "expect": "wizard",
+   "cluster": "fs-spec",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我深模块设计词汇：设计与改进模块接口",
+   "expect": "codebase-design",
+   "cluster": "fs-architecture",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我建立并打磨项目领域模型（术语/ADR/词汇表）",
+   "expect": "domain-modeling",
+   "cluster": "fs-architecture",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我扫描深化机会→HTML 报告→逐项访谈",
+   "expect": "improve-codebase-architecture",
+   "cluster": "fs-architecture",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我一次性原型验证设计问题，用完即弃",
+   "expect": "prototype",
+   "cluster": "fs-architecture",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我按规格或任务卡实施一段工作",
+   "expect": "implement",
+   "cluster": "fs-implement",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我测试先行开发（红-绿-重构）",
+   "expect": "tdd",
+   "cluster": "fs-implement",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我沿标准×可疑双轴评审相对固定点的改动",
+   "expect": "code-review",
+   "cluster": "fs-quality",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我硬 bug 与性能回归的诊断循环",
+   "expect": "diagnosing-bugs",
+   "cluster": "fs-quality",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我消解进行中的 git 合并/变基冲突",
+   "expect": "resolving-merge-conflicts",
+   "cluster": "fs-quality",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我按状态机对 issue 与外部 PR 分诊/归类/验证",
+   "expect": "triage",
+   "cluster": "fs-quality",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我为工程技能集配置仓库（issue tracker/分诊标签/领域文档）",
+   "expect": "setup-matt-pocock-skills",
+   "cluster": "fs-infra",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我配置 pre-commit 钩子",
+   "expect": "setup-pre-commit",
+   "cluster": "fs-infra",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我git 操作护栏（防危险操作）",
+   "expect": "git-guardrails-claude-code",
+   "cluster": "fs-infra",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我把代码迁移到 shoehorn 结构",
+   "expect": "migrate-to-shoehorn",
+   "cluster": "fs-infra",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我脚手架练习题（workshop 用）",
+   "expect": "scaffold-exercises",
+   "cluster": "fs-infra",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我把会话交接给新 agent 的交接文档",
+   "expect": "handoff",
+   "cluster": "fs-collab",
+   "difficulty": "easy"
+  },
+  {
+   "query": "帮我为 AI agent 编写清晰文档/指令",
+   "expect": "writing-for-agents",
+   "cluster": "fs-writing",
+   "difficulty": "easy"
+  }
+ ]
+}

@@ -1,0 +1,212 @@
+{
+  "creating-financial-models": {
+    "notUse": [
+      "DCF 估值专项走 dcf-valuation；电商预算预测走 ecommerce-budget-forecaster；利润率分析走 profit-margin-analyzer；市场 TAM 建模走 market-scenario-modeler"
+    ]
+  },
+  "ecommerce-financial-dashboard": {
+    "notUse": [
+      "销售仪表盘走 ecommerce-sales-dashboard；预算预测走 ecommerce-budget-forecaster；ROAS 归因走 marketing-roas-analyzer"
+    ]
+  },
+  "ecommerce-sales-dashboard": {
+    "notUse": [
+      "财务三表走 ecommerce-financial-dashboard；预算预测走 ecommerce-budget-forecaster；经营复盘走 ecommerce-business-insights"
+    ]
+  },
+  "ecommerce-budget-forecaster": {
+    "notUse": [
+      "财务模型搭建走 creating-financial-models；库存预算联动走 inventory-demand-forecaster；ROAS 归因走 marketing-roas-analyzer"
+    ]
+  },
+  "dynamic-pricing-engine": {
+    "notUse": [
+      "竞品价格监控走 ecommerce-price-monitor 或 platform-price-monitor；利润率测算走 profit-margin-analyzer；折扣促销走 discount-promotion-engine"
+    ]
+  },
+  "profit-margin-analyzer": {
+    "notUse": [
+      "动态调价走 dynamic-pricing-engine；DCF 估值走 dcf-valuation；财务模型走 creating-financial-models"
+    ]
+  },
+  "freemium-upgrade-optimizer": {
+    "notUse": [
+      "结账流程优化走 checkout-flow-optimizer；用户分群走 customer-rfm-analyzer；A/B 测试走 ab-test-setup"
+    ]
+  },
+  "sycm-analysis-skill": {
+    "notUse": [
+      "平台订单 CSV 清洗走 ecommerce-csv-processing；经营复盘走 ecommerce-business-insights；月度复盘走 ecommerce-monthly-review"
+    ]
+  },
+  "marketing-roas-analyzer": {
+    "notUse": [
+      "归因模型与增量实验走 attribution；广告账户审计走 paid-advertising；预算预测走 ecommerce-budget-forecaster"
+    ]
+  },
+  "dcf-valuation": {
+    "notUse": [
+      "通用财务模型走 creating-financial-models；公司级调研走 company-research；融资估值核查走 company-research"
+    ]
+  },
+  "analytics": {
+    "notUse": [
+      "归因模型走 attribution；ROAS 汇总走 marketing-roas-analyzer；销售仪表盘走 ecommerce-sales-dashboard"
+    ]
+  },
+  "attribution": {
+    "notUse": [
+      "GA4 埋点审计走 analytics；ROAS 汇总走 marketing-roas-analyzer；A/B 实验走 ab-test-setup"
+    ]
+  },
+  "product-review-intelligence-collector": {
+    "notUse": [
+      "客户声音六维映射走 customer-voice-analyzer；情感分析走 voc-sentiment-analyzer；评论分析助手走 review-analyst-agent"
+    ]
+  },
+  "seasonal-campaign-automator": {
+    "notUse": [
+      "大促效果分析走 performance-tracking；营销活动策划走 campaign-planning；邮件序列走 email-automation-flow-builder"
+    ]
+  },
+  "checkout-flow-optimizer": {
+    "notUse": [
+      "CRO 整体优化走 optimize-ecommerce-page-conversion；先买后付走 buy-now-pay-later-setup；多币种走 multi-currency-checkout"
+    ]
+  },
+  "helpdesk-order-integration": {
+    "notUse": [
+      "退换处理走 returns-exchange-automator；拒付争议走 chargeback-dispute-manager；客户召回走 customer-winback-automator"
+    ]
+  },
+  "customer-retention-automator": {
+    "notUse": [
+      "邮件流程搭建走 email-automation-flow-builder；RFM 分群走 customer-rfm-analyzer；LTV 计算走 customer-ltv-calculator"
+    ]
+  },
+  "customer-ltv-calculator": {
+    "notUse": [
+      "RFM 分群走 customer-rfm-analyzer；留存自动化走 customer-retention-automator；忠诚度设计走 loyalty-points-designer"
+    ]
+  },
+  "customer-winback-automator": {
+    "notUse": [
+      "RFM 分群走 customer-rfm-analyzer；弃购挽回序列走 email-automation-flow-builder；忠诚度设计走 loyalty-points-designer"
+    ]
+  },
+  "customer-rfm-analyzer": {
+    "notUse": [
+      "LTV 计算走 customer-ltv-calculator；留存触达走 customer-retention-automator；积分设计走 loyalty-points-designer"
+    ]
+  },
+  "review-request-automator": {
+    "notUse": [
+      "评论采集走 product-review-intelligence-collector；邮件序列走 email-automation-flow-builder；口碑分析走 review-analyst-agent"
+    ]
+  },
+  "cart-abandonment-recovery": {
+    "notUse": [
+      "邮件流程搭建走 email-automation-flow-builder；结账流程优化走 checkout-flow-optimizer；召回序列走 customer-winback-automator"
+    ]
+  },
+  "lifecycle-marketing-automator": {
+    "notUse": [
+      "邮件流程搭建走 email-automation-flow-builder；RFM 分群走 customer-rfm-analyzer；季节性活动走 seasonal-campaign-automator"
+    ]
+  },
+  "referral-program-builder": {
+    "notUse": [
+      "忠诚度积分走 loyalty-points-designer；邮件触达走 email-automation-flow-builder；留存自动化走 customer-retention-automator"
+    ]
+  },
+  "coupon-discount-manager": {
+    "notUse": [
+      "折扣促销引擎走 discount-promotion-engine；季节性活动走 seasonal-campaign-automator；优惠券定向建模走 ecommerce-ml-modeling-advisor"
+    ]
+  },
+  "discount-promotion-engine": {
+    "notUse": [
+      "优惠券管理走 coupon-discount-manager；动态定价走 dynamic-pricing-engine；大促活动走 seasonal-campaign-automator"
+    ]
+  },
+  "loyalty-points-designer": {
+    "notUse": [
+      "推荐计划走 referral-program-builder；RFM 分群走 customer-rfm-analyzer；LTV 计算走 customer-ltv-calculator"
+    ]
+  },
+  "b2b-payment-terms-optimizer": {
+    "notUse": [
+      "谈判策略走 sales-negotiator；发票生成走 invoice-generator；财务模型走 creating-financial-models"
+    ]
+  },
+  "lark-tools": {
+    "notUse": [
+      "飞书数字员工场景走 feishu-digital-employee；文档协同写作走 doc-coauthoring；会议与任务编排走 feishu-digital-employee"
+    ]
+  },
+  "create-website": {
+    "notUse": [
+      "落地页转化优化走 optimize-ecommerce-page-conversion；网站 SEO 走 seo-page-audit；产品发布视频走 product-launch-video"
+    ]
+  },
+  "internal-comms": {
+    "notUse": [
+      "对外公关走 public-relations；客户案例走 case-studies；文档协作走 doc-coauthoring"
+    ]
+  },
+  "doc-coauthoring": {
+    "notUse": [
+      "内部通报走 internal-comms；白皮书走 whitepapers；方案蓝图走 joint-solution-blueprint"
+    ]
+  },
+  "gmail-assistant": {
+    "notUse": [
+      "邮件营销序列走 email-automation-flow-builder；冷邮件外联走 cold-email；邮件流程自动化走 email-automation-flow-builder"
+    ]
+  },
+  "skill-vetter": {
+    "notUse": [
+      "Skill 质量评估走 skill-evaluator；结构检测走 skill-structure-doctor；技能创建走 skill-creator"
+    ]
+  },
+  "accio-mcp-cli": {
+    "notUse": [
+      "飞书操作走 lark-tools；DSH 插件开发走 build-deepseek-harness-plugin；插件安装评估走 dsh-plugin-acquire"
+    ]
+  },
+  "amazon-prelaunch-ad-budget": {
+    "notUse": [
+      "广告账户诊断走 amazon-ppc-campaign-manager；利润率测算走 profit-margin-analyzer；选品验证走 amazon-prelaunch-demand-check"
+    ]
+  },
+  "amazon-prelaunch-competitor-teardown": {
+    "notUse": [
+      "畅销款规律解码走 bestseller-pattern-decoder；竞品监控走 amazon-competitor-monitor；Listing 优化走 amz-product-optimizer"
+    ]
+  },
+  "amazon-prelaunch-demand-check": {
+    "notUse": [
+      "趋势时机判断走 trend-stage-timing-analyzer；市场可行性审计走 market-viability-logic-auditor；选品矩阵走 product-research-matrix"
+    ]
+  },
+  "amazon-prelaunch-demand-mirror": {
+    "notUse": [
+      "需求验证走 amazon-prelaunch-demand-check；选品分析走 product-selection；趋势侦察走 amazon-prelaunch-trend-scout"
+    ]
+  },
+  "amazon-prelaunch-listing-builder": {
+    "notUse": [
+      "Listing 专家走 amazon-listing-expert；Listing 优化走 amz-product-optimizer；多平台生成走 multi-platform-listing-generator"
+    ]
+  },
+  "amazon-prelaunch-margin-check": {
+    "notUse": [
+      "利润率分析走 profit-margin-analyzer；广告预算走 amazon-prelaunch-ad-budget；财务模型走 creating-financial-models"
+    ]
+  },
+  "amazon-prelaunch-trend-scout": {
+    "notUse": [
+      "趋势时机判断走 trend-stage-timing-analyzer；市场洞察选品走 market-insight-product-selection；畅销款解码走 bestseller-pattern-decoder"
+    ]
+  }
+}

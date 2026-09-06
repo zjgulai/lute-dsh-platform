@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>插件能力图谱 · LUTE Agentic System</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap bar">
+    <span class="logo">LUTE <b>Agentic System</b></span>
+    <nav>
+      <a href="index.html">总览</a>
+      <a class="on" href="plugins.html">插件能力图谱</a>
+      <a href="skills.html">技能库</a>
+      <a href="presets.html">业务预设</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero" style="padding:34px 40px">
+    <h1>插件能力图谱</h1>
+    <p>19 个扩展插件，按业务视角分五类。每个插件：一句话定位 → 能做什么 → 怎么用 → 怎么触发 → 业务场景。标注「重点」的 9 个给出半页详解（含实测体验，来自真实使用记录）。</p>
+    <div class="chips">
+      <span>💬 协作与接入（4）</span><span>🧠 知识与记忆（3）</span><span>🔍 研究·搜索·视觉（4）</span><span>🖥 界面与体验（5）</span><span>🛠 开发与工具（3）</span>
+    </div>
+  </div>
+
+  <!-- ═══════ 协作与接入 ═══════ -->
+  <section>
+    <h2><span class="cat c4" style="margin-bottom:0">协作与接入</span><span class="tag">让 AI 走出对话框 · 4 个</span></h2>
+
+    <div class="card key">
+      <span class="cat c4">协作与接入</span>
+      <h3>dsh-im · 九大 IM 机器人 <span class="ver">v4.1.0</span><span class="badge b-ext" style="margin-left:8px">重点</span></h3>
+      <p class="desc">把飞书、微信、钉钉、企业微信、QQ、Slack、Telegram、Discord、WhatsApp 变成你的 AI 入口——同事在聊天软件里发消息，电脑上的 AI 直接接单干活，结果流式回传。团队不用学任何新工具，聊天就是入口。</p>
+      <ul>
+        <li>一个渠道可接<b>多个机器人</b>，各自绑定独立工作区、模型与会话，互不干扰</li>
+        <li>飞书支持<b>流式卡片</b>：思考、工具进度、回答进度实时可见；图片与文件<b>双向回传</b>（图 ≤5MB，单条消息 ≤20MB）</li>
+        <li>40+ 机器人命令：/new /status /model /reasoning /preset /workspace /session /stop /steer /batch /send /compact /repair 等</li>
+        <li>每个机器人可设<b>访问模式</b>：Telegram 兼容/安全白名单，WhatsApp 仅自己/指定联系人/开放</li>
+        <li>接入方式：<b>扫码创建</b>（推荐，自动补权限）或手动填 App ID/Secret</li>
+        <li>工作区 / 模型 / 预设随时切：对机器人发 /workspace /model /preset</li>
+        <li>内置「AI Office」：本机主动连公网 AI Office（SSE 下行+任务租约），无需公网 IP</li>
+        <li>中文优先的入站上下文：群聊清醒严肃、私聊自带幽默</li>
+      </ul>
+      <div class="detail">
+        <div class="box"><h4>怎么用</h4><p>设置 → IM机器人 → 选渠道 → 扫码创建 → 飞书里私聊机器人即用；群聊默认「@机器人时才响应」。</p><p class="note">换工作区/预设：/workspace、/preset；权限补全：卡片上的「补全权限」扫码增量补。</p></div>
+        <div class="box"><h4>怎么触发</h4><p><span class="badge b-ext">外部消息</span> 别人在 IM 里发消息 / @机器人，即触发本机 AI 任务；本机「检查连接」可发测试消息。</p></div>
+        <div class="box"><h4>实测体验</h4><p>已真机接入飞书（机器人 ABI-KB）：扫码建号 → 私聊消息双向通路 → 卡片回调权限补全（2 分钟限时）→ 在线运行正常。凭据与工作区配置存本机，重装不丢。</p></div>
+      </div>
+      <div class="example"><b>业务场景：</b>团队在飞书群里 @机器人：「帮我把今天的周报整理成要点发群里」——电脑上的 AI 自动读工作区文件、生成要点、以流式卡片发回群，全程无需打开 DSH。</div>
+    </div>
+
+    <div class="card key">
+      <span class="cat c4">协作与接入</span>
+      <h3>agent-team-gui · 多智能体小队 <span class="ver">v1.0.1</span><span class="badge b-lang" style="margin-left:8px">重点</span></h3>
+      <p class="desc">把大任务拆成多个角色并行干：不同小队成员可以用不同模型，串行/并行可编排，DAG 工作流 + 全程运行历史。适合「一个人干不完、或该让几个 AI 分头查证再汇总」的复杂任务。</p>
+      <ul>
+        <li><b>小队创建与持久化</b>：成员、模型、分工一次配好长期复用</li>
+        <li><b>workflow 编排</b>：多阶段 DAG，各阶段独立跑不同模型/供应商</li>
+        <li><b>运行历史与洞察</b>：每次小队运行可回溯，token 用量按成员可查</li>
+        <li><b>上下文模式</b>：spawn（全新）/ fork（继承对话）/ chain（串行传递上一队员结果）</li>
+        <li>队员可拆成子代理并行，主代理负责汇总与评审</li>
+      </ul>
+      <div class="detail">
+        <div class="box"><h4>怎么用</h4><p>「小队运行」面板创建小队并派活；或直接说「让小队做 XX」。想要并行就多个队员，想递进就 chain。</p></div>
+        <div class="box"><h4>怎么触发</h4><p><span class="badge b-lang">语言指令</span><span class="badge b-ui"> 界面操作</span>（小队面板）；队员按编排串行/并行执行。</p></div>
+        <div class="box"><h4>实测体验</h4><p>内置小队配置：成员按「分析/开发/评审」分工，偏重模型可单独指定；长任务拆队后主代理汇总，出活明显快。</p></div>
+      </div>
+      <div class="example"><b>业务场景：</b>「把这个新功能的需求分析、技术方案、测试用例分别交给三个队员，最后汇总评审」——一次派发，三线并行，主代理汇总。</div>
+    </div>
+
+    <div class="card key">
+      <span class="cat c4">协作与接入</span>
+      <h3>dsh-pocket · 把 AI 装进口袋 <span class="ver">v2.8.0</span><span class="badge b-ui" style="margin-left:8px">重点</span></h3>
+      <p class="desc">一个设置页，手机扫码即访问电脑上的 AI：局域网免配置，公网走安全隧道（PIN 门禁），电脑手机实时同屏。通勤路上也能继续指挥。</p>
+      <ul>
+        <li><b>扫码即连</b>，无需装 App（手机浏览器打开）</li>
+        <li><b>局域网 + Cloudflare 公网隧道</b>双通道，密码/PIN 门禁，用后按需关公网</li>
+        <li><b>实时同屏</b>：电脑上聊一半，手机上接着聊，同一会话</li>
+        <li>兼容/扩展/增强模式均可，无需开浏览器访问也能工作</li>
+      </ul>
+      <div class="detail">
+        <div class="box"><h4>怎么用</h4><p>设置 → 手机访问 → 手机扫码 → 输入 PIN 即连；公网访问按需开关。</p></div>
+        <div class="box"><h4>怎么触发</h4><p><span class="badge b-ui">手机扫码</span> 触发；电脑端「设置 → 手机访问」管理开关与密码。</p></div>
+        <div class="box"><h4>实测体验</h4><p>局域网 http://192.168.x.x:3081 密码门禁 302 授权通过；Cloudflare 公网隧道外部抓取 200 + 公网 PIN 通过；测试后已按一次性授权关闭公网。</p></div>
+      </div>
+      <div class="example"><b>业务场景：</b>下班路上掏出手机，继续指挥电脑上的 AI 跑完数据清洗，到家看结果已经好了。</div>
+    </div>
+
+    <div class="card key">
+      <span class="cat c4">协作与接入</span>
+      <h3>archify · 专业架构图生成 <span class="ver">v0.1.0（技能 2.14）</span><span class="badge b-lang" style="margin-left:8px">重点</span></h3>
+      <p class="desc">一句话生成五种专业图：架构图、工作流、时序图、数据流、生命周期图——自包含 HTML，暗/亮主题，可选动效，可导出 PNG/SVG/WebM。</p>
+      <ul>
+        <li>接受<b>自然语言</b>，也接受 <b>Mermaid</b>（flowchart / sequenceDiagram / stateDiagram）转换美化</li>
+        <li>要画真实系统时，会先<b>读你的代码仓库取证</b>再落图——可验证、不瞎编</li>
+        <li><b>严格自校验</b>：9 项质量检查全过（showcase 标准）才交付，不达标会自我修正</li>
+        <li>五种图各有 schema + 示例，自动排版、自动补标签</li>
+        <li>产出物是独立 HTML：可点击、可放大、可导出、可放进汇报</li>
+      </ul>
+      <div class="detail">
+        <div class="box"><h4>怎么用</h4><p>直接说「用 archify 画一张 XX 的架构图，8-12 个核心组件」；产物是 HTML 文件，让 AI 给出文件路径后打开。</p></div>
+        <div class="box"><h4>怎么触发</h4><p><span class="badge b-lang">语言指令</span>（提及画图/架构/Mermaid 时 AI 自动启用该技能）。</p></div>
+        <div class="box"><h4>实测体验</h4><p>L4 冒烟：validate 9 项 showcase 检查 0 错 0 警 exit 0；deliver 产出 637KB 自包含 HTML。包内是 2.14 快照（仓库 main 已 2.16）。</p></div>
+      </div>
+      <div class="example"><b>业务场景：</b>给老板汇报：「把订单系统的架构画成一张能点、能放大、能导出 PNG 的图」——5 分钟出图，直接放进周报。</div>
+    </div>
+  </section>
+
+  <!-- ═══════ 知识与记忆 ═══════ -->
+  <section>
+    <h2><span class="cat c2" style="margin-bottom:0">知识与记忆</span><span class="tag">让 AI 记住你、越用越懂你 · 3 个</span></h2>
+
+    <div class="card key">
+      <span class="cat c2">知识与记忆</span>
+      <h3>noema · 跨会话长期记忆 <span class="ver">v0.1.0-rc.3</span><span class="badge b-auto" style="margin-left:8px">重点</span></h3>
+      <p class="desc">AI 的「长期档案」：跨会话记住你的偏好、决策、项目约定；记忆可浏览、可检索、可审计、可删除。你随口一句「记住 XX」，它就存下并一直遵守。</p>
+      <ul>
+        <li><b>自动召回</b>：每个新会话开始，AI 先读相关旧记忆再干活</li>
+        <li>你说「记住 XX」，它存下来；关键词 / 实体 / 知识图谱 / 多跳邻居检索</li>
+        <li>记忆带<b>实体与代码锚点</b>，按项目组织，跨会话关联</li>
+        <li><b>可审计</b>：设置页看全量目录、看候选、解释召回、删除或改写</li>
+        <li>可导入其它 AI 工具的 AGENTS.md / 规则文件（Codex / Claude / Cursor 等）</li>
+      </ul>
+      <div class="detail">
+        <div class="box"><h4>怎么用</h4><p>无需操作即自动生效；显式记忆说「记住：我们部署用 pnpm」；设置 → Noema 记忆可管理。</p></div>
+        <div class="box"><h4>怎么触发</h4><p><span class="badge b-auto">自动</span>（会话开始自动 recall + 重要事实自动候选）；<span class="badge b-lang">语言指令</span>（「记住…」）。</p></div>
+        <div class="box"><h4>实测体验</h4><p>已沉淀「21 点不提交」等约定与新会话自动召回；记忆目录/图谱能在设置页完整浏览，删除/改写即时生效。</p></div>
+      </div>
+      <div class="example"><b>业务场景：</b>上周定下的「21 点前不许提交代码」约定，这周换新会话 AI 依然记得并遵守。</div>
+    </div>
+
+    <div class="card key">
+      <span class="cat c2">知识与记忆</span>
+      <h3>灵枢 dsh-memory · 感知记忆与联想 <span class="ver">v0.4.0</span><span class="badge b-auto" style="margin-left:8px">重点</span></h3>
+      <p class="desc">「大脑」型记忆：对话自动沉淀进记忆库，带实体、关系、时间线；联想召回让 AI 能跨话题串起你的上下文——越用越懂你。</p>
+      <ul>
+        <li>对话<b>自动沉淀</b>（感知层 + 知识层双层记忆，自动去重）</li>
+        <li><b>组合联想召回</b>（内容相似 + 重要性 + 近因加权），跨话题关联</li>
+        <li>记忆时间线、完整性自检、会话要点外部化（可恢复）</li>
+        <li><b>知识摄取</b>：文本 / URL 直接灌进知识层；候选记忆审核队列</li>
+        <li>联想关系边（因果/相似/时序/空间/层级），图谱检索</li>
+      </ul>
+      <div class="detail">
+        <div class="box"><h4>怎么用</h4><p>自动运行，无需操作；也可用「灵枢」相关工具显式查询/写入。</p></div>
+        <div class="box"><h4>怎么触发</h4><p><span class="badge b-auto">自动</span>（对话自动沉淀 + 推理前自动联想）；<span class="badge b-tool">工具调用</span>（lingshu_*）。</p></div>
+        <div class="box"><h4>实测体验</h4><p>与 noema 并存（功能有重叠，用户决定共存）；记忆库带实体抽取与关系边，联想召回能串起跨天上下文。</p></div>
+      </div>
+      <div class="example"><b>业务场景：</b>三天前聊过的某个方案细节，今天随口一提，AI 立刻联想起来接着往下做。</div>
+    </div>
+
+    <div class="card">
+      <span class="cat c2">知识与记忆</span>
+      <h3>dsh-context · 上下文洞察 <span class="ver">v0.38.1</span></h3>
+      <p class="desc">看清 AI 的「脑容量」怎么花的：上下文构成仪表盘 + /context 命令，帮你理解长对话为什么变慢、怎么瘦身。</p>
+      <ul>
+        <li>上下文构成可视化（哪些内容占了 token：对话/轨迹/小队/系统提示词）</li>
+        <li>洞察 token 分布、缓存命中率、上下文溢出警报</li>
+      </ul>
+      <div class="row"><span class="k">怎么用</span><span class="v">上下文面板 + /context 命令</span></div>
+      <div class="row"><span class="k">触发</span><span class="v"><span class="badge b-ui">界面操作</span><span class="badge b-lang"> 命令</span></span></div>
+      <div class="example"><b>场景：</b>长对话变慢时看一眼上下文仪表盘，找出占用大头并 /compact 瘦身。</div>
+    </div>
+  </section>
+
+  <!-- ═══════ 研究·搜索·视觉 ═══════ -->
+  <section>
+    <h2><span class="cat c3" style="margin-bottom:0">研究·搜索·视觉</span><span class="tag">看得见、搜得到、查得深 · 4 个</span></h2>
+
+    <div class="card key">
+      <span class="cat c3">研究·搜索·视觉</span>
+      <h3>deepresearch · 深度调研 <span class="ver">v0.2.2</span><span class="badge b-lang" style="margin-left:8px">重点</span></h3>
+      <p class="desc">证据优先的调研工作流：多轮检索、来源留证、持久状态，产出可追溯的调研报告。适合「要一份能交给领导的、带出处的调研」。</p>
+      <ul>
+        <li><b>调研任务持久化</b>：中断了回来接着查，结果不丢</li>
+        <li><b>Web 工作区</b>：检索到的页面统一收纳管理，逐条留证</li>
+        <li>每条结论<b>带来源</b>，不空口无凭；多轮检索自动迭代</li>
+        <li>与搜索（modsearch）、图表（genui）联动成文</li>
+      </ul>
+      <div class="detail">
+        <div class="box"><h4>怎么用</h4><p>侧边栏「深度研究」入口，或说「深度调研一下 XX」。</p></div>
+        <div class="box"><h4>怎么触发</h4><p><span class="badge b-lang">语言指令</span><span class="badge b-ui"> 入口按钮</span>。</p></div>
+        <div class="box"><h4>实测体验</h4><p>「调研 DeepSeek Harness 插件兼容性」——自动多轮检索、归档页面、成文带来源；持久化状态让中途断点可续。</p></div>
+      </div>
+      <div class="example"><b>业务场景：</b>「调研一下 2026 年企业级 AI 智能体的市场格局，输出带来源的对比报告」——自动多轮检索、归档、成文。</div>
+    </div>
+
+    <div class="card key">
+      <span class="cat c3">研究·搜索·视觉</span>
+      <h3>vision-router · AI 的眼睛 <span class="ver">v2.0.1</span><span class="badge b-auto" style="margin-left:8px">重点</span></h3>
+      <p class="desc">给文本模型装上眼睛：免配置视觉链 + 像素级工具全家桶，看图、读图、比图、改图全在本地管线。设计稿对照、截图核验、OCR 一把抓。</p>
+      <ul>
+        <li>看图问答（结构预识别 + 目标定向追问）</li>
+        <li>目标定位 / 裁剪放大 / 双图像素对比（红热图标差异）</li>
+        <li>OCR 识别（中英）、主色提取、SVG 矢量化、前后景分离</li>
+        <li>HTML 无头截图、长图 OCR、图片直接呈现给用户</li>
+        <li><b>多后端自动路由</b>：某条限流/超时自动换线，并把失败如实告知</li>
+      </ul>
+      <div class="detail">
+        <div class="box"><h4>怎么用</h4><p>直接把图片拖进对话，或让 AI「看看这张截图哪里有问题」。</p></div>
+        <div class="box"><h4>怎么触发</h4><p><span class="badge b-auto">图片自动路由</span>（读图/OCR/对比等视觉任务自动走这套管线）。</p></div>
+        <div class="box"><h4>实测体验</h4><p>截图 + 像素 diff 验证 UI 修复；页面截图 auto-navigate 读取；多次遇视觉后端限流会如实报「本轮视觉不可用」并继续文字任务。</p></div>
+      </div>
+      <div class="example"><b>业务场景：</b>丢给 AI 一张设计稿和一张实现截图：「对比一下，实现哪里和设计不一致」——像素级差异图直接标红输出。</div>
+    </div>
+
+    <div class="card">
+      <span class="cat c3">研究·搜索·视觉</span>
+      <h3>modsearch · 智能网页搜索 <span class="ver">v5.10.0</span></h3>
+      <p class="desc">免费网页搜索：常规搜索 + X（推特）搜索 + 网页抓取，替换内置搜索后端，开箱即用。</p>
+      <ul>
+        <li>web_search / x_search / web_fetch / read_page 全套</li>
+        <li>提供来源 URL（外部数据，绝不当指令）</li>
+      </ul>
+      <div class="row"><span class="k">怎么用</span><span class="v">AI 需要联网查资料时自动使用，无需操作</span></div>
+      <div class="row"><span class="k">触发</span><span class="v"><span class="badge b-tool">工具自动路由</span></span></div>
+      <div class="example"><b>场景：</b>「查一下最近这条新政策」——自动搜网页、抓页面、给出来源。</div>
+    </div>
+
+    <div class="card">
+      <span class="cat c3">研究·搜索·视觉</span>
+      <h3>modlens · 文本模型视觉 <span class="ver">v3.25.2</span></h3>
+      <p class="desc">给纯文本模型的「插件式视觉」（Antigravity CLI 后端），让没有视觉能力的模型也能看图。</p>
+      <div class="row"><span class="k">怎么用</span><span class="v">自动；视觉路由未命中时兜底</span></div>
+      <div class="row"><span class="k">触发</span><span class="v"><span class="badge b-auto">自动</span></span></div>
+    </div>
+  </section>
+
+  <!-- ═══════ 界面与体验 ═══════ -->
+  <section>
+    <h2><span class="cat c1" style="margin-bottom:0">界面与体验</span><span class="tag">工作台更好用 · 5 个</span></h2>
+
+    <div class="card">
+      <span class="cat c1">界面与体验</span>
+      <h3>dsh-better-sidebar · VSCode 风右侧栏 <span class="ver">v0.17.1</span></h3>
+      <p class="desc">右侧多面板侧边栏：资源管理器 / 编辑器 / 终端 / Git / 浏览器，按会话隔离——边聊边改代码、跑命令、看 Git，不切窗口。</p>
+      <ul>
+        <li>文件浏览与编辑、内置终端、Git 面板、浏览器面板</li>
+        <li>每个会话独立的侧栏状态，互不干扰；侧栏展开中间栏自适应收缩</li>
+        <li>暴露服务给其它插件扩展（编辑器/终端/注册中心）</li>
+      </ul>
+      <div class="row"><span class="k">怎么用</span><span class="v">右侧栏切面板（文件/源代码管理/任务管理/终端/浏览器）</span></div>
+      <div class="row"><span class="k">触发</span><span class="v"><span class="badge b-ui">界面操作</span></span></div>
+      <div class="example"><b>场景：</b>让 AI 改代码，右侧栏实时看 diff、跑终端、查 Git，不用切出对话。</div>
+    </div>
+
+    <div class="card">
+      <span class="cat c1">界面与体验</span>
+      <h3>git-graph · 源代码管理 <span class="ver">v0.3.6</span></h3>
+      <p class="desc">会话内 Git 图谱：分支选择器 + 提交图谱 + 真实 git 操作（带守卫），改代码不忘看分支。</p>
+      <ul>
+        <li>分支可视化、提交历史图谱</li>
+        <li>真实 git 操作（checkout/merge 等），带安全守卫</li>
+      </ul>
+      <div class="row"><span class="k">怎么用</span><span class="v">侧边栏「源代码管理」面板</span></div>
+      <div class="row"><span class="k">触发</span><span class="v"><span class="badge b-ui">界面操作</span></span></div>
+      <div class="example"><b>场景：</b>空会话新建时先选分支，让 AI 在自己分支上干活不污染主干。</div>
+    </div>
+
+    <div class="card">
+      <span class="cat c1">界面与体验</span>
+      <h3>skill-explorer · 技能中心 <span class="ver">v0.3.6</span></h3>
+      <p class="desc">可视化浏览全部技能：按来源分组、启停、新建、删除，一眼看清 AI 会哪些本领、哪些临时被关。</p>
+      <div class="row"><span class="k">怎么用</span><span class="v">侧边栏「技能中心」</span></div>
+      <div class="row"><span class="k">触发</span><span class="v"><span class="badge b-ui">界面操作</span></span></div>
+      <div class="example"><b>场景：</b>想临时禁用某个技能，或看看某个插件带了哪些技能——技能中心一屏看清。</div>
+    </div>
+
+    <div class="card">
+      <span class="cat c1">界面与体验</span>
+      <h3>dsh-theme · 主题外观 <span class="ver">v0.1.0-local.1</span></h3>
+      <p class="desc">主题编辑器：精选配色 + 字体排版实时调节，让工作台顺手、养眼。</p>
+      <div class="row"><span class="k">怎么用</span><span class="v">设置 → 外观</span></div>
+      <div class="row"><span class="k">触发</span><span class="v"><span class="badge b-ui">界面操作</span></span></div>
+    </div>
+
+    <div class="card">
+      <span class="cat c1">界面与体验</span>
+      <h3>dsh-root-brand · 品牌皮肤 <span class="ver">v0.1.0-local.1</span></h3>
+      <p class="desc">品牌标识常驻：侧边栏品牌位、空会话欢迎页的产品形象（R∞T 字标与品牌绿）。</p>
+      <div class="row"><span class="k">怎么用</span><span class="v">无需操作，常驻生效</span></div>
+      <div class="row"><span class="k">触发</span><span class="v"><span class="badge b-auto">自动</span></span></div>
+    </div>
+  </section>
+
+  <!-- ═══════ 开发与工具 ═══════ -->
+  <section>
+    <h2><span class="cat c5" style="margin-bottom:0">开发与工具</span><span class="tag">对话里直接产出 · 3 个</span></h2>
+
+    <div class="card key">
+      <span class="cat c5">开发与工具</span>
+      <h3>genui · 回复内交互界面 <span class="ver">v0.9.6</span><span class="badge b-auto" style="margin-left:8px">重点</span></h3>
+      <p class="desc">AI 在回复里直接渲染可交互组件：布局、表格、图表、表单、问卷、流程图、3D——不用跳出对话就能用看板、答题、看数据。</p>
+      <ul>
+        <li>20+ 组件：卡片/表格/图表（柱状/折线/环图）/函数图/流程/时间轴/表单/问卷/3D 场景/Mermaid</li>
+        <li><b>交互就地完成</b>（判卷、展开、选中），不打断对话，零往返</li>
+        <li>交互状态按「会话 + 内容指纹」持久化，刷新/重放不丢</li>
+        <li>问卷模式：每题单选 + 一次提交，本地判分</li>
+        <li>严格 JSON 校验：坏围栏降级为代码块，不崩</li>
+      </ul>
+      <div class="detail">
+        <div class="box"><h4>怎么用</h4><p>让 AI「给我做个对比表 / 出个进度看板 / 来个选择题」，AI 直接在回复里渲染。</p></div>
+        <div class="box"><h4>怎么触发</h4><p><span class="badge b-auto">AI 自动</span>（结构化表达时主动渲染）；也可用 render_ui 工具主动输出。</p></div>
+        <div class="box"><h4>实测体验</h4><p>本白皮书本身的表格/卡片就是用 genui 渲染的；交互组件（问卷/看板）就地判分、状态持久。</p></div>
+      </div>
+      <div class="example"><b>业务场景：</b>「把这三个方案的优缺点做成对比表，再来个投票按钮」——回复里直接出现可交互表格，点按钮即反馈。</div>
+    </div>
+
+    <div class="card">
+      <span class="cat c5">开发与工具</span>
+      <h3>dshmarket · 插件市场 <span class="ver">v1.36.0</span></h3>
+      <p class="desc">可视化插件市场：浏览、搜索、一键安装社区插件；本白皮书里一半插件都从这儿来。</p>
+      <ul>
+        <li>分类/关键词/下载量浏览，一键安装</li>
+        <li>安装带评估（build 脚本白名单提示、依赖检查）</li>
+      </ul>
+      <div class="row"><span class="k">怎么用</span><span class="v">设置 → 插件市场</span></div>
+      <div class="row"><span class="k">触发</span><span class="v"><span class="badge b-ui">界面操作</span></span></div>
+      <div class="example"><b>场景：</b>「有没有能画图的插件？」——市场里搜、看评分、点装好。</div>
+    </div>
+
+    <div class="card">
+      <span class="cat c5">开发与工具</span>
+      <h3>dsh-preset-lint · 预设体检 <span class="ver">v0.1.0</span></h3>
+      <p class="desc">Agent 预设的「体检仪」：保存预设后自动静态校验组合配置，问题写进宿主日志，避免带病上阵。</p>
+      <div class="row"><span class="k">怎么用</span><span class="v">无需操作；保存预设时自动体检</span></div>
+      <div class="row"><span class="k">触发</span><span class="v"><span class="badge b-auto">自动</span>（预设保存后）</span></div>
+    </div>
+  </section>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span><b>LUTE Agentic System</b> · 插件能力图谱</span>
+    <span>19 插件 · 9 重点详解 · 更新 2026-08-30</span>
+    <a href="index.html">← 返回总览</a>
+  </div>
+</footer>
+</body>
+</html>

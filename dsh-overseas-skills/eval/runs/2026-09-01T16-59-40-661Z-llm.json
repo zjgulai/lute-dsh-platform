@@ -1,0 +1,9 @@
+{
+  "schema": "llm-run.v1",
+  "total": 70,
+  "strictHit": 70,
+  "looseHit": 70,
+  "strictPct": 100,
+  "loosePct": 100,
+  "fails": []
+}

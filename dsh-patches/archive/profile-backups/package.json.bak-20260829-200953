@@ -1,0 +1,38 @@
+{
+  "name": "dsh-profile-desktop",
+  "private": true,
+  "dependencies": {
+    "@deepseek-ai/dsh-deepresearch": "file:/Users/lute/project/Magpie-Horch/dsh-deepresearch-local",
+    "@furongjun1999/dsh-memory": "0.4.0",
+    "@zseven-w/dsh-noema": "0.1.0-rc.3",
+    "@linxin666/dsh-client-ui-git-graph": "0.3.6",
+    "@linxin666/dsh-client-ui-skill-explorer": "0.3.6",
+    "@liustack/modlens": "3.25.2",
+    "dsh-better-sidebar": "0.17.1",
+    "dsh-agent-team-gui": "file:/Users/lute/project/Magpie-Horch/dsh-agent-team-gui-local",
+    "dsh-context": "0.38.1",
+    "dsh-theme": "file:/Users/lute/project/Magpie-Horch/dsh-theme-local",
+    "dsh-vision-router": "2.0.1",
+    "dshmarket": "1.36.0"
+  },
+  "dsh": {
+    "profile": {
+      "bundles": [
+        "@deepseek-ai/dsh-base",
+        "@deepseek-ai/dsh-web-app",
+        "@deepseek-ai/dsh-deepresearch",
+        "dsh-agent-team-gui",
+        "@zseven-w/dsh-noema",
+        "dsh-better-sidebar",
+        "@liustack/modlens",
+        "dsh-vision-router",
+        "dsh-context",
+        "@furongjun1999/dsh-memory",
+        "dshmarket",
+        "@linxin666/dsh-client-ui-git-graph",
+        "@linxin666/dsh-client-ui-skill-explorer"
+      ],
+      "patchReload": "live"
+    }
+  }
+}

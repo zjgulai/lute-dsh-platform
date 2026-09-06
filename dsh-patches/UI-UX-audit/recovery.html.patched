@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" />
+    <title>LUTE Agentic System Recovery</title>
+    <script type="module" crossorigin src="./assets/recovery-CcF1mk2A.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-CbXtAM7H.js">
+    <link rel="modulepreload" crossorigin href="./assets/DesktopFrame-uOj0T9GT.js">
+    <link rel="modulepreload" crossorigin href="./assets/addEventListener-Bd4JDkiQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/CompositeRoot-37gzjW78.js">
+    <link rel="modulepreload" crossorigin href="./assets/scroll-area-Dzpbb0Zp.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-DSm5oYzE.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-CQkNWuEf.js">
+    <link rel="stylesheet" crossorigin href="./assets/DesktopFrame-Bk-6FzWf.css">
+  <link rel="stylesheet" crossorigin href="./assets/dsh-theme.css"></head>
+  <body><div id="root"></div><script src="./recovery-override.js" defer></script>
+</body>
+</html>

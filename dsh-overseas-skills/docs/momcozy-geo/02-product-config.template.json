@@ -1,0 +1,14 @@
+{
+  "name": "【待填】产品全名，如 Momcozy M9 Wearable Breast Pump",
+  "description": "【待填】一句话卖点",
+  "sku": "【待填】SKU",
+  "brand": { "name": "Momcozy" },
+  "offers": {
+    "price": "【待填】数字，如 159.99",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "【待填】产品页 URL"
+  },
+  "image": ["【待填】产品主图 URL"],
+  "aggregateRating": { "ratingValue": "【待填】如 4.8", "reviewCount": "【待填】如 3200" }
+}

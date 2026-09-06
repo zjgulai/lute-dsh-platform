@@ -1,0 +1,29 @@
+skill:
+  name: 竞品替代分析
+  version: "1.1.0"
+  type: pattern
+  parent_skill: mkt-main-hub
+  related_skills:
+    - mkt-copywriting
+    - mkt-launch-strategy
+    - mkt-ad-creative
+  triggers:
+    - 竞品分析
+    - 竞品替代
+    - 差异化定位
+    - 竞争对比
+    - alternative-to
+  capabilities:
+    - 竞品功能对比
+    - 替代方案矩阵
+    - 差异化定位声明
+    - 竞争话术脚本
+  output_formats:
+    - text
+    - markdown
+  complexity: standard
+  metadata:
+    last_updated: "2026-09-03"
+    license: MIT
+    author: coreyhaines31
+    source: https://github.com/coreyhaines31/marketingskills

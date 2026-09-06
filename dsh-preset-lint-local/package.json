@@ -1,0 +1,13 @@
+{
+  "name": "dsh-preset-lint-local",
+  "version": "0.1.0",
+  "description": "agent.cordis.yml 组合词汇静态校验钩子：preset 保存后自动 lint 并写入宿主日志",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

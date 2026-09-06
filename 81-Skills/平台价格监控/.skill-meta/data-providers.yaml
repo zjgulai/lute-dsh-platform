@@ -1,0 +1,100 @@
+# 价格监控数据提供者配置
+# 支持多源价格数据获取、自动降级、缓存策略
+
+data_providers:
+  # Amazon 官方 API（优先）
+  amazon:
+    type: api
+    enabled: true
+    priority: 10
+    rate_limit: "100/hour"
+    timeout: 30
+    retries: 3
+    fallback_enabled: true
+    cache_ttl: 3600
+    config:
+      access_key: "${AMAZON_ACCESS_KEY}"
+      secret_key: "${AMAZON_SECRET_KEY}"
+      partner_tag: "${AMAZON_PARTNER_TAG}"
+      marketplace: "${AMAZON_MARKETPLACE:-US}"
+      use_api: true
+
+  # Amazon 网页抓取（备用/风控时启用）
+  amazon_scraper:
+    type: scraper
+    enabled: false  # 默认禁用，合规风险
+    priority: 50
+    rate_limit: "10/hour"
+    timeout: 60
+    retries: 1
+    fallback_enabled: false
+    cache_ttl: 7200
+    config:
+      proxy_enabled: "${PROXY_ENABLED:-false}"
+      proxy_url: "${PROXY_URL}"
+
+  # eBay API
+  ebay:
+    type: api
+    enabled: true
+    priority: 20
+    rate_limit: "5000/day"
+    timeout: 30
+    retries: 3
+    fallback_enabled: true
+    cache_ttl: 3600
+    config:
+      app_id: "${EBAY_APP_ID}"
+      cert_id: "${EBAY_CERT_ID}"
+      dev_id: "${EBAY_DEV_ID}"
+      site: "${EBAY_SITE:-US}"
+      sandbox: false
+
+  # AliExpress API
+  aliexpress:
+    type: api
+    enabled: true
+    priority: 30
+    rate_limit: "10000/day"
+    timeout: 30
+    retries: 3
+    fallback_enabled: true
+    cache_ttl: 3600
+    config:
+      app_key: "${ALIEXPRESS_APP_KEY}"
+      app_secret: "${ALIEXPRESS_APP_SECRET}"
+      tracking_id: "${ALIEXPRESS_TRACKING_ID}"
+      locale: "${ALIEXPRESS_LOCALE:-en_US}"
+      currency: "${ALIEXPRESS_CURRENCY:-USD}"
+
+  # Mock Provider（测试/降级用）
+  mock:
+    type: mock
+    enabled: true
+    priority: 100
+    fallback_enabled: true
+    cache_ttl: 0
+    config:
+      price_variance: 0.1
+      stock_probability: 0.85
+
+# 降级策略配置
+fallback_strategy:
+  enabled: true
+  order:
+    - cache  # 优先使用缓存
+    - mock   # 其次使用 Mock 数据
+    - skip   # 最后跳过
+
+# 全局缓存配置
+cache:
+  type: memory  # memory / redis / file
+  ttl: 3600
+  max_size: 10000
+
+# 监控配置
+monitoring:
+  log_level: info
+  metrics_enabled: true
+  alert_on_failure: true
+  failure_threshold: 5  # 连续失败5次告警

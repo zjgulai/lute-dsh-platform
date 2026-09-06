@@ -1,0 +1,55 @@
+{
+  "source_url": "https://momcozy.com/products/momcozy-mobile-flow-hands-free-breast-pump",
+  "collected_at": "2026-09-06T07:05Z",
+  "method": "detail-page JSON-LD（application/ld+json，站点自带 Product schema）",
+  "name": "Momcozy Mobile Flow™ Hands-Free Breast Pump | M9",
+  "brand": "Momcozy",
+  "page_title": "M9 Mobile Hands-free Breast Pump | Personalised Pumping",
+  "default_sku": "BP266-NR71BA-A",
+  "image": "https://momcozy.com/cdn/shop/files/MomcozyMoblieFlow_BreastPump_7.jpg?v=1776163451&width=1024",
+  "aggregateRating": {
+    "ratingValue": "4.7",
+    "reviewCount": "654",
+    "bestRating": "5.0",
+    "worstRating": "1.0"
+  },
+  "price_valid_until": "2026-09-16",
+  "variants": [
+    {
+      "variant": "Double / Cozy Red",
+      "sku": "BP266-NR71BA-A",
+      "price": "215.99",
+      "currency": "USD",
+      "gtin": "571890654951",
+      "variant_id": "43846410830022",
+      "image": "https://momcozy.com/cdn/shop/files/MomcozyMoblieFlow_BreastPump_7.jpg?v=1776163451&width=1024"
+    },
+    {
+      "variant": "Double / Quill Grey",
+      "sku": "BP266-GR71BA-A",
+      "price": "215.99",
+      "currency": "USD",
+      "gtin": "97142080975",
+      "variant_id": "43962121257158",
+      "image": "https://momcozy.com/cdn/shop/files/MomcozyMoblieFlow_BreastPump_7.jpg?v=1776163451&width=1024"
+    },
+    {
+      "variant": "Single / Cozy Red",
+      "sku": "BP266-NR70BA-A",
+      "price": "135.99",
+      "currency": "USD",
+      "gtin": "97142080968",
+      "variant_id": "43928494735558",
+      "image": "https://momcozy.com/cdn/shop/files/MomcozyMoblieFlow_BreastPump_7.jpg?v=1776163451&width=1024"
+    },
+    {
+      "variant": "Single / Quill Grey",
+      "sku": "BP266-GR70BA-A",
+      "price": "135.99",
+      "currency": "USD",
+      "gtin": "97142080961",
+      "variant_id": "43962121289926",
+      "image": "https://momcozy.com/cdn/shop/files/MomcozyMoblieFlow_BreastPump_7.jpg?v=1776163451&width=1024"
+    }
+  ]
+}

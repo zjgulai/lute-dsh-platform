@@ -1,0 +1,14 @@
+{
+  "name": "Momcozy Mobile Flow™ Hands-Free Breast Pump | M9",
+  "description": "Wearable, hands-free breast pump with app-personalized pumping modes and DoubleFit™ flange — pump discreetly while working, commuting, or caring for baby.",
+  "sku": "BP266-NR71BA-A",
+  "brand": { "name": "Momcozy" },
+  "offers": {
+    "price": "215.99",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "https://momcozy.com/products/momcozy-mobile-flow-hands-free-breast-pump?variant=43846410830022"
+  },
+  "image": ["https://momcozy.com/cdn/shop/files/MomcozyMoblieFlow_BreastPump_7.jpg?v=1776163451&width=1024"],
+  "aggregateRating": { "ratingValue": "4.7", "reviewCount": "654" }
+}

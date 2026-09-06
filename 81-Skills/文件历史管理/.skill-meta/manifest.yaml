@@ -1,0 +1,21 @@
+name: file-history-manager
+version: "1.0.0"
+type: utility
+category: developer-tools
+author: user
+description: 管理 Claude Code 文件历史备份与回退
+compatibility:
+  claude: native
+  kimi: native
+  cursor: native
+triggers:
+  - 恢复文件
+  - 找回历史版本
+  - 回退到之前
+  - /restore
+  - /history
+  - 备份列表
+commands:
+  list-history: python skills/file-history-manager/scripts/list-history.py
+  restore-file: python skills/file-history-manager/scripts/restore-file.py
+  backup-now: python skills/file-history-manager/scripts/backup-now.py

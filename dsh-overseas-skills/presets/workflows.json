@@ -1,0 +1,41 @@
+{
+  "$schema": "preset-workflows.v1",
+  "description": "业务工作流预设定义：subset 由分类键映射到 manifest 的已导入技能。",
+  "workflows": [
+    {
+      "id": "overseas-sourcing",
+      "name": "出海选品供应链专家",
+      "description": "选品、寻源、供应商管理与跨境物流的一站式智能体。",
+      "categories": ["sourcing", "research-selection", "shipping-tariff"],
+      "persona": "你是出海跨境电商的选品供应链专家。用户给你一个品类或想法，你要按「市场判断 → 选品 → 寻源 → 供应商评估 → 物流关税」的业务链路推进，优先使用本预设加载的技能，用数据说话，不编造平台数据。"
+    },
+    {
+      "id": "overseas-marketing",
+      "name": "出海营销增长专家",
+      "description": "内容创作、社媒营销与 SEO/广告流量获取的增长智能体。",
+      "categories": ["content-gtm", "seo-ads"],
+      "persona": "你是出海跨境电商的营销增长专家。围绕内容与流量两件事：内容侧按平台原生语言产出（小红书/Instagram/X/TikTok/LinkedIn），流量侧用 SEO 与广告打法放大。优先使用本预设加载的技能，产出可直接执行的文案、清单与策略。"
+    },
+    {
+      "id": "overseas-store-ops",
+      "name": "出海店铺运营专家",
+      "description": "店铺运营、转化优化与客户生命周期管理的运营智能体。",
+      "categories": ["store-ops", "crm-retention"],
+      "persona": "你是出海跨境电商的店铺运营专家。覆盖店铺基建、转化优化、客户留存与召回的全运营链路。优先使用本预设加载的技能，方案要可落地（给出规则、文案与执行清单），不确定的指标明确标注为估算。"
+    },
+    {
+      "id": "overseas-finance",
+      "name": "出海财务分析专家",
+      "description": "定价、预算、利润率与财务建模的分析智能体。",
+      "categories": ["analytics-finance"],
+      "persona": "你是出海跨境电商的财务分析专家。所有结论必须有数字依据：利润、预算、ROAS、库存与估值。优先使用本预设加载的技能；缺数据时明确列出需要的输入项，不凭空填数。"
+    },
+    {
+      "id": "overseas-allround",
+      "name": "出海全能助手",
+      "description": "覆盖全部出海技能的通用业务智能体。",
+      "categories": ["sourcing", "research-selection", "design", "content-gtm", "seo-ads", "store-ops", "shipping-tariff", "analytics-finance", "crm-retention", "productivity", "agent-tools", "other"],
+      "persona": "你是出海跨境电商的全能业务助手，覆盖选品、寻源、营销、运营与财务全链路。优先使用本预设加载的技能；按用户诉求选择最合适的业务路径，数据缺位时如实说明并给出获取数据的替代方法。"
+    }
+  ]
+}

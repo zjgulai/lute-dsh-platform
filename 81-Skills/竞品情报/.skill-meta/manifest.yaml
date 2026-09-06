@@ -1,0 +1,26 @@
+name: pp-competitor-intelligence
+version: "1.1.0"
+description: Gather competitor intelligence and competitive landscape analysis from public sources
+category: product-planning
+complexity: standard
+workflows:
+  - product-launch
+  - daily-operations
+dependencies:
+  hard: []  # 无强依赖
+  soft:  # 软依赖
+    - so-amazon-competitor-monitor  # 监控数据用于情报分析
+    - pp-product-research-matrix  # 选品方向用于竞争分析
+  provides:  # 输出供下游使用
+    - scm-supplier-evaluation  # 竞品要求用于供应商评估
+    - so-amazon-listing-optimizer  # 竞品情报用于差异化定位
+  parallel:  # 可并行执行
+    - pp-jtbd-analyzer  # 需求+竞争分析可并行
+author: lute-skills-creator
+license: MIT
+tags:
+  - competitor
+  - intelligence
+  - market-research
+  - competitive-analysis
+  - competitive-landscape

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgenticOS 徽标 — 一行最终版（宿主真实约束）</title>
+<style>
+  /* 宿主布局关键规则（dsh-client-ui-sidebar） */
+  .logoRow { box-sizing:border-box; justify-content:flex-end; align-items:center; gap:8px; height:60px; margin-bottom:8px; padding:8px 0 8px 4px; display:flex; overflow:hidden; }
+  .brand { min-width:0; flex:1; align-items:center; padding:0; display:inline-flex; overflow:hidden; }
+  .brandIdentity { align-items:center; gap:8px; min-width:0; height:24px; display:inline-flex; }
+  .brandMark { flex:none; display:inline-flex; }
+  .brandName { letter-spacing:.04em; align-items:center; gap:6px; min-width:0; height:24px; display:inline-flex; }
+  .iconButton { width:28px; height:28px; flex:none; display:inline-flex; align-items:center; justify-content:center; color:#9a9aa0; }
+
+  /* 插件 CSS（与 brand.tsx 一致） */
+  [data-plugin="dsh-root-brand"].dsh-rb-name {
+    display:flex; flex-wrap:wrap; align-items:center; gap:6px;
+    min-width:0; max-width:100%;
+    color:#58B848; font-weight:600; font-size:11px; line-height:18px;
+    letter-spacing:.5px; white-space:nowrap;
+  }
+  [data-plugin="dsh-root-brand"] .dsh-rb-agentic {
+    display:inline-flex; align-items:center; gap:3px; width:fit-content;
+    height:15px; padding:0 5px; border-radius:999px;
+    font-size:8px; font-weight:600; line-height:1; letter-spacing:0;
+    white-space:nowrap; flex:0 0 auto;
+    color:var(--label,#e8e8ea);
+    background:linear-gradient(120deg, rgba(88,184,72,.34), rgba(88,184,72,.12));
+    border:1px solid rgba(88,184,72,.65);
+    box-shadow:0 0 8px rgba(88,184,72,.28), inset 0 1px 0 rgba(255,255,255,.10);
+  }
+  [data-plugin="dsh-root-brand"] .dsh-rb-agentic::before {
+    content:""; width:3px; height:3px; border-radius:50%; background:#58B848;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; padding:26px 30px 36px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif; background:#f4f4f5; color:#1c1c1e; }
+  h1 { font-size:18px; font-weight:700; margin:0 0 6px; }
+  .sub { font-size:12.5px; color:#6b6b6f; margin:0 0 18px; line-height:1.6; }
+  .sub b { color:#3a3a3e; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; max-width:1160px; }
+  .card { background:#fff; border:1px solid #e6e6e9; border-radius:14px; padding:18px 20px; box-shadow:0 2px 10px rgba(0,0,0,.05); }
+  .card-head { display:flex; align-items:baseline; gap:8px; margin-bottom:4px; font-weight:700; font-size:14px; }
+  .card-tag { font-size:11px; font-weight:700; color:#fff; background:#58B848; padding:2px 8px; border-radius:5px; }
+  .card-note { font-size:12px; color:#71717a; margin:0 0 10px; line-height:1.6; }
+  .lbl { margin:12px 0 6px; font-size:11px; color:#8a8a90; letter-spacing:.5px; }
+  .sidebar { width:232px; border-radius:12px; padding:12px; }
+  .sidebar.light { background:#ffffff; border:1px solid #e3e3e6; --label:#1c1c1e; }
+  .sidebar.dark { background:#1a1c1f; --label:#e8e8ea; }
+  .ruler { display:flex; font-size:9.5px; color:#8a8a90; margin-top:2px; }
+  .ruler span { border-left:1px solid #c9c9cd; padding-left:3px; }
+  .divider { grid-column:1/-1; height:1px; background:#e6e6e9; margin:6px 0 0; }
+  .foot { margin-top:16px; font-size:12px; color:#8a8a90; max-width:1160px; line-height:1.6; }
+  code { background:#ececee; padding:1px 5px; border-radius:4px; font-size:11px; }
+</style>
+</head>
+<body>
+<h1>AgenticOS · 一行最终版（宿主真实宽度渲染）</h1>
+<p class="sub">按宿主实测：名字槽 ≈ <b>114px</b>。本版为一行动态释放：<b>路特创新</b>（11px/字距0.5，约 46px）+ <b>● AgenticOS</b>（8px 紧凑胶囊，约 56px）＋间隙 6px ≈ <b>108px ≤ 114px</b> ✓。徽标保持绿底渐变蒙版（34%→12%）＋ 65% 描边 ＋ 8px 辉光。</p>
+
+<div class="grid">
+  <div class="card">
+    <div class="card-head"><span class="card-tag">侧栏 · 一行</span> 深色（232px）</div>
+    <div class="sidebar dark">
+      <div class="logoRow">
+        <div class="brand"><div class="brandIdentity">
+          <span class="brandMark"><svg width="46" height="24" viewBox="0 0 61 32" fill="none"><g stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 20 V3 H14.5 C18.6 3 21.5 5.9 21.5 9.8 C21.5 13.7 18.6 16.5 14 16.5 H6.5"/><path d="M14 16.5 L20.5 20"/><path d="M32.75 11.75 C32.75 6.3 25.5 6.3 25.5 11.75 C25.5 17.2 32.75 17.2 32.75 11.75 C32.75 6.3 40 6.3 40 11.75 C40 17.2 32.75 17.2 32.75 11.75"/><path d="M45.5 3 H57"/><path d="M51.25 3 V20"/></g><rect x="6.5" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/><rect x="25.5" y="26" width="16.5" height="5" rx="2.5" fill="#A8A8A8"/><rect x="44" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/></svg></span>
+          <span class="brandName"><span data-plugin="dsh-root-brand" class="dsh-rb-name">路特创新<span class="dsh-rb-agentic">AgenticOS</span></span></span>
+        </div></div>
+        <span class="iconButton">⏸</span>
+      </div>
+      <div class="ruler"><span style="width:58px">mark 46</span><span style="width:114px">name 槽 114px</span></div>
+    </div>
+
+    <div class="lbl">浅色（232px）</div>
+    <div class="sidebar light">
+      <div class="logoRow">
+        <div class="brand"><div class="brandIdentity">
+          <span class="brandMark"><svg width="46" height="24" viewBox="0 0 61 32" fill="none"><g stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 20 V3 H14.5 C18.6 3 21.5 5.9 21.5 9.8 C21.5 13.7 18.6 16.5 14 16.5 H6.5"/><path d="M14 16.5 L20.5 20"/><path d="M32.75 11.75 C32.75 6.3 25.5 6.3 25.5 11.75 C25.5 17.2 32.75 17.2 32.75 11.75 C32.75 6.3 40 6.3 40 11.75 C40 17.2 32.75 17.2 32.75 11.75"/><path d="M45.5 3 H57"/><path d="M51.25 3 V20"/></g><rect x="6.5" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/><rect x="25.5" y="26" width="16.5" height="5" rx="2.5" fill="#A8A8A8"/><rect x="44" y="26" width="16.5" height="5" rx="2.5" fill="#58B848"/></svg></span>
+          <span class="brandName"><span data-plugin="dsh-root-brand" class="dsh-rb-name">路特创新<span class="dsh-rb-agentic">AgenticOS</span></span></span>
+        </div></div>
+        <span class="iconButton">⏸</span>
+      </div>
+      <div class="ruler"><span style="width:58px">mark 46</span><span style="width:114px">name 槽 114px</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="card-tag">2.4× 特写</span> 蒙版细节</div>
+    <div style="display:flex;gap:16px;align-items:flex-start;margin-top:6px">
+      <div>
+        <div style="background:#1a1c1f;border-radius:10px;padding:12px 16px;transform:scale(2.4);transform-origin:left top;color:#e8e8ea;--label:#e8e8ea">
+          <span data-plugin="dsh-root-brand" class="dsh-rb-name">路特创新<span class="dsh-rb-agentic">AgenticOS</span></span>
+        </div>
+        <div class="lbl">深色 2.4×</div>
+      </div>
+      <div>
+        <div style="background:#fff;border:1px solid #e3e3e6;border-radius:10px;padding:12px 16px;transform:scale(2.4);transform-origin:left top;color:#1c1c1e;--label:#1c1c1e">
+          <span data-plugin="dsh-root-brand" class="dsh-rb-name">路特创新<span class="dsh-rb-agentic">AgenticOS</span></span>
+        </div>
+        <div class="lbl">浅色 2.4×</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="foot">
+    <b>本版改动：</b>徽标文字 <code>AgenticOS</code>（原 agentic system，去掉 text-transform）· 恢复一行布局（column→row，gap 6px）· 名字 12px→<b>11px</b>/字距 1.2→<b>0.5</b> · 徽标 9px→<b>8px</b>、高 15px、内边距 5px、圆点 3px · 蒙版不变（34%→12% 渐变＋65% 描边＋8px 辉光，无 backdrop-filter）。
+    已 <code>pnpm build</code>（9.14kB）＋测试 5/5，安装副本已同步。重启生效。
+  </div>
+</div>
+</body>
+</html>
