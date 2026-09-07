@@ -3,6 +3,8 @@ import { existsSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { spawn } from "node:child_process";
+import { createServer } from "node:http";
+import { randomBytes, createHash } from "node:crypto";
 import { defineTool } from "@deepseek-ai/dsh-tools";
 import * as McpClient from "@deepseek-ai/dsh-mcp-client";
 import { BOARDS, CONNECTIONS } from "./catalog.js";
@@ -138,12 +140,106 @@ user-invocable: true
 4. 删除边界：删笔记=回收站（可恢复）；删文件夹=仅空目录；删除知识库无接口——只能清空库内笔记后由用户在 App 删除，需如实告知。
 5. 整理完成后输出报告：移动/标签/删除的成功与失败清单。
 
+## 官方 MCP 路由（38 工具）
+
+MCP 板块启用「得到大脑（官方 MCP）」后，模型面另有 mcp__getnote__* 工具（38 个）。路由规则：
+
+1. **日常读写优先原生**：记笔记 / 搜索 / 读笔记 / 移库 / 标签 / 删除 / 配额 → 用 getnote_*（语义优化过、带 true-move 移库语义）。
+2. **原生没有的能力 → 官方 MCP**：
+   - 生成分享链接：mcp__getnote__share_note
+   - 订阅抖音博主：mcp__getnote__follow_topic_blogger（配套 list_topic_bloggers / list_topic_blogger_contents / get_blogger_content_detail）
+   - 订阅直播：mcp__getnote__follow_topic_live（配套 list_topic_lives / get_live_detail）
+   - 录音时间线 / 逐字转写 / 快捷笔记 / 待办：mcp__getnote__get_note_timeline / get_note_transcript / get_note_quick_note / get_note_todos
+   - 读笔记原文与附件：mcp__getnote__get_note_original / get_note_attachments
+   - 官方图片上传路径：mcp__getnote__upload_image（配套 get_upload_config / get_upload_token）
+3. **等价对照（避免混用，默认走左侧原生）**：getnote_save↔mcp__getnote__save_note、getnote_recall↔mcp__getnote__recall、getnote_recall_kb↔mcp__getnote__recall_knowledge、getnote_list↔mcp__getnote__list_notes、getnote_get↔mcp__getnote__get_note、getnote_topics↔mcp__getnote__list_topics、getnote_move_to_topic↔mcp__getnote__batch_add_notes_to_topic（配合 remove_note_from_topic）、getnote_quota↔mcp__getnote__get_quota。
+4. 官方 MCP 未启用时 mcp__getnote__* 不可用 → 涉及增量能力时提示用户去设置开启，或如实说明原生路径无解。
+
 ## 何时不用
 
 - 用户说「便签/备忘录」但未指明得到大脑 → 先问一句是否指得到大脑。
 - 其他知识库产品（Notion、飞书知识库等）→ 走对应连接，不触发本技能。
 - 索要密钥、要求还原脱敏笔记、越权读取 → 拒绝，不触发本技能。
 `;
+
+/* ── 引导技能（pixpix-ecommerce）：业务黑话 → MCP 工具映射 ──────────────── */
+const PIXPIX_SKILL_DIR = join(homedir(), ".dsh", "skills", "pixpix-ecommerce");
+const PIXPIX_SKILL_FILE = join(PIXPIX_SKILL_DIR, "SKILL.md");
+const PIXPIX_SKILL_TEMPLATE = `---
+name: "pixpix-ecommerce"
+title: "PixPix 电商视觉"
+description: "PixPix 电商视觉工作台：爆款复刻海报、商品套图、服装套图、模特试穿（服装/鞋/内衣/通用穿戴）、A+ 详情页、15 秒带货视频、竞品视频复刻、商品精修/换色/抠图、图片与视频高清化、视频压缩/去水印/抠背景、AI 生图/生视频/配音、生成模特、积分与会员权益查询。触发词：爆款复刻、竞品海报、商品套图、主图、白底图、服装套图、模特试穿、试穿海报、A+ 详情页、详情页模块、带货视频、电商视频、视频复刻、商品精修、修图、换色、抠图、去背景、高清放大、画质修复、视频压缩、去水印、AI 生图、AI 配音、生成模特。何时不用：与电商视觉无关的通用绘画；网页端专属的亚马逊合成人像合规标记（synthetic-performer-tagger）无 MCP 工具，指引用户去网页操作。"
+enabled: "true"
+disable-model-invocation: false
+user-invocable: true
+---
+
+# PixPix 电商视觉 · 业务指引
+
+本技能是「万物互联」中 **PixPix（AI 图像 MCP）** 的模型侧入口。37 个工具均已挂载为 mcp__pixpix__ 前缀；本文件把「业务黑话」映射到正确工具，让模型在用户说人话时选对工具。
+
+## 业务场景速查（用户怎么说 → 用哪个工具）
+
+| 用户业务诉求 | 首选工具（mcp__pixpix__ 前缀省略） |
+| --- | --- |
+| 爆款复刻 / 参考竞品海报风格做自家图 | run_tool-generation-bestseller-replica |
+| 商品套图 / 一整套主图 / 白底图+场景图+卖点图 | run_tool-generation-product-suite |
+| 服装套图（白底/模特/细节/卖点） | run_tool-generation-apparel-set |
+| 把衣服穿到模特身上 / 试穿 | run_tool-generation-apparel-try-on |
+| 把鞋穿到模特脚上 / 试穿海报 | run_tool-generation-footwear-try-on |
+| 内衣试穿 | run_tool-generation-lingerie-try-on |
+| 配饰/眼镜/帽子等穿戴展示 | run_tool-generation-ai-wear-anything |
+| A+ 详情页 / 详情页模块图 | run_tool-generation-a-plus-detail |
+| 15 秒带货视频 / 口播 / 短视频带货 | run_generation-viral-ecommerce-video |
+| 参考竞品视频换自家商品 / 视频复刻 | run_tool-generation-video-replication |
+| 修图 / 划痕 / 光泽 / 透视校正 | run_tool-generation-product-retouch |
+| 商品换色（保持材质） | run_tool-generation-product-recolor |
+| 抠图 / 去背景（图片） | run_generation-remove-bg |
+| 图片高清放大 | run_generation-high-definition-image |
+| 视频放大 / 超分 | run_generation-flux-video-upscale |
+| 老片/真人视频画质修复 | run_generation-high-definition-video |
+| 视频抠背景 | run_generation-video-remove-bg |
+| 视频去水印 | run_generation-video-remove-watermark |
+| 视频压缩 | run_generation-video-compression |
+| 生成模特人像 | run_generation-model |
+| AI 生图（文生图/图生图） | generate_image |
+| AI 生视频 | generate_video |
+| 文案配音 / TTS | generate_tts |
+
+## 标准工作流（生成类任务）
+
+1. **素材上传**（本地图/视频）：prepare_image_upload → 原生 HTTP PUT → complete_image_upload（视频同理 prepare_video_upload / complete_video_upload）。会话内已有图片附件优先直接使用，不要让用户重复选图。
+2. **提交任务**：调用上表对应工具，只返回 taskId，不直接返回成片。
+3. **轮询进度**：get_generation_status（单个）或 get_generation_status_batch（批量），到终态后再取结果。
+4. **展示结果**：本宿主用 get_generation_status 返回的下载链接交付给用户。
+5. **成本预估**：生成前可先 get_generation_credits 估算积分；get_membership_benefit 查会员与余额。
+6. **模型能力**：不确定模型/参数时先 list_generation_models。
+
+## 注意
+
+- 生成任务异步完成，提交后必须轮询状态，不要谎称「已完成」。
+- 工具返回的错误（积分不足、参数非法、限流）原样转达用户，不要重试轰炸。
+- 真人素材需用户确认已获使用授权；AI 合成人像用于亚马逊上架时，合规标记（contains-synthetic-performer）需在 PixPix 网页端工具完成（synthetic-performer-tagger，MCP 未暴露）。
+- 本技能只做映射与流程指引；凭证、token 由宿主管理，模型不可见，禁止索取。
+`;
+async function ensurePixpixSkill() {
+  if (!existsSync(PIXPIX_SKILL_FILE)) {
+    await mkdir(PIXPIX_SKILL_DIR, { recursive: true });
+    await writeFile(PIXPIX_SKILL_FILE, PIXPIX_SKILL_TEMPLATE, "utf8");
+    return;
+  }
+  // 模板升级（幂等）：缺「业务场景速查」章节时用新模板重写，保留旧文件的模型调用/可用性 flag
+  const text = await readFile(PIXPIX_SKILL_FILE, "utf8");
+  if (!text.includes("## 业务场景速查")) {
+    const fm = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text);
+    const dis = fm && /^disable-model-invocation:\s*(true|false)\s*$/m.exec(fm[1]);
+    const usr = fm && /^user-invocable:\s*(true|false)\s*$/m.exec(fm[1]);
+    let next = PIXPIX_SKILL_TEMPLATE;
+    if (dis) next = next.replace("disable-model-invocation: false", "disable-model-invocation: " + dis[1]);
+    if (usr) next = next.replace("user-invocable: true", "user-invocable: " + usr[1]);
+    await writeFile(PIXPIX_SKILL_FILE, next, "utf8");
+  }
+}
 async function ensureSkill() {
   if (!existsSync(SKILL_FILE)) {
     await mkdir(SKILL_DIR, { recursive: true });
@@ -152,7 +248,7 @@ async function ensureSkill() {
   }
   // 模板升级（幂等）：缺「整理分类」章节时用新模板重写，保留旧文件的模型调用/可用性 flag
   const text = await readFile(SKILL_FILE, "utf8");
-  if (!text.includes("## 整理分类")) {
+  if (!text.includes("## 官方 MCP 路由")) {
     const fm = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text);
     const dis = fm && /^disable-model-invocation:\s*(true|false)\s*$/m.exec(fm[1]);
     const usr = fm && /^user-invocable:\s*(true|false)\s*$/m.exec(fm[1]);
@@ -251,7 +347,27 @@ const DEFAULT_MCP_SERVERS = [
     command: "npx",
     args: ["-y", "shopify-mcp"],
     envRefs: { SHOPIFY_ACCESS_TOKEN: "shopify_access_token", MYSHOPIFY_DOMAIN: "shopify_domain" },
+    capabilities: ["商品管理", "订单查询", "客户管理", "库存同步", "折扣/营销", "Shopify Admin GraphQL"],
+    toolCount: 45,
     note: "geli2001/shopify-mcp（已安全审查）：45 工具，仅本店 Admin GraphQL；只读由 Custom App read_* scopes 平台层强制。与「企业应用」板块的 Shopify 连接联动启用。"
+  },
+  {
+    id: "pixpix",
+    name: "PixPix（AI 图像 MCP）",
+    enabled: false,
+    transport: "streamable-http",
+    url: "https://api.pixpix.media/pixpix/mcp/oauth2",
+    capabilities: ["主图与套图", "模特与试穿", "带货视频", "图片精修", "视频精修", "AI 生图与配音", "素材与任务", "成本与权益"],
+    toolCount: 37,
+    auth: {
+      type: "oauth-pkce",
+      clientId: "pixpix-09f96e473d35412a9517873b895413b5",
+      authorizationEndpoint: "https://api.pixpix.media/pixpix/oauth2/authorize",
+      tokenEndpoint: "https://api.pixpix.media/pixpix/oauth2/token",
+      scopes: ["mcp:connect", "offline_access"],
+      resource: "https://api.pixpix.media/pixpix/mcp/oauth2"
+    },
+    note: "覆盖网页端全部电商工具（爆款复刻/套图/试穿/A+ 详情页/带货视频/视频复刻/精修等）；仅「亚马逊合成人像合规标记」为网页端本地工具（pixpix.art/tools/synthetic-performer-tagger）。OAuth 手动授权，token 0600 落盘自动刷新。"
   },
   {
     id: "getnote",
@@ -261,14 +377,204 @@ const DEFAULT_MCP_SERVERS = [
     command: "npx",
     args: ["-y", "@getnote/mcp"],
     envRefs: { GETNOTE_API_KEY: "getnote_api_key", GETNOTE_CLIENT_ID: "getnote_client_id" },
-    note: "39 工具全套（含转写/上传/订阅）。与 getnote_* 原生工具能力重叠，建议二选一启用。"
+    capabilities: ["记笔记", "找笔记", "知识库管理", "内容订阅", "上传与配额", "删除与清理"],
+    toolCount: 38,
+    note: "官方 38 项能力全套（含订阅博主/直播、分享链接、转写原文等增量能力）。日常记笔记/搜索直接用上方「得到大脑」连接即可，两边数据同源；本卡开启后新增能力自动进对话。"
   }
 ];
+const OAUTH_FILE = join(homedir(), ".dsh", "integrations", "wanzh-hulian", "oauth-pixpix.json");
+let pendingOauth = null; // { verifier, redirectUri, expiresAt }
+
+/* ── PixPix 工具业务化映射（业务视角：业务名 + 业务描述 + 场景分组） ─────────── */
+const PIXPIX_BUSINESS_META = {
+  list_generation_models: { name: "可用模型目录", desc: "查询当前可用的 AI 生图、视频、语音模型及参数限制。", scene: "素材与任务" },
+  prepare_image_upload: { name: "上传商品图片", desc: "把本地图片上传到 PixPix 素材库，供后续生成使用。", scene: "素材与任务" },
+  complete_image_upload: { name: "确认图片上传", desc: "图片上传完成后确认入库，拿到可用的图片地址。", scene: "素材与任务" },
+  prepare_video_upload: { name: "上传商品视频", desc: "把本地视频上传到 PixPix 素材库（≤200MB）。", scene: "素材与任务" },
+  complete_video_upload: { name: "确认视频上传", desc: "视频上传完成后确认入库，拿到可用的视频地址。", scene: "素材与任务" },
+  generate_image: { name: "AI 生成图片", desc: "一句话描述或参考图，生成产品图、场景图、海报。", scene: "AI 生图与配音" },
+  generate_video: { name: "AI 生成视频", desc: "一句话描述或参考图，生成视频片段。", scene: "AI 生图与配音" },
+  generate_tts: { name: "文字转配音", desc: "把文案转成口播配音，带货视频旁白可用。", scene: "AI 生图与配音" },
+  get_generation_status: { name: "查生成进度", desc: "按任务号查询生成任务的进度和结果。", scene: "素材与任务" },
+  get_generation_status_for_workbuddy: { name: "查进度（WorkBuddy 宿主）", desc: "WorkBuddy 宿主专用的任务进度查询。", scene: "素材与任务" },
+  get_generation_status_batch: { name: "批量查生成进度", desc: "一次查多个生成任务的进度和结果。", scene: "素材与任务" },
+  render_generation_result_for_codex: { name: "展示结果（Codex 宿主）", desc: "Codex 宿主专用的生成结果展示。", scene: "素材与任务" },
+  render_generation_result_in_app: { name: "展示结果（Claude 宿主）", desc: "Claude 宿主专用的生成结果展示。", scene: "素材与任务" },
+  list_generation_tasks: { name: "历史生成记录", desc: "查看、筛选历史生成任务与收藏。", scene: "素材与任务" },
+  run_generation_tool: { name: "通用生成入口", desc: "兼容入口：某项能力没有专门工具时的兜底调用。", scene: "素材与任务" },
+  get_generation_credits: { name: "估算积分成本", desc: "生成前预估某项任务要消耗多少积分。", scene: "成本与权益" },
+  get_membership_benefit: { name: "会员权益", desc: "查询会员等级、积分余额与可用生成权益。", scene: "成本与权益" },
+  "run_generation-flux-video-upscale": { name: "视频放大", desc: "把短视频放大到更高分辨率（1.5/2/3 倍）。", scene: "视频精修" },
+  "run_generation-video-remove-bg": { name: "视频抠背景", desc: "去掉视频背景，只保留前景主体。", scene: "视频精修" },
+  "run_generation-video-compression": { name: "视频压缩", desc: "压缩视频体积，方便传输与上传。", scene: "视频精修" },
+  "run_generation-video-remove-watermark": { name: "视频去水印", desc: "移除视频中的水印。", scene: "视频精修" },
+  "run_generation-high-definition-video": { name: "视频画质修复", desc: "提升真人视频/老片清晰度（720P→1080P/2K/4K）。", scene: "视频精修" },
+  "run_tool-generation-viral-ecommerce-video": { name: "15 秒带货视频", desc: "商品图+卖点 → 带音轨的 15 秒营销视频（口播/短剧/演示等 8 种类型）。", scene: "带货视频" },
+  "run_tool-generation-video-replication": { name: "竞品视频复刻", desc: "参考一条爆款视频的运镜节奏，替换成你的商品。", scene: "带货视频" },
+  "run_generation-remove-bg": { name: "图片抠图", desc: "一键去背景，输出透明 PNG 主体图。", scene: "图片精修" },
+  "run_tool-generation-product-suite": { name: "商品套图", desc: "1-3 张产品图 → 白底图+场景图+卖点图一整套主图。", scene: "主图与套图" },
+  "run_generation-high-definition-image": { name: "图片高清放大", desc: "低清图片放大到 1K/2K/4K。", scene: "图片精修" },
+  "run_tool-generation-product-recolor": { name: "商品换色", desc: "保持材质光影不变，把商品主体换成指定颜色。", scene: "图片精修" },
+  "run_tool-generation-bestseller-replica": { name: "爆款复刻海报", desc: "参考竞品爆款海报的版式风格，生成自家商品海报（网页 hot-seller-replicate 同款）。", scene: "主图与套图" },
+  "run_generation-model": { name: "生成模特人像", desc: "按性别/人种/年龄段/体型生成模特人像。", scene: "模特与试穿" },
+  "run_tool-generation-product-retouch": { name: "商品精修", desc: "修复划痕瑕疵、提升光泽与清晰度、校正色彩与透视。", scene: "图片精修" },
+  "run_tool-generation-footwear-try-on": { name: "鞋履试穿", desc: "把鞋穿到模特脚上，生成竖版双画面试穿海报。", scene: "模特与试穿" },
+  "run_tool-generation-a-plus-detail": { name: "A+ 详情页", desc: "按亚马逊等平台规范生成详情页模块图（主视觉/卖点/场景/规格）。", scene: "主图与套图" },
+  "run_tool-generation-lingerie-try-on": { name: "内衣试穿", desc: "把内衣产品自然换到成年模特身上。", scene: "模特与试穿" },
+  "run_tool-generation-apparel-try-on": { name: "服装试穿", desc: "把服装参考图穿到指定模特身上。", scene: "模特与试穿" },
+  "run_tool-generation-apparel-set": { name: "服装套图", desc: "服装白底图/模特图/细节图/卖点图一整套。", scene: "主图与套图" },
+  "run_tool-generation-ai-wear-anything": { name: "通用穿戴展示", desc: "把任意商品（配饰/眼镜/帽子等）自然穿戴到模特身上。", scene: "模特与试穿" }
+};
+const PIXPIX_SCENE_CHIPS = ["主图与套图", "模特与试穿", "带货视频", "图片精修", "视频精修", "AI 生图与配音", "素材与任务", "成本与权益"];
+
+/* ── 得到大脑官方 MCP 业务化映射（38 工具，实测 tools/list 核对） ─────────── */
+const GETNOTE_MCP_BUSINESS_META = {
+  list_notes: { name: "最近笔记", desc: "分页列出最近的笔记。", scene: "找笔记" },
+  get_note: { name: "读笔记详情", desc: "按笔记 ID 读详情（正文、标签、附件、转写）。", scene: "找笔记" },
+  get_note_original: { name: "读原文", desc: "直接读原文（链接笔记=网页原文，录音笔记=转写原文），不拿 AI 摘要冒充。", scene: "找笔记" },
+  get_note_transcript: { name: "读转写原文", desc: "读录音、会议、课堂笔记的逐字转写。", scene: "找笔记" },
+  get_note_attachments: { name: "看附件", desc: "列出笔记里的图片、音频、文件附件。", scene: "找笔记" },
+  get_note_timeline: { name: "读时间线", desc: "读录音/会议笔记的结构化时间线。", scene: "找笔记" },
+  get_note_quick_note: { name: "读快捷笔记", desc: "读录音笔记的快捷笔记。", scene: "找笔记" },
+  get_note_todos: { name: "提取待办", desc: "从会议笔记提取待办清单。", scene: "找笔记" },
+  save_note: { name: "记一条笔记", desc: "把文字、链接或图片存成笔记，可带标题、标签、指定知识库。", scene: "记笔记" },
+  get_note_task_progress: { name: "查链接笔记进度", desc: "查链接笔记创建任务的处理进度。", scene: "知识库管理" },
+  delete_note: { name: "删笔记", desc: "把笔记移入回收站（App 端可恢复）。", scene: "删除与清理" },
+  update_note: { name: "修改笔记", desc: "改笔记的标题、内容或整体替换标签。", scene: "记笔记" },
+  add_note_tags: { name: "给笔记加标签", desc: "给已有笔记追加标签。", scene: "记笔记" },
+  delete_note_tag: { name: "删标签", desc: "删掉笔记上的某个标签。", scene: "删除与清理" },
+  list_topics: { name: "知识库列表", desc: "列出全部知识库。", scene: "知识库管理" },
+  create_topic: { name: "建知识库", desc: "新建知识库（每天限 50 个）。", scene: "知识库管理" },
+  list_topic_notes: { name: "库内笔记清单", desc: "列出知识库里的笔记。", scene: "知识库管理" },
+  batch_add_notes_to_topic: { name: "批量移入知识库", desc: "把笔记批量加进知识库（每批≤20）。", scene: "知识库管理" },
+  list_topic_directories: { name: "浏览文件夹", desc: "看知识库的文件夹结构。", scene: "知识库管理" },
+  create_topic_directory: { name: "建文件夹", desc: "在知识库里建文件夹。", scene: "知识库管理" },
+  update_topic_directory: { name: "改文件夹", desc: "重命名或移动知识库里的文件夹。", scene: "知识库管理" },
+  delete_topic_directory: { name: "删空文件夹", desc: "删除空文件夹（非空不能删）。", scene: "删除与清理" },
+  remove_note_from_topic: { name: "移出知识库", desc: "把笔记移出库（笔记本身保留）。", scene: "知识库管理" },
+  get_upload_config: { name: "上传限制查询", desc: "查图片上传的类型和大小限制。", scene: "上传与配额" },
+  get_upload_token: { name: "取上传凭证", desc: "拿 OSS 上传凭证（AI 内部用）。", scene: "上传与配额" },
+  upload_image: { name: "上传图片", desc: "把本地图片上传到得到大脑。", scene: "上传与配额" },
+  list_topic_bloggers: { name: "博主列表", desc: "看知识库订阅了哪些博主。", scene: "内容订阅" },
+  follow_topic_blogger: { name: "订阅抖音博主", desc: "把抖音博主订阅到知识库，自动沉淀内容。", scene: "内容订阅" },
+  list_topic_blogger_contents: { name: "博主内容列表", desc: "看博主发布了哪些内容。", scene: "内容订阅" },
+  get_blogger_content_detail: { name: "读博主内容", desc: "读博主内容的完整原文。", scene: "内容订阅" },
+  list_topic_lives: { name: "直播列表", desc: "看知识库沉淀了哪些直播。", scene: "内容订阅" },
+  get_live_detail: { name: "读直播详情", desc: "读直播的 AI 摘要和完整转写。", scene: "内容订阅" },
+  follow_topic_live: { name: "订阅直播", desc: "订阅一场得到 App 直播到知识库。", scene: "内容订阅" },
+  share_note: { name: "生成分享链接", desc: "把笔记生成公开分享链接，发给别人。", scene: "记笔记" },
+  list_subscribe_topics: { name: "订阅的知识库", desc: "列出订阅的他人知识库。", scene: "知识库管理" },
+  get_quota: { name: "配额查询", desc: "查调用配额余量。", scene: "上传与配额" },
+  recall: { name: "全库语义搜索", desc: "在所有笔记里按意思搜，返回相关片段。", scene: "找笔记" },
+  recall_knowledge: { name: "知识库内搜索", desc: "在指定知识库内按意思搜。", scene: "找笔记" }
+};
+const GETNOTE_SCENE_CHIPS = ["记笔记", "找笔记", "知识库管理", "内容订阅", "上传与配额", "删除与清理"];
+
+function b64url(buf) { return Buffer.from(buf).toString("base64url"); }
+async function readOauthToken() {
+  try {
+    const d = JSON.parse(await readFile(OAUTH_FILE, "utf8"));
+    return {
+      accessToken: typeof d?.access_token === "string" ? d.access_token : "",
+      refreshToken: typeof d?.refresh_token === "string" ? d.refresh_token : "",
+      expiresAt: typeof d?.expires_at === "number" ? d.expires_at : 0,
+      scope: typeof d?.scope === "string" ? d.scope : ""
+    };
+  } catch { return null; }
+}
+async function writeOauthToken(d) {
+  const dir = OAUTH_FILE.slice(0, OAUTH_FILE.lastIndexOf("/"));
+  await mkdir(dir, { recursive: true, mode: 0o700 });
+  await writeFile(OAUTH_FILE, JSON.stringify(d, null, 2), { mode: 0o600 });
+}
+async function exchangeOauthToken(auth, params) {
+  const res = await fetch(auth.tokenEndpoint, {
+    method: "POST",
+    headers: { "content-type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(params)
+  });
+  const body = await res.json().catch(() => null);
+  if (!res.ok) return { ok: false, error: `token 交换失败 HTTP ${res.status}: ${body?.error_description ?? body?.error ?? "unknown"}` };
+  if (!body?.access_token) return { ok: false, error: "token 响应缺少 access_token" };
+  await writeOauthToken({
+    access_token: body.access_token,
+    refresh_token: body.refresh_token ?? "",
+    expires_at: Date.now() + (Number(body.expires_in) || 3600) * 1000,
+    scope: body.scope ?? ""
+  });
+  return { ok: true };
+}
+/** 挂载前保证 token 可用（过期则 refresh） */
+async function ensureOauthToken(auth) {
+  const tok = await readOauthToken();
+  if (!tok || !tok.accessToken) return null;
+  if (tok.expiresAt > Date.now() + 60_000) return tok;
+  if (!tok.refreshToken) return tok; // 无 refresh 则按原样挂载（过期后工具 401 提示重授权）
+  const r = await exchangeOauthToken(auth, {
+    grant_type: "refresh_token",
+    refresh_token: tok.refreshToken,
+    client_id: auth.clientId
+  });
+  if (r.ok !== true) return tok;
+  return readOauthToken();
+}
+/** 发起授权：生成 PKCE + loopback 监听 + 打开系统浏览器 */
+async function startOauthFlow(auth, entryId) {
+  const verifier = b64url(randomBytes(48));
+  const challenge = b64url(createHash("sha256").update(verifier).digest());
+  const state = b64url(randomBytes(16));
+  let server;
+  const port = await new Promise((resolve, reject) => {
+    server = createServer(async (req, res) => {
+      const url = new URL(req.url ?? "/", "http://127.0.0.1");
+      res.setHeader("content-type", "text/html; charset=utf-8");
+      if (url.pathname === "/callback" && url.searchParams.get("code") && url.searchParams.get("state") === (pendingOauth?.state ?? "")) {
+        const code = url.searchParams.get("code");
+        const r = await exchangeOauthToken(auth, {
+          grant_type: "authorization_code",
+          code,
+          redirect_uri: pendingOauth?.redirectUri ?? "",
+          client_id: auth.clientId,
+          code_verifier: pendingOauth?.verifier ?? "",
+          resource: auth.resource ?? ""
+        });
+        res.end(r.ok ? "<h3>授权成功 ✓ 可关闭此页并返回 DSH 设置页</h3>" : `<h3>授权失败</h3><p>${r.error ?? ""}</p>`);
+        pendingOauth = null;
+        server.close();
+      } else {
+        res.end("<h3>无效回调</h3>");
+      }
+    });
+    server.on("error", reject);
+    server.listen(0, "127.0.0.1", () => resolve(server.address().port));
+  });
+  const redirectUri = `http://127.0.0.1:${port}/callback`;
+  pendingOauth = { verifier, redirectUri, state, expiresAt: Date.now() + 10 * 60_000 };
+  const params = new URLSearchParams({
+    client_id: auth.clientId,
+    redirect_uri: redirectUri,
+    response_type: "code",
+    scope: (auth.scopes ?? []).join(" "),
+    code_challenge: challenge,
+    code_challenge_method: "S256",
+    resource: auth.resource ?? "",
+    state
+  });
+  const authorizeUrl = auth.authorizationEndpoint + "?" + params.toString();
+  const child = spawn("open", [authorizeUrl], { detached: true, stdio: "ignore" });
+  child.unref();
+  return { ok: true, port, authorizeUrl, hint: "已在系统浏览器打开 PixPix 授权页；完成授权后自动回跳并保存 token。" };
+}
+
 async function readMcpServers() {
   try {
     const raw = await readFile(MCP_FILE, "utf8");
     const d = JSON.parse(raw);
-    if (Array.isArray(d?.servers)) return d.servers;
+    if (Array.isArray(d?.servers)) {
+      // 按 id 合并：用户文件覆盖 enabled 等运行时状态，默认条目补齐静态元数据（capabilities/toolCount/auth）
+      const fileMap = new Map(d.servers.map((s) => [s.id, s]));
+      return DEFAULT_MCP_SERVERS.map((def) => (fileMap.has(def.id) ? { ...def, ...fileMap.get(def.id) } : def));
+    }
   } catch { /* 缺省 */ }
   return DEFAULT_MCP_SERVERS;
 }
@@ -277,6 +583,58 @@ async function writeMcpServers(servers) {
   await mkdir(dir, { recursive: true, mode: 0o700 });
   await writeFile(MCP_FILE, JSON.stringify({ servers }, null, 2), { mode: 0o600 });
 }
+const globalMcpToolMeta = new Map();
+/** 抓取 streamable-http 服务器的工具元数据（15s 超时、失败静默、不阻塞挂载） */
+async function fetchMcpToolMeta(entry, headers) {
+  const url = entry.url;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 15000);
+  try {
+    const base = {
+      headers: {
+        "content-type": "application/json",
+        accept: "application/json, text/event-stream",
+        ...(headers ?? {})
+      },
+      signal: controller.signal
+    };
+    const init = await fetch(url, {
+      ...base,
+      method: "POST",
+      body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-06-18", capabilities: {}, clientInfo: { name: "dsh-wanzh-hulian", version: "0.1" } } })
+    });
+    const initBody = await init.json().catch(() => null);
+    if (!init.ok || !initBody?.result) return null;
+    const sessionId = init.headers.get("mcp-session-id");
+    const sidHeaders = { ...base.headers, ...(sessionId ? { "mcp-session-id": sessionId } : {}) };
+    await fetch(url, { ...base, headers: sidHeaders, method: "POST", body: JSON.stringify({ jsonrpc: "2.0", method: "notifications/initialized" }) }).catch(() => {});
+    const list = await fetch(url, { ...base, headers: sidHeaders, method: "POST", body: JSON.stringify({ jsonrpc: "2.0", id: 2, method: "tools/list" }) });
+    const listBody = await list.json().catch(() => null);
+    if (!list.ok || !listBody?.result) return null;
+    const tools = (Array.isArray(listBody.result.tools) ? listBody.result.tools : []).map((t) => {
+      const name = String(t?.name ?? "");
+      const biz = PIXPIX_BUSINESS_META[name];
+      return {
+        name,
+        description: String(t?.description ?? "").replace(/\s+/g, " ").trim().slice(0, 160),
+        businessName: biz?.name ?? "",
+        businessDesc: biz?.desc ?? "",
+        scene: biz?.scene ?? ""
+      };
+    }).filter((t) => t.name);
+    return {
+      tools,
+      instructions: typeof initBody.result.instructions === "string" ? initBody.result.instructions.slice(0, 1200) : "",
+      source: "live",
+      fetchedAt: Date.now()
+    };
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 /** 挂载启用中的 MCP 服务器（内置 dsh-mcp-client，工具名 mcp__<server>__<tool>） */
 async function mountMcpServers(ctx, credentials) {
   const servers = await readMcpServers();
@@ -299,10 +657,21 @@ async function mountMcpServers(ctx, credentials) {
       cwd: "",
       failOnStartupError: false
     };
-    if (config.transport === "streamable-http") { config.url = String(s.url ?? ""); config.headers = s.headers ?? {}; }
+    if (config.transport === "streamable-http") { config.url = String(s.url ?? ""); config.headers = { ...(s.headers ?? {}) }; }
+    if (s.auth?.type === "oauth-pkce") {
+      const tok = await ensureOauthToken(s.auth);
+      if (!tok || !tok.accessToken) { states.push({ id: s.id, enabled: true, status: "unauthorized", error: "未授权：请在设置页点击「浏览器授权」完成 PixPix OAuth。" }); continue; }
+      config.headers.authorization = `Bearer ${tok.accessToken}`;
+    }
     try {
       await ctx.plugin(McpClient, config);
       states.push({ id: s.id, enabled: true, status: "running" });
+      // 工具元数据抓取（streamable-http；失败静默，缓存内存）
+      if (config.transport === "streamable-http" && config.url) {
+        fetchMcpToolMeta(s, config.headers).then((meta) => {
+          if (meta) globalMcpToolMeta.set(s.id, meta);
+        }).catch(() => {});
+      }
     } catch (e) {
       states.push({ id: s.id, enabled: true, status: "error", error: String(e?.message ?? e).slice(0, 200) });
     }
@@ -608,6 +977,9 @@ export function apply(ctx) {
   ctx.effect(() => {
     ensureSkill().catch(() => {});
   }, "dsh-wanzh-hulian: ensure skill");
+  ctx.effect(() => {
+    ensurePixpixSkill().catch(() => {});
+  }, "dsh-wanzh-hulian: ensure pixpix skill");
 
   for (const tool of GETNOTE.tools) {
     const def = toolDefs[tool];
@@ -671,6 +1043,40 @@ export function apply(ctx) {
         } catch (e) { sendJson(res, 500, { ok: false, error: String(e?.message ?? e) }); }
       }
     });
+    const disposeOauthStart = ctx.webServer.register({
+      kind: "exact",
+      path: BASE + "/oauth/start",
+      handler: async (req, res) => {
+        if (!isLoopbackRequest(req)) return sendJson(res, 401, { error: "unauthorized" });
+        if (req.method !== "POST") return sendJson(res, 405, { error: "method not allowed" });
+        try {
+          const body = await readBody(req);
+          const entryId = typeof body?.id === "string" ? body.id : "pixpix";
+          const mcp = await readMcpServers();
+          const entry = mcp.find((s) => s.id === entryId);
+          if (!entry || entry.auth?.type !== "oauth-pkce") return sendJson(res, 400, { ok: false, error: "该条目不支持 OAuth 授权" });
+          const r = await startOauthFlow(entry.auth, entryId);
+          sendJson(res, 200, r);
+        } catch (e) { sendJson(res, 500, { ok: false, error: String(e?.message ?? e) }); }
+      }
+    });
+    const disposeOauthStatus = ctx.webServer.register({
+      kind: "exact",
+      path: BASE + "/oauth/status",
+      handler: async (req, res) => {
+        if (!isLoopbackRequest(req)) return sendJson(res, 401, { error: "unauthorized" });
+        if (req.method !== "GET") return sendJson(res, 405, { error: "method not allowed" });
+        const tok = await readOauthToken();
+        if (!tok || !tok.accessToken) return sendJson(res, 200, { ok: true, authed: false });
+        sendJson(res, 200, {
+          ok: true, authed: true,
+          expiresAt: tok.expiresAt,
+          expired: tok.expiresAt > 0 && tok.expiresAt <= Date.now() + 60_000,
+          hasRefresh: Boolean(tok.refreshToken),
+          scope: tok.scope
+        });
+      }
+    });
     const disposeMcpList = ctx.webServer.register({
       kind: "exact",
       path: BASE + "/mcp-servers",
@@ -680,7 +1086,32 @@ export function apply(ctx) {
           if (req.method === "GET") {
             const servers = await readMcpServers();
             const states = globalMcpStates ?? servers.map((s) => ({ id: s.id, enabled: s?.enabled === true, status: "unknown" }));
-            return sendJson(res, 200, { ok: true, servers: servers.map((s) => ({ ...s, state: states.find((x) => x.id === s.id) ?? null })) });
+            const tok = await readOauthToken();
+            const oauthState = !tok || !tok.accessToken
+              ? { authed: false }
+              : { authed: true, expired: tok.expiresAt > 0 && tok.expiresAt <= Date.now() + 60_000, scope: tok.scope };
+            return sendJson(res, 200, {
+              ok: true,
+              oauthState,
+              servers: servers.map((s) => {
+                let toolMeta = globalMcpToolMeta.get(s.id) ?? null;
+                // stdio 服务器无法实时抓取 → 注入静态业务化清单（getnote 官方 MCP 38 工具）
+                if (!toolMeta && s.id === "getnote") {
+                  toolMeta = {
+                    tools: Object.entries(GETNOTE_MCP_BUSINESS_META).map(([name, biz]) => ({
+                      name,
+                      description: "",
+                      businessName: biz.name,
+                      businessDesc: biz.desc,
+                      scene: biz.scene
+                    })),
+                    source: "static",
+                    fetchedAt: 0
+                  };
+                }
+                return { ...s, state: states.find((x) => x.id === s.id) ?? null, toolMeta };
+              })
+            });
           }
           if (req.method === "POST") {
             const body = await readBody(req);

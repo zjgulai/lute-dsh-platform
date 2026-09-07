@@ -49,32 +49,47 @@ window.__ModuleLoader__.load({
 			".whRoot .whBtnGhost { color:var(--dsw-alias-label-primary); background:var(--dsw-alias-bg-layer-2); border:1px solid var(--dsw-alias-border-l1); }",
 			".whRoot .whBtn:disabled { opacity:.55; cursor:default; }",
 			".whRoot .whHint { font-size:11px; line-height:16px; color:var(--dsw-alias-label-tertiary); }",
+			"[data-plugin='dsh-wanzh-hulian'] .whToolZone { display:flex; flex-direction:column; gap:6px; padding:8px 10px; border:1px solid color-mix(in srgb, #58B848 25%, var(--dsw-alias-border-l1)); border-radius:10px; background:color-mix(in srgb, #58B848 4%, var(--dsw-alias-bg-layer-2)); }",
+			"[data-plugin='dsh-wanzh-hulian'] .whToolZoneHead { display:flex; align-items:center; gap:6px; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whToolCount { flex:none; font-size:10px; line-height:14px; padding:1px 7px; border-radius:999px; color:#2E7D3C; background:#DCF1D6; font-weight:500; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whToolExpand { border:none; background:transparent; cursor:pointer; font-size:11px; line-height:16px; color:var(--dsw-alias-label-secondary); padding:0; display:inline-flex; align-items:center; gap:3px; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whToolExpand:hover { color:#2E7D3C; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whToolChips { display:flex; flex-wrap:wrap; gap:4px; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whToolChip { font-size:10px; line-height:14px; padding:1px 7px; border-radius:6px; color:#2E7D3C; background:#DCF1D6; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whToolList { display:flex; flex-direction:column; gap:4px; max-height:220px; overflow-y:auto; padding:6px; border-radius:8px; background:var(--dsw-alias-bg-layer-2); }",
+			"[data-plugin='dsh-wanzh-hulian'] .whToolRow { display:flex; flex-direction:column; gap:1px; padding:5px 8px; border-radius:8px; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whToolRow:hover { background:var(--dsw-alias-interactive-bg-hover); }",
+			"[data-plugin='dsh-wanzh-hulian'] .whToolTitle { display:flex; align-items:baseline; gap:6px; min-width:0; flex-wrap:wrap; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whToolName { flex:none; font-size:12px; font-weight:600; line-height:18px; color:var(--dsw-alias-label-primary); }",
+			"[data-plugin='dsh-wanzh-hulian'] .whToolDesc { font-size:10px; line-height:14px; color:var(--dsw-alias-label-tertiary); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whToolModel { min-width:0; font-size:9px; line-height:12px; color:var(--dsw-alias-label-caption); font-family:var(--dsw-font-markdown-code-block, ui-monospace, monospace); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whGuide { margin:0; padding:8px 10px; border-left:3px solid #58B848; border-radius:6px; background:var(--dsw-alias-bg-layer-2); font-size:11px; line-height:16px; color:var(--dsw-alias-label-secondary); white-space:pre-wrap; max-height:140px; overflow-y:auto; }",
 			".whRoot .whErr { font-size:11px; line-height:16px; color:var(--dsw-alias-state-error-primary); }",
 			".whRoot .whQuota { font-size:11px; line-height:16px; color:var(--dsw-alias-label-secondary); white-space:pre-wrap; }",
 			"@media (prefers-reduced-motion: reduce) { .whRoot .whSwitch, .whRoot .whSwitchKnob { transition:none; } }",
-			".whSbEntry { flex:none; align-items:center; width:100%; height:42px; margin:8px 0 0; display:flex; position:relative; }",
-			".whSbBtn { width:calc(100% + 4px); height:42px; color:var(--dsw-alias-label-primary); cursor:pointer; background:0 0; border:none; border-radius:12px; align-items:center; gap:8px; margin:0 -2px; padding:0 10px 0 12px; font-family:inherit; font-size:14px; display:inline-flex; overflow:hidden; }",
-			".whSbBtn:hover, .whSbBtn[data-active] { background:var(--dsw-alias-interactive-bg-hover); }",
-			".whSbLabel { text-overflow:ellipsis; white-space:nowrap; min-width:0; overflow:hidden; }",
-			".whRightPanel { position:fixed; top:0; right:0; bottom:0; width:min(360px, 96vw); z-index:2500; display:flex; flex-direction:column; gap:10px; padding:16px 16px 12px; border-left:1px solid var(--dsw-alias-border-l1); background:var(--dsw-alias-bg-layer-1); box-shadow:-12px 0 32px rgba(0,0,0,.18); overflow-y:auto; }",
-			".whRightPanelTop { flex:none; margin:-16px -16px 0; height:3px; background:linear-gradient(90deg, #58B848, #8FD48A); border-radius:0 0 4px 4px; }",
-			".whRightPanelHead { display:flex; align-items:center; gap:8px; }",
-			".whRightPanelTitle { flex:1; margin:0; font-size:14px; font-weight:600; line-height:22px; color:var(--dsw-alias-label-primary); }",
-			".whRightPanelSub { margin:0; font-size:11px; line-height:16px; color:var(--dsw-alias-label-tertiary); }",
-			".whRightPanelClose { border:none; background:transparent; cursor:pointer; font-size:16px; line-height:20px; color:var(--dsw-alias-label-tertiary); padding:2px 8px; border-radius:6px; }",
-			".whRightPanelClose:hover { background:var(--dsw-alias-interactive-bg-hover); color:var(--dsw-alias-label-primary); }",
-			".whSeg { display:flex; gap:4px; padding:3px; border-radius:10px; background:var(--dsw-alias-bg-layer-2); }",
-			".whSegBtn { flex:1; border:none; cursor:pointer; border-radius:8px; padding:6px 0; font-size:12px; line-height:18px; color:var(--dsw-alias-label-secondary); background:transparent; }",
-			".whSegOn { color:#fff; background:#58B848; font-weight:500; }",
-			".whKbGrid { display:grid; grid-template-columns:repeat(2, 1fr); gap:8px; }",
-			".whKbCard { display:flex; align-items:center; gap:8px; padding:8px 10px; border:1px solid var(--dsw-alias-border-l1); border-radius:12px; background:var(--dsw-alias-bg-layer-2); cursor:pointer; min-width:0; }",
-			".whKbCard:hover { border-color:#58B848; background:color-mix(in srgb, #58B848 6%, var(--dsw-alias-bg-layer-2)); }",
-			".whThumb { flex:none; width:36px; height:36px; border-radius:9px; object-fit:cover; background:var(--dsw-alias-bg-base); }",
-			".whKbText { display:flex; flex-direction:column; gap:1px; min-width:0; }",
-			".whKbName { font-size:12px; font-weight:500; line-height:17px; color:var(--dsw-alias-label-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }",
-			".whKbMeta { font-size:10px; line-height:14px; color:var(--dsw-alias-label-tertiary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }",
-			".whRightPanelHint { margin:0; font-size:11px; line-height:16px; color:var(--dsw-alias-label-tertiary); }",
-			".whSrcGroup { margin:2px 0 0; font-size:11px; font-weight:500; line-height:16px; color:var(--dsw-alias-label-secondary); }"
+			"[data-plugin='dsh-wanzh-hulian'].whSbEntry { flex:none; align-items:center; width:100%; height:42px; margin:8px 0 0; display:flex; position:relative; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whSbBtn { width:calc(100% + 4px); height:42px; color:var(--dsw-alias-label-primary); cursor:pointer; background:0 0; border:none; border-radius:12px; align-items:center; gap:8px; margin:0 -2px; padding:0 10px 0 12px; font-family:inherit; font-size:14px; display:inline-flex; overflow:hidden; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whSbBtn:hover, .whSbBtn[data-active] { background:var(--dsw-alias-interactive-bg-hover); }",
+			"[data-plugin='dsh-wanzh-hulian'] .whSbLabel { text-overflow:ellipsis; white-space:nowrap; min-width:0; overflow:hidden; }",
+			"[data-plugin='dsh-wanzh-hulian'].whRightPanel { position:fixed; top:0; right:0; bottom:0; width:min(360px, 96vw); z-index:2500; display:flex; flex-direction:column; gap:10px; padding:16px 16px 12px; border-left:1px solid var(--dsw-alias-border-l1); background:var(--dsw-alias-bg-layer-1); box-shadow:-12px 0 32px rgba(0,0,0,.18); overflow-y:auto; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whRightPanelTop { flex:none; margin:-16px -16px 0; height:3px; background:linear-gradient(90deg, #58B848, #8FD48A); border-radius:0 0 4px 4px; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whRightPanelHead { display:flex; align-items:center; gap:8px; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whRightPanelTitle { flex:1; margin:0; font-size:14px; font-weight:600; line-height:22px; color:var(--dsw-alias-label-primary); }",
+			"[data-plugin='dsh-wanzh-hulian'] .whRightPanelSub { margin:0; font-size:11px; line-height:16px; color:var(--dsw-alias-label-tertiary); }",
+			"[data-plugin='dsh-wanzh-hulian'] .whRightPanelClose { border:none; background:transparent; cursor:pointer; font-size:16px; line-height:20px; color:var(--dsw-alias-label-tertiary); padding:2px 8px; border-radius:6px; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whRightPanelClose:hover { background:var(--dsw-alias-interactive-bg-hover); color:var(--dsw-alias-label-primary); }",
+			"[data-plugin='dsh-wanzh-hulian'] .whSeg { display:flex; gap:4px; padding:3px; border-radius:10px; background:var(--dsw-alias-bg-layer-2); }",
+			"[data-plugin='dsh-wanzh-hulian'] .whSegBtn { flex:1; border:none; cursor:pointer; border-radius:8px; padding:6px 0; font-size:12px; line-height:18px; color:var(--dsw-alias-label-secondary); background:transparent; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whSegOn { color:#fff; background:#58B848; font-weight:500; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whKbGrid { display:grid; grid-template-columns:repeat(2, 1fr); gap:8px; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whKbCard { display:flex; align-items:center; gap:8px; padding:8px 10px; border:1px solid var(--dsw-alias-border-l1); border-radius:12px; background:var(--dsw-alias-bg-layer-2); cursor:pointer; min-width:0; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whKbCard:hover { border-color:#58B848; background:color-mix(in srgb, #58B848 6%, var(--dsw-alias-bg-layer-2)); }",
+			"[data-plugin='dsh-wanzh-hulian'] .whThumb { flex:none; width:36px; height:36px; border-radius:9px; object-fit:cover; background:var(--dsw-alias-bg-base); }",
+			"[data-plugin='dsh-wanzh-hulian'] .whKbText { display:flex; flex-direction:column; gap:1px; min-width:0; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whKbName { font-size:12px; font-weight:500; line-height:17px; color:var(--dsw-alias-label-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whKbMeta { font-size:10px; line-height:14px; color:var(--dsw-alias-label-tertiary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whRightPanelHint { margin:0; font-size:11px; line-height:16px; color:var(--dsw-alias-label-tertiary); }",
+			"[data-plugin='dsh-wanzh-hulian'] .whSrcGroup { margin:2px 0 0; font-size:11px; font-weight:500; line-height:16px; color:var(--dsw-alias-label-secondary); }"
 		];
 
 		exports.inject = ["slots", "locale", "sessions"];
@@ -191,6 +206,46 @@ window.__ModuleLoader__.load({
 			);
 		}
 
+		function ToolZone(props) {
+			var s = props.s;
+			var meta = s.toolMeta;
+			var caps = s.capabilities || [];
+			var count = meta && meta.tools && meta.tools.length > 0 ? meta.tools.length : (s.toolCount || 0);
+			var expandedState = useState(false);
+			var expanded = expandedState[0];
+			var setExpanded = expandedState[1];
+			return React.createElement("div", { className: "whToolZone", "data-plugin": "dsh-wanzh-hulian" },
+				React.createElement("div", { className: "whToolZoneHead" },
+					React.createElement("span", { className: "whToolCount" }, count + " 个工具 · mcp__" + s.id + "_*"),
+					meta && meta.tools && meta.tools.length > 0
+						? React.createElement("button", { className: "whToolExpand", onClick: function () { setExpanded(!expanded); } },
+							expanded ? "收起能力清单 ▴" : "查看全部 " + count + " 项能力 ▾")
+						: null
+				),
+				caps.length > 0
+					? React.createElement("div", { className: "whToolChips" },
+						caps.map(function (cap) { return React.createElement("span", { className: "whToolChip", key: cap }, cap); }))
+					: null,
+				expanded && meta && meta.tools
+					? React.createElement("div", { className: "whToolList" },
+						meta.tools.map(function (t) {
+							var bizName = t.businessName || t.name;
+							var desc = t.businessDesc || t.description;
+							return React.createElement("div", { className: "whToolRow", key: t.name },
+								React.createElement("div", { className: "whToolTitle" },
+									React.createElement("span", { className: "whToolName" }, bizName),
+									React.createElement("span", { className: "whToolModel" }, "mcp__" + s.id + "_" + t.name)
+								),
+								desc ? React.createElement("span", { className: "whToolDesc" }, desc) : null
+							);
+						}))
+					: null,
+				meta && meta.instructions
+					? React.createElement("p", { className: "whGuide" }, meta.instructions)
+					: null
+			);
+		}
+
 		function McpBoard(props) {
 			var ctl = props.ctl;
 			var serversState = useState(null);
@@ -224,6 +279,15 @@ window.__ModuleLoader__.load({
 								React.createElement("div", { className: "whRowLabel" }, "启用"),
 								React.createElement("div", { className: "whRowHint" }, "工具以 mcp__" + s.id + "__<tool> 注册；变更需重启 DSH 生效")
 							),
+						s.auth && s.auth.type === "oauth-pkce"
+							? React.createElement("div", { className: "whBtns", key: "oauth" },
+								React.createElement("button", { className: "whBtn whBtnGhost", disabled: ctl.busy, onClick: function () { ctl.oauthStart(s.id); } }, "浏览器授权"),
+								React.createElement("button", { className: "whBtn whBtnGhost", disabled: ctl.busy, onClick: ctl.oauthStatus }, "刷新授权状态")
+							)
+							: null,
+						ctl.oauthText && s.auth && s.auth.type === "oauth-pkce"
+							? React.createElement("pre", { className: "whQuota", key: "ot" }, ctl.oauthText)
+							: null,
 							React.createElement("button", {
 								className: "whSwitch" + (s.enabled ? " whSwitchOn" : ""),
 								disabled: ctl.busy,
@@ -232,6 +296,7 @@ window.__ModuleLoader__.load({
 							}, React.createElement("span", { className: "whSwitchKnob" }))
 						),
 						st && st.status === "error" ? React.createElement("div", { className: "whErr" }, st.error || "启动失败") : null,
+						React.createElement(ToolZone, { s: s, key: "tools" }),
 						s.note ? React.createElement("div", { className: "whHint" }, s.note) : null
 					);
 				})
@@ -286,6 +351,31 @@ window.__ModuleLoader__.load({
 						.finally(function () { setBusy(false); });
 				},
 
+				oauthStart: function (id) {
+					setBusy(true); setErr(""); setProbeText("");
+					fetch(API + "/oauth/start", {
+						method: "POST",
+						headers: { "content-type": "application/json" },
+						body: JSON.stringify({ id: id })
+					})
+						.then(function (r) { return r.json(); })
+						.then(function (d) {
+							if (d && d.ok) { setProbeText(d.hint || "授权页已打开"); ctl.oauthStatus(); }
+							else setErr(d && d.error ? d.error : "授权发起失败");
+						})
+						.catch(function (e) { setErr(String(e && e.message ? e.message : e)); })
+						.finally(function () { setBusy(false); });
+				},
+				oauthStatus: function () {
+					fetch(API + "/oauth/status", { headers: { accept: "application/json" } })
+						.then(function (r) { return r.json(); })
+						.then(function (d) {
+							if (!d) return;
+							if (!d.authed) setProbeText("未授权：点击「浏览器授权」完成 PixPix OAuth（授权后重启 DSH 生效）。");
+							else setProbeText("已授权 ✓ scope: " + (d.scope || "-") + (d.expired ? "（令牌已过期，重启时自动刷新）" : "（" + new Date(d.expiresAt).toLocaleString() + " 到期）"));
+						})
+						.catch(function () {});
+				},
 				toggleMcp: function (id, enabled) {
 					setBusy(true); setErr("");
 					fetch(API + "/mcp-servers", {
@@ -497,7 +587,7 @@ window.__ModuleLoader__.load({
 			if (!wide) return null;
 			return React.createElement(
 				"div",
-				{ className: "whSbEntry" },
+				{ className: "whSbEntry", "data-plugin": "dsh-wanzh-hulian" },
 				React.createElement(
 					"button",
 					{
