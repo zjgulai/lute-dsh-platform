@@ -10,11 +10,14 @@ SUG_DIR = "/tmp/skill-contract"
 ROOT = os.path.expanduser("~/.dsh/skills")
 
 suggestions = []
-for f in sorted(glob.glob(os.path.join(SUG_DIR, "sug-*.json"))):
+for f in sorted(glob.glob(os.path.join(SUG_DIR, "sug*.json"))):
     suggestions.extend(json.load(open(f, encoding="utf-8")))
 
 results = {"applied": [], "skipped": [], "invalid": []}
 for sug in suggestions:
+    if sug.get("skip") is True:
+        results["skipped"].append(sug.get("skill", "") + "(skip)")
+        continue
     name = sug.get("skill", "")
     f = os.path.join(ROOT, name, "SKILL.md")
     if not os.path.isfile(f):
