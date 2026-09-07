@@ -171,8 +171,48 @@ function generic(title) {
 const cache = new Map();
 
 /** 取技能模板（L1 → L2 → L3；缓存按文件 mtime 失效） */
+/** 读取技能 frontmatter 的输入→输出契约三键（业务视角函数签名）。 */
+function readContract(name) {
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(name)) return null;
+  const file = join(SKILLS_DIR, name, "SKILL.md");
+  if (!existsSync(file)) return null;
+  let raw = "";
+  try { raw = readFileSync(file, "utf8"); } catch { return null; }
+  const m = /^---\r?\n([\s\S]*?)\r?\n---/.exec(raw);
+  if (!m) return null;
+  const fm = m[1];
+  const pick = (key) => {
+    const r = new RegExp("^" + key + ":\\s*(?:\"([^\"]*)\"|(.*?))\\s*$", "m");
+    const mm = r.exec(fm);
+    if (!mm) return "";
+    return (mm[1] !== undefined ? mm[1] : mm[2] || "").trim();
+  };
+  const ic = pick("input_contract");
+  const oc = pick("output_contract");
+  const ex = pick("example");
+  if (!ic || !oc || !ex) return null;
+  return { ic, oc, ex };
+}
+
+/** 契约速览渲染：我需要 / 你将得到 / 示例 */
+function renderContract(title, c) {
+  return "我需要：" + c.ic + "\n你将得到：" + c.oc + "\n示例：" + c.ex + "\n\n请直接描述你的具体需求（" + (title || "") + "）：";
+}
+
 export function getPromptTemplate(name, title) {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(name)) return "";
+  // 契约优先：frontmatter 三键齐全 → 契约速览（输入→输出+示例），否则回退 L1/L2/L3
+  const contract = readContract(name);
+  if (contract) {
+    const fileC = join(SKILLS_DIR, name, "SKILL.md");
+    let mtC = 0;
+    try { mtC = statSync(fileC).mtimeMs; } catch { /* ignore */ }
+    const cc = cache.get(name);
+    if (cc && cc.mtime === mtC) return cc.text;
+    const textC = renderContract(title || name, contract);
+    cache.set(name, { mtime: mtC, text: textC });
+    return textC;
+  }
   const l1 = L1[name];
   if (l1) {
     const c = cache.get(name);

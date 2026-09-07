@@ -212,7 +212,9 @@ window.__ModuleLoader__.load({
 			}, [groups, cat]);
 
 			var clickShort = function (it) {
-				var text = "/" + (it.title || it.name) + " 请使用「" + it.title + "」帮我：";
+				var text = (typeof it.template === "string" && it.template.length > 0)
+					? it.template
+					: "/" + (it.title || it.name) + " 请使用「" + it.title + "」帮我：";
 				if (inputActions && typeof inputActions.setDraft === "function") {
 					inputActions.setDraft(text);
 					setHint(null);
