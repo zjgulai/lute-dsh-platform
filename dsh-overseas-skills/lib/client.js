@@ -314,7 +314,12 @@ window.__ModuleLoader__.load({
 														key: it.name,
 														className: "ovpCard",
 														type: "button",
-														title: "点击填入输入框：" + it.title,
+														title: (function () {
+												var tpl = (typeof it.template === "string" && it.template) || "";
+												var lines = tpl.split("\n").filter(function (l) { return l.trim(); });
+												var head = lines.slice(0, 2).join("\n");
+												return head || ("点击填入输入框：" + it.title);
+											})(),
 														onClick: function () { click(it); }
 													},
 													React.createElement(

@@ -58,6 +58,29 @@
 
 > 2026-09-04 增补：`kol-hunter`（深链星探）→ 中文命名「红人星探」并补品牌头像；`kol-content-expert` 粉色旧头像统一重建为品牌绿。目录增至 57 条（含 talent-scout / kol-content-expert）。
 
+
+## 「我说」功能（dsh-my-quotes，2026-09-07）
+
+| # | 项 | 位置 | 说明 |
+|---|---|---|---|
+| MQ-1 | 插件包 | `~/project/Magpie-Horch/dsh-my-quotes/`（package.json + cordis.patch.yml + lib/index.js + lib/client.js） | 注册方式：profile `package.json` 的 dependencies（file: 链接）+ `dsh.profile.bundles` 列表，需 `pnpm install` 后重启 |
+| MQ-2 | Host 半 | `lib/index.js` | 只读扫描 `~/.dsh/sessions/`，zstd 多帧容器解码（与官方 persistence 同构），抽取用户 ≥30 字消息（`user/message` + `source.kind=user`，排除 system-reminder 与子代理），规则 9 类分类，索引 `~/.dsh/my-quotes/index.jsonl`（原子写+指纹去重+增量对账），RPC 通道 `/my-quotes`（connection.rpc.handle，loopback） |
+| MQ-3 | Client 半 | `lib/client.js` | Tab 按钮与官方对话 Tab 完全同调（下划线式 13px/500，active 用 `--dsw-alias-state-business-primary`，绿色圆点品牌标识）；面板走全套 dsw token（搜索/9类chips带计数/项目筛选/列表/跳转/复制全文/手动改类/AI精分/重建索引/加载更多/空态/错误态）+ 点击外部/ESC 关闭 + 过期响应丢弃 + 设置页兜底入口 |
+| MQ-4 | 回滚 | — | 从 profile package.json 移除 `dsh-my-quotes`（dependencies 与 bundles 两处）→ `pnpm install` → 重启；索引目录 `~/.dsh/my-quotes/` 可随时删除重建 |
+
+> 注意：profile 插件注册的真实入口是 profile `package.json` 的 `dsh.profile.bundles` + `dependencies`（file:），**不是** `cordis.yml`（该文件会被应用重置为 `[]`）。
+
+
+## Session 日志按钮 → log + 左下角迁移（2026-09-07）
+
+| # | 项 | 目标文件 | 改动 | 回滚 |
+|---|---|---|---|---|
+| LB-1 | 改名 | `app.asar.unpacked/node_modules/@deepseek-ai/dsh-session-log-export/lib/client.js` | 字典 `header.action`：zh "Session 日志"、en "Session log" → "log"（对话框文案不动） | `client.js.orig-logbtn-20260907` |
+| LB-2 | 迁移 | 同上 | apply() 注入 MutationObserver 迁移器：隐藏原位按钮（display:none，React 树保持完整）→ 克隆节点插到左下角设置按钮右侧（点击委托回原按钮），设置按钮锚点=aria-label/text 含「设置」；找不到锚点留原位+告警 | 同上 |
+| LB-3 | 样式 | 注入 `#dsh-log-btn-fix` | margin-left:8px；克隆强制 inline-flex | 随 apply 回滚 |
+
+> 升级被覆盖时按 LB-1~3 重放；组合 rev 按内容哈希自动变化（实测 be5cc82ee218），无需手动清缓存。
+
 ## 修复前已存在的补丁
 
 | 项 | 位置 | 说明 |

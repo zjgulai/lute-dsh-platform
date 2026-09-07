@@ -39,7 +39,10 @@ echo "== [8/8] 同步 profile + 预设 lint =="
 PROFILE_LIB="$HOME/.dsh/profiles/desktop/node_modules/dsh-overseas-skills/lib"
 for f in index.js catalog.js client.js; do
   s="lib/$f"; d="$PROFILE_LIB/$f"
-  if [ -f "$d" ] && [ "$s" -ef "$d" ]; then echo "  $f: 同 inode（已穿透）"; else cat "$s" > "$d"; echo "  $f: 同步"; fi
+  # tmp+mv 原子替换：即使 d 与 s 是硬链接也不会把源文件截断（cat > 会先 truncate 再读，双杀）
+  if [ -f "$d" ] && [ "$s" -ef "$d" ]; then rm -f "$d"; fi
+  cp "$s" "$d.tmp" && mv -f "$d.tmp" "$d"
+  echo "  $f: 同步"
 done
 node "$HOME/project/Magpie-Horch/dsh-patches/lint-preset.mjs" "$HOME/.dsh/.agent-presets/brand-marketing-growth" 2>&1 | tail -1 || true
 echo "✓ 管线完成。catalog/client 变更需重启 DSH Desktop 生效。"

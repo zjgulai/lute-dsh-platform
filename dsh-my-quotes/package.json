@@ -1,0 +1,31 @@
+{
+  "name": "dsh-my-quotes",
+  "version": "0.1.0",
+  "description": "「我说」：聚合全部 DSH 会话中用户本人 ≥30 字消息，规则 9 类意图分类（可选 LLM 精分），支持搜索/项目筛选/跳转/复制全文。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "cordis.patch.yml"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-ui-slots"
+      ]
+    }
+  },
+  "license": "MIT"
+}

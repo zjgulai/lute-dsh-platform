@@ -55,3 +55,22 @@ lute-dsh-platform/
 4. **版本起点**：A v0.1.0 initial（推荐，无历史可重建）/ B 直接 v1.0.0？
 5. **DMG 发布方式**：A GitHub Releases 附件 + release/ 哈希清单（推荐）/ B 直接 git 存 DMG（不建议，仓库膨胀）？
 6. **执行时机**：决策后我执行 git init → .gitignore → 首次提交 → 连接新远程 → push → 建 main 保护与模板文件？
+
+## 5. 决策记录与执行结果（2026-09-06）
+
+| 决策 | 结论 |
+| --- | --- |
+| 仓库范围 | A 全平台 monorepo（核心 5 + 支撑 ~24 插件 + packaging + doc/_doc-notes + 81-Skills） |
+| 81-Skills | B 入库公开（用户确认） |
+| 临时文件 | A 排除（白名单 .gitignore，本地保留） |
+| 版本 | A v0.1.0 initial + tag |
+| DMG | A GitHub Releases 附件 + release/ 哈希清单（目录已建） |
+
+**执行结果**：
+- 仓库 https://github.com/zjgulai/lute-dsh-platform 已发布：main（3 提交）+ v0.1.0 tag；2623 文件，工作区干净。
+- 根级新增：README.md（平台总览/结构/安装/发布）、CHANGELOG.md、LICENSE(MIT)、.gitignore（白名单式）、docs/（ADR 索引+模板/architecture/release-process）、.github/pull_request_template.md、release/。
+- 安全：提交前 secret 扫描通过（仅占位符示例）；两轮清理（81-Skills .doctor-backup 加密备份与 dsh-chatui-fix 临时目录泄漏，白名单根级锚定修正）。
+- dsh-patches 旧 .git 已就地停用（.git.disabled，本地历史保留）。
+- 旧 push 链接说明：本机原无残留远程（仅 dsh-patches 有 .git 且无 remote），无需删除操作。
+
+**今后管理约定**：见 docs/release-process.md（版本+DMG+安全检查）与 docs/adr/（新决策走 ADR-NNNN）。DMG 打包后：hash → release/<ver>.sha256 → GitHub Releases 附件。

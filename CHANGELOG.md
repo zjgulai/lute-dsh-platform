@@ -21,3 +21,21 @@
 
 ### 工程
 - 指令审计 F1-F10；管线 8 阶段；preset 15 个 respectFileFlags
+
+## [v0.2.0] - 2026-09-07（功能扩展）
+
+### 「我说」跨会话检索（dsh-my-quotes 插件）
+- 侧边栏「我说」入口：聚合全部 DSH 会话中用户 ≥30 字消息，规则 9 类意图分类（可选 LLM 精分）
+- 搜索 / 项目筛选 / 跳转原会话 / 复制全文 / 手动改类 / 重建索引；索引为派生品可重建
+- 会话日志 zstd 拼接帧解码（复用官方 persistence 语义）；profile 插件注册走 package.json bundles（非 cordis.yml）
+
+### 品牌资产
+- lute-brand-icons 技能 + 57 枚方形徽章头像库（24 职业 + 12 家庭 + 14 通用 + 补充；参数化生成引擎 + manifest + 暗/浅总览）
+- Agent 预设卡片头像：类人漫画（爸爸/妈妈/宝宝），品牌绿 #58B848 细描边方形徽章、头部占比 80-85%、暗/浅双主题适配
+
+### UI 调整
+- Session 日志按钮改名「log」并迁至侧边栏设置按钮同行右侧（克隆式 DOM 迁移 + 自愈）
+
+### 文档
+- patches-manifest 补齐：P0 7/7、UI/UX 统一、Agent Preset 品牌化、lute-brand-icons、我说、Session 日志迁移
+- 新增 docs/dsh-desktop-white-screen-playbook.md 白屏排查手册

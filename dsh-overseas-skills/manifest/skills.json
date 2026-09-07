@@ -2203,11 +2203,12 @@
     },
     {
       "name": "self-improvement",
-      "title": "智能体自我学习",
+      "title": "知识进",
       "category": "agent-tools",
       "categoryTitle": "Agent 管理与基建",
-      "toolBacked": true,
-      "importable": false
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "把会话中的错误、纠正与发现沉淀为经验笔记，重要经验提升到项目记忆"
     },
     {
       "name": "accio-mcp-cli",

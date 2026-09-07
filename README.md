@@ -16,7 +16,7 @@
 | 支撑插件 | `dsh-*-local/`、`archify-local/` 等 | profile 依赖插件（deepresearch/noema/memory/loopx/agent-team/browser/theme…） |
 | 打包工程 | `packaging/` | DMG 组装/签名/发布流水线（assemble.sh、sign-and-dmg.sh） |
 | 技能源 | `81-Skills/` | 自研技能集（含安装与维护管线） |
-| 文档 | `docs/`（ADR/架构/发布流程）、`doc/`（HTML 文档站）、`_doc-notes/` | 决策与知识资产 |
+| 文档 | `docs/`（ADR/架构/发布流程/白屏排查手册）、`doc/`（HTML 文档站）、`_doc-notes/` | 决策与知识资产 |
 
 ## 安装（本机 DSH Desktop）
 
@@ -29,6 +29,7 @@ pnpm add file:/Users/lute/project/Magpie-Horch/dsh-overseas-skills
 ```
 
 详细维护与生效语义见 `docs/architecture.md` 与各插件 docs/。
+- 故障排查：`docs/dsh-desktop-white-screen-playbook.md`（DSH Desktop 白屏等二次开发常见故障速查，索引见 `docs/README.md`）。
 
 ## 版本与发布
 

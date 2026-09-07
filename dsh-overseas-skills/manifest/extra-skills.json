@@ -9,6 +9,16 @@
       "summaryZh": "统一实时搜索：网页/垂直领域/批量搜索与整页提取，服务信息检索、事实核查与深度研究",
       "toolGap": "",
       "icon": ""
+    },
+    {
+      "name": "agent-browser",
+      "title": "浏览器自动化",
+      "category": "agent-tools",
+      "categoryTitle": "Agent 管理与基建",
+      "toolBacked": true,
+      "summaryZh": "浏览器自动化操作：打开/点击/填表/抓取/截图，无障碍树精确定位",
+      "toolGap": "",
+      "icon": ""
     }
   ]
 }
