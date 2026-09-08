@@ -66,3 +66,28 @@ VERSION=1.0.0 ./assemble.sh                    # 产出 staging/1.0.0/payload
 - **升级保留数据**：安装器只替换包拥有的 manifest/代码面，profile `data/`、自装技能/预设不动。
 - **官方更新通道已禁用**（暂存 app 的 `app-update.yml` 被清空）。
 - **单架构 arm64**：node_modules 内原生依赖为 arm64，x64 需在 x64 机重跑 assemble。
+
+## 目标机安装（Gatekeeper 必读）
+
+包为 **adhoc 签名、未公证**（Developer ID 公证是付费通道，未启用），macOS Gatekeeper
+会对下载的 dmg 施加隔离属性（quarantine），表现为两种症状：
+
+1. **双击 `LUTE Setup.app` 打不开** → 右键 → 打开 → 弹框点「打开」；或系统设置 →
+   隐私与安全性 → 「仍要打开」。
+2. **`install.sh` 报 `Operation not permitted`**（Electron 二进制被拦）→
+   v1.2.0 起的 install.sh 解包后**自动清除 quarantine**，直接重跑即可；
+   旧包请先复制卷内容到本地并清属性：
+
+```bash
+mkdir -p ~/lute-install && cp -R "/Volumes/DSH Desktop LUTE 1.2.0/." ~/lute-install/
+xattr -cr ~/lute-install
+cd ~/lute-install && bash install.sh
+```
+
+推荐安装方式（终端一条命令，不依赖 GUI 授权弹框之外的操作）：
+
+```bash
+cd "/Volumes/DSH Desktop LUTE 1.2.0" && bash install.sh
+```
+
+安装完成后需重新授权 TCC（录屏/辅助功能/自动化），并重启 DSH Desktop。

@@ -27,6 +27,18 @@ mkdir -p "$SMOKE_HOME" "$SMOKE_APPS"
 ( cd "$PAYLOAD" && shasum -a 256 -c SHA256SUMS ) || bad "SHA256SUMS 校验"
 CJ="$PAYLOAD/completeness.json"
 
+# 0b. Gatekeeper 模拟：给 payload 加 quarantine（模拟浏览器下载的 dmg 挂载卷场景）
+#     bsdtar 解包会传播 quarantine → install.sh 必须解包后清除，否则
+#     Electron/python/noema exec 被 Gatekeeper 拦（Operation not permitted）
+QUARANTINE="0081;1788863500;Safari;00000000-0000-0000-0000-000000000000"
+for f in "DSH Desktop.app.tar.gz" profile.tar.gz skills-presets.tar.gz aeis-portable.tar.gz; do
+  xattr -w com.apple.quarantine "$QUARANTINE" "$PAYLOAD/$f" 2>/dev/null || true
+done
+cleanup_qa(){ for f in "DSH Desktop.app.tar.gz" profile.tar.gz skills-presets.tar.gz aeis-portable.tar.gz; do
+  xattr -d com.apple.quarantine "$PAYLOAD/$f" 2>/dev/null || true; done; }
+trap cleanup_qa EXIT
+pass "payload 已模拟 quarantine（下载 dmg 场景）"
+
 # 1. 安装（APP_TARGET 在 /tmp → 走免提权直写路径）
 DSH_HOME="$DSH_HOME_SMOKE" APP_TARGET="$APP_TARGET" bash "$PAYLOAD/install.sh" > "$SMOKE_HOME/install.log" 2>&1
 assert "install.sh exit 0" 0 "$?"
@@ -40,6 +52,12 @@ codesign --verify --deep --strict "$APP_TARGET" >/dev/null 2>&1
 assert "app adhoc 签名有效（解包后）" 0 "$?"
 assert "CFBundleVersion 带 lute 后缀" 1 "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$APP_TARGET/Contents/Info.plist" | grep -c 'lute\.' || true)"
 
+# 2b. quarantine 清除断言（Gatekeeper 防拦：install.sh 解包后必须清除隔离属性）
+QA_APP="$(xattr -p com.apple.quarantine "$APP_TARGET/Contents/MacOS/DSH Desktop" 2>/dev/null || true)"
+assert "app Electron 无 quarantine 残留" "" "$QA_APP"
+QA_PY="$(xattr -p com.apple.quarantine "$DSH_HOME_SMOKE/aeis-venv/bin/python3" 2>/dev/null || true)"
+assert "aeis python 无 quarantine 残留" "" "$QA_PY"
+
 # 3. profile
 P="$DSH_HOME_SMOKE/profiles/desktop"
 for f in package.json cordis.patch.yml apply-patches.mjs; do
@@ -51,6 +69,8 @@ assert "overrides 落位" yes "$([ -d "$P/overrides/dsh-llm" ] && echo yes)"
 NOEMA_BIN="$P/node_modules/@zseven-w/dsh-noema-darwin-arm64/bin/noema-mcp"
 assert "noema darwin-arm64 二进制落位" yes "$([ -x "$NOEMA_BIN" ] && echo yes)"
 assert "noema 二进制架构 arm64" yes "$(file "$NOEMA_BIN" | grep -q 'arm64' && echo yes)"
+QA_NOEMA="$(xattr -p com.apple.quarantine "$NOEMA_BIN" 2>/dev/null || true)"
+assert "noema 无 quarantine 残留" "" "$QA_NOEMA"
 assert "vendor 无树外符号链接" 0 "$(find "$P/vendor" -type l -exec sh -c 'case "$(readlink "$1")" in /*) echo 1;; esac' _ {} \; 2>/dev/null | grep -c 1 || true)"
 assert "cordis.patch.yml 无 __DSH_HOME__ 残留" 0 "$(grep -c '__DSH_HOME__' "$P/cordis.patch.yml" || true)"
 assert "cordis.patch.yml python 指向冒烟 aeis" 1 "$(grep -c "$DSH_HOME_SMOKE/aeis-venv/bin/python" "$P/cordis.patch.yml" || true)"

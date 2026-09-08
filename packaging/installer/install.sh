@@ -16,6 +16,11 @@ APP_TARGET="${APP_TARGET:-/Applications/DSH Desktop.app}"
 PROFILE_DIR="$DSH_HOME_DIR/profiles/desktop"
 STAMP="$(date +%Y%m%d-%H%M%S)"
 say(){ echo "[install] $*"; }
+# 清除 Gatekeeper 隔离属性：下载的 dmg 挂载后卷内文件带 com.apple.quarantine，
+# bsdtar 解包会传播到落盘文件 → Electron/python/noema 等二进制 exec 被 Gatekeeper
+# 拒绝（Operation not permitted）。解包后立即递归清除（失败不阻塞；提权路径
+# 文件 owner 是 root 用户态清不动——该场景在提权脚本内清）。
+clear_qa(){ xattr -dr com.apple.quarantine "$1" 2>/dev/null || true; }
 
 STAGING_DIR="$DSH_HOME_DIR/.lute-install"
 cleanup_tmp(){ rm -rf "$STAGING_DIR"; }
@@ -82,6 +87,7 @@ if [ -w "$APP_PARENT" ] && { [ ! -d "$APP_TARGET" ] || [ -w "$APP_TARGET" ]; }; 
     RESTORE_APP="$APP_TARGET.pre-lute-$STAMP"
   fi
   tar --no-same-owner -xzf "$HERE/DSH Desktop.app.tar.gz" -C "$APP_PARENT"
+  clear_qa "$APP_TARGET"
   REMOVE+=("$APP_TARGET")
 else
   say "1/6 写入 $APP_PARENT 需要管理员授权（系统将弹出密码框）"
@@ -91,6 +97,7 @@ else
 #!/bin/bash
 if [ -d '$APP_TARGET' ]; then mv '$APP_TARGET' '$APP_TARGET.pre-lute-$STAMP'; fi
 tar --no-same-owner -xzf '$HERE/DSH Desktop.app.tar.gz' -C '$APP_PARENT'
+xattr -dr com.apple.quarantine '$APP_TARGET' 2>/dev/null || true
 HEOF
   if [ -d "$APP_TARGET" ]; then RESTORE_APP="$APP_TARGET.pre-lute-$STAMP"; fi
   elevate "bash '$HELPER'"
@@ -110,6 +117,7 @@ if [ -d "$PROFILE_DIR" ]; then
 fi
 mkdir -p "$PROFILE_DIR"
 tar --no-same-owner -xzf "$HERE/profile.tar.gz" -C "$PROFILE_DIR"
+clear_qa "$PROFILE_DIR"
 for item in "${OWNED[@]}"; do REMOVE+=("$PROFILE_DIR/$item"); done
 say "2/6 profile 就位（node_modules 已随包，无需联网安装）"
 
@@ -134,8 +142,10 @@ mkdir -p "$STAGING_DIR"
 tar --no-same-owner -xzf "$HERE/skills-presets.tar.gz" -C "$STAGING_DIR"
 [ -d "$DSH_HOME_DIR/skills" ] || mkdir -p "$DSH_HOME_DIR/skills"
 cp -Rn "$STAGING_DIR/skills/." "$DSH_HOME_DIR/skills/" 2>/dev/null || true
+clear_qa "$DSH_HOME_DIR/skills"
 [ -d "$DSH_HOME_DIR/.agent-presets" ] || mkdir -p "$DSH_HOME_DIR/.agent-presets"
 cp -Rn "$STAGING_DIR/presets/." "$DSH_HOME_DIR/.agent-presets/" 2>/dev/null || true
+clear_qa "$DSH_HOME_DIR/.agent-presets"
 rm -rf "$STAGING_DIR/skills" "$STAGING_DIR/presets" 2>/dev/null || true
 say "5/6 技能+预设合并完成"
 
@@ -148,6 +158,7 @@ if [ -f "$HERE/aeis-portable.tar.gz" ]; then
   fi
   mkdir -p "$DSH_HOME_DIR"
   tar --no-same-owner -xzf "$HERE/aeis-portable.tar.gz" -C "$DSH_HOME_DIR"
+  clear_qa "$DSH_HOME_DIR/aeis-venv"
   REMOVE+=("$DSH_HOME_DIR/aeis-venv")
   bash "$HERE/tools/reloc-aeis.sh" --check "$DSH_HOME_DIR/aeis-venv" || say "⚠ 灵枢 venv 自检未通过，见 reloc-aeis.sh"
 else

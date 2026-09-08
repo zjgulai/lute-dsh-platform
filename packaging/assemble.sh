@@ -206,6 +206,13 @@ cat > "$PAYLOAD/README.md" <<EOF
 或终端 \`bash install.sh\`。
 启动后：**重新授权 TCC**（系统设置 → 隐私与安全 → 屏幕录制/辅助功能/自动化，授权 LUTE Agentic System）。
 
+## Gatekeeper（未公证包，必读）
+本包为 adhoc 签名、未公证，macOS 会拦下载的 dmg：
+- **双击 LUTE Setup.app 打不开** → 右键 → 打开 → 弹框点「打开」。
+- **install.sh 报 Operation not permitted** → 本版安装器解包后自动清除隔离属性，
+  直接重跑 \`bash install.sh\` 即可。
+- 推荐直接终端安装：\`cd "/Volumes/DSH Desktop LUTE $VERSION" && bash install.sh\`
+
 ## 校验
 \`\`\`bash
 bash tools/verify-patches.sh        # 应 ALL PATCHES VERIFIED
