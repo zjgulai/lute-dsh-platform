@@ -5,9 +5,9 @@
 *
 !*/
 !.gitignore
-!README.md
-!CHANGELOG.md
-!LICENSE
+/README.md
+/CHANGELOG.md
+/LICENSE
 !.github/**
 !docs/**
 !doc/**
@@ -17,6 +17,7 @@
 !dsh-overseas-skills/**
 !dsh-overseas-tools/**
 !dsh-wanzh-hulian/**
+!scripts/**
 !dsh-skill-subset/**
 !dsh-patches/**
 !dsh-loopx-plugin/**
@@ -43,6 +44,7 @@
 
 # —— 纳入目录内的常见排除 ——
 node_modules/
+.doctor-backup/
 staging/
 dist/
 generated/
@@ -53,3 +55,10 @@ credentials*
 *.shn#
 .DS_Store
 *.log
+!dsh-my-quotes/**
+
+# —— 排除临时/备份文件（覆盖白名单，避免 git add -A 误纳入）——
+*.bak-*
+*.pre-*
+dsh-team-hub/
+*.orig*
