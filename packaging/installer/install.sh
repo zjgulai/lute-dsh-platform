@@ -94,8 +94,14 @@ chmod +x "$NODE_SHIM"
 export PATH="$(dirname "$NODE_SHIM"):$PATH"
 
 # ── 1/6 解包 app（目标父目录不可写时提权）─────────────────────────────────────
+# pkg 模式（LUTE_INSTALL_APP=0）：app 已由 pkg 的 postinstall（root，Installer 已获
+# 管理员授权）落位 /Applications，此处只校验存在性，跳过解包与二次提权。
 APP_PARENT="$(dirname "$APP_TARGET")"
-if [ -w "$APP_PARENT" ] && { [ ! -d "$APP_TARGET" ] || [ -w "$APP_TARGET" ]; }; then
+if [ "${LUTE_INSTALL_APP:-1}" = "0" ]; then
+  [ -d "$APP_TARGET" ] || { echo "[install] LUTE_INSTALL_APP=0 但 $APP_TARGET 不存在（pkg app 落位失败）"; exit 1; }
+  clear_qa "$APP_TARGET" 2>/dev/null || true
+  say "1/6 app 已由 pkg 落位（跳过解包）"
+elif [ -w "$APP_PARENT" ] && { [ ! -d "$APP_TARGET" ] || [ -w "$APP_TARGET" ]; }; then
   if [ -d "$APP_TARGET" ]; then
     say "1/6 已有 $APP_TARGET → 备份为 $APP_TARGET.pre-lute-$STAMP"
     mv "$APP_TARGET" "$APP_TARGET.pre-lute-$STAMP"
