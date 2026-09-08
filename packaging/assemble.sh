@@ -29,7 +29,7 @@ APP_STAGE="$STAGE/app"
 mkdir -p "$APP_STAGE"
 # R2b 决策：内嵌 dsh-profile 作为首启兜底（与 profile.tar.gz 同源）。
 # 此处先排除 dev 机自带的老 dsh-profile（8-30 半成品），后面由 §2b 同源注入。
-rsync -a --exclude '.DS_Store' --exclude 'dsh-profile' --exclude '*.orig' --exclude '*.bak' "$DSH_APP/" "$APP_STAGE/DSH Desktop.app/" 2>/dev/null \
+rsync -a --exclude '.DS_Store' --exclude 'dsh-profile' --exclude '*.orig*' --exclude '*.bak' "$DSH_APP/" "$APP_STAGE/DSH Desktop.app/" 2>/dev/null \
   || { cp -R "$DSH_APP" "$APP_STAGE/DSH Desktop.app" && rm -rf "$APP_STAGE/DSH Desktop.app/Contents/Resources/dsh-profile"; }
 
 # 暂存改写：禁用官方更新通道（决策 D3；electron-updater 无 provider 即无检查源）
@@ -69,15 +69,22 @@ for d in $vendor_dirs dsh-patches; do
   [ -d "$DSH_VENDOR/$d" ] || { echo "[assemble] 缺少 vendor 源: $DSH_VENDOR/$d"; exit 1; }
   # --safe-links：跳过指向源树外的符号链接（如 dsh-theme-local/vendor 下指向
   # 构建机 app checkout 的开发期草稿链接），包内只保留树内相对链接
+  # dev 临时文件排除口径（与 .gitignore P3 对齐）：*.bak-*/*.pre-*/*.orig + 元数据
   rsync -a --safe-links --exclude node_modules --exclude .git --exclude '*.map' --exclude dist \
-        --exclude 'preview-*.html' --exclude archive "$DSH_VENDOR/$d/" "$STAGEP/profile/vendor/$d/" 2>/dev/null \
+        --exclude 'preview-*.html' --exclude archive \
+        --exclude '.DS_Store' --exclude '*.bak-*' --exclude '*.pre-*' --exclude '*.orig*' \
+        --exclude '.git.disabled' --exclude coverage \
+        "$DSH_VENDOR/$d/" "$STAGEP/profile/vendor/$d/" 2>/dev/null \
     || cp -R "$DSH_VENDOR/$d" "$STAGEP/profile/vendor/$d/"
 done
+# 兜底清理（rsync fallback 到 cp -R 时无排除能力；终态保证 vendor 无 dev 临时文件）
+find "$STAGEP/profile/vendor" \( -name '.DS_Store' -o -name '*.bak-*' -o -name '*.pre-*' -o -name '*.orig*' \) -delete 2>/dev/null || true
+find "$STAGEP/profile/vendor" -maxdepth 2 \( -name '.git.disabled' -o -name coverage \) -type d -exec rm -rf {} + 2>/dev/null || true
 
 # overrides（profile node_modules 里的 -override 副本，随包以防目标机版本漂移）
 for o in dsh-llm dsh-tool-subagent dsh-file-reference-local; do
   src="$PROFILE/node_modules/@deepseek-ai/$o"
-  [ -d "$src" ] && rsync -a --exclude node_modules "$src/" "$STAGEP/profile/overrides/$o/" 2>/dev/null
+  [ -d "$src" ] && rsync -a --exclude node_modules --exclude '*.orig*' --exclude '*.bak-*' --exclude '*.pre-*' "$src/" "$STAGEP/profile/overrides/$o/" 2>/dev/null
 done
 
 # file: 路径重写（包内自洽，决策 D4）→ 在暂存副本上执行，不触碰本机 profile
@@ -95,7 +102,7 @@ mkdir -p "$BUNDLED"
 # 注：内嵌副本排除 node_modules/.bin（CLI shim，DSH 运行时不用）——其中含断链，
 # 断链会导致 codesign --deep --strict 拒绝整个 bundle。
 rsync -a "$STAGEP/profile/" "$BUNDLED/"
-rsync -a --exclude '.bin' "$PROFILE/node_modules/" "$BUNDLED/node_modules/" 2>/dev/null \
+rsync -a --exclude '.bin' --exclude '*.orig*' --exclude '*.bak-*' --exclude '*.pre-*' "$PROFILE/node_modules/" "$BUNDLED/node_modules/" 2>/dev/null \
   || { cp -R "$PROFILE/node_modules" "$BUNDLED/node_modules" && rm -rf "$BUNDLED/node_modules/.bin"; }
 # 断言无指向包外的绝对符号链接（codesign --deep --strict 会拒绝）
 ABS_LINKS="$(find "$BUNDLED" -type l -exec sh -c 'case "$(readlink "$1")" in /*) echo "$1 -> $(readlink "$1")";; esac' _ {} \;)"
@@ -123,7 +130,10 @@ say "压缩 profile（含离线 node_modules 475M + vendor，数分钟）…"
 # 归档根 = profile 目录内容（package.json/vendor/overrides 在根，与目标机布局一致）+ node_modules
 # --exclude '.DS_Store'：与 app 归档（line 119）对称，否则 .DS_Store 混入 profile.tar.gz
 # 而 app.tar.gz 已排除 → 内嵌/安装后双落位不一致（smoke 5c 断言失败）
-tar -czf "$PAYLOAD/profile.tar.gz" --exclude '.DS_Store' -C "$STAGEP/profile" . -C "$PROFILE" node_modules
+# --exclude '*.orig*' 等：dev 临时文件（node_modules 里也有 index.js.orig）不进包
+tar -czf "$PAYLOAD/profile.tar.gz" --exclude '.DS_Store' --exclude '*.orig*' --exclude '*.bak-*' \
+    --exclude '*.pre-*' --exclude '.git.disabled' --exclude coverage \
+    -C "$STAGEP/profile" . -C "$PROFILE" node_modules
 say "profile 完成 ($(du -sh "$PAYLOAD/profile.tar.gz" | cut -f1))"
 rm -rf "$STAGEP"
 
@@ -133,7 +143,9 @@ SP="$STAGE/.sp"; mkdir -p "$SP/skills" "$SP/presets"
 [ -d "$DSH_HOME_DIR/skills" ] && cp -R "$DSH_HOME_DIR/skills/." "$SP/skills/"
 [ -d "$HOME/.agents/skills" ] && cp -R "$HOME/.agents/skills/." "$SP/skills/" 2>/dev/null || true
 [ -d "$DSH_HOME_DIR/.agent-presets" ] && cp -R "$DSH_HOME_DIR/.agent-presets/." "$SP/presets/"
-tar -czf "$PAYLOAD/skills-presets.tar.gz" -C "$SP" skills presets
+# 清理元数据/临时文件（口径与 vendor/node_modules 一致）
+find "$SP" \( -name '.DS_Store' -o -name '*.bak-*' -o -name '*.pre-*' -o -name '*.orig*' \) -delete 2>/dev/null || true
+tar -czf "$PAYLOAD/skills-presets.tar.gz" --exclude '.DS_Store' -C "$SP" skills presets
 rm -rf "$SP"
 say "技能+预设完成 ($(du -sh "$PAYLOAD/skills-presets.tar.gz" | cut -f1))"
 
@@ -152,14 +164,14 @@ fi
 # ── 5. 安装器与工具 ──────────────────────────────────────────────────────────
 say "5/6 装配安装器与工具"
 cp "$PKG_ROOT/installer/install.sh" "$PAYLOAD/install.sh"
-chmod +x "$PAYLOAD/install.sh"
+chmod 755 "$PAYLOAD/install.sh"
 cp "$PKG_ROOT/scripts/rewrite-file-deps.mjs" "$PAYLOAD/tools/"
 cp "$PKG_ROOT/scripts/reloc-aeis.sh" "$PAYLOAD/tools/"
 cp "$DSH_VENDOR/dsh-patches/verify-patches.sh" "$PAYLOAD/tools/"
 cp "$DSH_VENDOR/dsh-patches/brand-replay.sh" "$PAYLOAD/tools/" 2>/dev/null || true
 cp "$DSH_VENDOR/dsh-patches/brand-payload-wordmark.txt" "$PAYLOAD/tools/" 2>/dev/null || true
 cp "$DSH_VENDOR/dsh-patches/patches-manifest.md" "$PAYLOAD/tools/" 2>/dev/null || true
-chmod +x "$PAYLOAD/tools/"*.sh 2>/dev/null || true
+chmod 755 "$PAYLOAD/tools/"*.sh "$PAYLOAD/tools/"*.mjs 2>/dev/null || true
 
 # LUTE Setup.app（GUI 安装器，swiftc 编译；随 payload 根分发）
 bash "$PKG_ROOT/scripts/build-setup-app.sh" "$PAYLOAD"
