@@ -76,12 +76,12 @@ window.__ModuleLoader__.load({
 			"[data-plugin='dsh-wanzh-hulian'] .whSbBtn { width:calc(100% + 4px); height:42px; color:var(--dsw-alias-label-primary); cursor:pointer; background:0 0; border:none; border-radius:12px; align-items:center; gap:8px; margin:0 -2px; padding:0 10px 0 12px; font-family:inherit; font-size:14px; display:inline-flex; overflow:hidden; }",
 			"[data-plugin='dsh-wanzh-hulian'] .whSbBtn:hover, .whSbBtn[data-active] { background:var(--dsw-alias-interactive-bg-hover); }",
 			"[data-plugin='dsh-wanzh-hulian'] .whSbLabel { text-overflow:ellipsis; white-space:nowrap; min-width:0; overflow:hidden; }",
-			"[data-plugin='dsh-wanzh-hulian'].whRightPanel { position:fixed; top:0; right:0; bottom:0; width:min(360px, 96vw); z-index:2500; display:flex; flex-direction:column; gap:10px; padding:16px 16px 12px; border-left:1px solid var(--dsw-alias-border-l1); background:var(--dsw-alias-bg-layer-1); box-shadow:-12px 0 32px rgba(0,0,0,.18); overflow-y:auto; }",
+			"[data-plugin='dsh-wanzh-hulian'].whRightPanel { position:fixed; top:32px; right:0; bottom:0; width:min(360px, 96vw); z-index:2500; display:flex; flex-direction:column; gap:10px; padding:16px 16px 12px; border-left:1px solid var(--dsw-alias-border-l1); background:var(--dsw-alias-bg-layer-1); box-shadow:-12px 0 32px rgba(0,0,0,.18); overflow-y:auto; }",
 			"[data-plugin='dsh-wanzh-hulian'] .whRightPanelTop { flex:none; margin:-16px -16px 0; height:3px; background:linear-gradient(90deg, #58B848, #8FD48A); border-radius:0 0 4px 4px; }",
 			"[data-plugin='dsh-wanzh-hulian'] .whRightPanelHead { display:flex; align-items:center; gap:8px; }",
 			"[data-plugin='dsh-wanzh-hulian'] .whRightPanelTitle { flex:1; margin:0; font-size:14px; font-weight:600; line-height:22px; color:var(--dsw-alias-label-primary); }",
 			"[data-plugin='dsh-wanzh-hulian'] .whRightPanelSub { margin:0; font-size:11px; line-height:16px; color:var(--dsw-alias-label-tertiary); }",
-			"[data-plugin='dsh-wanzh-hulian'] .whRightPanelClose { border:none; background:transparent; cursor:pointer; font-size:16px; line-height:20px; color:var(--dsw-alias-label-tertiary); padding:2px 8px; border-radius:6px; }",
+			"[data-plugin='dsh-wanzh-hulian'] .whRightPanelClose { border:none; background:transparent; cursor:pointer; font-size:16px; line-height:20px; color:var(--dsw-alias-label-tertiary); padding:4px 10px; min-width:30px; min-height:28px; display:inline-flex; align-items:center; justify-content:center; border-radius:6px; }",
 			"[data-plugin='dsh-wanzh-hulian'] .whRightPanelClose:hover { background:var(--dsw-alias-interactive-bg-hover); color:var(--dsw-alias-label-primary); }",
 			"[data-plugin='dsh-wanzh-hulian'] .whSeg { display:flex; gap:4px; padding:3px; border-radius:10px; background:var(--dsw-alias-bg-layer-2); }",
 			"[data-plugin='dsh-wanzh-hulian'] .whSegBtn { flex:1; border:none; cursor:pointer; border-radius:8px; padding:6px 0; font-size:12px; line-height:18px; color:var(--dsw-alias-label-secondary); background:transparent; }",
@@ -684,6 +684,16 @@ window.__ModuleLoader__.load({
 				if (open) window.addEventListener("keydown", onKey);
 				return function () { window.removeEventListener("keydown", onKey); };
 			}, [open]);
+			useEffect(function () {
+				var onDoc = function (e) {
+					if (!open) return;
+					var t = e.target;
+					if (t && t.closest && (t.closest("[data-plugin='dsh-wanzh-hulian'].whRightPanel") || t.closest('[aria-label="知识库"]'))) return;
+					kbSetOpen(false);
+				};
+				if (open) document.addEventListener("mousedown", onDoc);
+				return function () { document.removeEventListener("mousedown", onDoc); };
+			}, [open]);
 			if (!open) return null;
 			var pick = function (text) {
 				var ok = false;
@@ -744,7 +754,7 @@ window.__ModuleLoader__.load({
 				React.createElement("div", { className: "whRightPanelTop" }),
 				React.createElement("div", { className: "whRightPanelHead" },
 					React.createElement("p", { className: "whRightPanelTitle" }, "知识库"),
-					React.createElement("button", { className: "whRightPanelClose", onClick: function () { kbSetOpen(false); }, "aria-label": "关闭知识库面板" }, "✕")
+					React.createElement("button", { className: "whRightPanelClose", onClick: function () { kbSetOpen(false); }, onMouseDown: function (e) { e.preventDefault(); kbSetOpen(false); }, "aria-label": "关闭知识库面板" }, "✕")
 				),
 				React.createElement("p", { className: "whRightPanelSub" }, subtitle + " · 选择的是知识库名称，不涉及具体笔记"),
 				conn
