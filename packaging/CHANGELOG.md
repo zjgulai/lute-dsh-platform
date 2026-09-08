@@ -2,27 +2,17 @@
 
 本文件记录 LUTE 集成打包的版本历史（独立语义版本；DSH 基线 2.0.4）。
 
-## [1.1.0]（2026-09-04）
+## [1.2.1]（2026-09-08）
 
-R2b 架构落地：**拖 app 即用（首启兜底）+ 安装器权威升级**。方案见 `SOLUTION.md`。
+### 万物互联（dsh-wanzh-hulian）面板 UX 修复
 
-- 内嵌 `Resources/dsh-profile`：由 assemble 同源流水线注入（与 `profile.tar.gz` 同一份内容两个落位），首启 ditto 自动落位；新增主进程补丁 **P0-7**（main.js 首启 hook）把 `cordis.patch.yml` 的 `__DSH_HOME__` 按真实 home 替换。
-- 补丁锚点 23→**31**：新增 P0-7 + chatui 界面修复（加载更早/按钮门/recall 回填 3 条）+ skill 中文标题（3 条）+ 剪贴板 execCommand 兜底（1 条）。修复 dev 机 noema `status-route` 漂移。
-- 完整性硬断言：载荷新增 `completeness.json`（全部 bundle/vendor/skills/presets 权威清单），冒烟逐一比对存在性；新增「内嵌 ≡ 安装后 profile」双落位一致性断言。
-- 安装器逻辑不变（1.0.0 已三验资产复用）。
+- 知识库选择面板 `top:32px` 对齐顶栏（原 top:0 顶部被遮挡）
+- 点击面板外自动关闭（mousedown 监听 + closest 排除面板本体/入口）
+- 关闭按钮点击区加大（min 30×28 触控友好）；`onMouseDown` 防冒泡立即关闭
 
-## [1.0.0]（2026-09-01）
+### 打包
 
-首个可安装包 `DSH-Desktop-LUTE-1.0.0-mac-arm64.dmg`（约 480M）。
-
-- 形态：dmg + `LUTE Setup.app`（swiftc GUI 安装器，流式日志 + TCC 引导）+ `install.sh`（命令行等价）。
-- 离线全量：已补丁 app（官方更新通道禁用、CFBundleVersion=2.0.4-lute.1.0.0、adhoc 深签名）+ profile（离线 node_modules + 包内自洽 vendor + overrides + `__DSH_HOME__` 占位）+ 技能/预设 + 灵枢便携运行时（python-build-standalone 3.14.7 + aeis 0.5.0，免 Python）。
-- 安装语义：幂等 + 回滚 + 升级保留 data/ 与自装技能；提权仅限写 /Applications 一步。
-- 验证：隔离冒烟 26 项断言（含 23 补丁锚点 + 11 品牌锚点 + noema arm64 二进制 + 解包后签名有效）全部通过；**从 dmg 只读卷真实安装路径验证通过**。
-- 变更：`dsh-patches/verify-patches.sh` 与 `brand-replay.sh` 路径参数化（`DSH_APP`/`DSH_HOME`/`LING_SRC`），dev 机默认行为不变。
-- 剥离：暂存 app 中移除半成品内嵌 `Resources/dsh-profile`（见 PLAN.md §11）。
-
----
+- **dmg + pkg 双格式交付**（pkg 面向无终端客户：双击 → Installer 图形向导 → 输密码 → 完成）
 
 ## [1.2.0]（2026-09-08）
 
@@ -30,13 +20,21 @@ R2b 架构落地：**拖 app 即用（首启兜底）+ 安装器权威升级**�
 
 - **P1 输入框打字抖动（回归修复）**：`dsh-my-quotes` 移除 `MutationObserver(document.body, subtree)` 反馈回路——React 重挂 tab bar 时 observer 回调 `appendChild` 与重协调打架导致抖动；改持久 `setInterval(2s)` 轻量轮询兜底。
 - **P2 CSS 属性化（红线）**：`dsh-overseas-skills` 85 处 `.ovsRoot/.ovpRoot` 后代选择器、`dsh-wanzh-hulian` 39 处 `.whRoot` 后代选择器 → `[data-plugin]` scoping，消除裸类名污染风险（同历史 .whRoot 污染）。
-- **P3 临时文件治理**：`.gitignore` 排除 `*.bak-*` / `*.pre-*` / `dsh-team-hub/`；移除已追踪的 `client.js.bak-cn-slash`。
+- **P3 临时文件治理**：`.gitignore` 排除 `*.bak-*` / `*.pre-*` / `*.orig*` / `dsh-team-hub/`；修复 .gitignore 被 assume-unchanged 压住导致排除段未进 HEAD 的问题。
 - **P4 Spec 正确性**：`readMcpServers` 按 id 对称合并（保留非默认 id 的自定义 MCP 条目）；`templates.js` 缓存加 `kind` 字段（contract/l1/l2/l3 不再共享 `{mtime,text}` 形状，消除误命中）。
 
 ### 业务侧更新
 
 - **dsh-wanzh-hulian**：新增 `business-meta.js`（MCP 卡片业务化——PixPix/Shopify 工具业务映射 + 静态元数据），`ensureShopifySkill` 模板生成，`package.json` 注册 bundles。
 - **dsh-overseas-skills**：catalog / manifest / scripts 清单与图标映射更新。
+
+### 打包加固（客户真机报障后的系统性修复）
+
+- **quarantine 防线**：install.sh 解包后五处自动清除隔离属性（app 免提权/提权脚本、profile、skills/presets、aeis）——根治客户「Operation not permitted」；冒烟新增 quarantine 模拟 + 3 清除断言。
+- **防 root 污染**：install.sh 拒绝 sudo 运行 + root 属主残留检测（历史 sudo 安装导致反复回滚的根因）。
+- **打包侧断言**：sign-and-dmg 制 dmg 前断言 payload 无 quarantine；profile.tar.gz 归档排除 `.DS_Store`/dev 临时文件（六处统一口径）。
+- **构建号**：VERSION/manifest 带 BUILD 唯一标识，防同名多代 dmg 混淆。
+- **pkg 交付**（新增）：`build-pkg.sh`（pkgbuild + productbuild）+ `pkg-postinstall.sh`（root 落位 app + 切登录用户装 profile）+ `install.sh` 的 `LUTE_INSTALL_APP=0` pkg 模式 + `INSTALL-CARD.md` 客户安装卡。
 
 ### 新增：dsh-file-upload → Codex 风格三 Tab 附件面板（v0.2.0-local）
 
@@ -58,3 +56,23 @@ R2b 架构落地：**拖 app 即用（首启兜底）+ 安装器权威升级**�
 ### 经验教训（避免白屏）
 
 - **bundles 子入口规则**：有 `dsh.bundle.patch`（指向 cordis.patch.yml）的插件，bundles 只写包名一次；插件自身 cordis.patch.yml 的 `insert` 条目由 desktop composition 层自动处理，**手动追加子入口（如 `/init-command`、`/driver`）会触发白屏**。
+
+## [1.1.0]（2026-09-04）
+
+R2b 架构落地：**拖 app 即用（首启兜底）+ 安装器权威升级**。方案见 `SOLUTION.md`。
+
+- 内嵌 `Resources/dsh-profile`：由 assemble 同源流水线注入（与 `profile.tar.gz` 同一份内容两个落位），首启 ditto 自动落位；新增主进程补丁 **P0-7**（main.js 首启 hook）把 `cordis.patch.yml` 的 `__DSH_HOME__` 按真实 home 替换。
+- 补丁锚点 23→**31**：新增 P0-7 + chatui 界面修复（加载更早/按钮门/recall 回填 3 条）+ skill 中文标题（3 条）+ 剪贴板 execCommand 兜底（1 条）。修复 dev 机 noema `status-route` 漂移。
+- 完整性硬断言：载荷新增 `completeness.json`（全部 bundle/vendor/skills/presets 权威清单），冒烟逐一比对存在性；新增「内嵌 ≡ 安装后 profile」双落位一致性断言。
+- 安装器逻辑不变（1.0.0 已三验资产复用）。
+
+## [1.0.0]（2026-09-01）
+
+首个可安装包 `DSH-Desktop-LUTE-1.0.0-mac-arm64.dmg`（约 480M）。
+
+- 形态：dmg + `LUTE Setup.app`（swiftc GUI 安装器，流式日志 + TCC 引导）+ `install.sh`（命令行等价）。
+- 离线全量：已补丁 app（官方更新通道禁用、CFBundleVersion=2.0.4-lute.1.0.0、adhoc 深签名）+ profile（离线 node_modules + 包内自洽 vendor + overrides + `__DSH_HOME__` 占位）+ 技能/预设 + 灵枢便携运行时（python-build-standalone 3.14.7 + aeis 0.5.0，免 Python）。
+- 安装语义：幂等 + 回滚 + 升级保留 data/ 与自装技能；提权仅限写 /Applications 一步。
+- 验证：隔离冒烟 26 项断言（含 23 补丁锚点 + 11 品牌锚点 + noema arm64 二进制 + 解包后签名有效）全部通过；**从 dmg 只读卷真实安装路径验证通过**。
+- 变更：`dsh-patches/verify-patches.sh` 与 `brand-replay.sh` 路径参数化（`DSH_APP`/`DSH_HOME`/`LING_SRC`），dev 机默认行为不变。
+- 剥离：暂存 app 中移除半成品内嵌 `Resources/dsh-profile`（见 PLAN.md §11）。
