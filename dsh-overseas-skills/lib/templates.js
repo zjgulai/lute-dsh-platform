@@ -208,9 +208,9 @@ export function getPromptTemplate(name, title) {
     let mtC = 0;
     try { mtC = statSync(fileC).mtimeMs; } catch { /* ignore */ }
     const cc = cache.get(name);
-    if (cc && cc.mtime === mtC) return cc.text;
+    if (cc && cc.kind === "contract" && cc.mtime === mtC) return cc.text;
     const textC = renderContract(title || name, contract);
-    cache.set(name, { mtime: mtC, text: textC });
+    cache.set(name, { kind: "contract", mtime: mtC, text: textC });
     return textC;
   }
   const l1 = L1[name];
@@ -230,13 +230,13 @@ export function getPromptTemplate(name, title) {
   let mtime = 0;
   try { mtime = statSync(file).mtimeMs; } catch { /* ignore */ }
   const c = cache.get(name);
-  if (c && c.mtime === mtime) return c.text;
+  if (c && c.kind === "l2" && c.mtime === mtime) return c.text;
   let text = "";
   try {
     const inputs = parseInputs(readFileSync(file, "utf8"));
     if (inputs.length > 0) text = render(title || name, "完成这项任务", inputs, []);
   } catch { /* ignore */ }
   if (!text) text = generic(title || name);
-  cache.set(name, { mtime, text });
+  cache.set(name, { kind: "l2", mtime, text });
   return text;
 }

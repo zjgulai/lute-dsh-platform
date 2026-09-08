@@ -141,7 +141,7 @@ class QuoteService {
     if (this.loaded) return
     this.overrides = (await readJson(OVERRIDES_FILE)) || {}
     const meta = await readJson(META_FILE)
-    if (meta && meta.total > 0) {
+    if (meta && meta.total > 0 && (meta.schemaVersion || 1) >= 2) {
       try {
         const raw = await readFile(INDEX_FILE, 'utf8')
         this.records = raw.split('\n').filter(Boolean).map(l => JSON.parse(l))
@@ -233,6 +233,8 @@ class QuoteService {
         })
       }
     }
+    // 标题事件通常晚于首批用户消息 → 行扫结束后用会话最终标题回填空标题记录
+    for (const rec of records) if (!rec.title) rec.title = title
     return { skip: false, records, title }
   }
 
@@ -275,7 +277,7 @@ class QuoteService {
       this.records = next
       this.applyOverrides()
       await atomicWrite(INDEX_FILE, next.map(r => JSON.stringify(r)).join('\n') + (next.length ? '\n' : ''))
-      await atomicWrite(META_FILE, JSON.stringify({ version: 1, total: next.length, scannedAt: Date.now(), files: newMetaFiles }))
+      await atomicWrite(META_FILE, JSON.stringify({ version: 1, schemaVersion: 2, total: next.length, scannedAt: Date.now(), files: newMetaFiles }))
       this.loaded = true
       return { total: next.length, ms: Date.now() - started }
     } finally {

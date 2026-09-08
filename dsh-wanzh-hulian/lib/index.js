@@ -6,6 +6,7 @@ import { spawn } from "node:child_process";
 import { createServer } from "node:http";
 import { randomBytes, createHash } from "node:crypto";
 import { defineTool } from "@deepseek-ai/dsh-tools";
+import { PIXPIX_BUSINESS_META, SHOPIFY_BUSINESS_META, MCP_STATIC_TOOL_META, staticToolMetaFor } from "./business-meta.js";
 import * as McpClient from "@deepseek-ai/dsh-mcp-client";
 import { BOARDS, CONNECTIONS } from "./catalog.js";
 
@@ -205,6 +206,8 @@ user-invocable: true
 | AI 生图（文生图/图生图） | generate_image |
 | AI 生视频 | generate_video |
 | 文案配音 / TTS | generate_tts |
+| 查历史生成记录 / 收藏 | list_generation_tasks |
+| 某项能力没有专门工具时的兜底 | run_generation_tool |
 
 ## 标准工作流（生成类任务）
 
@@ -221,6 +224,8 @@ user-invocable: true
 - 工具返回的错误（积分不足、参数非法、限流）原样转达用户，不要重试轰炸。
 - 真人素材需用户确认已获使用授权；AI 合成人像用于亚马逊上架时，合规标记（contains-synthetic-performer）需在 PixPix 网页端工具完成（synthetic-performer-tagger，MCP 未暴露）。
 - 本技能只做映射与流程指引；凭证、token 由宿主管理，模型不可见，禁止索取。
+- 宿主专用工具（get_generation_status_for_workbuddy、render_generation_result_for_codex/in_app）为其他宿主（WorkBuddy/Codex/Claude）使用，本宿主不暴露，无需调用。
+<!-- v2 2026-09-08 -->
 `;
 async function ensurePixpixSkill() {
   if (!existsSync(PIXPIX_SKILL_FILE)) {
@@ -230,7 +235,7 @@ async function ensurePixpixSkill() {
   }
   // 模板升级（幂等）：缺「业务场景速查」章节时用新模板重写，保留旧文件的模型调用/可用性 flag
   const text = await readFile(PIXPIX_SKILL_FILE, "utf8");
-  if (!text.includes("## 业务场景速查")) {
+  if (!text.includes("## 业务场景速查") || !text.includes("<!-- v2 2026-09-08 -->")) {
     const fm = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text);
     const dis = fm && /^disable-model-invocation:\s*(true|false)\s*$/m.exec(fm[1]);
     const usr = fm && /^user-invocable:\s*(true|false)\s*$/m.exec(fm[1]);
@@ -258,6 +263,78 @@ async function ensureSkill() {
     await writeFile(SKILL_FILE, next, "utf8");
   }
 }
+/* ── Shopify 店铺运营技能（模型侧入口，与 business-meta 单一数据源联动） ────── */
+const SHOPIFY_SKILL_DIR = join(homedir(), ".dsh", "skills", "shopify-store-ops");
+const SHOPIFY_SKILL_FILE = join(SHOPIFY_SKILL_DIR, "SKILL.md");
+const SHOPIFY_SKILL_MARKER = "<!-- business-meta v1 2026-09-08 -->";
+function buildShopifySkillTemplate() {
+  const rows = Object.entries(SHOPIFY_BUSINESS_META)
+    .map(([tool, biz]) => {
+      const tag = biz.readWrite === "write" ? "（写入·先确认）" : "";
+      return `| ${biz.scene} | ${biz.example} | ${tool}${tag} |`;
+    })
+    .join("\n");
+  return `---
+name: "shopify-store-ops"
+title: "Shopify 店铺运营"
+description: "Shopify 店铺运营（万物互联 MCP 直连）：查商品/订单/客户，改价格、订单备注、客户标签、新建商品等。触发词：Shopify、店铺运营、查订单、查商品、查客户、查库存、改价格、订单备注、新建商品、修改商品。何时不用：与 Shopify 店铺数据无关的电商问题（选品/广告/竞品分析走对应技能）。"
+enabled: "true"
+disable-model-invocation: false
+user-invocable: true
+input_contract: 一句店铺运营诉求（查/改商品、订单、客户），工具直连店铺 Admin API
+output_contract: 店铺数据结果（列表/详情）；写操作执行前先向你确认，无写权限时如实说明
+example: 说「帮我查店铺最近 10 个订单」→ 直接返回订单清单
+---
+
+# Shopify 店铺运营 · 业务指引
+
+本技能是「万物互联」中 **Shopify（社区 MCP）** 的模型侧入口。14 个工具已挂载为 mcp__shopify__ 前缀；本文件把「业务黑话」映射到正确工具，让模型在用户说人话时选对工具。
+
+## 业务场景速查（用户怎么说 → 用哪个工具）
+
+| 场景 | 用户怎么说 | 首选工具（mcp__shopify__ 前缀省略） |
+| --- | --- | --- |
+${rows}
+
+## 护栏（必须遵守）
+
+1. **只读优先**：查信息直接调 get_* 工具，不要用写工具去「探测」。
+2. **写操作先确认**：create / update / delete / manage 类工具执行前，必须向用户复述「将要执行的操作 + 对象」，得到明确确认后才能调用；delete 不可恢复，用户未点名删除对象时默认不做。
+3. **写权限边界**：店铺只授 read scopes 时写操作会被 Shopify 平台拒绝（HTTP 403）。此时如实告知用户「店铺未授写权限」，给出后台补权限路径，不要反复重试。
+4. **数据真实**：只转述工具返回的店铺数据，不编造商品/订单/客户信息。
+
+## 标准工作流
+
+1. 查清单：get_products / get_orders / get_customers 拿列表与 ID。
+2. 查详情：get_product_by_id / get_order_by_id / get_customer_orders 按 ID 深挖。
+3. 写操作：先确认 → 再调用 update_* / create_* / manage_*。
+4. 失败处理：权限/参数错误原样转达，不重试轰炸。
+
+## 注意
+
+- 本技能只做映射与流程指引；客户端 ID、加密密钥由宿主管理，模型不可见，禁止索取。
+${SHOPIFY_SKILL_MARKER}
+`;
+}
+async function ensureShopifySkill() {
+  const next = buildShopifySkillTemplate();
+  if (!existsSync(SHOPIFY_SKILL_FILE)) {
+    await mkdir(SHOPIFY_SKILL_DIR, { recursive: true });
+    await writeFile(SHOPIFY_SKILL_FILE, next, "utf8");
+    return;
+  }
+  const text = await readFile(SHOPIFY_SKILL_FILE, "utf8");
+  if (!text.includes(SHOPIFY_SKILL_MARKER)) {
+    const fm = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text);
+    const dis = fm && /^disable-model-invocation:\s*(true|false)\s*$/m.exec(fm[1]);
+    const usr = fm && /^user-invocable:\s*(true|false)\s*$/m.exec(fm[1]);
+    let out = next;
+    if (dis) out = out.replace("disable-model-invocation: false", "disable-model-invocation: " + dis[1]);
+    if (usr) out = out.replace("user-invocable: true", "user-invocable: " + usr[1]);
+    await writeFile(SHOPIFY_SKILL_FILE, out, "utf8");
+  }
+}
+
 async function setSkillModelInvoke(on) {
   await ensureSkill();
   const text = await readFile(SKILL_FILE, "utf8");
@@ -309,11 +386,12 @@ const DEFAULT_CONNECTIONS = [
     extras: [],
     authFields: [
       { ref: "shopify_domain", label: "商店域名", placeholder: "xxx.myshopify.com", secret: false },
-      { ref: "shopify_access_token", label: "Admin API Token", placeholder: "shpat_xxx", secret: true }
+      { ref: "shopify_client_id", label: "客户端 ID", placeholder: "32 位十六进制 ID", secret: true },
+      { ref: "shopify_client_secret", label: "加密密钥", placeholder: "shpss_xxx", secret: true }
     ],
     probe: { kind: "shopify-shop-info" },
     capabilities: ["商品查询", "订单查询", "客户查询", "库存查询", "折扣查询"],
-    note: "只读连接：Custom App 仅 read_* scopes，写操作由 Shopify 平台层拒绝。工具来自官方社区 MCP（mcp__shopify_*）。",
+    note: "只读连接：Custom App 仅 read_* scopes，写操作由 Shopify 平台层拒绝。凭据用开发仪表盘应用的客户端 ID + 加密密钥，插件自动换取访问令牌（约 24h，自动续期）。工具来自官方社区 MCP（mcp__shopify_*）。",
     platformUrl: "https://admin.shopify.com",
     docUrl: "https://shopify.dev/docs/api/usage/access-scopes",
     logo: ""
@@ -346,10 +424,10 @@ const DEFAULT_MCP_SERVERS = [
     transport: "stdio",
     command: "npx",
     args: ["-y", "shopify-mcp"],
-    envRefs: { SHOPIFY_ACCESS_TOKEN: "shopify_access_token", MYSHOPIFY_DOMAIN: "shopify_domain" },
+    envRefs: { SHOPIFY_CLIENT_ID: "shopify_client_id", SHOPIFY_CLIENT_SECRET: "shopify_client_secret", MYSHOPIFY_DOMAIN: "shopify_domain" },
     capabilities: ["商品管理", "订单查询", "客户管理", "库存同步", "折扣/营销", "Shopify Admin GraphQL"],
-    toolCount: 45,
-    note: "geli2001/shopify-mcp（已安全审查）：45 工具，仅本店 Admin GraphQL；只读由 Custom App read_* scopes 平台层强制。与「企业应用」板块的 Shopify 连接联动启用。"
+    toolCount: 14,
+    note: "geli2001/shopify-mcp（已安全审查）：45 工具，仅本店 Admin GraphQL；客户端 ID + 加密密钥自动换取访问令牌（24h 续期）。与「企业应用」板块的 Shopify 连接联动启用。"
   },
   {
     id: "pixpix",
@@ -386,89 +464,6 @@ const OAUTH_FILE = join(homedir(), ".dsh", "integrations", "wanzh-hulian", "oaut
 let pendingOauth = null; // { verifier, redirectUri, expiresAt }
 
 /* ── PixPix 工具业务化映射（业务视角：业务名 + 业务描述 + 场景分组） ─────────── */
-const PIXPIX_BUSINESS_META = {
-  list_generation_models: { name: "可用模型目录", desc: "查询当前可用的 AI 生图、视频、语音模型及参数限制。", scene: "素材与任务" },
-  prepare_image_upload: { name: "上传商品图片", desc: "把本地图片上传到 PixPix 素材库，供后续生成使用。", scene: "素材与任务" },
-  complete_image_upload: { name: "确认图片上传", desc: "图片上传完成后确认入库，拿到可用的图片地址。", scene: "素材与任务" },
-  prepare_video_upload: { name: "上传商品视频", desc: "把本地视频上传到 PixPix 素材库（≤200MB）。", scene: "素材与任务" },
-  complete_video_upload: { name: "确认视频上传", desc: "视频上传完成后确认入库，拿到可用的视频地址。", scene: "素材与任务" },
-  generate_image: { name: "AI 生成图片", desc: "一句话描述或参考图，生成产品图、场景图、海报。", scene: "AI 生图与配音" },
-  generate_video: { name: "AI 生成视频", desc: "一句话描述或参考图，生成视频片段。", scene: "AI 生图与配音" },
-  generate_tts: { name: "文字转配音", desc: "把文案转成口播配音，带货视频旁白可用。", scene: "AI 生图与配音" },
-  get_generation_status: { name: "查生成进度", desc: "按任务号查询生成任务的进度和结果。", scene: "素材与任务" },
-  get_generation_status_for_workbuddy: { name: "查进度（WorkBuddy 宿主）", desc: "WorkBuddy 宿主专用的任务进度查询。", scene: "素材与任务" },
-  get_generation_status_batch: { name: "批量查生成进度", desc: "一次查多个生成任务的进度和结果。", scene: "素材与任务" },
-  render_generation_result_for_codex: { name: "展示结果（Codex 宿主）", desc: "Codex 宿主专用的生成结果展示。", scene: "素材与任务" },
-  render_generation_result_in_app: { name: "展示结果（Claude 宿主）", desc: "Claude 宿主专用的生成结果展示。", scene: "素材与任务" },
-  list_generation_tasks: { name: "历史生成记录", desc: "查看、筛选历史生成任务与收藏。", scene: "素材与任务" },
-  run_generation_tool: { name: "通用生成入口", desc: "兼容入口：某项能力没有专门工具时的兜底调用。", scene: "素材与任务" },
-  get_generation_credits: { name: "估算积分成本", desc: "生成前预估某项任务要消耗多少积分。", scene: "成本与权益" },
-  get_membership_benefit: { name: "会员权益", desc: "查询会员等级、积分余额与可用生成权益。", scene: "成本与权益" },
-  "run_generation-flux-video-upscale": { name: "视频放大", desc: "把短视频放大到更高分辨率（1.5/2/3 倍）。", scene: "视频精修" },
-  "run_generation-video-remove-bg": { name: "视频抠背景", desc: "去掉视频背景，只保留前景主体。", scene: "视频精修" },
-  "run_generation-video-compression": { name: "视频压缩", desc: "压缩视频体积，方便传输与上传。", scene: "视频精修" },
-  "run_generation-video-remove-watermark": { name: "视频去水印", desc: "移除视频中的水印。", scene: "视频精修" },
-  "run_generation-high-definition-video": { name: "视频画质修复", desc: "提升真人视频/老片清晰度（720P→1080P/2K/4K）。", scene: "视频精修" },
-  "run_tool-generation-viral-ecommerce-video": { name: "15 秒带货视频", desc: "商品图+卖点 → 带音轨的 15 秒营销视频（口播/短剧/演示等 8 种类型）。", scene: "带货视频" },
-  "run_tool-generation-video-replication": { name: "竞品视频复刻", desc: "参考一条爆款视频的运镜节奏，替换成你的商品。", scene: "带货视频" },
-  "run_generation-remove-bg": { name: "图片抠图", desc: "一键去背景，输出透明 PNG 主体图。", scene: "图片精修" },
-  "run_tool-generation-product-suite": { name: "商品套图", desc: "1-3 张产品图 → 白底图+场景图+卖点图一整套主图。", scene: "主图与套图" },
-  "run_generation-high-definition-image": { name: "图片高清放大", desc: "低清图片放大到 1K/2K/4K。", scene: "图片精修" },
-  "run_tool-generation-product-recolor": { name: "商品换色", desc: "保持材质光影不变，把商品主体换成指定颜色。", scene: "图片精修" },
-  "run_tool-generation-bestseller-replica": { name: "爆款复刻海报", desc: "参考竞品爆款海报的版式风格，生成自家商品海报（网页 hot-seller-replicate 同款）。", scene: "主图与套图" },
-  "run_generation-model": { name: "生成模特人像", desc: "按性别/人种/年龄段/体型生成模特人像。", scene: "模特与试穿" },
-  "run_tool-generation-product-retouch": { name: "商品精修", desc: "修复划痕瑕疵、提升光泽与清晰度、校正色彩与透视。", scene: "图片精修" },
-  "run_tool-generation-footwear-try-on": { name: "鞋履试穿", desc: "把鞋穿到模特脚上，生成竖版双画面试穿海报。", scene: "模特与试穿" },
-  "run_tool-generation-a-plus-detail": { name: "A+ 详情页", desc: "按亚马逊等平台规范生成详情页模块图（主视觉/卖点/场景/规格）。", scene: "主图与套图" },
-  "run_tool-generation-lingerie-try-on": { name: "内衣试穿", desc: "把内衣产品自然换到成年模特身上。", scene: "模特与试穿" },
-  "run_tool-generation-apparel-try-on": { name: "服装试穿", desc: "把服装参考图穿到指定模特身上。", scene: "模特与试穿" },
-  "run_tool-generation-apparel-set": { name: "服装套图", desc: "服装白底图/模特图/细节图/卖点图一整套。", scene: "主图与套图" },
-  "run_tool-generation-ai-wear-anything": { name: "通用穿戴展示", desc: "把任意商品（配饰/眼镜/帽子等）自然穿戴到模特身上。", scene: "模特与试穿" }
-};
-const PIXPIX_SCENE_CHIPS = ["主图与套图", "模特与试穿", "带货视频", "图片精修", "视频精修", "AI 生图与配音", "素材与任务", "成本与权益"];
-
-/* ── 得到大脑官方 MCP 业务化映射（38 工具，实测 tools/list 核对） ─────────── */
-const GETNOTE_MCP_BUSINESS_META = {
-  list_notes: { name: "最近笔记", desc: "分页列出最近的笔记。", scene: "找笔记" },
-  get_note: { name: "读笔记详情", desc: "按笔记 ID 读详情（正文、标签、附件、转写）。", scene: "找笔记" },
-  get_note_original: { name: "读原文", desc: "直接读原文（链接笔记=网页原文，录音笔记=转写原文），不拿 AI 摘要冒充。", scene: "找笔记" },
-  get_note_transcript: { name: "读转写原文", desc: "读录音、会议、课堂笔记的逐字转写。", scene: "找笔记" },
-  get_note_attachments: { name: "看附件", desc: "列出笔记里的图片、音频、文件附件。", scene: "找笔记" },
-  get_note_timeline: { name: "读时间线", desc: "读录音/会议笔记的结构化时间线。", scene: "找笔记" },
-  get_note_quick_note: { name: "读快捷笔记", desc: "读录音笔记的快捷笔记。", scene: "找笔记" },
-  get_note_todos: { name: "提取待办", desc: "从会议笔记提取待办清单。", scene: "找笔记" },
-  save_note: { name: "记一条笔记", desc: "把文字、链接或图片存成笔记，可带标题、标签、指定知识库。", scene: "记笔记" },
-  get_note_task_progress: { name: "查链接笔记进度", desc: "查链接笔记创建任务的处理进度。", scene: "知识库管理" },
-  delete_note: { name: "删笔记", desc: "把笔记移入回收站（App 端可恢复）。", scene: "删除与清理" },
-  update_note: { name: "修改笔记", desc: "改笔记的标题、内容或整体替换标签。", scene: "记笔记" },
-  add_note_tags: { name: "给笔记加标签", desc: "给已有笔记追加标签。", scene: "记笔记" },
-  delete_note_tag: { name: "删标签", desc: "删掉笔记上的某个标签。", scene: "删除与清理" },
-  list_topics: { name: "知识库列表", desc: "列出全部知识库。", scene: "知识库管理" },
-  create_topic: { name: "建知识库", desc: "新建知识库（每天限 50 个）。", scene: "知识库管理" },
-  list_topic_notes: { name: "库内笔记清单", desc: "列出知识库里的笔记。", scene: "知识库管理" },
-  batch_add_notes_to_topic: { name: "批量移入知识库", desc: "把笔记批量加进知识库（每批≤20）。", scene: "知识库管理" },
-  list_topic_directories: { name: "浏览文件夹", desc: "看知识库的文件夹结构。", scene: "知识库管理" },
-  create_topic_directory: { name: "建文件夹", desc: "在知识库里建文件夹。", scene: "知识库管理" },
-  update_topic_directory: { name: "改文件夹", desc: "重命名或移动知识库里的文件夹。", scene: "知识库管理" },
-  delete_topic_directory: { name: "删空文件夹", desc: "删除空文件夹（非空不能删）。", scene: "删除与清理" },
-  remove_note_from_topic: { name: "移出知识库", desc: "把笔记移出库（笔记本身保留）。", scene: "知识库管理" },
-  get_upload_config: { name: "上传限制查询", desc: "查图片上传的类型和大小限制。", scene: "上传与配额" },
-  get_upload_token: { name: "取上传凭证", desc: "拿 OSS 上传凭证（AI 内部用）。", scene: "上传与配额" },
-  upload_image: { name: "上传图片", desc: "把本地图片上传到得到大脑。", scene: "上传与配额" },
-  list_topic_bloggers: { name: "博主列表", desc: "看知识库订阅了哪些博主。", scene: "内容订阅" },
-  follow_topic_blogger: { name: "订阅抖音博主", desc: "把抖音博主订阅到知识库，自动沉淀内容。", scene: "内容订阅" },
-  list_topic_blogger_contents: { name: "博主内容列表", desc: "看博主发布了哪些内容。", scene: "内容订阅" },
-  get_blogger_content_detail: { name: "读博主内容", desc: "读博主内容的完整原文。", scene: "内容订阅" },
-  list_topic_lives: { name: "直播列表", desc: "看知识库沉淀了哪些直播。", scene: "内容订阅" },
-  get_live_detail: { name: "读直播详情", desc: "读直播的 AI 摘要和完整转写。", scene: "内容订阅" },
-  follow_topic_live: { name: "订阅直播", desc: "订阅一场得到 App 直播到知识库。", scene: "内容订阅" },
-  share_note: { name: "生成分享链接", desc: "把笔记生成公开分享链接，发给别人。", scene: "记笔记" },
-  list_subscribe_topics: { name: "订阅的知识库", desc: "列出订阅的他人知识库。", scene: "知识库管理" },
-  get_quota: { name: "配额查询", desc: "查调用配额余量。", scene: "上传与配额" },
-  recall: { name: "全库语义搜索", desc: "在所有笔记里按意思搜，返回相关片段。", scene: "找笔记" },
-  recall_knowledge: { name: "知识库内搜索", desc: "在指定知识库内按意思搜。", scene: "找笔记" }
-};
-const GETNOTE_SCENE_CHIPS = ["记笔记", "找笔记", "知识库管理", "内容订阅", "上传与配额", "删除与清理"];
 
 function b64url(buf) { return Buffer.from(buf).toString("base64url"); }
 async function readOauthToken() {
@@ -573,7 +568,13 @@ async function readMcpServers() {
     if (Array.isArray(d?.servers)) {
       // 按 id 合并：用户文件覆盖 enabled 等运行时状态，默认条目补齐静态元数据（capabilities/toolCount/auth）
       const fileMap = new Map(d.servers.map((s) => [s.id, s]));
-      return DEFAULT_MCP_SERVERS.map((def) => (fileMap.has(def.id) ? { ...def, ...fileMap.get(def.id) } : def));
+      const merged = DEFAULT_MCP_SERVERS.map((def) => (fileMap.has(def.id) ? { ...def, ...fileMap.get(def.id) } : def));
+      // 对称合并：保留用户文件中非默认 id 的条目（自定义 MCP 不丢失，追加在默认之后）
+      const mergedIds = new Set(merged.map((s) => s.id));
+      for (const s of d.servers) {
+        if (s && s.id && !mergedIds.has(s.id)) merged.push(s);
+      }
+      return merged;
     }
   } catch { /* 缺省 */ }
   return DEFAULT_MCP_SERVERS;
@@ -900,14 +901,19 @@ async function handleProbe(credentials) {
 }
 
 async function resolveShopifyCreds(credentials) {
-  const out = { domain: undefined, token: undefined, configured: false };
+  const out = { domain: undefined, token: undefined, clientId: undefined, clientSecret: undefined, configured: false, mode: "none" };
   if (credentials === undefined) return out;
   try {
     const d = await credentials.resolve("shopify_domain");
     const t = await credentials.resolve("shopify_access_token");
+    const cid = await credentials.resolve("shopify_client_id");
+    const cs = await credentials.resolve("shopify_client_secret");
     out.domain = typeof d?.value === "string" ? d.value.trim() : undefined;
     out.token = typeof t?.value === "string" ? t.value : undefined;
-    out.configured = Boolean(out.domain && out.token);
+    out.clientId = typeof cid?.value === "string" ? cid.value.trim() : undefined;
+    out.clientSecret = typeof cs?.value === "string" ? cs.value : undefined;
+    if (out.domain && out.clientId && out.clientSecret) { out.mode = "client-credentials"; out.configured = true; }
+    else if (out.domain && out.token) { out.mode = "token"; out.configured = true; }
   } catch { /* 未配置 */ }
   return out;
 }
@@ -930,15 +936,31 @@ async function probeConnection(credentials, conn) {
   }
   if (kind === "shopify-shop-info") {
     const creds = await resolveShopifyCreds(credentials);
-    if (!creds.configured) return { ok: false, error: "未配置 Shopify 凭证：请填写商店域名与 Admin API Token（在 Shopify 后台创建 Custom App，只读 scopes）。" };
-    const url = `https://${creds.domain}/admin/api/2026-04/shop.json`;
+    if (!creds.configured) return { ok: false, error: "未配置 Shopify 凭证：请填写商店域名 + 客户端 ID + 加密密钥（开发仪表盘应用的 API 凭据，插件自动换取访问令牌）。" };
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 20000);
+    let token = creds.token;
+    let via = "Admin API Token";
     try {
-      const res = await fetch(url, { headers: { "x-shopify-access-token": creds.token }, signal: controller.signal });
+      if (!token) {
+        // 客户端凭据流：client_id + client_secret → /admin/oauth/access_token 换取访问令牌
+        const exc = await fetch(`https://${creds.domain}/admin/oauth/access_token`, {
+          method: "POST",
+          headers: { "content-type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({ grant_type: "client_credentials", client_id: creds.clientId, client_secret: creds.clientSecret }),
+          signal: controller.signal
+        });
+        const excBody = await exc.json().catch(() => null);
+        if (!exc.ok) return { ok: false, error: `Shopify 令牌交换失败 (HTTP ${exc.status}): ${excBody?.error_description || excBody?.error || "请求失败"}` };
+        token = excBody?.access_token;
+        via = "客户端凭据（已自动换取访问令牌）";
+        if (!token) return { ok: false, error: "Shopify 令牌交换失败：响应缺少 access_token" };
+      }
+      const url = `https://${creds.domain}/admin/api/2026-04/shop.json`;
+      const res = await fetch(url, { headers: { "x-shopify-access-token": token }, signal: controller.signal });
       const body = await res.json().catch(() => null);
       if (!res.ok) return { ok: false, error: `Shopify API HTTP ${res.status}: ${body?.errors ? String(body.errors) : "请求失败"}` };
-      return { ok: true, text: `连接测试通过 ✓\n店铺: ${body?.shop?.name ?? "（无名称）"}\n计划: ${body?.shop?.plan_name ?? "-"}\n域名: ${body?.shop?.myshopify_domain ?? creds.domain}` };
+      return { ok: true, text: `连接测试通过 ✓\n认证方式: ${via}\n店铺: ${body?.shop?.name ?? "（无名称）"}\n计划: ${body?.shop?.plan_name ?? "-"}\n域名: ${body?.shop?.myshopify_domain ?? creds.domain}` };
     } catch (e) {
       return { ok: false, error: `Shopify 请求失败: ${e?.message ?? e}` };
     } finally { clearTimeout(timer); }
@@ -980,6 +1002,9 @@ export function apply(ctx) {
   ctx.effect(() => {
     ensurePixpixSkill().catch(() => {});
   }, "dsh-wanzh-hulian: ensure pixpix skill");
+  ctx.effect(() => {
+    ensureShopifySkill().catch(() => {});
+  }, "dsh-wanzh-hulian: ensure shopify skill");
 
   for (const tool of GETNOTE.tools) {
     const def = toolDefs[tool];
@@ -1095,19 +1120,11 @@ export function apply(ctx) {
               oauthState,
               servers: servers.map((s) => {
                 let toolMeta = globalMcpToolMeta.get(s.id) ?? null;
-                // stdio 服务器无法实时抓取 → 注入静态业务化清单（getnote 官方 MCP 38 工具）
-                if (!toolMeta && s.id === "getnote") {
-                  toolMeta = {
-                    tools: Object.entries(GETNOTE_MCP_BUSINESS_META).map(([name, biz]) => ({
-                      name,
-                      description: "",
-                      businessName: biz.name,
-                      businessDesc: biz.desc,
-                      scene: biz.scene
-                    })),
-                    source: "static",
-                    fetchedAt: 0
-                  };
+                // 静态保底：三张卡永远有业务化清单（不再依赖实时抓取）；实时抓取仅作增强
+                const staticDef = MCP_STATIC_TOOL_META[s.id];
+                if (!toolMeta) toolMeta = staticToolMetaFor(s.id);
+                else if (staticDef) {
+                  toolMeta = { ...toolMeta, scenes: staticDef.scenes, example: staticDef.example };
                 }
                 return { ...s, state: states.find((x) => x.id === s.id) ?? null, toolMeta };
               })

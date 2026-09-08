@@ -64,6 +64,16 @@ def main():
             raise SystemExit(f"缺失头像：{icon_id}")
         cat_icons[key] = by_id[icon_id]
     skill_icons = {}
+    # 保留既有自定义图标（非 81 系，如 self-improvement/agent-browser），避免重跑管线时抹掉手工头像
+    prev_path = os.path.join(ROOT, "manifest", "skill-icons.json")
+    if os.path.isfile(prev_path):
+        try:
+            prev = json.load(open(prev_path, encoding="utf-8"))
+            for name, uri in prev.items():
+                if name not in SKILL_ASSIGN:
+                    skill_icons[name] = uri
+        except Exception:
+            pass
     for name, icon_id in SKILL_ASSIGN.items():
         if icon_id not in by_id:
             raise SystemExit(f"缺失头像：{icon_id}")

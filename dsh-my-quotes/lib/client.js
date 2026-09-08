@@ -8,6 +8,9 @@ window.__ModuleLoader__.load({
     var CHANNEL = "/my-quotes";
     var CAT_NAMES = { task: "任务指令", qa: "咨询问答", content: "内容创作", code: "代码开发", design: "设计品牌", ecom: "选品电商", research: "数据研究", system: "系统配置", other: "其他" };
     var ACCENT = "var(--dsw-alias-state-business-primary)";
+    // 官方控制器引用（apply 时注入；tryJump 只会在面板打开后调用，必已就绪）
+    var sessions = null;
+    var workspaces = null;
 
     var CSS = [
       // ---- Tab 按钮：与官方对话 Tab 完全同调（下划线式，继承 tabs 容器 gap） ----
@@ -111,32 +114,28 @@ window.__ModuleLoader__.load({
       }
     }
 
+    // 跳转：直接走官方 sessions.open（与侧边栏点击会话行/搜索结果行同一条跨工作区路径）。
+    // 不再填任何搜索框 → 侧边栏目录树永不被搜索结果视图替换（修「回不去工作区目录」）。
     function tryJump(r) {
+      var archived = [];
       try {
-        var ws = (function () { try { return window.__dsh_mq_ctx ? window.__dsh_mq_ctx.get("uiWorkspace") : null; } catch (e) { return null; } })();
-        if (ws) {
-          var keys = Object.keys(ws);
-          for (var i = 0; i < keys.length; i++) {
-            var fn = ws[keys[i]];
-            if (typeof fn === "function" && /session/i.test(keys[i]) && !/start/i.test(keys[i])) {
-              try { fn(r.sessionId); toast("已尝试打开会话"); return; } catch (e) { /* next */ }
-            }
-          }
-        }
+        var wsSnap = workspaces && workspaces.list && workspaces.list.getSnapshot && workspaces.list.getSnapshot();
+        archived = (wsSnap && wsSnap.archivedSessionIds) || [];
       } catch (e) {}
-      var inputs = document.querySelectorAll("input");
-      for (var i = 0; i < inputs.length; i++) {
-        var ph = (inputs[i].placeholder || "").toLowerCase();
-        if (ph.indexOf("搜索") !== -1 || ph.indexOf("search") !== -1) {
-          var setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-          setter.call(inputs[i], r.title || r.text.slice(0, 30));
-          inputs[i].dispatchEvent(new Event("input", { bubbles: true }));
-          inputs[i].focus();
-          toast("已填入侧边栏搜索框，请选择该会话");
-          return;
-        }
+      if (archived.indexOf(r.sessionId) !== -1) {
+        copyText(r.title || r.sessionId, function () { toast("该会话已归档，无法打开；已复制标题"); });
+        return;
       }
-      copyText(r.title || r.sessionId, function (ok) { toast(ok ? "已复制会话标题，请在会话列表搜索定位" : "复制失败"); });
+      var attempt = function (retries) {
+        try {
+          sessions.open(r.sessionId);
+          toast("已打开原会话");
+        } catch (e) {
+          if (retries > 0) { setTimeout(function () { attempt(retries - 1); }, 800); return; }
+          copyText(r.title || r.sessionId, function () { toast("会话不存在（可能已删除），已复制标题"); });
+        }
+      };
+      attempt(1); // 列表首拉未完成时 open 会同步抛错 → 800ms 后重试一次
     }
 
     function makePanel(call, close) {
@@ -388,11 +387,13 @@ window.__ModuleLoader__.load({
       return null;
     }
 
-    exports.inject = ["slots", "connection"];
+    exports.inject = ["slots", "connection", "sessions", "workspaces"];
 
     exports.apply = function (ctx) {
       injectStyle();
       var connection = ctx.get("connection");
+      sessions = ctx.get("sessions");
+      workspaces = ctx.get("workspaces");
       window.__dsh_mq_ctx = ctx;
 
       function call(endpoint, payload) {
@@ -446,19 +447,13 @@ window.__ModuleLoader__.load({
         bar.appendChild(tabBtn);
       }
 
-      var tries = 0;
-      var iv = setInterval(function () {
-        tries++;
-        ensureTab();
-        if (tries >= 60) clearInterval(iv);
-      }, 1000);
-      var mo = new MutationObserver(function () { ensureTab(); });
-      try { mo.observe(document.body, { childList: true, subtree: true }); } catch (e) {}
+      // 持久轻量轮询兜底（替代 MutationObserver：后者观察 document.body 子树，
+      // 每次打字 composer 重渲染都会触发 ensureTab → appendChild → 与 React 重协调打架 → 抖动）
+      var iv = setInterval(function () { ensureTab(); }, 2000);
 
       ctx.effect(function () {
         return function () {
           clearInterval(iv);
-          mo.disconnect();
           window.removeEventListener("dsh-my-quotes:toggle", toggle);
         };
       }, "dsh-my-quotes: cleanup");
