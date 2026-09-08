@@ -14,6 +14,17 @@ say(){ echo "[dmg] $*"; }
 
 [ -f "$PAYLOAD/install.sh" ] || { echo "[dmg] payload 不完整: $PAYLOAD"; exit 1; }
 [ -d "$PAYLOAD/LUTE Setup.app" ] || { echo "[dmg] 缺少 LUTE Setup.app"; exit 1; }
+
+# 0. payload 无 quarantine 断言（防打包侧混入隔离属性——客户 Operation not permitted
+#    的历史坑；若检测到则就地清除并提示）
+QA_HITS="$(find "$PAYLOAD" -maxdepth 1 \( -name '*.tar.gz' -o -name 'install.sh' \) -exec sh -c 'xattr -p com.apple.quarantine "$1" 2>/dev/null && echo "$1"' _ {} \; 2>/dev/null)"
+if [ -n "$QA_HITS" ]; then
+  say "⚠ payload 检测到 quarantine（打包侧混入），就地清除：$QA_HITS"
+  find "$PAYLOAD" -maxdepth 1 \( -name '*.tar.gz' -o -name 'install.sh' \) -exec xattr -d com.apple.quarantine {} \; 2>/dev/null || true
+else
+  say "payload 无 quarantine ✓"
+fi
+
 rm -rf "$REL"; mkdir -p "$REL"
 
 # 1. 制 dmg（UDZO 压缩，卷名即产品名）

@@ -62,6 +62,21 @@ trap 'cleanup_tmp; exit 1' INT TERM
 
 # ── 0. 前置校验 ─────────────────────────────────────────────────────────────
 [ "$(uname -s)" = "Darwin" ] || { echo "[install] 仅支持 macOS"; exit 1; }
+# 禁止 sudo/root 运行：root 会让 ~/.dsh 落盘文件全部变成 root 属主，后续用户态
+# 重跑无法 mv/覆盖 → 反复回滚（客户机器历史坑）。提权仅发生在「写 /Applications」
+# 单步（osascript 弹管理员密码框），全程无需 sudo。
+[ "$(id -u)" = "0" ] && { echo "[install] 请勿用 sudo 运行（root 会污染 ~/.dsh 属主导致后续无法覆盖）。请以普通用户执行：bash install.sh"; exit 1; }
+# root 属主残留检测（历史 sudo 安装的痕迹）：关键目录属主为 root 即中止并给修复命令
+ROOT_JUNK=""
+for p in "$DSH_HOME_DIR" "$DSH_HOME_DIR/profiles" "$PROFILE_DIR" "$DSH_HOME_DIR/aeis-venv"; do
+  [ -e "$p" ] && [ "$(stat -f %u "$p" 2>/dev/null)" = "0" ] && ROOT_JUNK="$ROOT_JUNK $p"
+done
+if [ -n "$ROOT_JUNK" ]; then
+  echo "[install] 检测到 root 属主残留（历史 sudo 安装所致）：$ROOT_JUNK"
+  echo "  修复：sudo chown -R $(id -un) ~/.dsh/profiles ~/.dsh/aeis-venv 2>/dev/null"
+  echo "  （data/ 用户数据不受影响；修复后重跑本安装器）"
+  exit 1
+fi
 [ -f "$HERE/DSH Desktop.app.tar.gz" ] || { echo "[install] 缺少 DSH Desktop.app.tar.gz"; exit 1; }
 [ -f "$HERE/profile.tar.gz" ] || { echo "[install] 缺少 profile.tar.gz"; exit 1; }
 FREE_KB="$(df -k "$HOME" | awk 'NR==2{print $4}')"

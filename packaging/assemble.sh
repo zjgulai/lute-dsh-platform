@@ -178,8 +178,10 @@ bash "$PKG_ROOT/scripts/build-setup-app.sh" "$PAYLOAD"
 
 # ── 6. 元数据（README / VERSION / SHA256SUMS / manifest.json）───────────────────
 say "6/6 元数据"
+BUILD="${BUILD:-$(date +%Y%m%d-%H%M%S)}"
 cat > "$PAYLOAD/VERSION" <<EOF
 LUTE_VERSION=$VERSION
+BUILD=$BUILD
 DSH_BASELINE=2.0.4
 ARCH=arm64
 EOF
@@ -202,16 +204,26 @@ cat > "$PAYLOAD/README.md" <<EOF
 - \`SHA256SUMS\`：完整性校验。
 
 ## 安装（macOS，完全离线）
-双击 \`LUTE Setup.app\` → 开始安装（写 /Applications 一步会弹管理员密码框）；
-或终端 \`bash install.sh\`。
-启动后：**重新授权 TCC**（系统设置 → 隐私与安全 → 屏幕录制/辅助功能/自动化，授权 LUTE Agentic System）。
+**推荐：终端一条命令**（自动处理 Gatekeeper 隔离属性，最可靠）：
 
-## Gatekeeper（未公证包，必读）
-本包为 adhoc 签名、未公证，macOS 会拦下载的 dmg：
-- **双击 LUTE Setup.app 打不开** → 右键 → 打开 → 弹框点「打开」。
-- **install.sh 报 Operation not permitted** → 本版安装器解包后自动清除隔离属性，
-  直接重跑 \`bash install.sh\` 即可。
-- 推荐直接终端安装：\`cd "/Volumes/DSH Desktop LUTE $VERSION" && bash install.sh\`
+\`\`\`bash
+cd "/Volumes/DSH Desktop LUTE $VERSION" && bash install.sh
+\`\`\`
+
+- 写 /Applications 一步会弹管理员密码框，**其余全程用户态**。
+- **切勿用 sudo 运行**：sudo 会污染 ~/.dsh 文件属主，导致后续无法覆盖。
+- GUI 方式（备选）：双击 \`LUTE Setup.app\`。若被 Gatekeeper 拦，右键 → 打开 → 弹框点「打开」。
+- 启动后：**重新授权 TCC**（系统设置 → 隐私与安全 → 屏幕录制/辅助功能/自动化，授权 LUTE Agentic System）。
+
+## Gatekeeper 说明（未公证包）
+本包为 adhoc 签名、未公证，下载分发的 dmg 会带隔离属性。本版安装器
+**解包后自动清除**，终端安装不受影响；仅 GUI 双击需要右键打开一次。
+
+## 版本核对
+\`\`\`bash
+cat VERSION            # LUTE_VERSION + BUILD（构建号，唯一标识本次打包）
+shasum -a 256 ../$(basename "$PWD").dmg  # 与发布方给的 SHA256 对照
+\`\`\`
 
 ## 校验
 \`\`\`bash
@@ -229,10 +241,10 @@ const fs=require('fs');
 const size=p=>fs.existsSync(p)?fs.statSync(p).size:0;
 const payload=process.argv[1];
 const files=['DSH Desktop.app.tar.gz','profile.tar.gz','skills-presets.tar.gz','aeis-portable.tar.gz','install.sh','LUTE Setup.app'];
-const m={name:'dsh-desktop-lute',version:process.argv[2],dsd_baseline:'2.0.4',arch:'arm64',
+const m={name:'dsh-desktop-lute',version:process.argv[2],build:process.argv[3],dsd_baseline:'2.0.4',arch:'arm64',
   created_at:new Date().toISOString(),
   files:Object.fromEntries(files.map(f=>[f,size(payload+'/'+f)]))};
-fs.writeFileSync(payload+'/manifest.json',JSON.stringify(m,null,2)+'\n');" "$PAYLOAD" "$VERSION"
+fs.writeFileSync(payload+'/manifest.json',JSON.stringify(m,null,2)+'\n');" "$PAYLOAD" "$VERSION" "$BUILD"
 
 # 完整性清单：所有 bundle/vendor/skills/presets 的权威列表（供 smoke 逐一比对）
 node -e "
