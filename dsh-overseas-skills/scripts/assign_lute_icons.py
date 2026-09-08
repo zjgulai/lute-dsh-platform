@@ -14,6 +14,15 @@ LUTE = os.path.expanduser("~/.dsh/skills/lute-brand-icons/assets/manifest.json")
 
 # 分类 → LUTE 头像 id（复用现成角色，品牌为新增 brand-officer）
 CAT_ASSIGN = {
+    "a-market": "sc-a-market",
+    "b-product": "sc-b-product",
+    "c-content-brand": "sc-c-content-brand",
+    "d-traffic": "sc-d-traffic",
+    "e-sales": "sc-e-sales",
+    "f-fulfillment": "sc-f-fulfillment",
+    "g-insight": "sc-g-insight",
+    "h-enable": "sc-h-enable",
+
     "sourcing": "procurement",
     "research-selection": "search",
     "design": "ux-designer",

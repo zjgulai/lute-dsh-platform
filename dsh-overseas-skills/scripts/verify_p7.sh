@@ -12,18 +12,15 @@ curl -s --max-time 8 "$BASE/list" -o "$TMP" || { echo "list 请求失败"; exit 
 python3 - "$TMP" <<'EOF'
 import json, sys
 d = json.load(open(sys.argv[1]))
+scen = d.get("scenarios", [])
 groups = d.get("groups", [])
-items = [i for g in groups for i in g.get("items", [])]
-print(f"分组: {len(groups)} | 条目: {len(items)}")
-new_cats = [g["key"] for g in groups if g["key"] in ("knowledge-engineering","skill-engineering","ecommerce-analytics")]
-print(f"新分组就位: {new_cats}")
-noicon = [g["key"] for g in groups if not g.get("icon")]
-noicon_items = [i["name"] for i in items if not i.get("icon")]
-print(f"无图标分组: {len(noicon)} | 无图标条目: {len(noicon_items)}")
-b_titles = {i["name"]: i["title"] for i in items if i["name"] in ("copywriting","ecommerce-marketing","amz-product-optimizer","skill-creator","ecommerce-seo-optimizer","seo-page-audit","performance-tracking","brand-voice-glossary","international-shipping-customs","social-content","optimize-ecommerce-page-conversion","email-automation-flow-builder")}
-print("B类标题抽查:", json.dumps(b_titles, ensure_ascii=False))
-installed_81 = [i["name"] for i in items if i["name"] in ("geo-optimizer","jtbd-analyzer","voc-sentiment-analyzer","seo-controller","ecommerce-monthly-review","brand-mention-tracking") ]
-print("C类抽查 installed:", [(n, next((i["installed"] for i in items if i["name"]==n), None)) for n in installed_81])
+items = [i for s in scen for sub in s.get("subs", []) for i in sub.get("items", [])]
+print(f"大场景: {len(scen)} | 细分场景: {len(groups)} | 条目: {len(items)}")
+print(f"场景键: {[s['key'] for s in scen]}")
+preset = [s["key"] for s in scen if "preset-" in s["key"]]
+print(f"preset 残留: {preset}")
+noicon_scen = [s["key"] for s in scen if not s.get("icon")]
+print(f"无图标大场景: {noicon_scen}")
 EOF
 echo
 echo "== 2. 防白屏：启动尾事件 =="

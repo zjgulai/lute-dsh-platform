@@ -1,5 +1,5 @@
 {
-  "product-launch-planner": { "notUse": ["上市策略与渠道打法的整体编排走 ecommerce-marketing；新品 GTM 战略走 gtm-strategy-planning；发布视频物料走 product-launch-video；发布后效果复盘走 performance-tracking"] },
+  "product-launch-planner": { "notUse": ["上市策略与渠道打法的整体编排走 ecommerce-marketing；新品 GTM 战略走 gtm-strategy-planning；发布视频物料走 product-video-director；发布后效果复盘走 performance-tracking"] },
   "product-marketing-context": { "notUse": ["需要新数据的新调研走 research-brief-blueprint 或 market-scenario-modeler；营销执行方案走 campaign-planning；定位梳理走 brand-narrative-playbook"] },
   "product-marketing-brief": { "notUse": ["品牌定位与叙事走 brand-narrative-playbook；竞品对比走 competitor-profiling；上下文沉淀走 product-marketing-context"] },
   "vibe-marketing": { "notUse": ["体系化内容策略走 content-strategy；投放物料与创意走 ad-creative；社媒日历运营走 social-operations"] },

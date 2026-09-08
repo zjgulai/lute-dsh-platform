@@ -97,36 +97,81 @@ async function readSkillMeta(dirName) {
   return { description, modelEnabled: !disableModel };
 }
 
-async function buildGroups(cats, skills) {
+function itemRecord(skill, fallbackIcon, meta) {
+  return {
+    name: skill.name,
+    title: skill.title,
+    icon: skill.icon || fallbackIcon || "",
+    description: meta ? meta.description : "",
+    descriptionZh: skill.summaryZh || (meta === null && skill.toolBacked ? "工具型技能 · 未接入外部工具（安装后启用）" : ""),
+    modelEnabled: meta ? meta.modelEnabled : false,
+    toolGap: skill.toolGap || "",
+    installed: meta !== null,
+    template: getPromptTemplate(skill.name, skill.title)
+  };
+}
+
+/** v3：大场景 → 细分场景 两级结构 */
+async function buildScenarios(cats, skills) {
+  const scenarios = [];
+  for (const sc of cats) {
+    const subs = [];
+    for (const sub of (sc.subs || [])) {
+      const items = [];
+      for (const skill of skills) {
+        if (skill.subcategory !== sub.key) continue;
+        const meta = await readSkillMeta(skill.name);
+        items.push(itemRecord(skill, sc.icon, meta));
+      }
+      if (items.length > 0) subs.push({ key: sub.key, title: sub.title, items });
+    }
+    if (subs.length > 0) scenarios.push({ key: sc.key, title: sc.title, icon: sc.icon || "", subs });
+  }
+  return scenarios;
+}
+
+/** 细分场景扁平视图（旧胶囊兼容） */
+async function buildFlatGroups(cats, skills) {
+  const groups = [];
+  for (const sc of cats) {
+    for (const sub of (sc.subs || [])) {
+      const items = [];
+      for (const skill of skills) {
+        if (skill.subcategory !== sub.key) continue;
+        const meta = await readSkillMeta(skill.name);
+        items.push(itemRecord(skill, sc.icon, meta));
+      }
+      if (items.length > 0) groups.push({ key: sub.key, title: sub.title, scenario: sc.title, icon: sc.icon || "", items });
+    }
+  }
+  return groups;
+}
+
+/** AI全栈旧分组视图（胶囊兼容，保持不变） */
+async function buildGroupsLegacy(cats, skills) {
   const groups = [];
   for (const cat of cats) {
     const items = [];
     for (const skill of skills) {
       if (skill.category !== cat.key) continue;
       const meta = await readSkillMeta(skill.name);
-      items.push({
-        name: skill.name,
-        title: skill.title,
-        icon: skill.icon || cat.icon || "",
-        description: meta ? meta.description : "",
-        descriptionZh: skill.summaryZh || (meta === null && skill.toolBacked ? "工具型技能 · 未接入外部工具（安装后启用）" : ""),
-        modelEnabled: meta ? meta.modelEnabled : false,
-        toolGap: skill.toolGap || "",
-        installed: meta !== null,
-        template: getPromptTemplate(skill.name, skill.title)
-      });
+      items.push(itemRecord(skill, cat.icon, meta));
     }
-    groups.push({ key: cat.key, title: cat.title, icon: cat.icon || "", items });
+    if (items.length > 0) groups.push({ key: cat.key, title: cat.title, icon: cat.icon || "", items });
   }
-  return { status: 200, body: { ok: true, groups } };
+  return groups;
 }
 
 async function handleList() {
-  return buildGroups(CATEGORIES, SKILLS);
+  const scenarios = await buildScenarios(CATEGORIES, SKILLS);
+  const groups = await buildFlatGroups(CATEGORIES, SKILLS);
+  return { status: 200, body: { ok: true, scenarios, groups } };
 }
 
 async function handleFullstackList() {
-  return buildGroups(CATEGORIES_FS, SKILLS_FS);
+  const scenarios = await buildScenarios(CATEGORIES, SKILLS_FS);
+  const groups = await buildGroupsLegacy(CATEGORIES_FS, SKILLS_FS);
+  return { status: 200, body: { ok: true, scenarios, groups } };
 }
 
 async function handleToggle(body) {

@@ -191,7 +191,7 @@
   },
   "video-prompt-guide": {
     "notUse": [
-      "爆款视频脚本分析走 viral-video-analyzer；图像提示词走 image-prompt-guide；产品概念设计走 ai-product-designer；动效演示走 dsh-motion-deck"
+      "爆款视频脚本分析走 viral-video-analyzer；图像提示词走 image-prompt-guide；产品概念设计走 ai-product-designer；动效演示走 dsh-motion-deck-studio"
     ]
   },
   "image-prompt-guide": {
@@ -201,7 +201,7 @@
   },
   "higgsfield-guide": {
     "notUse": [
-      "通用图像生成走 image-prompt-guide；视频提示词走 video-prompt-guide；产品发布视频走 product-launch-video"
+      "通用图像生成走 image-prompt-guide；视频提示词走 video-prompt-guide；产品发布视频走 product-video-director"
     ]
   }
 }

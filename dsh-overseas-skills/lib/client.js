@@ -20,6 +20,19 @@ window.__ModuleLoader__.load({
 			".ovsRoot .ovsGroup { display:flex; flex-direction:column; gap:8px; }",
 			".ovsRoot .ovsGroupTitle { margin:0; display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:500; line-height:20px; color:var(--dsw-alias-label-secondary); }",
 			".ovsRoot .ovsGroupTitleIcon { width:18px; height:18px; border-radius:5px; object-fit:contain; }",
+			".ovsRoot .ovsScenHead { display:flex; align-items:center; gap:8px; width:100%; border:1px solid var(--dsw-alias-border-l1); border-radius:12px; background:var(--dsw-alias-bg-layer-1); padding:10px 12px; cursor:pointer; color:var(--dsw-alias-label-primary); font:inherit; text-align:left; }",
+			".ovsRoot .ovsScenHead:hover { border-color:var(--dsw-alias-label-dimmed); }",
+			".ovsRoot .ovsScenIcon { flex:none; width:22px; height:22px; border-radius:6px; object-fit:contain; }",
+			".ovsRoot .ovsScenTitle { flex:1; min-width:0; font-size:13px; font-weight:600; line-height:20px; }",
+			".ovsRoot .ovsScenCount { flex:none; font-size:11px; color:var(--dsw-alias-label-tertiary); }",
+			".ovsRoot .ovsScenCaret { flex:none; font-size:11px; color:var(--dsw-alias-label-tertiary); transition:transform .15s; }",
+			".ovsRoot .ovsScenBody { display:flex; flex-direction:column; gap:6px; padding:8px 0 8px 6px; }",
+			".ovsRoot .ovsSubHead { display:flex; align-items:center; gap:6px; width:100%; border:none; background:transparent; padding:4px 8px; cursor:pointer; color:var(--dsw-alias-label-secondary); font:inherit; text-align:left; }",
+			".ovsRoot .ovsSubHead:hover { color:var(--dsw-alias-label-primary); }",
+			".ovsRoot .ovsSubTitle { flex:1; min-width:0; font-size:12px; font-weight:500; line-height:18px; }",
+			".ovsRoot .ovsSubCount { flex:none; font-size:11px; color:var(--dsw-alias-label-tertiary); }",
+			".ovsRoot .ovsSubCaret { flex:none; font-size:10px; color:var(--dsw-alias-label-tertiary); }",
+			".ovsRoot .ovsSubBody { padding:2px 0 8px 12px; }",
 			".ovsRoot .ovsCardIcon { flex:none; width:22px; height:22px; border-radius:6px; object-fit:contain; }",
 			".ovsRoot .ovsGrid { display:grid; grid-template-columns:repeat(auto-fill, minmax(210px, 1fr)); gap:8px; }",
 			".ovsRoot .ovsCard { display:flex; flex-direction:column; gap:4px; padding:10px 12px; border:1px solid var(--dsw-alias-border-l1); border-radius:12px; background:var(--dsw-alias-bg-layer-1); min-width:0; }",
@@ -382,6 +395,12 @@ function OverseasSkillsPage(props) {
 			var queryState = useState("");
 			var query = queryState[0];
 			var setQuery = queryState[1];
+			var scenState = useState(null);
+			var scen = scenState[0];
+			var setScen = scenState[1];
+			var expState = useState({});
+			var exp = expState[0];
+			var setExp = expState[1];
 			var busyState = useState({});
 			var busy = busyState[0];
 			var setBusy = busyState[1];
@@ -436,6 +455,7 @@ function OverseasSkillsPage(props) {
 					})
 					.then(function (data) {
 						setGroups(Array.isArray(data.groups) ? data.groups : []);
+						setScen(Array.isArray(data.scenarios) ? data.scenarios : null);
 						setErr(null);
 					})
 					.catch(function (e) {
@@ -466,14 +486,19 @@ function OverseasSkillsPage(props) {
 						return r.json();
 					})
 					.then(function () {
+						var patch = function (it) { return it.name === name ? Object.assign({}, it, { modelEnabled: enabled }) : it; };
 						setGroups(function (gs) {
 							return gs.map(function (g) {
+								return { key: g.key, title: g.title, icon: g.icon, scenario: g.scenario, items: g.items.map(patch) };
+							});
+						});
+						setScen(function (scs) {
+							if (!scs) return scs;
+							return scs.map(function (sc) {
 								return {
-									key: g.key,
-									title: g.title,
-									icon: g.icon,
-									items: g.items.map(function (it) {
-										return it.name === name ? Object.assign({}, it, { modelEnabled: enabled }) : it;
+									key: sc.key, title: sc.title, icon: sc.icon,
+									subs: sc.subs.map(function (sub) {
+										return { key: sub.key, title: sub.title, items: sub.items.map(patch) };
 									})
 								};
 							});
@@ -501,6 +526,7 @@ function OverseasSkillsPage(props) {
 							key: g.key,
 							title: g.title,
 							icon: g.icon,
+							scenario: g.scenario,
 							items: g.items.filter(function (it) {
 								return it.installed === true;
 							})
@@ -529,6 +555,70 @@ function OverseasSkillsPage(props) {
 						return g.items.length > 0;
 					});
 			}, [groups, q]);
+
+			var visibleScen = useMemo(function () {
+				if (!scen) return null;
+				return scen
+					.map(function (sc) {
+						return {
+							key: sc.key, title: sc.title, icon: sc.icon,
+							subs: (sc.subs || [])
+								.map(function (sub) {
+									return {
+										key: sub.key, title: sub.title,
+										items: (sub.items || []).filter(function (it) { return it.installed === true; })
+									};
+								})
+								.filter(function (sub) { return sub.items.length > 0; })
+						};
+					})
+					.filter(function (sc) { return sc.subs.length > 0; });
+			}, [scen]);
+
+			var toggleKey = function (k) {
+				setExp(function (prev) {
+					var next = Object.assign({}, prev);
+					if (next[k] === true) delete next[k];
+					else next[k] = true;
+					return next;
+				});
+			};
+
+			var renderSkillCard = function (it) {
+				return React.createElement(
+					"div",
+					{ key: it.name, className: "ovsCard" },
+					React.createElement(
+						"div",
+						{ className: "ovsCardHead" },
+						React.createElement(
+							"span",
+							{ className: "ovsCardTitleWrap" },
+							it.icon ? React.createElement("img", { className: "ovsCardIcon", src: it.icon, alt: "" }) : null,
+							React.createElement("span", { className: "ovsCardTitle", title: it.name }, it.title),
+							it.toolGap
+								? React.createElement("span", { className: "ovsToolGap", title: "本机未接入对应外部工具，详见技能说明" }, "需外部工具")
+								: null
+						),
+						React.createElement(
+							"button",
+							{
+								className: "ovsSwitch" + (it.modelEnabled ? " ovsSwitchOn" : ""),
+								type: "button",
+								role: "switch",
+								"aria-checked": it.modelEnabled ? "true" : "false",
+								"aria-label": it.title,
+								disabled: busy[it.name] === true,
+								onClick: function () { toggle(it.name, !it.modelEnabled); }
+							},
+							React.createElement("span", { className: "ovsSwitchKnob" })
+						)
+					),
+					it.descriptionZh || it.description
+						? React.createElement("p", { className: "ovsCardDesc" }, it.descriptionZh || it.description)
+						: null
+				);
+			};
 
 			return React.createElement(
 				"div",
@@ -576,67 +666,88 @@ function OverseasSkillsPage(props) {
 				}),
 				err ? React.createElement("div", { className: "ovsError" }, err) : null,
 				!groups && !err ? React.createElement("div", { className: "ovsHint" }, "加载中…") : null,
-				visible
-					? visible.map(function (g) {
-							return React.createElement(
-								"section",
-								{ key: g.key, className: "ovsGroup" },
-								React.createElement("h3", { className: "ovsGroupTitle" },
-								g.icon ? React.createElement("img", { className: "ovsGroupTitleIcon", src: g.icon, alt: "" }) : null,
-								g.title + " · " + g.items.length
-							),
-								React.createElement(
-									"div",
-									{ className: "ovsGrid" },
-									g.items.map(function (it) {
-										return React.createElement(
-											"div",
-											{ key: it.name, className: "ovsCard" },
-											React.createElement(
+				q !== ""
+					? (visible
+						? visible.map(function (g) {
+								return React.createElement(
+									"section",
+									{ key: g.key, className: "ovsGroup" },
+									React.createElement("h3", { className: "ovsGroupTitle" },
+										g.icon ? React.createElement("img", { className: "ovsGroupTitleIcon", src: g.icon, alt: "" }) : null,
+										(g.scenario ? g.scenario + " · " : "") + g.title + " · " + g.items.length
+									),
+									React.createElement("div", { className: "ovsGrid" }, g.items.map(renderSkillCard))
+								);
+							})
+						: null)
+					: visibleScen && visibleScen.length > 0
+						? visibleScen.map(function (sc) {
+								var scOpen = exp[sc.key] === true;
+								var total = sc.subs.reduce(function (n, sub) { return n + sub.items.length; }, 0);
+								return React.createElement(
+									"section",
+									{ key: sc.key, className: "ovsGroup" },
+									React.createElement(
+										"button",
+										{
+											className: "ovsScenHead",
+											type: "button",
+											"aria-expanded": scOpen ? "true" : "false",
+											onClick: function () { toggleKey(sc.key); }
+										},
+										sc.icon ? React.createElement("img", { className: "ovsScenIcon", src: sc.icon, alt: "" }) : null,
+										React.createElement("span", { className: "ovsScenTitle" }, sc.title),
+										React.createElement("span", { className: "ovsScenCount" }, total + " 项"),
+										React.createElement("span", { className: "ovsScenCaret" }, scOpen ? "\u25BE" : "\u25B8")
+									),
+									scOpen
+										? React.createElement(
 												"div",
-												{ className: "ovsCardHead" },
-												React.createElement(
-													"span",
-													{ className: "ovsCardTitleWrap" },
-																		it.icon ? React.createElement("img", { className: "ovsCardIcon", src: it.icon, alt: "" }) : null,
-													React.createElement(
-														"span",
-														{ className: "ovsCardTitle", title: it.name },
-														it.title
-													),
-													it.toolGap
-														? React.createElement(
-																"span",
-																{ className: "ovsToolGap", title: "本机未接入对应外部工具，详见技能说明" },
-																"需外部工具"
-															)
-														: null
-												),
-												React.createElement(
-													"button",
-													{
-														className: "ovsSwitch" + (it.modelEnabled ? " ovsSwitchOn" : ""),
-														type: "button",
-														role: "switch",
-														"aria-checked": it.modelEnabled ? "true" : "false",
-														"aria-label": it.title,
-														disabled: busy[it.name] === true,
-														onClick: function () {
-															toggle(it.name, !it.modelEnabled);
-														}
-													},
-													React.createElement("span", { className: "ovsSwitchKnob" })
-												)
-											),
-											it.descriptionZh || it.description
-												? React.createElement("p", { className: "ovsCardDesc" }, it.descriptionZh || it.description)
-												: null
-										);
-									})
-								)
-							);
-						})
-					: null
+												{ className: "ovsScenBody" },
+												sc.subs.map(function (sub) {
+													var subKey = sc.key + "/" + sub.key;
+													var subOpen = exp[subKey] === true;
+													return React.createElement(
+														"div",
+														{ key: sub.key },
+														React.createElement(
+															"button",
+															{
+																className: "ovsSubHead",
+																type: "button",
+																"aria-expanded": subOpen ? "true" : "false",
+																onClick: function () { toggleKey(subKey); }
+															},
+															React.createElement("span", { className: "ovsSubTitle" }, sub.title),
+															React.createElement("span", { className: "ovsSubCount" }, sub.items.length),
+															React.createElement("span", { className: "ovsSubCaret" }, subOpen ? "\u25BE" : "\u25B8")
+														),
+														subOpen
+															? React.createElement(
+																	"div",
+																	{ className: "ovsSubBody" },
+																	React.createElement("div", { className: "ovsGrid" }, sub.items.map(renderSkillCard))
+																)
+															: null
+													);
+												})
+											)
+										: null
+								);
+							})
+						: visible
+							? visible.map(function (g) {
+									return React.createElement(
+										"section",
+										{ key: g.key, className: "ovsGroup" },
+										React.createElement("h3", { className: "ovsGroupTitle" },
+											g.icon ? React.createElement("img", { className: "ovsGroupTitleIcon", src: g.icon, alt: "" }) : null,
+											(g.scenario ? g.scenario + " · " : "") + g.title + " · " + g.items.length
+										),
+										React.createElement("div", { className: "ovsGrid" }, g.items.map(renderSkillCard))
+									);
+								})
+							: null
 			);
 		}
 

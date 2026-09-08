@@ -39,9 +39,24 @@ for (const s of [...SKILLS, ...SKILLS_FS]) {
   if (!icon) emptyIcon.push(s.name);
 }
 if (emptyIcon.length) errors.push(`无图标行: ${emptyIcon.join(", ")}`);
+// ②b v3 二级结构：8 大场景 / 28 细分 / 行级 subcategory 全覆盖 / 无 preset 残留
+const scenCount = CATEGORIES.length;
+const subCount = CATEGORIES.reduce((n, c) => n + (c.subs || []).length, 0);
+if (scenCount !== 8) errors.push(`大场景数应为 8，实际 ${scenCount}`);
+if (subCount !== 28) errors.push(`细分场景数应为 28，实际 ${subCount}`);
+const noSub = SKILLS.filter((s) => !s.subcategory);
+if (noSub.length) errors.push(`缺 subcategory 行: ${noSub.map((s) => s.name).slice(0, 8).join(", ")}`);
+const presetRows = SKILLS.filter((s) => s.category.startsWith("preset-"));
+if (presetRows.length) errors.push(`preset 残留: ${presetRows.map((s) => s.name).join(", ")}`);
 // ③ 路由引用悬空（union：catalog + 实际技能目录）
 const dirs = new Set(readdirSync(SKILLS_DIR, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name));
-const all = new Set([...names, ...dirs]);
+// v3：路由引用可指向 agent 预设（已从技能目录移出，但仍是合法目标）
+let presetIds = [];
+try {
+  const ps = JSON.parse(readFileSync(join(ROOT, "presets", "preset-skills.json"), "utf8"));
+  presetIds = (ps.presets || []).map((x) => x.id);
+} catch {}
+const all = new Set([...names, ...dirs, ...presetIds]);
 const refineFiles = ["unify-refine-batch1.json", "unify-refine-batch2.json", "unify-refine-batch3.json"];
 let refs = 0, dangling = [];
 for (const f of refineFiles) {
@@ -64,4 +79,4 @@ if (errors.length) {
   errors.forEach((e) => console.error("  - " + e));
   process.exit(1);
 }
-console.log(`✓ verify_static 通过：${CATEGORIES.length}+${CATEGORIES_FS.length} 组 / ${SKILLS.length}+${SKILLS_FS.length} 行 / 名字唯一 / 图标覆盖 / ${refs} 条路由引用无悬空`);
+console.log(`✓ verify_static 通过：${CATEGORIES.length} 大场景/${subCount} 细分 + FS ${CATEGORIES_FS.length} 组 / ${SKILLS.length}+${SKILLS_FS.length} 行 / 名字唯一 / 图标覆盖 / ${refs} 条路由引用无悬空`);

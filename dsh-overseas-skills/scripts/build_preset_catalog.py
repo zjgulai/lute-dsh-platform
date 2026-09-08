@@ -28,6 +28,7 @@ EXTRA_SKILLS = os.path.join(ROOT, "manifest", "extra-skills.json")
 FULLSTACK = os.path.join(ROOT, "manifest", "fullstack-skills.json")
 OUT = os.path.join(ROOT, "presets", "preset-skills.json")
 CATALOG = os.path.join(ROOT, "lib", "catalog.js")
+TAXONOMY = os.path.join(ROOT, "manifest", "taxonomy-v3.json")
 
 # 营销技能新分类插入位置：content-gtm 之后
 MARKETING_CATEGORY_INSERT_AFTER = "content-gtm"
@@ -153,6 +154,15 @@ def main():
     fullstack = {"categories": [], "skills": []}
     if os.path.isfile(FULLSTACK):
         fullstack = json.load(open(FULLSTACK, encoding="utf-8"))
+    tax = {"scenarios": [], "mapping": {}}
+    if os.path.isfile(TAXONOMY):
+        tax = json.load(open(TAXONOMY, encoding="utf-8"))
+    tax_map = tax.get("mapping", {})
+    scenario_by_sub = {}
+    for sc in tax.get("scenarios", []):
+        for sub in sc.get("subs", []):
+            scenario_by_sub[sub["key"]] = sc["key"]
+    unmapped = []
     def cat_icon(key):
         return cat_svg.get(key, "")
     cat_svg_fs = {}
@@ -163,7 +173,14 @@ def main():
         skill_svg_fs = json.load(open(SKILL_ICONS_FS, encoding="utf-8"))
     cat_icon_fs = {c["key"]: cat_svg_fs.get(c["key"], cat_svg.get('agent-tools', '')) for c in fullstack.get("categories", [])}
     m = json.load(open(MANIFEST, encoding="utf-8"))
-    cats = [{"key": c["key"], "title": c["title"], "icon": cat_icon(c["key"])} for c in m["categories"]]
+    # v3：8 大场景（含细分场景 subs），不再使用 manifest 旧分组
+    cats = [
+        {
+            "key": sc["key"], "title": sc["title"], "icon": cat_icon(sc["key"]),
+            "subs": [{"key": sub["key"], "title": sub["title"]} for sub in sc.get("subs", [])]
+        }
+        for sc in tax.get("scenarios", [])
+    ]
     skills = [{
         "name": s["name"], "title": s["title"], "category": s["category"],
         "categoryTitle": s["categoryTitle"], "toolBacked": s["toolBacked"],
@@ -176,15 +193,7 @@ def main():
     mcats = marketing.get("categories", [])
     mskills = marketing.get("skills", [])
     cat_title = {c["key"]: c["title"] for c in mcats}
-    insert_at = next((i for i, c in enumerate(cats) if c["key"] == MARKETING_CATEGORY_INSERT_AFTER), None)
-    for c in mcats:
-        if any(x["key"] == c["key"] for x in cats):
-            continue
-        if insert_at is None:
-            cats.append({"key": c["key"], "title": c["title"], "icon": cat_icon(c["key"])})
-        else:
-            insert_at += 1
-            cats.insert(insert_at, {"key": c["key"], "title": c["title"], "icon": cat_icon(c["key"])})
+    # v3：分类完全由 taxonomy 决定，marketing 旧分类不再插入
     for s in mskills:
         skills.append({
             "name": s["name"], "title": s["title"], "category": s["category"],
@@ -197,10 +206,6 @@ def main():
     if os.path.isfile(SKILLS81):
         skills81 = json.load(open(SKILLS81, encoding="utf-8"))
     cats81 = skills81.get("categories", [])
-    for c in cats81:
-        if any(x["key"] == c["key"] for x in cats):
-            continue
-        cats.append({"key": c["key"], "title": c["title"], "icon": cat_icon(c["key"])})
     cat_icon81 = {c["key"]: c.get("icon", "") for c in cats81}
     for s in skills81.get("skills", []):
         skills.append({
@@ -219,15 +224,16 @@ def main():
             "toolBacked": s.get("toolBacked", False), "summaryZh": s.get("summaryZh", ""),
             "toolGap": s.get("toolGap", ""), "icon": s.get("icon", ""),
         })
-    for p in presets:
-        key = "preset-" + p["id"]
-        cats.append({"key": key, "title": p["title"], "icon": cat_icon(key)})
-        for s in p["skills"]:
-            skills.append({
-                "name": s["name"], "title": s["title"], "category": key,
-                "categoryTitle": p["title"], "toolBacked": False,
-                "summaryZh": s["descriptionZh"], "toolGap": "", "icon": "",
-            })
+    # v3：preset 组不再并入技能目录（preset-skills.json 仍生成，供其他工具使用）
+    # v3：全部技能按 taxonomy 归位到 8 大场景/细分场景
+    for s in skills:
+        sub = tax_map.get(s["name"])
+        if sub is None:
+            unmapped.append(s["name"])
+            continue
+        s["category"] = scenario_by_sub.get(sub, "h-enable")
+        s["subcategory"] = sub
+        s["categoryTitle"] = next((sc["title"] for sc in tax.get("scenarios", []) if sc["key"] == s["category"]), s["category"])
     # 行级 icon：81 系技能专属头像
     for s in skills:
         uri = skill_svg.get(s["name"])
@@ -256,9 +262,12 @@ def main():
     fs_cat_icon = {c["key"]: c.get("icon", "") for c in fullstack.get("categories", [])}
     fs_skills = []
     for s in fullstack.get("skills", []):
+        sub = tax_map.get(s["name"])
         fs_skills.append({
             "name": s["name"], "title": s["title"], "category": s["category"],
             "categoryTitle": s.get("categoryTitle", s["category"]),
+            "scenario": scenario_by_sub.get(sub, "h-enable") if sub else None,
+            "subcategory": sub,
             "toolBacked": False, "summaryZh": s.get("summaryZh", ""),
             "toolGap": "", "icon": skill_svg_fs.get(s["name"], "") or fs_cat_icon.get(s["category"], "") or cat_icon_fs.get(s["category"], ""),
         })
@@ -268,7 +277,10 @@ def main():
     out += "export const CATEGORIES_FS = " + json.dumps(fs_cats, ensure_ascii=False) + ";\n"
     out += "export const SKILLS_FS = " + json.dumps(fs_skills, ensure_ascii=False) + ";\n"
     open(CATALOG, "w", encoding="utf-8").write(out)
-    print(f"lib/catalog.js 已重建：{len(cats)} 组 / {len(skills)} 条 | AI全栈 {len(fs_cats)} 组 / {len(fs_skills)} 条")
+    print(f"lib/catalog.js 已重建：{len(cats)} 大场景 / {len(skills)} 条 | AI全栈 {len(fs_cats)} 组 / {len(fs_skills)} 条")
+    if unmapped:
+        print("taxonomy 未覆盖技能:", *sorted(set(unmapped)), sep="\n  ")
+        sys.exit(1)
     if problems:
         print("问题:", *problems, sep="\n  ")
         sys.exit(1)
