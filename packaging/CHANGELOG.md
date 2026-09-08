@@ -24,9 +24,19 @@ R2b 架构落地：**拖 app 即用（首启兜底）+ 安装器权威升级**�
 
 ---
 
-## [Unreleased] — dev 机功能更新（2026-09-05）
+## [1.2.0]（2026-09-08）
 
-> 以下为 dev 机实时状态；下次打包时并入 1.2.0 版本。
+### 测试闭环修复（发版前质量门：/代码评审 + /Bug 诊断）
+
+- **P1 输入框打字抖动（回归修复）**：`dsh-my-quotes` 移除 `MutationObserver(document.body, subtree)` 反馈回路——React 重挂 tab bar 时 observer 回调 `appendChild` 与重协调打架导致抖动；改持久 `setInterval(2s)` 轻量轮询兜底。
+- **P2 CSS 属性化（红线）**：`dsh-overseas-skills` 85 处 `.ovsRoot/.ovpRoot` 后代选择器、`dsh-wanzh-hulian` 39 处 `.whRoot` 后代选择器 → `[data-plugin]` scoping，消除裸类名污染风险（同历史 .whRoot 污染）。
+- **P3 临时文件治理**：`.gitignore` 排除 `*.bak-*` / `*.pre-*` / `dsh-team-hub/`；移除已追踪的 `client.js.bak-cn-slash`。
+- **P4 Spec 正确性**：`readMcpServers` 按 id 对称合并（保留非默认 id 的自定义 MCP 条目）；`templates.js` 缓存加 `kind` 字段（contract/l1/l2/l3 不再共享 `{mtime,text}` 形状，消除误命中）。
+
+### 业务侧更新
+
+- **dsh-wanzh-hulian**：新增 `business-meta.js`（MCP 卡片业务化——PixPix/Shopify 工具业务映射 + 静态元数据），`ensureShopifySkill` 模板生成，`package.json` 注册 bundles。
+- **dsh-overseas-skills**：catalog / manifest / scripts 清单与图标映射更新。
 
 ### 新增：dsh-file-upload → Codex 风格三 Tab 附件面板（v0.2.0-local）
 

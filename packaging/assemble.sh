@@ -121,7 +121,9 @@ say "app 完成 ($(du -sh "$PAYLOAD/DSH Desktop.app.tar.gz" | cut -f1))"
 
 say "压缩 profile（含离线 node_modules 475M + vendor，数分钟）…"
 # 归档根 = profile 目录内容（package.json/vendor/overrides 在根，与目标机布局一致）+ node_modules
-tar -czf "$PAYLOAD/profile.tar.gz" -C "$STAGEP/profile" . -C "$PROFILE" node_modules
+# --exclude '.DS_Store'：与 app 归档（line 119）对称，否则 .DS_Store 混入 profile.tar.gz
+# 而 app.tar.gz 已排除 → 内嵌/安装后双落位不一致（smoke 5c 断言失败）
+tar -czf "$PAYLOAD/profile.tar.gz" --exclude '.DS_Store' -C "$STAGEP/profile" . -C "$PROFILE" node_modules
 say "profile 完成 ($(du -sh "$PAYLOAD/profile.tar.gz" | cut -f1))"
 rm -rf "$STAGEP"
 
