@@ -1,8 +1,23 @@
 # Changelog
 
-本项目遵循语义化版本（单平台版本 + git tag），各插件 package.json 版本对齐。
+本项目遵循语义化版本，版本号 = git tag = 打包版本（1.x 序列；历史 v0.1.0 视为早期实验）。
 
-## [v0.1.0] - 2026-09-06（基线发布）
+## [1.2.0] - 2026-09-08（测试闭环 + 业务侧更新）
+
+### 测试闭环修复（发版前质量门：/代码评审 + /Bug 诊断）
+- **P1 输入框打字抖动回归**：dsh-my-quotes 移除 `MutationObserver(document.body)` 反馈回路，改持久 `setInterval(2s)` 兜底
+- **P2 CSS 属性化**：dsh-overseas-skills 85 处 + dsh-wanzh-hulian 39 处后代选择器 → `[data-plugin]` scoping
+- **P3 临时文件治理**：.gitignore 排除 `*.bak-*` / `*.pre-*` / `dsh-team-hub/`，移除已追踪 `.bak-cn-slash`
+- **P4 Spec 正确性**：readMcpServers 对称合并（保留非默认 id 自定义 MCP）；templates.js 缓存加 `kind` 字段
+
+### 业务侧
+- dsh-wanzh-hulian：新增 business-meta.js（MCP 卡片业务化）；ensureShopifySkill 模板
+- dsh-overseas-skills：catalog / manifest / scripts 更新
+
+### 打包
+- assemble.sh 修复 profile.tar.gz `.DS_Store` 双落位不一致；dmg 1.2.0（661M，冒烟 33 项全绿 + 31 补丁锚点）
+
+## [1.0.0] - 2026-09-06（基线发布）
 
 首个基线版本：把 DSH 二次开发工作台整理为 monorepo 并首次发布。
 
@@ -22,7 +37,7 @@
 ### 工程
 - 指令审计 F1-F10；管线 8 阶段；preset 15 个 respectFileFlags
 
-## [v0.2.0] - 2026-09-07（功能扩展）
+## [1.1.0] - 2026-09-07（功能扩展）
 
 ### 「我说」跨会话检索（dsh-my-quotes 插件）
 - 侧边栏「我说」入口：聚合全部 DSH 会话中用户 ≥30 字消息，规则 9 类意图分类（可选 LLM 精分）
