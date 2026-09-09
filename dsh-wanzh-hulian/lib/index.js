@@ -6,7 +6,7 @@ import { spawn } from "node:child_process";
 import { createServer } from "node:http";
 import { randomBytes, createHash } from "node:crypto";
 import { defineTool } from "@deepseek-ai/dsh-tools";
-import { PIXPIX_BUSINESS_META, SHOPIFY_BUSINESS_META, MCP_STATIC_TOOL_META, staticToolMetaFor } from "./business-meta.js";
+import { PIXPIX_BUSINESS_META, SHOPIFY_BUSINESS_META, APIFY_BUSINESS_META, MCP_STATIC_TOOL_META, staticToolMetaFor } from "./business-meta.js";
 import * as McpClient from "@deepseek-ai/dsh-mcp-client";
 import { BOARDS, CONNECTIONS } from "./catalog.js";
 
@@ -335,6 +335,81 @@ async function ensureShopifySkill() {
   }
 }
 
+/* ── Apify MCP 技能（模型侧入口，与 business-meta 单一数据源联动） ─────────── */
+const APIFY_SKILL_DIR = join(homedir(), ".dsh", "skills", "apify-mcp");
+const APIFY_SKILL_FILE = join(APIFY_SKILL_DIR, "SKILL.md");
+const APIFY_SKILL_MARKER = "<!-- business-meta v1 2026-09-08 -->";
+function buildApifySkillTemplate() {
+  const rows = Object.entries(APIFY_BUSINESS_META)
+    .map(([tool, biz]) => {
+      const tag = biz.readWrite === "execute" ? "（执行·先确认）" : "";
+      return `| ${biz.scene} | ${biz.example} | ${tool}${tag} |`;
+    })
+    .join("\n");
+  return `---
+name: "apify-mcp"
+title: "Apify 网页抓取"
+description: "Apify MCP 工具：搜索与调用 Apify Store 的 Actor 完成网页抓取、数据提取与自动化任务；预置网页转 Markdown（web-fetch）与网页搜索抓取（rag-web-browser）。触发词：Apify、apify、Actor、调用 Actor。何时不用：不涉及 Apify 的普通网页浏览（用浏览器工具）；跨境选品 SKU 校验（用 cross-border-selection）；只设计采集字段不执行采集（用 web-scraping-plan-designer）。"
+enabled: "true"
+disable-model-invocation: false
+user-invocable: true
+input_contract: 一句抓取/自动化诉求（目标网址或数据需求），工具直连 Apify 平台执行
+output_contract: 抓取结果（Markdown/列表数据）；付费 Actor 先报成本等你确认；长任务轮询到终态
+example: 说「用 Apify 抓取这个网页并给我 markdown」→ 直接返回页面内容
+---
+
+# Apify 网页抓取 · 业务指引
+
+本技能是「万物互联」中 **Apify（官方远程 MCP）** 的模型侧入口。12 个工具已挂载为 mcp__apify__ 前缀；本文件把「业务黑话」映射到正确工具。
+
+## 业务场景速查（用户怎么说 → 用哪个工具）
+
+| 场景 | 用户怎么说 | 首选工具（mcp__apify__ 前缀省略） |
+| --- | --- | --- |
+${rows}
+
+## 标准工作流
+
+1. **选工具**：网页内容直取优先用预置 apify--web_fetch（网页→Markdown）或 apify--rag_web_browser（搜索+抓取）；其他需求 search_actors 找合适 Actor。
+2. **查参数**：调用任意 Actor 前必须 fetch_actor_details 拿输入 schema，按 schema 构造 input，禁止瞎编参数。
+3. **提交**：call_actor 提交任务（waitSecs 设短，如 30-60s；超时未完成转轮询 get_actor_run）。
+4. **取结果**：列表数据 get_dataset_items（datasetId 来自 run 结果），单条记录 get_key_value_store_record。
+5. **止损**：跑偏或超额时 abort_actor_run 中止。
+
+## 护栏（必须遵守）
+
+1. **付费先确认**：调用付费 Actor 或大并发/大额度消耗前，先告知用户「该 Actor 计费/预计消耗」，得到确认后再调用。
+2. **规模克制**：maxResults/limit 默认取小（如 10-20），用户明确要大才放大。
+3. **错误原样转达**：额度不足、参数非法、限流等错误如实告知，不重试轰炸；工具缺陷可用 report_problem 反馈 Apify。
+4. **数据真实**：只交付工具实际返回的数据，不编造抓取结果。
+5. 凭证由宿主管理，模型不可见，禁止索取 API Token。
+
+## 注意
+
+- 平台文档查询用 search_apify_docs / fetch_apify_docs（Apify 与 Crawlee）。
+- 两个预置工具名称含双连字符（apify--web_fetch / apify--rag_web_browser），调用时保持原样。
+${APIFY_SKILL_MARKER}
+`;
+}
+async function ensureApifySkill() {
+  const next = buildApifySkillTemplate();
+  if (!existsSync(APIFY_SKILL_FILE)) {
+    await mkdir(APIFY_SKILL_DIR, { recursive: true });
+    await writeFile(APIFY_SKILL_FILE, next, "utf8");
+    return;
+  }
+  const text = await readFile(APIFY_SKILL_FILE, "utf8");
+  if (!text.includes(APIFY_SKILL_MARKER)) {
+    const fm = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text);
+    const dis = fm && /^disable-model-invocation:\s*(true|false)\s*$/m.exec(fm[1]);
+    const usr = fm && /^user-invocable:\s*(true|false)\s*$/m.exec(fm[1]);
+    let out = next;
+    if (dis) out = out.replace("disable-model-invocation: false", "disable-model-invocation: " + dis[1]);
+    if (usr) out = out.replace("user-invocable: true", "user-invocable: " + usr[1]);
+    await writeFile(APIFY_SKILL_FILE, out, "utf8");
+  }
+}
+
 async function setSkillModelInvoke(on) {
   await ensureSkill();
   const text = await readFile(SKILL_FILE, "utf8");
@@ -394,6 +469,25 @@ const DEFAULT_CONNECTIONS = [
     note: "只读连接：Custom App 仅 read_* scopes，写操作由 Shopify 平台层拒绝。凭据用开发仪表盘应用的客户端 ID + 加密密钥，插件自动换取访问令牌（约 24h，自动续期）。工具来自官方社区 MCP（mcp__shopify_*）。",
     platformUrl: "https://admin.shopify.com",
     docUrl: "https://shopify.dev/docs/api/usage/access-scopes",
+    logo: ""
+  },
+  {
+    id: "apify",
+    board: "enterprise",
+    kind: "mcp",
+    mcpServerId: "apify",
+    title: "Apify",
+    subtitle: "网页抓取 · Actor 市场",
+    enabled: false,
+    extras: [],
+    authFields: [
+      { ref: "apify_token", label: "API Token", placeholder: "apify_api_xxx", secret: true }
+    ],
+    probe: { kind: "apify-user-info" },
+    capabilities: ["找 Actor", "调用 Actor", "取结果", "网页直取", "文档查询"],
+    note: "Apify 官方 MCP：数千网页抓取/自动化 Actor（apify/rag-web-browser 与 apify/web-fetch 已预置）。付费 Actor 消耗账号月度额度，技能层已加成本确认护栏。",
+    platformUrl: "https://console.apify.com",
+    docUrl: "https://docs.apify.com/platform/integrations/mcp",
     logo: ""
   }
 ];
@@ -458,6 +552,17 @@ const DEFAULT_MCP_SERVERS = [
     capabilities: ["记笔记", "找笔记", "知识库管理", "内容订阅", "上传与配额", "删除与清理"],
     toolCount: 38,
     note: "官方 38 项能力全套（含订阅博主/直播、分享链接、转写原文等增量能力）。日常记笔记/搜索直接用上方「得到大脑」连接即可，两边数据同源；本卡开启后新增能力自动进对话。"
+  },
+  {
+    id: "apify",
+    name: "Apify（远程 MCP）",
+    enabled: false,
+    transport: "streamable-http",
+    url: "https://mcp.apify.com/",
+    headerRefs: { authorization: { ref: "apify_token", prefix: "Bearer " } },
+    capabilities: ["找 Actor", "调用 Actor", "取结果", "网页直取", "文档查询"],
+    toolCount: 12,
+    note: "Apify 官方 MCP（已实测 v0.15.5）：12 工具，覆盖 Apify Store 数千 Actor（网页抓取/自动化/AI）。API Token 认证，付费 Actor 消耗账号月度额度（护栏见 apify-mcp 技能）。URL 保持官方默认（含预置 web-fetch / rag-web-browser）。"
   }
 ];
 const OAUTH_FILE = join(homedir(), ".dsh", "integrations", "wanzh-hulian", "oauth-pixpix.json");
@@ -614,13 +719,14 @@ async function fetchMcpToolMeta(entry, headers) {
     if (!list.ok || !listBody?.result) return null;
     const tools = (Array.isArray(listBody.result.tools) ? listBody.result.tools : []).map((t) => {
       const name = String(t?.name ?? "");
-      const biz = PIXPIX_BUSINESS_META[name];
+      const biz = (MCP_STATIC_TOOL_META[entry.id]?.meta ?? {})[name] ?? PIXPIX_BUSINESS_META[name];
       return {
         name,
         description: String(t?.description ?? "").replace(/\s+/g, " ").trim().slice(0, 160),
         businessName: biz?.name ?? "",
         businessDesc: biz?.desc ?? "",
-        scene: biz?.scene ?? ""
+        scene: biz?.scene ?? "",
+        readWrite: biz?.readWrite ?? ""
       };
     }).filter((t) => t.name);
     return {
@@ -658,7 +764,19 @@ async function mountMcpServers(ctx, credentials) {
       cwd: "",
       failOnStartupError: false
     };
-    if (config.transport === "streamable-http") { config.url = String(s.url ?? ""); config.headers = { ...(s.headers ?? {}) }; }
+    if (config.transport === "streamable-http") {
+      config.url = String(s.url ?? "");
+      config.headers = { ...(s.headers ?? {}) };
+      // headerRefs：把凭据注入请求头（如 Apify 的 authorization: Bearer <token>），与 stdio envRefs 同构
+      for (const [header, refDef] of Object.entries(s.headerRefs ?? {})) {
+        try {
+          const ref = typeof refDef === "string" ? refDef : refDef?.ref;
+          const prefix = refDef !== null && typeof refDef === "object" && typeof refDef.prefix === "string" ? refDef.prefix : "";
+          const r = credentials ? await credentials.resolve(ref) : undefined;
+          if (typeof r?.value === "string" && r.value) config.headers[header] = prefix + r.value;
+        } catch { /* 未配置 */ }
+      }
+    }
     if (s.auth?.type === "oauth-pkce") {
       const tok = await ensureOauthToken(s.auth);
       if (!tok || !tok.accessToken) { states.push({ id: s.id, enabled: true, status: "unauthorized", error: "未授权：请在设置页点击「浏览器授权」完成 PixPix OAuth。" }); continue; }
@@ -918,6 +1036,13 @@ async function resolveShopifyCreds(credentials) {
   return out;
 }
 /** 连接探测处理器注册表（probe.kind → handler） */
+async function resolveApifyToken(credentials) {
+  if (credentials === undefined) return undefined;
+  try {
+    const r = await credentials.resolve("apify_token");
+    return typeof r?.value === "string" && r.value ? r.value : undefined;
+  } catch { return undefined; }
+}
 async function probeConnection(credentials, conn) {
   const kind = conn?.probe?.kind ?? "";
   if (kind === "getnote") {
@@ -965,6 +1090,21 @@ async function probeConnection(credentials, conn) {
       return { ok: false, error: `Shopify 请求失败: ${e?.message ?? e}` };
     } finally { clearTimeout(timer); }
   }
+  if (kind === "apify-user-info") {
+    const token = await resolveApifyToken(credentials);
+    if (!token) return { ok: false, error: "未配置 Apify API Token：请在 Apify 控制台（Settings → Integrations）创建后粘贴。" };
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 20000);
+    try {
+      const res = await fetch("https://api.apify.com/v2/users/me", { headers: { authorization: "Bearer " + token }, signal: controller.signal });
+      const body = await res.json().catch(() => null);
+      if (!res.ok) return { ok: false, error: `Apify API HTTP ${res.status}: ${body?.error?.message || body?.error || "请求失败"}` };
+      const u = body?.data ?? {};
+      return { ok: true, text: `连接测试通过 ✓\n账号: ${u.username ?? "-"}\n套餐: ${u.plan?.id ?? "-"}（月度上限 $${u.plan?.maxMonthlyUsageUsd ?? "?"}）\n并发上限: ${u.plan?.maxConcurrentActorRuns ?? "-"}` };
+    } catch (e) {
+      return { ok: false, error: `Apify 请求失败: ${e?.message ?? e}` };
+    } finally { clearTimeout(timer); }
+  }
   return { ok: false, error: `未知探测类型: ${kind}` };
 }
 
@@ -1005,6 +1145,9 @@ export function apply(ctx) {
   ctx.effect(() => {
     ensureShopifySkill().catch(() => {});
   }, "dsh-wanzh-hulian: ensure shopify skill");
+  ctx.effect(() => {
+    ensureApifySkill().catch(() => {});
+  }, "dsh-wanzh-hulian: ensure apify skill");
 
   for (const tool of GETNOTE.tools) {
     const def = toolDefs[tool];
