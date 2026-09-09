@@ -132,6 +132,23 @@ if [ -f "$PLIST" ]; then
   fi
 fi
 
+# ── 4. app 图标（icon.icns；lute-brand-icons 生成引擎产出，打包链替换）───────────
+# 品牌 hash 固定于打包时（assets/app-icon.icns）；图标重设计时用 BRAND_ICON_SHA 覆盖
+BRAND_ICON_SHA="${BRAND_ICON_SHA:-2f593b98b3134ae1452acbe59037eccfc5667fdd}"
+ICON="$DSH_APP/Contents/Resources/icon.icns"
+if [ -f "$ICON" ]; then
+  cur=$(shasum "$ICON" | awk '{print $1}')
+  if [ "$cur" = "$BRAND_ICON_SHA" ]; then
+    say "OK   icon.icns 品牌图标"
+  elif [ "$MODE" = "--apply" ]; then
+    say "APPLY icon.icns 需从 packaging/assets/app-icon.icns 复制（本脚本不带 icns 资产）"
+    fail=1
+  else
+    say "DRIFT icon.icns（hash $cur）— 官方图标未替换"
+    fail=1
+  fi
+fi
+
 echo
 if [ "$fail" = "0" ]; then echo "BRAND ALL VERIFIED"; else echo "BRAND DRIFT — 升级后跑 --apply"; fi
 exit $fail

@@ -46,6 +46,41 @@ say "app-update.yml 已改写（禁用官方更新通道）"
   "$APP_STAGE/DSH Desktop.app/Contents/Info.plist"
 say "CFBundleVersion → 2.0.4-lute.$VERSION"
 
+# 暂存改写：P0-8 补丁——dsh-llm-pi-ai 的 pi-ai lazy import 改磁盘绝对路径
+# （客户机器报障 "DeepSeek request extension preparation failed"：Electron asar 内
+#   ESM 动态 import 缺陷，lazy.js 从 asar 内加载时找不到相对模块；改从
+#   app.asar.unpacked 磁盘加载后相对解析落磁盘，绕过缺陷）
+PI_AI_FIX="$APP_STAGE/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-llm-pi-ai/lib/index.js"
+if [ -f "$PI_AI_FIX" ]; then
+  python3 - "$PI_AI_FIX" <<'PYEOF'
+import sys
+p = sys.argv[1]
+s = open(p).read()
+old = '''import { anthropicMessagesApi } from "@earendil-works/pi-ai/api/anthropic-messages.lazy";
+import { openAICompletionsApi } from "@earendil-works/pi-ai/api/openai-completions.lazy";
+import { openAIResponsesApi } from "@earendil-works/pi-ai/api/openai-responses.lazy";'''
+new = '''// P0-8 补丁：pi-ai lazy 模块强制从 unpacked 磁盘加载（绕开 asar 内 ESM 动态 import 缺陷）
+const PI_AI_API_DIR = `${process.resourcesPath}/app.asar.unpacked/node_modules/@earendil-works/pi-ai/dist/api`;
+const { anthropicMessagesApi } = await import(`${PI_AI_API_DIR}/anthropic-messages.lazy.js`);
+const { openAICompletionsApi } = await import(`${PI_AI_API_DIR}/openai-completions.lazy.js`);
+const { openAIResponsesApi } = await import(`${PI_AI_API_DIR}/openai-responses.lazy.js`);'''
+n = s.count(old)
+assert n == 1, f"P0-8 锚点不唯一或缺失: count={n}"
+open(p, 'w').write(s.replace(old, new))
+print("P0-8 pi-ai lazy import 补丁 OK")
+PYEOF
+else
+  echo "[assemble] 警告：未找到 dsh-llm-pi-ai（P0-8 补丁跳过，app 可能版本变化）"
+fi
+
+# 暂存改写：品牌 app 图标（lute-brand-icons 生成引擎产出，替换官方 icon.icns）
+if [ -f "$PKG_ROOT/assets/app-icon.icns" ]; then
+  cp "$PKG_ROOT/assets/app-icon.icns" "$APP_STAGE/DSH Desktop.app/Contents/Resources/icon.icns"
+  say "app 图标已替换为 LUTE 品牌徽章（icon.icns）"
+else
+  echo "[assemble] 警告：缺少 assets/app-icon.icns（图标保持官方原样）"
+fi
+
 # 签名与压缩推迟到 §2b：须先同源注入 dsh-profile 再 codesign --deep，否则首启兜底内容不在签名面内。
 
 # ── 2. profile（manifest 重写 + vendor + overrides + 离线 node_modules）───────

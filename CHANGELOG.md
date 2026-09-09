@@ -2,6 +2,14 @@
 
 本项目遵循语义化版本，版本号 = git tag = 打包版本（1.x 序列；历史 v0.1.0 视为早期实验）。
 
+## [1.2.2] - 2026-09-09（request extension 修复 + 品牌 app 图标）
+
+### 修复（客户真机报障）
+- **P0-8 补丁**：dsh-llm-pi-ai 的 pi-ai lazy import 改从 app.asar.unpacked 磁盘加载，
+  绕开 asar 内 ESM 动态 import 缺陷（「DeepSeek request extension preparation failed」）
+- **品牌 app 图标**：icon.icns 替换为 lute-brand-icons 生成引擎产出（程序员爸爸
+  方形徽章）；brand-replay 新增 icns 锚点，verify-patches 锚点 31→32
+
 ## [1.2.1] - 2026-09-08（面板 UX 修复 + 双格式交付）
 
 ### 万物互联（dsh-wanzh-hulian）

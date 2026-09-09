@@ -16,6 +16,7 @@
 | P0-5 | 记忆 | `@zseven-w/dsh-noema/lib/{status-route,import-service}.js` + `dsh-memory-local/lib+src` + `cordis.patch.yml` | 状态路由恢复真实 `ok`；ledger 原子写；python3 默认；dbPath 绝对化；跳过 delegationDepth>0 自动记忆 | `.orig` / git |
 | P0-6 | 权限/隐私 | `electron-runtime-DS52LbUW.js` + `diagnostic-export-worker.js` | 加 `setPermissionRequestHandler` 全拒；openExternal 仅 mailto；排除 `.dmp` | `.p06.bak` / `.orig` |
 | P0-7 | 首启 profile 占位替换 | `lib/main.js`（ditto 块内） | 首启 ditto 拷贝内嵌 profile 后，把 `cordis.patch.yml` 的 `__DSH_HOME__` 替换为真实 DSH home（R2b「仅拖 app」兜底路径） | `main.js.p07.bak` |
+| P0-8 | pi-ai lazy import 磁盘化 | `@deepseek-ai/dsh-llm-pi-ai/lib/index.js` | 三处 pi-ai lazy 静态 import 改 `await import(process.resourcesPath + unpacked 绝对路径)`，绕开 asar 内 ESM 动态 import 缺陷（客户报障 request extension preparation failed） | assemble 重打包 |
 
 
 

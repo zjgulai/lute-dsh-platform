@@ -2,6 +2,25 @@
 
 本文件记录 LUTE 集成打包的版本历史（独立语义版本；DSH 基线 2.0.4）。
 
+## [1.2.2]（2026-09-09）
+
+### 客户真机报障修复
+
+- **P0-8 补丁**（assemble 内联）：`dsh-llm-pi-ai/lib/index.js` 三处 pi-ai lazy 静态
+  import 改 `await import(process.resourcesPath + unpacked 绝对路径)`——客户机器
+  「DeepSeek request extension preparation failed」根因是 Electron asar 内 ESM 动态
+  import 缺陷（lazy.js 从 asar 内加载时找不到相对模块）；改磁盘加载后相对解析落
+  unpacked，绕过缺陷。锚点：verify-patches 31→32。
+- **品牌 app 图标**：`scripts/build-app-icon.sh`（lute-brand-icons 生成引擎 →
+  SVG → sips 1024 PNG → iconutil icns）产出 `assets/app-icon.icns`（程序员爸爸
+  方形徽章，280K）；assemble 替换 `Resources/icon.icns`；brand-replay 新增
+  icon.icns hash 锚点（BRAND_ICON_SHA 可覆盖）。
+
+### 验证
+
+- 冒烟 33 项 PASSED（32 补丁锚点 + icns 品牌锚点 + quarantine 4 断言）
+- node-mode 实测补丁路径：openAIResponsesApi 可用（stream/streamSimple ✓）
+
 ## [1.2.1]（2026-09-08）
 
 ### 万物互联（dsh-wanzh-hulian）面板 UX 修复

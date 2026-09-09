@@ -71,6 +71,9 @@ check "P0-6 .dmp 已排除" 0 "$(grep -c 'endsWith(".dmp")) entries.push' "$CHK/
 # ---- P0-7 首启 profile 占位替换（main.js，R2b 内嵌兜底路径） ----
 check "P0-7 首启占位替换 hook" 1 "$(grep -c 'P0-7 LUTE 首启 profile 占位替换' "$CHK/main.js" 2>/dev/null || true)"
 
+# ---- P0-8 pi-ai lazy import 磁盘化（dsh-llm-pi-ai；客户机器 request extension preparation failed）----
+check "P0-8 pi-ai lazy import 磁盘化" 1 "$(grep -c 'P0-8 补丁：pi-ai lazy 模块强制从 unpacked 磁盘加载' "$CORE/dsh-llm-pi-ai/lib/index.js" 2>/dev/null || true)"
+
 # ---- 界面完整性：chatui 修复（加载更早 + 按钮门 + recall 回填） ----
 check "chatui 加载更早（session-controller）" 1 "$(grep -Fc 'loadOlder: history page request timed out' "$CORE/dsh-api-session-controller/lib/client.js" 2>/dev/null || true)"
 check "chatui 按钮门（client-ui-chat）" 1 "$(grep -Fc 'hasMore && openState === "open"' "$CORE/dsh-client-ui-chat/lib/client.js" 2>/dev/null || true)"
