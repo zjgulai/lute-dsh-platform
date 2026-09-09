@@ -1,6 +1,6 @@
 # LUTE Agentic System 安装卡（客户版）
 
-**版本**：1.2.2 · BUILD 20260908-r1 · 仅支持 Apple 芯片 Mac（macOS 13+）
+**版本**：1.2.2 · BUILD 20260908-r2 · 仅支持 Apple 芯片 Mac（macOS 13+）
 
 ---
 
@@ -53,6 +53,6 @@ cd "/Volumes/DSH Desktop LUTE 1.2.2" && bash install.sh
 **文件校验**（可选，确认包完整）：
 
 ```text
-dmg SHA256: b30b2399554b5a48917f91285d80d0931eac4932be0b41735d117912045a2805
-pkg SHA256: 81d65899a3a145e8b1f471ca171b3ef0a7abeb7890e16dc24e9ae98f66f7bd77
+dmg SHA256: d74af5bc06a242909e072eaefda1b72c3b749404eb33f7d414e8ab80bc1b5f76
+pkg SHA256: cd826c477999c4b9a4da831944a91c8abf3c13c8f80f1c6029c6b4fffa17340d
 ```
