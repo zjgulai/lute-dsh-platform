@@ -107,14 +107,15 @@ for d in $vendor_dirs dsh-patches; do
   # dev 临时文件排除口径（与 .gitignore P3 对齐）：*.bak-*/*.pre-*/*.orig + 元数据
   rsync -a --safe-links --exclude node_modules --exclude .git --exclude '*.map' --exclude dist \
         --exclude 'preview-*.html' --exclude archive \
+        --exclude staging --exclude backup \
         --exclude '.DS_Store' --exclude '*.bak-*' --exclude '*.pre-*' --exclude '*.orig*' \
         --exclude '.git.disabled' --exclude coverage \
         "$DSH_VENDOR/$d/" "$STAGEP/profile/vendor/$d/" 2>/dev/null \
     || cp -R "$DSH_VENDOR/$d" "$STAGEP/profile/vendor/$d/"
 done
-# 兜底清理（rsync fallback 到 cp -R 时无排除能力；终态保证 vendor 无 dev 临时文件）
+# 兜底清理（rsync fallback 到 cp -R 时无排除能力；终态保证 vendor 无 dev 临时文件/中间产物）
 find "$STAGEP/profile/vendor" \( -name '.DS_Store' -o -name '*.bak-*' -o -name '*.pre-*' -o -name '*.orig*' \) -delete 2>/dev/null || true
-find "$STAGEP/profile/vendor" -maxdepth 2 \( -name '.git.disabled' -o -name coverage \) -type d -exec rm -rf {} + 2>/dev/null || true
+find "$STAGEP/profile/vendor" -maxdepth 2 \( -name '.git.disabled' -o -name coverage -o -name staging -o -name backup \) -type d -exec rm -rf {} + 2>/dev/null || true
 
 # overrides（profile node_modules 里的 -override 副本，随包以防目标机版本漂移）
 for o in dsh-llm dsh-tool-subagent dsh-file-reference-local; do

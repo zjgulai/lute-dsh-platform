@@ -67,6 +67,15 @@ VERSION=1.0.0 ./assemble.sh                    # 产出 staging/1.0.0/payload
 - **官方更新通道已禁用**（暂存 app 的 `app-update.yml` 被清空）。
 - **单架构 arm64**：node_modules 内原生依赖为 arm64，x64 需在 x64 机重跑 assemble。
 
+## 交付形态（2026-09-09 起）
+
+- **pkg 为主交付**：`DSH-Desktop-LUTE-<ver>-mac-arm64.pkg`——客户双击 → Installer
+  图形向导 → 输密码 → 完成，无需终端与 AI 助手。
+- **dmg 为备用**：`DSH-Desktop-LUTE-<ver>-mac-arm64.dmg`——CLI `bash install.sh`
+  （高级用户/自动化场景）。
+- 两者共用同一 payload（同源），SHA 分别记录于 `SHA256SUMS`/`PKG-SHA256SUMS`。
+- 二进制产物不上 git，发布走 GitHub Releases 附件（`gh release`）。
+
 ## 目标机安装（Gatekeeper 必读）
 
 包为 **adhoc 签名、未公证**（Developer ID 公证是付费通道，未启用），macOS Gatekeeper
