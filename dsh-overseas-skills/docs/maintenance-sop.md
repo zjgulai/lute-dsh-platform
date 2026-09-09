@@ -1,16 +1,18 @@
 # 出海技能体系 · 维护 SOP（脱手手册）
 
 > 目标：体系不依赖作者记忆。所有操作可复制粘贴执行。
+>
+> 近两日变更与坑位（分类 v3、硬链接双杀、图标防抹、重复 `---`）：见 [recent-changes-2026-09-08.md](recent-changes-2026-09-08.md)。
 
 ## 1. 文件地图
 
 | 对象 | 路径 | 说明 |
 | --- | --- | --- |
-| 技能运行时目录 | `~/.dsh/skills/` | 211 个技能目录（SKILL.md + references/scripts/examples/assets/tests…），文件层实时生效 |
+| 技能运行时目录 | `~/.dsh/skills/` | 250+ 个技能目录（~/.dsh/skills 顶层口径）（SKILL.md + references/scripts/examples/assets/tests…），文件层实时生效 |
 | 81 技能源码 | `~/project/Magpie-Horch/81-Skills/` | 中文目录源（转换源，含 4 个加密暂缓） |
 | 插件工程 | `~/project/Magpie-Horch/dsh-overseas-skills/` | catalog/图标/卡面/管线脚本 |
 | 预设 | `~/.dsh/.agent-presets/brand-marketing-growth/` | 三件套，gen_bmg_preset.mjs 可复现 |
-| 头像资产 | `~/.dsh/skills/lute-brand-icons/` | 106 枚 LUTE 头像生成器（139 条目） |
+| 头像资产 | `~/.dsh/skills/lute-brand-icons/` | LUTE 头像生成器（manifest 176 条目，含 83 枚卡片图标映射） |
 | 子集插件 | `~/project/Magpie-Horch/dsh-skill-subset/` | respectFileFlags 严格语义（I3） |
 | 回滚备份 | `dsh-overseas-skills/backup/pre-81/` | 23 个被替换技能原文件 |
 
