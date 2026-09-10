@@ -44,6 +44,17 @@ GitHub Release v2.0.0（dmg+pkg+校验清单+CHANGELOG）→ 灰度名单（1-2 
 | B6 | verify v1/v2 双路径 | 回退无害，删除收益低 |
 | B8 | rc-eval 手工构建 | 环境即弃即建；手册已覆盖（重建脚本按需再做） |
 
+## 6.5 执行进度（2026-09-10 复盘轮）
+
+- ✅ 1.1 PR-A（#2）+ 1.2 PR-B（#3）已开；P0-7v2 重锚修复已提交
+- ✅ 1.3 pkg 签名 → 发现 Apple 硬约束（productsign 不支持 adhoc）→ 决策改为校验清单承担（INSTALL-CARD 已强化）
+- ✅ 1.4 .gitignore staging-src + 1.5 竞态锁
+- ✅ 2.1 兜底触发实验：揪出原锚点静默失效 → 重锚修复 + 机制级验证通过；⚠️ 遗留「全新 userData 首启 composition stall」已交子代理排查（发货级阻塞，修复前不得灰度）
+- ✅ 2.2 灵枢产物冒烟（import 0.5.0 + MCP server 启动 OK）
+- ✅ 2.3 降级兼容（SESSION_FORMAT_VERSION=0 未变；seeded 会话为唯一风险面）
+- ✅ 4 文档回填：根 README/PLAN/05 矩阵/灰度 SOP（docs/release-gray-sop.md）/ADR-0006
+- ⏳ 2.4 spill 后验、发布链（Release 上传+灰度名单）、stall 根因修复、07 转正
+
 ## 7. 执行顺序总览
 
 ```
