@@ -53,7 +53,8 @@ GitHub Release v2.0.0（dmg+pkg+校验清单+CHANGELOG）→ 灰度名单（1-2 
 - ✅ 2.2 灵枢产物冒烟（import 0.5.0 + MCP server 启动 OK）
 - ✅ 2.3 降级兼容（SESSION_FORMAT_VERSION=0 未变；seeded 会话为唯一风险面）
 - ✅ 4 文档回填：根 README/PLAN/05 矩阵/灰度 SOP（docs/release-gray-sop.md）/ADR-0006
-- ⏳ 2.4 spill 后验、发布链（Release 上传+灰度名单）、stall 根因修复、07 转正
+- ✅ stall 根因修复（P0-7v2c：首启清除点删除预写 wizard 状态→向导重弹卡死；已修+全链重验：兜底首启 healthy、smoke 37/37、release 第三次重建）
+- ⏳ 2.4 spill 后验、发布链（Release 上传+灰度名单）、07 转正
 
 ## 7. 执行顺序总览
 
