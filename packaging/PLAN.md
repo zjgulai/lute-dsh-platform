@@ -1,6 +1,7 @@
 # DSH Desktop × Magpie-Horch 集成打包方案（PLAN）
 
 > 状态：**方案已定稿 + 用户确认（2026-09-01），实施中。**
+> **2.0.0 更新（2026-09-10）**：基座已升级 DSH Desktop 2.0.5（rc.1），P0-P5 全链完成（35 补丁重锚 34 锚点 ALL VERIFIED、smoke 37/37、dmg+pkg 双格式产物）。本文件的 2.0.4 段落保留为历史基线；2.0.5 权威细节见 docs/research/07 与 dsh-patches/patches-manifest-v2.md。
 > 基线：DSH Desktop 2.0.4（官方 Electron 壳）+ Magpie-Horch 全量定制层（P0 六项 + UI + 品牌 + profile 23 bundle + 技能/预设）。
 > 参照：MichengAI/dsh-codex-desktop 的发布工程（可安装产物 + 免环境 + 打包后冒烟 + 版本化发布），**不照搬其自建 launcher 架构**。
 
