@@ -13,7 +13,7 @@
 | P0-2v2 | 恢复显性化 | main.js | restoreSlot writeDurable 前 package.json 备份+日志 | .p02.orig |
 | P0-6v2 | 外链白名单+权限门 | electron-runtime-DLNj0vyk.js | setWindowOpenHandler 仅 mailto + setPermissionRequestHandler 剪贴板 | .p06.orig |
 | P0-6c | 诊断导出隐私 | diagnostic-export-worker.js | .dmp 排除 + active-run.json 脱敏 | .p06c.orig |
-| P0-7v2 | 首启内嵌兜底 | main.js | node:fs 导入加 cpSync + createFreshDesktopProfile 内嵌分支（2.0.5 无 ditto，全新设计，决策 A） | .p07v2.orig |
+| P0-7v2 | 首启内嵌兜底 | main.js + profile-manager-SP3bXlwi.js | createFreshDesktopProfile 内嵌分支（创建/恢复 UI 流）+ materializeDefaultDesktopProfile 内嵌分支（**首启真实路径**，实测官方合成路径绕过 main.js 钩子后重锚） | .p07v2.orig / .p07v2b.orig |
 | RECOVERY | recovery.html 路径 | main.js | RECOVERY_DOCUMENT replace asar→unpacked | .recovery-doc.orig |
 | 品牌×11 | ROOT/LUTE 品牌 | 9 文件 + Info.plist + icon.icns | brand-replay.sh（2.0.5 文件名参数化版） | — |
 

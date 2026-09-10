@@ -21,7 +21,8 @@ ck "P0-6v2 外链白名单"      "$LIB/electron-runtime-DLNj0vyk.js" "P0-6v2: op
 ck "P0-6v2 权限门"          "$LIB/electron-runtime-DLNj0vyk.js" "setPermissionRequestHandler"
 ck "P0-6c dmp 排除"         "$LIB/diagnostic-export-worker.js" "P0-6c: 进程内存转储"
 ck "P0-6c 脱敏"             "$LIB/diagnostic-export-worker.js" "P0-6c: Desensitize"
-ck "P0-7v2 首启兜底"        "$LIB/main.js" "P0-7v2 LUTE 首启兜底"
+ck "P0-7v2 首启兜底(main.js)"  "$LIB/main.js" "P0-7v2 LUTE 首启兜底"
+ck "P0-7v2 首启兜底(首启真实路径)"  "$LIB/profile-manager-SP3bXlwi.js" "P0-7v2 LUTE 首启兜底（首启真实路径）"
 ck "P0-8 pi-ai 磁盘化"      "$NM/dsh-llm-pi-ai/lib/index.js" "P0-8 补丁：pi-ai lazy"
 ck "RECOVERY_DOCUMENT"      "$LIB/main.js" 'app.asar.unpacked'
 ck "clipboard fall-through" "$NM/dsh-client-ui-primitives/lib/index.js" "fall through to the legacy"
