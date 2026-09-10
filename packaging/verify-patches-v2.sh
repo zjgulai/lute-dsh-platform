@@ -23,6 +23,7 @@ ck "P0-6c dmp 排除"         "$LIB/diagnostic-export-worker.js" "P0-6c: 进程�
 ck "P0-6c 脱敏"             "$LIB/diagnostic-export-worker.js" "P0-6c: Desensitize"
 ck "P0-7v2 首启兜底(main.js)"  "$LIB/main.js" "P0-7v2 LUTE 首启兜底"
 ck "P0-7v2 首启兜底(首启真实路径)"  "$LIB/profile-manager-SP3bXlwi.js" "P0-7v2 LUTE 首启兜底（首启真实路径）"
+ck "P0-7v2c wizard 状态保护"  "$LIB/main.js" "P0-7v2c：内嵌 dsh-profile 拷贝物化的 profile"
 ck "P0-8 pi-ai 磁盘化"      "$NM/dsh-llm-pi-ai/lib/index.js" "P0-8 补丁：pi-ai lazy"
 ck "RECOVERY_DOCUMENT"      "$LIB/main.js" 'app.asar.unpacked'
 ck "clipboard fall-through" "$NM/dsh-client-ui-primitives/lib/index.js" "fall through to the legacy"
