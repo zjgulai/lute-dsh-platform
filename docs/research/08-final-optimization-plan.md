@@ -17,7 +17,7 @@
 
 | # | 实验 | 方法 | 通过标准 |
 |---|---|---|---|
-| 2.1 | P0-7v2 兜底触发 | 隔离环境：装 app + 删空 profile → 首启 | createFreshDesktopProfile 走内嵌拷贝分支，cordis.patch.yml 的 __DSH_HOME__ 被替换，启动 healthy |
+| 2.1 | P0-7v2 兜底触发 | 隔离环境：装 app + 删空 profile → 首启 | ✅ **已执行并揪出真 bug**：原锚点（main.js createFreshDesktopProfile）在首启不触发（该包装仅服务恢复/创建 UI 流），真实路径是 profile-manager 的 materializeDefaultDesktopProfile——已重锚双锚点并提交 PR-A。机制级验证通过：内嵌完整拷贝（node_modules/vendor/overrides 落位）+ __DSH_HOME__ 占位替换 0 残留。⚠️ 残余：隔离测试环境（多实例同 product identity + 测试补丁破坏签名）下完整 health-commit 未复现（对照组同样 stall，与补丁无关）→ 留干净机器状态复测 |
 | 2.2 | 灵枢产物冒烟 | 2.0.0 payload 的 aeis-portable 解包 → 实际 import aeis + 起 MCP server | import 成功、server 可启动 |
 | 2.3 | 降级兼容 | rc-eval 写会话 → 与生产 alpha.1 会话逐字段对比格式 | zstd 容器/事件结构兼容，写回不破坏 2.0.4 读取 |
 | 2.4 | spill/白屏后验 | rc-eval 长会话触发 spill；#865/867 复现 | 有结果即入矩阵 |
