@@ -1,12 +1,12 @@
 # LUTE Agentic System 安装卡（客户版）
 
-**版本**：1.2.2 · BUILD 20260908-r2 · 仅支持 Apple 芯片 Mac（macOS 13+）
+**版本**：2.0.0 · DSH 基座 2.0.5（rc.1）· 仅支持 Apple 芯片 Mac（macOS 13+）
 
 ---
 
 ## 方式一：双击安装（pkg · 主交付格式，无需终端）
 
-1. 双击 `DSH-Desktop-LUTE-1.2.2-mac-arm64.pkg`
+1. 双击 `DSH-Desktop-LUTE-2.0.0-mac-arm64.pkg`
 2. 若弹出「无法验证开发者」：**右键点 pkg → 打开 → 弹框再点「打开」**
 3. 安装向导一路「继续」→ 输入电脑开机密码 → 「安装」
 4. 提示「安装成功」即完成
@@ -16,7 +16,7 @@
 1. 双击 dmg 挂载，打开「终端」粘贴：
 
 ```bash
-cd "/Volumes/DSH Desktop LUTE 1.2.2" && bash install.sh
+cd "/Volumes/DSH Desktop LUTE 2.0.0" && bash install.sh
 ```
 
 2. 写 /Applications 一步弹密码框，输入开机密码即可。
@@ -32,7 +32,17 @@ cd "/Volumes/DSH Desktop LUTE 1.2.2" && bash install.sh
 
 ```bash
 /usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "/Applications/DSH Desktop.app/Contents/Info.plist"
-# 应显示：2.0.4-lute.1.2.2
+# 应显示：2.0.5-lute.2.0.0
+```
+
+## 完整性校验（安装前）
+
+本包 pkg 未签名（与 App 侧 adhoc 策略一致），完整性由发布页校验清单承担：
+
+```bash
+# 下载目录里对比发布页公示的哈希（SHA256SUMS / PKG-SHA256SUMS）
+shasum -a 256 DSH-Desktop-LUTE-2.0.0-mac-arm64.pkg
+# 与 GitHub Release 页面的 PKG-SHA256SUMS 值一致方可安装
 ```
 
 ---

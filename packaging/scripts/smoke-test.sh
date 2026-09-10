@@ -65,7 +65,7 @@ for f in package.json cordis.patch.yml apply-patches.mjs; do
 done
 assert "node_modules 落位" yes "$([ -d "$P/node_modules/@deepseek-ai" ] && echo yes)"
 assert "vendor 落位" yes "$([ -d "$P/vendor/dsh-memory-local" ] && echo yes)"
-assert "overrides 落位" yes "$([ -d "$P/overrides/dsh-llm" ] && echo yes)"
+assert "overrides 落位" yes "$([ -d "$P/overrides/dsh-file-reference-local" ] && echo yes)"
 NOEMA_BIN="$P/node_modules/@zseven-w/dsh-noema-darwin-arm64/bin/noema-mcp"
 assert "noema darwin-arm64 二进制落位" yes "$([ -x "$NOEMA_BIN" ] && echo yes)"
 assert "noema 二进制架构 arm64" yes "$(file "$NOEMA_BIN" | grep -q 'arm64' && echo yes)"
@@ -120,7 +120,8 @@ assert "skills/presets 清单比对" 0 "$?"
 cat "$SMOKE_HOME/sp.log"
 
 # 5c. R2b 双落位一致性：内嵌 dsh-profile ≡ 安装后 profile
-BUNDLED="$APP_TARGET/Contents/Resources/dsh-profile"
+# 2.0.5 布局：内嵌副本按 profiles/desktop 嵌套（与 P0-7v2 首启拷贝路径对齐）
+BUNDLED="$APP_TARGET/Contents/Resources/dsh-profile/profiles/desktop"
 assert "内嵌 dsh-profile 存在" yes "$([ -d "$BUNDLED" ] && echo yes)"
 assert "内嵌 node_modules 落位" yes "$([ -d "$BUNDLED/node_modules/@deepseek-ai" ] && echo yes)"
 assert "内嵌 vendor 落位" yes "$([ -d "$BUNDLED/vendor/dsh-memory-local" ] && echo yes)"
@@ -130,10 +131,13 @@ assert "内嵌 ≡ 安装后 profile" 0 "$?"
 assert "内嵌 cordis 保留 __DSH_HOME__ 占位" yes "$(grep -q '__DSH_HOME__' "$BUNDLED/cordis.patch.yml" && echo yes)"
 
 # 6. 补丁锚点（env 指向冒烟路径）
-DSH_APP="$APP_TARGET" DSH_HOME="$DSH_HOME_SMOKE" \
-  LING_SRC="$P/vendor/dsh-memory-local" \
-  bash "$PAYLOAD/tools/verify-patches.sh" > "$SMOKE_HOME/verify.log" 2>&1
-assert "verify-patches ALL PATCHES VERIFIED" 0 "$?"
+if [ -f "$PAYLOAD/tools/verify-patches-v2.sh" ]; then
+  DSH_APP="$APP_TARGET" bash "$PAYLOAD/tools/verify-patches-v2.sh" > "$SMOKE_HOME/verify.log" 2>&1
+  assert "verify-patches-v2 ALL VERIFIED" 0 "$?"
+else
+  DSH_APP="$APP_TARGET" DSH_HOME="$DSH_HOME_SMOKE" LING_SRC="$P/vendor/dsh-memory-local" bash "$PAYLOAD/tools/verify-patches.sh" > "$SMOKE_HOME/verify.log" 2>&1
+  assert "verify-patches ALL PATCHES VERIFIED" 0 "$?"
+fi
 grep -c '^\[ok\]' "$SMOKE_HOME/verify.log" | xargs -I{} echo "  锚点通过数: {}"
 
 # 7. 品牌锚点

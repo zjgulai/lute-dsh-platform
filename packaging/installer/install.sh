@@ -1,5 +1,5 @@
 #!/bin/bash
-# LUTE Agentic System 目标机离线安装器（DSH Desktop 2.0.4 + Magpie-Horch 全量定制层）
+# LUTE Agentic System 目标机离线安装器（DSH Desktop 2.0.5 + Magpie-Horch 全量定制层）
 #
 # 特性：
 #   - 完全离线：不跑 pnpm / 不访问网络；node_modules 随包、node 运行时复用 Electron 二进制
@@ -13,6 +13,9 @@ set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 DSH_HOME_DIR="${DSH_HOME:-$HOME/.dsh}"
 APP_TARGET="${APP_TARGET:-/Applications/DSH Desktop.app}"
+# 2.0.5 新增：Electron userData（wizard 状态落位）。客户机默认 Application Support/LUTE Agentic System；
+# 冒烟/隔离环境用 LUTE_USERDATA 指向隔离 userData。
+USERDATA_DIR="${LUTE_USERDATA:-$HOME/Library/Application Support/LUTE Agentic System}"
 PROFILE_DIR="$DSH_HOME_DIR/profiles/desktop"
 STAMP="$(date +%Y%m%d-%H%M%S)"
 say(){ echo "[install] $*"; }
@@ -148,6 +151,38 @@ node "$HERE/tools/rewrite-file-deps.mjs" --check "$PROFILE_DIR" || true
 ( cd "$PROFILE_DIR" && node apply-patches.mjs )
 say "3/6 路径替换 + apply-patches.mjs 完成"
 
+# ── 3b/6 预写 setup-wizard skip 状态（2.0.5 首启免向导；目录权限必须 700）─────────
+# 状态路径：<userData>/profile-setup/<sha256(profileDir)>/state.json；
+# 只写「不存在时」，不覆盖用户已完成的向导决定（升级路径同理）。
+if [ -f "$HERE/tools/rewrite-file-deps.mjs" ]; then :; fi
+WIZARD_HASH="$(node -e "const{createHash}=require('crypto');console.log(createHash('sha256').update(process.argv[1]).digest('hex'))" "$PROFILE_DIR" 2>/dev/null || true)"
+if [ -n "$WIZARD_HASH" ]; then
+  WIZARD_ROOT="$USERDATA_DIR/profile-setup"
+  WIZARD_DIR="$WIZARD_ROOT/$WIZARD_HASH"
+  WIZARD_STATE="$WIZARD_DIR/state.json"
+  if [ ! -f "$WIZARD_STATE" ]; then
+    mkdir -p "$WIZARD_DIR"
+    chmod 700 "$WIZARD_ROOT" "$WIZARD_DIR" 2>/dev/null || true
+    cat > "$WIZARD_STATE" <<EOF
+{
+  "version": 2,
+  "profileHash": "$WIZARD_HASH",
+  "outcome": "skipped",
+  "desktopVersion": "2.0.5",
+  "dshVersion": "0.1.2-rc.1",
+  "setupRevision": 1,
+  "recordedAt": "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
+}
+EOF
+    chmod 600 "$WIZARD_STATE"
+    say "3b/6 setup-wizard skip 状态已预写（700 权限）"
+  else
+    say "3b/6 setup-wizard 状态已存在，保留不覆盖"
+  fi
+else
+  say "3b/6 跳过（node shim 不可用）"
+fi
+
 # ── 4/6 overrides 恢复（纵深防御：node_modules 已含 override 副本）─────────────
 for o in dsh-llm dsh-tool-subagent dsh-file-reference-local; do
   src="$PROFILE_DIR/overrides/$o"
@@ -185,7 +220,10 @@ if [ -f "$HERE/aeis-portable.tar.gz" ]; then
 else
   say "6/6 本包未含灵枢 venv 载荷（跳过）"
 fi
-if [ -f "$HERE/tools/verify-patches.sh" ]; then
+if [ -f "$HERE/tools/verify-patches-v2.sh" ]; then
+  say "运行补丁锚点校验（v2 · 2.0.5）…"
+  DSH_APP="$APP_TARGET" bash "$HERE/tools/verify-patches-v2.sh" || say "⚠ 补丁校验未全绿——先重启 DSH 再复验"
+elif [ -f "$HERE/tools/verify-patches.sh" ]; then
   say "运行补丁锚点校验…"
   DSH_APP="$APP_TARGET" DSH_HOME="$DSH_HOME_DIR" \
     LING_SRC="$PROFILE_DIR/vendor/dsh-memory-local" \
@@ -198,4 +236,4 @@ if [ -f "$HERE/tools/brand-replay.sh" ]; then
 fi
 
 cleanup_tmp
-say "完成。① 重启 DSH Desktop；② 重新授权 TCC（录屏/辅助功能/自动化）；③ 校验：bash $HERE/tools/verify-patches.sh"
+say "完成。① 重启 DSH Desktop；② 重新授权 TCC（录屏/辅助功能/自动化）；③ 校验：bash $HERE/tools/verify-patches-v2.sh"

@@ -66,3 +66,6 @@ dsh-overseas-skills/backup/
 dsh-chatui-fix/
 dsh-chatui-fix-backup/
 dsh-rootoutlet-heal/
+
+# 2.0.0 构建源（app 直补副本 + rc 时代 profile 源；可重建，勿入库）
+staging-src/
