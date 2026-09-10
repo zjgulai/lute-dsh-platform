@@ -31,7 +31,7 @@ interface SystemPromptService {
  * this class only wires official Harness seams and the conversation hook.
  */
 export class AgentTeamService extends ExecutionApplicationService {
-  static inject = { required: ['storageDomain', 'tools', 'subagents', 'llm', 'agents', 'sessions', 'systemPrompt'], optional: ['jobs', 'sessionProjections'] }
+  static inject = ['storageDomain', 'tools', 'subagents', 'llm', 'agents', 'sessions', 'systemPrompt', 'jobs', 'sessionProjections']
 
   static Config: z<AgentTeamConfig> = z.object({
     defaultProvider: z.string().default('spawn'),
