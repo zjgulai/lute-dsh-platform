@@ -1,5 +1,5 @@
 #!/bin/bash
-# LUTE 打包组装器 —— DSH Desktop 2.0.4 + Magpie-Horch 全量定制层 → 可分发 payload
+# LUTE 打包组装器 —— DSH Desktop 2.0.5 + Magpie-Horch 全量定制层 → 可分发 payload
 # 产出：staging/<VERSION>/payload/（安装器 + 载荷 tarball + 校验工具），Phase 3 由此制 dmg。
 #
 # 用法: VERSION=1.0.0 ./assemble.sh
@@ -9,9 +9,9 @@ PKG_ROOT="$(cd "$(dirname "$0")" && pwd)"
 DSH_APP="${DSH_APP:-/Applications/DSH Desktop.app}"
 DSH_HOME_DIR="${DSH_HOME:-$HOME/.dsh}"
 DSH_VENDOR="${DSH_VENDOR:-$HOME/project/Magpie-Horch}"
-PROFILE="$DSH_HOME_DIR/profiles/desktop"
+PROFILE="${PROFILE:-$DSH_HOME_DIR/profiles/desktop}"
 VERSION="${VERSION:-1.0.0}"
-STAGE="$PKG_ROOT/staging/$VERSION"
+STAGE="${OUT:-$PKG_ROOT/staging/$VERSION}"
 PAYLOAD="$STAGE/payload"
 say(){ echo "[assemble] $*"; }
 
@@ -41,17 +41,19 @@ EOF
 say "app-update.yml 已改写（禁用官方更新通道）"
 
 # 暂存改写：CFBundleVersion 加 lute 后缀（系统构建标识，防同版本重装被跳过；
-# ShortVersionString 保持 2.0.4 对齐 DSH 基线，避免内部版本判断漂移）
-/usr/libexec/PlistBuddy -c "Set :CFBundleVersion 2.0.4-lute.$VERSION" \
+# ShortVersionString 保持 2.0.5 对齐 DSH 基线，避免内部版本判断漂移）
+/usr/libexec/PlistBuddy -c "Set :CFBundleVersion 2.0.5-lute.$VERSION" \
   "$APP_STAGE/DSH Desktop.app/Contents/Info.plist"
-say "CFBundleVersion → 2.0.4-lute.$VERSION"
+say "CFBundleVersion → 2.0.5-lute.$VERSION"
 
 # 暂存改写：P0-8 补丁——dsh-llm-pi-ai 的 pi-ai lazy import 改磁盘绝对路径
 # （客户机器报障 "DeepSeek request extension preparation failed"：Electron asar 内
 #   ESM 动态 import 缺陷，lazy.js 从 asar 内加载时找不到相对模块；改从
 #   app.asar.unpacked 磁盘加载后相对解析落磁盘，绕过缺陷）
 PI_AI_FIX="$APP_STAGE/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-llm-pi-ai/lib/index.js"
-if [ -f "$PI_AI_FIX" ]; then
+if grep -q "P0-8 补丁" "$PI_AI_FIX" 2>/dev/null; then
+  say "P0-8 pi-ai lazy import 补丁已应用（staging app 直补），跳过内联块"
+elif [ -f "$PI_AI_FIX" ]; then
   python3 - "$PI_AI_FIX" <<'PYEOF'
 import sys
 p = sys.argv[1]
@@ -96,8 +98,8 @@ done
 vendor_dirs="$(node -e "
 const p=require(process.argv[1]);
 const names=Object.entries(p.dependencies||{})
-  .filter(([,v])=>typeof v==='string'&&v.startsWith('file:../../../project/Magpie-Horch/'))
-  .map(([,v])=>v.slice('file:../../../project/Magpie-Horch/'.length).replace(/\/+$/,''));
+  .filter(([,v])=>typeof v==='string'&&(v.startsWith('file:../../../project/Magpie-Horch/')||v.startsWith('file:/Users/lute/project/Magpie-Horch/')))
+  .map(([,v])=>v.startsWith('file:../../../project/Magpie-Horch/')?v.slice('file:../../../project/Magpie-Horch/'.length).replace(/\/+$/,''):v.slice('file:/Users/lute/project/Magpie-Horch/'.length).replace(/\/+$/,''));
 console.log(names.join(' '))" "$PROFILE/package.json")"
 say "vendor 列表: $vendor_dirs dsh-patches"
 for d in $vendor_dirs dsh-patches; do
@@ -132,9 +134,11 @@ sed -i '' "s|$DSH_HOME_DIR|__DSH_HOME__|g" "$STAGEP/profile/cordis.patch.yml"
 
 # ── 2b. R2b 双落位：同源 profile 注入 app 内嵌 dsh-profile（首启兜底）──────────
 say "2b/6 同源注入内嵌 dsh-profile（首启兜底）"
-BUNDLED="$APP_STAGE/DSH Desktop.app/Contents/Resources/dsh-profile"
+BUNDLED="$APP_STAGE/DSH Desktop.app/Contents/Resources/dsh-profile/profiles/desktop"
 mkdir -p "$BUNDLED"
 # 与 profile.tar.gz 完全同源：同一份 staging 内容 + 同一份离线 node_modules
+# 2.0.5 布局：内嵌副本按目标机 profile 布局嵌套（profiles/desktop/），
+# 与 main.js P0-7v2 首启兜底拷贝路径（dsh-profile/profiles/<name>）对齐。
 # 注：内嵌副本排除 node_modules/.bin（CLI shim，DSH 运行时不用）——其中含断链，
 # 断链会导致 codesign --deep --strict 拒绝整个 bundle。
 rsync -a "$STAGEP/profile/" "$BUNDLED/"
@@ -204,6 +208,7 @@ chmod 755 "$PAYLOAD/install.sh"
 cp "$PKG_ROOT/scripts/rewrite-file-deps.mjs" "$PAYLOAD/tools/"
 cp "$PKG_ROOT/scripts/reloc-aeis.sh" "$PAYLOAD/tools/"
 cp "$DSH_VENDOR/dsh-patches/verify-patches.sh" "$PAYLOAD/tools/"
+cp "$PKG_ROOT/verify-patches-v2.sh" "$PAYLOAD/tools/" 2>/dev/null || true
 cp "$DSH_VENDOR/dsh-patches/brand-replay.sh" "$PAYLOAD/tools/" 2>/dev/null || true
 cp "$DSH_VENDOR/dsh-patches/brand-payload-wordmark.txt" "$PAYLOAD/tools/" 2>/dev/null || true
 cp "$DSH_VENDOR/dsh-patches/patches-manifest.md" "$PAYLOAD/tools/" 2>/dev/null || true
@@ -218,7 +223,7 @@ BUILD="${BUILD:-$(date +%Y%m%d-%H%M%S)}"
 cat > "$PAYLOAD/VERSION" <<EOF
 LUTE_VERSION=$VERSION
 BUILD=$BUILD
-DSH_BASELINE=2.0.4
+DSH_BASELINE=2.0.5
 ARCH=arm64
 EOF
 if [ -f "$PAYLOAD/aeis-portable.tar.gz" ]; then
@@ -263,7 +268,8 @@ shasum -a 256 ../$(basename "$PWD").dmg  # 与发布方给的 SHA256 对照
 
 ## 校验
 \`\`\`bash
-bash tools/verify-patches.sh        # 应 ALL PATCHES VERIFIED
+bash tools/verify-patches.sh        # 2.0.4 锚点（旧基座）
+bash tools/verify-patches-v2.sh    # 2.0.5 锚点（本版 34 锚点，应 ALL VERIFIED）
 bash tools/brand-replay.sh --check  # 品牌锚点无漂移
 \`\`\`
 
@@ -277,7 +283,7 @@ const fs=require('fs');
 const size=p=>fs.existsSync(p)?fs.statSync(p).size:0;
 const payload=process.argv[1];
 const files=['DSH Desktop.app.tar.gz','profile.tar.gz','skills-presets.tar.gz','aeis-portable.tar.gz','install.sh','LUTE Setup.app'];
-const m={name:'dsh-desktop-lute',version:process.argv[2],build:process.argv[3],dsd_baseline:'2.0.4',arch:'arm64',
+const m={name:'dsh-desktop-lute',version:process.argv[2],build:process.argv[3],dsd_baseline:'2.0.5',arch:'arm64',
   created_at:new Date().toISOString(),
   files:Object.fromEntries(files.map(f=>[f,size(payload+'/'+f)]))};
 fs.writeFileSync(payload+'/manifest.json',JSON.stringify(m,null,2)+'\n');" "$PAYLOAD" "$VERSION" "$BUILD"
@@ -289,8 +295,8 @@ const p=require(process.argv[1]);
 const bundles=(p.dsh?.profile?.bundles||[]).map(b=>typeof b==='string'?b:b.name);
 const deps=Object.keys(p.dependencies||{});
 const vendorDirs=Object.entries(p.dependencies||{})
-  .filter(([,v])=>typeof v==='string'&&v.startsWith('file:../../../project/Magpie-Horch/'))
-  .map(([,v])=>v.slice('file:../../../project/Magpie-Horch/'.length).replace(/\/+\$/,''));
+  .filter(([,v])=>typeof v==='string'&&(v.startsWith('file:../../../project/Magpie-Horch/')||v.startsWith('file:/Users/lute/project/Magpie-Horch/')))
+  .map(([,v])=>v.startsWith('file:../../../project/Magpie-Horch/')?v.slice('file:../../../project/Magpie-Horch/'.length).replace(/\/+\$/,''):v.slice('file:/Users/lute/project/Magpie-Horch/'.length).replace(/\/+\$/,''));
 vendorDirs.push('dsh-patches');
 const allBundles=[...new Set([...bundles,...deps.filter(d=>typeof p.dependencies[d]==='string'&&!p.dependencies[d].startsWith('file:'))])];
 const listDir=(d)=>fs.existsSync(d)?fs.readdirSync(d).filter(x=>fs.statSync(path.join(d,x)).isDirectory()).sort():[];

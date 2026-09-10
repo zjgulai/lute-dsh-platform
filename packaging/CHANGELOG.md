@@ -1,6 +1,17 @@
 # CHANGELOG
 
-本文件记录 LUTE 集成打包的版本历史（独立语义版本；DSH 基线 2.0.4）。
+## [2.0.0]（2026-09-10）
+
+### 基座升级：DSH Desktop 2.0.4 → 2.0.5（runtime 0.1.2-alpha.1 → 0.1.2-rc.1）
+
+- **P0-P4 全链交付**：D 轨道验证（24 bundles 0 error）→ 35 补丁全量重锚（verify-patches-v2 34 锚点）→ 30 bundles rc 化 → 打包流水线适配 → 安装器适配
+- **新增**：setup-wizard 首启免向导（install.sh 预写 skip 状态，700 权限）；P0-7v2 首启内嵌兜底（2.0.5 无 ditto，全新设计）；Helper 重命名修复（品牌改名后 Electron "Unable to find helper app" 回归）
+- **修复**：dsh-overseas-skills files 清单缺 templates.js（PR #1，全新安装整树失败）；brand-replay.sh 动态文件名 + 花括号 + Helper 步骤；rc 生态安装前提 autoInstallPeers:false
+- **产物**：dmg 685M + pkg 683M（arm64），CFBundleVersion 2.0.5-lute.2.0.0；冒烟 37/37 + 打包产物真实启动 healthy + 升级场景端到端验证
+
+
+
+本文件记录 LUTE 集成打包的版本历史（独立语义版本；DSH 基线 2.0.5）。
 
 ## [1.2.2]（2026-09-09）
 
