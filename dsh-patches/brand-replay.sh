@@ -29,15 +29,18 @@ fail=0
 say() { echo "[$MODE] $*"; }
 
 # ── 1. 显示名品牌 ────────────────────────────────────────────────────────────
+# 动态文件名：hash 文件名随基座版本变化（2.0.4: Mw2EmLOX/DS52LbUW；2.0.5: DaaZGYGQ/DLNj0vyk）
+UPDATE_CHECKER="$(basename "$(ls "$CHK"/lib/update-checker-*.js 2>/dev/null | head -1)" 2>/dev/null)"
+ELECTRON_RUNTIME="$(basename "$(ls "$CHK"/lib/electron-runtime-*.js 2>/dev/null | head -1)" 2>/dev/null)"
 FILES=(
   "lib/updates.js"
-  "lib/update-checker-Mw2EmLOX.js"
+  "lib/${UPDATE_CHECKER:-update-checker-Mw2EmLOX.js}"
   "lib/desktop-terminal.js"
   "lib/native-ui/recovery.html"
   "lib/native-ui/setup-wizard.html"
   "lib/native-ui/desktop-dialog.html"
   "lib/client.js"
-  "lib/electron-runtime-DS52LbUW.js"
+  "lib/${ELECTRON_RUNTIME:-electron-runtime-DS52LbUW.js}"
   "lib/main.js"
 )
 for rel in "${FILES[@]}"; do
@@ -112,9 +115,30 @@ PY
     fi
   done
 else
-  say "MISSING $PAYLOAD（词标补丁载荷）"
+  say "MISSING ${PAYLOAD}（词标补丁载荷）"
   fail=1
 fi
+
+# ── 3b. Electron Helper 重命名（Electron 按外层 CFBundleName 查找 helper，缺省会 "Unable to find helper app"）──
+HELPERS_DIR="$DSH_APP/Contents/Frameworks"
+for helper_suffix in "" " (GPU)" " (Plugin)" " (Renderer)"; do
+  OLD_H="$HELPERS_DIR/DSH Desktop Helper${helper_suffix}.app"
+  NEW_H="$HELPERS_DIR/LUTE Agentic System Helper${helper_suffix}.app"
+  if [ -d "$OLD_H" ]; then
+    if [ "$MODE" = "--apply" ]; then
+      mv "$OLD_H" "$NEW_H"
+      /usr/libexec/PlistBuddy -c "Set :CFBundleName LUTE Agentic System Helper${helper_suffix}" "$NEW_H/Contents/Info.plist" 2>/dev/null
+      /usr/libexec/PlistBuddy -c "Set :CFBundleExecutable LUTE Agentic System Helper${helper_suffix}" "$NEW_H/Contents/Info.plist" 2>/dev/null
+      mv "$NEW_H/Contents/MacOS/DSH Desktop Helper${helper_suffix}" "$NEW_H/Contents/MacOS/LUTE Agentic System Helper${helper_suffix}" 2>/dev/null || true
+      say "APPLY Helper${helper_suffix} 重命名"
+    else
+      say "DRIFT Helper${helper_suffix} 未重命名 — 跑 --apply"
+      fail=1
+    fi
+  elif [ -d "$NEW_H" ]; then
+    [ "$MODE" = "--check" ] && say "OK   Helper${helper_suffix} 已重命名"
+  fi
+done
 
 # ── 3. Info.plist 显示名 ──────────────────────────────────────────────────────
 PLIST="$DSH_APP/Contents/Info.plist"
@@ -144,7 +168,7 @@ if [ -f "$ICON" ]; then
     say "APPLY icon.icns 需从 packaging/assets/app-icon.icns 复制（本脚本不带 icns 资产）"
     fail=1
   else
-    say "DRIFT icon.icns（hash $cur）— 官方图标未替换"
+    say "DRIFT icon.icns（hash ${cur}）— 官方图标未替换"
     fail=1
   fi
 fi

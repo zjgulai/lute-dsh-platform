@@ -11,6 +11,11 @@ VERSION="${2:-1.0.0}"
 PAYLOAD="$(cd "$PAYLOAD" && pwd)"
 BUILD="${3:-$(date +%Y%m%d-%H%M%S)}"
 REL="$PKG_ROOT/release/$VERSION"
+# 竞态锁：dmg/pkg 共用 release 目录，串行执行防互删（2026-09-10 实战竞态教训）
+LOCK="$REL/.build.lock"
+if [ -d "$LOCK" ]; then echo "[$(basename "$0")] 另一构建进行中（$LOCK 存在），请串行执行"; exit 1; fi
+mkdir -p "$REL" && mkdir "$LOCK"
+trap 'rm -rf "$LOCK"' EXIT
 PKG="$REL/DSH-Desktop-LUTE-$VERSION-mac-arm64.pkg"
 say(){ echo "[pkg] $*"; }
 

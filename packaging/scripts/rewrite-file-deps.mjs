@@ -16,7 +16,7 @@ const profileDir = path.resolve(args[check ? 1 : 0] ?? '.');
 const pkgPath = path.join(profileDir, 'package.json');
 const lockPath = path.join(profileDir, 'pnpm-lock.yaml');
 
-const OLD_PREFIX = 'file:../../../project/Magpie-Horch/';
+const OLD_PREFIXES = ['file:../../../project/Magpie-Horch/', 'file:/Users/lute/project/Magpie-Horch/'];
 const NEW_PREFIX = 'file:./vendor/';
 
 let changed = 0;
@@ -25,8 +25,9 @@ let changed = 0;
 if (fs.existsSync(pkgPath)) {
   const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
   for (const [name, spec] of Object.entries(pkg.dependencies ?? {})) {
-    if (typeof spec === 'string' && spec.startsWith(OLD_PREFIX)) {
-      const vendorName = spec.slice(OLD_PREFIX.length).replace(/\/+$/, '');
+    const oldPrefix = OLD_PREFIXES.find((prefix) => typeof spec === 'string' && spec.startsWith(prefix));
+    if (oldPrefix !== void 0) {
+      const vendorName = spec.slice(oldPrefix.length).replace(/\/+$/, '');
       if (!vendorName) {
         console.error(`[rewrite] 无法解析 file: 依赖 ${name}: ${spec}`);
         process.exit(2);
@@ -53,15 +54,17 @@ if (fs.existsSync(pkgPath)) {
 
 // ---- pnpm-lock.yaml ----
 if (fs.existsSync(lockPath)) {
-  const lock = fs.readFileSync(lockPath, 'utf8');
-  const count = lock.split(OLD_PREFIX).length - 1;
+  let lock = fs.readFileSync(lockPath, 'utf8');
+  let count = 0;
+  for (const prefix of OLD_PREFIXES) count += lock.split(prefix).length - 1;
   if (count > 0) {
     changed += count;
     if (!check) {
-      fs.writeFileSync(lockPath, lock.split(OLD_PREFIX).join(NEW_PREFIX));
-      console.log(`[rewrite] pnpm-lock.yaml: ${count} 处 ${OLD_PREFIX} → ${NEW_PREFIX}`);
+      for (const prefix of OLD_PREFIXES) lock = lock.split(prefix).join(NEW_PREFIX);
+      fs.writeFileSync(lockPath, lock);
+      console.log(`[rewrite] pnpm-lock.yaml: ${count} 处 file: 绝对/相对路径 → ${NEW_PREFIX}`);
     } else {
-      console.error(`[check] pnpm-lock.yaml 仍有 ${count} 处 ${OLD_PREFIX}`);
+      console.error(`[check] pnpm-lock.yaml 仍有 ${count} 处旧 file: 路径`);
     }
   }
 } else if (check) {
