@@ -118,11 +118,30 @@ export const SHOPIFY_BUSINESS_META = {
 export const SHOPIFY_SCENE_CHIPS = ["商品", "订单", "客户"];
 export const SHOPIFY_EXAMPLE = "帮我查店铺最近 10 个订单";
 
+/* ── Apify 官方 MCP 业务化映射（12 工具，实测 tools/list 核对） ─────────────── */
+export const APIFY_BUSINESS_META = {
+  search_actors: { name: "搜 Actor", desc: "在 Apify Store 搜索网页抓取/自动化工具（Actor）。", scene: "找工具", readWrite: "read", example: "帮我找抓取 Instagram 的 Actor" },
+  fetch_actor_details: { name: "查 Actor 详情", desc: "查 Actor 的说明与输入参数结构（调用前必查，不要瞎编参数）。", scene: "找工具", readWrite: "read", example: "查一下 apify/web-fetch 需要哪些参数" },
+  call_actor: { name: "调用 Actor", desc: "按输入参数结构调用任意 Actor 执行抓取/自动化任务。", scene: "跑任务", readWrite: "execute", example: "用这个 Actor 抓取这个网页" },
+  get_actor_run: { name: "查运行状态", desc: "查任务运行状态、数据存储位置与结果摘要（长任务轮询用）。", scene: "跑任务", readWrite: "read", example: "任务跑完了吗？" },
+  abort_actor_run: { name: "中止任务", desc: "中止正在运行的任务（止损）。", scene: "跑任务", readWrite: "execute", example: "停掉刚才那个任务" },
+  get_dataset_items: { name: "取结果数据", desc: "从数据集取任务产出的结果行（列表数据）。", scene: "取结果", readWrite: "read", example: "把抓到的数据给我" },
+  get_key_value_store_record: { name: "取单条记录", desc: "从键值存储取单条记录（如单个 JSON/HTML 结果）。", scene: "取结果", readWrite: "read", example: "读出这个结果文件的内容" },
+  "apify--web_fetch": { name: "网页转 Markdown", desc: "预置 Actor：下载网页转成 Markdown/纯文本（无需自己配参数）。", scene: "网页直取", readWrite: "read", example: "用 Apify 抓取这个网页并给我 markdown" },
+  "apify--rag_web_browser": { name: "网页搜索抓取", desc: "预置 Actor：网页搜索 + 抓取内容，适合 RAG/资料收集。", scene: "网页直取", readWrite: "read", example: "用 Apify 搜索并抓取这个主题的资料" },
+  search_apify_docs: { name: "搜平台文档", desc: "全文搜索 Apify/Crawlee 官方文档。", scene: "文档与反馈", readWrite: "read", example: "查 Apify 文档里 Proxy 的用法" },
+  fetch_apify_docs: { name: "读文档全文", desc: "按 URL 取 Apify/Crawlee 文档页全文。", scene: "文档与反馈", readWrite: "read", example: "打开这篇文档" },
+  report_problem: { name: "报告问题", desc: "把工具/Actor 的缺陷反馈给 Apify 官方。", scene: "文档与反馈", readWrite: "execute", example: "把这个工具报错反馈给 Apify" }
+};
+export const APIFY_SCENE_CHIPS = ["找工具", "跑任务", "取结果", "网页直取", "文档与反馈"];
+export const APIFY_EXAMPLE = "用 Apify 抓取这个网页的内容并给我 markdown";
+
 /** 服务器 id → 静态工具元数据（UI 保底 + 技能同步共用） */
 export const MCP_STATIC_TOOL_META = {
   shopify: { meta: SHOPIFY_BUSINESS_META, scenes: SHOPIFY_SCENE_CHIPS, example: SHOPIFY_EXAMPLE },
   pixpix: { meta: PIXPIX_BUSINESS_META, scenes: PIXPIX_SCENE_CHIPS, example: PIXPIX_EXAMPLE },
-  getnote: { meta: GETNOTE_MCP_BUSINESS_META, scenes: GETNOTE_SCENE_CHIPS, example: GETNOTE_EXAMPLE }
+  getnote: { meta: GETNOTE_MCP_BUSINESS_META, scenes: GETNOTE_SCENE_CHIPS, example: GETNOTE_EXAMPLE },
+  apify: { meta: APIFY_BUSINESS_META, scenes: APIFY_SCENE_CHIPS, example: APIFY_EXAMPLE }
 };
 
 /** 把业务清单转成 /mcp-servers 的 toolMeta 结构（source: static） */

@@ -264,8 +264,8 @@ window.__ModuleLoader__.load({
 								g.tools.map(function (t) {
 									var bizName = t.businessName || t.name;
 									var desc = t.businessDesc || t.description;
-									var badge = t.readWrite === "write"
-										? React.createElement("span", { className: "whToolBadge", title: "写入/删除操作：执行前需向用户确认，且需店铺授予对应写权限" }, "写入")
+									var badge = t.readWrite === "write" || t.readWrite === "execute"
+										? React.createElement("span", { className: "whToolBadge", title: t.readWrite === "write" ? "写入/删除操作：执行前需向用户确认" : "执行类操作：产生平台消耗或副作用，先确认再调用" }, t.readWrite === "write" ? "写入" : "执行")
 										: null;
 									return React.createElement("div", { className: "whToolRow", key: t.name },
 										React.createElement("div", { className: "whToolTitle" },

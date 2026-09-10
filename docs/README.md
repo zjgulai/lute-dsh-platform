@@ -12,9 +12,19 @@
 
 | 文档 | 说明 |
 | --- | --- |
-| [architecture.md](architecture.md) | 平台架构与维护/生效语义 |
+| [architecture.md](architecture.md) | 平台架构与维护/生效语义（含万物互联与出海技能当前产品形态，2026-09-09 对齐） |
 | [release-process.md](release-process.md) | 版本发布 SOP |
 | [adr/](adr/) | 架构决策记录（ADR-NNNN，模板与索引见目录内 README） |
+
+## 子产品文档入口
+
+| 文档 | 说明 |
+| --- | --- |
+| [../dsh-wanzh-hulian/docs/README.md](../dsh-wanzh-hulian/docs/README.md) | 万物互联产品形态总览（四板块/4 MCP/认证机制/技能同步） |
+| [../dsh-wanzh-hulian/docs/mcp-connections-2026-09-08.md](../dsh-wanzh-hulian/docs/mcp-connections-2026-09-08.md) | **最新**：业务化清单 / Shopify 客户端凭据 / Apify 接入（决策+验收+待办） |
+| [../dsh-overseas-skills/docs/maintenance-sop.md](../dsh-overseas-skills/docs/maintenance-sop.md) | 出海技能维护 SOP（脱手手册） |
+| [../dsh-overseas-skills/docs/recent-changes-2026-09-08.md](../dsh-overseas-skills/docs/recent-changes-2026-09-08.md) | 出海近期变更与坑位（分类 v3/硬链接/图标防抹） |
+| [../dsh-overseas-skills/docs/skill-taxonomy-v2.md](../dsh-overseas-skills/docs/skill-taxonomy-v2.md) | 技能分类总表（v3 终审稿：8 大场景/28 细分/222 条） |
 
 ## 计划与报告
 
