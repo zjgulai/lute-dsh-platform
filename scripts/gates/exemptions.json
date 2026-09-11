@@ -1,10 +1,10 @@
 [
   {
     "package": "packages/capabilities/dsh-deepresearch-local",
-    "reason": "typecheck 已归零；test 46/48 通过（此前 21/48）。剩 2 个真实 Cordis 组合用例失败：项目进入 failed 态，limitations 为「Runner failed: Cannot read properties of undefined (reading id)」，抛出点在 src/index.ts:290 launch() 捕获、异步链源于 runPlanning → spawnRole",
+    "reason": "typecheck 0 错；test 46/48。剩 2 个组合用例：项目进入 failed 态，limitations 为「Runner failed: Cannot read properties of undefined (reading id)」，抛出点 src/index.ts:290 launch() catch，异步链 runPlanning → spawnRole（第 731 行 agentPresets.mount(agentCtx, standard)）",
     "owner": "lute",
     "deadline": "2026-10-31",
-    "todo": "下钻 spawnRole 之后对 handle 的深层使用（已排除测试 stub 的 create 返回值、handle.agent.* 用法、agentDefaultModel.currentSelection 形状）"
+    "todo": "根因已定位到测试桩：dsh-agent-presets 的 mount() 第 1500 行先调 scopeOf(agentCtx)，第 1501/906 行对未建立 scope 的上下文直接抛错，且第 1323/1327/1732 行读取 agent.id 与 session.id；而测试桩的 agentCtx 只提供 tools/systemPrompt/on（tests/deepresearch.spec.ts:207-213）。修法：用 createScope(@deepseek-ai/dsh-scope) 构造带 scope 的上下文并补 agent/session，或让该用例改用真实 agent-presets 组合"
   },
   {
     "package": "packages/capabilities/dsh-browser-local",
