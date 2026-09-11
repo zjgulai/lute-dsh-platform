@@ -5,7 +5,12 @@ import type { AgentHandle } from '@deepseek-ai/dsh-agent'
 type SessionLike = {
   readonly id: { toString?(): string } | string
   deriveMessages(): ReadonlyArray<{ role?: string; content?: unknown }>
-  readonly events: ReadonlyArray<{ type: string; data?: unknown }>
+  /**
+   * 运行时实例提供 events（dsh-session 实现里有 `this.events`，本文件的草稿推送
+   * 依赖它），但该包的**公开声明未暴露**此成员——属 ADR-0017 记录过的「上游类型
+   * 完整性缺口」同型。故声明为可选并在读取处兜底；上游补齐后可改回必需。
+   */
+  readonly events?: ReadonlyArray<{ type: string; data?: unknown }>
 }
 
 /** Flatten text out of a message content payload. */
@@ -34,7 +39,8 @@ export function lastAssistantText(handle: AgentHandle): string {
 
 function inFlightAssistantText(events: SessionLike['events']): string {
   let parts: string[] = []
-  for (const event of events) {
+  // events 在声明里是可选的（见 SessionLike 注释）：缺失即无在途分片。
+  for (const event of events ?? []) {
     if (event.type === 'step/start') parts = []
     if (event.type === 'assistant/chunk') {
       const chunk = (event.data as { chunk?: { type?: string; text?: string } } | undefined)?.chunk

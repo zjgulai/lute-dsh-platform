@@ -26,7 +26,8 @@ export function lastAssistantText(handle) {
 }
 function inFlightAssistantText(events) {
     let parts = [];
-    for (const event of events) {
+    // events 在声明里是可选的（见 SessionLike 注释）：缺失即无在途分片。
+    for (const event of events ?? []) {
         if (event.type === 'step/start')
             parts = [];
         if (event.type === 'assistant/chunk') {

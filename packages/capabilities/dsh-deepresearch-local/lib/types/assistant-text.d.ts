@@ -8,7 +8,12 @@ type SessionLike = {
         role?: string;
         content?: unknown;
     }>;
-    readonly events: ReadonlyArray<{
+    /**
+     * 运行时实例提供 events（dsh-session 实现里有 `this.events`，本文件的草稿推送
+     * 依赖它），但该包的**公开声明未暴露**此成员——属 ADR-0017 记录过的「上游类型
+     * 完整性缺口」同型。故声明为可选并在读取处兜底；上游补齐后可改回必需。
+     */
+    readonly events?: ReadonlyArray<{
         type: string;
         data?: unknown;
     }>;
