@@ -173,6 +173,37 @@ $ loopx status
 - `agent_channel.resolution_trace.summary` 报 `source=agent_lane drift=true`，但同一份收据的
   `agent_lane_next_action` 又给出了确切条目——两处口径不一致，未追究。
 
+### `loopx check` 的 29 条 findings：逐条定性（全部不可行动）
+
+`loopx check --scan-root <repo>` 返回 `ok=false`、`errors=29 / warnings=0 / checks=6`（退出码 1），
+`goal_errors` 为空、**29 条全在 `global_errors`**，`code` 只有两种。逐条定性后**没有一条落在可写的受管范围**：
+
+| 条数 | 位置 | 性质 | 可否行动 |
+| --- | --- | --- | --- |
+| 12 | `vendor/`（+2 条 `local_private_path`） | pin 住的只读上游参照系 `a66e470` | ❌ ADR-0008：参照系只读 |
+| 6 | `.dsh-types/` | 生成物（类型输出，非手改目标） | ❌ 重生成即覆盖 |
+| 6 | `packaging/` | 构建暂存快照 | ❌ 暂存产物 |
+| 3 | `packages/` | 环境变量间接引用示例（`` !!js '`Bearer ${process.env.MCP_TOKEN}`' ``） | ❌ 非字面量秘密 |
+| 2 | `vendor/…/docs/postmortem/0003-*.md:17`（`local_private_path`） | 上游文档记录的**他人**机器路径（`/Users/tn.shen/…`） | ❌ 上游内容且不含本机信息 |
+
+两条独立反向核验支持「误报」判定：受管 `packages/` 下**零**高熵凭据模式
+（`sk-` / `ghp_` / `AKIA` / `xox*`）；被 `check` 命中的 29 个文件里**没有**「字段名 + ≥24 字符字面量」形态。
+`check` 自身也报告 `credential references downgraded: 56 non-literal hits`。
+
+### Driver 驱动回合暴露的四处 LoopX 契约落差（均未修，附复现）
+
+自动续跑一共跑了两个 turn，每一步都撞在控制面与文档不一致的地方。全部为实测，附错误码与复现要点：
+
+| # | 现象 | 错误码 / 证据 | 影响 |
+| --- | --- | --- | --- |
+| 1 | 心跳正文要求执行 `interaction_contract.cli_channel.settlement_plan.ordered_steps`，但收据里 `settlement_plan` **不存在**（全文 0 次），`next_cli_actions` 为空、两个 spend 闸门皆 `false` | 全文搜 `settlement_plan` / `ordered_steps` 均 0 命中 | 照文执行无从下手；实际有序步骤要**再跑一次** `quota should-run --todo-id … --material-change` 才产出 |
+| 2 | 产出的 ordered steps 里 `todo_id` 指向**下一条**待办而非已结算那条 | `settlement binding does not match the original quota guard: receipt todo=todo_f92fed2643a6 … requested todo=todo_fa501099a20c` | 逐字照抄 `next_cli_actions` 必然失败；换成 guard 收据身份后两步均 `appended=true` |
+| 3 | 同一 turn 内二次 `quota should-run` 无法提交收据 | `error_code=heartbeat_receipt_identity_conflict`、`state=blocked_health`、`heartbeat_receipt.status=write_failed`、`reason=…settlement identity conflicts with the current autonomous replan obligation`、退出码 1 | 与 `repair-patterns.md` 的 `scheduler_followup_turn_projection_gap` 一致（「Todo-less replan Turn 一旦 durable 结算，应由 fresh Turn 接管」）——**换新 turn 身份即 committed、退出码 0**，故属 turn 作用域而非全局死锁 |
+| 4 | `completed_advancement_without_successor` 义务：三条 todo 全部 `--no-follow-up` 结清后，**新 turn 仍要求 `autonomous_replan_required`** | `trigger_count=5`、`replan_obligation.obligation_id=replan-fbc72c7f13570993`、`must_attempt_work=true` | 无真实可执行后继时该义务不会因 settle 而收敛；契约本身写着「otherwise record an accepted typed semantic or coverage-backed terminal outcome」，但 CLI 未给出对应命令 |
+
+**这四条都不该由本仓库修**（LoopX 是独立开源项目，且插件托管面 0.5.4 落后于 PATH 上 1.0.3）。
+登记在此是为了让下一次遇到同样现象的人能立刻对上号，而不是重新排查一遍。
+
 **仍未取证的一项**：GoalBar 是否在会话底部渲染出 `Goal magpie-horch-goal` + 进度。需要浏览器侧目视。
 
 ## 5. 决策记录：补写被引用的设计文档（2026-09-11 第三轮）
