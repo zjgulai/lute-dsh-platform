@@ -17,6 +17,12 @@ export function findUser(config, name) {
   return config.users.find(u => u.name === name) || null;
 }
 
+/**
+ * 创建一个用户并加入配置。
+ * @param {any} config 运行配置
+ * @param {{ name: string, role?: string, password?: string }} input 新用户信息
+ * @returns {{ user: any, initialPassword: string }} 新用户与其初始密码
+ */
 export function createUser(config, { name, role = "member", password = generatePassword() }) {
   if (findUser(config, name)) throw new Error(`用户已存在：${name}`);
   const { salt, hash } = hashPassword(password);

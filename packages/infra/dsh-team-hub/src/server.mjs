@@ -61,8 +61,25 @@ function changePasswordPage(error = "") {
 <body><form method="post" action="/change-password"><h1>首次登录，请修改密码</h1><input name="current" type="password" placeholder="当前密码" required><input name="next" type="password" placeholder="新密码（至少 8 位）" required>${error ? `<p class="error">${error}</p>` : ""}<button>保存并继续</button></form></body></html>`;
 }
 
+/**
+ * 从 catch/未知值中取出可读消息。
+ * @param {unknown} reason 捕获到的值
+ * @returns {string} 消息文本
+ */
+function errorText(reason) {
+  return reason instanceof Error ? reason.message : String(reason);
+}
+
+/**
+ * @param {any} config 运行配置
+ * @param {import('node:http').IncomingMessage} req 请求
+ * @param {import('node:http').ServerResponse} res 响应
+ * @param {{ bodyOverride?: any, injectShim?: boolean }} [options] 代理选项
+ * @returns {Promise<void>}
+ */
 async function proxyRequest(config, req, res, { bodyOverride, injectShim = false } = {}) {
   const upstream = new URL(config.upstream);
+  /** @type {Record<string, any>} */
   const headers = {};
   for (const [key, value] of Object.entries(req.headers)) if (!HOP_BY_HOP.has(key)) headers[key] = value;
   headers.host = upstream.host;
@@ -70,14 +87,14 @@ async function proxyRequest(config, req, res, { bodyOverride, injectShim = false
   // 上游只接受自己的源——网关已做认证，这里把 Origin/Referer 统一改写成上游源。
   headers.origin = upstream.origin;
   if (typeof headers.referer === "string") {
-    const reqOrigin = new URL(req.url, "http://local").origin;
+    const reqOrigin = new URL(req.url ?? "/", "http://local").origin;
     headers.referer = headers.referer.replace(/^https?:\/\/[^/]+/, upstream.origin);
   }
-  const body = bodyOverride !== undefined ? bodyOverride : ["GET", "HEAD"].includes(req.method) ? undefined : await collect(req);
+  const body = bodyOverride !== undefined ? bodyOverride : ["GET", "HEAD"].includes(req.method ?? "") ? undefined : await collect(req);
   // 网关注入的缓存破坏参数（thub）只对浏览器有意义，转发上游前剥掉。
   // 注意：不能用 URL/URLSearchParams——combo 路径里的 `??` 会被重编码为 %3F，
   // 上游路由不认（实测 404）。纯字符串剥离。
-  const targetUrl = config.upstream + req.url.replace(new RegExp(`[&?]${CACHE_BUST_PARAM}=[^&]*`), "");
+  const targetUrl = config.upstream + (req.url ?? "/").replace(new RegExp(`[&?]${CACHE_BUST_PARAM}=[^&]*`), "");
   let response = await fetch(targetUrl, {
     method: req.method,
     headers: withBridge(headers, config),
@@ -94,6 +111,7 @@ async function proxyRequest(config, req, res, { bodyOverride, injectShim = false
       redirect: "manual"
     });
   }
+  /** @type {Record<string, any>} */
   const outHeaders = {};
   for (const [key, value] of response.headers.entries()) if (!HOP_BY_HOP.has(key)) outHeaders[key] = value;
   let out = Buffer.from(await response.arrayBuffer());
@@ -136,7 +154,7 @@ async function refreshOwnership(context) {
     }
     return true;
   } catch (error) {
-    context.audit.write("system.ownership-refresh-failed", { error: error.message });
+    context.audit.write("system.ownership-refresh-failed", { error: errorText(error) });
     return false;
   }
 }
@@ -157,7 +175,7 @@ async function ensureMemberWorkspaces(context) {
       }
       context.audit.write("workspace.created", { user: user.name });
     } catch (error) {
-      context.audit.write("workspace.create-failed", { user: user.name, error: error.message });
+      context.audit.write("workspace.create-failed", { user: user.name, error: errorText(error) });
     }
   }
 }
@@ -179,6 +197,7 @@ async function handleApiPost(context, user, req, res, method) {
     headers: withBridge({ "content-type": "application/json", host: upstream.host }, context.config),
     body: JSON.stringify({ ...message, payload: { args: guard.args } })
   });
+  /** @type {any} */
   const body = await response.json();
   if (body.result?.ok) body.result.value = filterMemberResponse({ ownership: context.ownership, user, method, value: body.result.value });
   context.audit.write("policy.allowed", { user: user.name, method });
@@ -238,12 +257,12 @@ export async function startServer() {
   process.on("uncaughtException", crashGuard("uncaughtException"));
   process.on("unhandledRejection", crashGuard("unhandledRejection"));
   let configMtime = fs.statSync(configFile).mtimeMs;
+  /** @type {{ home: string, config: any, ownership: any, audit: any, adminApi?: any }} */
   const context = {
     home,
     config,
     ownership: createOwnership(),
-    audit: new AuditLog(home),
-    adminApi: null
+    audit: new AuditLog(home)
   };
   // CLI（user add/disable 等）直接改 config.json；运行中的网关需要在下次请求时感知。
   let ensuring = false;
@@ -281,7 +300,7 @@ export async function startServer() {
       context.audit.write("system.settings-patch-skipped", { reason: context.config.enableSettingsPatch === true ? "dsh root not found" : "disabled (Desktop safe mode)" });
     }
   } catch (error) {
-    context.audit.write("system.settings-patch-error", { error: error.message });
+    context.audit.write("system.settings-patch-error", { error: errorText(error) });
   }
 
   // 启动时上游可能还没就绪（比如同时重启）：后台重试直到同步成功；
@@ -306,7 +325,7 @@ export async function startServer() {
   const server = http.createServer(async (req, res) => {
     try {
       reloadConfigIfChanged();
-      const url = new URL(req.url, "http://local");
+      const url = new URL(req.url ?? "/", "http://local");
       const cookies = parseCookies(req);
       const session = resolveSession(home, cookies[COOKIE]);
       const user = session && context.config.users.find(u => u.name === session.username && (u.status || "active") === "active");
@@ -331,7 +350,7 @@ export async function startServer() {
       }
       if (!user) {
         if (url.pathname.startsWith("/api/")) return rpcError(res, null, "unauthorized", "not logged in", 401);
-        return send(res, 302, "", { location: "/login?next=" + encodeURIComponent(req.url) });
+        return send(res, 302, "", { location: "/login?next=" + encodeURIComponent(req.url ?? "/") });
       }
       if (url.pathname === "/__teamhub/whoami") {
         return send(res, 200, { name: user.name, displayName: user.displayName || user.name, role: user.role });
@@ -345,7 +364,7 @@ export async function startServer() {
           saveConfig(home, context.config);
           context.audit.write("auth.password-changed", { user: user.name });
           return send(res, 302, "", { location: "/" });
-        } catch (error) { return send(res, 400, changePasswordPage(error.message), { "content-type": "text/html; charset=utf-8" }); }
+        } catch (error) { return send(res, 400, changePasswordPage(errorText(error)), { "content-type": "text/html; charset=utf-8" }); }
       }
       if (url.pathname === "/admin" || url.pathname.startsWith("/admin/")) {
         if (user.role !== "admin") return send(res, 403, "admin only");
@@ -365,8 +384,8 @@ export async function startServer() {
       if (url.pathname.startsWith("/api/") && req.method === "POST") return handleApiPost(context, user, req, res, url.pathname.slice("/api/".length));
       return proxyRequest(context.config, req, res, { injectShim: url.pathname === "/" || url.pathname === "/index.html" });
     } catch (error) {
-      context.audit.write("system.request-error", { error: error.message });
-      send(res, 500, { error: error.message });
+      context.audit.write("system.request-error", { error: errorText(error) });
+      send(res, 500, { error: errorText(error) });
     }
   });
 
@@ -377,7 +396,7 @@ export async function startServer() {
     const session = resolveSession(home, cookies[COOKIE]);
     const user = session && context.config.users.find(u => u.name === session.username && (u.status || "active") === "active");
     if (!user) { socket.destroy(); return; }
-    const url = new URL(req.url, "http://local");
+    const url = new URL(req.url ?? "/", "http://local");
     // Desktop 的事件流端点是 /api/remote.mux（Typert Remote 流复用），
     // 与 standalone dsh web 的 /api/events.mux|host 不同。admin 直通转发原始帧；
     // member 需按流过滤（阶段 2），当前拒绝。
@@ -477,7 +496,7 @@ export async function startServer() {
     });
   });
 
-  await new Promise(resolve => server.listen(config.listenPort, config.listenHost, resolve));
+  await new Promise((resolve) => { server.listen(config.listenPort, config.listenHost, () => { resolve(undefined) }) });
   console.log(`dsh-team-hub listening on http://${config.listenHost}:${config.listenPort}`);
   console.log(`Admin console: http://${config.listenHost}:${config.listenPort}/admin`);
 }

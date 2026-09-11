@@ -107,6 +107,7 @@ export function ownedBy(ownership, user, kind, id) {
 
 /** 从 Desktop args 信封提取候选归属字段（顶层字段 + 嵌套 request/address/args）。 */
 function candidateIds(args) {
+  /** @type {{ sessionIds: string[], workspaceIds: string[], cwd: string | null }} */
   const ids = { sessionIds: [], workspaceIds: [], cwd: null };
   const stack = [args];
   for (let depth = 0; depth < 4 && stack.length > 0; depth += 1) {

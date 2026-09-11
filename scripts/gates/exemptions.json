@@ -54,12 +54,5 @@
     "owner": "lute",
     "deadline": "2026-10-31",
     "todo": "补 tsconfig 与 typecheck 脚本；补至少一项契约级测试并接入 test 脚本"
-  },
-  {
-    "package": "packages/infra/dsh-team-hub",
-    "reason": "缺少 typecheck 脚本（三期补齐清单）",
-    "owner": "lute",
-    "deadline": "2026-10-31",
-    "todo": "补 tsconfig 与 typecheck 脚本"
   }
 ]

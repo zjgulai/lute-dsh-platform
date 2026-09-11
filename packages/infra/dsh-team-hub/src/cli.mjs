@@ -32,11 +32,22 @@ function printHelp() {
 `);
 }
 
+/**
+ * 读取命令行选项值。
+ * @param {string[]} args 参数列表
+ * @param {string} name 选项名
+ * @param {any} [fallback] 缺省值（可为任意形状，调用方各自收窄）
+ * @returns {any} 选项值或缺省值
+ */
 function option(args, name, fallback = null) {
   const index = args.indexOf(name);
   return index >= 0 ? args[index + 1] : fallback;
 }
 
+/**
+ * @param {string[]} args 参数列表
+ * @returns {Promise<void>}
+ */
 async function init(args) {
   const home = defaultHome();
   if (fs.existsSync(path.join(home, "config.json"))) throw new Error("配置已存在，init 不会覆盖");

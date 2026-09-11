@@ -9,6 +9,11 @@ export function defaultHome(env = process.env) {
   return env.DSH_TEAM_HUB_HOME || path.join(os.homedir(), ".dsh-team-hub");
 }
 
+/**
+ * 默认运行配置。
+ * @param {string} [home] 网关数据目录
+ * @returns {{ listenHost: string, listenPort: number, upstream: string, dshRoot: string | null, workspaceRoot: string, sharedRoot: string, users: any[] }} 配置对象
+ */
 export function defaultConfig(home = defaultHome()) {
   return {
     listenHost: "0.0.0.0",

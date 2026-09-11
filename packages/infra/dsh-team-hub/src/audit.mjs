@@ -31,6 +31,10 @@ export class AuditLog {
     } catch {}
   }
 
+  /**
+   * @param {{ user?: string, type?: string, limit?: number }} [filter] 过滤条件
+   * @returns {any[]} 命中的审计记录
+   */
   query({ user, type, limit = 200 } = {}) {
     if (!fs.existsSync(this.file)) return [];
     const lines = fs.readFileSync(this.file, "utf8").trim().split("\n").filter(Boolean);
