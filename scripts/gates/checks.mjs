@@ -266,3 +266,51 @@ export function checkChangedPackages({ changed, packages, exempted }) {
   }
   return { passed: violations.length === 0, violations }
 }
+
+/** 命令未找到的退出码（脚本存在但执行体缺失时 shell 返回）。 */
+const EXIT_COMMAND_NOT_FOUND = 127
+
+/**
+ * 校验包声明的脚本能真实执行（ADR-0014）。
+ * 动机（实测）：dsh-theme-local 与 dsh-loopx-plugin 的 typecheck 脚本存在，
+ * 但缺 typescript 依赖，执行即 127；脚本"存在"不等于"可用"，只看脚本键会漏掉这类空转。
+ * @param {{packages: Array<{relPath: string, scripts: Record<string, string>, results: Record<string, {code: number, output: string}>}>}} input
+ *   逐包的脚本定义与实际执行结果（由调用方负责运行）
+ * @returns {{passed: boolean, violations: string[]}}
+ */
+export function checkScriptsRunnable({ packages }) {
+  const violations = []
+  for (const { relPath, scripts, results } of packages) {
+    for (const key of ['typecheck', 'test']) {
+      if (!scripts[key]) continue
+      const result = results[key]
+      if (!result) continue
+      if (result.code === EXIT_COMMAND_NOT_FOUND) {
+        violations.push(`${relPath}: ${key} 脚本无法执行（退出码 127）——脚本存在但执行体不存在，属空转脚本（ADR-0014）`)
+      } else if (result.code !== 0) {
+        const tail = (result.output ?? '').split('\n').filter(Boolean).slice(-3).join(' ⏎ ')
+        violations.push(`${relPath}: ${key} 脚本运行失败（退出码 ${result.code}）${tail ? ` — ${tail}` : ''}`)
+      }
+    }
+  }
+  return { passed: violations.length === 0, violations }
+}
+
+/**
+ * 校验包内依赖符号链接未断链（ADR-0016 的目录可迁移性）。
+ * 动机（实测）：dsh-browser-local 的 @deepseek-ai/* 曾是指向应用包目录的相对符号链接，
+ * 包目录从 1 层移到 3 层后相对路径失效，11 个测试套件全部无法收集——而门禁此前看不到。
+ * @param {{links: Array<{from: string, target: string, exists: boolean}>}} input 待校验的符号链接
+ * @returns {{passed: boolean, violations: string[]}}
+ */
+export function checkDependencyLinks({ links }) {
+  return {
+    passed: links.every((link) => link.exists),
+    violations: links
+      .filter((link) => !link.exists)
+      .map(
+        (link) =>
+          `${link.from}: 依赖符号链接断链（指向 ${link.target}）——包目录层级变化会让相对链接失效（ADR-0016）`,
+      ),
+  }
+}

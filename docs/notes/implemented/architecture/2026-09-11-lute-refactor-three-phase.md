@@ -22,7 +22,7 @@ Status: implemented
 | 二期（结构收敛） | 能力组归位、生成式目录墙、门禁接 git 钩子、引入 lint | 5 个能力组与组 README、`scripts/gen-catalog.mjs` 与生成物、`profile-manifest` |
 | 三期（契约与清账） | typecheck/test 逐包补齐、豁免清空、历史 ADR 归档、资产分级处置 | 豁免文件为空且门禁拒绝非空、历史 6 篇 ADR 归档、`_attic/` 与大文件移出工作树 |
 
-十项决策各自记录在 ADR-0007 ~ ADR-0016 中：
+十一项决策各自记录在 ADR-0007 ~ ADR-0017 中：
 1. 三期推进（ADR-0007）
 2. harness 子模块初始化但仅作只读参照系（ADR-0008）
 3. 主脊柱中文单语，仅客户安装使用一条链出独立用户向文档（ADR-0009）
@@ -33,6 +33,7 @@ Status: implemented
 8. 门禁全量硬门槛 + 只减不增的临时豁免（ADR-0014）
 9. ADR 与本地 Notes 双轨分职并强制留痕（ADR-0015）
 10. 嵌套仓库治理：受管目录不得含未声明的独立仓库（ADR-0016）
+11. 类型检查指向内建运行时的类型而非应用内打包产物（ADR-0017）
 
 门禁的公开契约是 `scripts/gate.mjs` 的退出码：`--mode quick` 用于提交前，`--mode full` 用于推送前。门禁的校验项与阻塞级别见 [docs/architecture.md](../../../architecture.md) 第 0 节。
 
@@ -63,3 +64,9 @@ Status: implemented
 **代价。** 三期总周期拉长到 3 周量级，期间存在「骨架已建、存量未补齐」的过渡态。豁免条目到期未补齐会阻塞整个仓库，这是刻意设计——但也会在补齐期造成摩擦。ADR 与 Note 需要维护互链一致性。二期归组会改变 `file:` 依赖路径与硬链接 inode，迁移脚本必须走 tmp+mv 原子替换，不能用 `cat >` 直接覆盖。
 
 **验证。** 一期验收以真实命令输出为准：门禁对每个契约级校验项都能在无效输入下返回非零（负向用例），而不仅仅是在正常情况下返回零。三期终点验证豁免文件清空后门禁对非空文件返回非零。规格见 `.scratch/lute-refactor/spec.md`。
+
+## Verification
+
+三期的门禁 `scripts-runnable` 在 `full` 模式真实运行每个包的 `typecheck` 与 `test`，首次运行即暴露 7 处此前不可见的问题：2 个空转脚本（退出码 127）、1 个带真实类型错误的 typecheck（退出码 2）、4 个 test 失败。其中 `dsh-browser-local` 的 11 个套件全部收集失败被定位为相对符号链接因目录层级变化失效，修复后 9 个套件 111 项测试恢复通过。
+
+`dsh-skill-subset` 是首个完成闭环的包：新增 7 项契约测试与 JSDoc 类型契约，`tsc --noEmit` 退出码 0、`node --test` 7/7 通过，豁免条目已删除。

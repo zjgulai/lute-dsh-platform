@@ -8,7 +8,7 @@
  * 用法：node scripts/gate.mjs [--mode quick|full] [--list]
  *   quick（默认）提交前使用；full 推送前使用（含变更包 typecheck/test，二期接入 git 钩子后启用）。
  */
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
+import { existsSync, lstatSync, readFileSync, readlinkSync, readdirSync, statSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -17,11 +17,13 @@ import {
   checkAdrNoteLinks,
   checkCatalogFresh,
   checkChangedPackages,
+  checkDependencyLinks,
   checkExemptions,
   checkGitignoreWhitelist,
   checkNestedRepositories,
   checkPackageIdentity,
   checkPinConsistency,
+  checkScriptsRunnable,
   checkTrackedIgnored,
 } from './gates/checks.mjs'
 import { checkProfileMetadata } from './gates/sync-profile.mjs'
@@ -99,6 +101,13 @@ const CHECKS = [
     },
   },
   {
+    name: 'dependency-links',
+    remediation: '修复断链：重新安装该包依赖，或把链接目标改为绝对路径（ADR-0016）',
+    run() {
+      return checkDependencyLinks({ links: collectDependencyLinks() })
+    },
+  },
+  {
     name: 'nested-repos',
     remediation: '把嵌套仓库纳入 .gitmodules 声明，或折叠为普通目录（ADR-0016）',
     run() {
@@ -141,6 +150,16 @@ const CHECKS = [
     },
   },
   {
+    name: 'scripts-runnable',
+    modes: ['full'],
+    remediation: '补齐脚本依赖（如 devDependencies 加 typescript）或修复脚本本体，使其退出码为 0（ADR-0014）',
+    run() {
+      const exempted = new Set(JSON.parse(readIfExists(EXEMPTIONS_PATH) || '[]').map((row) => row.package))
+      const packages = runPackageScripts().filter((entry) => !exempted.has(entry.relPath))
+      return checkScriptsRunnable({ packages })
+    },
+  },
+  {
     name: 'changed-packages',
     remediation: '为本次改动的包补 typecheck 与 test 脚本，或按 ADR-0014 登记豁免（只减不增）',
     run() {
@@ -173,6 +192,76 @@ const NOTE_PATH = 'docs/notes/implemented/architecture/2026-09-11-lute-refactor-
 
 /** 豁免登记文件（仓库根相对路径）。 */
 const EXEMPTIONS_PATH = 'scripts/gates/exemptions.json'
+
+/**
+ * 收集受管包 node_modules 顶层作用域内的符号链接及其可达性。
+ * @returns {Array<{from: string, target: string, exists: boolean}>}
+ */
+function collectDependencyLinks() {
+  const links = []
+  for (const entry of collectManifests()) {
+    if (entry.dir === '.') continue
+    const modulesDir = join(repoRoot, entry.dir, 'node_modules')
+    if (!existsSync(modulesDir)) continue
+    for (const scope of readdirSync(modulesDir)) {
+      if (!scope.startsWith('@')) continue
+      const scopeDir = join(modulesDir, scope)
+      if (!statSync(scopeDir).isDirectory()) continue
+      for (const pkg of readdirSync(scopeDir)) {
+        const linkPath = join(scopeDir, pkg)
+        if (!lstatSync(linkPath).isSymbolicLink()) continue
+        const target = readlinkSync(linkPath)
+        links.push({
+          from: `${entry.dir}/node_modules/${scope}/${pkg}`,
+          target,
+          exists: existsSync(linkPath),
+        })
+      }
+    }
+  }
+  return links
+}
+
+/**
+ * 逐个运行受管包声明的 typecheck 与 test 脚本，收集真实退出码。
+ * 只用于 full 模式：逐包执行耗时较长，且需要各包 node_modules 已安装。
+ * @returns {Array<{relPath: string, scripts: Record<string, string>, results: Record<string, {code: number, output: string}>}>}
+ */
+function runPackageScripts() {
+  const timeoutMs = 180000
+  return collectManifests()
+    .filter((entry) => entry.dir !== '.')
+    .map((entry) => {
+      const scripts = entry.manifest.scripts ?? {}
+      const results = {}
+      for (const key of ['typecheck', 'test']) {
+        if (!scripts[key]) continue
+        results[key] = runScript(join(repoRoot, entry.dir), scripts[key], timeoutMs)
+      }
+      return { relPath: entry.dir, scripts, results }
+    })
+    .filter((entry) => Object.keys(entry.results).length > 0)
+}
+
+/**
+ * 运行一个包脚本并返回退出码与输出尾部。
+ * @param {string} cwd 包目录
+ * @param {string} script 脚本命令
+ * @param {number} timeoutMs 超时毫秒
+ * @returns {{code: number, output: string}} 超时按 124 记（与 coreutils timeout 一致）
+ */
+function runScript(cwd, script, timeoutMs) {
+  const binDir = join(cwd, 'node_modules', '.bin')
+  const env = { ...process.env, PATH: `${binDir}:${process.env.PATH ?? ''}` }
+  try {
+    const output = execFileSync('sh', ['-c', script], { cwd, env, encoding: 'utf8', timeout: timeoutMs, stdio: ['ignore', 'pipe', 'pipe'] })
+    return { code: 0, output: String(output).slice(-500) }
+  } catch (error) {
+    if (error.killed) return { code: 124, output: `超时 ${timeoutMs}ms` }
+    const output = `${error.stdout ?? ''}${error.stderr ?? ''}`.slice(-500)
+    return { code: typeof error.status === 'number' ? error.status : 1, output }
+  }
+}
 
 /**
  * 找出本次改动涉及的受管包（未提交改动 ∪ 与 main 的差异）。
@@ -300,8 +389,9 @@ function main() {
     return
   }
 
+  const active = CHECKS.filter((check) => !check.modes || check.modes.includes(mode))
   let failed = 0
-  for (const check of CHECKS) {
+  for (const check of active) {
     const result = check.run()
     if (result.passed) {
       process.stdout.write(`ok   contract ${check.name}\n`)
@@ -313,11 +403,11 @@ function main() {
     process.stdout.write(`     → ${check.remediation}\n`)
   }
 
-  const passed = CHECKS.length - failed
+  const passed = active.length - failed
   process.stdout.write(
     failed === 0
-      ? `ok ${passed}/${CHECKS.length} 项通过（mode=${mode}）\n`
-      : `fail ${passed}/${CHECKS.length} 项通过（mode=${mode}）\n`,
+      ? `ok ${passed}/${active.length} 项通过（mode=${mode}）\n`
+      : `fail ${passed}/${active.length} 项通过（mode=${mode}）\n`,
   )
   process.exitCode = failed === 0 ? 0 : 1
 }

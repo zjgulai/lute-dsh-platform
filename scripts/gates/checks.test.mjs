@@ -7,10 +7,12 @@ import {
   checkAdrNoteLinks,
   checkGitignoreWhitelist,
   checkChangedPackages,
+  checkDependencyLinks,
   checkExemptions,
   checkNestedRepositories,
   checkPackageIdentity,
   checkPinConsistency,
+  checkScriptsRunnable,
   checkTrackedIgnored,
 } from './checks.mjs'
 
@@ -337,4 +339,59 @@ test('豁免冻结校验：基线已存在时仍禁止新增', () => {
 
   assert.equal(result.passed, false)
   assert.match(result.violations[0], /新增豁免条目被拒绝/)
+})
+
+test('脚本可运行校验：退出码 127 视为空转（脚本存在但执行体不存在）', () => {
+  const result = checkScriptsRunnable({
+    packages: [
+      { relPath: 'packages/platform/dsh-theme', scripts: { typecheck: 'tsc --noEmit' }, results: { typecheck: { code: 127, output: 'sh: tsc: command not found' } } },
+    ],
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, [
+    'packages/platform/dsh-theme: typecheck 脚本无法执行（退出码 127）——脚本存在但执行体不存在，属空转脚本（ADR-0014）',
+  ])
+})
+
+test('脚本可运行校验：退出码 0 通过，非 0 非 127 报告为运行失败', () => {
+  const result = checkScriptsRunnable({
+    packages: [
+      { relPath: 'a', scripts: { typecheck: 'tsc --noEmit' }, results: { typecheck: { code: 0, output: '' } } },
+      { relPath: 'b', scripts: { test: 'node --test' }, results: { test: { code: 1, output: 'boom' } } },
+    ],
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, ['b: test 脚本运行失败（退出码 1） — boom'])
+})
+
+test('脚本可运行校验：无脚本的包不由本项负责（交给 changed-packages 与豁免）', () => {
+  const result = checkScriptsRunnable({ packages: [{ relPath: 'c', scripts: {}, results: {} }] })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('依赖链接校验：指向不存在目标的符号链接必须被拒绝', () => {
+  const result = checkDependencyLinks({
+    links: [
+      { from: 'packages/a/node_modules/@deepseek-ai/dsh-x', target: '/missing/path', exists: false },
+      { from: 'packages/b/node_modules/@deepseek-ai/dsh-y', target: '/ok/path', exists: true },
+    ],
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, [
+    'packages/a/node_modules/@deepseek-ai/dsh-x: 依赖符号链接断链（指向 /missing/path）——包目录层级变化会让相对链接失效（ADR-0016）',
+  ])
+})
+
+test('依赖链接校验：全部链接可达时通过', () => {
+  const result = checkDependencyLinks({
+    links: [{ from: 'packages/b/node_modules/@deepseek-ai/dsh-y', target: '/ok/path', exists: true }],
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
 })

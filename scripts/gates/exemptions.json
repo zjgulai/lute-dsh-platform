@@ -1,5 +1,19 @@
 [
   {
+    "package": "packages/platform/dsh-theme-local",
+    "reason": "typecheck 脚本此前从未运行（无 typescript 依赖，退出码 127）；补装 typescript/@types 后实测 21 个真实类型错误，根因是应用内打包的 @deepseek-ai/* 不含 .d.ts（ADR-0017）",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "从 vendor/dsh-desktop/vendor/dsh-runtime/0.1.2-rc.1 的 tgz 安装 DSH 类型依赖，按 ADR-0017 用 Bundler 解析，逐个修复 21 个错误"
+  },
+  {
+    "package": "packages/capabilities/dsh-browser-local",
+    "reason": "两个测试文件（composition.spec.ts 222 行、e2e/bridge-extension.e2e.spec.ts 628 行）引用 2.0.5/rc.1 已移除且未在 package.json 声明的 @deepseek-ai/dsh-host-apiproxy，导致 2/11 套件收集失败；其余 9 套件 111 测试全绿",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "查清 rc.1 中 createApiProxy 的替代（疑为 api-gateway / host-webserver 组合）并把两个测试文件迁移到新 API，随后删除本条目"
+  },
+  {
     "package": "packages/capabilities/dsh-overseas-skills",
     "reason": "缺少 typecheck 与 test 脚本（三期补齐清单）",
     "owner": "lute",

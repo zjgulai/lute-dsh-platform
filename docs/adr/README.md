@@ -20,8 +20,9 @@
 | ADR-0014 | 门禁全量硬门槛 + 只减不增的临时豁免（N5=A2） | accepted（2026-09-11） | [Note](../notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md) |
 | ADR-0015 | 决策记录双轨分职：ADR 时间线 + 本地 Notes（强制留痕） | accepted（2026-09-11） | [Note](../notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md) |
 | ADR-0016 | 嵌套仓库治理：受管目录不得含未声明的独立仓库 | accepted（2026-09-11） | [Note](../notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md) |
+| ADR-0017 | 包的类型检查必须指向内建运行时的类型，而非应用内打包产物 | accepted（2026-09-11） | [Note](../notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md) |
 
-> ADR-0007 ~ ADR-0016 是「LUTE 二开平台架构重构」的十项决策，共享同一篇决策记录 Note。
+> ADR-0007 ~ ADR-0017 是「LUTE 二开平台架构重构」的十一项决策，共享同一篇决策记录 Note。
 > 各插件历史决策（如 AI全栈 ADR-0001~0007、万物互联 D1-D5）保留在各插件 docs/ 内；历史 6 篇 ADR 的归档在三期进行（ADR-0015）。
 
 ## 双轨分职（ADR-0015）
