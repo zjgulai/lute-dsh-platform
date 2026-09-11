@@ -75,7 +75,6 @@ function normalizeTextResult(result, name) {
     }
     return { text: `${name} returned no text: ${JSON.stringify(result)}` };
 }
-/** The v1 tool set, model-perspective contracts only (no transport vocabulary). */
 function defineTools(call, options) {
     const snapshot = () => defineTool({
         name: 'browser_snapshot',

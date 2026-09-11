@@ -240,6 +240,10 @@ export function buildVendoredDeclarations({ dir, tsc, packages = DECLARATION_BUI
             declaration: true,
             // 上游源码内部用 `.ts` 后缀相对导入，必须改写为 `.js`，否则产物在 Node 下无法加载
             rewriteRelativeImportExtensions: true,
+            // 上游 cordis 用 `const enum`（如 FiberState）：默认会被 tsc 内联擦除，
+            // 产物里没有运行时对象，import 它会报「不导出该名称」（实测测试收集失败）。
+            // preserveConstEnums 保留其运行时对象，使产物与源码导出一致。
+            preserveConstEnums: true,
             outDir: 'lib',
             rootDir: 'src',
             skipLibCheck: true,

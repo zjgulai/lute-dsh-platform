@@ -87,6 +87,8 @@ export function resolveConfig(config) {
 export async function apply(ctx, config) {
     const resolved = resolveConfig(config);
     const tokenRes = await resolveToken(resolved.token);
+    // 契约取本地扩展接口 BridgeTypertGateway（见 src/shims.d.ts）：它在真实模块身份上
+    // 补齐运行时存在但声明缺失/private 的成员，避免跨 exports 路径的身份分裂。
     const gateway = ctx.typertGateway;
     // Workspace grouping wraps the gateway create; session deferral wraps the
     // result so materialization at first prompt still flows through grouping.

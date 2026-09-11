@@ -29,10 +29,10 @@
   },
   {
     "package": "packages/capabilities/dsh-browser-local",
-    "reason": "typecheck 2 错：① tools.ts 的 ToolDefinition 类型身份分裂（同名包两份声明，一处 output 可选一处必需）② index.ts 的 TypertGateway 增强未命中模块身份",
+    "reason": "typecheck 已归零（类型身份分裂根治：ToolDefinition 改用 defineTool 返回类型、TypertGateway 改用本地扩展接口）；test 剩 2 个套件收集失败——composition 与 e2e 需要 cordis 插件装载的完整运行时依赖闭包（safe-buffer 等传递依赖在应用 node_modules 中非顶层，无法直接补齐）",
     "owner": "lute",
     "deadline": "2026-10-31",
-    "todo": "统一包类型身份（让 node_modules 解析路径与显式导入路径同一 canonical module），或在类型供给阶段归一"
+    "todo": "为测试补齐运行时依赖闭包：或从内建运行时 tgz 安装完整依赖树，或在 vitest 配置中为这两个套件声明外部依赖白名单"
   },
   {
     "package": "packages/capabilities/dsh-overseas-skills",

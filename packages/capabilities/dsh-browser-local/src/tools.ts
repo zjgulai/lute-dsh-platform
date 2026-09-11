@@ -13,7 +13,7 @@
  */
 
 import type { Context } from '@deepseek-ai/cordis'
-import { defineTool, type ToolDefinition, type ToolRunContext } from '@deepseek-ai/dsh-tools'
+import { defineTool, type ToolRunContext } from '@deepseek-ai/dsh-tools'
 import type { BridgeServer } from './server.ts'
 
 /** Options resolved from plugin config before tool registration. */
@@ -109,8 +109,15 @@ interface Call {
 }
 
 /** The v1 tool set, model-perspective contracts only (no transport vocabulary). */
-function defineTools(call: Call, options: BrowserToolsOptions): ToolDefinition[] {
-  const snapshot = (): ToolDefinition => defineTool({
+/**
+ * 工具定义类型取自 `defineTool` 的返回类型，而不是另导入一份同名的 `ToolDefinition`：
+ * 后者的 `output` 为可选（旧版契约），与注册器要求的必需 `output` 不符
+ * （实测报「同名却互不兼容」，且 tool name 访问失败）。
+ */
+type DefinedTool = ReturnType<typeof defineTool>
+
+function defineTools(call: Call, options: BrowserToolsOptions): DefinedTool[] {
+  const snapshot = (): DefinedTool => defineTool({
     name: 'browser_snapshot',
     description: `Read the page and accessible iframes as structured text with numbered action targets. Use frame for iframe targets and delta=true for changes only. ${UNTRUSTED_CONTENT_WARNING}`,
     parameters: {
@@ -128,7 +135,7 @@ function defineTools(call: Call, options: BrowserToolsOptions): ToolDefinition[]
     },
   })
 
-  const click = (): ToolDefinition => defineTool({
+  const click = (): DefinedTool => defineTool({
     name: 'browser_click',
     description: 'Click an element from the latest browser_snapshot by index; include frame for an iframe target.',
     parameters: {
@@ -140,7 +147,7 @@ function defineTools(call: Call, options: BrowserToolsOptions): ToolDefinition[]
     execute: (args, exec) => call(exec, 'browser_click', args as Record<string, unknown>),
   })
 
-  const type = (): ToolDefinition => defineTool({
+  const type = (): DefinedTool => defineTool({
     name: 'browser_type',
     description: 'Append text to a field from browser_snapshot, or clear it first with replace=true. Include frame for an iframe target. Sensitive values are never returned.',
     parameters: {
@@ -162,7 +169,7 @@ function defineTools(call: Call, options: BrowserToolsOptions): ToolDefinition[]
     },
   })
 
-  const press = (): ToolDefinition => defineTool({
+  const press = (): DefinedTool => defineTool({
     name: 'browser_press',
     description: 'Send one key press, such as Enter, Tab, Escape, an arrow, Backspace, or Delete.',
     parameters: {
@@ -174,7 +181,7 @@ function defineTools(call: Call, options: BrowserToolsOptions): ToolDefinition[]
     execute: (args, exec) => call(exec, 'browser_press', args as Record<string, unknown>),
   })
 
-  const scroll = (): ToolDefinition => defineTool({
+  const scroll = (): DefinedTool => defineTool({
     name: 'browser_scroll',
     description: 'Scroll up, down, top, or bottom; amount is optional pixels.',
     parameters: {
@@ -194,7 +201,7 @@ function defineTools(call: Call, options: BrowserToolsOptions): ToolDefinition[]
     },
   })
 
-  const navigate = (): ToolDefinition => defineTool({
+  const navigate = (): DefinedTool => defineTool({
     name: 'browser_navigate',
     description: 'Navigate the controlled tab to an HTTP(S) URL while preserving its login state.',
     parameters: {
@@ -217,7 +224,7 @@ function defineTools(call: Call, options: BrowserToolsOptions): ToolDefinition[]
     },
   })
 
-  const simple = (name: 'browser_back' | 'browser_forward' | 'browser_reload', description: string): ToolDefinition => defineTool({
+  const simple = (name: 'browser_back' | 'browser_forward' | 'browser_reload', description: string): DefinedTool => defineTool({
     name,
     description,
     parameters: {},
@@ -226,7 +233,7 @@ function defineTools(call: Call, options: BrowserToolsOptions): ToolDefinition[]
     execute: (_args, exec) => call(exec, name, {}),
   })
 
-  const getText = (): ToolDefinition => defineTool({
+  const getText = (): DefinedTool => defineTool({
     name: 'browser_get_text',
     description: `Read plain text from the page or a selector. ${UNTRUSTED_CONTENT_WARNING}`,
     parameters: {
@@ -244,7 +251,7 @@ function defineTools(call: Call, options: BrowserToolsOptions): ToolDefinition[]
     },
   })
 
-  const wait = (): ToolDefinition => defineTool({
+  const wait = (): DefinedTool => defineTool({
     name: 'browser_wait',
     description: 'Wait for loading and DOM changes to settle, with an optional extra delay.',
     parameters: {

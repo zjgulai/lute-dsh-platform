@@ -17,7 +17,6 @@
  *
  * @module @yuxianglin/dsh-bridge-browser/src/apiproxy-shim
  */
-import type { TypertGatewayService } from '@deepseek-ai/dsh-api-gateway';
 /** rc branded rpc correlation id (runtime is a plain string). */
 export type RpcId = string;
 /** Runtime branded-constructor shim: `RpcId(uuid)` is identity. */
@@ -97,7 +96,7 @@ export interface ApiProxy {
     };
 }
 /** Build the rc-shaped ApiProxy over the alpha Typert Gateway. */
-export declare function makeApiProxy(gateway: TypertGatewayService): ApiProxy;
+export declare function makeApiProxy(gateway: BridgeTypertGateway): ApiProxy;
 /**
  * Fetch-shaped gateway carrier. Extension RPC frames arrive as
  * `POST /api/<method>` with body `{ type, rpcId, method, payload }` and are
@@ -105,7 +104,7 @@ export declare function makeApiProxy(gateway: TypertGatewayService): ApiProxy;
  * workspace wrappers are routed through the wrapped api object so the
  * wrappers keep working; everything else dispatches through the gateway.
  */
-export declare function toFetchHandler(api: ApiProxy, gateway: TypertGatewayService): {
+export declare function toFetchHandler(api: ApiProxy, gateway: BridgeTypertGateway): {
     fetch: (request: Request) => Promise<Response>;
 };
 //# sourceMappingURL=apiproxy-shim.d.ts.map
