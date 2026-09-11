@@ -218,6 +218,14 @@ describe('Deep Research extension', () => {
         return {
           agent: {
             ctx: agentCtx,
+            // Agent.session 是产品侧真实读取的成员（watchDraft 取 session.id /
+            // deriveMessages() / events 以推送草稿）。替身必须提供同形契约，
+            // 否则规划角色一启动就抛 "reading 'id'" 并把整轮打成 failed。
+            session: {
+              id: 'deepresearch-test-session',
+              deriveMessages: () => [],
+              events: [],
+            },
             followup: (message: { content: Array<{ type: string; text?: string }> }) => { prompts.push(message.content.map(block => block.text ?? '').join('')) },
             whenIdle: () => idle,
             cancel: () => { resolveIdle?.() },
@@ -311,6 +319,8 @@ describe('Deep Research extension', () => {
         return {
           agent: {
             ctx: { on: () => () => undefined },
+            // 同上一处：产品侧 watchDraft 读 agent.session，替身必须提供同形契约
+            session: { id: "deepresearch-scout-session", deriveMessages: () => [], events: [] },
             followup: () => undefined,
             whenIdle: async () => {
               const submitPlan = byName.get('deep_research_submit_plan')

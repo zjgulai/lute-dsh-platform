@@ -1,10 +1,10 @@
 [
   {
     "package": "packages/capabilities/dsh-deepresearch-local",
-    "reason": "typecheck 0 错；test 46/48。剩 2 个组合用例：项目进入 failed 态，limitations 为「Runner failed: Cannot read properties of undefined (reading id)」，抛出点 src/index.ts:290 launch() catch，异步链 runPlanning → spawnRole（第 731 行 agentPresets.mount(agentCtx, standard)）",
+    "reason": "test 已修复（46/48 → 48/48，退出码 0）；typecheck 实测 6 错（原 reason 称「0 错」有误，已用 tsc -b --force 复现，非增量假象）。6 错全部是客户端类型来源的版本分裂与增强缺失，不是本包代码缺陷",
     "owner": "lute",
     "deadline": "2026-10-31",
-    "todo": "根因已定位到测试桩：dsh-agent-presets 的 mount() 第 1500 行先调 scopeOf(agentCtx)，第 1501/906 行对未建立 scope 的上下文直接抛错，且第 1323/1327/1732 行读取 agent.id 与 session.id；而测试桩的 agentCtx 只提供 tools/systemPrompt/on（tests/deepresearch.spec.ts:207-213）。修法：用 createScope(@deepseek-ai/dsh-scope) 构造带 scope 的上下文并补 agent/session，或让该用例改用真实 agent-presets 组合"
+    "todo": "typecheck 6 错的根因（本轮已定位到机制层）：本包 src/client 依赖 @deepseek-ai/dsh-client-runtime（局部安装 0.1.1-rc.2），而应用运行时与 .dsh-types 均为 0.1.2-rc.1；且 .dsh-types 里没有 dsh-client-runtime（内建运行时 tgz 不提供它）——client plane 只能落到局部旧版。后果：TypertClientRemote 为空（缺 agentPresets/llm/commands/credentials 等 17 项）、Context.locale 与 Context.remote 的声明合并失败、$on 的事件字面量不受约束。修法候选：(a) 把 dsh-client-runtime 对齐到 0.1.2-rc.1 并让 client plane 的类型增强闭包（各 dsh-client-ui-* 的 TypepertClient 增强）进入解析范围；(b) 按 agent-team-gui 的先例，改为本地扩展接口而非 declare module 增强。工作量属一个独立单元，勿半途提交"
   },
   {
     "package": "packages/capabilities/dsh-browser-local",
