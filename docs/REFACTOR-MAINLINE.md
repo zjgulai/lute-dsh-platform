@@ -63,7 +63,7 @@
 | Loop 1 契约清账 | ✅ **已完成** | 达标 **20/20**，**豁免 0 条**（A2 达成）；20 个受管包 typecheck/test/build 全部通过 |
 | Loop 2 补丁层 | 未开始 | 依赖上游窗口节奏 |
 | Loop 3 能力闭环 | 进行中 | LoopX CLI ✅ 正式（doctor + connect/status 跑通）；DSH 插件绑定 🟡 beta → [Note](notes/implemented/capability/2026-09-11-loopx-capability-trial.md) |
-| Loop 4 数据工程 | 进行中 | 写入策略已文档化 → [Note](notes/implemented/architecture/2026-09-11-memory-write-strategy.md)；V2→V3 迁移待上游 0.1.5 |
+| Loop 4 数据工程 | ✅ 已完成 | 写入策略 + 陈旧库处置 + V2→V3 迁移结论 → [Note](notes/implemented/architecture/2026-09-11-memory-write-strategy.md)（结论：依赖已解除但**不迁移**，红线未触发） |
 
 ### 最近闭环记录
 
