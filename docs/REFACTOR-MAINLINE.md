@@ -60,7 +60,7 @@
 
 | Loop | 状态 | 备注 |
 | --- | --- | --- |
-| Loop 1 契约清账 | 进行中 | 达标 **11/20**，豁免 9 条 |
+| Loop 1 契约清账 | 进行中 | 达标 **13/20**，豁免 7 条 |
 | Loop 2 补丁层 | 未开始 | 依赖上游窗口节奏 |
 | Loop 3 能力闭环 | 未开始 | 需真实业务场景 |
 | Loop 4 数据工程 | 未开始 | 外部依赖：上游 0.1.5 |
@@ -79,11 +79,32 @@
 | `surfaces/dsh-my-quotes` | 10 | 0（修 1 处） | f6caa1c |
 | `surfaces/dsh-task-board-local` | 7 | 0（修父任务层级丢失） | ab2907b |
 | `capabilities/dsh-overseas-tools` | 8 | 0（修 8 处） | 941d478 |
+| `infra/dsh-team-hub` | 72（已有） | 0（修 31 处） | 7836736 |
+| `capabilities/dsh-loopx-plugin` | 6 | 0（替换 8 个死脚本） | d4fd833 |
 
-### 剩余豁免（9 条）
+### 剩余豁免（7 条）
 
-`memory-local` · `skill-center` · `agent-team-gui` · `loopx` · `deepresearch` ·
-`browser` · `overseas-skills` · `wanzh-hulian` · `team-hub`
+`memory-local` · `skill-center` · `agent-team-gui` · `deepresearch` ·
+`browser` · `overseas-skills` · `wanzh-hulian`
 
-其中 `team-hub` 已有 72 项测试、仅缺 typecheck，性价比最高；`wanzh-hulian` 需先处理
-47 个未类型化的外部响应边界。
+### 已定位的结构性阻塞（Loop 1.4 的前置条件）
+
+**DSH 类型经符号链接供给导致的「同一类型两个身份」问题。**
+
+现象：在 `dsh-browser-local` 上，`@deepseek-ai/dsh-tools` 与
+`@deepseek-ai/dsh-api-gateway` 的同一接口在 tsc 中分裂为两个身份，报
+「同名却互不兼容」。实测过程：
+
+| 探测 | 结果 |
+| --- | --- |
+| 关闭 `preserveSymlinks` | 报错按**物理路径**呈现（node_modules/…/lib/types/index） |
+| 开启 `preserveSymlinks` | 报错按**包名路径**呈现（@deepseek-ai/dsh-tools） |
+| 移除 `declare module` 增强、改用本地扩展接口 | `TypertGateway` 的 3 个错误**全部消除** |
+| 用裸导入的 `ToolDefinition` 与注册器参数比对 | `output` 可选 vs 必需——两份同源声明内容不同 |
+
+结论：符号链接 + `preserveSymlinks` 使「同一物理文件」在 tsc 中获得两个模块身份，
+声明内容因此不可互换。**根治方向（ADR-0017 的下一步）**：从内建运行时 tgz
+（`vendor/dsh-desktop/vendor/dsh-runtime/0.1.2-rc.1/*.tgz`，自带完整 `.d.ts`）
+安装 DSH 依赖，并用 `paths` 统一解析——让类型检查与运行时共用同一物理路径，
+消除身份分裂。`browser` / `deepresearch` / `agent-team-gui` / `wanzh-hulian`
+四个包的剩余错误均属此类，建议在 Loop 1.4 一次性解决。
