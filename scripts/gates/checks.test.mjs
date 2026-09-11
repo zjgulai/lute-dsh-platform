@@ -6,6 +6,7 @@ import {
   checkAdrIndex,
   checkAdrNoteLinks,
   checkGitignoreWhitelist,
+  checkChangedPackages,
   checkExemptions,
   checkNestedRepositories,
   checkPackageIdentity,
@@ -270,4 +271,70 @@ test('嵌套仓库校验：已声明的子模块不算未声明', () => {
 
   assert.equal(result.passed, true)
   assert.deepEqual(result.violations, [])
+})
+
+test('变更包校验：改动的包缺 typecheck/test 必须被拒绝', () => {
+  const result = checkChangedPackages({
+    changed: ['packages/capabilities/dsh-overseas-skills', 'packages/infra/dsh-team-hub'],
+    packages: [
+      { relPath: 'packages/capabilities/dsh-overseas-skills', manifest: { scripts: {} } },
+      { relPath: 'packages/infra/dsh-team-hub', manifest: { scripts: { test: 'node --test test/*.test.mjs' } } },
+    ],
+    exempted: [],
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, [
+    'packages/capabilities/dsh-overseas-skills: 改动了本包但缺少 typecheck 脚本（ADR-0014：变更包立即纳入硬门槛）',
+    'packages/capabilities/dsh-overseas-skills: 改动了本包但缺少 test 脚本（ADR-0014：变更包立即纳入硬门槛）',
+    'packages/infra/dsh-team-hub: 改动了本包但缺少 typecheck 脚本（ADR-0014：变更包立即纳入硬门槛）',
+  ])
+})
+
+test('变更包校验：豁免登记中的包不参与校验', () => {
+  const result = checkChangedPackages({
+    changed: ['packages/contract/dsh-skill-subset'],
+    packages: [{ relPath: 'packages/contract/dsh-skill-subset', manifest: { scripts: {} } }],
+    exempted: ['packages/contract/dsh-skill-subset'],
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('变更包校验：已补齐的包通过', () => {
+  const result = checkChangedPackages({
+    changed: ['packages/contract/dsh-skill-subset'],
+    packages: [
+      { relPath: 'packages/contract/dsh-skill-subset', manifest: { scripts: { typecheck: 'tsc --noEmit', test: 'node --test test/*.test.mjs' } } },
+    ],
+    exempted: [],
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('豁免冻结校验：豁免文件首次入库时允许初始登记', () => {
+  const result = checkExemptions({
+    exemptions: [{ package: 'packages/contract/dsh-skill-subset', reason: '缺 typecheck', owner: 'lute', deadline: '2026-10-31' }],
+    baseline: [],
+    today: '2026-09-11',
+    baselineExists: false,
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('豁免冻结校验：基线已存在时仍禁止新增', () => {
+  const result = checkExemptions({
+    exemptions: [{ package: 'packages/x', reason: 'r', owner: 'lute', deadline: '2026-10-31' }],
+    baseline: [],
+    today: '2026-09-11',
+    baselineExists: true,
+  })
+
+  assert.equal(result.passed, false)
+  assert.match(result.violations[0], /新增豁免条目被拒绝/)
 })

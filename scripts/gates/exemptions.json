@@ -1,1 +1,79 @@
-[]
+[
+  {
+    "package": "packages/capabilities/dsh-overseas-skills",
+    "reason": "缺少 typecheck 与 test 脚本（三期补齐清单）",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "补 tsconfig 与 typecheck 脚本；补至少一项契约级测试并接入 test 脚本"
+  },
+  {
+    "package": "packages/capabilities/dsh-overseas-tools",
+    "reason": "缺少 typecheck 与 test 脚本（三期补齐清单）",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "补 tsconfig 与 typecheck 脚本；补至少一项契约级测试并接入 test 脚本"
+  },
+  {
+    "package": "packages/capabilities/dsh-wanzh-hulian",
+    "reason": "缺少 typecheck 与 test 脚本（三期补齐清单）",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "补 tsconfig 与 typecheck 脚本；补至少一项契约级测试并接入 test 脚本"
+  },
+  {
+    "package": "packages/contract/dsh-preset-lint-local",
+    "reason": "缺少 typecheck 与 test 脚本（三期补齐清单）",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "补 tsconfig 与 typecheck 脚本；补至少一项契约级测试并接入 test 脚本"
+  },
+  {
+    "package": "packages/infra/dsh-team-hub",
+    "reason": "缺少 typecheck 脚本（三期补齐清单）",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "补 tsconfig 与 typecheck 脚本"
+  },
+  {
+    "package": "packages/platform/dsh-auto-compact-local",
+    "reason": "缺少 typecheck 与 test 脚本（三期补齐清单）",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "补 tsconfig 与 typecheck 脚本；补至少一项契约级测试并接入 test 脚本"
+  },
+  {
+    "package": "packages/platform/dsh-file-upload-local",
+    "reason": "缺少 typecheck 与 test 脚本（三期补齐清单）",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "补 tsconfig 与 typecheck 脚本；补至少一项契约级测试并接入 test 脚本"
+  },
+  {
+    "package": "packages/platform/dsh-rename-conversations",
+    "reason": "缺少 typecheck 与 test 脚本（三期补齐清单）",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "补 tsconfig 与 typecheck 脚本；补至少一项契约级测试并接入 test 脚本"
+  },
+  {
+    "package": "packages/platform/dsh-ui-polish-local",
+    "reason": "缺少 typecheck 与 test 脚本（三期补齐清单）",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "补 tsconfig 与 typecheck 脚本；补至少一项契约级测试并接入 test 脚本"
+  },
+  {
+    "package": "packages/surfaces/dsh-my-quotes",
+    "reason": "缺少 typecheck 与 test 脚本（三期补齐清单）",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "补 tsconfig 与 typecheck 脚本；补至少一项契约级测试并接入 test 脚本"
+  },
+  {
+    "package": "packages/surfaces/dsh-task-board-local",
+    "reason": "缺少 typecheck 与 test 脚本（三期补齐清单）",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "补 tsconfig 与 typecheck 脚本；补至少一项契约级测试并接入 test 脚本"
+  }
+]

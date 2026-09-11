@@ -16,6 +16,7 @@ import {
   checkAdrIndex,
   checkAdrNoteLinks,
   checkCatalogFresh,
+  checkChangedPackages,
   checkExemptions,
   checkGitignoreWhitelist,
   checkNestedRepositories,
@@ -140,13 +141,28 @@ const CHECKS = [
     },
   },
   {
+    name: 'changed-packages',
+    remediation: '为本次改动的包补 typecheck 与 test 脚本，或按 ADR-0014 登记豁免（只减不增）',
+    run() {
+      const manifests = collectManifests().filter((entry) => entry.dir !== '.')
+      const exempted = JSON.parse(readIfExists(EXEMPTIONS_PATH) || '[]').map((row) => row.package)
+      return checkChangedPackages({
+        changed: changedPackages(manifests),
+        packages: manifests,
+        exempted,
+      })
+    },
+  },
+  {
     name: 'exemptions-frozen',
     remediation: '不得新增豁免条目；补齐后请删除条目，期限不可延后（ADR-0014）',
     run() {
+      const baselineExists = baselineExemptionsExist()
       return checkExemptions({
         exemptions: JSON.parse(readIfExists(EXEMPTIONS_PATH) || '[]'),
-        baseline: readBaselineExemptions(),
+        baseline: baselineExists ? readBaselineExemptions() : [],
         today: new Date().toISOString().slice(0, 10),
+        baselineExists,
       })
     },
   },
@@ -157,6 +173,46 @@ const NOTE_PATH = 'docs/notes/implemented/architecture/2026-09-11-lute-refactor-
 
 /** 豁免登记文件（仓库根相对路径）。 */
 const EXEMPTIONS_PATH = 'scripts/gates/exemptions.json'
+
+/**
+ * 找出本次改动涉及的受管包（未提交改动 ∪ 与 main 的差异）。
+ * @param {Array<{dir: string}>} manifests 受管包清单
+ * @returns {string[]} 包相对路径
+ */
+function changedPackages(manifests) {
+  const files = new Set()
+  for (const args of [
+    ['diff', '--name-only', 'HEAD'],
+    ['diff', '--name-only', '--cached'],
+    ['diff', '--name-only', 'main...HEAD'],
+  ]) {
+    try {
+      const out = execFileSync('git', ['-C', repoRoot, ...args], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] })
+      for (const line of out.split('\n')) if (line) files.add(line)
+    } catch {
+      // main 不存在或仓库无该引用时忽略该来源
+    }
+  }
+  const changed = new Set()
+  for (const entry of manifests) {
+    const prefix = `${entry.dir}/`
+    if ([...files].some((file) => file === entry.dir || file.startsWith(prefix))) changed.add(entry.dir)
+  }
+  return [...changed]
+}
+
+/**
+ * 判断豁免登记文件是否已存在于 git HEAD（未入库即处于初始登记引导期）。
+ * @returns {boolean}
+ */
+function baselineExemptionsExist() {
+  try {
+    execFileSync('git', ['-C', repoRoot, 'cat-file', '-e', `HEAD:${EXEMPTIONS_PATH}`], { stdio: 'ignore' })
+    return true
+  } catch {
+    return false
+  }
+}
 
 /**
  * 从 git HEAD 读取豁免登记基线；文件尚未入库或仓库尚无提交时返回空数组。

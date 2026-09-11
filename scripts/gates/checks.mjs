@@ -168,7 +168,7 @@ function resolveDocLink(fromPath, link) {
  *   当前豁免条目、基线条目（上次提交状态）与今日日期（YYYY-MM-DD）
  * @returns {{passed: boolean, violations: string[]}}
  */
-export function checkExemptions({ exemptions, baseline, today }) {
+export function checkExemptions({ exemptions, baseline, today, baselineExists = true }) {
   const violations = []
   const baselineByName = new Map(baseline.map((entry) => [entry.package, entry]))
 
@@ -177,6 +177,7 @@ export function checkExemptions({ exemptions, baseline, today }) {
     const previous = baselineByName.get(name)
 
     if (!previous) {
+      if (!baselineExists) continue
       violations.push(`${name}: 新增豁免条目被拒绝（ADR-0014 只减不增，请在基线中登记或先补齐）`)
       continue
     }
@@ -238,4 +239,30 @@ export function checkCatalogFresh({ current, regenerated }) {
           'docs/catalog/packages.md: 与再生成结果不一致（生成物请勿手改，运行 node scripts/gen-catalog.mjs 更新，ADR-0011）',
         ],
       }
+}
+
+/**
+ * 校验本次改动的包已具备 typecheck 与 test 脚本（ADR-0014 的「变更包立即纳入硬门槛」）。
+ * 豁免登记中的包不参与校验；未改动的存量包由 exemptions-frozen 负责按期限收敛。
+ * @param {{changed: string[], packages: Array<{relPath: string, manifest: Record<string, unknown>}>, exempted: string[]}} input
+ * @returns {{passed: boolean, violations: string[]}}
+ */
+export function checkChangedPackages({ changed, packages, exempted }) {
+  const exempt = new Set(exempted)
+  const byPath = new Map(packages.map((entry) => [entry.relPath, entry]))
+  const violations = []
+
+  for (const relPath of changed) {
+    if (exempt.has(relPath)) continue
+    const entry = byPath.get(relPath)
+    if (!entry) continue
+    const scripts = entry.manifest.scripts ?? {}
+    if (!scripts.typecheck) {
+      violations.push(`${relPath}: 改动了本包但缺少 typecheck 脚本（ADR-0014：变更包立即纳入硬门槛）`)
+    }
+    if (!scripts.test) {
+      violations.push(`${relPath}: 改动了本包但缺少 test 脚本（ADR-0014：变更包立即纳入硬门槛）`)
+    }
+  }
+  return { passed: violations.length === 0, violations }
 }

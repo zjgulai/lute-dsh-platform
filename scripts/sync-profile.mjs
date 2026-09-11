@@ -15,14 +15,17 @@ import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statS
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { applySync, cleanTemps, planSync } from './gates/sync-profile.mjs'
+import { discoverPackages } from './gates/package-layout.mjs'
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 
-/** 仓库内受管插件目录（顶层 dsh-* 且含 package.json）。 */
+/**
+ * 仓库内受管插件目录相对路径。归组后包位于 packages/<组>/<包>，
+ * 一律通过 discoverPackages 定位，杜绝位置硬编码（曾因硬编码扫不到任何包而谎报一致）。
+ * @returns {string[]} 仓库根相对路径
+ */
 function managedPackages() {
-  return readdirSync(repoRoot)
-    .filter((name) => name.startsWith('dsh-') && existsSync(join(repoRoot, name, 'package.json')))
-    .sort()
+  return discoverPackages(repoRoot).map((entry) => ({ relPath: entry.relPath, dirName: entry.dirName }))
 }
 
 /** 递归收集相对文件路径，跳过 node_modules 与构建产物目录。 */
@@ -67,29 +70,29 @@ function main() {
   }
 
   let driftCount = 0
-  for (const pkg of managedPackages()) {
-    const target = join(vendorDir, pkg)
+  for (const { relPath, dirName } of managedPackages()) {
+    const target = join(vendorDir, dirName)
     if (!existsSync(target)) continue
 
-    const files = listFiles(join(repoRoot, pkg))
-    const { diverged, absentInTarget } = planSync(join(repoRoot, pkg), target, files)
+    const files = listFiles(join(repoRoot, relPath))
+    const { diverged, absentInTarget } = planSync(join(repoRoot, relPath), target, files)
     const selected = onlyMetadata ? diverged.filter((file) => file === 'package.json') : diverged
     if (selected.length === 0) {
       if (absentInTarget.length > 0) {
-        process.stdout.write(`note ${pkg}: 副本未包含 ${absentInTarget.length} 个仓库文件（不追加，副本可能含运行所需产物）\n`)
+        process.stdout.write(`note ${dirName}: 副本未包含 ${absentInTarget.length} 个仓库文件（不追加，副本可能含运行所需产物）\n`)
       }
       continue
     }
 
     driftCount += 1
     process.stdout.write(
-      `drift ${pkg}: ${selected.slice(0, 5).map((f) => `~${f}`).join(' ')}${selected.length > 5 ? ` … (+${selected.length - 5})` : ''}\n`,
+      `drift ${dirName}: ${selected.slice(0, 5).map((f) => `~${f}`).join(' ')}${selected.length > 5 ? ` … (+${selected.length - 5})` : ''}\n`,
     )
 
     if (mode === 'apply') {
-      applySync(join(repoRoot, pkg), target, selected)
+      applySync(join(repoRoot, relPath), target, selected)
       cleanTemps(target, selected)
-      process.stdout.write(`sync  ${pkg}: 已按 tmp+mv 原子替换 ${selected.length} 个文件\n`)
+      process.stdout.write(`sync  ${dirName}: 已按 tmp+mv 原子替换 ${selected.length} 个文件\n`)
     }
   }
 
