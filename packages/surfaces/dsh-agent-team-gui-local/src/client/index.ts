@@ -12,6 +12,19 @@ interface ClientContext {
   get(name: 'locale'): LocaleService;
   get(name: string): unknown;
   effect(fn: () => void | (() => void), label?: string): () => void;
+  /**
+   * slots 服务契约。`register` 来自运行时（实测 `SlotCore.prototype` 含 register）。
+   * `inject` 在运行时 `SlotCore.prototype` 上**不存在**（实测：只有 register / isLive /
+   * entries / entriesOfSlot / spec / specDynamic / snapshot / subscribe 等），上游类型里
+   * 它只是注册选项的字段而非方法。该调用在部署 bundle 中存在且小队界面实际可用，
+   * 说明它来自本仓库看不到的一层（DSH client runtime 或服务代理）。
+   * TODO(ADR-0017)：待取得客户端运行时后复核 inject 的真实来源；确认不存在则改为
+   * 直接 `ctx.slots.register(...)` 并加租约测试。
+   */
+  slots: {
+    register(options: Record<string, unknown>, component?: unknown): unknown;
+    inject?(slot: string, factory: () => unknown): unknown;
+  };
 }
 import type { ConnectionHandle } from '@deepseek-ai/dsh-client-connection/client'
 import type {} from '@deepseek-ai/dsh-client-ui-conversation/client'
@@ -35,6 +48,11 @@ export const RPC_CHANNEL = '/agent-team-gui'
 
 /** 将管理页和会话模式控件贡献到 dsh 的既有 additive slots。 */
 export function apply(ctx: ClientContext): void {
+  // 明确校验 slots.inject 可用性：该方法的运行时来源尚未证实（见 ClientContext 注释的
+  // TODO），因此不静默降级——缺失时给出可操作的错误，避免四个 slot 无声不注册。
+  if (typeof ctx.slots?.inject !== 'function') {
+    throw new Error('agent-team-gui: ctx.slots.inject 不可用；小队界面需要客户端运行时提供该能力（详见 ClientContext 注释）')
+  }
   const connection = ctx.get('connection') as ConnectionHandle
   const locale = ctx.get('locale') as LocaleService
   const call = async <T,>(endpoint: string, payload: unknown, signal?: AbortSignal): Promise<T> => {

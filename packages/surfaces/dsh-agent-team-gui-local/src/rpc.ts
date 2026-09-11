@@ -1,8 +1,7 @@
 /** Web UI 与 host service 之间的 loopback-only Connection RPC 适配层。 */
 
 import type { Context } from '@deepseek-ai/cordis'
-import type { RpcResult } from '@deepseek-ai/dsh-host-apiproxy/api'
-import type { ConnectionRpcHandler } from '@deepseek-ai/dsh-client-connection'
+import type { ConnectionRpcHandler, ConnectionRpcResult } from '@deepseek-ai/dsh-client-connection'
 import { SessionId } from '@deepseek-ai/dsh-session'
 import { z, ZodError } from 'zod'
 import type { AgentTeamService } from './index.ts'
@@ -189,11 +188,11 @@ const snapshotSchema = z.object({
   }).strict(),
 })
 
-function success<T>(value: T): RpcResult<T> {
+function success<T>(value: T): ConnectionRpcResult<T> {
   return { ok: true, value }
 }
 
-function failure(error: unknown, signal: AbortSignal): RpcResult<never> {
+function failure(error: unknown, signal: AbortSignal): ConnectionRpcResult<never> {
   if (signal.aborted) {
     return { ok: false, error: { code: 'cancelled', message: 'agent team request was cancelled', details: {} } }
   }
@@ -564,7 +563,6 @@ export function registerAgentTeamRpc(ctx: Context, service: AgentTeamService): v
     connectionCtx.connection.rpc.handle(
       AGENT_TEAM_RPC_CHANNEL,
       createAgentTeamRpcHandler(connectionCtx, service),
-      { authority: 'loopback' },
     )
   })
 }

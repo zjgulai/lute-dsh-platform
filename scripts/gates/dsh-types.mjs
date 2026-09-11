@@ -353,3 +353,51 @@ export function normalizeExportMaps({ outDir, packages }) {
   }
   return normalized
 }
+
+/**
+ * 类型声明补齐（ADR-0017 的组成部分）。
+ *
+ * 实测：DSH 0.1.2-rc.1 的发布声明比运行时**少成员**——运行时有、`.d.ts` 里没有：
+ *   `Session.events`（运行时 this.events 存在）、`SessionHeader.seedLength`（运行时存在）、
+ *   `JsonValue`（运行时从 dsh-util-values 使用，但主入口未重导出）。
+ * 这属于上游类型完整性缺陷；本仓库无法在上游修复，因此在**类型供给侧**以显式、
+ * 可审计的方式补齐，而不是在各插件里散落 `as any` 或本地重复声明。
+ * 每一条都写明依据，便于上游修复后删除。
+ * @param {{outDir: string}} input 类型来源目录
+ * @returns {string[]} 已补齐的条目描述
+ */
+export function augmentDeclarations({ outDir }) {
+  const applied = []
+  const sessionDir = join(outDir, 'dsh-session', 'lib', 'types')
+
+  const typesFile = join(sessionDir, 'types.d.ts')
+  if (existsSync(typesFile)) {
+    let text = readFileSync(typesFile, 'utf8')
+    if (!text.includes('seedLength')) {
+      // 运行时 `session.header.seedLength` 存在（lib/index.js 实测 2 处），声明缺失。
+      text = text.replace(
+        /(export interface SessionHeader \{)/,
+        '$1\n    /** 上游声明缺失：运行时存在（实测 lib/index.js），由类型供给补齐（ADR-0017）。 */\n    readonly seedLength?: number;',
+      )
+      writeFileSync(typesFile, text)
+      applied.push('dsh-session: SessionHeader.seedLength')
+    }
+  }
+
+  const indexFile = join(sessionDir, 'index.d.ts')
+  if (existsSync(indexFile)) {
+    let text = readFileSync(indexFile, 'utf8')
+    if (!/export type \{ JsonValue \}/.test(text)) {
+      // 运行时从 dsh-util-values 使用 JsonValue（实测 5 处），主入口未重导出。
+      text = `${text}\n/** 上游声明缺失：运行时使用 JsonValue（实测 lib/index.js 5 处），由类型供给重导出（ADR-0017）。 */\nexport type { JsonValue } from '@deepseek-ai/dsh-util-values';\n`
+      // `Session.events`：运行时实例拥有 events 数组（实测 this.events 3 处），声明未暴露。
+      text = text.replace(
+        /(export declare class Session\b[^{]*\{)/,
+        '$1\n    /** 上游声明缺失：运行时实例拥有 events（实测 lib/index.js），由类型供给补齐（ADR-0017）。 */\n    readonly events: readonly SessionEvent[];',
+      )
+      writeFileSync(indexFile, text)
+      applied.push('dsh-session: JsonValue 重导出、Session.events')
+    }
+  }
+  return applied
+}

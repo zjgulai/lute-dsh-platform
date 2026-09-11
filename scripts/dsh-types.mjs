@@ -13,7 +13,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { discoverPackages } from './gates/package-layout.mjs'
-import { applyTypeLinks, buildVendoredDeclarations, linkTypeScope, normalizeExportMaps, dshPackagesInManifest, dshPackagesInSource, extractRuntimeTypes, mergeVendoredTypes, planTypeLinks } from './gates/dsh-types.mjs'
+import { applyTypeLinks, augmentDeclarations, buildVendoredDeclarations, linkTypeScope, normalizeExportMaps, dshPackagesInManifest, dshPackagesInSource, extractRuntimeTypes, mergeVendoredTypes, planTypeLinks } from './gates/dsh-types.mjs'
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 
@@ -79,6 +79,8 @@ function main() {
     } else {
       process.stdout.write('note 未找到 tsc，跳过声明生成（cordis 家族类型将不可用）\n')
     }
+    const augmented = augmentDeclarations({ outDir: OUT_DIR })
+    if (augmented.length > 0) process.stdout.write(`ok 补齐上游缺失的类型声明 ${augmented.length} 项：${augmented.join('；')}\n`)
     const scopeLinks = linkTypeScope({ outDir: OUT_DIR, appNodeModules: appNodeModulesDir() })
     process.stdout.write(`ok 建立类型来源自解析作用域 ${scopeLinks} 条（供 host 测试运行时解析裸包名）\n`)
   } else {
