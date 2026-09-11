@@ -2,7 +2,7 @@
 
 > 基线：官方 DSH.Desktop-2.0.5-universal.dmg 解包 → packaging/staging/2.0.0/app
 > 校验：`packaging/verify-patches-v2.sh`（34 锚点，2026-09-10 ALL VERIFIED）
-> v1（2.0.4）见 patches-manifest.md；本清单是 2.0.0 的唯一权威登记簿
+> v1（2.0.4）见 [patches-manifest.md](patches-manifest.md)——**已标注为历史、非权威**；本清单是 2.0.0 的唯一权威登记簿
 > 纪律延续：.orig 备份 + count==1 锚点门 + node --check + 品牌 BRAND ALL VERIFIED
 
 ## A. 宿主壳层（lib/）

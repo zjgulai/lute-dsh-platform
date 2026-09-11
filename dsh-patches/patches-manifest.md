@@ -1,4 +1,19 @@
-# DSH Desktop 2.0.4 补丁清单（Patch Manifest）
+# DSH Desktop 2.0.4 补丁清单（历史 · 已被 v2 取代）
+
+> ⚠️ **本文件不是当前权威登记簿。** 它是 **2.0.4 基线**的历史记录，已被
+> [`patches-manifest-v2.md`](patches-manifest-v2.md)（2.0.5 / LUTE 2.0.0）取代。
+>
+> - **找当前补丁登记请读 v2**；校验用 `packaging/verify-patches-v2.sh`
+>   （哈希无关的 glob 定位，35 个锚点）。
+> - 保留本文件的原因：`packaging/` 与其它文档下有 13 处历史引用指向它，
+>   且它的「改动」列在重放旧补丁时仍是参考。
+> - **但不要把它当作现状依据。** 实测教训：本文件 P0-1 的目标文件名
+>   `electron-runtime-DS52LbUW.js` 早已失效（bundle 以内容哈希命名，当前为
+>   `DLNj0vyk`），照它判断会得出错误结论——这正是把 v1 误当权威的那次误报的成因。
+> - `./verify-patches.sh` 已退役（改为指向 v2 的说明），本文件不再由脚本维护。
+
+<details>
+<summary>2.0.4 时期原文（保留以备重放参考，勿据此判断现状）</summary>
 
 > 本文档是全部本地补丁的唯一权威登记簿。每次升级/重装后：
 > 1. 跑 `./verify-patches.sh` 检查漂移；
@@ -96,3 +111,5 @@
 
 1. `verify-patches.sh` 报告漂移项；
 2. 重放漂移补丁（按上表锚点）；
+
+</details>
