@@ -185,6 +185,27 @@ const CHECKS = [
       })
     },
   },
+  {
+    name: 'patch-anchors',
+    modes: ['full'],
+    remediation: '运行 packaging/verify-patches-v2.sh 看 MISSING/FAIL 明细；补丁确实丢失时需重打并按 ADR-0018 的教训改用稳定锚（勿依赖内容哈希文件名）',
+    run() {
+      const appDir = join('/', 'Applications', 'DSH Desktop.app')
+      // 环境相关：未安装 app 时报告为跳过（对照 profile-metadata-sync 的 pass 语义），
+      // 而不是假绿——真正跑起来时它必须能失败（已有负向验证）。
+      if (!existsSync(join(appDir, 'Contents', 'Resources', 'app.asar.unpacked'))) {
+        return { passed: true, violations: [] }
+      }
+      const script = join(repoRoot, 'packaging', 'verify-patches-v2.sh')
+      const result = runScript(repoRoot, `DSH_APP="$DSH_APP_TEST" bash "${script}"`, 300000, { DSH_APP_TEST: appDir })
+      if (result.code === 0) return { passed: true, violations: [] }
+      const lines = (result.output ?? '').split('\n').filter((line) => /^(MISSING|FAIL)/.test(line))
+      return {
+        passed: false,
+        violations: lines.length > 0 ? lines : [`补丁锚点校验失败（退出码 ${result.code}）`],
+      }
+    },
+  },
 ]
 
 /** 当前重构决策记录 Note 的仓库根相对路径（ADR-0007 ~ ADR-0015）。 */
@@ -250,9 +271,9 @@ function runPackageScripts() {
  * @param {number} timeoutMs 超时毫秒
  * @returns {{code: number, output: string}} 超时按 124 记（与 coreutils timeout 一致）
  */
-function runScript(cwd, script, timeoutMs) {
+function runScript(cwd, script, timeoutMs, extraEnv = {}) {
   const binDir = join(cwd, 'node_modules', '.bin')
-  const env = { ...process.env, PATH: `${binDir}:${process.env.PATH ?? ''}` }
+  const env = { ...process.env, ...extraEnv, PATH: `${binDir}:${process.env.PATH ?? ''}` }
   try {
     const output = execFileSync('sh', ['-c', script], { cwd, env, encoding: 'utf8', timeout: timeoutMs, stdio: ['ignore', 'pipe', 'pipe'] })
     return { code: 0, output: String(output).slice(-500) }

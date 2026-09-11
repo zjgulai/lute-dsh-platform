@@ -204,3 +204,30 @@ DSH_APP="/Applications/DSH Desktop.app" ./packaging/verify-patches-v2.sh
 
 我基于「manifest 说要删除调用」+「grep 到调用还在」就下了「补丁丢失」的结论，
 **没有先确认自己看的是不是权威脚本**。更正方式是：**先找全入口，再判事实**。
+
+---
+
+## 收口（2026-09-11）：以 v2 为唯一权威
+
+### 已完成
+
+1. **v2 补上 `[MISSING]` 语义**：目标文件缺失时输出 `MISSING <label> (target absent: <path>)`
+   并 `fail=1`。此前它只报 `FAIL ... found 0`，把「文件没了」与「补丁没打」混为一谈。
+   负向验证：`DSH_APP=/tmp/nonexistent-app` 时所有锚点响亮报 MISSING。
+2. **v2 接入门禁**（新校验项 `patch-anchors`，`full` 模式，14/14）：
+   - 环境相关：未安装 app 时报告为跳过（对照 `profile-metadata-sync` 的 pass 语义），
+     而不是假绿；
+   - **变异测试通过**：删掉 P0-3 标记 → 门禁 `fail 13/14`；还原后恢复 14/14。
+     即该校验项不是空转的。
+3. **v1（`dsh-patches/verify-patches.sh`）已退役**：改为指向 v2 的说明并 `exit 2`。
+   退役理由写进脚本头部（写死哈希 → 假通过；30 vs 35 锚点；产生假 DRIFT）。
+
+### 已知未竟（明确记录，避免以为已做完）
+
+- **门禁的违规诊断不够具体**：`runScript` 只保留输出末尾 500 字符，而 v2 打印 35 行锚点结果，
+  导致 `FAIL ...` 明细落在那 500 字符之外，门禁只能报「退出码 1」这个通用信息。
+  修法二选一：(a) 让 v2 支持 `--quiet` 只输出 MISSING/FAIL；(b) 让 `runScript` 保留更多输出。
+- **两份 manifest 仍并存**：`patches-manifest.md`（v1 清单）与 `patches-manifest-v2.md`。
+  按 ADR-0009（一份事实一个家）应一并收敛到 v2 清单；本轮未动。
+- **v1 中 v2 未覆盖的锚点**尚未逐项核对并入 v2（v1 原本 30 项，v2 35 项，
+  但两者集合关系未逐项比对过）。

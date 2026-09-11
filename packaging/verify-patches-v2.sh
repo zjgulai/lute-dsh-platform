@@ -11,7 +11,11 @@ glob1(){ local dir="$1" pat="$2"; local f; f=$(ls "$dir"/$pat 2>/dev/null | grep
 LIB_ER="$(glob1 "$LIB" 'electron-runtime-*.js')"
 LIB_PM="$(glob1 "$LIB" 'profile-manager-*.js')"
 ck(){ # ck <label> <file> <marker> [expected]
-  local n; n=$(grep -cF "$3" "$2" 2>/dev/null || true); n=${n:-0}; n=$(echo "$n" | tr -d " \n")
+  local n
+  # 目标文件缺失必须响亮：否则 grep 空结果与「标记不存在」不可区分，
+  # 会把「文件没了」读成「补丁没打」，或反之造成假通过。
+  if [ ! -f "$2" ]; then echo "MISSING $1 (target absent: $2)"; fail=1; return; fi
+  n=$(grep -cF "$3" "$2" 2>/dev/null || true); n=${n:-0}; n=$(echo "$n" | tr -d " \n")
   if [ "${n:-0}" -ge "${4:-1}" ]; then echo "OK   $1 ($n)"; else echo "FAIL $1 (found $n, want >=${4:-1})"; fail=1; fi
 }
 ck "P0-1v2 更新守卫"        "$LIB_ER" "Update installation is disabled for security"
