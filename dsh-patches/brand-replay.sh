@@ -86,27 +86,33 @@ PY
 done
 
 # ── 2. 启动词标（ROOT + SVG）─────────────────────────────────────────────────
+# 版本无关语义锚点（2026-09-11 加固）：
+#   文本：this.wordmark=<fn>(<ref>.wordmark,"X") → "ROOT"（2.0.4 Gt(Kt.wordmark,…) / 2.0.5 Yt(Gt.wordmark,…) 通吃）
+#   SVG：2.0.4 系 this.brandMark=…innerHTML='<svg…' → ROOT SVG；2.0.5 无 brandMark，仅文本
 if [ -f "$PAYLOAD" ]; then
   for asset in "$ASSETS"/*.js; do
     [ -f "$asset" ] || continue
     # 跳过不含词标构造的 vendor/框架 chunk
-    grep -q 'Kt.wordmark' "$asset" 2>/dev/null || continue
-    if grep -q 'Gt(Kt.wordmark,"ROOT")' "$asset" 2>/dev/null; then
+    grep -qE 'this\.wordmark=[A-Za-z_$]+\([A-Za-z_$.]+wordmark,"[^"]*"' "$asset" 2>/dev/null || continue
+    if grep -qE 'this\.wordmark=[A-Za-z_$]+\([A-Za-z_$.]+wordmark,"ROOT"' "$asset" 2>/dev/null; then
       say "OK   wordmark $(basename "$asset")"
     elif [ "$MODE" = "--apply" ]; then
       python3 - "$asset" "$PAYLOAD" <<'PY'
 import sys, re
 asset, payload = sys.argv[1], sys.argv[2]
-s = open(asset).read()
-block = open(payload).read().rstrip()
-pat = re.compile(r'this\.wordmark=Gt\(Kt\.wordmark,"[^"]*"\),this\.spinner=')
-m = pat.search(s)
+s = open(asset, encoding="utf-8").read()
+# 1) 词标文本 → "ROOT"（语义锚点，不依赖压缩器 Kt/Gt 命名）
+pat_text = re.compile(r'(this\.wordmark=\w+\(\w+\.wordmark,")[^"]*("\))')
+s, n = pat_text.subn(r'\g<1>ROOT\g<2>', s)
+if n: print(f"wordmark text -> ROOT x{n}")
+# 2) 启动标 SVG（仅 2.0.4 系有 brandMark；payload 里取 ROOT SVG）
+m = re.search(r"this\.brandMark=([^;]*?)\.innerHTML='<svg[^']*'", s)
 if m:
-    s = s[:m.start()] + block + ',this.spinner=' + s[m.end():]
-    open(asset, "w").write(s)
-    print("wordmark patched")
-else:
-    print("anchor not found (structure drifted — 手工适配)")
+    block = open(payload, encoding="utf-8").read().rstrip()
+    inner = block.split("innerHTML='", 1)[1].rsplit("'", 1)[0]
+    s = s[:m.start()] + "this.brandMark=" + m.group(1) + ".innerHTML='" + inner + "'" + s[m.end():]
+    print("brandMark svg -> ROOT")
+open(asset, "w", encoding="utf-8").write(s)
 PY
       say "APPLY wordmark $(basename "$asset")"
     else
@@ -117,6 +123,53 @@ PY
 else
   say "MISSING ${PAYLOAD}（词标补丁载荷）"
   fail=1
+fi
+
+# ── 2b. Hero 空态标题 + 网页标题（fallback 防御；正常路径由 dsh-root-brand 插件接管并隐藏官方文案）──
+# 官方 locale 锚点（语义键稳定，与压缩器哈希无关）: "hero.headline" zh/en
+CONV_CLIENT="$CHK/node_modules/@deepseek-ai/dsh-client-ui-conversation/lib/client.js"
+if [ -f "$CONV_CLIENT" ]; then
+  if grep -q '"hero.headline": "Artificial Business Intelligence Agentic"' "$CONV_CLIENT" 2>/dev/null; then
+    say "OK   hero.headline 品牌文案"
+  elif [ "$MODE" = "--apply" ]; then
+    python3 - "$CONV_CLIENT" <<'PY'
+import sys
+p = sys.argv[1]
+s = open(p, encoding="utf-8").read()
+n1 = s.count('"hero.headline": "探索未至之境"')
+n2 = s.count('"hero.headline": "Into the Unknown"')
+s = s.replace('"hero.headline": "探索未至之境"', '"hero.headline": "Artificial Business Intelligence Agentic"')
+s = s.replace('"hero.headline": "Into the Unknown"', '"hero.headline": "Artificial Business Intelligence Agentic"')
+open(p, "w", encoding="utf-8").write(s)
+print(f"hero.headline patched (zh×{n1} en×{n2})")
+PY
+    say "APPLY hero.headline 品牌文案"
+  else
+    say "DRIFT hero.headline 官方文案 — 跑 --apply"
+    fail=1
+  fi
+else
+  say "MISSING conversation client（hero.headline 补丁目标）"
+  fail=1
+fi
+IDX_HTML="$CHK/node_modules/@deepseek-ai/dsh-web-frontend/dist/index.html"
+if [ -f "$IDX_HTML" ]; then
+  if grep -q '<title>LUTE Agentic System</title>' "$IDX_HTML" 2>/dev/null; then
+    say "OK   index.html 标题"
+  elif [ "$MODE" = "--apply" ]; then
+    python3 - "$IDX_HTML" <<'PY'
+import sys
+p = sys.argv[1]
+s = open(p, encoding="utf-8").read()
+s = s.replace("<title>DeepSeek Harness</title>", "<title>LUTE Agentic System</title>")
+open(p, "w", encoding="utf-8").write(s)
+print("index.html title patched")
+PY
+    say "APPLY index.html 标题"
+  else
+    say "DRIFT index.html 标题 — 跑 --apply"
+    fail=1
+  fi
 fi
 
 # ── 3b. Electron Helper 重命名（Electron 按外层 CFBundleName 查找 helper，缺省会 "Unable to find helper app"）──
@@ -156,19 +209,30 @@ if [ -f "$PLIST" ]; then
   fi
 fi
 
-# ── 4. app 图标（icon.icns；lute-brand-icons 生成引擎产出，打包链替换）───────────
-# 品牌 hash 固定于打包时（assets/app-icon.icns）；图标重设计时用 BRAND_ICON_SHA 覆盖
-BRAND_ICON_SHA="${BRAND_ICON_SHA:-2f593b98b3134ae1452acbe59037eccfc5667fdd}"
+# ── 4. app 图标（icon.icns；ROOT 品牌资产为唯一真相源）───────────
+# 真相源：.dsh-root-brand-preview/root-icon/icon.icns（与 packaging/assets/app-icon.icns 同源，2026-09-11 统一）。
+# 优先取脚本同目录随包分发的 app-icon.icns（payload/tools/），动态计算期望 hash；
+# 无随包资产时回退常量（仅 check 用途）。--apply 需随包资产，本脚本不带 icns。
+ICON_ASSET="$(dirname "$0")/app-icon.icns"
+BRAND_ICON_SHA="${BRAND_ICON_SHA:-}"
+if [ -f "$ICON_ASSET" ]; then
+  BRAND_ICON_SHA="$(shasum "$ICON_ASSET" | awk '{print $1}')"
+elif [ -z "$BRAND_ICON_SHA" ]; then
+  BRAND_ICON_SHA="290286804849af5386b751c9d28b7bd24972f0f8"  # root-icon/icon.icns sha1（真相源）
+fi
 ICON="$DSH_APP/Contents/Resources/icon.icns"
 if [ -f "$ICON" ]; then
   cur=$(shasum "$ICON" | awk '{print $1}')
   if [ "$cur" = "$BRAND_ICON_SHA" ]; then
-    say "OK   icon.icns 品牌图标"
+    say "OK   icon.icns ROOT 品牌图标"
+  elif [ "$MODE" = "--apply" ] && [ -f "$ICON_ASSET" ]; then
+    cp "$ICON_ASSET" "$ICON"
+    say "APPLY icon.icns ← $(basename "$ICON_ASSET")"
   elif [ "$MODE" = "--apply" ]; then
-    say "APPLY icon.icns 需从 packaging/assets/app-icon.icns 复制（本脚本不带 icns 资产）"
+    say "APPLY icon.icns 失败：随包缺少 app-icon.icns（本脚本不带 icns 资产）"
     fail=1
   else
-    say "DRIFT icon.icns（hash ${cur}）— 官方图标未替换"
+    say "DRIFT icon.icns（hash ${cur}）— 与 ROOT 品牌资产不符"
     fail=1
   fi
 fi
