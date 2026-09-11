@@ -9,6 +9,7 @@ import {
   checkExemptions,
   checkPackageIdentity,
   checkPinConsistency,
+  checkTrackedIgnored,
 } from './checks.mjs'
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -223,6 +224,25 @@ test('豁免登记校验：缺字段与过期条目必须被拒绝', () => {
 
 test('豁免登记校验：空数组且今天不晚于任何期限时通过', () => {
   const result = checkExemptions({ exemptions: [], baseline: [], today: '2026-09-11' })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('索引漂移校验：已跟踪文件同时命中忽略规则必须被拒绝', () => {
+  const result = checkTrackedIgnored({
+    trackedIgnored: ['dsh-patches/archive/profile-backups/package.json.bak-1788066245', 'release/README.md'],
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, [
+    'dsh-patches/archive/profile-backups/package.json.bak-1788066245: 已跟踪文件同时命中忽略规则（tracked+ignored 漂移，ADR-0013）',
+    'release/README.md: 已跟踪文件同时命中忽略规则（tracked+ignored 漂移，ADR-0013）',
+  ])
+})
+
+test('索引漂移校验：无漂移时通过', () => {
+  const result = checkTrackedIgnored({ trackedIgnored: [] })
 
   assert.equal(result.passed, true)
   assert.deepEqual(result.violations, [])

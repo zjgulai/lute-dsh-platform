@@ -190,3 +190,18 @@ export function checkExemptions({ exemptions, baseline, today }) {
   }
   return { passed: violations.length === 0, violations }
 }
+
+/**
+ * 校验没有「已跟踪文件同时命中忽略规则」的漂移（ADR-0013）。
+ * 该状态会让仓库对同一文件给出两种相反回答：git 跟踪它，忽略规则又声称它不该存在。
+ * @param {{trackedIgnored: string[]}} input `git ls-files --cached --ignored --exclude-standard` 的输出
+ * @returns {{passed: boolean, violations: string[]}}
+ */
+export function checkTrackedIgnored({ trackedIgnored }) {
+  return {
+    passed: trackedIgnored.length === 0,
+    violations: trackedIgnored.map(
+      (file) => `${file}: 已跟踪文件同时命中忽略规则（tracked+ignored 漂移，ADR-0013）`,
+    ),
+  }
+}

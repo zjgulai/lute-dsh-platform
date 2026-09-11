@@ -19,6 +19,7 @@ import {
   checkGitignoreWhitelist,
   checkPackageIdentity,
   checkPinConsistency,
+  checkTrackedIgnored,
 } from './gates/checks.mjs'
 import { checkProfileMetadata } from './gates/sync-profile.mjs'
 
@@ -77,6 +78,17 @@ const CHECKS = [
         noteText: readIfExists(join(repoRoot, NOTE_PATH)),
         exists: (path) => existsSync(join(repoRoot, path)),
       })
+    },
+  },
+  {
+    name: 'index-drift',
+    remediation: '结清漂移：git rm --cached 已不在磁盘的条目，或把受管归档纳入 .gitignore 白名单（ADR-0013）',
+    run() {
+      const output = execFileSync('git', ['-C', repoRoot, 'ls-files', '--cached', '--ignored', '--exclude-standard'], {
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'ignore'],
+      })
+      return checkTrackedIgnored({ trackedIgnored: output.split('\n').filter(Boolean) })
     },
   },
   {
