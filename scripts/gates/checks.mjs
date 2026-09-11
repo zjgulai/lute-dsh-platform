@@ -118,13 +118,20 @@ export function checkAdrIndex({ adrFiles, indexText }) {
 }
 
 /**
- * 校验 ADR 头部的「决策记录」链接可达，且对应 Note 正文回引该 ADR 编号（ADR-0015）。
- * @param {{adrDocs: Array<{path: string, text: string}>, notePath: string, noteText: string, exists: (path: string) => boolean}} input
+ * 校验 ADR 头部的「决策记录」链接可达，且**该 ADR 自己指向的那篇 Note** 正文回引其编号（ADR-0015）。
+ *
+ * 逐篇解析、逐篇回引：一篇 Note 只需回引指向它的那些 ADR（通常恰好一篇）。
+ * 早期实现把 Note 路径写死成单值，于是「中心 Note 必须提到每一个带链接的 ADR」
+ * 成了隐含要求——每新增一篇独立主题的 ADR，就得往无关的 Note 里补一行例外说明，
+ * 而那行说明既不承载决策也无人维护。见
+ * docs/notes/implemented/contract/2026-09-11-adr-note-links-per-note.md。
+ *
+ * @param {{adrDocs: Array<{path: string, text: string}>, readNote: (path: string) => string, exists: (path: string) => boolean}} input
+ *   `readNote` 读取仓库根相对路径的 Note 正文；读不到时返回空串（自然判为未回引）。
  * @returns {{passed: boolean, violations: string[]}}
  */
-export function checkAdrNoteLinks({ adrDocs, notePath, noteText, exists }) {
+export function checkAdrNoteLinks({ adrDocs, readNote, exists }) {
   const violations = []
-  const noteNumbers = []
   for (const { path, text } of adrDocs) {
     const number = /ADR-(\d{4})/.exec(path)?.[1]
     const match = /决策记录：\[Note\]\(([^)]+)\)/.exec(text)
@@ -135,12 +142,10 @@ export function checkAdrNoteLinks({ adrDocs, notePath, noteText, exists }) {
       violations.push(`${path}：决策记录链接指向不存在的 Note（${target}）`)
       continue
     }
-    if (number) noteNumbers.push(number)
-  }
+    if (number === undefined) continue
 
-  for (const number of noteNumbers) {
-    if (!noteText.includes(`ADR-${number}`)) {
-      violations.push(`${notePath}：正文未引用 ADR-${number}`)
+    if (!readNote(target).includes(`ADR-${number}`)) {
+      violations.push(`${target}：正文未引用 ADR-${number}（由 ${path} 指向）`)
     }
   }
   return { passed: violations.length === 0, violations }

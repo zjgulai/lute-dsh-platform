@@ -81,8 +81,8 @@ const CHECKS = [
     run() {
       return checkAdrNoteLinks({
         adrDocs: listAdrFiles().map((path) => ({ path, text: readIfExists(join(repoRoot, path)) })),
-        notePath: NOTE_PATH,
-        noteText: readIfExists(join(repoRoot, NOTE_PATH)),
+        // 逐篇读该 ADR 自己指向的那篇 Note（不再写死单一路径）。
+        readNote: (path) => readIfExists(join(repoRoot, path)),
         exists: (path) => existsSync(join(repoRoot, path)),
       })
     },
@@ -234,9 +234,6 @@ const CHECKS = [
     },
   },
 ]
-
-/** 当前重构决策记录 Note 的仓库根相对路径（ADR-0007 ~ ADR-0015）。 */
-const NOTE_PATH = 'docs/notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md'
 
 /** 豁免登记文件（仓库根相对路径）。 */
 const EXEMPTIONS_PATH = 'scripts/gates/exemptions.json'

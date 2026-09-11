@@ -136,8 +136,7 @@ test('ADR↔Note 互链校验：ADR 指向不存在的 Note 必须被拒绝', ()
       { path: 'docs/adr/ADR-0007.md', text: '- 决策记录：[Note](../notes/implemented/architecture/2026-09-11-missing.md)\n' },
       { path: 'docs/adr/ADR-0008.md', text: '- 决策记录：[Note](../notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md)\n' },
     ],
-    notePath: 'docs/notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md',
-    noteText: 'ADR-0007 / ADR-0008\n',
+    readNote: (path) => (path === 'docs/notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md' ? 'ADR-0008\n' : ''),
     exists: (path) => path === 'docs/notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md',
   })
 
@@ -148,25 +147,59 @@ test('ADR↔Note 互链校验：ADR 指向不存在的 Note 必须被拒绝', ()
 test('ADR↔Note 互链校验：Note 未引用其 ADR 编号必须被拒绝', () => {
   const result = checkAdrNoteLinks({
     adrDocs: [{ path: 'docs/adr/ADR-0007.md', text: '- 决策记录：[Note](../notes/implemented/architecture/2026-09-11-topic.md)\n' }],
-    notePath: 'docs/notes/implemented/architecture/2026-09-11-topic.md',
-    noteText: '本篇记录重构决策。\n',
+    readNote: () => '本篇记录重构决策。\n',
     exists: () => true,
   })
 
   assert.equal(result.passed, false)
-  assert.deepEqual(result.violations, ['docs/notes/implemented/architecture/2026-09-11-topic.md：正文未引用 ADR-0007'])
+  assert.deepEqual(result.violations, ['docs/notes/implemented/architecture/2026-09-11-topic.md：正文未引用 ADR-0007（由 docs/adr/ADR-0007.md 指向）'])
 })
 
 test('ADR↔Note 互链校验：双向可达时通过', () => {
   const result = checkAdrNoteLinks({
     adrDocs: [{ path: 'docs/adr/ADR-0007.md', text: '- 决策记录：[Note](../notes/implemented/architecture/2026-09-11-topic.md)\n' }],
-    notePath: 'docs/notes/implemented/architecture/2026-09-11-topic.md',
-    noteText: 'ADR-0007 记录三次推进。\n',
+    readNote: () => 'ADR-0007 记录三次推进。\n',
     exists: () => true,
   })
 
   assert.equal(result.passed, true)
   assert.deepEqual(result.violations, [])
+})
+
+test('ADR↔Note 互链校验：两篇 ADR 各指向自己的 Note 时互不牵连', () => {
+  // 回归：早期实现把 Note 路径写死为单值，于是第二篇 ADR 会被拿去第一篇 Note 里找编号，
+  // 必然失败——实际后果是每新增一篇独立主题的 ADR，都要往无关的 Note 里补一行例外说明。
+  const notes = {
+    'docs/notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md': 'ADR-0007 记录三期推进。\n',
+    'docs/notes/implemented/architecture/2026-09-11-role-squad-contract.md': '决策记录见 ADR-0020。\n',
+  }
+  const result = checkAdrNoteLinks({
+    adrDocs: [
+      { path: 'docs/adr/ADR-0007.md', text: '- 决策记录：[Note](../notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md)\n' },
+      { path: 'docs/adr/ADR-0020.md', text: '- 决策记录：[Note](../notes/implemented/architecture/2026-09-11-role-squad-contract.md)\n' },
+    ],
+    readNote: (path) => notes[path] ?? '',
+    exists: (path) => path in notes,
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('ADR↔Note 互链校验：别的 Note 提到了该编号不能顶替自己那篇', () => {
+  // 反向回归：ADR-0020 自己指向的 Note 没回引，而另一篇提到了 ADR-0020 —— 仍然必须被拒绝。
+  const notes = {
+    'docs/notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md': '另见 ADR-0020。\n',
+    'docs/notes/implemented/architecture/2026-09-11-role-squad-contract.md': '本篇只讲编队。\n',
+  }
+  const result = checkAdrNoteLinks({
+    adrDocs: [{ path: 'docs/adr/ADR-0020.md', text: '- 决策记录：[Note](../notes/implemented/architecture/2026-09-11-role-squad-contract.md)\n' }],
+    readNote: (path) => notes[path] ?? '',
+    exists: (path) => path in notes,
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, ['docs/notes/implemented/architecture/2026-09-11-role-squad-contract.md：正文未引用 ADR-0020（由 docs/adr/ADR-0020.md 指向）'])
 })
 
 test('豁免登记校验：新增条目必须被拒绝（只减不增）', () => {
