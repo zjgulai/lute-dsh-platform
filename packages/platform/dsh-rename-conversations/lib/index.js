@@ -32,14 +32,25 @@ function extractUserTexts(events, perTextMax, maxTexts) {
   const out = [];
   for (const e of Array.isArray(events) ? events : []) {
     if (!e || e.type !== "user/message") continue;
-    const c = e.data && e.data.message && e.data.message.content
-      ? e.data.message.content
-      : (e.data && e.data.content) || [];
+    /** @type {{ message?: { content?: Array<{ text?: string }> }, content?: Array<{ text?: string }> } | undefined} */
+    const data = /** @type {any} */ (e).data;
+    const c = data && data.message && data.message.content
+      ? data.message.content
+      : (data && data.content) || [];
     const text = c.map((b) => (b && b.text) || "").join(" ").trim();
     if (text.length > 0) out.push(clip(text, perTextMax));
     if (out.length >= maxTexts) break;
   }
   return out;
+}
+
+/**
+ * 从 catch/未知值中取出可读消息。
+ * @param {unknown} reason 捕获到的值
+ * @returns {string} 消息文本，非 Error 时回退为字符串化结果
+ */
+function errorMessage(reason) {
+  return reason instanceof Error ? reason.message : String(reason);
 }
 
 function currentTitleOf(events) {
@@ -73,6 +84,7 @@ export function apply(ctx) {
     },
     timeoutMs: 120000,
     execute: async (args) => {
+      /** @type {{ rows: Array<Record<string, unknown>>, details: Record<string, Record<string, unknown>>, listError?: string }} */
       const out = { rows: [], details: {} };
       try {
         const list = await controller.list({});
@@ -89,7 +101,7 @@ export function apply(ctx) {
           });
         }
       } catch (e) {
-        out.listError = String(e && e.message ? e.message : e);
+        out.listError = errorMessage(e);
       }
       const ids = Array.isArray(args && args.sessionIds) ? args.sessionIds.slice(0, 30) : [];
       for (const id of ids) {
@@ -108,7 +120,7 @@ export function apply(ctx) {
             userMessageCount: (Array.isArray(events) ? events : []).filter((e) => e && e.type === "user/message").length
           };
         } catch (e) {
-          out.details[id] = { error: String(e && e.message ? e.message : e) };
+          out.details[id] = { error: errorMessage(e) };
         }
       }
       return out;
@@ -161,7 +173,7 @@ export function apply(ctx) {
           results.push({ sessionId, ok: true, title: r.title, seq: r.seq });
         } catch (e) {
           failed += 1;
-          results.push({ sessionId, ok: false, error: String(e && e.message ? e.message : e) });
+          results.push({ sessionId, ok: false, error: errorMessage(e) });
         }
       }
       return { success, failed, results };
@@ -189,7 +201,7 @@ export function apply(ctx) {
         const r = await controller.rename({ sessionId: String(args.sessionId), title: String(args.title) });
         return { ok: true, title: r.title, seq: r.seq };
       } catch (e) {
-        return { ok: false, error: String(e && e.message ? e.message : e) };
+        return { ok: false, error: errorMessage(e) };
       }
     }
   });
