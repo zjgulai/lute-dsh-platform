@@ -15,11 +15,20 @@ ROOT 路特创新 品牌皮肤：把 DSH Desktop 初始页面的官方品牌位�
 
 ## 已知约束（重要）
 
-- `hero.headline`（探索未至之境）与 `hero.preview`（预览版）不是公开 slot，无法经语言包覆盖；
-  本插件通过注入 CSS 隐藏原生 headline/preview（`_37cUPa_headlineText`、`_37cUPa_previewBadge`），
-  这些类名**版本钉在 DSH Desktop 2.0.4**。应用升级后若类名重新 hash，需在
-  `src/client/brand.tsx` 的 `BRAND_CSS` 中更新这两个选择器并重新 build。
+- `hero.headline`（中文原文「探索未至之境」）与 `hero.preview`（`预览版`）**不是公开 slot**，
+  也**不在可被插件注册的公开 locale 命名空间**（`ctx.locale.register` 对同命名空间同 locale 直接抛错），
+  所以只能从外部改写官方 DOM。**改写锚不写死哈希**：`src/client/live-selectors.ts` 在运行时按
+  官方样式标签 `style[data-plugin-css="<包路径>/<模块>.module.css"]`（包路径级锚，不随构建哈希变）
+  读出类名，因此 2.0.4 的 `_37cUPa_*` 与 2.0.5 的 `zNic4G_*` 由**同一份实现**覆盖。
+  上游若重命名 `HeroShell.module.css` / `StatsLine.module.css`，解析器会报 drift（见下）并走结构降级，
+  届时才需要重锚模块 id。决定与代价见 ADR-0019。
+- **漂移可观测**：解析失败时 `document.documentElement.dataset.dshRootBrandAnchors` 变为
+  `degraded:<缺失锚点列表>`，并在 Console 打出 `[dsh-root-brand] anchor drift: …`；全部命中时为 `resolved`。
+- **角标文案**：保持官方节点与外观，只把文本 `预览版 → Preview`（中英界面一致），
+  `MutationObserver` 抗 React 回写，卸载时还原原文。
 - hero 渲染的替换内容通过公开 slot `conversation.hero.brand.mark` 挂入（官方推荐的品牌座位路径）。
+- 原先把官方 `hero.headline` 改写成同一句的兜底（`dsh-patches/brand-replay.sh`）**已退役**：
+  品牌句的唯一真相源是本插件，避免「插件隐藏规则 miss 时同文案出现两次」。
 
 ## 命令
 
@@ -28,6 +37,14 @@ pnpm install
 pnpm typecheck && pnpm test && pnpm build   # 构建后运行 scripts/validate-build.mjs
 node ~/.dsh/skills/build-deepseek-harness-plugin/scripts/check_plugin.mjs .
 ```
+
+测试分两层，且**都必须跑**（`vitest.config.ts` 同时纳入 `test/` 与 `src/`）：
+
+- `test/*.spec.ts`：**真实产物 seam** —— 经 `window.__ModuleLoader__` 桩加载 `lib/client.js`，
+  在 happy-dom 里执行 `apply`；官方类名真值从真实产物解析（本机 app 包 / 已入库 2.0.4 归档），
+  不写死哈希。覆盖「标题唯一」「角标 Preview 且抗回写、可还原」「统计条折叠两代都命中」
+  「换新前缀仍命中」「缺锚时 degraded + 警告」。
+- `src/client/*.test.ts(x)`：源码级守卫（反向断言：产品代码里不得出现哈希选择器）。
 
 ## 安装 / 卸载
 

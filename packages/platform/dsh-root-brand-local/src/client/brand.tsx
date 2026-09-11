@@ -1,6 +1,8 @@
 import type { CSSProperties, ReactElement } from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
 
+import { classSelector, type LiveAnchors } from "./live-selectors.js";
+
 /**
  * ROOT (路特创新) brand components.
  *
@@ -96,14 +98,15 @@ export function HeroRootBrand({ size = 34, className }: BrandMarkProps): ReactEl
 }
 
 /**
- * Brand surface styles + the version-pinned hero fix.
+ * Brand surface styles (version-independent part).
  *
  * `hero.headline` / `hero.preview` are not public slots (they are owned by the
  * conversation package's private locale namespace), so the native headline and
- * preview badge are hidden with display rules pinned to the DSH Desktop 2.0.4
- * CSS-module hashes, and the replacement content renders through the public
- * `conversation.hero.brand.mark` seat. If an app update re-hashes these class
- * names, verify the pins below against the fresh bundle.
+ * preview badge have to be hidden from the outside — but **not** with hashed
+ * class names written into this file. The hash-bearing rules are produced at
+ * runtime by {@link buildBrandCss} from the anchors read out of the official
+ * stylesheets (see `live-selectors.ts`), so an upstream re-hash no longer
+ * breaks the skin.
  */
 export const BRAND_CSS = `
 [data-plugin="dsh-root-brand"].dsh-rb-hero {
@@ -165,33 +168,8 @@ export const BRAND_CSS = `
 @media (max-width: 640px) {
   [data-plugin="dsh-root-brand"].dsh-rb-hero .dsh-rb-hero-name { font-size: 14px; }
 }
-._37cUPa_headlineText, ._37cUPa_previewBadge { display: none; }
-._37cUPa_headline { grid-template-columns: auto; }
 
-/* P1.5a 统计条折叠（版本钉：DSH Desktop 2.0.4，dsh-client-ui-chat StatsLine q2FAPq_root）
-   默认折叠为 6px 悬停条（底部中央 2px 抓手），hover 展开完整统计；选择器 miss 即自然降级（不折叠）。 */
-.q2FAPq_root {
-  max-height: 6px;
-  opacity: 0.45;
-  transition: max-height 0.18s ease, opacity 0.18s ease;
-}
-.q2FAPq_root:hover {
-  max-height: 28px;
-  opacity: 1;
-}
-.q2FAPq_root::after {
-  content: "";
-  display: block;
-  height: 2px;
-  width: 34px;
-  margin: 2px auto 0;
-  border-radius: 2px;
-  background: var(--dsw-alias-separator-primary, rgba(127, 127, 127, 0.5));
-  transition: opacity 0.18s ease;
-}
-.q2FAPq_root:hover::after {
-  opacity: 0;
-}
+/* P1.5a 统计条折叠的视觉留在下面（选择器由 live-selectors 在运行时解析）。 */
 
 /* P2 键盘可达性：覆写区与 hero 的 focus ring（品牌绿描边） */
 .dshro-action:focus-within,
@@ -212,14 +190,48 @@ export const BRAND_CSS = `
 
 export const BRAND_CSS_STYLE_ID = "dsh-root-brand-css";
 
+/**
+ * Hash-bearing rules, assembled from the anchors read out of the official
+ * stylesheets. Empty when an anchor is missing — the version-independent part
+ * above stays installed either way, and the caller reports the miss.
+ *
+ * 覆盖声明一律带 `!important`：官方 HeroShell 规则与这里的选择器**特异性相同**
+ * （都是单个类名，0-1-0），谁在 `<head>` 里靠后谁赢。官方样式标签由 conversation
+ * 包在模块求值期注入，本插件的锚点标签何时创建取决于两侧加载次序 —— 一旦插件标签
+ * 排在官方之前，`grid-template-columns: 34px auto auto` 就反压回来：品牌槽宽度
+ * 397px 被塞进 34px 轨道、溢出并与 `previewBadge` 重叠（2.0.5 实测症状：空会话
+ * hero 的 Preview 角标错位）。用 `!important` 让结果与注入顺序无关。
+ */
+export function buildBrandCss(anchors: Partial<LiveAnchors>): string {
+  const rules: string[] = [];
+  const { heroHeadline, heroHeadlineText, heroPreviewBadge, statsLineRoot } = anchors;
+
+  if (heroHeadlineText !== undefined) {
+    rules.push(`${classSelector(heroHeadlineText)} { display: none !important; }`);
+  }
+  if (heroHeadline !== undefined) {
+    rules.push(`${classSelector(heroHeadline)} { grid-template-columns: auto !important; }`);
+  }
+  if (statsLineRoot !== undefined) {
+    const root = classSelector(statsLineRoot);
+    rules.push(
+      `${root} { max-height: 6px !important; opacity: 0.45 !important; transition: max-height 0.18s ease, opacity 0.18s ease; }`,
+      `${root}:hover { max-height: 28px !important; opacity: 1 !important; }`,
+      `${root}::after { content: ""; display: block; height: 2px; width: 34px; margin: 2px auto 0; border-radius: 2px; background: var(--dsw-alias-separator-primary, rgba(127, 127, 127, 0.5)); transition: opacity 0.18s ease; }`,
+      `${root}:hover::after { opacity: 0; }`,
+    );
+  }
+  return rules.join("\n");
+}
+
 /** Install the brand style tag; returns a disposer that removes it. */
-export function installBrandCss(): () => void {
+export function installBrandCss(anchors: Partial<LiveAnchors> = {}): () => void {
   if (typeof document === "undefined") return () => {};
   if (document.getElementById(BRAND_CSS_STYLE_ID) !== null) return () => {};
   const tag = document.createElement("style");
   tag.id = BRAND_CSS_STYLE_ID;
   tag.dataset.plugin = "dsh-root-brand";
-  tag.textContent = BRAND_CSS;
+  tag.textContent = `${BRAND_CSS}\n${buildBrandCss(anchors)}`;
   document.head.appendChild(tag);
   return () => {
     document.getElementById(BRAND_CSS_STYLE_ID)?.remove();

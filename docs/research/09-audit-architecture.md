@@ -63,7 +63,7 @@ flowchart TD
 | L1 官方壳直补层 | 直补深度超出节点层（lib 本体 + 25 平台包，35 文件）；`.orig`/`.bak` 备份面、heal 基线、branding-backup 与 UI-UX-audit 多套并存 | 🟰（01 §3/§8.1；panorama 模式②） | 逐锚重推（07 §1 A/B/C/D 处置表 + §1 checklist 10 步），预期 35 锚全红起步 | 内容/字符面锚定 minified 产物——上游换压缩器/minify 参数即群体漂移 |
 | L1 | **直补层没有 VCS**：dsh-patches 是 `.git.disabled`+登记簿制；「带补丁的 app」唯一存在于机器状态（/Applications 或 staging-src） | 🆕 | 升级必须先跑 snapshot 对比两处机器态；回滚依赖手工备份堆 | 登记簿-现场一致性靠 verify 脚本反向校验；任何绕过 manifest 的直接编辑成为「影子补丁」（已知案例：heal 目录即为绕过产物） |
 | L1 | **双基座漂移**：生产 /Applications=2.0.4（alpha.1）+ 35 直补；发行线 staging-src/2.0.0=2.0.5（rc.1）+ 重锚 35 补；同一语义（如 P0-3）在两条基线上各有变体 | 🆕 | 2.0.4 退役前每次窗口都要维护两套锚（verify v1/v2 双轨即其 symptom） | 生产回滚目标（2.0.4）与发行目标（2.0.5）语义分叉；补丁语义在两基座间不同步即「回滚=丢修复」 |
-| L1 | 哈希类/哈希文件名结构性锚：`_37cUPa_*`（hero）、`q2FAPq_root`（StatsLine）、`bC90nG_*`（卡片头像 CSS 前缀）；`electron-runtime-DS52LbUW`→`DLNj0vyk`、`update-checker-Mw2EmLOX`→`DaaZGYGQ`、`web-frontend` `index-D-eoFxDP` 等哈希产物名 | 🟰（panorama root-brand/theme 行；07 §6 🐛） | 每个 release 重新探测哈希映射（brand-replay 已参数化 +2 bug） | bundler 哈希每次构建必变；当前靠「选择器 miss 即自然降级」把失败降级为退化，不会崩溃但**静默退化本身不可观测**（无 miss 告警） |
+| L1 | 哈希类/哈希文件名结构性锚：~~`_37cUPa_*`（hero）、`q2FAPq_root`（StatsLine）~~ **已于 2026-09-11 迁移为运行时解析（ADR-0019）**、`bC90nG_*`（卡片头像 CSS 前缀）；`electron-runtime-DS52LbUW`→`DLNj0vyk`、`update-checker-Mw2EmLOX`→`DaaZGYGQ`、`web-frontend` `index-D-eoFxDP` 等哈希产物名 | 🟰（panorama root-brand/theme 行；07 §6 🐛） | 每个 release 重新探测哈希映射（brand-replay 已参数化 +2 bug） | bundler 哈希每次构建必变；当前靠「选择器 miss 即自然降级」把失败降级为退化，不会崩溃但**静默退化本身不可观测**（无 miss 告警） |
 | L1 | root-brand slot 选举依赖未文档化规则：三席（sidebar.brand.mark/name、conversation.hero.brand.mark）以 priority −100 注册，依赖「registry 选取最低优先级」这条私有语义 | 🆕 | 上游若改选举方向/引入同席竞争即三席全灭 | 单行私有契约承载整个品牌身份面；无 type/test 约束，静默失效 |
 | L2 profile 插件层 | file: 安装的三形态漂移（workspace src → lib → profile 副本）；「改了即生效」直觉失效 | 🟰（panorama 模式①；architecture.md 红线 4） | 升级窗口内所有 vendor 包重建+三验（段⑤ §0） | profile 副本与 workspace lib 目前**内容一致但 inode 独立**（本审计实测：等拷贝态）——同步纪律一旦跳过即静默回旧版（case#8 教训已编码但无 preflight 强制） |
 | L2 | postinstall 自动改写第三方包（apply-patches 8 条活跃：noema ×2、better-sidebar、dshmarket、modlens、dsh-context…）；profile 层存在 6 个 `package.json.bak-*` 与 apply-patches.orig 残堆 | 🟰（01 §3.6；panorama ④）+ 🆕（残堆治理） | 每次 `dsh plugin add`/重装即重放；npm 版第三方包升级（noema rc 更新线）需逐条重验 | 对第三方包的 patch 无上游登记处（非本工作区管理），是**唯一没有 fork 出口的补丁面**——退役条件不存在，只能靠包作者上游修复（B 类语义重推永远开放） |
@@ -84,7 +84,7 @@ flowchart TD
 |---|---|---|---|---|
 | **内容锚（稳）** | 语义代码片段（源码级字符串），grep 可在任意 minify 产物中命中 | P0-3 `imageRequestPricing?.(provider, model)`（含 types 副本）、P0-4 `Promise.resolve(fiber.dispose())`（3 处）、cordis clamp、loader B-4、clipboard fall-through、skill-title ×6、LB ×2、chatui ×3、P0-1/2/6/8、RECOVERY_DOCUMENT，约 **28/35** | 「锚点与 alpha.1 逐字一致」「rc.1 逐字全命中」（07 §6）| 高：受上游语义重构才失效（P0-8 pi-ai 在 rc.1 被上游重构即实例） |
 | **语义重推锚（中）** | 上游同段代码结构变化，需按新结构重新设计等价补丁 | P0-8（rc.1 已重构 lazy → 需冒烟判复发后重推）、UI-1 ErrorBoundary（B 表）、chatui loadOlder（rc.1 catch 别名漂移，已适配） | 每次上游重构触发；成本 O(读源码) | 中：跟上游迭代节奏，不可预算 |
-| **结构锚（脆）** | 文件名/结构位置/DOM 槽位级 | ① `electron-runtime-DLNj0vyk.js`、`update-checker-DaaZGYGQ.js`、`index-D-eoFxDP.js` 等哈希产物名（brand-replay 脚本内）；② main.js 结构块（P0-7v2 依赖 createFreshDesktopProfile + profile-manager 双锚点，2.0.5 时原单锚静默失效——**盲区实验 2.1 才揪出**）；③ CSS-module 哈希类（_37cUPa/q2FAPq/bC90nG，钉 2.0.4）；④ native-ui `desktop-dialog-C6qDR3Sk.js`（UI-3 在 2.0.5 已不存在） | 每次构建必变或每次升级需重探测；07 §6 已为 ① 参数化 | 低：**每次上游 release 自动全红** |
+| **结构锚（脆）** | 文件名/结构位置/DOM 槽位级 | ① `electron-runtime-DLNj0vyk.js`、`update-checker-DaaZGYGQ.js`、`index-D-eoFxDP.js` 等哈希产物名（brand-replay 脚本内）；② main.js 结构块（P0-7v2 依赖 createFreshDesktopProfile + profile-manager 双锚点，2.0.5 时原单锚静默失效——**盲区实验 2.1 才揪出**）；③ CSS-module 哈希类（bC90nG 仍钉 2.0.4；~~_37cUPa/q2FAPq~~ 品牌侧已由运行时解析取代，见 ADR-0019）；④ native-ui `desktop-dialog-C6qDR3Sk.js`（UI-3 在 2.0.5 已不存在） | 每次构建必变或每次升级需重探测；07 §6 已为 ① 参数化 | 低：**每次上游 release 自动全红** |
 
 ### 2.2 n+3（2.0.6/2.0.7）重锚成本模型
 
@@ -110,7 +110,7 @@ flowchart TD
 |---|---|---|---|
 | theme #4（no-op 已删） | 已退役 | — | 已完成（段④） |
 | memory roleplay / deepresearch http 守卫 | src 原生 + 文件级补丁层 | 待 2.0.5 窗口 lib 重建 | `tsc+tests 全绿 且 lib 重建在位` → 同窗口删对应 apply-patches 条目（段⑤ §1.3 已排程） |
-| brand 哈希类 `_37cUPa/q2FAPq` | `data-dsh-skin` + overrideTokens 官方 token 契约 | skin 已出现，tokens 契约未扩到 hero/statsline 席 | 官方席出 token 化 slot（可注册组件而非 hide-DOM）→ 一经可注册即退役 CSS 哈希钉 |
+| ~~brand 哈希类 `_37cUPa/q2FAPq`~~ **已退役（2026-09-11，ADR-0019）** | 运行时按 `data-plugin-css` 解析类名 + 失败自报 | 已落地：两代前缀同一实现覆盖，缺锚时报 `degraded` | 剩余路径：官方席出 token 化 slot（可注册组件而非 hide-DOM）→ 再退役整套 DOM 改写；若上游重命名 `HeroShell/StatsLine.module.css` 则需重锚模块 id |
 | theme `:root` 注入 | 官方主题 token（`--dsw-*`）全面化 | inject 列表已对齐（源包原生） | 官方 overrideTokens 覆盖 `:root` 全量重定义语义 → 降级为纯 user 侧配置 |
 | team-gui 文案导航 | 申请宿主 imperative settings API/slot 属性 | 无公开 API（代码注释自认） | 官方 `settings.open(section)` 类 API 出现 → 删 openTeamSettings 文本锚 |
 | PR-1 icon 透传 | 向上游提 PR（字段已在 schema，仅缺透传） | 2.0.5 仍缺（verify v2 PR-1 两锚为准） | 上游版本含 `record.icon` 透传 → 删 L1 两锚 + preset 面脱离 L1 |
@@ -228,7 +228,7 @@ grep -cE "^ck " packaging/verify-patches-v2.sh = 35（v1=31 锚）
 /Applications/.../package.json → dsh-plugin-desktop 2.0.4；packaging/staging-src/2.0.0/app → 2.0.5
 packaging/release/2.0.0/VERSION → LUTE_VERSION=2.0.0 BUILD=20260910-155331 DSH_BASELINE=2.0.5
 # 锚分类样例
-dsh-root-brand-local/lib/client.js:180-185（._37cUPa_*/.q2FAPq_root 哈希钉）、:249-255（priority:-100 三席）
+dsh-root-brand-local：哈希钉已于 2026-09-11 退役（改为运行时解析，见 ADR-0019 与其 Note）；仅余 priority:-100 三席选举依赖未文档化规则
 dsh-agent-team-gui-local/lib/client.js openTeamSettings（role=dialog + 文本匹配 + 12×50ms seek）
 dsh-theme-local/src/client/index.tsx:129（:root 注入）
 # 数据

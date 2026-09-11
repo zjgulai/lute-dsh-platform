@@ -14,9 +14,13 @@ if (size > budget) {
   throw new Error(`Client bundle is ${size} bytes, over ${budget} bytes`);
 }
 
+// 守卫的是「依赖引用」，不是「字符串值」：live-selectors 会按官方包路径去查
+// `style[data-plugin-css="<包路径>/<模块>.module.css"]`，该包名合法地以字符串出现，
+// 但绝不能被 bundle 进去（否则双实例）。
 for (const forbidden of ["@deepseek-ai/dsh-client-ui-conversation", "react.development"]) {
-  if (client.includes(forbidden) || host.includes(forbidden)) {
-    throw new Error(`Build still contains unintended dependency: ${forbidden}`);
+  const asDependency = new RegExp(`(?:require\\(|from\\s*|import\\()["'\`]${forbidden.replaceAll(".", "\\.")}`);
+  if (asDependency.test(client) || asDependency.test(host)) {
+    throw new Error(`Build still imports unintended dependency: ${forbidden}`);
   }
 }
 

@@ -125,33 +125,12 @@ else
   fail=1
 fi
 
-# ── 2b. Hero 空态标题 + 网页标题（fallback 防御；正常路径由 dsh-root-brand 插件接管并隐藏官方文案）──
-# 官方 locale 锚点（语义键稳定，与压缩器哈希无关）: "hero.headline" zh/en
-CONV_CLIENT="$CHK/node_modules/@deepseek-ai/dsh-client-ui-conversation/lib/client.js"
-if [ -f "$CONV_CLIENT" ]; then
-  if grep -q '"hero.headline": "Artificial Business Intelligence Agentic"' "$CONV_CLIENT" 2>/dev/null; then
-    say "OK   hero.headline 品牌文案"
-  elif [ "$MODE" = "--apply" ]; then
-    python3 - "$CONV_CLIENT" <<'PY'
-import sys
-p = sys.argv[1]
-s = open(p, encoding="utf-8").read()
-n1 = s.count('"hero.headline": "探索未至之境"')
-n2 = s.count('"hero.headline": "Into the Unknown"')
-s = s.replace('"hero.headline": "探索未至之境"', '"hero.headline": "Artificial Business Intelligence Agentic"')
-s = s.replace('"hero.headline": "Into the Unknown"', '"hero.headline": "Artificial Business Intelligence Agentic"')
-open(p, "w", encoding="utf-8").write(s)
-print(f"hero.headline patched (zh×{n1} en×{n2})")
-PY
-    say "APPLY hero.headline 品牌文案"
-  else
-    say "DRIFT hero.headline 官方文案 — 跑 --apply"
-    fail=1
-  fi
-else
-  say "MISSING conversation client（hero.headline 补丁目标）"
-  fail=1
-fi
+# ── 2b. 网页标题（hero 空态标题的补丁已于 2026-09-11 退役）───────────────
+# 退役说明：原先此处把官方 locale 的 "hero.headline" 改写成品牌句做兜底，与
+# dsh-root-brand 插件的「隐藏官方标题 + 渲染品牌句」构成第二条真相源 —— 一旦插件
+# 的隐藏规则 miss（CSS-module 哈希漂移），官方标题就会以同文案第二次出现。
+# 现在品牌句的唯一真相源是插件，官方标题由插件在运行时解析类名后隐藏。
+# 规格：.scratch/dsh-root-brand-drift/spec.md ｜ 决定：ADR-0019
 IDX_HTML="$CHK/node_modules/@deepseek-ai/dsh-web-frontend/dist/index.html"
 if [ -f "$IDX_HTML" ]; then
   if grep -q '<title>LUTE Agentic System</title>' "$IDX_HTML" 2>/dev/null; then
