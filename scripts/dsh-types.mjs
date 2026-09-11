@@ -13,7 +13,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { discoverPackages } from './gates/package-layout.mjs'
-import { applyTypeLinks, buildVendoredDeclarations, dshPackagesInManifest, dshPackagesInSource, extractRuntimeTypes, mergeVendoredTypes, planTypeLinks } from './gates/dsh-types.mjs'
+import { applyTypeLinks, buildVendoredDeclarations, linkTypeScope, dshPackagesInManifest, dshPackagesInSource, extractRuntimeTypes, mergeVendoredTypes, planTypeLinks } from './gates/dsh-types.mjs'
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 
@@ -24,6 +24,12 @@ function runtimeDir() {
   const versions = readdirSync(base).filter((name) => !name.startsWith('.'))
   if (versions.length === 0) return undefined
   return join(base, versions[0])
+}
+
+/** 应用内 node_modules（提供 @standard-schema 等第三方依赖）。 */
+function appNodeModulesDir() {
+  const path = '/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules'
+  return existsSync(path) ? path : undefined
 }
 
 /** 查找可用于生成声明文件的 tsc（取任一已装 typescript 的受管包）。 */
@@ -71,6 +77,8 @@ function main() {
     } else {
       process.stdout.write('note 未找到 tsc，跳过声明生成（cordis 家族类型将不可用）\n')
     }
+    const scopeLinks = linkTypeScope({ outDir: OUT_DIR, appNodeModules: appNodeModulesDir() })
+    process.stdout.write(`ok 建立类型来源自解析作用域 ${scopeLinks} 条（供 host 测试运行时解析裸包名）\n`)
   } else {
     available = existsSync(OUT_DIR)
       ? readdirSync(OUT_DIR).filter((name) => existsSync(join(OUT_DIR, name, 'package.json'))).map((name) => `@deepseek-ai/${name}`)

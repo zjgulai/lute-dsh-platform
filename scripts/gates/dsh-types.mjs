@@ -86,6 +86,7 @@ export function applyTypeLinks({ root, source, links }) {
   for (const name of links) {
     const pkgName = name.split('/')[1]
     const sourceDir = join(source, pkgName)
+    // 类型来源里没有对应目录就跳过；否则会留下断链（门禁 dependency-links 会拒绝）
     if (!existsSync(sourceDir)) continue
     const scopeDir = join(root, 'node_modules', DSH_SCOPE)
     mkdirSync(scopeDir, { recursive: true })
@@ -281,4 +282,40 @@ function listTsFiles(dir, out = []) {
     else if (entry.name.endsWith('.ts') && !entry.name.endsWith('.d.ts')) out.push(path)
   }
   return out
+}
+
+/**
+ * 在类型来源目录内建立 `node_modules/@deepseek-ai` 自解析作用域。
+ *
+ * 为什么需要：解出的 DSH 包 `lib/index.js` 里是裸包名导入（如 `@deepseek-ai/cordis`），
+ * 只有运行时（vitest/node 执行 host 测试）会真正加载它们；若 `.dsh-types` 自身没有
+ * node_modules，Node 从该目录向上找不到这些包，host 测试会全部收集失败（实测 5/5）。
+ * @param {{outDir: string, appNodeModules?: string}} input 类型来源目录与应用 node_modules（提供 @standard-schema 等第三方）
+ * @returns {number} 建立的链接数
+ */
+export function linkTypeScope({ outDir, appNodeModules }) {
+  if (!existsSync(outDir)) return 0
+  const scopeDir = join(outDir, 'node_modules', DSH_SCOPE)
+  mkdirSync(scopeDir, { recursive: true })
+  let linked = 0
+  for (const entry of readdirSync(outDir)) {
+    if (entry === 'node_modules' || entry.startsWith('.')) continue
+    const pkgDir = join(outDir, entry)
+    if (!existsSync(join(pkgDir, 'package.json'))) continue
+    const linkPath = join(scopeDir, entry)
+    if (isSymlink(linkPath)) rmSync(linkPath, { force: true })
+    else if (existsSync(linkPath)) continue
+    symlinkSync(pkgDir, linkPath)
+    linked += 1
+  }
+  if (appNodeModules && existsSync(appNodeModules)) {
+    for (const scope of readdirSync(appNodeModules)) {
+      if (!scope.startsWith('@')) continue
+      const from = join(appNodeModules, scope)
+      const to = join(outDir, 'node_modules', scope)
+      if (existsSync(to)) continue
+      symlinkSync(from, to)
+    }
+  }
+  return linked
 }
