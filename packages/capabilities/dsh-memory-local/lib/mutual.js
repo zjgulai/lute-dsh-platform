@@ -1,0 +1,352 @@
+/**
+ * dsh-memory · 互维维护（Mutual Sustain Loop v1.1）——沙箱 B 侧
+ *
+ * 职责（与 A 侧 guardian.py 对称）：
+ *   1. 心跳写戳：10min 写 ~/.lingxu_net/heartbeat.web.stamp（{ts,pid,task_running}）
+ *   2. 守护 A：检测 harness 进程（wmic 特征）→ 不存在则 detached 拉起
+ *      （python -m harness.guardian；幂等：拉起前确认不存在 + 60s 冷却）
+ *   3. 任务验证：轮询 ~/.lingxu_net/tasks/task-*.json → 双通道验证
+ *      （白箱 base_verify + DeepSeek 复核）→ 写回 result-<id>.json
+ *
+ * 协议：CommonTrustProtocol/docs/mutual-sustain-loop.md v1.1
+ * 失联分级：25min 告警 / 35min 重启 / task_running 豁免 ×2=70min
+ */
+import { exec, spawn } from 'node:child_process';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import * as os from 'node:os';
+const DEFAULTS = {
+    heartbeatMs: 10 * 60 * 1000,
+    warnMs: 25 * 60 * 1000,
+    deadMs: 35 * 60 * 1000,
+    workingFactor: 2,
+    restartCooldownMs: 60 * 1000,
+    netDir: path.join(os.homedir(), '.lingxu_net'),
+};
+/** 互维网络目录定位 */
+export function netDir(opts = DEFAULTS) {
+    return opts.netDir;
+}
+// ---------------------------------------------------------------------------
+// 心跳（B 侧写戳）
+// ---------------------------------------------------------------------------
+export function writeHeartbeat(opts = DEFAULTS, taskRunning = false) {
+    const dir = netDir(opts);
+    fs.mkdirSync(dir, { recursive: true });
+    const stamp = {
+        ts: Date.now() / 1000,
+        pid: process.pid,
+        task_running: taskRunning,
+    };
+    fs.writeFileSync(path.join(dir, 'heartbeat.web.stamp'), JSON.stringify(stamp), 'utf-8');
+}
+export function readHeartbeat(which, opts = DEFAULTS) {
+    try {
+        const raw = fs.readFileSync(path.join(netDir(opts), `heartbeat.${which}.stamp`), 'utf-8');
+        const s = JSON.parse(raw);
+        const ageMs = Date.now() - s.ts * 1000;
+        return { ts: s.ts, pid: s.pid, task_running: !!s.task_running, ageMs };
+    }
+    catch {
+        return null;
+    }
+}
+/** 失联分级判定（纯函数，A 侧 judge_stamp 的 B 侧镜像） */
+export function judgeStamp(stamp, opts = DEFAULTS) {
+    if (!stamp)
+        return 'no_stamp';
+    const threshold = stamp.task_running ? opts.deadMs * opts.workingFactor : opts.deadMs;
+    if (stamp.ageMs < opts.warnMs)
+        return 'alive';
+    if (stamp.task_running && stamp.ageMs < threshold)
+        return 'alive_working';
+    if (stamp.ageMs < threshold)
+        return 'warning';
+    return 'dead';
+}
+// ---------------------------------------------------------------------------
+// 守护 A（检测 harness 进程 + 拉起）
+// ---------------------------------------------------------------------------
+const HARNESS_PROC = ['python', 'harness.guardian']; // wmic 特征
+function execP(cmd) {
+    return new Promise((resolve) => {
+        exec(cmd, { windowsHide: true, timeout: 15_000 }, (err, stdout) => {
+            resolve(err ? '' : String(stdout));
+        });
+    });
+}
+/** 检测 harness 进程是否存在
+ * P1 完善（GPT 审查·wmic 兼容）：wmic 在 Win11+ 已被移除——失败时
+ * fallback PowerShell Get-CimInstance（Win）；非 Windows 用 ps 查询。 */
+export async function harnessRunning() {
+    if (process.platform === 'win32') {
+        // ① wmic（旧 Win10 可用）
+        const out = await execP(`wmic process where "name='python.exe'" get commandline 2>nul`);
+        if (out.includes('harness.guardian') || out.includes('harness.main'))
+            return true;
+        // ② wmic 不可用（Win11 移除）→ PowerShell
+        const psOut = await execP(`powershell -NoProfile -Command "Get-CimInstance Win32_Process -Filter \\"name='python.exe'\\" | Select-Object -ExpandProperty CommandLine"`);
+        return psOut.includes('harness.guardian') || psOut.includes('harness.main');
+    }
+    // 非 Windows（Linux/macOS）：ps 查询
+    const psOut = await execP(`ps -eo command | grep -E 'harness\\.(guardian|main)' | grep -v grep`);
+    return !!psOut;
+}
+/** detached 拉起 A 侧 harness.guardian（幂等：先确认不存在） */
+export async function ensureHarness(python = 'python', opts = DEFAULTS) {
+    const running = await harnessRunning();
+    if (running)
+        return 'already';
+    // P1 修复（GPT 审查）：spawn 找不到可执行文件是异步 error 事件，无监听
+    // 会直接崩 Node（Unhandled 'error' event）。加监听 + 超时判定拉起失败。
+    return new Promise((resolve) => {
+        let child = null;
+        let failTimer = null;
+        let okTimer = null;
+        let settled = false;
+        const finish = (r) => {
+            if (settled)
+                return;
+            settled = true;
+            if (failTimer)
+                clearTimeout(failTimer);
+            if (okTimer)
+                clearTimeout(okTimer);
+            resolve(r);
+        };
+        try {
+            child = spawn(python, ['-m', 'harness.guardian'], {
+                windowsHide: true,
+                detached: true,
+                stdio: 'ignore',
+            });
+        }
+        catch (e) {
+            log(opts, `守护失败：${String(e)}`);
+            finish('failed');
+            return;
+        }
+        // 拉起失败（python 不存在等）→ 记录 + failed，不崩 Node。
+        // spawn 的 error 事件是异步的：不能立即判 started——等 50ms error 窗口，
+        // 无 error 才算拉起成功（GPT 审查：此前立即返回 started，错误路径也报成功）。
+        child.on('error', (err) => {
+            log(opts, `守护拉起错误：${err.message}`);
+            finish('failed');
+        });
+        // 拉起成功但立即退出（harness.guardian 不存在）→ failed
+        child.on('exit', (code) => {
+            if (code !== null && code !== 0) {
+                log(opts, `守护进程退出 code=${code}（guardian 可能不可用）`);
+                finish('failed');
+            }
+        });
+        okTimer = setTimeout(() => finish('started'), 50);
+        failTimer = setTimeout(() => {
+            log(opts, `守护拉起超时（10s 无健康确认）`);
+            finish('failed');
+        }, 10_000);
+        child.unref();
+        log(opts, `守护动作：拉起 harness.guardian（pid=${child.pid ?? '?'}）`);
+    });
+}
+/** 扫描互维目录里 A→B 的 pending 任务 */
+export function scanTasks(opts = DEFAULTS) {
+    const dir = path.join(netDir(opts), 'tasks');
+    if (!fs.existsSync(dir))
+        return [];
+    const out = [];
+    for (const f of fs.readdirSync(dir)) {
+        if (!f.startsWith('task-') || !f.endsWith('.json'))
+            continue;
+        try {
+            const t = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf-8'));
+            if (t.to === 'B' && t.status === 'pending')
+                out.push(t);
+        }
+        catch { /* 跳过坏文件 */ }
+    }
+    return out;
+}
+/** 白箱通道：智慧之书 base_verify（通过 bridge 调用，或本地注入） */
+export async function whiteboxVerify(claim, verifyFn) {
+    try {
+        return await verifyFn(claim);
+    }
+    catch (e) {
+        return { judgment: `whitebox_error: ${String(e)}`, best: '', d_norm: -1, record_id: '' };
+    }
+}
+/** 复核通道：DeepSeek 独立复核（在白箱判定之上） */
+export async function llmReview(claim, whitebox, reviewFn) {
+    try {
+        return await reviewFn(claim, whitebox);
+    }
+    catch (e) {
+        return { conclusion: `llm_error: ${String(e)}`, reason: '' };
+    }
+}
+/** 综合 verdict（白箱优先） */
+export function combineVerdict(w, l) {
+    const c = l.conclusion || '';
+    // P1 修复（GPT 审查）：白箱通道异常 → fail-closed（不因复核「同意」而 pass）
+    if (w.judgment.startsWith('whitebox_error') || w.judgment.startsWith('llm_error')
+        || w.d_norm < 0) {
+        return 'needs_revision';
+    }
+    if (w.judgment.startsWith('采纳')) {
+        // 白箱采纳：复核质疑/不同意→needs_revision（白箱优先，记录分歧）；否则 pass
+        return c.includes('质疑') || c.includes('不同意') || c.includes('不通过')
+            ? 'needs_revision' : 'pass';
+    }
+    if (w.judgment.includes('fail') || w.judgment.includes('不成立'))
+        return 'fail';
+    // 证据不足/无法判断 → 白箱不确定，交给复核决定（「不同意」须排除「同意」子串）
+    if (c.includes('不同意') || c.includes('不通过'))
+        return 'needs_revision';
+    if (c.includes('通过') || c.includes('同意'))
+        return 'pass';
+    // P1 修复（GPT 审查）：「质疑」是分歧信号——白箱不确定 + 复核质疑 → 需要修订，
+    // 此前把「质疑」当 pass 与白箱采纳分支语义矛盾。
+    if (c.includes('质疑'))
+        return 'needs_revision';
+    return 'needs_revision';
+}
+/** 任务 ID 安全校验（P1 修复：防路径穿越——task.id 可含 ../../ 写目录外） */
+const TASK_ID_RE = /^[A-Za-z0-9._-]{1,64}$/;
+export function safeTaskId(id) {
+    return TASK_ID_RE.test(id) && !id.includes('..');
+}
+/** 处理单个任务：双通道验证 → 写回 result */
+export async function processTask(task, verifyFn, reviewFn, opts = DEFAULTS) {
+    const dir = path.join(netDir(opts), 'tasks');
+    // P1 修复（GPT 审查）：task.id 路径穿越——非法 id 拒绝处理，不写任何文件
+    if (!safeTaskId(task.id)) {
+        log(opts, `任务 ${JSON.stringify(task.id)} 非法（路径穿越风险），拒绝处理`);
+        throw new Error(`非法任务 id: ${task.id}`);
+    }
+    const taskPath = path.join(dir, `task-${task.id}.json`);
+    // P1 完善（GPT 审查·任务竞态）：原子 claim——rename task→processing。
+    // 多实例同时 scanTasks 读到同一 pending 时，rename 只有一方成功；
+    // 失败（文件已被 rename/不存在）= 其他实例正在处理 → 跳过（返回 null）。
+    // 此前无锁：多实例都写 processing/result/done，结果互相覆盖。
+    const claimPath = path.join(dir, `processing-${task.id}.json`);
+    try {
+        fs.renameSync(taskPath, claimPath);
+    }
+    catch {
+        return null; // 已被其他实例 claim，或文件不存在
+    }
+    try {
+        const w = await whiteboxVerify(task.payload.claim, verifyFn);
+        const l = await llmReview(task.payload.claim, w, reviewFn);
+        const verdict = combineVerdict(w, l);
+        const result = {
+            task_id: task.id,
+            verdict,
+            whitebox: w,
+            llm_review: l,
+            reasons: [
+                `白箱判定：${w.judgment}（best=${w.best}，d_norm=${w.d_norm}）`,
+                `复核结论：${l.conclusion}`,
+            ],
+            evidence: [task.payload.source_ref || ''].filter(Boolean),
+            verifier: 'B',
+            at: Date.now() / 1000,
+        };
+        // 结果先写 tmp 再 rename（原子，防半写文件）
+        const resultTmp = path.join(dir, `result-${task.id}.json.tmp`);
+        fs.writeFileSync(resultTmp, JSON.stringify(result, null, 2), 'utf-8');
+        fs.renameSync(resultTmp, path.join(dir, `result-${task.id}.json`));
+        // 完成：清理 claim 文件（rename 回 done 标记供审计）
+        fs.renameSync(claimPath, path.join(dir, `done-${task.id}.json`));
+        log(opts, `任务 ${task.id} 验证完成：${verdict}`);
+        return result;
+    }
+    catch (e) {
+        // 处理失败：释放 claim（rename 回 task 供重试）
+        try {
+            fs.renameSync(claimPath, taskPath);
+        }
+        catch { /* 文件可能已不在 */ }
+        throw e;
+    }
+}
+// ---------------------------------------------------------------------------
+// 日志 / last_contact
+// ---------------------------------------------------------------------------
+export function log(opts, msg) {
+    try {
+        const p = path.join(netDir(opts), 'mutual.log');
+        fs.appendFileSync(p, `[B ${new Date().toISOString()}] ${msg}\n`, 'utf-8');
+    }
+    catch { /* 日志失败不阻塞 */ }
+}
+export function writeLastContact(opts = DEFAULTS) {
+    try {
+        fs.writeFileSync(path.join(netDir(opts), 'last_contact.json'), JSON.stringify({ last_contact_b: Date.now() / 1000 }), 'utf-8');
+    }
+    catch { /* 非阻塞 */ }
+}
+// ---------------------------------------------------------------------------
+// 安装（ctx.effect 作用域内，卸载时清理）
+// ---------------------------------------------------------------------------
+export function installMutualMaintenance(ctx, config = {}, hooks = {}, 
+/** Python 可执行（默认 'python'；调用方应透传 Config.python——P2 修复：硬编码 'python' 忽略 config）。 */
+pythonConfig = {}) {
+    const opts = { ...DEFAULTS, ...config };
+    const pythonExe = pythonConfig.python ?? 'python';
+    // 1. 心跳写戳 + 守护 A（10min 周期）
+    // P1 修复（GPT 审查）：cordis-plugin-timer 签名是 interval(callback, delay)
+    // ——此前 (ms, fn) 写反：数字被当 callback、函数被当 delay，回调永不执行，
+    // 互维心跳/任务扫描实际不工作。
+    // P2 修复：不能用 ctx.interval——那是 cordis-plugin-timer 注入的快捷属性，
+    // 未声明 `timer` inject 时访问抛 "cannot get property without inject"。
+    // 改用 Node 原生 setInterval（互维不需要 Cordis effect 生命周期管理）。
+    const heartbeatTimer = setInterval(() => {
+        try {
+            writeHeartbeat(opts);
+            // 守护 A：harness 不在 → 拉起
+            ensureHarness(pythonExe, opts).then((r) => {
+                if (r === 'started')
+                    ctx.logger.info(`mutual: 已拉起 A 侧 harness（${r}）`);
+            });
+            // 读 A 戳分级判定
+            const a = readHeartbeat('a', opts);
+            const verdict = judgeStamp(a, opts);
+            if (verdict === 'warning')
+                ctx.logger.info('mutual: A 侧心跳告警（>25min 未更新）');
+            if (verdict === 'dead')
+                ctx.logger.info('mutual: A 侧失联（>35min），等待 guardian 自愈或告警');
+            writeLastContact(opts);
+        }
+        catch (e) { /* 单次失败不中断 */ }
+    }, opts.heartbeatMs);
+    heartbeatTimer.unref?.();
+    // 2. 任务轮询（30s 周期，检查 A→B 任务）
+    const taskTimer = setInterval(() => {
+        try {
+            const tasks = scanTasks(opts);
+            for (const t of tasks) {
+                if (!hooks.verify || !hooks.review)
+                    continue;
+                processTask(t, hooks.verify, hooks.review, opts).catch((e) => {
+                    log(opts, `任务 ${t.id} 处理异常：${String(e)}`);
+                });
+            }
+        }
+        catch (e) { /* 单次失败不中断 */ }
+    }, 30_000);
+    taskTimer.unref?.();
+    // 3. effect 作用域清理
+    ctx.effect(() => {
+        return () => {
+            try {
+                clearInterval(heartbeatTimer);
+                clearInterval(taskTimer);
+            }
+            catch { /* 清理失败不阻塞 */ }
+        };
+    }, 'dsh-memory-mutual');
+}
+export default { installMutualMaintenance, writeHeartbeat, readHeartbeat, judgeStamp, scanTasks, processTask };
+//# sourceMappingURL=mutual.js.map

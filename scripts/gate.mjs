@@ -24,7 +24,7 @@ import {
   checkTrackedIgnored,
 } from './gates/checks.mjs'
 import { checkProfileMetadata } from './gates/sync-profile.mjs'
-import { discoverPackages } from './gates/package-layout.mjs'
+import { collectPackages } from './gates/package-collect.mjs'
 import { renderCatalog } from './gen-catalog.mjs'
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -186,17 +186,20 @@ function listAdrFiles() {
 
 /**
  * 收集仓库根与全部受管包的清单（根包自身也受身份契约约束）。
- * 包位置由 package-layout 决定，迁移期兼容归组与平铺两种布局。
+ * 与目录墙生成器共用 collectPackages，避免两侧包集合分叉。
  * @returns {Array<{dir: string, manifest: Record<string, unknown>}>}
  */
 function collectManifests() {
-  const entries = [
-    { dir: '.', manifest: JSON.parse(readFileSync(join(repoRoot, 'package.json'), 'utf8')) },
+  const { rootManifest, packages } = collectPackages(repoRoot)
+  return [
+    { relPath: '.', dir: '.', manifest: rootManifest },
+    ...packages.map((entry) => ({
+      relPath: entry.relPath,
+      dir: entry.relPath,
+      group: entry.group,
+      manifest: entry.manifest,
+    })),
   ]
-  for (const entry of discoverPackages(repoRoot)) {
-    entries.push({ dir: entry.relPath, manifest: JSON.parse(readFileSync(join(entry.dir, 'package.json'), 'utf8')) })
-  }
-  return entries
 }
 
 /** 读取子模块实际 HEAD；未初始化或不可读时返回 undefined。 */

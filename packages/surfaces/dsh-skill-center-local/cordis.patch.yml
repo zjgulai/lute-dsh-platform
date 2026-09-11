@@ -1,0 +1,6 @@
+# bundle patch for the LUTE-localized skill center plugin (fork of
+# @linxin666/dsh-client-ui-skill-explorer v0.3.6): inserts its plugin row
+# into the desktop profile roster.
+- insert:
+    - id: ui-skill-center-local
+      name: 'dsh-skill-center-local'

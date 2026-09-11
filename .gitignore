@@ -18,29 +18,13 @@
 !.scratch/**
 !packaging/**
 !81-Skills/**
-!dsh-overseas-skills/**
-!dsh-overseas-tools/**
-!dsh-wanzh-hulian/**
+!packages/**
 !scripts/**
-!dsh-skill-subset/**
 !dsh-patches/**
-!dsh-loopx-plugin/**
-!dsh-memory-local/**
-!dsh-auto-compact-local/**
-!dsh-deepresearch-local/**
-!dsh-agent-team-gui-local/**
-!dsh-browser-local/**
-!dsh-file-upload-local/**
-!dsh-preset-lint-local/**
-!dsh-rename-conversations/**
 !dsh-renderer-heal/**
 !dsh-reverse-skill-local/**
-!dsh-root-brand-local/**
 !dsh-skill-title-fix/**
-!dsh-theme-local/**
-!dsh-team-hub/**
-!dsh-skill-center-local/**
-!dsh-ui-polish-local/**
+!dsh-rootoutlet-heal/**
 !explore-unknowns-local/**
 !write-spec-local/**
 
@@ -62,7 +46,6 @@ credentials*
 *.shn#
 .DS_Store
 *.log
-!dsh-my-quotes/**
 
 # —— 排除临时/备份文件（覆盖白名单，避免 git add -A 误纳入）——
 *.bak-*
@@ -78,4 +61,3 @@ staging-src/
 # —— dsh-patches 归档素材与 release 目录：受管资产，显式纳入以消除 tracked+ignored 漂移（ADR-0013）——
 !dsh-patches/archive/**
 !release/**
-!dsh-task-board-local/**

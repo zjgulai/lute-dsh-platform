@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib/types",
+    "tsBuildInfoFile": "lib/tsconfig.host.tsbuildinfo",
+    "typeRoots": [
+      "../node_modules/@types"
+    ]
+  },
+  "files": [
+    "src/index.ts",
+    "src/invariant.ts",
+    "src/spec.ts",
+    "src/types.ts",
+    "src/artifacts.ts",
+    "src/assistant-text.ts",
+    "src/budget.ts",
+    "src/investigation.ts",
+    "src/prompts.ts",
+    "src/migrate.ts",
+    "src/platform.ts"
+  ]
+}

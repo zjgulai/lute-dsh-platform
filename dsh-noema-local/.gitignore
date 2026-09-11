@@ -1,7 +1,0 @@
-node_modules/
-lib/
-.client-build/
-*.tsbuildinfo
-npm/*/bin/
-artifacts/
-*.tgz

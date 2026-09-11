@@ -5,7 +5,7 @@
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
-import { discoverPackages } from './gates/package-layout.mjs'
+import { collectPackages } from './gates/package-collect.mjs'
 import { fileURLToPath } from 'node:url'
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -93,19 +93,11 @@ export function renderCatalog({ packages }) {
 
 /** 收集仓库顶层受管包（含根包）。 */
 function collect() {
-  const packages = [
-    { dir: '.', manifest: JSON.parse(readFileSync(join(repoRoot, 'package.json'), 'utf8')) },
+  const { rootManifest, packages } = collectPackages(repoRoot)
+  return [
+    { relPath: '.', dir: '.', manifest: rootManifest },
+    ...packages.map((entry) => ({ relPath: entry.relPath, dir: entry.relPath, group: entry.group, manifest: entry.manifest })),
   ]
-  for (const entry of discoverPackages(repoRoot)) {
-    const group = entry.relPath.startsWith('packages/') ? entry.relPath.split('/')[1] : undefined
-    packages.push({
-      relPath: entry.relPath,
-      dir: entry.relPath,
-      group,
-      manifest: JSON.parse(readFileSync(join(entry.dir, 'package.json'), 'utf8')),
-    })
-  }
-  return packages
 }
 
 function main() {
