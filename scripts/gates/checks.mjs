@@ -222,3 +222,20 @@ export function checkNestedRepositories({ nestedRepos, declaredSubmodules }) {
       .map((repo) => `${repo}: 未在 .gitmodules 声明的嵌套仓库——它不属于父仓库任何提交，内容会静默失管（ADR-0016）`),
   }
 }
+
+/**
+ * 校验生成式目录墙与再生成结果一致（ADR-0011）。
+ * 生成物是只读产物：手改会让文档与代码脱节，且门禁必须能发现。
+ * @param {{current: string, regenerated: string}} input 磁盘上的产物与按当前代码重新生成的内容
+ * @returns {{passed: boolean, violations: string[]}}
+ */
+export function checkCatalogFresh({ current, regenerated }) {
+  return current === regenerated
+    ? { passed: true, violations: [] }
+    : {
+        passed: false,
+        violations: [
+          'docs/catalog/packages.md: 与再生成结果不一致（生成物请勿手改，运行 node scripts/gen-catalog.mjs 更新，ADR-0011）',
+        ],
+      }
+}

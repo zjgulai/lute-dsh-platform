@@ -15,6 +15,7 @@ import { fileURLToPath } from 'node:url'
 import {
   checkAdrIndex,
   checkAdrNoteLinks,
+  checkCatalogFresh,
   checkExemptions,
   checkGitignoreWhitelist,
   checkNestedRepositories,
@@ -23,6 +24,7 @@ import {
   checkTrackedIgnored,
 } from './gates/checks.mjs'
 import { checkProfileMetadata } from './gates/sync-profile.mjs'
+import { renderCatalog } from './gen-catalog.mjs'
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 const MODES = ['quick', 'full']
@@ -78,6 +80,19 @@ const CHECKS = [
         notePath: NOTE_PATH,
         noteText: readIfExists(join(repoRoot, NOTE_PATH)),
         exists: (path) => existsSync(join(repoRoot, path)),
+      })
+    },
+  },
+  {
+    name: 'catalog-fresh',
+    remediation: '运行 node scripts/gen-catalog.mjs 重新生成目录墙（ADR-0011）',
+    run() {
+      const target = 'docs/catalog/packages.md'
+      const current = readIfExists(join(repoRoot, target))
+      if (current === '') return { passed: true, violations: [] }
+      return checkCatalogFresh({
+        current,
+        regenerated: renderCatalog({ packages: collectManifests() }),
       })
     },
   },
