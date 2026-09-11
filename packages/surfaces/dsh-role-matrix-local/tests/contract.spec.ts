@@ -118,3 +118,43 @@ describe('build artifacts', () => {
     expect(host).toContain("export const inject = ['webServer']")
   })
 })
+
+describe('host route registration', () => {
+  it('calls webServer.register once per route, with kind and path intact', async () => {
+    // The real contract is `register(route: WebRoute): () => void` — ONE route,
+    // filed by `route.kind` + `route.path`. Handed the whole array instead, it
+    // reads `kind === undefined` and files both routes under the `undefined`
+    // key of the PREFIX table; `table.has(route.path)` is `has(undefined)` so
+    // the duplicate check cannot fire either. Nothing throws, nothing logs, and
+    // both exact routes are unreachable — the panel then reports a bare
+    // "读取失败：HTTP 404" produced by the /api prefix guard, which answers
+    // identically for a path that was never registered at all.
+    //
+    // This stub therefore enforces the contract rather than accepting whatever
+    // it is handed; an array-receiving `register` must fail here.
+    const { apply } = (await import('../src/index.ts')) as {
+      apply: (ctx: unknown, config?: unknown) => void
+    }
+    const calls: Array<{ kind?: unknown; path?: unknown }> = []
+    const ctx = {
+      effect: (fn: () => unknown) => fn(),
+      logger: { warn: () => {} },
+      webServer: {
+        register: (route: { kind?: unknown; path?: unknown }) => {
+          if (route === null || typeof route !== 'object' || Array.isArray(route)) {
+            throw new Error('webServer.register expects one WebRoute, not an array')
+          }
+          calls.push(route)
+          return () => {}
+        },
+      },
+    }
+
+    apply(ctx)
+
+    expect(calls.map((route) => [route.kind, route.path])).toEqual([
+      ['exact', ROUTES.list],
+      ['exact', ROUTES.health],
+    ])
+  })
+})

@@ -67,8 +67,24 @@ function applyImpl(ctx: Context, config?: Config): void {
     presetRoot: () => presetRoot,
     logger: { warn: (error: unknown) => { ctx.logger?.warn?.(error) } },
   })
-  const webServer = (ctx as unknown as { webServer: { register(routes: unknown[]): () => void } }).webServer
-  ctx.effect(() => webServer.register(routes as unknown[]), 'role-matrix-local: routes')
+  const webServer = (ctx as unknown as { webServer: { register(route: unknown): () => void } }).webServer
+  // One route per `register` call — never the whole array.
+  //
+  // `webServer.register(route)` files a SINGLE WebRoute by `route.kind` and
+  // `route.path`. Handed an array it reads `kind === undefined`, so both routes
+  // land in the PREFIX table under the key `undefined`; and because the
+  // duplicate check is `table.has(route.path)` with `path` also undefined, the
+  // collision never fires. Nothing throws, nothing logs, and the two exact
+  // routes never reach the exact table — every request falls through to the
+  // `/api` prefix guard, which answers 401 "unauthorized" exactly as it does
+  // for a path that was never registered. Diagnosing that costs an hour; the
+  // loop below costs one line.
+  ctx.effect(() => {
+    const disposers = routes.map((route) => webServer.register(route))
+    return () => {
+      for (const dispose of disposers) dispose()
+    }
+  }, 'role-matrix-local: routes')
 }
 
 /** Apply, guarded so a second install source cannot double-register the routes. */
