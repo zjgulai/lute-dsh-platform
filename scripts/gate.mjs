@@ -24,6 +24,7 @@ import {
   checkTrackedIgnored,
 } from './gates/checks.mjs'
 import { checkProfileMetadata } from './gates/sync-profile.mjs'
+import { discoverPackages } from './gates/package-layout.mjs'
 import { renderCatalog } from './gen-catalog.mjs'
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -133,7 +134,7 @@ const CHECKS = [
           .map((entry) => ({
             name: entry.dir,
             sourceDir: join(repoRoot, entry.dir),
-            targetDir: join(profileVendor, entry.dir),
+            targetDir: join(profileVendor, entry.dir.split('/').pop()),
           })),
       )
     },
@@ -183,20 +184,17 @@ function listAdrFiles() {
     .map((name) => `docs/adr/${name}`)
 }
 
-/** 收集仓库根与顶层含 package.json 的目录（根包自身也受身份契约约束）。 */
+/**
+ * 收集仓库根与全部受管包的清单（根包自身也受身份契约约束）。
+ * 包位置由 package-layout 决定，迁移期兼容归组与平铺两种布局。
+ * @returns {Array<{dir: string, manifest: Record<string, unknown>}>}
+ */
 function collectManifests() {
-  const entries = []
-  const rootManifest = join(repoRoot, 'package.json')
-  if (existsSync(rootManifest)) {
-    entries.push({ dir: '.', manifest: JSON.parse(readFileSync(rootManifest, 'utf8')) })
-  }
-  for (const name of readdirSync(repoRoot)) {
-    if (SCAN_SKIP.has(name) || name.startsWith('.')) continue
-    const dir = join(repoRoot, name)
-    if (!statSync(dir).isDirectory()) continue
-    const manifest = join(dir, 'package.json')
-    if (!existsSync(manifest)) continue
-    entries.push({ dir: name, manifest: JSON.parse(readFileSync(manifest, 'utf8')) })
+  const entries = [
+    { dir: '.', manifest: JSON.parse(readFileSync(join(repoRoot, 'package.json'), 'utf8')) },
+  ]
+  for (const entry of discoverPackages(repoRoot)) {
+    entries.push({ dir: entry.relPath, manifest: JSON.parse(readFileSync(join(entry.dir, 'package.json'), 'utf8')) })
   }
   return entries
 }

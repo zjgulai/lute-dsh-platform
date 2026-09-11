@@ -7,6 +7,16 @@ import { checkCatalogFresh } from './checks.mjs'
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 
+test('目录墙：显示物理路径（归组后即为 packages/<组>/<包>）', () => {
+  const catalog = renderCatalog({
+    packages: [
+      { relPath: 'packages/capabilities/dsh-overseas-skills', dir: 'packages/capabilities/dsh-overseas-skills', group: 'capabilities', manifest: { name: 'dsh-overseas-skills', version: '0.1.0', luteOrigin: 'self', luteOwner: 'lute', lutePublish: false } },
+    ],
+  })
+
+  assert.match(catalog, /\| capabilities \| `packages\/capabilities\/dsh-overseas-skills` \|/)
+})
+
 test('目录墙：按能力组归类受管包', () => {
   const catalog = renderCatalog({
     packages: [

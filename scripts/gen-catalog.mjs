@@ -3,8 +3,9 @@
  * 目录墙是从各 package.json 生成的只读产物：手改会被门禁 `catalog-fresh` 拒绝，
  * 唯一正确的更新方式是运行本脚本。
  */
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
+import { discoverPackages } from './gates/package-layout.mjs'
 import { fileURLToPath } from 'node:url'
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -59,8 +60,8 @@ export function renderCatalog({ packages }) {
   const rows = packages
     .filter((entry) => entry.manifest.luteOrigin !== undefined)
     .map((entry) => ({
-      dir: entry.dir,
-      group: groupOf(entry.dir),
+      dir: entry.relPath ?? entry.dir,
+      group: entry.group ?? groupOf(entry.dir),
       name: String(entry.manifest.name ?? '—'),
       origin: String(entry.manifest.luteOrigin),
       owner: String(entry.manifest.luteOwner ?? '—'),
@@ -92,13 +93,17 @@ export function renderCatalog({ packages }) {
 
 /** 收集仓库顶层受管包（含根包）。 */
 function collect() {
-  const packages = []
-  const rootManifest = join(repoRoot, 'package.json')
-  packages.push({ dir: '.', manifest: JSON.parse(readFileSync(rootManifest, 'utf8')) })
-  for (const name of readdirSync(repoRoot)) {
-    const manifestPath = join(repoRoot, name, 'package.json')
-    if (!existsSync(manifestPath)) continue
-    packages.push({ dir: name, manifest: JSON.parse(readFileSync(manifestPath, 'utf8')) })
+  const packages = [
+    { dir: '.', manifest: JSON.parse(readFileSync(join(repoRoot, 'package.json'), 'utf8')) },
+  ]
+  for (const entry of discoverPackages(repoRoot)) {
+    const group = entry.relPath.startsWith('packages/') ? entry.relPath.split('/')[1] : undefined
+    packages.push({
+      relPath: entry.relPath,
+      dir: entry.relPath,
+      group,
+      manifest: JSON.parse(readFileSync(join(entry.dir, 'package.json'), 'utf8')),
+    })
   }
   return packages
 }
