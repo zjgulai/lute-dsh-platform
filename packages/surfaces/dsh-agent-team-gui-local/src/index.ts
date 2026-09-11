@@ -31,7 +31,12 @@ interface SystemPromptService {
  * this class only wires official Harness seams and the conversation hook.
  */
 export class AgentTeamService extends ExecutionApplicationService {
-  static inject = ['storageDomain', 'tools', 'subagents', 'llm', 'agents', 'sessions', 'systemPrompt', 'jobs', 'sessionProjections']
+  /**
+   * 必需注入。`sessionProjections` 刻意不在此列：该服务在部分 Host 版本中不存在，
+   * 使用处（official-usage-meter）全程以 `ctx.get()` + undefined 守卫 + try/catch 兜底，
+   * 声明为必需会让插件在缺少它的 Host 上加载失败。租约契约见 tests/smoke/release-contract.spec.ts。
+   */
+  static inject = ['storageDomain', 'tools', 'subagents', 'llm', 'agents', 'sessions', 'systemPrompt', 'jobs']
 
   static Config: z<AgentTeamConfig> = z.object({
     defaultProvider: z.string().default('spawn'),
