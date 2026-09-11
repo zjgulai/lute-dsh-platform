@@ -98,7 +98,9 @@ function apply(ctx, config) {
       runWhenIdle();
       return { ok: true, status: "scheduled", note: "compaction runs after this turn ends" };
     },
-    presentCall: () => ({ card: "generic", title: "调度上下文压缩", kind: "compact", rawInput: "" }),
+    // kind 必须取自 ToolCallKind（read|edit|delete|move|search|execute|fetch|other）；
+    // 原先的 "compact" 不在联合类型内，UI 侧无法识别该提示（typecheck 实测暴露）。
+    presentCall: () => ({ card: "generic", title: "调度上下文压缩", kind: "other", rawInput: "" }),
   }));
   ctx.logger.info("[dsh-auto-compact] compact_now tool registered successfully");
 
