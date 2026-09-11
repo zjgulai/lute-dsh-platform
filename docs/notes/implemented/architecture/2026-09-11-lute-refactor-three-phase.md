@@ -7,7 +7,7 @@ Status: implemented
 当前二开仓库有 20 个插件、2,755 个文件、125,580 行代码，但缺少三根工程骨架，导致「改坏了」只能在客户现场或人工冒烟测试时被发现。
 
 - **无验证平面**：仓库根目录没有 `package.json`，因此没有 `pnpm test` / `lint` / `typecheck` / `check` 之类的聚合门禁；`.github/` 下只有 PR 模板，没有任何工作流文件；20 个插件中 11 个没有 `test` 脚本、12 个没有 `typecheck`。基座升级的正确性完全依赖 35 个补丁的锚点文字加上人工运行 `smoke-test.sh`。
-- **无包平面**：20 个插件平铺在仓库根目录。目录名与包名使用了 6 种不同的命名空间（`dsh-*`、`@deepseek-ai/dsh-*`、`@yuxianglin/*`、`@furongjun1999/*`、`@etony668/*`，以及一个没有包名的 `dsh-skill-title-fix`），版本号散布在 15 个不同的值上。仓库里「自研的代码」和「从 npm 装进来的依赖」混在一起，没有清晰的边界。
+- **无包平面**：20 个插件平铺在仓库根目录。目录名与包名使用了 6 种不同的命名空间（`dsh-*`、`@deepseek-ai/dsh-*`、`@yuxianglin/*`、`@furongjun1999/*`、`@etony668/*`，以及一个没有包名的 `dsh-skill-title-fix`），版本号散布在 15 个不同的值上。仓库里「自研的代码」和「从 npm 装进来的依赖」混在一起，没有清晰的边界。（该目录已于 2026-09-11 作为已完成补丁项目归档出工作树，故此处的 `dsh-skill-title-fix` 属历史现状描述。）
 - **无文档脊柱**：`docs/`、各插件自己的 `docs/`、`_doc-notes/`、`doc/` 四套体系并存。同一个事实有多份副本（`docs/dsh-desktop-white-screen-playbook.md` 和 `_doc-notes/` 下的同名文件内容完全相同，SHA 都是 `dddfb43fd62c`）；README 里有一句话与事实不符——它声称「各插件 package.json 同步对齐」，但实测版本号有 15 个不同的值。
 - **基座不可检索**：`vendor/dsh-desktop/.gitmodules` 声明了 `deepseek-harness` 子模块，但该目录是空的，pin 文件记录为 `NOT-INITIALIZED`，运行时改用预打包的 tgz 产物。补丁重锚时只能人工反查产物，每个上游窗口花 3 到 5 人日。
 - **仓库自相矛盾**：42 个已经被 git 跟踪的文件同时命中了 `.gitignore` 规则，其中包含 `*.orig` 备份文件。`.gitignore` 的白名单里还列着 5 个磁盘上根本不存在的路径。
@@ -23,6 +23,9 @@ Status: implemented
 | 三期（契约与清账） | typecheck/test 逐包补齐、豁免清空、历史 ADR 归档、资产分级处置 | 豁免文件为空且门禁拒绝非空、历史 6 篇 ADR 归档、`_attic/` 与大文件移出工作树 |
 
 十一项决策各自记录在 ADR-0007 ~ ADR-0017 中：
+（本 Note 的「决策记录」声明覆盖 ADR-0007 ~ ADR-0018；后续的 ADR-0019 属独立主题
+——品牌皮肤对官方 UI 的改写锚治理，记录在
+[2026-09-11-root-brand-live-resolver.md](2026-09-11-root-brand-live-resolver.md)。）
 1. 三期推进（ADR-0007）
 2. harness 子模块初始化但仅作只读参照系（ADR-0008）
 3. 主脊柱中文单语，仅客户安装使用一条链出独立用户向文档（ADR-0009）

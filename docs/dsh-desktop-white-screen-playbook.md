@@ -77,7 +77,8 @@
 ### 6.1 RootOutlet 防御补丁（根治，已应用 2026-09-07）
 - 位置：`app.asar.unpacked/node_modules/@deepseek-ai/dsh-client-ui-renderer/lib/client.js` 的 `RootOutlet`。
 - 改法：root 未注册时不再 `throw`，改为 `console.error`（保留诊断文本）+ 渲染 `data-slot-waiting="root"` 的"UI 正在装载…"占位；因 `useSyncExternalStore` 已订阅 root 槽变更，注册到达后自动重渲染恢复。
-- 备份与回滚：原地 `client.js.orig`；持久基线 `~/project/Magpie-Horch/dsh-rootoutlet-heal/dsh-client-ui-renderer.client.js.baseline-20260907`。回滚 = `cp client.js.orig client.js` + 完整重启。
+- 备份与回滚：原地 `client.js.orig`；持久基线 `~/project/Magpie-Horch/dsh-rootoutlet-heal/dsh-client-ui-renderer.client.js.baseline-20260907`。回滚 = `cp client.js.orig client.js` + 完整重启。**该目录刻意保留在仓库根**：手册把它定位为升级后重放补丁时要用的运行时基线资产，不是文档。
+- ⚠ **2026-09-11 实测注记**：该补丁**当前不在 2.0.5 基座的打包树里**。`packaging/staging/2.1.0/…/dsh-client-ui-renderer/lib/client.js` 的 `RootOutlet` 仍是原实现——`if (!entry) { … throw new SlotAssemblyError("renderSlot('root') before any 'root' registration (boot order)") }`，无 `data-slot-waiting` 占位文本；两个持久基线同样不含该标记（它们是**补丁前**状态）；`dsh-patches/patches-manifest-v2.md` 中也没有这一项。按 §6.1 自己的「升级注意」，它很可能在 2.0.5 重锚时丢失，**下次白屏诊断前需先确认是否要重放**。
 - 升级注意：官方重打包 `.app` 会覆盖该补丁，升级后需重放（锚点漂移时先 diff 再适配）。
 
 ### 6.2 插件移除止损（案例 1 用）

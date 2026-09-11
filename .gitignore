@@ -4,6 +4,10 @@
 # 维护规则：白名单条目必须指向磁盘上真实存在的路径；门禁 verify:* 会拒绝幽灵条目（ADR-0013）
 # 2026-09-11：移除 !81-Skills/** —— 该创作源已迁出仓库至 ~/project/81-Skills/，
 # 白名单条目随之失效（门禁 gitignore-whitelist 会拒绝幽灵条目）。
+# 2026-09-11（G6）：再移除 5 条 —— dsh-renderer-heal / dsh-reverse-skill-local /
+# dsh-skill-title-fix / explore-unknowns-local / write-spec-local 已归档出工作树
+# （副本在 ~/project/_archive/Magpie-Horch-20260911/）；其文档已入 docs/。
+# !dsh-rootoutlet-heal/** 刻意保留：白屏手册 §6.1 把它作为运行时回滚基线。
 
 *
 !*/
@@ -22,12 +26,7 @@
 !packages/**
 !scripts/**
 !dsh-patches/**
-!dsh-renderer-heal/**
-!dsh-reverse-skill-local/**
-!dsh-skill-title-fix/**
 !dsh-rootoutlet-heal/**
-!explore-unknowns-local/**
-!write-spec-local/**
 
 # —— vendor 嵌套仓库：源码不入库，仅 pin 文件入库 ——
 !vendor/
