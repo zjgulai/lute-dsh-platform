@@ -1,8 +1,0 @@
-skill:
-  name: com-knowledge-extractor
-  version: 1.0.0
-  type: technique
-  author: lute-skills-create
-  tags: ["knowledge-management", "reading", "book-analysis", "pkm", "deep-reading"]
-  created_at: "2026-04-12"
-  updated_at: "2026-04-12"

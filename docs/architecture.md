@@ -9,7 +9,8 @@
 | 基座参照系 | `vendor/dsh-desktop/deepseek-harness/` | pin 到 `a66e470`（runtime 0.1.2-rc.1）的上游源码，**只读、不参与构建**（[ADR-0008](adr/ADR-0008.md)） |
 | 壳层 fork | `vendor/dsh-desktop/` | 嵌套仓库，pin 见 `vendor/dsh-desktop.pin`；改 pin 与行为变更分开提交 |
 | 运行时来源 | `vendor/dsh-runtime/0.1.2-rc.1/*.tgz` | 打包与 profile 实际使用的运行时产物 |
-| 二开插件 | 仓库顶层 `dsh-*` 目录 | 按能力归入 5 组（[ADR-0011](adr/ADR-0011.md)，二期执行迁移） |
+| 二开插件 | `packages/<能力组>/<包>/` | 20 个受管包按能力归入 5 组（[ADR-0011](adr/ADR-0011.md)）。**二期迁移已完成**：`package-layout.mjs` 仍保留历史平铺布局的兼容分支，但非该布局的包已为 0 |
+| 出海技能创作源 | `~/project/81-Skills/`（**仓库外**） | 81 个中文名原文，经 `dsh-overseas-skills/scripts/import-81skills.mjs` 转换后安装进 `~/.dsh/skills/`。2026-09-11 迁出仓库，与同包其余 3 个 importer（accio / marketing / fullstack）的「源在仓库外」设计一致 |
 | 门禁 | `scripts/gate.mjs` | 单命令聚合校验，退出码即契约（[ADR-0014](adr/ADR-0014.md)） |
 
 门禁契约（`pnpm run gate` / `pnpm run gate:full`）：

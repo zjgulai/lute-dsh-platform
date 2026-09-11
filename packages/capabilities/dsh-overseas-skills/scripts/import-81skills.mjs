@@ -3,7 +3,7 @@
  * import-81skills.mjs — 把 81-Skills 转换为 DSH 技能并安装进 ~/.dsh/skills/
  *
  * 数据流：
- *   Magpie-Horch/81-Skills/<中文名>/SKILL.md (+references/scripts/examples/assets)
+ *   <81-Skills 创作源>/<中文名>/SKILL.md (+references/scripts/examples/assets)
  *     + scripts/81-mapping.json（映射/分类/图标/别名）
  *   -> staging/81-skills/<english-name>/SKILL.md（DSH frontmatter + 正文改名改写）
  *   -> ~/.dsh/skills/<english-name>/（A/B 覆盖保开关，C 新建默认关模型调用）
@@ -12,6 +12,7 @@
  *
  * 加密/损坏的 4 个（deferred）跳过并记录。
  * 用法：node scripts/import-81skills.mjs [--dry]
+ *       LUTE_81SKILLS_SRC=<目录> node scripts/import-81skills.mjs   # 临时换创作源
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -19,11 +20,21 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
-const SRC_ROOT = "/Users/lute/project/Magpie-Horch/81-Skills";
+// 创作源在仓库外（与本包其余 importer 一致：import-accio/import-marketing-skills/import-fullstack
+// 都从仓库外读源）。2026-09-11 由 Magpie-Horch/81-Skills/ 迁至此处，使 4 个 importer 的设计一致。
+// 本包 `files` 清单与安装链都不含该目录——载荷技能来自 staging，故此路径只影响手工迭代。
+const SRC_ROOT = process.env.LUTE_81SKILLS_SRC ?? "/Users/lute/project/81-Skills";
 const SKILLS_DIR = path.join(process.env.HOME, ".dsh", "skills");
 const STAGING = path.join(ROOT, "staging", "81-skills");
 const MAPPING = JSON.parse(fs.readFileSync(path.join(__dirname, "81-mapping.json"), "utf8"));
 const DRY = process.argv.includes("--dry");
+
+// 源缺失必须响亮失败：否则路径写错会「以 0 个技能成功结束」，把源问题伪装成无事发生。
+if (!fs.existsSync(SRC_ROOT)) {
+  console.error(`[import-81skills] 创作源不存在: ${SRC_ROOT}`);
+  console.error(`  用 LUTE_81SKILLS_SRC=<目录> 指定，或把源放回该路径。`);
+  process.exit(1);
+}
 
 const NAME_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 // D1 决策：除垃圾外全量装（tests/eval-reports/.skill-meta/README/LICENSE/CHANGELOG 等全保留）

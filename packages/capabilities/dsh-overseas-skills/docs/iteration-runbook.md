@@ -47,7 +47,7 @@ node scripts/route_bench_llm.mjs
 ## 81-Skills 增量与迭代（2026-09-05 追加）
 
 ### 4 个加密技能补齐（上市策略 / 市场可行性审计 / 竞品情报 / 电商季度战略）
-1. 用户把明文 SKILL.md 放回 `~/project/Magpie-Horch/81-Skills/<中文名>/`
+1. 用户把明文 SKILL.md 放回 `~/project/81-Skills/<中文名>/`（创作源在仓库外，2026-09-11 迁出）
 2. `bash scripts/pipeline.sh --import`（转换+安装+头像+目录+同步+lint 一键）
 3. 重启 DSH Desktop → `bash scripts/verify_p7.sh`
 4. 预设白名单已含 4 名，无需改动（补齐后自动进入子集）

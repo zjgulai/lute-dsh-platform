@@ -2,6 +2,8 @@
 # 策略：默认忽略全部 → 恢复目录 → 仅纳入经审批的目录与根级元文件
 # （一次性补丁脚本/预览 HTML/构建产物/临时文件不入库）
 # 维护规则：白名单条目必须指向磁盘上真实存在的路径；门禁 verify:* 会拒绝幽灵条目（ADR-0013）
+# 2026-09-11：移除 !81-Skills/** —— 该创作源已迁出仓库至 ~/project/81-Skills/，
+# 白名单条目随之失效（门禁 gitignore-whitelist 会拒绝幽灵条目）。
 
 *
 !*/
@@ -17,7 +19,6 @@
 !_doc-notes/**
 !.scratch/**
 !packaging/**
-!81-Skills/**
 !packages/**
 !scripts/**
 !dsh-patches/**

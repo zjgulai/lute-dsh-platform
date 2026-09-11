@@ -9,7 +9,7 @@
 | 对象 | 路径 | 说明 |
 | --- | --- | --- |
 | 技能运行时目录 | `~/.dsh/skills/` | 250+ 个技能目录（~/.dsh/skills 顶层口径）（SKILL.md + references/scripts/examples/assets/tests…），文件层实时生效 |
-| 81 技能源码 | `~/project/Magpie-Horch/81-Skills/` | 中文目录源（转换源，含 4 个加密暂缓） |
+| 81 技能源码 | `~/project/81-Skills/`（**仓库外**，2026-09-11 迁出） | 中文目录源（转换源，含 4 个加密暂缓）；路径可用 `LUTE_81SKILLS_SRC` 覆盖 |
 | 插件工程 | `~/project/Magpie-Horch/dsh-overseas-skills/` | catalog/图标/卡面/管线脚本 |
 | 预设 | `~/.dsh/.agent-presets/brand-marketing-growth/` | 三件套，gen_bmg_preset.mjs 可复现 |
 | 头像资产 | `~/.dsh/skills/lute-brand-icons/` | LUTE 头像生成器（manifest 176 条目，含 83 枚卡片图标映射） |

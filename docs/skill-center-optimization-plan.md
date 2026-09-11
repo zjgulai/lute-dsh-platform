@@ -27,7 +27,7 @@
 | 入口机制 | DOM 注入（MutationObserver 自愈），插在「新会话按钮」与「工作区列表」之间；官方 shell 此位置无 Slot，该机制保留 |
 | 面板形态 | 居中 overlay modal，两 tab（技能 / 创建），7 来源分组 |
 | 数据链 | SKILL.md frontmatter（name/title/description/whenToUse/disable-model-invocation/user-invocable）→ dsh-skill 注册表 → 技能中心自有 HTTP 路由（loopback 围栏） |
-| 技能资产 | `~/.dsh/skills/` 252 个（技能中心扫描根）；其中 81 个来自 `Magpie-Horch/81-Skills/`（中文名源）经 `dsh-overseas-skills/scripts/import-81skills.mjs` 转换导入（英文 name + 中文 title） |
+| 技能资产 | `~/.dsh/skills/` 252 个（技能中心扫描根）；其中 81 个来自 `~/project/81-Skills/`（中文名源，2026-09-11 迁出仓库）经 `dsh-overseas-skills/scripts/import-81skills.mjs` 转换导入（英文 name + 中文 title） |
 | title 覆盖 | 251/252 有中文 `title` 字段 |
 | 斜杠菜单 | 官方客户端插件 `dsh-client-ui-input-trigger`（conversation.input.overlay slot "slash-menu"）+ `dsh-client-ui-skill`（"skill" source）；卡片渲染 `name + title + description`；`whenToUse` 不渲染 |
 | 官方定制点 | `ctx.inputTriggers.registerSource()`（正规定制新源）；slots 官方 shadow 语义（`priority:-1` 可遮蔽 slash-menu，官方 runner 内置示例）；`ctx.remote.skills.list({sessionId})` 提供同源数据（含 title/whenToUse/modelInvocable） |
@@ -89,7 +89,7 @@
 - `description` 原样保留（模型触发依据，零风险）。
 
 **落盘与同步（单源 + 透传）**
-- 写入 `Magpie-Horch/81-Skills/<中文名>/SKILL.md`（源）；
+- 写入 `~/project/81-Skills/<中文名>/SKILL.md`（源，在仓库外）；
 - 扩展 `dsh-overseas-skills/scripts/import-81skills.mjs` 透传 `user_summary`/`user_try` 到 `~/.dsh/skills/<english-name>/SKILL.md`，保证重建不丢；
 - 覆盖范围：本次 81 个核心技能；其余 171 个走 title + description 截断回退展示，后续按需补。
 
