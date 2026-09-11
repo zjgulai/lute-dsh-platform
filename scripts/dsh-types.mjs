@@ -13,7 +13,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { discoverPackages } from './gates/package-layout.mjs'
-import { applyTypeLinks, augmentDeclarations, buildVendoredDeclarations, linkTypeScope, normalizeExportMaps, dshPackagesInManifest, dshPackagesInSource, extractRuntimeTypes, mergeVendoredTypes, planTypeLinks } from './gates/dsh-types.mjs'
+import { applyTypeLinks, augmentDeclarations, buildVendoredDeclarations, linkTypeScope, normalizeExportMaps, dshPackagesInManifest, dshPackagesInSource, extractRuntimeTypes, mergeVendoredTypes, planTypeLinks, stripDanglingSourceMaps } from './gates/dsh-types.mjs'
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 
@@ -66,6 +66,8 @@ function main() {
     available = [...result.available, ...merged].sort()
     process.stdout.write(`ok 从内建运行时解出 ${result.extracted} 个 DSH 包到 .dsh-types/\n`)
     if (merged.length > 0) process.stdout.write(`ok 并入参照系 vendor 化包 ${merged.length} 个：${merged.join(', ')}\n`)
+    const stripped = stripDanglingSourceMaps(OUT_DIR)
+    if (stripped > 0) process.stdout.write(`ok 清理悬空 sourcemap 引用 ${stripped} 个文件（引用缺失 map 会让 vitest 报错）\n`)
     const tsc = findTsc()
     if (tsc) {
       const { built, failed, failures } = buildVendoredDeclarations({ dir: OUT_DIR, tsc })

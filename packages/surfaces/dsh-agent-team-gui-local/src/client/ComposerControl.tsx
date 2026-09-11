@@ -10,7 +10,22 @@ import { SlotErrorBoundary } from './SlotErrorBoundary.tsx'
 export interface TeamComposerInjected {
   controller: AgentTeamController
 }
-export type TeamComposerControlProps = PropsRuntime<'conversation.input.right'> & InjectFace<TeamComposerInjected>
+/**
+ * 输入区 slot 的会话 props 契约。
+ *
+ * 上游把 `SessionStandardProps` 声明为空接口，靠各 UI 适配器做声明合并补齐成员；
+ * 本仓库的依赖面（.dsh-types）里没有做该合并的适配器包，合并因此不生效，
+ * `input` 不可见（typecheck 实测 TS2339）。此处按本包的实际使用面显式声明，
+ * 与 dsh-theme-local 的本地 ClientContext 同型做法（ADR-0017）。
+ */
+interface ComposerSessionProps {
+  /** 输入区当前状态；`submitting` 期间禁用小队模式切换。 */
+  input?: { phase?: string };
+}
+
+export type TeamComposerControlProps = PropsRuntime<'conversation.input.right'> &
+  InjectFace<TeamComposerInjected> &
+  ComposerSessionProps
 
 interface ModeState {
   initialized: boolean

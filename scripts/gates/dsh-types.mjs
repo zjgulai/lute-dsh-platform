@@ -405,3 +405,41 @@ export function augmentDeclarations({ outDir }) {
   }
   return applied
 }
+
+/**
+ * 清除类型来源中指向**不存在的 map 文件**的 sourceMappingURL 注释。
+ *
+ * 动机（实测）：内建运行时 tgz 解出的包带 `//# sourceMappingURL=index.js.map`，
+ * 而本流水线用 tsc 只产出 .js/.d.ts、不产出 map；vitest 加载这些 js 时会尝试读 map
+ * 并抛 ENOENT，导致测试套件整体收集失败（dsh-deepresearch-local 实测 3/6 套件失败）。
+ * @param {string} outDir 类型来源目录
+ * @returns {number} 被清理的文件数
+ */
+export function stripDanglingSourceMaps(outDir) {
+  if (!existsSync(outDir)) return 0
+  let cleaned = 0
+  for (const pkg of readdirSync(outDir)) {
+    const libDir = join(outDir, pkg, 'lib')
+    if (!existsSync(libDir)) continue
+    for (const file of listJsFiles(libDir)) {
+      const text = readFileSync(file, 'utf8')
+      const match = /\/\/# sourceMappingURL=(\S+)/.exec(text)
+      if (match === null) continue
+      const mapPath = join(dirname(file), match[1])
+      if (existsSync(mapPath)) continue
+      writeFileSync(file, text.split('\n').filter((line) => !line.includes('sourceMappingURL=')).join('\n'))
+      cleaned += 1
+    }
+  }
+  return cleaned
+}
+
+/** 递归列出 .js 文件。 */
+function listJsFiles(dir, out = []) {
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name)
+    if (entry.isDirectory()) listJsFiles(path, out)
+    else if (entry.name.endsWith('.js')) out.push(path)
+  }
+  return out
+}
