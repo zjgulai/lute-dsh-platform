@@ -271,15 +271,23 @@ function runPackageScripts() {
  * @param {number} timeoutMs 超时毫秒
  * @returns {{code: number, output: string}} 超时按 124 记（与 coreutils timeout 一致）
  */
+/**
+ * 保留的输出尾部长度。实测校准（2026-09-11）：patch-anchors 依赖的
+ * verify-patches-v2.sh 会打印 35 行锚点结果（约 1 KB），而 FAIL/MISSING 明细
+ * 出现在输出**开头**——原先的 500 字符只留到 OK 行与汇总，导致门禁只能报
+ * 「退出码 1」而指不出漂移项。4000 足以容纳该脚本全部输出，仍远小于异常堆栈。
+ */
+const SCRIPT_OUTPUT_TAIL = 4000
+
 function runScript(cwd, script, timeoutMs, extraEnv = {}) {
   const binDir = join(cwd, 'node_modules', '.bin')
   const env = { ...process.env, ...extraEnv, PATH: `${binDir}:${process.env.PATH ?? ''}` }
   try {
     const output = execFileSync('sh', ['-c', script], { cwd, env, encoding: 'utf8', timeout: timeoutMs, stdio: ['ignore', 'pipe', 'pipe'] })
-    return { code: 0, output: String(output).slice(-500) }
+    return { code: 0, output: String(output).slice(-SCRIPT_OUTPUT_TAIL) }
   } catch (error) {
     if (error.killed) return { code: 124, output: `超时 ${timeoutMs}ms` }
-    const output = `${error.stdout ?? ''}${error.stderr ?? ''}`.slice(-500)
+    const output = `${error.stdout ?? ''}${error.stderr ?? ''}`.slice(-SCRIPT_OUTPUT_TAIL)
     return { code: typeof error.status === 'number' ? error.status : 1, output }
   }
 }
