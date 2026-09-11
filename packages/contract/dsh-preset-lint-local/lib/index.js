@@ -13,9 +13,14 @@ export const name = "dsh-preset-lint-local";
 export function apply(ctx) {
   const dshHome = process.env.DSH_HOME ?? join(homedir(), ".dsh");
   const presetRoot = join(dshHome, ".agent-presets");
-  const linterPath = process.env.DSH_LINT_PATH ?? "/Users/lute/project/Magpie-Horch/dsh-patches/lint-preset.mjs";
+  // linter 随插件发布（lib/lint-preset.mjs），路径相对本模块解析。
+  // 原先写死 /Users/lute/project/Magpie-Horch/dsh-patches/lint-preset.mjs：
+  // 该文件既不在 package.json 的 files 中、也不在打包脚本里，客户机上必然失效且静默。
+  const bundledLinter = new URL("./lint-preset.mjs", import.meta.url);
+  const linterPath = process.env.DSH_LINT_PATH ?? bundledLinter.href;
 
-  let timer = void 0;
+  /** @type {ReturnType<typeof setTimeout> | undefined} */
+  let timer = undefined;
   let chain = Promise.resolve();
   const disposers = [];
 
@@ -38,7 +43,9 @@ export function apply(ctx) {
     chain = chain.then(() => lintOne(file)).catch(() => {});
   };
 
-  // 启动 5s 后对存量 preset 串行全量扫一遍（不阻塞 boot）
+  // 启动后对存量 preset 串行全量扫一遍（不阻塞 boot）。延迟可经环境变量覆盖，
+  // 使契约测试无需真实等待（默认保持 5000ms 的产品行为）。
+  const startDelayMs = Number(process.env.DSH_PRESET_LINT_START_DELAY_MS ?? 5000);
   const initialTimer = setTimeout(() => {
     try {
       for (const dir of readdirSync(presetRoot)) {
@@ -46,7 +53,7 @@ export function apply(ctx) {
         if (existsSync(file)) enqueue(file);
       }
     } catch {}
-  }, 5000);
+  }, startDelayMs);
   disposers.push(() => clearTimeout(initialTimer));
 
   let watcher;
