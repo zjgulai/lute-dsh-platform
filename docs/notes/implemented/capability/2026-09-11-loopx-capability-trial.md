@@ -204,6 +204,41 @@ $ loopx status
 **这四条都不该由本仓库修**（LoopX 是独立开源项目，且插件托管面 0.5.4 落后于 PATH 上 1.0.3）。
 登记在此是为了让下一次遇到同样现象的人能立刻对上号，而不是重新排查一遍。
 
+### 终结义务的正确写法（可复用，含一个会拦人的陷阱）
+
+`autonomous_replan_required` 义务**不会**因 `todo complete --no-follow-up` 而清除。它的收敛是**分批**的
+（实测 `trigger_count` 单调下降：5 → 2 → 1），最后需要一个 **coverage-backed terminal outcome**。
+下面这组参数是实测通过（`ok=true, appended=true`，`vision_checkpoint.decision=patched`、
+`delivery_boundary=semantic_closeout`）的确切形状：
+
+```bash
+loopx refresh-state --goal-id <goal> \
+  --progress-scope agent_lane --classification bounded_replan_progress \
+  --progress-result-class no_followup \
+  --progress-surface-id <surface> --progress-hypothesis-id <hypothesis> \
+  --progress-probe-kind read_only_cli_verification \
+  --progress-coverage-scope-id agent_lane_todo_set --progress-coverage-complete \
+  --progress-evidence-id <evidence> \
+  --repair-delta-kind no_followup --autonomous-replan-recorded \
+  --agent-vision-json <PATH-TO-JSON> --agent-id <agent>
+```
+
+逐级被拒的过程本身就是文档（每一步的报错都指明了缺什么）：
+
+1. `--progress-result-class no_followup` 单独用 → 要求 `--progress-coverage-scope-id`；
+2. 补上后 → 要求 `agent_vision.state=no_followup` **且** `path_delta.outcome=stop`；
+3. 缺 `path_delta.prior_assumption` / `observed_reality`（各限 220 字符）→ 补上即通过；
+4. `--agent-vision-json` 收的是**文件路径**不是 JSON 字符串（直接传字符串会报 `File name too long`）。
+
+**陷阱（实测踩中，会拦住任何写入者）**：`loopx/authority.py` 的 `PRIVATE_TEXT_PATTERNS` 里有一条
+`\bAuthorization\b`（大小写不敏感），于是**普通英文词 "authorization" 也会被判为私有值**并整条拒绝写入。
+同类还会误伤的是 `Bearer`、`token =`、`password`、`secret`、`/Users/`。我把 "owner authorization" 改成
+"owner sign-off" 才通过。写 `--vision-*` 字段前建议先用解释器把 payload 过一遍这批正则：
+
+```python
+from loopx.authority import PRIVATE_TEXT_PATTERNS   # 需先 sys.path 指向插件托管面 site-packages
+```
+
 **仍未取证的一项**：GoalBar 是否在会话底部渲染出 `Goal magpie-horch-goal` + 进度。需要浏览器侧目视。
 
 ## 5. 决策记录：补写被引用的设计文档（2026-09-11 第三轮）
