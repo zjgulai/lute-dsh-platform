@@ -234,7 +234,7 @@ function runPackageScripts() {
     .map((entry) => {
       const scripts = entry.manifest.scripts ?? {}
       const results = {}
-      for (const key of ['typecheck', 'test']) {
+      for (const key of ['typecheck', 'test', 'build']) {
         if (!scripts[key]) continue
         results[key] = runScript(join(repoRoot, entry.dir), scripts[key], timeoutMs)
       }
@@ -377,6 +377,20 @@ function parseArgs(argv) {
   return { mode, list }
 }
 
+/**
+ * 某包入库的 lib/types 文件清单。
+ * @param {string} dir 包相对路径
+ * @returns {string[]}
+ */
+function trackedTypeFiles(dir) {
+  const output = execFileSync('git', ['-C', repoRoot, 'ls-files', `${dir}/lib/types`], {
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'ignore'],
+  })
+  return output.split('\n').filter(Boolean)
+}
+
+/** 程序入口：解析参数、跑校验、按失败数设置退出码。 */
 function main() {
   const { mode, list, error } = parseArgs(process.argv.slice(2))
   if (error) {

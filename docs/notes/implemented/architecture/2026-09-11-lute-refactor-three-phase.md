@@ -146,3 +146,33 @@ Status: implemented
 **代价与遗留。** 客户端的搜索交互仍无自动化覆盖（见上）。`lib/catalog.js` 是 222 + 29 项的快照数据，`findCatalogInconsistencies` 已能机器发现「引用了不存在的分类/子场景/重复登记」，但尚未接入门禁——它现在只是可用的工具，不是被强制的校验项。
 
 **验证。** Red→Green 同一测试：新增 10 项全部失败 → 实现后 11/11通过（含行为等价项）。`tsc -p tsconfig.json` 31 → 0 错。`node scripts/gate.mjs --mode full` 13/13、退出码 0（其中 `profile-metadata-sync` 先按门禁自己的 remediation 跑了 `node scripts/sync-profile.mjs --apply --only-metadata`）。
+
+## 构建产物 lib/types 的入库边界（ADR-0018，2026-09-11）
+
+### Problem
+
+`lib/types/` 同时是「包对外声明的类型接口」（`exports` 与 `files` 都指向它）和「构建产物」，这条边界仓库里从未定过，于是同一件事出现了三种做法：`dsh-browser-local`（48 文件）、`dsh-deepresearch-local`（80 文件）、`dsh-loopx-plugin`（15 文件）入库；`dsh-agent-team-gui-local`、`dsh-skill-center-local` 不入库（由打包流水线产出）。
+
+三种做法各自都成立，所以问题不是谁做错了，而是没有规则——而且入库的那两个包已经在漂移。实测（`tsc -b --force` 后看 `git status`，三次复现一致）：`dsh-deepresearch-local/lib/types/index.d.ts` 的入库版本缺 `Service` 导入、多一个 `[x: number]: () => Promise<void>` 索引签名；`lib/types/client/index.js` 不含源码里新增的注释。门禁看不到这件事——`index-drift` 管 `docs/`，`catalog-fresh` 管目录墙，没有任何校验项覆盖 `lib/types/`。
+
+### Decision
+
+**入库边界按「有无源码」划分**，而不是按包身份：有 `src/` 的包，`lib/types/` 入库——理由不是「应该入库」，而是交付链的现实约束：受管包以 `file:` 依赖被 profile 安装，pnpm 按 `files` 打包，构建不会在安装时自动跑，产物不入库则装出来的包没有类型。无源码的纯预构建包（`dsh-loopx-plugin`）里，`lib/types/` 是**作者手写内容**，必须入库。因此 agent-team-gui / skill-center 不入库不算违规。
+
+**`build` 必须被门禁真实执行**：`scripts-runnable`（ADR-0014）原先只验证 `typecheck` 与 `test`，`build` 从未被跑过。已把 `build` 纳入该校验项——「产物能不能生成」此前完全没有校验覆盖。
+
+**产物新鲜度校验（`types-fresh`）实现后主动撤回。** 原计划重新构建并与入库内容比对，实测发现它无法非空转地成立：`dsh-browser-local` 的 build（`tsc -b && tsdown`）退出码 0 却**不改动** `lib/types/index.d.ts`（md5 与 mtime 前后一致），即 build 并非该产物的权威生成者，比对恒为空转；`dsh-deepresearch-local` 的 build 因自身 5 个类型错误退出码 1，新鲜度无从判定。恒真的校验项比没有校验项更糟——它给的是假信心，故连同其纯函数与测试一并撤回，复现方式写进 ADR，避免后人重走。
+
+### Alternatives considered
+
+**全部移出跟踪（一律不入库）。** 最干净，但打断 `file:` 交付链：不入库又不在安装时构建，装出来的包就没有 `lib/types/`。要修就得给每包加 `prepare` 并在安装时构建——那是把「产物可能过期」换成「安装时构建可能失败」这个新的失败面。
+
+**全部入库。** 与现状一致，但等于承认产物可以漂移，正是要解决的问题。
+
+**并入 ADR-0017 的类型统一供给。** 方向对但解决的是另一个问题：ADR-0017 管「类型从哪来」，本条管「入库的产物是否与源码一致」。即便来源统一，入库产物仍可能过期。
+
+**用「构建后 git diff 为空」代替独立校验项。** 已实现并实测，随后撤回——原因见上。剩下唯一能让 `types-fresh` 真正成立的路径是**为每个包声明 `typegen` 脚本**（权威生成其类型产物的命令，而不是复用可能并不产出这些文件的 `build`），本轮不引入，属独立工作量，与 `types-fresh` 一并推迟。
+
+### Consequences
+
+「有源码的包，产物入库」从三种习惯变成一条规则，边界由 `src/` 与 `files` 推导而非人工维护；`build` 首次纳入门禁校验。**未竟项要说清楚**：入库产物的新鲜度仍无机器校验——本 ADR 只解决了「怎么放」，没解决「是否过期」，这是明确推迟而非遗漏。后续：先逐个确认每个包的权威生成命令（不是复用 `build`），再引入按包声明的 `typegen` 与 `types-fresh`；`dsh-loopx-plugin` 无源码，其 `lib/types/` 是作者手写内容，不参与任何产物校验。

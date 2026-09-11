@@ -274,6 +274,10 @@ const EXIT_COMMAND_NOT_FOUND = 127
  * 校验包声明的脚本能真实执行（ADR-0014）。
  * 动机（实测）：dsh-theme-local 与 dsh-loopx-plugin 的 typecheck 脚本存在，
  * 但缺 typescript 依赖，执行即 127；脚本"存在"不等于"可用"，只看脚本键会漏掉这类空转。
+ *
+ * `build` 也在校验范围内：ADR-0018 让 `types-fresh` 依赖构建产出来判断新鲜度，
+ * 若某个包 build 跑不通，它的产物新鲜度就无从判定。把「build 能不能跑通」放在
+ * 本校验而不是 `types-fresh`，同一个问题才不会在门禁里报两遍。
  * @param {{packages: Array<{relPath: string, scripts: Record<string, string>, results: Record<string, {code: number, output: string}>}>}} input
  *   逐包的脚本定义与实际执行结果（由调用方负责运行）
  * @returns {{passed: boolean, violations: string[]}}
@@ -281,7 +285,7 @@ const EXIT_COMMAND_NOT_FOUND = 127
 export function checkScriptsRunnable({ packages }) {
   const violations = []
   for (const { relPath, scripts, results } of packages) {
-    for (const key of ['typecheck', 'test']) {
+    for (const key of ['typecheck', 'test', 'build']) {
       if (!scripts[key]) continue
       const result = results[key]
       if (!result) continue
