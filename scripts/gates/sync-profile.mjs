@@ -72,3 +72,39 @@ export function checkProfileMetadata(pairs) {
   }
   return { passed: violations.length === 0, violations }
 }
+
+/**
+ * 校验 profile 副本与包 `files` 清单一致（交付形态，两个方向都查）。
+ *
+ * 动机（2026-09-11 实测）：`file:` 依赖在 profile 里是**硬链接实体副本**而非符号链接，
+ * 安装之后新增的文件不会进副本。dsh-preset-lint-local 的 lib/lint-preset.mjs 就这么丢了，
+ * 症状是「preset 校验整体静默失效 + 日志里一句 warn」，排查成本极高。
+ * 反向的不一致同样存在：清单声明了但源码里根本没有（陈旧清单）。
+ *
+ * 语义：`files` 清单即契约。
+ *   - 清单条目在源码中不存在（通配条目按其静态前缀目录判定）→ 违规；
+ *   - 条目在源码中存在、但 profile 副本中不存在 → 违规。
+ * 副本不存在该包时视为「未安装」，跳过（与 checkProfileMetadata 同语义）。
+ * @param {Array<{name: string, sourceDir: string, targetDir: string, files?: string[]}>} pairs 待校验包
+ * @returns {{passed: boolean, violations: string[]}}
+ */
+export function checkProfileFilesSync(pairs) {
+  const violations = []
+  for (const { name, sourceDir, targetDir, files } of pairs) {
+    if (!existsSync(join(targetDir, 'package.json'))) continue
+    for (const entry of files ?? []) {
+      // 通配条目（如 lib/types/**/*.d.ts）取其静态前缀目录判定存在性。
+      const relative = entry.includes('*')
+        ? entry.slice(0, entry.search(/[*?]/)).replace(/\/$/, '')
+        : entry
+      if (!existsSync(join(sourceDir, relative))) {
+        violations.push(`${name}: files 声明的 "${entry}" 在源码中不存在（陈旧清单，请从 package.json 的 files 中删除）`)
+        continue
+      }
+      if (!existsSync(join(targetDir, relative))) {
+        violations.push(`${name}: files 声明的 "${entry}" 在 profile 副本中缺失（用 tmp+mv 语义补齐，勿直接覆盖）`)
+      }
+    }
+  }
+  return { passed: violations.length === 0, violations }
+}

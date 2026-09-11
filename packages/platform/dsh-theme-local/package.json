@@ -25,10 +25,6 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "README.md",
-    "README.zh.md",
-    "docs/theme-design.md",
-    "assets/readme/deepseek-harness.svg",
     "lib/index.js",
     "lib/client.js",
     "lib/client.js.map",

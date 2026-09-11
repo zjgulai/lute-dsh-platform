@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { apply, name } from '../lib/index.js'
+import { lintFile } from '../lib/lint-preset.mjs'
 
 const packageRoot = dirname(dirname(fileURLToPath(import.meta.url)))
 
@@ -127,4 +128,77 @@ test('同源守卫：随包 linter 与 dsh-patches 内的权威副本保持一�
 
   const [a, b] = await Promise.all([readFile(bundled, 'utf8'), readFile(authoritative, 'utf8')])
   assert.equal(a, b, '两份 linter 已漂移：请以 dsh-patches/lint-preset.mjs 为准重新同步 lib/lint-preset.mjs')
+})
+
+// —— dsh-skill-subset 配置规则（2026-09-11 实测事故的直接成因）——
+// 规则用 fixture 显式给出的 config.skillsDir 指向临时目录，不读真实 ~/.dsh/skills。
+
+/** 建一个临时 skillsDir，其中只存在 names 列出的技能。 */
+async function skillsDir(names) {
+  const root = await mkdtemp(join(tmpdir(), 'preset-skills-'))
+  for (const skill of names) {
+    await mkdir(join(root, skill), { recursive: true })
+    await writeFile(join(root, skill, 'SKILL.md'), '---\nname: ' + skill + '\ndescription: 测试用\n---\n')
+  }
+  return root
+}
+
+/** 写一份含 skill-subset 行的 preset，返回其路径。 */
+async function presetWithSubset(configLines) {
+  const dir = await mkdtemp(join(tmpdir(), 'preset-subset-'))
+  const file = join(dir, 'agent.cordis.yml')
+  await writeFile(file, ['- id: skill-subset', "  name: 'dsh-skill-subset'", '  config:', ...configLines, ''].join('\n'))
+  return file
+}
+
+/** 在 preset 目录内建一个自带技能（preset 的 skill-filesystem 行会读这里）。 */
+async function presetOwnSkill(presetFile, skill) {
+  const dir = join(dirname(presetFile), 'skills', skill)
+  await mkdir(dir, { recursive: true })
+  await writeFile(join(dir, 'SKILL.md'), '---\nname: ' + skill + '\ndescription: preset 自带\n---\n')
+}
+
+test('skill-subset 的 skills 里存在但磁盘上没有的技能名必须报错', async () => {
+  const dir = await skillsDir(['present-skill'])
+  const file = await presetWithSubset(['    skills:', '      - present-skill', '      - missing-skill', `    skillsDir: '${dir}'`])
+
+  const { errors } = lintFile(file)
+  assert.ok(
+    errors.some((e) => e.includes('missing-skill')),
+    `必须报出缺失的技能名 missing-skill，实际 errors=${JSON.stringify(errors)}`,
+  )
+})
+
+test('技能只存在于 preset 自带的 skills/ 目录时不得报错（实测：6 个 preset 都是这种形态）', async () => {
+  const dir = await skillsDir(['present-skill']) // 该目录里没有 preset-own-skill
+  const file = await presetWithSubset(['    skills:', '      - present-skill', '      - preset-own-skill', `    skillsDir: '${dir}'`])
+  await presetOwnSkill(file, 'preset-own-skill')
+
+  const { errors } = lintFile(file)
+  const subsetErrors = errors.filter((e) => e.includes('preset-own-skill'))
+  assert.deepEqual(subsetErrors, [], `preset 自带目录里的技能不应报错，实际=${JSON.stringify(subsetErrors)}`)
+})
+
+test('skill-subset 的 skills 全部存在时不报错（规则不得一味报错）', async () => {
+  const dir = await skillsDir(['present-skill'])
+  const file = await presetWithSubset(['    skills:', '      - present-skill', `    skillsDir: '${dir}'`])
+
+  const { errors } = lintFile(file)
+  const subsetErrors = errors.filter((e) => e.includes('skill-subset'))
+  assert.deepEqual(subsetErrors, [], `技能都在时不应报错，实际=${JSON.stringify(subsetErrors)}`)
+})
+
+test("positiveSource: 'dir' 而 skillsDir 不存在时必须报错", async () => {
+  const file = await presetWithSubset([
+    '    skills:',
+    '      - some-skill',
+    "    positiveSource: 'dir'",
+    `    skillsDir: '${join(tmpdir(), 'definitely-missing-skills-dir')}'`,
+  ])
+
+  const { errors } = lintFile(file)
+  assert.ok(
+    errors.some((e) => e.includes('skillsDir') || e.includes('definitely-missing-skills-dir')),
+    `必须报出 skillsDir 不存在，实际 errors=${JSON.stringify(errors)}`,
+  )
 })

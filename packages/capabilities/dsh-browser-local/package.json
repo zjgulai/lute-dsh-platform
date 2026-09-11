@@ -31,7 +31,6 @@
   },
   "files": [
     "lib/index.js",
-    "lib/invariant.js",
     "lib/protocol.js",
     "lib/types/**/*.d.ts",
     "cordis.patch.yml",

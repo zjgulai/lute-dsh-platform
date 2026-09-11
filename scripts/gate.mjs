@@ -26,7 +26,7 @@ import {
   checkScriptsRunnable,
   checkTrackedIgnored,
 } from './gates/checks.mjs'
-import { checkProfileMetadata } from './gates/sync-profile.mjs'
+import { checkProfileFilesSync, checkProfileMetadata } from './gates/sync-profile.mjs'
 import { collectPackages } from './gates/package-collect.mjs'
 import { renderCatalog } from './gen-catalog.mjs'
 
@@ -147,6 +147,33 @@ const CHECKS = [
             targetDir: join(profileVendor, entry.dir.split('/').pop()),
           })),
       )
+    },
+  },
+  {
+    name: 'profile-files-sync',
+    remediation: '按 package.json 的 files 清单修正：陈旧条目从 files 中删除；真缺件用 tmp+mv 语义补齐 profile 副本（勿直接覆盖）',
+    run() {
+      const profile = join(process.env.HOME ?? '', '.dsh', 'profiles', 'desktop')
+      // 盯 node_modules：`file:` 依赖是硬链接实体副本，且这是 DSH 真实装载点
+      // （2026-09-11 实测报错路径即 profiles/desktop/node_modules/dsh-preset-lint-local/lib/...）。
+      // vendor/ 是另一份命名不同的副本，两份都缺 linter——本项只对装载点断言。
+      const target = join(profile, 'node_modules')
+      if (!existsSync(target)) return { passed: true, violations: [] }
+      const packages = new Map(collectManifests().filter((entry) => entry.dir !== '.').map((entry) => [entry.dir.split('/').pop(), entry]))
+      const pairs = []
+      for (const [name, spec] of Object.entries(installedProfileDependencies(profile))) {
+        if (!spec.startsWith('file:')) continue
+        const sourceDir = spec.slice('file:'.length)
+        if (!existsSync(join(sourceDir, 'package.json'))) continue
+        const entry = packages.get(sourceDir.split('/').pop())
+        pairs.push({
+          name,
+          sourceDir,
+          targetDir: join(target, name),
+          files: entry?.manifest.files ?? [],
+        })
+      }
+      return checkProfileFilesSync(pairs)
     },
   },
   {
@@ -388,6 +415,20 @@ function submoduleHead() {
 
 function readIfExists(path) {
   return existsSync(path) ? readFileSync(path, 'utf8') : ''
+}
+
+/**
+ * 读取 live profile 的已安装依赖表（package.json 的 dependencies）。
+ * 返回空对象表示该 profile 未安装或不可读——调用方据此跳过校验。
+ */
+function installedProfileDependencies(profileDir) {
+  const manifest = join(profileDir, 'package.json')
+  if (!existsSync(manifest)) return {}
+  try {
+    return JSON.parse(readFileSync(manifest, 'utf8')).dependencies ?? {}
+  } catch {
+    return {}
+  }
 }
 
 function parseArgs(argv) {
