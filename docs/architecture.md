@@ -22,6 +22,7 @@
 | `adr-index` | 是 | ADR 编号连续、索引与文件一致（ADR-0015） |
 | `adr-note-links` | 是 | ADR 的「决策记录」链接可达，且 Note 正文回引该 ADR 编号（ADR-0015） |
 | `exemptions-frozen` | 是 | 豁免条目只减不增、期限不延后、到期即失败（ADR-0014） |
+| `profile-files-sync` | 是 | profile 副本必须与包 `package.json` 的 `files` 清单一致：清单声明但源码无（陈旧清单）、源码有而副本缺（真缺件）都失败。盯 `node_modules`（真实装载点）；`vendor` 侧由既有 `profile-metadata-sync` 负责（见 `docs/notes/implemented/contract/2026-09-11-preset-lint-and-profile-files-sync.md`） |
 
 退出码：`0` 全部通过 · `1` 存在失败校验 · `2` 用法错误。`--list` 输出全部校验项名称。
 
@@ -39,7 +40,7 @@
 - 工具：`ctx.tools.register(defineTool(...))`；工具名 DeepSeek 契约（≤64 字符、[A-Za-z0-9_-]）；MCP 宿主直挂 `dsh-mcp-client`（ctx.plugin），工具名 `mcp__<server>__<raw>`（连字符原样保留）。
 - 凭证：credentials 服务（resolve/set/describe），页面不回显；文件类配置 0600。
 - 生效语义：宿主变更=重启；客户端变更=刷新；技能文件=watcher 热载；**MCP 挂载在宿主启动时解析凭据（token 必须先于重启写入凭据库）**。
-- 同步语义：profile 副本同步一律 tmp+mv 原子替换（`cat >` 遇硬链接会双杀两文件）。
+- 同步语义：profile 副本同步一律 tmp+mv 原子替换（`cat >` 遇硬链接会双杀两文件）。**`file:` 依赖的副本是安装时刻的硬链接快照——安装之后新增的文件不会自动进去**，必须按 `files` 清单补（漏补的症状是「功能静默不生效 + 日志一句 warn」，2026-09-11 的 preset lint 全失效即此因）。
 
 ## 2. 红线（改动前必读）
 
