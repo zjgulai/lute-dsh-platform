@@ -8,12 +8,13 @@
 | 能力 | 标注 | 依据 |
 | --- | --- | --- |
 | **LoopX CLI（`loopx` 命令）** | ✅ **正式** | 安装成功、`doctor` 全项通过、`connect`/`status` 真实建库并校验契约 |
-| **DSH 侧 `dsh-loopx-plugin` 绑定闭环** | 🟡 **beta（收窄）** | 绑定侧已实测打通（见 §4）；差「Driver 激活 + GoalBar 渲染」最后一跳——被 preset 技能遮蔽挡住，待重启 DSH 后验证 |
+| **DSH 侧 `dsh-loopx-plugin` · 技能可调用 + Driver 激活** | ✅ **正式** | 技能在会话目录内可加载；Driver 认下 typed 证据并把心跳任务真实排进本会话（见 §5） |
+| **DSH 侧 `dsh-loopx-plugin` · GoalBar 渲染** | 🟡 **beta（仅剩此项）** | 渲染需浏览器观察，本会话 browser bridge 无扩展连接，无法取证 |
 | 其余 0 调用能力 | 未评估 | 本 Loop 只覆盖 LoopX |
 
-**为什么插件是 beta 而不是正式**：验收标准是「跑通升正式」。CLI 那半跑通了；
-插件那半要求「一个确切的活体 `(goalId, loopxAgentId)` 绑定」，而该绑定只在
-真实 Session 里产生——**没有验证过的事不标正式**。
+**为什么 GoalBar 仍单独标 beta**：验收标准是「跑通升正式」，而 GoalBar 的可见性只在浏览器里成立。
+它的读通道已确认存在且鉴权加固（`curl :43120/loopx` → 401），但「是否渲染出那一行」**没有实测过的事不标正式**。
+插件整体可视为「本地闭环已通、UI 面待一次目视确认」。
 
 ## 1. 安装（可复现）
 
@@ -126,6 +127,53 @@ $ loopx status
 
 > 设计契约（GoalBar 协议、延迟原子性限制、激活边界与上述反例）已落成文档：
 > [`docs/plans/2026-08-20-dsh-native-skill-driver.md`](../../../plans/2026-08-20-dsh-native-skill-driver.md)（ADR-0009 单一事实源）。
+
+## 5. Driver 激活实录（2026-09-11 第四轮）
+
+第 4 节留下的最后一跳在本轮打通。三次重启各自暴露一层问题，**每一层都只能靠实测发现**：
+
+| 轮次 | `skill(loopx)` 结果 | 真实成因 |
+| --- | --- | --- |
+| 初始 | `not available for model invocation` | preset 的 `dsh-skill-subset` 把该技能注册为 `modelInvocable: false` / `userInvocable: false` |
+| 改白名单后 | `unknown or no longer available` | 遮蔽项消失，但 `~/.dsh/skills` **不在 preset 作用域**（`includeDefaultRoots: false`），技能彻底不可见 |
+| 再把 `positiveSource` 改 `'dir'` | 技能可见，点开抛 `loaded skill "loopx" source must be a string` | subset 插件自己 `register()` 的对象**缺 `source`/`provider`**，点开即触发 `dsh-skill` 的 `validateDefinition` |
+| 最终（两条腿分职） | ✅ **成功加载 2388 字节 SKILL.md** | 文件系统 provider 供技能（带完整字段）+ subset 只做白名单遮蔽（`positiveSource: 'none'`） |
+
+**最终配置**（`~/.dsh/.agent-presets/ai-product-developer/agent.cordis.yml`，相对原始仅两处改动）：
+
+```yaml
+- id: skill-subset
+  config:
+    skills: ['grill-me', 'tdd', 'to-spec', 'loopx']   # ← 加 loopx
+- id: skill-filesystem
+  config:
+    customSkillDirs:
+      - !!js "...new URL('skills/', baseUrl)..."       # preset 自带（原有）
+      - !!js "...homedir() + '/.dsh/skills/'..."       # ← 加全局技能目录（loopx 在这里）
+```
+
+**Driver 激活的实测证据链**（按顺序，全部为真实读数）：
+
+1. 技能目录里出现 `loopx`（会话目录已更新）。
+2. 一次成功的 `skill` 工具调用 —— 满足 Driver 认的第二种 typed 证据（`tool/call` name=`skill` + 配对的成功 `tool/result`）。
+3. 绑定仍为唯一：`resolve-agent-thread` → `status=bound`、`matches=1`。
+4. **Driver 把心跳任务真实排进了本会话**，正文以 `Advance magpie-horch-goal from the registry-declared active state` 开头，
+   携带 `LOOPX_TURN=dsh-loopx-48350045-…`、`quota should-run` 命令、`settlement_plan` 引用与写回契约。
+   这是「插件与 LoopX 双向接通」的直接证据，而非配置推断。
+5. `quota should-run`（带该 turn-instance-id）→ `execution_obligation.must_attempt_work: true`、
+   `interaction_contract.mode: bounded_delivery`、`agent_channel.must_attempt: true`。
+
+**同轮发现的两处契约落差（如实登记，均未修）**：
+
+- 心跳正文要求「execute `interaction_contract.cli_channel.settlement_plan.ordered_steps`」，
+  但实际收据中 **`settlement_plan` 不存在**（全文 `settlement_plan` 出现 0 次、`ordered_steps` 0 次），
+  且 `next_cli_actions` 为空、`spend_allowed_now` 与 `spend_after_validation` 均为 `false`。
+  即「按 todo 绑定后应当给出结算计划」这一步在 LoopX 1.0.3（插件托管面 0.5.4）上**没有真的产出**。
+  本轮据此改为按 `protocol_action_packet` 的 `agent_action` 执行 bounded slice 并用 `todo complete --evidence` 写回。
+- `agent_channel.resolution_trace.summary` 报 `source=agent_lane drift=true`，但同一份收据的
+  `agent_lane_next_action` 又给出了确切条目——两处口径不一致，未追究。
+
+**仍未取证的一项**：GoalBar 是否在会话底部渲染出 `Goal magpie-horch-goal` + 进度。需要浏览器侧目视。
 
 ## 5. 决策记录：补写被引用的设计文档（2026-09-11 第三轮）
 
