@@ -20,7 +20,6 @@ const GROUP_BY_DIR = {
   'dsh-wanzh-hulian': 'capabilities',
   'dsh-deepresearch-local': 'capabilities',
   'dsh-browser-local': 'capabilities',
-  'dsh-memory-local': 'capabilities',
   'dsh-loopx-plugin': 'capabilities',
   'dsh-agent-team-gui-local': 'surfaces',
   'dsh-skill-center-local': 'surfaces',

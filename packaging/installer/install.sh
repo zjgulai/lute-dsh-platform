@@ -226,7 +226,6 @@ if [ -f "$HERE/tools/verify-patches-v2.sh" ]; then
 elif [ -f "$HERE/tools/verify-patches.sh" ]; then
   say "运行补丁锚点校验…"
   DSH_APP="$APP_TARGET" DSH_HOME="$DSH_HOME_DIR" \
-    LING_SRC="$PROFILE_DIR/vendor/dsh-memory-local" \
     bash "$HERE/tools/verify-patches.sh" || say "⚠ 补丁校验未全绿——先重启 DSH 再复验"
 fi
 if [ -f "$HERE/tools/brand-replay.sh" ]; then

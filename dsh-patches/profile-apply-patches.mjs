@@ -17,24 +17,6 @@ function write(rel, content) {
 }
 
 // ---------------------------------------------------------------------------
-// 1. @furongjun1999/dsh-memory — remove the roleplay web surface
-// ---------------------------------------------------------------------------
-{
-  const file = '@furongjun1999/dsh-memory/lib/index.js';
-  const c = read(file);
-  if (!c.includes('installRoleplayWeb')) {
-    console.log('[ok] dsh-memory roleplay removal: already applied');
-  } else {
-    const next = c
-      .replace("import { installRoleplayWeb } from './roleplay_web.js';\n", '')
-      .replace(/\t*\/\/ 角色扮演网页[^\n]*\n\t*await installRoleplayWeb\(ctx, bridge, config, disposers\);\n/, '')
-      .replace(/ *\/\/ 角色扮演网页[^\n]*\n *await installRoleplayWeb\(ctx, bridge, config, disposers\);\n/, '');
-    write(file, next);
-    console.log('[patched] dsh-memory roleplay removal');
-  }
-}
-
-// ---------------------------------------------------------------------------
 // 2. @deepseek-ai/dsh-deepresearch — skip http provider when already mounted
 // ---------------------------------------------------------------------------
 {

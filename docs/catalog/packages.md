@@ -9,12 +9,12 @@
 | capabilities | `packages/capabilities/dsh-browser-local` | `@yuxianglin/dsh-bridge-browser` | `internalized` | `@yuxianglin` | `false` |
 | capabilities | `packages/capabilities/dsh-deepresearch-local` | `@deepseek-ai/dsh-deepresearch` | `internalized` | `@deepseek-ai` | `false` |
 | capabilities | `packages/capabilities/dsh-loopx-plugin` | `dsh-loopx-plugin` | `self` | `lute` | `true` |
-| capabilities | `packages/capabilities/dsh-memory-local` | `@furongjun1999/dsh-memory` | `internalized` | `@furongjun1999` | `false` |
 | capabilities | `packages/capabilities/dsh-overseas-skills` | `dsh-overseas-skills` | `self` | `lute` | `false` |
 | capabilities | `packages/capabilities/dsh-overseas-tools` | `dsh-overseas-tools` | `self` | `lute` | `false` |
 | capabilities | `packages/capabilities/dsh-wanzh-hulian` | `dsh-wanzh-hulian` | `self` | `lute` | `false` |
 | surfaces | `packages/surfaces/dsh-agent-team-gui-local` | `dsh-agent-team-gui` | `internalized` | `@deepseek-ai` | `false` |
 | surfaces | `packages/surfaces/dsh-my-quotes` | `dsh-my-quotes` | `self` | `lute` | `false` |
+| surfaces | `packages/surfaces/dsh-role-matrix-local` | `dsh-role-matrix-local` | `self` | `lute` | `false` |
 | surfaces | `packages/surfaces/dsh-skill-center-local` | `dsh-skill-center-local` | `self` | `lute` | `false` |
 | surfaces | `packages/surfaces/dsh-task-board-local` | `@etony668/dsh-task-board` | `internalized` | `@etony668` | `false` |
 | platform | `packages/platform/dsh-auto-compact-local` | `@deepseek-ai/dsh-auto-compact` | `internalized` | `@deepseek-ai` | `false` |
@@ -32,8 +32,8 @@
 
 | 组 | 包数 |
 | --- | --- |
-| capabilities | 7 |
-| surfaces | 4 |
+| capabilities | 6 |
+| surfaces | 5 |
 | platform | 6 |
 | contract | 2 |
 | infra | 2 |
