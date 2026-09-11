@@ -1,17 +1,21 @@
 # —— LUTE Agentic System · monorepo 白名单式 .gitignore ——
 # 策略：默认忽略全部 → 恢复目录 → 仅纳入经审批的目录与根级元文件
 # （一次性补丁脚本/预览 HTML/构建产物/临时文件不入库）
+# 维护规则：白名单条目必须指向磁盘上真实存在的路径；门禁 verify:* 会拒绝幽灵条目（ADR-0013）
 
 *
 !*/
 !.gitignore
-/README.md
-/CHANGELOG.md
-/LICENSE
+!/README.md
+!/CHANGELOG.md
+!/LICENSE
+!AGENTS.md
+!/package.json
 !.github/**
 !docs/**
 !doc/**
 !_doc-notes/**
+!.scratch/**
 !packaging/**
 !81-Skills/**
 !dsh-overseas-skills/**
@@ -22,12 +26,9 @@
 !dsh-patches/**
 !dsh-loopx-plugin/**
 !dsh-memory-local/**
-!dsh-noema-local/**
 !dsh-auto-compact-local/**
 !dsh-deepresearch-local/**
 !dsh-agent-team-gui-local/**
-!dsh-bridge-protocol-local/**
-!dsh-browser-extension-local/**
 !dsh-browser-local/**
 !dsh-file-upload-local/**
 !dsh-preset-lint-local/**
@@ -37,10 +38,11 @@
 !dsh-root-brand-local/**
 !dsh-skill-title-fix/**
 !dsh-theme-local/**
-!archify-local/**
+!dsh-team-hub/**
+!dsh-skill-center-local/**
+!dsh-ui-polish-local/**
 !explore-unknowns-local/**
 !write-spec-local/**
-!deepseek-harness-studio-presets/**
 
 # —— vendor 嵌套仓库：源码不入库，仅 pin 文件入库 ——
 !vendor/
@@ -65,12 +67,10 @@ credentials*
 # —— 排除临时/备份文件（覆盖白名单，避免 git add -A 误纳入）——
 *.bak-*
 *.pre-*
-dsh-team-hub/
 *.orig*
 dsh-overseas-skills/backup/
 dsh-chatui-fix/
 dsh-chatui-fix-backup/
-dsh-rootoutlet-heal/
 
 # 2.0.0 构建源（app 直补副本 + rc 时代 profile 源；可重建，勿入库）
 staging-src/

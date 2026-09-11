@@ -1,6 +1,9 @@
 {
   "name": "dsh-overseas-tools",
   "version": "0.1.0",
+  "luteOrigin": "self",
+  "luteOwner": "lute",
+  "lutePublish": false,
   "description": "出海技能外部工具接入：exa_search（凭据 overseas.exa，缺 Key 优雅降级）+ Jungle Scout / Klaviyo 凭据位预留。",
   "type": "module",
   "main": "lib/index.js",

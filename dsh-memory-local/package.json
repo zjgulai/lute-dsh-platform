@@ -1,6 +1,9 @@
 {
   "name": "@furongjun1999/dsh-memory",
   "version": "0.4.0",
+  "luteOrigin": "internalized",
+  "luteOwner": "@furongjun1999",
+  "lutePublish": false,
   "description": "灵枢（Lingshu·líng shū）DeepSeek Harness 插件：完整大脑——长期记忆/知识飞轮/自我认知/递归反思接入 DSH，对话自动沉淀进记忆库",
   "type": "module",
   "main": "lib/index.js",
@@ -13,7 +16,6 @@
   },
   "files": [
     "lib",
-    "src",
     "README.md",
     "cordis.yml.example",
     "cordis.patch.yml",
@@ -60,7 +62,8 @@
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && node --import tsx --test \"test/*.test.ts\"",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run build && npm test"
+    "prepublishOnly": "npm run build && npm test",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,9 @@
 {
   "name": "dsh-rename-conversations",
   "version": "0.1.0",
+  "luteOrigin": "self",
+  "luteOwner": "lute",
+  "lutePublish": false,
   "description": "会话标题规范化宿主插件：提供 rc_probe（只读盘点，含 Asia/Shanghai 日期换算与文本瘦身）、rc_batch_rename（一键批量重命名）、rc_rename（单条重命名）三个模型工具，走官方 sessionController 契约。",
   "type": "module",
   "main": "lib/index.js",

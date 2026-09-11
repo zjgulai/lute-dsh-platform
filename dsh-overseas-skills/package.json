@@ -1,6 +1,9 @@
 {
   "name": "dsh-overseas-skills",
   "version": "0.1.0",
+  "luteOrigin": "self",
+  "luteOwner": "lute",
+  "lutePublish": false,
   "description": "出海技能：设置页侧边导航新增「出海技能」页，展示从 Accio 导入的跨境电商技能目录（12 分类、分组栅格、搜索与模型/斜杠可见性开关）。",
   "type": "module",
   "main": "lib/index.js",

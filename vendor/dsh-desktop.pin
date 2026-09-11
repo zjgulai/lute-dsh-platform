@@ -7,6 +7,7 @@ upstream-tag: v2.0.5
 upstream-sha: 423406fe225442995902015cb6f10eed670ff115
 lute-branch: lute-v2.0.5
 lute-sha: 4e23031e926de35898cf79500be49eedbdd27b9a
-harness-submodule: NOT-INITIALIZED (pin a66e4702047846cdaa10c66c9d3df3951f5ea70d, runtime 0.1.2-rc.1)
+harness-submodule: a66e4702047846cdaa10c66c9d3df3951f5ea70d
+harness-submodule-role: read-only-ref（ADR-0008：只作源码参照系，不参与构建；运行时仍取 harness-runtime-source）
 harness-runtime-source: vendor/dsh-runtime/0.1.2-rc.1/manifest.json
 checked-at: 2026-09-11

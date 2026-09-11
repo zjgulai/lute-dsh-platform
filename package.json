@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "lute-agentic-system",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "LUTE Agentic System —— 基于 DeepSeek Harness（DSH Desktop）的二次开发平台 monorepo。根包只承载门禁与工程脚本，不发布。",
+  "luteOrigin": "self",
+  "luteOwner": "lute",
+  "lutePublish": false,
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "scripts": {
+    "gate": "node scripts/gate.mjs --mode quick",
+    "gate:full": "node scripts/gate.mjs --mode full",
+    "gate:list": "node scripts/gate.mjs --list",
+    "test:gate": "node --test scripts/gate.test.mjs scripts/gates/checks.test.mjs"
+  }
+}

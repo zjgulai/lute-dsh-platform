@@ -1,0 +1,229 @@
+import { test } from 'node:test'
+import assert from 'node:assert/strict'
+import { fileURLToPath } from 'node:url'
+import { dirname, join } from 'node:path'
+import {
+  checkAdrIndex,
+  checkAdrNoteLinks,
+  checkGitignoreWhitelist,
+  checkExemptions,
+  checkPackageIdentity,
+  checkPinConsistency,
+} from './checks.mjs'
+
+const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
+
+test('包身份校验：缺少 luteOrigin 的包必须被拒绝', () => {
+  const result = checkPackageIdentity(repoRoot, [
+    { dir: 'fixture-valid', manifest: { name: 'fixture-valid', luteOrigin: 'self', luteOwner: 'lute', lutePublish: false } },
+    { dir: 'fixture-missing-origin', manifest: { name: 'fixture-missing-origin', luteOwner: 'lute', lutePublish: false } },
+    { dir: 'fixture-bad-origin', manifest: { name: 'fixture-bad-origin', luteOrigin: 'borrowed', luteOwner: 'lute', lutePublish: false } },
+    { dir: 'fixture-missing-owner', manifest: { name: 'fixture-missing-owner', luteOrigin: 'self', lutePublish: false } },
+    { dir: 'fixture-bad-publish', manifest: { name: 'fixture-bad-publish', luteOrigin: 'self', luteOwner: 'lute', lutePublish: 'no' } },
+  ])
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, [
+    'fixture-missing-origin: 缺少 luteOrigin',
+    'fixture-bad-origin: luteOrigin 取值非法（borrowed），仅允许 self / internalized / npm-pinned',
+    'fixture-missing-owner: 缺少 luteOwner',
+    'fixture-bad-publish: lutePublish 必须是布尔值',
+  ])
+})
+
+test('包身份校验：合法的自研包通过', () => {
+  const result = checkPackageIdentity(repoRoot, [
+    { dir: 'fixture-valid', manifest: { name: 'fixture-valid', luteOrigin: 'self', luteOwner: 'lute', lutePublish: false } },
+  ])
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('pin 校验：pin 记录的 sha 与子模块实际 sha 不一致必须被拒绝', () => {
+  const result = checkPinConsistency({
+    pinText: 'harness-submodule: a66e4702047846cdaa10c66c9d3df3951f5ea70d\n',
+    submoduleSha: 'ffffffffffffffffffffffffffffffffffffffff',
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, [
+    'vendor/dsh-desktop.pin 记录的 harness-submodule（a66e4702047846cdaa10c66c9d3df3951f5ea70d）与 vendor/dsh-desktop/deepseek-harness 实际 HEAD（ffffffffffffffffffffffffffffffffffffffff）不一致',
+  ])
+})
+
+test('pin 校验：pin 仍为 NOT-INITIALIZED 视为未初始化并拒绝', () => {
+  const result = checkPinConsistency({
+    pinText: 'harness-submodule: NOT-INITIALIZED (pin a66e4702047846cdaa10c66c9d3df3951f5ea70d, runtime 0.1.2-rc.1)\n',
+    submoduleSha: 'a66e4702047846cdaa10c66c9d3df3951f5ea70d',
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, ['vendor/dsh-desktop.pin 的 harness-submodule 仍为 NOT-INITIALIZED（ADR-0008 要求初始化）'])
+})
+
+test('pin 校验：sha 一致时通过', () => {
+  const result = checkPinConsistency({
+    pinText: 'harness-submodule: a66e4702047846cdaa10c66c9d3df3951f5ea70d\n',
+    submoduleSha: 'a66e4702047846cdaa10c66c9d3df3951f5ea70d',
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('gitignore 白名单校验：指向不存在路径的条目必须被拒绝', () => {
+  const result = checkGitignoreWhitelist({
+    gitignoreText: ['*', '!*/', '!real-dir/**', '!ghost-dir/**', '!vendor/dsh-desktop.pin', '!/README.md'].join('\n'),
+    exists: (path) => path === 'vendor/dsh-desktop.pin' || path === 'README.md' || path === 'real-dir',
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, ['ghost-dir: .gitignore 白名单条目指向不存在的路径（ADR-0013 禁止幽灵条目）'])
+})
+
+test('gitignore 白名单校验：全部条目指向真实路径时通过', () => {
+  const result = checkGitignoreWhitelist({
+    gitignoreText: ['*', '!*/', '!real-dir/**', '!vendor/dsh-desktop.pin'].join('\n'),
+    exists: (path) => path === 'vendor/dsh-desktop.pin' || path === 'real-dir',
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('ADR 索引校验：索引行必须有对应文件且编号连续', () => {
+  const result = checkAdrIndex({
+    adrFiles: ['docs/adr/ADR-0001.md', 'docs/adr/ADR-0003.md'],
+    indexText: '| ADR-0001 | 标题一 | accepted | — |\n| ADR-0003 | 标题三 | accepted | [Note](x.md) |\n',
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, ['ADR 编号不连续：缺 ADR-0002（索引含 1, 3）'])
+})
+
+test('ADR 索引校验：索引提到但文件缺失必须被拒绝', () => {
+  const result = checkAdrIndex({
+    adrFiles: ['docs/adr/ADR-0001.md'],
+    indexText: '| ADR-0001 | 标题一 | accepted | — |\n| ADR-0002 | 幽灵 | accepted | — |\n',
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, [
+    'docs/adr/ADR-0002.md：索引已登记但文件不存在',
+    'ADR 文件数（1）与索引条目数（2）不一致',
+  ])
+})
+
+test('ADR 索引校验：索引与文件一致时通过', () => {
+  const result = checkAdrIndex({
+    adrFiles: ['docs/adr/ADR-0001.md', 'docs/adr/ADR-0002.md'],
+    indexText: '| ADR-0001 | 标题一 | accepted | — |\n| ADR-0002 | 标题二 | accepted | [Note](n.md) |\n',
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('ADR↔Note 互链校验：ADR 指向不存在的 Note 必须被拒绝', () => {
+  const result = checkAdrNoteLinks({
+    adrDocs: [
+      { path: 'docs/adr/ADR-0007.md', text: '- 决策记录：[Note](../notes/implemented/architecture/2026-09-11-missing.md)\n' },
+      { path: 'docs/adr/ADR-0008.md', text: '- 决策记录：[Note](../notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md)\n' },
+    ],
+    notePath: 'docs/notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md',
+    noteText: 'ADR-0007 / ADR-0008\n',
+    exists: (path) => path === 'docs/notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md',
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, ['docs/adr/ADR-0007.md：决策记录链接指向不存在的 Note（docs/notes/implemented/architecture/2026-09-11-missing.md）'])
+})
+
+test('ADR↔Note 互链校验：Note 未引用其 ADR 编号必须被拒绝', () => {
+  const result = checkAdrNoteLinks({
+    adrDocs: [{ path: 'docs/adr/ADR-0007.md', text: '- 决策记录：[Note](../notes/implemented/architecture/2026-09-11-topic.md)\n' }],
+    notePath: 'docs/notes/implemented/architecture/2026-09-11-topic.md',
+    noteText: '本篇记录重构决策。\n',
+    exists: () => true,
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, ['docs/notes/implemented/architecture/2026-09-11-topic.md：正文未引用 ADR-0007'])
+})
+
+test('ADR↔Note 互链校验：双向可达时通过', () => {
+  const result = checkAdrNoteLinks({
+    adrDocs: [{ path: 'docs/adr/ADR-0007.md', text: '- 决策记录：[Note](../notes/implemented/architecture/2026-09-11-topic.md)\n' }],
+    notePath: 'docs/notes/implemented/architecture/2026-09-11-topic.md',
+    noteText: 'ADR-0007 记录三次推进。\n',
+    exists: () => true,
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('豁免登记校验：新增条目必须被拒绝（只减不增）', () => {
+  const result = checkExemptions({
+    exemptions: [{ package: 'dsh-big', reason: '缺 typecheck', owner: 'lute', deadline: '2026-10-31' }],
+    baseline: [],
+    today: '2026-09-11',
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, [
+    'dsh-big: 新增豁免条目被拒绝（ADR-0014 只减不增，请在基线中登记或先补齐）',
+  ])
+})
+
+test('豁免登记校验：deadline 延后必须被拒绝', () => {
+  const result = checkExemptions({
+    exemptions: [{ package: 'dsh-big', reason: '缺 typecheck', owner: 'lute', deadline: '2026-12-31' }],
+    baseline: [{ package: 'dsh-big', reason: '缺 typecheck', owner: 'lute', deadline: '2026-10-31' }],
+    today: '2026-09-11',
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, ['dsh-big: 豁免期限不得延后（基线 2026-10-31 → 当前 2026-12-31，ADR-0014）'])
+})
+
+test('豁免登记校验：不可反悔地删除条目是允许的（只减不增）', () => {
+  const result = checkExemptions({
+    exemptions: [],
+    baseline: [{ package: 'dsh-big', reason: '缺 typecheck', owner: 'lute', deadline: '2026-10-31' }],
+    today: '2026-09-11',
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('豁免登记校验：缺字段与过期条目必须被拒绝', () => {
+  const result = checkExemptions({
+    exemptions: [
+      { package: 'dsh-a', reason: '缺 typecheck', owner: 'lute', deadline: '2026-10-31' },
+      { package: 'dsh-b', reason: '缺 test', owner: 'lute' },
+      { package: 'dsh-c', reason: '缺 test', owner: 'lute', deadline: '2026-09-01' },
+    ],
+    baseline: [
+      { package: 'dsh-a', reason: '缺 typecheck', owner: 'lute', deadline: '2026-10-31' },
+      { package: 'dsh-b', reason: '缺 test', owner: 'lute', deadline: '2026-10-31' },
+      { package: 'dsh-c', reason: '缺 test', owner: 'lute', deadline: '2026-09-01' },
+    ],
+    today: '2026-09-11',
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, [
+    'dsh-b: 豁免条目缺少 deadline 字段（ADR-0014）',
+    'dsh-c: 豁免已过期（deadline 2026-09-01，今天 2026-09-11）——到期即为最高优先级，不得继续豁免',
+  ])
+})
+
+test('豁免登记校验：空数组且今天不晚于任何期限时通过', () => {
+  const result = checkExemptions({ exemptions: [], baseline: [], today: '2026-09-11' })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})

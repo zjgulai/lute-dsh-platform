@@ -1,6 +1,9 @@
 {
   "name": "dsh-skill-subset",
   "version": "0.1.0",
+  "luteOrigin": "self",
+  "luteOwner": "lute",
+  "lutePublish": false,
   "description": "Preset 技能子集打包：在 preset scope 层以运行时技能重注册指定子集（模型可见），遮蔽全局 model-off 副本。",
   "type": "module",
   "main": "lib/index.js",

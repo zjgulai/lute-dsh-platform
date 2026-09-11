@@ -43,10 +43,21 @@ pnpm add file:/Users/lute/project/Magpie-Horch/dsh-overseas-skills
 
 ## 版本与发布
 
-- 版本：单平台版本 `vX.Y.Z`（git tag = 打包版本），各插件 package.json 同步对齐；`CHANGELOG.md`（根）与 `packaging/CHANGELOG.md`（打包）双轨汇总。
+- 版本：平台侧使用单一版本 `vX.Y.Z`（git tag = 打包版本）；`CHANGELOG.md`（根）与 `packaging/CHANGELOG.md`（打包）双轨汇总。
+- 插件版本现状：各插件 `package.json` 保留自身版本，实测分布于 9 个取值（`0.0.3-alpha.1-port` … `1.0.1`），**尚未与平台版本对齐**；对齐机制与债务由 [ADR-0003](docs/adr/ADR-0003.md)、[ADR-0012](docs/adr/ADR-0012.md) 与门禁 `package-identity` 接管。
 - 发布：`packaging/` 构建 pkg + dmg → **GitHub Releases 附件**（二进制不进 git）+ `SHA256SUMS`/`PKG-SHA256SUMS` 校验清单 + `INSTALL-CARD.md` 客户安装卡。
 - 交付形态：**pkg 为主**（客户双击向导）、dmg 为备用（CLI）；BUILD 号标识每次打包（防同名多代混淆）。
 - 流程 SOP：`docs/release-process.md`。
+
+## 开发与验收
+
+```bash
+pnpm run gate        # 提交前：契约级门禁（退出码即契约）
+pnpm run gate:full   # 推送前：完整门禁
+pnpm run test:gate   # 门禁自身的单元测试
+```
+
+规则与分层见 [AGENTS.md](AGENTS.md)；门禁校验项与阻塞级别见 [docs/architecture.md](docs/architecture.md) 第 0 节。
 
 ## 决策与贡献
 

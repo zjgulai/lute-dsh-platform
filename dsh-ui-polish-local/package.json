@@ -1,10 +1,12 @@
 {
-  "name": "dsh-my-quotes",
-  "version": "0.1.0",
+  "name": "dsh-ui-polish",
+  "description": "LUTE 本机 UI 微调（DSH Desktop 2.0.5）：右栏 detailsCol 滚动条滑块透明、任务看板画布底部横向滚动条彻底移除（防中间框晃动）、会话正文/输入卡宽度 748→960px。纯 client CSS 注入，不改任何 app bundle 字节。",
+  "version": "0.1.0-local.1",
   "luteOrigin": "self",
   "luteOwner": "lute",
   "lutePublish": false,
-  "description": "「我说」：聚合全部 DSH 会话中用户本人 ≥30 字消息，规则 9 类意图分类（可选 LLM 精分），支持搜索/项目筛选/跳转/复制全文。",
+  "private": true,
+  "license": "MIT",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -22,12 +24,7 @@
       "patch": "./cordis.patch.yml"
     },
     "client": {
-      "platform": "web",
-      "inject": [
-        "@deepseek-ai/dsh-client-connection",
-        "@deepseek-ai/dsh-client-ui-slots"
-      ]
+      "platform": "web"
     }
-  },
-  "license": "MIT"
+  }
 }

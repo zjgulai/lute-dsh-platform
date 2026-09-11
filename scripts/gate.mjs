@@ -1,0 +1,226 @@
+#!/usr/bin/env node
+/**
+ * LUTE 门禁入口。退出码即契约（ADR-0014）：
+ *   0 = 全部校验通过
+ *   1 = 存在失败校验
+ *   2 = 用法错误
+ *
+ * 用法：node scripts/gate.mjs [--mode quick|full] [--list]
+ *   quick（默认）提交前使用；full 推送前使用（含变更包 typecheck/test，二期接入 git 钩子后启用）。
+ */
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import {
+  checkAdrIndex,
+  checkAdrNoteLinks,
+  checkExemptions,
+  checkGitignoreWhitelist,
+  checkPackageIdentity,
+  checkPinConsistency,
+} from './gates/checks.mjs'
+import { checkProfileMetadata } from './gates/sync-profile.mjs'
+
+const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
+const MODES = ['quick', 'full']
+
+/** 不参与包身份校验的目录（无 package.json 或属外部依赖）。 */
+const SCAN_SKIP = new Set(['node_modules', 'vendor', '.git', 'packaging', 'docs', '.scratch'])
+
+/** 校验项注册表：新增校验在此登记，name 会出现在 --list 输出中。 */
+const CHECKS = [
+  {
+    name: 'package-identity',
+    remediation: '在每个受管 package.json 补 luteOrigin / luteOwner / lutePublish（ADR-0012）',
+    run() {
+      return checkPackageIdentity(repoRoot, collectManifests())
+    },
+  },
+  {
+    name: 'pin-consistency',
+    remediation: '更新 vendor/dsh-desktop.pin 的 harness-submodule 为实际 HEAD（ADR-0008）',
+    run() {
+      return checkPinConsistency({
+        pinText: readIfExists(join(repoRoot, 'vendor', 'dsh-desktop.pin')),
+        submoduleSha: submoduleHead() ?? '<未初始化>',
+      })
+    },
+  },
+  {
+    name: 'gitignore-whitelist',
+    remediation: '删除 .gitignore 中指向不存在路径的白名单条目（ADR-0013）',
+    run() {
+      return checkGitignoreWhitelist({
+        gitignoreText: readIfExists(join(repoRoot, '.gitignore')),
+        exists: (path) => existsSync(join(repoRoot, path)),
+      })
+    },
+  },
+  {
+    name: 'adr-index',
+    remediation: '修正 docs/adr/README.md 索引与 docs/adr/ADR-NNNN.md 文件的一致性（ADR-0015）',
+    run() {
+      return checkAdrIndex({
+        adrFiles: listAdrFiles(),
+        indexText: readIfExists(join(repoRoot, 'docs', 'adr', 'README.md')),
+      })
+    },
+  },
+  {
+    name: 'adr-note-links',
+    remediation: '修正 ADR 的「决策记录」链接或在其 Note 正文回引 ADR 编号（ADR-0015）',
+    run() {
+      return checkAdrNoteLinks({
+        adrDocs: listAdrFiles().map((path) => ({ path, text: readIfExists(join(repoRoot, path)) })),
+        notePath: NOTE_PATH,
+        noteText: readIfExists(join(repoRoot, NOTE_PATH)),
+        exists: (path) => existsSync(join(repoRoot, path)),
+      })
+    },
+  },
+  {
+    name: 'profile-metadata-sync',
+    remediation: '运行 node scripts/sync-profile.mjs --apply --only-metadata 同步 live profile 副本的 package.json',
+    run() {
+      const profileVendor = join(process.env.HOME ?? '', '.dsh', 'profiles', 'desktop', 'vendor')
+      if (!existsSync(profileVendor)) return { passed: true, violations: [] }
+      return checkProfileMetadata(
+        collectManifests()
+          .filter((entry) => entry.dir !== '.')
+          .map((entry) => ({
+            name: entry.dir,
+            sourceDir: join(repoRoot, entry.dir),
+            targetDir: join(profileVendor, entry.dir),
+          })),
+      )
+    },
+  },
+  {
+    name: 'exemptions-frozen',
+    remediation: '不得新增豁免条目；补齐后请删除条目，期限不可延后（ADR-0014）',
+    run() {
+      return checkExemptions({
+        exemptions: JSON.parse(readIfExists(EXEMPTIONS_PATH) || '[]'),
+        baseline: readBaselineExemptions(),
+        today: new Date().toISOString().slice(0, 10),
+      })
+    },
+  },
+]
+
+/** 当前重构决策记录 Note 的仓库根相对路径（ADR-0007 ~ ADR-0015）。 */
+const NOTE_PATH = 'docs/notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md'
+
+/** 豁免登记文件（仓库根相对路径）。 */
+const EXEMPTIONS_PATH = 'scripts/gates/exemptions.json'
+
+/**
+ * 从 git HEAD 读取豁免登记基线；文件尚未入库或仓库尚无提交时返回空数组。
+ * @returns {Array<Record<string, unknown>>}
+ */
+function readBaselineExemptions() {
+  try {
+    const text = execFileSync('git', ['-C', repoRoot, 'show', `HEAD:${EXEMPTIONS_PATH}`], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    })
+    return JSON.parse(text)
+  } catch {
+    return []
+  }
+}
+
+/** 列出 docs/adr 下的 ADR 文件（仓库根相对路径）。 */
+function listAdrFiles() {
+  const dir = join(repoRoot, 'docs', 'adr')
+  if (!existsSync(dir)) return []
+  return readdirSync(dir)
+    .filter((name) => /^ADR-\d{4}\.md$/.test(name))
+    .sort()
+    .map((name) => `docs/adr/${name}`)
+}
+
+/** 收集仓库根与顶层含 package.json 的目录（根包自身也受身份契约约束）。 */
+function collectManifests() {
+  const entries = []
+  const rootManifest = join(repoRoot, 'package.json')
+  if (existsSync(rootManifest)) {
+    entries.push({ dir: '.', manifest: JSON.parse(readFileSync(rootManifest, 'utf8')) })
+  }
+  for (const name of readdirSync(repoRoot)) {
+    if (SCAN_SKIP.has(name) || name.startsWith('.')) continue
+    const dir = join(repoRoot, name)
+    if (!statSync(dir).isDirectory()) continue
+    const manifest = join(dir, 'package.json')
+    if (!existsSync(manifest)) continue
+    entries.push({ dir: name, manifest: JSON.parse(readFileSync(manifest, 'utf8')) })
+  }
+  return entries
+}
+
+/** 读取子模块实际 HEAD；未初始化或不可读时返回 undefined。 */
+function submoduleHead() {
+  const path = join(repoRoot, 'vendor', 'dsh-desktop', 'deepseek-harness')
+  try {
+    return execFileSync('git', ['-C', path, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
+  } catch {
+    return undefined
+  }
+}
+
+function readIfExists(path) {
+  return existsSync(path) ? readFileSync(path, 'utf8') : ''
+}
+
+function parseArgs(argv) {
+  let mode = 'quick'
+  let list = false
+  for (let i = 0; i < argv.length; i += 1) {
+    if (argv[i] === '--list') list = true
+    else if (argv[i] === '--mode') {
+      mode = argv[i + 1]
+      i += 1
+    } else {
+      return { error: `未知参数：${argv[i]}` }
+    }
+  }
+  if (!MODES.includes(mode)) return { error: `未知模式：${mode}（可用：${MODES.join(' / ')}）` }
+  return { mode, list }
+}
+
+function main() {
+  const { mode, list, error } = parseArgs(process.argv.slice(2))
+  if (error) {
+    process.stderr.write(`${error}\n`)
+    process.exitCode = 2
+    return
+  }
+  if (list) {
+    process.stdout.write(`${CHECKS.map((check) => check.name).join('\n')}\n`)
+    return
+  }
+
+  let failed = 0
+  for (const check of CHECKS) {
+    const result = check.run()
+    if (result.passed) {
+      process.stdout.write(`ok   contract ${check.name}\n`)
+      continue
+    }
+    failed += 1
+    process.stdout.write(`fail contract ${check.name}\n`)
+    for (const violation of result.violations) process.stdout.write(`     - ${violation}\n`)
+    process.stdout.write(`     → ${check.remediation}\n`)
+  }
+
+  const passed = CHECKS.length - failed
+  process.stdout.write(
+    failed === 0
+      ? `ok ${passed}/${CHECKS.length} 项通过（mode=${mode}）\n`
+      : `fail ${passed}/${CHECKS.length} 项通过（mode=${mode}）\n`,
+  )
+  process.exitCode = failed === 0 ? 0 : 1
+}
+
+main()

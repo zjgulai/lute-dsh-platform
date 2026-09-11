@@ -1,6 +1,36 @@
 # LUTE Agentic System · 架构与基座契约
 
-## 1. DSH 基座事实（2.0.4 壳 + 0.1.2-alpha.1 技能层）
+本页是**有序地图**：只写组合、能力归属、扩展点与门禁契约；类型定义、逐包细节、决策理由一律在被链接的文档里（分层规则见根 [AGENTS.md](../AGENTS.md)）。
+
+## 0. 仓库构成与门禁（2026-09-11 起）
+
+| 层 | 位置 | 说明 |
+| --- | --- | --- |
+| 基座参照系 | `vendor/dsh-desktop/deepseek-harness/` | pin 到 `a66e470`（runtime 0.1.2-rc.1）的上游源码，**只读、不参与构建**（[ADR-0008](adr/ADR-0008.md)） |
+| 壳层 fork | `vendor/dsh-desktop/` | 嵌套仓库，pin 见 `vendor/dsh-desktop.pin`；改 pin 与行为变更分开提交 |
+| 运行时来源 | `vendor/dsh-runtime/0.1.2-rc.1/*.tgz` | 打包与 profile 实际使用的运行时产物 |
+| 二开插件 | 仓库顶层 `dsh-*` 目录 | 按能力归入 5 组（[ADR-0011](adr/ADR-0011.md)，二期执行迁移） |
+| 门禁 | `scripts/gate.mjs` | 单命令聚合校验，退出码即契约（[ADR-0014](adr/ADR-0014.md)） |
+
+门禁契约（`pnpm run gate` / `pnpm run gate:full`）：
+
+| 校验项 | 阻塞 | 依据 |
+| --- | --- | --- |
+| `package-identity` | 是 | 每个受管 `package.json` 必含 `luteOrigin` / `luteOwner` / `lutePublish`（ADR-0012） |
+| `pin-consistency` | 是 | `vendor/dsh-desktop.pin` 的 `harness-submodule` 必须等于子模块实际 HEAD（ADR-0008） |
+| `gitignore-whitelist` | 是 | 白名单条目必须指向真实路径，禁止幽灵条目（ADR-0013） |
+| `adr-index` | 是 | ADR 编号连续、索引与文件一致（ADR-0015） |
+| `adr-note-links` | 是 | ADR 的「决策记录」链接可达，且 Note 正文回引该 ADR 编号（ADR-0015） |
+| `exemptions-frozen` | 是 | 豁免条目只减不增、期限不延后、到期即失败（ADR-0014） |
+
+退出码：`0` 全部通过 · `1` 存在失败校验 · `2` 用法错误。`--list` 输出全部校验项名称。
+
+## 1. DSH 基座事实（双基座：生产 2.0.4/alpha.1 · 发行 2.0.0=2.0.5/rc.1）
+
+> 2026-09-10 更新：发行线已迁移到 DSH Desktop 2.0.5 + runtime 0.1.2-rc.1（LUTE 2.0.0，
+> 35 补丁重锚、34→35 锚点 verify v2、smoke 37/37）；生产机仍是 2.0.4/alpha.1（灰度期双基座漂移，
+> 见 docs/research/09-audit-architecture.md C 类与 10-debt-solution.md 段 C）。下方契约两基座通用，
+> 差异处以「2.0.5」标注。
 
 - Skill 契约：`name` 必须英文 kebab（加载与运行时双重校验）；目录一层扫描；`.system` 跳过；frontmatter 首行必须是且仅是一个 `---`（重复 `---` 会静默忽略技能，见诊断案例 12）。
 - 插件：`dsh.bundle` + profile `file:` 硬链接安装；bundles 列表注册。

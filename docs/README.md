@@ -2,11 +2,22 @@
 
 本目录沉淀 LUTE Agentic System（DSH Desktop 二次开发平台）的决策与知识资产。
 
+本页是**人工入口**，不是事实源：分层规则见根 [AGENTS.md](../AGENTS.md)，门禁契约见 [architecture.md](architecture.md) 第 0 节。
+
+## 文档脊柱（改代码前先读）
+
+| 层 | 位置 | 说明 |
+| --- | --- | --- |
+| 常驻规则 | [../AGENTS.md](../AGENTS.md) | 每会话必读的结论与归属地，每条链接其详细文档 |
+| 有序地图 | [architecture.md](architecture.md) | 仓库构成、门禁契约、基座事实、红线、模块地图 |
+| 决策时间线 | [adr/](adr/) | ADR-NNNN 编号时间线（决定**是什么**），索引见目录内 README |
+| 决策理由 | [notes/](notes/) | `{lifecycle}/{class}/yyyy-mm-dd-topic.md`（为什么改、放弃了什么），非机械改动必须附一篇 |
+
 ## 故障排查（优先看）
 
 | 文档 | 说明 |
 | --- | --- |
-| [dsh-desktop-white-screen-playbook.md](dsh-desktop-white-screen-playbook.md) | **DSH Desktop 白屏排查手册**：速查卡 + 两次白屏实战案例 + 二次开发红线清单 + 修复工具箱。二次开发遇到白屏先查这里。 |
+| [dsh-desktop-white-screen-playbook.md](dsh-desktop-white-screen-playbook.md) | **DSH Desktop 白屏排查手册**：速查卡 + 两次白屏实战案例 + 二次开发红线清单 + 修复工具箱。二次开发遇到白屏先查这里（唯一 home，`_doc-notes/` 下的旧副本已移除）。 |
 
 ## 架构与流程
 

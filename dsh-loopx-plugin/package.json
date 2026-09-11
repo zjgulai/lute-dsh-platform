@@ -1,6 +1,9 @@
 {
   "name": "dsh-loopx-plugin",
   "version": "0.1.1-beta.4",
+  "luteOrigin": "self",
+  "luteOwner": "lute",
+  "lutePublish": true,
   "description": "One-step LoopX bootstrap, same-session driver, and local GoalBar for DeepSeek Harness",
   "type": "module",
   "main": "./lib/index.js",

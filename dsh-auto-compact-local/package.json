@@ -2,6 +2,9 @@
   "name": "@deepseek-ai/dsh-auto-compact",
   "private": true,
   "version": "1.0.0",
+  "luteOrigin": "internalized",
+  "luteOwner": "@deepseek-ai",
+  "lutePublish": false,
   "type": "module",
   "main": "lib/index.js",
   "exports": {

@@ -1,6 +1,9 @@
 {
   "name": "dsh-agent-team-gui",
   "version": "1.0.1",
+  "luteOrigin": "internalized",
+  "luteOwner": "@deepseek-ai",
+  "lutePublish": false,
   "description": "Persistent multi-model squads for DeepSeek Harness with durable orchestration, DAG workflows, run history, and provider-reported token usage",
   "type": "module",
   "main": "lib/index.js",
@@ -162,7 +165,7 @@
     "playwright": "^1.62.1",
     "react-dom": "^18.2.0",
     "tsdown": "^0.22.14",
-    "typescript": "^7.0.2",
+    "typescript": "~5.7.3",
     "vitest": "^4.1.10"
   }
 }

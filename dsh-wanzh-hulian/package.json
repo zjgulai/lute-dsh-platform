@@ -1,6 +1,9 @@
 {
   "name": "dsh-wanzh-hulian",
   "version": "0.1.0",
+  "luteOrigin": "self",
+  "luteOwner": "lute",
+  "lutePublish": false,
   "description": "万物互联：设置页新增「万物互联」页，统一管理 MCP / API / 企业应用 / 知识库连接。首个连接：得到大脑知识库（可开关 + 双层开关 + 凭证双通道）。",
   "type": "module",
   "main": "lib/index.js",
