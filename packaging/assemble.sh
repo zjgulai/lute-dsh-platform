@@ -361,8 +361,8 @@ const p=require(process.argv[1]);
 const bundles=(p.dsh?.profile?.bundles||[]).map(b=>typeof b==='string'?b:b.name);
 const deps=Object.keys(p.dependencies||{});
 const vendorDirs=Object.entries(p.dependencies||{})
-  .filter(([,v])=>typeof v==='string'&&(v.startsWith('file:../../../project/Magpie-Horch/')||v.startsWith('file:/Users/lute/project/Magpie-Horch/')))
-  .map(([,v])=>v.startsWith('file:../../../project/Magpie-Horch/')?v.slice('file:../../../project/Magpie-Horch/'.length).replace(/\/+\$/,''):v.slice('file:/Users/lute/project/Magpie-Horch/'.length).replace(/\/+\$/,''));
+  .filter(([,v])=>typeof v==='string'&&(v.startsWith('file:../../../project/Magpie-Horch/')||v.startsWith('file:/Users/lute/project/Magpie-Horch/')||v.startsWith('file:./vendor/')))
+  .map(([,v])=>v.startsWith('file:../../../project/Magpie-Horch/')?v.slice('file:../../../project/Magpie-Horch/'.length).replace(/\/+\$/,''):(v.startsWith('file:./vendor/')?v.slice('file:./vendor/'.length).replace(/\/+\$/,''):v.slice('file:/Users/lute/project/Magpie-Horch/'.length).replace(/\/+\$/,'')));
 vendorDirs.push('dsh-patches');
 const allBundles=[...new Set([...bundles,...deps.filter(d=>typeof p.dependencies[d]==='string'&&!p.dependencies[d].startsWith('file:'))])];
 const listDir=(d)=>fs.existsSync(d)?fs.readdirSync(d).filter(x=>fs.statSync(path.join(d,x)).isDirectory()).sort():[];

@@ -1,8 +1,31 @@
 #!/bin/bash
 # verify-patches v2 — LUTE 2.0.0（DSH 2.0.5/rc.1）补丁锚点校验
-# 用法: DSH_APP=<staging app> ./verify-patches-v2.sh
+# 用法: ./verify-patches-v2.sh                       # 默认校验当前权威 staging 树
+#       DSH_APP=<staging app> ./verify-patches-v2.sh
+#       STAGE_VERSION=<版本> ./verify-patches-v2.sh   # 换一棵 staging 树
 set -u
-DSH_APP="${DSH_APP:-/Users/lute/project/Magpie-Horch/packaging/staging/2.0.0/app/DSH Desktop.app}"
+# 默认目标 = 当前权威 staging 树。把历史版本号（曾为 2.0.0）硬编码在默认值里，会随目录裁剪
+# 变成结构性红灯：表现为 35 条 MISSING，与「补丁真的漂移」在输出上不可区分。
+# 改为可覆盖的版本变量，并在推导出的树不存在时响亮失败。
+PKG_ROOT="$(cd "$(dirname "$0")" && pwd)"
+STAGE_VERSION="${STAGE_VERSION:-2.1.0}"
+DSH_APP="${DSH_APP:-}"
+if [ -z "$DSH_APP" ]; then
+  if [ -d "$PKG_ROOT/staging/$STAGE_VERSION/app/DSH Desktop.app" ]; then
+    DSH_APP="$PKG_ROOT/staging/$STAGE_VERSION/app/DSH Desktop.app"
+  elif [ -d "$PKG_ROOT/app/DSH Desktop.app" ]; then
+    # 随 payload 分发时（拷到 payload/tools/），脚本旁就是 app/，没有 staging/ 层。
+    DSH_APP="$PKG_ROOT/app/DSH Desktop.app"
+  else
+    DSH_APP="$PKG_ROOT/staging/$STAGE_VERSION/app/DSH Desktop.app"
+  fi
+fi
+if [ ! -d "$DSH_APP" ]; then
+  echo "FAIL 目标 app 不存在: $DSH_APP"
+  echo "     现有 staging 树: $(ls "$PKG_ROOT/staging" 2>/dev/null | grep -v '\.log$' | tr '\n' ' ')"
+  echo "     用 STAGE_VERSION=<版本> 或 DSH_APP=<app 路径> 指定要校验的树。"
+  exit 1
+fi
 NM="$DSH_APP/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai"
 LIB="$DSH_APP/Contents/Resources/app.asar.unpacked/lib"
 fail=0
