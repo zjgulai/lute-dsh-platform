@@ -7,6 +7,7 @@ import {
   checkAdrNoteLinks,
   checkGitignoreWhitelist,
   checkExemptions,
+  checkNestedRepositories,
   checkPackageIdentity,
   checkPinConsistency,
   checkTrackedIgnored,
@@ -243,6 +244,29 @@ test('索引漂移校验：已跟踪文件同时命中忽略规则必须被拒�
 
 test('索引漂移校验：无漂移时通过', () => {
   const result = checkTrackedIgnored({ trackedIgnored: [] })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('嵌套仓库校验：未在 .gitmodules 声明的嵌套仓库必须被拒绝', () => {
+  const result = checkNestedRepositories({
+    nestedRepos: ['dsh-team-hub', 'dsh-task-board-local'],
+    declaredSubmodules: [],
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, [
+    'dsh-team-hub: 未在 .gitmodules 声明的嵌套仓库——它不属于父仓库任何提交，内容会静默失管（ADR-0016）',
+    'dsh-task-board-local: 未在 .gitmodules 声明的嵌套仓库——它不属于父仓库任何提交，内容会静默失管（ADR-0016）',
+  ])
+})
+
+test('嵌套仓库校验：已声明的子模块不算未声明', () => {
+  const result = checkNestedRepositories({
+    nestedRepos: ['vendor/dsh-desktop'],
+    declaredSubmodules: ['vendor/dsh-desktop'],
+  })
 
   assert.equal(result.passed, true)
   assert.deepEqual(result.violations, [])

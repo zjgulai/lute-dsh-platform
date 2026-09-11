@@ -22,7 +22,7 @@ Status: implemented
 | 二期（结构收敛） | 能力组归位、生成式目录墙、门禁接 git 钩子、引入 lint | 5 个能力组与组 README、`scripts/gen-catalog.mjs` 与生成物、`profile-manifest` |
 | 三期（契约与清账） | typecheck/test 逐包补齐、豁免清空、历史 ADR 归档、资产分级处置 | 豁免文件为空且门禁拒绝非空、历史 6 篇 ADR 归档、`_attic/` 与大文件移出工作树 |
 
-九项决策各自记录在 ADR-0007 ~ ADR-0015 中：
+十项决策各自记录在 ADR-0007 ~ ADR-0016 中：
 1. 三期推进（ADR-0007）
 2. harness 子模块初始化但仅作只读参照系（ADR-0008）
 3. 主脊柱中文单语，仅客户安装使用一条链出独立用户向文档（ADR-0009）
@@ -32,6 +32,7 @@ Status: implemented
 7. 资产分级处置：删除 / 归档出工作树 / 纳入版本管理（ADR-0013）
 8. 门禁全量硬门槛 + 只减不增的临时豁免（ADR-0014）
 9. ADR 与本地 Notes 双轨分职并强制留痕（ADR-0015）
+10. 嵌套仓库治理：受管目录不得含未声明的独立仓库（ADR-0016）
 
 门禁的公开契约是 `scripts/gate.mjs` 的退出码：`--mode quick` 用于提交前，`--mode full` 用于推送前。门禁的校验项与阻塞级别见 [docs/architecture.md](../../../architecture.md) 第 0 节。
 

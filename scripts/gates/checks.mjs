@@ -205,3 +205,20 @@ export function checkTrackedIgnored({ trackedIgnored }) {
     ),
   }
 }
+
+/**
+ * 校验受管目录中不存在「未在 .gitmodules 声明」的嵌套仓库（ADR-0016）。
+ * 嵌套仓库不属于父仓库任何提交：父仓库既跟踪不了它的文件，也读不到它的历史，
+ * 内容会在无人察觉的情况下失管。
+ * @param {{nestedRepos: string[], declaredSubmodules: string[]}} input 受管目录下的 .git 持有者与 .gitmodules 声明的子模块路径
+ * @returns {{passed: boolean, violations: string[]}}
+ */
+export function checkNestedRepositories({ nestedRepos, declaredSubmodules }) {
+  const declared = new Set(declaredSubmodules)
+  return {
+    passed: nestedRepos.every((repo) => declared.has(repo)),
+    violations: nestedRepos
+      .filter((repo) => !declared.has(repo))
+      .map((repo) => `${repo}: 未在 .gitmodules 声明的嵌套仓库——它不属于父仓库任何提交，内容会静默失管（ADR-0016）`),
+  }
+}

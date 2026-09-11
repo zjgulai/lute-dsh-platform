@@ -1,0 +1,37 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><style>
+  body { margin:0; font:13px/1.5 -apple-system,"PingFang SC",sans-serif; background:#1b1b1c; color:#eee; }
+  .wrap { display:flex; }
+  .pane { width:50%; box-sizing:border-box; border-right:1px solid #333; }
+  .pane h2 { font-size:12px; padding:6px 10px; margin:0; background:#232324; color:#9aa; }
+  [data-conversation-scroll] { position:relative; height:260px; background:#141415; padding:10px; }
+  .dsh-tb-shell { height:120px; background:#1f2021; border:1px dashed #3a3a3c; color:#8ab; padding:8px; }
+  [data-composer-seat] { position:absolute; left:10px; right:10px; bottom:10px; padding:10px;
+      background:#26272a; border:1px solid #3a3a3c; border-radius:8px; }
+  .ph { color:#8b8b90; }
+  .approval { margin-top:6px; padding:6px 8px; background:#2b2f22; border:1px solid #5a6b2f; border-radius:6px; color:#cfe08a; }
+  /* ── 被测规则：与 dsh-task-board P2 补丁逐字一致 ── */
+  [data-conversation-scroll]:has(.dsh-tb-shell) > [data-composer-seat]:not(:has([data-approval-key],[data-question-key],[data-plan-review-key])) { display:none; }
+</style></head><body>
+<div class="wrap">
+  <div class="pane"><h2>情形 A：普通坐席（应被隐藏）</h2>
+    <div data-conversation-scroll>
+      <div class="dsh-tb-shell">任务看板视图（dsh-tb-shell 根）</div>
+      <div data-composer-seat><span class="ph">发消息或做任务… / 调用指令 @ 文件或对话</span></div>
+    </div></div>
+  <div class="pane"><h2>情形 B：坐席内含审批控件（应保持可见）</h2>
+    <div data-conversation-scroll>
+      <div class="dsh-tb-shell">任务看板视图（dsh-tb-shell 根）</div>
+      <div data-composer-seat>
+        <div class="approval" data-approval-key="bash-1">工具审批：是否允许执行 rm -rf /tmp/x ？ [允许] [拒绝]</div>
+        <span class="ph">发消息或做任务… / 调用指令 @ 文件或对话</span>
+      </div>
+    </div></div>
+</div>
+<h2 style="padding:8px 10px;background:#232324">对照：原版规则 body:has(...) [data-composer-seat]{display:none!important} 对 B 情形也会隐藏（下方为原版规则复现）</h2>
+<div data-conversation-scroll style="height:180px">
+  <div class="dsh-tb-shell" style="height:60px">任务看板视图</div>
+  <div data-composer-seat style="display:none !important">
+    <div class="approval" data-approval-key="bash-1">工具审批：是否允许执行 rm -rf /tmp/x ？ [允许] [拒绝]</div>
+  </div>
+</div>
+</body></html>

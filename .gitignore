@@ -78,3 +78,4 @@ staging-src/
 # —— dsh-patches 归档素材与 release 目录：受管资产，显式纳入以消除 tracked+ignored 漂移（ADR-0013）——
 !dsh-patches/archive/**
 !release/**
+!dsh-task-board-local/**

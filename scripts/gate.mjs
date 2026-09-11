@@ -17,6 +17,7 @@ import {
   checkAdrNoteLinks,
   checkExemptions,
   checkGitignoreWhitelist,
+  checkNestedRepositories,
   checkPackageIdentity,
   checkPinConsistency,
   checkTrackedIgnored,
@@ -78,6 +79,20 @@ const CHECKS = [
         noteText: readIfExists(join(repoRoot, NOTE_PATH)),
         exists: (path) => existsSync(join(repoRoot, path)),
       })
+    },
+  },
+  {
+    name: 'nested-repos',
+    remediation: '把嵌套仓库纳入 .gitmodules 声明，或折叠为普通目录（ADR-0016）',
+    run() {
+      const nested = []
+      for (const entry of collectManifests()) {
+        if (entry.dir === '.') continue
+        if (existsSync(join(repoRoot, entry.dir, '.git'))) nested.push(entry.dir)
+      }
+      const gitmodules = readIfExists(join(repoRoot, '.gitmodules'))
+      const declared = [...gitmodules.matchAll(/^\s*path\s*=\s*(.+)$/gm)].map((m) => m[1].trim())
+      return checkNestedRepositories({ nestedRepos: nested, declaredSubmodules: declared })
     },
   },
   {
