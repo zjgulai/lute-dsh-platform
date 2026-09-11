@@ -8,6 +8,27 @@ const inject = ["webServer", "agents"];
 const MAX_JSON_BYTES = 18 * 1024 * 1024;
 const MAX_DIR_ENTRIES = 200;
 
+/**
+ * 从 catch 变量取出可读消息。
+ * @param {unknown} reason 捕获到的值
+ * @returns {string} 消息文本
+ */
+function errorMessage(reason) {
+  return reason instanceof Error ? reason.message : String(reason);
+}
+
+/**
+ * 从 catch 变量取出可用作 HTTP 状态码的数值（缺省 500）。
+ * @param {unknown} reason 捕获到的值
+ * @returns {number} 状态码
+ */
+function errorStatus(reason) {
+  if (reason instanceof Error && "status" in reason && typeof (/** @type {{status?: unknown}} */ (reason)).status === "number") {
+    return /** @type {{status: number}} */ (reason).status;
+  }
+  return 500;
+}
+
 export function sanitizeFilename(raw) {
   let n = String(raw ?? "").trim();
   n = n.replace(/[\\/]/g, "_");
@@ -96,7 +117,7 @@ function apply(ctx) {
         const result = await saveUpload(workspaceRoot(ctx), rawName, Buffer.from(bytesB64, "base64"));
         respond(res, 200, { ok: true, relativePath: result.relativePath });
       } catch (err) {
-        if (!res.headersSent) respond(res, err?.status ?? 500, { ok: false, error: err?.message ?? String(err) });
+        if (!res.headersSent) respond(res, errorStatus(err), { ok: false, error: errorMessage(err) });
         else res.destroy();
       }
     },
@@ -134,7 +155,7 @@ function apply(ctx) {
         const parentPath = subPath && subPath !== "." ? subPath.split("/").slice(0, -1).join("/") : null;
         respond(res, 200, { ok: true, entries, cwd: root, currentPath: subPath, parentPath });
       } catch (err) {
-        if (!res.headersSent) respond(res, err?.status ?? 500, { ok: false, error: err?.message ?? String(err) });
+        if (!res.headersSent) respond(res, errorStatus(err), { ok: false, error: errorMessage(err) });
         else res.destroy();
       }
     },
@@ -159,7 +180,7 @@ function apply(ctx) {
         } catch { /* skills dir not found — return empty list */ }
         respond(res, 200, { ok: true, skills });
       } catch (err) {
-        if (!res.headersSent) respond(res, 500, { ok: false, error: err?.message ?? String(err) });
+        if (!res.headersSent) respond(res, 500, { ok: false, error: errorMessage(err) });
         else res.destroy();
       }
     },
@@ -200,7 +221,7 @@ function apply(ctx) {
         try { activation = JSON.parse(result.stdout); } catch { /* not JSON, fine */ }
         respond(res, 200, { ok: true, exitCode: result.code, activation, rawOutput: result.stdout.slice(0, 2000) });
       } catch (err) {
-        if (!res.headersSent) respond(res, err?.status ?? 500, { ok: false, error: err?.message ?? String(err) });
+        if (!res.headersSent) respond(res, errorStatus(err), { ok: false, error: errorMessage(err) });
         else res.destroy();
       }
     },

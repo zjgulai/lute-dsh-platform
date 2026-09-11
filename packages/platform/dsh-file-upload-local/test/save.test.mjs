@@ -1,69 +1,61 @@
-import { mkdtemp, readFile, readdir } from "node:fs/promises";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
-import { saveUpload, sanitizeFilename } from "../lib/index.js";
+import { before, test } from 'node:test'
+import assert from 'node:assert/strict'
+import { mkdtemp, readFile } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+import { saveUpload, sanitizeFilename } from '../lib/index.js'
 
-let root;
-const cases = [];
+/**
+ * 每个用例注册为真实测试：先前的自定义 harness 只在单文件里跑断言，
+ * `node --test` 只能看到 1 个测试、无法定位失败（实测），故改为注册式。
+ */
+let root
+before(async () => { root = await mkdtemp(join(tmpdir(), 'dsh-fu-')) })
 
-function check(name, fn) {
-  cases.push([name, fn]);
-}
+test('sanitize：普通文件名原样保留', () => {
+  assert.equal(sanitizeFilename('report.pdf'), 'report.pdf')
+})
 
-// --- sanitizeFilename ---
-check("sanitize: plain name", () => {
-  if (sanitizeFilename("report.pdf") !== "report.pdf") throw new Error("plain");
-});
-check("sanitize: strips separators", () => {
-  if (sanitizeFilename("a/b\\c.txt") !== "a_b_c.txt") throw new Error("separators");
-});
-check("sanitize: leading dots", () => {
-  if (sanitizeFilename("...secret") !== "secret") throw new Error("dots");
-});
-check("sanitize: empty → upload.bin", () => {
-  if (sanitizeFilename("   ") !== "upload.bin") throw new Error("empty");
-});
-check("sanitize: path traversal", () => {
-  const out = sanitizeFilename("../../etc/passwd");
-  const unsafe = out.includes("/") || out.includes("\\") || out.startsWith(".") || out === "." || out === "..";
-  if (unsafe) throw new Error("traversal: " + out);
-});
+test('sanitize：路径分隔符归一为下划线', () => {
+  assert.equal(sanitizeFilename('a/b\\c.txt'), 'a_b_c.txt')
+})
 
-// --- saveUpload ---
-check("save: writes bytes and returns relative path", async () => {
-  const { absolute, relativePath } = await saveUpload(root, "hello.txt", Buffer.from("hi"));
-  if (relativePath !== "uploads/hello.txt") throw new Error("relative: " + relativePath);
-  const content = await readFile(absolute, "utf8");
-  if (content !== "hi") throw new Error("content: " + content);
-});
+test('sanitize：前导点被剥离', () => {
+  assert.equal(sanitizeFilename('...secret'), 'secret')
+})
 
-check("save: dedupes collisions with -1 suffix", async () => {
-  const base = `dedupe-${Date.now()}.txt`;
-  const r1 = await saveUpload(root, base, Buffer.from("a"));
-  const r2 = await saveUpload(root, base, Buffer.from("b"));
-  const stem = base.slice(0, -4);
-  if (r2.relativePath !== `uploads/${stem}-1.txt`) throw new Error("dedupe: " + r2.relativePath);
-});
+test('sanitize：空白名回退为 upload.bin', () => {
+  assert.equal(sanitizeFilename('   '), 'upload.bin')
+})
 
-check("save: preserves extension on dedupe", async () => {
-  const r = await saveUpload(root, "data.json", Buffer.from("{}"));
-  if (r.relativePath !== "uploads/data.json") throw new Error("ext: " + r.relativePath);
-});
+test('sanitize：路径穿越不可逃出目标目录', () => {
+  const out = sanitizeFilename('../../etc/passwd')
+  assert.ok(!out.includes('/'), `不得含路径分隔符：${out}`)
+  assert.ok(!out.includes('\\'), `不得含反斜杠：${out}`)
+  assert.ok(!out.startsWith('.'), `不得以点开头：${out}`)
+  assert.notEqual(out, '.')
+  assert.notEqual(out, '..')
+})
 
-async function run() {
-  root = await mkdtemp(join(tmpdir(), "dsh-fu-"));
-  let failed = 0;
-  for (const [name, fn] of cases) {
-    try {
-      await fn();
-      console.log(`  ok  ${name}`);
-    } catch (err) {
-      failed += 1;
-      console.error(`FAIL  ${name}: ${err?.message ?? err}`);
-    }
-  }
-  console.log(`\n${cases.length - failed}/${cases.length} passed`);
-  if (failed > 0) process.exit(1);
-}
+test('save：写入字节并返回相对路径', async () => {
+  const { absolute, relativePath } = await saveUpload(root, 'hello.txt', Buffer.from('hi'))
+  assert.equal(relativePath, 'uploads/hello.txt')
+  assert.equal(await readFile(absolute, 'utf8'), 'hi')
+})
 
-run();
+test('save：重名时以 -1 后缀去重', async () => {
+  const base = `dedupe-${Date.now()}.txt`
+  await saveUpload(root, base, Buffer.from('a'))
+  const second = await saveUpload(root, base, Buffer.from('b'))
+  const stem = base.slice(0, -4)
+  assert.equal(second.relativePath, `uploads/${stem}-1.txt`)
+})
+
+test('save：去重时保留扩展名', async () => {
+  const result = await saveUpload(root, 'data.json', Buffer.from('{}'))
+  assert.equal(result.relativePath, 'uploads/data.json')
+})
+
+test('save：workspace 根不可用时抛错（不静默写入）', async () => {
+  await assert.rejects(() => saveUpload('', 'x.txt', Buffer.from('x')), /workspace root is unavailable/)
+})
