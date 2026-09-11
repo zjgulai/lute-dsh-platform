@@ -17,12 +17,20 @@ import { DeepResearchOverlay } from './DeepResearchOverlay.tsx'
 
 export type {} from '@deepseek-ai/dsh-deepresearch/remote'
 
-declare module '@deepseek-ai/cordis' {
-  interface Context {
-    /** Generated Remote namespaces, including deep research. */
-    remote: TypertClientRemote
-  }
-}
+/*
+ * 此处刻意**不**声明 Context.remote。
+ *
+ * 历史上这里有一处 `remote: TypertClientRemote` 增强，与
+ * @deepseek-ai/dsh-api-gateway/client 已存在的 `remote: ClientRemote` 构成重复声明。
+ * ClientRemote extends TypertClientRemote，但两者来自不同的物理副本
+ * （api-gateway 走 .dsh-types；本文件的 TypertClientRemote 经本包 node_modules 下
+ * client-runtime 拉来的旧副本解析），于是 tsc 报 TS2717
+ * 「Subsequent property declarations must have the same type」。
+ *
+ * ctx.remote 的类型由 api-gateway 的声明提供；本文件继续 import TypertClientRemote,
+ * 仅用于给 createApi 的参数与 deepResearch 命名空间标注类型。把上述增强加回来会让
+ * TS2717 复现（实测 typecheck 由 5 错回到 6 错）。
+ */
 
 /** Required services: the typed Remote client, slot registry, and locale service. */
 export const inject = ['remote', 'slots', 'locale']
