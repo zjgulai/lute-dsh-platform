@@ -14,12 +14,30 @@ const inject = ["credentials", "tools"];
 const EXA_ENDPOINT = "https://api.exa.ai/search";
 const EXA_TIMEOUT_MS = 25000;
 
+/**
+ * 从 catch/未知值中取出可读消息。
+ * @param {unknown} reason 捕获到的值
+ * @returns {string} 消息文本
+ */
+function errorMessage(reason) {
+  return reason instanceof Error ? reason.message : String(reason);
+}
+
+/**
+ * 把 Exa 响应归一为可安全读取的对象（响应体是外部输入，形状不可信）。
+ * @param {unknown} body 解析后的响应体
+ * @returns {{ results?: unknown }} 归一后的对象
+ */
+function asRecord(body) {
+  return typeof body === "object" && body !== null ? /** @type {{ results?: unknown }} */ (body) : {};
+}
+
 async function exaSearch(ctx, query, numResults, type, signal) {
     let resolved;
   try {
     resolved = await ctx.credentials.resolve("overseas_exa");
   } catch (e) {
-    return { ok: false, error: `凭据解析失败: ${e?.message ?? e}` };
+    return { ok: false, error: `凭据解析失败: ${errorMessage(e)}` };
   }
   if (resolved === undefined) {
     return {
@@ -49,7 +67,7 @@ async function exaSearch(ctx, query, numResults, type, signal) {
       const text = await r.text().catch(() => "");
       return { ok: false, error: `Exa API HTTP ${r.status}: ${text.slice(0, 300)}` };
     }
-    const data = await r.json();
+    const data = asRecord(await r.json());
     const results = Array.isArray(data?.results) ? data.results.slice(0, numResults) : [];
     return {
       ok: true,
@@ -62,7 +80,7 @@ async function exaSearch(ctx, query, numResults, type, signal) {
       }))
     };
   } catch (error) {
-    return { ok: false, error: `Exa 请求失败: ${error?.message ?? error}` };
+    return { ok: false, error: `Exa 请求失败: ${errorMessage(error)}` };
   } finally {
     clearTimeout(timer);
     signal?.removeEventListener("abort", onAbort);
