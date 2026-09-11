@@ -21,13 +21,6 @@
     "todo": "激活 SessionStandardProps 的声明合并（引入 ui-conversation 的 slot 契约），消除最后 1 个错误后移除本条目"
   },
   {
-    "package": "packages/capabilities/dsh-loopx-plugin",
-    "reason": "typecheck 与 test 均退出码 127：依赖从未安装（node_modules 缺失），tsc/vitest 不存在",
-    "owner": "lute",
-    "deadline": "2026-10-31",
-    "todo": "安装该包依赖（含 DSH 类型来源）后重跑，修复暴露的问题"
-  },
-  {
     "package": "packages/capabilities/dsh-deepresearch-local",
     "reason": "typecheck 实测退出码 1：deepResearch 不在 TypertClientRemote 上、MarkdownLabels 缺失；test 亦失败（TYpert remote 相关）",
     "owner": "lute",
