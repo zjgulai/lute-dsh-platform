@@ -85,7 +85,7 @@
 | `surfaces/dsh-agent-team-gui-local` | 119+66 | 0（本地契约） | bbf9150 |
 | `capabilities/dsh-memory-local` | 10 | 0（消除假绿） | a23e84c |
 | `surfaces/dsh-skill-center-local` | 74 | 0（localStorage 环境） | a23e84c |
-| `capabilities/dsh-wanzh-hulian` | 10 | 0（117 → 0） | 47f8ea4 |
+| `capabilities/dsh-wanzh-hulian` | 10 | 0（117 → 0） | `git log -- packages/capabilities/dsh-wanzh-hulian` |
 
 ### 剩余豁免（3 条）
 
