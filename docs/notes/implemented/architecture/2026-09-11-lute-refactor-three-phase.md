@@ -216,3 +216,39 @@ Status: implemented
 **代价与遗留。** 两处本地声明（事件选择、`events` 可选）是上游缺口的补丁，需在上游修复后删除——依据已写在注释里。测试环境依赖手工修补的 `node_modules`（锁文件装不出可用环境），这点未根治，已记入本 Note，是「交付链能否只靠声明重建」的独立问题。ADR-0018 撤回的新鲜度校验仍待「按包声明 typegen」才能引入。
 
 **验证。** 每步都实测：typecheck 6 → 5 → 2 → 1 → 0；test 31/48（环境损坏态）→ 48/48；`gate --mode full` 13/13、退出码 0，其中 `scripts-runnable` 现在真实运行本包的 typecheck/test/build 三者。
+
+## Loop 1 收官：豁免清空（2026-09-11）
+
+### Problem
+
+Loop 1 的最后一条豁免是 `dsh-browser-local`，理由是「2 个套件需要 cordis 插件装载的完整依赖闭包（`safe-buffer` 等非顶层）」。接手工单必须自己重测——本轮实测发现这条理由**只说对了一半**，真实状况有三层：
+
+1. **缺的传递依赖确实是 `safe-buffer`**（`dsh-client-ui-primitives` 之外的一处），但补上它之后暴露出下一层。
+2. **两个失败套件其实是「陈旧副本」**。包里存在 `tests/rc-legacy/`，其中已有 `composition.spec.ts` 与 `bridge-extension.e2e.spec.ts` 两份，并被 `vitest.config.ts` 的 `exclude: ['tests/rc-legacy/**']` 按设计排除；而 `tests/` 下还各有一份**逐字节相同**的副本，它们才被收集。`tests/rc-legacy/README.md` 早已写明：这两个 spec 依赖 rc 时代的 `@deepseek-ai/dsh-host-apiproxy` 的 `createApiProxy`，该包在宿主 alpha.1 已移除（并入 TypertGateway），**需按 alpha 组合形态重写后才能回迁 `tests/`**。也就是说，把副本留在 `tests/` 本身就是一次未完成的迁移。
+3. **`typecheck` 的失败是 TypeScript 版本**：包声明 `typescript: 5.6.3`，但它的 `tsconfig.json` 用了 `target: ES2024`、`rewriteRelativeImportExtensions` 等 5.7+ 才有的选项——声明的版本根本跑不了自己的配置，此前是靠环境里更高的实例才通过。
+
+### Decision
+
+**一、删除 `tests/` 下的两份陈旧副本，保留 `tests/rc-legacy/` 的冷冻版本。** 依据是仓库自己的设计：`rc-legacy/` 是既定的冻结位（有 README、有 vitest exclude）。删除前已确认两份逐字节相同、且无任何外部文件引用它们的路径。这样做的效果不是「让测试通过」，而是**消除了同一份测试的两个副本**——`rc-legacy/` 仍是唯一快照，将来重写回迁时路径明确。
+
+**二、把 TypeScript 声明对齐到配置实际需要的版本（5.6.3 → 5.7.3）。** 这不是「升级依赖」，而是修复一处自相矛盾：配置要求 5.7+ 的选项，声明却是 5.6.3。
+
+**三、补 `safe-buffer` 顶层实体。** 该包由 `dsh-client-ui-primitives` 的路径传递依赖而来，需在 `node_modules` 顶层可达。
+
+**四、豁免文件置为 `[]`。** 这是 ADR-0014 与主线 A2 的目标状态。
+
+### Alternatives considered
+
+**把 `tests/` 下两份 spec 按 alpha 组合形态重写回迁。** `rc-legacy/README.md` 规划的就是这条路，但它需要把整条组合测试与 e2e（含 playwright + 扩展加载）按新形态重写，属独立工作量。本轮的目标是「让 Loop 1 的豁免清空」，而**保留两份无法运行的重复文件**并不是达成该目标的必要条件——它们既不提供覆盖，又制造噪音。重写仍待 2.0.5 窗口。
+
+**再补依赖让旧 spec 跑起来。** 不可行：`createApiProxy` 在当前生态里**完全不存在**（仓库、`.dsh-types`、应用三处检索均为 0 命中），不是缺依赖，是被移除的 API。
+
+**继续用 `pnpm add` 修依赖。** 已实测有害两次（本轮把 `typescript` 降到 5.6.3、把 `zod` 从 store 清掉）。**教训已固化：受管包的 `node_modules` 属手工修补态，任何 pnpm 写操作前先备份。** 本轮全部改为手工修补（复制同侪包的实体、重写 `.bin/tsc` shim 指向顶层实体）。
+
+### Consequences
+
+**收益（主线的 A1+A2 达成）。** 受管包达标 19/20 → **20/20**；`scripts/gates/exemptions.json` 为**空数组**；`gate --mode full` 13/13、退出码 0，其中 `scripts-runnable` 真实跑通全部 20 个受管包的 typecheck / test / build。**「改坏了在提交前被机器发现」这条主线目标，在契约层面已经成立。**
+
+**代价与遗留。** ① `rc-legacy/` 的两个 spec 仍需按 alpha 组合形态重写回迁（挂 2.0.5 窗口），当前覆盖缺口是「真实 Loader 启完整 cordis.yml」与「扩展端到端」，111 个单测不覆盖这两个维度。② 受管包 `node_modules` 的手工修补态未根治：多个包的 `package.json` 声明与其配置实际需要不一致（本轮修了 browser-local 的 typescript 版本，同类问题可能还有）。③ ADR-0018 撤回的产物新鲜度校验仍待「按包声明 typegen」。
+
+**验证。** 逐步实测：补 `safe-buffer` → 暴露 `zod` 缺失 → 补 `zod@4.4.3`（与运行时同版）→ 暴露 `dsh-host-apiproxy` 不存在（取证确认非缺依赖）→ 删两份陈旧副本 → 9 套件 111/111 → typecheck 因 TS 版本失败 → 对齐 5.7.3 → typecheck/build/test 三者退出码 0 → 豁免置空 → `gate --mode full` 13/13。

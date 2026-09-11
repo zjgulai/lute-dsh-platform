@@ -60,7 +60,7 @@
 
 | Loop | 状态 | 备注 |
 | --- | --- | --- |
-| Loop 1 契约清账 | 进行中 | 达标 **19/20**，豁免 1 条；受管包 typecheck 全部 0 错 |
+| Loop 1 契约清账 | ✅ **已完成** | 达标 **20/20**，**豁免 0 条**（A2 达成）；20 个受管包 typecheck/test/build 全部通过 |
 | Loop 2 补丁层 | 未开始 | 依赖上游窗口节奏 |
 | Loop 3 能力闭环 | 未开始 | 需真实业务场景 |
 | Loop 4 数据工程 | 未开始 | 外部依赖：上游 0.1.5 |
@@ -88,14 +88,11 @@
 | `capabilities/dsh-wanzh-hulian` | 10 | 0（117 → 0） | `git log -- packages/capabilities/dsh-wanzh-hulian` |
 | `capabilities/dsh-overseas-skills` | 11 | 0（31 → 0） | `git log -- packages/capabilities/dsh-overseas-skills` |
 | `capabilities/dsh-deepresearch-local` | 48 | 0（6 → 0） | `git log -- packages/capabilities/dsh-deepresearch-local` |
+| `capabilities/dsh-browser-local` | 9 套件/111 | 0 | `git log -- packages/capabilities/dsh-browser-local` |
 
-### 剩余豁免（1 条）
+### 剩余豁免：**0 条**
 
-| 包 | typecheck | 卡点 |
-| --- | --- | --- |
-| `browser-local` | **0** ✅ | test 111/111 通过，2 个套件需 cordis 插件装载的完整依赖闭包（`safe-buffer` 等非顶层） |
-
-**性质变化**：剩余条目的卡点已从「类型」转为「测试环境 / 依赖获取 / 大包工作量」。
+`scripts/gates/exemptions.json` 已是空数组，且门禁的 `scripts-runnable` 在 full 模式下真实跑通全部 20 个受管包的 typecheck / test / build。
 
 ### 已定位的结构性阻塞（Loop 1.4 的前置条件）
 
