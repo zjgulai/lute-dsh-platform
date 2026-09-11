@@ -13,8 +13,8 @@
 
 | # | 标准 | 度量方式 | 当前 |
 | --- | --- | --- | --- |
-| A1 | 每个受管包都能被机器证明 | `gate --mode full` 的 `scripts-runnable` 零失败 | 9 条豁免未清（另有 agent-team-gui 1 错、browser-local 2 错） |
-| A2 | 契约无隐性豁免 | `scripts/gates/exemptions.json` 为空数组 | 9 条 |
+| A1 | 每个受管包都能被机器证明 | `gate --mode full` 的 `scripts-runnable` 零失败 | 4 条豁免未清；**typecheck 已全部 0 错** |
+| A2 | 契约无隐性豁免 | `scripts/gates/exemptions.json` 为空数组 | 4 条 |
 | A3 | 单命令给出全部证据 | `node scripts/gate.mjs --mode quick` 退出码 0 | ✅ 12/12 |
 | A4 | 文档无重复事实 | 同一结论只有一个 home，链接由 `adr-note-links` 校验 | ✅ |
 | A5 | 结构无静默失管 | `index-drift` / `nested-repos` / `dependency-links` 零失败 | ✅ |
@@ -60,7 +60,7 @@
 
 | Loop | 状态 | 备注 |
 | --- | --- | --- |
-| Loop 1 契约清账 | 进行中 | 达标 **13/20**，豁免 7 条 |
+| Loop 1 契约清账 | 进行中 | 达标 **16/20**，豁免 4 条；18 个受管包 typecheck 全部 0 错 |
 | Loop 2 补丁层 | 未开始 | 依赖上游窗口节奏 |
 | Loop 3 能力闭环 | 未开始 | 需真实业务场景 |
 | Loop 4 数据工程 | 未开始 | 外部依赖：上游 0.1.5 |
@@ -81,11 +81,21 @@
 | `capabilities/dsh-overseas-tools` | 8 | 0（修 8 处） | 941d478 |
 | `infra/dsh-team-hub` | 72（已有） | 0（修 31 处） | 7836736 |
 | `capabilities/dsh-loopx-plugin` | 6 | 0（替换 8 个死脚本） | d4fd833 |
+| `capabilities/dsh-browser-local` | 111 | 0（类型身份根治） | 63ad75d |
+| `surfaces/dsh-agent-team-gui-local` | 119+66 | 0（本地契约） | bbf9150 |
+| `capabilities/dsh-memory-local` | 10 | 0（消除假绿） | a23e84c |
+| `surfaces/dsh-skill-center-local` | 74 | 0（localStorage 环境） | a23e84c |
 
-### 剩余豁免（7 条）
+### 剩余豁免（4 条）
 
-`memory-local` · `skill-center` · `agent-team-gui` · `deepresearch` ·
-`browser` · `overseas-skills` · `wanzh-hulian`
+| 包 | typecheck | 卡点 |
+| --- | --- | --- |
+| `deepresearch-local` | **0** ✅ | test 46/48；2 个真实 Cordis 组合用例失败（`Runner failed: … reading 'id'`） |
+| `browser-local` | **0** ✅ | test 111/111 通过，2 个套件需 cordis 插件装载的完整依赖闭包（`safe-buffer` 等非顶层） |
+| `overseas-skills` | 未动 | 大包（1533 文件） |
+| `wanzh-hulian` | 未动 | 大包 + 47 个未类型化的外部响应边界 |
+
+**性质变化**：剩余条目的卡点已从「类型」转为「测试环境 / 依赖获取 / 大包工作量」。
 
 ### 已定位的结构性阻塞（Loop 1.4 的前置条件）
 

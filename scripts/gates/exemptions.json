@@ -1,10 +1,10 @@
 [
   {
     "package": "packages/capabilities/dsh-deepresearch-local",
-    "reason": "typecheck 实测退出码 1：deepResearch 不在 TypertClientRemote 上、MarkdownLabels 缺失；test 亦失败（TYpert remote 相关）",
+    "reason": "typecheck 已归零；test 46/48 通过（此前 21/48）。剩 2 个真实 Cordis 组合用例失败：项目进入 failed 态，limitations 为「Runner failed: Cannot read properties of undefined (reading id)」，抛出点在 src/index.ts:290 launch() 捕获、异步链源于 runPlanning → spawnRole",
     "owner": "lute",
     "deadline": "2026-10-31",
-    "todo": "按 ADR-0017 从内建 tgz 提供类型后逐个修复类型与测试"
+    "todo": "下钻 spawnRole 之后对 handle 的深层使用（已排除测试 stub 的 create 返回值、handle.agent.* 用法、agentDefaultModel.currentSelection 形状）"
   },
   {
     "package": "packages/capabilities/dsh-browser-local",
