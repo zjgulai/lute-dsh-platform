@@ -34,6 +34,17 @@ declare module '@deepseek-ai/dsh-typert-protocol' {
     'deepResearch/updateQuestion': (request: ResearchQuestionUpdateRequest) => Promise<RemoteResult<ResearchProject>>
     'deepResearch/writeReport': (request: ResearchWriteReportRequest) => Promise<RemoteResult<ResearchProject>>
   }
+  /*
+   * 本包向前端转发 deepResearch/progress，必须声明在「转发选择」里，
+   * 否则 TypertRemoteEvent = Extract<TypertForwardableEvent, keyof TypertRemoteEventSelection>
+   * 解析为 never，$on 连字面量都传不进去（src/client/index.ts 订阅该事件）。
+   *
+   * 手工补入的原因：实测仓库内**没有任何包**被 typert-generator 生成过此项，
+   * 而本包是唯一使用远程 $on 的包——属生成器缺口。上游修复后可删除。
+   */
+  interface TypertRemoteEventSelection {
+    'deepResearch/progress': true
+  }
   interface TypertRemoteNamespaceMap {
     'deepResearch': TypertRemoteNamespace$646565705265736561726368
   }
