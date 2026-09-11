@@ -14,12 +14,16 @@ function fixture(relPaths) {
   return root
 }
 
-test('包发现：同时识别归组后与历史平铺两种布局', () => {
+test('包发现：只认归组布局 packages/<组>/<包>（历史平铺已退役，ADR-0011 二期迁移完成）', () => {
   const root = fixture(['packages/capabilities/dsh-overseas-skills', 'dsh-theme-local'])
 
   const found = discoverPackages(root).map((entry) => entry.relPath).sort()
 
-  assert.deepEqual(found, ['dsh-theme-local', 'packages/capabilities/dsh-overseas-skills'])
+  assert.deepEqual(
+    found,
+    ['packages/capabilities/dsh-overseas-skills'],
+    '根层平铺目录即使含 package.json 也不得被当作受管包（过渡期兼容分支已退役）',
+  )
 })
 
 test('包发现：无 package.json 的目录不计为包', () => {
