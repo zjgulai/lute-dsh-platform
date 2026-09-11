@@ -17,6 +17,7 @@
   "files": [
     "lib/index.js",
     "lib/client.js",
+    "lib/globals.d.ts",
     "cordis.patch.yml"
   ],
   "dsh": {
@@ -26,5 +27,15 @@
     "client": {
       "platform": "web"
     }
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "happy-dom": "^20.11.1",
+    "typescript": "5.6.3",
+    "vitest": "^4.1.11"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   }
 }
