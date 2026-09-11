@@ -1,7 +1,7 @@
 {
-  // Self-contained compiler settings: types resolve from the @deepseek-ai/*
-  // npm SDK packages declared in devDependencies (official NPM SDK), never
-  // from a DSH source checkout.
+  // 类型来源见 ADR-0017：应用内打包的 @deepseek-ai/* 不含 .d.ts，类型从内建运行时
+  // 解出的 .dsh-types/ 解析（scripts/dsh-types.mjs 供给，可重建、不入库）。
+  // cordis 家族在 monorepo 中是未构建的 TS 源码包，用 paths 指向其源码入口。
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
@@ -20,7 +20,8 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "types": []
+    "types": ["node"],
+    "preserveSymlinks": true
   },
   "include": [
     "src/**/*.ts",

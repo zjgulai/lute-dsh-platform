@@ -2,7 +2,7 @@
  * Codemini-aligned Deep Research: planning Lead, serial/parallel Scouts, Evaluator, Writer.
  * @module @deepseek-ai/dsh-deepresearch
  */
-import { Context, Service } from '@deepseek-ai/cordis';
+import { Context } from '@deepseek-ai/cordis';
 import s from '@deepseek-ai/schemastery';
 import { TypertRemoteService } from '@deepseek-ai/dsh-typert-protocol';
 import type { ResearchCompleteRequest, ResearchConfirmRequest, ResearchDeleteRequest, ResearchDeleteResult, ResearchEvidenceRequest, ResearchFailRequest, ResearchGetRequest, ResearchListRequest, ResearchListResult, ResearchPlanUpdateRequest, ResearchProject, ResearchQuestionUpdateRequest, ResearchResumeRequest, ResearchStartRequest, ResearchWriteReportRequest } from './types.ts';
@@ -31,6 +31,7 @@ declare module '@deepseek-ai/cordis' {
 }
 /** Durable Codemini-style Deep Research project service. */
 export declare class DeepResearchService extends TypertRemoteService {
+    [x: number]: () => Promise<void>;
     private readonly config;
     static inject: string[];
     static Config: s<Config>;
@@ -39,7 +40,6 @@ export declare class DeepResearchService extends TypertRemoteService {
     private readonly activeRuns;
     /** @param ctx - Host context carrying storage, prompt, and Tool registries. @param config - Project and content limits. */
     constructor(ctx: Context, config: Config);
-    protected [Service.init](): Promise<void>;
     list(request: ResearchListRequest): ResearchListResult;
     get(request: ResearchGetRequest): ResearchProject | null;
     start(request: ResearchStartRequest): Promise<ResearchProject>;

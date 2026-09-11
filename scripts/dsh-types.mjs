@@ -13,7 +13,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { discoverPackages } from './gates/package-layout.mjs'
-import { applyTypeLinks, dshPackagesInManifest, dshPackagesInSource, extractRuntimeTypes, mergeVendoredTypes, planTypeLinks } from './gates/dsh-types.mjs'
+import { applyTypeLinks, buildVendoredDeclarations, dshPackagesInManifest, dshPackagesInSource, extractRuntimeTypes, mergeVendoredTypes, planTypeLinks } from './gates/dsh-types.mjs'
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 
@@ -24,6 +24,16 @@ function runtimeDir() {
   const versions = readdirSync(base).filter((name) => !name.startsWith('.'))
   if (versions.length === 0) return undefined
   return join(base, versions[0])
+}
+
+/** 查找可用于生成声明文件的 tsc（取任一已装 typescript 的受管包）。 */
+function findTsc() {
+  const candidates = [
+    join(repoRoot, 'packages', 'surfaces', 'dsh-skill-center-local', 'node_modules', '.bin', 'tsc'),
+    join(repoRoot, 'packages', 'platform', 'dsh-theme-local', 'node_modules', '.bin', 'tsc'),
+    join(repoRoot, 'packages', 'contract', 'dsh-skill-subset', 'node_modules', '.bin', 'tsc'),
+  ]
+  return candidates.find((path) => existsSync(path))
 }
 
 /** 上游参照系的 vendor 目录（cordis 家族与 schemastery 的源码所在）。 */
@@ -50,6 +60,17 @@ function main() {
     available = [...result.available, ...merged].sort()
     process.stdout.write(`ok 从内建运行时解出 ${result.extracted} 个 DSH 包到 .dsh-types/\n`)
     if (merged.length > 0) process.stdout.write(`ok 并入参照系 vendor 化包 ${merged.length} 个：${merged.join(', ')}\n`)
+    const tsc = findTsc()
+    if (tsc) {
+      const { built, failed, failures } = buildVendoredDeclarations({ dir: OUT_DIR, tsc })
+      process.stdout.write(`ok 生成声明文件 ${built.length} 个：${built.join(', ') || '(无)'}\n`)
+      if (failed.length > 0) {
+        process.stdout.write(`note 声明生成失败 ${failed.length} 个：${failed.join(', ')}\n`)
+        for (const line of failures.slice(0, 3)) process.stdout.write(`     原因 ${line}\n`)
+      }
+    } else {
+      process.stdout.write('note 未找到 tsc，跳过声明生成（cordis 家族类型将不可用）\n')
+    }
   } else {
     available = existsSync(OUT_DIR)
       ? readdirSync(OUT_DIR).filter((name) => existsSync(join(OUT_DIR, name, 'package.json'))).map((name) => `@deepseek-ai/${name}`)

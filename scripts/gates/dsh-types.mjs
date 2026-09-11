@@ -8,7 +8,7 @@
  * 本模块从这些 tgz 解出统一视图，并按包建立 node_modules 符号链接，
  * 使每个包的 typecheck 与 test 都能解析到与交付运行时同版本的 API 契约。
  */
-import { existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, rmSync, symlinkSync } from 'node:fs'
+import { existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { dirname, join } from 'node:path'
 
@@ -181,4 +181,104 @@ export function mergeVendoredTypes({ refVendorDir, outDir }) {
     merged.push(name)
   }
   return merged
+}
+
+/** 需要从源码生成声明文件的 vendored 包（按依赖顺序：cosmokit 先于 cordis）。 */
+export const DECLARATION_BUILD_ORDER = [
+  'cosmokit',
+  'schemastery',
+  'cordis',
+  'cordis-plugin-group',
+  'cordis-plugin-loader',
+  'cordis-plugin-include',
+  'cordis-plugin-timer',
+  'cordis-plugin-hmr',
+  'cordis-plugin-logger-console',
+]
+
+/**
+ * 为 vendored 的 DSH 源码包生成 `lib/types/*.d.ts`，使其 `exports.types` 可达。
+ *
+ * 为什么需要：这些包在参照系里是**未构建的 TypeScript 源码**，`package.json` 的
+ * `exports.types` 指向不存在的 `lib/types/`；而应用与内建运行时都不提供它们的类型。
+ * 若让消费者直接 paths 到 `.ts` 源码，tsc 会连带检查上游实现并报出源码自身的错误。
+ * 因此在这里一次性生成声明：源码加 `@ts-nocheck` 只抑制上游内部错误，
+ * 对外导出的签名仍由 tsc 按真实类型推导。
+ *
+ * @param {{dir: string, tsc: string, packages?: string[]}} input 类型来源目录、tsc 可执行文件与包名（目录名）
+ * @returns {{built: string[], failed: string[]}} 成功与失败清单
+ */
+export function buildVendoredDeclarations({ dir, tsc, packages = DECLARATION_BUILD_ORDER }) {
+  const built = []
+  const failed = []
+  const failures = []
+  const buildRoot = join(dir, '.decl-build')
+  for (const name of packages) {
+    const source = join(dir, name)
+    if (!existsSync(join(source, 'src'))) continue
+    const work = join(buildRoot, name)
+    rmSync(work, { recursive: true, force: true })
+    mkdirSync(work, { recursive: true })
+    execFileSync('cp', ['-R', join(source, 'src'), join(work, 'src')])
+    for (const file of listTsFiles(join(work, 'src'))) {
+      const text = readFileSync(file, 'utf8')
+      if (!text.startsWith('// @ts-nocheck')) writeFileSync(file, `// @ts-nocheck\n${text}`)
+    }
+    writeFileSync(
+      join(work, 'tsconfig.json'),
+      JSON.stringify(
+        {
+          compilerOptions: {
+            target: 'ES2022',
+            module: 'ESNext',
+            moduleResolution: 'Bundler',
+            lib: ['ES2023'],
+            types: ['node'],
+            declaration: true,
+            emitDeclarationOnly: true,
+            outDir: 'lib/types',
+            rootDir: 'src',
+            skipLibCheck: true,
+            strict: false,
+            noImplicitAny: false,
+          },
+          include: ['src/**/*.ts'],
+        },
+        null,
+        2,
+      ),
+    )
+    try {
+      execFileSync(tsc, ['-p', join(work, 'tsconfig.json')], { stdio: ['ignore', 'pipe', 'pipe'] })
+    } catch {
+      // tsc 可能因临时目录缺少 @types/node 等环境问题返回非零，但声明已产出；
+      // 因此以「产物是否存在」为成功判据，而不是退出码（实测教训）。
+    }
+    {
+      const produced = join(work, 'lib', 'types')
+      if (!existsSync(produced)) {
+        failed.push(name)
+        failures.push(`${name}: 未产出 lib/types（tsc 退出非零且无产物）`)
+        continue
+      }
+      rmSync(join(source, 'lib'), { recursive: true, force: true })
+      mkdirSync(join(source, 'lib'), { recursive: true })
+      execFileSync('cp', ['-R', produced, join(source, 'lib', 'types')])
+      writeFileSync(join(source, 'lib', 'index.js'), '// 声明占位：类型来自 lib/types，运行时不使用本文件\n')
+      built.push(name)
+    }
+  }
+  rmSync(buildRoot, { recursive: true, force: true })
+  return { built, failed, failures }
+}
+
+/** 递归列出 .ts 文件（不含声明文件）。 */
+function listTsFiles(dir, out = []) {
+  if (!existsSync(dir)) return out
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name)
+    if (entry.isDirectory()) listTsFiles(path, out)
+    else if (entry.name.endsWith('.ts') && !entry.name.endsWith('.d.ts')) out.push(path)
+  }
+  return out
 }
