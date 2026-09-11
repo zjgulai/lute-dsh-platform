@@ -76,3 +76,68 @@ B. **退役**：删除锚点，理由是它测的机制已不存在，且其覆�
 24 ok / 6 drift
 剩余 drift：P0-1 ×2（上面的真问题）、P0-2 main.js restore 日志、P0-3 ×2、P0-7（P0-2/P0-3/P0-7 为陈旧标记类，判据见上表）
 ```
+
+---
+
+## P0-1 复现实验结论（2026-09-11 · 请求的复现实验已完成）
+
+### 问题
+
+P0-1 是安全类补丁（无签名更新器）。它的移除操作是否还在当前产物里？
+
+### 三类证据
+
+**① manifest 明确记载了它该做什么**
+`patches-manifest.md:12`：
+> P0-1 | 无签名更新器 | `app.asar.unpacked/lib/electron-runtime-**DS52LbUW**.js` |
+> 移除 `shell.openPath`/`launchWindowsUpdateInstaller` **自动执行**；
+> `macInstallInstructions` 文案改「已下载」 | `cp .orig`（含 P0-1 前状态）
+
+**② 备份原件与当前产物都没移除**
+
+| 危险调用 | `.p01.orig`（补丁前） | 当前产物 |
+| --- | --- | --- |
+| `shell.openPath(artifactPath)` | 1 | **1** |
+| `launchWindowsUpdateInstaller(artifactPath)` | 1 | **1** |
+
+原件与产物都含这些调用 → **移除操作从未落到当前这一代 bundle 上**。
+（同一代的 P0-1**v2** throw 守卫**是**在的 —— 见下 —— 所以不是「整代补丁都没打」。）
+
+**③ 代码是活的，不是死代码**
+
+```js
+if (platform === "darwin") {
+  const openError = await shell.openPath(artifactPath);   // ← 自动打开安装包
+  if (openError !== "") throw new Error(/* ... */);
+  signal.throwIfAborted();
+  await this.showUpdateMessageBox({ /* detail: copy.macInstallInstructions */ });  // ← 文案仍是旧版
+}
+```
+
+`openPath` 在 darwin 分支内被真实 await 调用；紧随其后的 `macInstallInstructions`
+文案也**没有**被改成 manifest 要求的「已下载」。两处都未生效。
+
+### 结论：属于「情况 1」——迁移重建 bundle 时补丁丢失
+
+P0-1 的**移除型**改动没有随 rc 迁移重放，而**守卫型**改动（v2 的 throw）在。
+差别在于锚定方式：
+- P0-1v2 用**稳定锚**（`downloadAndOpenUpdate` 入口，函数名不随构建变化）→ 重放成功；
+- P0-1 用**文件哈希名**（`electron-runtime-DS52LbUW.js`）→ 哈希一变，补丁无处可落，静默失效。
+
+**这是与锚点腐化同源的缺陷**：补丁的定位依赖了随上游构建变化的东西。
+
+### 待你决策（两条路）
+
+**A. 按原设计补做移除**（推荐，理由见下）
+把 `shell.openPath(artifactPath)` 的自动执行改为「只提示已下载、由用户手动打开」，
+并同步 `macInstallInstructions` 文案。依据充分：manifest 有明确记载、代码是活的、
+属安全类 P0。改动点是单个 bundle 文件内的两处，可控。
+
+**B. 判定为有意放宽并退役该补丁**
+若 rc 之后上游已自行修好无签名更新问题（需证据，目前**未查到**任何决策记录），
+则应补一篇 ADR 说明放宽理由并退役锚点。**在没有该证据前不建议选 B。**
+
+### 无论选哪条：锚点必须改为哈希无关
+
+现有的 4 个 P0-1 锚点已改为 glob 定位（本轮完成）。但**补丁本身**若仍以文件哈希名
+定位，下次上游构建还会丢。修法是让补丁脚本用稳定锚（函数名/代码片段）定位文件。
