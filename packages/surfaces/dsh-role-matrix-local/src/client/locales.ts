@@ -14,6 +14,9 @@ export const zh = {
 
   'search.placeholder': '搜索岗位（别名 / 岗位名 / 产物 / 技能 / 编号）…',
   'search.empty': '没有匹配的岗位。换个关键词试试。',
+  'search.clear': '清空搜索',
+
+  'state.retry': '重试',
 
   'totals.roles': '{count} 个岗位',
   'totals.planes': '{count} 个平面',
@@ -58,6 +61,9 @@ export const en: Record<RoleMatrixKey, string> = {
 
   'search.placeholder': 'Search roles (alias / title / artifact / skill / id)…',
   'search.empty': 'No role matches. Try another keyword.',
+  'search.clear': 'Clear search',
+
+  'state.retry': 'Retry',
 
   'totals.roles': '{count} roles',
   'totals.planes': '{count} planes',

@@ -30,6 +30,7 @@
 | ADR-0024 | 上下文压缩加固：容量表实测 + 摘要路由解耦 + 确定性压缩按需切换 | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-context-compaction-hardening.md) |
 | ADR-0025 | `webServer.register` 一次只收一条路由；传数组会静默失效 | accepted（2026-09-12） | [Note](../notes/implemented/contract/2026-09-12-role-matrix-route-registration.md) |
 | ADR-0026 | 对官方 UI 的样式覆盖必须与注入顺序无关（!important + 样式标签居末） | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-root-brand-hero-override-cascade.md) |
+| ADR-0027 | 模态浮层进浏览器 top layer（`<dialog>` + `showModal()`），不参与 z-index 竞争 | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-role-matrix-top-layer-drawer.md) |
 
 > ADR-0007 ~ ADR-0018 是「LUTE 二开平台架构重构」的十二项决策，共享同一篇决策记录 Note。
 > ADR-0019 独立成篇（品牌皮肤锚点治理），决策记录见其 Note。
@@ -40,6 +41,7 @@
 > ADR-0024 独立成篇（上下文压缩加固），决策记录见其 Note。
 > ADR-0025 独立成篇（宿主路由注册契约 + 替身即契约纪律），决策记录见其 Note。
 > ADR-0026 独立成篇（官方 UI 覆盖规则的顺序无关性），决策记录见其 Note。
+> ADR-0027 独立成篇（模态浮层的 top layer 纪律），决策记录见其 Note。
 > 各插件历史决策（如 AI全栈 ADR-0001~0007、万物互联 D1-D5）保留在各插件 docs/ 内；历史 6 篇 ADR 的归档在三期进行（ADR-0015）。
 
 ## 双轨分职（ADR-0015）
