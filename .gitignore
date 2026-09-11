@@ -42,6 +42,11 @@
 !write-spec-local/**
 !deepseek-harness-studio-presets/**
 
+# —— vendor 嵌套仓库：源码不入库，仅 pin 文件入库 ——
+!vendor/
+!vendor/dsh-desktop.pin
+vendor/dsh-desktop/
+
 # —— 纳入目录内的常见排除 ——
 node_modules/
 .doctor-backup/

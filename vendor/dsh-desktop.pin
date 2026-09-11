@@ -1,0 +1,12 @@
+# LUTE vendor pin —— dsh-desktop 壳层 fork（嵌套仓库，源码不入库）
+#
+# 门禁契约：assemble.sh 读取本文件并校验 vendor/dsh-desktop HEAD == lute-sha，
+# 不一致即拒绝构建。每次上游合并窗口 bump 本文件（与 patches-manifest 同步更新）。
+upstream-url: https://github.com/anywhere-labs/dsh-desktop
+upstream-tag: v2.0.5
+upstream-sha: 423406fe225442995902015cb6f10eed670ff115
+lute-branch: lute-v2.0.5
+lute-sha: 423406fe225442995902015cb6f10eed670ff115
+harness-submodule: NOT-INITIALIZED (pin a66e4702047846cdaa10c66c9d3df3951f5ea70d, runtime 0.1.2-rc.1)
+harness-runtime-source: vendor/dsh-runtime/0.1.2-rc.1/manifest.json
+checked-at: 2026-09-11
