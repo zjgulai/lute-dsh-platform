@@ -1,6 +1,5 @@
 /** Client mount for the deep-research Remote contribution. */
 
-import type { ClientContext } from '@deepseek-ai/dsh-client-runtime/client'
 import type {} from '@deepseek-ai/dsh-client-locale/client'
 import type {} from '@deepseek-ai/dsh-client-ui-layout/client'
 import type {} from '@deepseek-ai/dsh-client-ui-sidebar/client'
@@ -31,6 +30,34 @@ export type {} from '@deepseek-ai/dsh-deepresearch/remote'
  * 仅用于给 createApi 的参数与 deepResearch 命名空间标注类型。把上述增强加回来会让
  * TS2717 复现（实测 typecheck 由 5 错回到 6 错）。
  */
+
+/*
+ * 客户端挂载点的本地契约。
+ *
+ * 刻意**不**从 @deepseek-ai/dsh-client-runtime/client 取 ClientContext：实测该包只作
+ * 编译期类型依赖存在——应用 asar 里出现 0 次、.dsh-types 里也没有，且 lib/client.js
+ * 只 require dsh-client-ui-primitives / react / react/jsx-runtime，说明它与其它包一样
+ * 由构建期内联。它却把整棵类型图拉向 dsh-typert-protocol@0.1.0-rc.8，与仓库统一的
+ * .dsh-types(0.1.2-rc.1) 形成身份分裂，是剩余类型错误的主要来源。
+ *
+ * 本文件实际只用下列成员，故显式声明所需面（范式同 wanzh-hulian 的 TypertGateway、
+ * agent-team-gui 的 ComposerSessionProps）。
+ */
+interface DeepResearchClientContext {
+  remote: TypertClientRemote
+  locale: { register(ns: string, dictionaries: { zh: Record<string, string>, en: Record<string, string> }): () => void }
+  effect(callback: () => unknown, label?: string): unknown
+  inject(services: readonly string[], callback: (scoped: DeepResearchScopedServices) => unknown): { dispose(): Promise<void> }
+}
+
+/** ctx.inject([...]) 返回的受限上下文：注入的服务被提升到顶层。 */
+interface DeepResearchScopedServices {
+  remote: TypertClientRemote
+  slots: {
+    inject(path: string, callback: () => unknown): unknown
+    register(entry: Record<string, unknown>, component: unknown): () => void
+  }
+}
 
 /** Required services: the typed Remote client, slot registry, and locale service. */
 export const inject = ['remote', 'slots', 'locale']
@@ -67,7 +94,7 @@ function createApi(clientRemote: TypertClientRemote, deepResearch: TypertClientR
  * @param ctx - Web client root carrying Remote, slot, and locale services.
  * @returns disposer after the namespace is ready.
  */
-export async function apply(ctx: ClientContext): Promise<() => Promise<void>> {
+export async function apply(ctx: DeepResearchClientContext): Promise<() => Promise<void>> {
   const disposeRemote = await ctx.remote.$mount(deepResearchRemote)
   ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'deepresearch: dictionaries')
   const store = createDeepResearchUiStore()

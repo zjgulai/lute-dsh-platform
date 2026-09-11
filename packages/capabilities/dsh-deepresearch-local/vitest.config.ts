@@ -18,5 +18,6 @@ export default defineConfig({
     // deepresearch.spec.ts boots full Cordis Contexts; forks isolation keeps
     // one file's host state from leaking into another (skill-center precedent).
     pool: 'forks',
+    server: { deps: { inline: [/dsh-client-ui-primitives/] } },
   },
 })
