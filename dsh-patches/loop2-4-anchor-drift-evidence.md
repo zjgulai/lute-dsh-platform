@@ -141,3 +141,66 @@ P0-1 的**移除型**改动没有随 rc 迁移重放，而**守卫型**改动（
 
 现有的 4 个 P0-1 锚点已改为 glob 定位（本轮完成）。但**补丁本身**若仍以文件哈希名
 定位，下次上游构建还会丢。修法是让补丁脚本用稳定锚（函数名/代码片段）定位文件。
+
+---
+
+## ⚠️ 更正（2026-09-11，同轮自我推翻）：P0-1 **没有**失守
+
+上文「P0-1 属情况 1 · 补丁丢失」的结论**是错的**。正确结论如下。
+
+### 我错在哪
+
+我把 **`dsh-patches/verify-patches.sh`（v1）** 当成了权威校验脚本。
+它不是——仓库里还存在 **`packaging/verify-patches-v2.sh`**，而后者才是权威的：
+它**已经用 glob 解析哈希名**（`glob1 "$LIB" 'electron-runtime-*.js'`），
+且专门校验 P0-1v2 的守卫。
+
+### 事实：危险调用默认不可达
+
+```js
+async downloadAndOpenUpdate(version, signal, channel = "stable") {
+  // P0-1v2: 禁用无签名/哈希校验的更新安装执行（防更新端点 RCE）。
+  if (process.env.DSH_DISABLE_UPDATE_INSTALL !== "0") {
+    throw new Error("Update installation is disabled for security (unsigned payload risk). ...");
+  }
+  ...
+  const openError = await shell.openPath(artifactPath);   // ← 默认路径下不可达
+```
+
+守卫在**函数入口**，`shell.openPath` / `launchWindowsUpdateInstaller` 在其后，
+因此**默认不可达**。P0-1 的目标（禁止无签名更新自动执行）由**入口守卫**达成，
+而不是像 v1 manifest 描述的那样删除调用——**实现方式变了，目标达成了**。
+
+### 权威校验结果
+
+```
+DSH_APP="/Applications/DSH Desktop.app" ./packaging/verify-patches-v2.sh
+→ OK=35  FAIL=0   PATCHES v2 ALL VERIFIED   exit=0
+```
+
+**35 个补丁锚点全部在位**（与任务板「35 个补丁锚点」的数字一致——v1 的 30 个
+是更旧的子集）。
+
+### 真正的缺陷：两个校验脚本并存，旧的产生假 DRIFT
+
+| 脚本 | 哈希处理 | 锚点数 | 当前结果 |
+| --- | --- | --- | --- |
+| `dsh-patches/verify-patches.sh`（v1） | ❌ 写死 `DS52LbUW` | 30 | 6 DRIFT（**含假阳性**） |
+| `packaging/verify-patches-v2.sh`（v2） | ✅ glob | 35 | **全绿 exit=0** |
+
+「重锚 3-5 人日/窗口」的一部分成本，恰恰来自**维护了错误的那个脚本**：
+它报告漂移，人就去查，查完发现是脚本自己过时了。
+
+### 修正后的 Loop 2 方向
+
+1. **以 v2 为唯一权威**：v1 的 30 个锚点中，凡是 v2 已覆盖的（P0-1v2/P0-2v2/P0-3/P0-4/
+   P0-6/P0-7/P0-8 等）直接退役，不再维护第二份事实源（ADR-0009）。
+2. **v1 中 v2 未覆盖的锚点**需逐项核对后**并入 v2**，而不是就地修 v1。
+3. **把 v2 接入门禁**（Loop 2.3）——这才是「锚点漂移可被门禁发现」的落点。
+4. `patches-manifest.md`（v1 清单）与 `patches-manifest-v2.md` 并存同属此事，
+   应同 v1/v2 脚本一起收敛。
+
+### 我这次错误的教训
+
+我基于「manifest 说要删除调用」+「grep 到调用还在」就下了「补丁丢失」的结论，
+**没有先确认自己看的是不是权威脚本**。更正方式是：**先找全入口，再判事实**。
