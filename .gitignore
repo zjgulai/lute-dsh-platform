@@ -63,3 +63,7 @@ staging-src/
 !release/**
 !packages/**/test/**
 !packages/**/tsconfig.json
+
+# ADR-0017：从内建运行时 tgz 解出的 DSH 类型来源，可重建，不入库
+.dsh-types/
+*.tsbuildinfo

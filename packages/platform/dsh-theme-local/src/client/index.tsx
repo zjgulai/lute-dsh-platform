@@ -122,6 +122,7 @@ export function apply(ctx: ClientContext): void {
     const dark: string[] = [];
     for (const name of names) {
       const pair = tokens[name];
+      if (pair === undefined) continue;
       light.push(`${name}: ${pair.light};`);
       dark.push(`${name}: ${pair.dark};`);
     }

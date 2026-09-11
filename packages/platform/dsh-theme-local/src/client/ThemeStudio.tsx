@@ -3,6 +3,7 @@ import type {
   PropsRuntime,
   PropsStore,
 } from "@deepseek-ai/dsh-client-ui-slots";
+import type {} from "@deepseek-ai/dsh-client-ui-settings/client";
 import type { ThemePreference } from "@deepseek-ai/dsh-client-ui-theme/client";
 import * as React from "react";
 
