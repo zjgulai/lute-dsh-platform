@@ -20,6 +20,26 @@ function isLoopbackHost(host) {
   return /^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/.test(String(host || '').toLowerCase())
 }
 
+/**
+ * 从 catch/未知值中取出可读消息。
+ * @param {unknown} reason 捕获到的值
+ * @returns {string} 消息文本
+ */
+function errorMessage(reason) {
+  return reason instanceof Error ? reason.message : String(reason);
+}
+
+/**
+ * 从 catch/未知值中取出错误码（缺省空串）。
+ * @param {unknown} reason 捕获到的值
+ * @returns {string} 错误码
+ */
+function errorCode(reason) {
+  return reason instanceof Error && 'code' in reason && typeof (/** @type {{code?: unknown}} */ (reason)).code === 'string'
+    ? /** @type {{code: string}} */ (reason).code
+    : '';
+}
+
 export const name = 'task-board'
 export const inject = ['tools', 'skills', 'webServer', 'sessions']
 
@@ -283,14 +303,14 @@ async function loadBoard(project) {
   try {
     text = await readFile(target, 'utf8')
   } catch (error) {
-    if (error && error.code === 'ENOENT') return emptyBoard(project)
+    if (errorCode(error) === 'ENOENT') return emptyBoard(project)
     throw error
   }
   let parsed
   try {
     parsed = JSON.parse(text)
   } catch (error) {
-    throw new Error('看板数据文件损坏: ' + String(error && error.message || error))
+    throw new Error('看板数据文件损坏: ' + errorMessage(error))
   }
   return normalizeBoard(parsed, project)
 }
@@ -342,7 +362,10 @@ function ops() {
     create: (args) => withLock(normalizeProject(args.projectPath), async () => {
       const project = normalizeProject(args.projectPath)
       const board = await loadBoard(project)
-      createTaskInBoard(board, args, args.parent_id || null)
+      // 第三个参数一旦显式传入，createTaskInBoard 内 `parentId === undefined` 的回退分支
+      // 就永不生效；而模型工具传的是 camelCase 的 parentId。原先只读 args.parent_id，
+      // 导致 task_create 的 parent_id 被静默忽略、子任务永远建不出层级（实测复现）。
+      createTaskInBoard(board, args, args.parentId ?? args.parent_id ?? null)
       touch(board)
       await saveBoard(board)
       return { board: copyBoard(board) }
@@ -583,7 +606,7 @@ export function apply(ctx) {
           const result = await (op === 'init' ? fn(body, sessions) : fn(body))
           send(200, Object.assign({ ok: true }, result))
         } catch (error) {
-          send(200, { ok: false, error: String(error && error.message || error) })
+          send(200, { ok: false, error: errorMessage(error) })
         }
       },
     })

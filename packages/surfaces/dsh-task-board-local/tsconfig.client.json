@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", "module": "ESNext", "moduleResolution": "Bundler",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"], "strict": false, "noEmit": true,
+    "skipLibCheck": true, "allowJs": true, "checkJs": false, "noImplicitAny": false
+  },
+  "include": ["lib/client.js", "lib/**/*.d.ts"]
+}
