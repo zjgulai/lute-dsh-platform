@@ -37,6 +37,15 @@ const RULES = [
   { id: 'qa', kw: ['是什么', '为什么', '怎么', '如何', '是否', '哪些', '区别', '原理', '介绍', '请问', '吗', '呢', '多少', '哪个', '解释'] },
 ]
 
+/**
+ * 从 catch/未知值中取出可读消息。
+ * @param {unknown} reason 捕获到的值
+ * @returns {string} 消息文本
+ */
+function errorMessage(reason) {
+  return reason instanceof Error ? reason.message : String(reason);
+}
+
 function classify(text) {
   const t = (' ' + text.toLowerCase().replace(/\s+/g, '') + ' ')
   const scores = {}
@@ -377,7 +386,7 @@ function createHandler(ctx, service) {
         default: return { ok: false, error: { code: 'bad-request', message: 'unknown endpoint ' + endpoint } }
       }
     } catch (error) {
-      return { ok: false, error: { code: 'internal', message: String(error?.message ?? error) } }
+      return { ok: false, error: { code: 'internal', message: String(errorMessage(error)) } }
     }
   }
 }
@@ -393,7 +402,7 @@ export function apply(ctx) {
   ctx.effect(() => {
     const timer = setInterval(() => {
       service.rescan(false).catch((error) => {
-        ctx.logger?.warn?.('dsh-my-quotes: periodic rescan failed: ' + (error?.message ?? error))
+        ctx.logger?.warn?.('dsh-my-quotes: periodic rescan failed: ' + (errorMessage(error)))
       })
     }, 5 * 60 * 1000)
     timer.unref?.()

@@ -70,13 +70,6 @@
     "todo": "补 tsconfig 与 typecheck 脚本"
   },
   {
-    "package": "packages/surfaces/dsh-my-quotes",
-    "reason": "缺少 typecheck 与 test 脚本（三期补齐清单）",
-    "owner": "lute",
-    "deadline": "2026-10-31",
-    "todo": "补 tsconfig 与 typecheck 脚本；补至少一项契约级测试并接入 test 脚本"
-  },
-  {
     "package": "packages/surfaces/dsh-task-board-local",
     "reason": "缺少 typecheck 与 test 脚本（三期补齐清单）",
     "owner": "lute",
