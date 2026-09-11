@@ -7,6 +7,20 @@ window.__ModuleLoader__.load({
 		var useState = React.useState;
 		var useEffect = React.useEffect;
 
+		/**
+		 * 本 bundle 与宿主 /api/dsh-wanzh-hulian 之间的负载形状。
+		 * bundle 不使用 ES import，故在此集中声明边界类型——
+		 * 否则 useState(null) 会把状态类型锁成 null，整条渲染链退化为 never。
+		 */
+
+		/** @typedef {{id: string, name: string, cover?: string, noteCount?: number|null}} KbTopic */
+		/** @typedef {{slug?: string, allSearch?: string, allSave?: string}} ConnCommand */
+		/** @typedef {{id: string, title?: string, board?: string, command?: ConnCommand, extras?: string[], [key: string]: any}} WanzhConnection */
+		/** @typedef {{key: string, title?: string, desc?: string, icon?: string, ready?: boolean, connections?: string[]}} WanzhBoard */
+		/** @typedef {{id: string, name?: string, note?: string, enabled?: boolean, state?: {status?: string, error?: string}, [key: string]: any}} McpServer */
+		/** @typedef {{boards: WanzhBoard[], connections: WanzhConnection[], ok?: boolean, error?: string, [key: string]: any}} ListPayload */
+		/** @typedef {{ok?: boolean, topics?: KbTopic[], error?: string, [key: string]: any}} TopicsPayload */
+
 		var NS = "dsh-wanzh-hulian";
 		var API = "/api/dsh-wanzh-hulian";
 		var KB_PLACEHOLDER = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+PHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiByeD0iMTAiIGZpbGw9IiNEQ0YxRDYiLz48cGF0aCBkPSJNMTQgMTJjNC0xLjYgOC0xLjYgMTIgMHYyMmMtNC0xLjYtOC0xLjYtMTIgMHoiIGZpbGw9IiM1OEI4NDgiLz48cGF0aCBkPSJNMjIgMTJjNC0xLjYgOC0xLjYgMTIgMHYyMmMtNC0xLjYtOC0xLjYtMTIgMHoiIGZpbGw9IiMyRTdEM0MiLz48L3N2Zz4=";
@@ -107,7 +121,7 @@ window.__ModuleLoader__.load({
 			var fieldStates = {};
 			fields.forEach(function (f) { fieldStates[f.ref] = useState(""); });
 			var extras = conn.extras || [];
-			var topicsState = useState(null);
+			var topicsState = useState(/** @type {KbTopic[]|null} */ (null));
 			var topics = topicsState[0];
 			var setTopics = topicsState[1];
 			useEffect(function () {
@@ -286,7 +300,7 @@ window.__ModuleLoader__.load({
 
 		function McpBoard(props) {
 			var ctl = props.ctl;
-			var serversState = useState(null);
+			var serversState = useState(/** @type {McpServer[]|null} */ (null));
 			var servers = serversState[0];
 			var setServers = serversState[1];
 			useEffect(function () {
@@ -342,7 +356,7 @@ window.__ModuleLoader__.load({
 		}
 
 		function WanzhPage() {
-			var loadResult = useState({ boards: [], connections: [] });
+			var loadResult = useState(/** @type {ListPayload} */ ({ boards: [], connections: [] }));
 			var board = useState("knowledge");
 			var busy = useState(false);
 			var err = useState("");
@@ -602,11 +616,12 @@ window.__ModuleLoader__.load({
 		}
 
 		/* ── 输入区知识库选择器（跨 Slot 共享开关状态） ─────────────────── */
+		/** @type {{open: boolean, subs: Array<(v: boolean) => void>}} */
 		var kbStore = { open: false, subs: [] };
 		function kbSetOpen(next) {
 			if (kbStore.open === next) return;
 			kbStore.open = next;
-			kbStore.subs.forEach(function (fn) { fn(); });
+			kbStore.subs.forEach(function (fn) { fn(kbStore.open); });
 		}
 		function useKbOpen() {
 			var v = useState(kbStore.open);
@@ -642,8 +657,8 @@ window.__ModuleLoader__.load({
 
 		function KbRightPanel(props) {
 			var open = useKbOpen();
-			var topicsState = useState(null);
-			var connState = useState(null);
+			var topicsState = useState(/** @type {KbTopic[]|null} */ (null));
+			var connState = useState(/** @type {WanzhConnection|null} */ (null));
 			var errState = useState("");
 			var modeState = useState("search");
 			var topics = topicsState[0];
@@ -654,12 +669,14 @@ window.__ModuleLoader__.load({
 			var setErr = errState[1];
 			var mode = modeState[0];
 			var setMode = modeState[1];
-			var loadedRef = useState(false);
+			var loadedRef = useState(/** @type {boolean} */ (false));
 			var inputActions = props && props.inputActions;
 			var sessionId = props && props.sessionId;
 			useEffect(function () {
 				if (!open || loadedRef[0]) return;
-				loadedRef[1] = true;
+				// 必须调用 setter：直接给 loadedRef[1] 赋值会把 setter 覆盖成 true，
+				// 「已加载」闩锁永远不生效（面板每次重开都会重新拉取）。
+				loadedRef[1](true);
 				var controller = new AbortController();
 				Promise.all([
 					fetch(API + "/topics", { signal: controller.signal, headers: { accept: "application/json" } }),
@@ -677,7 +694,7 @@ window.__ModuleLoader__.load({
 				return function () { controller.abort(); };
 			}, [open]);
 			useEffect(function () {
-				if (!open) loadedRef[1] = false;
+				if (!open) loadedRef[1](false);
 			}, [open]);
 			useEffect(function () {
 				var onKey = function (e) { if (e.key === "Escape") kbSetOpen(false); };
@@ -721,7 +738,7 @@ window.__ModuleLoader__.load({
 			};
 			var thumb = function (t) {
 				var src = t.id === "__all" ? KB_PLACEHOLDER : (t.cover || KB_PLACEHOLDER);
-				return React.createElement("img", { className: "whThumb", src: src, width: 36, height: 36, alt: "", onError: function (e) { if (e.target.src !== KB_PLACEHOLDER) e.target.src = KB_PLACEHOLDER; } });
+				return React.createElement("img", { className: "whThumb", src: src, width: 36, height: 36, alt: "", onError: function (e) { var img = /** @type {HTMLImageElement} */ (e.target); if (img.src !== KB_PLACEHOLDER) img.src = KB_PLACEHOLDER; } });
 			};
 			var cards = topics
 				? [

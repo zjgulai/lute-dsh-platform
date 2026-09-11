@@ -8,7 +8,8 @@ import { randomBytes, createHash } from "node:crypto";
 import { defineTool } from "@deepseek-ai/dsh-tools";
 import { PIXPIX_BUSINESS_META, SHOPIFY_BUSINESS_META, APIFY_BUSINESS_META, MCP_STATIC_TOOL_META, staticToolMetaFor } from "./business-meta.js";
 import * as McpClient from "@deepseek-ai/dsh-mcp-client";
-import { BOARDS, CONNECTIONS } from "./catalog.js";
+import { buildBoards, errorMessage, mergeRegisteredTools, resolveShopifyToken } from "./host-util.js";
+import { BOARDS, GETNOTE_LOGO } from "./boards.js";
 
 /**
  * dsh-wanzh-hulian — Host half（万物互联）。
@@ -39,7 +40,25 @@ const SKILL_DIR = join(homedir(), ".dsh", "skills", "getnote-brain");
 const SKILL_FILE = join(SKILL_DIR, "SKILL.md");
 const API_BASE = "https://openapi.biji.com/open/api/v1";
 const API_TIMEOUT_MS = 30000;
-const GETNOTE = CONNECTIONS[0];
+
+/**
+ * 得到大脑凭证 ref：唯一来源是连接注册表 getnote-brain 的 authFields。
+ * （历史上这里有第二份手工常量，注册表改 ref 时不会同步。）
+ * @returns {{apiKeyRef: string, clientIdRef: string}}
+ */
+function registryRefs() {
+  const fields = DEFAULT_CONNECTIONS.find((c) => c.id === "getnote-brain")?.authFields ?? [];
+  const has = (ref) => fields.some((f) => f.ref === ref);
+  return {
+    apiKeyRef: has("getnote_api_key") ? "getnote_api_key" : "",
+    clientIdRef: has("getnote_client_id") ? "getnote_client_id" : "",
+  };
+}
+
+/** 已注册的得到大脑工具名。唯一来源是 toolDefs（文件末尾定义），而非手工清单。 */
+function getnoteToolNames() {
+  return Object.keys(toolDefs);
+}
 
 /* ── loopback 信任围栏（与出海插件同款） ─────────────────────────────── */
 function isIPv4Loopback(v4) {
@@ -448,7 +467,7 @@ const DEFAULT_CONNECTIONS = [
     oauthCmd: "npx @getnote/cli@latest auth login",
     platformUrl: "https://www.biji.com/openapi",
     docUrl: "https://www.biji.com/openapi?tab=skill",
-    logo: GETNOTE.logo
+    logo: GETNOTE_LOGO
   },
   {
     id: "shopify",
@@ -817,7 +836,7 @@ async function mountMcpServers(ctx, credentials) {
         }).catch(() => {});
       }
     } catch (e) {
-      states.push({ id: s.id, enabled: true, status: "error", error: String(e?.message ?? e).slice(0, 200) });
+      states.push({ id: s.id, enabled: true, status: "error", error: errorMessage(e).slice(0, 200) });
     }
   }
   return states;
@@ -835,12 +854,17 @@ async function readCliConfig() {
     };
   } catch { return { apiKey: "", clientId: "", cliAuthed: false }; }
 }
+/**
+ * 解析得到大脑凭证。
+ * @param {any} credentials credentials 服务（可为 undefined）
+ * @returns {Promise<{apiKey: string|undefined, clientId: string|undefined, configured: boolean, source: string, cliAuthed: boolean}>}
+ */
 async function resolveCreds(credentials) {
   const out = { apiKey: undefined, clientId: undefined, configured: false, source: "none", cliAuthed: false };
   if (credentials !== undefined) {
     try {
-      const k = await credentials.resolve(GETNOTE.auth.apiKeyRef);
-      const c = await credentials.resolve(GETNOTE.auth.clientIdRef);
+      const k = await credentials.resolve(registryRefs().apiKeyRef);
+      const c = await credentials.resolve(registryRefs().clientIdRef);
       out.apiKey = typeof k?.value === "string" ? k.value : undefined;
       out.clientId = typeof c?.value === "string" ? c.value : undefined;
     } catch { /* 未配置 */ }
@@ -860,7 +884,11 @@ async function resolveCreds(credentials) {
 
 async function getnoteRequest(credentials, method, path, params, data, signal) {
   const creds = await resolveCreds(credentials);
-  if (!creds.configured) {
+  // 凭证守卫：configured 为真即意味着两个字段都是非空字符串（见 resolveCreds），
+  // 但类型系统无法从布尔字段反推，故按值显式收窄；同时保证 headers 里绝不出现 undefined。
+  const apiKey = typeof creds.apiKey === "string" && creds.apiKey ? creds.apiKey : "";
+  const clientId = typeof creds.clientId === "string" && creds.clientId ? creds.clientId : "";
+  if (!apiKey || !clientId) {
     return {
       ok: false,
       error: "未配置得到大脑凭据：请在 设置 → 万物互联 → 得到大脑 卡片填写 API Key 与 Client ID（前往 https://www.biji.com/openapi 应用管理获取；需得到大脑会员）。"
@@ -879,9 +907,9 @@ async function getnoteRequest(credentials, method, path, params, data, signal) {
       method,
       headers: {
         "content-type": "application/json",
-        "x-client-id": creds.clientId,
+        "x-client-id": clientId,
         // 官方文档：Authorization 直接放 API Key（无 Bearer 前缀）
-        authorization: creds.apiKey
+        authorization: apiKey
       },
       body: data !== undefined ? JSON.stringify(data) : undefined,
       signal: controller.signal
@@ -892,16 +920,16 @@ async function getnoteRequest(credentials, method, path, params, data, signal) {
     if (!res.ok) {
       const err = body?.error ?? {};
       const reason = err?.reason ? `（${err.reason}）` : "";
-      return { ok: false, error: `得到大脑 API HTTP ${res.status}${reason}: ${err?.message ?? text.slice(0, 200)}` };
+      return { ok: false, error: `得到大脑 API HTTP ${res.status}${reason}: ${typeof err?.message === "string" ? err.message : text.slice(0, 200)}` };
     }
     if (body?.success !== true) {
       const err = body?.error ?? {};
       const reason = err?.reason ? `（${err.reason}）` : "";
-      return { ok: false, error: `得到大脑 API 失败${reason}: ${err?.message ?? "unknown"}` };
+      return { ok: false, error: `得到大脑 API 失败${reason}: ${typeof err?.message === "string" ? err.message : "unknown"}` };
     }
     return { ok: true, data: body.data };
   } catch (error) {
-    return { ok: false, error: `得到大脑请求失败: ${error?.message ?? error}` };
+    return { ok: false, error: `得到大脑请求失败: ${errorMessage(error)}` };
   } finally {
     clearTimeout(timer);
     signal?.removeEventListener("abort", onAbort);
@@ -953,17 +981,14 @@ async function handleList(credentials) {
     }
     // getnote 旧字段兼容
     if (conn.id === "getnote-brain") {
-      item.tools = GETNOTE.tools;
-      item.command = conn.command ?? GETNOTE.command;
+      Object.assign(item, mergeRegisteredTools(item, getnoteToolNames()));
+      item.command = conn.command ?? item.command;
       item.oauthCmd = conn.oauthCmd;
     }
     item.state = st;
     connections.push(item);
   }
-  const boards = BOARDS.map((b) => ({
-    ...b,
-    connections: connections.filter((x) => x.board === b.key).map((x) => x.id)
-  }));
+  const boards = buildBoards({ boards: BOARDS, connections });
   return {
     status: 200,
     body: { ok: true, boards, connections }
@@ -1025,7 +1050,7 @@ async function handleCredentialSet(credentials, ref, value) {
     const info = await credentials.describe(ref);
     return { status: 200, body: { ok: true, ref, configured: info?.configured === true } };
   } catch (error) {
-    return { status: 500, body: { ok: false, error: String(error?.message ?? error) } };
+    return { status: 500, body: { ok: false, error: errorMessage(error) } };
   }
 }
 
@@ -1089,30 +1114,35 @@ async function probeConnection(credentials, conn) {
     if (!creds.configured) return { ok: false, error: "未配置 Shopify 凭证：请填写商店域名 + 客户端 ID + 加密密钥（开发仪表盘应用的 API 凭据，插件自动换取访问令牌）。" };
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 20000);
-    let token = creds.token;
-    let via = "Admin API Token";
     try {
-      if (!token) {
-        // 客户端凭据流：client_id + client_secret → /admin/oauth/access_token 换取访问令牌
-        const exc = await fetch(`https://${creds.domain}/admin/oauth/access_token`, {
-          method: "POST",
-          headers: { "content-type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({ grant_type: "client_credentials", client_id: creds.clientId, client_secret: creds.clientSecret }),
-          signal: controller.signal
-        });
-        const excBody = await exc.json().catch(() => null);
-        if (!exc.ok) return { ok: false, error: `Shopify 令牌交换失败 (HTTP ${exc.status}): ${excBody?.error_description || excBody?.error || "请求失败"}` };
-        token = excBody?.access_token;
-        via = "客户端凭据（已自动换取访问令牌）";
-        if (!token) return { ok: false, error: "Shopify 令牌交换失败：响应缺少 access_token" };
-      }
+      // 令牌获取策略（直填优先 / 客户端凭据换取）由 host-util 承载并有测试覆盖
+      const resolved = await resolveShopifyToken({
+        token: creds.token,
+        exchange: async () => {
+          const exchParams = new URLSearchParams({ grant_type: "client_credentials" });
+          if (creds.clientId) exchParams.set("client_id", creds.clientId);
+          if (creds.clientSecret) exchParams.set("client_secret", creds.clientSecret);
+          const exc = await fetch(`https://${creds.domain}/admin/oauth/access_token`, {
+            method: "POST",
+            headers: { "content-type": "application/x-www-form-urlencoded" },
+            body: exchParams,
+            signal: controller.signal
+          });
+          const excBody = await exc.json().catch(() => null);
+          if (!exc.ok) return { ok: false, error: `Shopify 令牌交换失败 (HTTP ${exc.status}): ${excBody?.error_description || excBody?.error || "请求失败"}` };
+          return { ok: true, token: typeof excBody?.access_token === "string" ? excBody.access_token : undefined };
+        }
+      });
+      if (resolved.ok !== true) return { ok: false, error: resolved.error };
+      const token = resolved.token;
+      const via = resolved.via;
       const url = `https://${creds.domain}/admin/api/2026-04/shop.json`;
       const res = await fetch(url, { headers: { "x-shopify-access-token": token }, signal: controller.signal });
       const body = await res.json().catch(() => null);
       if (!res.ok) return { ok: false, error: `Shopify API HTTP ${res.status}: ${body?.errors ? String(body.errors) : "请求失败"}` };
       return { ok: true, text: `连接测试通过 ✓\n认证方式: ${via}\n店铺: ${body?.shop?.name ?? "（无名称）"}\n计划: ${body?.shop?.plan_name ?? "-"}\n域名: ${body?.shop?.myshopify_domain ?? creds.domain}` };
     } catch (e) {
-      return { ok: false, error: `Shopify 请求失败: ${e?.message ?? e}` };
+      return { ok: false, error: `Shopify 请求失败: ${errorMessage(e)}` };
     } finally { clearTimeout(timer); }
   }
   if (kind === "apify-user-info") {
@@ -1127,7 +1157,7 @@ async function probeConnection(credentials, conn) {
       const u = body?.data ?? {};
       return { ok: true, text: `连接测试通过 ✓\n账号: ${u.username ?? "-"}\n套餐: ${u.plan?.id ?? "-"}（月度上限 $${u.plan?.maxMonthlyUsageUsd ?? "?"}）\n并发上限: ${u.plan?.maxConcurrentActorRuns ?? "-"}` };
     } catch (e) {
-      return { ok: false, error: `Apify 请求失败: ${e?.message ?? e}` };
+      return { ok: false, error: `Apify 请求失败: ${errorMessage(e)}` };
     } finally { clearTimeout(timer); }
   }
   return { ok: false, error: `未知探测类型: ${kind}` };
@@ -1135,6 +1165,16 @@ async function probeConnection(credentials, conn) {
 
 /** 外部链接白名单（设置页「打开开放平台」等按钮，用系统默认浏览器打开） */
 const EXTERNAL_HOSTS = new Set(["biji.com", "www.biji.com", "openapi.biji.com", "doc.biji.com", "app.biji.com", "admin.shopify.com", "shopify.dev", "www.shopify.com"]);
+/**
+ * 按平台选择打开外部链接的命令。
+ * @param {string} url 已通过白名单校验的链接
+ * @returns {{command: string, args: string[]}} 命令与其参数
+ */
+function openCommand(url) {
+  if (process.platform === "darwin") return { command: "open", args: [url] };
+  if (process.platform === "win32") return { command: "cmd", args: ["/c", "start", "", url] };
+  return { command: "xdg-open", args: [url] };
+}
 async function handleOpenUrl(body) {
   const url = typeof body?.url === "string" ? body.url.trim() : "";
   if (!url) return { status: 400, body: { ok: false, error: "url 不能为空" } };
@@ -1142,16 +1182,17 @@ async function handleOpenUrl(body) {
   try { parsed = new URL(url); } catch { return { status: 400, body: { ok: false, error: "url 非法" } }; }
   if (parsed.protocol !== "https:" && parsed.protocol !== "http:") return { status: 400, body: { ok: false, error: "仅允许 http/https" } };
   if (!EXTERNAL_HOSTS.has(parsed.hostname)) return { status: 400, body: { ok: false, error: "域名不在白名单内" } };
-  const cmd = process.platform === "darwin" ? ["open", [url]]
-    : process.platform === "win32" ? ["cmd", ["/c", "start", "", url]]
-    : ["xdg-open", [url]];
-  try {
-    const child = spawn(cmd[0], cmd[1], { detached: true, stdio: "ignore" });
-    child.unref();
-    return { status: 200, body: { ok: true } };
-  } catch (error) {
-    return { status: 500, body: { ok: false, error: String(error?.message ?? error) } };
-  }
+  // spawn 而非 execFile：execFile 不接受 detached/stdio，无法与宿主进程解耦；
+  // 且 spawn 启动失败以 'error' 事件上报（同步 try 捕不到），
+  // 旧写法会让接口返回「已打开」而实际什么都没发生。
+  return new Promise((resolve) => {
+    const cmd = openCommand(url);
+    /** @type {import("node:child_process").SpawnOptions} */
+    const options = { detached: true, stdio: "ignore" };
+    const child = spawn(cmd.command, cmd.args, options);
+    child.once("error", (error) => resolve({ status: 500, body: { ok: false, error: errorMessage(error) } }));
+    child.once("spawn", () => { child.unref(); resolve({ status: 200, body: { ok: true } }); });
+  });
 }
 
 /* ── apply ────────────────────────────────────────────────────────────── */
@@ -1174,7 +1215,7 @@ export function apply(ctx) {
     ensureApifySkill().catch(() => {});
   }, "dsh-wanzh-hulian: ensure apify skill");
 
-  for (const tool of GETNOTE.tools) {
+  for (const tool of getnoteToolNames()) {
     const def = toolDefs[tool];
     if (def) ctx.tools.register(def);
   }
@@ -1189,7 +1230,7 @@ export function apply(ctx) {
         try {
           const r = await handleList(credentials);
           sendJson(res, r.status, r.body);
-        } catch (e) { sendJson(res, 500, { ok: false, error: String(e?.message ?? e) }); }
+        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
       }
     });
     const disposeToggle = ctx.webServer.register({
@@ -1201,7 +1242,7 @@ export function apply(ctx) {
         try {
           const r = await handleToggle(credentials, await readBody(req));
           sendJson(res, r.status, r.body);
-        } catch (e) { sendJson(res, 500, { ok: false, error: String(e?.message ?? e) }); }
+        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
       }
     });
     const disposeCredential = ctx.webServer.register({
@@ -1216,7 +1257,7 @@ export function apply(ctx) {
             return sendJson(res, r.status, r.body);
           }
           return sendJson(res, 405, { error: "method not allowed" });
-        } catch (e) { sendJson(res, 500, { ok: false, error: String(e?.message ?? e) }); }
+        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
       }
     });
     const disposeProbe = ctx.webServer.register({
@@ -1233,7 +1274,7 @@ export function apply(ctx) {
           if (!conn) return sendJson(res, 404, { ok: false, error: "未知连接 id" });
           const r = await probeConnection(credentials, conn);
           sendJson(res, 200, r);
-        } catch (e) { sendJson(res, 500, { ok: false, error: String(e?.message ?? e) }); }
+        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
       }
     });
     const disposeOauthStart = ctx.webServer.register({
@@ -1250,7 +1291,7 @@ export function apply(ctx) {
           if (!entry || entry.auth?.type !== "oauth-pkce") return sendJson(res, 400, { ok: false, error: "该条目不支持 OAuth 授权" });
           const r = await startOauthFlow(entry.auth, entryId);
           sendJson(res, 200, r);
-        } catch (e) { sendJson(res, 500, { ok: false, error: String(e?.message ?? e) }); }
+        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
       }
     });
     const disposeOauthStatus = ctx.webServer.register({
@@ -1315,7 +1356,7 @@ export function apply(ctx) {
             return sendJson(res, 200, { ok: true, restart: true, hint: "MCP 服务器挂载在宿主启动时生效，请重启 DSH Desktop。" });
           }
           return sendJson(res, 405, { error: "method not allowed" });
-        } catch (e) { sendJson(res, 500, { ok: false, error: String(e?.message ?? e) }); }
+        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
       }
     });
     const disposeAuthLogin = ctx.webServer.register({
@@ -1329,7 +1370,7 @@ export function apply(ctx) {
           child.unref();
           return sendJson(res, 200, { ok: true, hint: "已在系统浏览器打开得到大脑授权页；完成授权后点「测试连接 + 配额」验证。" });
         } catch (error) {
-          sendJson(res, 500, { ok: false, error: String(error?.message ?? error) });
+          sendJson(res, 500, { ok: false, error: errorMessage(error) });
         }
       }
     });
@@ -1352,7 +1393,7 @@ export function apply(ctx) {
         try {
           const r = await handleOpenUrl(await readBody(req));
           sendJson(res, r.status, r.body);
-        } catch (e) { sendJson(res, 500, { ok: false, error: String(e?.message ?? e) }); }
+        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
       }
     });
     const disposeTopics = ctx.webServer.register({
@@ -1364,7 +1405,7 @@ export function apply(ctx) {
         try {
           const r = await handleTopics(credentials);
           sendJson(res, r.status, r.body);
-        } catch (e) { sendJson(res, 500, { ok: false, error: String(e?.message ?? e) }); }
+        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
       }
     });
     const disposeDefaultTopic = ctx.webServer.register({
@@ -1376,7 +1417,7 @@ export function apply(ctx) {
         try {
           const r = await handleDefaultTopic(await readBody(req));
           sendJson(res, r.status, r.body);
-        } catch (e) { sendJson(res, 500, { ok: false, error: String(e?.message ?? e) }); }
+        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
       }
     });
     return () => {

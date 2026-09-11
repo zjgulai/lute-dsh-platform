@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process'
 import { existsSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import {
@@ -11,6 +12,34 @@ import {
   sanitizedEnvironment,
 } from '../../scripts/quality/common.mjs'
 import { DshWebFixture } from '../../scripts/quality/dsh-fixture.mjs'
+
+/**
+ * 可靠的 node 可执行文件路径。
+ *
+ * 不能用 `process.execPath`：在 pnpm 生命周期脚本下它可能是宿主 Electron 可执行文件
+ * （本机实测 `pnpm exec node -e 'process.execPath'` 返回
+ * `/Applications/DSH Desktop.app/Contents/MacOS/DSH Desktop`），
+ * 用它 spawn 出来的是 Electron 而非 node，子进程没有 stdout——
+ * 「spawns commands without a shell」用例于是拿到空串而失败（2026-09-11 定位）。
+ * 改为在 PATH 中解析 node 并校验它能应答 `--version`。
+ */
+function resolveNodeExecutable(): string {
+  const candidates = [
+    process.env.DSH_NODE_EXECPATH,
+    ...(process.env.PATH ?? '').split(':').filter(Boolean).map(dir => `${dir}/node`),
+    process.execPath,
+  ].filter((value): value is string => typeof value === 'string' && value !== '')
+  for (const candidate of candidates) {
+    if (!existsSync(candidate)) continue
+    try {
+      const probe = execFileSync(candidate, ['--version'], { encoding: 'utf8' }).trim()
+      if (/^v\d+\./.test(probe)) return candidate
+    } catch { /* 不是 node，试下一个 */ }
+  }
+  throw new Error('找不到可用的 node 可执行文件：请设置 DSH_NODE_EXECPATH 或把 node 放进 PATH')
+}
+
+const NODE_EXECUTABLE = resolveNodeExecutable()
 
 describe('quality script safety helpers', () => {
   it('removes ambient credentials while retaining ordinary process settings', () => {
@@ -113,13 +142,13 @@ describe('quality script safety helpers', () => {
   it('spawns commands without a shell', async () => {
     const runner = new CommandRunner()
     const marker = '$(must-not-execute)'
-    const result = await runner.run(process.execPath, ['-e', 'process.stdout.write(process.argv[1])', marker], { capture: true })
+    const result = await runner.run(NODE_EXECUTABLE, ['-e', 'process.stdout.write(process.argv[1])', marker], { capture: true })
     expect(result.stdout).toBe(marker)
   })
 
   it('waits for a timed-out child to terminate before rejecting', async () => {
     const runner = new CommandRunner()
-    await expect(runner.run(process.execPath, ['-e', 'setInterval(() => {}, 1_000)'], {
+    await expect(runner.run(NODE_EXECUTABLE, ['-e', 'setInterval(() => {}, 1_000)'], {
       capture: true,
       timeoutMs: 25,
     })).rejects.toThrow(/timed out after 25 ms/)

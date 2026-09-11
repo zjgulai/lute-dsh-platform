@@ -14,10 +14,11 @@
   },
   "files": [
     "lib/index.js",
-    "lib/catalog.js",
+    "lib/boards.js",
+    "lib/business-meta.js",
+    "lib/host-util.js",
     "lib/client.js",
-    "cordis.patch.yml",
-    "lib/business-meta.js"
+    "cordis.patch.yml"
   ],
   "dsh": {
     "bundle": {
@@ -34,6 +35,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "react": "^18.3.0"
+    "@types/node": "^22.20.2",
+    "@types/react": "18.3.12",
+    "react": "18.3.1",
+    "typescript": "5.6.3"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --pretty false",
+    "test": "node --test test/*.spec.mjs"
   }
 }

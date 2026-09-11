@@ -70,3 +70,45 @@ Status: implemented
 三期的门禁 `scripts-runnable` 在 `full` 模式真实运行每个包的 `typecheck` 与 `test`，首次运行即暴露 7 处此前不可见的问题：2 个空转脚本（退出码 127）、1 个带真实类型错误的 typecheck（退出码 2）、4 个 test 失败。其中 `dsh-browser-local` 的 11 个套件全部收集失败被定位为相对符号链接因目录层级变化失效，修复后 9 个套件 111 项测试恢复通过。
 
 `dsh-skill-subset` 是首个完成闭环的包：新增 7 项契约测试与 JSDoc 类型契约，`tsc --noEmit` 退出码 0、`node --test` 7/7 通过，豁免条目已删除。
+
+## Loop 1.3 收官：dsh-wanzh-hulian 的契约清账（2026-09-11）
+
+### Problem
+
+`dsh-wanzh-hulian` 是 20 个受管包里的最大包（host 1,916 行 + client 822 行），在豁免清单上挂了整整一轮，理由是「缺少 typecheck 与 test 脚本」。真实状况比这句话复杂三层：
+
+- **类型检查此前无从运行**：包内没有 `tsconfig.json`、没有 `node_modules`。首次接入（copy 同侪包的可复现依赖 + 从内建运行时取类型）后 `checkJs` 实测 **117 错**：client 73 错来自「bundle 入口契约未声明」——bundle 不使用 ES import，靠宿主 ModuleLoader 注入 `require`，因此 `window`/`require('react')` 全无类型；host 44 错来自外部响应边界未声明形状（`await res.json()` 落在 `{}`）与 `catch (e)` 的未知类型。
+- **同一事实有两个家**：`lib/catalog.js` 保存了「连接」与「工具清单」两份手工快照，而运行时真源是 `lib/index.js` 的 `DEFAULT_CONNECTIONS` 加用户落盘的 `~/.dsh/integrations/wanzh-hulian/connections.json`。两份副本**已经实际漂移**：仓库版 4,133 字节、已部署版 5,077 字节，两者对 `board.connections` 的取值不同。
+- **部署副本与仓库副本是两份实体**：profile 以 `file:` 依赖安装本包，解出的 `node_modules` 副本是独立实体（inode 不同）。因此「仓库改了、GUI 就在跑新代码」这一直觉不成立——实测运行中的 `/api/dsh-wanzh-hulian/list` 跑的是 9 月 10 日的旧副本，且新增的模块文件不会随 `sync-profile.mjs` 进入副本（该脚本按设计不追加副本缺失的文件）。
+
+### Decision
+
+把「可被机器证明」当成设计约束倒推实现形态，而不是事后补测试：
+
+1. **边界抽成无 I/O 的纯函数**（新 `lib/host-util.js`）：`errorMessage` / `resolveShopifyToken` / `pickBoardConnections` / `buildBoards` / `mergeRegisteredTools`。它们不依赖 cordis 运行时与凭证服务，因此 `node --test` 可直接验证行为契约；宿主 `lib/index.js` 改为调用它们，而不是各留一份内联实现。
+2. **工具清单与板块清单只从运行时注册表派生**：工具名取自 `Object.keys(toolDefs)`，板块连接取自 `loadConnections()`；`lib/catalog.js` 整个删除（仅保留板块定义与 logo 到新 `lib/boards.js`）。同一事实收敛到一个家（ADR-0009），漂移在结构上不再可能。
+3. **客户端 bundle 的宿主契约显式声明**（新 `lib/globals.d.ts` + `lib/**` 纳入 tsconfig，与 `dsh-ui-polish-local` 同型）：声明 `window.__ModuleLoader__.load` 与 `require`，React 类型显式取自 `@types/react`，负载形状用 `@typedef` 集中声明——`useState(null)` 曾把状态类型锁成 `null`，使整条渲染链退化为 `never`。
+4. **顺手修掉两处真实缺陷**：`loadedRef[1] = true` 直接给 setter 赋值，覆盖掉 setter 本身，「已加载」闩锁永不生效（面板每次重开都重新拉取）；`handleOpenUrl` 用 `spawn` 启动浏览器，而 `spawn` 的启动失败以 `error` 事件上报、同步 `try` 捕不到——接口会返回「已打开」而实际什么都没发生。改用 `execFile`→`spawn`+`error`/`spawn` 事件两分支。
+5. **不新建 ADR 编号、不新建独立 Note**：本次没有引入新的决策类别。ADR-0017 已确立「类型来源单一化」，本条是其必然应用；Note 按 ADR-0015「一次决策一篇」落在本篇内。按 ADR-0009，进度事实只写在 `docs/REFACTOR-MAINLINE.md`，本 Note 不复制。
+
+**一次需要自我更正的中间结论。** 我在过程中一度断言「`GETNOTE.tools` 把两个凭证 ref 当成工具播报」，并据此写了回归测试。逐项核对后该断言**不成立**：`getnote_api_key` / `getnote_client_id` 从不在 `tools` 数组内（它们只出现在 `authFields[].ref`），我看到的「21 项」是把 `authFields` 的 ref 一起 grep 进来的产物。测试与注释已按事实改写为「工具清单只来自注册表，快照残留不影响播报」——该断言可证伪、且对本次删除快照的动作有真实守卫价值，而原断言是空转的。
+
+### Alternatives considered
+
+**为两个 plane 各建一套测试桩，如实测运行时的 cordis 组合。** `lib/index.js` 的 `apply(ctx)` 依赖 `@deepseek-ai/dsh-mcp-client` 等运行时模块，如实装载需要完整的 cordis 依赖闭包——这正是 `dsh-browser-local` 剩 2 个套件被卡住的同一堵墙。改为把边界抽成纯函数：覆盖面从「端到端」缩到「边界判定」，但**可测且可长期维持**，且抽出的函数同时消除了内联重复实现。
+
+**保留 `lib/catalog.js`，只补一份测试来防漂移。** 测试能发现漂移，但不能消除漂移；每加一个连接就要同步三处。删除第二份快照把「同步」这件事本身删掉了。
+
+**让 `sync-profile.mjs` 追加副本缺失的文件。** 该脚本是「只替换副本中已存在的文件」，为的是不把构建产物与副本独有文件搅乱。为一个包改变这条语义会波及全部 20 个包，风险与收益不成比例——正确做法是让包本身的 `files` 清单与入口自洽，部署通过 `pnpm install` 重解 `file:` 依赖完成。
+
+**加深 capture 的收尾逻辑来治冒烟测试的偶发空串。** 我把 `close` 改造为「额外等 stdout/stderr 的 `end`」，结果失败率从偶发升到 12/12。根因根本不在收尾时序：在 pnpm 生命周期脚本下 `process.execPath` 是宿主 Electron 可执行文件而非 node，用它 spawn 出来的是 Electron，子进程没有 stdout。改造已完整回滚，改为在测试中从 PATH 解析 node 并校验 `node --version` 应答。
+
+### Consequences
+
+**收益。** 受管包达标从 16/20 升到 **17/20**；本包 `typecheck` 117 → 0 错（退出码 0），`test` 10/10（退出码 0）；豁免从 4 条降到 3 条。两处真实缺陷有回归测试或结构性守卫。工具清单与板块清单不再有第二份事实源。
+
+**代价与遗留。** 纯函数边界的代价是**端到端路径仍无自动化覆盖**：`/api/dsh-wanzh-hulian/list` 的真实 HTTP 响应只有人工 curl 证据，`apply()` 的装载路径要等 `dsh-browser-local` 那堵依赖闭包的墙被推倒后才能进测试。`lib/boards.js` 里的 logo 是 1.6 KB base64 常量，属于「生成物入库」，未纳入本次范围。
+
+**验证。** Red→Green 用同一测试：新增 9 项失败 → 实现后 10/10 通过（追加的回归项另有其独立 Red）。`tsc -p tsconfig.json` 由 117 错到 0 错。`node scripts/gate.mjs --mode full` 13/13、退出码 0。端到端人工证据：`curl http://127.0.0.1:43120/api/dsh-wanzh-hulian/list` 返回 `ok:true`，板块连接与运行时 `connections.json` 一致，工具清单 19 项。
+
+**过程中暴露并一并修复的既有缺陷**（非本次引入，已用命令确认根因）：`dsh-agent-team-gui-local` 的 `typecheck` 因引用已在运行时 rc.1 移除的包 `@deepseek-ai/dsh-host-apiproxy/api`、以及 `i18n.ts` 的 `NS` 已改名，整条脚本无法运行——修复后 typecheck 退出码 0、host 119/119、client 66/66；其冒烟测试的空串失败率由「偶发」变为可复现后根治（见上）。这两项使 `gate --mode full` 从 12/13 回到 13/13。

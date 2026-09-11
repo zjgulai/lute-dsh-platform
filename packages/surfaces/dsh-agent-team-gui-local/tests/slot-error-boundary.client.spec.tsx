@@ -3,13 +3,13 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import type { ReactNode } from 'react'
 import { SlotErrorBoundary } from '../src/client/SlotErrorBoundary.tsx'
 import type { AgentTeamController } from '../src/client/controller.ts'
-import { DICTIONARIES, NS } from '../src/client/i18n.ts'
+import { AGENT_TEAM_LOCALE_NS, DICTIONARIES } from '../src/client/i18n.ts'
 
 /** 最小 controller 替身：只提供边界渲染所需的三项。 */
 function controller(): AgentTeamController {
   const t = ((key: string) => (DICTIONARIES.zh as Record<string, string>)[key] ?? key) as never
   return {
-    i18n: { t, locale: 'zh', register: () => () => {}, ns: NS },
+    i18n: { t, locale: 'zh', register: () => () => {}, ns: AGENT_TEAM_LOCALE_NS },
     load: async () => ({ squads: [] }),
   } as unknown as AgentTeamController
 }
