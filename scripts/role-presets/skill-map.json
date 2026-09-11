@@ -1,0 +1,217 @@
+{
+  "_meta": {
+    "purpose": "把材料《AI组织变革》50 个岗位的 151 个中文业务技能名，映射到 ~/.dsh/skills 现有 264 项技能的英文 id，供 50 个岗位 preset 的 skill-subset 使用。",
+    "source": "docs/05-agents/role-catalog.json 的 roles[].skills（151 个去重名，每岗 3 个）",
+    "target": "~/.dsh/skills 下 264 项技能的 name 字段（英文 kebab）",
+    "authoring": "人工语义映射，非程序生成。",
+    "kinds": {
+      "direct": "平台有语义直接对应的技能，可直接进 skill-subset",
+      "partial": "平台只覆盖该业务技能的一部分，映射的是最接近的供给，已在 note 说明缺口",
+      "gap": "平台无供给。**不编造技能名**，supply 为空数组；缺口如实登记，待自建 SKILL.md 或外部接入"
+    },
+    "constraint": "材料原文明确写过「这些名称不代表现有工具接口」——所以这些中文名是**业务能力名**而非 skill id，必须映射后才可用。",
+    "verified_by": "scripts/role-presets/verify-lossless.mjs 的 L8 层：每个引用的英文 id 必须在目标技能库里真实存在"
+  },
+  "skills": {
+    "经营目标拆解": { "kind": "direct", "supply": ["ecommerce-quarterly-strategy", "ecommerce-budget-forecaster"] },
+    "资源情景比较": { "kind": "direct", "supply": ["creating-financial-models", "market-scenario-modeler", "dcf-valuation"] },
+    "月度经营复盘": { "kind": "direct", "supply": ["ecommerce-monthly-review", "ecommerce-analytics-controller"] },
+
+    "需求分诊": { "kind": "partial", "supply": ["ecommerce-analytics-controller"], "note": "平台只有电商数据域的 Skill 路由主控，没有针对「场景工单」的通用分诊器" },
+    "能力匹配": { "kind": "direct", "supply": ["skill-family-manager"] },
+    "依赖协调": { "kind": "gap", "supply": [], "note": "无技能供给；属模型外 Case Control 的确定性职责，材料本身也不要求它由技能实现" },
+    "异常冻结与恢复": { "kind": "gap", "supply": [], "note": "无技能供给；同上——材料要求这是模型外控制，不应由 Skill 承担" },
+
+    "GMV归因分析": { "kind": "direct", "supply": ["attribution", "ecommerce-business-insights"] },
+    "经营预测": { "kind": "direct", "supply": ["ecommerce-budget-forecaster", "ecommerce-ml-modeling-advisor"] },
+    "情景模拟": { "kind": "direct", "supply": ["market-scenario-modeler", "creating-financial-models"] },
+
+    "岗位能力分析": { "kind": "direct", "supply": ["org-structure-research", "people-research"] },
+    "培训与招聘支持": { "kind": "partial", "supply": ["people-research"], "note": "有人员研究，无培训/招聘执行类技能" },
+    "人事行政流程": { "kind": "partial", "supply": ["lark-tools", "internal-comms"], "note": "飞书工具可承接行政流程；无专门的人力流程技能" },
+
+    "抽样审计": { "kind": "gap", "supply": [], "note": "平台无审计类技能。这是真实供给缺口，不编造" },
+    "证据复核": { "kind": "gap", "supply": [], "note": "同上" },
+    "利益冲突检查": { "kind": "gap", "supply": [], "note": "同上" },
+
+    "用户访谈分析": { "kind": "direct", "supply": ["jtbd-analyzer", "icp-profiler"] },
+    "需求分群": { "kind": "direct", "supply": ["customer-rfm-analyzer", "semantic-bucketer"] },
+    "VOC编码": { "kind": "direct", "supply": ["voc-sentiment-analyzer", "customer-voice-analyzer", "review-analyst-agent"] },
+
+    "竞品研究": { "kind": "direct", "supply": ["competitor-profiling", "competitor-deep-analysis", "competitor-alternative-analysis"] },
+    "趋势监测": { "kind": "direct", "supply": ["trend-stage-timing-analyzer", "market-signal-tracker"] },
+    "市场机会评估": { "kind": "direct", "supply": ["market-viability-logic-auditor", "market-insight-product-selection", "cross-border-category-feasibility"] },
+
+    "组合取舍": { "kind": "direct", "supply": ["product-attribute-analyzer", "product-research-matrix"] },
+    "实验组合": { "kind": "direct", "supply": ["ab-test-setup", "campaign-planning"] },
+    "阶段投资建议": { "kind": "direct", "supply": ["product-launch-planner", "market-viability-logic-auditor"] },
+
+    "产品需求定义": { "kind": "direct", "supply": ["ai-product-designer", "product-marketing-brief"] },
+    "商业案例": { "kind": "partial", "supply": ["creating-financial-models", "joint-solution-blueprint"], "note": "有财务建模，无专门的商业立项模板" },
+    "产品范围管理": { "kind": "direct", "supply": ["write-spec", "to-tickets"] },
+
+    "使用旅程": { "kind": "direct", "supply": ["experience-system-blueprint", "jtbd-analyzer"] },
+    "工业设计简报": { "kind": "direct", "supply": ["ai-product-designer", "tech-pack-generator"] },
+    "可用性验证": { "kind": "partial", "supply": ["optimize-ecommerce-page-conversion", "ab-test-setup"], "note": "只有电商页面转化与 A/B，无硬件可用性测试方法" },
+
+    "工程需求审查": { "kind": "partial", "supply": ["tech-pack-generator"], "note": "Tech Pack 覆盖工艺/BOM/DFM，但不含结构强度与材料工程计算" },
+    "BOM与材料分析": { "kind": "partial", "supply": ["tech-pack-generator"], "note": "同上" },
+    "可制造性分析": { "kind": "partial", "supply": ["tech-pack-generator"], "note": "同上（DFM 风险审查在 tech-pack-generator 内）" },
+
+    "软件需求分析": { "kind": "direct", "supply": ["write-spec", "to-spec"] },
+    "算法评估设计": { "kind": "direct", "supply": ["ecommerce-ml-modeling-advisor"] },
+    "应用生态规划": { "kind": "direct", "supply": ["partner-ecosystem-map"] },
+
+    "研发计划": { "kind": "direct", "supply": ["write-spec", "to-tickets"] },
+    "测试方案": { "kind": "direct", "supply": ["tdd"] },
+    "阶段验证": { "kind": "direct", "supply": ["implement", "prototype"] },
+
+    "供应商评估": { "kind": "direct", "supply": ["supplier-evaluation", "supplier-performance-manager"] },
+    "产能调查": { "kind": "partial", "supply": ["supplier-performance-manager", "product-supplier-sourcing"], "note": "有供应商绩效与寻源，无产能建模" },
+    "OEM协作": { "kind": "direct", "supply": ["supplier-performance-manager", "dropshipping-supplier-integrator"] },
+
+    "采购比价": { "kind": "direct", "supply": ["product-supplier-sourcing", "supplier-evaluation"] },
+    "订单协调": { "kind": "direct", "supply": ["multi-location-order-router", "helpdesk-order-integration"] },
+    "履约跟踪": { "kind": "direct", "supply": ["shipment-tracking", "supplier-performance-manager"] },
+
+    "需求预测": { "kind": "direct", "supply": ["inventory-demand-forecaster"] },
+    "补货模拟": { "kind": "direct", "supply": ["inventory-demand-forecaster", "amazon-fba-inventory-optimizer"] },
+    "供需协调": { "kind": "direct", "supply": ["supply-chain-controller", "multichannel-inventory-sync"] },
+
+    "库存分层": { "kind": "direct", "supply": ["inventory-demand-forecaster", "multichannel-inventory-sync"] },
+    "生命周期分析": { "kind": "partial", "supply": ["trend-stage-timing-analyzer", "product-selection"], "note": "有趋势阶段与选品，无商品生命周期阶段模型" },
+    "调拨清货建议": { "kind": "direct", "supply": ["multi-location-order-router", "dynamic-pricing-engine"] },
+
+    "质量分析": { "kind": "partial", "supply": ["product-review-intelligence-collector", "review-analyst-agent"], "note": "供给是「评价侧质量信号」，不含生产线质量分析与 SPC" },
+    "生产异常协调": { "kind": "partial", "supply": ["supplier-performance-manager"], "note": "有供应商绩效，无生产异常处置流程" },
+    "纠正预防措施": { "kind": "gap", "supply": [], "note": "无 CAPA / 8D 类技能供给" },
+
+    "物流方案": { "kind": "direct", "supply": ["international-shipping-customs"] },
+    "关务资料检查": { "kind": "direct", "supply": ["international-shipping-customs", "tariff-search"] },
+    "到货异常追踪": { "kind": "direct", "supply": ["shipment-tracking"] },
+
+    "履约异常": { "kind": "direct", "supply": ["warehouse-fulfillment-workflow"] },
+    "退货分流": { "kind": "direct", "supply": ["returns-exchange-automator", "return-policy-designer"] },
+    "仓储协作": { "kind": "direct", "supply": ["warehouse-fulfillment-workflow", "multi-location-order-router"] },
+
+    "渠道经营分析": { "kind": "direct", "supply": ["amazon-sorftime-research", "ecommerce-analytics-controller"] },
+    "行动组合": { "kind": "direct", "supply": ["amazon-ppc-campaign-manager", "amazon-listing-expert"] },
+    "经营复盘": { "kind": "direct", "supply": ["ecommerce-business-insights", "ecommerce-monthly-review"] },
+
+    "商品诊断": { "kind": "direct", "supply": ["amazon-listing-expert", "amz-product-optimizer"] },
+    "搜索意图分析": { "kind": "direct", "supply": ["seo-keyword-research", "serp-ranking-analyzer"] },
+    "Listing优化": { "kind": "direct", "supply": ["amazon-listing-expert", "multi-platform-listing-generator"] },
+
+    "漏斗诊断": { "kind": "direct", "supply": ["optimize-ecommerce-page-conversion", "ecommerce-analytics-controller"] },
+    "站点运营": { "kind": "direct", "supply": ["shopify-store-ops", "create-website"] },
+    "转化优化": { "kind": "direct", "supply": ["checkout-flow-optimizer", "cart-abandonment-recovery"] },
+
+    "渠道研究": { "kind": "direct", "supply": ["market-insight-product-selection", "cross-border-category-feasibility"] },
+    "市场进入": { "kind": "direct", "supply": ["gtm-strategy-planning", "launch-strategy"] },
+    "平台运营": { "kind": "direct", "supply": ["etsy-pod-automation", "tiktok-shop-setup", "shopify-store-ops"] },
+
+    "线索评估": { "kind": "direct", "supply": ["icp-profiler", "partner-ecosystem-map"] },
+    "渠道方案": { "kind": "direct", "supply": ["channel-integration", "partner-revenue-desk"] },
+    "商务交付协调": { "kind": "direct", "supply": ["sales-negotiator", "b2b-payment-terms-optimizer"] },
+
+    "价格敏感性": { "kind": "direct", "supply": ["dynamic-pricing-engine", "ecommerce-price-monitor"] },
+    "促销规划": { "kind": "direct", "supply": ["discount-promotion-engine", "seasonal-campaign-automator", "coupon-discount-manager"] },
+    "组合设计": { "kind": "direct", "supply": ["product-attribute-analyzer", "product-research-matrix"] },
+
+    "账号诊断": { "kind": "partial", "supply": ["amazon-brand-protection"], "note": "有品牌保护与合规监测，无店铺账号健康度诊断" },
+    "规则监测": { "kind": "partial", "supply": ["amazon-brand-protection", "platform-price-monitor"], "note": "覆盖品牌与价格规则，不覆盖平台政策变更监测" },
+    "申诉材料准备": { "kind": "partial", "supply": ["doc-coauthoring"], "note": "只有通用文档协作，无平台申诉模板与举证清单" },
+
+    "本地化": { "kind": "direct", "supply": ["multilingual-seo", "terminology-standardizer"] },
+    "市场语境审查": { "kind": "direct", "supply": ["product-marketing-context", "brand-voice-glossary"] },
+    "术语治理": { "kind": "direct", "supply": ["terminology-standardizer", "brand-voice-glossary"] },
+
+    "品牌定位": { "kind": "direct", "supply": ["brand-governance-os", "brand-narrative-playbook"] },
+    "传播规划": { "kind": "direct", "supply": ["public-relations", "editorial-ops", "thought-leadership"] },
+    "品牌反馈": { "kind": "direct", "supply": ["brand-mention-tracking", "brand-measurement-dashboard"] },
+
+    "内容策划": { "kind": "direct", "supply": ["marketing-content-suite", "content-strategy"] },
+    "创意简报": { "kind": "direct", "supply": ["marketing-ideas", "product-marketing-brief"] },
+    "内容实验": { "kind": "direct", "supply": ["ab-test-setup", "vibe-marketing"] },
+
+    "视觉简报": { "kind": "direct", "supply": ["image-prompt-guide", "brand-logo-designer"] },
+    "视频制作协作": { "kind": "direct", "supply": ["video-prompt-guide", "higgsfield-guide", "viral-video-analyzer"] },
+    "素材版本管理": { "kind": "direct", "supply": ["file-history-manager"] },
+
+    "投放诊断": { "kind": "direct", "supply": ["amazon-ppc-campaign-manager", "marketing-roas-analyzer"] },
+    "预算分配": { "kind": "direct", "supply": ["ecommerce-budget-forecaster", "amazon-prelaunch-ad-budget"] },
+    "广告实验": { "kind": "direct", "supply": ["ad-creative", "tiktok-ads-strategy", "paid-advertising"] },
+
+    "达人筛选": { "kind": "direct", "supply": ["influencer-marketing", "influencer-campaign-manager"] },
+    "联盟运营": { "kind": "direct", "supply": ["referral-program-builder", "partner-revenue-desk"] },
+    "合作复盘": { "kind": "direct", "supply": ["attribution", "customer-ltv-calculator"] },
+
+    "分群": { "kind": "direct", "supply": ["customer-rfm-analyzer", "customer-ltv-calculator"] },
+    "生命周期触达": { "kind": "direct", "supply": ["lifecycle-marketing-automator", "customer-retention-automator", "email-automation-flow-builder"] },
+    "复购实验": { "kind": "direct", "supply": ["customer-winback-automator", "ab-test-setup"] },
+
+    "实验设计": { "kind": "partial", "supply": ["ab-test-setup", "campaign-planning"], "note": "有 A/B 与活动规划，无增量实验（holdout/geo-lift）设计器" },
+    "增量分析": { "kind": "partial", "supply": ["attribution", "marketing-roas-analyzer"], "note": "归因不等于增量；平台无因果增量（lift）方法技能" },
+    "因果局限审查": { "kind": "partial", "supply": ["market-viability-logic-auditor"], "note": "只有可行性逻辑审计，非因果推断审查" },
+
+    "产品问答": { "kind": "direct", "supply": ["product-marketing-context", "helpdesk-order-integration"] },
+    "选购指导": { "kind": "direct", "supply": ["icp-profiler", "jtbd-analyzer"] },
+    "需求识别": { "kind": "direct", "supply": ["jtbd-analyzer", "customer-voice-analyzer"] },
+
+    "客诉分诊": { "kind": "direct", "supply": ["helpdesk-order-integration", "review-analyst-agent"] },
+    "售后处理": { "kind": "direct", "supply": ["returns-exchange-automator", "return-policy-designer"] },
+    "服务补救": { "kind": "direct", "supply": ["chargeback-dispute-manager", "customer-winback-automator"] },
+
+    "客诉聚类": { "kind": "direct", "supply": ["voc-sentiment-analyzer", "semantic-bucketer"] },
+    "体验分析": { "kind": "direct", "supply": ["customer-voice-analyzer", "review-analyst-agent"] },
+    "改进验证": { "kind": "partial", "supply": ["product-review-intelligence-collector", "ab-test-setup"], "note": "有评价情报与 A/B，无「改进后复测同一指标」的闭环验证技能" },
+
+    "使用教育": { "kind": "direct", "supply": ["doc-coauthoring", "knowledge-extraction-expert"] },
+    "会员活动": { "kind": "direct", "supply": ["loyalty-points-designer", "referral-program-builder"] },
+    "用户反馈": { "kind": "direct", "supply": ["customer-voice-analyzer", "voc-sentiment-analyzer"] },
+
+    "渠道对账": { "kind": "direct", "supply": ["ecommerce-financial-dashboard", "profit-margin-analyzer"] },
+    "收入与费用核对": { "kind": "direct", "supply": ["invoice-generator", "ecommerce-financial-dashboard"] },
+    "差异追踪": { "kind": "partial", "supply": ["profit-margin-analyzer"], "note": "有利润差异分析，无对账差异追踪与挂账台账" },
+
+    "资金预测": { "kind": "direct", "supply": ["creating-financial-models", "dcf-valuation"] },
+    "经营预算": { "kind": "direct", "supply": ["ecommerce-budget-forecaster"] },
+    "经济性分析": { "kind": "direct", "supply": ["profit-margin-analyzer", "dcf-valuation"] },
+
+    "税务资料": { "kind": "direct", "supply": ["sales-tax-vat-automator", "tariff-search"] },
+    "实体口径核对": { "kind": "partial", "supply": ["sales-tax-vat-automator"], "note": "有税种合规自动化，无跨境实体口径与转让定价核对" },
+    "申报协作": { "kind": "direct", "supply": ["sales-tax-vat-automator", "invoice-generator"] },
+
+    "合同审查支持": { "kind": "partial", "supply": ["b2b-payment-terms-optimizer"], "note": "只覆盖 B2B 付款条款，无合同审查方法。法务属「专业判断由合格外部主体承担」范畴" },
+    "知识产权检索": { "kind": "partial", "supply": ["amazon-brand-protection"], "note": "有品牌保护，无专利/商标检索" },
+    "争议证据组织": { "kind": "direct", "supply": ["chargeback-dispute-manager"] },
+
+    "产品准入核对": { "kind": "partial", "supply": ["cross-border-category-feasibility", "ecommerce-gdpr-compliance"], "note": "有类目可行性与数据合规，无产品准入认证矩阵（CE/FCC/CPSC 等）" },
+    "宣称审查": { "kind": "partial", "supply": ["brand-governance-os"], "note": "有品牌治理，无宣称合规审查规则库" },
+    "隐私需求分析": { "kind": "direct", "supply": ["ecommerce-gdpr-compliance"] },
+
+    "指标契约": { "kind": "partial", "supply": ["ecommerce-business-insights", "ecommerce-analytics-controller"], "note": "有 KPI 树与口径实现，无「指标契约」的版本化定义治理" },
+    "账号商品映射": { "kind": "direct", "supply": ["social-commerce-sync", "multichannel-inventory-sync"] },
+    "主数据治理": { "kind": "direct", "supply": ["terminology-standardizer", "ecommerce-csv-processing"] },
+
+    "数据质量": { "kind": "direct", "supply": ["ecommerce-csv-processing"] },
+    "数据管道": { "kind": "gap", "supply": [], "note": "平台无 ETL / 管道编排类技能" },
+    "溯源监测": { "kind": "partial", "supply": ["knowledge-extraction-expert"], "note": "有知识溯源，无数据血缘与新鲜度监测" },
+
+    "接口契约": { "kind": "partial", "supply": ["build-deepseek-harness-plugin"], "note": "覆盖 DSH 插件契约，不覆盖业务系统接口契约" },
+    "业务工具实现": { "kind": "direct", "supply": ["build-deepseek-harness-plugin", "apify-mcp", "accio-mcp-cli"] },
+    "集成验证": { "kind": "direct", "supply": ["dsh-dev-platform-diagnostics", "dsh-plugin-acquire"] },
+
+    "知识溯源": { "kind": "direct", "supply": ["knowledge-extraction-expert", "research"] },
+    "技能版本": { "kind": "direct", "supply": ["skill-family-manager", "skill-structure-doctor"] },
+    "Playbook评估": { "kind": "direct", "supply": ["skill-evaluator", "skill-optimizer"] },
+
+    "运行监测": { "kind": "direct", "supply": ["dsh-dev-platform-diagnostics", "dsh-desktop-diagnostics"] },
+    "容量管理": { "kind": "gap", "supply": [], "note": "平台无容量/SLO 管理类技能" },
+    "失败恢复": { "kind": "direct", "supply": ["dsh-desktop-diagnostics"] },
+
+    "访问控制": { "kind": "partial", "supply": ["skill-vetter"], "note": "只有 Skill 安装前的安全审查，无运行时访问控制与授权矩阵" },
+    "授权审查": { "kind": "partial", "supply": ["skill-vetter"], "note": "同上" },
+    "安全事件处理": { "kind": "gap", "supply": [], "note": "无安全事件响应类技能" }
+  }
+}

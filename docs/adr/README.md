@@ -22,8 +22,20 @@
 | ADR-0016 | 嵌套仓库治理：受管目录不得含未声明的独立仓库 | accepted（2026-09-11） | [Note](../notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md) |
 | ADR-0017 | 包的类型检查必须指向内建运行时的类型，而非应用内打包产物 | accepted（2026-09-11） | [Note](../notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md) |
 | ADR-0018 | 构建产物 lib/types 的入库边界与 build 可执行性 | accepted（2026-09-11） | [Note](../notes/implemented/architecture/2026-09-11-lute-refactor-three-phase.md) |
+| ADR-0019 | 对官方 UI 的改写锚必须运行时解析，禁止把 CSS-module 哈希写进产品代码 | accepted（2026-09-11） | [Note](../notes/implemented/architecture/2026-09-11-root-brand-live-resolver.md) |
+| ADR-0020 | 岗位小队 = 单 preset 的人格 + 技能并集，不做多 preset 挂载 | accepted（2026-09-11） | [Note](../notes/implemented/architecture/2026-09-11-role-squad-contract.md) |
+| ADR-0021 | Preset 承载材料声明时，必须显式披露「声明 vs 供给」的差 | accepted（2026-09-11） | [Note](../notes/implemented/architecture/2026-09-11-preset-supply-disclosure.md) |
+| ADR-0022 | 岗位头像走官方 `icon` 字段，图标库是唯一事实之家 | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-preset-avatar-contract.md) |
+| ADR-0023 | 删除被会话引用的 preset：默认值先迁移、归档先验字节、损失需显式接受 | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-preset-cleanup.md) |
+| ADR-0024 | 上下文压缩加固：容量表实测 + 摘要路由解耦 + 确定性压缩按需切换 | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-context-compaction-hardening.md) |
 
 > ADR-0007 ~ ADR-0018 是「LUTE 二开平台架构重构」的十二项决策，共享同一篇决策记录 Note。
+> ADR-0019 独立成篇（品牌皮肤锚点治理），决策记录见其 Note。
+> ADR-0020 独立成篇（岗位小队编队契约），决策记录见其 Note。
+> ADR-0021 独立成篇（preset 供给披露规则），决策记录见其 Note。
+> ADR-0022 独立成篇（岗位头像契约），决策记录见其 Note。
+> ADR-0023 独立成篇（preset 清理与默认值迁移），决策记录见其 Note。
+> ADR-0024 独立成篇（上下文压缩加固），决策记录见其 Note。
 > 各插件历史决策（如 AI全栈 ADR-0001~0007、万物互联 D1-D5）保留在各插件 docs/ 内；历史 6 篇 ADR 的归档在三期进行（ADR-0015）。
 
 ## 双轨分职（ADR-0015）
