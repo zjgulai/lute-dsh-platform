@@ -6,7 +6,7 @@ upstream-url: https://github.com/anywhere-labs/dsh-desktop
 upstream-tag: v2.0.5
 upstream-sha: 423406fe225442995902015cb6f10eed670ff115
 lute-branch: lute-v2.0.5
-lute-sha: 423406fe225442995902015cb6f10eed670ff115
+lute-sha: c2b8a0eb1843781ec7526e6c3bf84a0ba7e2c71d
 harness-submodule: NOT-INITIALIZED (pin a66e4702047846cdaa10c66c9d3df3951f5ea70d, runtime 0.1.2-rc.1)
 harness-runtime-source: vendor/dsh-runtime/0.1.2-rc.1/manifest.json
 checked-at: 2026-09-11
