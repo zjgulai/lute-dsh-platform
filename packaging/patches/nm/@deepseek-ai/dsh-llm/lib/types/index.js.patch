@@ -1,0 +1,11 @@
+--- a/@deepseek-ai/dsh-llm/lib/types/index.js
++++ b/@deepseek-ai/dsh-llm/lib/types/index.js
+@@ -527,7 +527,7 @@
+          * @returns the owning adapter's image pricing for the route, when declared.
+          */
+         imageRequestPricing(provider, model) {
+-            return this.adapters.get(provider)?.adapter.imageRequestPricing(provider, model);
++            return this.adapters.get(provider)?.adapter.imageRequestPricing?.(provider, model);
+         }
+         /** Detach typed adapter-owned modality metadata. */
+         detachedModalities(modalities) {

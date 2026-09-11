@@ -1,0 +1,12 @@
+--- a/@deepseek-ai/dsh-client-ui-primitives/lib/index.js
++++ b/@deepseek-ai/dsh-client-ui-primitives/lib/index.js
+@@ -1989,7 +1989,8 @@
+ 		await navigator.clipboard.writeText(text);
+ 		return true;
+ 	} catch {
+-		return false;
++		/* Permission denied or transient failure: fall through to the legacy
++		execCommand path instead of failing the copy outright. */
+ 	}
+ 	const exec = typeof document.execCommand === "function" ? document.execCommand.bind(document) : void 0;
+ 	if (exec === void 0) return false;

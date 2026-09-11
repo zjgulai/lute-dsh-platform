@@ -1,0 +1,11 @@
+--- a/@deepseek-ai/cordis/lib/index.js
++++ b/@deepseek-ai/cordis/lib/index.js
+@@ -180,7 +180,7 @@
+ 	const lines = reason.stack.split("\n");
+ 	let index = lines.indexOf(innerLines[2]);
+ 	if (index === -1) throw reason;
+-	index -= info.offset;
++	index = Math.max(0, index - info.offset);
+ 	while (index > 0) {
+ 		if (!lines[index - 1].endsWith(" (<anonymous>)")) break;
+ 		index -= 1;

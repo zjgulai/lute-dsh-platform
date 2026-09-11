@@ -1,0 +1,46 @@
+--- a/@deepseek-ai/dsh-tool-skill/lib/index.js
++++ b/@deepseek-ai/dsh-tool-skill/lib/index.js
+@@ -42,7 +42,8 @@
+ function catalogSourceEntries(skills, descriptionMaxLength) {
+ 	return skills.map((skill) => ({
+ 		name: skill.name,
+-		description: catalogDescription(skill.description, descriptionMaxLength)
++		description: catalogDescription(skill.description, descriptionMaxLength),
++		...skill.title !== void 0 ? { title: skill.title } : {}
+ 	}));
+ }
+ /** Validate and default the model-facing skill catalog configuration. */
+@@ -291,7 +292,7 @@
+ * no escapable character.
+ */
+ function renderCatalogEntries(entries) {
+-	return entries.map((entry) => `- \`${entry.name}\`: ${escapeText(entry.description)}`);
++	return entries.map((entry) => `- \`${entry.name}\`${entry.title !== void 0 ? `（${escapeText(entry.title)}）` : ""}: ${escapeText(entry.description)}`);
+ }
+ /**
+ * Catalog identity over the durable entry list rather than the rendered prose.
+@@ -299,7 +300,7 @@
+ * written for the model and must not decide whether a republish is needed.
+ */
+ function digestCatalogEntries(entries) {
+-	const canonical = entries.map((entry) => JSON.stringify([entry.name, entry.description])).join("\n");
++	const canonical = entries.map((entry) => JSON.stringify([entry.name, entry.title ?? null, entry.description])).join("\n");
+ 	return createHash("sha256").update(canonical).digest("hex");
+ }
+ /**
+@@ -319,11 +320,13 @@
+ 	const readable = [];
+ 	for (const entry of entries) {
+ 		if (typeof entry !== "object" || entry === null) return void 0;
+-		const { name, description } = entry;
++		const { name, description, title } = entry;
+ 		if (typeof name !== "string" || name === "" || typeof description !== "string") return void 0;
++		if (title !== void 0 && typeof title !== "string") return void 0;
+ 		readable.push({
+ 			name,
+-			description
++			description,
++			...title !== void 0 ? { title } : {}
+ 		});
+ 	}
+ 	return readable;

@@ -1,0 +1,76 @@
+--- a/@deepseek-ai/dsh-api-session-controller/lib/client.js
++++ b/@deepseek-ai/dsh-api-session-controller/lib/client.js
+@@ -1048,18 +1048,37 @@
+ 			}
+ 			/** Page up: pull one earlier page with the window's first seq as beforeSeq and prepend. */
+ 			async loadOlder() {
+-				if (this.openState !== "open" || !this.hasMore || this.loadingOlder) return;
+-				const events = this.events;
+-				if (events === void 0) return;
++				if (!this.hasMore || this.loadingOlder) return;
+ 				this.loadingOlder = true;
+ 				this.notifier.markDirty();
+ 				try {
+-					await events.prepend({
+-						beforeSeq: this.baseSeq,
+-						maxMessages: 50
+-					});
+-				} catch (error) {
+-					if (!(0, _deepseek_ai_dsh_api_gateway_client.isRemoteFailure)(error)) console.error("[session-controller] loadOlder failed:", error);
++					if (this.openState !== "open" || this.events === void 0) {
++						if (this.openState === "error" || this.openState === "cold") await this.resync();
++						if (this.openState !== "open" || this.events === void 0) {
++							if (this.openError === null) this.openError = new Error("history stream is not open");
++							console.error("[session-controller] loadOlder blocked:", this.openState);
++							return;
++						}
++					}
++					const events = this.events;
++					let timer;
++					try {
++						await Promise.race([
++							events.prepend({
++								beforeSeq: this.baseSeq,
++								maxMessages: 50
++							}),
++							new Promise((_, reject) => {
++								timer = setTimeout(() => reject(new Error("loadOlder: history page request timed out")), 15e3);
++							})
++						]);
++						this.openError = null;
++					} catch (error) {
++						this.openError = error;
++						console.error("[session-controller] loadOlder failed:", error);
++					} finally {
++						if (timer !== void 0) clearTimeout(timer);
++					}
+ 				} finally {
+ 					this.loadingOlder = false;
+ 					this.notifier.markDirty();
+@@ -1351,6 +1370,16 @@
+ 				this.notifier.markDirty();
+ 			}
+ 			buildSnapshot() {
++				const lastOwnMessage = (() => {
++					const entries = this.eventSource.snapshot.entries;
++					for (let index = entries.length - 1; index >= 0; index--) {
++						const event = entries[index].event;
++						if (event.type !== "user/message" || event.data?.source?.kind !== "user") continue;
++						const text = (event.data?.content ?? []).filter((part) => part.type === "text").map((part) => part.text).join("");
++						return text === void 0 || text === "" ? void 0 : text;
++					}
++					return void 0;
++				})();
+ 				return {
+ 					sessionId: this.sessionId,
+ 					queue: this.queueMirror.snapshot(),
+@@ -1369,7 +1398,8 @@
+ 					blank: this.blankBit,
+ 					lastAgentError: this.lastAgentError,
+ 					promptAttempted: this.promptAttempted,
+-					awaitingFirstTurn: this.firstPromptPendingTurn
++					awaitingFirstTurn: this.firstPromptPendingTurn,
++					lastOwnMessage
+ 				};
+ 			}
+ 			sessionAddress() {

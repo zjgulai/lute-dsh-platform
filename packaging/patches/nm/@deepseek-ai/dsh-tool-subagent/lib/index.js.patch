@@ -1,0 +1,11 @@
+--- a/@deepseek-ai/dsh-tool-subagent/lib/index.js
++++ b/@deepseek-ai/dsh-tool-subagent/lib/index.js
+@@ -631,7 +631,7 @@
+ 		if (fiber === void 0) return;
+ 		scopedInstalls.delete(candidate);
+ 		/* v8 ignore next 3 -- Cordis Fiber disposal contains registration cleanup failures; this is the final diagnostic sink. */
+-		fiber.dispose().catch((error) => {
++		Promise.resolve(fiber.dispose()).catch((error) => {
+ 			ctx.logger.warn(`tool-subagent: failed to remove recomposed Agent "${candidate.id}" definitions: ${String(error)}`);
+ 		});
+ 	};

@@ -1,0 +1,54 @@
+--- a/@deepseek-ai/dsh-skill/lib/index.js
++++ b/@deepseek-ai/dsh-skill/lib/index.js
+@@ -438,6 +438,7 @@
+ 	return {
+ 		name: skill.name,
+ 		description: skill.description,
++		...skill.title !== void 0 ? { title: skill.title } : {},
+ 		...skill.whenToUse !== void 0 ? { whenToUse: skill.whenToUse } : {},
+ 		invocation: skill.invocation,
+ 		source: skill.source,
+@@ -455,6 +456,7 @@
+ 	if (typeof candidate.description !== "string") throw new TypeError(`skill provider "${providerName}" returned skill "${candidate.name}" with a non-string description`);
+ 	if (candidate.description.length === 0) throw new Error(`skill provider "${providerName}" returned skill "${candidate.name}" without a description`);
+ 	validateInvocation(candidate.invocation, `skill provider "${providerName}" returned skill "${candidate.name}"`);
++	if (candidate.title !== void 0 && typeof candidate.title !== "string") throw new TypeError(`skill provider "${providerName}" returned skill "${candidate.name}" with a non-string title`);
+ 	if (candidate.whenToUse !== void 0 && typeof candidate.whenToUse !== "string") throw new TypeError(`skill provider "${providerName}" returned skill "${candidate.name}" with a non-string whenToUse`);
+ 	if (typeof candidate.source !== "string") throw new TypeError(`skill provider "${providerName}" returned skill "${candidate.name}" with a non-string source`);
+ 	if (typeof candidate.rank !== "number" || !Number.isFinite(candidate.rank)) throw new Error(`skill provider "${providerName}" returned skill "${candidate.name}" with an invalid rank`);
+@@ -465,12 +467,14 @@
+ function validateRuntimeSkill(skill) {
+ 	if (!SKILL_NAME.test(skill.name)) throw new Error(`invalid skill name "${skill.name}"`);
+ 	if (skill.description.length === 0) throw new Error(`skill "${skill.name}" requires a description`);
++	if (skill.title !== void 0 && typeof skill.title !== "string") throw new TypeError(`runtime skill "${skill.name}" title must be a string`);
+ 	validateInvocation(skill.invocation, `runtime skill "${skill.name}"`);
+ }
+ /** Validate a definition loaded from a provider-controlled parser or remote source. */
+ function validateDefinition(skill) {
+ 	const name = skill.name;
+ 	const description = skill.description;
++	const title = skill.title;
+ 	const whenToUse = skill.whenToUse;
+ 	const invocation = skill.invocation;
+ 	const source = skill.source;
+@@ -481,6 +485,7 @@
+ 	if (!SKILL_NAME.test(name)) throw new Error(`loaded skill has invalid name "${name}"`);
+ 	if (typeof description !== "string") throw new TypeError(`loaded skill "${name}" description must be a string`);
+ 	if (description.length === 0) throw new Error(`loaded skill "${name}" requires a description`);
++	if (title !== void 0 && typeof title !== "string") throw new TypeError(`loaded skill "${name}" title must be a string`);
+ 	validateInvocation(invocation, `loaded skill "${name}"`);
+ 	if (whenToUse !== void 0 && typeof whenToUse !== "string") throw new TypeError(`loaded skill "${name}" whenToUse must be a string`);
+ 	if (typeof source !== "string") throw new TypeError(`loaded skill "${name}" source must be a string`);
+@@ -489,10 +494,11 @@
+ 	if (path !== void 0 && typeof path !== "string") throw new TypeError(`loaded skill "${name}" path must be a string`);
+ }
+ function toSummary(skill) {
+-	const { name, description, whenToUse, invocation, source, provider, resourceBase } = skill;
++	const { name, title, description, whenToUse, invocation, source, provider, resourceBase } = skill;
+ 	return {
+ 		name,
+ 		description,
++		...title !== void 0 ? { title } : {},
+ 		...whenToUse !== void 0 ? { whenToUse } : {},
+ 		invocation,
+ 		source,

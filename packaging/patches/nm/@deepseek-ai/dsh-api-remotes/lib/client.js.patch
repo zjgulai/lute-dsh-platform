@@ -1,0 +1,10 @@
+--- a/@deepseek-ai/dsh-api-remotes/lib/client.js
++++ b/@deepseek-ai/dsh-api-remotes/lib/client.js
+@@ -8012,6 +8012,7 @@
+ 		const _deepseek_ai_dsh_api_session_controller_skills_list_result$schema = object({ "skills": array(object({
+ 			"name": string().readonly(),
+ 			"description": string().readonly(),
++			"title": string().readonly().optional(),
+ 			"whenToUse": string().readonly().optional(),
+ 			"modelInvocable": boolean().readonly()
+ 		})).readonly() });

@@ -1,0 +1,19 @@
+--- a/@deepseek-ai/dsh-api-session-controller/lib/typert.host.js
++++ b/@deepseek-ai/dsh-api-session-controller/lib/typert.host.js
+@@ -659,6 +659,7 @@
+   'skills': z.array(z.object({
+   'name': z.string().readonly(),
+   'description': z.string().readonly(),
++  'title': z.string().readonly().optional(),
+   'whenToUse': z.string().readonly().optional(),
+   'modelInvocable': z.boolean().readonly(),
+ })).readonly(),
+@@ -2471,7 +2472,7 @@
+           },
+           {
+             "name": "SkillEntry",
+-            "declaration": "export interface SkillEntry {\n    readonly name: string;\n    readonly description: string;\n    readonly whenToUse?: string;\n    readonly modelInvocable: boolean;\n}"
++            "declaration": "export interface SkillEntry {\n    readonly name: string;\n    readonly description: string;\n    readonly title?: string;\n    readonly whenToUse?: string;\n    readonly modelInvocable: boolean;\n}"
+           },
+           {
+             "name": "SkillListRequest",

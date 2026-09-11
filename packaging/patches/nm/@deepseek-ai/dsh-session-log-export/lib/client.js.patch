@@ -1,0 +1,93 @@
+--- a/@deepseek-ai/dsh-session-log-export/lib/client.js
++++ b/@deepseek-ai/dsh-session-log-export/lib/client.js
+@@ -206,7 +206,7 @@
+ 		const NS = "session-log-download";
+ 		/** Simplified-Chinese Session export strings. */
+ 		const zh = {
+-			"header.action": "Session 日志",
++			"header.action": "log",
+ 			"dialog.preparingTitle": "正在导出 Session",
+ 			"dialog.preparingDescription": "正在准备包含当前 Session、子 Session 和附件的 ZIP 文件。",
+ 			"dialog.successTitle": "Session 导出已开始下载",
+@@ -217,7 +217,7 @@
+ 		};
+ 		/** English Session export strings. */
+ 		const en = {
+-			"header.action": "Session log",
++			"header.action": "log",
+ 			"dialog.preparingTitle": "Exporting Session",
+ 			"dialog.preparingDescription": "Preparing a ZIP containing this Session, its sub-Sessions, and attachments.",
+ 			"dialog.successTitle": "Session download started",
+@@ -247,6 +247,72 @@
+ 			ctx.on("command/executed", (sessionId, commandName, result) => {
+ 				if (commandName === "export" && result.kind === "success") controller.download(sessionId);
+ 			});
++			/* dsh-patch 2026-09-07: 改名 log + 迁至侧边栏「设置」按钮同行右侧（隐藏原位 + 克隆绝对定位 + 委托点击） */
++			ctx.effect(() => {
++				const SEL = ".pTsq1a_sessionLogButton:not([data-log-clone])";
++				let attempts = 0;
++				let warned = false;
++				let clone = null;
++				const findSettingsCtrl = () => {
++					const inSidebar = (el) => el && el.closest('[class*="settingsArea"], [class*="footArea"], [class*="rail"]');
++					const area = document.querySelector('[class*="settingsArea"]');
++					if (area) {
++						const ctrl = area.querySelector('button, a, [role="button"]');
++						return ctrl || area;
++					}
++					const foot = document.querySelector('[class*="footArea"]');
++					if (foot) {
++						const ctrl = foot.querySelector('button[aria-label*="设置"], button[aria-label*="Settings"]');
++						if (ctrl) return ctrl;
++					}
++					for (const sel of ['button[aria-label="设置"]', 'button[aria-label="Settings"]', 'button[aria-label*="设置"]', 'button[aria-label*="Settings"]']) {
++						for (const el of document.querySelectorAll(sel)) { if (inSidebar(el)) return el; }
++					}
++					const nodes = document.querySelectorAll('button, a');
++					for (const el of nodes) {
++						const t = (el.textContent || "").trim();
++						if ((t === "设置" || t === "Settings") && inSidebar(el)) return el;
++					}
++					return null;
++				};
++				const migrate = () => {
++					const orig = document.querySelector(SEL);
++					if (!orig || !orig.isConnected) { clone = null; return; }
++					if (orig.style.display !== "none") orig.style.display = "none";
++					const ctrl = findSettingsCtrl();
++					if (!ctrl) {
++						if (attempts > 60 && !warned) { warned = true; console.warn("dsh-session-log-export: 未找到侧边栏设置按钮锚点，log 按钮留在原位"); }
++						return;
++					}
++					if (clone && clone.isConnected && clone.parentNode === ctrl) return;
++					if (clone && clone.parentNode) clone.parentNode.removeChild(clone);
++					clone = orig.cloneNode(true);
++					clone.dataset.logClone = "1";
++					clone.removeAttribute("id");
++					clone.style.position = "absolute";
++					clone.style.right = "10px";
++					clone.style.top = "50%";
++					clone.style.transform = "translateY(-50%)";
++					clone.style.marginLeft = "0";
++					clone.style.zIndex = "5";
++					clone.addEventListener("click", (e) => {
++						e.preventDefault(); e.stopPropagation();
++						if (orig.disabled) return;
++						orig.click();
++					});
++					if (getComputedStyle(ctrl).position === "static") ctrl.style.position = "relative";
++					ctrl.appendChild(clone);
++					if (/[\b](rail|collapsed)[\b]/.test(ctrl.className || "") || ctrl.closest('[class*="collapsed"]')) clone.style.display = "none";
++				};
++				const iv = setInterval(() => { attempts++; migrate(); if (attempts > 120) clearInterval(iv); }, 800);
++				const mo = new MutationObserver(() => migrate());
++				mo.observe(document.body, { childList: true, subtree: true });
++				const style = document.createElement("style");
++				style.id = "dsh-log-btn-fix";
++				style.textContent = ".pTsq1a_sessionLogButton:not([data-log-clone]){display:none!important}.pTsq1a_sessionLogButton[data-log-clone]{display:inline-flex!important}";
++				document.head.appendChild(style);
++				return () => { clearInterval(iv); mo.disconnect(); style.remove(); if (clone && clone.parentNode) clone.parentNode.removeChild(clone); };
++			}, "session-log-download: relocate beside sidebar settings");
+ 			ctx.slots.inject("conversation.session.header.utilities", () => ctx.slots.register({
+ 				name: "conversation.session.header.utilities",
+ 				id: "session-log-download",

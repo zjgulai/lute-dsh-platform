@@ -1,0 +1,17 @@
+--- a/@deepseek-ai/dsh-llm-pi-ai/lib/index.js
++++ b/@deepseek-ai/dsh-llm-pi-ai/lib/index.js
+@@ -7,9 +7,11 @@
+ import z from "@deepseek-ai/schemastery";
+ import { credentialKey, credentialKeyId, credentialKeyScope, credentialRef, isCredentialKeySegment, isCredentialRefName } from "@deepseek-ai/dsh-credentials";
+ import { builtinProviders, getBuiltinModels, getBuiltinProviders } from "@earendil-works/pi-ai/providers/all";
+-import { anthropicMessagesApi } from "@earendil-works/pi-ai/api/anthropic-messages.lazy";
+-import { openAICompletionsApi } from "@earendil-works/pi-ai/api/openai-completions.lazy";
+-import { openAIResponsesApi } from "@earendil-works/pi-ai/api/openai-responses.lazy";
++// P0-8 补丁：pi-ai lazy 模块强制从 unpacked 磁盘加载（绕开 asar 内 ESM 动态 import 缺陷）
++const PI_AI_API_DIR = `${process.resourcesPath}/app.asar.unpacked/node_modules/@earendil-works/pi-ai/dist/api`;
++const { anthropicMessagesApi } = await import(`${PI_AI_API_DIR}/anthropic-messages.lazy.js`);
++const { openAICompletionsApi } = await import(`${PI_AI_API_DIR}/openai-completions.lazy.js`);
++const { openAIResponsesApi } = await import(`${PI_AI_API_DIR}/openai-responses.lazy.js`);
+ import { homedir } from "node:os";
+ import { access } from "node:fs/promises";
+ import { resolve } from "node:path";

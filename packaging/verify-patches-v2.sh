@@ -6,25 +6,29 @@ DSH_APP="${DSH_APP:-/Users/lute/project/Magpie-Horch/packaging/staging/2.0.0/app
 NM="$DSH_APP/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai"
 LIB="$DSH_APP/Contents/Resources/app.asar.unpacked/lib"
 fail=0
+# hash 名 bundle glob 解析（源码构建后 hash 随内容变化；BASE=dmg 时亦兼容）
+glob1(){ local dir="$1" pat="$2"; local f; f=$(ls "$dir"/$pat 2>/dev/null | grep -v '\.map$' | head -1); echo "${f:-/nonexistent}"; }
+LIB_ER="$(glob1 "$LIB" 'electron-runtime-*.js')"
+LIB_PM="$(glob1 "$LIB" 'profile-manager-*.js')"
 ck(){ # ck <label> <file> <marker> [expected]
   local n; n=$(grep -cF "$3" "$2" 2>/dev/null || true); n=${n:-0}; n=$(echo "$n" | tr -d " \n")
   if [ "${n:-0}" -ge "${4:-1}" ]; then echo "OK   $1 ($n)"; else echo "FAIL $1 (found $n, want >=${4:-1})"; fail=1; fi
 }
-ck "P0-1v2 更新守卫"        "$LIB/electron-runtime-DLNj0vyk.js" "Update installation is disabled for security"
+ck "P0-1v2 更新守卫"        "$LIB_ER" "Update installation is disabled for security"
 ck "P0-2v2 恢复日志"        "$LIB/main.js" "Profile checkpoint restored: package.json will be modified."
 ck "P0-3 llm 主文件"        "$NM/dsh-llm/lib/index.js" "imageRequestPricing?.(provider, model)"
 ck "P0-3 llm types"         "$NM/dsh-llm/lib/types/index.js" "imageRequestPricing?.(provider, model)"
 ck "P0-4 tool-subagent"     "$NM/dsh-tool-subagent/lib/index.js" "Promise.resolve(fiber.dispose())"
 ck "P0-4 file-ref"          "$NM/dsh-file-reference-local/lib/index.js" "Promise.resolve(fiber.dispose())"
 ck "P0-4 file-ref types"    "$NM/dsh-file-reference-local/lib/types/index.js" "Promise.resolve(fiber.dispose())"
-ck "P0-6v2 外链白名单"      "$LIB/electron-runtime-DLNj0vyk.js" "P0-6v2: openExternal"
-ck "P0-6v2 权限门"          "$LIB/electron-runtime-DLNj0vyk.js" "setPermissionRequestHandler"
-ck "P0-6c dmp 排除"         "$LIB/diagnostic-export-worker.js" "P0-6c: 进程内存转储"
-ck "P0-6c 脱敏"             "$LIB/diagnostic-export-worker.js" "P0-6c: Desensitize"
-ck "P0-7v2 首启兜底(main.js)"  "$LIB/main.js" "P0-7v2 LUTE 首启兜底"
-ck "P0-7v2 首启兜底(首启真实路径)"  "$LIB/profile-manager-SP3bXlwi.js" "P0-7v2 LUTE 首启兜底（首启真实路径）"
-ck "P0-7v2c wizard 状态保护"  "$LIB/main.js" "P0-7v2c：内嵌 dsh-profile 拷贝物化的 profile"
-ck "P0-8 pi-ai 磁盘化"      "$NM/dsh-llm-pi-ai/lib/index.js" "P0-8 补丁：pi-ai lazy"
+ck "P0-6v2 外链白名单"      "$LIB_ER" 'target.protocol === "mailto:"'
+ck "P0-6v2 权限门"          "$LIB_ER" "setPermissionRequestHandler"
+ck "P0-6c dmp 排除"         "$LIB/diagnostic-export-worker.js" 'endsWith(".dmp")'
+ck "P0-6c 脱敏"             "$LIB/diagnostic-export-worker.js" "_desensitized"
+ck "P0-7v2 首启兜底(main.js)"  "$LIB/main.js" "embeddedRoot"
+ck "P0-7v2 首启兜底(首启真实路径)"  "$LIB_PM" "embeddedRoot"
+ck "P0-7v2c wizard 状态保护"  "$LIB/main.js" 'activeProfileDir, "vendor")'
+ck "P0-8 pi-ai 磁盘化"      "$NM/dsh-llm-pi-ai/lib/index.js" "PI_AI_API_DIR"
 ck "RECOVERY_DOCUMENT"      "$LIB/main.js" 'app.asar.unpacked'
 ck "clipboard fall-through" "$NM/dsh-client-ui-primitives/lib/index.js" "fall through to the legacy"
 ck "LB log 改名"            "$NM/dsh-session-log-export/lib/client.js" 'dsh-log-btn-fix'

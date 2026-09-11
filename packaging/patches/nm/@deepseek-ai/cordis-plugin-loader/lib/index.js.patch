@@ -1,0 +1,16 @@
+--- a/@deepseek-ai/cordis-plugin-loader/lib/index.js
++++ b/@deepseek-ai/cordis-plugin-loader/lib/index.js
+@@ -95,7 +95,12 @@
+ 		const newMap = Object.fromEntries(config.map((options) => [options.id, options]));
+ 		try {
+ 			const outcomes = await Promise.allSettled(config.map((options) => this.create(options)));
+-			if (this.ctx.fiber.uid === null) return;
++			if (this.ctx.fiber.uid === null) {
++				for (const id of Object.keys(newMap).reverse()) {
++					if (!oldMap[id]) this.remove(id, true).catch(() => undefined);
++				}
++				return;
++			}
+ 			const failures = outcomes.filter((outcome) => outcome.status === "rejected").map((outcome) => outcome.reason);
+ 			if (failures.length === 1) throw failures[0];
+ 			if (failures.length > 1) throw new AggregateError(failures, "loader entries failed to apply");

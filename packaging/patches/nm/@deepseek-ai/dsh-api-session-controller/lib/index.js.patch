@@ -1,0 +1,10 @@
+--- a/@deepseek-ai/dsh-api-session-controller/lib/index.js
++++ b/@deepseek-ai/dsh-api-session-controller/lib/index.js
+@@ -2225,6 +2225,7 @@
+ 				})).filter(isUserInvocable).map((skill) => ({
+ 					name: skill.name,
+ 					description: skill.description,
++					...skill.title === void 0 ? {} : { title: skill.title },
+ 					...skill.whenToUse === void 0 ? {} : { whenToUse: skill.whenToUse },
+ 					modelInvocable: skill.invocation.modelInvocable
+ 				})) };

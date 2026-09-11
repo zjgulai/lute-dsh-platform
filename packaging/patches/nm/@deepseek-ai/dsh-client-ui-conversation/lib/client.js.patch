@@ -1,0 +1,58 @@
+--- a/@deepseek-ai/dsh-client-ui-conversation/lib/client.js
++++ b/@deepseek-ai/dsh-client-ui-conversation/lib/client.js
+@@ -14737,6 +14737,10 @@
+ 					event?.preventDefault();
+ 					return true;
+ 				}
++				if (key === "up" && !inComposition && handlers.recallPrevious !== void 0 && handlers.recallPrevious() === true) {
++					event?.preventDefault();
++					return true;
++				}
+ 				return false;
+ 			};
+ 			return Eu(editor.registerRootListener((root, prevRoot) => {
+@@ -15324,6 +15328,7 @@
+ 			const running = useSession((s) => s.running) ?? false;
+ 			const subagent = useSession((s) => s.subagent) ?? null;
+ 			const removed = useSession((s) => s.removed) ?? false;
++			const lastOwnMessage = useSession((s) => s.lastOwnMessage) ?? null;
+ 			const planActive = useProjection("plan", (plan) => plan !== void 0 && (plan.pending ? !plan.active : plan.active));
+ 			const hasGoal = useProjection("goal", (goal) => goal != null);
+ 			const live = input !== void 0 && keyboard !== void 0 && inputActions !== void 0;
+@@ -15453,7 +15458,10 @@
+ 				running,
+ 				subagent,
+ 				resolveSubmitMode,
+-				intakeImages
++				intakeImages,
++				empty,
++				editable,
++				lastOwnMessage
+ 			});
+ 			gate.current = {
+ 				locked,
+@@ -15462,7 +15470,10 @@
+ 				running,
+ 				subagent,
+ 				resolveSubmitMode,
+-				intakeImages
++				intakeImages,
++				empty,
++				editable,
++				lastOwnMessage
+ 			};
+ 			(0, react.useEffect)(() => {
+ 				if (editor === null || keyboard === void 0) return;
+@@ -15490,6 +15501,12 @@
+ 					pasteText: (text) => {
+ 						if (gate.current.machineBusy || gate.current.locked) return;
+ 						keyboard.paste(text);
++					},
++					recallPrevious: () => {
++						const g = gate.current;
++						if (!g.editable || !g.empty || g.lastOwnMessage === void 0 || g.lastOwnMessage === null) return false;
++						keyboard.paste(g.lastOwnMessage);
++						return true;
+ 					}
+ 				});
+ 			}, [editor, keyboard]);

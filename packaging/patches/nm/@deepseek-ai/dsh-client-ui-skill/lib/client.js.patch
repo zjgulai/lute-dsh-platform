@@ -1,0 +1,30 @@
+--- a/@deepseek-ai/dsh-client-ui-skill/lib/client.js
++++ b/@deepseek-ai/dsh-client-ui-skill/lib/client.js
+@@ -285,9 +285,15 @@
+ 				async candidates(session, { query, signal }) {
+ 					const skills = await fetchCatalog(session.sessionId);
+ 					if (signal.aborted) return [];
+-					return skills.filter((skill) => skill.name.startsWith(query)).map((skill) => ({
+-						name: skill.name,
+-						description: skill.modelInvocable ? skill.description : `${t("menu.userOnly")} · ${skill.description}`
++					const needle = query.toLowerCase();
++					return skills.filter((skill) => {
++						if (needle.length === 0) return true;
++						const hay = [(skill.title ?? ""), skill.name, skill.description];
++						return hay.some((text) => text.toLowerCase().includes(needle));
++					}).map((skill) => ({
++						name: skill.title ?? skill.name,
++						description: skill.modelInvocable ? skill.description : `${t("menu.userOnly")} · ${skill.description}`,
++						skillName: skill.name
+ 					}));
+ 				},
+ 				warm(session) {
+@@ -307,7 +313,7 @@
+ 					};
+ 				},
+ 				onPick({ candidate }) {
+-					return { text: `/${candidate.name} ` };
++					return { text: `/${candidate.skillName ?? candidate.name} ` };
+ 				}
+ 			};
+ 			const inputTriggers = ctx.get("inputTriggers");

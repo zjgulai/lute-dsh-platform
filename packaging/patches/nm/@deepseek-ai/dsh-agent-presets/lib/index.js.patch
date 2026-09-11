@@ -1,0 +1,20 @@
+--- a/@deepseek-ai/dsh-agent-presets/lib/index.js
++++ b/@deepseek-ai/dsh-agent-presets/lib/index.js
+@@ -69,7 +69,8 @@
+ 	return {
+ 		...name === void 0 ? {} : { name },
+ 		...description === void 0 ? {} : { description },
+-		...order === void 0 ? {} : { order }
++		...order === void 0 ? {} : { order },
++		...record.icon === void 0 ? {} : { icon: record.icon }
+ 	};
+ }
+ /**
+@@ -1361,6 +1362,7 @@
+ 					isDefault: preset.id === defaultId,
+ 					...preset.name === void 0 ? {} : { name: preset.name },
+ 					...preset.description === void 0 ? {} : { description: preset.description },
++					...preset.icon === void 0 ? {} : { icon: preset.icon },
+ 					...preset.broken === void 0 ? {} : { broken: preset.broken }
+ 				})),
+ 				authorable: this.authorable

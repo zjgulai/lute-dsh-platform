@@ -1,0 +1,10 @@
+--- a/@deepseek-ai/dsh-api-session-controller/lib/types/skill-catalog.js
++++ b/@deepseek-ai/dsh-api-session-controller/lib/types/skill-catalog.js
+@@ -160,6 +160,7 @@
+                     skills: skills.map(skill => ({
+                         name: skill.name,
+                         description: skill.description,
++                        ...skill.title === undefined ? {} : { title: skill.title },
+                         ...skill.whenToUse === undefined ? {} : { whenToUse: skill.whenToUse },
+                         modelInvocable: skill.invocation.modelInvocable,
+                     })),

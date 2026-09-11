@@ -1,0 +1,19 @@
+--- a/@deepseek-ai/dsh-client-ui-chat/lib/client.js
++++ b/@deepseek-ai/dsh-client-ui-chat/lib/client.js
+@@ -2439,14 +2439,14 @@
+ 									className: ChatView_module_css_default.hint,
+ 									children: t("chat.loadingHistory")
+ 								}),
+-								openState === "error" && openError !== null && (0, react_jsx_runtime.jsx)("div", {
++								openError !== null && (0, react_jsx_runtime.jsx)("div", {
+ 									className: ChatView_module_css_default.openError,
+ 									children: t("chat.loadError", {
+ 										message: openError.message,
+ 										code: openError.code
+ 									})
+ 								}),
+-								hasMore && (0, react_jsx_runtime.jsx)("div", {
++								hasMore && openState === "open" && (0, react_jsx_runtime.jsx)("div", {
+ 									className: ChatView_module_css_default.older,
+ 									children: (0, react_jsx_runtime.jsx)("button", {
+ 										type: "button",

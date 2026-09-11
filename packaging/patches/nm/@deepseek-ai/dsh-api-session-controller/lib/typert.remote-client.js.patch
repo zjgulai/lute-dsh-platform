@@ -1,0 +1,10 @@
+--- a/@deepseek-ai/dsh-api-session-controller/lib/typert.remote-client.js
++++ b/@deepseek-ai/dsh-api-session-controller/lib/typert.remote-client.js
+@@ -659,6 +659,7 @@
+   'skills': z.array(z.object({
+   'name': z.string().readonly(),
+   'description': z.string().readonly(),
++  'title': z.string().readonly().optional(),
+   'whenToUse': z.string().readonly().optional(),
+   'modelInvocable': z.boolean().readonly(),
+ })).readonly(),

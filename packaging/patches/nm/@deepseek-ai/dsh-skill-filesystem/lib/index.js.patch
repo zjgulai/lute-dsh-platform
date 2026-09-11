@@ -1,0 +1,26 @@
+--- a/@deepseek-ai/dsh-skill-filesystem/lib/index.js
++++ b/@deepseek-ai/dsh-skill-filesystem/lib/index.js
+@@ -119,6 +119,7 @@
+ 		return {
+ 			name: parsed.name,
+ 			description: parsed.description,
++			...parsed.title !== void 0 ? { title: parsed.title } : {},
+ 			...parsed.whenToUse !== void 0 ? { whenToUse: parsed.whenToUse } : {},
+ 			invocation: parsed.invocation,
+ 			source: candidate.source,
+@@ -596,6 +597,7 @@
+ 		skills.push({
+ 			name: parsed.name,
+ 			description: parsed.description,
++			...parsed.title !== void 0 ? { title: parsed.title } : {},
+ 			...parsed.whenToUse !== void 0 ? { whenToUse: parsed.whenToUse } : {},
+ 			invocation: parsed.invocation,
+ 			provider,
+@@ -696,6 +698,7 @@
+ 	return {
+ 		name,
+ 		description,
++		...optionalString(parsed.data, "title"),
+ 		...optionalString(parsed.data, "whenToUse"),
+ 		invocation,
+ 		...optionalMetadata(parsed.data),
