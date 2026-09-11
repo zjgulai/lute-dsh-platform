@@ -40,7 +40,18 @@ test_seam: ① 根层条目分类计数（tracked / ignored / untracked 三分�
 - `package-layout.mjs` 的 `TOP_LEVEL_SKIP` **未覆盖** `_attic`/`_tools`/`assets`/`generated`——若其中将来出现
   `package.json` 会被误判为受管包（实测当前均无）。
 - `.dsh-types` 被 `scripts/dsh-types.mjs:51` 硬编码为 `OUT_DIR`，且该模块会为每个包建类型链接；移动它需改码并重建链接。
-- `dsh-patches/`、`81-Skills/`、`packaging/` 是交付链输入，**必须留在根层**。
+- `dsh-patches/` 与 `packaging/` 是交付链输入，**必须留在根层**。
+- **`81-Skills/` 必须留在根层，且必须留在这一确切路径**（2026-09-11 查明，取代此前「交付链输入」的笼统表述）：
+  它是出海技能的**人工创作源**，不是「安装后未清理的副本」。链路是三段身份——
+  `81-Skills/<中文名>/`（人写原文）→ `packages/capabilities/dsh-overseas-skills/staging/81-skills/<english>/`
+  （转换中间产物：DSH frontmatter + 正文改名改写）→ `~/.dsh/skills/<english>/`（运行态）。
+  成文 SOP 见 `dsh-overseas-skills/docs/iteration-runbook.md`：「用户把明文 SKILL.md 放回
+  `81-Skills/<中文名>/` → `bash scripts/pipeline.sh --import`（转换+安装+头像+目录+同步+lint 一键）」。
+  **实测校验**：`81-Skills/` 的 81 项按已安装侧 `title` 字段匹配，**81/81 全部已安装**（0 未命中）——
+  即「已安装」与「仍在仓库」并存不是疏漏，而是「源 + 产物」并存。
+  **决定性约束**：`scripts/import-81skills.mjs` 把源根**硬编码**为
+  `SRC_ROOT = "/Users/lute/project/Magpie-Horch/81-Skills"`（该包 `ROOT` 由脚本自身位置推导），
+  所以移动它需要改码；而 staging 那份可随时重生成，**人写的中文原文不可再生**，故它比中间产物更该留。
 
 ## Solution
 
