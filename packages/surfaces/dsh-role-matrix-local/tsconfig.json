@@ -1,0 +1,32 @@
+{
+  // 类型来源见 ADR-0017：应用内打包的 @deepseek-ai/* 不含 .d.ts，类型从内建运行时
+  // 解出的 .dsh-types/ 解析（scripts/dsh-types.mjs 供给，可重建、不入库）。
+  // cordis 家族在 monorepo 中是未构建的 TS 源码包，用 paths 指向其源码入口。
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "jsx": "react-jsx",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "types": ["node"],
+    "preserveSymlinks": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ]
+}
