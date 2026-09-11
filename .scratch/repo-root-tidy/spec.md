@@ -211,3 +211,36 @@ test_seam: ① 根层条目分类计数（tracked / ignored / untracked 三分�
 
 **一处自我更正**：曾误判 `~/project/_archive/` 下另有一份 `81-Skills`；实测不存在，
 创作源唯一位于 `~/project/81-Skills/`（1533 文件、指纹 `c43ae593…` 与仓库内源一致）。
+
+## 追加决策（2026-09-11 执行期，用户拍板）
+
+**Q1 · `.dsh-vision-router/` 与插件本体：彻底卸载（用户明确选择，已确认能力会消失）**
+
+- 卸载动作：`~/.dsh/profiles/desktop/package.json` 移除 `dependencies["dsh-vision-router"]`
+  与 `dsh.profile.bundles` 条目（32 项）→ `node_modules/dsh-vision-router` 备份后删除 →
+  宿主内置 pnpm `install --lockfile-only` 清 lock（残留 0）→ 仓库内 `.dsh-vision-router/`（83M 产物）删除。
+- 备份：`~/project/_archive/Magpie-Horch-20260911/removed-plugins/dsh-vision-router/`；
+  `package.json` 备份为同目录 `package.json.bak-pre-vision-uninstall`。
+- **能力影响（用户已确认接受）**：应用内无原生视觉包、profile 内唯一提供者是它，故 `read_image`
+  与 agent 读图能力随卸载消失。
+- **一处需更正的我方判断**：我曾说 `scripts/ui-verify.sh` 会一并失效——**错**。实测
+  `macos-harness` 是独立工具（`~/.local/bin/macos-harness`，有 `see` 子命令）且另有同名 skill，
+  `tesseract` 亦在 `/opt/homebrew/bin`，故该脚本**不受影响**。卸载只影响 agent 自身读图。
+- 生效条件：插件在宿主启动时挂载，**需重启 DSH 才真正卸下**。
+
+**Q2 · `.dsh-root-brand-preview/`：本次保持原样 + 登记（采用推荐）**
+
+实测它是**人工运维资产而非产物**：`preview.html` 被 `packages/platform/dsh-root-brand-local/README.local.md:60`
+绝对路径引用；`reapply-delivery-patches.sh`（最后改动 2026-09-11 01:07）是交付补丁重打脚本且内部
+硬编码 `SRC=…/.dsh-root-brand-preview`；`failsafe-drill/` 是**待命**演练协议（「等待用户说可以演练了」）；
+`root-icon/icon.icns` 与 `packaging/assets/app-icon.icns` 同源（同为 65241 字节）。
+移动会断三处绝对路径引用，违背「不影响功能」约束，故本次**只登记不动**。
+**由此暴露的脆弱点**：该目录带点号（`ls` 不可见）且未被 git 跟踪（无版本保护）——
+「如何让它可版本化且不依赖绝对路径」是独立议题，需自己的规格。
+
+**Q3 · `.orig` 归位（采用推荐 A）**
+
+结论是**几乎无需搬**。52 个 `.orig` 的实际分布：23 个在 `_attic/`（已随 G2 归档出工作树）、
+20 个在 `dsh-patches/archive/`（补丁链自有归档位）、8 个在 `packaging/staging-src/`（构建暂存树）。
+档③的动机是消除 **tracked+ignored 漂移态**，而这三处都不在该问题域内——
+盲目搬 52 个会把归档位内容混进文档目录，反而制造新混乱。故档③**按实测收敛为「无需执行」**。
