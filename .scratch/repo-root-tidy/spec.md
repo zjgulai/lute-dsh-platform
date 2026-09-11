@@ -143,6 +143,21 @@ test_seam: ① 根层条目分类计数（tracked / ignored / untracked 三分�
 6. G4/G5 归入 `scripts/` 与 `docs/`。
 7. 收尾：根层计数复核 + 完整门禁 + 未跟踪/忽略件归零。
 
+### 执行状态（2026-09-11）
+
+| 阶段 | 状态 | 结果 |
+| --- | --- | --- |
+| G6 | ✅ 完成 | 归档 2 项（`dsh-renderer-heal`、`dsh-skill-title-fix` 代码）、文档入 `docs/`（5 篇）、保留 `dsh-rootoutlet-heal`（白屏手册 §6.1 运行时基线） |
+| G1 | ✅ 完成 | 删 29 项：5 残渣 + 19 一次性脚本 + `.DS_Store` + 补删 4 个 `.mjs*` 残渣 |
+| G2 | 🟡 主体完成 | 已归档 17 项至 `~/project/_archive/Magpie-Horch-20260911/root-loose/`（旧 bundle 490M、预览 HTML 群、31M contact sheet、univer、lark 图、执行前旧版 checklist）；剩 4 项未跟踪目录待处置（见下表） |
+| G3/G4/G5/G7 | ⏳ 未开始 | — |
+
+**G1 的一处自我更正**：首轮枚举用 `ls *.jsnecho *.jsnnode *.shnbash`，把 `*.mjsnecho` / `*.mjsnnode` 形态漏掉了——
+而 ADR-0013 原文**明确列举过**这 4 个文件名（`patch-index.mjsnecho` 等）。属「证据在手却没用上」，
+教训：按 ADR 点名的字面量逐项核对，不要用自拟 glob 代替。
+
+**根层收敛**：79 项（基线）→ 46 项；已跟踪 23 → 17；被忽略 47 → 18；未跟踪 9 → 9。
+
 ## Testing Decisions
 
 - **seam ①（结构收敛）**：根层条目按 `git ls-files` 与 `git check-ignore` 三分计数。
@@ -182,3 +197,17 @@ test_seam: ① 根层条目分类计数（tracked / ignored / untracked 三分�
   故 `assets/` 按 G2 归档，**不需要**改归入 `packaging/`。
 - **已知缺口（本轮不做）**：`package-layout.mjs` 的 `TOP_LEVEL_SKIP` 只是补全，未改为「白名单式」正向枚举——
   后者更彻底但会改包发现语义，需单独论证。
+
+
+### G2 剩余 4 项（未跟踪目录）的定性
+
+| 目录 | 体积 | 身份（实测） | 建议 |
+| --- | --- | --- | --- |
+| `_attic/` | 107M · 17 项 | 仓库既有归档位；含上轮已从 `.gitignore` 清除的 5 个幽灵条目对应的目录（`dsh-noema-local` 等） | 归档（ADR-0013 档②点名全量） |
+| `assets/` | 1.9M · 31 项 | **Vite 构建产物**（`*.js`/`*.js.map`/`*.css`/`.woff2`）；与 `packaging/assets/`（图标资产位）零重叠，全仓引用仅 1 处且为技能文档的通用约定示例 | 归档 |
+| `.dsh-root-brand-preview/` | 4.2M | 根品牌预览与演练产物（含 `failsafe-drill`、`p0-2`、`P2-enhancements-plan.md`） | 待用户定：归档，或与 `.dsh-vision-router` 一并按「运行/预览区的隐藏目录」保留 |
+| `.dsh-vision-router/` | 83M | 视觉路由运行产物（`artifacts/`） | 同上 |
+| `_tools/ui-verify.sh` | 4K | **真实在用的验证工具**（2026-09-11：macos-harness 截图 → tesseract OCR → 关键字断言），零引用但在用 | **不归档，归入 `scripts/`**（G4） |
+
+**一处自我更正**：曾误判 `~/project/_archive/` 下另有一份 `81-Skills`；实测不存在，
+创作源唯一位于 `~/project/81-Skills/`（1533 文件、指纹 `c43ae593…` 与仓库内源一致）。

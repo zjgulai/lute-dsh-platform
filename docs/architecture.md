@@ -13,6 +13,8 @@
 | 出海技能创作源 | `~/project/81-Skills/`（**仓库外**） | 81 个中文名原文，经 `dsh-overseas-skills/scripts/import-81skills.mjs` 转换后安装进 `~/.dsh/skills/`。2026-09-11 迁出仓库，与同包其余 3 个 importer（accio / marketing / fullstack）的「源在仓库外」设计一致 |
 | 门禁 | `scripts/gate.mjs` | 单命令聚合校验，退出码即契约（[ADR-0014](adr/ADR-0014.md)） |
 
+**归档出工作树的资产不在仓库内**：按 [ADR-0013](adr/ADR-0013.md) 的「归档出工作树」档，根层游离件（旧 bundle、预览 HTML 群、已完成的补丁项目等）移至 `~/project/_archive/Magpie-Horch-<日期>/`，**该目录内的 `README.md` 是归档索引**（逐项列来源与去向）；仓库内不再保留副本，回溯时去那里找。刻意**未**归档的两项也记在该索引里：`dsh-rootoutlet-heal/`（白屏手册 §6.1 的运行时回滚基线）与 `.dsh-types/`（ADR-0017 的生成物）。
+
 门禁契约（`pnpm run gate` / `pnpm run gate:full`）：
 
 | 校验项 | 阻塞 | 依据 |
@@ -51,6 +53,7 @@
 4. 编辑工具会打破 file: 硬链接 inode——改后必须 tmp+mv 同步 profile。
 5. 补丁（patch-cn-slash 等）锚点为精确原文，restore 会回滚全部补丁。
 6. MCP 工具模型侧描述不可覆写（dsh-mcp-client 无钩子）——业务中文层走「技能速查表」桥接（宿主 ensure*Skill 幂等写入）。
+7. **官方 UI 改写锚禁止钉哈希**：对官方 DOM 的改写（隐藏或替换官方文案/角标等）必须**运行时**解析类名——用官方样式标签的包路径锚 `style[data-plugin-css="<包路径>/<模块>.module.css"]`，配模块局部名负向断言算出完整类名；禁止把 CSS-module 哈希前缀写进产品代码或测试断言；解析失败必须自报（`console.warn` + `document.documentElement.dataset` 诊断属性），最坏表现是降级而非静默失效。依赖哈希的改写每次上游重建必失效（DSH 2.0.4→2.0.5 的 `_37cUPa_*`→`zNic4G_*`、`q2FAPq_root`→`bxNl9a_root` 即实例，见 [ADR-0019](adr/ADR-0019.md)）；上游改**模块文件名**才需重锚模块 id，改哈希前缀无需维护。
 
 ## 3. 模块地图
 
