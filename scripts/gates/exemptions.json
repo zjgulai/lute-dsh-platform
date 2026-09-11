@@ -1,5 +1,33 @@
 [
   {
+    "package": "packages/surfaces/dsh-skill-center-local",
+    "reason": "test 实测退出码 1（mount_.dispose 相关 5 个失败）",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "修复 dispose 生命周期测试"
+  },
+  {
+    "package": "packages/surfaces/dsh-agent-team-gui-local",
+    "reason": "test 实测退出码 1（2 个套件失败）",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "定位并修复失败断言，或在确认行为已废弃后随决策记录更新测试"
+  },
+  {
+    "package": "packages/capabilities/dsh-loopx-plugin",
+    "reason": "typecheck 与 test 均退出码 127：依赖从未安装（node_modules 缺失），tsc/vitest 不存在",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "安装该包依赖（含 DSH 类型来源）后重跑，修复暴露的问题"
+  },
+  {
+    "package": "packages/capabilities/dsh-deepresearch-local",
+    "reason": "typecheck 实测退出码 1：deepResearch 不在 TypertClientRemote 上、MarkdownLabels 缺失；test 亦失败（TYpert remote 相关）",
+    "owner": "lute",
+    "deadline": "2026-10-31",
+    "todo": "按 ADR-0017 从内建 tgz 提供类型后逐个修复类型与测试"
+  },
+  {
     "package": "packages/platform/dsh-theme-local",
     "reason": "typecheck 脚本此前从未运行（无 typescript 依赖，退出码 127）；补装 typescript/@types 后实测 21 个真实类型错误，根因是应用内打包的 @deepseek-ai/* 不含 .d.ts（ADR-0017）",
     "owner": "lute",
