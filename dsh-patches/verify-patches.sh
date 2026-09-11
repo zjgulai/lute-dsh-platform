@@ -18,9 +18,32 @@ set -u
 #   LING_SRC  —— dsh-memory-local fork 源（默认 ~/project/Magpie-Horch/dsh-memory-local）
 DSH_APP="${DSH_APP:-/Applications/DSH Desktop.app}"
 DSH_HOME_DIR="${DSH_HOME:-$HOME/.dsh}"
-LING="${LING_SRC:-$HOME/project/Magpie-Horch/dsh-memory-local}"
+# 归组后 fork 源在 packages/capabilities/（旧路径 ~/project/Magpie-Horch/dsh-memory-local
+# 在 ADR-0011 后已不存在，曾导致 2 个锚点静默空转）。
+LING="${LING_SRC:-$(resolve_dir "$(dirname "${BASH_SOURCE[0]}")/../packages/capabilities/dsh-memory-local" "$HOME/project/Magpie-Horch/packages/capabilities/dsh-memory-local" || true)}"
 CHK="$DSH_APP/Contents/Resources/app.asar.unpacked/lib"
 CORE="$DSH_APP/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai"
+# pnpm 重装后包位置会变（workspace 提升会把包放到 profiles/node_modules/），
+# 因此按候选清单解析而不是写死一个路径；缺失时由 require_dir 显式报错。
+resolve_dir() { # 回显第一个存在的候选目录，都没有则返回非零
+  local cand
+  for cand in "$@"; do
+    [ -d "$cand" ] && { printf '%s' "$cand"; return 0; }
+  done
+  return 1
+}
+PROF="$(resolve_dir "$DSH_HOME_DIR/profiles/desktop/node_modules/@deepseek-ai" "$DSH_HOME_DIR/profiles/node_modules/@deepseek-ai" || true)"
+missing=0
+require_dir() { # name path —— 缺失时显式记账，避免 grep 空结果被当成「0 次命中」通过
+  local name="$1" path="$2"
+  if [ -z "$path" ] || [ ! -d "$path" ]; then
+    echo "[MISSING] $name: 目标目录不存在（锚点无法判定，不等于通过）"
+    fail=1
+    missing=1
+    return 1
+  fi
+  return 0
+}
 PROF="$DSH_HOME_DIR/profiles/desktop/node_modules/@deepseek-ai"
 NOEMA="$DSH_HOME_DIR/profiles/desktop/node_modules/@zseven-w/dsh-noema"
 DM="$DSH_HOME_DIR/profiles/desktop/node_modules/dshmarket"
@@ -96,5 +119,10 @@ for pkg in dsh-llm dsh-tool-subagent dsh-file-reference-local; do
 done
 
 echo
+if [ "$missing" != 0 ]; then
+  echo
+  echo "注意：有锚点因目标目录缺失而无法判定——这类锚点**不等于通过**，请修路径后重跑。"
+fi
+
 if [ "$fail" = 0 ]; then echo "ALL PATCHES VERIFIED"; else echo "DRIFT DETECTED — see above"; fi
 exit $fail
