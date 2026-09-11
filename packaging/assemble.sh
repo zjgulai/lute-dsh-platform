@@ -223,10 +223,14 @@ say "内嵌 dsh-profile 就绪 ($(du -sh "$BUNDLED" | cut -f1))"
 # adhoc 深签名（决策 D2；内容已改写 + 注入 dsh-profile，原签名失效，打包前重签）
 say "adhoc 深签名（含内嵌 dsh-profile）…"
 codesign --force --deep --sign - "$APP_STAGE/DSH Desktop.app"
-codesign --verify --deep --strict "$APP_STAGE/DSH Desktop.app"
+bash "$PKG_ROOT/scripts/verify-app-signature.sh" "$APP_STAGE/DSH Desktop.app" "签名后立即自验" || exit 1
 say "app adhoc 深签名完成"
 
+# 归档前的第二次断言：签名与 tar 之间若有任何写入，seal 会失效且无声。
+# 实测（2026-09-11）：签名后追加一个字节 → codesign 退出码 1；此前该位置无断言，
+# 被改坏的 app 会被静默打进 payload。守卫详情见 scripts/verify-app-signature.sh 头部。
 say "压缩 app（gzip -1）…"
+bash "$PKG_ROOT/scripts/verify-app-signature.sh" "$APP_STAGE/DSH Desktop.app" "归档前" || exit 1
 ( cd "$APP_STAGE" && tar --exclude '.DS_Store' -cf - "DSH Desktop.app" | gzip -1 > "$PAYLOAD/DSH Desktop.app.tar.gz" )
 say "app 完成 ($(du -sh "$PAYLOAD/DSH Desktop.app.tar.gz" | cut -f1))"
 

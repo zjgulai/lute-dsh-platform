@@ -37,7 +37,7 @@ say "制作 dmg（约 665M 源 → UDZO，数分钟）…"
 hdiutil create -volname "$VOLNAME" -srcfolder "$PAYLOAD" -ov -format UDZO "$DMG"
 say "dmg 完成: $DMG ($(du -sh "$DMG" | cut -f1))"
 
-# 2. 挂载终验：Setup.app 签名 + 关键文件可见
+# 2. 挂载终验：Setup.app 签名 + 载荷内 app 签名 + 关键文件可见
 MOUNT="/Volumes/$VOLNAME"
 hdiutil attach -readonly -nobrowse "$DMG" >/dev/null
 cleanup(){ hdiutil detach "$MOUNT" >/dev/null 2>&1 || true; }
@@ -46,6 +46,20 @@ say "挂载终验 @ $MOUNT"
 codesign --verify --deep --strict "$MOUNT/LUTE Setup.app" && say "Setup.app 签名 OK"
 [ -f "$MOUNT/install.sh" ] && say "install.sh 可见"
 [ -f "$MOUNT/DSH Desktop.app.tar.gz" ] && [ -f "$MOUNT/profile.tar.gz" ] && say "载荷可见"
+
+# 载荷内 app 的签名终验（此前只验了 Setup.app，而用户实际运行的是载荷里的 DSH Desktop.app）。
+# 解到临时目录再验，验完即删——dmg 是只读卷，不能在卷内展开。
+say "载荷内 DSH Desktop.app 签名终验（解包后校验，约 30s）…"
+VERIFY_TMP="$(mktemp -d)"
+cleanup_payload(){ rm -rf "$VERIFY_TMP"; cleanup; }
+trap cleanup_payload EXIT
+tar -xzf "$MOUNT/DSH Desktop.app.tar.gz" -C "$VERIFY_TMP"
+bash "$PKG_ROOT/scripts/verify-app-signature.sh" "$VERIFY_TMP/DSH Desktop.app" "dmg 载荷终验" || {
+  echo "[$(basename "$0")] 载荷内 app 签名无效——dmg 不可发布（$DMG）" >&2
+  exit 1
+}
+say "载荷内 app 签名 OK"
+rm -rf "$VERIFY_TMP"
 ls "$MOUNT"
 
 # 3. 发布归档
