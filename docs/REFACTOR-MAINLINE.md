@@ -60,7 +60,7 @@
 
 | Loop | 状态 | 备注 |
 | --- | --- | --- |
-| Loop 1 契约清账 | 进行中 | 达标 **18/20**，豁免 2 条；受管包 typecheck 全部 0 错 |
+| Loop 1 契约清账 | 进行中 | 达标 **19/20**，豁免 1 条；受管包 typecheck 全部 0 错 |
 | Loop 2 补丁层 | 未开始 | 依赖上游窗口节奏 |
 | Loop 3 能力闭环 | 未开始 | 需真实业务场景 |
 | Loop 4 数据工程 | 未开始 | 外部依赖：上游 0.1.5 |
@@ -87,12 +87,12 @@
 | `surfaces/dsh-skill-center-local` | 74 | 0（localStorage 环境） | a23e84c |
 | `capabilities/dsh-wanzh-hulian` | 10 | 0（117 → 0） | `git log -- packages/capabilities/dsh-wanzh-hulian` |
 | `capabilities/dsh-overseas-skills` | 11 | 0（31 → 0） | `git log -- packages/capabilities/dsh-overseas-skills` |
+| `capabilities/dsh-deepresearch-local` | 48 | 0（6 → 0） | `git log -- packages/capabilities/dsh-deepresearch-local` |
 
-### 剩余豁免（2 条）
+### 剩余豁免（1 条）
 
 | 包 | typecheck | 卡点 |
 | --- | --- | --- |
-| `deepresearch-local` | **0** ✅ | test 46/48；2 个真实 Cordis 组合用例失败（`Runner failed: … reading 'id'`） |
 | `browser-local` | **0** ✅ | test 111/111 通过，2 个套件需 cordis 插件装载的完整依赖闭包（`safe-buffer` 等非顶层） |
 
 **性质变化**：剩余条目的卡点已从「类型」转为「测试环境 / 依赖获取 / 大包工作量」。

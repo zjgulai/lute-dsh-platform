@@ -176,3 +176,43 @@ Status: implemented
 ### Consequences
 
 「有源码的包，产物入库」从三种习惯变成一条规则，边界由 `src/` 与 `files` 推导而非人工维护；`build` 首次纳入门禁校验。**未竟项要说清楚**：入库产物的新鲜度仍无机器校验——本 ADR 只解决了「怎么放」，没解决「是否过期」，这是明确推迟而非遗漏。后续：先逐个确认每个包的权威生成命令（不是复用 `build`），再引入按包声明的 `typegen` 与 `types-fresh`；`dsh-loopx-plugin` 无源码，其 `lib/types/` 是作者手写内容，不参与任何产物校验。
+
+## Loop 1.3 收官：dsh-deepresearch-local 契约闭环（2026-09-11）
+
+### Problem
+
+`dsh-deepresearch-local` 挂在豁免清单上的理由是「test 46/48；2 个真实 Cordis 组合用例失败」。但接手工单必须自己重测：本条目的 reason 与实际不符两次——先是「typecheck 0 错」实测为 6 错，后是 2 个失败用例的真实根因与条目写的诊断方向不同。
+
+实测到的真实状况分三层：
+
+1. **2 个失败用例的替身缺 `Agent.session`**。产品侧 `src/assistant-text.ts` 的 `watchDraft` 读 `handle.agent.session.{id, deriveMessages, events}`，而 `Agent` 类型确实提供这些成员（`dsh-agent` 的 `readonly session: Session`）。替身不忠实，不是产品缺陷。豁免条目原写的「需用 `createScope` 构造带 scope 的上下文」方向有误——替身里的 `agentPresets.mount` 是 stub，从未走到真实 `mount` 的 scope 检查。
+2. **typecheck 6 错全部是类型来源的身份分裂**，不是本包代码缺陷。
+3. **本包 `node_modules` 属「锁文件装不出可用环境」状态**：`pnpm install` 后缺 `clsx`（`dsh-client-ui-primitives` 的**未声明**运行时依赖）、`dsh-llm` 被解析到 0.1.5-rc.1 而运行时是 0.1.2-rc.1。
+
+### Decision
+
+**一、先纠正前提，再动手。** 上一轮我曾判断「把类型强制指向 `.dsh-types` 会声明一个客户端不存在的运行时」，并据此停手。本轮取证推翻了该判断：实测 `lib/client.js` 只 `require` 三个包（`dsh-client-ui-primitives` / `react` / `react/jsx-runtime`），而 `dsh-client-runtime` 在应用 asar 里出现 0 次、`.dsh-types` 里也没有——它与其它包一样由**构建期内联**，不是运行时外部依赖。前提错了，结论就要改。
+
+**二、移除 client 的编译期类型依赖，改用本地契约接口。** `src/client/index.ts` 只为拿一个 `ClientContext` 别名（就是 cordis `Context`）而 import `@deepseek-ai/dsh-client-runtime/client`，却把整棵类型图拉向 `dsh-typert-protocol@0.1.0-rc.8`，与仓库统一的 `.dsh-types`(0.1.2-rc.1) 身份分裂。改为只声明实际用到的成员（`remote`/`locale`/`effect`/`inject`/`slots`）。范式与 `wanzh-hulian` 的 `TypertGateway`、`agent-team-gui` 的 `ComposerSessionProps` 一致。
+
+**三、补两个上游缺口，各写明依据便于日后删除。**
+- `lib/typert.remote-client.d.ts` 补 `TypertRemoteEventSelection`：`TypertRemoteEvent = Extract<TypertForwardableEvent, keyof TypertRemoteEventSelection>`，无此声明时该类型为 `never`，`$on` 连字面量都传不进去。实测**没有任何包**被 `typert-generator` 生成过此项，而本包是仓库内唯一使用远程 `$on` 的包。
+- `assistant-text.ts` 的 `SessionLike.events` 放宽为可选：`dsh-session` 实现里有 `this.events`，公开声明未暴露——ADR-0017 记录过的「上游类型完整性缺口」同型。
+
+**四、测试环境修复：把 `dsh-client-ui-primitives` 标为 vitest inline。** 它被外置后，其传递引入的 `.module.css` 落进 Node ESM 解析器，报 `Unknown file extension ".css"`，2 个套件无法收集。标为 inline 让它走 Vite 转换管道后恢复。
+
+### Alternatives considered
+
+**继续用「强制解析到 `.dsh-types`」消错。** 前提已被推翻，且即便前提成立，override 也是把版本不兼容藏起来而非修复——`0.1.5-rc.1` 同样不满足 `dsh-client-runtime` 的 peer `^0.1.1-rc.2`。
+
+**保留 `dsh-client-runtime` 依赖、只改 tsconfig 解析。** 治不了根：真正的问题是「为一个类型别名引入整棵不兼容的类型图」，而 `ClientContext` 只是 `Context` 的别名，本文件不需要那个包。
+
+**用 `pnpm add` 修版本对齐。** 已实测有害：它把依赖树打散（`clsx` 丢失、`dsh-llm` 错版、CSS 加载失败），且一次失误的 `git checkout` 把已验证的源码修复一并回滚。**结论：对本包任何 pnpm 写操作前必须先备份 `node_modules`。** 本次改用手工修补（补 `clsx`、把 `dsh-llm` 与 `dsh-client-ui-primitives` 指向应用运行时 0.1.2-rc.1）。
+
+### Consequences
+
+**收益。** 受管包达标 18/20 → **19/20**；本包 `typecheck` 6 → 0 错、`test` 46/48 → **48/48**（均退出码 0）；豁免 2 条 → **1 条**。三处上游缺口有了带依据的本地声明。
+
+**代价与遗留。** 两处本地声明（事件选择、`events` 可选）是上游缺口的补丁，需在上游修复后删除——依据已写在注释里。测试环境依赖手工修补的 `node_modules`（锁文件装不出可用环境），这点未根治，已记入本 Note，是「交付链能否只靠声明重建」的独立问题。ADR-0018 撤回的新鲜度校验仍待「按包声明 typegen」才能引入。
+
+**验证。** 每步都实测：typecheck 6 → 5 → 2 → 1 → 0；test 31/48（环境损坏态）→ 48/48；`gate --mode full` 13/13、退出码 0，其中 `scripts-runnable` 现在真实运行本包的 typecheck/test/build 三者。
