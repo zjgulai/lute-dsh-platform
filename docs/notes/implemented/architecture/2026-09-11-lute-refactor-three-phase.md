@@ -112,3 +112,37 @@ Status: implemented
 **验证。** Red→Green 用同一测试：新增 9 项失败 → 实现后 10/10 通过（追加的回归项另有其独立 Red）。`tsc -p tsconfig.json` 由 117 错到 0 错。`node scripts/gate.mjs --mode full` 13/13、退出码 0。端到端人工证据：`curl http://127.0.0.1:43120/api/dsh-wanzh-hulian/list` 返回 `ok:true`，板块连接与运行时 `connections.json` 一致，工具清单 19 项。
 
 **过程中暴露并一并修复的既有缺陷**（非本次引入，已用命令确认根因）：`dsh-agent-team-gui-local` 的 `typecheck` 因引用已在运行时 rc.1 移除的包 `@deepseek-ai/dsh-host-apiproxy/api`、以及 `i18n.ts` 的 `NS` 已改名，整条脚本无法运行——修复后 typecheck 退出码 0、host 119/119、client 66/66；其冒烟测试的空串失败率由「偶发」变为可复现后根治（见上）。这两项使 `gate --mode full` 从 12/13 回到 13/13。
+
+## Loop 1.3 续：dsh-overseas-skills 的契约清账（2026-09-11）
+
+### Problem
+
+`dsh-overseas-skills` 是最后一个「未动」的受管包，豁免理由只有一句「缺少 typecheck 与 test 脚本」。它的体积被误读了：目录下 1,653 个文件里，1,483 个在 `staging/`（导入用的技能素材）、42 个在 `docs/`、34 个在 `scripts/`、24 个在 `eval/`——**可类型检查的代码只有 `lib/` 的 1,383 行**（index 319 / client 817 / templates 242 / catalog 5），且没有 `src/`，`lib/` 就是手写源。所以「大包」这个判断来自文件计数，不是代码规模。
+
+接入 tsconfig 后的实测：**31 错**，全部属两族——client 24 错是「bundle 入口契约未声明」（`window.__ModuleLoader__` 无类型、`useState(null)` 把状态锁成 `null` 使渲染链退化为 `never`），host 7 错是 `catch (e)` 的 `e` 在 checkJs 下为未知类型却直接读 `.message`。
+
+### Decision
+
+1. **边界抽成无 I/O 纯函数**（新 `lib/host-util.js`）：`errorMessage` / `isValidSkillName` / `rebuildFrontmatter` / `findCatalogInconsistencies`，宿主改为调用它们。
+2. **`rebuildFrontmatter` 的抽取以「零行为变更」为前提**：它重写的是用户 `~/.dsh/skills` 下的**真实 SKILL.md**，写坏了就是用户资产损坏。因此测试里保留原内联实现作为参照，逐字节比对 5 组输入 × 2 种开关状态，抽取等于不可见。同时覆盖此前没有保护的四类边界：重复调用必须幂等（否则每切一次开关就多一行重复键）、无 frontmatter 时必须返回 null 而不是写坏文件、CRLF 输入、正文不得被触碰。
+3. **客户端 bundle 宿主契约显式声明**（新 `lib/globals.d.ts`），并把负载形状用 `@typedef` 集中声明，与 `dsh-ui-polish-local` / `dsh-wanzh-hulian` 同型（ADR-0017 的延续）。
+
+**typecheck 当场抓到一处真实缺陷（本次最有价值的产出）。** 搜索分支重建分组对象时漏了 `scenario` 字段，而无查询分支带着它——用户一旦在搜索框输入关键词，分组标题会**静默丢掉场景前缀**，标题在有无查询之间无谓跳变。这不是推断：两个分支的差异就在源码里，且搜索输入确实写入同一个 `q`。修复为让两个分支产出同一形状。
+
+同一处我最初还断言「搜索分支多做了一层未过滤的 items，所以会显示未安装技能」——**该断言错误**：`installed` 在 553 行已按 `it.installed === true` 过滤，`.filter` 保序保真，搜索并不溢出。已更正。
+
+### Alternatives considered
+
+**把 `staging/` 的 1,483 个文件纳入类型检查范围。** 它们是素材（markdown / python / 数据），不是本包的代码；纳入只会制造噪音错误并拖慢每次门禁。`tsconfig` 的 include 明确限定 `lib/**` 与 `test/**`。
+
+**为 `rebuildFrontmatter` 换一套更「正确」的行尾归一化。** 现有实现对 CRLF 输入会产出混合行尾。实测该混合行尾**不影响任何下游读取**：`frontmatterBlock` 解析出的块内不含 `\r`，`readSkillMeta` 的开关正则仍匹配，round-trip 正确。顺带「修好」它等于在用户资产写入路径上引入未经验证的行为变更——抽取阶段只做等价搬运，外观问题留给需要时的独立改动。
+
+**为客户端 bundle 建 node --test 测具（伪造 `window.__ModuleLoader__` + React 桩）。** 能覆盖搜索交互，但要复刻宿主加载契约与 React 渲染语义；在本次预算内，`scenario` 缺陷已由 typecheck 直接抓到并修复，测试测具的边际价值不足以挤占本轮。记为后续项。
+
+### Consequences
+
+**收益。** 受管包达标 17/20 → **18/20**；本包 `typecheck` 31 → 0 错（退出码 0）、`test` 11/11（退出码 0）；豁免 3 条 → **2 条**。搜索丢场景前缀的真实缺陷被修复，开关重写首次有了契约保护（幂等 / 不写坏文件 / 行为等价）。Loop 1 只剩 deepresearch 与 browser 两条「测试环境」类豁免。
+
+**代价与遗留。** 客户端的搜索交互仍无自动化覆盖（见上）。`lib/catalog.js` 是 222 + 29 项的快照数据，`findCatalogInconsistencies` 已能机器发现「引用了不存在的分类/子场景/重复登记」，但尚未接入门禁——它现在只是可用的工具，不是被强制的校验项。
+
+**验证。** Red→Green 同一测试：新增 10 项全部失败 → 实现后 11/11通过（含行为等价项）。`tsc -p tsconfig.json` 31 → 0 错。`node scripts/gate.mjs --mode full` 13/13、退出码 0（其中 `profile-metadata-sync` 先按门禁自己的 remediation 跑了 `node scripts/sync-profile.mjs --apply --only-metadata`）。

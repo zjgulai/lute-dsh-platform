@@ -12,12 +12,5 @@
     "owner": "lute",
     "deadline": "2026-10-31",
     "todo": "为测试补齐运行时依赖闭包：或从内建运行时 tgz 安装完整依赖树，或在 vitest 配置中为这两个套件声明外部依赖白名单"
-  },
-  {
-    "package": "packages/capabilities/dsh-overseas-skills",
-    "reason": "缺少 typecheck 与 test 脚本（三期补齐清单）",
-    "owner": "lute",
-    "deadline": "2026-10-31",
-    "todo": "补 tsconfig 与 typecheck 脚本；补至少一项契约级测试并接入 test 脚本"
   }
 ]

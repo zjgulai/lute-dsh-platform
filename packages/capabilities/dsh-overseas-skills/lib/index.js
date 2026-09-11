@@ -4,6 +4,7 @@ import { homedir } from "node:os";
 import { join } from "node:path";
 import { CATEGORIES, SKILLS, CATEGORIES_FS, SKILLS_FS } from "./catalog.js";
 import { getPromptTemplate } from "./templates.js";
+import { errorMessage, isValidSkillName, rebuildFrontmatter } from "./host-util.js";
 
 /**
  * dsh-overseas-skills — Host half.
@@ -177,22 +178,15 @@ async function handleFullstackList() {
 async function handleToggle(body) {
   const skillName = typeof body?.name === "string" ? body.name : "";
   const enabled = body?.enabled === true;
-  if (!NAME_PATTERN.test(skillName)) return { status: 400, body: { ok: false, error: "invalid name" } };
+  if (!isValidSkillName(skillName)) return { status: 400, body: { ok: false, error: "invalid name" } };
   const file = join(SKILLS_DIR, skillName, "SKILL.md");
   if (!existsSync(file)) return { status: 404, body: { ok: false, error: "not found" } };
   const text = await readFile(file, "utf8");
-  const match = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text);
-  if (!match) return { status: 400, body: { ok: false, error: "no frontmatter" } };
-  const kept = match[1]
-    .split(/\r?\n/)
-    .filter((line) => !/^(disable-model-invocation|user-invocable):/.test(line));
+  // 重写逻辑在 host-util.rebuildFrontmatter：与抽取前的内联实现逐字节等价（有测试锁定），
+  // 并覆盖幂等、无 frontmatter 时绝不写盘、CRLF 输入等边界。
   // A1 语义：开关只控「模型调用」；user-invocable 恒 true（"/" 菜单始终可见）
-  const nextFm = [
-    ...kept,
-    `disable-model-invocation: ${String(!enabled)}`,
-    `user-invocable: true`
-  ].join("\n");
-  const rebuilt = text.slice(0, match.index) + "---\n" + nextFm + "\n---" + text.slice(match.index + match[0].length);
+  const rebuilt = rebuildFrontmatter(text, enabled);
+  if (rebuilt === null) return { status: 400, body: { ok: false, error: "no frontmatter" } };
   await writeFile(file, rebuilt, "utf8");
   return { status: 200, body: { ok: true, name: skillName, enabled } };
 }
@@ -204,7 +198,7 @@ async function handleCredentialDescribe(credentials, ref) {
     const info = await credentials.describe(ref);
     return { status: 200, body: { ok: true, ref, configured: info?.configured === true, writable: info?.writable !== false } };
   } catch (error) {
-    return { status: 500, body: { ok: false, error: String(error?.message ?? error) } };
+    return { status: 500, body: { ok: false, error: errorMessage(error) } };
   }
 }
 
@@ -217,7 +211,7 @@ async function handleCredentialSet(credentials, ref, value) {
     const info = await credentials.describe(ref);
     return { status: 200, body: { ok: true, ref, configured: info?.configured === true } };
   } catch (error) {
-    return { status: 500, body: { ok: false, error: String(error?.message ?? error) } };
+    return { status: 500, body: { ok: false, error: errorMessage(error) } };
   }
 }
 
@@ -234,7 +228,7 @@ export function apply(ctx) {
           const result = await handleList();
           sendJson(res, result.status, result.body);
         } catch (error) {
-          sendJson(res, 500, { ok: false, error: String(error?.message ?? error) });
+          sendJson(res, 500, { ok: false, error: errorMessage(error) });
         }
       }
     });
@@ -248,7 +242,7 @@ export function apply(ctx) {
           const result = await handleFullstackList();
           sendJson(res, result.status, result.body);
         } catch (error) {
-          sendJson(res, 500, { ok: false, error: String(error?.message ?? error) });
+          sendJson(res, 500, { ok: false, error: errorMessage(error) });
         }
       }
     });
@@ -262,7 +256,7 @@ export function apply(ctx) {
           const result = await handleToggle(await readBody(req));
           sendJson(res, result.status, result.body);
         } catch (error) {
-          sendJson(res, 500, { ok: false, error: String(error?.message ?? error) });
+          sendJson(res, 500, { ok: false, error: errorMessage(error) });
         }
       }
     });
@@ -280,7 +274,7 @@ export function apply(ctx) {
           const template = getPromptTemplate(name, title);
           return sendJson(res, 200, { ok: true, template });
         } catch (error) {
-          sendJson(res, 500, { ok: false, error: String(error?.message ?? error) });
+          sendJson(res, 500, { ok: false, error: errorMessage(error) });
         }
       }
     });
@@ -302,7 +296,7 @@ export function apply(ctx) {
           }
           return sendJson(res, 405, { error: "method not allowed" });
         } catch (error) {
-          sendJson(res, 500, { ok: false, error: String(error?.message ?? error) });
+          sendJson(res, 500, { ok: false, error: errorMessage(error) });
         }
       }
     });

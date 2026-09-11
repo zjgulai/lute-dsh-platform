@@ -9,6 +9,29 @@ window.__ModuleLoader__.load({
 		var useMemo = React.useMemo;
 		var useCallback = React.useCallback;
 
+		/**
+		 * 本 bundle 与宿主 /api/dsh-overseas-skills 之间的负载形状。
+		 * bundle 不使用 ES import，故在此集中声明边界类型——
+		 * 否则 useState(null) 会把状态类型锁成 null，整条渲染链退化为 never。
+		 */
+
+		/** @typedef {{name: string, title: string, icon?: string, description?: string, descriptionZh?: string, modelEnabled?: boolean, toolGap?: string, installed?: boolean, template?: string}} OverseasSkillItem */
+		/** @typedef {{key: string, title: string, icon?: string, items: OverseasSkillItem[]}} OverseasSkillSub */
+		/** @typedef {{key: string, title: string, scenario?: string, icon?: string, items: OverseasSkillItem[]}} OverseasSkillGroup */
+		/** @typedef {{key: string, title: string, icon?: string, subs: OverseasSkillGroup[]}} OverseasSkillScenario */
+		/** @typedef {{exa: null|{configured?: boolean}, saving: boolean, msg: null|string}} ExaCredState */
+		/**
+		 * 把任意抛出值归一化为可读文本（与 host-util.errorMessage 同语义）。
+		 * bundle 不使用 ES import，故本地声明一份；命名与语义保持一致。
+		 * @param {unknown} reason 抛出值
+		 * @returns {string} 错误文本
+		 */
+		function errMessage(reason) {
+			if (reason instanceof Error) return reason.message;
+			if (typeof reason === "string") return reason;
+			if (reason === null || reason === undefined) return "";
+			return String(reason);
+		}
 		var NS = "dsh-overseas-skills";
 		var API = "/api/dsh-overseas-skills";
 
@@ -107,7 +130,7 @@ window.__ModuleLoader__.load({
 				var label = props && props.label ? props.label : "出海技能";
 			var sessionId = props && props.sessionId;
 			var inputActions = props && props.inputActions;
-			var groupsState = useState(null);
+			var groupsState = useState(/** @type {OverseasSkillGroup[]|null} */ (null));
 			var groups = groupsState[0];
 			var setGroups = groupsState[1];
 			var catState = useState("");
@@ -116,10 +139,10 @@ window.__ModuleLoader__.load({
 			var openState = useState(false);
 			var open = openState[0];
 			var setOpen = openState[1];
-			var hintState = useState(null);
+			var hintState = useState(/** @type {string|null} */ (null));
 			var hint = hintState[0];
 			var setHint = hintState[1];
-			var errState = useState(null);
+			var errState = useState(/** @type {string|null} */ (null));
 			var err = errState[0];
 			var setErr = errState[1];
 
@@ -129,7 +152,7 @@ window.__ModuleLoader__.load({
 				try {
 					controller = new AbortController();
 				} catch (e) {
-					setErr(String(e && e.message ? e.message : e));
+					setErr(errMessage(e));
 					return;
 				}
 				var fullCache = null;
@@ -183,7 +206,7 @@ window.__ModuleLoader__.load({
 				var load = function () {
 					if (!(remote && typeof sessionId === "string")) {
 						applyVisible(null).catch(function (e) {
-							if (!stopped) setErr(String(e && e.message ? e.message : e));
+							if (!stopped) setErr(errMessage(e));
 						});
 						return;
 					}
@@ -201,7 +224,7 @@ window.__ModuleLoader__.load({
 							return applyVisible(visible);
 						})
 						.catch(function (e) {
-							if (!stopped) setErr(String(e && e.message ? e.message : e));
+							if (!stopped) setErr(errMessage(e));
 						});
 				};
 				load();
@@ -368,7 +391,7 @@ window.__ModuleLoader__.load({
 				return React.createElement(
 					"div",
 					{ className: "ovpRoot", "data-plugin": "dsh-overseas-skills" },
-					React.createElement("div", { className: "ovsError" }, label + "面板渲染失败：" + (e && e.message ? e.message : String(e)))
+					React.createElement("div", { className: "ovsError" }, label + "面板渲染失败：" + errMessage(e))
 				);
 			}
 		}
@@ -386,25 +409,25 @@ function OverseasSkillsPage(props) {
 			props = props || {};
 			var endpoint = props.endpoint || "/list";
 			var showCred = props.showCred !== false;
-			var groupsState = useState(null);
+			var groupsState = useState(/** @type {OverseasSkillGroup[]} */ ([]));
 			var groups = groupsState[0];
 			var setGroups = groupsState[1];
-			var errState = useState(null);
+			var errState = useState(/** @type {string|null} */ (null));
 			var err = errState[0];
 			var setErr = errState[1];
 			var queryState = useState("");
 			var query = queryState[0];
 			var setQuery = queryState[1];
-			var scenState = useState(null);
+			var scenState = useState(/** @type {OverseasSkillScenario[]|null} */ (null));
 			var scen = scenState[0];
 			var setScen = scenState[1];
-			var expState = useState({});
+			var expState = useState(/** @type {Record<string, boolean>} */ ({}));
 			var exp = expState[0];
 			var setExp = expState[1];
-			var busyState = useState({});
+			var busyState = useState(/** @type {Record<string, boolean>} */ ({}));
 			var busy = busyState[0];
 			var setBusy = busyState[1];
-			var credState = useState({ exa: null, saving: false, msg: null });
+			var credState = useState(/** @type {ExaCredState} */ ({ exa: null, saving: false, msg: null }));
 			var cred = credState[0];
 			var setCred = credState[1];
 			var exaInputState = useState("");
@@ -438,7 +461,7 @@ function OverseasSkillsPage(props) {
 						setCred({ exa: d && d.ok === true && d.configured === true, saving: false, msg: d && d.ok === true ? "Exa API Key 已保存" : (d && d.error ? d.error : "保存失败") });
 					})
 					.catch(function (e) {
-						setCred(function (c) { return { exa: c.exa, saving: false, msg: String(e && e.message ? e.message : e) }; });
+						setCred(function (c) { return { exa: c.exa, saving: false, msg: errMessage(e) }; });
 					});
 			};
 
@@ -460,7 +483,7 @@ function OverseasSkillsPage(props) {
 					})
 					.catch(function (e) {
 						if (e && e.name === "AbortError") return;
-						setErr(String(e && e.message ? e.message : e));
+						setErr(errMessage(e));
 					});
 				return function () {
 					controller.abort();
@@ -505,7 +528,7 @@ function OverseasSkillsPage(props) {
 						});
 					})
 					.catch(function (e) {
-						setErr(String(e && e.message ? e.message : e));
+						setErr(errMessage(e));
 					})
 					.finally(function () {
 						setBusy(function (b) {
@@ -536,12 +559,16 @@ function OverseasSkillsPage(props) {
 						return g.items.length > 0;
 					});
 				if (q === "") return installed;
+				// 搜索分支重建分组时漏了 scenario：一旦输入关键词，分组标题会**静默丢掉
+				// 场景前缀**，而无查询时又带着它（标题无谓地跳变）。这是 typecheck 接入时
+				// 抓到的真实缺陷——两个分支必须产出同一形状。
 				return installed
 					.map(function (g) {
 						return {
 							key: g.key,
 							title: g.title,
 							icon: g.icon,
+							scenario: g.scenario,
 							items: g.items.filter(function (it) {
 								return (
 									String(it.title || "").toLowerCase().indexOf(q) !== -1 ||
