@@ -13,7 +13,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { discoverPackages } from './gates/package-layout.mjs'
-import { applyTypeLinks, buildVendoredDeclarations, linkTypeScope, dshPackagesInManifest, dshPackagesInSource, extractRuntimeTypes, mergeVendoredTypes, planTypeLinks } from './gates/dsh-types.mjs'
+import { applyTypeLinks, buildVendoredDeclarations, linkTypeScope, normalizeExportMaps, dshPackagesInManifest, dshPackagesInSource, extractRuntimeTypes, mergeVendoredTypes, planTypeLinks } from './gates/dsh-types.mjs'
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 
@@ -69,7 +69,9 @@ function main() {
     const tsc = findTsc()
     if (tsc) {
       const { built, failed, failures } = buildVendoredDeclarations({ dir: OUT_DIR, tsc })
-      process.stdout.write(`ok 生成声明文件 ${built.length} 个：${built.join(', ') || '(无)'}\n`)
+      process.stdout.write(`ok 生成 lib（JS + 类型）${built.length} 个：${built.join(', ') || '(无)'}\n`)
+      const normalized = normalizeExportMaps({ outDir: OUT_DIR, packages: built })
+      process.stdout.write(`ok 归一化 exports ${normalized.length} 个（使 default 与 types 都可达）\n`)
       if (failed.length > 0) {
         process.stdout.write(`note 声明生成失败 ${failed.length} 个：${failed.join(', ')}\n`)
         for (const line of failures.slice(0, 3)) process.stdout.write(`     原因 ${line}\n`)

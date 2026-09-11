@@ -198,13 +198,15 @@ export const DECLARATION_BUILD_ORDER = [
 ]
 
 /**
- * 为 vendored 的 DSH 源码包生成 `lib/types/*.d.ts`，使其 `exports.types` 可达。
+ * 为 vendored 的 DSH 源码包生成 `lib/`（真实 JS + 类型声明），使其 exports 的
+ * default 与 types 两个入口都可达。
  *
  * 为什么需要：这些包在参照系里是**未构建的 TypeScript 源码**，`package.json` 的
  * `exports.types` 指向不存在的 `lib/types/`；而应用与内建运行时都不提供它们的类型。
  * 若让消费者直接 paths 到 `.ts` 源码，tsc 会连带检查上游实现并报出源码自身的错误。
- * 因此在这里一次性生成声明：源码加 `@ts-nocheck` 只抑制上游内部错误，
- * 对外导出的签名仍由 tsc 按真实类型推导。
+ * 因此在这里一次性编译：源码加 `@ts-nocheck` 只抑制上游内部错误，
+ * 对外导出的签名仍由 tsc 按真实类型推导；同时产出运行时代码，
+ * 使 node_modules 链接可以同时满足运行时与类型检查两个需求。
  *
  * @param {{dir: string, tsc: string, packages?: string[]}} input 类型来源目录、tsc 可执行文件与包名（目录名）
  * @returns {{built: string[], failed: string[]}} 成功与失败清单
@@ -236,8 +238,9 @@ export function buildVendoredDeclarations({ dir, tsc, packages = DECLARATION_BUI
             lib: ['ES2023'],
             types: ['node'],
             declaration: true,
-            emitDeclarationOnly: true,
-            outDir: 'lib/types',
+            // 上游源码内部用 `.ts` 后缀相对导入，必须改写为 `.js`，否则产物在 Node 下无法加载
+            rewriteRelativeImportExtensions: true,
+            outDir: 'lib',
             rootDir: 'src',
             skipLibCheck: true,
             strict: false,
@@ -256,16 +259,16 @@ export function buildVendoredDeclarations({ dir, tsc, packages = DECLARATION_BUI
       // 因此以「产物是否存在」为成功判据，而不是退出码（实测教训）。
     }
     {
-      const produced = join(work, 'lib', 'types')
+      const produced = join(work, 'lib')
       if (!existsSync(produced)) {
         failed.push(name)
-        failures.push(`${name}: 未产出 lib/types（tsc 退出非零且无产物）`)
+        failures.push(`${name}: 未产出 lib（tsc 退出非零且无产物）`)
         continue
       }
+      // 同时回填真实 JS 与类型声明：运行时（host 测试）与类型检查共用同一份来源，
+      // 这正是 ADR-0017 要求的「已编译 + 带类型」，避免两侧各指一处。
       rmSync(join(source, 'lib'), { recursive: true, force: true })
-      mkdirSync(join(source, 'lib'), { recursive: true })
-      execFileSync('cp', ['-R', produced, join(source, 'lib', 'types')])
-      writeFileSync(join(source, 'lib', 'index.js'), '// 声明占位：类型来自 lib/types，运行时不使用本文件\n')
+      execFileSync('cp', ['-R', produced, join(source, 'lib')])
       built.push(name)
     }
   }
@@ -318,4 +321,35 @@ export function linkTypeScope({ outDir, appNodeModules }) {
     }
   }
   return linked
+}
+
+/**
+ * 按实际产出把包 `exports` 归一化，使 default 与 types 两个入口都可达。
+ *
+ * 为什么需要：上游这些包用 tsdown 打包（产出 .mjs/.cjs 或多入口），而本流水线用 tsc
+ * 产出 `lib/index.js` + `lib/index.d.ts`。若照搬上游 exports，消费者按 exports 解析
+ * 会落空（实测：cordis 的 types 指向不存在的 lib/types/，schemastery 指向不存在的 .mjs/.cjs）。
+ * @param {{outDir: string, packages: string[]}} input 类型来源目录与包名（目录名）
+ * @returns {string[]} 已归一化的包名
+ */
+export function normalizeExportMaps({ outDir, packages }) {
+  const normalized = []
+  for (const name of packages) {
+    const pkgDir = join(outDir, name)
+    const entryJs = join(pkgDir, 'lib', 'index.js')
+    const entryTypes = join(pkgDir, 'lib', 'index.d.ts')
+    if (!existsSync(entryJs) || !existsSync(entryTypes)) continue
+    const manifestPath = join(pkgDir, 'package.json')
+    const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'))
+    manifest.exports = {
+      '.': { types: './lib/index.d.ts', default: './lib/index.js' },
+      './src/*': './src/*',
+      './package.json': './package.json',
+    }
+    manifest.main = 'lib/index.js'
+    manifest.types = 'lib/index.d.ts'
+    writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`)
+    normalized.push(name)
+  }
+  return normalized
 }

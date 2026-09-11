@@ -1,6 +1,18 @@
 /** agent_team_gui 浏览器入口：Settings 小队页 + 输入区小队模式。 */
 
-import type { ClientContext } from '@deepseek-ai/dsh-client-runtime/client'
+/**
+ * 最小本地上下文契约。LOCAL ADAPTATION：上游的 `ClientContext` 类型来自
+ * `@deepseek-ai/dsh-client-runtime`，该包在 DSH 2.0.5/rc.1 中已被移除
+ * （应用与内建运行时均无此包，实测）。此处只声明本插件实际使用的三项能力：
+ * `slots`（additive 插槽注册）、`connection`（独立 RPC channel）、
+ * `locale`（双语字典），与 `inject` 声明一致。同型做法见 dsh-theme-local。
+ */
+interface ClientContext {
+  get(name: 'connection'): ConnectionHandle;
+  get(name: 'locale'): LocaleService;
+  get(name: string): unknown;
+  effect(fn: () => void | (() => void), label?: string): () => void;
+}
 import type { ConnectionHandle } from '@deepseek-ai/dsh-client-connection/client'
 import type {} from '@deepseek-ai/dsh-client-ui-conversation/client'
 import type {} from '@deepseek-ai/dsh-client-ui-settings/client'
