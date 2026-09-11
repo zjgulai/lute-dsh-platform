@@ -1,19 +1,5 @@
 [
   {
-    "package": "packages/capabilities/dsh-memory-local",
-    "reason": "类型来源打通后 typecheck 报 9 个真实错误、test 亦失败（此前因符号链接断链解析到 any，0 错误是假象）",
-    "owner": "lute",
-    "deadline": "2026-10-31",
-    "todo": "按 ADR-0017 已可解析真实类型，逐个修复 9 个类型错误与其测试"
-  },
-  {
-    "package": "packages/surfaces/dsh-skill-center-local",
-    "reason": "test 实测退出码 1（mount_.dispose 相关 5 个失败）",
-    "owner": "lute",
-    "deadline": "2026-10-31",
-    "todo": "修复 dispose 生命周期测试"
-  },
-  {
     "package": "packages/capabilities/dsh-deepresearch-local",
     "reason": "typecheck 实测退出码 1：deepResearch 不在 TypertClientRemote 上、MarkdownLabels 缺失；test 亦失败（TYpert remote 相关）",
     "owner": "lute",
