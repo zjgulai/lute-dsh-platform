@@ -18,7 +18,7 @@
 
 import { randomUUID } from 'node:crypto'
 import type { Context } from '@deepseek-ai/cordis'
-import type { TypertGatewayService } from '@deepseek-ai/dsh-api-gateway'
+import type { TypertGateway } from '@deepseek-ai/dsh-api-gateway/types'
 import type {} from '@deepseek-ai/dsh-agent'
 import z from '@deepseek-ai/schemastery'
 import type {} from '@deepseek-ai/dsh-tools'
@@ -128,7 +128,10 @@ export async function apply(ctx: Context, config: Config): Promise<void> {
   const resolved = resolveConfig(config)
 
   const tokenRes = await resolveToken(resolved.token)
-  const gateway: TypertGatewayService = ctx.typertGateway
+  // 契约取 `TypertGateway`（上游导出的服务接口）。`TypertGatewayService`（实现类）把
+  // dispatchRpc / openWireStream 声明为 private 而运行时存在，用它会产生 2 个类型错误；
+  // 详见 src/shims.d.ts 的已知阻塞说明（ADR-0017 待办）。
+  const gateway: TypertGateway = ctx.typertGateway
   // Workspace grouping wraps the gateway create; session deferral wraps the
   // result so materialization at first prompt still flows through grouping.
   const api: ApiProxy = withSessionDeferral(

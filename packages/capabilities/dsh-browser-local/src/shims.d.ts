@@ -36,8 +36,14 @@ declare module '@deepseek-ai/dsh-home-paths' {
   export function dshHomePath(name: string): string
 }
 
-declare module '@deepseek-ai/dsh-api-gateway' {
-  export interface TypertGatewayService {
+/**
+ * 运行时实测：服务上存在 `dispatchRpc`（应用 bundle 2 处）与 `openWireStream`（3 处），
+ * 且 `invoke` 接受 (request, signal) 两参；但上游声明把前两者标为 private / 未暴露、
+ * 且 `invoke` 只声明一参。此处对**接口** `TypertGateway` 做声明合并补齐（接口可合并，
+ * 类不可），使契约与运行时一致。上游修正后可删除本段（ADR-0017）。
+ */
+declare module '@deepseek-ai/dsh-api-gateway/types' {
+  export interface TypertGateway {
     invoke(
       request: { namespace: string; method: string; args: unknown },
       signal?: AbortSignal,
@@ -48,7 +54,6 @@ declare module '@deepseek-ai/dsh-api-gateway' {
       signal?: AbortSignal,
     ): Promise<{ ok: boolean; value?: unknown; error?: { code: string; message: string } }>
     openWireStream(endpoint: string, payload: { args: unknown }, signal?: AbortSignal): AsyncIterable<unknown>
-    [key: string]: any
   }
 }
 

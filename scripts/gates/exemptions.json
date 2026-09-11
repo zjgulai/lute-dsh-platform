@@ -15,10 +15,10 @@
   },
   {
     "package": "packages/surfaces/dsh-agent-team-gui-local",
-    "reason": "test 实测退出码 1（2 个套件失败）",
+    "reason": "typecheck 63 → 1 错（仅剩 ComposerControl 的 input：SessionStandardProps 在声明中是空接口、依赖 ui-conversation 的声明合并而未激活）；test 已全绿（host 119/119、client 65/65）",
     "owner": "lute",
     "deadline": "2026-10-31",
-    "todo": "定位并修复失败断言，或在确认行为已废弃后随决策记录更新测试"
+    "todo": "激活 SessionStandardProps 的声明合并（引入 ui-conversation 的 slot 契约），消除最后 1 个错误后移除本条目"
   },
   {
     "package": "packages/capabilities/dsh-loopx-plugin",
@@ -36,10 +36,10 @@
   },
   {
     "package": "packages/capabilities/dsh-browser-local",
-    "reason": "两个测试文件（composition.spec.ts 222 行、e2e/bridge-extension.e2e.spec.ts 628 行）引用 2.0.5/rc.1 已移除且未在 package.json 声明的 @deepseek-ai/dsh-host-apiproxy，导致 2/11 套件收集失败；其余 9 套件 111 测试全绿",
+    "reason": "typecheck 2 错：① tools.ts 的 ToolDefinition 类型身份分裂（同名包两份声明，一处 output 可选一处必需）② index.ts 的 TypertGateway 增强未命中模块身份",
     "owner": "lute",
     "deadline": "2026-10-31",
-    "todo": "查清 rc.1 中 createApiProxy 的替代（疑为 api-gateway / host-webserver 组合）并把两个测试文件迁移到新 API，随后删除本条目"
+    "todo": "统一包类型身份（让 node_modules 解析路径与显式导入路径同一 canonical module），或在类型供给阶段归一"
   },
   {
     "package": "packages/capabilities/dsh-overseas-skills",

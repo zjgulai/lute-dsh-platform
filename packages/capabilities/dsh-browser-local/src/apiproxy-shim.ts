@@ -19,7 +19,7 @@
  */
 
 import { randomUUID } from 'node:crypto'
-import type { TypertGatewayService } from '@deepseek-ai/dsh-api-gateway'
+import type { TypertGateway } from '@deepseek-ai/dsh-api-gateway/types'
 
 /* ---------------------------------- types --------------------------------- */
 
@@ -78,7 +78,7 @@ export interface ApiProxy {
 }
 
 /** Build the rc-shaped ApiProxy over the alpha Typert Gateway. */
-export function makeApiProxy(gateway: TypertGatewayService): ApiProxy {
+export function makeApiProxy(gateway: TypertGateway): ApiProxy {
   // alpha controller descriptors declare one wire parameter named `request`;
   // the args container must therefore be `{ request: payload }` (invoke takes
   // namespace/method separately). invoke() throws TypertGatewayError carrying
@@ -205,7 +205,7 @@ export function makeApiProxy(gateway: TypertGatewayService): ApiProxy {
  * workspace wrappers are routed through the wrapped api object so the
  * wrappers keep working; everything else dispatches through the gateway.
  */
-export function toFetchHandler(api: ApiProxy, gateway: TypertGatewayService): {
+export function toFetchHandler(api: ApiProxy, gateway: TypertGateway): {
   fetch: (request: Request) => Promise<Response>
 } {
   const json = (body: unknown, status: number): Response =>
