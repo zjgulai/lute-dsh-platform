@@ -300,6 +300,7 @@ sessions  settings.yaml(+bak)  skills(252)  storages(9)
 
 - `docs/`：`adr/README.md`、architecture.md、dsh-desktop-white-screen-playbook.md、README.md、release-process.md、skill-contract-plan.md、skillopt-optimization-plan.md、skillopt-optimization-report.md、skillopt-skill-optimizer-merge-plan.md。**docs/research/ 原不存在（本报告首次创建）**。
 - `_doc-notes/`：badge-test.html、dsh-browser-local、dsh-desktop-white-screen-playbook.md、dsh-genui-local、dsh-im-local、dsh-modsearch-local、dsh-pocket-local、github-plan.md。
+  - **2026-09-11 时序注记**：`_doc-notes/` 已解散收编——6 篇第三方插件安装说明移入 `docs/install-notes/`（经 git 重命名保留历史），4 个草稿（`github-plan.md`、`skill-descs-81.json`、`user-summaries-draft.md`、`badge-test.html`）归档至 `~/project/_archive/Magpie-Horch-20260911/doc-notes-drafts/`，白名单条目同步移除。至此文档脊柱收敛为 ADR-0009 定的三层（`AGENTS.md` → `docs/architecture.md` → `docs/notes/`）。
 - 另存在单数 `doc/`（assets/index/plugins/presets/skills.html —— 静态目录页）与根级 CHANGELOG.md（1.2.2 版本记录：P0-8 pi-ai lazy import 磁盘化修复 + 品牌 app 图标）。
 
 ---

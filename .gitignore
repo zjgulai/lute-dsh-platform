@@ -8,6 +8,8 @@
 # dsh-skill-title-fix / explore-unknowns-local / write-spec-local 已归档出工作树
 # （副本在 ~/project/_archive/Magpie-Horch-20260911/）；其文档已入 docs/。
 # !dsh-rootoutlet-heal/** 刻意保留：白屏手册 §6.1 把它作为运行时回滚基线。
+# 2026-09-11（G5）：移除 !_doc-notes/** —— 该草稿体系已收编（8 篇插件说明入 docs/install-notes/，
+# 4 个草稿归档），与 ADR-0009 的文档脊柱（AGENTS.md → architecture.md → notes/）合并。
 
 *
 !*/
@@ -20,7 +22,6 @@
 !.github/**
 !docs/**
 !doc/**
-!_doc-notes/**
 !.scratch/**
 !packaging/**
 !packages/**

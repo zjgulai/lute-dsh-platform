@@ -244,3 +244,23 @@ test_seam: ① 根层条目分类计数（tracked / ignored / untracked 三分�
 20 个在 `dsh-patches/archive/`（补丁链自有归档位）、8 个在 `packaging/staging-src/`（构建暂存树）。
 档③的动机是消除 **tracked+ignored 漂移态**，而这三处都不在该问题域内——
 盲目搬 52 个会把归档位内容混进文档目录，反而制造新混乱。故档③**按实测收敛为「无需执行」**。
+
+
+## G5 · `_doc-notes/` 收编完成（2026-09-11）
+
+实测：`_doc-notes/` 未被任何 Markdown 链接引用（5 处提及全是散文），且 `docs/README.md` 已写明
+「`_doc-notes/` 下的旧副本已移除」——体系本就在收编中。ADR-0009 定的脊柱是三层
+（`AGENTS.md` → `docs/architecture.md` → `docs/notes/`），无 `_doc-notes/`；ADR-0015 亦称其为待收编的草稿体系。
+
+处置（与其后三处插件说明同型，保持一处一个家）：
+- **6 篇第三方插件安装说明** → `docs/install-notes/`（git 识别为 `R100` 重命名，历史保留）：
+  `dsh-bridge-browser-migration`、`dsh-genui`、`dsh-im`、`dsh-modsearch`、`dsh-pocket`、`dsh-univer-office`。
+  至此该目录共 9 篇，覆盖 9 个已安装的第三方插件。
+- **4 个草稿** → 归档 `~/project/_archive/Magpie-Horch-20260911/doc-notes-drafts/`：
+  `github-plan.md`（未执行的 GitHub 方案讨论稿）、`skill-descs-81.json`（81 条中文简介草稿）、
+  `user-summaries-draft.md`（「待复核后落盘 81-Skills 源」的文案草案）、`badge-test.html`（视觉测试夹具）。
+- **白名单条目 `!_doc-notes/**` 移除**，并注明缘由。
+
+过程教训：移除白名单会**立即**把原受跟踪文件变成 tracked+ignored 漂移态——门禁 `index-drift`
+如实报出 5 条。修法是用 `git add -A` 把「删除旧路径 + 记录新路径」一次性暂存，使 git 识别为重命名。
+即：**这类搬移必须与白名单变更同一次暂存**，否则门禁会红。
