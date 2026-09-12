@@ -1,0 +1,482 @@
+{
+ "batch": "B09",
+ "assignments": [
+  {
+   "name": "icp-profiler",
+   "roles": [
+    {
+     "id": "AGT-006",
+     "responsibility": "需求分群",
+     "confidence": "medium",
+     "from_skill": "一个产品可有多个 ICP",
+     "from_role": "从购买和使用旅程识别高价值未满足需求",
+     "note": "既有映射的 responsibility 由「用户访谈分析」改为「需求分群」：ICP 以画像与人群拆分为主，不执行访谈编码流程。多岗说明：同一份 ICP 画像分别作为需求分群依据、线索资格上游判据与选购指导依据，三岗用法不同，故整体压到 medium 及以下。"
+    },
+    {
+     "id": "AGT-025",
+     "responsibility": "线索评估",
+     "confidence": "low",
+     "from_skill": "用于指导营销定向、销售与产品决策",
+     "from_role": "线索评估",
+     "note": "间接：画像可作为销售定向与线索资格的上游判据，但技能不产出经销商/B2B 线索判据，需人工复核。"
+    },
+    {
+     "id": "AGT-036",
+     "responsibility": "选购指导",
+     "confidence": "low",
+     "from_skill": "购买动机",
+     "from_role": "帮助客户理解产品适用场景并完成选择",
+     "note": "间接：购买动机与人群特征可支撑售前选购建议，技能本身不面向客户对话。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "ecommerce-csv-processing",
+   "roles": [
+    {
+     "id": "AGT-045",
+     "responsibility": "主数据治理",
+     "confidence": "medium",
+     "from_skill": "字段名映射转换（自定义→标准）",
+     "from_role": "让业务对象和指标有统一来源与责任",
+     "note": "字段映射与标准字段规范服务主数据口径统一，但技能不定义跨系统口径契约。"
+    },
+    {
+     "id": "AGT-046",
+     "responsibility": "数据质量",
+     "confidence": "high",
+     "from_skill": "数据质量报告",
+     "from_role": "带质量状态的数据产物",
+     "note": ""
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "ecommerce-price-monitor",
+   "roles": [
+    {
+     "id": "AGT-026",
+     "responsibility": "价格敏感性",
+     "confidence": "medium",
+     "from_skill": "价格调整决策支持",
+     "from_role": "在供给和经营边界内设计价格与组合",
+     "note": "技能观测跨平台价格与趋势并给定价建议，不建模价格弹性，故 medium。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "ecommerce-analytics-controller",
+   "roles": [
+    {
+     "id": "AGT-002",
+     "responsibility": "需求分诊",
+     "confidence": "medium",
+     "from_skill": "不确定调用哪个具体子Skill",
+     "from_role": "维护场景分类、主岗位选择、Skills装配",
+     "note": "主控核心是子技能路由与装配判断。多岗说明：主控同时是数据技能路由（02）、经营报告编排（01/21）与 KPI 报告口径承接（45），故全部压到 medium 及以下。"
+    },
+    {
+     "id": "AGT-001",
+     "responsibility": "月度经营复盘",
+     "confidence": "medium",
+     "from_skill": "需要生成经营报告（日报/月报/季度报告）",
+     "from_role": "月度经营复盘",
+     "note": "经月度/季度报告工作流覆盖月度经营复盘，但不承担目标拆解。"
+    },
+    {
+     "id": "AGT-021",
+     "responsibility": "渠道经营分析",
+     "confidence": "medium",
+     "from_skill": "需要分析电商订单数据",
+     "from_role": "渠道经营分析",
+     "note": "须限定在明确渠道/账号范围内；技能自身不产出 Amazon 专属行动组合。"
+    },
+    {
+     "id": "AGT-045",
+     "responsibility": "指标契约",
+     "confidence": "low",
+     "from_skill": "月度KPI、趋势分析、问题诊断",
+     "from_role": "让业务对象和指标有统一来源与责任",
+     "note": "仅间接：主控统合 KPI 报告结构，不建立指标契约。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": [
+    {
+     "id": "AGT-023",
+     "reason": "主控只调度订单 CSV 经营报告类子技能，不产出独立站漏斗环节诊断，无法承担「漏斗诊断」。"
+    }
+   ]
+  },
+  {
+   "name": "ecommerce-quarterly-strategy",
+   "roles": [
+    {
+     "id": "AGT-001",
+     "responsibility": "经营目标拆解",
+     "confidence": "high",
+     "from_skill": "下季度目标设定建议",
+     "from_role": "经营目标拆解",
+     "note": "季度目标设定与资源分配建议直接对应目标拆解。"
+    },
+    {
+     "id": "AGT-003",
+     "responsibility": "经营预测",
+     "confidence": "medium",
+     "from_skill": "预测全年目标完成情况",
+     "from_role": "经营预测",
+     "note": "全年目标完成预测与增长驱动分析属经营预测/解释，非模型化预测。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "ecommerce-daily-report",
+   "roles": [
+    {
+     "id": "AGT-021",
+     "responsibility": "渠道经营分析",
+     "confidence": "medium",
+     "from_skill": "监控日常销售异常波动（销售额、订单量、客单价）",
+     "from_role": "渠道经营分析",
+     "note": "须限定为 Amazon 订单数据；技能为跨平台通用日报，不含渠道专属行动组合。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "ecommerce-monthly-review",
+   "roles": [
+    {
+     "id": "AGT-001",
+     "responsibility": "月度经营复盘",
+     "confidence": "high",
+     "from_skill": "需要进行月度电商经营复盘",
+     "from_role": "月度经营复盘",
+     "note": ""
+    },
+    {
+     "id": "AGT-021",
+     "responsibility": "经营复盘",
+     "confidence": "medium",
+     "from_skill": "诊断未达标指标的原因",
+     "from_role": "经营复盘",
+     "note": "月度复盘报告可支撑渠道级经营复盘，但技能不产出渠道行动组合。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "ecommerce-ml-modeling-advisor",
+   "roles": [
+    {
+     "id": "AGT-012",
+     "responsibility": "算法评估设计",
+     "confidence": "high",
+     "from_skill": "设计验证：时间切分优先",
+     "from_role": "算法评估设计",
+     "note": "标签/特征/模型族/验证指标/漂移监控的设计即算法评估设计。"
+    },
+    {
+     "id": "AGT-003",
+     "responsibility": "经营预测",
+     "confidence": "medium",
+     "from_skill": "30 天复购预测、流失预警",
+     "from_role": "经营预测",
+     "note": "把复购/流失/LTV 预测问题转成建模方案，服务预测但不等同 GMV 预测。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "ecommerce-business-insights",
+   "roles": [
+    {
+     "id": "AGT-003",
+     "responsibility": "GMV归因分析",
+     "confidence": "medium",
+     "from_skill": "需要归因分析与可落地的行动建议清单",
+     "from_role": "GMV归因分析",
+     "note": "多岗说明：同一份 REVIEW 报告同时承载 GMV 归因（03）、渠道经营复盘（21）与口径纪律承接（45），故全部压到 medium 及以下。"
+    },
+    {
+     "id": "AGT-021",
+     "responsibility": "经营复盘",
+     "confidence": "medium",
+     "from_skill": "需要从订单/销售 CSV 生成经营复盘报告",
+     "from_role": "经营复盘",
+     "note": "需限定渠道数据范围；技能为跨平台通用经营复盘。"
+    },
+    {
+     "id": "AGT-045",
+     "responsibility": "指标契约",
+     "confidence": "low",
+     "from_skill": "缺少数据字段或口径不明确",
+     "from_role": "指标契约",
+     "note": "仅间接：技能遵守口径纪律并标注缺口，不制定指标契约。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "knowledge-similarity-analyzer",
+   "roles": [
+    {
+     "id": "AGT-046",
+     "responsibility": "数据质量",
+     "confidence": "medium",
+     "from_skill": "知识库去重与合并",
+     "from_role": "数据质量",
+     "note": "对象是知识单元定义而非订单数据，映射置信度受限于此。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "knowledge-extraction-expert",
+   "roles": [
+    {
+     "id": "AGT-048",
+     "responsibility": "知识溯源",
+     "confidence": "medium",
+     "from_skill": "绘制论证与证据地图",
+     "from_role": "把经验变成可复用可评估的岗位能力",
+     "note": "证据地图与反例拆解保持主张可回溯原文，属知识溯源；不产出用户教育内容。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": [
+    {
+     "id": "AGT-039",
+     "reason": "技能面向个人深度阅读与行为转化，不产出面向用户的产品使用教育内容，仅「教育」词面重叠。"
+    },
+    {
+     "id": "AGT-046",
+     "reason": "「溯源监测」指数据血缘监测，本技能的证据地图是书籍论证结构，不是数据管道溯源。"
+    }
+   ]
+  },
+  {
+   "name": "competitor-alternative-analysis",
+   "roles": [
+    {
+     "id": "AGT-007",
+     "responsibility": "竞品研究",
+     "confidence": "high",
+     "from_skill": "竞品功能对比矩阵",
+     "from_role": "竞品研究",
+     "note": ""
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "web-scraping-plan-designer",
+   "roles": [
+    {
+     "id": "AGT-045",
+     "responsibility": "指标契约",
+     "confidence": "medium",
+     "from_skill": "字段说明与指标字典",
+     "from_role": "指标契约",
+     "note": "指标字典与字段说明是采集口径定义，不等于企业指标契约。"
+    },
+    {
+     "id": "AGT-046",
+     "responsibility": "数据管道",
+     "confidence": "medium",
+     "from_skill": "设计自动化采集流程",
+     "from_role": "数据管道",
+     "note": "翻页/去重/断点续采/质量审计的流程设计属数据管道设计，技能不含实现。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "marketing-content-suite",
+   "roles": [
+    {
+     "id": "AGT-030",
+     "responsibility": "内容策划",
+     "confidence": "high",
+     "from_skill": "多渠道生成营销内容",
+     "from_role": "将需求与产品事实转成可测试内容",
+     "note": "多渠道内容与 A/B 版本即「可测试内容」。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "semantic-bucketer",
+   "roles": [
+    {
+     "id": "AGT-048",
+     "responsibility": "技能版本",
+     "confidence": "low",
+     "from_skill": "准备批量处理（如 Skill 生成）",
+     "from_role": "把经验变成可复用可评估的岗位能力",
+     "note": "分组对象是知识单元标签，服务技能单元生成前组织，故 low；据此删除既有 AGT-006/AGT-038。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": [
+    {
+     "id": "AGT-006",
+     "reason": "分桶对象是知识单元标签（applicable_objects/domain_tags/logic_type），不是消费者需求分群。"
+    },
+    {
+     "id": "AGT-038",
+     "reason": "技能不处理客诉文本，聚类对象为知识单元标签，无法承担「客诉聚类」。"
+    }
+   ]
+  },
+  {
+   "name": "semantic-density-analyzer",
+   "roles": [
+    {
+     "id": "AGT-046",
+     "responsibility": "数据质量",
+     "confidence": "medium",
+     "from_skill": "内容质量评估与分级",
+     "from_role": "数据质量",
+     "note": "密度评分用于内容质量分级与筛选，服务知识类数据产品质量。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "semantic-doc-chunker",
+   "roles": [
+    {
+     "id": "AGT-046",
+     "responsibility": "数据管道",
+     "confidence": "medium",
+     "from_skill": "构建 RAG 知识库，需要保持语义边界",
+     "from_role": "数据管道",
+     "note": "分块是 RAG 知识库入库管道步骤，技能不产出知识结论。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "cross-border-category-feasibility",
+   "roles": [
+    {
+     "id": "AGT-007",
+     "responsibility": "市场机会评估",
+     "confidence": "medium",
+     "from_skill": "判断一个品类是否值得进入跨境市场",
+     "from_role": "市场机会评估",
+     "note": "多岗说明：同一份可行性报告同时提供市场机会、进入节奏、供应能力与准入证据，四岗用法不同，故全部压到 medium 及以下。"
+    },
+    {
+     "id": "AGT-024",
+     "responsibility": "市场进入",
+     "confidence": "medium",
+     "from_skill": "建议首发聚焦北美后再横向扩展",
+     "from_role": "市场进入",
+     "note": "首发市场与横向扩展建议支撑进入路径判断。"
+    },
+    {
+     "id": "AGT-014",
+     "responsibility": "供应商评估",
+     "confidence": "medium",
+     "from_skill": "列出 ≥3 家验证供应商",
+     "from_role": "供应商评估",
+     "note": "供应链成熟度模块给出验证供应商与 OEM/ODM、MOQ、交期指标，属供应商评估输入。"
+    },
+    {
+     "id": "AGT-044",
+     "responsibility": "产品准入核对",
+     "confidence": "low",
+     "from_skill": "认证状态",
+     "from_role": "产品准入核对",
+     "note": "仅间接：认证状态作为供应链指标之一出现，技能不做准入结论。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "cross-border-intel-radar",
+   "roles": [
+    {
+     "id": "AGT-048",
+     "responsibility": "技能版本",
+     "confidence": "low",
+     "from_skill": "跨境电商领域的 Claude Skills 最新动态",
+     "from_role": "把经验变成可复用可评估的岗位能力",
+     "note": "情报雷达只做外部 Skills 动态扫描与分类，不做深度评测或版本结论，故 low。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "anchor-text-splitter",
+   "roles": [
+    {
+     "id": "AGT-046",
+     "responsibility": "数据管道",
+     "confidence": "medium",
+     "from_skill": "基于锚点标记精确分割文本",
+     "from_role": "数据管道",
+     "note": "精确切分是文档入库管道的确定步骤，被 semantic-doc-chunker 递归剥离调用。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "anysearch",
+   "roles": [],
+   "no_role_reason": "纯实时搜索工具接入（网页/垂直领域搜索、批量搜索、整页提取），任何岗位都可直接调用，本身不承担任何岗位责任。",
+   "no_role_kind": "TOOL_ONLY",
+   "drop_reasons": []
+  },
+  {
+   "name": "agent-browser",
+   "roles": [],
+   "no_role_reason": "纯浏览器自动化 CLI 工具（打开/点击/填表/抓取/截图），属平台操作形态的通用执行工具，不承担岗位责任。",
+   "no_role_kind": "TOOL_ONLY",
+   "drop_reasons": []
+  }
+ ]
+}

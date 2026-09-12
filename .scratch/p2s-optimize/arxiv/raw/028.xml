@@ -1,0 +1,1014 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/L4nBo7UhvA/CRURUhiT6kTk0Oic</id>
+  <title>arXiv Query: search_query=&amp;id_list=2605.22855,2605.22924,2605.24973,2605.25338,2605.26298,2605.26835,2605.29612,2605.29615,2606.00282,2606.00610,2606.01300,2606.01396,2606.01513,2606.01607,2606.01617,2606.01828,2606.03001,2606.03315,2606.04909,2606.08275,2606.08853,2606.10907,2606.11583,2606.12198,2606.12487,2606.13233,2606.13533,2606.14383,2606.15953,2606.16987,2606.17016,2606.17053&amp;start=0&amp;max_results=32</title>
+  <updated>2026-09-12T07:44:37Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=32&amp;id_list=2605.22855,2605.22924,2605.24973,2605.25338,2605.26298,2605.26835,2605.29612,2605.29615,2606.00282,2606.00610,2606.01300,2606.01396,2606.01513,2606.01607,2606.01617,2606.01828,2606.03001,2606.03315,2606.04909,2606.08275,2606.08853,2606.10907,2606.11583,2606.12198,2606.12487,2606.13233,2606.13533,2606.14383,2606.15953,2606.16987,2606.17016,2606.17053" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>32</opensearch:itemsPerPage>
+  <opensearch:totalResults>32</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2605.29615v1</id>
+    <title>DiffSpot: Can VLMs Spot Fine-Grained Visual Differences in Web Interfaces?</title>
+    <updated>2026-05-28T08:50:34Z</updated>
+    <link href="https://arxiv.org/abs/2605.29615v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.29615v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Vision-language models (VLMs) have made strong progress on high-level image-text alignment, yet their ability to perceive subtle visual differences remains limited. We study this problem in rendered web interfaces, where localized visual changes are both a diagnostic test of fine-grained perception and a practical requirement for GUI agents and design tools. We introduce \textbf{DiffSpot}, a code-driven benchmark for open-ended spot-the-difference on web interfaces. DiffSpot constructs controlled image pairs by mutating a single CSS property of a target element in self-contained HTML, re-rendering the page, and recording the changed property, element, and mutation magnitude. A grounding gate retains only pairs whose rendered pixel difference is confined to the target element. The benchmark contains 4{,}400 pairs, including 3{,}900 has-diff pairs balanced across 13 CSS-property operators and three difficulty tiers, plus 500 no-diff pairs for hallucination control. Evaluating 13 frontier VLMs zero-shot, we find that even the best model identifies only $40.7\%$ of true changes, with Hard-tier Recall below $23\%$ for every model. DiffSpot further shows that difficulty is strongly property-dependent: across CSS operators, neither pixel magnitude nor CLIP distance reliably predicts Recall.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-28T08:50:34Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Linhao Zhang</name>
+    </author>
+    <author>
+      <name>Aiwei Liu</name>
+    </author>
+    <author>
+      <name>Yuan Liu</name>
+    </author>
+    <author>
+      <name>Xiao Zhou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.13233v1</id>
+    <title>ReSET: Accurate Latency-Critical NVFP4 Reasoning via Step-Aware Temperature Scaling</title>
+    <updated>2026-06-11T11:47:40Z</updated>
+    <link href="https://arxiv.org/abs/2606.13233v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.13233v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large reasoning models (LRMs) improve complex problem-solving by generating long intermediate reasoning traces, but this substantially increases inference costs. NVFP4 inference offers a promising approach to reduce both computational and memory costs through hardware-supported low-precision execution. However, directly applying NVFP4 to LRMs introduces two practical limitations: reasoning accuracy degrades under quantization, and existing NVFP4 kernels do not fully realize latency benefits in small-batch autoregressive decoding. In this work, we analyze the effect of NVFP4 quantization on token-level uncertainty during reasoning. We show that quantization increases incorrect sampling at low-entropy symbolic tokens, while causing over-concentration on a small set of tokens in high-uncertainty reasoning steps. Based on this observation, we propose \textbf{ReSET}, a reasoning-step entropy-based temperature-scaling method that estimates step-level uncertainty online and adapts the decoding temperature using both token-level and step-level entropy signals. To address the latency gap, we further design a CUDA-core small-$M$ NVFP4 kernel for latency-critical autoregressive decoding. Across reasoning benchmarks and model scales, ReSET improves NVFP4 reasoning accuracy by up to $\sim\!$2 points over the NVFP4 baseline. Our CUDA-core small-$M$ kernel further improves latency-critical decoding, delivering up to $2.5\!\times$ kernel-level speedup over NVFP4 vLLM and approximately $2\!\times$ end-to-end decoding speedup over BF16. Code is available at https://github.com/aiha-lab/ReSET.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-11T11:47:40Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Sihwa Lee</name>
+    </author>
+    <author>
+      <name>Janghwan Lee</name>
+    </author>
+    <author>
+      <name>Donghoon Yoo</name>
+    </author>
+    <author>
+      <name>Jae Gon Kim</name>
+    </author>
+    <author>
+      <name>Hanyul Ryu</name>
+    </author>
+    <author>
+      <name>Soojung Ryu</name>
+    </author>
+    <author>
+      <name>Jungwook Choi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.13533v2</id>
+    <title>OneRetrieval: Unifying Multi-Branch E-commerce Retrieval with an Editable Generative Model</title>
+    <updated>2026-06-22T06:53:02Z</updated>
+    <link href="https://arxiv.org/abs/2606.13533v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.13533v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Industrial e-commerce search serves hundreds of millions of items through a multi-branch retrieval stage fused by hand-tuned merging without joint optimization. Generative retrieval (GR) raises the prospect of collapsing this stage into a single model, yet unification is gated by more than retrieval quality: the inverted-index branch converts below the platform average yet persists because it is almost the only branch where operations can inject a new term within hours without any model update; a one-model substitute must preserve this real-time editability. Existing GR methods structurally lack it: closed-codebook methods fix each slot to a quantized embedding at training, while open-vocabulary methods leave new-term routing to model generalization. We present OneRetrieval, a one-model GR framework built on Keyword-Aligned Encoding (KAE), which ties each identifier position to an interpretable attribute word, pairing competitive recall quality with the editability of the inverted index -- to our knowledge the first editable generative retrieval method. An information-theoretic merging organizes 18 attribute categories into six codebook groups with non-uniform capacity; reserved slots in each codebook can be bound to new words after deployment without retraining; and a four-stage fine-tuning pipeline secures quality and editability jointly. On five million real-traffic requests, OneRetrieval matches the deep recall of the strongest generative baseline, with an intervention hit rate over an order of magnitude above closed-codebook encodings. Online, replacing the inverted-index branch significantly lifts order volume; extending to nearly the entire stage holds conversion while improving CTR. The system is deployed at Kuaishou, serving hundreds of millions of PVs daily.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-11T16:21:13Z</published>
+    <arxiv:comment>Any Question please contact: benchen4395@gmail.com</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Xuxin Zhang</name>
+    </author>
+    <author>
+      <name>Ben Chen</name>
+    </author>
+    <author>
+      <name>Yue Lv</name>
+    </author>
+    <author>
+      <name>Siyuan Wang</name>
+    </author>
+    <author>
+      <name>Yupeng Li</name>
+    </author>
+    <author>
+      <name>Yufei Ma</name>
+    </author>
+    <author>
+      <name>Zihan Liang</name>
+    </author>
+    <author>
+      <name>Tong Zhao</name>
+    </author>
+    <author>
+      <name>Ying Yang</name>
+    </author>
+    <author>
+      <name>Huangyu Dai</name>
+    </author>
+    <author>
+      <name>Lingtao Mao</name>
+    </author>
+    <author>
+      <name>Zhipeng Qian</name>
+    </author>
+    <author>
+      <name>Xinyu Sun</name>
+    </author>
+    <author>
+      <name>Chenyi Lei</name>
+    </author>
+    <author>
+      <name>Wenwu Ou</name>
+    </author>
+    <author>
+      <name>Kun Gai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.03001v2</id>
+    <title>FOLD: Fuzzy Online Deduplication for Very Large Evolving Datasets via Approximate Nearest Neighbor Search</title>
+    <updated>2026-06-11T15:51:58Z</updated>
+    <link href="https://arxiv.org/abs/2606.03001v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.03001v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Fuzzy deduplication is key to constructing large language model training corpora. However, classic Locality-Sensitive Hashing (LSH) pipelines scale poorly as corpora grow and are ill-suited to continuous ingestion. The main issue is that each new document batch must be checked against the admitted corpus before insertion. As the corpus grows, the LSH buckets grow: each query can hit several large buckets and must scan the returned candidates. To solve this problem, we present RAD (Retrieval-Augmented Deduplication), an online fuzzy deduplication system that delivers both high recall and throughput for evolving datasets. RAD maintains an incrementally updated HNSW index over admitted documents, retrieving a small, high-quality candidate neighborhood for each incoming document instead of repeatedly re-scanning the accumulated corpus. RAD is the first online fuzzy deduplication system to use HNSW, leading to stable throughput as datasets grow. However, it is not easy to maintain high recall when using HNSW-style indexes. The core issue is the distance metric between graph nodes. Jaccard similarity, the metric used for fuzzy deduplication, yields low recall when applied out-of-the-box with an HNSW index. It leads to distance score crowding, making graph traversal unreliable within a bounded number of steps. RAD addresses this with a bitmap representation that provides a more discriminative, Jaccard-aligned signal during HNSW search. Across four LLM-scale datasets (LM1B, C4, RealNews, and Common Crawl), RAD preserves the scaling trajectory needed for online fuzzy deduplication: at 30M documents, it maintains 0.94-0.97 recall relative to state-of-the-art LSH solutions, and delivers up to an 8x throughput increase.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-02T01:16:26Z</published>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>Nelson Bore</name>
+    </author>
+    <author>
+      <name>Pritish Mishra</name>
+    </author>
+    <author>
+      <name>Constantin Adam</name>
+    </author>
+    <author>
+      <name>Eyal de Lara</name>
+    </author>
+    <author>
+      <name>Oana Balmau</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.04909v1</id>
+    <title>BEATS: Bootstrapping E-commerce Attribute Taxonomies for Search through Iterative Human-AI Collaboration</title>
+    <updated>2026-06-03T14:06:27Z</updated>
+    <link href="https://arxiv.org/abs/2606.04909v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.04909v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>E-commerce platforms in emerging markets often operate with underdeveloped product catalogs that contain only category taxonomies but lack structured attribute schemas. This absence of fine-grained product attributes limits search capabilities -- preventing faceted filtering, degrading query understanding, and weakening semantic representations used by search systems. We present BEATS, a human-in-the-loop LLM framework for bootstrapping product attribute taxonomies entirely from scratch. Our approach extends a multi-stage LLM generation pipeline with two critical production stages: (1) proactive quality checking by model developers to filter erroneous outputs, and (2) human annotation by domain-expert local staff to validate generated attributes. The framework operates iteratively -- prompts at each generation stage are refined based on quality check observations and annotator feedback across successive rounds, progressively improving attribute quality. Once the attribute taxonomy is established, we employ LLMs to perform structured attribute tagging on individual product items, enriching their contextual representations. The enriched catalog directly benefits multiple components of the search system: enabling granular attribute-based filtering, providing structured features for ranking models, and improving semantic representations for dense retrieval. We validate the generated taxonomy by training dense retrieval models on attribute-enriched product data, demonstrating consistent improvements over baselines using original catalog information. Our system has been deployed at Rakuten Taiwan, enriching 9 major categories spanning 2,694 sub-categories with 67,277 generated attributes, and over 5.4 million products have been tagged with the generated attributes, with plans to enrich the entire product catalog.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-03T14:06:27Z</published>
+    <arxiv:comment>6 pages, 1 figure, 5 tables. Accepted to SIGIR 2026 Industry Track. Official version: https://doi.org/10.1145/3805712.3808520</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Yung-Yu Shih</name>
+    </author>
+    <author>
+      <name>Shang-Yu Su</name>
+    </author>
+    <author>
+      <name>Tzu-I Ho</name>
+    </author>
+    <author>
+      <name>Dongzhe Wang</name>
+    </author>
+    <author>
+      <name>Yun-Nung Chen</name>
+    </author>
+    <arxiv:doi>10.1145/3805712.3808520</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3805712.3808520" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.00610v1</id>
+    <title>MemGraphRAG: Memory-based Multi-Agent System for Graph Retrieval-Augmented Generation</title>
+    <updated>2026-05-30T08:18:53Z</updated>
+    <link href="https://arxiv.org/abs/2606.00610v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.00610v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Retrieval-Augmented Generation (RAG) has become an essential method for mitigating hallucinations in Large Language Models (LLMs) by leveraging external knowledge. Although effective for simple queries, traditional RAG struggles with large-scale, unstructured corpora where information is highly fragmented. Graph-based RAG (GraphRAG) incorporates knowledge graphs to capture structural relationships, enabling more comprehensive retrieval for complex reasoning. However, existing GraphRAG methods rely on isolated, fragment-level extraction for graph construction, lacking a global perspective on the whole corpus. As a result, these methods frequently lead to thematically inconsistent, logically conflicting, and structurally fragmented graphs that degrade retrieval performance. In this paper, we propose MemGraphRAG, a novel framework that introduces a memory-based multi-agent system to ensure high-quality graph construction. Specifically, MemGraphRAG employs a collaborative society of agents supported by shared memory, which provides a unified global context throughout the extraction process. This mechanism allows agents to dynamically resolve logical conflicts and maintain structural connectivity throughout the corpus. Furthermore, we propose a memory-aware hierarchical retrieval algorithm tailored for the constructed graph. Extensive experiments on multiple benchmarks demonstrate that MemGraphRAG outperforms the state-of-the-art baseline models with comparable efficiency. Our code is available at https://github.com/XMUDeepLIT/MemGraphRAG.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-30T08:18:53Z</published>
+    <arxiv:comment>Accepted by KDD 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Chuanjie Wu</name>
+    </author>
+    <author>
+      <name>Zhishang Xiang</name>
+    </author>
+    <author>
+      <name>Yunbo Tang</name>
+    </author>
+    <author>
+      <name>Zerui Chen</name>
+    </author>
+    <author>
+      <name>Qinggang Zhang</name>
+    </author>
+    <author>
+      <name>Jinsong Su</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.01396v1</id>
+    <title>Quantizing Intent: Cross-Domain Semantic IDs from Organic Activity for Industrial Ranking</title>
+    <updated>2026-05-31T18:40:41Z</updated>
+    <link href="https://arxiv.org/abs/2606.01396v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.01396v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Ads click-through rate (CTR) prediction is constrained by sparse user supervision: most users engage with ads infrequently while generating dense behavioral evidence in organic surfaces such as feed. Transferring these cross-domain signals into ads ranking is difficult due to domain mismatch, serving cost, and production complexity. We introduce cross-domain user Semantic IDs (SIDs) derived from organic feed activity and show that behavioral activity richness governs cross-domain transfer quality: SIDs from user profile text yield +0.036% AUC, SIDs from an activity-tuned LLaMA-based user embedding model yield +0.107%, and SIDs from direct feed activity behavioral embeddings yield +0.213%. We further propose RQ-FSQ, a residual finite scalar quantization method that discretizes pre-trained embeddings while matching dense-embedding AUC at substantially smaller storage. Across two heterogeneous sources, RQ-FSQ matches or slightly exceeds dense source embeddings, achieving +0.351% AUC for Feed Activity at about 30x smaller storage and +0.265% AUC for Activity-Tuned LLaMA at about 280x smaller storage. We also introduce a Hierarchical Discrete Embedding module that encodes multi-level SIDs through prefix n-gram sparse embedding tables trained end-to-end under the CTR objective. In a large-scale industrial ads ranking system, cold-start segment analysis shows gains up to +1.522% for users with near-zero ad interaction history, validating cross-domain behavioral transfer as an effective bridge for sparse-history ranking.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-31T18:40:41Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Julie Choi</name>
+    </author>
+    <author>
+      <name>Haoran Ye</name>
+    </author>
+    <author>
+      <name>Zhiwei Ding</name>
+    </author>
+    <author>
+      <name>Bo Long</name>
+    </author>
+    <author>
+      <name>Benjamin Zelditch</name>
+    </author>
+    <author>
+      <name>Arpita Vats</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.03315v1</id>
+    <title>A Graph Foundation Model with Spectral Parsing and Prototype-Guided Spatial Propagation</title>
+    <updated>2026-06-02T08:27:03Z</updated>
+    <link href="https://arxiv.org/abs/2606.03315v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.03315v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Graph foundation models aim to learn transferable knowledge from diverse graphs for generalization to unseen graphs and tasks. Unlike text and images, graphs lack a shared vocabulary or regular spatial grid, making cross-graph transfer challenging. This challenge comes from both feature discrepancies and, more critically, diverse graph structures. Existing GFMs mainly improve transferability by unifying feature spaces or incorporating structural tokens and vocabularies. However, existing topology-aware designs still have limitations. Structural tokens are usually discrete, while structural vocabularies often rely on predefined substructures such as trees and cycles, whose limited coverage may miss richer relational patterns across graphs. Moreover, graph signals contain both high-frequency local patterns and smoother low-frequency patterns, which require different propagation behaviors. These components are often entangled in raw graph signals, while this spectral perspective is rarely explored in existing GFMs. To address these challenges, we propose SPG, a graph foundation model with spectral parsing and prototype-guided spatial propagation. SPG applies learnable Chebyshev filters to decompose node features into multiple spectral responses, reducing the mismatch between frequency-specific graph signals and propagation behaviors. It then constructs a Gromov-Wasserstein prototype geometry to distill transferable pairwise relations beyond predefined substructures into a shared structural space. The learned prototype geometry is further projected back as a prototype-guided propagation operator. Experiments demonstrate consistent improvements in cross-domain generalization.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-02T08:27:03Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Ankang Yang</name>
+    </author>
+    <author>
+      <name>Jitao Zhao</name>
+    </author>
+    <author>
+      <name>Dongxiao He</name>
+    </author>
+    <author>
+      <name>Liang Yang</name>
+    </author>
+    <author>
+      <name>Di Jin</name>
+    </author>
+    <author>
+      <name>Weixiong Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.08853v1</id>
+    <title>AI-Assisted Variance Reduction in Randomized Experiments</title>
+    <updated>2026-06-07T21:45:17Z</updated>
+    <link href="https://arxiv.org/abs/2606.08853v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.08853v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Generative AI and large language models can produce realistic predictions of human behavior from rich, unstructured inputs with little to no task-specific training data. Recent work uses these ``digital twin'' predictions to supplement human responses in surveys and experiments. We study the special case of using AI-generated predictions to reduce variance in randomized experiments. We argue that doing so requires no new estimators and that researchers can simply include AI predictions as covariates in standard regression adjustment, analogous to adjusting for a prognostic score. A benefit of this approach is a ``do no harm'' property whereby the adjusted estimator reverts to the unadjusted difference in means when predictions are uninformative. Other methods, such as variants of prediction-powered inference, do not have this guarantee. We provide implementation guidance, including how to obtain continuous scores from discrete LLM outputs and how to use LLMs to featurize unstructured inputs as auxiliary covariates. We demonstrate these ideas in simulations and three empirical applications: a survey mega-study, an email marketing A/B test, and a large-scale technology platform experiment. Overall, efficiency gains are real if modest, with greater benefits in studies that contain substantial text and other unstructured data. We also confirm the do no harm property empirically. Given these gains and limited costs, we recommend adjusting for AI-generated predictions as a regular empirical practice.</summary>
+    <category term="econ.EM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-07T21:45:17Z</published>
+    <arxiv:comment>camera ready for KDD 2026</arxiv:comment>
+    <arxiv:primary_category term="econ.EM"/>
+    <author>
+      <name>David Arbour</name>
+    </author>
+    <author>
+      <name>Eli Ben-Michael</name>
+    </author>
+    <author>
+      <name>Avi Feller</name>
+    </author>
+    <author>
+      <name>Apoorva Lal</name>
+    </author>
+    <author>
+      <name>Lo-Hua Yuan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.26298v1</id>
+    <title>Sandlock: Confining AI Agent Code with Unprivileged Linux Primitives</title>
+    <updated>2026-05-25T19:51:30Z</updated>
+    <link href="https://arxiv.org/abs/2605.26298v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.26298v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>AI agents increasingly run untrusted code on developer machines: shell commands generated by language models, third-party scripts retrieved at runtime, and tool plugins of unknown provenance. Existing isolation mechanisms impose tradeoffs that fit this workload poorly: containers and microVMs add privilege, image-management, and startup costs, while ad-hoc process controls and wrappers (e.g. chroot, ulimit) provide weak guarantees and little syscall-level control. Sandlock is a lightweight Linux process sandbox organized around a simple split: static, input-independent policy is compiled into kernel-enforced rules, while a narrow supervisor handles runtime-dependent decisions and virtualized effects. This split lets Sandlock enforce filesystem, network, IPC, and syscall policies without root, cgroups, images, or mandatory namespaces. It also supports dynamic network decisions, HTTP-level access control, TOCTOU-safe inspection of execve arguments, and reversible filesystem effects. On our workstation, Sandlock adds roughly 5 ms of startup overhead and runs Redis at bare-metal throughput (within measurement noise); its pipeline operator further supports per-stage confinement for separating data, network, and untrusted-content capabilities. Sandlock is available at https://github.com/multikernel/sandlock</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.OS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-25T19:51:30Z</published>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Cong Wang</name>
+    </author>
+    <author>
+      <name>Yusheng Zheng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.29612v1</id>
+    <title>CONCAT: Consensus- and Confidence-Driven Ad Hoc Teaming for Efficient LLM-Based Multi-Agent Systems</title>
+    <updated>2026-05-28T08:47:54Z</updated>
+    <link href="https://arxiv.org/abs/2605.29612v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.29612v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Although large language model (LLM) based multi-agent systems (MAS) show their capability to solve complex tasks and achieve higher performance over single agent systems, they lead to huge computational overheads because of heavy communication between agents. Previous research has made efforts to train a sparse multi-agent graph or fine-tune a planner to orchestrate the workflow better. However, such extra training processes introduce computational costs and limit MAS to specific domains, therefore compromising their generalizability. In this paper, we propose CONCAT, a training-free multi-agent collaboration framework based on CONsensus and Confidence-driven Ad hoc Teaming to efficiently organize agent interactions. Specifically, agents are clustered based on their initial answers, and leaders of each cluster are selected based on the agents' confidence. Then, a heuristic function based on the Theory of Mind is designed to predict the collaboration benefits between every two leaders according to their answers and confidence. Finally, an ad hoc multi-agent network is organized after evicting a percentage of communications based on the predicted benefits. Experiments across three LLMs and three benchmarks show that CONCAT achieves up to 2.02x higher efficiency (accuracy/latency ratio) than LLM-Debate and outperforms training-aware methods such as AgentDropout, while reducing average latency by 50.1% on Qwen2.5-14B-Instruct, without any task-specific training.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-28T08:47:54Z</published>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>Ziyang Ma</name>
+    </author>
+    <author>
+      <name>Dingyi Zhang</name>
+    </author>
+    <author>
+      <name>Sichu Liang</name>
+    </author>
+    <author>
+      <name>Jiajia Chu</name>
+    </author>
+    <author>
+      <name>Pengfei Xia</name>
+    </author>
+    <author>
+      <name>Hui Zang</name>
+    </author>
+    <author>
+      <name>Deyu Zhou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.11583v1</id>
+    <title>Beyond the Golden Teacher: Enhancing Graph Learning through LLM-GNN Co-teaching</title>
+    <updated>2026-06-10T02:15:56Z</updated>
+    <link href="https://arxiv.org/abs/2606.11583v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.11583v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Text-attributed graphs (TAGs) underlie real-world applications such as citation networks, social media, and e-commerce. Few-shot graph learning on TAGs is hard: with only a handful of labels per class and the rest of the graph unannotated, neither GNNs nor LLMs can learn well on their own. GNNs read topology and fail on cold nodes; LLMs read text and fail on text-ambiguous nodes. Existing LLM-GNN methods all follow the same recipe: designate one model as the golden teacher and use its outputs (e.g., features or pseudo-labels) to supervise the other. We argue this golden-teacher assumption breaks under sparse supervision: neither model is golden, and treating either as such transfers its blind spots into the student. We therefore ask: can we avoid designating either model as the golden teacher, and still perform effective graph learning? We answer with LLM-GNN Co-Teaching, a bidirectional co-teaching framework in which neither model is fixed as teacher. The GNN and LLM exchange their most confident pseudo-labels under an architecture-specific small-loss criterion, and both update every round. Supervision is then mined from the trajectory: whenever a node moves from cross-model contradiction at round t to cross-model agreement at round t+1, the LLM's two answers on the same input form a preference pair (old contradicting self &lt; new peer-endorsed self) for DPO training. We call this Round-based Pseudo-Label Preference Optimization (RPL-PO). On six benchmarks, LLM-GNN Co-Teaching consistently outperforms GNN-as-Judge and all prior methods, with absolute 3-shot gains of 7.86% on Cora and 7.73% on ogbn-arxiv; improvements carry over to 5-shot and to zero-shot cross-dataset transfer. Error-structure analysis further shows that abandoning the golden-teacher assumption substantially improves the LLM's graph learning capability on challenging samples.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-10T02:15:56Z</published>
+    <arxiv:comment>Code: https://github.com/llmgnncoteaching/LLM-GNN-Coteaching</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Zhuoyi Peng</name>
+    </author>
+    <author>
+      <name>Hanlin Gu</name>
+    </author>
+    <author>
+      <name>Lixin Fan</name>
+    </author>
+    <author>
+      <name>Yi Yang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.24973v2</id>
+    <title>MinerU-Popo: Universal Post-Processing Model for Structured Document Parsing</title>
+    <updated>2026-07-30T03:39:15Z</updated>
+    <link href="https://arxiv.org/abs/2605.24973v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.24973v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>VLM-based OCR models have become the de facto choice for document parsing, as they can accurately extract page-level elements (e.g., paragraphs within individual pages) together with their bounding boxes and textual content. However, downstream applications such as RAG require coherent document-level information, whereas these models often break cross-page continuity and fail to recover disrupted structures, such as paragraphs and tables truncated by page boundaries. Such relationships are not confined to a single page; instead, they require joint analysis of titles, paragraphs, tables, and images spanning multiple pages. A natural solution is therefore to reuse existing OCR outputs and reconstruct document-level logical structures through post-processing.
+  To this end, we propose MinerU-Popo, a lightweight and universal framework for POst-Processing OCR outputs, which converts page-level results from diverse parsers into coherent document-level structures. MinerU-Popo decomposes the problem into four focused subtasks: text truncation recovery, table truncation recovery, title hierarchy reconstruction, and image-text association. To address these effectively, we build a task-oriented data engine with task-specific input filtering, and use the generated data (30K) to fine-tune a lightweight post-processing model (Qwen3-VL-4B). To support long documents, we introduce dynamic chunking with overlap-based synchronization, which aligns chunk-level outputs from the fine-tuned model and preserves global consistency. Finally, we assemble the aligned outputs into a tree-structured document representation, further enriched with node chunking and summaries for downstream retrieval and analysis. Empirical results show MinerU-Popo improves title-hierarchy TEDS by at least 20% across all five tested OCR models, improves RAG accuracy and reduces per-query latency.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-24T10:00:28Z</published>
+    <arxiv:comment>The code is available at https://github.com/opendatalab/MinerU-Popo</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Bangrui Xu</name>
+    </author>
+    <author>
+      <name>Ziyang Miao</name>
+    </author>
+    <author>
+      <name>Xuanhe Zhou</name>
+    </author>
+    <author>
+      <name>Yiming Lin</name>
+    </author>
+    <author>
+      <name>Zirui Tang</name>
+    </author>
+    <author>
+      <name>Xiaomeng Zhao</name>
+    </author>
+    <author>
+      <name>Fan Wu</name>
+    </author>
+    <author>
+      <name>Cheng Tan</name>
+    </author>
+    <author>
+      <name>Fan Wu</name>
+    </author>
+    <author>
+      <name>Bin Wang</name>
+    </author>
+    <author>
+      <name>Conghui He</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.10907v2</id>
+    <title>From Prompt to Purchase: How AI Brand Recommendations Move Consumers on the Open Web</title>
+    <updated>2026-08-31T19:05:03Z</updated>
+    <link href="https://arxiv.org/abs/2606.10907v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.10907v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>When a conversational assistant recommends a brand to a user with no recent observed engagement, that user's same-name Google search rises $+4.3$ percentage points (pp) [$3.1$, $5.5$], visits to the brand's own site $+2.4$ pp [$1.4$, $3.5$], and brand-specific retailer-page visits $+1.0$ pp [$0.3$, $1.7$] over matched backward placebos. Recovering that estimate is the work. The mention creates a brand exposure no web log attributes to the assistant, and the naive all-mention funnel that seems to measure it is confounded: many mentions are incidental references to brands the user already uses ("your Netflix download"), whose downstream visits are that existing customer's own behavior and surface as a brand-specific pre-trend. We measure off-platform response on a panel that joins opt-in clickstream to the same users' ChatGPT, Claude, and Gemini conversations, and isolate the effect with a pre-trend event study, a stance classifier, non-customer conditioning, and a within-response same-category control: incidental name-drops then move behavior far less ($+1.8/+1.1/+0.3$), and the named brand moves far more than unnamed same-category brands in the same response. The downstream path is mostly search-mediated and reaches both own sites and retailer pages, with a destination mix that tracks baseline brand-directed behavior rather than redirecting toward either. The design is observational and we do not observe transactions, so retail is purchase-adjacent. Standard referrer-based and last-click measurement miss this upstream exposure: assistants move observably-unengaged users into open-web brand navigation along a path attributed elsewhere -- an acquisition touchpoint at the head of the customer journey that journey models and last-click attribution do not see.</summary>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-09T14:16:48Z</published>
+    <arxiv:comment>10 pages, 4 figures, 9 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CY"/>
+    <author>
+      <name>Michael Iannelli</name>
+    </author>
+    <author>
+      <name>Alan Ai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.26835v1</id>
+    <title>Helicase: Uncertainty-Guided Supply Chain Knowledge Graph Construction with Autonomous Multi-Agent LLMs</title>
+    <updated>2026-05-26T10:53:00Z</updated>
+    <link href="https://arxiv.org/abs/2605.26835v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.26835v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LLM-based multi-agent systems have been widely adopted for knowledge retrieval and report generation, synthesizing known information through web search and textual reasoning. However, many critical information tasks in supply chains are not simple one-shot queries: they are structural inference problems requiring multi-hop reasoning across complex, fragmented web resources. Questions such as \textit{``Which Tesla components use lithium from Australian mines?''} have no answer in any single document; answers must be computationally synthesized through the autonomous construction and analysis of dynamic knowledge graphs assembled from fragmented, heterogeneous sources. Moreover, such discovery processes must be uncertainty-aware: decisions depend not only on answers but on calibrated confidence in their reliability, traceable to source quality and reasoning consistency. To address this capability gap, we propose \textit{Helicase}, an autonomous multi-agent LLM system for uncertainty-guided supply chain knowledge graph construction. \textit{Helicase} decomposes high-level supply-chain queries into executable investigation plans, coordinates specialized web-search, reasoning, and coding agents through iterative verification loops, and incrementally constructs query-specific supply chain knowledge graphs with per-fact uncertainty annotations. Its three-layer uncertainty framework tracks uncertainty at the action, trajectory, and memory layers, enabling both structural inference and calibrated confidence assessment. To evaluate autonomous reasoning across the full complexity spectrum, we introduce SCQA (Supply Chain Query Assessment), a benchmark of 80 supply chain queries organized into four quadrants spanning single-hop to multi-hop inference under both high and low data visibility.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-26T10:53:00Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Yunbo Long</name>
+    </author>
+    <author>
+      <name>Haolang Zhao</name>
+    </author>
+    <author>
+      <name>Ge Zheng</name>
+    </author>
+    <author>
+      <name>Alexandra Brintrup</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.01300v1</id>
+    <title>ChronosAD: Leveraging Time Series Foundation Models for Accurate Anomaly Detection</title>
+    <updated>2026-05-31T15:42:40Z</updated>
+    <link href="https://arxiv.org/abs/2606.01300v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.01300v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Time series anomaly detection is a crucial task in various domains, including finance, healthcare, and industry. However, existing methods often struggle to generalize across different datasets, especially when anomalies are subtle or context-dependent. To solve this issue, we introduce ChronosAD, a novel architecture for anomaly detection that uses a time series foundation model as a feature extractor. Specifically, it employs a two-stage pipeline: first, it uses the foundation model to extract embeddings for each time series in a zero-shot manner. Then, a custom-developed Temporal Block, composed of Bidirectional Long Short-Term Memory (BiLSTM) and Multi-Head Attention, refines these embeddings to capture temporal dependencies and highlight salient patterns. Unlike previous approaches, our model requires minimal task-specific tuning and demonstrates robust generalization across a wide range of domains, including industrial, medical, cyber-physical, and automotive systems. Extensive experiments on 11 benchmarks show that ChronosAD outperforms existing methods by 4.72% in AUC and 6.60% in AP on average. The source code is available at https://github.com/intelligolabs/ChronosAD.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-31T15:42:40Z</published>
+    <arxiv:comment>Accepted at the 24th IEEE International Conference on Industrial Informatics (INDIN) 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Uzair Khan</name>
+    </author>
+    <author>
+      <name>Luigi Capogrosso</name>
+    </author>
+    <author>
+      <name>Francesco Biondani</name>
+    </author>
+    <author>
+      <name>Michele Magno</name>
+    </author>
+    <author>
+      <name>Franco Fummi</name>
+    </author>
+    <author>
+      <name>Francesco Setti</name>
+    </author>
+    <author>
+      <name>Marco Cristani</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.01828v1</id>
+    <title>Dynamic Trust-Aware Sparse Communication Topology for LLM-Based Multi-Agent Consensus</title>
+    <updated>2026-06-01T07:42:33Z</updated>
+    <link href="https://arxiv.org/abs/2606.01828v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.01828v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language model-driven multi-agent systems enhance the reliability of complex reasoning tasks through multi-round deliberation, role specialization, and cross-validation. However, existing multi-agent debate and collaboration frameworks typically adopt fully connected communication, causing the number of messages, token costs, and end-to-end latency to grow approximately quadratically with the number of agents; although fixed sparse topologies reduce overhead, they cannot adapt communication relationships to different task instances or intermediate reasoning states, making them prone either to preserving low-value interactions or to losing critical error-correction information. To address this problem, this paper proposes DySCo (Dynamic Sparse Consensus), a dynamic trust-aware sparse consensus mechanism. In each round of reasoning, DySCo estimates the value of communication edges based on agent reliability, answer divergence, and task relevance, and selects a small number of high-value edges for message exchange under budget constraints; it then aggregates the answers of different agents through dynamic trust weights and terminates the discussion early once consensus stabilizes. This mechanism replaces universal broadcasting with on-demand communication, thereby reducing communication overhead while preserving essential cross-validation information. We further present analyses of communication complexity and consensus stability, and evaluate the performance of DySCo on mathematical reasoning, logical reasoning, and factual question-answering tasks.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-01T07:42:33Z</published>
+    <arxiv:comment>11 pages, 3 figures, 5 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>Wanshuang Gou</name>
+    </author>
+    <author>
+      <name>Zihan Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.22855v1</id>
+    <title>PrefBench: Evaluating Zero-Shot LLM Agents in Hidden-Preference Personalized Pricing Negotiations</title>
+    <updated>2026-05-19T04:10:05Z</updated>
+    <link href="https://arxiv.org/abs/2605.22855v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.22855v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Personalized pricing negotiations are a challenging testbed for LLM agents because successful interaction does not guarantee profitable decision making. A seller may produce valid actions and close many deals while still pricing poorly when buyer willingness to pay and bargaining traits remain hidden. This paper presents PrefBench, a simulator-based benchmark for hidden-preference personalized pricing negotiations. Each episode pairs a simulated buyer with a fixed vehicle-customization bundle; the seller observes public persona descriptors, bundle information, and negotiation history, while latent buyer variables govern valuation, patience, counter-offer behavior, and walkaway decisions. PrefBench evaluates this setting through an LLM-facing state-summary protocol that constrains agents to return strict JSON actions under a fixed hidden-information boundary. We evaluate zero-shot LLM sellers against heuristic references over 7,500 episodes. The tested LLMs follow the protocol reliably and achieve deal rates above 0.99, but their seller-profit outcomes remain weak: the best LLM average profit is only slightly above the random baseline and far below a simple concession heuristic under the same episode stream. These results show that structured action compliance and agreement-seeking behavior can coexist with weak profit-sensitive bargaining. PrefBench provides a controlled benchmark for evaluating pricing-agent behavior under hidden buyer preferences.</summary>
+    <category term="cs.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-19T04:10:05Z</published>
+    <arxiv:comment>24 pages, 3 figures, 5 tables. Code is available at https://github.com/ChaosTheProducer/PrefBench</arxiv:comment>
+    <arxiv:primary_category term="cs.GT"/>
+    <author>
+      <name>Yingjie Lei</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.15953v2</id>
+    <title>Drift-Aware Spectral Conformal Prediction for Non-Exchangeable Streaming Data</title>
+    <updated>2026-07-16T19:34:17Z</updated>
+    <link href="https://arxiv.org/abs/2606.15953v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.15953v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Conformal prediction provides distribution-free prediction intervals under exchangeability, but many modern data streams are neither independent nor stable. They exhibit recurring regimes, changing seasonal frequencies, abrupt shifts, and gradual drift. We propose drift-aware spectral conformal prediction (DASC), a streaming uncertainty quantification framework for structured non-exchangeable data subject to distributional drift. DASC forms conformal prediction intervals using calibration residuals weighted by local spectral similarity, while a transport-based drift score monitors whether the current test distribution has moved away from past calibration regimes. When drift is mild, DASC borrows calibration residuals from structurally similar historical windows; when drift is severe, it contracts or reweights the calibration pool and updates the target miscoverage level online. The method also reports an effective sample size diagnostic that warns when a weighted conformal quantile is statistically fragile. We establish an approximate coverage bound that decomposes coverage loss into drift, residual mismatch, and weighted effective sample size. In synthetic experiments and five stress-test regimes, DASC maintains near-nominal coverage after drift where rolling, recency-weighted, and spectral-only conformal methods can under-cover. In real electricity and weather streams, DASC reduces average interval width by approximately 28% and 42%, respectively, relative to the best calibrated non-DASC baseline, while preserving calibrated or conservative coverage. A financial volatility example shows a more nuanced regime in which spectral-only calibration is competitive, but DASC retains near-nominal coverage and adds drift diagnostics.</summary>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-14T18:23:58Z</published>
+    <arxiv:comment>25 pages, includes figures and references</arxiv:comment>
+    <arxiv:primary_category term="stat.ME"/>
+    <author>
+      <name>Jeffery Opoku</name>
+    </author>
+    <author>
+      <name>David Banahene</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.01607v1</id>
+    <title>FedMTFI: Feature Importance Based Optimized Multi Teacher Knowledge Distillation in Heterogeneous Federated Learning Environment</title>
+    <updated>2026-06-01T02:58:16Z</updated>
+    <link href="https://arxiv.org/abs/2606.01607v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.01607v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Federated learning (FL) is a decentralized approach that enables collaborative model training without exposing raw data. Instead of transferring sensitive data, it allows devices to share only model weights, keeping personal data locally and secure. However, in real world settings, the data held by devices is often not evenly distributed and devices mostly differ in computing power and memory capacity. These differences make FL harder to maintain consistent performance across the system. To address these issues, we propose FedMTFI, a novel architecture that combines multi-teacher knowledge distillation (MTKD) with feature importance to improve the FL process in heterogeneous environments. In FedMTFI, clients are clustered based on similar hardware and model types. Each cluster trains a specific model on not independently and identically distributed (non-IID) data. Within a cluster, every client updates that model using only its own local private data. The server then aggregates the locally trained models in each cluster using FedAvg to form multiple prototype models. Then these prototypes serve as teacher models to train a global generalized student model using MTKD. What makes FedMTFI more unique is the integration of Shapley values (SHAP) to emphasize important features during distillation, which enhances both accuracy and interpretability. Experimental results show that FedMTFI achieves higher accuracy than traditional FL algorithms and performs more effectively under non-IID data conditions.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-01T02:58:16Z</published>
+    <arxiv:comment>Accepted by IJCNN 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Nazmus Shakib Shadin</name>
+    </author>
+    <author>
+      <name>Aaron Cummings</name>
+    </author>
+    <author>
+      <name>Xinyue Zhang</name>
+    </author>
+    <author>
+      <name>Bobin Deng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.16987v1</id>
+    <title>Consensus-based Agentic Large Language Model Framework for Harmonized Tariff Schedule Code Classification</title>
+    <updated>2026-06-15T17:24:07Z</updated>
+    <link href="https://arxiv.org/abs/2606.16987v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.16987v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurate Harmonized Tariff Schedule (HTS) code classification is essential for customs clearance, duty assessment, trade statistics, and regulatory compliance in maritime logistics. However, exact HTS classification remains challenging because product descriptions are often short, incomplete, or ambiguous, while correct classification depends on hierarchical tariff structures, legal notes, and jurisdiction-specific rules. This paper proposes an agentic large language model (LLM) framework for Canadian 10-digit HTS code classification in smart-port and maritime logistics environments. The framework integrates multi-agent information retrieval, semantic retrieval over official tariff documents, evidence-grounded reasoning, consensus-based validation, element-wise voting across hierarchical code components, confidence estimation, and human-in-the-loop escalation. We evaluate the framework on a private dataset of 3,300 domain-expert-labeled product records collected from logistics and delivery contexts. Experimental results show that exact 10-digit classification remains difficult even for advanced LLMs, with performance decreasing from coarse chapter-level prediction to fine-grained tariff and statistical suffix assignment. These findings demonstrate the need for evidence-grounded, uncertainty-aware, and human-centered classification workflows rather than fully autonomous single-step prediction. The proposed framework supports more interpretable, accountable, and compliance-oriented HTS classification for maritime logistics and smart-port operations. Our code is available at https://github.com/Analytics-Everywhere-Lab/hts.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-15T17:24:07Z</published>
+    <arxiv:comment>Accepted at the 3rd International Conference of Resilience by Technology and Design (RTD 2026)</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Truong Thanh Hung Nguyen</name>
+    </author>
+    <author>
+      <name>Khanh Van Quynh Nguyen</name>
+    </author>
+    <author>
+      <name>Hoang-Loc Cao</name>
+    </author>
+    <author>
+      <name>Tri Duong</name>
+    </author>
+    <author>
+      <name>Phuc Ho</name>
+    </author>
+    <author>
+      <name>Van Pham</name>
+    </author>
+    <author>
+      <name>Loc Nguyen</name>
+    </author>
+    <author>
+      <name>Hung Cao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.14383v2</id>
+    <title>IndustryBench-MIPU: Benchmarking Multi-Image Attribute Value Extraction for Industrial Products</title>
+    <updated>2026-06-16T03:59:08Z</updated>
+    <link href="https://arxiv.org/abs/2606.14383v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.14383v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Industrial products such as valves and circuit breakers are defined by dense technical specifications that govern procurement, compatibility, and safety across supply chains. These specifications are scattered across multiple heterogeneous product images, including specification tables, nameplates, and technical drawings, yet whether Multimodal Large Language Models (MLLMs) can reliably recover them remains underexplored. To fill this gap, we introduce IndustryBench-MIPU, the first large-scale benchmark for multi-image industrial product understanding, built around structured attribute extraction -- recovering property-value pairs from product images. This task jointly probes text recognition on specification tables and nameplates, visual reasoning over technical drawings, domain knowledge to decode industrial terminology, and cross-image evidence integration to assemble scattered specifications. Concretely, the benchmark comprises 4,559 products across 27,652 images with 103,703 annotations spanning 18 industrial categories, constructed through multi-model consensus and three-tier quality assurance. Evaluating nine MLLMs under both single-image and product-level multi-image settings reveals a stark completeness gap: models achieve high precision (86--94%) but the best recovers only 49.9% of product-level attributes; moving from single-image to multi-image extraction costs 15--34 percentage points of recall. Multi-image completeness, not single-image accuracy, is the core bottleneck. Dataset and code are publicly available.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-12T12:18:00Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Haonan Qi</name>
+    </author>
+    <author>
+      <name>Jin Cao</name>
+    </author>
+    <author>
+      <name>Yongqi Zhang</name>
+    </author>
+    <author>
+      <name>Xintong Wang</name>
+    </author>
+    <author>
+      <name>Weidong Tang</name>
+    </author>
+    <author>
+      <name>Bin Chen</name>
+    </author>
+    <author>
+      <name>Chengfu Huo</name>
+    </author>
+    <author>
+      <name>Haojun Pan</name>
+    </author>
+    <author>
+      <name>Hengyu You</name>
+    </author>
+    <author>
+      <name>Jing Li</name>
+    </author>
+    <author>
+      <name>Yingde Wang</name>
+    </author>
+    <author>
+      <name>Liang Ding</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.00282v1</id>
+    <title>Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems</title>
+    <updated>2026-05-29T19:17:50Z</updated>
+    <link href="https://arxiv.org/abs/2606.00282v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.00282v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large-scale recommendation systems operate across diverse domains, yet they face the challenges of data sparsity and noisy implicit feedback. Traditional approaches mitigate this via model-specific knowledge distillation from source domains to a target domain. Inspired by the transformative success of synthetic data generation in large language models (LLMs), we introduce Synthetic Cross-domain Augmentation and Learning for Recommendation (SCALR), a framework that generates synthetic user-item interaction events for a target recommendation domain by leveraging observed events from a source domain. SCALR decomposes cross-domain learning into two modular stages. First, it translates observed user events in source domains by framing event generation as estimating the likelihood that a user would interact with a target-domain item, conditioned on their observed interactions in a source domain. Second, downstream models train on these synthetic events as cross-domain learning objectives, where the synthetic events augment the target domain's training data in a model-agnostic manner. Our approach yields statistically significant improvements in online A/B tests on an industrial recommendation platform. To the best of our knowledge, this is among the first works to explicitly frame cross-domain event transfer as synthetic data generation for recommendation systems.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-29T19:17:50Z</published>
+    <arxiv:comment>13 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Xiangyu Wang</name>
+    </author>
+    <author>
+      <name>Yawen He</name>
+    </author>
+    <author>
+      <name>Shivendra Pratap Singh</name>
+    </author>
+    <author>
+      <name>Han Huang</name>
+    </author>
+    <author>
+      <name>Mengtong Hu</name>
+    </author>
+    <author>
+      <name>Sharath Ciddu</name>
+    </author>
+    <author>
+      <name>Yi-Hsuan Hsieh</name>
+    </author>
+    <author>
+      <name>Erik Groving</name>
+    </author>
+    <author>
+      <name>Yi Ding</name>
+    </author>
+    <author>
+      <name>Jieming Di</name>
+    </author>
+    <author>
+      <name>Tony Wang</name>
+    </author>
+    <author>
+      <name>Min Yun</name>
+    </author>
+    <author>
+      <name>Xiaoyu Chen</name>
+    </author>
+    <author>
+      <name>Ling Leng</name>
+    </author>
+    <author>
+      <name>Rob Malkin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.17053v1</id>
+    <title>Context-Aware RL for Agentic and Multimodal LLMs</title>
+    <updated>2026-06-15T17:59:28Z</updated>
+    <link href="https://arxiv.org/abs/2606.17053v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.17053v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) often fail when answering requires identifying a small but decisive piece of evidence within a long or complex context, such as a single line in a tool trace or a subtle detail in an image. We propose ContextRL, a context-aware reinforcement learning (RL) method that improves long-horizon reasoning and multimodal performance through an \emph{indirect} auxiliary objective. Instead of supervising only the final answer, ContextRL presents the model with a query, an answer, and two highly similar contexts, and rewards it for selecting the context that supports the query--answer pair, thereby encouraging fine-grained grounding. We construct contrastive context data in two domains: for coding agents, trajectories serve as contexts, yielding 1k pairs built via condition filtering; for multimodal reasoning, images serve as contexts, yielding 7K pairs built via generative editing and similarity search. ContextRL achieves average gains of +2.2% over standard GRPO on 5 long-horizon benchmarks, and +1.8% across 12 diverse visual question answering benchmarks. To disentangle the effect of the proposed objective from that of additional data, we compare against data-augmentation baselines that repurpose the same contrastive contexts as standard query--context--answer examples. These baselines provide little to no improvement, showing that the gains arise from the proposed context-selection objective rather than from the contrastive data alone.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-15T17:59:28Z</published>
+    <arxiv:comment>29 pages, 9 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Peiyang Xu</name>
+    </author>
+    <author>
+      <name>Bangzheng Li</name>
+    </author>
+    <author>
+      <name>Sijia Liu</name>
+    </author>
+    <author>
+      <name>Karthik R. Narasimhan</name>
+    </author>
+    <author>
+      <name>Pramod Viswanath</name>
+    </author>
+    <author>
+      <name>Prateek Mittal</name>
+    </author>
+    <author>
+      <name>Xingyu Fu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.08275v1</id>
+    <title>Causal Agent Replay: Counterfactual Attribution for LLM-Agent Failures</title>
+    <updated>2026-06-06T17:44:23Z</updated>
+    <link href="https://arxiv.org/abs/2606.08275v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.08275v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>When an LLM agent fails -- issues a refund it should not have, calls the wrong tool, leaks data -- existing tooling answers what happened (observability) or whether it passed (evaluation), but not which step caused the failure. The obvious heuristics are wrong: the step that executes the harmful action is usually not the step that decided on it, and LLM-judge attribution is correlational and unreliable (state-of-the-art step-level accuracy on the Who&amp;When benchmark is about 14%). We present Causal Agent Replay (CAR), which answers the question by intervention: it models an agent run as a structural causal model, applies a do-operation to a step, and re-executes the trajectory forward under the same stochastic policy, measuring the shift in the outcome distribution. We define an intervention algebra over agent steps, a single-step contrastive estimator whose point-of-commitment rule resolves a confound specific to stochastic run-forward, and a budget-bounded Monte-Carlo Shapley estimator that splits credit across interacting steps. Every effect is reported with confidence intervals. We validate against synthetic structural causal models with planted ground truth: the contrastive estimator recovers the pivotal step, and Shapley recovers a two-step interaction (0.44, 0.45, ~0; efficiency sum 0.909 versus the analytic 0.91). CAR is open source and runs on hosted or free local models.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-06T17:44:23Z</published>
+    <arxiv:comment>Open-source: https://github.com/jaineet17/causal-agent-replay</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jaineet Shah</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.12487v1</id>
+    <title>DynamicPTQ: Mitigating Activation Quantization Collapse via Residual-Stream Dynamics</title>
+    <updated>2026-06-10T09:25:45Z</updated>
+    <link href="https://arxiv.org/abs/2606.12487v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.12487v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Post-training quantization (PTQ) is essential for efficient large language model inference, but reliably quantizing activations remains challenging when weights, activations, and KV caches are all quantized to 4-bit precision. A key difficulty lies in massive activations, whose extreme values dominate the activation range and amplify quantization errors. State-of-the-art methods mainly mitigate massive activations through transformation-based smoothing, such as orthogonal rotations and affine scaling, but overlook the cross-layer dynamics of the residual stream. In this paper, we show that massive activations emerge and disappear in a phase-wise pattern across network depth, triggering large residual changes. These changes cause newly injected layer-wise updates to dominate the 4-bit quantization scale and weaken historical residual information. To characterize this behavior, we introduce Jump Ratio and Historical Feature SNR. This suggests that static transformation-based smoothing cannot fully resolve dynamic quantization instability caused by cross-layer residual changes. Based on this analysis, we propose DynamicPTQ, a Dynamic Post-Training Quantization policy for phase-aware mixed-precision activation quantization. DynamicPTQ identifies quantization-sensitive layers from residual-stream dynamics and assigns 8-bit activation precision only to these layers, while keeping weights, KV caches, and other activations in 4-bit precision. It can be directly integrated with strong PTQ baselines such as QuaRot, SpinQuant, and FlatQuant. Experiments on LLaMA-2 and LLaMA-3 show that DynamicPTQ consistently improves perplexity and zero-shot QA performance under W4A4KV4 quantization, while achieving 1.05 to 1.07 times throughput improvement with modest memory overhead. These results demonstrate a practical path toward robust low-bit LLM inference.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-10T09:25:45Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Zimo Zhao</name>
+    </author>
+    <author>
+      <name>Maolin Wang</name>
+    </author>
+    <author>
+      <name>Bowen Yu</name>
+    </author>
+    <author>
+      <name>Bowen Liu</name>
+    </author>
+    <author>
+      <name>Xiao Han</name>
+    </author>
+    <author>
+      <name>Xiangyu Zhao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.01617v1</id>
+    <title>EvoPool: Evolutionary Programmatic Annotation for Label-Efficient Specialized Supervision</title>
+    <updated>2026-06-01T03:10:37Z</updated>
+    <link href="https://arxiv.org/abs/2606.01617v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.01617v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models excel at general tasks but underperform smaller supervised models in specialized, high-stakes domains where training labels are costly. We address this regime with EvoPool, an evolutionary multi-agent framework inspired by Darwinian evolution. Three specialized agents iteratively propose executable annotator code, a small validation set provides a fitness signal, and a deterministic gate keeps only annotators that pass viability, diversity, and marginal-contribution checks across generations. Pool votes are mapped to soft training labels by EvoAgg, a text-aware aggregator combining semantic features with annotator-vote features. The authored pool runs at near-zero per-example cost and is 4500 to 31000x faster than LLM annotation on 100K examples. Across 7 of 8 LLM-weak specialized and complex tasks spanning biomedical relation extraction, legal-clause classification, complex reasoning, and dense multi-label biomedical classification, EvoPool beats the strongest LLM annotation baseline by an average +0.141 macro-F1, peaking at +0.301 on ChemProt and +0.265 on PubMed. Code is available at: https://github.com/tianyi0216/EvoPool</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-01T03:10:37Z</published>
+    <arxiv:comment>39 pages, 7 figures. Code: https://github.com/tianyi0216/EvoPool</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Tianyi Xu</name>
+    </author>
+    <author>
+      <name>Yaolun Zhang</name>
+    </author>
+    <author>
+      <name>Xuan Ouyang</name>
+    </author>
+    <author>
+      <name>Huazheng Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.01513v1</id>
+    <title>Compliance-Scored Best-of-N Guardrail Orchestration for Multimodal Document Generation in Payments Dispute Defense</title>
+    <updated>2026-06-01T00:24:30Z</updated>
+    <link href="https://arxiv.org/abs/2606.01513v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.01513v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>High-stakes enterprise document generation, including financial dispute narratives, compliance notices, and audit summaries, demands schema correctness, policy compliance, and low-latency operation at scale. Prior to a unified guardrail layer, production systems often stitched together separate PII redaction, content moderation, and format validation steps, leading to fragmented logic, slower request paths, and higher operational cost.
+  We present a guardrail orchestration layer for text and image inputs that couples multi-candidate generation with an explicit compliance score used for early exit. The framework runs configurable parallel generation heads, scores candidates against weighted guardrails including PII detection, content moderation, schema constraints, and domain rules, and returns the best-scoring output with selection metadata. The available operational readout reports 5 attempts within 20 seconds and 91 percent compliance.
+  For payments dispute defense summaries, we analyze aggregate operational scenario readouts rather than a randomized A/B test. Variable cohorts show higher count win rates than controls overall, 301/659 versus 536/1548, corresponding to +11.0 percentage points with 95 percent confidence interval [6.6, 15.5] and p &lt; 0.001, and for adjusted item-not-received cases, +7.5 percentage points with 95 percent confidence interval [0.2, 15.7] and p = 0.045. Fraud and local evidence-ranking deltas are directionally positive but not statistically significant from the aggregate count data. We also report reviewer-calibrated Responsible-AI evidence-quality signals from 770 generated-evidence reviews and a 70-case OCR slice, and document the reproducibility boundary through the request interface, scoring logic, pseudocode, and operational evidence boundary.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-01T00:24:30Z</published>
+    <arxiv:comment>8 pages, 7 figures, 4 tables. Preprint. Applied systems paper on compliance-scored guardrail orchestration for multimodal LLM document generation. Contains aggregate operational readouts; not a randomized A/B test</arxiv:comment>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>Nataraj Agaram Sundar</name>
+    </author>
+    <author>
+      <name>Tejas Morabia</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.25338v1</id>
+    <title>CausalFlow: Causal Attribution and Counterfactual Repair for LLM Agent Failures</title>
+    <updated>2026-05-25T01:47:01Z</updated>
+    <link href="https://arxiv.org/abs/2605.25338v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.25338v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language model (LLM) agents frequently fail on multi-step tasks involving reasoning, tool use, and environment interaction. While such failures are typically logged or retried heuristically, they contain structured signals about where execution broke down. We introduce CausalFlow, an interventional framework that converts failed agent traces into minimal counterfactual repairs and reusable supervision. CausalFlow models execution traces as sequential chains of dependent steps and computes Causal Responsibility Scores(CRS) via step-level counterfactual intervention to identify failure-inducing steps. For these steps, we generate minimally edited repairs that flip the final outcome to success, producing validated contrastive pairs of the form (wrong step, corrected step). CausalFlow supports two complementary uses: targeted test-time repair that recovers from failures with minimal behavioral drift, and training-time supervision suitable for offline preference optimization or reward modeling. Across four benchmarks spanning mathematical reasoning, code generation, question answering, and medical browsing, CausalFlow converts failed executions into validated minimal repairs with high minimality and causal-consensus scores, and demonstrates that causal attribution is necessary for reliable improvement across diverse agent tasks, outperforming heuristic refinement in complex retrieval settings while producing more localized repairs throughout. These results demonstrate that interventional analysis over structured execution traces provides a principled and scalable mechanism for transforming agent failures into reliability gains and learning-ready supervision.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-25T01:47:01Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Akash Bonagiri</name>
+    </author>
+    <author>
+      <name>Devang Borkar</name>
+    </author>
+    <author>
+      <name>Gerard Janno Anderias</name>
+    </author>
+    <author>
+      <name>Setareh Rafatirad</name>
+    </author>
+    <author>
+      <name>Houman Homayoun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.22924v2</id>
+    <title>Building a privacy-preserving Federated Recommender system for mobile devices</title>
+    <updated>2026-05-27T18:29:59Z</updated>
+    <link href="https://arxiv.org/abs/2605.22924v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.22924v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Serving personalized content on mobile devices has traditionally required pooling sensitive user data on centralized servers, a practice increasingly at odds with modern privacy expectations and geographical regulations. We present a two-stage federated recommendation system pipeline for mobile devices, built around a principled separation between non-sensitive user preference data and sensitive mobile context data that never leaves the device. The first stage runs a collaborative filtering model on non-sensitive app-context data in the cloud to generate a shortlist of relevant items. The second stage re-ranks these candidates on-device using sensitive mobile signals, with only model updates/gradients ever leaving the device. We validate the approach on MovieLens, UCI Human Activity Recognition, and a proprietary pilot dataset, and deliver a production-ready implementation as a Kotlin Multiplatform library deployable on Android and iOS.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-21T18:02:26Z</published>
+    <arxiv:comment>Masters thesis, Université de Montréal, Department of Computer Science and Operations Research, 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Aasheesh Singh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.12198v2</id>
+    <title>LLM-Based User Personas for Recommendations at Scale</title>
+    <updated>2026-07-15T16:08:17Z</updated>
+    <link href="https://arxiv.org/abs/2606.12198v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.12198v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) offer unprecedented potential for enhancing recommendation systems through their world knowledge and reasoning capabilities. However, existing approaches often rely on structured IDs or offline processing, limiting semantic richness, real-time adaptability, and user-facing interpretability. In this paper, we introduce a novel framework that enables real-time generation of LLM-based user interest personas for a large-scale commercial video recommendation platform. Our method generates natural-language user interest personas that address the exploitation-exploration trade-off by combining the summarization of existing interests with novel topics, directly during serving. To overcome the computational challenges of online LLM inference at a billion-user scale, we design a cost-efficient architecture leveraging knowledge distillation, asynchronous inference, and input optimization via semantically clustered video representations. Extensive offline evaluations, user studies, and live A/B tests demonstrate significant improvements in viewer value. This work bridges the gap between high-level semantic understanding and industrial-scale recommendation, paving the way for more dynamic, explainable, and satisfying personalized experiences.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-10T15:18:32Z</published>
+    <arxiv:comment>Accepted by 2026 RecSys Industry Track</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Haoting Wang</name>
+    </author>
+    <author>
+      <name>Haokai Lu</name>
+    </author>
+    <author>
+      <name>Zheyun Feng</name>
+    </author>
+    <author>
+      <name>Jenny Huang</name>
+    </author>
+    <author>
+      <name>Yifat Amir</name>
+    </author>
+    <author>
+      <name>Gregory Hinkson</name>
+    </author>
+    <author>
+      <name>Ben Most</name>
+    </author>
+    <author>
+      <name>Zelong Zhao</name>
+    </author>
+    <author>
+      <name>Yixin Kelly Cui</name>
+    </author>
+    <author>
+      <name>Rein Zhang</name>
+    </author>
+    <author>
+      <name>Fabio Soldo</name>
+    </author>
+    <author>
+      <name>Yu Xia</name>
+    </author>
+    <author>
+      <name>Nihar Bhupalam</name>
+    </author>
+    <author>
+      <name>Minmin Chen</name>
+    </author>
+    <author>
+      <name>Konstantina Christakopoulou</name>
+    </author>
+    <author>
+      <name>Lichan Hong</name>
+    </author>
+    <author>
+      <name>Ed H. Chi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.17016v2</id>
+    <title>TokenPilot: Cache-Efficient Context Management for LLM Agents</title>
+    <updated>2026-08-28T01:44:50Z</updated>
+    <link href="https://arxiv.org/abs/2606.17016v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.17016v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As LLM agents are deployed in long-horizon sessions, context accumulation drives up inference costs. Existing approaches utilize text pruning or dynamic memory eviction to minimize token footprints; however, their unconstrained sequence mutations alter layouts, introducing prefix mismatches and cache invalidation. This reveals a critical trade-off between text sparsity and prompt cache continuity. To address this, we present TokenPilot, a dual-granularity context management framework. Globally, Ingestion-Aware Compaction acts as a framework harness to stabilize prompt prefixes and eliminate open-world environmental noise at the ingestion gate. Locally, Lifecycle-Aware Eviction monitors the ongoing residual utility of context segments, enforcing a conservative batch-turn schedule to offload content segments only when task relevance expires. Experiments on PinchBench and Claw-Eval under both isolated and continuous modes demonstrate that TokenPilot reduces costs by 61% and 56% in isolated mode, and 61% and 87% in continuous mode, while maintaining competitive performance compared to prior systems. TokenPilot has been integrated into LightRSI at https://github.com/zjunlp/RSI.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-15T17:46:50Z</published>
+    <arxiv:comment>EMNLP 2026 Findings</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Buqiang Xu</name>
+    </author>
+    <author>
+      <name>Zirui Xue</name>
+    </author>
+    <author>
+      <name>Dianmou Chen</name>
+    </author>
+    <author>
+      <name>Chenyang Fu</name>
+    </author>
+    <author>
+      <name>Chiyu Wu</name>
+    </author>
+    <author>
+      <name>Caiying Huang</name>
+    </author>
+    <author>
+      <name>Chen Jiang</name>
+    </author>
+    <author>
+      <name>Jizhan Fang</name>
+    </author>
+    <author>
+      <name>Xinle Deng</name>
+    </author>
+    <author>
+      <name>Yijun Chen</name>
+    </author>
+    <author>
+      <name>Yunzhi Yao</name>
+    </author>
+    <author>
+      <name>Xuehai Wang</name>
+    </author>
+    <author>
+      <name>Jin Shang</name>
+    </author>
+    <author>
+      <name>Gong Yu</name>
+    </author>
+    <author>
+      <name>Ningyu Zhang</name>
+    </author>
+  </entry>
+</feed>

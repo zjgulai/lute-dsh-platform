@@ -1,0 +1,1029 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/i+t8SSA7WlKLLAm9qRuPiGlf5r8</id>
+  <title>arXiv Query: search_query=&amp;id_list=1706.04498,1706.04599,1706.05098,1706.06551,1706.08840,1707.01545,1707.03264,1708.07747,1709.10190,1710.10903,1710.11299,1711.10160,1712.02763,1801.00926,1802.03050,1802.03426,1802.06501,1802.09127,1803.00567,1804.07931,1804.10659,1805.06318,1805.06358,1805.08342,1809.04038,1809.07421,1809.09446,1810.00048,1810.05997,1811.00855,1811.02395,1811.03146,1811.03728,1811.04170,1902.08387,1903.01384,1903.07761,1904.04047,1904.04208,1904.04567&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:41:14Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=1706.04498,1706.04599,1706.05098,1706.06551,1706.08840,1707.01545,1707.03264,1708.07747,1709.10190,1710.10903,1710.11299,1711.10160,1712.02763,1801.00926,1802.03050,1802.03426,1802.06501,1802.09127,1803.00567,1804.07931,1804.10659,1805.06318,1805.06358,1805.08342,1809.04038,1809.07421,1809.09446,1810.00048,1810.05997,1811.00855,1811.02395,1811.03146,1811.03728,1811.04170,1902.08387,1903.01384,1903.07761,1904.04047,1904.04208,1904.04567" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1809.07421v2</id>
+    <title>Supersingular Elliptic Curves and Moonshine</title>
+    <updated>2019-01-29T05:51:07Z</updated>
+    <link href="https://arxiv.org/abs/1809.07421v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1809.07421v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We generalize a theorem of Ogg on supersingular $j$-invariants to supersingular elliptic curves with level. Ogg observed that the level one case yields a characterization of the primes dividing the order of the monster. We show that the corresponding analyses for higher levels give analogous characterizations of the primes dividing the orders of other sporadic simple groups (e.g., baby monster, Fischer's largest group). This situates Ogg's theorem in a broader setting. More generally, we characterize, in terms of supersingular elliptic curves with level, the primes arising as orders of Fricke elements in centralizer subgroups of the monster. We also present a connection between supersingular elliptic curves and umbral moonshine. Finally, we present a procedure for explicitly computing invariants of supersingular elliptic curves with level structure.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-09-19T22:35:30Z</published>
+    <arxiv:primary_category term="math.NT"/>
+    <arxiv:journal_ref>SIGMA 15 (2019), 007, 17 pages</arxiv:journal_ref>
+    <author>
+      <name>Victor Manuel Aricheta</name>
+    </author>
+    <arxiv:doi>10.3842/SIGMA.2019.007</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.3842/SIGMA.2019.007" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1805.06318v2</id>
+    <title>Representations in Grassmann space and fermion degrees of freedom</title>
+    <updated>2019-01-17T12:33:48Z</updated>
+    <link href="https://arxiv.org/abs/1805.06318v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1805.06318v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In Ref. [arXiv:1802.05554v3] one of the authors (N.S.M.B.) studies the second quantization of fermions with integer spin while describing the internal degrees of freedom of fermions in Grassmann space. In this contribution we study the representations in Grassmann space of the groups $SO(5,1)$, $SO(3,1)$, $SU(3) \times U(1)$, and $SO(4)$, which are of particular interest as the subgroups of the group $SO(13,1)$. The second quantized integer spin fermions, appearing in Grassmann space, not observed so far, could be an alternative choice to the half integer spin fermions, appearing in Clifford space. The spin-charge-family theory, using two kinds of Clifford operators --- $γ^a$ and $\tildeγ^a$ --- for the description of spins and charges (first) and family quantum numbers (second), offers the explanation for not only the appearance of families but also for all the properties of quarks and leptons, the gauge fields, scalar fields and others. In both cases the gauge fields in $d \ge(13+1)$ --- the spin connections $ω_{ab α}$ (of the two kinds in Clifford case and of one kind in Grassmann case) and the vielbeins $f^α{}_α$ --- determine in $d=(3+1)$ scalars, those with the space index $α=(5,6,\cdots,d)$, and gauge fields, those with the space index $α=(0,1,2,3)$. While states of the Lorentz group and all its subgroups (in any dimension) are in Clifford space in the fundamental representations of the groups, with the family degrees of freedom included, states in Grassmann space manifest with respect to the Lorentz group adjoint representations, allowing no families.</summary>
+    <category term="physics.gen-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-05-15T12:02:27Z</published>
+    <arxiv:comment>31 pages, 3 figures, This contribution developed during the discussions at the $20^{\rm{th}}$ and $21^{\rm{st}}$ Workshop "What Comes Beyond the Standard Models", Bled 2017, 2018. Appeared in the Proceedings to the 21st Bled Workshop, DMFA Ljubljana, December 2018. Also available at http://bsm.fmf.uni-lj.si/bled2018bsm/talks/BledVol19No2proc.pdf, pp. 335--358</arxiv:comment>
+    <arxiv:primary_category term="physics.gen-ph"/>
+    <author>
+      <name>D. Lukman</name>
+    </author>
+    <author>
+      <name>N. S. Mankoc Borstnik</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1810.05997v6</id>
+    <title>Predict then Propagate: Graph Neural Networks meet Personalized PageRank</title>
+    <updated>2022-04-05T11:39:26Z</updated>
+    <link href="https://arxiv.org/abs/1810.05997v6" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1810.05997v6" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Neural message passing algorithms for semi-supervised classification on graphs have recently achieved great success. However, for classifying a node these methods only consider nodes that are a few propagation steps away and the size of this utilized neighborhood is hard to extend. In this paper, we use the relationship between graph convolutional networks (GCN) and PageRank to derive an improved propagation scheme based on personalized PageRank. We utilize this propagation procedure to construct a simple model, personalized propagation of neural predictions (PPNP), and its fast approximation, APPNP. Our model's training time is on par or faster and its number of parameters on par or lower than previous models. It leverages a large, adjustable neighborhood for classification and can be easily combined with any neural network. We show that this model outperforms several recently proposed methods for semi-supervised classification in the most thorough study done so far for GCN-like models. Our implementation is available online.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-10-14T08:36:54Z</published>
+    <arxiv:comment>Published as a conference paper at ICLR 2019. Author name changed from Johannes Klicpera to Johannes Gasteiger</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>International Conference on Learning Representations (ICLR), New Orleans, LA, USA, 2019</arxiv:journal_ref>
+    <author>
+      <name>Johannes Gasteiger</name>
+    </author>
+    <author>
+      <name>Aleksandar Bojchevski</name>
+    </author>
+    <author>
+      <name>Stephan Günnemann</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1903.07761v1</id>
+    <title>A Parallel Data Compression Framework for Large Scale 3D Scientific Data</title>
+    <updated>2019-03-18T23:19:49Z</updated>
+    <link href="https://arxiv.org/abs/1903.07761v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1903.07761v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large scale simulations of complex systems ranging from climate and astrophysics to crowd dynamics, produce routinely petabytes of data and are projected to reach the zettabytes level in the coming decade. These simulations enable unprecedented insights but at the same their effectiveness is hindered by the enormous data sizes associated with the computational elements and respective output quantities of interest that impose severe constraints on storage and I/O time. In this work, we address these challenges through a novel software framework for scientific data compression. The software (CubismZ) incorporates efficient wavelet based techniques and the state-of-the-art ZFP, SZ and FPZIP floating point compressors. The framework relies on a block-structured data layout, benefits from OpenMP and MPI and targets supercomputers based on multicores. CubismZ can be used as a tool for ex situ (offline) compression of scientific datasets and supports conventional Computational Fluid Dynamics (CFD) file formats. Moreover, it provides a testbed of comparison, in terms of compression factor and peak signal-to-noise ratio, for a number of available data compression methods. The software yields in situ compression ratios of 100x or higher for fluid dynamics data produced by petascale simulations of cloud cavitation collapse using $\mathcal{O}(10^{11})$ grid cells, with negligible impact on the total simulation time.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-03-18T23:19:49Z</published>
+    <arxiv:comment>26 pages, 12 figures, open-source software</arxiv:comment>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>Panagiotis Hadjidoukas</name>
+    </author>
+    <author>
+      <name>Fabian Wermelinger</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1801.00926v3</id>
+    <title>Joint Optic Disc and Cup Segmentation Based on Multi-label Deep Network and Polar Transformation</title>
+    <updated>2018-01-11T03:15:16Z</updated>
+    <link href="https://arxiv.org/abs/1801.00926v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1801.00926v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Glaucoma is a chronic eye disease that leads to irreversible vision loss. The cup to disc ratio (CDR) plays an important role in the screening and diagnosis of glaucoma. Thus, the accurate and automatic segmentation of optic disc (OD) and optic cup (OC) from fundus images is a fundamental task. Most existing methods segment them separately, and rely on hand-crafted visual feature from fundus images. In this paper, we propose a deep learning architecture, named M-Net, which solves the OD and OC segmentation jointly in a one-stage multi-label system. The proposed M-Net mainly consists of multi-scale input layer, U-shape convolutional network, side-output layer, and multi-label loss function. The multi-scale input layer constructs an image pyramid to achieve multiple level receptive field sizes. The U-shape convolutional network is employed as the main body network structure to learn the rich hierarchical representation, while the side-output layer acts as an early classifier that produces a companion local prediction map for different scale layers. Finally, a multi-label loss function is proposed to generate the final segmentation map. For improving the segmentation performance further, we also introduce the polar transformation, which provides the representation of the original image in the polar coordinate system. The experiments show that our M-Net system achieves state-of-the-art OD and OC segmentation result on ORIGA dataset. Simultaneously, the proposed method also obtains the satisfactory glaucoma screening performances with calculated CDR value on both ORIGA and SCES datasets.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-01-03T08:56:45Z</published>
+    <arxiv:comment>Project homepage: http://hzfu.github.io/proj_glaucoma_fundus.html , and Accepted by IEEE Transactions on Medical Imaging</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Huazhu Fu</name>
+    </author>
+    <author>
+      <name>Jun Cheng</name>
+    </author>
+    <author>
+      <name>Yanwu Xu</name>
+    </author>
+    <author>
+      <name>Damon Wing Kee Wong</name>
+    </author>
+    <author>
+      <name>Jiang Liu</name>
+    </author>
+    <author>
+      <name>Xiaochun Cao</name>
+    </author>
+    <arxiv:doi>10.1109/TMI.2018.2791488</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/TMI.2018.2791488" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1803.00567v4</id>
+    <title>Computational Optimal Transport</title>
+    <updated>2020-03-18T09:54:55Z</updated>
+    <link href="https://arxiv.org/abs/1803.00567v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1803.00567v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Optimal transport (OT) theory can be informally described using the words of the French mathematician Gaspard Monge (1746-1818): A worker with a shovel in hand has to move a large pile of sand lying on a construction site. The goal of the worker is to erect with all that sand a target pile with a prescribed shape (for example, that of a giant sand castle). Naturally, the worker wishes to minimize her total effort, quantified for instance as the total distance or time spent carrying shovelfuls of sand. Mathematicians interested in OT cast that problem as that of comparing two probability distributions, two different piles of sand of the same volume. They consider all of the many possible ways to morph, transport or reshape the first pile into the second, and associate a "global" cost to every such transport, using the "local" consideration of how much it costs to move a grain of sand from one place to another. Recent years have witnessed the spread of OT in several fields, thanks to the emergence of approximate solvers that can scale to sizes and dimensions that are relevant to data sciences. Thanks to this newfound scalability, OT is being increasingly used to unlock various problems in imaging sciences (such as color or texture processing), computer vision and graphics (for shape manipulation) or machine learning (for regression, classification and density fitting). This short book reviews OT with a bias toward numerical methods and their applications in data sciences, and sheds lights on the theoretical properties of OT that make it particularly useful for some of these applications.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-03-01T18:28:43Z</published>
+    <arxiv:comment>new version with corrected typo in Eq. 4.43 and 4.44 (minus sign in front of f, g now changed to +) a few more corrected typos</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <arxiv:journal_ref>Foundations and Trends in Machine Learning, vol. 11, no. 5-6, pp. 355-607, 2019</arxiv:journal_ref>
+    <author>
+      <name>Gabriel Peyré</name>
+    </author>
+    <author>
+      <name>Marco Cuturi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1712.02763v1</id>
+    <title>Single top production at linear $e^-e^+$ colliders</title>
+    <updated>2017-12-07T18:22:48Z</updated>
+    <link href="https://arxiv.org/abs/1712.02763v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1712.02763v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study single top production at linear lepton colliders with $\sqrt{s} = 0.5$, 1 and 3 TeV. A preliminary analysis shows that despite the large $t\bar t$ background at $\sqrt{s} = 0.5$ and 1 TeV it is possible to obtain a good sensitivity to the $tbW$ vertex; even more so at 3 TeV when single top becomes the dominant mode of production. Concerning the four dimension six operators involved, two of them simultaneously generate $ttZ$ couplings and their sensitivity decreases with energy. The opposite is true for the other two operators. Single top production at these machines is also useful to probe charged-current four fermion operators $eνbt$, some of which are related to $tbW$ operators through the equations of motion.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-12-07T18:22:48Z</published>
+    <arxiv:comment>28 pages</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>Phys. Rev. D 97, 033004 (2018)</arxiv:journal_ref>
+    <author>
+      <name>Angel Escamilla</name>
+    </author>
+    <author>
+      <name>Antonio O. Bouzas</name>
+    </author>
+    <author>
+      <name>F. Larios</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.97.033004</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.97.033004" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1804.10659v3</id>
+    <title>A study on linear and non-linear parton evolution equations</title>
+    <updated>2018-08-03T17:33:02Z</updated>
+    <link href="https://arxiv.org/abs/1804.10659v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1804.10659v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the high energy regime, the proton structure consists of a very large number of particles called partons (quarks and gluons) that interact with each other, according to the theory of strong interactions, Quantum Chromodynamics (QCD). Through QCD, the number of partons in the proton is described by equations of parton evolution that depend on kinematic variables. These equations can be linear, the DGLAP equations, and nonlinear, the GLR-MQ equation. We have studied some analytic solutions of the equations of parton evolution. In order to generate the preliminary results, we used an ansatz for the solution of the equations of evolution of the gluon distribution, and compared with results of parametrizations of Parton Distributions Functions (PDFs). Another method proposed in the literature is the solution via Laplace transform that will be applied in the future.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-04-27T19:39:04Z</published>
+    <arxiv:comment>4 pages, 3 figures, poster presented by G. C. Penedo in XIV International Workshop on Hadron Physics (18-23 March 2018), Florianopólis, Brazil. Revised and updated version</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <author>
+      <name>Gilvana C. Penedo</name>
+    </author>
+    <author>
+      <name>Werner K. Sauter</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1708.07747v2</id>
+    <title>Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms</title>
+    <updated>2017-09-15T21:29:49Z</updated>
+    <link href="https://arxiv.org/abs/1708.07747v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1708.07747v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present Fashion-MNIST, a new dataset comprising of 28x28 grayscale images of 70,000 fashion products from 10 categories, with 7,000 images per category. The training set has 60,000 images and the test set has 10,000 images. Fashion-MNIST is intended to serve as a direct drop-in replacement for the original MNIST dataset for benchmarking machine learning algorithms, as it shares the same image size, data format and the structure of training and testing splits. The dataset is freely available at https://github.com/zalandoresearch/fashion-mnist</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-08-25T14:01:29Z</published>
+    <arxiv:comment>Dataset is freely available at https://github.com/zalandoresearch/fashion-mnist Benchmark is available at http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Han Xiao</name>
+    </author>
+    <author>
+      <name>Kashif Rasul</name>
+    </author>
+    <author>
+      <name>Roland Vollgraf</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1710.10903v3</id>
+    <title>Graph Attention Networks</title>
+    <updated>2018-02-04T19:13:29Z</updated>
+    <link href="https://arxiv.org/abs/1710.10903v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1710.10903v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present graph attention networks (GATs), novel neural network architectures that operate on graph-structured data, leveraging masked self-attentional layers to address the shortcomings of prior methods based on graph convolutions or their approximations. By stacking layers in which nodes are able to attend over their neighborhoods' features, we enable (implicitly) specifying different weights to different nodes in a neighborhood, without requiring any kind of costly matrix operation (such as inversion) or depending on knowing the graph structure upfront. In this way, we address several key challenges of spectral-based graph neural networks simultaneously, and make our model readily applicable to inductive as well as transductive problems. Our GAT models have achieved or matched state-of-the-art results across four established transductive and inductive graph benchmarks: the Cora, Citeseer and Pubmed citation network datasets, as well as a protein-protein interaction dataset (wherein test graphs remain unseen during training).</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-10-30T12:41:12Z</published>
+    <arxiv:comment>To appear at ICLR 2018. 12 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Petar Veličković</name>
+    </author>
+    <author>
+      <name>Guillem Cucurull</name>
+    </author>
+    <author>
+      <name>Arantxa Casanova</name>
+    </author>
+    <author>
+      <name>Adriana Romero</name>
+    </author>
+    <author>
+      <name>Pietro Liò</name>
+    </author>
+    <author>
+      <name>Yoshua Bengio</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1707.03264v2</id>
+    <title>A simple but tough-to-beat baseline for the Fake News Challenge stance detection task</title>
+    <updated>2018-05-21T10:31:40Z</updated>
+    <link href="https://arxiv.org/abs/1707.03264v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1707.03264v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Identifying public misinformation is a complicated and challenging task. An important part of checking the veracity of a specific claim is to evaluate the stance different news sources take towards the assertion. Automatic stance evaluation, i.e. stance detection, would arguably facilitate the process of fact checking. In this paper, we present our stance detection system which claimed third place in Stage 1 of the Fake News Challenge. Despite our straightforward approach, our system performs at a competitive level with the complex ensembles of the top two winning teams. We therefore propose our system as the 'simple but tough-to-beat baseline' for the Fake News Challenge stance detection task.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-07-11T13:44:51Z</published>
+    <arxiv:comment>6 pages, 1 figure, 3 tables; additional reference and details added, typos and wording corrected</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Benjamin Riedel</name>
+    </author>
+    <author>
+      <name>Isabelle Augenstein</name>
+    </author>
+    <author>
+      <name>Georgios P. Spithourakis</name>
+    </author>
+    <author>
+      <name>Sebastian Riedel</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1706.04599v2</id>
+    <title>On Calibration of Modern Neural Networks</title>
+    <updated>2017-08-03T13:29:46Z</updated>
+    <link href="https://arxiv.org/abs/1706.04599v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1706.04599v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Confidence calibration -- the problem of predicting probability estimates representative of the true correctness likelihood -- is important for classification models in many applications. We discover that modern neural networks, unlike those from a decade ago, are poorly calibrated. Through extensive experiments, we observe that depth, width, weight decay, and Batch Normalization are important factors influencing calibration. We evaluate the performance of various post-processing calibration methods on state-of-the-art architectures with image and document classification datasets. Our analysis and experiments not only offer insights into neural network learning, but also provide a simple and straightforward recipe for practical settings: on most datasets, temperature scaling -- a single-parameter variant of Platt Scaling -- is surprisingly effective at calibrating predictions.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-06-14T17:33:50Z</published>
+    <arxiv:comment>ICML 2017</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Chuan Guo</name>
+    </author>
+    <author>
+      <name>Geoff Pleiss</name>
+    </author>
+    <author>
+      <name>Yu Sun</name>
+    </author>
+    <author>
+      <name>Kilian Q. Weinberger</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1809.04038v2</id>
+    <title>Polarization observables in $e^+e^-$ annihilation to a baryon-antibaryon pair</title>
+    <updated>2019-02-28T03:23:12Z</updated>
+    <link href="https://arxiv.org/abs/1809.04038v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1809.04038v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Using the helicity formalism of Jacob and Wick we derive spin density matrices of baryon antibaryon pairs produced in $e^+e^-$ annihilation. We consider the production of pairs with spins $1/2+\overline{1/2}$, $1/2+\overline{3/2}$ (+c.c.) and $3/2+\overline{3/2}$. We provide modular expressions to include chains of weak hadronic two-body decays of the produced hyperons. The expressions are suitable for the analysis of high statistics data from $J/ψ$ and $ψ(2S)$ decays at $e^+e^-$ colliders, by fits to the fully differential angular distributions of the measured particles. We illustrate the method by examples, such as the inclusive measurement of the $e^+e^-\toψ(2S)\toΩ^-\barΩ^+$ process where one decay chain $Ω^-\toΛK^-$ followed by $Λ\to pπ^-$ is considered. Finally we show that the inclusive angular distributions can be used to test spin assignment of the produced baryons.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nucl-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-09-11T17:08:42Z</published>
+    <arxiv:comment>16 pages;update: 1 figure, extended introduction and examples, results not changed</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>Phys. Rev. D 99, 056008 (2019)</arxiv:journal_ref>
+    <author>
+      <name>Elisabetta Perotti</name>
+      <arxiv:affiliation>Uppsala U.</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Göran Fäldt</name>
+      <arxiv:affiliation>Uppsala U.</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Andrzej Kupść</name>
+      <arxiv:affiliation>Uppsala U.</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Stefan Leupold</name>
+      <arxiv:affiliation>Uppsala U.</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jiao Jiao Song</name>
+      <arxiv:affiliation>Shandong U. and Beijing, Inst. High Energy Phys.</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.99.056008</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.99.056008" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1811.04170v3</id>
+    <title>The Augmented Synthetic Control Method</title>
+    <updated>2020-07-23T15:19:18Z</updated>
+    <link href="https://arxiv.org/abs/1811.04170v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1811.04170v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The synthetic control method (SCM) is a popular approach for estimating the impact of a treatment on a single unit in panel data settings. The "synthetic control" is a weighted average of control units that balances the treated unit's pre-treatment outcomes as closely as possible. A critical feature of the original proposal is to use SCM only when the fit on pre-treatment outcomes is excellent. We propose Augmented SCM as an extension of SCM to settings where such pre-treatment fit is infeasible. Analogous to bias correction for inexact matching, Augmented SCM uses an outcome model to estimate the bias due to imperfect pre-treatment fit and then de-biases the original SCM estimate. Our main proposal, which uses ridge regression as the outcome model, directly controls pre-treatment fit while minimizing extrapolation from the convex hull. This estimator can also be expressed as a solution to a modified synthetic controls problem that allows negative weights on some donor units. We bound the estimation error of this approach under different data generating processes, including a linear factor model, and show how regularization helps to avoid over-fitting to noise. We demonstrate gains from Augmented SCM with extensive simulation studies and apply this framework to estimate the impact of the 2012 Kansas tax cuts on economic growth. We implement the proposed method in the new augsynth R package.</summary>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="econ.EM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-11-10T01:18:52Z</published>
+    <arxiv:primary_category term="stat.ME"/>
+    <author>
+      <name>Eli Ben-Michael</name>
+    </author>
+    <author>
+      <name>Avi Feller</name>
+    </author>
+    <author>
+      <name>Jesse Rothstein</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1904.04047v3</id>
+    <title>Black is to Criminal as Caucasian is to Police: Detecting and Removing Multiclass Bias in Word Embeddings</title>
+    <updated>2019-07-02T01:16:15Z</updated>
+    <link href="https://arxiv.org/abs/1904.04047v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1904.04047v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Online texts -- across genres, registers, domains, and styles -- are riddled with human stereotypes, expressed in overt or subtle ways. Word embeddings, trained on these texts, perpetuate and amplify these stereotypes, and propagate biases to machine learning models that use word embeddings as features. In this work, we propose a method to debias word embeddings in multiclass settings such as race and religion, extending the work of (Bolukbasi et al., 2016) from the binary setting, such as binary gender. Next, we propose a novel methodology for the evaluation of multiclass debiasing. We demonstrate that our multiclass debiasing is robust and maintains the efficacy in standard NLP tasks.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-04-03T22:17:27Z</published>
+    <arxiv:comment>Accepted as a conference paper at NAACL. 5 Pages excluding references, additional page for appendix</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Thomas Manzini</name>
+    </author>
+    <author>
+      <name>Yao Chong Lim</name>
+    </author>
+    <author>
+      <name>Yulia Tsvetkov</name>
+    </author>
+    <author>
+      <name>Alan W Black</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1802.03050v1</id>
+    <title>Thompson Sampling for Dynamic Pricing</title>
+    <updated>2018-02-08T21:17:28Z</updated>
+    <link href="https://arxiv.org/abs/1802.03050v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1802.03050v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we apply active learning algorithms for dynamic pricing in a prominent e-commerce website. Dynamic pricing involves changing the price of items on a regular basis, and uses the feedback from the pricing decisions to update prices of the items. Most popular approaches to dynamic pricing use a passive learning approach, where the algorithm uses historical data to learn various parameters of the pricing problem, and uses the updated parameters to generate a new set of prices. We show that one can use active learning algorithms such as Thompson sampling to more efficiently learn the underlying parameters in a pricing problem. We apply our algorithms to a real e-commerce system and show that the algorithms indeed improve revenue compared to pricing algorithms that use passive learning.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-02-08T21:17:28Z</published>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Ravi Ganti</name>
+    </author>
+    <author>
+      <name>Matyas Sustik</name>
+    </author>
+    <author>
+      <name>Quoc Tran</name>
+    </author>
+    <author>
+      <name>Brian Seaman</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1802.09127v1</id>
+    <title>Deep Bayesian Bandits Showdown: An Empirical Comparison of Bayesian Deep Networks for Thompson Sampling</title>
+    <updated>2018-02-26T02:04:57Z</updated>
+    <link href="https://arxiv.org/abs/1802.09127v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1802.09127v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent advances in deep reinforcement learning have made significant strides in performance on applications such as Go and Atari games. However, developing practical methods to balance exploration and exploitation in complex domains remains largely unsolved. Thompson Sampling and its extension to reinforcement learning provide an elegant approach to exploration that only requires access to posterior samples of the model. At the same time, advances in approximate Bayesian methods have made posterior approximation for flexible neural network models practical. Thus, it is attractive to consider approximate Bayesian neural networks in a Thompson Sampling framework. To understand the impact of using an approximate posterior on Thompson Sampling, we benchmark well-established and recently developed methods for approximate posterior sampling combined with Thompson Sampling over a series of contextual bandit problems. We found that many approaches that have been successful in the supervised learning setting underperformed in the sequential decision-making scenario. In particular, we highlight the challenge of adapting slowly converging uncertainty estimates to the online setting.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-02-26T02:04:57Z</published>
+    <arxiv:comment>Sixth International Conference on Learning Representations, ICLR 2018</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Carlos Riquelme</name>
+    </author>
+    <author>
+      <name>George Tucker</name>
+    </author>
+    <author>
+      <name>Jasper Snoek</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1706.06551v2</id>
+    <title>Grounded Language Learning in a Simulated 3D World</title>
+    <updated>2017-06-26T09:47:36Z</updated>
+    <link href="https://arxiv.org/abs/1706.06551v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1706.06551v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We are increasingly surrounded by artificially intelligent technology that takes decisions and executes actions on our behalf. This creates a pressing need for general means to communicate with, instruct and guide artificial agents, with human language the most compelling means for such communication. To achieve this in a scalable fashion, agents must be able to relate language to the world and to actions; that is, their understanding of language must be grounded and embodied. However, learning grounded language is a notoriously challenging problem in artificial intelligence research. Here we present an agent that learns to interpret language in a simulated 3D environment where it is rewarded for the successful execution of written instructions. Trained via a combination of reinforcement and unsupervised learning, and beginning with minimal prior knowledge, the agent learns to relate linguistic symbols to emergent perceptual representations of its physical surroundings and to pertinent sequences of actions. The agent's comprehension of language extends beyond its prior experience, enabling it to apply familiar language to unfamiliar situations and to interpret entirely novel instructions. Moreover, the speed with which this agent learns new words increases as its semantic knowledge grows. This facility for generalising and bootstrapping semantic knowledge indicates the potential of the present approach for reconciling ambiguous natural language with the complexity of the physical world.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-06-20T17:09:29Z</published>
+    <arxiv:comment>16 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Karl Moritz Hermann</name>
+    </author>
+    <author>
+      <name>Felix Hill</name>
+    </author>
+    <author>
+      <name>Simon Green</name>
+    </author>
+    <author>
+      <name>Fumin Wang</name>
+    </author>
+    <author>
+      <name>Ryan Faulkner</name>
+    </author>
+    <author>
+      <name>Hubert Soyer</name>
+    </author>
+    <author>
+      <name>David Szepesvari</name>
+    </author>
+    <author>
+      <name>Wojciech Marian Czarnecki</name>
+    </author>
+    <author>
+      <name>Max Jaderberg</name>
+    </author>
+    <author>
+      <name>Denis Teplyashin</name>
+    </author>
+    <author>
+      <name>Marcus Wainwright</name>
+    </author>
+    <author>
+      <name>Chris Apps</name>
+    </author>
+    <author>
+      <name>Demis Hassabis</name>
+    </author>
+    <author>
+      <name>Phil Blunsom</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1706.05098v1</id>
+    <title>An Overview of Multi-Task Learning in Deep Neural Networks</title>
+    <updated>2017-06-15T21:38:12Z</updated>
+    <link href="https://arxiv.org/abs/1706.05098v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1706.05098v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multi-task learning (MTL) has led to successes in many applications of machine learning, from natural language processing and speech recognition to computer vision and drug discovery. This article aims to give a general overview of MTL, particularly in deep neural networks. It introduces the two most common methods for MTL in Deep Learning, gives an overview of the literature, and discusses recent advances. In particular, it seeks to help ML practitioners apply MTL by shedding light on how MTL works and providing guidelines for choosing appropriate auxiliary tasks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-06-15T21:38:12Z</published>
+    <arxiv:comment>14 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Sebastian Ruder</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1805.06358v1</id>
+    <title>Conflict-free Replicated Data Types (CRDTs)</title>
+    <updated>2018-05-16T15:00:36Z</updated>
+    <link href="https://arxiv.org/abs/1805.06358v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1805.06358v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A conflict-free replicated data type (CRDT) is an abstract data type, with a well defined interface, designed to be replicated at multiple processes and exhibiting the following properties: (1) any replica can be modified without coordinating with another replicas; (2) when any two replicas have received the same set of updates, they reach the same state, deterministically, by adopting mathematically sound rules to guarantee state convergence.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-05-16T15:00:36Z</published>
+    <arxiv:primary_category term="cs.DC"/>
+    <arxiv:journal_ref>Sakr, Sherif and Zomaya, Albert. Encyclopedia of Big Data Technologies, Springer International Publishing, 2018, Encyclopedia of Big Data Technologies, 978-3-319-63962-8</arxiv:journal_ref>
+    <author>
+      <name>Nuno Preguiça</name>
+      <arxiv:affiliation>Regal</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Carlos Baquero</name>
+      <arxiv:affiliation>Regal</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Marc Shapiro</name>
+      <arxiv:affiliation>Regal</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1007/978-3-319-63962-8\_185-1</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/978-3-319-63962-8\_185-1" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1810.00048v2</id>
+    <title>Power corrections and renormalons in parton quasi-distributions</title>
+    <updated>2020-10-11T08:49:36Z</updated>
+    <link href="https://arxiv.org/abs/1810.00048v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1810.00048v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Perturbative expansions for short-distance quantities in QCD are factorially divergent and this deficiency can be turned into a useful tool to investigate nonperturbative corrections. In this work, we use this approach to study the structure of power corrections to parton quasi-distributions and pseudo-distributions which appear in lattice calculations of parton distribution functions. As the main result, we predict the functional dependence of the leading power corrections to quasi(pseudo)-distributions on the Bjorken $x$ variable. We also show that these corrections can be strongly affected by the normalization procedure.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-lat" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-09-28T19:19:29Z</published>
+    <arxiv:comment>14 pages, 6 figures; corrected typos in sec.3, matched to the journal version</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>Phys. Rev. D 99, 014013 (2019)</arxiv:journal_ref>
+    <author>
+      <name>V. Braun</name>
+    </author>
+    <author>
+      <name>A. Vladimirov</name>
+    </author>
+    <author>
+      <name>J. -H. Zhang</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.99.014013</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.99.014013" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1811.03728v1</id>
+    <title>Detecting Backdoor Attacks on Deep Neural Networks by Activation Clustering</title>
+    <updated>2018-11-09T01:08:00Z</updated>
+    <link href="https://arxiv.org/abs/1811.03728v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1811.03728v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While machine learning (ML) models are being increasingly trusted to make decisions in different and varying areas, the safety of systems using such models has become an increasing concern. In particular, ML models are often trained on data from potentially untrustworthy sources, providing adversaries with the opportunity to manipulate them by inserting carefully crafted samples into the training set. Recent work has shown that this type of attack, called a poisoning attack, allows adversaries to insert backdoors or trojans into the model, enabling malicious behavior with simple external backdoor triggers at inference time and only a blackbox perspective of the model itself. Detecting this type of attack is challenging because the unexpected behavior occurs only when a backdoor trigger, which is known only to the adversary, is present. Model users, either direct users of training data or users of pre-trained model from a catalog, may not guarantee the safe operation of their ML-based system. In this paper, we propose a novel approach to backdoor detection and removal for neural networks. Through extensive experimental results, we demonstrate its effectiveness for neural networks classifying text and images. To the best of our knowledge, this is the first methodology capable of detecting poisonous data crafted to insert backdoors and repairing the model that does not require a verified and trusted dataset.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-11-09T01:08:00Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Bryant Chen</name>
+    </author>
+    <author>
+      <name>Wilka Carvalho</name>
+    </author>
+    <author>
+      <name>Nathalie Baracaldo</name>
+    </author>
+    <author>
+      <name>Heiko Ludwig</name>
+    </author>
+    <author>
+      <name>Benjamin Edwards</name>
+    </author>
+    <author>
+      <name>Taesung Lee</name>
+    </author>
+    <author>
+      <name>Ian Molloy</name>
+    </author>
+    <author>
+      <name>Biplav Srivastava</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1809.09446v1</id>
+    <title>Nested cross-validation when selecting classifiers is overzealous for most practical applications</title>
+    <updated>2018-09-25T12:59:05Z</updated>
+    <link href="https://arxiv.org/abs/1809.09446v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1809.09446v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>When selecting a classification algorithm to be applied to a particular problem, one has to simultaneously select the best algorithm for that dataset \emph{and} the best set of hyperparameters for the chosen model. The usual approach is to apply a nested cross-validation procedure; hyperparameter selection is performed in the inner cross-validation, while the outer cross-validation computes an unbiased estimate of the expected accuracy of the algorithm \emph{with cross-validation based hyperparameter tuning}. The alternative approach, which we shall call `flat cross-validation', uses a single cross-validation step both to select the optimal hyperparameter values and to provide an estimate of the expected accuracy of the algorithm, that while biased may nevertheless still be used to select the best learning algorithm. We tested both procedures using 12 different algorithms on 115 real life binary datasets and conclude that using the less computationally expensive flat cross-validation procedure will generally result in the selection of an algorithm that is, for all practical purposes, of similar quality to that selected via nested cross-validation, provided the learning algorithms have relatively few hyperparameters to be optimised.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-09-25T12:59:05Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jacques Wainer</name>
+    </author>
+    <author>
+      <name>Gavin Cawley</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1902.08387v1</id>
+    <title>Complexity and invariant measure of the period-doubling subshift</title>
+    <updated>2019-02-22T07:55:18Z</updated>
+    <link href="https://arxiv.org/abs/1902.08387v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1902.08387v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Explicit formulas for complexity and unique invariant measure of the period-doubling subshift can be derived from those for the Thue-Morse subshift, obtained by Brlek, De Luca and Varricchio, and Dekking. In this note we give direct proofs based on combinatorial properties of the period-doubling sequence. We also derive explicit formulas for correlation integral and other recurrence characteristics of the period-doubling subshift. As a corollary we obtain that the determinism of this subshift converges to 1 as the distance threshold approaches 0.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-02-22T07:55:18Z</published>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Miroslava Poláková</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1707.01545v2</id>
+    <title>Translational absolute continuity and Fourier frames on a sum of singular measures</title>
+    <updated>2017-07-12T20:43:09Z</updated>
+    <link href="https://arxiv.org/abs/1707.01545v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1707.01545v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A finite Borel measure $μ$ in ${\mathbb R}^d$ is called a frame-spectral measure if it admits an exponential frame (or Fourier frame) for $L^2(μ)$. It has been conjectured that a frame-spectral measure must be translationally absolutely continuous, which is a criterion describing the local uniformity of a measure on its support. In this paper, we show that if any measures $ν$ and $λ$ without atoms whose supports form a packing pair, then $ν\ast λ+δ_t\astν$ is translationally singular and it does not admit any Fourier frame. In particular, we show that the sum of one-fourth and one-sixteenth Cantor measure $μ_4+μ_{16}$ does not admit any Fourier frame. We also interpolate the mixed-type frame-spectral measures studied by Lev and the measure we studied. In doing so, we demonstrate a discontinuity behavior: For any anticlockwise rotation mapping $R_θ$ with $θ\ne \pmπ/2$, the two-dimensional measure $ρ_θ (\cdot): = (μ_4\timesδ_0)(\cdot)+(δ_0\timesμ_{16})(R_θ^{-1}\cdot)$, supported on the union of $x$-axis and $y=(\cot θ)x$, always admit a Fourier frame. Furthermore, we can find $\{e^{2πi \langleλ,x\rangle}\}_{λ\inΛ_θ}$ such that it forms a Fourier frame for $ρ_θ$ with frame bounds independent of $θ$. Nonetheless, $ρ_{\pmπ/2}$ does not admit any Fourier frame.</summary>
+    <category term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-07-05T19:16:39Z</published>
+    <arxiv:primary_category term="math.FA"/>
+    <author>
+      <name>Xiaoye Fu</name>
+    </author>
+    <author>
+      <name>Chun-Kit Lai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1710.11299v3</id>
+    <title>Properties of Caratheodory measure hyperbolic universal covers of compact Kahler manifolds</title>
+    <updated>2018-03-10T01:07:51Z</updated>
+    <link href="https://arxiv.org/abs/1710.11299v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1710.11299v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This article explores some properties of universal covers of compact Kahler manifolds, under the assumption of Caratheodory measure hyperbolicity. In particular, by comparing invariant volume forms, an inequality is established between the volume of canonical bundle of a compact Kahler manifolds and the Caratheodory measure of its universal cover (similar result as in [Kikuta 10]). Using similar method, an inequality is established between the restricted volume of canonical bundle of a compact Kahler manifolds and the restricted Caratheodory measure of its covering, solving a conjecture in [Kikuta 13].</summary>
+    <category term="math.DG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-10-31T02:07:31Z</published>
+    <arxiv:primary_category term="math.DG"/>
+    <arxiv:journal_ref>Proc. Amer. Math. Soc. 146 (2018), 3923-3934</arxiv:journal_ref>
+    <author>
+      <name>Ngai-Fung Ng</name>
+    </author>
+    <arxiv:doi>10.1090/proc/14045</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1090/proc/14045" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1802.06501v3</id>
+    <title>Recommendations with Negative Feedback via Pairwise Deep Reinforcement Learning</title>
+    <updated>2018-08-10T02:33:08Z</updated>
+    <link href="https://arxiv.org/abs/1802.06501v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1802.06501v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recommender systems play a crucial role in mitigating the problem of information overload by suggesting users' personalized items or services. The vast majority of traditional recommender systems consider the recommendation procedure as a static process and make recommendations following a fixed strategy. In this paper, we propose a novel recommender system with the capability of continuously improving its strategies during the interactions with users. We model the sequential interactions between users and a recommender system as a Markov Decision Process (MDP) and leverage Reinforcement Learning (RL) to automatically learn the optimal strategies via recommending trial-and-error items and receiving reinforcements of these items from users' feedback. Users' feedback can be positive and negative and both types of feedback have great potentials to boost recommendations. However, the number of negative feedback is much larger than that of positive one; thus incorporating them simultaneously is challenging since positive feedback could be buried by negative one. In this paper, we develop a novel approach to incorporate them into the proposed deep recommender system (DEERS) framework. The experimental results based on real-world e-commerce data demonstrate the effectiveness of the proposed framework. Further experiments have been conducted to understand the importance of both positive and negative feedback in recommendations.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-02-19T02:30:10Z</published>
+    <arxiv:comment>arXiv admin note: substantial text overlap with arXiv:1801.00209</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Xiangyu Zhao</name>
+    </author>
+    <author>
+      <name>Liang Zhang</name>
+    </author>
+    <author>
+      <name>Zhuoye Ding</name>
+    </author>
+    <author>
+      <name>Long Xia</name>
+    </author>
+    <author>
+      <name>Jiliang Tang</name>
+    </author>
+    <author>
+      <name>Dawei Yin</name>
+    </author>
+    <arxiv:doi>10.1145/3219819.3219886</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3219819.3219886" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1904.04567v1</id>
+    <title>Angular momentum compensation manipulation to room temperature of the ferrimagnet Ho$_{3-x}$Dy$_x$Fe$_5$O$_{12}$ detected by the Barnett effect</title>
+    <updated>2019-04-09T09:50:28Z</updated>
+    <link href="https://arxiv.org/abs/1904.04567v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1904.04567v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We demonstrate that the angular momentum compensation temperature $T_A$, at which the net angular momentum in the sample disappears, can be controlled in Ho$_3$Fe$_5$O$_{12}$ by partially substituting Dy for Ho. The $T_A$ can be detected using the Barnett effect, by which mechanical rotation magnetizes an object due to spin-rotation coupling. We found that $T_A$ increases with the Dy content and clarified that the $T_A$ of Ho$_{1.5}$Dy$_{1.5}$Fe$_5$O$_{12}$ coincides with room temperature. The Barnett effect enables us to explore materials applicable to magnetic devices utilizing the angular momentum compensation only by rotating the powder sample at room temperature.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.other" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-04-09T09:50:28Z</published>
+    <arxiv:comment>5pages, 4figure</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <arxiv:journal_ref>Appl. Phys. Lett. 114, 162402 (2019)</arxiv:journal_ref>
+    <author>
+      <name>Masaki Imai</name>
+    </author>
+    <author>
+      <name>Hiroyuki Chudo</name>
+    </author>
+    <author>
+      <name>Masao Ono</name>
+    </author>
+    <author>
+      <name>Kazuya Harii</name>
+    </author>
+    <author>
+      <name>Mamoru Matsuo</name>
+    </author>
+    <author>
+      <name>Yuichi Ohnuma</name>
+    </author>
+    <author>
+      <name>Sadamichi Maekawa</name>
+    </author>
+    <author>
+      <name>Eiji Saitoh</name>
+    </author>
+    <arxiv:doi>10.1063/1.5095166</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/1.5095166" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1904.04208v1</id>
+    <title>Analysis and design of a Germanium multi-quantum well metal strip nanocavity plasmon laser</title>
+    <updated>2019-03-19T08:03:02Z</updated>
+    <link href="https://arxiv.org/abs/1904.04208v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1904.04208v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In order to achieve electrically pumped plasmon nano lasers, several structures, materials and methods, have been proposed recently. However, there is still a long way to find out a reliable appropriate on-chip plasmon source for commercial plasmonic integrated circuits. In this paper, a new waveguide integrated nanocavity plasmon laser is proposed for 1550 nm free-space wavelength. Due to its significant field confinement resulted by the metal strip structure and strong interaction of plasmonic modes with the germanium quantum wells and as a result a considerable Purcell factor about 291, this structure has a remarkable output performance. Using semi-classical rate equations in combination with finite difference time domain (FDTD) cavity mode analysis, the output performance measures are estimated and confirmed with respect to various physical models and simulation tools. Simulation results for this tiny structure (0.073 um2 area) show a 2.8uW output power with 10uA injection current and about 4.16mW output power with the threshold pump current of 27mA while maintaining its performance in a wide modulation bandwidth of 178GHz.</summary>
+    <category term="physics.app-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-03-19T08:03:02Z</published>
+    <arxiv:comment>arXiv admin note: text overlap with arXiv:1812.04498</arxiv:comment>
+    <arxiv:primary_category term="physics.app-ph"/>
+    <author>
+      <name>Hamed Ghodsi</name>
+    </author>
+    <author>
+      <name>Hassan Kaatuzian</name>
+    </author>
+    <author>
+      <name>Elahe Rastergar Pashaki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1811.03146v1</id>
+    <title>Multi-channel discourse as an indicator for Bitcoin price and volume movements</title>
+    <updated>2018-11-06T18:39:00Z</updated>
+    <link href="https://arxiv.org/abs/1811.03146v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1811.03146v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This research aims to identify how Bitcoin-related news publications and online discourse are expressed in Bitcoin exchange movements of price and volume. Being inherently digital, all Bitcoin-related fundamental data (from exchanges, as well as transactional data directly from the blockchain) is available online, something that is not true for traditional businesses or currencies traded on exchanges. This makes Bitcoin an interesting subject for such research, as it enables the mapping of sentiment to fundamental events that might otherwise be inaccessible. Furthermore, Bitcoin discussion largely takes place on online forums and chat channels. In stock trading, the value of sentiment data in trading decisions has been demonstrated numerous times [1] [2] [3], and this research aims to determine whether there is value in such data for Bitcoin trading models. To achieve this, data over the year 2015 has been collected from Bitcointalk.org, (the biggest Bitcoin forum in post volume), established news sources such as Bloomberg and the Wall Street Journal, the complete /r/btc and /r/Bitcoin subreddits, and the bitcoin-otc and bitcoin-dev IRC channels. By analyzing this data on sentiment and volume, we find weak to moderate correlations between forum, news, and Reddit sentiment and movements in price and volume from 1 to 5 days after the sentiment was expressed. A Granger causality test confirms the predictive causality of the sentiment on the daily percentage price and volume movements, and at the same time underscores the predictive causality of market movements on sentiment expressions in online communities</summary>
+    <category term="q-fin.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-11-06T18:39:00Z</published>
+    <arxiv:comment>18 pages</arxiv:comment>
+    <arxiv:primary_category term="q-fin.ST"/>
+    <author>
+      <name>Marvin Aron Kennis</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1709.10190v1</id>
+    <title>Unified Deep Supervised Domain Adaptation and Generalization</title>
+    <updated>2017-09-28T22:35:36Z</updated>
+    <link href="https://arxiv.org/abs/1709.10190v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1709.10190v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This work provides a unified framework for addressing the problem of visual supervised domain adaptation and generalization with deep models. The main idea is to exploit the Siamese architecture to learn an embedding subspace that is discriminative, and where mapped visual domains are semantically aligned and yet maximally separated. The supervised setting becomes attractive especially when only few target data samples need to be labeled. In this scenario, alignment and separation of semantic probability distributions is difficult because of the lack of data. We found that by reverting to point-wise surrogates of distribution distances and similarities provides an effective solution. In addition, the approach has a high speed of adaptation, which requires an extremely low number of labeled target training samples, even one per category can be effective. The approach is extended to domain generalization. For both applications the experiments show very promising results.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-09-28T22:35:36Z</published>
+    <arxiv:comment>International Conference on Computer Vision ICCV 2017</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Saeid Motiian</name>
+    </author>
+    <author>
+      <name>Marco Piccirilli</name>
+    </author>
+    <author>
+      <name>Donald A. Adjeroh</name>
+    </author>
+    <author>
+      <name>Gianfranco Doretto</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1811.02395v2</id>
+    <title>Parameter estimation of wormholes beyond the Heisenberg limit</title>
+    <updated>2018-11-08T08:48:15Z</updated>
+    <link href="https://arxiv.org/abs/1811.02395v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1811.02395v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose to exploit the quantum properties of nonlinear media to estimate the parameters of massless wormholes. The spacetime curvature produces a change in length with respect to Minkowski spacetime that can be estimated in principle with an interferometer. We use quantum metrology techniques to show that the sensitivity is improved with nonlinear media and propose a nonlinear Mach-Zehnder interferometer to estimate the parameters of massless wormholes that scales beyond the Heisenberg limit.</summary>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-11-06T15:07:00Z</published>
+    <arxiv:primary_category term="gr-qc"/>
+    <arxiv:journal_ref>Universe 4, 115 (2018)</arxiv:journal_ref>
+    <author>
+      <name>Carlos Sabín</name>
+    </author>
+    <author>
+      <name>Carlos Sanchidrián Vaca</name>
+    </author>
+    <arxiv:doi>10.3390/universe4110115</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.3390/universe4110115" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1811.00855v4</id>
+    <title>Session-based Recommendation with Graph Neural Networks</title>
+    <updated>2019-01-24T08:12:19Z</updated>
+    <link href="https://arxiv.org/abs/1811.00855v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1811.00855v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The problem of session-based recommendation aims to predict user actions based on anonymous sessions. Previous methods model a session as a sequence and estimate user representations besides item representations to make recommendations. Though achieved promising results, they are insufficient to obtain accurate user vectors in sessions and neglect complex transitions of items. To obtain accurate item embedding and take complex transitions of items into account, we propose a novel method, i.e. Session-based Recommendation with Graph Neural Networks, SR-GNN for brevity. In the proposed method, session sequences are modeled as graph-structured data. Based on the session graph, GNN can capture complex transitions of items, which are difficult to be revealed by previous conventional sequential methods. Each session is then represented as the composition of the global preference and the current interest of that session using an attention network. Extensive experiments conducted on two real datasets show that SR-GNN evidently outperforms the state-of-the-art session-based recommendation methods consistently.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-11-01T02:44:16Z</published>
+    <arxiv:comment>9 pages, 4 figures, accepted by AAAI Conference on Artificial Intelligence (AAAI-19)</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Shu Wu</name>
+    </author>
+    <author>
+      <name>Yuyuan Tang</name>
+    </author>
+    <author>
+      <name>Yanqiao Zhu</name>
+    </author>
+    <author>
+      <name>Liang Wang</name>
+    </author>
+    <author>
+      <name>Xing Xie</name>
+    </author>
+    <author>
+      <name>Tieniu Tan</name>
+    </author>
+    <arxiv:doi>10.1609/aaai.v33i01.3301346</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1609/aaai.v33i01.3301346" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1805.08342v4</id>
+    <title>Nearest neighbor density functional estimation from inverse Laplace transform</title>
+    <updated>2022-02-05T01:54:27Z</updated>
+    <link href="https://arxiv.org/abs/1805.08342v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1805.08342v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A new approach to $L_2$-consistent estimation of a general density functional using $k$-nearest neighbor distances is proposed, where the functional under consideration is in the form of the expectation of some function $f$ of the densities at each point. The estimator is designed to be asymptotically unbiased, using the convergence of the normalized volume of a $k$-nearest neighbor ball to a Gamma distribution in the large-sample limit, and naturally involves the inverse Laplace transform of a scaled version of the function $f.$ Some instantiations of the proposed estimator recover existing $k$-nearest neighbor based estimators of Shannon and Rényi entropies and Kullback--Leibler and Rényi divergences, and discover new consistent estimators for many other functionals such as logarithmic entropies and divergences. The $L_2$-consistency of the proposed estimator is established for a broad class of densities for general functionals, and the convergence rate in mean squared error is established as a function of the sample size for smooth, bounded densities.</summary>
+    <category term="math.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-05-22T01:19:30Z</published>
+    <arxiv:comment>43 pages, 4 figures. IEEE Transactions on Information Theory (to appear)</arxiv:comment>
+    <arxiv:primary_category term="math.ST"/>
+    <author>
+      <name>J. Jon Ryu</name>
+    </author>
+    <author>
+      <name>Shouvik Ganguly</name>
+    </author>
+    <author>
+      <name>Young-Han Kim</name>
+    </author>
+    <author>
+      <name>Yung-Kyun Noh</name>
+    </author>
+    <author>
+      <name>Daniel D. Lee</name>
+    </author>
+    <arxiv:doi>10.1109/TIT.2022.3151231</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/TIT.2022.3151231" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1903.01384v1</id>
+    <title>A case of the Rodriguez Villegas conjecture</title>
+    <updated>2019-03-04T17:29:49Z</updated>
+    <link href="https://arxiv.org/abs/1903.01384v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1903.01384v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let L be a number field and let E be any subgroup of the units O_L^* of L. If rank(E) = 1, Lehmer's conjecture predicts that the height of any non-torsion element of E is bounded below by an absolute positive constant. If rank(E) = rank(O_L^*), Zimmert proved a lower bound on the regulator of E which grows exponentially with [L:Q]. Fernando Rodriguez Villegas made a conjecture in 2002 that "interpolates" between these two extremes of rank. Here we prove a high-rank case of this conjecture. Namely, it holds if L contains a subfield K for which [L:K] &gt;&gt; [K:Q] and E contains the kernel of the norm map from O_L^* to O_K^*.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-03-04T17:29:49Z</published>
+    <arxiv:primary_category term="math.NT"/>
+    <arxiv:journal_ref>Pacific J. Math. 321 (2022) 119-165</arxiv:journal_ref>
+    <author>
+      <name>Ted Chinburg</name>
+    </author>
+    <author>
+      <name>Eduardo Friedman</name>
+    </author>
+    <author>
+      <name>Fernando Rodriguez-Villegas</name>
+    </author>
+    <author>
+      <name>James Sundstrom</name>
+    </author>
+    <arxiv:doi>10.2140/pjm.2022.321.119</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.2140/pjm.2022.321.119" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1802.03426v3</id>
+    <title>UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction</title>
+    <updated>2020-09-18T01:56:41Z</updated>
+    <link href="https://arxiv.org/abs/1802.03426v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1802.03426v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>UMAP (Uniform Manifold Approximation and Projection) is a novel manifold learning technique for dimension reduction. UMAP is constructed from a theoretical framework based in Riemannian geometry and algebraic topology. The result is a practical scalable algorithm that applies to real world data. The UMAP algorithm is competitive with t-SNE for visualization quality, and arguably preserves more of the global structure with superior run time performance. Furthermore, UMAP has no computational restrictions on embedding dimension, making it viable as a general purpose dimension reduction technique for machine learning.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-02-09T19:39:33Z</published>
+    <arxiv:comment>Reference implementation available at http://github.com/lmcinnes/umap</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Leland McInnes</name>
+    </author>
+    <author>
+      <name>John Healy</name>
+    </author>
+    <author>
+      <name>James Melville</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1804.07931v2</id>
+    <title>Entire Space Multi-Task Model: An Effective Approach for Estimating Post-Click Conversion Rate</title>
+    <updated>2018-04-24T12:54:14Z</updated>
+    <link href="https://arxiv.org/abs/1804.07931v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1804.07931v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Estimating post-click conversion rate (CVR) accurately is crucial for ranking systems in industrial applications such as recommendation and advertising. Conventional CVR modeling applies popular deep learning methods and achieves state-of-the-art performance. However it encounters several task-specific problems in practice, making CVR modeling challenging. For example, conventional CVR models are trained with samples of clicked impressions while utilized to make inference on the entire space with samples of all impressions. This causes a sample selection bias problem. Besides, there exists an extreme data sparsity problem, making the model fitting rather difficult. In this paper, we model CVR in a brand-new perspective by making good use of sequential pattern of user actions, i.e., impression -&gt; click -&gt; conversion. The proposed Entire Space Multi-task Model (ESMM) can eliminate the two problems simultaneously by i) modeling CVR directly over the entire space, ii) employing a feature representation transfer learning strategy. Experiments on dataset gathered from Taobao's recommender system demonstrate that ESMM significantly outperforms competitive methods. We also release a sampling version of this dataset to enable future research. To the best of our knowledge, this is the first public dataset which contains samples with sequential dependence of click and conversion labels for CVR modeling.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-04-21T09:59:29Z</published>
+    <arxiv:comment>accept by SIGIR-2018</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Xiao Ma</name>
+    </author>
+    <author>
+      <name>Liqin Zhao</name>
+    </author>
+    <author>
+      <name>Guan Huang</name>
+    </author>
+    <author>
+      <name>Zhi Wang</name>
+    </author>
+    <author>
+      <name>Zelin Hu</name>
+    </author>
+    <author>
+      <name>Xiaoqiang Zhu</name>
+    </author>
+    <author>
+      <name>Kun Gai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1711.10160v1</id>
+    <title>Snorkel: Rapid Training Data Creation with Weak Supervision</title>
+    <updated>2017-11-28T07:48:05Z</updated>
+    <link href="https://arxiv.org/abs/1711.10160v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1711.10160v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Labeling training data is increasingly the largest bottleneck in deploying machine learning systems. We present Snorkel, a first-of-its-kind system that enables users to train state-of-the-art models without hand labeling any training data. Instead, users write labeling functions that express arbitrary heuristics, which can have unknown accuracies and correlations. Snorkel denoises their outputs without access to ground truth by incorporating the first end-to-end implementation of our recently proposed machine learning paradigm, data programming. We present a flexible interface layer for writing labeling functions based on our experience over the past year collaborating with companies, agencies, and research labs. In a user study, subject matter experts build models 2.8x faster and increase predictive performance an average 45.5% versus seven hours of hand labeling. We study the modeling tradeoffs in this new setting and propose an optimizer for automating tradeoff decisions that gives up to 1.8x speedup per pipeline execution. In two collaborations, with the U.S. Department of Veterans Affairs and the U.S. Food and Drug Administration, and on four open-source text and image data sets representative of other deployments, Snorkel provides 132% average improvements to predictive performance over prior heuristic approaches and comes within an average 3.60% of the predictive performance of large hand-curated training sets.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-11-28T07:48:05Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Proceedings of the VLDB Endowment, 11(3), 269-282, 2017</arxiv:journal_ref>
+    <author>
+      <name>Alexander Ratner</name>
+    </author>
+    <author>
+      <name>Stephen H. Bach</name>
+    </author>
+    <author>
+      <name>Henry Ehrenberg</name>
+    </author>
+    <author>
+      <name>Jason Fries</name>
+    </author>
+    <author>
+      <name>Sen Wu</name>
+    </author>
+    <author>
+      <name>Christopher Ré</name>
+    </author>
+    <arxiv:doi>10.14778/3157794.3157797</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.14778/3157794.3157797" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1706.04498v1</id>
+    <title>Net reaction rate and neutrino emissivity for the Urca process in departure from chemical equilibrium</title>
+    <updated>2017-06-14T13:59:58Z</updated>
+    <link href="https://arxiv.org/abs/1706.04498v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1706.04498v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We discuss the effect of compression on Urca shells in the ocean and crust of accreting neutron stars, especially in superbursting sources. We find that Urca shells may be deviated from chemical equilibrium in neutron stars which accrete at several tenths of the local Eddington accretion rate. The deviation depends on the energy threshold of the parent and daughter nuclei, the transition strength, the temperature, and the local accretion rate. In a typical crust model of accreting neutron stars, the chemical departures range from a few tenths of kBT to tens of kBT for various Urca pairs. If the Urca shell can exist in crusts of accreting neutron stars, compression may enhance the net neutrino cooling rate by a factor of about 1 ? 2 relative to the neutrino emissivity in chemical equilibrium. For some cases, such as Urca pairs with small energy thresholds and/or weak transition strength, the large chemical departure may result in net heating rather than cooling, although the released heat can be small. Strong Urca pairs in the deep crust are hard to be deviated even in neutron stars accreting at the local Eddington accretion rate.</summary>
+    <category term="astro-ph.HE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-06-14T13:59:58Z</published>
+    <arxiv:comment>7 pages, 1 figure</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.HE"/>
+    <arxiv:journal_ref>Physical Review C 95, 065802 (2017)</arxiv:journal_ref>
+    <author>
+      <name>Wei-Hua Wang</name>
+    </author>
+    <author>
+      <name>Xi Huang</name>
+    </author>
+    <author>
+      <name>Xiao-Ping Zheng</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevC.95.065802</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevC.95.065802" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1706.08840v6</id>
+    <title>Gradient Episodic Memory for Continual Learning</title>
+    <updated>2022-09-13T14:47:52Z</updated>
+    <link href="https://arxiv.org/abs/1706.08840v6" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1706.08840v6" rel="related" type="application/pdf" title="pdf"/>
+    <summary>One major obstacle towards AI is the poor ability of models to solve new problems quicker, and without forgetting previously acquired knowledge. To better understand this issue, we study the problem of continual learning, where the model observes, once and one by one, examples concerning a sequence of tasks. First, we propose a set of metrics to evaluate models learning over a continuum of data. These metrics characterize models not only by their test accuracy, but also in terms of their ability to transfer knowledge across tasks. Second, we propose a model for continual learning, called Gradient Episodic Memory (GEM) that alleviates forgetting, while allowing beneficial transfer of knowledge to previous tasks. Our experiments on variants of the MNIST and CIFAR-100 datasets demonstrate the strong performance of GEM when compared to the state-of-the-art.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-06-26T14:53:34Z</published>
+    <arxiv:comment>Published at NIPS 2017</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>David Lopez-Paz</name>
+    </author>
+    <author>
+      <name>Marc'Aurelio Ranzato</name>
+    </author>
+  </entry>
+</feed>

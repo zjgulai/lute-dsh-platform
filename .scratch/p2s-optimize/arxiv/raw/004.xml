@@ -1,0 +1,1064 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/PcSLhJs5wynj12KNKGj12vr/diE</id>
+  <title>arXiv Query: search_query=&amp;id_list=2006.11239,2006.11287,2006.12345,2006.14786,2006.16668,2007.04271,2007.13861,2008.03371,2008.12849,2009.05391,2009.10056,2009.10862,2009.12969,2010.12543,2012.04740,2102.04528,2102.07831,2102.11107,2102.12345,2103.00020,2103.01923,2103.03247,2103.09265,2103.13342,2104.05268,2104.05281,2104.06641,2104.07682,2104.07700,2104.08678,2104.08728,2104.08758,2104.08798,2104.08958,2104.09486,2104.10945,2104.11955,2104.12345,2104.12720,2104.12918&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:42:03Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2006.11239,2006.11287,2006.12345,2006.14786,2006.16668,2007.04271,2007.13861,2008.03371,2008.12849,2009.05391,2009.10056,2009.10862,2009.12969,2010.12543,2012.04740,2102.04528,2102.07831,2102.11107,2102.12345,2103.00020,2103.01923,2103.03247,2103.09265,2103.13342,2104.05268,2104.05281,2104.06641,2104.07682,2104.07700,2104.08678,2104.08728,2104.08758,2104.08798,2104.08958,2104.09486,2104.10945,2104.11955,2104.12345,2104.12720,2104.12918" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2009.10056v1</id>
+    <title>Composed Variational Natural Language Generation for Few-shot Intents</title>
+    <updated>2020-09-21T17:48:43Z</updated>
+    <link href="https://arxiv.org/abs/2009.10056v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2009.10056v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we focus on generating training examples for few-shot intents in the realistic imbalanced scenario. To build connections between existing many-shot intents and few-shot intents, we consider an intent as a combination of a domain and an action, and propose a composed variational natural language generator (CLANG), a transformer-based conditional variational autoencoder. CLANG utilizes two latent variables to represent the utterances corresponding to two different independent parts (domain and action) in the intent, and the latent variables are composed together to generate natural examples. Additionally, to improve the generator learning, we adopt the contrastive regularization loss that contrasts the in-class with the out-of-class utterance generation given the intent. To evaluate the quality of the generated utterances, experiments are conducted on the generalized few-shot intent detection task. Empirical results show that our proposed model achieves state-of-the-art performances on two real-world intent detection datasets.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-09-21T17:48:43Z</published>
+    <arxiv:comment>10 pages, accepted to Findings of EMNLP 2020</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Congying Xia</name>
+    </author>
+    <author>
+      <name>Caiming Xiong</name>
+    </author>
+    <author>
+      <name>Philip Yu</name>
+    </author>
+    <author>
+      <name>Richard Socher</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.14786v1</id>
+    <title>Prime-universal diagonal quadratic forms</title>
+    <updated>2020-06-26T04:06:37Z</updated>
+    <link href="https://arxiv.org/abs/2006.14786v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.14786v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A (positive definite and integral) quadratic form is said to be $\textit{prime-universal}$ if it represents all primes. Recently, Doyle and Williams in [2] classified all prime-universal diagonal ternary quadratic forms, and all prime-universal diagonal quaternary quadratic forms under two conjectures proposed by themselves. In this article, we classify all prime-universal diagonal quadratic forms regardless of ranks. Furthermore, we prove, so called, $67$-Theorem for a diagonal quadratic form to be prime-universal.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-26T04:06:37Z</published>
+    <arxiv:comment>14 pages</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Jangwon Ju</name>
+    </author>
+    <author>
+      <name>Daejun Kim</name>
+    </author>
+    <author>
+      <name>Kyoungmin Kim</name>
+    </author>
+    <author>
+      <name>Mingyu Kim</name>
+    </author>
+    <author>
+      <name>Byeong-Kweon Oh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2009.10862v5</id>
+    <title>An Intuitive Tutorial to Gaussian Process Regression</title>
+    <updated>2024-01-28T03:24:49Z</updated>
+    <link href="https://arxiv.org/abs/2009.10862v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2009.10862v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This tutorial aims to provide an intuitive introduction to Gaussian process regression (GPR). GPR models have been widely used in machine learning applications due to their representation flexibility and inherent capability to quantify uncertainty over predictions. The tutorial starts with explaining the basic concepts that a Gaussian process is built on, including multivariate normal distribution, kernels, non-parametric models, and joint and conditional probability. It then provides a concise description of GPR and an implementation of a standard GPR algorithm. In addition, the tutorial reviews packages for implementing state-of-the-art Gaussian process algorithms. This tutorial is accessible to a broad audience, including those new to machine learning, ensuring a clear understanding of GPR fundamentals.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-09-22T23:57:30Z</published>
+    <arxiv:comment>8 pages, 12 figures</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <arxiv:journal_ref>Computing in Science &amp; Engineering, 2024</arxiv:journal_ref>
+    <author>
+      <name>Jie Wang</name>
+    </author>
+    <arxiv:doi>10.1109/MCSE.2023.3342149</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/MCSE.2023.3342149" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.06641v3</id>
+    <title>FDG: A Precise Measurement of Fault Diagnosability Gain of Test Cases</title>
+    <updated>2022-05-24T12:45:38Z</updated>
+    <link href="https://arxiv.org/abs/2104.06641v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.06641v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The performance of many Fault Localisation (FL) techniques directly depends on the quality of the used test suites. Consequently, it is extremely useful to be able to precisely measure how much diagnostic power each test case can introduce when added to a test suite used for FL. Such a measure can help us not only to prioritise and select test cases to be used for FL, but also to effectively augment test suites that are too weak to be used with FL techniques. We propose FDG, a new measure of Fault Diagnosability Gain for individual test cases. The design of FDG is based on our analysis of existing metrics that are designed to prioritise test cases for better FL. Unlike other metrics, FDG exploits the ongoing FL results to emphasise the parts of the program for which more information is needed. Our evaluation of FDG with Defects4J shows that it can successfully help the augmentation of test suites for better FL. When given only a few failing test cases (2.3 test cases on average), FDG can effectively augment the given test suite by prioritising the test cases generated automatically by EvoSuite: the augmentation can improve the acc@1 and acc@10 of the FL results by 11.6x and 2.2x on average, after requiring only ten human judgements on the correctness of the assertions EvoSuite generates.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-14T06:06:29Z</published>
+    <arxiv:comment>13 pages, 6 figures (to be published in ISSTA'22)</arxiv:comment>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Gabin An</name>
+    </author>
+    <author>
+      <name>Shin Yoo</name>
+    </author>
+    <arxiv:doi>10.1145/3533767.3534370</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3533767.3534370" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2007.04271v2</id>
+    <title>Incompleteness Matters Not: Inference of $H_0$ from BBH-galaxy cross-correlations</title>
+    <updated>2020-10-15T18:54:24Z</updated>
+    <link href="https://arxiv.org/abs/2007.04271v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2007.04271v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show how the angular clustering between gravitational-wave standard sirens and galaxies with known redshifts allows an inference of the Hubble constant, regardless of whether the host galaxies of any of these sirens are present in the galaxy catalog. We demonstrate this for the first time with realistic simulations of gravitational-wave signals from binary black holes in a three-detector network with Advanced LIGO and Advanced Virgo sensitivities. We show that with such a network, the cross-correlation technique can be used to infer the Hubble parameter with a precision of less than 10% (2%) at 90% confidence with 50 (500) sources, even with a 100% incomplete catalog, which does not contain the hosts of any of the gravitational-wave events. We compare our method with the current state-of-the-art techniques used for the inference of the Hubble parameter from real data. We argue that, if the clustering information is not used explicitly, the inference of $H_0$ from real data is expected to be prior-dominated.</summary>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-07-08T17:16:41Z</published>
+    <arxiv:comment>15 pages, 11 figures, few references modified, matches published version</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.CO"/>
+    <arxiv:journal_ref>ApJ 902 (2020) 79</arxiv:journal_ref>
+    <author>
+      <name>Sayantani Bera</name>
+    </author>
+    <author>
+      <name>Divya Rana</name>
+    </author>
+    <author>
+      <name>Surhud More</name>
+    </author>
+    <author>
+      <name>Sukanta Bose</name>
+    </author>
+    <arxiv:doi>10.3847/1538-4357/abb4e0</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.3847/1538-4357/abb4e0" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.01923v2</id>
+    <title>Gravitational-Wave Detector Networks: Standard Sirens on Cosmology and Modified Gravity Theory</title>
+    <updated>2021-05-17T16:50:07Z</updated>
+    <link href="https://arxiv.org/abs/2103.01923v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.01923v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We construct the catalogues of standard sirens (StS) based on the future gravitational wave (GW) detector networks, i.e., the second-generation ground-based advanced LIGO+advanced Virgo+KAGRA+LIGO-India (HLVKI), the third-generation ground-based Einstein Telescope+two Cosmic Explorer (ET+2CE), and the space-based LISA+Taiji. From the corresponding electromagnetic (EM) counterpart detectors for each networks, we sample the joint GW+EM detections from the probability to construct the Hubble diagram of standard sirens for 10 years detections of HLVKI, 5 years detections of ET+2CE, and 5 years of detections of LISA+Taiji, which we estimate would be available and released in the 2030s. Thus we construct a combined Hubble diagram from these ground and spaced-based detector networks to explore the expansion history of our Universe from redshift 0 to 7. We give a conservative and realistic estimation of the catalogue and Hubble diagram of GW standard sirens and their potential on studying cosmology and modified gravity theory in the 2030s. We adopt two strategies for the forecasts. One is the traditional model-fitting Markov-Chain Monte-Carlo method (MCMC). The results show that the combined StS alone can constrain the Hubble constant at the precision level of $0.34\%$, 1.76 times more tightly than the current most precise measurement from \textit{Planck}+BAO+Pantheon. The joint StS with current EM experiments will improve the constraints of cosmological parameters significantly. The modified gravity theory can be constrained with $0.46\%$ error from the GW propagation. In the second strategy, we use the machine-learning nonparametric reconstruction techniques, i.e., the Gaussian process (GP) with the Artificial Neural Networks (ANN) as a comparison. GP reconstructions can give comparable results with MCMC. We anticipate more works and research on these topics.</summary>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-02T18:32:02Z</published>
+    <arxiv:comment>36 pages, 15 figures, 2 tables, to match the JCAP version</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.CO"/>
+    <arxiv:journal_ref>JCAP05(2021)044</arxiv:journal_ref>
+    <author>
+      <name>Tao Yang</name>
+    </author>
+    <arxiv:doi>10.1088/1475-7516/2021/05/044</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1475-7516/2021/05/044" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.08758v2</id>
+    <title>Documenting Large Webtext Corpora: A Case Study on the Colossal Clean Crawled Corpus</title>
+    <updated>2021-09-30T17:20:01Z</updated>
+    <link href="https://arxiv.org/abs/2104.08758v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.08758v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models have led to remarkable progress on many NLP tasks, and researchers are turning to ever-larger text corpora to train them. Some of the largest corpora available are made by scraping significant portions of the internet, and are frequently introduced with only minimal documentation. In this work we provide some of the first documentation for the Colossal Clean Crawled Corpus (C4; Raffel et al., 2020), a dataset created by applying a set of filters to a single snapshot of Common Crawl. We begin by investigating where the data came from, and find a significant amount of text from unexpected sources like patents and US military websites. Then we explore the content of the text itself, and find machine-generated text (e.g., from machine translation systems) and evaluation examples from other benchmark NLP datasets. To understand the impact of the filters applied to create this dataset, we evaluate the text that was removed, and show that blocklist filtering disproportionately removes text from and about minority individuals. Finally, we conclude with some recommendations for how to created and document web-scale datasets from a scrape of the internet.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-18T07:42:52Z</published>
+    <arxiv:comment>EMNLP 2021 accepted paper camera ready version</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jesse Dodge</name>
+    </author>
+    <author>
+      <name>Maarten Sap</name>
+    </author>
+    <author>
+      <name>Ana Marasović</name>
+    </author>
+    <author>
+      <name>William Agnew</name>
+    </author>
+    <author>
+      <name>Gabriel Ilharco</name>
+    </author>
+    <author>
+      <name>Dirk Groeneveld</name>
+    </author>
+    <author>
+      <name>Margaret Mitchell</name>
+    </author>
+    <author>
+      <name>Matt Gardner</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.07682v2</id>
+    <title>Growth of Massive Black Hole Seeds by Migration of Stellar and Primordial Black Holes: Gravitational Waves and Stochastic Background</title>
+    <updated>2021-09-24T08:09:51Z</updated>
+    <link href="https://arxiv.org/abs/2104.07682v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.07682v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate the formation and growth of massive black hole (BH) seeds in dusty star-forming galaxies, relying and extending the framework proposed by Boco et al. 2020. Specifically, the latter envisages the migration of stellar compact remnants (neutron stars and stellar-mass black holes) via gaseous dynamical friction towards the galaxy nuclear region, and their subsequent merging to grow a massive central BH seed. In this paper we add two relevant ingredients: (i) we include primordial BHs, that could constitute a fraction $f_{\rm pBH}$ of the dark matter, as an additional component participating in the seed growth; (ii) we predict the stochastic gravitational wave background originated during the seed growth, both from stellar compact remnant and from primordial BH mergers. We find that the latter events contribute most to the initial growth of the central seed during a timescale of $10^6-10^7\,\rm yr$, before stellar compact remnant mergers and gas accretion take over. In addition, if the fraction of primordial BHs $f_{\rm pBH}$ is large enough, gravitational waves emitted by their mergers in the nuclear galactic regions could be detected by future interferometers like Einsten Telescope, DECIGO and LISA. As for the associated stochastic gravitational wave background, we predict that it extends over the wide frequency band $10^{-6}\lesssim f [{\rm Hz}]\lesssim 10$, which is very different from the typical range originated by mergers of isolated binary compact objects. On the one hand, the detection of such a background could be a smoking gun to test the proposed seed growth mechanism; on the other hand, it constitutes a relevant contaminant from astrophysical sources to be characterized and subtracted, in the challenging search for a primordial background of cosmological origin.</summary>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-15T18:00:04Z</published>
+    <arxiv:comment>36 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.CO"/>
+    <author>
+      <name>Lumen Boco</name>
+    </author>
+    <author>
+      <name>Andrea Lapi</name>
+    </author>
+    <author>
+      <name>Alex Sicilia</name>
+    </author>
+    <author>
+      <name>Giulia Capurri</name>
+    </author>
+    <author>
+      <name>Carlo Baccigalupi</name>
+    </author>
+    <author>
+      <name>Luigi Danese</name>
+    </author>
+    <arxiv:doi>10.1088/1475-7516/2021/10/035</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1475-7516/2021/10/035" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.07700v1</id>
+    <title>Unconventional iron-magnesium compounds at terapascal pressures</title>
+    <updated>2021-04-15T18:10:48Z</updated>
+    <link href="https://arxiv.org/abs/2104.07700v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.07700v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Being a lithophile element at ambient pressure, magnesium is long believed to be immiscible with iron. A recent study by Gao et al. [1] showed that pressure turns magnesium into a siderophile element and can produce unconventional Fe-Mg compounds. Here, we extend the investigation to exoplanetary pressure conditions using an adaptive genetic algorithm-based variable-composition structural prediction approach. We identify several Fe-Mg phases up to 3 TPa. Our cluster alignment analysis reveals that most of the predicted Fe-Mg compounds prefer a BCC packing motif at terapascal pressures. This study provides a more comprehensive structure database to support future investigations of the high-pressure structural behavior of Fe-Mg and ternary, quaternary, etc. compounds involving these elements.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.geo-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-15T18:10:48Z</published>
+    <arxiv:comment>6 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <arxiv:journal_ref>Phys. Rev. B 104, 144109, 2021</arxiv:journal_ref>
+    <author>
+      <name>Yimei Fang</name>
+    </author>
+    <author>
+      <name>Yang Sun</name>
+    </author>
+    <author>
+      <name>Renhai Wang</name>
+    </author>
+    <author>
+      <name>Feng Zheng</name>
+    </author>
+    <author>
+      <name>Shunqing Wu</name>
+    </author>
+    <author>
+      <name>Cai-Zhuang Wang</name>
+    </author>
+    <author>
+      <name>Renata M. Wentzcovitch</name>
+    </author>
+    <author>
+      <name>Kai-Ming Ho</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevB.104.144109</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevB.104.144109" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.11955v3</id>
+    <title>On Logics and Homomorphism Closure</title>
+    <updated>2021-06-29T20:46:24Z</updated>
+    <link href="https://arxiv.org/abs/2104.11955v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.11955v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Predicate logic is the premier choice for specifying classes of relational structures. Homomorphisms are key to describing correspondences between relational structures. Questions concerning the interdependencies between these two means of characterizing (classes of) structures are of fundamental interest and can be highly non-trivial to answer. We investigate several problems regarding the homomorphism closure (homclosure) of the class of all (finite or arbitrary) models of logical sentences: membership of structures in a sentence's homclosure; sentence homclosedness; homclosure characterizability in a logic; normal forms for homclosed sentences in certain logics. For a wide variety of fragments of first- and second-order predicate logic, we clarify these problems' computational properties.</summary>
+    <category term="cs.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-24T13:55:07Z</published>
+    <arxiv:primary_category term="cs.LO"/>
+    <author>
+      <name>Manuel Bodirsky</name>
+    </author>
+    <author>
+      <name>Thomas Feller</name>
+    </author>
+    <author>
+      <name>Simon Knäuer</name>
+    </author>
+    <author>
+      <name>Sebastian Rudolph</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.13342v3</id>
+    <title>The Shapley Value of coalition of variables provides better explanations</title>
+    <updated>2022-04-06T14:01:19Z</updated>
+    <link href="https://arxiv.org/abs/2103.13342v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.13342v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While Shapley Values (SV) are one of the gold standard for interpreting machine learning models, we show that they are still poorly understood, in particular in the presence of categorical variables or of variables of low importance. For instance, we show that the popular practice that consists in summing the SV of dummy variables is false as it provides wrong estimates of all the SV in the model and implies spurious interpretations. Based on the identification of null and active coalitions, and a coalitional version of the SV, we provide a correct computation and inference of important variables. Moreover, a Python library (All the experiments and simulations can be reproduced with the publicly available library Active Coalition of Variables, https://www.github.com/salimamoukou/acv00) that computes reliably conditional expectations and SV for tree-based models, is implemented and compared with state-of-the-art algorithms on toy models and real data sets.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-24T17:02:57Z</published>
+    <arxiv:comment>This paper has been withdrawn by the authors, because it has now been merged with (and superseded by) a parallel work arXiv:2106.03820</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Salim I. Amoukou</name>
+    </author>
+    <author>
+      <name>Nicolas J-B. Brunel</name>
+    </author>
+    <author>
+      <name>Tangi Salaün</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2009.05391v1</id>
+    <title>Welding few-layered graphene ribbon via penetration of high-speed fullerenes</title>
+    <updated>2020-08-30T12:18:54Z</updated>
+    <link href="https://arxiv.org/abs/2009.05391v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2009.05391v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Two-dimensional materials are popular in design of nanodevices. To improve bending stiffness of few-layered graphene ribbon, the relative sliding between neighboring layers should be avoided by method such as bonding them together. In this study, the new bonds between the graphene layers in ribbon are formed by ballistic C60 fullerenes from both surfaces of the ribbon. Collision effects are evaluated through molecular dynamics simulations. The formation of the new two dimensional carbon material is demonstrated by breakage and generation of bonds between atoms from graphene and/or fullerenes. Note that the incident velocity of the fullerenes had an interval, in which both graphene and fullerenes will break and further be connected by new covalent bonds at the impact area.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-08-30T12:18:54Z</published>
+    <arxiv:comment>19 pages,10 figures,1 table</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <author>
+      <name>Jiao Shi</name>
+    </author>
+    <author>
+      <name>Chunwei Hu</name>
+    </author>
+    <author>
+      <name>Jiaxing Ji</name>
+    </author>
+    <author>
+      <name>Bo Song</name>
+    </author>
+    <arxiv:doi>10.1088/1361-6528/abf5fc</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1361-6528/abf5fc" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.00020v1</id>
+    <title>Learning Transferable Visual Models From Natural Language Supervision</title>
+    <updated>2021-02-26T19:04:58Z</updated>
+    <link href="https://arxiv.org/abs/2103.00020v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.00020v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>State-of-the-art computer vision systems are trained to predict a fixed set of predetermined object categories. This restricted form of supervision limits their generality and usability since additional labeled data is needed to specify any other visual concept. Learning directly from raw text about images is a promising alternative which leverages a much broader source of supervision. We demonstrate that the simple pre-training task of predicting which caption goes with which image is an efficient and scalable way to learn SOTA image representations from scratch on a dataset of 400 million (image, text) pairs collected from the internet. After pre-training, natural language is used to reference learned visual concepts (or describe new ones) enabling zero-shot transfer of the model to downstream tasks. We study the performance of this approach by benchmarking on over 30 different existing computer vision datasets, spanning tasks such as OCR, action recognition in videos, geo-localization, and many types of fine-grained object classification. The model transfers non-trivially to most tasks and is often competitive with a fully supervised baseline without the need for any dataset specific training. For instance, we match the accuracy of the original ResNet-50 on ImageNet zero-shot without needing to use any of the 1.28 million training examples it was trained on. We release our code and pre-trained model weights at https://github.com/OpenAI/CLIP.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-02-26T19:04:58Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Alec Radford</name>
+    </author>
+    <author>
+      <name>Jong Wook Kim</name>
+    </author>
+    <author>
+      <name>Chris Hallacy</name>
+    </author>
+    <author>
+      <name>Aditya Ramesh</name>
+    </author>
+    <author>
+      <name>Gabriel Goh</name>
+    </author>
+    <author>
+      <name>Sandhini Agarwal</name>
+    </author>
+    <author>
+      <name>Girish Sastry</name>
+    </author>
+    <author>
+      <name>Amanda Askell</name>
+    </author>
+    <author>
+      <name>Pamela Mishkin</name>
+    </author>
+    <author>
+      <name>Jack Clark</name>
+    </author>
+    <author>
+      <name>Gretchen Krueger</name>
+    </author>
+    <author>
+      <name>Ilya Sutskever</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2102.04528v1</id>
+    <title>Deterministic Sampling on the Circle using Projected Cumulative Distributions</title>
+    <updated>2021-02-08T20:59:23Z</updated>
+    <link href="https://arxiv.org/abs/2102.04528v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2102.04528v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose a method for deterministic sampling of arbitrary continuous angular density functions. With deterministic sampling, good estimation results can typically be achieved with much smaller numbers of samples compared to the commonly used random sampling. While the Unscented Kalman Filter uses deterministic sampling as well, it only takes the absolute minimum number of samples. Our method can draw arbitrary numbers of deterministic samples and therefore improve the quality of state estimation. Conformity between the continuous density function (reference) and the Dirac mixture density, i.e., sample locations (approximation) is established by minimizing the difference of the cumulatives of many univariate projections. In other words, we compare cumulatives of probability densities in the Radon space.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-02-08T20:59:23Z</published>
+    <arxiv:comment>11 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Daniel Frisch</name>
+    </author>
+    <author>
+      <name>Uwe D. Hanebeck</name>
+    </author>
+    <arxiv:doi>10.23919/FUSION49751.2022.9841299</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.23919/FUSION49751.2022.9841299" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2102.11107v1</id>
+    <title>Towards Causal Representation Learning</title>
+    <updated>2021-02-22T15:26:57Z</updated>
+    <link href="https://arxiv.org/abs/2102.11107v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2102.11107v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The two fields of machine learning and graphical causality arose and developed separately. However, there is now cross-pollination and increasing interest in both fields to benefit from the advances of the other. In the present paper, we review fundamental concepts of causal inference and relate them to crucial open problems of machine learning, including transfer and generalization, thereby assaying how causality can contribute to modern machine learning research. This also applies in the opposite direction: we note that most work in causality starts from the premise that the causal variables are given. A central problem for AI and causality is, thus, causal representation learning, the discovery of high-level causal variables from low-level observations. Finally, we delineate some implications of causality for machine learning and propose key research areas at the intersection of both communities.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-02-22T15:26:57Z</published>
+    <arxiv:comment>Special Issue of Proceedings of the IEEE - Advances in Machine Learning and Deep Neural Networks</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Bernhard Schölkopf</name>
+    </author>
+    <author>
+      <name>Francesco Locatello</name>
+    </author>
+    <author>
+      <name>Stefan Bauer</name>
+    </author>
+    <author>
+      <name>Nan Rosemary Ke</name>
+    </author>
+    <author>
+      <name>Nal Kalchbrenner</name>
+    </author>
+    <author>
+      <name>Anirudh Goyal</name>
+    </author>
+    <author>
+      <name>Yoshua Bengio</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2008.03371v1</id>
+    <title>LotteryFL: Personalized and Communication-Efficient Federated Learning with Lottery Ticket Hypothesis on Non-IID Datasets</title>
+    <updated>2020-08-07T20:45:12Z</updated>
+    <link href="https://arxiv.org/abs/2008.03371v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2008.03371v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Federated learning is a popular distributed machine learning paradigm with enhanced privacy. Its primary goal is learning a global model that offers good performance for the participants as many as possible. The technology is rapidly advancing with many unsolved challenges, among which statistical heterogeneity (i.e., non-IID) and communication efficiency are two critical ones that hinder the development of federated learning. In this work, we propose LotteryFL -- a personalized and communication-efficient federated learning framework via exploiting the Lottery Ticket hypothesis. In LotteryFL, each client learns a lottery ticket network (i.e., a subnetwork of the base model) by applying the Lottery Ticket hypothesis, and only these lottery networks will be communicated between the server and clients. Rather than learning a shared global model in classic federated learning, each client learns a personalized model via LotteryFL; the communication cost can be significantly reduced due to the compact size of lottery networks. To support the training and evaluation of our framework, we construct non-IID datasets based on MNIST, CIFAR-10 and EMNIST by taking feature distribution skew, label distribution skew and quantity skew into consideration. Experiments on these non-IID datasets demonstrate that LotteryFL significantly outperforms existing solutions in terms of personalization and communication cost.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-08-07T20:45:12Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Ang Li</name>
+    </author>
+    <author>
+      <name>Jingwei Sun</name>
+    </author>
+    <author>
+      <name>Binghui Wang</name>
+    </author>
+    <author>
+      <name>Lin Duan</name>
+    </author>
+    <author>
+      <name>Sicheng Li</name>
+    </author>
+    <author>
+      <name>Yiran Chen</name>
+    </author>
+    <author>
+      <name>Hai Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2009.12969v1</id>
+    <title>Simultaneous Relevance and Diversity: A New Recommendation Inference Approach</title>
+    <updated>2020-09-27T22:20:12Z</updated>
+    <link href="https://arxiv.org/abs/2009.12969v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2009.12969v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Relevance and diversity are both important to the success of recommender systems, as they help users to discover from a large pool of items a compact set of candidates that are not only interesting but exploratory as well. The challenge is that relevance and diversity usually act as two competing objectives in conventional recommender systems, which necessities the classic trade-off between exploitation and exploration. Traditionally, higher diversity often means sacrifice on relevance and vice versa. We propose a new approach, heterogeneous inference, which extends the general collaborative filtering (CF) by introducing a new way of CF inference, negative-to-positive. Heterogeneous inference achieves divergent relevance, where relevance and diversity support each other as two collaborating objectives in one recommendation model, and where recommendation diversity is an inherent outcome of the relevance inference process. Benefiting from its succinctness and flexibility, our approach is applicable to a wide range of recommendation scenarios/use-cases at various sophistication levels. Our analysis and experiments on public datasets and real-world production data show that our approach outperforms existing methods on relevance and diversity simultaneously.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-09-27T22:20:12Z</published>
+    <arxiv:comment>9 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yifang Liu</name>
+    </author>
+    <author>
+      <name>Zhentao Xu</name>
+    </author>
+    <author>
+      <name>Qiyuan An</name>
+    </author>
+    <author>
+      <name>Yang Yi</name>
+    </author>
+    <author>
+      <name>Yanzhi Wang</name>
+    </author>
+    <author>
+      <name>Trevor Hastie</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.12345v1</id>
+    <title>Generic Rotation Sets in Hyperbolic Surfaces</title>
+    <updated>2020-06-22T15:39:05Z</updated>
+    <link href="https://arxiv.org/abs/2006.12345v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.12345v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show that for generic homeomorphisms homotopic to the identity in a closed and oriented surface of genus $g&gt;1$, the rotation set is given by a union of at most $2^{5g-3}$ convex sets. Examples showing the sharpness for this asymptotic order are provided.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-22T15:39:05Z</published>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>J. Alonso</name>
+    </author>
+    <author>
+      <name>J. Brum</name>
+    </author>
+    <author>
+      <name>A. Passeggi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.08798v1</id>
+    <title>Near-miss Identities and Spinor Genus Classification of Ternary Quadratic Forms with Congruence Conditions</title>
+    <updated>2021-04-18T10:09:42Z</updated>
+    <link href="https://arxiv.org/abs/2104.08798v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.08798v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, near-miss identities for the number of representations of some integral ternary quadratic forms with congruence conditions are found and proven. The genus and spinor genus of the corresponding lattice cosets are then classified. Finally, a complete genus and spinor genus classification for all conductor 2 lattice cosets of 2-adically unimodular lattices is given.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-18T10:09:42Z</published>
+    <arxiv:comment>33 pages, no figures, 9 tables (3 unnumbered) For associated Python and C++ programme files, see https://github.com/kush1729/ternary-quadratic-forms/blob/master/README.md</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Kush Singhal</name>
+      <arxiv:affiliation>The University of Hong Kong</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.08678v3</id>
+    <title>Improving Question Answering Model Robustness with Synthetic Adversarial Data Generation</title>
+    <updated>2022-03-15T17:47:56Z</updated>
+    <link href="https://arxiv.org/abs/2104.08678v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.08678v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Despite recent progress, state-of-the-art question answering models remain vulnerable to a variety of adversarial attacks. While dynamic adversarial data collection, in which a human annotator tries to write examples that fool a model-in-the-loop, can improve model robustness, this process is expensive which limits the scale of the collected data. In this work, we are the first to use synthetic adversarial data generation to make question answering models more robust to human adversaries. We develop a data generation pipeline that selects source passages, identifies candidate answers, generates questions, then finally filters or re-labels them to improve quality. Using this approach, we amplify a smaller human-written adversarial dataset to a much larger set of synthetic question-answer pairs. By incorporating our synthetic data, we improve the state-of-the-art on the AdversarialQA dataset by 3.7F1 and improve model generalisation on nine of the twelve MRQA datasets. We further conduct a novel human-in-the-loop evaluation to show that our models are considerably more robust to new human-written adversarial examples: crowdworkers can fool our model only 8.8% of the time on average, compared to 17.6% for a model trained without synthetic data.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-18T02:00:06Z</published>
+    <arxiv:comment>EMNLP 2021</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing, p.8830-8848. Association for Computational Linguistics</arxiv:journal_ref>
+    <author>
+      <name>Max Bartolo</name>
+    </author>
+    <author>
+      <name>Tristan Thrush</name>
+    </author>
+    <author>
+      <name>Robin Jia</name>
+    </author>
+    <author>
+      <name>Sebastian Riedel</name>
+    </author>
+    <author>
+      <name>Pontus Stenetorp</name>
+    </author>
+    <author>
+      <name>Douwe Kiela</name>
+    </author>
+    <arxiv:doi>10.18653/v1/2021.emnlp-main.696</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.18653/v1/2021.emnlp-main.696" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.08728v2</id>
+    <title>Revealing Persona Biases in Dialogue Systems</title>
+    <updated>2021-12-15T07:38:56Z</updated>
+    <link href="https://arxiv.org/abs/2104.08728v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.08728v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Dialogue systems in the form of chatbots and personal assistants are being increasingly integrated into people's lives. Modern dialogue systems may consider adopting anthropomorphic personas, mimicking societal demographic groups to appear more approachable and trustworthy to users. However, the adoption of a persona can result in the adoption of biases. In this paper, we present the first large-scale study on persona biases in dialogue systems and conduct analyses on personas of different social classes, sexual orientations, races, and genders. We define persona biases as harmful differences in responses (e.g., varying levels of offensiveness, agreement with harmful statements) generated from adopting different demographic personas. Furthermore, we introduce an open-source framework, UnitPersonaBias, to explore and aggregate persona biases in dialogue systems. By analyzing the Blender and DialoGPT dialogue systems, we observe that adopting personas can actually decrease harmful responses, compared to not using any personas. Additionally, we find that persona choices can affect the degree of harms in generated responses and thus should be systematically evaluated before deployment. We also analyze how personas can result in different amounts of harm towards specific demographics.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-18T05:44:41Z</published>
+    <arxiv:comment>8 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Emily Sheng</name>
+    </author>
+    <author>
+      <name>Josh Arnold</name>
+    </author>
+    <author>
+      <name>Zhou Yu</name>
+    </author>
+    <author>
+      <name>Kai-Wei Chang</name>
+    </author>
+    <author>
+      <name>Nanyun Peng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.10945v2</id>
+    <title>Transverse $\mathcal F^T$-entropy and transverse Ricci flow for Riemannian foliations</title>
+    <updated>2022-09-19T01:42:10Z</updated>
+    <link href="https://arxiv.org/abs/2104.10945v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.10945v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we introduce an entropy functional on Riemannian foliation, inspired by the work of , which is monotonically along the transverse Ricci flow. We relate their gradient flow, via diffeomorphism preserving the foliated structure of the manifold with Riemannian foliation, to the transverse Ricci flow. Moreover, inspired by the work of Fuquan Fang and Yuhao Zhang, we give a necessary condition for codimension 4 Riemannian foliation admitting the transverse Einstein metric.</summary>
+    <category term="math.DG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-22T09:15:29Z</published>
+    <arxiv:comment>13 pages</arxiv:comment>
+    <arxiv:primary_category term="math.DG"/>
+    <author>
+      <name>Dexie Lin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.11239v2</id>
+    <title>Denoising Diffusion Probabilistic Models</title>
+    <updated>2020-12-16T21:15:05Z</updated>
+    <link href="https://arxiv.org/abs/2006.11239v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.11239v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present high quality image synthesis results using diffusion probabilistic models, a class of latent variable models inspired by considerations from nonequilibrium thermodynamics. Our best results are obtained by training on a weighted variational bound designed according to a novel connection between diffusion probabilistic models and denoising score matching with Langevin dynamics, and our models naturally admit a progressive lossy decompression scheme that can be interpreted as a generalization of autoregressive decoding. On the unconditional CIFAR10 dataset, we obtain an Inception score of 9.46 and a state-of-the-art FID score of 3.17. On 256x256 LSUN, we obtain sample quality similar to ProgressiveGAN. Our implementation is available at https://github.com/hojonathanho/diffusion</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-19T17:24:44Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jonathan Ho</name>
+    </author>
+    <author>
+      <name>Ajay Jain</name>
+    </author>
+    <author>
+      <name>Pieter Abbeel</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2010.12543v3</id>
+    <title>Performance Analysis of Distributed Intelligent Reflective Surfaces for Wireless Communications</title>
+    <updated>2022-02-09T05:23:34Z</updated>
+    <link href="https://arxiv.org/abs/2010.12543v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2010.12543v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, a comprehensive performance analysis of a distributed intelligent reflective surfaces (IRSs)-aided communication system is presented. First, the optimal signal-to-noise ratio (SNR), which is attainable through the direct and reflected channels, is quantified by controlling the phase shifts of the distributed IRS. Next, this optimal SNR is statistically characterized by deriving tight approximations to the exact probability density function (PDF) and cumulative distribution function (CDF) for Nakagami-$m$ fading. The accuracy/tightness of this statistical characterization is investigated by deriving the Kullback-Leibler divergence. Our PDF/CDF analysis is used to derive tight approximations/bounds for the outage probability, achievable rate, and average symbol error rate (SER) in closed-form. To obtain useful insights, the asymptotic outage probability and average SER are derived for the high SNR regime. Thereby, the achievable diversity order and array gains are quantified. Our asymptotic performance analysis reveals that the diversity order can be boosted by using distributed passive IRSs without generating additional electromagnetic (EM) waves via active radio frequency chains. Our asymptotic rate analysis shows that the lower and upper rate bounds converge to an asymptotic limit in large reflective element regime. Our analysis is validated via Monte-Carlo simulations. We present a rigorous set of numerical results to investigate the performance gains of the proposed system model. Our analytical and numerical results reveal that the performance of single-input single-output wireless systems can be boosted by recycling the EM waves generated by a transmitter through distributed passive IRS reflections to enable constructive signal combining at a receiver.</summary>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-10-23T17:10:02Z</published>
+    <arxiv:comment>31 pages, 10 Figures, Journal version</arxiv:comment>
+    <arxiv:primary_category term="cs.IT"/>
+    <author>
+      <name>Diluka Loku Galappaththige</name>
+    </author>
+    <author>
+      <name>Dhanushka Kudathanthirige</name>
+    </author>
+    <author>
+      <name>Gayan Amarasuriya Aruma Baduge</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.05281v1</id>
+    <title>Shapes In A Box -- Disassembling 3D objects for efficient packing and fabrication</title>
+    <updated>2021-04-12T08:23:24Z</updated>
+    <link href="https://arxiv.org/abs/2104.05281v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.05281v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Modern 3D printing technologies and the upcoming mass-customization paradigm call for efficient methods to produce and distribute arbitrarily-shaped 3D objects. This paper introduces an original algorithm to split a 3D model in parts that can be efficiently packed within a box, with the objective of reassembling them after delivery. The first step consists in the creation of a hierarchy of possible parts that can be tightly packed within their minimum bounding boxes. In a second step, the hierarchy is exploited to extract the (single) segmentation whose parts can be most tightly packed. The fact that shape packing is an NP-complete problem justifies the use of heuristics and approximated solutions whose efficacy and efficiency must be assessed. Extensive experimentation demonstrates that our algorithm produces satisfactory results for arbitrarily-shaped objects while being comparable to ad-hoc methods when specific shapes are considered.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-12T08:23:24Z</published>
+    <arxiv:primary_category term="cs.GR"/>
+    <arxiv:journal_ref>Computer Graphics Forum, 2015</arxiv:journal_ref>
+    <author>
+      <name>Marco Attene</name>
+    </author>
+    <arxiv:doi>10.1111/cgf.12608</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1111/cgf.12608" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.09265v1</id>
+    <title>Bio-inspired Robustness: A Review</title>
+    <updated>2021-03-16T18:20:29Z</updated>
+    <link href="https://arxiv.org/abs/2103.09265v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.09265v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deep convolutional neural networks (DCNNs) have revolutionized computer vision and are often advocated as good models of the human visual system. However, there are currently many shortcomings of DCNNs, which preclude them as a model of human vision. For example, in the case of adversarial attacks, where adding small amounts of noise to an image, including an object, can lead to strong misclassification of that object. But for humans, the noise is often invisible. If vulnerability to adversarial noise cannot be fixed, DCNNs cannot be taken as serious models of human vision. Many studies have tried to add features of the human visual system to DCNNs to make them robust against adversarial attacks. However, it is not fully clear whether human vision inspired components increase robustness because performance evaluations of these novel components in DCNNs are often inconclusive. We propose a set of criteria for proper evaluation and analyze different models according to these criteria. We finally sketch future efforts to make DCCNs one step closer to the model of human vision.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-16T18:20:29Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Harshitha Machiraju</name>
+    </author>
+    <author>
+      <name>Oh-Hyeon Choung</name>
+    </author>
+    <author>
+      <name>Pascal Frossard</name>
+    </author>
+    <author>
+      <name>Michael. H Herzog</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.03247v1</id>
+    <title>Time granularity impact on propagation of disruptions in a system-of-systems simulation of infrastructure and business networks</title>
+    <updated>2021-03-04T10:39:37Z</updated>
+    <link href="https://arxiv.org/abs/2103.03247v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.03247v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>System-of-systems (SoS) approach is often used for simulating disruptions to business and infrastructure system networks allowing for integration of several models into one simulation. However, the integration is frequently challenging as each system is designed individually with different characteristics, such as time granularity. Understanding the impact of time granularity on propagation of disruptions between businesses and infrastructure systems and finding the appropriate granularity for the SoS simulation remain as major challenges. To tackle these, we explore how time granularity, recovery time, and disruption size affect the propagation of disruptions between constituent systems of an SoS simulation. To address this issue, we developed a High Level Architecture (HLA) simulation of 3 networks and performed a series of simulation experiments. Our results revealed that time granularity and especially recovery time have huge impact on propagation of disruptions. Consequently, we developed a model for selecting an appropriate time granularity for an SoS simulation based on expected recovery time. Our simulation experiments show that time granularity should be less than 1.13 of expected recovery time. We identified some areas for future research centered around extending the experimental factors space.</summary>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-04T10:39:37Z</published>
+    <arxiv:comment>26 pages, 11 figures, 2 tables, Submitted to International Journal of Environmental Research and Public Health: Special Issue on Cascading Disaster Modelling and Prevention</arxiv:comment>
+    <arxiv:primary_category term="cs.SI"/>
+    <author>
+      <name>Mateusz Iwo Dubaniowski</name>
+    </author>
+    <author>
+      <name>Hans Rudolf Heinimann</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.12720v2</id>
+    <title>Logarithmic corrections to the entropy function of black holes in the open ensemble</title>
+    <updated>2022-07-14T09:25:49Z</updated>
+    <link href="https://arxiv.org/abs/2104.12720v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.12720v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>An `open' or $(μ,P,T)$-ensemble describes equilibrium systems whose control parameters are chemical potential $μ$, pressure $P$ and temperature $T$. Such an unconstrained ensemble is seldom used for applications to standard thermodynamic systems due to the fact that the corresponding free energy identically vanishes as a result of the Euler relation. However, an open ensemble is perfectly regular for the case of black holes, as the entropy is a quasi-homogeneous function of extensive thermodynamic variables with scaling dictated by the Smarr formula. Following a brief discussion on thermodynamics in the open ensemble, we compute the general form of logarithmic corrections to the entropy of a typical system, due to fluctuations in energy, thermodynamic volume and a generic charge $N$. This is then used to obtain the exact analytic form of the logarithmically corrected black hole entropy for charged and rotating black holes in anti-de Sitter spacetimes.</summary>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-26T17:05:58Z</published>
+    <arxiv:comment>v2: 24 pages,4 figures, major revision, erroneous discussion on critical points in earlier version corrected and figures replotted, new appendix added, key conclusions and results unchanged, matches published version</arxiv:comment>
+    <arxiv:primary_category term="hep-th"/>
+    <author>
+      <name>Aritra Ghosh</name>
+    </author>
+    <author>
+      <name>Sudipta Mukherji</name>
+    </author>
+    <author>
+      <name>Chandrasekhar Bhamidipati</name>
+    </author>
+    <arxiv:doi>10.1016/j.nuclphysb.2022.115902</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.nuclphysb.2022.115902" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.11287v2</id>
+    <title>Discovering Symbolic Models from Deep Learning with Inductive Biases</title>
+    <updated>2020-11-18T01:16:09Z</updated>
+    <link href="https://arxiv.org/abs/2006.11287v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.11287v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We develop a general approach to distill symbolic representations of a learned deep model by introducing strong inductive biases. We focus on Graph Neural Networks (GNNs). The technique works as follows: we first encourage sparse latent representations when we train a GNN in a supervised setting, then we apply symbolic regression to components of the learned model to extract explicit physical relations. We find the correct known equations, including force laws and Hamiltonians, can be extracted from the neural network. We then apply our method to a non-trivial cosmology example-a detailed dark matter simulation-and discover a new analytic formula which can predict the concentration of dark matter from the mass distribution of nearby cosmic structures. The symbolic expressions extracted from the GNN using our technique also generalized to out-of-distribution data better than the GNN itself. Our approach offers alternative directions for interpreting neural networks and discovering novel physical principles from the representations they learn.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-19T18:00:00Z</published>
+    <arxiv:comment>Accepted to NeurIPS 2020. 9 pages content + 16 pages appendix/references. Supporting code found at https://github.com/MilesCranmer/symbolic_deep_learning</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Miles Cranmer</name>
+    </author>
+    <author>
+      <name>Alvaro Sanchez-Gonzalez</name>
+    </author>
+    <author>
+      <name>Peter Battaglia</name>
+    </author>
+    <author>
+      <name>Rui Xu</name>
+    </author>
+    <author>
+      <name>Kyle Cranmer</name>
+    </author>
+    <author>
+      <name>David Spergel</name>
+    </author>
+    <author>
+      <name>Shirley Ho</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.16668v1</id>
+    <title>GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding</title>
+    <updated>2020-06-30T10:42:02Z</updated>
+    <link href="https://arxiv.org/abs/2006.16668v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.16668v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Neural network scaling has been critical for improving the model quality in many real-world machine learning applications with vast amounts of training data and compute. Although this trend of scaling is affirmed to be a sure-fire approach for better model quality, there are challenges on the path such as the computation cost, ease of programming, and efficient implementation on parallel devices. GShard is a module composed of a set of lightweight annotation APIs and an extension to the XLA compiler. It provides an elegant way to express a wide range of parallel computation patterns with minimal changes to the existing model code. GShard enabled us to scale up multilingual neural machine translation Transformer model with Sparsely-Gated Mixture-of-Experts beyond 600 billion parameters using automatic sharding. We demonstrate that such a giant model can efficiently be trained on 2048 TPU v3 accelerators in 4 days to achieve far superior quality for translation from 100 languages to English compared to the prior art.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-30T10:42:02Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Dmitry Lepikhin</name>
+    </author>
+    <author>
+      <name>HyoukJoong Lee</name>
+    </author>
+    <author>
+      <name>Yuanzhong Xu</name>
+    </author>
+    <author>
+      <name>Dehao Chen</name>
+    </author>
+    <author>
+      <name>Orhan Firat</name>
+    </author>
+    <author>
+      <name>Yanping Huang</name>
+    </author>
+    <author>
+      <name>Maxim Krikun</name>
+    </author>
+    <author>
+      <name>Noam Shazeer</name>
+    </author>
+    <author>
+      <name>Zhifeng Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2007.13861v5</id>
+    <title>Calibration of Google Trends Time Series</title>
+    <updated>2021-02-04T15:03:13Z</updated>
+    <link href="https://arxiv.org/abs/2007.13861v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2007.13861v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Google Trends is a tool that allows researchers to analyze the popularity of Google search queries across time and space. In a single request, users can obtain time series for up to 5 queries on a common scale, normalized to the range from 0 to 100 and rounded to integer precision. Despite the overall value of Google Trends, rounding causes major problems, to the extent that entirely uninformative, all-zero time series may be returned for unpopular queries when requested together with more popular queries. We address this issue by proposing Google Trends Anchor Bank (G-TAB), an efficient solution for the calibration of Google Trends data. Our method expresses the popularity of an arbitrary number of queries on a common scale without being compromised by rounding errors. The method proceeds in two phases. In the offline preprocessing phase, an "anchor bank" is constructed, a set of queries spanning the full spectrum of popularity, all calibrated against a common reference query by carefully chaining together multiple Google Trends requests. In the online deployment phase, any given search query is calibrated by performing an efficient binary search in the anchor bank. Each search step requires one Google Trends request, but few steps suffice, as we demonstrate in an empirical evaluation. We make our code publicly available as an easy-to-use library at https://github.com/epfl-dlab/GoogleTrendsAnchorBank.</summary>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-07-27T20:54:33Z</published>
+    <arxiv:comment>Proceedings of the 29th ACM Conference on Information and Knowledge Management (CIKM), 2020</arxiv:comment>
+    <arxiv:primary_category term="cs.SI"/>
+    <author>
+      <name>Robert West</name>
+    </author>
+    <arxiv:doi>10.1145/3340531.3412075</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3340531.3412075" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2102.07831v2</id>
+    <title>NeuralNDCG: Direct Optimisation of a Ranking Metric via Differentiable Relaxation of Sorting</title>
+    <updated>2021-05-22T08:50:53Z</updated>
+    <link href="https://arxiv.org/abs/2102.07831v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2102.07831v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Learning to Rank (LTR) algorithms are usually evaluated using Information Retrieval metrics like Normalised Discounted Cumulative Gain (NDCG) or Mean Average Precision. As these metrics rely on sorting predicted items' scores (and thus, on items' ranks), their derivatives are either undefined or zero everywhere. This makes them unsuitable for gradient-based optimisation, which is the usual method of learning appropriate scoring functions. Commonly used LTR loss functions are only loosely related to the evaluation metrics, causing a mismatch between the optimisation objective and the evaluation criterion. In this paper, we address this mismatch by proposing NeuralNDCG, a novel differentiable approximation to NDCG. Since NDCG relies on the non-differentiable sorting operator, we obtain NeuralNDCG by relaxing that operator using NeuralSort, a differentiable approximation of sorting. As a result, we obtain a new ranking loss function which is an arbitrarily accurate approximation to the evaluation metric, thus closing the gap between the training and the evaluation of LTR models. We introduce two variants of the proposed loss function. Finally, the empirical evaluation shows that our proposed method outperforms previous work aimed at direct optimisation of NDCG and is competitive with the state-of-the-art methods.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-02-15T20:11:42Z</published>
+    <arxiv:comment>12 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Przemysław Pobrotyn</name>
+    </author>
+    <author>
+      <name>Radosław Białobrzeski</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.12918v1</id>
+    <title>Extractive and Abstractive Explanations for Fact-Checking and Evaluation of News</title>
+    <updated>2021-04-27T00:21:55Z</updated>
+    <link href="https://arxiv.org/abs/2104.12918v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.12918v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we explore the construction of natural language explanations for news claims, with the goal of assisting fact-checking and news evaluation applications. We experiment with two methods: (1) an extractive method based on Biased TextRank -- a resource-effective unsupervised graph-based algorithm for content extraction; and (2) an abstractive method based on the GPT-2 language model. We perform comparative evaluations on two misinformation datasets in the political and health news domains, and find that the extractive method shows the most promise.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-27T00:21:55Z</published>
+    <arxiv:comment>Accepted to NLP for Internet Freedom Workshop at NAACL 2021</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Ashkan Kazemi</name>
+    </author>
+    <author>
+      <name>Zehua Li</name>
+    </author>
+    <author>
+      <name>Verónica Pérez-Rosas</name>
+    </author>
+    <author>
+      <name>Rada Mihalcea</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.08958v1</id>
+    <title>Dependent Type Theory as Related to the Bourbaki Notions of Structure and Isomorphism</title>
+    <updated>2021-04-18T21:25:32Z</updated>
+    <link href="https://arxiv.org/abs/2104.08958v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.08958v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper develops a version of dependent type theory in which isomorphism is handled through a direct generalization of the 1939 definitions of Bourbaki. More specifically we generalize the Bourbaki definition of structure from simple type signatures to dependent type signatures. Both the original Bourbaki notion of isomorphism and its generalization given here define an isomorphism between two structures $N$ and $N'$ to consist of bijections between their sorts that transport the structure of $N$ to the structure of $N'$. Here transport is defined by commutativity conditions stated with set-theoretic equality. This differs from the dependent type theoretic treatments of isomorphism given in the groupoid model and homotopy type theory where no analogously straightforward set-theoretic definition of transport is specified. The straightforward definition of transport also leads to a straightforward constructive proof (constructive content) for the validity of the substitution of isomorphics -- something that is difficult in the groupoid model or homotopy type theory.</summary>
+    <category term="cs.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-18T21:25:32Z</published>
+    <arxiv:primary_category term="cs.LO"/>
+    <author>
+      <name>David McAllester</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2102.12345v2</id>
+    <title>Automated Fuzzing of Automotive Control Units</title>
+    <updated>2025-05-11T17:54:04Z</updated>
+    <link href="https://arxiv.org/abs/2102.12345v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2102.12345v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Modern vehicles are governed by a network of Electronic Control Units (ECUs), which are programmed to sense inputs from the driver and the environment, to process these inputs, and to control actuators that, e.g., regulate the engine or even control the steering system. ECUs within a vehicle communicate via automotive bus systems such as the Controller Area Network (CAN), and beyond the vehicles boundaries through upcoming vehicle-to-vehicle and vehicle-to-infrastructure channels. Approaches to manipulate the communication between ECUs for the purpose of security testing and reverse-engineering of vehicular functions have been presented in the past, all of which struggle with automating the detection of system change in response to message injection. In this paper we present our findings with fuzzing CAN networks, in particular while observing individual ECUs with a sensor harness. The harness detects physical responses, which we then use in a oracle functions to inform the fuzzing process. We systematically define fuzzers, fuzzing configurations and oracle functions for testing ECUs. We evaluate our approach based on case studies of commercial instrument clusters and with an experimental framework for CAN authentication. Our results show that the approach is capable of identifying interesting ECU states with a high level of automation. Our approach is applicable in distributed cyber-physical systems beyond automotive computing.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-02-24T15:28:36Z</published>
+    <arxiv:comment>Appeared in 2019 International Workshop on Attacks and Defenses for Internet-of-Things (ADIoT) / International Workshop on the Secure Internet of Things (SIoT)</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Timothy Werquin</name>
+    </author>
+    <author>
+      <name>Roos Hubrechtsen</name>
+    </author>
+    <author>
+      <name>Ashok Thangarajan</name>
+    </author>
+    <author>
+      <name>Frank Piessens</name>
+    </author>
+    <author>
+      <name>Jan Tobias Muehlberg</name>
+    </author>
+    <arxiv:doi>10.1109/SIOT48044.2019.9637090</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/SIOT48044.2019.9637090" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.12345v2</id>
+    <title>Machine Learning-based Lie Detector applied to a Novel Annotated Game Dataset</title>
+    <updated>2021-06-30T04:00:37Z</updated>
+    <link href="https://arxiv.org/abs/2104.12345v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.12345v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Lie detection is considered a concern for everyone in their day to day life given its impact on human interactions. Thus, people normally pay attention to both what their interlocutors are saying and also to their visual appearances, including faces, to try to find any signs that indicate whether the person is telling the truth or not. While automatic lie detection may help us to understand this lying characteristics, current systems are still fairly limited, partly due to lack of adequate datasets to evaluate their performance in realistic scenarios. In this work, we have collected an annotated dataset of facial images, comprising both 2D and 3D information of several participants during a card game that encourages players to lie. Using our collected dataset, We evaluated several types of machine learning-based lie detectors in terms of their generalization, person-specific and cross-domain experiments. Our results show that models based on deep learning achieve the best accuracy, reaching up to 57\% for the generalization task and 63\% when dealing with a single participant. Finally, we also highlight the limitation of the deep learning based lie detector when dealing with cross-domain lie detection tasks.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-26T04:48:42Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Nuria Rodriguez-Diaz</name>
+    </author>
+    <author>
+      <name>Decky Aspandi</name>
+    </author>
+    <author>
+      <name>Federico Sukno</name>
+    </author>
+    <author>
+      <name>Xavier Binefa</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.09486v2</id>
+    <title>Convolutional codes over finite chain rings, MDP codes and their characterization</title>
+    <updated>2022-03-30T11:01:34Z</updated>
+    <link href="https://arxiv.org/abs/2104.09486v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.09486v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we develop the theory of convolutional codes over finite commutative chain rings. In particular, we focus on maximum distance profile (MDP) convolutional codes and we provide a characterization of these codes, generalizing the one known for fields. Moreover, we relate (reverse) MDP convolutional codes over a finite chain ring with (reverse) MDP convolutional codes over its residue field. Finally, we provide a construction of (reverse) MDP convolutional codes over finite chain rings generalizing the notion of (reverse) superregular matrices.</summary>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-19T17:46:28Z</published>
+    <arxiv:comment>19 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.IT"/>
+    <author>
+      <name>Gianira N. Alfarano</name>
+    </author>
+    <author>
+      <name>Anina Gruica</name>
+    </author>
+    <author>
+      <name>Julia Lieb</name>
+    </author>
+    <author>
+      <name>Joachim Rosenthal</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.05268v1</id>
+    <title>Separation of singularities for the Bergman space and application to control theory</title>
+    <updated>2021-04-12T08:00:50Z</updated>
+    <link href="https://arxiv.org/abs/2104.05268v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.05268v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we solve a separation of singularities problem in the Bergman space. More precisely, we show that if $P\subset \mathbb{C}$ is a convex polygon which is the intersection of $n$ half planes, then the Bergman space on $P$ decomposes into the sum of the Bergman spaces on these half planes. The result applies to the characterization of the reachable space of the one-dimensional heat equation on a finite interval with boundary controls. We prove that this space is a Bergman space of the square which has the given interval as a diagonal. This gives an affirmative answer to a conjecture raised in [HKT20].</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-12T08:00:50Z</published>
+    <arxiv:comment>Journal de Math{é}matiques Pures et Appliqu{é}es, Elsevier, 2021</arxiv:comment>
+    <arxiv:primary_category term="math.AP"/>
+    <author>
+      <name>Andreas Hartmann</name>
+      <arxiv:affiliation>IMB</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Marcu-Antone Orsoni</name>
+      <arxiv:affiliation>IMB</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1016/j.matpur.2021.04.009</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.matpur.2021.04.009" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2008.12849v2</id>
+    <title>The Identity Fragmentation Bias</title>
+    <updated>2021-02-08T01:00:38Z</updated>
+    <link href="https://arxiv.org/abs/2008.12849v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2008.12849v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Consumers interact with firms across multiple devices, browsers, and machines; these interactions are often recorded with different identifiers for the same consumer. The failure to correctly match different identities leads to a fragmented view of exposures and behaviors. This paper studies the identity fragmentation bias, referring to the estimation bias resulted from using fragmented data. Using a formal framework, we decompose the contributing factors of the estimation bias caused by data fragmentation and discuss the direction of bias. Contrary to conventional wisdom, this bias cannot be signed or bounded under standard assumptions. Instead, upward biases and sign reversals can occur even in experimental settings. We then compare several corrective measures, and discuss their respective advantages and caveats.</summary>
+    <category term="econ.EM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-08-28T21:15:37Z</published>
+    <arxiv:primary_category term="econ.EM"/>
+    <arxiv:journal_ref>Marketing Science 41.3 (2022): 433-440</arxiv:journal_ref>
+    <author>
+      <name>Tesary Lin</name>
+    </author>
+    <author>
+      <name>Sanjog Misra</name>
+    </author>
+    <arxiv:doi>10.1287/mksc.2022.1360</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1287/mksc.2022.1360" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2012.04740v1</id>
+    <title>River: machine learning for streaming data in Python</title>
+    <updated>2020-12-08T21:04:44Z</updated>
+    <link href="https://arxiv.org/abs/2012.04740v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2012.04740v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>River is a machine learning library for dynamic data streams and continual learning. It provides multiple state-of-the-art learning methods, data generators/transformers, performance metrics and evaluators for different stream learning problems. It is the result from the merger of the two most popular packages for stream learning in Python: Creme and scikit-multiflow. River introduces a revamped architecture based on the lessons learnt from the seminal packages. River's ambition is to be the go-to library for doing machine learning on streaming data. Additionally, this open source package brings under the same umbrella a large community of practitioners and researchers. The source code is available at https://github.com/online-ml/river.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-12-08T21:04:44Z</published>
+    <arxiv:comment>Submitted to JMLR MLOSS</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jacob Montiel</name>
+    </author>
+    <author>
+      <name>Max Halford</name>
+    </author>
+    <author>
+      <name>Saulo Martiello Mastelini</name>
+    </author>
+    <author>
+      <name>Geoffrey Bolmier</name>
+    </author>
+    <author>
+      <name>Raphael Sourty</name>
+    </author>
+    <author>
+      <name>Robin Vaysse</name>
+    </author>
+    <author>
+      <name>Adil Zouitine</name>
+    </author>
+    <author>
+      <name>Heitor Murilo Gomes</name>
+    </author>
+    <author>
+      <name>Jesse Read</name>
+    </author>
+    <author>
+      <name>Talel Abdessalem</name>
+    </author>
+    <author>
+      <name>Albert Bifet</name>
+    </author>
+  </entry>
+</feed>

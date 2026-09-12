@@ -1,0 +1,357 @@
+{
+ "batch": "B05",
+ "assignments": [
+  {
+   "name": "customer-rfm-analyzer",
+   "roles": [
+    {
+     "id": "AGT-034",
+     "responsibility": "分群",
+     "confidence": "medium",
+     "from_skill": "RFM scoring, cohort retention",
+     "from_role": "围绕用户阶段提升有价值的复购",
+     "note": "RFM 与队列留存把客户按购买行为分成 Champion/VIP/流失风险等群，正是 AGT-034 分群责任的输入；既有 AGT-006 已删除。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": [
+    {
+     "id": "AGT-006",
+     "reason": "该岗位的『需求分群』来自用户访谈与 VOC 的需求侧研究，本技能是对已有订单做 RFM 交易行为分层，不做访谈，故删除。"
+    }
+   ]
+  },
+  {
+   "name": "review-request-automator",
+   "roles": [
+    {
+     "id": "AGT-034",
+     "responsibility": "生命周期触达",
+     "confidence": "medium",
+     "from_skill": "timed request sequences",
+     "from_role": "CRM留存与复购",
+     "note": "技能是购后 T+0/T+7/T+21 的定时触达序列与晒图激励，属生命周期触达机制；但其设计目的是社会证明与转化而非复购实验，故只挂这一条责任。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "cart-abandonment-recovery",
+   "roles": [
+    {
+     "id": "AGT-023",
+     "responsibility": "转化优化",
+     "confidence": "high",
+     "from_skill": "remind shoppers",
+     "from_role": "改善品牌独立站的购买闭环与经营结果",
+     "note": "以邮件+短信序列把已发起结账的流量赢回并完成下单，直接改善独立站购买闭环；触发条件（结账完成率低于 50%、降低 CPA）即转化优化场景。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "lifecycle-marketing-automator",
+   "roles": [
+    {
+     "id": "AGT-034",
+     "responsibility": "生命周期触达",
+     "confidence": "high",
+     "from_skill": "personalized messaging",
+     "from_role": "围绕用户阶段提升有价值的复购",
+     "note": "技能按生命周期阶段定义转移触发器并做阶段化个性化触达，逐字对应『生命周期触达』。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "referral-program-builder",
+   "roles": [
+    {
+     "id": "AGT-033",
+     "responsibility": "联盟运营",
+     "confidence": "medium",
+     "from_skill": "refer-a-friend programs",
+     "from_role": "把合作触达转为可追踪的品牌和销售结果",
+     "note": "唯一带追踪链接、双向激励与防作弊的合作方运营机制，落在联盟/合作运营；既有 AGT-039 已删除。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": [
+    {
+     "id": "AGT-039",
+     "reason": "『会员活动』是存量会员的运营与反馈，本技能是推荐裂变拉新，机制与责任对象都不符，故删除。"
+    }
+   ]
+  },
+  {
+   "name": "coupon-discount-manager",
+   "roles": [
+    {
+     "id": "AGT-026",
+     "responsibility": "促销规划",
+     "confidence": "high",
+     "from_skill": "seasonal promotional calendar",
+     "from_role": "在供给和经营边界内设计价格与组合",
+     "note": "折扣码规则、限额、有效期与分发节奏就是促销规划的执行件，技能自身也以 seasonal promotional calendar 为使用场景。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "discount-promotion-engine",
+   "roles": [
+    {
+     "id": "AGT-026",
+     "responsibility": "促销规划",
+     "confidence": "high",
+     "from_skill": "tiered quantity pricing",
+     "from_role": "价格与促销决策包",
+     "note": "阶梯定价/BOGO/购物车级促销的配置与叠加治理即促销规划内容，并以毛利保护为约束；同一岗位的『组合设计』（买赠与捆绑）也由本技能承担，但一个岗位只挂一条，故合并于此。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "loyalty-points-designer",
+   "roles": [
+    {
+     "id": "AGT-039",
+     "responsibility": "会员活动",
+     "confidence": "medium",
+     "from_skill": "loyalty points program",
+     "from_role": "会员活动",
+     "note": "积分与 VIP 分层是会员体系的机制设计，交给负责会员活动与用户反馈的 AGT-039；既有 AGT-034 已删除。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "b2b-payment-terms-optimizer",
+   "roles": [
+    {
+     "id": "AGT-025",
+     "responsibility": "渠道方案",
+     "confidence": "medium",
+     "from_skill": "trade credit",
+     "from_role": "协调经销零售与B2B机会和交付",
+     "note": "账期、信用额度与自动开票是批发/B2B 渠道合作方案里可执行的部分，落在渠道方案责任；既有 AGT-043 已删除。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": [
+    {
+     "id": "AGT-043",
+     "reason": "『合同审查支持』审的是合同权利与知识产权，本技能配置贸易信用、账期与应收催收，不审合同，故删除。"
+    }
+   ]
+  },
+  {
+   "name": "lark-tools",
+   "roles": [
+    {
+     "id": "AGT-004",
+     "responsibility": "人事行政流程",
+     "confidence": "medium",
+     "from_skill": "Bitable/Base records",
+     "from_role": "人事行政流程",
+     "note": "飞书多维表格/文档/日历/任务/邮件是行政协作与流程台账的实际载体，套在人事行政流程上；因其为通用协作平台操作，行政属性需人工复核。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "create-website",
+   "roles": [
+    {
+     "id": "AGT-023",
+     "responsibility": "站点运营",
+     "confidence": "medium",
+     "from_skill": "HTML website directly",
+     "from_role": "独立站经营与实验包",
+     "note": "产出可直接上线的单文件 HTML 落地页，属独立站的站点建设与运营物料；技能不承担转化实验，故只挂站点运营。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "internal-comms",
+   "roles": [
+    {
+     "id": "AGT-004",
+     "responsibility": "人事行政流程",
+     "confidence": "medium",
+     "from_skill": "Company newsletters",
+     "from_role": "支持人才、培训、绩效、编制和行政协作",
+     "note": "内部通报、周报、FAQ、3P 与事故通报是行政协作与组织沟通的产物，落在该岗位的行政协作使命。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "doc-coauthoring",
+   "roles": [],
+   "no_role_reason": "文档共写流程是跨岗位通用的写作方法论，任何岗位都可按任务调用，不构成单一岗位的责任；既有 AGT-027 的申诉材料与 AGT-039 的使用教育都不以共写流程为责任内容，故不挂岗。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": [
+    {
+     "id": "AGT-027",
+     "reason": "『申诉材料准备』是账号规则申诉材料，本技能是通用共写流程，不针对申诉场景，故删除。"
+    },
+    {
+     "id": "AGT-039",
+     "reason": "『会员活动』是存量会员的运营与反馈，本技能是推荐裂变拉新，机制与责任对象都不符，故删除。"
+    }
+   ]
+  },
+  {
+   "name": "docx",
+   "roles": [],
+   "no_role_reason": "纯文档格式处理（读写 .docx、修订与批注），属通用文件操作形态，不承担任何岗位责任。",
+   "no_role_kind": "TOOL_ONLY",
+   "drop_reasons": []
+  },
+  {
+   "name": "gmail-assistant",
+   "roles": [],
+   "no_role_reason": "纯 Gmail 接入与操作形态（搜索、草拟、标签、送达验证）且需外部 MCP，本身不构成岗位责任。",
+   "no_role_kind": "TOOL_ONLY",
+   "drop_reasons": []
+  },
+  {
+   "name": "pdf",
+   "roles": [],
+   "no_role_reason": "纯 PDF 解析、生成、合并拆分等格式处理工具形态，不承担任何岗位责任。",
+   "no_role_kind": "TOOL_ONLY",
+   "drop_reasons": []
+  },
+  {
+   "name": "pptx",
+   "roles": [],
+   "no_role_reason": "纯 PPTX 生成与编辑的格式处理工具形态，不承担任何岗位责任。",
+   "no_role_kind": "TOOL_ONLY",
+   "drop_reasons": []
+  },
+  {
+   "name": "xlsx",
+   "roles": [],
+   "no_role_reason": "纯 xlsx 表格读写与公式处理的格式工具形态，不承担任何岗位责任。",
+   "no_role_kind": "TOOL_ONLY",
+   "drop_reasons": []
+  },
+  {
+   "name": "skill-vetter",
+   "roles": [
+    {
+     "id": "AGT-050",
+     "responsibility": "授权审查",
+     "confidence": "high",
+     "from_skill": "Permission Scope Analysis",
+     "from_role": "授权审查",
+     "note": "技能核心步骤是逐项审查 fileRead/fileWrite/network/shell 权限的必要性，逐字对应授权审查；同一岗位的『访问控制』（判定技能权限边界、标红 network+shell 高危组合）与『安全事件处理』（凭据读取/外泄等红线的发现与阻断）也由本技能承担，因三岗同属 AGT-050 只挂一条。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "skill-finder",
+   "roles": [
+    {
+     "id": "AGT-002",
+     "responsibility": "能力匹配",
+     "confidence": "low",
+     "from_skill": "and install agent skills",
+     "from_role": "能力匹配",
+     "note": "按能力描述检索并推荐可安装的技能/插件，只间接服务于 AGT-002 的能力匹配（该岗位要为场景选定主岗位与 Skills 装配），非直接执行该责任，需人工复核。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "skill-creator",
+   "roles": [],
+   "no_role_reason": "技能创作方法论（模板、Iron Law 测试、渐进式披露与质量评估），任何岗位都可用来把流程固化成技能，不承担某一岗位的责任；AGT-048 需要的是知识溯源、技能版本与 Playbook 评估，本技能不产出其中任何一项。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": []
+  },
+  {
+   "name": "self-improvement",
+   "roles": [],
+   "no_role_reason": "跨岗位的通用自我改进机制（把会话错误、纠正写入 .learnings 笔记并提升到项目记忆），任何岗位都可用，本身不承载岗位责任；其触发边界也明确排除与经验沉淀无关的普通任务。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": []
+  },
+  {
+   "name": "accio-mcp-cli",
+   "roles": [
+    {
+     "id": "AGT-047",
+     "responsibility": "业务工具实现",
+     "confidence": "medium",
+     "from_skill": "invoke MCP tools",
+     "from_role": "业务工具实现",
+     "note": "以 CLI 统一发现与调用 MCP 工具（Twitter/Gmail/Notion/Apify 等），为各岗位提供可复用的受控执行能力；技能是工具调用网关而非工具实现，故给 medium。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "amazon-prelaunch-ad-budget",
+   "roles": [
+    {
+     "id": "AGT-032",
+     "responsibility": "预算分配",
+     "confidence": "high",
+     "from_skill": "defensible",
+     "from_role": "将广告预算转成可解释的业务增长",
+     "note": "技能直接输出日/月/上线期广告预算、分关键词 CPC 表与盈亏平衡 ACoS/目标 ACoS，就是预算分配的可解释依据。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "amazon-prelaunch-competitor-teardown",
+   "roles": [
+    {
+     "id": "AGT-007",
+     "responsibility": "竞品研究",
+     "confidence": "high",
+     "from_skill": "competing Amazon ASIN",
+     "from_role": "竞品研究",
+     "note": "把竞品 ASIN/品牌拆成营收、价格史、关键词足迹与份额，输出可攻击弱点清单，逐字对应竞品研究。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  }
+ ]
+}

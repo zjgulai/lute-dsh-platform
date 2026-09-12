@@ -1,9 +1,24 @@
 #!/bin/bash
-# build-app-icon.sh —— 用 lute-brand-icons 生成引擎产出 LUTE app 图标（icon.icns）
+# build-app-icon.sh —— 产出 LUTE app 图标（icon.icns）
+# 默认（2026-09-11 品牌治理）：从 ROOT 真相源复制
+#   .dsh-root-brand-preview/root-icon/icon.icns（与 packaging/assets/app-icon.icns 同源）。
+# 旧引擎（lute-brand-icons dad-coder 头像徽章）仅在 LUTE_ICON_ENGINE=1 时启用，
+# 供头像类导出使用；app 图标不再使用引擎产物（pkg 投诉根因：头像徽章 ≠ RooT 品牌）。
 # 用法: ./build-app-icon.sh <输出.icns>
-# 链条: generator.js(buildIcon) → SVG → sips PNG(1024) → iconset → iconutil icns
 set -euo pipefail
 OUT="${1:?用法: build-app-icon.sh <输出.icns>}"
+REPO="${DSH_VENDOR:-$HOME/project/Magpie-Horch}"
+CANON="$REPO/.dsh-root-brand-preview/root-icon/icon.icns"
+
+if [ "${LUTE_ICON_ENGINE:-0}" != "1" ]; then
+  [ -f "$CANON" ] || { echo "[app-icon] 缺少 ROOT 真相源: $CANON"; exit 1; }
+  mkdir -p "$(dirname "$OUT")"
+  cp "$CANON" "$OUT"
+  echo "[app-icon] 已从真相源复制: $OUT ($(du -h "$OUT" | cut -f1), sha1 $(shasum "$OUT" | awk '{print $1}'))"
+  exit 0
+fi
+
+# ── 旧引擎路径（仅头像类导出，勿用于 app 图标）──────────────────────────────
 SKILL="${LUTE_ICON_SKILL:-$HOME/.dsh/skills/lute-brand-icons}"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
@@ -32,4 +47,4 @@ for s in 32 64 256 512; do d=$((s*2)); sips -z $d $d "$TMP/icon-1024.png" --out 
 # 4. icns
 mkdir -p "$(dirname "$OUT")"
 iconutil -c icns "$TMP/AppIcon.iconset" -o "$OUT"
-echo "[app-icon] icns 完成: $OUT ($(du -sh "$OUT" | cut -f1))"
+echo "[app-icon] 引擎产物完成: $OUT ($(du -sh "$OUT" | cut -f1))"

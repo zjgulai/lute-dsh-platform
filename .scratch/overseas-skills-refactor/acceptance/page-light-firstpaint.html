@@ -1,0 +1,953 @@
+<!doctype html><html><head><meta charset="utf-8"><title>出海技能 · light · 真实 client bundle + 真机负载（8 场景 / 319 行 / 2</title>
+<style>
+/* Base variables referenced by the token sheets and component CSS but defined
+ * upstream (deepsuite theme/global.css) — supplied here so the composite
+ * --dsw-font-* variables resolve and motion rides the upstream curve. Code
+ * font stack deliberately omits a bare `monospace` tail (Windows CJK falls
+ * back to SimSun otherwise). */
+:root {
+  --dsw-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --ds-font-family-code: 'SF Mono', 'JetBrains Mono', 'Fira Code', Consolas,
+    'Liberation Mono', Menlo, Courier, 'PingFang SC', 'Microsoft YaHei';
+  --ds-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ds-transition-duration: 0.2s;
+  --ds-transition-duration-fast: 0.1s;
+  --ds-transition-duration-slow: 0.3s;
+}
+
+/* Smooth corner curvature for every rounded surface. Inside the support
+ * guard, all corners curve along superellipse(1.5) — between a circular arc
+ * (round = superellipse(1)) and a squircle (superellipse(2)) — instead of the
+ * default arc; engines without corner-shape keep circular corners because the
+ * token and the rule exist only inside the guard.
+ *
+ * corner-shape does not inherit, so the universal selector applies the token
+ * to elements and their ::before/::after; other pseudo-elements (for example
+ * the ::-webkit-scrollbar parts) stay circular.
+ *
+ * Full-round shapes opt out where they are declared: a superellipse deforms a
+ * circle into a squircle and squares off capsule ends, so every effectively
+ * uncapped radius (50%, 100%, or a pill radius far above the box size) pairs
+ * `corner-shape: round` with its `border-radius` in the owning component
+ * sheet. The corner-shape stylesheet spec enforces that pairing. */
+@supports (corner-shape: superellipse(1.5)) {
+  :root {
+    --dsw-corner-shape: superellipse(1.5);
+  }
+
+  *,
+  *::before,
+  *::after {
+    corner-shape: var(--dsw-corner-shape);
+  }
+}
+
+/* Figma font-weight 510 (an SF Pro variable-font weight) always renders as
+   font-weight: 500 in this UI — non-variable webfonts snap intermediate
+   weights unpredictably across platforms. */
+body {
+  --dsw-static-amber-100: rgb(254, 245, 231);
+  --dsw-static-amber-400: rgb(247, 173, 49);
+  --dsw-static-amber-500: rgb(245, 158, 11);
+  --dsw-static-amber-600: rgb(221, 134, 41);
+  --dsw-static-amber-900: rgb(39, 36, 31);
+  --dsw-static-blue-100: rgb(219, 234, 254);
+  --dsw-static-blue-300: rgb(147, 197, 253);
+  --dsw-static-blue-400: rgb(96, 165, 250);
+  --dsw-static-blue-450: rgb(77, 147, 248);
+  --dsw-static-blue-500: rgb(59, 130, 246);
+  --dsw-static-blue-50: rgb(239, 246, 255);
+  --dsw-static-blue-50p: rgb(234, 243, 255);
+  --dsw-static-blue-600: rgb(37, 99, 235);
+  --dsw-static-blue-75: rgb(229, 240, 255);
+  --dsw-static-blue-800: rgb(30, 64, 175);
+  --dsw-static-blue-900: rgb(14, 48, 116);
+  --dsw-static-blue-950: rgb(23, 37, 84);
+  --dsw-static-deepseek-100: rgb(228, 237, 253);
+  --dsw-static-deepseek-200: rgb(211, 226, 255);
+  --dsw-static-deepseek-300: rgb(183, 200, 254);
+  --dsw-static-deepseek-400: rgb(103, 158, 254);
+  --dsw-static-deepseek-450: rgb(86, 134, 254);
+  --dsw-static-deepseek-500: rgb(65, 118, 230);
+  --dsw-static-deepseek-50: rgb(237, 243, 254);
+  --dsw-static-deepseek-600: rgb(72, 104, 178);
+  --dsw-static-deepseek-700-delete: rgb(47, 76, 143);
+  --dsw-static-deepseek-800: rgb(52, 65, 91);
+  --dsw-static-deepseek-900: rgb(40, 49, 66);
+  --dsw-static-green-100: rgb(230, 250, 237);
+  --dsw-static-green-400: rgb(78, 209, 126);
+  --dsw-static-green-500: rgb(34, 197, 94);
+  --dsw-static-green-900: rgb(35, 60, 44);
+  --dsw-static-neutral-00: rgb(255, 255, 255);
+  --dsw-static-neutral-1000: rgb(0, 0, 0);
+  --dsw-static-neutral-100: rgb(245, 245, 245);
+  --dsw-static-neutral-150: rgb(237, 237, 237);
+  --dsw-static-neutral-200: rgb(229, 229, 229);
+  --dsw-static-neutral-250: rgb(220, 220, 220);
+  --dsw-static-neutral-300: rgb(212, 212, 212);
+  --dsw-static-neutral-400: rgb(162, 164, 166);
+  --dsw-static-neutral-500: rgb(127, 130, 135);
+  --dsw-static-neutral-50: rgb(250, 250, 250);
+  --dsw-static-neutral-550: rgb(101, 103, 107);
+  --dsw-static-neutral-600: rgb(84, 85, 87);
+  --dsw-static-neutral-700: rgb(60, 60, 61);
+  --dsw-static-neutral-800: rgb(41, 41, 41);
+  --dsw-static-neutral-850: rgb(33, 33, 35);
+  --dsw-static-neutral-900: rgb(15, 15, 15);
+  --dsw-static-neutral-bluish-00: rgb(255, 255, 255);
+  --dsw-static-neutral-bluish-1000: rgb(15, 17, 21);
+  --dsw-static-neutral-bluish-100: rgb(235, 238, 242);
+  --dsw-static-neutral-bluish-150: rgb(233, 236, 242);
+  --dsw-static-neutral-bluish-200: rgb(225, 229, 238);
+  --dsw-static-neutral-bluish-300: rgb(207, 211, 214);
+  --dsw-static-neutral-bluish-400: rgb(173, 178, 184);
+  --dsw-static-neutral-bluish-500: rgb(151, 157, 166);
+  --dsw-static-neutral-bluish-50: rgb(249, 250, 251);
+  --dsw-static-neutral-bluish-600: rgb(129, 133, 140);
+  --dsw-static-neutral-bluish-60: rgb(245, 246, 247);
+  --dsw-static-neutral-bluish-700: rgb(97, 102, 107);
+  --dsw-static-neutral-bluish-750: rgb(67, 69, 74);
+  --dsw-static-neutral-bluish-75: rgb(241, 243, 245);
+  --dsw-static-neutral-bluish-800: rgb(53, 54, 56);
+  --dsw-static-neutral-bluish-850: rgb(44, 44, 46);
+  --dsw-static-neutral-bluish-875: rgb(35, 35, 36);
+  --dsw-static-neutral-bluish-900: rgb(27, 27, 28);
+  --dsw-static-neutral-bluish-950: rgb(21, 21, 23);
+  --dsw-static-red-100: rgb(254, 226, 226);
+  --dsw-static-red-400: rgb(242, 90, 90);
+  --dsw-static-red-500: rgb(239, 68, 68);
+  --dsw-static-red-50: rgb(254, 242, 242);
+  --dsw-static-red-600: rgb(236, 19, 19);
+  --dsw-static-red-900: rgb(87, 12, 12);
+}
+
+body[data-ds-dark-theme] {
+  --dsw-static-amber-100: rgb(254, 245, 231);
+  --dsw-static-amber-400: rgb(247, 173, 49);
+  --dsw-static-amber-500: rgb(245, 158, 11);
+  --dsw-static-amber-600: rgb(221, 134, 41);
+  --dsw-static-amber-900: rgb(39, 36, 31);
+  --dsw-static-blue-100: rgb(219, 234, 254);
+  --dsw-static-blue-300: rgb(147, 197, 253);
+  --dsw-static-blue-400: rgb(96, 165, 250);
+  --dsw-static-blue-450: rgb(77, 147, 248);
+  --dsw-static-blue-500: rgb(59, 130, 246);
+  --dsw-static-blue-50: rgb(239, 246, 255);
+  --dsw-static-blue-50p: rgb(234, 243, 255);
+  --dsw-static-blue-600: rgb(37, 99, 235);
+  --dsw-static-blue-75: rgb(229, 240, 255);
+  --dsw-static-blue-800: rgb(30, 64, 175);
+  --dsw-static-blue-900: rgb(14, 48, 116);
+  --dsw-static-blue-950: rgb(23, 37, 84);
+  --dsw-static-deepseek-100: rgb(228, 237, 253);
+  --dsw-static-deepseek-200: rgb(211, 226, 255);
+  --dsw-static-deepseek-300: rgb(183, 200, 254);
+  --dsw-static-deepseek-400: rgb(103, 158, 254);
+  --dsw-static-deepseek-450: rgb(86, 134, 254);
+  --dsw-static-deepseek-500: rgb(65, 118, 230);
+  --dsw-static-deepseek-50: rgb(237, 243, 254);
+  --dsw-static-deepseek-600: rgb(72, 104, 178);
+  --dsw-static-deepseek-700-delete: rgb(47, 76, 143);
+  --dsw-static-deepseek-800: rgb(52, 65, 91);
+  --dsw-static-deepseek-900: rgb(40, 49, 66);
+  --dsw-static-green-100: rgb(230, 250, 237);
+  --dsw-static-green-400: rgb(78, 209, 126);
+  --dsw-static-green-500: rgb(34, 197, 94);
+  --dsw-static-green-900: rgb(35, 60, 44);
+  --dsw-static-neutral-00: rgb(255, 255, 255);
+  --dsw-static-neutral-1000: rgb(0, 0, 0);
+  --dsw-static-neutral-100: rgb(245, 245, 245);
+  --dsw-static-neutral-150: rgb(237, 237, 237);
+  --dsw-static-neutral-200: rgb(229, 229, 229);
+  --dsw-static-neutral-250: rgb(220, 220, 220);
+  --dsw-static-neutral-300: rgb(212, 212, 212);
+  --dsw-static-neutral-400: rgb(162, 164, 166);
+  --dsw-static-neutral-500: rgb(127, 130, 135);
+  --dsw-static-neutral-50: rgb(250, 250, 250);
+  --dsw-static-neutral-550: rgb(101, 103, 107);
+  --dsw-static-neutral-600: rgb(84, 85, 87);
+  --dsw-static-neutral-700: rgb(60, 60, 61);
+  --dsw-static-neutral-800: rgb(41, 41, 41);
+  --dsw-static-neutral-850: rgb(33, 33, 35);
+  --dsw-static-neutral-900: rgb(15, 15, 15);
+  --dsw-static-neutral-bluish-00: rgb(255, 255, 255);
+  --dsw-static-neutral-bluish-1000: rgb(15, 17, 21);
+  --dsw-static-neutral-bluish-100: rgb(235, 238, 242);
+  --dsw-static-neutral-bluish-150: rgb(233, 236, 242);
+  --dsw-static-neutral-bluish-200: rgb(225, 229, 238);
+  --dsw-static-neutral-bluish-300: rgb(207, 211, 214);
+  --dsw-static-neutral-bluish-400: rgb(173, 178, 184);
+  --dsw-static-neutral-bluish-500: rgb(151, 157, 166);
+  --dsw-static-neutral-bluish-50: rgb(249, 250, 251);
+  --dsw-static-neutral-bluish-600: rgb(129, 133, 140);
+  --dsw-static-neutral-bluish-60: rgb(249, 250, 251);
+  --dsw-static-neutral-bluish-700: rgb(97, 102, 107);
+  --dsw-static-neutral-bluish-750: rgb(67, 69, 74);
+  --dsw-static-neutral-bluish-75: rgb(241, 243, 245);
+  --dsw-static-neutral-bluish-800: rgb(53, 54, 56);
+  --dsw-static-neutral-bluish-850: rgb(44, 44, 46);
+  --dsw-static-neutral-bluish-875: rgb(35, 35, 36);
+  --dsw-static-neutral-bluish-900: rgb(27, 27, 28);
+  --dsw-static-neutral-bluish-950: rgb(21, 21, 23);
+  --dsw-static-red-100: rgb(254, 226, 226);
+  --dsw-static-red-400: rgb(242, 90, 90);
+  --dsw-static-red-500: rgb(239, 68, 68);
+  --dsw-static-red-50: rgb(254, 242, 242);
+  --dsw-static-red-600: rgb(236, 19, 19);
+  --dsw-static-red-900: rgb(87, 12, 12);
+}
+
+body {
+  --dsw-alias-bg-base: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-bg-layer-1: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-bg-layer-2: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-bg-layer-3: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-bg-mask-1: rgba(0, 0, 0, 0.24);
+  --dsw-alias-bg-mask-2: rgba(0, 0, 0, 0.12);
+  --dsw-alias-bg-mask-3: rgba(0, 0, 0, 0.48);
+  --dsw-alias-bg-mask-photo: rgba(0, 0, 0, 0.88);
+  --dsw-alias-bg-mask-drop: rgba(255, 255, 255, 0.7);
+  --dsw-alias-bg-module-platform: var(--dsw-static-neutral-bluish-60);
+  --dsw-alias-bg-multi-select: var(--dsw-static-neutral-bluish-60);
+  --dsw-alias-bg-overlay: var(--dsw-static-neutral-bluish-150);
+  --dsw-alias-bg-skeleton: rgba(0, 0, 0, 0.04);
+  --dsw-alias-border-inverted2: rgba(0, 0, 0, 0);
+  --dsw-alias-border-inverted: rgba(0, 0, 0, 0);
+  --dsw-alias-border-l1: rgba(0, 0, 0, 0.04);
+  --dsw-alias-border-l2-darkmode-thin: rgba(0, 0, 0, 0.1);
+  --dsw-alias-border-l2: rgba(0, 0, 0, 0.1);
+  --dsw-alias-border-l3: rgba(0, 0, 0, 0.12);
+  --dsw-alias-border-l4: rgba(0, 0, 0, 0.16);
+  --dsw-alias-brand-primary-invert: var(--dsw-static-neutral-bluish-1000);
+  --dsw-alias-brand-primary-new-colorprimary-new-color: rgb(65, 118, 230);
+  --dsw-alias-brand-primary: var(--dsw-static-neutral-bluish-1000);
+  --dsw-alias-brand-text: var(--dsw-static-neutral-bluish-1000);
+  --dsw-alias-button-contrast-fill: var(--dsw-static-neutral-bluish-700);
+  --dsw-alias-button-elevated-fill: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-button-floating-fill: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-button-floating-hover: var(--dsw-static-neutral-bluish-75);
+  --dsw-alias-button-ghost-active-border: var(--dsw-static-neutral-bluish-500);
+  --dsw-alias-button-ghost-active-fill: var(--dsw-static-neutral-bluish-100);
+  --dsw-alias-button-ghost-active-hover: var(--dsw-static-neutral-bluish-150);
+  --dsw-alias-button-info-fill: var(--dsw-static-deepseek-500);
+  --dsw-alias-button-info-hover: var(--dsw-static-deepseek-400);
+  --dsw-alias-button-primary-dimmed: var(--dsw-static-neutral-bluish-100);
+  --dsw-alias-button-primary-fill: var(--dsw-alias-brand-primary);
+  --dsw-alias-button-primary-hover: var(--dsw-static-neutral-bluish-750);
+  --dsw-alias-button-tool-bar-fill-invisible: rgba(31, 31, 31, 0.36);
+  --dsw-alias-button-tool-bar-fill: rgba(84, 85, 87, 0.5);
+  --dsw-alias-button-tool-bar-hover: rgba(84, 85, 87, 0.6);
+  --dsw-alias-interactive-bg-active: rgba(38, 49, 72, 0.1);
+  --dsw-alias-interactive-bg-hover-accent: rgba(38, 49, 72, 0.14);
+  --dsw-alias-interactive-bg-hover-danger: rgba(236, 19, 19, 0.05);
+  --dsw-alias-interactive-bg-hover-solid: var(--dsw-static-neutral-bluish-75);
+  --dsw-alias-interactive-bg-hover: rgba(38, 49, 72, 0.06);
+  --dsw-alias-label-caption: var(--dsw-static-neutral-bluish-400);
+  --dsw-alias-label-dimmed: var(--dsw-static-neutral-bluish-200);
+  --dsw-alias-label-primary-bluish: var(--dsw-static-blue-900);
+  --dsw-alias-label-primary-dimmed: var(--dsw-static-neutral-bluish-950);
+  --dsw-alias-label-primary-foreground: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-label-primary-inverted: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-label-primary: var(--dsw-static-neutral-bluish-1000);
+  --dsw-alias-label-secondary: var(--dsw-static-neutral-bluish-700);
+  --dsw-alias-label-tertiary: var(--dsw-static-neutral-bluish-600);
+  --dsw-alias-markdown-citation: var(--dsw-static-neutral-bluish-100);
+  --dsw-alias-markdown-code-block-banner: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-markdown-code-block: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-markdown-code-segment-selected: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-markdown-code-segment-unselected: var(--dsw-static-neutral-bluish-75);
+  --dsw-alias-markdown-inline-code: var(--dsw-static-neutral-bluish-100);
+  --dsw-alias-markdown-placeholder: var(--dsw-static-neutral-bluish-60);
+  --dsw-alias-markdown-tag: var(--dsw-static-neutral-bluish-75);
+  --dsw-alias-scrollbar-bg-l1: var(--dsw-static-neutral-200);
+  --dsw-alias-scrollbar-bg-l2: var(--dsw-static-neutral-200);
+  --dsw-alias-scrollbar-hover-l1: var(--dsw-static-neutral-300);
+  --dsw-alias-scrollbar-hover-l2: var(--dsw-static-neutral-300);
+  --dsw-alias-state-business-primary: var(--dsw-static-deepseek-500);
+  --dsw-alias-state-business-tertiary: var(--dsw-static-deepseek-100);
+  --dsw-alias-state-error-primary: var(--dsw-static-red-600);
+  --dsw-alias-state-error-secondary: var(--dsw-static-red-400);
+  --dsw-alias-state-success-primary: var(--dsw-static-green-500);
+  --dsw-alias-state-success-secondary: var(--dsw-static-green-400);
+  --dsw-alias-state-success-tertiary: var(--dsw-static-green-100);
+  --dsw-alias-state-warn-label: var(--dsw-static-amber-600);
+  --dsw-alias-state-warn-primary: var(--dsw-static-amber-500);
+  --dsw-alias-state-warn-secondary: var(--dsw-static-amber-400);
+  --dsw-alias-state-warn-tertiary: var(--dsw-static-amber-100);
+  --dsw-alias-toast-bg: var(--dsw-static-neutral-bluish-800);
+  --dsw-alias-tooltip-bg: var(--dsw-static-neutral-bluish-850);
+  --dsw-specific-bubble-highlight: var(--dsw-static-deepseek-200);
+  --dsw-specific-bubble: var(--dsw-static-deepseek-50);
+  --dsw-specific-input-major: var(--dsw-static-neutral-bluish-00);
+  --dsw-specific-login-input: var(--dsw-static-neutral-bluish-50);
+  --dsw-specific-menu: var(--dsw-alias-bg-layer-3);
+  --dsw-specific-selector: var(--dsw-static-neutral-bluish-60);
+  --dsw-specific-sidebar-fill: var(--dsw-static-neutral-bluish-50);
+  --dsw-specific-sidebar-nav-item-active-accent: var(--dsw-static-deepseek-100);
+  --dsw-specific-sidebar-nav-item-active: var(--dsw-static-neutral-bluish-100);
+  --dsw-specific-sidebar-nav-item-hover: var(--dsw-static-neutral-bluish-75);
+  --dsw-specific-tip: var(--dsw-static-neutral-bluish-60);
+}
+
+body[data-ds-dark-theme] {
+  --dsw-alias-bg-base: var(--dsw-static-neutral-bluish-950);
+  --dsw-alias-bg-layer-1: var(--dsw-static-neutral-bluish-875);
+  --dsw-alias-bg-layer-2: var(--dsw-static-neutral-bluish-850);
+  --dsw-alias-bg-layer-3: var(--dsw-static-neutral-bluish-800);
+  --dsw-alias-bg-mask-1: rgba(0, 0, 0, 0.5);
+  --dsw-alias-bg-mask-2: rgba(0, 0, 0, 0.2);
+  --dsw-alias-bg-mask-3: rgba(0, 0, 0, 0.48);
+  --dsw-alias-bg-mask-photo: rgba(0, 0, 0, 0.88);
+  --dsw-alias-bg-mask-drop: rgba(39, 39, 48, 0.7);
+  --dsw-alias-bg-module-platform: var(--dsw-static-neutral-bluish-800);
+  --dsw-alias-bg-multi-select: var(--dsw-static-neutral-850);
+  --dsw-alias-bg-overlay: var(--dsw-static-neutral-bluish-700);
+  --dsw-alias-bg-skeleton: rgba(255, 255, 255, 0.08);
+  --dsw-alias-border-inverted2: rgba(255, 255, 255, 0.08);
+  --dsw-alias-border-inverted: rgba(255, 255, 255, 0.06);
+  --dsw-alias-border-l1: rgba(255, 255, 255, 0.06);
+  --dsw-alias-border-l2-darkmode-thin: rgba(255, 255, 255, 0.06);
+  --dsw-alias-border-l2: rgba(255, 255, 255, 0.12);
+  --dsw-alias-border-l3: rgba(255, 255, 255, 0.16);
+  --dsw-alias-border-l4: rgba(255, 255, 255, 0.2);
+  --dsw-alias-brand-primary-invert: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-brand-primary-new-colorprimary-new-color: var(--dsw-static-deepseek-450);
+  --dsw-alias-brand-primary: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-brand-text: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-button-contrast-fill: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-button-elevated-fill: var(--dsw-static-neutral-bluish-750);
+  --dsw-alias-button-floating-fill: var(--dsw-static-neutral-bluish-850);
+  --dsw-alias-button-floating-hover: var(--dsw-static-neutral-bluish-800);
+  --dsw-alias-button-ghost-active-border: var(--dsw-static-neutral-bluish-600);
+  --dsw-alias-button-ghost-active-fill: var(--dsw-static-neutral-bluish-750);
+  --dsw-alias-button-ghost-active-hover: var(--dsw-static-neutral-bluish-700);
+  --dsw-alias-button-info-fill: var(--dsw-static-deepseek-400);
+  --dsw-alias-button-info-hover: var(--dsw-static-deepseek-500);
+  --dsw-alias-button-primary-dimmed: var(--dsw-static-neutral-bluish-750);
+  --dsw-alias-button-primary-fill: var(--dsw-alias-brand-primary);
+  --dsw-alias-button-primary-hover: var(--dsw-static-neutral-bluish-100);
+  --dsw-alias-button-tool-bar-fill-invisible: rgba(31, 31, 31, 0.36);
+  --dsw-alias-button-tool-bar-fill: rgba(84, 85, 87, 0.5);
+  --dsw-alias-button-tool-bar-hover: rgba(84, 85, 87, 0.6);
+  --dsw-alias-interactive-bg-active: rgba(255, 255, 255, 0.14);
+  --dsw-alias-interactive-bg-hover-accent: rgba(255, 255, 255, 0.24);
+  --dsw-alias-interactive-bg-hover-danger: rgba(242, 90, 90, 0.15);
+  --dsw-alias-interactive-bg-hover-solid: var(--dsw-static-neutral-bluish-800);
+  --dsw-alias-interactive-bg-hover: rgba(255, 255, 255, 0.08);
+  --dsw-alias-label-caption: var(--dsw-static-neutral-bluish-600);
+  --dsw-alias-label-dimmed: var(--dsw-static-neutral-bluish-750);
+  --dsw-alias-label-primary-bluish: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-label-primary-dimmed: var(--dsw-static-neutral-bluish-100);
+  --dsw-alias-label-primary-foreground: var(--dsw-static-neutral-bluish-1000);
+  --dsw-alias-label-primary-inverted: var(--dsw-static-neutral-bluish-800);
+  --dsw-alias-label-primary: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-label-secondary: var(--dsw-static-neutral-bluish-300);
+  --dsw-alias-label-tertiary: var(--dsw-static-neutral-bluish-400);
+  --dsw-alias-markdown-citation: var(--dsw-static-neutral-bluish-800);
+  --dsw-alias-markdown-code-block-banner: var(--dsw-static-neutral-bluish-850);
+  --dsw-alias-markdown-code-block: var(--dsw-static-neutral-bluish-900);
+  --dsw-alias-markdown-code-segment-selected: var(--dsw-static-neutral-bluish-800);
+  --dsw-alias-markdown-code-segment-unselected: var(--dsw-static-neutral-bluish-900);
+  --dsw-alias-markdown-inline-code: var(--dsw-static-neutral-bluish-850);
+  --dsw-alias-markdown-placeholder: var(--dsw-static-neutral-bluish-850);
+  --dsw-alias-markdown-tag: var(--dsw-static-neutral-bluish-850);
+  --dsw-alias-scrollbar-bg-l1: var(--dsw-static-neutral-700);
+  --dsw-alias-scrollbar-bg-l2: var(--dsw-static-neutral-600);
+  --dsw-alias-scrollbar-hover-l1: var(--dsw-static-neutral-600);
+  --dsw-alias-scrollbar-hover-l2: var(--dsw-static-neutral-550);
+  --dsw-alias-state-business-primary: var(--dsw-static-deepseek-400);
+  --dsw-alias-state-business-tertiary: var(--dsw-static-deepseek-800);
+  --dsw-alias-state-error-primary: var(--dsw-static-red-400);
+  --dsw-alias-state-error-secondary: var(--dsw-static-red-400);
+  --dsw-alias-state-success-primary: var(--dsw-static-green-500);
+  --dsw-alias-state-success-secondary: var(--dsw-static-green-400);
+  --dsw-alias-state-success-tertiary: var(--dsw-static-green-900);
+  --dsw-alias-state-warn-label: var(--dsw-static-amber-600);
+  --dsw-alias-state-warn-primary: var(--dsw-static-amber-500);
+  --dsw-alias-state-warn-secondary: var(--dsw-static-amber-400);
+  --dsw-alias-state-warn-tertiary: var(--dsw-static-amber-900);
+  --dsw-alias-toast-bg: var(--dsw-static-neutral-bluish-750);
+  --dsw-alias-tooltip-bg: var(--dsw-static-neutral-bluish-750);
+  --dsw-specific-bubble-highlight: var(--dsw-static-neutral-bluish-750);
+  --dsw-specific-bubble: var(--dsw-static-neutral-bluish-850);
+  --dsw-specific-input-major: var(--dsw-static-neutral-bluish-850);
+  --dsw-specific-login-input: var(--dsw-static-neutral-bluish-900);
+  --dsw-specific-menu: var(--dsw-alias-bg-layer-3);
+  --dsw-specific-selector: var(--dsw-static-neutral-bluish-800);
+  --dsw-specific-sidebar-fill: var(--dsw-static-neutral-bluish-900);
+  --dsw-specific-sidebar-nav-item-active-accent: var(--dsw-static-neutral-bluish-800);
+  --dsw-specific-sidebar-nav-item-active: var(--dsw-static-neutral-bluish-750);
+  --dsw-specific-sidebar-nav-item-hover: var(--dsw-static-neutral-bluish-850);
+  --dsw-specific-tip: var(--dsw-static-neutral-bluish-800);
+}
+
+/* Scrollbar skin: the sole consumer of the four --dsw-alias-scrollbar-*
+ * tokens. Without it every scrolling region renders the UA scrollbar, which
+ * ignores the theme — a light native bar over the dark palette.
+ *
+ * The rules sit on `body`, not `html`: design-platform.css declares the
+ * --dsw-alias-* tokens on `body` (and the dark overrides on
+ * `body[data-ds-dark-theme]`), and custom properties only inherit downward,
+ * so an `html` rule resolves them to the guaranteed-invalid value and
+ * `scrollbar-color` falls back to `auto`.
+ *
+ * Surfaces pick their elevation by rebinding --dsh-scrollbar-thumb{,-hover}:
+ * the l1 pair here is the base-surface default, and an elevated surface
+ * (menu, popover, dialog) rebinds to the l2 pair on its own container. Both
+ * rendering paths below read the indirection, so one rebind reaches whichever
+ * path the engine took. */
+
+body {
+  --dsh-scrollbar-thumb: var(--dsw-alias-scrollbar-bg-l1);
+  --dsh-scrollbar-thumb-hover: var(--dsw-alias-scrollbar-hover-l1);
+  /* The WebKit bar's layout width, mirrored by the ::-webkit-scrollbar rule
+     below. A surface that must align itself beside a space-consuming bar
+     (ConversationRoot's overlay composer seat) reads this instead of
+     hardcoding the number. */
+  --dsh-scrollbar-width: 8px;
+}
+
+/* The two paths are mutually exclusive, and the gate is load-bearing rather
+   than defensive. A non-`auto` `scrollbar-width` or `scrollbar-color` makes
+   Chromium and Safari drop every `::-webkit-scrollbar*` rule for that
+   element, including `::-webkit-scrollbar-thumb:hover` — measured in chromium
+   as an 8px `::-webkit-scrollbar` width taking effect on its own and being
+   ignored as soon as `scrollbar-width: thin` is added. Declaring both
+   unconditionally therefore leaves the hover tokens with no rendering at all,
+   because the engines that implement the hover pseudo-element are exactly the
+   ones the standard properties silence, and Firefox has no hover
+   pseudo-element to fall back on.
+
+   `not selector(::-webkit-scrollbar)` is true only where the pseudo-element
+   is unimplemented, so Firefox takes the standard path and WebKit-based
+   engines take the pseudo-element path. An engine too old for the
+   `selector()` function makes the condition invalid, which evaluates false
+   and selects the pseudo-element path — the correct side for the pre-16.4
+   Safari that is the realistic case. */
+@supports not selector(::-webkit-scrollbar) {
+  /* Declared on every element rather than inherited from `body`. Inheriting
+     would pass down the COLOUR already substituted at `body`, so a descendant
+     rebinding --dsh-scrollbar-thumb could not change it; re-declaring makes
+     each element substitute the variable as it sees it, which is what gives
+     an elevated surface a working rebind. `scrollbar-width` is not an
+     inherited property at all, so it needs the per-element declaration
+     regardless.
+
+     No hover counterpart exists on this path: `scrollbar-color` states one
+     thumb colour and the engine derives its own hover treatment. */
+  body,
+  body * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--dsh-scrollbar-thumb) transparent;
+  }
+}
+
+/* Not gated in turn: an engine that does not implement these pseudo-elements
+   drops the rules as unknown selectors, so the gate would only restate what
+   selector matching already does. Not inherited either, hence the unscoped
+   selectors. */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track stays transparent so the thumb reads against whatever surface scrolls
+   under it; only the thumb carries a token colour. */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: var(--dsh-scrollbar-thumb);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dsh-scrollbar-thumb-hover);
+}
+
+/* Both scrollbars meeting in a corner: no separate token, so the corner
+   matches the transparent track rather than the UA's opaque default. */
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+body {
+  --dsw-linear-gradient-think: linear-gradient(180deg, #fff 20.19%, rgba(255, 255, 255, 0) 100%);
+  --dsw-linear-think-select: linear-gradient(180deg, #f5f6f7 20.19%, rgba(245, 246, 247, 0) 100%);
+  /* 阴影 */
+  --dsw-shadow-lv1: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  --dsw-shadow-lv1-blur: 0 4px 12px 0 rgba(0, 0, 0, 0.02);
+  --dsw-shadow-lv2: 0 4px 12px 0 rgba(0, 0, 0, 0.02), 0 2px 8px 0 rgba(0, 0, 0, 0.04);
+  --dsw-shadow-lv3:
+    0 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 4px 0 rgba(0, 0, 0, 0.02), 0 12px 32px 0 rgba(0, 0, 0, 0.08);
+  /* Elevation：浮层/面板/面型按钮的描边+投影三件套。0.5px 发丝描边画在
+     box-shadow 里（组件配 border: 0，不占布局），叠两层极淡柔光；深色主题下
+     柔光几乎不可见，由描边承担分离。描边颜色经 --dsw-elevation-stroke-color
+     间接，组件可重绑（菜单面重绑最浅的 l1、输入框重绑 l2，输入框的
+     workspace-trigger 态置 transparent 只保留柔光）。soft 供输入框：更大
+     模糊、更低透明度的柔光。默认色只声明在 body 上，让表面的重绑沿继承
+     传给真正消费投影的后代。 */
+  --dsw-elevation-stroke-color: var(--dsw-alias-border-l4);
+  /* blur filter */
+  --dsw-mask-blur: blur(2px);
+}
+
+/* 派生 elevation 值逐元素声明而非从 body 继承：继承传下来的是在 body 上就
+   已替换完 var() 的值，组件重绑 --dsw-elevation-stroke-color 将无法进入
+   var(--dsw-elevation-*)；逐元素声明让每个元素按自己看到的描边色重新替换
+   （同 scrollbar.css 对 --dsh-scrollbar-thumb 的处理）。 */
+body,
+body * {
+  --dsw-elevation-stroke: 0 0 0 0.5px var(--dsw-elevation-stroke-color);
+  --dsw-elevation-panel:
+    var(--dsw-elevation-stroke), 0 3px 8px 0 rgba(0, 0, 0, 0.03), 0 0 16px 0 rgba(0, 0, 0, 0.02);
+  --dsw-elevation-prominent:
+    var(--dsw-elevation-stroke), 0 3px 8px 0 rgba(0, 0, 0, 0.04), 0 0 20px 0 rgba(0, 0, 0, 0.05);
+  --dsw-elevation-soft:
+    var(--dsw-elevation-stroke), 0 4px 16px 0 rgba(0, 0, 0, 0.03), 0 0 24px 0 rgba(0, 0, 0, 0.03);
+}
+
+body[data-ds-dark-theme] {
+  --dsw-linear-gradient-think: linear-gradient(180deg, #151517 20.19%, rgba(21, 21, 23, 0) 100%);
+  --dsw-linear-think-select: linear-gradient(180deg, #232325 20.19%, rgba(35, 35, 37, 0) 100%);
+}
+
+/* ---------- 字体 ---------- */
+/* 由 @deepseek-figma-plugin/custom-variable-name 插件导出 */
+/* Markdown 阶梯整体按 0.875（正文 16 → 14）等比缩放，四舍五入到整数像素；
+   重新从 Figma 导出时需要保留这一缩放。 */
+/* 正文字号调节：--dsh-content-font-size 由主题 bootstrap 与 ThemePresenter
+   写在 body 上（整数 px，12–17，默认 14）。标题与正文变体按同一像素增量
+   （--dsh-content-font-delta）随动，保持层级。低一档文本（think、工具/bash
+   行的标题与摘要、markdown 表格、流内次级说明等）统一读
+   --dsh-content-font-size-secondary：设置 ≤14 时为设置值 −1，>14 时为
+   设置值 −2（12→11、13→12、14→13、15→13、16→14、17→15）。式中
+   max(13px,·) 的作用是让低设置取 −1 而非 −2，不是结果下限——12 设置下
+   层级触底 11px。small、code 属于密集次级文本，保持固定。 */
+body {
+  --dsh-content-font-delta: calc(var(--dsh-content-font-size, 14px) - 14px);
+  --dsh-content-font-size-secondary: min(calc(var(--dsh-content-font-size, 14px) - 1px), max(13px, calc(var(--dsh-content-font-size, 14px) - 2px)));
+  --dsh-content-font-delta-secondary: calc(var(--dsh-content-font-size-secondary) - 13px);
+
+  --dsw-font-markdown-h1: 700 calc(21px + var(--dsh-content-font-delta)) / calc(30px + var(--dsh-content-font-delta)) var(--dsw-font-family);
+  --dsw-font-markdown-h1-font-family: var(--dsw-font-family);
+  --dsw-font-markdown-h1-font-weight: 700;
+  --dsw-font-markdown-h1-line-height: calc(30px + var(--dsh-content-font-delta));
+  --dsw-font-markdown-h1-font-size: calc(21px + var(--dsh-content-font-delta));
+  --dsw-font-markdown-h1-font-style: normal;
+
+  --dsw-font-markdown-h2: 700 calc(19px + var(--dsh-content-font-delta)) / calc(28px + var(--dsh-content-font-delta)) var(--dsw-font-family);
+  --dsw-font-markdown-h2-font-family: var(--dsw-font-family);
+  --dsw-font-markdown-h2-font-weight: 700;
+  --dsw-font-markdown-h2-line-height: calc(28px + var(--dsh-content-font-delta));
+  --dsw-font-markdown-h2-font-size: calc(19px + var(--dsh-content-font-delta));
+  --dsw-font-markdown-h2-font-style: normal;
+
+  --dsw-font-markdown-h3: 700 calc(18px + var(--dsh-content-font-delta)) / calc(26px + var(--dsh-content-font-delta)) var(--dsw-font-family);
+  --dsw-font-markdown-h3-font-family: var(--dsw-font-family);
+  --dsw-font-markdown-h3-font-weight: 700;
+  --dsw-font-markdown-h3-line-height: calc(26px + var(--dsh-content-font-delta));
+  --dsw-font-markdown-h3-font-size: calc(18px + var(--dsh-content-font-delta));
+  --dsw-font-markdown-h3-font-style: normal;
+
+  --dsw-font-markdown-h4: 600 var(--dsh-content-font-size, 14px) / calc(24px + var(--dsh-content-font-delta)) var(--dsw-font-family);
+  --dsw-font-markdown-h4-font-family: var(--dsw-font-family);
+  --dsw-font-markdown-h4-font-weight: 600;
+  --dsw-font-markdown-h4-line-height: calc(24px + var(--dsh-content-font-delta));
+  --dsw-font-markdown-h4-font-size: var(--dsh-content-font-size, 14px);
+  --dsw-font-markdown-h4-font-style: normal;
+
+  --dsw-font-markdown-base: var(--dsh-content-font-size, 14px) / calc(24px + var(--dsh-content-font-delta)) var(--dsw-font-family);
+  --dsw-font-markdown-base-font-family: var(--dsw-font-family);
+  --dsw-font-markdown-base-font-weight: 400;
+  --dsw-font-markdown-base-line-height: calc(24px + var(--dsh-content-font-delta));
+  --dsw-font-markdown-base-font-size: var(--dsh-content-font-size, 14px);
+  --dsw-font-markdown-base-font-style: normal;
+
+  --dsw-font-markdown-base-strong: 600 var(--dsh-content-font-size, 14px) / calc(24px + var(--dsh-content-font-delta)) var(--dsw-font-family);
+  --dsw-font-markdown-base-strong-font-family: var(--dsw-font-family);
+  --dsw-font-markdown-base-strong-font-weight: 600;
+  --dsw-font-markdown-base-strong-line-height: calc(24px + var(--dsh-content-font-delta));
+  --dsw-font-markdown-base-strong-font-size: var(--dsh-content-font-size, 14px);
+  --dsw-font-markdown-base-strong-font-style: normal;
+
+  --dsw-font-markdown-base-italic: italic var(--dsh-content-font-size, 14px) / calc(24px + var(--dsh-content-font-delta)) var(--dsw-font-family);
+  --dsw-font-markdown-base-italic-font-family: var(--dsw-font-family);
+  --dsw-font-markdown-base-italic-font-weight: 400;
+  --dsw-font-markdown-base-italic-line-height: calc(24px + var(--dsh-content-font-delta));
+  --dsw-font-markdown-base-italic-font-size: var(--dsh-content-font-size, 14px);
+  --dsw-font-markdown-base-italic-font-style: italic;
+
+  --dsw-font-markdown-base-strong-italic: italic 600 var(--dsh-content-font-size, 14px) / calc(24px + var(--dsh-content-font-delta)) var(--dsw-font-family);
+  --dsw-font-markdown-base-strong-italic-font-family: var(--dsw-font-family);
+  --dsw-font-markdown-base-strong-italic-font-weight: 600;
+  --dsw-font-markdown-base-strong-italic-line-height: calc(24px + var(--dsh-content-font-delta));
+  --dsw-font-markdown-base-strong-italic-font-size: var(--dsh-content-font-size, 14px);
+  --dsw-font-markdown-base-strong-italic-font-style: italic;
+
+  --dsw-font-markdown-table: var(--dsh-content-font-size-secondary, 13px)/calc(22px + var(--dsh-content-font-delta-secondary, 0px)) var(--dsw-font-family);
+  --dsw-font-markdown-table-font-family: var(--dsw-font-family);
+  --dsw-font-markdown-table-font-weight: 400;
+  --dsw-font-markdown-table-line-height: calc(22px + var(--dsh-content-font-delta-secondary, 0px));
+  --dsw-font-markdown-table-font-size: var(--dsh-content-font-size-secondary, 13px);
+  --dsw-font-markdown-table-font-style: normal;
+
+  --dsw-font-markdown-table-head: 500 var(--dsh-content-font-size-secondary, 13px)/calc(22px + var(--dsh-content-font-delta-secondary, 0px)) var(--dsw-font-family);
+  --dsw-font-markdown-table-head-font-family: var(--dsw-font-family);
+  --dsw-font-markdown-table-head-font-weight: 500;
+  --dsw-font-markdown-table-head-line-height: calc(22px + var(--dsh-content-font-delta-secondary, 0px));
+  --dsw-font-markdown-table-head-font-size: var(--dsh-content-font-size-secondary, 13px);
+  --dsw-font-markdown-table-head-font-style: normal;
+
+  --dsw-font-markdown-small: 12px/20px var(--dsw-font-family);
+  --dsw-font-markdown-small-font-family: var(--dsw-font-family);
+  --dsw-font-markdown-small-font-weight: 400;
+  --dsw-font-markdown-small-line-height: 20px;
+  --dsw-font-markdown-small-font-size: 12px;
+  --dsw-font-markdown-small-font-style: normal;
+
+  --dsw-font-markdown-small-strong: 600 12px/20px var(--dsw-font-family);
+  --dsw-font-markdown-small-strong-font-family: var(--dsw-font-family);
+  --dsw-font-markdown-small-strong-font-weight: 600;
+  --dsw-font-markdown-small-strong-line-height: 20px;
+  --dsw-font-markdown-small-strong-font-size: 12px;
+  --dsw-font-markdown-small-strong-font-style: normal;
+
+  --dsw-font-markdown-small-italic: italic 12px/20px var(--dsw-font-family);
+  --dsw-font-markdown-small-italic-font-family: var(--dsw-font-family);
+  --dsw-font-markdown-small-italic-font-weight: 400;
+  --dsw-font-markdown-small-italic-line-height: 20px;
+  --dsw-font-markdown-small-italic-font-size: 12px;
+  --dsw-font-markdown-small-italic-font-style: italic;
+
+  --dsw-font-markdown-small-strong-italic: italic 600 12px/20px var(--dsw-font-family);
+  --dsw-font-markdown-small-strong-italic-font-family: var(--dsw-font-family);
+  --dsw-font-markdown-small-strong-italic-font-weight: 600;
+  --dsw-font-markdown-small-strong-italic-line-height: 20px;
+  --dsw-font-markdown-small-strong-italic-font-size: 12px;
+  --dsw-font-markdown-small-strong-italic-font-style: italic;
+
+  --dsw-font-markdown-code: 12px/19px var(--ds-font-family-code);
+  --dsw-font-markdown-code-font-family: var(--ds-font-family-code);
+  --dsw-font-markdown-code-font-weight: 400;
+  --dsw-font-markdown-code-line-height: 19px;
+  --dsw-font-markdown-code-font-size: 12px;
+  --dsw-font-markdown-code-font-style: normal;
+
+  --dsw-font-markdown-code-block: 11px/19px var(--ds-font-family-code);
+  --dsw-font-markdown-code-block-font-family: var(--ds-font-family-code);
+  --dsw-font-markdown-code-block-font-weight: 400;
+  --dsw-font-markdown-code-block-line-height: 19px;
+  --dsw-font-markdown-code-block-font-size: 11px;
+  --dsw-font-markdown-code-block-font-style: normal;
+
+  /* 手工补充（非插件导出）：tool row 展开卡片内的小号 code 字体。 */
+  --dsw-font-markdown-code-block-small: 11px/16px var(--ds-font-family-code);
+  --dsw-font-markdown-code-block-small-font-family: var(--ds-font-family-code);
+  --dsw-font-markdown-code-block-small-font-weight: 400;
+  --dsw-font-markdown-code-block-small-line-height: 16px;
+  --dsw-font-markdown-code-block-small-font-size: 11px;
+  --dsw-font-markdown-code-block-small-font-style: normal;
+
+  --dsw-font-xl-24: 600 24px/32px var(--dsw-font-family);
+  --dsw-font-xl-24-font-family: var(--dsw-font-family);
+  --dsw-font-xl-24-font-weight: 600;
+  --dsw-font-xl-24-line-height: 32px;
+  --dsw-font-xl-24-font-size: 24px;
+  --dsw-font-xl-24-font-style: normal;
+
+  --dsw-font-l-20: 500 20px/28px var(--dsw-font-family);
+  --dsw-font-l-20-font-family: var(--dsw-font-family);
+  --dsw-font-l-20-font-weight: 500;
+  --dsw-font-l-20-line-height: 28px;
+  --dsw-font-l-20-font-size: 20px;
+  --dsw-font-l-20-font-style: normal;
+
+  --dsw-font-m-18: 500 16px/28px var(--dsw-font-family);
+  --dsw-font-m-18-font-family: var(--dsw-font-family);
+  --dsw-font-m-18-font-weight: 500;
+  --dsw-font-m-18-line-height: 28px;
+  --dsw-font-m-18-font-size: 16px;
+  --dsw-font-m-18-font-style: normal;
+
+  --dsw-font-base-16: 16px/24px var(--dsw-font-family);
+  --dsw-font-base-16-font-family: var(--dsw-font-family);
+  --dsw-font-base-16-font-weight: 400;
+  --dsw-font-base-16-line-height: 24px;
+  --dsw-font-base-16-font-size: 16px;
+  --dsw-font-base-16-font-style: normal;
+
+  --dsw-font-base-strong-16: 500 16px/24px var(--dsw-font-family);
+  --dsw-font-base-strong-16-font-family: var(--dsw-font-family);
+  --dsw-font-base-strong-16-font-weight: 500;
+  --dsw-font-base-strong-16-line-height: 24px;
+  --dsw-font-base-strong-16-font-size: 16px;
+  --dsw-font-base-strong-16-font-style: normal;
+
+  --dsw-font-s-14: 14px/22px var(--dsw-font-family);
+  --dsw-font-s-14-font-family: var(--dsw-font-family);
+  --dsw-font-s-14-font-weight: 400;
+  --dsw-font-s-14-line-height: 22px;
+  --dsw-font-s-14-font-size: 14px;
+  --dsw-font-s-14-font-style: normal;
+
+  --dsw-font-s-strong-14: 500 14px/22px var(--dsw-font-family);
+  --dsw-font-s-strong-14-font-family: var(--dsw-font-family);
+  --dsw-font-s-strong-14-font-weight: 500;
+  --dsw-font-s-strong-14-line-height: 22px;
+  --dsw-font-s-strong-14-font-size: 14px;
+  --dsw-font-s-strong-14-font-style: normal;
+
+  --dsw-font-xs-13: 13px/20px var(--dsw-font-family);
+  --dsw-font-xs-13-font-family: var(--dsw-font-family);
+  --dsw-font-xs-13-font-weight: 400;
+  --dsw-font-xs-13-line-height: 20px;
+  --dsw-font-xs-13-font-size: 13px;
+  --dsw-font-xs-13-font-style: normal;
+
+  --dsw-font-xs-strong-13: 500 13px/20px var(--dsw-font-family);
+  --dsw-font-xs-strong-13-font-family: var(--dsw-font-family);
+  --dsw-font-xs-strong-13-font-weight: 500;
+  --dsw-font-xs-strong-13-line-height: 20px;
+  --dsw-font-xs-strong-13-font-size: 13px;
+  --dsw-font-xs-strong-13-font-style: normal;
+
+  --dsw-font-xxs-12: 12px/18px var(--dsw-font-family);
+  --dsw-font-xxs-12-font-family: var(--dsw-font-family);
+  --dsw-font-xxs-12-font-weight: 400;
+  --dsw-font-xxs-12-line-height: 18px;
+  --dsw-font-xxs-12-font-size: 12px;
+  --dsw-font-xxs-12-font-style: normal;
+
+  --dsw-font-xxs-strong-12: 500 12px/18px var(--dsw-font-family);
+  --dsw-font-xxs-strong-12-font-family: var(--dsw-font-family);
+  --dsw-font-xxs-strong-12-font-weight: 500;
+  --dsw-font-xxs-strong-12-line-height: 18px;
+  --dsw-font-xxs-strong-12-font-size: 12px;
+  --dsw-font-xxs-strong-12-font-style: normal;
+
+  --dsw-font-xxxs-11: 11px/14px var(--dsw-font-family);
+  --dsw-font-xxxs-11-font-family: var(--dsw-font-family);
+  --dsw-font-xxxs-11-font-weight: 400;
+  --dsw-font-xxxs-11-line-height: 14px;
+  --dsw-font-xxxs-11-font-size: 11px;
+  --dsw-font-xxxs-11-font-style: normal;
+
+  --dsw-font-xxxs-strong-11: 500 11px/14px var(--dsw-font-family);
+  --dsw-font-xxxs-strong-11-font-family: var(--dsw-font-family);
+  --dsw-font-xxxs-strong-11-font-weight: 500;
+  --dsw-font-xxxs-strong-11-line-height: 14px;
+  --dsw-font-xxxs-strong-11-font-size: 11px;
+  --dsw-font-xxxs-strong-11-font-style: normal;
+}
+
+</style>
+<style>
+[data-plugin="dsh-overseas-skills"].ovsRoot { display:flex; flex-direction:column; gap:14px; padding:2px 0 8px; min-width:0; }
+[data-plugin="dsh-overseas-skills"] .ovsSearch { box-sizing:border-box; width:100%; height:32px; padding:0 12px; border:1px solid var(--dsw-alias-border-l1); border-radius:8px; background:var(--dsw-alias-bg-layer-1); color:var(--dsw-alias-label-primary); font-size:13px; line-height:20px; outline:none; }
+[data-plugin="dsh-overseas-skills"] .ovsSearch:focus { border-color: var(--dsw-alias-brand-primary); }
+[data-plugin="dsh-overseas-skills"] .ovsSearch::placeholder { color: var(--dsw-alias-label-secondary); }
+[data-plugin="dsh-overseas-skills"] .ovsGroup { display:flex; flex-direction:column; gap:8px; }
+[data-plugin="dsh-overseas-skills"] .ovsGroupTitle { margin:0; display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:500; line-height:20px; color:var(--dsw-alias-label-secondary); }
+[data-plugin="dsh-overseas-skills"] .ovsGroupTitleIcon { width:18px; height:18px; border-radius:5px; object-fit:contain; }
+[data-plugin="dsh-overseas-skills"] .ovsScenHead { display:flex; align-items:center; gap:8px; width:100%; border:1px solid var(--dsw-alias-border-l1); border-radius:12px; background:var(--dsw-alias-bg-layer-1); padding:10px 12px; cursor:pointer; color:var(--dsw-alias-label-primary); font:inherit; text-align:left; }
+[data-plugin="dsh-overseas-skills"] .ovsScenHead:hover { border-color:var(--dsw-alias-label-dimmed); }
+[data-plugin="dsh-overseas-skills"] .ovsScenIcon { flex:none; width:22px; height:22px; border-radius:6px; object-fit:contain; }
+[data-plugin="dsh-overseas-skills"] .ovsScenTitle { flex:1; min-width:0; font-size:13px; font-weight:600; line-height:20px; }
+[data-plugin="dsh-overseas-skills"] .ovsScenCount { flex:none; font-size:11px; color:var(--dsw-alias-label-tertiary); }
+[data-plugin="dsh-overseas-skills"] .ovsScenCaret { flex:none; font-size:11px; color:var(--dsw-alias-label-tertiary); transition:transform .15s; }
+[data-plugin="dsh-overseas-skills"] .ovsScenBody { display:flex; flex-direction:column; gap:6px; padding:8px 0 8px 6px; }
+[data-plugin="dsh-overseas-skills"] .ovsSubHead { display:flex; align-items:center; gap:6px; width:100%; border:none; background:transparent; padding:4px 8px; cursor:pointer; color:var(--dsw-alias-label-secondary); font:inherit; text-align:left; }
+[data-plugin="dsh-overseas-skills"] .ovsSubHead:hover { color:var(--dsw-alias-label-primary); }
+[data-plugin="dsh-overseas-skills"] .ovsSubTitle { flex:1; min-width:0; font-size:12px; font-weight:500; line-height:18px; }
+[data-plugin="dsh-overseas-skills"] .ovsSubCount { flex:none; font-size:11px; color:var(--dsw-alias-label-tertiary); }
+[data-plugin="dsh-overseas-skills"] .ovsSubCaret { flex:none; font-size:10px; color:var(--dsw-alias-label-tertiary); }
+[data-plugin="dsh-overseas-skills"] .ovsSubBody { padding:2px 0 8px 12px; }
+[data-plugin="dsh-overseas-skills"] .ovsToolbar { display:flex; align-items:center; gap:8px; }
+[data-plugin="dsh-overseas-skills"] .ovsToolBtn { border:1px solid var(--dsw-alias-border-l1); background:transparent; border-radius:6px; padding:2px 8px; cursor:pointer; font:inherit; font-size:11px; line-height:16px; color:var(--dsw-alias-label-secondary); }
+[data-plugin="dsh-overseas-skills"] .ovsToolBtn:hover { color:var(--dsw-alias-label-primary); border-color:var(--dsw-alias-label-dimmed); }
+[data-plugin="dsh-overseas-skills"] .ovsDiag { display:flex; flex-direction:column; gap:6px; padding:10px 12px; border:1px solid var(--dsw-alias-border-l1); border-radius:12px; background:var(--dsw-alias-bg-layer-2); }
+[data-plugin="dsh-overseas-skills"] .ovsDiagHead { display:flex; align-items:center; gap:8px; cursor:pointer; border:none; background:transparent; padding:0; font:inherit; text-align:left; color:var(--dsw-alias-label-primary); }
+[data-plugin="dsh-overseas-skills"] .ovsDiagTitle { font-size:12px; font-weight:600; line-height:18px; }
+[data-plugin="dsh-overseas-skills"] .ovsDiagBody { display:flex; flex-direction:column; gap:4px; padding-top:2px; }
+[data-plugin="dsh-overseas-skills"] .ovsDiagLine { font-size:11px; line-height:16px; color:var(--dsw-alias-label-secondary); }
+[data-plugin="dsh-overseas-skills"] .ovsDiagLine b { color:var(--dsw-alias-label-primary); font-weight:600; }
+[data-plugin="dsh-overseas-skills"] .ovsPlane { display:flex; flex-direction:column; gap:4px; }
+[data-plugin="dsh-overseas-skills"] .ovsPlaneHead { display:flex; align-items:center; gap:8px; width:100%; border:1px solid var(--dsw-alias-border-l1); border-radius:10px; background:color-mix(in srgb, var(--dsw-alias-brand-primary) 4%, var(--dsw-alias-bg-layer-1)); padding:7px 10px; cursor:pointer; color:var(--dsw-alias-label-primary); font:inherit; text-align:left; }
+[data-plugin="dsh-overseas-skills"] .ovsPlaneHead:hover { border-color:var(--dsw-alias-label-dimmed); }
+[data-plugin="dsh-overseas-skills"] .ovsPlaneIcon { flex:none; width:20px; height:20px; border-radius:5px; object-fit:contain; }
+[data-plugin="dsh-overseas-skills"] .ovsPlaneTitle { flex:1; min-width:0; font-size:12px; font-weight:600; line-height:18px; }
+[data-plugin="dsh-overseas-skills"] .ovsPlaneCount { flex:none; font-size:11px; color:var(--dsw-alias-label-tertiary); }
+[data-plugin="dsh-overseas-skills"] .ovsPlaneBody { display:flex; flex-direction:column; gap:4px; padding:2px 0 4px 10px; border-left:1px dashed var(--dsw-alias-border-l1); margin-left:9px; }
+[data-plugin="dsh-overseas-skills"] .ovsDomainHead { display:flex; align-items:center; gap:7px; width:100%; border:none; background:transparent; padding:4px 6px; cursor:pointer; color:var(--dsw-alias-label-secondary); font:inherit; text-align:left; }
+[data-plugin="dsh-overseas-skills"] .ovsDomainHead:hover { color:var(--dsw-alias-label-primary); }
+[data-plugin="dsh-overseas-skills"] .ovsDomainIcon { flex:none; width:18px; height:18px; border-radius:5px; object-fit:contain; }
+[data-plugin="dsh-overseas-skills"] .ovsDomainTitle { flex:1; min-width:0; font-size:12px; font-weight:500; line-height:18px; }
+[data-plugin="dsh-overseas-skills"] .ovsDomainCount { flex:none; font-size:11px; color:var(--dsw-alias-label-tertiary); }
+[data-plugin="dsh-overseas-skills"] .ovsDomainBody { display:flex; flex-direction:column; gap:4px; padding:2px 0 6px 12px; }
+[data-plugin="dsh-overseas-skills"] .ovsRoleHead { display:flex; align-items:center; gap:8px; width:100%; border:1px solid transparent; border-radius:10px; background:transparent; padding:6px 8px; cursor:pointer; color:var(--dsw-alias-label-primary); font:inherit; text-align:left; }
+[data-plugin="dsh-overseas-skills"] .ovsRoleHead:hover { background:var(--dsw-alias-bg-layer-2); border-color:var(--dsw-alias-border-l1); }
+[data-plugin="dsh-overseas-skills"] .ovsRoleIcon { flex:none; width:24px; height:24px; border-radius:7px; object-fit:contain; }
+[data-plugin="dsh-overseas-skills"] .ovsRoleName { flex:1; min-width:0; display:flex; flex-direction:column; gap:0; }
+[data-plugin="dsh-overseas-skills"] .ovsRoleAlias { font-size:12px; font-weight:600; line-height:17px; }
+[data-plugin="dsh-overseas-skills"] .ovsRoleTitle { font-size:11px; line-height:16px; color:var(--dsw-alias-label-secondary); }
+[data-plugin="dsh-overseas-skills"] .ovsRoleCount { flex:none; font-size:11px; color:var(--dsw-alias-label-tertiary); }
+[data-plugin="dsh-overseas-skills"] .ovsRoleBody { padding:2px 0 8px 14px; }
+[data-plugin="dsh-overseas-skills"] .ovsBadge { flex:none; font-size:10px; line-height:15px; padding:0 5px; border-radius:4px; white-space:nowrap; }
+[data-plugin="dsh-overseas-skills"] .ovsBadgeSelf { color:var(--dsw-alias-state-success-primary); border:1px solid color-mix(in srgb, var(--dsw-alias-state-success-primary) 45%, transparent); }
+[data-plugin="dsh-overseas-skills"] .ovsBadgeOther { color:var(--dsw-alias-label-secondary); border:1px solid var(--dsw-alias-border-l1); }
+[data-plugin="dsh-overseas-skills"] .ovsBadgeNone { color:var(--dsw-alias-label-tertiary); border:1px dashed var(--dsw-alias-border-l1); }
+[data-plugin="dsh-overseas-skills"] .ovsBadgeNew { color:var(--dsw-alias-brand-primary); border:1px solid color-mix(in srgb, var(--dsw-alias-brand-primary) 45%, transparent); }
+[data-plugin="dsh-overseas-skills"] .ovsBadgeMulti { color:var(--dsw-alias-label-secondary); background:var(--dsw-alias-bg-layer-2); }
+[data-plugin="dsh-overseas-skills"] .ovsLoose { display:flex; flex-direction:column; gap:6px; padding:8px 10px; border:1px dashed var(--dsw-alias-border-l1); border-radius:10px; }
+[data-plugin="dsh-overseas-skills"] .ovsLooseTitle { font-size:12px; font-weight:500; line-height:18px; color:var(--dsw-alias-label-secondary); }
+[data-plugin="dsh-overseas-skills"] .ovsDiagList { margin:0; padding-left:16px; font-size:11px; line-height:17px; color:var(--dsw-alias-label-secondary); }
+[data-plugin="dsh-overseas-skills"] .ovsCardIcon { flex:none; width:22px; height:22px; border-radius:6px; object-fit:contain; }
+[data-plugin="dsh-overseas-skills"] .ovsGrid { display:grid; grid-template-columns:repeat(auto-fill, minmax(210px, 1fr)); gap:8px; }
+[data-plugin="dsh-overseas-skills"] .ovsCard { display:flex; flex-direction:column; gap:4px; padding:10px 12px; border:1px solid var(--dsw-alias-border-l1); border-radius:12px; background:var(--dsw-alias-bg-layer-1); min-width:0; }
+[data-plugin="dsh-overseas-skills"] .ovsCardHead { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+[data-plugin="dsh-overseas-skills"] .ovsCardTitleWrap { display:flex; align-items:center; gap:6px; min-width:0; }
+[data-plugin="dsh-overseas-skills"] .ovsCardTitle { font-size:12px; line-height:18px; color:var(--dsw-alias-label-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; font-weight:500;}
+[data-plugin="dsh-overseas-skills"] .ovsToolGap { flex:none; font-size:10px; line-height:14px; padding:0 5px; border-radius:4px; color:var(--dsw-alias-state-warn-primary); border:1px solid var(--dsw-alias-state-warn-primary); opacity:.9; }
+[data-plugin="dsh-overseas-skills"] .ovsCardDesc { margin:0; font-size:11px; line-height:16px; color:var(--dsw-alias-label-secondary); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+[data-plugin="dsh-overseas-skills"] .ovsSwitch { position:relative; flex:none; width:34px; height:20px; border:none; border-radius:999px; cursor:pointer; padding:0; background:var(--dsw-alias-border-l2); transition:background .15s ease; }
+[data-plugin="dsh-overseas-skills"] .ovsSwitchOn { background:var(--dsw-alias-brand-primary); }
+[data-plugin="dsh-overseas-skills"] .ovsSwitch:disabled { cursor:default; opacity:.6; }
+[data-plugin="dsh-overseas-skills"] .ovsSwitchKnob { position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:var(--dsw-alias-bg-overlay); transition:left .15s ease; }
+[data-plugin="dsh-overseas-skills"] .ovsSwitchOn .ovsSwitchKnob { left:16px; }
+[data-plugin="dsh-overseas-skills"] .ovsError { font-size:11px; line-height:16px; color:var(--dsw-alias-state-error-primary); }
+[data-plugin="dsh-overseas-skills"] .ovsCred { display:flex; flex-direction:column; gap:8px; padding:12px; border:1px solid var(--dsw-alias-border-l1); border-radius:12px; background:var(--dsw-alias-bg-layer-1); }
+[data-plugin="dsh-overseas-skills"] .ovsCredHead { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+[data-plugin="dsh-overseas-skills"] .ovsCredTitle { font-size:13px; font-weight:500; line-height:20px; color:var(--dsw-alias-label-primary); }
+[data-plugin="dsh-overseas-skills"] .ovsCredState { flex:none; font-size:11px; line-height:16px; padding:0 8px; border-radius:999px; color:var(--dsw-alias-label-secondary); background:var(--dsw-alias-bg-layer-2); }
+[data-plugin="dsh-overseas-skills"] .ovsCredStateOn { color:var(--dsw-alias-state-success-primary); background:color-mix(in srgb, var(--dsw-alias-state-success-primary) 12%, transparent); }
+[data-plugin="dsh-overseas-skills"] .ovsCredInput { box-sizing:border-box; width:100%; height:32px; padding:0 12px; border:1px solid var(--dsw-alias-border-l1); border-radius:8px; background:var(--dsw-alias-bg-base); color:var(--dsw-alias-label-primary); font-size:13px; line-height:20px; outline:none; }
+[data-plugin="dsh-overseas-skills"] .ovsCredInput:focus { border-color:var(--dsw-alias-brand-primary); }
+[data-plugin="dsh-overseas-skills"] .ovsCredBtn { align-self:flex-start; border:none; cursor:pointer; border-radius:8px; padding:6px 14px; font-size:13px; line-height:18px; color:#fff; background:var(--dsw-alias-brand-primary); }
+[data-plugin="dsh-overseas-skills"] .ovsCredBtn:hover:not(:disabled) { filter:brightness(1.08); }
+[data-plugin="dsh-overseas-skills"] .ovsCredBtn:disabled { opacity:.55; cursor:default; }
+[data-plugin="dsh-overseas-skills"] .ovsHint { font-size:11px; line-height:16px; color:var(--dsw-alias-label-secondary); }
+@media (prefers-reduced-motion: reduce) { [data-plugin="dsh-overseas-skills"] .ovsSwitch, [data-plugin="dsh-overseas-skills"] .ovsSwitchKnob { transition:none; } }
+[data-plugin="dsh-overseas-skills"].ovpStack { display:flex; flex-direction:column; gap:8px; margin:0 -16px; }
+[data-plugin="dsh-overseas-skills"].ovpRoot { box-sizing:border-box; width:100%; max-width:var(--dsh-composer-card-max-width, 952px); margin:0 auto; display:flex; flex-direction:column; gap:8px; padding:8px 10px 10px; min-width:0; border:1px solid var(--dsw-alias-border-l1); border-radius:14px; background:linear-gradient(180deg, color-mix(in srgb, var(--dsw-alias-brand-primary) 5%, transparent) 0%, transparent 64px), var(--dsw-alias-bg-layer-1); }
+[data-plugin="dsh-overseas-skills"] .ovpHead { display:flex; align-items:center; gap:8px; }
+[data-plugin="dsh-overseas-skills"] .ovpDot { flex:none; width:8px; height:8px; border-radius:50%; background:linear-gradient(135deg, var(--dsw-alias-brand-primary), color-mix(in srgb, var(--dsw-alias-brand-primary) 55%, #7c9cff)); box-shadow:0 0 0 3px color-mix(in srgb, var(--dsw-alias-brand-primary) 16%, transparent); }
+[data-plugin="dsh-overseas-skills"] .ovpLabel { font-size:13px; font-weight:500; line-height:20px; color:var(--dsw-alias-label-primary); letter-spacing:.2px; }
+[data-plugin="dsh-overseas-skills"] .ovpCount { flex:none; font-size:10px; line-height:14px; font-weight:500; padding:0 7px; border-radius:999px; color:var(--dsw-alias-brand-primary); background:color-mix(in srgb, var(--dsw-alias-brand-primary) 12%, transparent); }
+[data-plugin="dsh-overseas-skills"] .ovpSpacer { flex:1; }
+[data-plugin="dsh-overseas-skills"] .ovpToggle { flex:none; display:inline-flex; align-items:center; gap:2px; border:none; background:transparent; padding:2px 6px; border-radius:6px; cursor:pointer; color:var(--dsw-alias-label-tertiary); font-size:10px; line-height:14px; }
+[data-plugin="dsh-overseas-skills"] .ovpToggle:hover { background:var(--dsw-alias-interactive-bg-hover); color:var(--dsw-alias-label-primary); }
+[data-plugin="dsh-overseas-skills"] .ovpBody { display:flex; flex-direction:column; gap:8px; animation:ovpIn .16s ease; }
+[data-plugin="dsh-overseas-skills"] .ovpPills { display:flex; gap:6px; overflow-x:auto; padding:1px 1px 2px; scrollbar-width:none; }
+[data-plugin="dsh-overseas-skills"] .ovpPills::-webkit-scrollbar { display:none; }
+[data-plugin="dsh-overseas-skills"] .ovpPill { flex:none; display:inline-flex; align-items:center; gap:4px; border:1px solid transparent; cursor:pointer; border-radius:999px; padding:4px 12px; font-size:11px; line-height:16px; color:var(--dsw-alias-label-secondary); background:transparent; transition:background .12s ease, color .12s ease, border-color .12s ease; }
+[data-plugin="dsh-overseas-skills"] .ovpPillIcon { width:16px; height:16px; border-radius:5px; object-fit:contain; }
+[data-plugin="dsh-overseas-skills"] .ovpPill:hover { background:color-mix(in srgb, var(--dsw-alias-brand-primary) 8%, transparent); color:var(--dsw-alias-label-primary); }
+[data-plugin="dsh-overseas-skills"] .ovpPill:focus-visible { outline:2px solid var(--dsw-alias-brand-primary); outline-offset:1px; }
+[data-plugin="dsh-overseas-skills"] .ovpPillActive {font-size:12px;  background:var(--dsw-alias-brand-primary); border-color:var(--dsw-alias-brand-primary); color:#fff; font-weight:500; }
+[data-plugin="dsh-overseas-skills"] .ovpPillActive:hover { background:var(--dsw-alias-brand-primary); color:#fff; }
+[data-plugin="dsh-overseas-skills"] .ovpGrid { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:6px; max-height:150px; overflow-y:auto; contain:content; padding:2px 2px 4px; }
+[data-plugin="dsh-overseas-skills"] .ovpCard { position:relative; display:flex; flex-direction:column; gap:2px; padding:8px 10px; border:1px solid var(--dsw-alias-border-l1); border-radius:12px; background:var(--dsw-alias-bg-layer-2); cursor:pointer; min-width:0; text-align:left; transition:border-color .12s ease, background .12s ease; }
+[data-plugin="dsh-overseas-skills"] .ovpCard:before { content:""; position:absolute; left:0; top:8px; bottom:8px; width:3px; border-radius:0 3px 3px 0; background:var(--dsw-alias-brand-primary); opacity:0; transform:scaleY(.4); transform-origin:center; transition:opacity .12s ease, transform .12s ease; }
+[data-plugin="dsh-overseas-skills"] .ovpCard:hover { border-color:color-mix(in srgb, var(--dsw-alias-brand-primary) 65%, var(--dsw-alias-border-l1)); background:color-mix(in srgb, var(--dsw-alias-brand-primary) 6%, var(--dsw-alias-bg-layer-2)); }
+[data-plugin="dsh-overseas-skills"] .ovpCard:hover:before { opacity:1; transform:scaleY(1); }
+[data-plugin="dsh-overseas-skills"] .ovpCard:focus-visible { outline:2px solid var(--dsw-alias-brand-primary); outline-offset:1px; }
+[data-plugin="dsh-overseas-skills"] .ovpCardTop { display:flex; align-items:center; justify-content:space-between; gap:6px; min-width:0; }
+[data-plugin="dsh-overseas-skills"] .ovpCardTitleWrap { min-width:0; flex:1; }
+[data-plugin="dsh-overseas-skills"] .ovpCardTitle { max-width:100%; }
+[data-plugin="dsh-overseas-skills"] .ovpRight { flex-wrap:nowrap; }
+[data-plugin="dsh-overseas-skills"] .ovpCardTitleWrap { display:inline-flex; align-items:center; gap:5px; min-width:0; }
+[data-plugin="dsh-overseas-skills"] .ovpCardIcon { flex:none; width:18px; height:18px; border-radius:5px; object-fit:contain; }
+[data-plugin="dsh-overseas-skills"] .ovpCardTitle { font-size:12px; font-weight:500; line-height:18px; color:var(--dsw-alias-label-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; transition:color .12s ease; }
+[data-plugin="dsh-overseas-skills"] .ovpCard:hover .ovpCardTitle { color:var(--dsw-alias-brand-primary); }
+[data-plugin="dsh-overseas-skills"] .ovpCardDesc { margin:0; font-size:11px; line-height:16px; color:var(--dsw-alias-label-secondary); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+[data-plugin="dsh-overseas-skills"] .ovpTag { flex:none; font-size:10px; line-height:14px; padding:0 5px; border-radius:999px; color:var(--dsw-alias-state-warn-primary); background:color-mix(in srgb, var(--dsw-alias-state-warn-primary) 10%, transparent); border:1px solid color-mix(in srgb, var(--dsw-alias-state-warn-primary) 30%, transparent); }
+[data-plugin="dsh-overseas-skills"] .ovpRight { flex:none; display:inline-flex; align-items:center; gap:4px; margin-left:auto; }
+[data-plugin="dsh-overseas-skills"] .ovpShort { border:none; background:transparent; cursor:pointer; font-size:10px; line-height:14px; padding:1px 6px; border-radius:6px; color:var(--dsw-alias-label-tertiary); opacity:0; transition:opacity .12s ease; }
+[data-plugin="dsh-overseas-skills"] .ovpCard:hover .ovpShort { opacity:1; }
+[data-plugin="dsh-overseas-skills"] .ovpShort:hover { background:var(--dsw-alias-interactive-bg-hover); color:var(--dsw-alias-label-primary); }
+[data-plugin="dsh-overseas-skills"] .ovpLoading { font-size:11px; line-height:16px; color:var(--dsw-alias-label-tertiary); padding:2px 2px 6px; }
+@keyframes ovpIn { from { opacity:0; transform:translateY(-3px); } to { opacity:1; transform:none; } }
+@media (prefers-reduced-motion: reduce) { [data-plugin="dsh-overseas-skills"] .ovpBody { animation:none; } [data-plugin="dsh-overseas-skills"] .ovpCard, [data-plugin="dsh-overseas-skills"] .ovpCard:before, [data-plugin="dsh-overseas-skills"] .ovpPill, [data-plugin="dsh-overseas-skills"] .ovpCardTitle { transition:none; } }
+</style>
+<style>
+
+html,body{margin:0;padding:0;height:100%;}
+body{background:var(--dsw-alias-bg-base);font-family:var(--dsw-font-family);}
+.overlay{position:fixed;top:22px;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;}
+/* 展开图：面板不限高，若仍居中会在图顶留出上千 px 空白，且面板落点随内容高度漂移。
+   顶端对齐让「第 300 行一定在面板里」成立，验收脚本才有一个稳定口径。 */
+.overlay.stretch{align-items:flex-start;}
+.mask{position:absolute;inset:0;background:var(--dsw-alias-bg-mask-1);}
+.panel{position:relative;z-index:1;display:flex;width:800px;
+  height:min(800px,calc(100vh - 48px));max-width:calc(100vw - 48px);
+  border-radius:32px;overflow:hidden;background:var(--dsw-alias-bg-layer-2);
+  box-shadow:var(--dsw-elevation-prominent);}
+.nav{flex:none;display:flex;flex-direction:column;gap:18px;width:188px;
+  padding:22px 12px 0;box-sizing:border-box;}
+.navTitle{padding:0 12px;font-size:16px;line-height:24px;font-weight:500;color:var(--dsw-alias-label-primary);}
+.navList{display:flex;flex-direction:column;gap:4px;}
+.navCell{display:flex;align-items:center;gap:8px;height:40px;padding:9px 16px 9px 12px;
+  box-sizing:border-box;border:none;border-radius:12px;background:transparent;
+  font-family:inherit;font-size:14px;line-height:22px;font-weight:400;
+  color:var(--dsw-alias-label-primary);text-align:left;}
+.navCell.active{background:var(--dsw-specific-sidebar-nav-item-active);}
+.navGlyph{flex:none;width:16px;height:16px;border-radius:4px;
+  background:var(--dsw-alias-label-tertiary);opacity:.55;}
+.navLabel{flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.content{flex:1;min-width:0;display:flex;flex-direction:column;}
+.header{flex:none;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;
+  height:54px;padding:20px 14px 8px 10px;box-sizing:border-box;}
+.close{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;
+  padding:0;border:none;border-radius:28px;background:transparent;cursor:pointer;
+  color:var(--dsw-alias-label-primary);font-size:14px;line-height:1;}
+.options{flex:1;min-height:0;padding:0 24px 24px;overflow-y:auto;}
+.options.stretch{overflow:visible;height:auto;}
+.panel.stretch{height:auto;}
+.note{position:fixed;left:0;right:0;top:0;height:22px;margin:0;z-index:5;padding:3px 10px;
+  box-sizing:border-box;font-size:10.5px;line-height:16px;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;color:var(--dsw-alias-label-tertiary);
+  background:var(--dsw-alias-bg-layer-2);border-bottom:1px solid var(--dsw-alias-border-l1);}
+
+</style>
+</head>
+<body>
+<div class="overlay">
+  <div class="mask"></div>
+  <div class="panel">
+    <nav class="nav">
+      <div class="navTitle">设置</div>
+      <div class="navList">
+        <button class="navCell">
+          <span class="navGlyph"></span><span class="navLabel">通用设置</span>
+        </button>
+        <button class="navCell">
+          <span class="navGlyph"></span><span class="navLabel">模型</span>
+        </button>
+        <button class="navCell">
+          <span class="navGlyph"></span><span class="navLabel">插件</span>
+        </button>
+        <button class="navCell">
+          <span class="navGlyph"></span><span class="navLabel">Agent 预设</span>
+        </button>
+        <button class="navCell active">
+          <span class="navGlyph"></span><span class="navLabel">出海技能</span>
+        </button>
+        <button class="navCell">
+          <span class="navGlyph"></span><span class="navLabel">万物互联</span>
+        </button>
+        <button class="navCell">
+          <span class="navGlyph"></span><span class="navLabel">算法技能</span>
+        </button>
+      </div>
+    </nav>
+    <div class="content">
+      <div class="header"><div></div><button class="close">✕</button></div>
+      <div class="options"><div class="ovsRoot" data-plugin="dsh-overseas-skills"><div class="ovsCred"><div class="ovsCredHead"><span class="ovsCredTitle">外部工具凭据</span><span class="ovsCredState">Exa 未配置</span></div><input class="ovsCredInput" type="password" placeholder="Exa API Key（用于公司/人物/组织调研）" value=""><button class="ovsCredBtn" type="button">保存 Exa Key</button></div><input class="ovsSearch" type="search" placeholder="搜索技能" value=""><div class="ovsDiag"><button class="ovsDiagHead" type="button" aria-expanded="false"><span class="ovsDiagTitle">一致性诊断 · 5 条</span><span class="ovsScenCaret">▸</span></button><div class="ovsDiagBody"><div class="ovsDiagLine">技能卡 <b>222</b>　归位 <b>209</b>　未归岗 <b>13</b>　岗位 <b>50</b>（有卡 <b>47</b>）</div><div class="ovsDiagLine">行数 <b>319</b>　—— 一张卡归多个岗位就会在多处出现，所以行数大于卡片数；开关是按卡走的，任何一处拨动都作用于同一张卡。</div></div></div><div class="ovsToolbar"><button class="ovsToolBtn" type="button">展开全部</button><button class="ovsToolBtn" type="button">全部收起</button></div><section class="ovsGroup"><button class="ovsScenHead" type="button" aria-expanded="false"><img class="ovsScenIcon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdzYy1hLW1hcmtldCIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRURGNkU2Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTUlIiBzdG9wLWNvbG9yPSIjRDNFQUMyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0I0RDlBMCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0iaGlzYy1hLW1hcmtldCIgY3g9IjAuMyIgY3k9IjAuMiIgcj0iMS4wIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0icmdiYSgyNTUsMjU1LDI1NSwwLjY4KSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjU1JSIgc3RvcC1jb2xvcj0icmdiYSgyNTUsMjU1LDI1NSwwKSIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICAgIDxjbGlwUGF0aCBpZD0iY2xpcHNjLWEtbWFya2V0Ij48cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIvPjwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjQuNSIgeT0iOC4yIiB3aWR0aD0iOTEiIGhlaWdodD0iODciIHJ4PSIxOCIgZmlsbD0icmdiYSgwLDAsMCwwLjEyKSIvPgogIDxyZWN0IHg9IjQuNSIgeT0iNC41IiB3aWR0aD0iOTEiIGhlaWdodD0iOTEiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ3NjLWEtbWFya2V0KSIgc3Ryb2tlPSIjNThCODQ4IiBzdHJva2Utd2lkdGg9IjIuMiIvPgogIDxwYXRoIGQ9Ik0xMC41IDI2IFExMC41IDEwLjUgMjYgMTAuNSBMNjEgMTAuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNTUpIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTg5LjUgNzQgUTg5LjUgODkuNSA3NCA4OS41IEwzOSA4OS41IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoNDYsMTI1LDYwLDAuMzUpIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHJlY3QgeD0iNi41IiB5PSI2LjUiIHdpZHRoPSI4NyIgaGVpZ2h0PSI4NyIgcng9IjE1LjUiIGZpbGw9InVybCgjaGlzYy1hLW1hcmtldCkiLz4KICA8ZyBjbGlwLXBhdGg9InVybCgjY2xpcHNjLWEtbWFya2V0KSI+CiAgPHBhdGggZD0iTTEyIDEwMCBDMTIgODQgMjcgODAgNTAgODAgQzczIDgwIDg4IDg0IDg4IDEwMCBaIiBmaWxsPSJHIi8+CiAgCiAgPGNpcmNsZSBjeD0iNDUiIGN5PSI4OSIgcj0iMy42IiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMiIvPjxjaXJjbGUgY3g9IjU1IiBjeT0iODkiIHI9IjMuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIiLz48cGF0aCBkPSJNNDguNiA4OSBINTEuNCIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIiLz48cGF0aCBkPSJNNDEuNSA4NyBMMzggOTMgTTU4LjUgODcgTDYyIDkzIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMS44Ii8+CiAgPHJlY3QgeD0iNDQuNSIgeT0iNzAiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMyIgcng9IjQuNSIgZmlsbD0iI0Q5QTM3QyIvPgogIDxjaXJjbGUgY3g9IjUwIiBjeT0iNDQiIHI9IjM0IiBmaWxsPSIjRUZDNDlFIi8+CiAgPGNpcmNsZSBjeD0iMTUuNSIgY3k9IjQ1IiByPSI0LjIiIGZpbGw9IiNFRkM0OUUiLz4KICA8Y2lyY2xlIGN4PSI4NC41IiBjeT0iNDUiIHI9IjQuMiIgZmlsbD0iI0VGQzQ5RSIvPgogIDxwYXRoIGQ9Ik0yOCA1NSBRNTAgNjYgNzIgNTUgTDcyIDU5LjUgUTUwIDY3IDI4IDU5LjUgWiIgZmlsbD0iIzlDOEE3OCIgb3BhY2l0eT0iMC40Ii8+CiAgCiAgPGNpcmNsZSBjeD0iNDEiIGN5PSI0NCIgcj0iMi45IiBmaWxsPSIjMkIyNjIyIi8+PGNpcmNsZSBjeD0iNTkiIGN5PSI0NCIgcj0iMi45IiBmaWxsPSIjMkIyNjIyIi8+CiAgPGNpcmNsZSBjeD0iNDEuOSIgY3k9IjQzLjEiIHI9IjEuMDUiIGZpbGw9IiNGRkZGRkYiLz48Y2lyY2xlIGN4PSI1OS45IiBjeT0iNDMuMSIgcj0iMS4wNSIgZmlsbD0iI0ZGRkZGRiIvPgogIDxwYXRoIGQ9Ik0zNyAzOC41IFE0MSAzNiA0NSAzOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMkIyNjIyIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik01NSAzOCBRNTkgMzYgNjMgMzguNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMkIyNjIyIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik00OC42IDQ4LjUgUTQ5LjUgNTEuNSA1MC42IDQ4LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Q5QTM3QyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik00NCA1NiBRNTAgNjAuNSA1NiA1NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQjU2NzRCIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgCiAgCiAgPHBhdGggZD0iTTE2IDQ0IFExNSA3IDUwIDcgUTg1IDcgODQgNDQgUTc4IDI5IDUwIDI5IFEyMiAyOSAxNiA0NCBaIiBmaWxsPSIjMkUyQTI4Ii8+CiAgPC9nPgo8L3N2Zz4=" alt=""><span class="ovsScenTitle">A 市场与选品</span><span class="ovsScenCount">49 项</span><span class="ovsScenCaret">▸</span></button></section><section class="ovsGroup"><button class="ovsScenHead" type="button" aria-expanded="false"><img class="ovsScenIcon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdzYy1iLXByb2R1Y3QiIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0VERjZFNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjU1JSIgc3RvcC1jb2xvcj0iI0QzRUFDMiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNCNEQ5QTAiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9Imhpc2MtYi1wcm9kdWN0IiBjeD0iMC4zIiBjeT0iMC4yIiByPSIxLjAiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNjgpIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTUlIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwyNTUsMjU1LDApIi8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPGNsaXBQYXRoIGlkPSJjbGlwc2MtYi1wcm9kdWN0Ij48cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIvPjwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjQuNSIgeT0iOC4yIiB3aWR0aD0iOTEiIGhlaWdodD0iODciIHJ4PSIxOCIgZmlsbD0icmdiYSgwLDAsMCwwLjEyKSIvPgogIDxyZWN0IHg9IjQuNSIgeT0iNC41IiB3aWR0aD0iOTEiIGhlaWdodD0iOTEiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ3NjLWItcHJvZHVjdCkiIHN0cm9rZT0iIzU4Qjg0OCIgc3Ryb2tlLXdpZHRoPSIyLjIiLz4KICA8cGF0aCBkPSJNMTAuNSAyNiBRMTAuNSAxMC41IDI2IDEwLjUgTDYxIDEwLjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjU1KSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik04OS41IDc0IFE4OS41IDg5LjUgNzQgODkuNSBMMzkgODkuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDQ2LDEyNSw2MCwwLjM1KSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxyZWN0IHg9IjYuNSIgeT0iNi41IiB3aWR0aD0iODciIGhlaWdodD0iODciIHJ4PSIxNS41IiBmaWxsPSJ1cmwoI2hpc2MtYi1wcm9kdWN0KSIvPgogIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwc2MtYi1wcm9kdWN0KSI+CiAgPHBhdGggZD0iTTEyIDEwMCBDMTIgODQgMjcgODAgNTAgODAgQzczIDgwIDg4IDg0IDg4IDEwMCBaIiBmaWxsPSJNSU5UIi8+CiAgPHBhdGggZD0iTTQyIDgwIEw1MCA4NiBMNTggODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU4Qjg0OCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNDQgODIgSDU2IEw1OSA4NSBWOTYgSDQ0IFoiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJFN0QzQyIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTU2IDgyIFY4NSBINTkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJFN0QzQyIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTQ2LjUgODkgSDU1LjUgTTQ2LjUgOTIgSDUzLjUiIHN0cm9rZT0iIzJFN0QzQyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxyZWN0IHg9IjQ0LjUiIHk9IjcwIiB3aWR0aD0iMTEiIGhlaWdodD0iMTMiIHJ4PSI0LjUiIGZpbGw9IiNFMkI0OEMiLz4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjQ0IiByPSIzNCIgZmlsbD0iI0Y2RDdCOCIvPgogIDxjaXJjbGUgY3g9IjE1LjUiIGN5PSI0NSIgcj0iNC4yIiBmaWxsPSIjRjZEN0I4Ii8+CiAgPGNpcmNsZSBjeD0iODQuNSIgY3k9IjQ1IiByPSI0LjIiIGZpbGw9IiNGNkQ3QjgiLz4KICA8cGF0aCBkPSJNMTYgNDUgUTEyIDY4IDEzIDg0IEw4NyA4NCBRODggNjggODQgNDUgWiIgZmlsbD0iIzlDNUIzMyIvPgogIAogIDxjaXJjbGUgY3g9IjQxIiBjeT0iNDQiIHI9IjIuOSIgZmlsbD0iIzJCMjYyMiIvPjxjaXJjbGUgY3g9IjU5IiBjeT0iNDQiIHI9IjIuOSIgZmlsbD0iIzJCMjYyMiIvPgogIDxjaXJjbGUgY3g9IjQxLjkiIGN5PSI0My4xIiByPSIxLjA1IiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iNTkuOSIgY3k9IjQzLjEiIHI9IjEuMDUiIGZpbGw9IiNGRkZGRkYiLz4KICA8cGF0aCBkPSJNMzcgMzguNSBRNDEgMzYgNDUgMzgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJCMjYyMiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNTUgMzggUTU5IDM2IDYzIDM4LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJCMjYyMiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNDguNiA0OC41IFE0OS41IDUxLjUgNTAuNiA0OC41IiBmaWxsPSJub25lIiBzdHJva2U9IiNFMkI0OEMiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNDQgNTYgUTUwIDYwLjUgNTYgNTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0I1Njc0QiIgc3Ryb2tlLXdpZHRoPSIyLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxlbGxpcHNlIGN4PSIzNCIgY3k9IjUxIiByeD0iNS40IiByeT0iMyIgZmlsbD0icmdiYSgyNTUsMTIwLDEyMCwwLjQyKSIvPjxlbGxpcHNlIGN4PSI2NiIgY3k9IjUxIiByeD0iNS40IiByeT0iMyIgZmlsbD0icmdiYSgyNTUsMTIwLDEyMCwwLjQyKSIvPgogIAogIDxwYXRoIGQ9Ik0xNiA0MyBRMTYuNSAxNSA1MCAxNSBRODMuNSAxNSA4NCA0MyBRNzQgMjcgNTAgMjggUTI2IDI3IDE2IDQzIFoiIGZpbGw9IiM5QzVCMzMiLz4KICA8L2c+Cjwvc3ZnPg==" alt=""><span class="ovsScenTitle">B 产品与Listing</span><span class="ovsScenCount">16 项</span><span class="ovsScenCaret">▸</span></button></section><section class="ovsGroup"><button class="ovsScenHead" type="button" aria-expanded="false"><img class="ovsScenIcon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdzYy1jLWNvbnRlbnQtYnJhbmQiIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0VERjZFNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjU1JSIgc3RvcC1jb2xvcj0iI0QzRUFDMiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNCNEQ5QTAiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9Imhpc2MtYy1jb250ZW50LWJyYW5kIiBjeD0iMC4zIiBjeT0iMC4yIiByPSIxLjAiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNjgpIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTUlIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwyNTUsMjU1LDApIi8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPGNsaXBQYXRoIGlkPSJjbGlwc2MtYy1jb250ZW50LWJyYW5kIj48cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIvPjwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjQuNSIgeT0iOC4yIiB3aWR0aD0iOTEiIGhlaWdodD0iODciIHJ4PSIxOCIgZmlsbD0icmdiYSgwLDAsMCwwLjEyKSIvPgogIDxyZWN0IHg9IjQuNSIgeT0iNC41IiB3aWR0aD0iOTEiIGhlaWdodD0iOTEiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ3NjLWMtY29udGVudC1icmFuZCkiIHN0cm9rZT0iIzU4Qjg0OCIgc3Ryb2tlLXdpZHRoPSIyLjIiLz4KICA8cGF0aCBkPSJNMTAuNSAyNiBRMTAuNSAxMC41IDI2IDEwLjUgTDYxIDEwLjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjU1KSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik04OS41IDc0IFE4OS41IDg5LjUgNzQgODkuNSBMMzkgODkuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDQ2LDEyNSw2MCwwLjM1KSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxyZWN0IHg9IjYuNSIgeT0iNi41IiB3aWR0aD0iODciIGhlaWdodD0iODciIHJ4PSIxNS41IiBmaWxsPSJ1cmwoI2hpc2MtYy1jb250ZW50LWJyYW5kKSIvPgogIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwc2MtYy1jb250ZW50LWJyYW5kKSI+CiAgPHBhdGggZD0iTTEyIDEwMCBDMTIgODQgMjcgODAgNTAgODAgQzczIDgwIDg4IDg0IDg4IDEwMCBaIiBmaWxsPSJHTCIvPgogIDxwYXRoIGQ9Ik00MiA4MCBMNTAgODYgTDU4IDgwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1OEI4NDgiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTUyIDgyIFE2MCA4OCA1MCA5NSBRNDYgOTAgNTIgODIgWiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMkU3RDNDIiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik01MSA4NCBMNTUgODkiIHN0cm9rZT0iIzJFN0QzQyIgc3Ryb2tlLXdpZHRoPSIxLjYiLz4KICA8cmVjdCB4PSI0NC41IiB5PSI3MCIgd2lkdGg9IjExIiBoZWlnaHQ9IjEzIiByeD0iNC41IiBmaWxsPSIjRTJCNDhDIi8+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI0NCIgcj0iMzQiIGZpbGw9IiNGNkQ3QjgiLz4KICA8Y2lyY2xlIGN4PSIxNS41IiBjeT0iNDUiIHI9IjQuMiIgZmlsbD0iI0Y2RDdCOCIvPgogIDxjaXJjbGUgY3g9Ijg0LjUiIGN5PSI0NSIgcj0iNC4yIiBmaWxsPSIjRjZEN0I4Ii8+CiAgPHBhdGggZD0iTTg0IDQ0IFE5NSA2MCA4OSA4NSBRODQgODggODEgNzkgUTc3IDYyIDg0IDQ0IFoiIGZpbGw9IiM5QzVCMzMiLz4KICAKICA8Y2lyY2xlIGN4PSI0MSIgY3k9IjQ0IiByPSIyLjkiIGZpbGw9IiMyQjI2MjIiLz48Y2lyY2xlIGN4PSI1OSIgY3k9IjQ0IiByPSIyLjkiIGZpbGw9IiMyQjI2MjIiLz4KICA8Y2lyY2xlIGN4PSI0MS45IiBjeT0iNDMuMSIgcj0iMS4wNSIgZmlsbD0iI0ZGRkZGRiIvPjxjaXJjbGUgY3g9IjU5LjkiIGN5PSI0My4xIiByPSIxLjA1IiBmaWxsPSIjRkZGRkZGIi8+CiAgPHBhdGggZD0iTTM3IDM4LjUgUTQxIDM2IDQ1IDM4IiBmaWxsPSJub25lIiBzdHJva2U9IiMyQjI2MjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTU1IDM4IFE1OSAzNiA2MyAzOC41IiBmaWxsPSJub25lIiBzdHJva2U9IiMyQjI2MjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQ4LjYgNDguNSBRNDkuNSA1MS41IDUwLjYgNDguNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRTJCNDhDIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQ0IDU2IFE1MCA2MC41IDU2IDU2IiBmaWxsPSJub25lIiBzdHJva2U9IiNCNTY3NEIiIHN0cm9rZS13aWR0aD0iMi40IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8ZWxsaXBzZSBjeD0iMzQiIGN5PSI1MSIgcng9IjUuNCIgcnk9IjMiIGZpbGw9InJnYmEoMjU1LDEyMCwxMjAsMC40MikiLz48ZWxsaXBzZSBjeD0iNjYiIGN5PSI1MSIgcng9IjUuNCIgcnk9IjMiIGZpbGw9InJnYmEoMjU1LDEyMCwxMjAsMC40MikiLz4KICAKICA8cGF0aCBkPSJNMTYgNDMgUTE2LjUgMTUgNTAgMTUgUTgzLjUgMTUgODQgNDMgUTc0IDI3IDUwIDI4IFEyNiAyNyAxNiA0MyBaIiBmaWxsPSIjOUM1QjMzIi8+CiAgPC9nPgo8L3N2Zz4=" alt=""><span class="ovsScenTitle">C 内容与品牌</span><span class="ovsScenCount">37 项</span><span class="ovsScenCaret">▸</span></button></section><section class="ovsGroup"><button class="ovsScenHead" type="button" aria-expanded="false"><img class="ovsScenIcon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdzYy1kLXRyYWZmaWMiIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0VERjZFNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjU1JSIgc3RvcC1jb2xvcj0iI0QzRUFDMiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNCNEQ5QTAiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9Imhpc2MtZC10cmFmZmljIiBjeD0iMC4zIiBjeT0iMC4yIiByPSIxLjAiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNjgpIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTUlIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwyNTUsMjU1LDApIi8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPGNsaXBQYXRoIGlkPSJjbGlwc2MtZC10cmFmZmljIj48cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIvPjwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjQuNSIgeT0iOC4yIiB3aWR0aD0iOTEiIGhlaWdodD0iODciIHJ4PSIxOCIgZmlsbD0icmdiYSgwLDAsMCwwLjEyKSIvPgogIDxyZWN0IHg9IjQuNSIgeT0iNC41IiB3aWR0aD0iOTEiIGhlaWdodD0iOTEiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ3NjLWQtdHJhZmZpYykiIHN0cm9rZT0iIzU4Qjg0OCIgc3Ryb2tlLXdpZHRoPSIyLjIiLz4KICA8cGF0aCBkPSJNMTAuNSAyNiBRMTAuNSAxMC41IDI2IDEwLjUgTDYxIDEwLjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjU1KSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik04OS41IDc0IFE4OS41IDg5LjUgNzQgODkuNSBMMzkgODkuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDQ2LDEyNSw2MCwwLjM1KSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxyZWN0IHg9IjYuNSIgeT0iNi41IiB3aWR0aD0iODciIGhlaWdodD0iODciIHJ4PSIxNS41IiBmaWxsPSJ1cmwoI2hpc2MtZC10cmFmZmljKSIvPgogIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwc2MtZC10cmFmZmljKSI+CiAgPHBhdGggZD0iTTEyIDEwMCBDMTIgODQgMjcgODAgNTAgODAgQzczIDgwIDg4IDg0IDg4IDEwMCBaIiBmaWxsPSJXIi8+CiAgPHBhdGggZD0iTTM4IDgwIEw1MCA4NiBMNjIgODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJFN0QzQyIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik00MiA4MCBMNTAgOTEgTDU4IDgwIFoiIGZpbGw9IiM1OEI4NDgiLz48cmVjdCB4PSI0NyIgeT0iODAiIHdpZHRoPSI2IiBoZWlnaHQ9IjUiIHJ4PSIxLjUiIGZpbGw9IiMyRTdEM0MiLz4KICA8cGF0aCBkPSJNNDAgODQgSDUzIEw1OSA4OSBWOTQgTDUzIDk0IFoiIGZpbGw9IiMyRTdEM0MiLz48cGF0aCBkPSJNNTcgODcgUTYzIDg0IDY2IDg4IFE2OCA5MSA2MyA5NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMkU3RDNDIiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTQwIDg0IFY5NCIgc3Ryb2tlPSIjMkU3RDNDIiBzdHJva2Utd2lkdGg9IjIuNCIvPgogIDxyZWN0IHg9IjQ0LjUiIHk9IjcwIiB3aWR0aD0iMTEiIGhlaWdodD0iMTMiIHJ4PSI0LjUiIGZpbGw9IiNEOUEzN0MiLz4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjQ0IiByPSIzNCIgZmlsbD0iI0VGQzQ5RSIvPgogIDxjaXJjbGUgY3g9IjE1LjUiIGN5PSI0NSIgcj0iNC4yIiBmaWxsPSIjRUZDNDlFIi8+CiAgPGNpcmNsZSBjeD0iODQuNSIgY3k9IjQ1IiByPSI0LjIiIGZpbGw9IiNFRkM0OUUiLz4KICAKICAKICA8Y2lyY2xlIGN4PSI0MSIgY3k9IjQ0IiByPSIyLjkiIGZpbGw9IiMyQjI2MjIiLz48Y2lyY2xlIGN4PSI1OSIgY3k9IjQ0IiByPSIyLjkiIGZpbGw9IiMyQjI2MjIiLz4KICA8Y2lyY2xlIGN4PSI0MS45IiBjeT0iNDMuMSIgcj0iMS4wNSIgZmlsbD0iI0ZGRkZGRiIvPjxjaXJjbGUgY3g9IjU5LjkiIGN5PSI0My4xIiByPSIxLjA1IiBmaWxsPSIjRkZGRkZGIi8+CiAgPHBhdGggZD0iTTM3IDM4LjUgUTQxIDM2IDQ1IDM4IiBmaWxsPSJub25lIiBzdHJva2U9IiMyQjI2MjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTU1IDM4IFE1OSAzNiA2MyAzOC41IiBmaWxsPSJub25lIiBzdHJva2U9IiMyQjI2MjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQ4LjYgNDguNSBRNDkuNSA1MS41IDUwLjYgNDguNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRDlBMzdDIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQ0IDU2IFE1MCA2MC41IDU2IDU2IiBmaWxsPSJub25lIiBzdHJva2U9IiNCNTY3NEIiIHN0cm9rZS13aWR0aD0iMi40IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAKICAKICA8cGF0aCBkPSJNMTYgNDQgUTE1IDcuNSA1MCA3LjUgUTU4LjUgNy41IDYyLjUgMTAuNSBRNzAuNSA1LjUgNzYuNSA5LjUgUTc4LjUgMTIuNSA4NCA0NCBRNzggMjcuNSA1MCAyOCBRMjIgMjcuNSAxNiA0NCBaIiBmaWxsPSIjN0E0QTJCIi8+CiAgPC9nPgo8L3N2Zz4=" alt=""><span class="ovsScenTitle">D 流量与获客</span><span class="ovsScenCount">24 项</span><span class="ovsScenCaret">▸</span></button></section><section class="ovsGroup"><button class="ovsScenHead" type="button" aria-expanded="false"><img class="ovsScenIcon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdzYy1lLXNhbGVzIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNFREY2RTYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1NSUiIHN0b3AtY29sb3I9IiNEM0VBQzIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjQjREOUEwIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHJhZGlhbEdyYWRpZW50IGlkPSJoaXNjLWUtc2FsZXMiIGN4PSIwLjMiIGN5PSIwLjIiIHI9IjEuMCI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9InJnYmEoMjU1LDI1NSwyNTUsMC42OCkiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1NSUiIHN0b3AtY29sb3I9InJnYmEoMjU1LDI1NSwyNTUsMCkiLz4KICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgICA8Y2xpcFBhdGggaWQ9ImNsaXBzYy1lLXNhbGVzIj48cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIvPjwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjQuNSIgeT0iOC4yIiB3aWR0aD0iOTEiIGhlaWdodD0iODciIHJ4PSIxOCIgZmlsbD0icmdiYSgwLDAsMCwwLjEyKSIvPgogIDxyZWN0IHg9IjQuNSIgeT0iNC41IiB3aWR0aD0iOTEiIGhlaWdodD0iOTEiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ3NjLWUtc2FsZXMpIiBzdHJva2U9IiM1OEI4NDgiIHN0cm9rZS13aWR0aD0iMi4yIi8+CiAgPHBhdGggZD0iTTEwLjUgMjYgUTEwLjUgMTAuNSAyNiAxMC41IEw2MSAxMC41IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC41NSkiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNODkuNSA3NCBRODkuNSA4OS41IDc0IDg5LjUgTDM5IDg5LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSg0NiwxMjUsNjAsMC4zNSkiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIgZmlsbD0idXJsKCNoaXNjLWUtc2FsZXMpIi8+CiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXBzYy1lLXNhbGVzKSI+CiAgPHBhdGggZD0iTTEyIDEwMCBDMTIgODQgMjcgODAgNTAgODAgQzczIDgwIDg4IDg0IDg4IDEwMCBaIiBmaWxsPSJHRCIvPgogIDxwYXRoIGQ9Ik00MiA4MCBMNTAgODYgTDU4IDgwIiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQxIDkwIEw0MSA4NiBMNTQgODYgTDU5IDkyIEw0MSA5MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48Y2lyY2xlIGN4PSI0NSIgY3k9Ijk1IiByPSIyIiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMS44Ii8+PGNpcmNsZSBjeD0iNTUiIGN5PSI5NSIgcj0iMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjEuOCIvPgogIDxyZWN0IHg9IjQ0LjUiIHk9IjcwIiB3aWR0aD0iMTEiIGhlaWdodD0iMTMiIHJ4PSI0LjUiIGZpbGw9IiNDRTlDNzIiLz4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjQ0IiByPSIzNCIgZmlsbD0iI0U4Qjc4QSIvPgogIDxjaXJjbGUgY3g9IjE1LjUiIGN5PSI0NSIgcj0iNC4yIiBmaWxsPSIjRThCNzhBIi8+CiAgPGNpcmNsZSBjeD0iODQuNSIgY3k9IjQ1IiByPSI0LjIiIGZpbGw9IiNFOEI3OEEiLz4KICAKICAKICA8Y2lyY2xlIGN4PSI0MSIgY3k9IjQ0IiByPSIyLjkiIGZpbGw9IiMyQjI2MjIiLz48Y2lyY2xlIGN4PSI1OSIgY3k9IjQ0IiByPSIyLjkiIGZpbGw9IiMyQjI2MjIiLz4KICA8Y2lyY2xlIGN4PSI0MS45IiBjeT0iNDMuMSIgcj0iMS4wNSIgZmlsbD0iI0ZGRkZGRiIvPjxjaXJjbGUgY3g9IjU5LjkiIGN5PSI0My4xIiByPSIxLjA1IiBmaWxsPSIjRkZGRkZGIi8+CiAgPHBhdGggZD0iTTM3IDM4LjUgUTQxIDM2IDQ1IDM4IiBmaWxsPSJub25lIiBzdHJva2U9IiMyQjI2MjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTU1IDM4IFE1OSAzNiA2MyAzOC41IiBmaWxsPSJub25lIiBzdHJva2U9IiMyQjI2MjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQ4LjYgNDguNSBRNDkuNSA1MS41IDUwLjYgNDguNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQ0U5QzcyIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQ0IDU2IFE1MCA2MC41IDU2IDU2IiBmaWxsPSJub25lIiBzdHJva2U9IiNCNTY3NEIiIHN0cm9rZS13aWR0aD0iMi40IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAKICAKICA8cGF0aCBkPSJNMTYgNDQgUTE1IDcgNTAgNyBRODUgNyA4NCA0NCBRNzggMjkgNTAgMjkgUTIyIDI5IDE2IDQ0IFoiIGZpbGw9IiM2QjRCMkUiLz4KICA8L2c+Cjwvc3ZnPg==" alt=""><span class="ovsScenTitle">E 销售与转化</span><span class="ovsScenCount">30 项</span><span class="ovsScenCaret">▸</span></button></section><section class="ovsGroup"><button class="ovsScenHead" type="button" aria-expanded="false"><img class="ovsScenIcon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdzYy1mLWZ1bGZpbGxtZW50IiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNFREY2RTYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1NSUiIHN0b3AtY29sb3I9IiNEM0VBQzIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjQjREOUEwIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHJhZGlhbEdyYWRpZW50IGlkPSJoaXNjLWYtZnVsZmlsbG1lbnQiIGN4PSIwLjMiIGN5PSIwLjIiIHI9IjEuMCI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9InJnYmEoMjU1LDI1NSwyNTUsMC42OCkiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1NSUiIHN0b3AtY29sb3I9InJnYmEoMjU1LDI1NSwyNTUsMCkiLz4KICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgICA8Y2xpcFBhdGggaWQ9ImNsaXBzYy1mLWZ1bGZpbGxtZW50Ij48cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIvPjwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjQuNSIgeT0iOC4yIiB3aWR0aD0iOTEiIGhlaWdodD0iODciIHJ4PSIxOCIgZmlsbD0icmdiYSgwLDAsMCwwLjEyKSIvPgogIDxyZWN0IHg9IjQuNSIgeT0iNC41IiB3aWR0aD0iOTEiIGhlaWdodD0iOTEiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ3NjLWYtZnVsZmlsbG1lbnQpIiBzdHJva2U9IiM1OEI4NDgiIHN0cm9rZS13aWR0aD0iMi4yIi8+CiAgPHBhdGggZD0iTTEwLjUgMjYgUTEwLjUgMTAuNSAyNiAxMC41IEw2MSAxMC41IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC41NSkiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNODkuNSA3NCBRODkuNSA4OS41IDc0IDg5LjUgTDM5IDg5LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSg0NiwxMjUsNjAsMC4zNSkiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIgZmlsbD0idXJsKCNoaXNjLWYtZnVsZmlsbG1lbnQpIi8+CiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXBzYy1mLWZ1bGZpbGxtZW50KSI+CiAgPHBhdGggZD0iTTEyIDEwMCBDMTIgODQgMjcgODAgNTAgODAgQzczIDgwIDg4IDg0IDg4IDEwMCBaIiBmaWxsPSJHIi8+CiAgPHJlY3QgeD0iMTQiIHk9IjkwIiB3aWR0aD0iNzIiIGhlaWdodD0iNiIgZmlsbD0iI0ZGRkZGRiIgb3BhY2l0eT0iMC44NSIvPgogIDxyZWN0IHg9IjM5IiB5PSI4NSIgd2lkdGg9IjE2IiBoZWlnaHQ9IjkiIHJ4PSIxLjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTU1IDg4IEg1OCBMNjAgOTEgVjk0IEgzOSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48Y2lyY2xlIGN4PSI0MyIgY3k9Ijk1IiByPSIxLjgiIGZpbGw9IiNGRkZGRkYiLz48Y2lyY2xlIGN4PSI1NiIgY3k9Ijk1IiByPSIxLjgiIGZpbGw9IiNGRkZGRkYiLz4KICA8cmVjdCB4PSI0NC41IiB5PSI3MCIgd2lkdGg9IjExIiBoZWlnaHQ9IjEzIiByeD0iNC41IiBmaWxsPSIjQ0U5QzcyIi8+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI0NCIgcj0iMzQiIGZpbGw9IiNFOEI3OEEiLz4KICA8Y2lyY2xlIGN4PSIxNS41IiBjeT0iNDUiIHI9IjQuMiIgZmlsbD0iI0U4Qjc4QSIvPgogIDxjaXJjbGUgY3g9Ijg0LjUiIGN5PSI0NSIgcj0iNC4yIiBmaWxsPSIjRThCNzhBIi8+CiAgCiAgCiAgPGNpcmNsZSBjeD0iNDEiIGN5PSI0NCIgcj0iMi45IiBmaWxsPSIjMkIyNjIyIi8+PGNpcmNsZSBjeD0iNTkiIGN5PSI0NCIgcj0iMi45IiBmaWxsPSIjMkIyNjIyIi8+CiAgPGNpcmNsZSBjeD0iNDEuOSIgY3k9IjQzLjEiIHI9IjEuMDUiIGZpbGw9IiNGRkZGRkYiLz48Y2lyY2xlIGN4PSI1OS45IiBjeT0iNDMuMSIgcj0iMS4wNSIgZmlsbD0iI0ZGRkZGRiIvPgogIDxwYXRoIGQ9Ik0zNyAzOC41IFE0MSAzNiA0NSAzOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMkIyNjIyIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik01NSAzOCBRNTkgMzYgNjMgMzguNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMkIyNjIyIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik00OC42IDQ4LjUgUTQ5LjUgNTEuNSA1MC42IDQ4LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0NFOUM3MiIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik00NCA1NiBRNTAgNjAuNSA1NiA1NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQjU2NzRCIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgCiAgCiAgCiAgPHBhdGggZD0iTTE0LjUgMzUgUTE0LjUgNi41IDUwIDYuNSBRODUuNSA2LjUgODUuNSAzNSBaIiBmaWxsPSIjNThCODQ4Ii8+CiAgPHJlY3QgeD0iMTEiIHk9IjMzIiB3aWR0aD0iNzgiIGhlaWdodD0iNiIgcng9IjMiIGZpbGw9IiMyRTdEM0MiLz4KICA8cmVjdCB4PSIzMiIgeT0iMTciIHdpZHRoPSIzNiIgaGVpZ2h0PSI0LjUiIHJ4PSIyLjI1IiBmaWxsPSIjRkZGRkZGIiBvcGFjaXR5PSIwLjY1Ii8+CiAgPHBhdGggZD0iTTE0LjUgNDIgUTUwIDcwIDg1LjUgNDIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJFN0QzQyIgc3Ryb2tlLXdpZHRoPSIyIi8+PC9nPgo8L3N2Zz4=" alt=""><span class="ovsScenTitle">F 履约与售后</span><span class="ovsScenCount">12 项</span><span class="ovsScenCaret">▸</span></button></section><section class="ovsGroup"><button class="ovsScenHead" type="button" aria-expanded="false"><img class="ovsScenIcon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdzYy1nLWluc2lnaHQiIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0VERjZFNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjU1JSIgc3RvcC1jb2xvcj0iI0QzRUFDMiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNCNEQ5QTAiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9Imhpc2MtZy1pbnNpZ2h0IiBjeD0iMC4zIiBjeT0iMC4yIiByPSIxLjAiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNjgpIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTUlIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwyNTUsMjU1LDApIi8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPGNsaXBQYXRoIGlkPSJjbGlwc2MtZy1pbnNpZ2h0Ij48cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIvPjwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjQuNSIgeT0iOC4yIiB3aWR0aD0iOTEiIGhlaWdodD0iODciIHJ4PSIxOCIgZmlsbD0icmdiYSgwLDAsMCwwLjEyKSIvPgogIDxyZWN0IHg9IjQuNSIgeT0iNC41IiB3aWR0aD0iOTEiIGhlaWdodD0iOTEiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ3NjLWctaW5zaWdodCkiIHN0cm9rZT0iIzU4Qjg0OCIgc3Ryb2tlLXdpZHRoPSIyLjIiLz4KICA8cGF0aCBkPSJNMTAuNSAyNiBRMTAuNSAxMC41IDI2IDEwLjUgTDYxIDEwLjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjU1KSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik04OS41IDc0IFE4OS41IDg5LjUgNzQgODkuNSBMMzkgODkuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDQ2LDEyNSw2MCwwLjM1KSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxyZWN0IHg9IjYuNSIgeT0iNi41IiB3aWR0aD0iODciIGhlaWdodD0iODciIHJ4PSIxNS41IiBmaWxsPSJ1cmwoI2hpc2MtZy1pbnNpZ2h0KSIvPgogIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwc2MtZy1pbnNpZ2h0KSI+CiAgPHBhdGggZD0iTTEyIDEwMCBDMTIgODQgMjcgODAgNTAgODAgQzczIDgwIDg4IDg0IDg4IDEwMCBaIiBmaWxsPSJXIi8+CiAgPHBhdGggZD0iTTM4IDgwIEw1MCA4NiBMNjIgODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJFN0QzQyIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik00MiA4MCBMNTAgOTEgTDU4IDgwIFoiIGZpbGw9IiM1OEI4NDgiLz48cmVjdCB4PSI0NyIgeT0iODAiIHdpZHRoPSI2IiBoZWlnaHQ9IjUiIHJ4PSIxLjUiIGZpbGw9IiMyRTdEM0MiLz4KICA8cmVjdCB4PSI0MiIgeT0iOTAiIHdpZHRoPSI0LjUiIGhlaWdodD0iOCIgcng9IjEiIGZpbGw9IiMyRTdEM0MiLz48cmVjdCB4PSI0OCIgeT0iODUiIHdpZHRoPSI0LjUiIGhlaWdodD0iMTMiIHJ4PSIxIiBmaWxsPSIjMkU3RDNDIi8+PHJlY3QgeD0iNTQiIHk9Ijg4IiB3aWR0aD0iNC41IiBoZWlnaHQ9IjEwIiByeD0iMSIgZmlsbD0iIzJFN0QzQyIvPgogIDxyZWN0IHg9IjQ0LjUiIHk9IjcwIiB3aWR0aD0iMTEiIGhlaWdodD0iMTMiIHJ4PSI0LjUiIGZpbGw9IiNEOUEzN0MiLz4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjQ0IiByPSIzNCIgZmlsbD0iI0VGQzQ5RSIvPgogIDxjaXJjbGUgY3g9IjE1LjUiIGN5PSI0NSIgcj0iNC4yIiBmaWxsPSIjRUZDNDlFIi8+CiAgPGNpcmNsZSBjeD0iODQuNSIgY3k9IjQ1IiByPSI0LjIiIGZpbGw9IiNFRkM0OUUiLz4KICAKICAKICA8Y2lyY2xlIGN4PSI0MSIgY3k9IjQ0IiByPSIyLjkiIGZpbGw9IiMyQjI2MjIiLz48Y2lyY2xlIGN4PSI1OSIgY3k9IjQ0IiByPSIyLjkiIGZpbGw9IiMyQjI2MjIiLz4KICA8Y2lyY2xlIGN4PSI0MS45IiBjeT0iNDMuMSIgcj0iMS4wNSIgZmlsbD0iI0ZGRkZGRiIvPjxjaXJjbGUgY3g9IjU5LjkiIGN5PSI0My4xIiByPSIxLjA1IiBmaWxsPSIjRkZGRkZGIi8+CiAgPHBhdGggZD0iTTM3IDM4LjUgUTQxIDM2IDQ1IDM4IiBmaWxsPSJub25lIiBzdHJva2U9IiMyQjI2MjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTU1IDM4IFE1OSAzNiA2MyAzOC41IiBmaWxsPSJub25lIiBzdHJva2U9IiMyQjI2MjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQ4LjYgNDguNSBRNDkuNSA1MS41IDUwLjYgNDguNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRDlBMzdDIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQ0IDU2IFE1MCA2MC41IDU2IDU2IiBmaWxsPSJub25lIiBzdHJva2U9IiNCNTY3NEIiIHN0cm9rZS13aWR0aD0iMi40IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAKICA8Y2lyY2xlIGN4PSI0MSIgY3k9IjQ0IiByPSI3LjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJFN0QzQyIgc3Ryb2tlLXdpZHRoPSIyIi8+PGNpcmNsZSBjeD0iNTkiIGN5PSI0NCIgcj0iNy4yIiBmaWxsPSJub25lIiBzdHJva2U9IiMyRTdEM0MiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik00OC4yIDQ0IEg1MS44IiBzdHJva2U9IiMyRTdEM0MiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxwYXRoIGQ9Ik0xNiA0MyBRMTUgOCA1MCA4IFE4NSA4IDg0IDQzIFE3OCAyMiA1MCAyMS41IFEyMiAyMiAxNiA0MyBaIiBmaWxsPSIjMkUyQTI4Ii8+CiAgPC9nPgo8L3N2Zz4=" alt=""><span class="ovsScenTitle">G 数据与决策</span><span class="ovsScenCount">24 项</span><span class="ovsScenCaret">▸</span></button></section><section class="ovsGroup"><button class="ovsScenHead" type="button" aria-expanded="false"><img class="ovsScenIcon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdzYy1oLWVuYWJsZSIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRURGNkU2Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTUlIiBzdG9wLWNvbG9yPSIjRDNFQUMyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0I0RDlBMCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0iaGlzYy1oLWVuYWJsZSIgY3g9IjAuMyIgY3k9IjAuMiIgcj0iMS4wIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0icmdiYSgyNTUsMjU1LDI1NSwwLjY4KSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjU1JSIgc3RvcC1jb2xvcj0icmdiYSgyNTUsMjU1LDI1NSwwKSIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICAgIDxjbGlwUGF0aCBpZD0iY2xpcHNjLWgtZW5hYmxlIj48cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIvPjwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjQuNSIgeT0iOC4yIiB3aWR0aD0iOTEiIGhlaWdodD0iODciIHJ4PSIxOCIgZmlsbD0icmdiYSgwLDAsMCwwLjEyKSIvPgogIDxyZWN0IHg9IjQuNSIgeT0iNC41IiB3aWR0aD0iOTEiIGhlaWdodD0iOTEiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ3NjLWgtZW5hYmxlKSIgc3Ryb2tlPSIjNThCODQ4IiBzdHJva2Utd2lkdGg9IjIuMiIvPgogIDxwYXRoIGQ9Ik0xMC41IDI2IFExMC41IDEwLjUgMjYgMTAuNSBMNjEgMTAuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNTUpIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTg5LjUgNzQgUTg5LjUgODkuNSA3NCA4OS41IEwzOSA4OS41IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoNDYsMTI1LDYwLDAuMzUpIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHJlY3QgeD0iNi41IiB5PSI2LjUiIHdpZHRoPSI4NyIgaGVpZ2h0PSI4NyIgcng9IjE1LjUiIGZpbGw9InVybCgjaGlzYy1oLWVuYWJsZSkiLz4KICA8ZyBjbGlwLXBhdGg9InVybCgjY2xpcHNjLWgtZW5hYmxlKSI+CiAgPHBhdGggZD0iTTEyIDEwMCBDMTIgODQgMjcgODAgNTAgODAgQzczIDgwIDg4IDg0IDg4IDEwMCBaIiBmaWxsPSJNSU5UIi8+CiAgPHBhdGggZD0iTTQyIDgwIEw1MCA4NiBMNTggODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU4Qjg0OCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9Ijg5IiByPSI0LjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJFN0QzQyIgc3Ryb2tlLXdpZHRoPSIyLjIiLz48Y2lyY2xlIGN4PSI1MCIgY3k9Ijg5IiByPSIxLjYiIGZpbGw9IiMyRTdEM0MiLz48cGF0aCBkPSJNNTAgODEuNSBWODQgTTUwIDk0IFY5Ni41IE00MS41IDg5IEg0NCBNNTYgODkgSDU4LjUgTTQ0IDgyLjUgTDQ2IDg0LjUgTTU0IDkzLjUgTDU2IDk1LjUgTTU2IDgyLjUgTDU0IDg0LjUgTTQ2IDkzLjUgTDQ0IDk1LjUiIHN0cm9rZT0iIzJFN0QzQyIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxyZWN0IHg9IjQ0LjUiIHk9IjcwIiB3aWR0aD0iMTEiIGhlaWdodD0iMTMiIHJ4PSI0LjUiIGZpbGw9IiNFMkI0OEMiLz4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjQ0IiByPSIzNCIgZmlsbD0iI0Y2RDdCOCIvPgogIDxjaXJjbGUgY3g9IjE1LjUiIGN5PSI0NSIgcj0iNC4yIiBmaWxsPSIjRjZEN0I4Ii8+CiAgPGNpcmNsZSBjeD0iODQuNSIgY3k9IjQ1IiByPSI0LjIiIGZpbGw9IiNGNkQ3QjgiLz4KICAKICAKICA8Y2lyY2xlIGN4PSI0MSIgY3k9IjQ0IiByPSIyLjkiIGZpbGw9IiMyQjI2MjIiLz48Y2lyY2xlIGN4PSI1OSIgY3k9IjQ0IiByPSIyLjkiIGZpbGw9IiMyQjI2MjIiLz4KICA8Y2lyY2xlIGN4PSI0MS45IiBjeT0iNDMuMSIgcj0iMS4wNSIgZmlsbD0iI0ZGRkZGRiIvPjxjaXJjbGUgY3g9IjU5LjkiIGN5PSI0My4xIiByPSIxLjA1IiBmaWxsPSIjRkZGRkZGIi8+CiAgPHBhdGggZD0iTTM3IDM4LjUgUTQxIDM2IDQ1IDM4IiBmaWxsPSJub25lIiBzdHJva2U9IiMyQjI2MjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTU1IDM4IFE1OSAzNiA2MyAzOC41IiBmaWxsPSJub25lIiBzdHJva2U9IiMyQjI2MjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQ4LjYgNDguNSBRNDkuNSA1MS41IDUwLjYgNDguNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRTJCNDhDIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQ0IDU2IFE1MCA2MC41IDU2IDU2IiBmaWxsPSJub25lIiBzdHJva2U9IiNCNTY3NEIiIHN0cm9rZS13aWR0aD0iMi40IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8ZWxsaXBzZSBjeD0iMzQiIGN5PSI1MSIgcng9IjUuNCIgcnk9IjMiIGZpbGw9InJnYmEoMjU1LDEyMCwxMjAsMC40MikiLz48ZWxsaXBzZSBjeD0iNjYiIGN5PSI1MSIgcng9IjUuNCIgcnk9IjMiIGZpbGw9InJnYmEoMjU1LDEyMCwxMjAsMC40MikiLz4KICAKICA8cGF0aCBkPSJNMTYgNDMgUTE2LjUgMTUgNTAgMTUgUTgzLjUgMTUgODQgNDMgUTc0IDI3IDUwIDI4IFEyNiAyNyAxNiA0MyBaIiBmaWxsPSIjMkUyQTI4Ii8+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSIxMy4yIiByPSI2LjUiIGZpbGw9IiMyRTJBMjgiLz48L2c+Cjwvc3ZnPg==" alt=""><span class="ovsScenTitle">H 组织与工具</span><span class="ovsScenCount">30 项</span><span class="ovsScenCaret">▸</span></button></section></div></div>
+    </div>
+  </div>
+</div>
+<p class="note">真实 client bundle + 真机负载（8 场景 / 319 行 / 222 卡 / 50 岗）· 官方 SettingsRoot 几何（800px 面板 − 188px 导航 − 48px 内边距 = 页面 564px）· 官方主题 token · 默认状态：8 个折叠场景 + 一致性诊断条</p>
+</body></html>

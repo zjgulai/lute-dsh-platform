@@ -154,6 +154,7 @@ describe('host route registration', () => {
 
     expect(calls.map((route) => [route.kind, route.path])).toEqual([
       ['exact', ROUTES.list],
+      ['exact', ROUTES.capabilities],
       ['exact', ROUTES.health],
     ])
   })

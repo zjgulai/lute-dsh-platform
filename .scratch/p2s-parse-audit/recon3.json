@@ -1,0 +1,184 @@
+{
+ "rows": [
+  {
+   "card": "Skill-AI-Carbon-Footprint-Optimizer",
+   "tier": "unverified",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 226,
+   "parses": false
+  },
+  {
+   "card": "Skill-AI-Humanities-Healing-Cards",
+   "tier": "unverified",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 232,
+   "parses": false
+  },
+  {
+   "card": "Skill-Agent-Memory-Learning",
+   "tier": "unverified",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 245,
+   "parses": false
+  },
+  {
+   "card": "Skill-CAMEL-Role-Playing-Agents",
+   "tier": "unverified",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 27,
+   "parses": false
+  },
+  {
+   "card": "Skill-CodeXEmbed-Code-Semantic-Embedding",
+   "tier": "oracle",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 279,
+   "parses": false
+  },
+  {
+   "card": "Skill-DQN-Purchase-Prediction",
+   "tier": "unverified",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 174,
+   "parses": false
+  },
+  {
+   "card": "Skill-Domain-Agnostic-Context-Engine",
+   "tier": "unverified",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 12,
+   "parses": false
+  },
+  {
+   "card": "Skill-HGCN-Hyperbolic-Graph-Convolutional-Networks",
+   "tier": "unverified",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 172,
+   "parses": false
+  },
+  {
+   "card": "Skill-HGT-Heterogeneous-Graph-Transformer",
+   "tier": "unverified",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 212,
+   "parses": false
+  },
+  {
+   "card": "Skill-InstructUIE-Unified-Information-Extraction",
+   "tier": "unverified",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 258,
+   "parses": false
+  },
+  {
+   "card": "Skill-MAS-Testing-Verification",
+   "tier": "unverified",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 20,
+   "parses": false
+  },
+  {
+   "card": "Skill-Model-Performance-Monitor",
+   "tier": "oracle",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 363,
+   "parses": false
+  },
+  {
+   "card": "Skill-RFM-Segment-Campaign-Dispatcher",
+   "tier": "oracle",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 224,
+   "parses": false
+  },
+  {
+   "card": "Skill-Real-Time-Competitive-Repricing",
+   "tier": "oracle",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 71,
+   "parses": false
+  },
+  {
+   "card": "Skill-Semantic-Blueprint-Compiler",
+   "tier": "unverified",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 222,
+   "parses": false
+  },
+  {
+   "card": "Skill-Skill-Registry-Dynamic-Loading",
+   "tier": "unverified",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 192,
+   "parses": false
+  },
+  {
+   "card": "Skill-Subagent-Decomposition",
+   "tier": "unverified",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 246,
+   "parses": false
+  },
+  {
+   "card": "Skill-Supply-Chain-ML-Features",
+   "tier": "unverified",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 30,
+   "parses": false
+  },
+  {
+   "card": "Skill-TimeCMA-LLM-Forecasting",
+   "tier": "oracle",
+   "declared": "paper2skills-code/03-时间序列/time_cma_llm_2025/model.py",
+   "how": "unresolved",
+   "canonical": null,
+   "recovered_lines": 45,
+   "parses": false
+  },
+  {
+   "card": "Skill-Tree-of-Thoughts-Planning",
+   "tier": "unverified",
+   "declared": null,
+   "how": "no_decl",
+   "canonical": null,
+   "recovered_lines": 196,
+   "parses": false
+  }
+ ]
+}

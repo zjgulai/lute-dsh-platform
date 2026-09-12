@@ -1,0 +1,1185 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/YyDTgLkH5OsfOSoI2XkpFnkoMuk</id>
+  <title>arXiv Query: search_query=&amp;id_list=2407.01219,2407.03512,2407.05621,2407.08223,2407.08234,2407.08341,2407.08452,2407.08923,2407.09234,2407.09394,2407.09413,2407.09498,2407.09783,2407.09834,2407.11234,2407.11340,2407.11384,2407.11418,2407.12567,2407.12883,2407.12983,2407.13456,2407.13983,2407.14025,2407.14521,2407.14562,2407.15055,2407.15234,2407.15392,2407.16034,2407.16337,2407.16892,2407.17333,2407.18234,2407.18472,2407.18901,2407.19056,2407.21059,2408.02304,2408.05061&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:43:35Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2407.01219,2407.03512,2407.05621,2407.08223,2407.08234,2407.08341,2407.08452,2407.08923,2407.09234,2407.09394,2407.09413,2407.09498,2407.09783,2407.09834,2407.11234,2407.11340,2407.11384,2407.11418,2407.12567,2407.12883,2407.12983,2407.13456,2407.13983,2407.14025,2407.14521,2407.14562,2407.15055,2407.15234,2407.15392,2407.16034,2407.16337,2407.16892,2407.17333,2407.18234,2407.18472,2407.18901,2407.19056,2407.21059,2408.02304,2408.05061" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2407.05621v2</id>
+    <title>EA4RCA:Efficient AIE accelerator design framework for Regular Communication-Avoiding Algorithm</title>
+    <updated>2024-07-09T03:11:16Z</updated>
+    <link href="https://arxiv.org/abs/2407.05621v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.05621v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>With the introduction of the Adaptive Intelligence Engine (AIE), the Versal Adaptive Compute Acceleration Platform (Versal ACAP) has garnered great attention. However, the current focus of Vitis Libraries and limited research has mainly been on how to invoke AIE modules, without delving into a thorough discussion on effectively utilizing AIE in its typical use cases. As a result, the widespread adoption of Versal ACAP has been restricted. The Communication Avoidance (CA) algorithm is considered a typical application within the AIE architecture. Nevertheless, the effective utilization of AIE in CA applications remains an area that requires further exploration. We propose a top-down customized design framework, EA4RCA(Efficient AIE accelerator design framework for regular Communication-Avoid Algorithm), specifically tailored for CA algorithms with regular communication patterns, and equipped with AIE Graph Code Generator software to accelerate the AIE design process. The primary objective of this framework is to maximize the performance of AIE while incorporating high-speed data streaming services. Experiments show that for the RCA algorithm Filter2D and Matrix Multiple (MM) with lower communication requirements and the RCA algorithm FFT with higher communication requirements, the accelerators implemented by the RA4RCA framework achieve the highest throughput improvements of 22.19x, 1.05x and 3.88x compared with the current highest performance acceleration scheme (SOTA), and the highest energy efficiency improvements of 6.11x, 1.30x and 7.00x.</summary>
+    <category term="cs.AR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-08T05:29:18Z</published>
+    <arxiv:primary_category term="cs.AR"/>
+    <author>
+      <name>W. B. Zhang</name>
+    </author>
+    <author>
+      <name>Y. Q. Liu</name>
+    </author>
+    <author>
+      <name>T. H. Zang</name>
+    </author>
+    <author>
+      <name>Z. S. Bao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.01219v1</id>
+    <title>Searching for Best Practices in Retrieval-Augmented Generation</title>
+    <updated>2024-07-01T12:06:34Z</updated>
+    <link href="https://arxiv.org/abs/2407.01219v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.01219v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Retrieval-augmented generation (RAG) techniques have proven to be effective in integrating up-to-date information, mitigating hallucinations, and enhancing response quality, particularly in specialized domains. While many RAG approaches have been proposed to enhance large language models through query-dependent retrievals, these approaches still suffer from their complex implementation and prolonged response times. Typically, a RAG workflow involves multiple processing steps, each of which can be executed in various ways. Here, we investigate existing RAG approaches and their potential combinations to identify optimal RAG practices. Through extensive experiments, we suggest several strategies for deploying RAG that balance both performance and efficiency. Moreover, we demonstrate that multimodal retrieval techniques can significantly enhance question-answering capabilities about visual inputs and accelerate the generation of multimodal content using a "retrieval as generation" strategy.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-01T12:06:34Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Xiaohua Wang</name>
+    </author>
+    <author>
+      <name>Zhenghua Wang</name>
+    </author>
+    <author>
+      <name>Xuan Gao</name>
+    </author>
+    <author>
+      <name>Feiran Zhang</name>
+    </author>
+    <author>
+      <name>Yixin Wu</name>
+    </author>
+    <author>
+      <name>Zhibo Xu</name>
+    </author>
+    <author>
+      <name>Tianyuan Shi</name>
+    </author>
+    <author>
+      <name>Zhengyuan Wang</name>
+    </author>
+    <author>
+      <name>Shizheng Li</name>
+    </author>
+    <author>
+      <name>Qi Qian</name>
+    </author>
+    <author>
+      <name>Ruicheng Yin</name>
+    </author>
+    <author>
+      <name>Changze Lv</name>
+    </author>
+    <author>
+      <name>Xiaoqing Zheng</name>
+    </author>
+    <author>
+      <name>Xuanjing Huang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.13983v1</id>
+    <title>Practical continuous-variable quantum secret sharing using local local oscillator</title>
+    <updated>2024-07-19T02:25:04Z</updated>
+    <link href="https://arxiv.org/abs/2407.13983v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.13983v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Although continuous-variable quantum secret sharing (CVQSS) has been theoretically proven to be secure, it may still be vulnerable to various local oscillator (LO)-aimed attacks. To close this loophole, we propose a practical CVQSS scheme using local LO (LLO), which is called LLO-CVQSS. In this scheme, LO is no longer generated by each user but can be locally generated by the legitimate party, i.e., the dealer. This waives the necessity that all LOs have to be transmitted through an untrusted channel, which makes CVQSS system naturally immune to all LO-aimed attacks, greatly enhancing its practical security. We also develop a specially designed phase compensation method for LLO-CVQSS so that the phase noise of the whole system can be eliminated. We finally construct a noise model for LLO-CVQSS and derive its security bound against both eavesdroppers and dishonest users. Numerical simulation shows that LLO-CVQSS is able to support 30 users at the same time and its maximal transmission distance reaches 112 km, revealing that LLO-CVQSS is not only has the ability to defend itself against all LO-aimed attacks but also has the potential for building large-scale practical quantum communication networks.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-19T02:25:04Z</published>
+    <arxiv:comment>13 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="quant-ph"/>
+    <author>
+      <name>Qin Liao</name>
+    </author>
+    <author>
+      <name>Zhuoying Fei</name>
+    </author>
+    <author>
+      <name>Lei Huang</name>
+    </author>
+    <author>
+      <name>Xiquan Fu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.02304v1</id>
+    <title>Embedding Compression in Recommender Systems: A Survey</title>
+    <updated>2024-08-05T08:30:16Z</updated>
+    <link href="https://arxiv.org/abs/2408.02304v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.02304v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>To alleviate the problem of information explosion, recommender systems are widely deployed to provide personalized information filtering services. Usually, embedding tables are employed in recommender systems to transform high-dimensional sparse one-hot vectors into dense real-valued embeddings. However, the embedding tables are huge and account for most of the parameters in industrial-scale recommender systems. In order to reduce memory costs and improve efficiency, various approaches are proposed to compress the embedding tables. In this survey, we provide a comprehensive review of embedding compression approaches in recommender systems. We first introduce deep learning recommendation models and the basic concept of embedding compression in recommender systems. Subsequently, we systematically organize existing approaches into three categories, namely low-precision, mixed-dimension, and weight-sharing, respectively. Lastly, we summarize the survey with some general suggestions and provide future prospects for this field.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-05T08:30:16Z</published>
+    <arxiv:comment>Accepted by ACM Computing Surveys</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <arxiv:journal_ref>ACM Comput. Surv. 56, 5, Article 130 (January 2024)</arxiv:journal_ref>
+    <author>
+      <name>Shiwei Li</name>
+    </author>
+    <author>
+      <name>Huifeng Guo</name>
+    </author>
+    <author>
+      <name>Xing Tang</name>
+    </author>
+    <author>
+      <name>Ruiming Tang</name>
+    </author>
+    <author>
+      <name>Lu Hou</name>
+    </author>
+    <author>
+      <name>Ruixuan Li</name>
+    </author>
+    <author>
+      <name>Rui Zhang</name>
+    </author>
+    <arxiv:doi>10.1145/3637841</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3637841" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.21059v1</id>
+    <title>Modular RAG: Transforming RAG Systems into LEGO-like Reconfigurable Frameworks</title>
+    <updated>2024-07-26T03:45:30Z</updated>
+    <link href="https://arxiv.org/abs/2407.21059v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.21059v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Retrieval-augmented Generation (RAG) has markedly enhanced the capabilities of Large Language Models (LLMs) in tackling knowledge-intensive tasks. The increasing demands of application scenarios have driven the evolution of RAG, leading to the integration of advanced retrievers, LLMs and other complementary technologies, which in turn has amplified the intricacy of RAG systems. However, the rapid advancements are outpacing the foundational RAG paradigm, with many methods struggling to be unified under the process of "retrieve-then-generate". In this context, this paper examines the limitations of the existing RAG paradigm and introduces the modular RAG framework. By decomposing complex RAG systems into independent modules and specialized operators, it facilitates a highly reconfigurable framework. Modular RAG transcends the traditional linear architecture, embracing a more advanced design that integrates routing, scheduling, and fusion mechanisms. Drawing on extensive research, this paper further identifies prevalent RAG patterns-linear, conditional, branching, and looping-and offers a comprehensive analysis of their respective implementation nuances. Modular RAG presents innovative opportunities for the conceptualization and deployment of RAG systems. Finally, the paper explores the potential emergence of new operators and paradigms, establishing a solid theoretical foundation and a practical roadmap for the continued evolution and practical deployment of RAG technologies.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-26T03:45:30Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yunfan Gao</name>
+    </author>
+    <author>
+      <name>Yun Xiong</name>
+    </author>
+    <author>
+      <name>Meng Wang</name>
+    </author>
+    <author>
+      <name>Haofen Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.11418v3</id>
+    <title>Semantic Operators: A Declarative Model for Rich, AI-based Data Processing</title>
+    <updated>2025-03-01T01:47:51Z</updated>
+    <link href="https://arxiv.org/abs/2407.11418v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.11418v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The semantic capabilities of large language models (LLMs) have the potential to enable rich analytics and reasoning over vast knowledge corpora. Unfortunately, existing systems either empirically optimize expensive LLM-powered operations with no performance guarantees, or serve a limited set of row-wise LLM operations, providing limited robustness, expressiveness and usability. We introduce semantic operators, the first formalism for declarative and general-purpose AI-based transformations based on natural language specifications (e.g., filtering, sorting, joining or aggregating records using natural language criteria). Each operator opens a rich space for execution plans, similar to relational operators. Our model specifies the expected behavior of each operator with a high-quality gold algorithm, and we develop an optimization framework that reduces cost, while providing accuracy guarantees with respect to a gold algorithm. Using this approach, we propose several novel optimizations to accelerate semantic filtering, joining, group-by and top-k operations by up to $1,000\times$. We implement semantic operators in the LOTUS system and demonstrate LOTUS' effectiveness on real, bulk-semantic processing applications, including fact-checking, biomedical multi-label classification, search, and topic analysis. We show that the semantic operator model is expressive, capturing state-of-the-art AI pipelines in a few operator calls, and making it easy to express new pipelines that match or exceed quality of recent LLM-based analytic systems by up to $170\%$, while offering accuracy guarantees. Overall, LOTUS programs match or exceed the accuracy of state-of-the-art AI pipelines for each task while running up to $3.6\times$ faster than the highest-quality baselines. LOTUS is publicly available at https://github.com/lotus-data/lotus.</summary>
+    <category term="cs.DB" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-16T06:19:14Z</published>
+    <arxiv:primary_category term="cs.DB"/>
+    <author>
+      <name>Liana Patel</name>
+    </author>
+    <author>
+      <name>Siddharth Jha</name>
+    </author>
+    <author>
+      <name>Melissa Pan</name>
+    </author>
+    <author>
+      <name>Harshit Gupta</name>
+    </author>
+    <author>
+      <name>Parth Asawa</name>
+    </author>
+    <author>
+      <name>Carlos Guestrin</name>
+    </author>
+    <author>
+      <name>Matei Zaharia</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.12567v4</id>
+    <title>Experimental demonstration of spontaneous symmetry breaking with emergent multi-qubit entanglement</title>
+    <updated>2025-04-30T14:36:33Z</updated>
+    <link href="https://arxiv.org/abs/2407.12567v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.12567v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Spontaneous symmetry breaking (SSB) is crucial to the occurrence of phase transitions. Once a phase transition occurs, a quantum system presents degenerate eigenstates that lack the symmetry of the Hamiltonian. After crossing the critical point, the system is essentially evolved to a quantum superposition of these eigenstates until decoherence sets in. Despite the fundamental importance and potential applications in quantum technologies, such quantum-mechanical SSB phenomena have not been experimentally explored in many-body systems. We here present an experimental demonstration of the SSB process in the Lipkin-Meshkov-Glick model, governed by the competition between the individual driving and intra-qubit interaction. The model is realized in a circuit quantum electrodynamics system, where 6 Xmon qubits are coupled in an all-to-all manner through virtual photon exchange mediated by a resonator. The observed nonclassical correlations among these qubits in the symmetry-breaking region go beyond the conventional description of SSB, shedding new light on phase transitions for quantum many-body systems.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-17T13:50:29Z</published>
+    <arxiv:comment>34 pages, 17 figures</arxiv:comment>
+    <arxiv:primary_category term="quant-ph"/>
+    <arxiv:journal_ref>Phys. Rev. Lett. 134, 150406 (2025)</arxiv:journal_ref>
+    <author>
+      <name>Ri-Hua Zheng</name>
+    </author>
+    <author>
+      <name>Wen Ning</name>
+    </author>
+    <author>
+      <name>Jia-Hao Lü</name>
+    </author>
+    <author>
+      <name>Xue-Jia Yu</name>
+    </author>
+    <author>
+      <name>Fan Wu</name>
+    </author>
+    <author>
+      <name>Cheng-Lin Deng</name>
+    </author>
+    <author>
+      <name>Zhen-Biao Yang</name>
+    </author>
+    <author>
+      <name>Kai Xu</name>
+    </author>
+    <author>
+      <name>Dongning Zheng</name>
+    </author>
+    <author>
+      <name>Heng Fan</name>
+    </author>
+    <author>
+      <name>Shi-Biao Zheng</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.134.150406</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.134.150406" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.13456v1</id>
+    <title>Magnetic exponent for the long-range bond disordered Potts model</title>
+    <updated>2024-07-18T12:33:36Z</updated>
+    <link href="https://arxiv.org/abs/2407.13456v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.13456v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the critical behavior of two-dimensional Potts models in presence of a bond disorder in which the correlation decays as a power law. In some recent work the thermal sector of this theory was investigated by a renormalization group computation based on perturbed conformal field theory. Here we apply the same approach to study instead the magnetic sector. In particular we compute the leading corrections to the Potts spin scaling dimension. Our results include as a special case the long-range disorder Ising model. We compare our prediction to Monte-Carlo simulations. Finally, by studying the magnetization scaling function, we show a clear numerical evidence of a cross-over between the long-range and the short-range class of universality.</summary>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-18T12:33:36Z</published>
+    <arxiv:comment>21 pages, 7 figures, 4 tables</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.dis-nn"/>
+    <author>
+      <name>Ivan Lecce</name>
+    </author>
+    <author>
+      <name>Marco Picco</name>
+    </author>
+    <author>
+      <name>Raoul Santachiara</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.14521v1</id>
+    <title>Towards Automated Functional Equation Proving: A Benchmark Dataset and A Domain-Specific In-Context Agent</title>
+    <updated>2024-07-05T15:59:16Z</updated>
+    <link href="https://arxiv.org/abs/2407.14521v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.14521v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Automated Theorem Proving (ATP) faces challenges due to its complexity and computational demands. Recent work has explored using Large Language Models (LLMs) for ATP action selection, but these methods can be resource-intensive. This study introduces FEAS, an agent that enhances the COPRA in-context learning framework within Lean. FEAS refines prompt generation, response parsing, and incorporates domain-specific heuristics for functional equations. It introduces FunEq, a curated dataset of functional equation problems with varying difficulty. FEAS outperforms baselines on FunEq, particularly with the integration of domain-specific heuristics. The results demonstrate FEAS's effectiveness in generating and formalizing high-level proof strategies into Lean proofs, showcasing the potential of tailored approaches for specific ATP challenges.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-05T15:59:16Z</published>
+    <arxiv:comment>11 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Mahdi Buali</name>
+    </author>
+    <author>
+      <name>Robert Hoehndorf</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.16892v1</id>
+    <title>Exploring Fusion Techniques in Multimodal AI-Based Recruitment: Insights from FairCVdb</title>
+    <updated>2024-06-17T12:37:58Z</updated>
+    <link href="https://arxiv.org/abs/2407.16892v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.16892v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Despite the large body of work on fairness-aware learning for individual modalities like tabular data, images, and text, less work has been done on multimodal data, which fuses various modalities for a comprehensive analysis. In this work, we investigate the fairness and bias implications of multimodal fusion techniques in the context of multimodal AI-based recruitment systems using the FairCVdb dataset. Our results show that early-fusion closely matches the ground truth for both demographics, achieving the lowest MAEs by integrating each modality's unique characteristics. In contrast, late-fusion leads to highly generalized mean scores and higher MAEs. Our findings emphasise the significant potential of early-fusion for accurate and fair applications, even in the presence of demographic biases, compared to late-fusion. Future research could explore alternative fusion strategies and incorporate modality-related fairness constraints to improve fairness. For code and additional insights, visit: https://github.com/Swati17293/Multimodal-AI-Based-Recruitment-FairCVdb</summary>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-17T12:37:58Z</published>
+    <arxiv:primary_category term="cs.CY"/>
+    <author>
+      <name>Swati Swati</name>
+    </author>
+    <author>
+      <name>Arjun Roy</name>
+    </author>
+    <author>
+      <name>Eirini Ntoutsi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.15055v2</id>
+    <title>Training Zero-Shot Generalizable End-to-End Task-Oriented Dialog System Without Turn-level Dialog Annotations</title>
+    <updated>2024-11-04T16:56:13Z</updated>
+    <link href="https://arxiv.org/abs/2407.15055v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.15055v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Task-oriented dialogue (TOD) systems enable users to achieve their goals through natural language interactions. Traditionally, these systems have relied on turn-level manually annotated metadata, such as dialogue states and policy annotations, which are expensive, time-consuming, and often inconsistent or error-prone. This dependence limits the potential to leverage vast amounts of readily available conversational data for training TOD systems. Additionally, a critical challenge in TOD system design is determining when and how to access and integrate information from external sources. Current approaches typically expect this information to be provided alongside the dialogue context, rather than learning to identify and retrieve it autonomously. While pre-trained large language models (LLMs) have been used to develop TOD systems, their potential to train such systems without laborious annotations remains largely unexplored. This work employs multi-task instruction fine-tuning to create more efficient and scalable TOD systems that can effectively leverage natural language conversational data without manual annotations, while autonomously managing external information retrieval. Our extensive experimental evaluations, using three diverse TOD datasets and three LLMs of varying sizes, demonstrate that our approach can generalize to new, unseen domains. Notably, our approach outperforms both state-of-the-art models trained on annotated data and billion-scale parameter off-the-shelf ChatGPT models.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-21T04:52:38Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Adib Mosharrof</name>
+    </author>
+    <author>
+      <name>A. B. Siddique</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.09413v3</id>
+    <title>SPIQA: A Dataset for Multimodal Question Answering on Scientific Papers</title>
+    <updated>2025-01-10T19:41:43Z</updated>
+    <link href="https://arxiv.org/abs/2407.09413v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.09413v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Seeking answers to questions within long scientific research articles is a crucial area of study that aids readers in quickly addressing their inquiries. However, existing question-answering (QA) datasets based on scientific papers are limited in scale and focus solely on textual content. We introduce SPIQA (Scientific Paper Image Question Answering), the first large-scale QA dataset specifically designed to interpret complex figures and tables within the context of scientific research articles across various domains of computer science. Leveraging the breadth of expertise and ability of multimodal large language models (MLLMs) to understand figures, we employ automatic and manual curation to create the dataset. We craft an information-seeking task on interleaved images and text that involves multiple images covering plots, charts, tables, schematic diagrams, and result visualizations. SPIQA comprises 270K questions divided into training, validation, and three different evaluation splits. Through extensive experiments with 12 prominent foundational models, we evaluate the ability of current multimodal systems to comprehend the nuanced aspects of research articles. Additionally, we propose a Chain-of-Thought (CoT) evaluation strategy with in-context retrieval that allows fine-grained, step-by-step assessment and improves model performance. We further explore the upper bounds of performance enhancement with additional textual information, highlighting its promising potential for future research and the dataset's impact on revolutionizing how we interact with scientific literature.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-12T16:37:59Z</published>
+    <arxiv:comment>NeurIPS 2024, Datasets &amp; Benchmarks track</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shraman Pramanick</name>
+    </author>
+    <author>
+      <name>Rama Chellappa</name>
+    </author>
+    <author>
+      <name>Subhashini Venugopalan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.11384v2</id>
+    <title>InvAgent: A Large Language Model based Multi-Agent System for Inventory Management in Supply Chains</title>
+    <updated>2025-01-31T04:31:59Z</updated>
+    <link href="https://arxiv.org/abs/2407.11384v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.11384v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Supply chain management (SCM) involves coordinating the flow of goods, information, and finances across various entities to deliver products efficiently. Effective inventory management is crucial in today's volatile and uncertain world. Previous research has demonstrated the superiority of heuristic methods and reinforcement learning applications in inventory management. However, the application of large language models (LLMs) as autonomous agents in multi-agent systems for inventory management remains underexplored. This study introduces a novel approach using LLMs to manage multi-agent inventory systems. Leveraging their zero-shot learning capabilities, our model, InvAgent, enhances resilience and improves efficiency across the supply chain network. Our contributions include utilizing LLMs for zero-shot learning to enable adaptive and informed decision-making without prior training, providing explainability and clarity through chain-of-thought, and demonstrating dynamic adaptability to varying demand scenarios while reducing costs and preventing stockouts. Extensive evaluations across different scenarios highlight the efficiency of our model in SCM.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-16T04:55:17Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yinzhu Quan</name>
+    </author>
+    <author>
+      <name>Zefang Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.08223v2</id>
+    <title>Speculative RAG: Enhancing Retrieval Augmented Generation through Drafting</title>
+    <updated>2025-02-27T19:03:36Z</updated>
+    <link href="https://arxiv.org/abs/2407.08223v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.08223v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Retrieval augmented generation (RAG) combines the generative abilities of large language models (LLMs) with external knowledge sources to provide more accurate and up-to-date responses. Recent RAG advancements focus on improving retrieval outcomes through iterative LLM refinement or self-critique capabilities acquired through additional instruction tuning of LLMs. In this work, we introduce Speculative RAG - a framework that leverages a larger generalist LM to efficiently verify multiple RAG drafts produced in parallel by a smaller, distilled specialist LM. Each draft is generated from a distinct subset of retrieved documents, offering diverse perspectives on the evidence while reducing input token counts per draft. This approach enhances comprehension of each subset and mitigates potential position bias over long context. Our method accelerates RAG by delegating drafting to the smaller specialist LM, with the larger generalist LM performing a single verification pass over the drafts. Extensive experiments demonstrate that Speculative RAG achieves state-of-the-art performance with reduced latency on TriviaQA, MuSiQue, PopQA, PubHealth, and ARC-Challenge benchmarks. It notably enhances accuracy by up to 12.97% while reducing latency by 50.83% compared to conventional RAG systems on PubHealth.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-11T06:50:19Z</published>
+    <arxiv:comment>Accepted to ICLR 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zilong Wang</name>
+    </author>
+    <author>
+      <name>Zifeng Wang</name>
+    </author>
+    <author>
+      <name>Long Le</name>
+    </author>
+    <author>
+      <name>Huaixiu Steven Zheng</name>
+    </author>
+    <author>
+      <name>Swaroop Mishra</name>
+    </author>
+    <author>
+      <name>Vincent Perot</name>
+    </author>
+    <author>
+      <name>Yuwei Zhang</name>
+    </author>
+    <author>
+      <name>Anush Mattapalli</name>
+    </author>
+    <author>
+      <name>Ankur Taly</name>
+    </author>
+    <author>
+      <name>Jingbo Shang</name>
+    </author>
+    <author>
+      <name>Chen-Yu Lee</name>
+    </author>
+    <author>
+      <name>Tomas Pfister</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.11234v2</id>
+    <title>Flavor and path-length dependence of jet quenching from inclusive jet and γ-jet suppression</title>
+    <updated>2025-10-20T12:55:06Z</updated>
+    <link href="https://arxiv.org/abs/2407.11234v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.11234v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We employ the parametric approach to analyze jet suppression measured using the nuclear modification factor of inclusive jets, $b$-jets, and jets from $γ$-jet events. With minimum model assumptions, we quantify the magnitude of the average energy loss and its transverse momentum dependence. Then, we quantify the impact of fluctuations in the energy loss and nuclear PDFs on the measured jet suppression. The Glauber and Trajectum models are used to estimate the average path length that a jet is expected to traverse in the medium. With this information, we quantify the path-length dependence of the average energy loss, which is found to support the physics picture of the radiative nature of parton energy loss. Using the obtained parameterizations, we evaluate jet $v_2$, quantifying its sensitivity to details of path-length modeling. We also provide model-independent predictions for the magnitude of energy loss expected in upcoming oxygen-oxygen collisions and briefly discuss the path-length dependence of energy loss of $b$-jets. Finally, we analyze intriguing features seen in the suppression of jets in the $γ$-jet system.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-15T20:55:03Z</published>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>Eur.Phys.J. C 85 (2025) 8, 899</arxiv:journal_ref>
+    <author>
+      <name>Agnieszka Ogrodnik</name>
+    </author>
+    <author>
+      <name>Martin Rybář</name>
+    </author>
+    <author>
+      <name>Martin Spousta</name>
+    </author>
+    <arxiv:doi>10.1140/epjc/s10052-025-14629-5</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epjc/s10052-025-14629-5" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.12883v4</id>
+    <title>BRIGHT: A Realistic and Challenging Benchmark for Reasoning-Intensive Retrieval</title>
+    <updated>2025-03-26T07:37:26Z</updated>
+    <link href="https://arxiv.org/abs/2407.12883v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.12883v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Existing retrieval benchmarks primarily consist of information-seeking queries (e.g., aggregated questions from search engines) where keyword or semantic-based retrieval is usually sufficient. However, many complex real-world queries require in-depth reasoning to identify relevant documents that go beyond surface form matching. For example, finding documentation for a coding question requires understanding the logic and syntax of the functions involved. To better benchmark retrieval on such challenging queries, we introduce BRIGHT, the first text retrieval benchmark that requires intensive reasoning to retrieve relevant documents. Our dataset consists of 1,384 real-world queries spanning diverse domains, such as economics, psychology, mathematics, and coding. These queries are drawn from naturally occurring and carefully curated human data. Extensive evaluation reveals that even state-of-the-art retrieval models perform poorly on BRIGHT. The leading model on the MTEB leaderboard (Muennighoff et al., 2023) SFR-Embedding-Mistral (Meng et al., 2024), which achieves a score of 59.0 nDCG@10,1 produces a score of nDCG@10 of 18.3 on BRIGHT. We show that incorporating explicit reasoning about the query improves retrieval performance by up to 12.2 points. Moreover, incorporating retrieved documents from the top-performing retriever boosts question-answering performance. We believe that BRIGHT paves the way for future research on retrieval systems in more realistic and challenging settings.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-16T17:58:27Z</published>
+    <arxiv:comment>51 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Hongjin Su</name>
+    </author>
+    <author>
+      <name>Howard Yen</name>
+    </author>
+    <author>
+      <name>Mengzhou Xia</name>
+    </author>
+    <author>
+      <name>Weijia Shi</name>
+    </author>
+    <author>
+      <name>Niklas Muennighoff</name>
+    </author>
+    <author>
+      <name>Han-yu Wang</name>
+    </author>
+    <author>
+      <name>Haisu Liu</name>
+    </author>
+    <author>
+      <name>Quan Shi</name>
+    </author>
+    <author>
+      <name>Zachary S. Siegel</name>
+    </author>
+    <author>
+      <name>Michael Tang</name>
+    </author>
+    <author>
+      <name>Ruoxi Sun</name>
+    </author>
+    <author>
+      <name>Jinsung Yoon</name>
+    </author>
+    <author>
+      <name>Sercan O. Arik</name>
+    </author>
+    <author>
+      <name>Danqi Chen</name>
+    </author>
+    <author>
+      <name>Tao Yu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.14025v2</id>
+    <title>Stokes flow of an evolving fluid film with arbitrary shape and topology</title>
+    <updated>2025-01-14T04:11:50Z</updated>
+    <link href="https://arxiv.org/abs/2407.14025v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.14025v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The dynamics of evolving fluid films in the viscous Stokes limit is relevant to various applications, such as the modeling of lipid bilayers in cells. While the governing equations were formulated by Scriven in 1960, solving for the flow of a deformable viscous surface with arbitrary shape and topology has remained a challenge. In this study, we present a straightforward discrete model based on variational principles to address this long-standing problem. We replace the classical equations, which are expressed with tensor calculus in local coordinates, with a simple coordinate-free, differential-geometric formulation. The formulation provides a fundamental understanding of the underlying mechanics and directly translates to discretization. We construct a discrete analogue of the system using the Onsager variational principle, which, in a smooth context, governs the flow of a viscous medium. In the discrete setting, instead of term-wise discretizing the coordinate-based Stokes equations, we construct a discrete Rayleighian for the system and derive the discrete Stokes equations via the variational principle. This approach results in a stable, structure-preserving variational integrator that solves the system on general manifolds.</summary>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-19T04:51:09Z</published>
+    <arxiv:primary_category term="physics.flu-dyn"/>
+    <arxiv:journal_ref>J. Fluid Mech. 1003 (2025) R1</arxiv:journal_ref>
+    <author>
+      <name>Cuncheng Zhu</name>
+    </author>
+    <author>
+      <name>David Saintillan</name>
+    </author>
+    <author>
+      <name>Albert Chern</name>
+    </author>
+    <arxiv:doi>10.1017/jfm.2024.1208</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1017/jfm.2024.1208" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.08341v2</id>
+    <title>Adaptive Deep Iris Feature Extractor at Arbitrary Resolutions</title>
+    <updated>2024-07-12T10:15:45Z</updated>
+    <link href="https://arxiv.org/abs/2407.08341v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.08341v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper proposes a deep feature extractor for iris recognition at arbitrary resolutions. Resolution degradation reduces the recognition performance of deep learning models trained by high-resolution images. Using various-resolution images for training can improve the model's robustness while sacrificing recognition performance for high-resolution images. To achieve higher recognition performance at various resolutions, we propose a method of resolution-adaptive feature extraction with automatically switching networks. Our framework includes resolution expert modules specialized for different resolution degradations, including down-sampling and out-of-focus blurring. The framework automatically switches them depending on the degradation condition of an input image. Lower-resolution experts are trained by knowledge-distillation from the high-resolution expert in such a manner that both experts can extract common identity features. We applied our framework to three conventional neural network models. The experimental results show that our method enhances the recognition performance at low-resolution in the conventional methods and also maintains their performance at high-resolution.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-11T09:44:40Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yuho Shoji</name>
+    </author>
+    <author>
+      <name>Yuka Ogino</name>
+    </author>
+    <author>
+      <name>Takahiro Toizumi</name>
+    </author>
+    <author>
+      <name>Atsushi Ito</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.08923v1</id>
+    <title>A Bistatic ISAC Framework for LEO Satellite Systems: A Rate-Splitting Approach</title>
+    <updated>2024-07-12T02:07:36Z</updated>
+    <link href="https://arxiv.org/abs/2407.08923v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.08923v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Aiming to achieve ubiquitous global connectivity and target detection on the same platform with improved spectral/energy efficiency and reduced onboard hardware cost, low Earth orbit (LEO) satellite systems capable of simultaneously performing communications and radar have attracted significant attention. Designing such a joint system should address not only the challenges of integrating two functions but also the unique propagation characteristics of the satellites. To overcome severe echo signal path loss due to the high altitude of the satellite, we put forth a bistatic integrated sensing and communication (ISAC) framework with a radar receiver separated from the satellite. For robust and effective interference management, we employ rate-splitting multiple access (RSMA), which splits and encodes users messages into private and common streams. We optimize the dual-functional precoders to maximize the minimum rate among all users while satisfying the Cramer-Rao bound (CRB) constraints. Given the challenge of acquiring instantaneous channel state information (iCSI) for LEO satellites, we exploit the geometrical and statistical characteristics of the satellite channel. To develop an efficient optimization algorithm, semidefinite relaxation (SDR), sequential rank-1 constraint relaxation (SROCR), and successive convex approximation (SCA) are utilized. Numerical results show that the proposed framework efficiently performs both communication and radar, demonstrating superior interference control capabilities. Furthermore, it is validated that the common stream plays three vital roles: i) beamforming towards the radar target, ii) interference management between communications and radar, and iii) interference management among communication users.</summary>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-12T02:07:36Z</published>
+    <arxiv:comment>33 pages, 8 figures, 2 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.IT"/>
+    <author>
+      <name>Juha Park</name>
+    </author>
+    <author>
+      <name>Jaehyup Seong</name>
+    </author>
+    <author>
+      <name>Jaehak Ryu</name>
+    </author>
+    <author>
+      <name>Yijie Mao</name>
+    </author>
+    <author>
+      <name>Wonjae Shin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.15234v1</id>
+    <title>Exploring the Design of Collaborative Applications via the Lens of NDN Workspace</title>
+    <updated>2024-07-21T17:58:52Z</updated>
+    <link href="https://arxiv.org/abs/2407.15234v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.15234v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Metaverse applications desire to communicate with semantically identified objects among a diverse set of cyberspace entities, such as cameras for collecting images from, sensors for sensing environment, and users collaborating with each other, all could be nearby or far away, in a timely and secure way. However, supporting the above function faces networking challenges. Today's metaverse implementations are, by and large, use secure transport connections to communicate with cloud servers instead of letting participating entities communicate directly. In this paper, we use the design and implementation of NDN Workspace, a web-based, multi-user collaborative app to showcase a new way to networking that supports many-to-many secure data exchanges among communicating entities directly. NDN Workspace users establish trust relations among each other, exchange URI-identified objects directly, and can collaborate through intermittent connectivity, all in the absence of cloud servers. Its data-centric design offers an exciting new approach to metaverse app development.</summary>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-21T17:58:52Z</published>
+    <arxiv:primary_category term="cs.NI"/>
+    <author>
+      <name>Tianyuan Yu</name>
+    </author>
+    <author>
+      <name>Xinyu Ma</name>
+    </author>
+    <author>
+      <name>Varun Patil</name>
+    </author>
+    <author>
+      <name>Yekta Kocaogullar</name>
+    </author>
+    <author>
+      <name>Lixia Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.19056v1</id>
+    <title>OfficeBench: Benchmarking Language Agents across Multiple Applications for Office Automation</title>
+    <updated>2024-07-26T19:27:17Z</updated>
+    <link href="https://arxiv.org/abs/2407.19056v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.19056v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Office automation significantly enhances human productivity by automatically finishing routine tasks in the workflow. Beyond the basic information extraction studied in much of the prior document AI literature, the office automation research should be extended to more realistic office tasks which require to integrate various information sources in the office system and produce outputs through a series of decision-making processes. We introduce OfficeBench, one of the first office automation benchmarks for evaluating current LLM agents' capability to address office tasks in realistic office workflows. OfficeBench requires LLM agents to perform feasible long-horizon planning, proficiently switch between applications in a timely manner, and accurately ground their actions within a large combined action space, based on the contextual demands of the workflow. Applying our customized evaluation methods on each task, we find that GPT-4 Omni achieves the highest pass rate of 47.00%, demonstrating a decent performance in handling office tasks. However, this is still far below the human performance and accuracy standards required by real-world office workflows. We further observe that most issues are related to operation redundancy and hallucinations, as well as limitations in switching between multiple applications, which may provide valuable insights for developing effective agent frameworks for office automation.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-26T19:27:17Z</published>
+    <arxiv:comment>Preprint</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zilong Wang</name>
+    </author>
+    <author>
+      <name>Yuedong Cui</name>
+    </author>
+    <author>
+      <name>Li Zhong</name>
+    </author>
+    <author>
+      <name>Zimin Zhang</name>
+    </author>
+    <author>
+      <name>Da Yin</name>
+    </author>
+    <author>
+      <name>Bill Yuchen Lin</name>
+    </author>
+    <author>
+      <name>Jingbo Shang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.18472v1</id>
+    <title>FedUD: Exploiting Unaligned Data for Cross-Platform Federated Click-Through Rate Prediction</title>
+    <updated>2024-07-26T02:48:32Z</updated>
+    <link href="https://arxiv.org/abs/2407.18472v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.18472v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Click-through rate (CTR) prediction plays an important role in online advertising platforms. Most existing methods use data from the advertising platform itself for CTR prediction. As user behaviors also exist on many other platforms, e.g., media platforms, it is beneficial to further exploit such complementary information for better modeling user interest and for improving CTR prediction performance. However, due to privacy concerns, data from different platforms cannot be uploaded to a server for centralized model training. Vertical federated learning (VFL) provides a possible solution which is able to keep the raw data on respective participating parties and learn a collaborative model in a privacy-preserving way. However, traditional VFL methods only utilize aligned data with common keys across parties, which strongly restricts their application scope. In this paper, we propose FedUD, which is able to exploit unaligned data, in addition to aligned data, for more accurate federated CTR prediction. FedUD contains two steps. In the first step, FedUD utilizes aligned data across parties like traditional VFL, but it additionally includes a knowledge distillation module. This module distills useful knowledge from the guest party's high-level representations and guides the learning of a representation transfer network. In the second step, FedUD applies the learned knowledge to enrich the representations of the host party's unaligned data such that both aligned and unaligned data can contribute to federated model training. Experiments on two real-world datasets demonstrate the superior performance of FedUD for federated CTR prediction.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-26T02:48:32Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Wentao Ouyang</name>
+    </author>
+    <author>
+      <name>Rui Dong</name>
+    </author>
+    <author>
+      <name>Ri Tao</name>
+    </author>
+    <author>
+      <name>Xiangzheng Liu</name>
+    </author>
+    <arxiv:doi>10.1145/3626772.3657941</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3626772.3657941" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.09834v1</id>
+    <title>Analysis of time-harmonic electromagnetic problems with elliptic material coefficients</title>
+    <updated>2024-07-13T10:07:43Z</updated>
+    <link href="https://arxiv.org/abs/2407.09834v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.09834v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider time-harmonic electromagnetic problems with material coefficients represented by elliptic fields, covering a wide range of complex and anisotropic material media. The properties of elliptic fields are analyzed, with particular emphasis on scalar fields and normal tensor fields. Time-harmonic electromagnetic problems with general elliptic material fields are then studied. Well-posedness results for classical variational formulations with different boundary conditions are reviewed, and hypotheses for the coercivity of the corresponding sesquilinear forms are investigated. Finally, the proposed framework is applied to examples of media used in the literature: isotropic lossy media, geometric media, and gyrotropic media.</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-13T10:07:43Z</published>
+    <arxiv:primary_category term="math.AP"/>
+    <author>
+      <name>Patrick Ciarlet</name>
+    </author>
+    <author>
+      <name>Axel Modave</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.17333v2</id>
+    <title>Global Confidence Degree Based Graph Neural Network for Financial Fraud Detection</title>
+    <updated>2024-08-18T06:39:56Z</updated>
+    <link href="https://arxiv.org/abs/2407.17333v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.17333v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Graph Neural Networks (GNNs) are widely used in financial fraud detection due to their excellent ability on handling graph-structured financial data and modeling multilayer connections by aggregating information of neighbors. However, these GNN-based methods focus on extracting neighbor-level information but neglect a global perspective. This paper presents the concept and calculation formula of Global Confidence Degree (GCD) and thus designs GCD-based GNN (GCD-GNN) that can address the challenges of camouflage in fraudulent activities and thus can capture more global information. To obtain a precise GCD for each node, we use a multilayer perceptron to transform features and then the new features and the corresponding prototype are used to eliminate unnecessary information. The GCD of a node evaluates the typicality of the node and thus we can leverage GCD to generate attention values for message aggregation. This process is carried out through both the original GCD and its inverse, allowing us to capture both the typical neighbors with high GCD and the atypical ones with low GCD. Extensive experiments on two public datasets demonstrate that GCD-GNN outperforms state-of-the-art baselines, highlighting the effectiveness of GCD. We also design a lightweight GCD-GNN (GCD-GNN$_{light}$) that also outperforms the baselines but is slightly weaker than GCD-GNN on fraud detection performance. However, GCD-GNN$_{light}$ obviously outperforms GCD-GNN on convergence and inference speed.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-24T14:55:37Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jiaxun Liu</name>
+    </author>
+    <author>
+      <name>Yue Tian</name>
+    </author>
+    <author>
+      <name>Guanjun Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.05061v1</id>
+    <title>A Jailbroken GenAI Model Can Cause Substantial Harm: GenAI-powered Applications are Vulnerable to PromptWares</title>
+    <updated>2024-08-09T13:32:50Z</updated>
+    <link href="https://arxiv.org/abs/2408.05061v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.05061v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we argue that a jailbroken GenAI model can cause substantial harm to GenAI-powered applications and facilitate PromptWare, a new type of attack that flips the GenAI model's behavior from serving an application to attacking it. PromptWare exploits user inputs to jailbreak a GenAI model to force/perform malicious activity within the context of a GenAI-powered application. First, we introduce a naive implementation of PromptWare that behaves as malware that targets Plan &amp; Execute architectures (a.k.a., ReAct, function calling). We show that attackers could force a desired execution flow by creating a user input that produces desired outputs given that the logic of the GenAI-powered application is known to attackers. We demonstrate the application of a DoS attack that triggers the execution of a GenAI-powered assistant to enter an infinite loop that wastes money and computational resources on redundant API calls to a GenAI engine, preventing the application from providing service to a user. Next, we introduce a more sophisticated implementation of PromptWare that we name Advanced PromptWare Threat (APwT) that targets GenAI-powered applications whose logic is unknown to attackers. We show that attackers could create user input that exploits the GenAI engine's advanced AI capabilities to launch a kill chain in inference time consisting of six steps intended to escalate privileges, analyze the application's context, identify valuable assets, reason possible malicious activities, decide on one of them, and execute it. We demonstrate the application of APwT against a GenAI-powered e-commerce chatbot and show that it can trigger the modification of SQL tables, potentially leading to unauthorized discounts on the items sold to the user.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-09T13:32:50Z</published>
+    <arxiv:comment>Website, see https://sites.google.com/view/promptware</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Stav Cohen</name>
+    </author>
+    <author>
+      <name>Ron Bitton</name>
+    </author>
+    <author>
+      <name>Ben Nassi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.18234v3</id>
+    <title>Recent Developments in Degenerate Higher Order Scalar Tensor Theories</title>
+    <updated>2024-11-04T12:42:29Z</updated>
+    <link href="https://arxiv.org/abs/2407.18234v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.18234v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Degenerate Higher Order Scalar Tensor (DHOST) theories are the most general scalar-tensor theories whose Lagrangian depends on the metric tensor and a single scalar field and its derivatives up to second order. They propagate only one scalar degree of freedom, without being plagued by Ostrogradsky instabilities. This is achieved through certain degeneracies of the functions forming their Lagrangian. They generalise the Horndeski and beyond-Horndeski theories. Originally proposed to describe the late-time acceleration of the expansion of the universe, generalising the cosmological constant, they can also be used to build models of the early universe, to describe inflation or alternatives to standard inflation. In the late universe, they modify the standard Vainstein screening mechanism from Horndeski theories (which can have observable consequences) and are suited to build black hole models, featuring non-stealth Kerr black hole solutions. In this work their phenomenology is reviewed, looking at their basic properties, their parameterisations and classifications, focusing on solutions in the early and the late universe and at cosmological and astrophysical constraints.</summary>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-25T17:51:09Z</published>
+    <arxiv:comment>36 pages; Accepted for publication in Annalen der Physik</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.CO"/>
+    <author>
+      <name>Andrei Lazanu</name>
+    </author>
+    <arxiv:doi>10.1002/andp.202400263</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1002/andp.202400263" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.09234v3</id>
+    <title>SU(3) symmetry analysis in charmed baryon two body decays with penguin diagram contribution</title>
+    <updated>2024-09-20T06:35:02Z</updated>
+    <link href="https://arxiv.org/abs/2407.09234v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.09234v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>An increasing number of experimental measurements from the BESIII, Belle, and Belle-II collaborations encourage investigations into charmed baryon two-body decay processes. By including contributions from the penguin diagrams that are ignored in previous studies, we perform a global analysis with SU(3) flavor symmetry. Assuming all form factors are real, we achieve a remarkable minimal $χ^{2}/d.o.f = 0.788$ and find that the contribution of the amplitude proportional to $V_{cb}^*V_{ub}$ is of the order $\sim 0.01$, comparable with the contribution of the tree-level diagram. Additionally, by using the KPW theorem to reduce the number of amplitudes from 13 to 7 in the leading contribution, it becomes possible to consider the complex form factor case for the leading IRA amplitude in the global analysis. However, the analysis of complex form factors significantly conflicts with the experimental data $Br(Ξ_c^0\toΞ^-π^+)$, and by excluding this data, $χ^2/d.o.f$ is reduced from 5.95 to 1.19. Although the analysis of complex form factors shows a significant central value of the penguin diagram contribution, the large errors from the corresponding form factors make it a challenge to precisely determine its true contribution. Consequently, the direct CP violation in decay processes is predicted to be approximately zero. With more data in future experiments, the penguin diagram contribution with the amplitude proportional to $V_{cb}^*V_{ub}$ will be precisely determined, allowing for a more accurate prediction of CP violation. Our analysis necessitates further theoretical investigations and experimental measurements in the future.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-12T12:58:43Z</published>
+    <arxiv:comment>13 pages, accepted by EPJC</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <author>
+      <name>Zhi-Peng Xing</name>
+    </author>
+    <author>
+      <name>Yu-Ji Shi</name>
+    </author>
+    <author>
+      <name>Jin Sun</name>
+    </author>
+    <author>
+      <name>Ye Xing</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.03512v1</id>
+    <title>The Art of the Steal: Purloining Deep Learning Models Developed for an Ultrasound Scanner to a Competitor Machine</title>
+    <updated>2024-07-03T21:19:13Z</updated>
+    <link href="https://arxiv.org/abs/2407.03512v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.03512v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A transfer function approach has recently proven effective for calibrating deep learning (DL) algorithms in quantitative ultrasound (QUS), addressing data shifts at both the acquisition and machine levels. Expanding on this approach, we develop a strategy to 'steal' the functionality of a DL model from one ultrasound machine and implement it on another, in the context of QUS. This demonstrates the ease with which the functionality of a DL model can be transferred between machines, highlighting the security risks associated with deploying such models in a commercial scanner for clinical use. The proposed method is a black-box unsupervised domain adaptation technique that integrates the transfer function approach with an iterative schema. It does not utilize any information related to model internals of the victim machine but it solely relies on the availability of input-output interface. Additionally, we assume the availability of unlabelled data from the testing machine, i.e., the perpetrator machine. This scenario could become commonplace as companies begin deploying their DL functionalities for clinical use. Competing companies might acquire the victim machine and, through the input-output interface, replicate the functionality onto their own machines. In the experiments, we used a SonixOne and a Verasonics machine. The victim model was trained on SonixOne data, and its functionality was then transferred to the Verasonics machine. The proposed method successfully transferred the functionality to the Verasonics machine, achieving a remarkable 98\% classification accuracy in a binary decision task. This study underscores the need to establish security measures prior to deploying DL models in clinical settings.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-03T21:19:13Z</published>
+    <arxiv:comment>8 pages, 4 figures, 4 tables</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Ufuk Soylu</name>
+    </author>
+    <author>
+      <name>Varun Chandrasekeran</name>
+    </author>
+    <author>
+      <name>Michael L. Oelze</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.11340v1</id>
+    <title>Different influence of gas accretion on the evolution of star-forming and non-star-forming galaxies</title>
+    <updated>2024-07-16T03:14:07Z</updated>
+    <link href="https://arxiv.org/abs/2407.11340v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.11340v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Using integral field spectroscopic data from the Mapping Nearby Galaxies at Apache Point Observatory survey, we investigate the spatially resolved properties and empirical relations of a star-forming galaxy and a non-star-forming galaxy hosting counter-rotating stellar disks (CRDs). The DESI $g, r, z$ color images reveal no evidence of merger remnants in either galaxy, suggesting that gas accretion fuels the formation of CRDs. Based on the visible counter-rotation in the stellar velocity field, we can fit a spatial boundary to distinguish the inner and outer regions dominated by two stellar disks in each galaxy. In the inner region of the star-forming CRDs, stars are co-rotating with ionized gas, and the stellar population is younger. Comparison of the star-forming main sequence relations between the inner and outer regions reveals enhanced star formation in the inner region. Given the abundant pre-existing gas in the star-forming galaxy, collisions between pre-existing and external gas efficiently consume angular momentum, triggering star formation in the inner region. Conversely, in the outer region of the non-star-forming CRDs, stars are co-rotating with ionized gas, and the stellar population is younger. Comparison of the stellar mass-metallicity relations between the inner and outer regions indicates enriched gas-phase metallicity in the outer region. Considering the less abundant pre-existing gas in the non-star-forming galaxy, external gas could preserve angular momentum, fueling star formation in the outer region. Overall, gas accretion exhibits different influence on the evolution of star-forming and non-star-forming galaxies.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-16T03:14:07Z</published>
+    <arxiv:comment>Accepted for publication in ApJ, 14 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <author>
+      <name>Min Bao</name>
+    </author>
+    <author>
+      <name>Wenlong Zhao</name>
+    </author>
+    <author>
+      <name>Qirong Yuan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.09394v2</id>
+    <title>PersonaRAG: Enhancing Retrieval-Augmented Generation Systems with User-Centric Agents</title>
+    <updated>2026-01-15T00:12:56Z</updated>
+    <link href="https://arxiv.org/abs/2407.09394v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.09394v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) struggle with generating reliable outputs due to outdated knowledge and hallucinations. Retrieval-Augmented Generation (RAG) models address this by enhancing LLMs with external knowledge, but often fail to personalize the retrieval process. This paper introduces PersonaRAG, a novel framework incorporating user-centric agents to adapt retrieval and generation based on real-time user data and interactions. Evaluated across various question answering datasets, PersonaRAG demonstrates superiority over baseline models, providing tailored answers to user needs. The results suggest promising directions for user-adapted information retrieval systems.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-12T16:18:00Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <arxiv:journal_ref>Information Retrieval's Role in RAG Systems (IR-RAG) workshop at SIGIR, 2024, Washington D.C., USA</arxiv:journal_ref>
+    <author>
+      <name>Saber Zerhoudi</name>
+    </author>
+    <author>
+      <name>Michael Granitzer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.16337v1</id>
+    <title>STATE: A Robust ATE Estimator of Heavy-Tailed Metrics for Variance Reduction in Online Controlled Experiments</title>
+    <updated>2024-07-23T09:35:59Z</updated>
+    <link href="https://arxiv.org/abs/2407.16337v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.16337v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Online controlled experiments play a crucial role in enabling data-driven decisions across a wide range of companies. Variance reduction is an effective technique to improve the sensitivity of experiments, achieving higher statistical power while using fewer samples and shorter experimental periods. However, typical variance reduction methods (e.g., regression-adjusted estimators) are built upon the intuitional assumption of Gaussian distributions and cannot properly characterize the real business metrics with heavy-tailed distributions. Furthermore, outliers diminish the correlation between pre-experiment covariates and outcome metrics, greatly limiting the effectiveness of variance reduction.
+  In this paper, we develop a novel framework that integrates the Student's t-distribution with machine learning tools to fit heavy-tailed metrics and construct a robust average treatment effect estimator in online controlled experiments, which we call STATE. By adopting a variational EM method to optimize the loglikehood function, we can infer a robust solution that greatly eliminates the negative impact of outliers and achieves significant variance reduction. Moreover, we extend the STATE method from count metrics to ratio metrics by utilizing linear transformation that preserves unbiased estimation, whose variance reduction is more complex but less investigated in existing works. Finally, both simulations on synthetic data and long-term empirical results on Meituan experiment platform demonstrate the effectiveness of our method. Compared with the state-of-the-art estimators (CUPAC/MLRATE), STATE achieves over 50% variance reduction, indicating it can reach the same statistical power with only half of the observations, or half the experimental duration.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-23T09:35:59Z</published>
+    <arxiv:comment>Accepted by KDD 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hao Zhou</name>
+    </author>
+    <author>
+      <name>Kun Sun</name>
+    </author>
+    <author>
+      <name>Shaoming Li</name>
+    </author>
+    <author>
+      <name>Yangfeng Fan</name>
+    </author>
+    <author>
+      <name>Guibin Jiang</name>
+    </author>
+    <author>
+      <name>Jiaqi Zheng</name>
+    </author>
+    <author>
+      <name>Tao Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.09783v1</id>
+    <title>Infinite families of optimal and minimal codes over rings using simplicial complexes</title>
+    <updated>2024-07-13T05:46:14Z</updated>
+    <link href="https://arxiv.org/abs/2407.09783v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.09783v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, several infinite families of codes over the extension of non-unital non-commutative rings are constructed utilizing general simplicial complexes. Thanks to the special structure of the defining sets, the principal parameters of these codes are characterized. Specially, when the employed simplicial complexes are generated by a single maximal element, we determine their Lee weight distributions completely. Furthermore, by considering the Gray image codes and the corresponding subfield-like codes, numerous of linear codes over $\mathbb{F}_q$ are also obtained, where $q$ is a prime power. Certain conditions are given to ensure the above linear codes are (Hermitian) self-orthogonal in the case of $q=2,3,4$. It is noteworthy that most of the derived codes over $\mathbb{F}_q$ satisfy the Ashikhmin-Barg's condition for minimality. Besides, we obtain two infinite families of distance-optimal codes over $\mathbb{F}_q$ with respect to the Griesmer bound.</summary>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-13T05:46:14Z</published>
+    <arxiv:comment>26 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.IT"/>
+    <author>
+      <name>Yanan Wu</name>
+    </author>
+    <author>
+      <name>Tingting Pang</name>
+    </author>
+    <author>
+      <name>Nian Li</name>
+    </author>
+    <author>
+      <name>Yanbin Pan</name>
+    </author>
+    <author>
+      <name>Xiangyong Zeng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.18901v1</id>
+    <title>AppWorld: A Controllable World of Apps and People for Benchmarking Interactive Coding Agents</title>
+    <updated>2024-07-26T17:55:45Z</updated>
+    <link href="https://arxiv.org/abs/2407.18901v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.18901v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Autonomous agents that address day-to-day digital tasks (e.g., ordering groceries for a household), must not only operate multiple apps (e.g., notes, messaging, shopping app) via APIs, but also generate rich code with complex control flow in an iterative manner based on their interaction with the environment. However, existing benchmarks for tool use are inadequate, as they only cover tasks that require a simple sequence of API calls.
+  To remedy this gap, we built $\textbf{AppWorld Engine}$, a high-quality execution environment (60K lines of code) of 9 day-to-day apps operable via 457 APIs and populated with realistic digital activities simulating the lives of ~100 fictitious users. We then created $\textbf{AppWorld Benchmark}$ (40K lines of code), a suite of 750 natural, diverse, and challenging autonomous agent tasks requiring rich and interactive code generation. It supports robust programmatic evaluation with state-based unit tests, allowing for different ways of completing a task while also checking for unexpected changes, i.e., collateral damage. The state-of-the-art LLM, GPT-4o, solves only ~49% of our 'normal' tasks and ~30% of 'challenge' tasks, while other models solve at least 16% fewer. This highlights the benchmark's difficulty and AppWorld's potential to push the frontiers of interactive coding agents. The project website is available at https://appworld.dev/.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-26T17:55:45Z</published>
+    <arxiv:comment>ACL'24 Camera Ready</arxiv:comment>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Harsh Trivedi</name>
+    </author>
+    <author>
+      <name>Tushar Khot</name>
+    </author>
+    <author>
+      <name>Mareike Hartmann</name>
+    </author>
+    <author>
+      <name>Ruskin Manku</name>
+    </author>
+    <author>
+      <name>Vinty Dong</name>
+    </author>
+    <author>
+      <name>Edward Li</name>
+    </author>
+    <author>
+      <name>Shashank Gupta</name>
+    </author>
+    <author>
+      <name>Ashish Sabharwal</name>
+    </author>
+    <author>
+      <name>Niranjan Balasubramanian</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.08234v1</id>
+    <title>Model Predictive Control For Mobile Manipulators Based On Neural Dynamics(Extended version)</title>
+    <updated>2024-07-11T07:17:23Z</updated>
+    <link href="https://arxiv.org/abs/2407.08234v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.08234v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This article focuses on the trajectory tracking problem of mobile manipulators (MMs). Firstly, we construct a position and orientation model predictive tracking control (POMPTC) scheme for mobile manipulators. The proposed POMPTC scheme can simultaneously minimize the tracking error, joint velocity, and joint acceleration. Moreover, it can achieve synchronous control for the position and orientation of the end-effector. Secondly, a finite-time convergent neural dynamics (FTCND) model is constructed to find the optimal solution of the POMPTC scheme. Then, based on the proposed POMPTC scheme, a non-singular fast terminal sliding model (NFTSM) control method is presented, which considers the disturbances caused by the base motion on the manipulator at the dynamic level. It can achieve finite-time tracking performance and improve the anti-disturbances ability. Finally, simulation and experiments show that the proposed control method has the advantages of strong robustness, fast convergence, and high control accuracy.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-11T07:17:23Z</published>
+    <arxiv:comment>This article consists of 13 pages, including the text and the proof process</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Tao Su</name>
+    </author>
+    <author>
+      <name>Shiqi Zheng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.15392v1</id>
+    <title>Advancing Ultraviolet Detector Technology for future missions: Investigating the dark current plateau in silicon detectors using photon-counting EMCCDs</title>
+    <updated>2024-07-22T05:39:58Z</updated>
+    <link href="https://arxiv.org/abs/2407.15392v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.15392v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Understanding the noise characteristics of high quantum efficiency silicon-based ultraviolet detectors, developed by the Microdevices Lab at the Jet Propulsion Laboratory, is critical for current and proposed UV missions using these devices. In this paper, we provide an overview of our detector noise characterization test bench that uses delta-doped, photon counting, Electron-multiplying CCDs (EMCCDs) to understand the fundamental noise properties relevant to all silicon CCDs and CMOS arrays. This work attempts to identify the source of the dark current plateau that has been previously measured with photon-counting EMCCDs and is known to be prevalent in other silicon-based arrays. It is suspected that the plateau could be due to a combination of detectable photons in the tail of blackbody radiation of the ambient instrument, low-level light leaks, and a non-temperature-dependent component that varies with substrate voltage. Our innovative test setup delineates the effect of the ambient environment during dark measurements by independently controlling the temperature of the detector and surrounding environment. We present the design of the test setup and preliminary results.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.ins-det" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-22T05:39:58Z</published>
+    <arxiv:comment>Submitted for Proceedings of SPIE Astronomical Telescopes+Instrumentation 2024, Paper number: 13093-26</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>Aafaque R. Khan</name>
+      <arxiv:affiliation>Steward Observatory, University of Arizona, Tucson, Arizona, USA</arxiv:affiliation>
+      <arxiv:affiliation>Wyant College of Optical Sciences, University of Arizona, Tucson, Arizona, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Erika Hamden</name>
+      <arxiv:affiliation>Steward Observatory, University of Arizona, Tucson, Arizona, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Gillian Kyne</name>
+      <arxiv:affiliation>Jet Propulsion Laboratory, California Institute of Technology, Pasadena, California, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>April D. Jewell</name>
+      <arxiv:affiliation>Jet Propulsion Laboratory, California Institute of Technology, Pasadena, California, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>John Henessey</name>
+      <arxiv:affiliation>Jet Propulsion Laboratory, California Institute of Technology, Pasadena, California, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Shouleh Nikzad</name>
+      <arxiv:affiliation>Jet Propulsion Laboratory, California Institute of Technology, Pasadena, California, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Vincent Picouet</name>
+      <arxiv:affiliation>California Institute of Technology, Pasadena, California, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Olivia Jones</name>
+      <arxiv:affiliation>Steward Observatory, University of Arizona, Tucson, Arizona, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Harrison Bradley</name>
+      <arxiv:affiliation>Steward Observatory, University of Arizona, Tucson, Arizona, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Nazende Kerkeser</name>
+      <arxiv:affiliation>Steward Observatory, University of Arizona, Tucson, Arizona, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Zeren Lin</name>
+      <arxiv:affiliation>California Institute of Technology, Pasadena, California, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Brock Parker</name>
+      <arxiv:affiliation>Steward Observatory, University of Arizona, Tucson, Arizona, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Grant West</name>
+      <arxiv:affiliation>Steward Observatory, University of Arizona, Tucson, Arizona, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>John Ford</name>
+      <arxiv:affiliation>Steward Observatory, University of Arizona, Tucson, Arizona, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Frank Gacon</name>
+      <arxiv:affiliation>Steward Observatory, University of Arizona, Tucson, Arizona, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Dave Beaty</name>
+      <arxiv:affiliation>Steward Observatory, University of Arizona, Tucson, Arizona, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jacob Vider</name>
+      <arxiv:affiliation>Steward Observatory, University of Arizona, Tucson, Arizona, USA</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.16034v1</id>
+    <title>Efficient Replay Memory Architectures in Multi-Agent Reinforcement Learning for Traffic Congestion Control</title>
+    <updated>2024-07-22T20:20:04Z</updated>
+    <link href="https://arxiv.org/abs/2407.16034v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.16034v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Episodic control, inspired by the role of episodic memory in the human brain, has been shown to improve the sample inefficiency of model-free reinforcement learning by reusing high-return past experiences. However, the memory growth of episodic control is undesirable in large-scale multi-agent problems such as vehicle traffic management. This paper proposes a novel replay memory architecture called Dual-Memory Integrated Learning, to augment to multi-agent reinforcement learning methods for congestion control via adaptive light signal scheduling. Our dual-memory architecture mimics two core capabilities of human decision-making. First, it relies on diverse types of memory--semantic and episodic, short-term and long-term--in order to remember high-return states that occur often in the network and filter out states that don't. Second, it employs equivalence classes to group together similar state-action pairs and that can be controlled using the same action (i.e., light signal sequence). Theoretical analyses establish memory growth bounds, and simulation experiments on several intersection networks showcase improved congestion performance (e.g., vehicle throughput) from our method.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-22T20:20:04Z</published>
+    <arxiv:comment>Full version of accepted paper to IEEE Intelligent Transportation Systems Conference (ITSC) 2024</arxiv:comment>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Mukul Chodhary</name>
+    </author>
+    <author>
+      <name>Kevin Octavian</name>
+    </author>
+    <author>
+      <name>SooJean Han</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.12983v1</id>
+    <title>Lopsidedness in Early-Type Galaxies: the role of the $m=1$ multipole in Isophote Fitting and Strong Lens Modelling</title>
+    <updated>2024-07-17T20:02:14Z</updated>
+    <link href="https://arxiv.org/abs/2407.12983v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.12983v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The surface brightness distribution of massive early-type galaxies (ETGs) often deviates from a perfectly elliptical shape. To capture these deviations in their isophotes during an ellipse fitting analysis, Fourier modes of order $m = 3, 4$ are often used. In such analyses the centre of each ellipse is treated as a free parameter, which may result in offsets from the centre of light, particularly for ellipses in the outer regions. This complexity is not currently accounted for in the mass models used in either strong gravitational lensing or galactic dynamical studies. In this work, we adopt a different approach, using the $m=1$ Fourier mode to account for this complexity while keeping the centres of all perturbed ellipses fixed, showing that it fits the data equally well. We applied our method to the distribution of light emission to a sample of ETGs from the MASSIVE survey and found that the majority have low $m_1$ amplitudes, below 2 percent. Five out of the 30 galaxies we analysed have high $m_1$ amplitudes, ranging from 2 to 10 percent in the outer parts ($R \gtrsim 3$ kpc), all of which have a physically associated companion. Based on our findings, we advocate the use of the $m=1$ multipole in the mass models used in strong lensing and dynamical studies, particularly for galaxies with recent or ongoing interactions.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-17T20:02:14Z</published>
+    <arxiv:comment>7 pages, 6 figures. Submitted to MNRAS</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <author>
+      <name>Aristeidis Amvrosiadis</name>
+    </author>
+    <author>
+      <name>James W. Nightingale</name>
+    </author>
+    <author>
+      <name>Qiuhan He</name>
+    </author>
+    <author>
+      <name>Andrew Robertson</name>
+    </author>
+    <author>
+      <name>Samuel C. Lange</name>
+    </author>
+    <author>
+      <name>Carlos S. Frenk</name>
+    </author>
+    <author>
+      <name>Shaun Cole</name>
+    </author>
+    <author>
+      <name>Richard Massey</name>
+    </author>
+    <author>
+      <name>Adriano Poci</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.14562v2</id>
+    <title>Thought-Like-Pro: Enhancing Reasoning of Large Language Models through Self-Driven Prolog-based Chain-of-Thought</title>
+    <updated>2024-08-10T06:54:20Z</updated>
+    <link href="https://arxiv.org/abs/2407.14562v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.14562v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have shown exceptional performance as general-purpose assistants, excelling across a variety of reasoning tasks. This achievement represents a significant step toward achieving artificial general intelligence (AGI). Despite these advancements, the effectiveness of LLMs often hinges on the specific prompting strategies employed, and there remains a lack of a robust framework to facilitate learning and generalization across diverse reasoning tasks. To address these challenges, we introduce a novel learning framework, THOUGHT-LIKE-PRO In this framework, we utilize imitation learning to imitate the Chain-of-Thought (CoT) process which is verified and translated from reasoning trajectories generated by a symbolic Prolog logic engine. This framework proceeds in a self-driven manner, that enables LLMs to formulate rules and statements from given instructions and leverage the symbolic Prolog engine to derive results. Subsequently, LLMs convert Prolog-derived successive reasoning trajectories into natural language CoT for imitation learning. Our empirical findings indicate that our proposed approach substantially enhances the reasoning abilities of LLMs and demonstrates robust generalization across out-of-distribution reasoning tasks.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-18T18:52:10Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Xiaoyu Tan</name>
+      <arxiv:affiliation>INF Technology</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Yongxin Deng</name>
+      <arxiv:affiliation>Shanghai University of Engineering Science</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Xihe Qiu</name>
+      <arxiv:affiliation>Shanghai University of Engineering Science</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Weidi Xu</name>
+      <arxiv:affiliation>INF Technology</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Chao Qu</name>
+      <arxiv:affiliation>INF Technology</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Wei Chu</name>
+      <arxiv:affiliation>INF Technology</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Yinghui Xu</name>
+      <arxiv:affiliation>Fudan University</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Yuan Qi</name>
+      <arxiv:affiliation>Fudan University</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.09498v2</id>
+    <title>OT-VP: Optimal Transport-guided Visual Prompting for Test-Time Adaptation</title>
+    <updated>2024-09-10T07:03:32Z</updated>
+    <link href="https://arxiv.org/abs/2407.09498v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.09498v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Vision Transformers (ViTs) have demonstrated remarkable capabilities in learning representations, but their performance is compromised when applied to unseen domains. Previous methods either engage in prompt learning during the training phase or modify model parameters at test time through entropy minimization. The former often overlooks unlabeled target data, while the latter doesn't fully address domain shifts. In this work, our approach, Optimal Transport-guided Test-Time Visual Prompting (OT-VP), handles these problems by leveraging prompt learning at test time to align the target and source domains without accessing the training process or altering pre-trained model parameters. This method involves learning a universal visual prompt for the target domain by optimizing the Optimal Transport distance.OT-VP, with only four learned prompt tokens, exceeds state-of-the-art performance across three stylistic datasets-PACS, VLCS, OfficeHome, and one corrupted dataset ImageNet-C. Additionally, OT-VP operates efficiently, both in terms of memory and computation, and is adaptable for extension to online settings.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-12T18:30:03Z</published>
+    <arxiv:comment>WACV2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yunbei Zhang</name>
+    </author>
+    <author>
+      <name>Akshay Mehra</name>
+    </author>
+    <author>
+      <name>Jihun Hamm</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.08452v2</id>
+    <title>MITL Model Checking via Generalized Timed Automata and a New Liveness Algorithm</title>
+    <updated>2025-07-03T18:44:45Z</updated>
+    <link href="https://arxiv.org/abs/2407.08452v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.08452v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The translation of Metric Interval Temporal Logic (MITL) to timed automata is a topic that has been extensively studied. A key challenge here is the conversion of future modalities into equivalent automata. Typical conversions equip the automata with a guess-and-check mechanism to ascertain the truth of future modalities. Guess-and-check can be naturally implemented via alternation. However, since timed automata tools do not handle alternation, existing methods perform an additional step of converting the alternating timed automata into timed automata. This de-alternation step proceeds by an intricate finite abstraction of the space of configurations of the alternating automaton.
+  Recently, a model of generalized timed automata (GTA) has been proposed. The model comes with several powerful additional features, and yet, the best known zone-based reachability algorithms for timed automata have been extended to the GTA model, with the same complexity for all the zone operations. We provide a new concise translation from MITL to GTA. In particular, for the timed until modality, our translation offers an exponential improvement w.r.t. the state-of-the-art.
+  Thanks to this conversion, MITL model checking reduces to checking liveness for GTAs. However, no liveness algorithm is known for GTAs. Due to the presence of future clocks, there is no finite time-abstract bisimulation (region equivalence) for GTAs, whereas liveness algorithms for timed automata crucially rely on the presence of the finite region equivalence. As our second contribution, we provide a new zone-based algorithm for checking Buchi non-emptiness in GTAs, which circumvents this fundamental challenge.</summary>
+    <category term="cs.FL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-11T12:45:35Z</published>
+    <arxiv:primary_category term="cs.FL"/>
+    <author>
+      <name>S. Akshay</name>
+    </author>
+    <author>
+      <name>Paul Gastin</name>
+    </author>
+    <author>
+      <name>R. Govind</name>
+    </author>
+    <author>
+      <name>B. Srivathsan</name>
+    </author>
+  </entry>
+</feed>

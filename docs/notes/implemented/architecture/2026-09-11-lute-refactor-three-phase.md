@@ -22,10 +22,7 @@ Status: implemented
 | 二期（结构收敛） | 能力组归位、生成式目录墙、门禁接 git 钩子、引入 lint | 5 个能力组与组 README、`scripts/gen-catalog.mjs` 与生成物、`profile-manifest` |
 | 三期（契约与清账） | typecheck/test 逐包补齐、豁免清空、历史 ADR 归档、资产分级处置 | 豁免文件为空且门禁拒绝非空、历史 6 篇 ADR 归档、`_attic/` 与大文件移出工作树 |
 
-十一项决策各自记录在 ADR-0007 ~ ADR-0017 中：
-（本 Note 的「决策记录」声明覆盖 ADR-0007 ~ ADR-0018；后续的 ADR-0019 属独立主题
-——品牌皮肤对官方 UI 的改写锚治理，记录在
-[2026-09-11-root-brand-live-resolver.md](2026-09-11-root-brand-live-resolver.md)。）
+十一项决策各自记录在 ADR-0007 ~ ADR-0017 中（本 Note 的「决策记录」声明覆盖 ADR-0007 ~ ADR-0018）：
 1. 三期推进（ADR-0007）
 2. harness 子模块初始化但仅作只读参照系（ADR-0008）
 3. 主脊柱中文单语，仅客户安装使用一条链出独立用户向文档（ADR-0009）

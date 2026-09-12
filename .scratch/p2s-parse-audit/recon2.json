@@ -1,0 +1,364 @@
+{
+ "rows": [
+  {
+   "card": "Skill-CodeXEmbed-Code-Semantic-Embedding",
+   "tier": "oracle",
+   "fence_index": 2,
+   "marks": 4,
+   "marks_after_chosen": 1,
+   "recovered_lines": 279,
+   "parses": false,
+   "last_line": "    print(\"\\n[✓] CodeXEmbed代码语义嵌入测试通过\")",
+   "cut_tail": false,
+   "stray_after_close": null,
+   "canonical_near": []
+  },
+  {
+   "card": "Skill-Model-Performance-Monitor",
+   "tier": "oracle",
+   "fence_index": 6,
+   "marks": 10,
+   "marks_after_chosen": 3,
+   "recovered_lines": 363,
+   "parses": false,
+   "last_line": "print(\"[✓] Model Performance Monitor 测试通过\")",
+   "cut_tail": false,
+   "stray_after_close": [
+    474,
+    "---"
+   ],
+   "canonical_near": [
+    "paper2skills-code/ml_fundamentals/model_performance_monitor/model.py"
+   ]
+  },
+  {
+   "card": "Skill-RFM-Segment-Campaign-Dispatcher",
+   "tier": "oracle",
+   "fence_index": 0,
+   "marks": 2,
+   "marks_after_chosen": 1,
+   "recovered_lines": 224,
+   "parses": false,
+   "last_line": "        print(f\"  [{seg}] 调度{plan['dispatched']}人，预计守护LTV ${plan['estimated_ltv_at_risk']}\")",
+   "cut_tail": false,
+   "stray_after_close": null,
+   "canonical_near": []
+  },
+  {
+   "card": "Skill-Real-Time-Competitive-Repricing",
+   "tier": "oracle",
+   "fence_index": 2,
+   "marks": 4,
+   "marks_after_chosen": 1,
+   "recovered_lines": 71,
+   "parses": false,
+   "last_line": "            )",
+   "cut_tail": false,
+   "stray_after_close": [
+    281,
+    "self.learner.update(state, self.decision_history[-1][1], reward, next_state)"
+   ],
+   "canonical_near": [
+    "paper2skills-code/data_collection/real_time_inventory_event_stream/model.py",
+    "paper2skills-code/data_collection/real_time_supply_chain_drift_detection/model.py",
+    "paper2skills-code/marketing/tiktok_live_real_time_cvr_prediction/model.py"
+   ]
+  },
+  {
+   "card": "Skill-TimeCMA-LLM-Forecasting",
+   "tier": "oracle",
+   "fence_index": 0,
+   "marks": 2,
+   "marks_after_chosen": 1,
+   "recovered_lines": 45,
+   "parses": false,
+   "last_line": "print(\"[✓] TimeCMA LLM Forecasting 测试通过\")",
+   "cut_tail": false,
+   "stray_after_close": [
+    143,
+    "**核心函数说明**："
+   ],
+   "canonical_near": [
+    "paper2skills-code/time_series/timecma_llm_forecasting/model.py"
+   ]
+  },
+  {
+   "card": "Skill-AI-Carbon-Footprint-Optimizer",
+   "tier": "unverified",
+   "fence_index": 1,
+   "marks": 4,
+   "marks_after_chosen": 2,
+   "recovered_lines": 226,
+   "parses": false,
+   "last_line": "print(\"[✓] Skill-AI-Carbon-Footprint-Optimizer测试通过\")",
+   "cut_tail": false,
+   "stray_after_close": null,
+   "canonical_near": []
+  },
+  {
+   "card": "Skill-AI-Humanities-Healing-Cards",
+   "tier": "unverified",
+   "fence_index": 9,
+   "marks": 20,
+   "marks_after_chosen": 10,
+   "recovered_lines": 232,
+   "parses": false,
+   "last_line": "print(\"[✓] Skill-AI-Humanities-Healing-Cards测试通过\")",
+   "cut_tail": false,
+   "stray_after_close": null,
+   "canonical_near": [
+    "paper2skills-code/ai_humanities/ai_humanities_healing_cards/model.py"
+   ]
+  },
+  {
+   "card": "Skill-Agent-Memory-Learning",
+   "tier": "unverified",
+   "fence_index": 2,
+   "marks": 7,
+   "marks_after_chosen": 4,
+   "recovered_lines": 245,
+   "parses": false,
+   "last_line": "## 三层记忆架构示意",
+   "cut_tail": false,
+   "stray_after_close": [
+    448,
+    "用户查询"
+   ],
+   "canonical_near": [
+    "paper2skills-code/llm_agent_engineering/agemem_unified_agent_memory/model.py",
+    "paper2skills-code/mas/agent_memory_learning/__init__.py",
+    "paper2skills-code/mas/agent_memory_learning/agent_memory.py"
+   ]
+  },
+  {
+   "card": "Skill-CAMEL-Role-Playing-Agents",
+   "tier": "unverified",
+   "fence_index": 1,
+   "marks": 7,
+   "marks_after_chosen": 5,
+   "recovered_lines": 27,
+   "parses": false,
+   "last_line": "<CAMEL_TASK_DONE>",
+   "cut_tail": true,
+   "stray_after_close": [
+    120,
+    "**业务价值**："
+   ],
+   "canonical_near": [
+    "paper2skills-code/mas/camel_role_playing/__init__.py",
+    "paper2skills-code/mas/camel_role_playing/camel_agent.py",
+    "paper2skills-code/mas/camel_role_playing_agents/model.py"
+   ]
+  },
+  {
+   "card": "Skill-DQN-Purchase-Prediction",
+   "tier": "unverified",
+   "fence_index": 1,
+   "marks": 5,
+   "marks_after_chosen": 3,
+   "recovered_lines": 174,
+   "parses": false,
+   "last_line": "**组合效果**：",
+   "cut_tail": false,
+   "stray_after_close": [
+    296,
+    "输入: 用户U123的最新会话数据"
+   ],
+   "canonical_near": [
+    "paper2skills-code/growth_model/dqn_purchase_prediction/__init__.py",
+    "paper2skills-code/growth_model/dqn_purchase_prediction/model.py"
+   ]
+  },
+  {
+   "card": "Skill-Domain-Agnostic-Context-Engine",
+   "tier": "unverified",
+   "fence_index": 1,
+   "marks": 7,
+   "marks_after_chosen": 5,
+   "recovered_lines": 12,
+   "parses": false,
+   "last_line": "        └─ Policy: 中等审核（品牌一致性+平台合规）",
+   "cut_tail": false,
+   "stray_after_close": [
+    117,
+    "**具体数据规模**："
+   ],
+   "canonical_near": [
+    "paper2skills-code/growth_model/whatsapp_private_domain_analytics/model.py",
+    "paper2skills-code/mas/domain_agnostic_context_engine/model.py"
+   ]
+  },
+  {
+   "card": "Skill-HGCN-Hyperbolic-Graph-Convolutional-Networks",
+   "tier": "unverified",
+   "fence_index": 3,
+   "marks": 9,
+   "marks_after_chosen": 5,
+   "recovered_lines": 172,
+   "parses": false,
+   "last_line": "## 与 HGT 的互补关系",
+   "cut_tail": false,
+   "stray_after_close": [
+    318,
+    "图结构特性          HGT              HGCN"
+   ],
+   "canonical_near": [
+    "paper2skills-code/knowledge_graph/hgcn_hyperbolic_graph_convolutional_networks/model.py"
+   ]
+  },
+  {
+   "card": "Skill-HGT-Heterogeneous-Graph-Transformer",
+   "tier": "unverified",
+   "fence_index": 4,
+   "marks": 13,
+   "marks_after_chosen": 8,
+   "recovered_lines": 212,
+   "parses": false,
+   "last_line": "## 学习路径",
+   "cut_tail": false,
+   "stray_after_close": [
+    367,
+    "GNN 基础 (GCN, GraphSAGE)"
+   ],
+   "canonical_near": [
+    "paper2skills-code/knowledge_graph/hgt_heterogeneous_graph_transformer/model.py"
+   ]
+  },
+  {
+   "card": "Skill-InstructUIE-Unified-Information-Extraction",
+   "tier": "unverified",
+   "fence_index": 5,
+   "marks": 13,
+   "marks_after_chosen": 7,
+   "recovered_lines": 258,
+   "parses": false,
+   "last_line": "本技能是 **ABSA** 和 **标签体系管理** 的上层统一框架：",
+   "cut_tail": false,
+   "stray_after_close": [
+    448,
+    "ABSA (方面情感分析)"
+   ],
+   "canonical_near": [
+    "paper2skills-code/nlp_voc/instructuie_unified_ie/__init__.py",
+    "paper2skills-code/nlp_voc/instructuie_unified_ie/instructuie_model.py",
+    "paper2skills-code/nlp_voc/instructuie_unified_information_extraction/model.py"
+   ]
+  },
+  {
+   "card": "Skill-MAS-Testing-Verification",
+   "tier": "unverified",
+   "fence_index": 0,
+   "marks": 9,
+   "marks_after_chosen": 8,
+   "recovered_lines": 20,
+   "parses": false,
+   "last_line": "  用 inter-agent 覆盖率引导变异方向，优先探索未覆盖的 Agent 交互路径",
+   "cut_tail": false,
+   "stray_after_close": [
+    66,
+    "**关键指标**：inter-agent 覆盖率 96.9%，发现 56 个此前未知的 MAS 特有失败模式（传统测试工具发现数：0）"
+   ],
+   "canonical_near": [
+    "paper2skills-code/mas/mas_testing_verification/model.py"
+   ]
+  },
+  {
+   "card": "Skill-Semantic-Blueprint-Compiler",
+   "tier": "unverified",
+   "fence_index": 2,
+   "marks": 7,
+   "marks_after_chosen": 4,
+   "recovered_lines": 222,
+   "parses": false,
+   "last_line": "## 在工作流中的位置",
+   "cut_tail": false,
+   "stray_after_close": [
+    414,
+    "[InstructUIE 抽取]"
+   ],
+   "canonical_near": [
+    "paper2skills-code/data_collection/listing_semantic_relevance_scoring/model.py",
+    "paper2skills-code/knowledge_graph/dense_retrieval_ecommerce_semantic_search/model.py",
+    "paper2skills-code/knowledge_graph/semantic_chunking_strategy/model.py"
+   ]
+  },
+  {
+   "card": "Skill-Skill-Registry-Dynamic-Loading",
+   "tier": "unverified",
+   "fence_index": 3,
+   "marks": 9,
+   "marks_after_chosen": 5,
+   "recovered_lines": 192,
+   "parses": false,
+   "last_line": "## 在 MAS 工作流中的位置",
+   "cut_tail": false,
+   "stray_after_close": [
+    352,
+    "[Task Blueprint 生成]"
+   ],
+   "canonical_near": [
+    "paper2skills-code/mas/agent_registry_discovery/__init__.py",
+    "paper2skills-code/mas/agent_registry_discovery/model.py",
+    "paper2skills-code/mas/skill_registry/__init__.py"
+   ]
+  },
+  {
+   "card": "Skill-Subagent-Decomposition",
+   "tier": "unverified",
+   "fence_index": 3,
+   "marks": 9,
+   "marks_after_chosen": 5,
+   "recovered_lines": 246,
+   "parses": false,
+   "last_line": "## 在 MAS 工作流中的位置",
+   "cut_tail": false,
+   "stray_after_close": [
+    478,
+    "[Task Blueprint]"
+   ],
+   "canonical_near": [
+    "paper2skills-code/mas/subagent_decomposer/__init__.py",
+    "paper2skills-code/mas/subagent_decomposer/subagent_decomposer.py",
+    "paper2skills-code/mas/subagent_decomposition/model.py"
+   ]
+  },
+  {
+   "card": "Skill-Supply-Chain-ML-Features",
+   "tier": "unverified",
+   "fence_index": 4,
+   "marks": 17,
+   "marks_after_chosen": 12,
+   "recovered_lines": 30,
+   "parses": false,
+   "last_line": "  - avg_user_ltv                       # 平均用户生命周期价值",
+   "cut_tail": false,
+   "stray_after_close": [
+    221,
+    "**促销效果预测模型**："
+   ],
+   "canonical_near": [
+    "paper2skills-code/04-\\344\\276\\233\\345\\272\\224\\351\\223\\276/demand_forecasting_supply_chain/__init__.py",
+    "paper2skills-code/04-\\344\\276\\233\\345\\272\\224\\351\\223\\276/demand_forecasting_supply_chain/model.py",
+    "paper2skills-code/07-NLP-VOC/voc_supply_chain_signal_bridge/__init__.py"
+   ]
+  },
+  {
+   "card": "Skill-Tree-of-Thoughts-Planning",
+   "tier": "unverified",
+   "fence_index": 2,
+   "marks": 7,
+   "marks_after_chosen": 4,
+   "recovered_lines": 196,
+   "parses": false,
+   "last_line": "## 与 ReAct / CoT 的关系",
+   "cut_tail": false,
+   "stray_after_close": [
+    360,
+    "CoT:  问题 → Thought1 → Thought2 → Thought3 → 答案"
+   ],
+   "canonical_near": [
+    "paper2skills-code/mas/tree_of_thoughts_planning/model.py"
+   ]
+  }
+ ]
+}

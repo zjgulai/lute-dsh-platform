@@ -1,0 +1,1078 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/A8iHQCOiMm3PMEnzms+oGitOCso</id>
+  <title>arXiv Query: search_query=&amp;id_list=2404.02543,2404.02893,2404.03299,2404.03868,2404.05961,2404.06293,2404.07392,2404.07523,2404.08234,2404.08521,2404.08821,2404.09123,2404.09234,2404.09596,2404.09733,2404.09823,2404.11237,2404.11584,2404.12156,2404.12543,2404.12847,2404.14469,2404.14927,2404.16130,2404.17582,2404.18291,2404.19331,2405.01817,2405.03291,2405.03671,2405.03845,2405.03912,2405.04711,2405.07183,2405.07437,2405.07510,2405.08210,2405.08661,2405.08756,2405.08832&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:43:17Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2404.02543,2404.02893,2404.03299,2404.03868,2404.05961,2404.06293,2404.07392,2404.07523,2404.08234,2404.08521,2404.08821,2404.09123,2404.09234,2404.09596,2404.09733,2404.09823,2404.11237,2404.11584,2404.12156,2404.12543,2404.12847,2404.14469,2404.14927,2404.16130,2404.17582,2404.18291,2404.19331,2405.01817,2405.03291,2405.03671,2405.03845,2405.03912,2405.04711,2405.07183,2405.07437,2405.07510,2405.08210,2405.08661,2405.08756,2405.08832" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2404.06293v1</id>
+    <title>Optimal Stopping with Interdependent Values</title>
+    <updated>2024-04-09T13:19:25Z</updated>
+    <link href="https://arxiv.org/abs/2404.06293v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.06293v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study online selection problems in both the prophet and secretary settings, when arriving agents have interdependent values. In the interdependent values model, introduced in the seminal work of Milgrom and Weber [1982], each agent has a private signal and the value of an agent is a function of the signals held by all agents. Results in online selection crucially rely on some degree of independence of values, which is conceptually at odds with the interdependent values model. For prophet and secretary models under the standard independent values assumption, prior works provide constant factor approximations to the welfare. On the other hand, when agents have interdependent values, prior works in Economics and Computer Science provide truthful mechanisms that obtain optimal and approximately optimal welfare under certain assumptions on the valuation functions.
+  We bring together these two important lines of work and provide the first constant factor approximations for prophet and secretary problems with interdependent values. We consider both the algorithmic setting, where agents are non-strategic (but have interdependent values), and the mechanism design setting with strategic agents. All our results are constructive and use simple stopping rules.</summary>
+    <category term="cs.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-09T13:19:25Z</published>
+    <arxiv:primary_category term="cs.GT"/>
+    <author>
+      <name>Simon Mauras</name>
+    </author>
+    <author>
+      <name>Divyarthi Mohan</name>
+    </author>
+    <author>
+      <name>Rebecca Reiffenhäuser</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.11237v1</id>
+    <title>Physics of nova outbursts: Theoretical models of classical nova outbursts with optically thick winds on $1.2~M_\odot$ and $1.3~M_\odot$ white dwarfs</title>
+    <updated>2024-04-17T10:39:35Z</updated>
+    <link href="https://arxiv.org/abs/2404.11237v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.11237v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present time-dependent nova outburst models with optically thick winds for a 1.2 and 1.35 $M_\odot$ white dwarfs (WDs) with a mass accretion rate of $5 \times 10^{-9}~M_\odot$ yr$^{-1}$ and for a 1.3 $M_\odot$ WD with $2 \times 10^{-9}~M_\odot$ yr$^{-1}$. The X-ray flash occurs 11 days before the optical peak of the 1.2 $M_\odot$ WD and 2.5 days before the peak of the 1.3 $M_\odot$ WD. The wind mass loss rate of the 1.2 $M_\odot$ WD (1.3 $M_\odot$ WD) reaches a peak of $6.4 \times 10^{-5}~M_\odot$ yr$^{-1}$ ($7.4 \times 10^{-5}~M_\odot$ yr$^{-1}$) at the epoch of the maximum photospheric expansion with the lowest photospheric temperature of $\log T_{\rm ph}$ (K)=4.33 (4.35). The nuclear energy generated during the outburst is lost in a form of radiation (61% for the 1.2 $M_\odot$ WD; 47% for the 1.3 $M_\odot$ WD), gravitational energy of ejecta (39%; 52%), and kinetic energy of the wind (0.28%; 0.29%). We found an empirical relation for fast novae between the time to optical maximum from the outburst $t_{\rm peak}$ and the expansion timescale $τ_{\rm exp}$ at $t=0$. With this relation, we are able to predict the time to optical maximum $t_{\rm peak}$ from the ignition model (at $t=0$) without following a time-consuming nova wind evolution.</summary>
+    <category term="astro-ph.SR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.HE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-17T10:39:35Z</published>
+    <arxiv:comment>10 pages, 8 figures, accepted for publication in PASJ</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.SR"/>
+    <author>
+      <name>Mariko Kato</name>
+    </author>
+    <author>
+      <name>Hideyuki Saio</name>
+    </author>
+    <author>
+      <name>Izumi Hachisu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.09733v1</id>
+    <title>Semiconductor Devices Condition Monitoring Using Harmonics in Inverter Control Variables</title>
+    <updated>2024-04-15T12:34:31Z</updated>
+    <link href="https://arxiv.org/abs/2404.09733v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.09733v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The health status of power semiconductor devices in power converters is important but difficult to monitor. This paper analyzes the relationship between harmonics in inverter control variables and a health precursor (the on-state voltage Von of power semiconductor devices). Based on the analysis, harmonics can estimate Von without adding extra sensing circuits. The method is validated through simulations.</summary>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-15T12:34:31Z</published>
+    <arxiv:primary_category term="eess.SP"/>
+    <author>
+      <name>Shuyu Ou</name>
+    </author>
+    <author>
+      <name>Ariya Sangwongwanich</name>
+    </author>
+    <author>
+      <name>Subham Sahoo</name>
+    </author>
+    <author>
+      <name>Frede Blaabjerg</name>
+    </author>
+    <arxiv:doi>10.23919/EPE23ECCEEurope58414.2023.10264538</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.23919/EPE23ECCEEurope58414.2023.10264538" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.07523v1</id>
+    <title>GNN-based Probabilistic Supply and Inventory Predictions in Supply Chain Networks</title>
+    <updated>2024-04-11T07:36:00Z</updated>
+    <link href="https://arxiv.org/abs/2404.07523v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.07523v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Successful supply chain optimization must mitigate imbalances between supply and demand over time. While accurate demand prediction is essential for supply planning, it alone does not suffice. The key to successful supply planning for optimal and viable execution lies in maximizing predictability for both demand and supply throughout an execution horizon. Therefore, enhancing the accuracy of supply predictions is imperative to create an attainable supply plan that matches demand without overstocking or understocking. However, in complex supply chain networks with numerous nodes and edges, accurate supply predictions are challenging due to dynamic node interactions, cascading supply delays, resource availability, production and logistic capabilities. Consequently, supply executions often deviate from their initial plans. To address this, we present the Graph-based Supply Prediction (GSP) probabilistic model. Our attention-based graph neural network (GNN) model predicts supplies, inventory, and imbalances using graph-structured historical data, demand forecasting, and original supply plan inputs. The experiments, conducted using historical data from a global consumer goods company's large-scale supply chain, demonstrate that GSP significantly improves supply and inventory prediction accuracy, potentially offering supply plan corrections to optimize executions.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-11T07:36:00Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Hyung-il Ahn</name>
+    </author>
+    <author>
+      <name>Young Chol Song</name>
+    </author>
+    <author>
+      <name>Santiago Olivar</name>
+    </author>
+    <author>
+      <name>Hershel Mehta</name>
+    </author>
+    <author>
+      <name>Naveen Tewari</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.08234v1</id>
+    <title>Searching for Hyper-compact star clusters in the Milky Way using LAMOST and Gaia</title>
+    <updated>2024-04-12T04:27:33Z</updated>
+    <link href="https://arxiv.org/abs/2404.08234v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.08234v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>During the early merger of the Milky Way, intermediate-mass black holes in merged dwarf galaxies may have been ejected from the center of their host galaxies due to gravitational waves, carrying some central stars along. This process can lead to the formation of hyper-compact star clusters, potentially hosting black holes in the mass range of $10^4$ to $10^5$ solar masses. These clusters are crucial targets for identifying and investigating intermediate-mass black holes. However, no hyper-compact star clusters in the Milky Way have been identified so far. In this paper, taking advantage of the high spatial resolution power of Gaia, we used data from Gaia EDR3 and LAMOST DR7, along with additional data from Pan-STARRS and SDSS, to conduct an initial screening of 6,138,049 sources using various parameters of Gaia EDR3. A total of 4,786 sources were selected for in-depth analysis. Each of these sources was meticulously scrutinized by examining their images, spectra, and nearby celestial objects to exclude various false positives, such as contaminations, galaxies, wide binaries, or wrong matches. We finally identified one likely hyper-compact star cluster candidate in the Milky Way, laying the foundation for further high-resolution imaging and spectral verification.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-12T04:27:33Z</published>
+    <arxiv:comment>17 pages, 16 figures; Accepted by The Astronomical Journal</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <author>
+      <name>Hao Wu</name>
+    </author>
+    <author>
+      <name>Haibo Yuan</name>
+    </author>
+    <author>
+      <name>Yilun Wang</name>
+    </author>
+    <author>
+      <name>Zexi Niu</name>
+    </author>
+    <author>
+      <name>Huawei Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.11584v1</id>
+    <title>The Landscape of Emerging AI Agent Architectures for Reasoning, Planning, and Tool Calling: A Survey</title>
+    <updated>2024-04-17T17:32:41Z</updated>
+    <link href="https://arxiv.org/abs/2404.11584v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.11584v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This survey paper examines the recent advancements in AI agent implementations, with a focus on their ability to achieve complex goals that require enhanced reasoning, planning, and tool execution capabilities. The primary objectives of this work are to a) communicate the current capabilities and limitations of existing AI agent implementations, b) share insights gained from our observations of these systems in action, and c) suggest important considerations for future developments in AI agent design. We achieve this by providing overviews of single-agent and multi-agent architectures, identifying key patterns and divergences in design choices, and evaluating their overall impact on accomplishing a provided goal. Our contribution outlines key themes when selecting an agentic architecture, the impact of leadership on agent systems, agent communication styles, and key phases for planning, execution, and reflection that enable robust AI agent systems.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-17T17:32:41Z</published>
+    <arxiv:comment>13 pages,6 figures,38 references</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Tula Masterman</name>
+    </author>
+    <author>
+      <name>Sandi Besen</name>
+    </author>
+    <author>
+      <name>Mason Sawtell</name>
+    </author>
+    <author>
+      <name>Alex Chao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.08821v1</id>
+    <title>Constrained C-Test Generation via Mixed-Integer Programming</title>
+    <updated>2024-04-12T21:35:21Z</updated>
+    <link href="https://arxiv.org/abs/2404.08821v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.08821v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This work proposes a novel method to generate C-Tests; a deviated form of cloze tests (a gap filling exercise) where only the last part of a word is turned into a gap. In contrast to previous works that only consider varying the gap size or gap placement to achieve locally optimal solutions, we propose a mixed-integer programming (MIP) approach. This allows us to consider gap size and placement simultaneously, achieving globally optimal solutions, and to directly integrate state-of-the-art models for gap difficulty prediction into the optimization problem. A user study with 40 participants across four C-Test generation strategies (including GPT-4) shows that our approach (MIP) significantly outperforms two of the baseline strategies (based on gap placement and GPT-4); and performs on-par with the third (based on gap size). Our analysis shows that GPT-4 still struggles to fulfill explicit constraints during generation and that MIP produces C-Tests that correlate best with the perceived difficulty. We publish our code, model, and collected data consisting of 32 English C-Tests with 20 gaps each (totaling 3,200 individual gap responses) under an open source license.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-12T21:35:21Z</published>
+    <arxiv:comment>Github: https://github.com/UKPLab/arxiv2024-constrained-ctest-generation</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Ji-Ung Lee</name>
+    </author>
+    <author>
+      <name>Marc E. Pfetsch</name>
+    </author>
+    <author>
+      <name>Iryna Gurevych</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.07510v5</id>
+    <title>PeRFlow: Piecewise Rectified Flow as Universal Plug-and-Play Accelerator</title>
+    <updated>2024-09-02T06:27:05Z</updated>
+    <link href="https://arxiv.org/abs/2405.07510v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.07510v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present Piecewise Rectified Flow (PeRFlow), a flow-based method for accelerating diffusion models. PeRFlow divides the sampling process of generative flows into several time windows and straightens the trajectories in each interval via the reflow operation, thereby approaching piecewise linear flows. PeRFlow achieves superior performance in a few-step generation. Moreover, through dedicated parameterizations, the PeRFlow models inherit knowledge from the pretrained diffusion models. Thus, the training converges fast and the obtained models show advantageous transfer ability, serving as universal plug-and-play accelerators that are compatible with various workflows based on the pre-trained diffusion models. Codes for training and inference are publicly released. https://github.com/magic-research/piecewise-rectified-flow</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-13T07:10:53Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hanshu Yan</name>
+    </author>
+    <author>
+      <name>Xingchao Liu</name>
+    </author>
+    <author>
+      <name>Jiachun Pan</name>
+    </author>
+    <author>
+      <name>Jun Hao Liew</name>
+    </author>
+    <author>
+      <name>Qiang Liu</name>
+    </author>
+    <author>
+      <name>Jiashi Feng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.05961v2</id>
+    <title>LLM2Vec: Large Language Models Are Secretly Powerful Text Encoders</title>
+    <updated>2024-08-21T22:46:05Z</updated>
+    <link href="https://arxiv.org/abs/2404.05961v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.05961v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large decoder-only language models (LLMs) are the state-of-the-art models on most of today's NLP tasks and benchmarks. Yet, the community is only slowly adopting these models for text embedding tasks, which require rich contextualized representations. In this work, we introduce LLM2Vec, a simple unsupervised approach that can transform any decoder-only LLM into a strong text encoder. LLM2Vec consists of three simple steps: 1) enabling bidirectional attention, 2) masked next token prediction, and 3) unsupervised contrastive learning. We demonstrate the effectiveness of LLM2Vec by applying it to 4 popular LLMs ranging from 1.3B to 8B parameters and evaluate the transformed models on English word- and sequence-level tasks. We outperform encoder-only models by a large margin on word-level tasks and reach a new unsupervised state-of-the-art performance on the Massive Text Embeddings Benchmark (MTEB). Moreover, when combining LLM2Vec with supervised contrastive learning, we achieve state-of-the-art performance on MTEB among models that train only on publicly available data (as of May 24, 2024). Our strong empirical results and extensive analysis demonstrate that LLMs can be effectively transformed into universal text encoders in a parameter-efficient manner without the need for expensive adaptation or synthetic GPT-4 generated data.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-09T02:51:05Z</published>
+    <arxiv:comment>Accepted to COLM 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Parishad BehnamGhader</name>
+    </author>
+    <author>
+      <name>Vaibhav Adlakha</name>
+    </author>
+    <author>
+      <name>Marius Mosbach</name>
+    </author>
+    <author>
+      <name>Dzmitry Bahdanau</name>
+    </author>
+    <author>
+      <name>Nicolas Chapados</name>
+    </author>
+    <author>
+      <name>Siva Reddy</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.03912v1</id>
+    <title>A Thin Film Lithium Niobate Near-Infrared Platform for Multiplexing Quantum Nodes</title>
+    <updated>2024-05-07T00:13:46Z</updated>
+    <link href="https://arxiv.org/abs/2405.03912v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.03912v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Practical quantum networks will require quantum nodes consisting of many memory qubits. This in turn will increase the complexity of the photonic circuits needed to control each qubit and will require strategies to multiplex memories and overcome the inhomogeneous distribution of their transition frequencies. Integrated photonics operating at visible to near-infrared (VNIR) wavelength range, compatible with the transition frequencies of leading quantum memory systems, can provide solutions to these needs. In this work, we realize a VNIR thin-film lithium niobate (TFLN) integrated photonics platform with the key components to meet these requirements. These include low-loss couplers ($&lt;$ 1 dB/facet), switches ($&gt;$ 20 dB extinction), and high-bandwidth electro-optic modulators ($&gt;$ 50 GHz). With these devices we demonstrate high-efficiency and CW-compatible frequency shifting ($&gt;$ 50 $\%$ efficiency at 15 GHz), as well as simultaneous laser amplitude and frequency control through a nested modulator structure. Finally, we highlight an architecture for multiplexing quantum memories using the demonstrated TFLN components, and outline how this platform can enable a 2-order of magnitude improvement in entanglement rates over single memory nodes. Our results demonstrate that TFLN can meet the necessary performance and scalability benchmarks to enable large-scale quantum nodes.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.app-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-07T00:13:46Z</published>
+    <arxiv:primary_category term="physics.optics"/>
+    <author>
+      <name>Daniel Assumpcao</name>
+    </author>
+    <author>
+      <name>Dylan Renaud</name>
+    </author>
+    <author>
+      <name>Aida Baradari</name>
+    </author>
+    <author>
+      <name>Beibei Zeng</name>
+    </author>
+    <author>
+      <name>Chawina De-Eknamkul</name>
+    </author>
+    <author>
+      <name>C. J. Xin</name>
+    </author>
+    <author>
+      <name>Amirhassan Shams-Ansari</name>
+    </author>
+    <author>
+      <name>David Barton</name>
+    </author>
+    <author>
+      <name>Bartholomeus Machielse</name>
+    </author>
+    <author>
+      <name>Marko Loncar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.04711v1</id>
+    <title>Community detection in multi-layer bipartite networks</title>
+    <updated>2024-05-07T23:09:38Z</updated>
+    <link href="https://arxiv.org/abs/2405.04711v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.04711v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The problem of community detection in multi-layer undirected networks has received considerable attention in recent years. However, practical scenarios often involve multi-layer bipartite networks, where each layer consists of two distinct types of nodes. Existing community detection algorithms tailored for multi-layer undirected networks are not directly applicable to multi-layer bipartite networks. To address this challenge, this paper introduces a novel multi-layer degree-corrected stochastic co-block model specifically designed to capture the underlying community structure within multi-layer bipartite networks. Within this framework, we propose an efficient debiased spectral co-clustering algorithm for detecting nodes' communities. We establish the consistent estimation property of our proposed algorithm and demonstrate that an increased number of layers in bipartite networks improves the accuracy of community detection. Through extensive numerical experiments, we showcase the superior performance of our algorithm compared to existing methods. Additionally, we validate our algorithm by applying it to real-world multi-layer network datasets, yielding meaningful and insightful results.</summary>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.soc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-07T23:09:38Z</published>
+    <arxiv:comment>24 pages, 13 figures, 1 table</arxiv:comment>
+    <arxiv:primary_category term="cs.SI"/>
+    <author>
+      <name>Huan Qing</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.12847v2</id>
+    <title>Banach Lie groupoid of partial isometries over restricted Grassmannian</title>
+    <updated>2024-07-25T17:21:41Z</updated>
+    <link href="https://arxiv.org/abs/2404.12847v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.12847v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The set of partial isometries in a W*-algebra possesses a structure of Banach Lie groupoid. In this paper the differential structure on the set of partial isometries over the restricted Grassmannian is constructed, which makes it into a Banach Lie groupoid.</summary>
+    <category term="math.DG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-19T12:29:51Z</published>
+    <arxiv:comment>13 pages</arxiv:comment>
+    <arxiv:primary_category term="math.DG"/>
+    <arxiv:journal_ref>Anal.Math.Phys. 15, 27 (2025)</arxiv:journal_ref>
+    <author>
+      <name>Tomasz Goliński</name>
+    </author>
+    <author>
+      <name>Grzegorz Jakimowicz</name>
+    </author>
+    <author>
+      <name>Aneta Sliżewska</name>
+    </author>
+    <arxiv:doi>10.1007/s13324-025-01028-y</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s13324-025-01028-y" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.07392v2</id>
+    <title>Synthetic Spectra from Particle-in-cell Simulations of Relativistic Jets containing an initial Toroidal Magnetic Field</title>
+    <updated>2025-04-14T13:19:24Z</updated>
+    <link href="https://arxiv.org/abs/2404.07392v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.07392v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The properties of relativistic jets, their interaction with the environment, and their emission of radiation can be self-consistently studied by using collisionless particle-in-cell (PIC) numerical simulations. Using three-dimensional (3D), relativistic PIC simulations, we present the first self-consistently calculated synthetic spectra of head-on and off-axis emission from electrons accelerated in cylindrical, relativistic plasma jets containing an initial toroidal magnetic field. The jet particles are initially accelerated during the linear stage of growing plasma instabilities, which are the Weibel instability (WI), kinetic Kelvin-Helmholtz instability (kKHI), and mushroom instability (MI). In the nonlinear stage, these instabilities are dissipated and generate turbulent magnetic fields which accelerate particles further. We calculate the synthetic spectra by tracing a large number of jet electrons in the nonlinear stage, near the jet head where the magnetic fields are turbulent. Our results show the basic properties of jitter-like radiation emitted by relativistic electrons when they travel through a magnetized plasma with the plasma waves driven by kinetic instabilities (WI, kKHI, and MI) growing into the nonlinear regime. At low frequencies, the slope of the spectrum is ~ 0.94, which is similar to that of the jitter radiation, rather than that of the classical synchrotron radiation which is ~ 1/3. Although, we start with a weak magnetized plasma, the plasma magnetization increases locally in regions where the magnetic field becomes stronger due to kinetic instabilities. The results of this study may be relevant for probing photon emission from low energies up to, at least, low energies in the X-ray domain in AGN/blazar and GRB jets, as the peak frequency of synthetic spectra increases as the Lorentz factor of the jet increases from 15 to 100.</summary>
+    <category term="astro-ph.HE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-10T23:52:04Z</published>
+    <arxiv:comment>12 pages, 8 figures, accepted by MNRAS</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.HE"/>
+    <author>
+      <name>Ioana Dutan</name>
+    </author>
+    <author>
+      <name>Kenichi Nishikawa</name>
+    </author>
+    <author>
+      <name>Athina Meli</name>
+    </author>
+    <author>
+      <name>Oleh Kobzar</name>
+    </author>
+    <author>
+      <name>Christoph Koehn</name>
+    </author>
+    <author>
+      <name>Yosuke Mizuno</name>
+    </author>
+    <author>
+      <name>Nicholas MacDonald</name>
+    </author>
+    <author>
+      <name>Jose L. Gomez</name>
+    </author>
+    <author>
+      <name>Kouichi Hirotani</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.08661v1</id>
+    <title>Gradient Estimation and Variance Reduction in Stochastic and Deterministic Models</title>
+    <updated>2024-05-14T14:41:58Z</updated>
+    <link href="https://arxiv.org/abs/2405.08661v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.08661v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It seems that in the current age, computers, computation, and data have an increasingly important role to play in scientific research and discovery. This is reflected in part by the rise of machine learning and artificial intelligence, which have become great areas of interest not just for computer science but also for many other fields of study. More generally, there have been trends moving towards the use of bigger, more complex and higher capacity models. It also seems that stochastic models, and stochastic variants of existing deterministic models, have become important research directions in various fields. For all of these types of models, gradient-based optimization remains as the dominant paradigm for model fitting, control, and more. This dissertation considers unconstrained, nonlinear optimization problems, with a focus on the gradient itself, that key quantity which enables the solution of such problems.
+  In chapter 1, we introduce the notion of reverse differentiation, a term which describes the body of techniques which enables the efficient computation of gradients. We cover relevant techniques both in the deterministic and stochastic cases. We present a new framework for calculating the gradient of problems which involve both deterministic and stochastic elements. In chapter 2, we analyze the properties of the gradient estimator, with a focus on those properties which are typically assumed in convergence proofs of optimization algorithms. Chapter 3 gives various examples of applying our new gradient estimator. We further explore the idea of working with piecewise continuous models, that is, models with distinct branches and if statements which define what specific branch to use.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-14T14:41:58Z</published>
+    <arxiv:comment>cornell university dissertation</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Ronan Keane</name>
+    </author>
+    <arxiv:doi>10.7298/pjz7-ef27</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.7298/pjz7-ef27" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.09596v1</id>
+    <title>About some properties of the canonical density matrix versus the canonical Bloch equation</title>
+    <updated>2024-04-15T09:07:25Z</updated>
+    <link href="https://arxiv.org/abs/2404.09596v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.09596v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We examine some properties of the non-normalized (or canonical) density matrix in the coherent states representation, by two equivalent ways. On the one hand by its definition, and on the other hand as a solution to Bloch's canonical equation. It is concluded that, since in many cases Bloch's differential equation is difficult to solve, in applications it is preferable to use the expression obtained directly from the definition of the canonical density matrix in the coherent states representation. This conclusion is verified by examining several cases of quantum systems with linear or quadratic energy spectrum.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-15T09:07:25Z</published>
+    <arxiv:comment>pdf, 35 pages, NO figures</arxiv:comment>
+    <arxiv:primary_category term="quant-ph"/>
+    <author>
+      <name>Dušan Popov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.09234v1</id>
+    <title>Distribution and Recovery Phase of Geomagnetic Storms During Solar Cycles 23 and 24</title>
+    <updated>2024-04-14T12:26:15Z</updated>
+    <link href="https://arxiv.org/abs/2404.09234v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.09234v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Coronal mass ejections (CMEs) and Stream Interaction Regions (SIRs) are the main drivers of intense geomagnetic storms. We study the distribution of geomagnetic storms associated with different drivers during solar cycles 23 and 24 (1996-2019). Although the annual occurrence rate of geomagnetic storms in both cycles tracks the sunspot cycle, the second peak in storm activity lags the second sunspot peak. SIRs contribute significantly to the second peak in storm numbers in both cycles, particularly for moderate to stronger-than-moderate storms. We note semiannual peaks in storm numbers much closer to equinoxes for moderate storms, and slightly shifted from equinoxes for intense and stronger-than-intense storms. We note a significant fraction of multiple-peak storms in both cycles due to isolated ICMEs/SIRs, while single-peak storms from multiple interacting drivers, suggesting a complex relationship between storm steps and their drivers. Our study focuses on investigating the recovery phases of geomagnetic storms and examining their dependencies on various storm parameters. Multiple-peak storms in both cycles have recovery phase duration strongly influenced by slow and fast decay phases with no correlation with the main phase buildup rate and Dst peak. However, the recovery phase in single-peak storms for both cycles depends to some extent on the main phase buildup rate and Dst peak, in addition to slow and fast decay phases. Future research should explore recovery phases of single and multiple-peak storms incorporating in-situ solar wind observations for a deeper understanding of storm evolution and decay processes.</summary>
+    <category term="astro-ph.SR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.space-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-14T12:26:15Z</published>
+    <arxiv:comment>12 pages, 5 figures. Accepted for publication in Monthly Notices of the Royal Astronomical Society (MNRAS)</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.SR"/>
+    <author>
+      <name>Wageesh Mishra</name>
+    </author>
+    <author>
+      <name>Preity Sukla Sahani</name>
+    </author>
+    <author>
+      <name>Soumyaranjan Khuntia</name>
+    </author>
+    <author>
+      <name>Dibyendu Chakrabarty</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.08210v1</id>
+    <title>Infinite Texture: Text-guided High Resolution Diffusion Texture Synthesis</title>
+    <updated>2024-05-13T21:53:09Z</updated>
+    <link href="https://arxiv.org/abs/2405.08210v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.08210v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present Infinite Texture, a method for generating arbitrarily large texture images from a text prompt. Our approach fine-tunes a diffusion model on a single texture, and learns to embed that statistical distribution in the output domain of the model. We seed this fine-tuning process with a sample texture patch, which can be optionally generated from a text-to-image model like DALL-E 2. At generation time, our fine-tuned diffusion model is used through a score aggregation strategy to generate output texture images of arbitrary resolution on a single GPU. We compare synthesized textures from our method to existing work in patch-based and deep learning texture synthesis methods. We also showcase two applications of our generated textures in 3D rendering and texture transfer.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-13T21:53:09Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yifan Wang</name>
+    </author>
+    <author>
+      <name>Aleksander Holynski</name>
+    </author>
+    <author>
+      <name>Brian L. Curless</name>
+    </author>
+    <author>
+      <name>Steven M. Seitz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.03671v1</id>
+    <title>Prompting Task Trees using Gemini: Methodologies and Insights</title>
+    <updated>2024-05-06T17:48:10Z</updated>
+    <link href="https://arxiv.org/abs/2405.03671v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.03671v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Robots are the future of every technology where every advanced technology eventually will be used to make robots which are more efficient. The major challenge today is to train the robots exactly and empathetically using knowledge representation. This paper gives you insights of how we can use unstructured knowledge representation and convert them to meaningful structured representation with the help of prompt engineering which can be eventually used in the robots to make help them understand how human brain can make wonders with the minimal data or objects can providing to them.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-06T17:48:10Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Pallavi Tandra</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.16130v2</id>
+    <title>From Local to Global: A Graph RAG Approach to Query-Focused Summarization</title>
+    <updated>2025-02-19T10:49:41Z</updated>
+    <link href="https://arxiv.org/abs/2404.16130v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.16130v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The use of retrieval-augmented generation (RAG) to retrieve relevant information from an external knowledge source enables large language models (LLMs) to answer questions over private and/or previously unseen document collections. However, RAG fails on global questions directed at an entire text corpus, such as "What are the main themes in the dataset?", since this is inherently a query-focused summarization (QFS) task, rather than an explicit retrieval task. Prior QFS methods, meanwhile, do not scale to the quantities of text indexed by typical RAG systems. To combine the strengths of these contrasting methods, we propose GraphRAG, a graph-based approach to question answering over private text corpora that scales with both the generality of user questions and the quantity of source text. Our approach uses an LLM to build a graph index in two stages: first, to derive an entity knowledge graph from the source documents, then to pregenerate community summaries for all groups of closely related entities. Given a question, each community summary is used to generate a partial response, before all partial responses are again summarized in a final response to the user. For a class of global sensemaking questions over datasets in the 1 million token range, we show that GraphRAG leads to substantial improvements over a conventional RAG baseline for both the comprehensiveness and diversity of generated answers.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-24T18:38:11Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Darren Edge</name>
+    </author>
+    <author>
+      <name>Ha Trinh</name>
+    </author>
+    <author>
+      <name>Newman Cheng</name>
+    </author>
+    <author>
+      <name>Joshua Bradley</name>
+    </author>
+    <author>
+      <name>Alex Chao</name>
+    </author>
+    <author>
+      <name>Apurva Mody</name>
+    </author>
+    <author>
+      <name>Steven Truitt</name>
+    </author>
+    <author>
+      <name>Dasha Metropolitansky</name>
+    </author>
+    <author>
+      <name>Robert Osazuwa Ness</name>
+    </author>
+    <author>
+      <name>Jonathan Larson</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.03845v1</id>
+    <title>Self-Improving Customer Review Response Generation Based on LLMs</title>
+    <updated>2024-05-06T20:50:17Z</updated>
+    <link href="https://arxiv.org/abs/2405.03845v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.03845v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Previous studies have demonstrated that proactive interaction with user reviews has a positive impact on the perception of app users and encourages them to submit revised ratings. Nevertheless, developers encounter challenges in managing a high volume of reviews, particularly in the case of popular apps with a substantial influx of daily reviews. Consequently, there is a demand for automated solutions aimed at streamlining the process of responding to user reviews. To address this, we have developed a new system for generating automatic responses by leveraging user-contributed documents with the help of retrieval-augmented generation (RAG) and advanced Large Language Models (LLMs). Our solution, named SCRABLE, represents an adaptive customer review response automation that enhances itself with self-optimizing prompts and a judging mechanism based on LLMs. Additionally, we introduce an automatic scoring mechanism that mimics the role of a human evaluator to assess the quality of responses generated in customer review domains. Extensive experiments and analyses conducted on real-world datasets reveal that our method is effective in producing high-quality responses, yielding improvement of more than 8.5% compared to the baseline. Further validation through manual examination of the generated responses underscores the efficacy our proposed system.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-06T20:50:17Z</published>
+    <arxiv:comment>18 pages, 4 figure, 8 figures in Appendix, accepted to LREC-COLING 2024 workshop</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Guy Azov</name>
+    </author>
+    <author>
+      <name>Tatiana Pelc</name>
+    </author>
+    <author>
+      <name>Adi Fledel Alon</name>
+    </author>
+    <author>
+      <name>Gila Kamhi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.09123v1</id>
+    <title>Provable Interactive Learning with Hindsight Instruction Feedback</title>
+    <updated>2024-04-14T02:18:07Z</updated>
+    <link href="https://arxiv.org/abs/2404.09123v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.09123v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study interactive learning in a setting where the agent has to generate a response (e.g., an action or trajectory) given a context and an instruction. In contrast, to typical approaches that train the system using reward or expert supervision on response, we study learning with hindsight instruction where a teacher provides an instruction that is most suitable for the agent's generated response. This hindsight labeling of instruction is often easier to provide than providing expert supervision of the optimal response which may require expert knowledge or can be impractical to elicit. We initiate the theoretical analysis of interactive learning with hindsight labeling. We first provide a lower bound showing that in general, the regret of any algorithm must scale with the size of the agent's response space. We then study a specialized setting where the underlying instruction-response distribution can be decomposed as a low-rank matrix. We introduce an algorithm called LORIL for this setting and show that its regret scales as $\sqrt{T}$ where $T$ is the number of rounds and depends on the intrinsic rank but does not depend on the size of the agent's response space. We provide experiments in two domains showing that LORIL outperforms baselines even when the low-rank assumption is violated.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-14T02:18:07Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Dipendra Misra</name>
+    </author>
+    <author>
+      <name>Aldo Pacchiano</name>
+    </author>
+    <author>
+      <name>Robert E. Schapire</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.08832v1</id>
+    <title>Theorizing Deception: A Scoping Review of Theory in Research on Dark Patterns and Deceptive Design</title>
+    <updated>2024-05-14T00:44:09Z</updated>
+    <link href="https://arxiv.org/abs/2405.08832v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.08832v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The issue of dark patterns and deceptive designs (DPs) in everyday interfaces and interactions continues to grow. DPs are manipulative and malicious elements within user interfaces that deceive users into making unintended choices. In parallel, research on DPs has significantly increased over the past two decades. As the field has matured, epistemological gaps have also become a salient and pressing concern. In this scoping review, we assessed the academic work so far -- 51 papers between 2014 to 2023 -- to identify the state of theory in DP research. We identified the key theories employed, examined how these theories have been referenced, and call for enhancing the incorporation of theory into DP research. We also propose broad theoretical foundations to establish a comprehensive and solid base for contextualizing and informing future DP research from a variety of theoretical scopes and lenses.</summary>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-14T00:44:09Z</published>
+    <arxiv:primary_category term="cs.HC"/>
+    <arxiv:journal_ref>CHI EA '24: Extended Abstracts of the CHI Conference on Human Factors in Computing Systems (2024), Article No.: 321, 1-7</arxiv:journal_ref>
+    <author>
+      <name>Weichen Joe Chang</name>
+    </author>
+    <author>
+      <name>Katie Seaborn</name>
+    </author>
+    <author>
+      <name>Andrew A. Adams</name>
+    </author>
+    <arxiv:doi>10.1145/3613905.3650997</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3613905.3650997" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.07183v1</id>
+    <title>A Study of Quantitative Correlations Between Crucial Bio-markers and the Optimal Drug Regimen of Type-I Lepra Reaction</title>
+    <updated>2024-05-12T06:57:43Z</updated>
+    <link href="https://arxiv.org/abs/2405.07183v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.07183v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Leprosy (Hansen's) is a disease caused by Mycobacterium leprae. This disease slowly leads to occurrence of leprae reactions which mainly damage peripheral nervous system which cause loss of organs. We can prevent occurring leprae reactions by monitoring the bio-markers involved in it. Motivated by these observations in this research work we do a exhaustive study dealing with the quantitative correlations between crucial bio-markers and the Multi Drug Thearphy (MDT) used in treating the type I lepra reaction. We frame and study a complex 11 compartment model dealing with the the concentrations of plasma $c_1(t)$ and effective drug action $c_2(t)$, susceptible schwann cells $S(t)$, infected schwann cells $I(t)$, bacterial load $B(t)$, and five cytokines pivotal in Type-1 Lepra reaction: IFN-$γ$, TNF-$α$, IL-$10$, IL-$12$, IL-$15$, and IL-$17$. We explore exhaustively and establish the quantitative correlations with respect to the optimal drug dosage of the MDT drugs such as rifampin, clofazimine \&amp; dapsone and the crucial bio-markers involved in type I lepra reaction. We conclude this work by reitrating the fact that the optimal drug dosage of the MDT drugs found through these optimal control studies and the dosage prescribed as per WHO guidelines are almost the same.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-12T06:57:43Z</published>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>CH Ramanjaneyulu</name>
+    </author>
+    <author>
+      <name>Dinesh Nayak</name>
+    </author>
+    <author>
+      <name>D K K Vamsi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.12543v2</id>
+    <title>Symmetric Group Gauge Theories and Simple Gauge/String Dualities</title>
+    <updated>2025-01-29T02:15:18Z</updated>
+    <link href="https://arxiv.org/abs/2404.12543v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.12543v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study two-dimensional topological gauge theories with gauge group equal to the symmetric group $S_n$ and their string theory duals. The simplest such theory is the topological quantum field theory of principal $S_n$ fiber bundles. Its correlators are equal to Hurwitz numbers. The operator products in the gauge theory for each finite value of $n$ are coded in a partial permutation algebra. We propose a generalization of the partial permutation algebra to any symmetric orbifold topological quantum field theory and show that the latter theory factorizes into marked partial permutation combinatorics and seed Frobenius algebra properties. Moreover, we exploit the established correspondence between Hurwitz theory and the stationary sector of Gromov-Witten theory on the sphere to prove an exact gauge/string duality. The relevant field theory is a grand canonical version of Hurwitz theory and its two-point functions are obtained by summing over all values of the instanton degree of the maps covering the sphere. We stress that one must look for a multiplicative basis on the boundary to match the bulk operator algebra of single string insertions. The relevant boundary observables are completed cycles.</summary>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-18T23:26:59Z</published>
+    <arxiv:comment>36 pages, 7 figures, Journal version. Augmented introduction</arxiv:comment>
+    <arxiv:primary_category term="hep-th"/>
+    <arxiv:journal_ref>J. Phys. A: Math. Theor. 57 505401 (2024)</arxiv:journal_ref>
+    <author>
+      <name>Lior Benizri</name>
+    </author>
+    <author>
+      <name>Jan Troost</name>
+    </author>
+    <arxiv:doi>10.1088/1751-8121/ad92ce</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1751-8121/ad92ce" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.03291v2</id>
+    <title>Spontaneous Lorentz symmetry-breaking constraints in Kalb-Ramond gravity</title>
+    <updated>2024-12-05T18:46:32Z</updated>
+    <link href="https://arxiv.org/abs/2405.03291v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.03291v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this work, we study timelike and lightlike geodesics in Kalb-Ramond (KR) gravity around a black hole with the goal of constraining the Lorentz symmetry-breaking parameter $l$. The analysis involves studying the precession of the S2 star periastron orbiting Sgr A* and geodesic precession around the Earth. The ratio of precession frequencies for General Relativity (GR) and KR gravity is computed, with Event Horizon Telescope (EHT) results providing a parameter range for the spontaneous symmetry-breaking of $-0.185022 \leq l \leq 0.060938$. Utilizing the geodesic precession frequency from the Gravity Probe B (GP-B), the $l$ parameter is further constrained to $-6.30714 \times 10^{-12} \leq l \leq 3.90708 \times 10^{-12}$, which is consistent with the Schwarzschild limits. Moreover, for timelike geodesics, the innermost circular orbit (ICO) and innermost stable circular orbit (ISCO) are determined and analyzed to illustrate the impact of the symmetry breaking term. Zoom-whirl obstructions are compared with the Schwarzschild solution. Lower and upper limits of the photon sphere for lightlike geodesics are established to demonstrate the influence of KR gravity on the photon sphere. Additionally, the shadow radius is determined for two observers, one situated at a finite distance from the KR black hole, and the other located at an infinite distance, to constrain the symmetry-breaking parameter $l$, with comparisons made to EHT results. The bounds for $l$ derived from constraints on the photon sphere radius for lightlike geodesics yield $-0.0700225 \leq l \leq 0.189785$ using EHT data. The findings of this paper align with experimental results in the $l \rightarrow 0$ limit.</summary>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.HE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-06T09:09:53Z</published>
+    <arxiv:comment>11 pages, 4 figures. V2: 12 pages, 4 figures. Discussion and references added; matches published version</arxiv:comment>
+    <arxiv:primary_category term="gr-qc"/>
+    <arxiv:journal_ref>Eur. Phys. J. C 84, 1257 (2024)</arxiv:journal_ref>
+    <author>
+      <name>Ednaldo L. B. Junior</name>
+    </author>
+    <author>
+      <name>José Tarciso S. S. Junior</name>
+    </author>
+    <author>
+      <name>Francisco S. N. Lobo</name>
+    </author>
+    <author>
+      <name>Manuel E. Rodrigues</name>
+    </author>
+    <author>
+      <name>Diego Rubiera-Garcia</name>
+    </author>
+    <author>
+      <name>Luís F. Dias da Silva</name>
+    </author>
+    <author>
+      <name>Henrique A. Vieira</name>
+    </author>
+    <arxiv:doi>10.1140/epjc/s10052-024-13619-3</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epjc/s10052-024-13619-3" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.07437v2</id>
+    <title>Evaluation of Retrieval-Augmented Generation: A Survey</title>
+    <updated>2024-07-03T04:59:32Z</updated>
+    <link href="https://arxiv.org/abs/2405.07437v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.07437v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Retrieval-Augmented Generation (RAG) has recently gained traction in natural language processing. Numerous studies and real-world applications are leveraging its ability to enhance generative models through external information retrieval. Evaluating these RAG systems, however, poses unique challenges due to their hybrid structure and reliance on dynamic knowledge sources. To better understand these challenges, we conduct A Unified Evaluation Process of RAG (Auepora) and aim to provide a comprehensive overview of the evaluation and benchmarks of RAG systems. Specifically, we examine and compare several quantifiable metrics of the Retrieval and Generation components, such as relevance, accuracy, and faithfulness, within the current RAG benchmarks, encompassing the possible output and ground truth pairs. We then analyze the various datasets and metrics, discuss the limitations of current benchmarks, and suggest potential directions to advance the field of RAG benchmarks.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-13T02:33:25Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Hao Yu</name>
+    </author>
+    <author>
+      <name>Aoran Gan</name>
+    </author>
+    <author>
+      <name>Kai Zhang</name>
+    </author>
+    <author>
+      <name>Shiwei Tong</name>
+    </author>
+    <author>
+      <name>Qi Liu</name>
+    </author>
+    <author>
+      <name>Zhaofeng Liu</name>
+    </author>
+    <arxiv:doi>10.1007/978-981-96-1024-2_8</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/978-981-96-1024-2_8" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.14927v1</id>
+    <title>Optimal Refund Mechanism with Consumer Learning</title>
+    <updated>2024-04-23T11:13:23Z</updated>
+    <link href="https://arxiv.org/abs/2404.14927v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.14927v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper studies the optimal refund mechanism when an uninformed buyer can privately acquire information about his valuation of a product over time. We consider a class of refund mechanisms based on stochastic return policies: if the buyer requests a return, the seller will issue a (partial) refund while allowing the buyer to keep the product with some probability. Such return policies can affect the buyer's learning process and thereby influence the return rate. Nevertheless, we show that the optimal refund mechanism is deterministic and takes a simple form: either the seller offers a sufficiently low price and disallows returns to deter buyer learning, or she offers a sufficiently high price with free returns to implement maximal buyer learning. The form of the optimal refund mechanism is non-monotone in the buyer's prior belief regarding his valuation.</summary>
+    <category term="econ.TH" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-23T11:13:23Z</published>
+    <arxiv:primary_category term="econ.TH"/>
+    <author>
+      <name>Qianjun Lyu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.03299v1</id>
+    <title>SiloFuse: Cross-silo Synthetic Data Generation with Latent Tabular Diffusion Models</title>
+    <updated>2024-04-04T08:48:30Z</updated>
+    <link href="https://arxiv.org/abs/2404.03299v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.03299v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Synthetic tabular data is crucial for sharing and augmenting data across silos, especially for enterprises with proprietary data. However, existing synthesizers are designed for centrally stored data. Hence, they struggle with real-world scenarios where features are distributed across multiple silos, necessitating on-premise data storage. We introduce SiloFuse, a novel generative framework for high-quality synthesis from cross-silo tabular data. To ensure privacy, SiloFuse utilizes a distributed latent tabular diffusion architecture. Through autoencoders, latent representations are learned for each client's features, masking their actual values. We employ stacked distributed training to improve communication efficiency, reducing the number of rounds to a single step. Under SiloFuse, we prove the impossibility of data reconstruction for vertically partitioned synthesis and quantify privacy risks through three attacks using our benchmark framework. Experimental results on nine datasets showcase SiloFuse's competence against centralized diffusion-based synthesizers. Notably, SiloFuse achieves 43.8 and 29.8 higher percentage points over GANs in resemblance and utility. Experiments on communication show stacked training's fixed cost compared to the growing costs of end-to-end training as the number of training iterations increases. Additionally, SiloFuse proves robust to feature permutations and varying numbers of clients.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DB" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-04T08:48:30Z</published>
+    <arxiv:comment>Accepted at 40th IEEE International Conference on Data Engineering (ICDE 2024)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Aditya Shankar</name>
+    </author>
+    <author>
+      <name>Hans Brouwer</name>
+    </author>
+    <author>
+      <name>Rihan Hai</name>
+    </author>
+    <author>
+      <name>Lydia Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.09823v1</id>
+    <title>Biclustering bipartite networks via extended Mixture of Latent Trait Analyzers</title>
+    <updated>2024-04-15T14:21:42Z</updated>
+    <link href="https://arxiv.org/abs/2404.09823v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.09823v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the context of network data, bipartite networks are of particular interest, as they provide a useful description of systems representing relationships between sending and receiving nodes. In this framework, we extend the Mixture of Latent Trait Analyzers (MLTA) to perform a joint clustering of sending and receiving nodes, as in the biclustering framework. In detail, sending nodes are partitioned into clusters (called components) via a finite mixture of latent trait models. In each component, receiving nodes are partitioned into clusters (called segments) by adopting a flexible and parsimonious specification of the linear predictor. Dependence between receiving nodes is modeled via a multidimensional latent trait, as in the original MLTA specification. The proposal also allows for the inclusion of concomitant variables in the latent layer of the model, with the aim of understanding how they influence component formation. To estimate model parameters, an EM-type algorithm based on a Gauss-Hermite approximation of intractable integrals is proposed. A simulation study is conducted to test the performance of the model in terms of clustering and parameters' recovery. The proposed model is applied to a bipartite network on pediatric patients possibly affected by appendicitis with the objective of identifying groups of patients (sending nodes) being similar with respect to subsets of clinical conditions (receiving nodes).</summary>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-15T14:21:42Z</published>
+    <arxiv:primary_category term="stat.ME"/>
+    <author>
+      <name>Dalila Failli</name>
+    </author>
+    <author>
+      <name>Maria Francesca Marino</name>
+    </author>
+    <author>
+      <name>Francesca Martella</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.14469v2</id>
+    <title>SnapKV: LLM Knows What You are Looking for Before Generation</title>
+    <updated>2024-06-17T03:01:58Z</updated>
+    <link href="https://arxiv.org/abs/2404.14469v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.14469v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) have made remarkable progress in processing extensive contexts, with the Key-Value (KV) cache playing a vital role in enhancing their performance. However, the growth of the KV cache in response to increasing input length poses challenges to memory and time efficiency. To address this problem, this paper introduces SnapKV, an innovative and fine-tuning-free approach that efficiently minimizes KV cache size while still delivering comparable performance in real-world applications.
+  We discover that each attention head in the model consistently focuses on specific prompt attention features during generation. Meanwhile, this robust pattern can be obtained from an 'observation' window located at the end of the prompts. Drawing on this insight, SnapKV automatically compresses KV caches by selecting clustered important KV positions for each attention head. Our approach significantly reduces the growing computational overhead and memory footprint when processing long input sequences. Specifically, SnapKV achieves a consistent decoding speed with a 3.6x increase in generation speed and an 8.2x enhancement in memory efficiency compared to the baseline when processing inputs of 16K tokens. At the same time, it maintains comparable performance to the baseline models across 16 long sequence datasets. Moreover, SnapKV can process up to 380K context tokens on a single A100-80GB GPU using HuggingFace implementation with minor changes, exhibiting only a negligible accuracy drop in the Needle-in-a-Haystack test. Further comprehensive studies suggest SnapKV's potential for practical applications.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-22T17:42:58Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yuhong Li</name>
+    </author>
+    <author>
+      <name>Yingbing Huang</name>
+    </author>
+    <author>
+      <name>Bowen Yang</name>
+    </author>
+    <author>
+      <name>Bharat Venkitesh</name>
+    </author>
+    <author>
+      <name>Acyr Locatelli</name>
+    </author>
+    <author>
+      <name>Hanchen Ye</name>
+    </author>
+    <author>
+      <name>Tianle Cai</name>
+    </author>
+    <author>
+      <name>Patrick Lewis</name>
+    </author>
+    <author>
+      <name>Deming Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.03868v2</id>
+    <title>Extract, Define, Canonicalize: An LLM-based Framework for Knowledge Graph Construction</title>
+    <updated>2024-10-02T05:51:53Z</updated>
+    <link href="https://arxiv.org/abs/2404.03868v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.03868v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this work, we are interested in automated methods for knowledge graph creation (KGC) from input text. Progress on large language models (LLMs) has prompted a series of recent works applying them to KGC, e.g., via zero/few-shot prompting. Despite successes on small domain-specific datasets, these models face difficulties scaling up to text common in many real-world applications. A principal issue is that, in prior methods, the KG schema has to be included in the LLM prompt to generate valid triplets; larger and more complex schemas easily exceed the LLMs' context window length. Furthermore, there are scenarios where a fixed pre-defined schema is not available and we would like the method to construct a high-quality KG with a succinct self-generated schema. To address these problems, we propose a three-phase framework named Extract-Define-Canonicalize (EDC): open information extraction followed by schema definition and post-hoc canonicalization. EDC is flexible in that it can be applied to settings where a pre-defined target schema is available and when it is not; in the latter case, it constructs a schema automatically and applies self-canonicalization. To further improve performance, we introduce a trained component that retrieves schema elements relevant to the input text; this improves the LLMs' extraction performance in a retrieval-augmented generation-like manner. We demonstrate on three KGC benchmarks that EDC is able to extract high-quality triplets without any parameter tuning and with significantly larger schemas compared to prior works. Code for EDC is available at https://github.com/clear-nus/edc.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-05T02:53:51Z</published>
+    <arxiv:comment>18 pages, 3 figures, Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Bowen Zhang</name>
+    </author>
+    <author>
+      <name>Harold Soh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.08756v1</id>
+    <title>Stable Inverse Reinforcement Learning: Policies from Control Lyapunov Landscapes</title>
+    <updated>2024-05-14T16:40:45Z</updated>
+    <link href="https://arxiv.org/abs/2405.08756v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.08756v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Learning from expert demonstrations to flexibly program an autonomous system with complex behaviors or to predict an agent's behavior is a powerful tool, especially in collaborative control settings. A common method to solve this problem is inverse reinforcement learning (IRL), where the observed agent, e.g., a human demonstrator, is assumed to behave according to the optimization of an intrinsic cost function that reflects its intent and informs its control actions. While the framework is expressive, it is also computationally demanding and generally lacks convergence guarantees. We therefore propose a novel, stability-certified IRL approach by reformulating the cost function inference problem to learning control Lyapunov functions (CLF) from demonstrations data. By additionally exploiting closed-form expressions for associated control policies, we are able to efficiently search the space of CLFs by observing the attractor landscape of the induced dynamics. For the construction of the inverse optimal CLFs, we use a Sum of Squares and formulate a convex optimization problem. We present a theoretical analysis of the optimality properties provided by the CLF and evaluate our approach using both simulated and real-world data.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-14T16:40:45Z</published>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Samuel Tesfazgi</name>
+    </author>
+    <author>
+      <name>Leonhard Sprandl</name>
+    </author>
+    <author>
+      <name>Armin Lederer</name>
+    </author>
+    <author>
+      <name>Sandra Hirche</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.02543v3</id>
+    <title>Unbiased Learning to Rank Meets Reality: Lessons from Baidu's Large-Scale Search Dataset</title>
+    <updated>2024-05-15T14:04:20Z</updated>
+    <link href="https://arxiv.org/abs/2404.02543v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.02543v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Unbiased learning-to-rank (ULTR) is a well-established framework for learning from user clicks, which are often biased by the ranker collecting the data. While theoretically justified and extensively tested in simulation, ULTR techniques lack empirical validation, especially on modern search engines. The Baidu-ULTR dataset released for the WSDM Cup 2023, collected from Baidu's search engine, offers a rare opportunity to assess the real-world performance of prominent ULTR techniques. Despite multiple submissions during the WSDM Cup 2023 and the subsequent NTCIR ULTRE-2 task, it remains unclear whether the observed improvements stem from applying ULTR or other learning techniques.
+  In this work, we revisit and extend the available experiments on the Baidu-ULTR dataset. We find that standard unbiased learning-to-rank techniques robustly improve click predictions but struggle to consistently improve ranking performance, especially considering the stark differences obtained by choice of ranking loss and query-document features. Our experiments reveal that gains in click prediction do not necessarily translate to enhanced ranking performance on expert relevance annotations, implying that conclusions strongly depend on how success is measured in this benchmark.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-03T08:00:46Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Philipp Hager</name>
+    </author>
+    <author>
+      <name>Romain Deffayet</name>
+    </author>
+    <author>
+      <name>Jean-Michel Renders</name>
+    </author>
+    <author>
+      <name>Onno Zoeter</name>
+    </author>
+    <author>
+      <name>Maarten de Rijke</name>
+    </author>
+    <arxiv:doi>10.1145/3626772.3657892</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3626772.3657892" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.01817v1</id>
+    <title>Uniformly Stable Algorithms for Adversarial Training and Beyond</title>
+    <updated>2024-05-03T02:30:57Z</updated>
+    <link href="https://arxiv.org/abs/2405.01817v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.01817v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In adversarial machine learning, neural networks suffer from a significant issue known as robust overfitting, where the robust test accuracy decreases over epochs (Rice et al., 2020). Recent research conducted by Xing et al.,2021; Xiao et al., 2022 has focused on studying the uniform stability of adversarial training. Their investigations revealed that SGD-based adversarial training fails to exhibit uniform stability, and the derived stability bounds align with the observed phenomenon of robust overfitting in experiments. This motivates us to develop uniformly stable algorithms specifically tailored for adversarial training. To this aim, we introduce Moreau envelope-$\mathcal{A}$, a variant of the Moreau Envelope-type algorithm. We employ a Moreau envelope function to reframe the original problem as a min-min problem, separating the non-strong convexity and non-smoothness of the adversarial loss. Then, this approach alternates between solving the inner and outer minimization problems to achieve uniform stability without incurring additional computational overhead. In practical scenarios, we show the efficacy of ME-$\mathcal{A}$ in mitigating the issue of robust overfitting. Beyond its application in adversarial training, this represents a fundamental result in uniform stability analysis, as ME-$\mathcal{A}$ is the first algorithm to exhibit uniform stability for weakly-convex, non-smooth problems.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-03T02:30:57Z</published>
+    <arxiv:comment>ICML 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jiancong Xiao</name>
+    </author>
+    <author>
+      <name>Jiawei Zhang</name>
+    </author>
+    <author>
+      <name>Zhi-Quan Luo</name>
+    </author>
+    <author>
+      <name>Asuman Ozdaglar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.18291v1</id>
+    <title>Panoptic Segmentation and Labelling of Lumbar Spine Vertebrae using Modified Attention Unet</title>
+    <updated>2024-04-28T19:35:00Z</updated>
+    <link href="https://arxiv.org/abs/2404.18291v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.18291v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Segmentation and labeling of vertebrae in MRI images of the spine are critical for the diagnosis of illnesses and abnormalities. These steps are indispensable as MRI technology provides detailed information about the tissue structure of the spine. Both supervised and unsupervised segmentation methods exist, yet acquiring sufficient data remains challenging for achieving high accuracy. In this study, we propose an enhancing approach based on modified attention U-Net architecture for panoptic segmentation of 3D sliced MRI data of the lumbar spine. Our method achieves an impressive accuracy of 99.5\% by incorporating novel masking logic, thus significantly advancing the state-of-the-art in vertebral segmentation and labeling. This contributes to more precise and reliable diagnosis and treatment planning.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-28T19:35:00Z</published>
+    <arxiv:comment>9 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Rikathi Pal</name>
+    </author>
+    <author>
+      <name>Priya Saha</name>
+    </author>
+    <author>
+      <name>Somoballi Ghoshal</name>
+    </author>
+    <author>
+      <name>Amlan Chakrabarti</name>
+    </author>
+    <author>
+      <name>Susmita Sur-Kolay</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.17582v2</id>
+    <title>Data Quality in Crowdsourcing and Spamming Behavior Detection</title>
+    <updated>2025-06-25T17:56:08Z</updated>
+    <link href="https://arxiv.org/abs/2404.17582v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.17582v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As crowdsourcing emerges as an efficient and cost-effective method for obtaining labels for machine learning datasets, it is important to assess the quality of crowd-provided data, so as to improve analysis performance and reduce biases in subsequent machine learning tasks. Given the lack of ground truth in most cases of crowdsourcing, we refer to data quality as annotators' consistency and credibility. Unlike the simple scenarios where Kappa coefficient and intraclass correlation coefficient usually can apply, online crowdsourcing requires dealing with more complex situations. We introduce a systematic method for evaluating data quality and detecting spamming threats via variance decomposition, and we classify spammers into three categories based on their different behavioral patterns. A spammer index is proposed to assess entire data consistency, and two metrics are developed to measure crowd workers' credibility by utilizing the Markov chain and generalized random effects models. Furthermore, we showcase the practicality of our techniques and their advantages by applying them on a face verification task with both simulation and real-world data collected from two crowdsourcing platforms.</summary>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-04T02:21:38Z</published>
+    <arxiv:comment>Preprint paper, accepted on Behavior Research Methods. 56 pages, 14 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.HC"/>
+    <author>
+      <name>Yang Ba</name>
+    </author>
+    <author>
+      <name>Michelle V. Mancenido</name>
+    </author>
+    <author>
+      <name>Erin K. Chiou</name>
+    </author>
+    <author>
+      <name>Rong Pan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.02893v1</id>
+    <title>ChatGLM-Math: Improving Math Problem-Solving in Large Language Models with a Self-Critique Pipeline</title>
+    <updated>2024-04-03T17:51:18Z</updated>
+    <link href="https://arxiv.org/abs/2404.02893v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.02893v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have shown excellent mastering of human language, but still struggle in real-world applications that require mathematical problem-solving. While many strategies and datasets to enhance LLMs' mathematics are developed, it remains a challenge to simultaneously maintain and improve both language and mathematical capabilities in deployed LLM systems.In this work, we tailor the Self-Critique pipeline, which addresses the challenge in the feedback learning stage of LLM alignment. We first train a general Math-Critique model from the LLM itself to provide feedback signals. Then, we sequentially employ rejective fine-tuning and direct preference optimization over the LLM's own generations for data collection. Based on ChatGLM3-32B, we conduct a series of experiments on both academic and our newly created challenging dataset, MathUserEval. Results show that our pipeline significantly enhances the LLM's mathematical problem-solving while still improving its language ability, outperforming LLMs that could be two times larger. Related techniques have been deployed to ChatGLM\footnote{\url{https://chatglm.cn}}, an online serving LLM. Related evaluation dataset and scripts are released at \url{https://github.com/THUDM/ChatGLM-Math}.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-03T17:51:18Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yifan Xu</name>
+    </author>
+    <author>
+      <name>Xiao Liu</name>
+    </author>
+    <author>
+      <name>Xinghan Liu</name>
+    </author>
+    <author>
+      <name>Zhenyu Hou</name>
+    </author>
+    <author>
+      <name>Yueyan Li</name>
+    </author>
+    <author>
+      <name>Xiaohan Zhang</name>
+    </author>
+    <author>
+      <name>Zihan Wang</name>
+    </author>
+    <author>
+      <name>Aohan Zeng</name>
+    </author>
+    <author>
+      <name>Zhengxiao Du</name>
+    </author>
+    <author>
+      <name>Wenyi Zhao</name>
+    </author>
+    <author>
+      <name>Jie Tang</name>
+    </author>
+    <author>
+      <name>Yuxiao Dong</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.19331v2</id>
+    <title>Fusing Depthwise and Pointwise Convolutions for Efficient Inference on GPUs</title>
+    <updated>2024-08-05T11:03:38Z</updated>
+    <link href="https://arxiv.org/abs/2404.19331v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.19331v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Depthwise and pointwise convolutions have fewer parameters and perform fewer operations than standard convolutions. As a result, they have become increasingly used in various compact DNNs, including convolutional neural networks (CNNs) and vision transformers (ViTs). However, they have a lower compute-to-memory-access ratio than standard convolutions, making their memory accesses often the performance bottleneck. This paper explores fusing depthwise and pointwise convolutions to overcome the memory access bottleneck. The focus is on fusing these operators on GPUs. The prior art on GPU-based fusion suffers from one or more of the following: (1) fusing either a convolution with an element-wise or multiple non-convolutional operators, (2) not explicitly optimizing for memory accesses, (3) not supporting depthwise convolutions. This paper proposes Fused Convolutional Modules (FCMs), a set of novel fused depthwise and pointwise GPU kernels. FCMs significantly reduce pointwise and depthwise convolutions memory accesses, improving execution time and energy efficiency. To evaluate the trade-offs associated with fusion and determine which convolutions are beneficial to fuse and the optimal FCM parameters, we propose FusePlanner. FusePlanner consists of cost models to estimate the memory accesses of depthwise, pointwise, and FCM kernels given GPU characteristics. Our experiments on three GPUs using representative CNNs and ViTs demonstrate that FCMs save up to 83\% of the memory accesses and achieve speedups of up to 3.7x compared to cuDNN. Complete model implementations of various CNNs using our modules outperform TVMs' achieving speedups of up to 1.8x and saving up to two-thirds of the energy. FCM and FusePlanner implementations are open source: https://github.com/fqararyah/Fusing_DW_and_PW_on_GPUs.</summary>
+    <category term="cs.PF" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-30T07:55:45Z</published>
+    <arxiv:primary_category term="cs.PF"/>
+    <author>
+      <name>Fareed Qararyah</name>
+    </author>
+    <author>
+      <name>Muhammad Waqar Azhar</name>
+    </author>
+    <author>
+      <name>Mohammad Ali Maleki</name>
+    </author>
+    <author>
+      <name>Pedro Trancoso</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.12156v3</id>
+    <title>The birth of StatPhys: The 1949 Florence conference at the juncture of national and international physics reconstruction after World War II</title>
+    <updated>2024-06-08T18:27:39Z</updated>
+    <link href="https://arxiv.org/abs/2404.12156v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.12156v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In spring 1949 about 70 physicists from eight countries met in Florence to discuss recent trends in statistical mechanics. This scientific gathering, co-organized by the Commission on Thermodynamics and Statistical Mechanics of the International Union of Pure and Applied Physics (IUPAP) and the Italian Physical Society (SIF), initiated a tradition of IUPAP-sponsored international conferences on statistical mechanics that lasts to this day. In 1977, when this conference series took the name of StatPhys, the foundational role of the Florence conference was recognized by retrospectively naming it StatPhys1. This paper examines the dual scientific and social significance of the conference, situating it in the broader contexts of the post-World War II reconstruction in Italian physics and of the revitalization of the international science organization. Through an analysis of IUPAP archives and Italian records, we illustrate how the event's success hinged on the aligned objectives of its organizers. Internationally, it was instrumental in defining the scientific and organizational foundations for the activities of IUPAP commissions during a critical phase of IUPAP's history, when the Union was resurging on the international scene after the inactivity of the interwar period. Nationally, the conference served as a cornerstone in SIF's strategy to re-establish Italian physics' international stature and to aid the domestic revitalization of physics through the internationalization of its activities, notably of its flagship journal, \textit{Il Nuovo Cimento}. This analysis not only sheds light on the conference's impact but also informs recent discussions in the history of science about the multiple roles of international scientific conferences.</summary>
+    <category term="physics.hist-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-18T13:00:36Z</published>
+    <arxiv:comment>44 pages. We have added a more extensive recontextualization at a scientific level of statistical mechanics as an emerging discipline at the time of the 1949 conference organized in Florence.The manuscript has been accepted for publication in The European Physical Journal H</arxiv:comment>
+    <arxiv:primary_category term="physics.hist-ph"/>
+    <author>
+      <name>Roberto Lalli</name>
+    </author>
+    <author>
+      <name>Paolo Politi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.08521v2</id>
+    <title>Magnetism measurements of two-dimensional van der Waals antiferromagnet CrPS4 using dynamic cantilever magnetometry</title>
+    <updated>2024-10-12T08:49:37Z</updated>
+    <link href="https://arxiv.org/abs/2404.08521v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.08521v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent experimental and theoretical work has focused on two-dimensional van der Waals (2D vdW) magnets due to their potential applications in sensing and spintronics devises. In measurements of these emerging materials, conventional magnetometry often encounters challenges in characterizing the magnetic properties of small-sized vdW materials, especially for antiferromagnets with nearly compensated magnetic moments. Here, we investigate the magnetism of 2D antiferromagnet CrPS4 with a thickness of 8nm by using dynamic cantilever magnetometry (DCM). Through a combination of DCM experiment and the calculation based on a Stoner--Wohlfarth-type model, we unravel the magnetization states in 2D CrPS4 antiferromagnet. In the case of H parallel with c, a two-stage phase transition is observed. For H perpendicular to c, a hump in the effective magnetic restoring force is noted, which implies the presence of spin reorientation as temperature increases. These results demonstrate the benefits of DCM for studying magnetism of 2D magnets.</summary>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-12T15:01:38Z</published>
+    <arxiv:primary_category term="cond-mat.mes-hall"/>
+    <author>
+      <name>Qi Li</name>
+    </author>
+    <author>
+      <name>Weili Zhen</name>
+    </author>
+    <author>
+      <name>Ning Wang</name>
+    </author>
+    <author>
+      <name>Meng Shi</name>
+    </author>
+    <author>
+      <name>Yang Yu</name>
+    </author>
+    <author>
+      <name>Senyang Pan</name>
+    </author>
+    <author>
+      <name>Lin Deng</name>
+    </author>
+    <author>
+      <name>Jiaqiang Cai</name>
+    </author>
+    <author>
+      <name>Kang Wang</name>
+    </author>
+    <author>
+      <name>Lvkuan Zou</name>
+    </author>
+    <author>
+      <name>Zhongming Zeng</name>
+    </author>
+    <author>
+      <name>Jinglei Zhang</name>
+    </author>
+  </entry>
+</feed>

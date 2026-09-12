@@ -1,0 +1,232 @@
+{
+  "startedAt": "2026-09-12T07:37:31.446Z",
+  "installedEntry": "/Users/lute/.dsh/profiles/desktop/node_modules/dsh-newapp-local/lib/index.js",
+  "fixtureRoot": "/var/folders/wp/t77hdxr93bs86v8r0dbwf8940000gn/T/newapp-live-xLLOZY",
+  "stages": {
+    "A": {
+      "port": 51407,
+      "routes": {
+        "exact": [
+          "/api/dsh-newapp/health",
+          "/api/dsh-newapp/products"
+        ],
+        "prefix": []
+      },
+      "plugin": {
+        "name": "newapp-local",
+        "inject": [
+          "webServer"
+        ]
+      }
+    },
+    "D": {
+      "health": 200,
+      "products": 200,
+      "crossSite": 403,
+      "restartRequired": false,
+      "staleHost": false
+    }
+  },
+  "results": [
+    {
+      "id": "srv-alive",
+      "kind": "instrument",
+      "what": "一条不存在的路由必须 404（证明服务真在派发）",
+      "pass": true,
+      "expect": 404,
+      "actual": 404,
+      "detail": "→ 404 "
+    },
+    {
+      "id": "health",
+      "kind": "instrument",
+      "what": "health 必须 200 且自称 newapp-local（栅栏负例的正控）",
+      "pass": true,
+      "expect": 200,
+      "actual": 200,
+      "detail": "→ 200 {\"ok\":true,\"plugin\":\"newapp-local\",\"version\":\"0.1.0\",\"detect"
+    },
+    {
+      "id": "curl-alive",
+      "kind": "instrument",
+      "what": "连没人监听的端口必须失败（证明 curl 的失败看得见）",
+      "pass": true,
+      "expect": "curl 非零退出",
+      "actual": 7,
+      "detail": "→ curl exit 7"
+    },
+    {
+      "id": "node-interpreter",
+      "kind": "instrument",
+      "what": "冷进程模式要用的解释器必须真的把脚本当 node 跑（阶段 C 的 default-scans-nothing 靠它）",
+      "pass": true,
+      "expect": "子进程回话",
+      "actual": "回话",
+      "detail": "→ /opt/homebrew/Cellar/node/26.0.0/bin/node（node，node 26.0.0） → 子进程回话 LUTE-NODE-OK"
+    },
+    {
+      "id": "products-ok",
+      "kind": "control",
+      "what": "默认请求（回环 + 同源）必须 200 —— 负例的差分基准",
+      "pass": true,
+      "expect": 200,
+      "actual": 200,
+      "detail": "→ 200 cards=1 declared=1 roots=3"
+    },
+    {
+      "id": "products-cross-site",
+      "kind": "negative",
+      "what": "只加 Sec-Fetch-Site: cross-site",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "detail": "→ 403 {\"error\":\"forbidden: loopback-only\"}"
+    },
+    {
+      "id": "products-foreign-origin",
+      "kind": "negative",
+      "what": "只加 Origin: http://evil.example",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "detail": "→ 403 {\"error\":\"forbidden: loopback-only\"}"
+    },
+    {
+      "id": "products-foreign-host",
+      "kind": "negative",
+      "what": "只把 Host 换成非回环权威",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "detail": "→ 403 {\"error\":\"forbidden: loopback-only\"}"
+    },
+    {
+      "id": "products-method",
+      "kind": "negative",
+      "what": "POST 必须 405（发现是读，不是写）",
+      "pass": true,
+      "expect": 405,
+      "actual": 405,
+      "detail": "→ 405 {\"error\":\"method not allowed: POST\"}"
+    },
+    {
+      "id": "health-cross-site",
+      "kind": "negative",
+      "what": "health 也必须过栅栏（不是只有 products 被包住）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "detail": "→ 403 {\"error\":\"forbidden: loopback-only\"}"
+    },
+    {
+      "id": "roots-echoed",
+      "kind": "contract",
+      "what": "扫描根必须原样回显（读者要能看见读了哪）",
+      "pass": true,
+      "expect": "三个根都在 scannedRoots 里",
+      "actual": "3 个",
+      "detail": "→ scannedRoots=[\"/var/folders/wp/t77hdxr93bs86v8r0dbwf8940000gn/T/newapp-live-xLLOZY\",\"/var/folders/wp/t77hdxr93bs86v8r0dbwf8940000gn/T/newapp-live-does-not-exist-xyz\",\"/var/folders/wp/t77hdxr93bs86v8r0dbwf8940000gn/T/newapp-live-xLLOZY/declared-project/product.json\"]"
+    },
+    {
+      "id": "declared-card",
+      "kind": "contract",
+      "what": "有 product.json 的目录必须出一张卡，带 id / preset / 入口服务",
+      "pass": true,
+      "expect": "一张卡且三字段齐全",
+      "actual": "{\"id\":\"probe-product\",\"name\":\"探针产品\",\"summary\":\"本探针自造的产品声明\",\"version\":\"0.1.0\",\"status\":\"draft\",\"statusReason\":\"探针夹具\",\"pre",
+      "detail": "→ probe-product preset=agt-033 svc=probe-workbench"
+    },
+    {
+      "id": "declaration-verbatim",
+      "kind": "contract",
+      "what": "响应体里的 declaration 必须带着 features[].inputs（入口面板靠它渲染表单）",
+      "pass": true,
+      "expect": "inputs 两条 + skills 一条",
+      "actual": "inputs=2",
+      "detail": "→ inputs=[\"a\",\"b\"] skills=1"
+    },
+    {
+      "id": "undeclared-counted",
+      "kind": "contract",
+      "what": "没有 product.json 的目录**不再出卡**，但必须被 undeclaredCount 数到（不是消失）",
+      "pass": true,
+      "expect": "bare-project 无卡 + undeclaredCount ≥ 1 + cards.length = declaredCount",
+      "actual": "cards=1 declared=1 undeclared=2",
+      "detail": "→ 卡片里没有 bare-project；undeclaredCount=2"
+    },
+    {
+      "id": "hidden-skipped",
+      "kind": "contract",
+      "what": "点开头的目录不当作工作目录（不读 .git 之类）",
+      "pass": true,
+      "expect": "卡片列表里没有 .hidden-project",
+      "actual": "1 张卡",
+      "detail": "→ cards=[\"declared-project\"]"
+    },
+    {
+      "id": "malformed-reported",
+      "kind": "contract",
+      "what": "坏声明必须进 unreadable 并说明原因（不是静默少一张卡）",
+      "pass": true,
+      "expect": "unreadable 指名 broken-project",
+      "actual": "product.json 不是合法 JSON：Expected property name or '}' in JSON at position 1 (line 1 column 2)",
+      "detail": "→ product.json 不是合法 JSON：Expected property name or '}' in JSON at position 1 (line 1 column 2)"
+    },
+    {
+      "id": "missing-root-skipped",
+      "kind": "contract",
+      "what": "配了但不存在的根必须进 skipped（读不到的扫描不能长得像空扫描）",
+      "pass": true,
+      "expect": "skipped 指名该根且带原因",
+      "actual": "ENOENT: no such file or directory, stat '/var/folders/wp/t77hdxr93bs86v8r0dbwf8940000gn/T/newapp-live-does-not-exist-xyz'",
+      "detail": "→ ENOENT: no such file or directory, stat '/var/folders/wp/t77hdxr93bs86v8r0dbwf8940000gn/T/newapp-live-does-not-exist-xyz'"
+    },
+    {
+      "id": "file-as-root-skipped",
+      "kind": "contract",
+      "what": "把文件当根配必须被指出来",
+      "pass": true,
+      "expect": "skipped 说「不是一个目录」",
+      "actual": "不是一个目录",
+      "detail": "→ 不是一个目录"
+    },
+    {
+      "id": "default-scans-nothing",
+      "kind": "contract",
+      "what": "没有配 productRoots 时，一个目录都不许读（安全默认；冷进程里跑）",
+      "pass": true,
+      "expect": 200,
+      "actual": 200,
+      "detail": "→ 200 cards=0 declared=0 roots=0"
+    },
+    {
+      "id": "live-health",
+      "kind": "live",
+      "what": "运行中的实例装载了本插件（exact 路由无需 cookie 即应答）",
+      "pass": true,
+      "expect": 200,
+      "actual": 200,
+      "detail": "→ 200 newapp-local"
+    },
+    {
+      "id": "live-fence",
+      "kind": "live",
+      "what": "运行中的实例对本插件路由的 cross-site 请求答 403（栅栏的判决，不是被兜住的异常）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "detail": "→ 403 forbidden: loopback-only"
+    }
+  ],
+  "notes": [
+    "装载点 realpath：/Users/lute/.dsh/profiles/desktop/node_modules/dsh-newapp-local/lib/index.js",
+    "精确路由表：[/api/dsh-newapp/health, /api/dsh-newapp/products]",
+    "实况扫描：roots=[\"/Users/lute/project\"] cards=1 declared=1"
+  ],
+  "restartRequired": false,
+  "liveProductsStatus": 200,
+  "liveFenceStatus": 403,
+  "staleHostFence": false,
+  "passed": 21,
+  "total": 21
+}

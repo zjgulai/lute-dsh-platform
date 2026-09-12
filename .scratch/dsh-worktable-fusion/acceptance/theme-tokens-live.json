@@ -1,0 +1,345 @@
+{
+  "checkedAt": "2026-09-12T05:50:35.337Z",
+  "themeBundle": "/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-client-ui-theme/lib/client.js",
+  "browser": "chromium 153.0.8010.36",
+  "cssBlobs": 8,
+  "cssDefinedTokens": 356,
+  "officialDefinedTokens": 393,
+  "repoSuppliedTokens": 67,
+  "referenced": 54,
+  "instrument": [
+    {
+      "name": "正控解析成功",
+      "ok": true,
+      "detail": "--dsw-alias-bg-layer-1 → \"#fff\""
+    },
+    {
+      "name": "正控颜色可用",
+      "ok": true,
+      "detail": "--dsw-alias-bg-layer-1 背景 → rgb(255, 255, 255)"
+    },
+    {
+      "name": "负控解析为空",
+      "ok": true,
+      "detail": "不存在的名字 → \"\""
+    },
+    {
+      "name": "负控颜色回落初值",
+      "ok": true,
+      "detail": "不存在的名字背景 → rgba(0, 0, 0, 0)"
+    },
+    {
+      "name": "切主题确实生效",
+      "ok": true,
+      "detail": "--dsw-alias-bg-base 浅 rgb(255, 255, 255) / 深 rgb(21, 21, 23)"
+    }
+  ],
+  "summary": {
+    "agreeOfficial": 47,
+    "agreeRepo": 0,
+    "agreeAbsent": 7,
+    "gateFalsePositiveOfficial": 0,
+    "gateFalsePositiveRepo": 0,
+    "gateFalseNegative": 0,
+    "followTheme": 30,
+    "newappUnresolved": 0,
+    "newappFlatWithSurface": 4
+  },
+  "newappTokens": [
+    {
+      "token": "--ds-font-family-code",
+      "resolves": true,
+      "followTheme": false,
+      "light": "rgba(0, 0, 0, 0)",
+      "dark": "rgba(0, 0, 0, 0)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-bg-base",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgb(255, 255, 255)",
+      "dark": "rgb(21, 21, 23)",
+      "sameAsSurfaceLight": true,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-bg-layer-1",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgb(255, 255, 255)",
+      "dark": "rgb(35, 35, 36)",
+      "sameAsSurfaceLight": true,
+      "sameAsSurfaceDark": true
+    },
+    {
+      "token": "--dsw-alias-bg-mask-1",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgba(0, 0, 0, 0.24)",
+      "dark": "rgba(0, 0, 0, 0.5)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-bg-mask-2",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgba(0, 0, 0, 0.12)",
+      "dark": "rgba(0, 0, 0, 0.2)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-bg-module-platform",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgb(245, 246, 247)",
+      "dark": "rgb(53, 54, 56)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-border-l1",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgba(0, 0, 0, 0.04)",
+      "dark": "rgba(255, 255, 255, 0.06)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-border-l2",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgba(0, 0, 0, 0.1)",
+      "dark": "rgba(255, 255, 255, 0.12)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-border-l3",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgba(0, 0, 0, 0.12)",
+      "dark": "rgba(255, 255, 255, 0.16)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-button-elevated-fill",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgb(255, 255, 255)",
+      "dark": "rgb(67, 69, 74)",
+      "sameAsSurfaceLight": true,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-button-floating-hover",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgb(241, 243, 245)",
+      "dark": "rgb(53, 54, 56)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-button-primary-fill",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgb(15, 17, 21)",
+      "dark": "rgb(249, 250, 251)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-button-primary-hover",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgb(67, 69, 74)",
+      "dark": "rgb(235, 238, 242)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-interactive-bg-hover",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgba(38, 49, 72, 0.06)",
+      "dark": "rgba(255, 255, 255, 0.08)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-label-caption",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgb(173, 178, 184)",
+      "dark": "rgb(129, 133, 140)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-label-primary",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgb(15, 17, 21)",
+      "dark": "rgb(249, 250, 251)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-label-primary-foreground",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgb(255, 255, 255)",
+      "dark": "rgb(15, 17, 21)",
+      "sameAsSurfaceLight": true,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-label-secondary",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgb(97, 102, 107)",
+      "dark": "rgb(207, 211, 214)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-state-error-primary",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgb(236, 19, 19)",
+      "dark": "rgb(242, 90, 90)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-state-success-primary",
+      "resolves": true,
+      "followTheme": false,
+      "light": "rgb(34, 197, 94)",
+      "dark": "rgb(34, 197, 94)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-state-success-tertiary",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgb(230, 250, 237)",
+      "dark": "rgb(35, 60, 44)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-font-m-18",
+      "resolves": true,
+      "followTheme": false,
+      "light": "rgba(0, 0, 0, 0)",
+      "dark": "rgba(0, 0, 0, 0)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-font-s-14",
+      "resolves": true,
+      "followTheme": false,
+      "light": "rgba(0, 0, 0, 0)",
+      "dark": "rgba(0, 0, 0, 0)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-font-s-strong-14",
+      "resolves": true,
+      "followTheme": false,
+      "light": "rgba(0, 0, 0, 0)",
+      "dark": "rgba(0, 0, 0, 0)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-font-xs-13",
+      "resolves": true,
+      "followTheme": false,
+      "light": "rgba(0, 0, 0, 0)",
+      "dark": "rgba(0, 0, 0, 0)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-font-xs-strong-13",
+      "resolves": true,
+      "followTheme": false,
+      "light": "rgba(0, 0, 0, 0)",
+      "dark": "rgba(0, 0, 0, 0)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-font-xxs-12",
+      "resolves": true,
+      "followTheme": false,
+      "light": "rgba(0, 0, 0, 0)",
+      "dark": "rgba(0, 0, 0, 0)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-font-xxs-strong-12",
+      "resolves": true,
+      "followTheme": false,
+      "light": "rgba(0, 0, 0, 0)",
+      "dark": "rgba(0, 0, 0, 0)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-font-xxxs-11",
+      "resolves": true,
+      "followTheme": false,
+      "light": "rgba(0, 0, 0, 0)",
+      "dark": "rgba(0, 0, 0, 0)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-static-neutral-bluish-00",
+      "resolves": true,
+      "followTheme": false,
+      "light": "rgb(255, 255, 255)",
+      "dark": "rgb(255, 255, 255)",
+      "sameAsSurfaceLight": true,
+      "sameAsSurfaceDark": false
+    }
+  ],
+  "newappFlatWithSurface": [
+    {
+      "token": "--dsw-alias-bg-base",
+      "sameAsSurfaceLight": true,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-button-elevated-fill",
+      "sameAsSurfaceLight": true,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-label-primary-foreground",
+      "sameAsSurfaceLight": true,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-static-neutral-bluish-00",
+      "sameAsSurfaceLight": true,
+      "sameAsSurfaceDark": false
+    }
+  ],
+  "gateFalsePositive": [],
+  "gateFalseNegative": [],
+  "consoleLines": []
+}

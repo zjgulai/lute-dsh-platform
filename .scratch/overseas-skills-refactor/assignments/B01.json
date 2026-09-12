@@ -1,0 +1,582 @@
+{
+ "batch": "B01",
+ "assignments": [
+  {
+   "name": "1688-sourcing",
+   "roles": [
+    {
+     "id": "AGT-015",
+     "responsibility": "采购比价",
+     "confidence": "medium",
+     "from_skill": "批量采购比价",
+     "from_role": "采购比价",
+     "note": "技能提供1688找货、批量采购比价与多条件筛选，只服务采购比价环节；不含订单协调与履约跟踪"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "product-supplier-sourcing",
+   "roles": [
+    {
+     "id": "AGT-014",
+     "responsibility": "供应商评估",
+     "confidence": "medium",
+     "from_skill": "supplier discovery",
+     "from_role": "供应商评估",
+     "note": "既有映射为产能调查；技能实际在B2B平台锁定候选供应商与工厂，产出待评估的供应商集合，故挂三条责任中最贴近的供应商评估"
+    },
+    {
+     "id": "AGT-015",
+     "responsibility": "采购比价",
+     "confidence": "medium",
+     "from_skill": "compare items",
+     "from_role": "采购比价",
+     "note": ""
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "dropshipping-supplier-integrator",
+   "roles": [
+    {
+     "id": "AGT-047",
+     "responsibility": "接口契约",
+     "confidence": "high",
+     "from_skill": "REST/GraphQL API",
+     "from_role": "接口契约",
+     "note": "技能定义供应商系统对接方式（API/CSV/EDI）与订单、库存接口要求，属集成契约与业务工具实现"
+    },
+    {
+     "id": "AGT-015",
+     "responsibility": "订单协调",
+     "confidence": "medium",
+     "from_skill": "订单自动路由",
+     "from_role": "订单协调",
+     "note": ""
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": [
+    {
+     "id": "AGT-014",
+     "reason": "技能做的是零售代发供应商的订单/库存接口对接与履约对账，属系统集成与订单履约范畴；AGT-014 三条责任（供应商评估/产能调查/OEM协作）无对应工作"
+    }
+   ]
+  },
+  {
+   "name": "supplier-performance-manager",
+   "roles": [
+    {
+     "id": "AGT-014",
+     "responsibility": "供应商评估",
+     "confidence": "medium",
+     "from_skill": "supplier evaluation",
+     "from_role": "供应商评估",
+     "note": "同一技能服务三岗：评分卡与交期指标用于供应商评估"
+    },
+    {
+     "id": "AGT-015",
+     "responsibility": "履约跟踪",
+     "confidence": "medium",
+     "from_skill": "lead-time tracking",
+     "from_role": "履约跟踪",
+     "note": "同一技能服务三岗：PO流程、收货核对与交期追踪用于采购履约跟踪"
+    },
+    {
+     "id": "AGT-018",
+     "responsibility": "质量分析",
+     "confidence": "medium",
+     "from_skill": "Defect Rate",
+     "from_role": "质量分析",
+     "note": "同一技能服务三岗：来料质检与缺陷率指标用于生产质量分析"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "aliexpress-supplier-evaluator",
+   "roles": [
+    {
+     "id": "AGT-014",
+     "responsibility": "供应商评估",
+     "confidence": "high",
+     "from_skill": "Vendor Evaluation",
+     "from_role": "供应商评估",
+     "note": ""
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "sales-negotiator",
+   "roles": [
+    {
+     "id": "AGT-025",
+     "responsibility": "商务交付协调",
+     "confidence": "medium",
+     "from_skill": "B2B deal-making",
+     "from_role": "商务交付协调",
+     "note": "通用B2B谈判方法，落在成交与承诺环节；实际交付执行不在技能范围内"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "product-attribute-analyzer",
+   "roles": [
+    {
+     "id": "AGT-007",
+     "responsibility": "市场机会评估",
+     "confidence": "medium",
+     "from_skill": "结构机会验证",
+     "from_role": "市场机会评估",
+     "note": "同一技能服务三岗：属性结构与空白验证用于市场机会评估"
+    },
+    {
+     "id": "AGT-008",
+     "responsibility": "组合取舍",
+     "confidence": "medium",
+     "from_skill": "空白组合",
+     "from_role": "组合取舍",
+     "note": "同一技能服务三岗：把伪空白/真需求机会筛出来，供新品组合取舍"
+    },
+    {
+     "id": "AGT-026",
+     "responsibility": "价格敏感性",
+     "confidence": "low",
+     "from_skill": "价位带价值弹性",
+     "from_role": "价格敏感性",
+     "note": "同一技能服务三岗：价位带属性价值弹性仅触及价格敏感性，不产出定价或促销方案，需人工复核"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "scenario-driven-product-scout",
+   "roles": [
+    {
+     "id": "AGT-007",
+     "responsibility": "市场机会评估",
+     "confidence": "medium",
+     "from_skill": "场景机会",
+     "from_role": "市场机会评估",
+     "note": ""
+    },
+    {
+     "id": "AGT-008",
+     "responsibility": "实验组合",
+     "confidence": "medium",
+     "from_skill": "可验证的产品方向",
+     "from_role": "实验组合",
+     "note": ""
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "bestseller-pattern-decoder",
+   "roles": [
+    {
+     "id": "AGT-007",
+     "responsibility": "竞品研究",
+     "confidence": "high",
+     "from_skill": "拆解 Amazon 畅销款",
+     "from_role": "竞品研究",
+     "note": ""
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "company-research",
+   "roles": [
+    {
+     "id": "AGT-007",
+     "responsibility": "竞品研究",
+     "confidence": "medium",
+     "from_skill": "竞品公司深挖前的信息准备",
+     "from_role": "竞品研究",
+     "note": "技能做具名公司的公司级调研（团队治理/竞争/风险），可承担竞品公司研究"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "competitor-deep-analysis",
+   "roles": [
+    {
+     "id": "AGT-007",
+     "responsibility": "竞品研究",
+     "confidence": "high",
+     "from_skill": "竞品情报",
+     "from_role": "竞品研究",
+     "note": ""
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "competitive-landscape",
+   "roles": [
+    {
+     "id": "AGT-007",
+     "responsibility": "市场机会评估",
+     "confidence": "medium",
+     "from_skill": "differentiation opportunities",
+     "from_role": "市场机会评估",
+     "note": ""
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "customer-voice-analyzer",
+   "roles": [
+    {
+     "id": "AGT-006",
+     "responsibility": "VOC编码",
+     "confidence": "medium",
+     "from_skill": "跨平台 VoC",
+     "from_role": "VOC编码",
+     "note": "同一技能服务四岗：产物是跨平台反馈重建的决策旅程，同时服务消费者VOC研究、售前需求识别、售后体验洞察与用户反馈"
+    },
+    {
+     "id": "AGT-036",
+     "responsibility": "需求识别",
+     "confidence": "medium",
+     "from_skill": "购买前犹豫点",
+     "from_role": "需求识别",
+     "note": "同一技能服务四岗：Amazon Q&A与犹豫未下单人群用于售前需求识别"
+    },
+    {
+     "id": "AGT-038",
+     "responsibility": "体验分析",
+     "confidence": "medium",
+     "from_skill": "决策旅程重建",
+     "from_role": "体验分析",
+     "note": "同一技能服务四岗：跨平台反馈到决策旅程的重建用于体验分析"
+    },
+    {
+     "id": "AGT-039",
+     "responsibility": "用户反馈",
+     "confidence": "low",
+     "from_skill": "用户反馈",
+     "from_role": "用户反馈",
+     "note": "同一技能服务四岗：社群/私域反馈采集用于用户反馈，但非会员社区教育闭环，需人工复核"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "cross-border-selection",
+   "roles": [
+    {
+     "id": "AGT-046",
+     "responsibility": "数据质量",
+     "confidence": "high",
+     "from_skill": "Hard validation gates",
+     "from_role": "数据质量",
+     "note": ""
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "review-analyst-agent",
+   "roles": [
+    {
+     "id": "AGT-006",
+     "responsibility": "VOC编码",
+     "confidence": "medium",
+     "from_skill": "voice of customer",
+     "from_role": "VOC编码",
+     "note": "同一技能服务四岗：评论洞察与情感/要点编码服务VOC研究"
+    },
+    {
+     "id": "AGT-018",
+     "responsibility": "质量分析",
+     "confidence": "medium",
+     "from_skill": "Top Complaints",
+     "from_role": "质量分析",
+     "note": "同一技能服务四岗：按频次与严重度排序的抱怨清单服务生产质量分析"
+    },
+    {
+     "id": "AGT-037",
+     "responsibility": "客诉分诊",
+     "confidence": "low",
+     "from_skill": "customer complaints",
+     "from_role": "客诉分诊",
+     "note": "同一技能服务四岗：只做抱怨问题的分级排序，不含工单受理与售后处理，需人工复核"
+    },
+    {
+     "id": "AGT-038",
+     "responsibility": "体验分析",
+     "confidence": "medium",
+     "from_skill": "improvement recommendations",
+     "from_role": "体验分析",
+     "note": "同一技能服务四岗：改进优先级与行动方案服务体验分析与改进验证"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "review-summarizer",
+   "roles": [
+    {
+     "id": "AGT-006",
+     "responsibility": "VOC编码",
+     "confidence": "low",
+     "from_skill": "sentiment analysis",
+     "from_role": "VOC编码",
+     "note": "通用多平台评论抓取摘要工具（含 Yelp/TripAdvisor，用途标注为 arbitrage/affiliate），与 review-analyst-agent、customer-voice-analyzer 重叠，建议人工复核是否合并"
+    },
+    {
+     "id": "AGT-038",
+     "responsibility": "体验分析",
+     "confidence": "low",
+     "from_skill": "Common complaints and cons",
+     "from_role": "体验分析",
+     "note": "同上：只提供评论摘要与情绪/优缺点提取，需人工复核去重"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "trend-stage-timing-analyzer",
+   "roles": [
+    {
+     "id": "AGT-007",
+     "responsibility": "趋势监测",
+     "confidence": "high",
+     "from_skill": "公开趋势信号",
+     "from_role": "趋势监测",
+     "note": ""
+    },
+    {
+     "id": "AGT-017",
+     "responsibility": "生命周期分析",
+     "confidence": "low",
+     "from_skill": "生命周期",
+     "from_role": "生命周期分析",
+     "note": "技能判断的是市场与子趋势的阶段时机，与 AGT-017 的SKU库存生命周期仅词面相邻，保留既有映射待人工复核"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "people-research",
+   "roles": [
+    {
+     "id": "AGT-004",
+     "responsibility": "培训与招聘支持",
+     "confidence": "medium",
+     "from_skill": "professional backgrounds",
+     "from_role": "培训与招聘支持",
+     "note": "既有映射含岗位能力分析：技能实际产出个人履历与专业背景画像，最贴近招聘/人才支持"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "social-network-mapper",
+   "roles": [],
+   "no_role_reason": "技能是以 Twitter/X 互动数据构建关系图谱并跑社群检测的工具步骤（networkx），由 org-structure-research 等调研任务调用，本身不产出任何岗位三条责任所要求的工作产物",
+   "no_role_kind": "TOOL_ONLY",
+   "drop_reasons": []
+  },
+  {
+   "name": "market-insight-product-selection",
+   "roles": [
+    {
+     "id": "AGT-007",
+     "responsibility": "市场机会评估",
+     "confidence": "high",
+     "from_skill": "值不值得做",
+     "from_role": "市场机会评估",
+     "note": ""
+    },
+    {
+     "id": "AGT-024",
+     "responsibility": "渠道研究",
+     "confidence": "low",
+     "from_skill": "渠道打法",
+     "from_role": "渠道研究",
+     "note": "技能比较的是 Amazon 与 DTC 打法，属核心渠道而非 AGT-024 的其余渠道，保留既有映射待人工复核"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "market-viability-logic-auditor",
+   "roles": [
+    {
+     "id": "AGT-007",
+     "responsibility": "市场机会评估",
+     "confidence": "medium",
+     "from_skill": "市场机会",
+     "from_role": "市场机会评估",
+     "note": "同一技能服务三岗：区分市场机会与专属机会，服务机会评估"
+    },
+    {
+     "id": "AGT-008",
+     "responsibility": "阶段投资建议",
+     "confidence": "medium",
+     "from_skill": "值不值得 Momcozy 进入",
+     "from_role": "阶段投资建议",
+     "note": "同一技能服务三岗：进入/放弃裁决即阶段投资建议"
+    },
+    {
+     "id": "AGT-035",
+     "responsibility": "因果局限审查",
+     "confidence": "low",
+     "from_skill": "结论往往会过于乐观",
+     "from_role": "因果局限审查",
+     "note": "同一技能服务三岗：只对结论过度乐观做提醒式审查，非因果推断复核，需人工复核"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "product-selection",
+   "roles": [
+    {
+     "id": "AGT-007",
+     "responsibility": "市场机会评估",
+     "confidence": "medium",
+     "from_skill": "follow-sell opportunities",
+     "from_role": "市场机会评估",
+     "note": ""
+    },
+    {
+     "id": "AGT-008",
+     "responsibility": "组合取舍",
+     "confidence": "low",
+     "from_skill": "product selection workflow",
+     "from_role": "组合取舍",
+     "note": "技能输出“该卖什么”的候选商品证据，供新品组合取舍，需人工复核"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": [
+    {
+     "id": "AGT-017",
+     "reason": "循证选品流程为行业→消费者→选品→供应商，全文不含库存分层、生命周期或调拨清货工作，无法承担 AGT-017 的任一条责任"
+    }
+   ]
+  },
+  {
+   "name": "alibaba-amazon-market-intel",
+   "roles": [
+    {
+     "id": "AGT-022",
+     "responsibility": "搜索意图分析",
+     "confidence": "medium",
+     "from_skill": "reverse-ASIN",
+     "from_role": "搜索意图分析",
+     "note": "同一技能服务三岗：关键词/反查ASIN等Amazon数据查询，分别服务搜索运营、Amazon经营分析与投放诊断"
+    },
+    {
+     "id": "AGT-021",
+     "responsibility": "渠道经营分析",
+     "confidence": "medium",
+     "from_skill": "brand share of voice",
+     "from_role": "渠道经营分析",
+     "note": "同一技能服务三岗：销量估算与品牌声量数据服务Amazon渠道经营分析"
+    },
+    {
+     "id": "AGT-032",
+     "responsibility": "投放诊断",
+     "confidence": "low",
+     "from_skill": "PPC bid analysis",
+     "from_role": "投放诊断",
+     "note": "同一技能服务三岗：竞价与广告效果数据只作投放诊断输入，不含投放决策，需人工复核"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "org-structure-research",
+   "roles": [
+    {
+     "id": "AGT-004",
+     "responsibility": "岗位能力分析",
+     "confidence": "low",
+     "from_skill": "employee profiles",
+     "from_role": "岗位能力分析",
+     "note": "技能面向外部公司组织结构与人员画像调研，与 AGT-004 的组织/岗位能力分析只间接相关，保留既有映射待人工复核"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "jungle-scout-deep-dive-analyzer",
+   "roles": [
+    {
+     "id": "AGT-007",
+     "responsibility": "市场机会评估",
+     "confidence": "high",
+     "from_skill": "opportunity evaluation",
+     "from_role": "市场机会评估",
+     "note": ""
+    },
+    {
+     "id": "AGT-008",
+     "responsibility": "组合取舍",
+     "confidence": "medium",
+     "from_skill": "product recommendations",
+     "from_role": "组合取舍",
+     "note": ""
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  }
+ ]
+}

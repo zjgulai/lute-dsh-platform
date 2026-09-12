@@ -1,0 +1,1011 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/QR2old/u49srqpB1Oc2g2qbTFd8</id>
+  <title>arXiv Query: search_query=&amp;id_list=1912.02164,1912.02572,1912.07753,1912.09363,1969.0001,2002.05798,2002.10561,2003.00127,2003.00744,2003.01452,2003.04960,2003.08823,2003.08934,2003.12345,2004.00530,2004.04906,2004.05718,2004.07208,2004.07683,2004.11892,2004.12832,2004.14884,2005.00065,2005.01571,2005.03825,2005.06978,2005.10293,2005.11401,2005.11870,2005.12345,2006.03589,2006.04768,2006.04967,2006.05432,2006.05479,2006.05679,2006.06865,2006.06870,2006.06878,2006.09917&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:41:43Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=1912.02164,1912.02572,1912.07753,1912.09363,1969.0001,2002.05798,2002.10561,2003.00127,2003.00744,2003.01452,2003.04960,2003.08823,2003.08934,2003.12345,2004.00530,2004.04906,2004.05718,2004.07208,2004.07683,2004.11892,2004.12832,2004.14884,2005.00065,2005.01571,2005.03825,2005.06978,2005.10293,2005.11401,2005.11870,2005.12345,2006.03589,2006.04768,2006.04967,2006.05432,2006.05479,2006.05679,2006.06865,2006.06870,2006.06878,2006.09917" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>39</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2005.10293v2</id>
+    <title>Predictions of quantum gravity in inflationary cosmology: effects of the Weyl-squared term</title>
+    <updated>2020-08-01T15:21:23Z</updated>
+    <link href="https://arxiv.org/abs/2005.10293v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2005.10293v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We derive the predictions of quantum gravity with fakeons on the amplitudes and spectral indices of the scalar and tensor fluctuations in inflationary cosmology. The action is $R+R^{2}$ plus the Weyl-squared term. The ghost is eliminated by turning it into a fakeon, that is to say a purely virtual particle. We work to the next-to-leading order of the expansion around the de Sitter background. The consistency of the approach puts a lower bound ($ m_{χ}&gt;m_{φ}/4$) on the mass $m_{χ}$ of the fakeon with respect to the mass $m_{φ}$ of the inflaton. The tensor-to-scalar ratio $r$ is predicted within less than an order of magnitude ($4/3&lt;N^{2}r&lt;12$ to the leading order in the number of $e$-foldings $N$). Moreover, the relation $r\simeq -8n_{T}$ is not affected by the Weyl-squared term. No vector and no other scalar/tensor degree of freedom is present.</summary>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-05-20T18:13:57Z</published>
+    <arxiv:comment>39 pages, 1 figure; v2: minor changes, JHEP</arxiv:comment>
+    <arxiv:primary_category term="hep-th"/>
+    <arxiv:journal_ref>J. High Energy Phys. 07 (2020) 211</arxiv:journal_ref>
+    <author>
+      <name>Damiano Anselmi</name>
+    </author>
+    <author>
+      <name>Eugenio Bianchi</name>
+    </author>
+    <author>
+      <name>Marco Piva</name>
+    </author>
+    <arxiv:doi>10.1007/JHEP07(2020)211</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/JHEP07(2020)211" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1912.02164v4</id>
+    <title>Plug and Play Language Models: A Simple Approach to Controlled Text Generation</title>
+    <updated>2020-03-03T05:33:49Z</updated>
+    <link href="https://arxiv.org/abs/1912.02164v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1912.02164v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large transformer-based language models (LMs) trained on huge text corpora have shown unparalleled generation capabilities. However, controlling attributes of the generated language (e.g. switching topic or sentiment) is difficult without modifying the model architecture or fine-tuning on attribute-specific data and entailing the significant cost of retraining. We propose a simple alternative: the Plug and Play Language Model (PPLM) for controllable language generation, which combines a pretrained LM with one or more simple attribute classifiers that guide text generation without any further training of the LM. In the canonical scenario we present, the attribute models are simple classifiers consisting of a user-specified bag of words or a single learned layer with 100,000 times fewer parameters than the LM. Sampling entails a forward and backward pass in which gradients from the attribute model push the LM's hidden activations and thus guide the generation. Model samples demonstrate control over a range of topics and sentiment styles, and extensive automated and human annotated evaluations show attribute alignment and fluency. PPLMs are flexible in that any combination of differentiable attribute models may be used to steer text generation, which will allow for diverse and creative applications beyond the examples given in this paper.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-12-04T18:32:15Z</published>
+    <arxiv:comment>ICLR 2020 camera ready</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Sumanth Dathathri</name>
+    </author>
+    <author>
+      <name>Andrea Madotto</name>
+    </author>
+    <author>
+      <name>Janice Lan</name>
+    </author>
+    <author>
+      <name>Jane Hung</name>
+    </author>
+    <author>
+      <name>Eric Frank</name>
+    </author>
+    <author>
+      <name>Piero Molino</name>
+    </author>
+    <author>
+      <name>Jason Yosinski</name>
+    </author>
+    <author>
+      <name>Rosanne Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.06870v4</id>
+    <title>Multi-Agent Informational Learning Processes</title>
+    <updated>2021-02-25T21:43:47Z</updated>
+    <link href="https://arxiv.org/abs/2006.06870v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.06870v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We introduce a new mathematical model of multi-agent reinforcement learning, the Multi-Agent Informational Learning Processor "MAILP" model. The model is based on the notion that agents have policies for a certain amount of information, models how this information iteratively evolves and propagates through many agents. This model is very general, and the only meaningful assumption made is that learning for individual agents progressively slows over time.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-11T23:18:50Z</published>
+    <arxiv:comment>We are withdrawing this paper as section 2.1.1 implicitly assumes information gain at all points is homogenous. A researcher has provided us an example showing that this assumption causes our model to make unexpected and pathological predictions, and we are aware of now way to remove this assumption from our work</arxiv:comment>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>J. K. Terry</name>
+    </author>
+    <author>
+      <name>Nathaniel Grammel</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2003.00127v1</id>
+    <title>Time of arrival imaging: The proof of concept for a novel medical imaging modality</title>
+    <updated>2020-02-28T23:52:13Z</updated>
+    <link href="https://arxiv.org/abs/2003.00127v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2003.00127v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It has been shown that with the use of ultra-wideband (UWB) electromagnetic signal and time of arrival (ToA) principle, it is possible to locate medical implants given the permittivity distribution of the body. We propose a new imaging modality using the reverse process to acquire permittivity distributions as a surrogate of human anatomy. In the proposed systems, the locations of the signal source, receiver, and signal shapes are assumed to be known exactly. The measured data is recorded as the time it takes for the signal to travel from the signal source to the signal receiver. The finite-difference-time-domain (FDTD) method is used for the modeling of signal propagation within the phantom, which is used for both simulation and image reconstruction. Image reconstruction is achieved using linear regression on the training pairs, which includes randomly generated images and its corresponding arrival times generated using the FDTD approach. The linear weights of the training images are generated to minimize the difference between the arrival time of the reconstruction image and the measured arrival time. A simulation study using UWB signal with the central frequency of 300 MHz and the Shepp-Logan phantom was carried out. Ten-picosecond timing resolution is used for the simulation and image reconstruction. The quantitative difference between the arrival times of the phantom and the reconstructed image reduced with an increased iteration number. The quantitative error of the reconstructed image reached below 10% after 900 iterations, and 8.4% after 1200 iterations. With additional post-smoothing to suppress the introduced noise pattern through reconstruction, 6.5% error was achieved. In this paper, an approach that utilizes the ToA principle to achieve transmission imaging with radio waves is proposed and validated using a simulation study.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-02-28T23:52:13Z</published>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Tao Feng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2005.01571v3</id>
+    <title>Frugal Optimization for Cost-related Hyperparameters</title>
+    <updated>2020-12-22T20:48:40Z</updated>
+    <link href="https://arxiv.org/abs/2005.01571v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2005.01571v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The increasing demand for democratizing machine learning algorithms calls for hyperparameter optimization (HPO) solutions at low cost. Many machine learning algorithms have hyperparameters which can cause a large variation in the training cost. But this effect is largely ignored in existing HPO methods, which are incapable to properly control cost during the optimization process. To address this problem, we develop a new cost-frugal HPO solution. The core of our solution is a simple but new randomized direct-search method, for which we prove a convergence rate of $O(\frac{\sqrt{d}}{\sqrt{K}})$ and an $O(dε^{-2})$-approximation guarantee on the total cost. We provide strong empirical results in comparison with state-of-the-art HPO methods on large AutoML benchmarks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-05-04T15:40:44Z</published>
+    <arxiv:comment>29 pages (including supplementary appendix)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Qingyun Wu</name>
+    </author>
+    <author>
+      <name>Chi Wang</name>
+    </author>
+    <author>
+      <name>Silu Huang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2005.06978v1</id>
+    <title>A network-based transfer learning approach to improve sales forecasting of new products</title>
+    <updated>2020-05-13T15:08:47Z</updated>
+    <link href="https://arxiv.org/abs/2005.06978v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2005.06978v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Data-driven methods -- such as machine learning and time series forecasting -- are widely used for sales forecasting in the food retail domain. However, for newly introduced products insufficient training data is available to train accurate models. In this case, human expert systems are implemented to improve prediction performance. Human experts rely on their implicit and explicit domain knowledge and transfer knowledge about historical sales of similar products to forecast new product sales. By applying the concept of Transfer Learning, we propose an analytical approach to transfer knowledge between listed stock products and new products. A network-based Transfer Learning approach for deep neural networks is designed to investigate the efficiency of Transfer Learning in the domain of food sales forecasting. Furthermore, we examine how knowledge can be shared across different products and how to identify the products most suitable for transfer. To test the proposed approach, we conduct a comprehensive case study for a newly introduced product, based on data of an Austrian food retailing company. The experimental results show, that the prediction accuracy of deep neural networks for food sales forecasting can be effectively increased using the proposed approach.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-05-13T15:08:47Z</published>
+    <arxiv:comment>28th European Conference on Information Systems (ECIS 2020)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Tristan Karb</name>
+    </author>
+    <author>
+      <name>Niklas Kühl</name>
+    </author>
+    <author>
+      <name>Robin Hirt</name>
+    </author>
+    <author>
+      <name>Varvara Glivici-Cotruta</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2005.03825v1</id>
+    <title>Learned Multi-layer Residual Sparsifying Transform Model for Low-dose CT Reconstruction</title>
+    <updated>2020-05-08T02:36:50Z</updated>
+    <link href="https://arxiv.org/abs/2005.03825v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2005.03825v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Signal models based on sparse representation have received considerable attention in recent years. Compared to synthesis dictionary learning, sparsifying transform learning involves highly efficient sparse coding and operator update steps. In this work, we propose a Multi-layer Residual Sparsifying Transform (MRST) learning model wherein the transform domain residuals are jointly sparsified over layers. In particular, the transforms for the deeper layers exploit the more intricate properties of the residual maps. We investigate the application of the learned MRST model for low-dose CT reconstruction using Penalized Weighted Least Squares (PWLS) optimization. Experimental results on Mayo Clinic data show that the MRST model outperforms conventional methods such as FBP and PWLS methods based on edge-preserving (EP) regularizer and single-layer transform (ST) model, especially for maintaining some subtle details.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-05-08T02:36:50Z</published>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Xikai Yang</name>
+    </author>
+    <author>
+      <name>Xuehang Zheng</name>
+    </author>
+    <author>
+      <name>Yong Long</name>
+    </author>
+    <author>
+      <name>Saiprasad Ravishankar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2003.04960v2</id>
+    <title>Curriculum Learning for Reinforcement Learning Domains: A Framework and Survey</title>
+    <updated>2020-09-17T22:31:51Z</updated>
+    <link href="https://arxiv.org/abs/2003.04960v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2003.04960v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Reinforcement learning (RL) is a popular paradigm for addressing sequential decision tasks in which the agent has only limited environmental feedback. Despite many advances over the past three decades, learning in many domains still requires a large amount of interaction with the environment, which can be prohibitively expensive in realistic scenarios. To address this problem, transfer learning has been applied to reinforcement learning such that experience gained in one task can be leveraged when starting to learn the next, harder task. More recently, several lines of research have explored how tasks, or data samples themselves, can be sequenced into a curriculum for the purpose of learning a problem that may otherwise be too difficult to learn from scratch. In this article, we present a framework for curriculum learning (CL) in reinforcement learning, and use it to survey and classify existing CL methods in terms of their assumptions, capabilities, and goals. Finally, we use our framework to find open problems and suggest directions for future RL curriculum learning research.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-03-10T20:41:24Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Journal of Machine Learning Research 21(181):1-50, 2020</arxiv:journal_ref>
+    <author>
+      <name>Sanmit Narvekar</name>
+    </author>
+    <author>
+      <name>Bei Peng</name>
+    </author>
+    <author>
+      <name>Matteo Leonetti</name>
+    </author>
+    <author>
+      <name>Jivko Sinapov</name>
+    </author>
+    <author>
+      <name>Matthew E. Taylor</name>
+    </author>
+    <author>
+      <name>Peter Stone</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2003.08934v2</id>
+    <title>NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis</title>
+    <updated>2020-08-03T22:17:31Z</updated>
+    <link href="https://arxiv.org/abs/2003.08934v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2003.08934v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a method that achieves state-of-the-art results for synthesizing novel views of complex scenes by optimizing an underlying continuous volumetric scene function using a sparse set of input views. Our algorithm represents a scene using a fully-connected (non-convolutional) deep network, whose input is a single continuous 5D coordinate (spatial location $(x,y,z)$ and viewing direction $(θ, φ)$) and whose output is the volume density and view-dependent emitted radiance at that spatial location. We synthesize views by querying 5D coordinates along camera rays and use classic volume rendering techniques to project the output colors and densities into an image. Because volume rendering is naturally differentiable, the only input required to optimize our representation is a set of images with known camera poses. We describe how to effectively optimize neural radiance fields to render photorealistic novel views of scenes with complicated geometry and appearance, and demonstrate results that outperform prior work on neural rendering and view synthesis. View synthesis results are best viewed as videos, so we urge readers to view our supplementary video for convincing comparisons.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-03-19T17:57:23Z</published>
+    <arxiv:comment>ECCV 2020 (oral). Project page with videos and code: http://tancik.com/nerf</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Ben Mildenhall</name>
+    </author>
+    <author>
+      <name>Pratul P. Srinivasan</name>
+    </author>
+    <author>
+      <name>Matthew Tancik</name>
+    </author>
+    <author>
+      <name>Jonathan T. Barron</name>
+    </author>
+    <author>
+      <name>Ravi Ramamoorthi</name>
+    </author>
+    <author>
+      <name>Ren Ng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.09917v1</id>
+    <title>FISHING Net: Future Inference of Semantic Heatmaps In Grids</title>
+    <updated>2020-06-17T14:56:08Z</updated>
+    <link href="https://arxiv.org/abs/2006.09917v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.09917v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>For autonomous robots to navigate a complex environment, it is crucial to understand the surrounding scene both geometrically and semantically. Modern autonomous robots employ multiple sets of sensors, including lidars, radars, and cameras. Managing the different reference frames and characteristics of the sensors, and merging their observations into a single representation complicates perception. Choosing a single unified representation for all sensors simplifies the task of perception and fusion. In this work, we present an end-to-end pipeline that performs semantic segmentation and short term prediction using a top-down representation. Our approach consists of an ensemble of neural networks which take in sensor data from different sensor modalities and transform them into a single common top-down semantic grid representation. We find this representation favorable as it is agnostic to sensor-specific reference frames and captures both the semantic and geometric information for the surrounding scene. Because the modalities share a single output representation, they can be easily aggregated to produce a fused output. In this work we predict short-term semantic grids but the framework can be extended to other tasks. This approach offers a simple, extensible, end-to-end approach for multi-modal perception and prediction.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-17T14:56:08Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Noureldin Hendy</name>
+    </author>
+    <author>
+      <name>Cooper Sloan</name>
+    </author>
+    <author>
+      <name>Feng Tian</name>
+    </author>
+    <author>
+      <name>Pengfei Duan</name>
+    </author>
+    <author>
+      <name>Nick Charchut</name>
+    </author>
+    <author>
+      <name>Yuesong Xie</name>
+    </author>
+    <author>
+      <name>Chuang Wang</name>
+    </author>
+    <author>
+      <name>James Philbin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.06878v1</id>
+    <title>Optimization Theory for ReLU Neural Networks Trained with Normalization Layers</title>
+    <updated>2020-06-11T23:55:54Z</updated>
+    <link href="https://arxiv.org/abs/2006.06878v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.06878v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The success of deep neural networks is in part due to the use of normalization layers. Normalization layers like Batch Normalization, Layer Normalization and Weight Normalization are ubiquitous in practice, as they improve generalization performance and speed up training significantly. Nonetheless, the vast majority of current deep learning theory and non-convex optimization literature focuses on the un-normalized setting, where the functions under consideration do not exhibit the properties of commonly normalized neural networks. In this paper, we bridge this gap by giving the first global convergence result for two-layer neural networks with ReLU activations trained with a normalization layer, namely Weight Normalization. Our analysis shows how the introduction of normalization layers changes the optimization landscape and can enable faster convergence as compared with un-normalized neural networks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-11T23:55:54Z</published>
+    <arxiv:comment>To be presented at ICML 2020</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yonatan Dukler</name>
+    </author>
+    <author>
+      <name>Quanquan Gu</name>
+    </author>
+    <author>
+      <name>Guido Montúfar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2003.00744v3</id>
+    <title>PhoBERT: Pre-trained language models for Vietnamese</title>
+    <updated>2020-10-05T09:53:19Z</updated>
+    <link href="https://arxiv.org/abs/2003.00744v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2003.00744v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present PhoBERT with two versions, PhoBERT-base and PhoBERT-large, the first public large-scale monolingual language models pre-trained for Vietnamese. Experimental results show that PhoBERT consistently outperforms the recent best pre-trained multilingual model XLM-R (Conneau et al., 2020) and improves the state-of-the-art in multiple Vietnamese-specific NLP tasks including Part-of-speech tagging, Dependency parsing, Named-entity recognition and Natural language inference. We release PhoBERT to facilitate future research and downstream applications for Vietnamese NLP. Our PhoBERT models are available at https://github.com/VinAIResearch/PhoBERT</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-03-02T10:21:17Z</published>
+    <arxiv:comment>EMNLP 2020 (Findings)</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Dat Quoc Nguyen</name>
+    </author>
+    <author>
+      <name>Anh Tuan Nguyen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2004.00530v1</id>
+    <title>Learning Sparse Rewarded Tasks from Sub-Optimal Demonstrations</title>
+    <updated>2020-04-01T15:57:15Z</updated>
+    <link href="https://arxiv.org/abs/2004.00530v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2004.00530v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Model-free deep reinforcement learning (RL) has demonstrated its superiority on many complex sequential decision-making problems. However, heavy dependence on dense rewards and high sample-complexity impedes the wide adoption of these methods in real-world scenarios. On the other hand, imitation learning (IL) learns effectively in sparse-rewarded tasks by leveraging the existing expert demonstrations. In practice, collecting a sufficient amount of expert demonstrations can be prohibitively expensive, and the quality of demonstrations typically limits the performance of the learning policy. In this work, we propose Self-Adaptive Imitation Learning (SAIL) that can achieve (near) optimal performance given only a limited number of sub-optimal demonstrations for highly challenging sparse reward tasks. SAIL bridges the advantages of IL and RL to reduce the sample complexity substantially, by effectively exploiting sup-optimal demonstrations and efficiently exploring the environment to surpass the demonstrated performance. Extensive empirical results show that not only does SAIL significantly improve the sample-efficiency but also leads to much better final performance across different continuous control tasks, comparing to the state-of-the-art.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-04-01T15:57:15Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Zhuangdi Zhu</name>
+    </author>
+    <author>
+      <name>Kaixiang Lin</name>
+    </author>
+    <author>
+      <name>Bo Dai</name>
+    </author>
+    <author>
+      <name>Jiayu Zhou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2004.07683v2</id>
+    <title>Do sequence-to-sequence VAEs learn global features of sentences?</title>
+    <updated>2021-03-28T18:59:31Z</updated>
+    <link href="https://arxiv.org/abs/2004.07683v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2004.07683v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Autoregressive language models are powerful and relatively easy to train. However, these models are usually trained without explicit conditioning labels and do not offer easy ways to control global aspects such as sentiment or topic during generation. Bowman &amp; al. (2016) adapted the Variational Autoencoder (VAE) for natural language with the sequence-to-sequence architecture and claimed that the latent vector was able to capture such global features in an unsupervised manner. We question this claim. We measure which words benefit most from the latent information by decomposing the reconstruction loss per position in the sentence. Using this method, we find that VAEs are prone to memorizing the first words and the sentence length, producing local features of limited usefulness. To alleviate this, we investigate alternative architectures based on bag-of-words assumptions and language model pretraining. These variants learn latent variables that are more global, i.e., more predictive of topic or sentiment labels. Moreover, using reconstructions, we observe that they decrease memorization: the first word and the sentence length are not recovered as accurately than with the baselines, consequently yielding more diverse reconstructions.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-04-16T14:43:27Z</published>
+    <arxiv:comment>Camera-ready version, EMNLP2020</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Tom Bosc</name>
+    </author>
+    <author>
+      <name>Pascal Vincent</name>
+    </author>
+    <arxiv:doi>10.18653/v1/2020.emnlp-main.350</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.18653/v1/2020.emnlp-main.350" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2005.11870v1</id>
+    <title>Spooky Action at a Distance</title>
+    <updated>2020-05-25T00:31:27Z</updated>
+    <link href="https://arxiv.org/abs/2005.11870v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2005.11870v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This article studies quantum mechanical entanglement. We begin by illustrating why entanglement implies action at a distance. We then introduce a simple criterion for determining when a pure quantum state is entangled. Finally, we present a measure for the amount of entanglement for a pure state.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-05-25T00:31:27Z</published>
+    <arxiv:comment>A survey of entanglement for students and general reader. 13 pages</arxiv:comment>
+    <arxiv:primary_category term="quant-ph"/>
+    <arxiv:journal_ref>Quanta 2020; 9: 1-6</arxiv:journal_ref>
+    <author>
+      <name>Stan Gudder</name>
+    </author>
+    <arxiv:doi>10.12743/quanta.v9i1.113</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.12743/quanta.v9i1.113" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.06865v1</id>
+    <title>Exploring Algorithmic Fairness in Robust Graph Covering Problems</title>
+    <updated>2020-06-11T22:58:36Z</updated>
+    <link href="https://arxiv.org/abs/2006.06865v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.06865v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Fueled by algorithmic advances, AI algorithms are increasingly being deployed in settings subject to unanticipated challenges with complex social effects. Motivated by real-world deployment of AI driven, social-network based suicide prevention and landslide risk management interventions, this paper focuses on robust graph covering problems subject to group fairness constraints. We show that, in the absence of fairness constraints, state-of-the-art algorithms for the robust graph covering problem result in biased node coverage: they tend to discriminate individuals (nodes) based on membership in traditionally marginalized groups. To mitigate this issue, we propose a novel formulation of the robust graph covering problem with group fairness constraints and a tractable approximation scheme applicable to real-world instances. We provide a formal analysis of the price of group fairness (PoF) for this problem, where we show that uncertainty can lead to greater PoF. We demonstrate the effectiveness of our approach on several real-world social networks. Our method yields competitive node coverage while significantly improving group fairness relative to state-of-the-art methods.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-11T22:58:36Z</published>
+    <arxiv:comment>Accepted at 2019 Conference on Neural Information Processing Systems</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <arxiv:journal_ref>year=2019, pages=15750 to 15761</arxiv:journal_ref>
+    <author>
+      <name>Aida Rahmattalabi</name>
+    </author>
+    <author>
+      <name>Phebe Vayanos</name>
+    </author>
+    <author>
+      <name>Anthony Fulginiti</name>
+    </author>
+    <author>
+      <name>Eric Rice</name>
+    </author>
+    <author>
+      <name>Bryan Wilder</name>
+    </author>
+    <author>
+      <name>Amulya Yadav</name>
+    </author>
+    <author>
+      <name>Milind Tambe</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2004.12832v2</id>
+    <title>ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT</title>
+    <updated>2020-06-04T05:28:21Z</updated>
+    <link href="https://arxiv.org/abs/2004.12832v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2004.12832v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent progress in Natural Language Understanding (NLU) is driving fast-paced advances in Information Retrieval (IR), largely owed to fine-tuning deep language models (LMs) for document ranking. While remarkably effective, the ranking models based on these LMs increase computational cost by orders of magnitude over prior approaches, particularly as they must feed each query-document pair through a massive neural network to compute a single relevance score. To tackle this, we present ColBERT, a novel ranking model that adapts deep LMs (in particular, BERT) for efficient retrieval. ColBERT introduces a late interaction architecture that independently encodes the query and the document using BERT and then employs a cheap yet powerful interaction step that models their fine-grained similarity. By delaying and yet retaining this fine-granular interaction, ColBERT can leverage the expressiveness of deep LMs while simultaneously gaining the ability to pre-compute document representations offline, considerably speeding up query processing. Beyond reducing the cost of re-ranking the documents retrieved by a traditional model, ColBERT's pruning-friendly interaction mechanism enables leveraging vector-similarity indexes for end-to-end retrieval directly from a large document collection. We extensively evaluate ColBERT using two recent passage search datasets. Results show that ColBERT's effectiveness is competitive with existing BERT-based models (and outperforms every non-BERT baseline), while executing two orders-of-magnitude faster and requiring four orders-of-magnitude fewer FLOPs per query.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-04-27T14:21:03Z</published>
+    <arxiv:comment>Accepted at SIGIR 2020</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Omar Khattab</name>
+    </author>
+    <author>
+      <name>Matei Zaharia</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2003.01452v1</id>
+    <title>Online Joint Bid/Daily Budget Optimization of Internet Advertising Campaigns</title>
+    <updated>2020-03-03T11:07:38Z</updated>
+    <link href="https://arxiv.org/abs/2003.01452v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2003.01452v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Pay-per-click advertising includes various formats (\emph{e.g.}, search, contextual, social) with a total investment of more than 200 billion USD per year worldwide. An advertiser is given a daily budget to allocate over several, even thousands, campaigns, mainly distinguishing for the ad, target, or channel. Furthermore, publishers choose the ads to display and how to allocate them employing auctioning mechanisms, in which every day the advertisers set for each campaign a bid corresponding to the maximum amount of money per click they are willing to pay and the fraction of the daily budget to invest. In this paper, we study the problem of automating the online joint bid/daily budget optimization of pay-per-click advertising campaigns over multiple channels. We formulate our problem as a combinatorial semi-bandit problem, which requires solving a special case of the Multiple-Choice Knapsack problem every day. Furthermore, for every campaign, we capture the dependency of the number of clicks on the bid and daily budget by Gaussian Processes, thus requiring mild assumptions on the regularity of these functions. We design four algorithms and show that they suffer from a regret that is upper bounded with high probability as O(sqrt{T}), where T is the time horizon of the learning process. We experimentally evaluate our algorithms with synthetic settings generated from real data from Yahoo!, and we present the results of the adoption of our algorithms in a real-world application with a daily average spent of 1,000 Euros for more than one year.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-03-03T11:07:38Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Alessandro Nuara</name>
+    </author>
+    <author>
+      <name>Francesco Trovò</name>
+    </author>
+    <author>
+      <name>Nicola Gatti</name>
+    </author>
+    <author>
+      <name>Marcello Restelli</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2002.05798v1</id>
+    <title>Compensation of Linear Attacks to Cyber Physical Systems through ARX System Identification</title>
+    <updated>2020-02-13T22:22:19Z</updated>
+    <link href="https://arxiv.org/abs/2002.05798v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2002.05798v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Cyber-Physical Systems (CPSs) are vastly used in today's cities critical infrastructure. The cyber part of these systems usually has a network component through which cyber attacks can be launched. In this paper, we first design an intrusion detection system (IDS) by identifying the plant. We assume the initial operation period of the CPS is attack-free and learn the plant model. Then, we compare the expected output found via the identifier with the real one coming through the feedback link. Any difference greater than a threshold is deemed to be an anomaly. To compensate, once the IDS flags a change in the loop, we restart the system identification to find the new transfer function. With the estimation of the new transfer function at hand, a new controller is designed to keep the system stable. To test the idea, we took a DC motor as the plant and employed ARX identifier. MATLAB Simulink environment was used to test the proposed intrusion detection and compensation framework. We applied a set of deception attacks to the forward channel in our experiments. The obtained results prove that our detection strategy works well and timely reacts to anomalies. Moreover, they show that the compensation strategy is also effective and keeps the system stable under such attacks.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-02-13T22:22:19Z</published>
+    <arxiv:comment>9 figures, conference</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <arxiv:journal_ref>IKT 2019 proceedings</arxiv:journal_ref>
+    <author>
+      <name>Soheila Barchinezhad</name>
+    </author>
+    <author>
+      <name>Mohammad Sayad Haghighi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2004.11892v1</id>
+    <title>Template-Based Question Generation from Retrieved Sentences for Improved Unsupervised Question Answering</title>
+    <updated>2020-04-24T17:57:45Z</updated>
+    <link href="https://arxiv.org/abs/2004.11892v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2004.11892v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Question Answering (QA) is in increasing demand as the amount of information available online and the desire for quick access to this content grows. A common approach to QA has been to fine-tune a pretrained language model on a task-specific labeled dataset. This paradigm, however, relies on scarce, and costly to obtain, large-scale human-labeled data. We propose an unsupervised approach to training QA models with generated pseudo-training data. We show that generating questions for QA training by applying a simple template on a related, retrieved sentence rather than the original context sentence improves downstream QA performance by allowing the model to learn more complex context-question relationships. Training a QA model on this data gives a relative improvement over a previous unsupervised model in F1 score on the SQuAD dataset by about 14%, and 20% when the answer is a named entity, achieving state-of-the-art performance on SQuAD for unsupervised QA.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-04-24T17:57:45Z</published>
+    <arxiv:comment>ACL 2020</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Alexander R. Fabbri</name>
+    </author>
+    <author>
+      <name>Patrick Ng</name>
+    </author>
+    <author>
+      <name>Zhiguo Wang</name>
+    </author>
+    <author>
+      <name>Ramesh Nallapati</name>
+    </author>
+    <author>
+      <name>Bing Xiang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1912.09363v3</id>
+    <title>Temporal Fusion Transformers for Interpretable Multi-horizon Time Series Forecasting</title>
+    <updated>2020-09-27T14:17:28Z</updated>
+    <link href="https://arxiv.org/abs/1912.09363v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1912.09363v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multi-horizon forecasting problems often contain a complex mix of inputs -- including static (i.e. time-invariant) covariates, known future inputs, and other exogenous time series that are only observed historically -- without any prior information on how they interact with the target. While several deep learning models have been proposed for multi-step prediction, they typically comprise black-box models which do not account for the full range of inputs present in common scenarios. In this paper, we introduce the Temporal Fusion Transformer (TFT) -- a novel attention-based architecture which combines high-performance multi-horizon forecasting with interpretable insights into temporal dynamics. To learn temporal relationships at different scales, the TFT utilizes recurrent layers for local processing and interpretable self-attention layers for learning long-term dependencies. The TFT also uses specialized components for the judicious selection of relevant features and a series of gating layers to suppress unnecessary components, enabling high performance in a wide range of regimes. On a variety of real-world datasets, we demonstrate significant performance improvements over existing benchmarks, and showcase three practical interpretability use-cases of TFT.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-12-19T16:45:40Z</published>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Bryan Lim</name>
+    </author>
+    <author>
+      <name>Sercan O. Arik</name>
+    </author>
+    <author>
+      <name>Nicolas Loeff</name>
+    </author>
+    <author>
+      <name>Tomas Pfister</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1912.07753v1</id>
+    <title>A Deep Probabilistic Model for Customer Lifetime Value Prediction</title>
+    <updated>2019-12-16T23:23:48Z</updated>
+    <link href="https://arxiv.org/abs/1912.07753v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1912.07753v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurate predictions of customers' future lifetime value (LTV) given their attributes and past purchase behavior enables a more customer-centric marketing strategy. Marketers can segment customers into various buckets based on the predicted LTV and, in turn, customize marketing messages or advertising copies to serve customers in different segments better. Furthermore, LTV predictions can directly inform marketing budget allocations and improve real-time targeting and bidding of ad impressions.
+  One challenge of LTV modeling is that some customers never come back, and the distribution of LTV can be heavy-tailed. The commonly used mean squared error (MSE) loss does not accommodate the significant fraction of zero value LTV from one-time purchasers and can be sensitive to extremely large LTV's from top spenders. In this article, we model the distribution of LTV given associated features as a mixture of zero point mass and lognormal distribution, which we refer to as the zero-inflated lognormal (ZILN) distribution. This modeling approach allows us to capture the churn probability and account for the heavy-tailedness nature of LTV at the same time. It also yields straightforward uncertainty quantification of the point prediction. The ZILN loss can be used in both linear models and deep neural networks (DNN). For model evaluation, we recommend the normalized Gini coefficient to quantify model discrimination and decile charts to assess model calibration. Empirically, we demonstrate the predictive performance of our proposed model on two real-world public datasets.</summary>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-12-16T23:23:48Z</published>
+    <arxiv:primary_category term="stat.AP"/>
+    <author>
+      <name>Xiaojing Wang</name>
+    </author>
+    <author>
+      <name>Tianqi Liu</name>
+    </author>
+    <author>
+      <name>Jingang Miao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2004.04906v3</id>
+    <title>Dense Passage Retrieval for Open-Domain Question Answering</title>
+    <updated>2020-09-30T21:27:13Z</updated>
+    <link href="https://arxiv.org/abs/2004.04906v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2004.04906v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Open-domain question answering relies on efficient passage retrieval to select candidate contexts, where traditional sparse vector space models, such as TF-IDF or BM25, are the de facto method. In this work, we show that retrieval can be practically implemented using dense representations alone, where embeddings are learned from a small number of questions and passages by a simple dual-encoder framework. When evaluated on a wide range of open-domain QA datasets, our dense retriever outperforms a strong Lucene-BM25 system largely by 9%-19% absolute in terms of top-20 passage retrieval accuracy, and helps our end-to-end QA system establish new state-of-the-art on multiple open-domain QA benchmarks.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-04-10T04:53:17Z</published>
+    <arxiv:comment>EMNLP 2020</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Vladimir Karpukhin</name>
+    </author>
+    <author>
+      <name>Barlas Oğuz</name>
+    </author>
+    <author>
+      <name>Sewon Min</name>
+    </author>
+    <author>
+      <name>Patrick Lewis</name>
+    </author>
+    <author>
+      <name>Ledell Wu</name>
+    </author>
+    <author>
+      <name>Sergey Edunov</name>
+    </author>
+    <author>
+      <name>Danqi Chen</name>
+    </author>
+    <author>
+      <name>Wen-tau Yih</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2005.00065v4</id>
+    <title>Generative Adversarial Networks (GANs Survey): Challenges, Solutions, and Future Directions</title>
+    <updated>2023-04-05T09:11:18Z</updated>
+    <link href="https://arxiv.org/abs/2005.00065v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2005.00065v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Generative Adversarial Networks (GANs) is a novel class of deep generative models which has recently gained significant attention. GANs learns complex and high-dimensional distributions implicitly over images, audio, and data. However, there exists major challenges in training of GANs, i.e., mode collapse, non-convergence and instability, due to inappropriate design of network architecture, use of objective function and selection of optimization algorithm. Recently, to address these challenges, several solutions for better design and optimization of GANs have been investigated based on techniques of re-engineered network architectures, new objective functions and alternative optimization algorithms. To the best of our knowledge, there is no existing survey that has particularly focused on broad and systematic developments of these solutions. In this study, we perform a comprehensive survey of the advancements in GANs design and optimization solutions proposed to handle GANs challenges. We first identify key research issues within each design and optimization technique and then propose a new taxonomy to structure solutions by key research issues. In accordance with the taxonomy, we provide a detailed discussion on different GANs variants proposed within each solution and their relationships. Finally, based on the insights gained, we present the promising research directions in this rapidly growing field.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-04-30T19:26:46Z</published>
+    <arxiv:comment>61 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>ACM CSUR, 2021</arxiv:journal_ref>
+    <author>
+      <name>Divya Saxena</name>
+    </author>
+    <author>
+      <name>Jiannong Cao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.05479v4</id>
+    <title>Probabilistic Autoencoder</title>
+    <updated>2022-09-19T15:48:08Z</updated>
+    <link href="https://arxiv.org/abs/2006.05479v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.05479v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Principal Component Analysis (PCA) minimizes the reconstruction error given a class of linear models of fixed component dimensionality. Probabilistic PCA adds a probabilistic structure by learning the probability distribution of the PCA latent space weights, thus creating a generative model. Autoencoders (AE) minimize the reconstruction error in a class of nonlinear models of fixed latent space dimensionality and outperform PCA at fixed dimensionality. Here, we introduce the Probabilistic Autoencoder (PAE) that learns the probability distribution of the AE latent space weights using a normalizing flow (NF). The PAE is fast and easy to train and achieves small reconstruction errors, high sample quality, and good performance in downstream tasks. We compare the PAE to Variational AE (VAE), showing that the PAE trains faster, reaches a lower reconstruction error, and produces good sample quality without requiring special tuning parameters or training procedures. We further demonstrate that the PAE is a powerful model for performing the downstream tasks of probabilistic image reconstruction in the context of Bayesian inference of inverse problems for inpainting and denoising applications. Finally, we identify latent space density from NF as a promising outlier detection metric.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-09T19:43:35Z</published>
+    <arxiv:comment>Accepted version. Code available at https://github.com/VMBoehm/PAE</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Vanessa Böhm</name>
+    </author>
+    <author>
+      <name>Uroš Seljak</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2004.14884v3</id>
+    <title>Few-Shot Learning for Opinion Summarization</title>
+    <updated>2020-10-10T06:30:38Z</updated>
+    <link href="https://arxiv.org/abs/2004.14884v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2004.14884v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Opinion summarization is the automatic creation of text reflecting subjective information expressed in multiple documents, such as user reviews of a product. The task is practically important and has attracted a lot of attention. However, due to the high cost of summary production, datasets large enough for training supervised models are lacking. Instead, the task has been traditionally approached with extractive methods that learn to select text fragments in an unsupervised or weakly-supervised way. Recently, it has been shown that abstractive summaries, potentially more fluent and better at reflecting conflicting information, can also be produced in an unsupervised fashion. However, these models, not being exposed to actual summaries, fail to capture their essential properties. In this work, we show that even a handful of summaries is sufficient to bootstrap generation of the summary text with all expected properties, such as writing style, informativeness, fluency, and sentiment preservation. We start by training a conditional Transformer language model to generate a new product review given other available reviews of the product. The model is also conditioned on review properties that are directly related to summaries; the properties are derived from reviews with no manual effort. In the second stage, we fine-tune a plug-in module that learns to predict property values on a handful of summaries. This lets us switch the generator to the summarization mode. We show on Amazon and Yelp datasets that our approach substantially outperforms previous extractive and abstractive methods in automatic and human evaluation.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-04-30T15:37:38Z</published>
+    <arxiv:comment>EMNLP 2020</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Arthur Bražinskas</name>
+    </author>
+    <author>
+      <name>Mirella Lapata</name>
+    </author>
+    <author>
+      <name>Ivan Titov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.04768v3</id>
+    <title>Linformer: Self-Attention with Linear Complexity</title>
+    <updated>2020-06-14T08:15:54Z</updated>
+    <link href="https://arxiv.org/abs/2006.04768v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.04768v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large transformer models have shown extraordinary success in achieving state-of-the-art results in many natural language processing applications. However, training and deploying these models can be prohibitively costly for long sequences, as the standard self-attention mechanism of the Transformer uses $O(n^2)$ time and space with respect to sequence length. In this paper, we demonstrate that the self-attention mechanism can be approximated by a low-rank matrix. We further exploit this finding to propose a new self-attention mechanism, which reduces the overall self-attention complexity from $O(n^2)$ to $O(n)$ in both time and space. The resulting linear transformer, the \textit{Linformer}, performs on par with standard Transformer models, while being much more memory- and time-efficient.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-08T17:37:52Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Sinong Wang</name>
+    </author>
+    <author>
+      <name>Belinda Z. Li</name>
+    </author>
+    <author>
+      <name>Madian Khabsa</name>
+    </author>
+    <author>
+      <name>Han Fang</name>
+    </author>
+    <author>
+      <name>Hao Ma</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.05679v1</id>
+    <title>Dense and sparse vertex connectivity in networks</title>
+    <updated>2020-06-10T06:27:07Z</updated>
+    <link href="https://arxiv.org/abs/2006.05679v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.05679v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The different approaches developed to analyze the structure of complex networks have generated a large number of studies. In the field of social networks at least, studies mainly address the detection and analysis of communities. In this paper, we challenge these approaches and focus on nodes that have meaningful local interactions able to identify the internal organization of communities or the way communities are assembled. We propose an algorithm, ItRich, to identify this type of nodes, based on the decomposition of a graph into successive, less and less dense, layers. Our method is tested on synthetic and real data sets and meshes well with other methods such as community detection or k-core decomposition.</summary>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-10T06:27:07Z</published>
+    <arxiv:primary_category term="cs.SI"/>
+    <author>
+      <name>Djellabi Mehdi</name>
+    </author>
+    <author>
+      <name>Jouve Bertrand</name>
+    </author>
+    <author>
+      <name>Amblard Frédéric</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2004.07208v2</id>
+    <title>Why integral equations should be used instead of differential equations to describe the dynamics of epidemics</title>
+    <updated>2020-04-27T16:15:56Z</updated>
+    <link href="https://arxiv.org/abs/2004.07208v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2004.07208v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It is of vital importance to understand and track the dynamics of rapidly unfolding epidemics. The health and economic consequences of the current COVID-19 pandemic provide a poignant case. Here we point out that since they are based on differential equations, the most widely used models of epidemic spread are plagued by an approximation that is not justified in the case of the current COVID-19 pandemic. Taking the example of data from New York City, we show that currently used models significantly underestimate the initial basic reproduction number ($R_0$). The correct description, based on integral equations, can be implemented in most of the reported models and it much more accurately accounts for the dynamics of the epidemic after sharp changes in $R_0$ due to restrictive public congregation measures. It also provides a novel way to determine the incubation period, and most importantly, as we demonstrate for several countries, this method allows an accurate monitoring of $R_0$ and thus a fine-tuning of any restrictive measures. Integral equation based models do not only provide the conceptually correct description, they also have more predictive power than differential equation based models, therefore we do not see any reason for using the latter.</summary>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-04-15T17:09:44Z</published>
+    <arxiv:comment>11 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="q-bio.PE"/>
+    <author>
+      <name>Z. Fodor</name>
+    </author>
+    <author>
+      <name>S. D. Katz</name>
+    </author>
+    <author>
+      <name>T. G. Kovacs</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2003.12345v1</id>
+    <title>Covering minimal separators and potential maximal cliques in $P_t$-free graphs</title>
+    <updated>2020-03-27T11:54:41Z</updated>
+    <link href="https://arxiv.org/abs/2003.12345v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2003.12345v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A graph is called $P_t$-free} if it does not contain a $t$-vertex path as an induced subgraph. While $P_4$-free graphs are exactly cographs, the structure of $P_t$-free graphs for $t \geq 5$ remains little understood. On one hand, classic computational problems such as Maximum Weight Independent Set (MWIS) and $3$-Coloring are not known to be NP-hard on $P_t$-free graphs for any fixed $t$. On the other hand, despite significant effort, polynomial-time algorithms for MWIS in $P_6$-free graphs~[SODA 2019] and $3$-Coloring in $P_7$-free graphs~[Combinatorica 2018] have been found only recently. In both cases, the algorithms rely on deep structural insights into the considered graph classes.
+  One of the main tools in the algorithms for MWIS in $P_5$-free graphs~[SODA 2014] and in $P_6$-free graphs~[SODA 2019] is the so-called Separator Covering Lemma that asserts that every minimal separator in the graph can be covered by the union of neighborhoods of a constant number of vertices. In this note we show that such a statement generalizes to $P_7$-free graphs and is false in $P_8$-free graphs. We also discuss analogues of such a statement for covering potential maximal cliques with unions of neighborhoods.</summary>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-03-27T11:54:41Z</published>
+    <arxiv:primary_category term="cs.DM"/>
+    <author>
+      <name>Andrzej Grzesik</name>
+    </author>
+    <author>
+      <name>Tereza Klimošová</name>
+    </author>
+    <author>
+      <name>Marcin Pilipczuk</name>
+    </author>
+    <author>
+      <name>Michał Pilipczuk</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2003.08823v4</id>
+    <title>Conditional Gaussian Distribution Learning for Open Set Recognition</title>
+    <updated>2021-02-09T11:52:11Z</updated>
+    <link href="https://arxiv.org/abs/2003.08823v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2003.08823v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deep neural networks have achieved state-of-the-art performance in a wide range of recognition/classification tasks. However, when applying deep learning to real-world applications, there are still multiple challenges. A typical challenge is that unknown samples may be fed into the system during the testing phase and traditional deep neural networks will wrongly recognize the unknown sample as one of the known classes. Open set recognition is a potential solution to overcome this problem, where the open set classifier should have the ability to reject unknown samples as well as maintain high classification accuracy on known classes. The variational auto-encoder (VAE) is a popular model to detect unknowns, but it cannot provide discriminative representations for known classification. In this paper, we propose a novel method, Conditional Gaussian Distribution Learning (CGDL), for open set recognition. In addition to detecting unknown samples, this method can also classify known samples by forcing different latent features to approximate different Gaussian models. Meanwhile, to avoid information hidden in the input vanishing in the middle layers, we also adopt the probabilistic ladder architecture to extract high-level abstract features. Experiments on several standard image datasets reveal that the proposed method significantly outperforms the baseline method and achieves new state-of-the-art results.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-03-19T14:32:08Z</published>
+    <arxiv:comment>Accepted to CVPR2020</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Xin Sun</name>
+    </author>
+    <author>
+      <name>Zhenning Yang</name>
+    </author>
+    <author>
+      <name>Chi Zhang</name>
+    </author>
+    <author>
+      <name>Guohao Peng</name>
+    </author>
+    <author>
+      <name>Keck-Voon Ling</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2004.05718v5</id>
+    <title>Principal Neighbourhood Aggregation for Graph Nets</title>
+    <updated>2020-12-31T08:23:06Z</updated>
+    <link href="https://arxiv.org/abs/2004.05718v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2004.05718v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Graph Neural Networks (GNNs) have been shown to be effective models for different predictive tasks on graph-structured data. Recent work on their expressive power has focused on isomorphism tasks and countable feature spaces. We extend this theoretical framework to include continuous features - which occur regularly in real-world input domains and within the hidden layers of GNNs - and we demonstrate the requirement for multiple aggregation functions in this context. Accordingly, we propose Principal Neighbourhood Aggregation (PNA), a novel architecture combining multiple aggregators with degree-scalers (which generalize the sum aggregator). Finally, we compare the capacity of different models to capture and exploit the graph structure via a novel benchmark containing multiple tasks taken from classical graph theory, alongside existing benchmarks from real-world domains, all of which demonstrate the strength of our model. With this work, we hope to steer some of the GNN research towards new aggregation methods which we believe are essential in the search for powerful and robust models.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-04-12T23:30:00Z</published>
+    <arxiv:comment>34th Conference on Neural Information Processing Systems (NeurIPS 2020)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Gabriele Corso</name>
+    </author>
+    <author>
+      <name>Luca Cavalleri</name>
+    </author>
+    <author>
+      <name>Dominique Beaini</name>
+    </author>
+    <author>
+      <name>Pietro Liò</name>
+    </author>
+    <author>
+      <name>Petar Veličković</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2005.11401v4</id>
+    <title>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</title>
+    <updated>2021-04-12T15:42:18Z</updated>
+    <link href="https://arxiv.org/abs/2005.11401v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2005.11401v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large pre-trained language models have been shown to store factual knowledge in their parameters, and achieve state-of-the-art results when fine-tuned on downstream NLP tasks. However, their ability to access and precisely manipulate knowledge is still limited, and hence on knowledge-intensive tasks, their performance lags behind task-specific architectures. Additionally, providing provenance for their decisions and updating their world knowledge remain open research problems. Pre-trained models with a differentiable access mechanism to explicit non-parametric memory can overcome this issue, but have so far been only investigated for extractive downstream tasks. We explore a general-purpose fine-tuning recipe for retrieval-augmented generation (RAG) -- models which combine pre-trained parametric and non-parametric memory for language generation. We introduce RAG models where the parametric memory is a pre-trained seq2seq model and the non-parametric memory is a dense vector index of Wikipedia, accessed with a pre-trained neural retriever. We compare two RAG formulations, one which conditions on the same retrieved passages across the whole generated sequence, the other can use different passages per token. We fine-tune and evaluate our models on a wide range of knowledge-intensive NLP tasks and set the state-of-the-art on three open domain QA tasks, outperforming parametric seq2seq models and task-specific retrieve-and-extract architectures. For language generation tasks, we find that RAG models generate more specific, diverse and factual language than a state-of-the-art parametric-only seq2seq baseline.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-05-22T21:34:34Z</published>
+    <arxiv:comment>Accepted at NeurIPS 2020</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Patrick Lewis</name>
+    </author>
+    <author>
+      <name>Ethan Perez</name>
+    </author>
+    <author>
+      <name>Aleksandra Piktus</name>
+    </author>
+    <author>
+      <name>Fabio Petroni</name>
+    </author>
+    <author>
+      <name>Vladimir Karpukhin</name>
+    </author>
+    <author>
+      <name>Naman Goyal</name>
+    </author>
+    <author>
+      <name>Heinrich Küttler</name>
+    </author>
+    <author>
+      <name>Mike Lewis</name>
+    </author>
+    <author>
+      <name>Wen-tau Yih</name>
+    </author>
+    <author>
+      <name>Tim Rocktäschel</name>
+    </author>
+    <author>
+      <name>Sebastian Riedel</name>
+    </author>
+    <author>
+      <name>Douwe Kiela</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.03589v3</id>
+    <title>Higher-Order Explanations of Graph Neural Networks via Relevant Walks</title>
+    <updated>2020-11-27T04:10:00Z</updated>
+    <link href="https://arxiv.org/abs/2006.03589v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.03589v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Graph Neural Networks (GNNs) are a popular approach for predicting graph structured data. As GNNs tightly entangle the input graph into the neural network structure, common explainable AI approaches are not applicable. To a large extent, GNNs have remained black-boxes for the user so far. In this paper, we show that GNNs can in fact be naturally explained using higher-order expansions, i.e. by identifying groups of edges that jointly contribute to the prediction. Practically, we find that such explanations can be extracted using a nested attribution scheme, where existing techniques such as layer-wise relevance propagation (LRP) can be applied at each step. The output is a collection of walks into the input graph that are relevant for the prediction. Our novel explanation method, which we denote by GNN-LRP, is applicable to a broad range of graph neural networks and lets us extract practically relevant insights on sentiment analysis of text data, structure-property relationships in quantum chemistry, and image classification.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-05T17:59:14Z</published>
+    <arxiv:comment>14 pages + 6 pages supplement</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Thomas Schnake</name>
+    </author>
+    <author>
+      <name>Oliver Eberle</name>
+    </author>
+    <author>
+      <name>Jonas Lederer</name>
+    </author>
+    <author>
+      <name>Shinichi Nakajima</name>
+    </author>
+    <author>
+      <name>Kristof T. Schütt</name>
+    </author>
+    <author>
+      <name>Klaus-Robert Müller</name>
+    </author>
+    <author>
+      <name>Grégoire Montavon</name>
+    </author>
+    <arxiv:doi>10.1109/TPAMI.2021.3115452</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/TPAMI.2021.3115452" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2005.12345v1</id>
+    <title>Transparent IFC Enforcement: Possibility and (In)Efficiency Results</title>
+    <updated>2020-05-25T18:58:28Z</updated>
+    <link href="https://arxiv.org/abs/2005.12345v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2005.12345v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Information Flow Control (IFC) is a collection of techniques for ensuring a no-write-down no-read-up style security policy known as noninterference. Traditional methods for both static and dynamic IFC suffer from untenable numbers of false alarms on real-world programs. Secure Multi-Execution (SME) promises to provide secure IFC without modifying the behaviour of already secure programs, a property known as transparency. Implementations of SME exist for the web and as plug-ins to several programming languages. Furthermore, SME can in theory work in a black-box manner, meaning that it can be programming language agnostic, making it perfect for securing legacy or third-party systems. As such SME, and its variants like Multiple Facets (MF) and Faceted Secure Multi-Execution (FSME), appear to be a family of panaceas for the security engineer. The question is, how come, given all these advantages, that these techniques are not ubiquitous in practice? The answer lies, partially, in the issue of runtime and memory overhead. SME and its variants are prohibitively expensive to deploy in many non-trivial situations. Why is this the case? On the surface, the reason is simple. The techniques in the SME family all rely on the idea of multi-execution, running all or parts of a program multiple times to achieve noninterference. Naturally, this causes overhead. However, the goal in the IFC community has been to overcome these overheads. In this paper we argue that there are fundamental reasons to expect this not to be possible and prove two key theorems: 1. All transparent enforcement is polynomial time equivalent to multi-execution. 2. All black-box enforcement takes time exponential in the number of principals in the security lattice. We also answer, in the affirmative, an open question about the possibility of transparently enforcing the TINI security condition.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-05-25T18:58:28Z</published>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Maximilian Algehed</name>
+    </author>
+    <author>
+      <name>Cormac Flanagan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.04967v1</id>
+    <title>Summarising Big Data: Common GitHub Dataset for Software Engineering Challenges</title>
+    <updated>2020-06-08T22:21:25Z</updated>
+    <link href="https://arxiv.org/abs/2006.04967v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.04967v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In open-source software development environments; textual, numerical and relationship-based data generated are of interest to researchers. Various data sets are available for this data, which is frequently used in areas such as software engineering and natural language processing. However, since these data sets contain all the data in the environment, the problem arises in the terabytes of data processing. For this reason, almost all of the studies using GitHub data use filtered data according to certain criteria. In this context, using a different data set in each study makes a comparison of the accuracy of the studies quite difficult. In order to solve this problem, a common dataset was created and shared with the researchers, which would allow us to work on many software engineering problems.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-08T22:21:25Z</published>
+    <arxiv:comment>7 pages, The article was submitted to Cumhuriyet Science Journal</arxiv:comment>
+    <arxiv:primary_category term="cs.SE"/>
+    <arxiv:journal_ref>Cumhuriyet Science Journal, 41, (2020), 720-724</arxiv:journal_ref>
+    <author>
+      <name>Abdulkadir Şeker</name>
+    </author>
+    <author>
+      <name>Banu Diri</name>
+    </author>
+    <author>
+      <name>Halil Arslan</name>
+    </author>
+    <arxiv:doi>10.17776/csj.728932</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.17776/csj.728932" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2002.10561v2</id>
+    <title>Learning the mapping $\mathbf{x}\mapsto \sum_{i=1}^d x_i^2$: the cost of finding the needle in a haystack</title>
+    <updated>2020-05-16T21:14:02Z</updated>
+    <link href="https://arxiv.org/abs/2002.10561v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2002.10561v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The task of using machine learning to approximate the mapping $\mathbf{x}\mapsto\sum_{i=1}^d x_i^2$ with $x_i\in[-1,1]$ seems to be a trivial one. Given the knowledge of the separable structure of the function, one can design a sparse network to represent the function very accurately, or even exactly. When such structural information is not available, and we may only use a dense neural network, the optimization procedure to find the sparse network embedded in the dense network is similar to finding the needle in a haystack, using a given number of samples of the function. We demonstrate that the cost (measured by sample complexity) of finding the needle is directly related to the Barron norm of the function. While only a small number of samples is needed to train a sparse network, the dense network trained with the same number of samples exhibits large test loss and a large generalization gap. In order to control the size of the generalization gap, we find that the use of explicit regularization becomes increasingly more important as $d$ increases. The numerically observed sample complexity with explicit regularization scales as $\mathcal{O}(d^{2.5})$, which is in fact better than the theoretically predicted sample complexity that scales as $\mathcal{O}(d^{4})$. Without explicit regularization (also called implicit regularization), the numerically observed sample complexity is significantly higher and is close to $\mathcal{O}(d^{4.5})$.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-02-24T21:58:22Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jiefu Zhang</name>
+    </author>
+    <author>
+      <name>Leonardo Zepeda-Núñez</name>
+    </author>
+    <author>
+      <name>Yuan Yao</name>
+    </author>
+    <author>
+      <name>Lin Lin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.05432v3</id>
+    <title>Finding New Physics without learning about it: Anomaly Detection as a tool for Searches at Colliders</title>
+    <updated>2021-11-29T11:55:19Z</updated>
+    <link href="https://arxiv.org/abs/2006.05432v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.05432v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we propose a new strategy, based on anomaly detection methods, to search for new physics phenomena at colliders independently of the details of such new events. For this purpose, machine learning techniques are trained using Standard Model events, with the corresponding outputs being sensitive to physics beyond it. We explore three novel AD methods in HEP: Isolation Forest, Histogram Based Outlier Detection, and Deep Support Vector Data Description; alongside the most customary Autoencoder. In order to evaluate the sensitivity of the proposed approach, predictions from specific new physics models are considered and compared to those achieved when using fully supervised deep neural networks. A comparison between shallow and deep anomaly detection techniques is also presented. Our results demonstrate the potential of semi-supervised anomaly detection techniques to extensively explore the present and future hadron colliders' data.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-09T18:03:29Z</published>
+    <arxiv:comment>25 pages, 8 figures, 3 tables. Update corresponds to the consolidation of the published EPJC version plus the corresponding erratum</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>Eur.Phys.J.C 81 (2021) 1, 27, Eur.Phys.J.C 81 (2021) 11, 1020 (erratum)</arxiv:journal_ref>
+    <author>
+      <name>M. Crispim Romao</name>
+    </author>
+    <author>
+      <name>N. F. Castro</name>
+    </author>
+    <author>
+      <name>R. Pedro</name>
+    </author>
+    <arxiv:doi>10.1140/epjc/s10052-020-08807-w</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epjc/s10052-020-08807-w" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1912.02572v3</id>
+    <title>Dynamic Pricing on E-commerce Platform with Deep Reinforcement Learning: A Field Experiment</title>
+    <updated>2021-08-31T01:42:10Z</updated>
+    <link href="https://arxiv.org/abs/1912.02572v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1912.02572v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we present an end-to-end framework for addressing the problem of dynamic pricing (DP) on E-commerce platform using methods based on deep reinforcement learning (DRL). By using four groups of different business data to represent the states of each time period, we model the dynamic pricing problem as a Markov Decision Process (MDP). Compared with the state-of-the-art DRL-based dynamic pricing algorithms, our approaches make the following three contributions. First, we extend the discrete set problem to the continuous price set. Second, instead of using revenue as the reward function directly, we define a new function named difference of revenue conversion rates (DRCR). Third, the cold-start problem of MDP is tackled by pre-training and evaluation using some carefully chosen historical sales data. Our approaches are evaluated by both offline evaluation method using real dataset of Alibaba Inc., and online field experiments starting from July 2018 with thousands of items, lasting for months on Tmall.com. To our knowledge, there is no other DP field experiment using DRL before. Field experiment results suggest that DRCR is a more appropriate reward function than revenue, which is widely used by current literature. Also, continuous price sets have better performance than discrete sets and our approaches significantly outperformed the manual pricing by operation experts.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-12-05T13:41:03Z</published>
+    <arxiv:comment>9 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jiaxi Liu</name>
+    </author>
+    <author>
+      <name>Yidong Zhang</name>
+    </author>
+    <author>
+      <name>Xiaoqing Wang</name>
+    </author>
+    <author>
+      <name>Yuming Deng</name>
+    </author>
+    <author>
+      <name>Xingyu Wu</name>
+    </author>
+  </entry>
+</feed>

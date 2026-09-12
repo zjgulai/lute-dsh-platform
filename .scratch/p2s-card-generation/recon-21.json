@@ -1,0 +1,216 @@
+[
+  {
+    "card": "Skill-Cleanroom-Audience-Collaboration",
+    "excerpt_lines": 1,
+    "commits": 2,
+    "hist_checked": 1,
+    "found_rev": "a51a8f40cb1c94f99436df021c0267fe73749037|2026-07-07|fix(quality): 全量三轨注入+无代码补全+✓标记修复",
+    "head_fences": [
+      223
+    ]
+  },
+  {
+    "card": "Skill-Compliance-Scored-Guardrail-Orchestration",
+    "excerpt_lines": 1,
+    "commits": 4,
+    "hist_checked": 1,
+    "found_rev": "a51a8f40cb1c94f99436df021c0267fe73749037|2026-07-07|fix(quality): 全量三轨注入+无代码补全+✓标记修复",
+    "head_fences": [
+      21,
+      1
+    ]
+  },
+  {
+    "card": "Skill-Context-Kubernetes-KB-Orchestration",
+    "excerpt_lines": 1,
+    "commits": 2,
+    "hist_checked": 1,
+    "found_rev": "a51a8f40cb1c94f99436df021c0267fe73749037|2026-07-07|fix(quality): 全量三轨注入+无代码补全+✓标记修复",
+    "head_fences": [
+      338
+    ]
+  },
+  {
+    "card": "Skill-Cost-Aware-Agent-Scheduling",
+    "excerpt_lines": 1,
+    "commits": 6,
+    "hist_checked": 1,
+    "found_rev": "6a63196d2dcbb830f1c9b3073f2292a0c7fad88f|2026-07-16|feat(S4-孤岛消除): 364个孤岛归零 → 图谱边数12989→14829(+1840)",
+    "head_fences": [
+      333
+    ]
+  },
+  {
+    "card": "Skill-Cost-Plus-Dynamic-Tariff-Pricing",
+    "excerpt_lines": 1,
+    "commits": 1,
+    "hist_checked": 1,
+    "found_rev": "4a4fa0d49e44dfaa50a730293a61dc6269af53d9|2026-07-17|feat(T1+T2): 孤岛清零+稀疏链补强+三域规模补齐 → 1338 Skills / 14901边",
+    "head_fences": [
+      14
+    ]
+  },
+  {
+    "card": "Skill-Flash-Sale-Price-Optimization",
+    "excerpt_lines": 1,
+    "commits": 1,
+    "hist_checked": 1,
+    "found_rev": "4a4fa0d49e44dfaa50a730293a61dc6269af53d9|2026-07-17|feat(T1+T2): 孤岛清零+稀疏链补强+三域规模补齐 → 1338 Skills / 14901边",
+    "head_fences": [
+      22
+    ]
+  },
+  {
+    "card": "Skill-Graph-OKB-Design-SC",
+    "excerpt_lines": 1,
+    "commits": 5,
+    "hist_checked": 1,
+    "found_rev": "6a63196d2dcbb830f1c9b3073f2292a0c7fad88f|2026-07-16|feat(S4-孤岛消除): 364个孤岛归零 → 图谱边数12989→14829(+1840)",
+    "head_fences": [
+      253
+    ]
+  },
+  {
+    "card": "Skill-MAS-Orchestrator",
+    "excerpt_lines": 1,
+    "commits": 3,
+    "hist_checked": 1,
+    "found_rev": "13e2aff0aa3da113c1e24631736d88906e9dff65|2026-07-05|feat(evolution): darwin_evolve v2.0 + 批量Skill质量提升",
+    "head_fences": [
+      2,
+      52
+    ]
+  },
+  {
+    "card": "Skill-Memory-as-Action",
+    "excerpt_lines": 1,
+    "commits": 2,
+    "hist_checked": 1,
+    "found_rev": "8b1f5e7e3cfec03ac1f193d715ce20f5d09ffbc1|2026-07-06|feat(p1+p2): 进化v3修复+新增17个Skill",
+    "head_fences": [
+      46
+    ]
+  },
+  {
+    "card": "Skill-Multi-Objective-Budget-Allocation",
+    "excerpt_lines": 1,
+    "commits": 4,
+    "hist_checked": 1,
+    "found_rev": "faa547f203e6b096e813ee5f96458dbfaf84cbd6|2026-07-15|fix(audit-s2): 79个frontmatter补全 + 5个wiki链接 + 2个测试标记 + 图谱边+35",
+    "head_fences": [
+      345
+    ]
+  },
+  {
+    "card": "Skill-Ontology-Schema-Design",
+    "excerpt_lines": 1,
+    "commits": 6,
+    "hist_checked": 1,
+    "found_rev": "6a63196d2dcbb830f1c9b3073f2292a0c7fad88f|2026-07-16|feat(S4-孤岛消除): 364个孤岛归零 → 图谱边数12989→14829(+1840)",
+    "head_fences": [
+      473
+    ]
+  },
+  {
+    "card": "Skill-Property-Graph-Query-Optimization",
+    "excerpt_lines": 1,
+    "commits": 5,
+    "hist_checked": 1,
+    "found_rev": "6a63196d2dcbb830f1c9b3073f2292a0c7fad88f|2026-07-16|feat(S4-孤岛消除): 364个孤岛归零 → 图谱边数12989→14829(+1840)",
+    "head_fences": [
+      158
+    ]
+  },
+  {
+    "card": "Skill-ReAct-Reasoning-Acting",
+    "excerpt_lines": 1,
+    "commits": 5,
+    "hist_checked": 1,
+    "found_rev": "faa547f203e6b096e813ee5f96458dbfaf84cbd6|2026-07-15|fix(audit-s2): 79个frontmatter补全 + 5个wiki链接 + 2个测试标记 + 图谱边+35",
+    "head_fences": [
+      2,
+      57
+    ]
+  },
+  {
+    "card": "Skill-Realtime-Feature-Collection",
+    "excerpt_lines": 1,
+    "commits": 5,
+    "hist_checked": 1,
+    "found_rev": "cd11549b98f0089c38c5cf2937b94c3927528dac|2026-07-15|fix(audit-s1): 部署1210 Skills上线 + 修复65个yaml错误 + 4处SyntaxWarning + AGENTS.md全量更新",
+    "head_fences": [
+      601
+    ]
+  },
+  {
+    "card": "Skill-Reflexion-Self-Improvement",
+    "excerpt_lines": 1,
+    "commits": 6,
+    "hist_checked": 1,
+    "found_rev": "6a63196d2dcbb830f1c9b3073f2292a0c7fad88f|2026-07-16|feat(S4-孤岛消除): 364个孤岛归零 → 图谱边数12989→14829(+1840)",
+    "head_fences": [
+      2,
+      45
+    ]
+  },
+  {
+    "card": "Skill-SC-Agent-MCP-ERP-Integration",
+    "excerpt_lines": 1,
+    "commits": 4,
+    "hist_checked": 1,
+    "found_rev": "a51a8f40cb1c94f99436df021c0267fe73749037|2026-07-07|fix(quality): 全量三轨注入+无代码补全+✓标记修复",
+    "head_fences": [
+      288
+    ]
+  },
+  {
+    "card": "Skill-SLM-Tool-Calling-Optimization",
+    "excerpt_lines": 1,
+    "commits": 4,
+    "hist_checked": 4,
+    "found_rev": null,
+    "head_fences": [
+      2
+    ]
+  },
+  {
+    "card": "Skill-SQL-Agent-Text-to-SQL",
+    "excerpt_lines": 1,
+    "commits": 6,
+    "hist_checked": 1,
+    "found_rev": "a51a8f40cb1c94f99436df021c0267fe73749037|2026-07-07|fix(quality): 全量三轨注入+无代码补全+✓标记修复",
+    "head_fences": [
+      228
+    ]
+  },
+  {
+    "card": "Skill-Skill-Lifecycle-Design",
+    "excerpt_lines": 1,
+    "commits": 2,
+    "hist_checked": 1,
+    "found_rev": "a51a8f40cb1c94f99436df021c0267fe73749037|2026-07-07|fix(quality): 全量三轨注入+无代码补全+✓标记修复",
+    "head_fences": [
+      52
+    ]
+  },
+  {
+    "card": "Skill-Trajectory-Pattern-Mining",
+    "excerpt_lines": 1,
+    "commits": 5,
+    "hist_checked": 1,
+    "found_rev": "cd11549b98f0089c38c5cf2937b94c3927528dac|2026-07-15|fix(audit-s1): 部署1210 Skills上线 + 修复65个yaml错误 + 4处SyntaxWarning + AGENTS.md全量更新",
+    "head_fences": [
+      784
+    ]
+  },
+  {
+    "card": "Skill-Visual-Data-Collection",
+    "excerpt_lines": 1,
+    "commits": 5,
+    "hist_checked": 1,
+    "found_rev": "cd11549b98f0089c38c5cf2937b94c3927528dac|2026-07-15|fix(audit-s1): 部署1210 Skills上线 + 修复65个yaml错误 + 4处SyntaxWarning + AGENTS.md全量更新",
+    "head_fences": [
+      394
+    ]
+  }
+]

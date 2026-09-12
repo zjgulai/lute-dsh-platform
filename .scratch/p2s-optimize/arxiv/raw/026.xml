@@ -1,0 +1,1342 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/68IccubyWpfw7s4tyiOZdpfMp3Y</id>
+  <title>arXiv Query: search_query=&amp;id_list=2602.19843,2602.20867,2602.21082,2602.23620,2602.24262,2603.00476,2603.01145,2603.02184,2603.02816,2603.04474,2603.05134,2603.08332,2603.08835,2603.08852,2603.12056,2603.13032,2603.13110,2603.13398,2603.13940,2603.14057,2603.14688,2603.14864,2603.15661,2603.16815,2603.20059,2603.25248,2603.25737,2603.29161,2603.29261,2604.00344,2604.00513,2604.01020,2604.01687,2604.02042,2604.03724,2604.05289,2604.05987,2604.06718,2604.07585,2604.08618&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:44:28Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2602.19843,2602.20867,2602.21082,2602.23620,2602.24262,2603.00476,2603.01145,2603.02184,2603.02816,2603.04474,2603.05134,2603.08332,2603.08835,2603.08852,2603.12056,2603.13032,2603.13110,2603.13398,2603.13940,2603.14057,2603.14688,2603.14864,2603.15661,2603.16815,2603.20059,2603.25248,2603.25737,2603.29161,2603.29261,2604.00344,2604.00513,2604.01020,2604.01687,2604.02042,2604.03724,2604.05289,2604.05987,2604.06718,2604.07585,2604.08618" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2604.03724v2</id>
+    <title>Rank, Don't Generate: Statement-level Ranking for Explainable Recommendation</title>
+    <updated>2026-06-25T13:28:29Z</updated>
+    <link href="https://arxiv.org/abs/2604.03724v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.03724v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Textual explanations, generated with large language models (LLMs), are increasingly used to justify recommendations. Yet, evaluating these explanations remains a critical challenge. We advocate a shift in objective: rank, don't generate. We formalize explainable recommendation as a statement-level ranking problem, where systems rank candidate explanatory statements derived from reviews and return the top-k as explanation. This formulation mitigates hallucination by construction and enables fine-grained factual analysis. It also models factor importance through relevance scores and supports standardized, reproducible evaluation with established ranking metrics. Meaningful assessment, however, requires each statement to be explanatory (item facts affecting user experience), atomic (one opinion about one aspect), and unique (paraphrases consolidated), which is challenging to obtain from noisy reviews. We address this with (i) an LLM-based extraction pipeline producing explanatory and atomic statements, and (ii) a scalable, semantic clustering method consolidating paraphrases to enforce uniqueness. Building on this pipeline, we introduce StaR, a benchmark for statement ranking in explainable recommendation, constructed from four Amazon Reviews 2014 product categories. We evaluate popularity-based baselines and state-of-the-art models under global-level (all statements) and item-level (target item statements) ranking. Popularity baselines are competitive in global-level ranking but outperform state-of-the-art models on average in item-level ranking, exposing critical limitations in personalized explanation ranking.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-04T13:01:45Z</published>
+    <arxiv:comment>12 pages, 7 tables, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Ben Kabongo</name>
+    </author>
+    <author>
+      <name>Arthur Satouf</name>
+    </author>
+    <author>
+      <name>Vincent Guigue</name>
+    </author>
+    <arxiv:doi>10.1145/3805713.3820414</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3805713.3820414" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.02042v1</id>
+    <title>A Fenchel Theorem for the Gauss maps and uniqueness of minimizers of nonlocal curvature energies</title>
+    <updated>2026-04-02T13:47:59Z</updated>
+    <link href="https://arxiv.org/abs/2604.02042v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.02042v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we prove a Fenchel theorem for Gauss maps by providing sharp lower bounds for the path length of Gauss maps of an embedding. By combining the Fenchel-type theorem with various techniques from the field of geometric analysis, we show that circles minimize most generalized tangent-point energies. Furthermore, we prove that disks minimize all fractional Willmore energies among the class of convex planar sets.</summary>
+    <category term="math.CA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-02T13:47:59Z</published>
+    <arxiv:primary_category term="math.CA"/>
+    <author>
+      <name>Elias Döhrer</name>
+    </author>
+    <author>
+      <name>Alexander Dohmen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.13110v1</id>
+    <title>AgentRM: An OS-Inspired Resource Manager for LLM Agent Systems</title>
+    <updated>2026-03-13T16:07:20Z</updated>
+    <link href="https://arxiv.org/abs/2603.13110v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.13110v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Model (LLM) agent systems have experienced rapid adoption across diverse domains, yet they suffer from critical user experience problems that limit their practical deployment. Through an empirical analysis of over 40,000 GitHub issues from six major agent frameworks (OpenClaw, AutoGen, CrewAI, LangGraph, Codex, Claude Code), we identify two fundamental resource management challenges: (1) scheduling failures leading to system unresponsiveness due to blocking, zombie processes, and rate limit cascades, and (2) context degradation causing agent "amnesia" from unbounded memory growth and poor retention policies. Drawing inspiration from decades of operating systems research, we present AgentRM, a middleware resource manager that treats agent resources analogously to OS resources. AgentRM employs a Multi-Level Feedback Queue (MLFQ) scheduler with zombie reaping and rate-limit-aware admission control, coupled with a three-tier Context Lifecycle Manager that implements adaptive compaction and hibernation mechanisms. Our evaluation demonstrates significant improvements: AgentRM-MLFQ reduces P95 latency by 86%, decreases lane waste by 96%, and increases throughput by 168% while eliminating zombie agents (0 vs. 29 baseline). AgentRM-CLM achieves 100% key information retention with 95% quality score compared to 65.1% retention and 87% quality for existing approaches, albeit with higher compaction costs (34,330 vs. 17,212 tokens).</summary>
+    <category term="cs.OS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-13T16:07:20Z</published>
+    <arxiv:primary_category term="cs.OS"/>
+    <author>
+      <name>Jianshu She</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.16815v1</id>
+    <title>Beyond Accuracy: Evaluating Forecasting Models by Multi-Echelon Inventory Cost</title>
+    <updated>2026-03-17T17:19:34Z</updated>
+    <link href="https://arxiv.org/abs/2603.16815v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.16815v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This study develops a digitalized forecasting-inventory optimization pipeline integrating traditional forecasting models, machine learning regressors, and deep sequence models within a unified inventory simulation framework. Using the M5 Walmart dataset, we evaluate seven forecasting approaches and assess their operational impact under single- and two-echelon newsvendor systems. Results indicate that Temporal CNN and LSTM models significantly reduce inventory costs and improve fill rates compared to statistical baselines. Sensitivity and multi-echelon analyses demonstrate robustness and scalability, offering a data-driven decision-support tool for modern supply chains.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-17T17:19:34Z</published>
+    <arxiv:comment>10 pages, 2 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Swata Marik</name>
+    </author>
+    <author>
+      <name>Swayamjit Saha</name>
+    </author>
+    <author>
+      <name>Garga Chatterjee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.08835v1</id>
+    <title>MASEval: Extending Multi-Agent Evaluation from Models to Systems</title>
+    <updated>2026-03-09T18:46:17Z</updated>
+    <link href="https://arxiv.org/abs/2603.08835v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.08835v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The rapid adoption of LLM-based agentic systems has produced a rich ecosystem of frameworks (smolagents, LangGraph, AutoGen, CAMEL, LlamaIndex, i.a.). Yet existing benchmarks are model-centric: they fix the agentic setup and do not compare other system components. We argue that implementation decisions substantially impact performance, including choices such as topology, orchestration logic, and error handling. MASEval addresses this evaluation gap with a framework-agnostic library that treats the entire system as the unit of analysis. Through a systematic system-level comparison across 3 benchmarks, 3 models, and 3 frameworks, we find that framework choice matters as much as model choice. MASEval allows researchers to explore all components of agentic systems, opening new avenues for principled system design, and practitioners to identify the best implementation for their use case.
+  MASEval is available under the MIT licence https://github.com/parameterlab/MASEval.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-09T18:46:17Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Cornelius Emde</name>
+    </author>
+    <author>
+      <name>Alexander Rubinstein</name>
+    </author>
+    <author>
+      <name>Anmol Goel</name>
+    </author>
+    <author>
+      <name>Ahmed Heakl</name>
+    </author>
+    <author>
+      <name>Sangdoo Yun</name>
+    </author>
+    <author>
+      <name>Seong Joon Oh</name>
+    </author>
+    <author>
+      <name>Martin Gubri</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.02816v2</id>
+    <title>BrandFusion: A Multi-Agent Framework for Seamless Brand Integration in Text-to-Video Generation</title>
+    <updated>2026-03-11T07:06:57Z</updated>
+    <link href="https://arxiv.org/abs/2603.02816v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.02816v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The rapid advancement of text-to-video (T2V) models has revolutionized content creation, yet their commercial potential remains largely untapped. We introduce, for the first time, the task of seamless brand integration in T2V: automatically embedding advertiser brands into prompt-generated videos while preserving semantic fidelity to user intent. This task confronts three core challenges: maintaining prompt fidelity, ensuring brand recognizability, and achieving contextually natural integration. To address them, we propose BrandFusion, a novel multi-agent framework comprising two synergistic phases. In the offline phase (advertiser-facing), we construct a Brand Knowledge Base by probing model priors and adapting to novel brands via lightweight fine-tuning. In the online phase (user-facing), five agents jointly refine user prompts through iterative refinement, leveraging the shared knowledge base and real-time contextual tracking to ensure brand visibility and semantic alignment. Experiments on 18 established and 2 custom brands across multiple state-of-the-art T2V models demonstrate that BrandFusion significantly outperforms baselines in semantic preservation, brand recognizability, and integration naturalness. Human evaluations further confirm higher user satisfaction, establishing a practical pathway for sustainable T2V monetization.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-03T10:10:41Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Zihao Zhu</name>
+    </author>
+    <author>
+      <name>Ruotong Wang</name>
+    </author>
+    <author>
+      <name>Siwei Lyu</name>
+    </author>
+    <author>
+      <name>Min Zhang</name>
+    </author>
+    <author>
+      <name>Baoyuan Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.13398v1</id>
+    <title>Qianfan-OCR: A Unified End-to-End Model for Document Intelligence</title>
+    <updated>2026-03-11T16:08:22Z</updated>
+    <link href="https://arxiv.org/abs/2603.13398v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.13398v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present Qianfan-OCR, a 4B-parameter end-to-end vision-language model that unifies document parsing, layout analysis, and document understanding within a single architecture. It performs direct image-to-Markdown conversion and supports diverse prompt-driven tasks including table extraction, chart understanding, document QA, and key information extraction. To address the loss of explicit layout analysis in end-to-end OCR, we propose Layout-as-Thought, an optional thinking phase triggered by special think tokens that generates structured layout representations -- bounding boxes, element types, and reading order -- before producing final outputs, recovering layout grounding capabilities while improving accuracy on complex layouts. Qianfan-OCR ranks first among end-to-end models on OmniDocBench v1.5 (93.12) and OlmOCR Bench (79.8), achieves competitive results on OCRBench, CCOCR, DocVQA, and ChartQA against general VLMs of comparable scale, and attains the highest average score on public key information extraction benchmarks, surpassing Gemini-3.1-Pro, Seed-2.0, and Qwen3-VL-235B. The model is publicly accessible via the Baidu AI Cloud Qianfan platform.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-11T16:08:22Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Daxiang Dong</name>
+    </author>
+    <author>
+      <name>Mingming Zheng</name>
+    </author>
+    <author>
+      <name>Dong Xu</name>
+    </author>
+    <author>
+      <name>Chunhua Luo</name>
+    </author>
+    <author>
+      <name>Bairong Zhuang</name>
+    </author>
+    <author>
+      <name>Yuxuan Li</name>
+    </author>
+    <author>
+      <name>Ruoyun He</name>
+    </author>
+    <author>
+      <name>Haoran Wang</name>
+    </author>
+    <author>
+      <name>Wenyu Zhang</name>
+    </author>
+    <author>
+      <name>Wenbo Wang</name>
+    </author>
+    <author>
+      <name>Yicheng Wang</name>
+    </author>
+    <author>
+      <name>Xue Xiong</name>
+    </author>
+    <author>
+      <name>Ayong Zheng</name>
+    </author>
+    <author>
+      <name>Xiaoying Zuo</name>
+    </author>
+    <author>
+      <name>Ziwei Ou</name>
+    </author>
+    <author>
+      <name>Jingnan Gu</name>
+    </author>
+    <author>
+      <name>Quanhao Guo</name>
+    </author>
+    <author>
+      <name>Jianmin Wu</name>
+    </author>
+    <author>
+      <name>Dawei Yin</name>
+    </author>
+    <author>
+      <name>Dou Shen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.25248v1</id>
+    <title>ColBERT-Att: Late-Interaction Meets Attention for Enhanced Retrieval</title>
+    <updated>2026-03-26T09:51:54Z</updated>
+    <link href="https://arxiv.org/abs/2603.25248v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.25248v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Vector embeddings from pre-trained language models form a core component in Neural Information Retrieval systems across a multitude of knowledge extraction tasks. The paradigm of late interaction, introduced in ColBERT, demonstrates high accuracy along with runtime efficiency. However, the current formulation fails to take into account the attention weights of query and document terms, which intuitively capture the "importance" of similarities between them, that might lead to a better understanding of relevance between the queries and documents. This work proposes ColBERT-Att, to explicitly integrate attention mechanism into the late interaction framework for enhanced retrieval performance. Empirical evaluation of ColBERT-Att depicts improvements in recall accuracy on MS-MARCO as well as on a wide range of BEIR and LoTTE benchmark datasets.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-26T09:51:54Z</published>
+    <arxiv:comment>5 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Raj Nath Patel</name>
+    </author>
+    <author>
+      <name>Sourav Dutta</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.20059v1</id>
+    <title>DIAL-KG: Schema-Free Incremental Knowledge Graph Construction via Dynamic Schema Induction and Evolution-Intent Assessment</title>
+    <updated>2026-03-20T15:39:22Z</updated>
+    <link href="https://arxiv.org/abs/2603.20059v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.20059v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Knowledge Graphs (KGs) are foundational to applications such as search, question answering, and recommendation. Conventional knowledge graph construction methods are predominantly static, rely ing on a single-step construction from a fixed corpus with a prede f
+ined schema. However, such methods are suboptimal for real-world sce narios where data arrives dynamically, as incorporating new informa tion requires complete and computationally expensive graph reconstruc tions. Furthermore, predefined schemas hinder the flexibility of knowl edge graph construction. To address these limitations, we introduce DIAL KG, a closed-loop framework for incremental KG construction orches trated by a Meta-Knowledge Base (MKB). The framework oper ates in a three-stage cycle: (i) Dual-Track Extraction, which ensures knowledge completeness by defaulting to triple generation and switching to event extraction for complex knowledge; (ii) Governance Adjudica tion, which ensures the fidelity and currency of extracted facts to prevent hallucinations and knowledge staleness; and (iii) Schema Evolution, in which new schemas are induced from validated knowledge to guide subsequent construction cycles, and knowledge from the current round is incrementally applied to the existing KG. Extensive experiments demon strate that our framework achieves state-of-the-art (SOTA) performance in the quality of both the constructed graph and the induced schemas.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-20T15:39:22Z</published>
+    <arxiv:comment>Accepted to DASFAA 2026. 16 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Weidong Bao</name>
+    </author>
+    <author>
+      <name>Yilin Wang</name>
+    </author>
+    <author>
+      <name>Ruyu Gao</name>
+    </author>
+    <author>
+      <name>Fangling Leng</name>
+    </author>
+    <author>
+      <name>Yubin Bao</name>
+    </author>
+    <author>
+      <name>Ge Yu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.01145v2</id>
+    <title>AutoSkill: Experience-Driven Lifelong Learning via Skill Self-Evolution</title>
+    <updated>2026-03-05T03:24:40Z</updated>
+    <link href="https://arxiv.org/abs/2603.01145v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.01145v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In practical LLM applications, users repeatedly express stable preferences and requirements, such as reducing hallucinations, following institutional writing conventions, or avoiding overly technical wording, yet such interaction experience is seldom consolidated into reusable knowledge. Consequently, LLM agents often fail to accumulate personalized capabilities across sessions. We present AutoSkill, an experience-driven lifelong learning framework that enables LLM agents to automatically derive, maintain, and reuse skills from dialogue and interaction traces. AutoSkill abstracts skills from user experience, supports their continual self-evolution, and dynamically injects relevant skills into future requests without retraining the underlying model. Designed as a model-agnostic plugin layer, it is compatible with existing LLMs and introduces a standardized skill representation for sharing and transfer across agents, users, and tasks. In this way, AutoSkill turns ephemeral interaction experience into explicit, reusable, and composable capabilities. This paper describes the motivation, architecture, skill lifecycle, and implementation of AutoSkill, and positions it with respect to prior work on memory, retrieval, personalization, and agentic systems. AutoSkill highlights a practical and scalable path toward lifelong personalized agents and personal digital surrogates.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-01T15:11:59Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Yutao Yang</name>
+    </author>
+    <author>
+      <name>Junsong Li</name>
+    </author>
+    <author>
+      <name>Qianjun Pan</name>
+    </author>
+    <author>
+      <name>Bihao Zhan</name>
+    </author>
+    <author>
+      <name>Yuxuan Cai</name>
+    </author>
+    <author>
+      <name>Lin Du</name>
+    </author>
+    <author>
+      <name>Jie Zhou</name>
+    </author>
+    <author>
+      <name>Kai Chen</name>
+    </author>
+    <author>
+      <name>Qin Chen</name>
+    </author>
+    <author>
+      <name>Xin Li</name>
+    </author>
+    <author>
+      <name>Bo Zhang</name>
+    </author>
+    <author>
+      <name>Liang He</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.21082v1</id>
+    <title>Beyond the Star Rating: A Scalable Framework for Aspect-Based Sentiment Analysis Using LLMs and Text Classification</title>
+    <updated>2026-02-24T16:45:17Z</updated>
+    <link href="https://arxiv.org/abs/2602.21082v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.21082v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Customer-provided reviews have become an important source of information for business owners and other customers alike. However, effectively analyzing millions of unstructured reviews remains challenging. While large language models (LLMs) show promise for natural language understanding, their application to large-scale review analysis has been limited by computational costs and scalability concerns. This study proposes a hybrid approach that uses LLMs for aspect identification while employing classic machine-learning methods for sentiment classification at scale. Using ChatGPT to analyze sampled restaurant reviews, we identified key aspects of dining experiences and developed sentiment classifiers using human-labeled reviews, which we subsequently applied to 4.7 million reviews collected over 17 years from a major online platform. Regression analysis reveals that our machine-labeled aspects significantly explain variance in overall restaurant ratings across different aspects of dining experiences, cuisines, and geographical regions. Our findings demonstrate that combining LLMs with traditional machine learning approaches can effectively automate aspect-based sentiment analysis of large-scale customer feedback, suggesting a practical framework for both researchers and practitioners in the hospitality industry and potentially, other service sectors.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-24T16:45:17Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Vishal Patil</name>
+    </author>
+    <author>
+      <name>Shree Vaishnavi Bacha</name>
+    </author>
+    <author>
+      <name>Revanth Yamani</name>
+    </author>
+    <author>
+      <name>Yidan Sun</name>
+    </author>
+    <author>
+      <name>Mayank Kejriwal</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.07585v1</id>
+    <title>Don't Measure Once: Measuring Visibility in AI Search (GEO)</title>
+    <updated>2026-04-08T20:38:05Z</updated>
+    <link href="https://arxiv.org/abs/2604.07585v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.07585v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As large language model-based chat systems become increasingly widely used, generative engine optimization (GEO) has emerged as an important problem for information access and retrieval. In classical search engines, results are comparatively transparent and stable: a single query often provides a representative snapshot of where a page or brand appears relative to competitors. The inherent probabilistic nature of AI search changes this paradigm. Answers can vary across runs, prompts, and time, making one-off observations unreliable. Drawing on empirical studies, our findings underscore the need for repeated measurements to assess a brand's GEO performance and to characterize visibility as a distribution rather than a single-point outcome.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-08T20:38:05Z</published>
+    <arxiv:comment>19 pages, 7 figures, 17 tables. Comments welcome!</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Julius Schulte</name>
+    </author>
+    <author>
+      <name>Malte Bleeker</name>
+    </author>
+    <author>
+      <name>Philipp Kaufmann</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.14057v1</id>
+    <title>Demand-Driven Context: A Methodology for Building Enterprise Knowledge Bases Through Agent Failure</title>
+    <updated>2026-03-14T17:58:56Z</updated>
+    <link href="https://arxiv.org/abs/2603.14057v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.14057v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language model agents demonstrate expert-level reasoning, yet consistently fail on enterprise-specific tasks due to missing domain knowledge -- terminology, operational procedures, system interdependencies, and institutional decisions that exist largely as tribal knowledge. Current approaches fall into two categories: top-down knowledge engineering, which documents domain knowledge before agents use it, and bottom-up automation, where agents learn from task experience. Both have fundamental limitations: top-down efforts produce bloated, untested knowledge bases; bottom-up approaches cannot acquire knowledge that exists only in human heads. We present Demand-Driven Context (DDC), a problem-first methodology that uses agent failure as the primary signal for what domain knowledge to curate. Inspired by Test-Driven Development, DDC inverts knowledge engineering: instead of curating knowledge and hoping it is useful, DDC gives agents real problems, lets them demand the context they need, and curates only the minimum knowledge required to succeed. We describe the methodology, its entity meta-model, and a convergence hypothesis suggesting that 20-30 problem cycles produce a knowledge base sufficient for a given domain role. We demonstrate DDC through a worked example in retail order fulfillment, where nine cycles targeting an SRE incident management agent produce a reusable knowledge base of 46 entities. Finally, we propose a scaling architecture for enterprise adoption with semi-automated curation and human governance.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-14T17:58:56Z</published>
+    <arxiv:comment>18 pages, 5 figures, 1 algorithm. Preprint</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Raj Navakoti</name>
+    </author>
+    <author>
+      <name>Saideep Navakoti</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.14864v3</id>
+    <title>Shopping Companion: Benchmarking and Training LLM Agents for Long-Horizon Preference-Grounded E-Commerce Tasks</title>
+    <updated>2026-05-27T02:20:13Z</updated>
+    <link href="https://arxiv.org/abs/2603.14864v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.14864v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In e-commerce, LLM agents show promise for shopping tasks such as recommendations, budget management, and bundle deals, where accurately capturing user preferences from long-horizon conversations is critical. However, progress is limited by two key challenges: (1) the absence of benchmarks for evaluating long-term preference-aware shopping tasks, and (2) the lack of fine-grained supervision for shopping agent training. To fill the benchmark gap, we introduce Shopping Companion Bench, a novel benchmark comprising two shopping tasks that require cross-session preference memory, grounded in a product pool of over 1.2 million real-world items. Our analysis further identifies two major sources of failure on this benchmark: cascading errors caused by preference hallucination, and insufficient verification of product attributes against user requirements. To address these failure modes, we design annotation-free, tool-wise rewards that provide process supervision for each tool call, alleviating reward sparsity in long-horizon tasks. Experimental results demonstrate that even state-of-the-art models such as GPT-5 achieve success rates below 70%, highlighting the difficulty of our benchmark. Notably, our fine-tuned lightweight 4B model consistently outperforms strong baselines in both preference capture and task performance, suggesting the effectiveness of our reward design.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-16T06:07:52Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zijian Yu</name>
+    </author>
+    <author>
+      <name>Kejun Xiao</name>
+    </author>
+    <author>
+      <name>Huaipeng Zhao</name>
+    </author>
+    <author>
+      <name>Tao Luo</name>
+    </author>
+    <author>
+      <name>Xiaoyi Zeng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.29261v1</id>
+    <title>Monodense Deep Neural Model for Determining Item Price Elasticity</title>
+    <updated>2026-03-31T04:50:51Z</updated>
+    <link href="https://arxiv.org/abs/2603.29261v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.29261v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Item Price Elasticity is used to quantify the responsiveness of consumer demand to changes in item prices, enabling businesses to create pricing strategies and optimize revenue management. Sectors such as store retail, e-commerce, and consumer goods rely on elasticity information derived from historical sales and pricing data. This elasticity provides an understanding of purchasing behavior across different items, consumer discount sensitivity, and demand elastic departments. This information is particularly valuable for competitive markets and resource-constrained businesses decision making which aims to maximize profitability and market share. Price elasticity also uncovers historical shifts in consumer responsiveness over time. In this paper, we model item-level price elasticity using large-scale transactional datasets, by proposing a novel elasticity estimation framework which has the capability to work in an absence of treatment control setting. We test this framework by using Machine learning based algorithms listed below, including our newly proposed Monodense deep neural network.
+  (1) Monodense-DL network -- Hybrid neural network architecture combining embedding, dense, and Monodense layers (2) DML -- Double machine learning setting using regression models (3) LGBM -- Light Gradient Boosting Model
+  We evaluate our model on multi-category retail data spanning millions of transactions using a back testing framework. Experimental results demonstrate the superiority of our proposed neural network model within the framework compared to other prevalent ML based methods listed above.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-31T04:50:51Z</published>
+    <arxiv:comment>Accepted at AAIML 2026 (International Conference on Advances in Artificial Intelligence and Machine Learning). Copyright 2026 IEEE. 6 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>2026 International Conference on Advances in Artificial Intelligence and Machine Learning (AAIML)</arxiv:journal_ref>
+    <author>
+      <name>Lakshya Garg</name>
+    </author>
+    <author>
+      <name>Sai Yaswanth</name>
+    </author>
+    <author>
+      <name>Deep Narayan Mishra</name>
+    </author>
+    <author>
+      <name>Karthik Kumaran</name>
+    </author>
+    <author>
+      <name>Anupriya Sharma</name>
+    </author>
+    <author>
+      <name>Mayank Uniyal</name>
+    </author>
+    <arxiv:doi>10.1109/AAIML67890.2026.11498150</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/AAIML67890.2026.11498150" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.04474v2</id>
+    <title>From Spark to Fire: Modeling and Mitigating Error Cascades in LLM-Based Multi-Agent Collaboration</title>
+    <updated>2026-05-11T15:41:00Z</updated>
+    <link href="https://arxiv.org/abs/2603.04474v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.04474v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Model-based Multi-Agent Systems (LLM-MAS) are increasingly applied to complex collaborative scenarios. However, their collaborative mechanisms may cause minor inaccuracies to gradually solidify into system-level false consensus through iteration. Such risks are difficult to trace since errors can propagate and amplify through message dependencies. Existing protections often rely on single-agent validation or require modifications to the collaboration architecture, which can weaken effective information flow and may not align with natural collaboration processes in real tasks. To address this, we propose a propagation dynamics model tailored for LLM-MAS that abstracts collaboration as a directed dependency graph and provides an early-stage risk criterion to characterize amplification risk. Through experiments on six mainstream frameworks, we identify three vulnerability classes: cascade amplification, topological sensitivity, and consensus inertia. We further instantiate an attack where injecting just a single atomic error seed leads to widespread failure. In response, we introduce a genealogy-graph-based governance layer, implemented as a message-layer plugin, that suppresses both endogenous and exogenous error amplification without altering the collaboration architecture. Experiments show that this approach prevents final infection in at least 89% of runs across operating modes and significantly mitigates the cascading spread of minor errors.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-04T11:45:27Z</published>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>Yizhe Xie</name>
+    </author>
+    <author>
+      <name>Congcong Zhu</name>
+    </author>
+    <author>
+      <name>Xinyue Zhang</name>
+    </author>
+    <author>
+      <name>Tianqing Zhu</name>
+    </author>
+    <author>
+      <name>Dayong Ye</name>
+    </author>
+    <author>
+      <name>Minfeng Qi</name>
+    </author>
+    <author>
+      <name>Huajie Chen</name>
+    </author>
+    <author>
+      <name>Wanlei Zhou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.12056v3</id>
+    <title>XSkill: Continual Learning from Experience and Skills in Multimodal Agents</title>
+    <updated>2026-07-01T10:34:53Z</updated>
+    <link href="https://arxiv.org/abs/2603.12056v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.12056v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multimodal agents can now tackle complex reasoning tasks with diverse tools, yet they still suffer from inefficient tool use and inflexible orchestration in open-ended settings. A central challenge is enabling such agents to continually improve without parameter updates by learning from past trajectories. We identify two complementary forms of reusable knowledge essential for this goal: experiences, providing concise action-level guidance for tool selection and decision making, and skills, providing structured task-level guidance for planning and tool use. To this end, we propose XSkill, a dual-stream framework for continual learning from experience and skills in multimodal agents. XSkill grounds both knowledge extraction and retrieval in visual observations. During accumulation, XSkill distills and consolidates experiences and skills from multi-path rollouts via visually grounded summarization and cross-rollout critique. During inference, it retrieves and adapts this knowledge to the current visual context and feeds usage history back into accumulation to form a continual learning loop. Evaluated on five benchmarks across diverse domains with four backbone models, XSkill consistently and substantially outperforms both tool-only and learning-based baselines. Further analysis reveals that the two knowledge streams play complementary roles in influencing the reasoning behaviors of agents and show superior zero-shot generalization.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-12T15:25:57Z</published>
+    <arxiv:comment>Accepted to ICML 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Guanyu Jiang</name>
+    </author>
+    <author>
+      <name>Zhaochen Su</name>
+    </author>
+    <author>
+      <name>Xiaoye Qu</name>
+    </author>
+    <author>
+      <name>Yi R. Fung</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.20867v1</id>
+    <title>SoK: Agentic Skills -- Beyond Tool Use in LLM Agents</title>
+    <updated>2026-02-24T13:11:38Z</updated>
+    <link href="https://arxiv.org/abs/2602.20867v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.20867v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Agentic systems increasingly rely on reusable procedural capabilities, \textit{a.k.a., agentic skills}, to execute long-horizon workflows reliably. These capabilities are callable modules that package procedural knowledge with explicit applicability conditions, execution policies, termination criteria, and reusable interfaces. Unlike one-off plans or atomic tool calls, skills operate (and often do well) across tasks.
+  This paper maps the skill layer across the full lifecycle (discovery, practice, distillation, storage, composition, evaluation, and update) and introduces two complementary taxonomies. The first is a system-level set of \textbf{seven design patterns} capturing how skills are packaged and executed in practice, from metadata-driven progressive disclosure and executable code skills to self-evolving libraries and marketplace distribution. The second is an orthogonal \textbf{representation $\times$ scope} taxonomy describing what skills \emph{are} (natural language, code, policy, hybrid) and what environments they operate over (web, OS, software engineering, robotics).
+  We analyze the security and governance implications of skill-based agents, covering supply-chain risks, prompt injection via skill payloads, and trust-tiered execution, grounded by a case study of the ClawHavoc campaign in which nearly 1{,}200 malicious skills infiltrated a major agent marketplace, exfiltrating API keys, cryptocurrency wallets, and browser credentials at scale. We further survey deterministic evaluation approaches, anchored by recent benchmark evidence that curated skills can substantially improve agent success rates while self-generated skills may degrade them. We conclude with open challenges toward robust, verifiable, and certifiable skills for real-world autonomous agents.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.ET" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-24T13:11:38Z</published>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Yanna Jiang</name>
+    </author>
+    <author>
+      <name>Delong Li</name>
+    </author>
+    <author>
+      <name>Haiyu Deng</name>
+    </author>
+    <author>
+      <name>Baihe Ma</name>
+    </author>
+    <author>
+      <name>Xu Wang</name>
+    </author>
+    <author>
+      <name>Qin Wang</name>
+    </author>
+    <author>
+      <name>Guangsheng Yu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.19843v1</id>
+    <title>MAS-FIRE: Fault Injection and Reliability Evaluation for LLM-Based Multi-Agent Systems</title>
+    <updated>2026-02-23T13:47:43Z</updated>
+    <link href="https://arxiv.org/abs/2602.19843v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.19843v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As LLM-based Multi-Agent Systems (MAS) are increasingly deployed for complex tasks, ensuring their reliability has become a pressing challenge. Since MAS coordinate through unstructured natural language rather than rigid protocols, they are prone to semantic failures (e.g., hallucinations, misinterpreted instructions, and reasoning drift) that propagate silently without raising runtime exceptions. Prevailing evaluation approaches, which measure only end-to-end task success, offer limited insight into how these failures arise or how effectively agents recover from them. To bridge this gap, we propose MAS-FIRE, a systematic framework for fault injection and reliability evaluation of MAS. We define a taxonomy of 15 fault types covering intra-agent cognitive errors and inter-agent coordination failures, and inject them via three non-invasive mechanisms: prompt modification, response rewriting, and message routing manipulation. Applying MAS-FIRE to three representative MAS architectures, we uncover a rich set of fault-tolerant behaviors that we organize into four tiers: mechanism, rule, prompt, and reasoning. This tiered view enables fine-grained diagnosis of where and why systems succeed or fail. Our findings reveal that stronger foundation models do not uniformly improve robustness. We further show that architectural topology plays an equally decisive role, with iterative, closed-loop designs neutralizing over 40% of faults that cause catastrophic collapse in linear workflows. MAS-FIRE provides the process-level observability and actionable guidance needed to systematically improve multi-agent systems.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-23T13:47:43Z</published>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Jin Jia</name>
+    </author>
+    <author>
+      <name>Zhiling Deng</name>
+    </author>
+    <author>
+      <name>Zhuangbin Chen</name>
+    </author>
+    <author>
+      <name>Yingqi Wang</name>
+    </author>
+    <author>
+      <name>Zibin Zheng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.05134v1</id>
+    <title>LBM: Hierarchical Large Auto-Bidding Model via Reasoning and Acting</title>
+    <updated>2026-03-05T13:01:21Z</updated>
+    <link href="https://arxiv.org/abs/2603.05134v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.05134v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The growing scale of ad auctions on online advertising platforms has intensified competition, making manual bidding impractical and necessitating auto-bidding to help advertisers achieve their economic goals. Current auto-bidding methods have evolved to use offline reinforcement learning or generative methods to optimize bidding strategies, but they can sometimes behave counterintuitively due to the black-box training manner and limited mode coverage of datasets, leading to challenges in understanding task status and generalization in dynamic ad environments. Large language models (LLMs) offer a promising solution by leveraging prior human knowledge and reasoning abilities to improve auto-bidding performance. However, directly applying LLMs to auto-bidding faces difficulties due to the need for precise actions in competitive auctions and the lack of specialized auto-bidding knowledge, which can lead to hallucinations and suboptimal decisions. To address these challenges, we propose a hierarchical Large autoBidding Model (LBM) to leverage the reasoning capabilities of LLMs for developing a superior auto-bidding strategy. This includes a high-level LBM-Think model for reasoning and a low-level LBM-Act model for action generation. Specifically, we propose a dual embedding mechanism to efficiently fuse two modalities, including language and numerical inputs, for language-guided training of the LBM-Act; then, we propose an offline reinforcement fine-tuning technique termed GQPO for mitigating the LLM-Think's hallucinations and enhancing decision-making performance without simulation or real-world rollout like previous multi-turn LLM-based methods. Experiments demonstrate the superiority of a generative backbone based on our LBM, especially in an efficient training manner and generalization ability.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-05T13:01:21Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yewen Li</name>
+    </author>
+    <author>
+      <name>Zhiyi Lyu</name>
+    </author>
+    <author>
+      <name>Peng Jiang</name>
+    </author>
+    <author>
+      <name>Qingpeng Cai</name>
+    </author>
+    <author>
+      <name>Fei Pan</name>
+    </author>
+    <author>
+      <name>Bo An</name>
+    </author>
+    <author>
+      <name>Peng Jiang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.14688v2</id>
+    <title>AgentTrace: Causal Graph Tracing for Root Cause Analysis in Deployed Multi-Agent Systems</title>
+    <updated>2026-03-27T05:32:27Z</updated>
+    <link href="https://arxiv.org/abs/2603.14688v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.14688v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As multi-agent AI systems are increasingly deployed in real-world settings - from automated customer support to DevOps remediation - failures become harder to diagnose due to cascading effects, hidden dependencies, and long execution traces. We present AgentTrace, a lightweight causal tracing framework for post-hoc failure diagnosis in deployed multi-agent workflows. AgentTrace reconstructs causal graphs from execution logs, traces backward from error manifestations, and ranks candidate root causes using interpretable structural and positional signals - without requiring LLM inference at debugging time. Across a diverse benchmark of multi-agent failure scenarios designed to reflect common deployment patterns, AgentTrace localizes root causes with high accuracy and sub-second latency, significantly outperforming both heuristic and LLM-based baselines. Our results suggest that causal tracing provides a practical foundation for improving the reliability and trustworthiness of agentic systems in the wild.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-16T00:46:44Z</published>
+    <arxiv:comment>11 pages, 1 figure, 19 tables. Published at ICLR 2026 Workshop on Agents in the Wild. Camera-ready version with revised layout and framework overview figure</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Zhaohui Geoffrey Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.13032v2</id>
+    <title>Multimodal OCR: Parse Anything from Documents</title>
+    <updated>2026-03-19T09:48:54Z</updated>
+    <link href="https://arxiv.org/abs/2603.13032v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.13032v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present Multimodal OCR (MOCR), a document parsing paradigm that jointly parses text and graphics into unified textual representations. Unlike conventional OCR systems that focus on text recognition and leave graphical regions as cropped pixels, our method, termed dots.mocr, treats visual elements such as charts, diagrams, tables, and icons as first-class parsing targets, enabling systems to parse documents while preserving semantic relationships across elements. It offers several advantages: (1) it reconstructs both text and graphics as structured outputs, enabling more faithful document reconstruction; (2) it supports end-to-end training over heterogeneous document elements, allowing models to exploit semantic relations between textual and visual components; and (3) it converts previously discarded graphics into reusable code-level supervision, unlocking multimodal supervision embedded in existing documents. To make this paradigm practical at scale, we build a comprehensive data engine from PDFs, rendered webpages, and native SVG assets, and train a compact 3B-parameter model through staged pretraining and supervised fine-tuning. We evaluate dots.mocr from two perspectives: document parsing and structured graphics parsing. On document parsing benchmarks, it ranks second only to Gemini 3 Pro on our OCR Arena Elo leaderboard, surpasses existing open-source document parsing systems, and sets a new state of the art of 83.9 on olmOCR Bench. On structured graphics parsing, our model achieves higher reconstruction quality than Gemini 3 Pro across image-to-SVG benchmarks, demonstrating strong performance on charts, UI layouts, scientific figures, and chemical diagrams. These results show a scalable path toward building large-scale image-to-code corpora for multimodal pretraining. Code and models are publicly available at https://github.com/rednote-hilab/dots.mocr.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-13T14:42:21Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Handong Zheng</name>
+    </author>
+    <author>
+      <name>Yumeng Li</name>
+    </author>
+    <author>
+      <name>Kaile Zhang</name>
+    </author>
+    <author>
+      <name>Liang Xin</name>
+    </author>
+    <author>
+      <name>Guangwei Zhao</name>
+    </author>
+    <author>
+      <name>Hao Liu</name>
+    </author>
+    <author>
+      <name>Jiayu Chen</name>
+    </author>
+    <author>
+      <name>Jie Lou</name>
+    </author>
+    <author>
+      <name>Qi Fu</name>
+    </author>
+    <author>
+      <name>Rui Yang</name>
+    </author>
+    <author>
+      <name>Shuo Jiang</name>
+    </author>
+    <author>
+      <name>Weijian Luo</name>
+    </author>
+    <author>
+      <name>Weijie Su</name>
+    </author>
+    <author>
+      <name>Weijun Zhang</name>
+    </author>
+    <author>
+      <name>Xingyu Zhu</name>
+    </author>
+    <author>
+      <name>Yabin Li</name>
+    </author>
+    <author>
+      <name>Yiwei ma</name>
+    </author>
+    <author>
+      <name>Yu Chen</name>
+    </author>
+    <author>
+      <name>Yuqiu Ji</name>
+    </author>
+    <author>
+      <name>Zhaohui Yu</name>
+    </author>
+    <author>
+      <name>Guang Yang</name>
+    </author>
+    <author>
+      <name>Colin Zhang</name>
+    </author>
+    <author>
+      <name>Lei Zhang</name>
+    </author>
+    <author>
+      <name>Yuliang Liu</name>
+    </author>
+    <author>
+      <name>Xiang Bai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.00476v1</id>
+    <title>Atomicity for Agents: Exposing, Exploiting, and Mitigating TOCTOU Vulnerabilities in Browser-Use Agents</title>
+    <updated>2026-02-28T05:25:03Z</updated>
+    <link href="https://arxiv.org/abs/2603.00476v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.00476v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Browser-use agents are widely used for everyday tasks. They enable automated interaction with web pages through structured DOM based interfaces or vision language models operating on page screenshots. However, web pages often change between planning and execution, causing agents to execute actions based on stale assumptions. We view this temporal mismatch as a time of check to time of use (TOCTOU) vulnerability in browser-use agents. Dynamic or adversarial web content can exploit this window to induce unintended actions. We present a large scale empirical study of TOCTOU vulnerabilities in browser-use agents using a benchmark that spans synthesized and real world websites. Using this benchmark, we evaluate 10 popular open source agents and show that TOCTOU vulnerabilities are widespread. We design a lightweight mitigation based on pre-execution validation. It monitors DOM and layout changes during planning and validates the page state immediately before action execution. This approach reduces the risk of insecure execution and mitigates unintended side effects in browser-use agents.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-28T05:25:03Z</published>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Linxi Jiang</name>
+    </author>
+    <author>
+      <name>Zhijie Liu</name>
+    </author>
+    <author>
+      <name>Haotian Luo</name>
+    </author>
+    <author>
+      <name>Zhiqiang Lin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.00344v1</id>
+    <title>Agent Q-Mix: Selecting the Right Action for LLM Multi-Agent Systems through Reinforcement Learning</title>
+    <updated>2026-04-01T00:38:24Z</updated>
+    <link href="https://arxiv.org/abs/2604.00344v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.00344v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) have shown remarkable performance in completing various tasks. However, solving complex problems often requires the coordination of multiple agents, raising a fundamental question: how to effectively select and interconnect these agents. In this paper, we propose \textbf{Agent Q-Mix}, a reinforcement learning framework that reformulates topology selection as a cooperative Multi-Agent Reinforcement Learning (MARL) problem. Our method learns decentralized communication decisions using QMIX value factorization, where each agent selects from a set of communication actions that jointly induce a round-wise communication graph. At its core, Agent Q-Mix combines a topology-aware GNN encoder, GRU memory, and per-agent Q-heads under a Centralized Training with Decentralized Execution (CTDE) paradigm. The framework optimizes a reward function that balances task accuracy with token cost. Across seven core benchmarks in coding, reasoning, and mathematics, Agent Q-Mix achieves the highest average accuracy compared to existing methods while demonstrating superior token efficiency and robustness against agent failure. Notably, on the challenging Humanity's Last Exam (HLE) using Gemini-3.1-Flash-Lite as a backbone, Agent Q-Mix achieves 20.8\% accuracy, outperforming Microsoft Agent Framework (19.2\%) and LangGraph (19.2\%), followed by AutoGen and Lobster by OpenClaw. These results underscore the effectiveness of learned, decentralized topology optimization in pushing the boundaries of multi-agent reasoning.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-01T00:38:24Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Eric Hanchen Jiang</name>
+    </author>
+    <author>
+      <name>Levina Li</name>
+    </author>
+    <author>
+      <name>Rui Sun</name>
+    </author>
+    <author>
+      <name>Xiao Liang</name>
+    </author>
+    <author>
+      <name>Yubei Li</name>
+    </author>
+    <author>
+      <name>Yuchen Wu</name>
+    </author>
+    <author>
+      <name>Haozheng Luo</name>
+    </author>
+    <author>
+      <name>Hengli Li</name>
+    </author>
+    <author>
+      <name>Zhi Zhang</name>
+    </author>
+    <author>
+      <name>Zhaolu Kang</name>
+    </author>
+    <author>
+      <name>Kai-Wei Chang</name>
+    </author>
+    <author>
+      <name>Ying Nian Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.01020v1</id>
+    <title>OrgAgent: Organize Your Multi-Agent System like a Company</title>
+    <updated>2026-04-01T15:21:14Z</updated>
+    <link href="https://arxiv.org/abs/2604.01020v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.01020v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While large language model-based multi-agent systems have shown strong potential for complex reasoning, how to effectively organize multiple agents remains an open question. In this paper, we introduce OrgAgent, a company-style hierarchical multi-agent framework that separates collaboration into governance, execution, and compliance layers. OrgAgent decomposes multi-agent reasoning into three layers: a governance layer for planning and resource allocation, an execution layer for task solving and review, and a compliance layer for final answer control. By evaluating the framework across reasoning tasks, LLMs, execution modes, and execution policies, we find that multi-agent systems organized in a company-style hierarchy generally outperform other organizational structures. Besides, hierarchical coordination also reduces token consumption relative to flat collaboration in most settings. For example, for GPT-OSS-120B, the hierarchical setting improves performance over flat multi-agent system by 102.73% while reducing token usage by 74.52% on SQuAD 2.0. Further analysis shows that hierarchy helps most when tasks benefit from stable skill assignment, controlled information flow, and layered verification. Overall, our findings highlight organizational structure as an important factor in multi-agent reasoning, shaping not only effectiveness and cost, but also coordination behavior.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-01T15:21:14Z</published>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>Yiru Wang</name>
+    </author>
+    <author>
+      <name>Xinyue Shen</name>
+    </author>
+    <author>
+      <name>Yaohui Han</name>
+    </author>
+    <author>
+      <name>Michael Backes</name>
+    </author>
+    <author>
+      <name>Pin-Yu Chen</name>
+    </author>
+    <author>
+      <name>Tsung-Yi Ho</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.05289v1</id>
+    <title>FLARE: Agentic Coverage-Guided Fuzzing for LLM-Based Multi-Agent Systems</title>
+    <updated>2026-04-07T00:47:37Z</updated>
+    <link href="https://arxiv.org/abs/2604.05289v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.05289v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multi-Agent LLM Systems (MAS) have been adopted to automate complex human workflows by breaking down tasks into subtasks. However, due to the non-deterministic behavior of LLM agents and the intricate interactions between agents, MAS applications frequently encounter failures, including infinite loops and failed tool invocations. Traditional software testing techniques are ineffective in detecting such failures due to the lack of LLM agent specification, the large behavioral space of MAS, and semantic-based correctness judgment.
+  This paper presents FLARE, a novel testing framework tailored for MAS. FLARE takes the source code of MAS as input and extracts specifications and behavioral spaces from agent definitions. Based on these specifications, FLARE builds test oracles and conducts coverage-guided fuzzing to expose failures. It then analyzes execution logs to judge whether each test has passed and generates failure reports. Our evaluation on 16 diverse open-source applications demonstrates that FLARE achieves 96.9% inter-agent coverage and 91.1% intra-agent coverage, outperforming baselines by 9.5% and 1.0%. FLARE also uncovers 56 previously unknown failures unique to MAS.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-07T00:47:37Z</published>
+    <arxiv:comment>22 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Mingxuan Hui</name>
+    </author>
+    <author>
+      <name>Xinyue Li</name>
+    </author>
+    <author>
+      <name>Lu Wang</name>
+    </author>
+    <author>
+      <name>Chengcheng Wan</name>
+    </author>
+    <author>
+      <name>Yifan Wang</name>
+    </author>
+    <author>
+      <name>Yimian Wang</name>
+    </author>
+    <author>
+      <name>Feiyue Song</name>
+    </author>
+    <author>
+      <name>Beining Shi</name>
+    </author>
+    <author>
+      <name>Yixi Li</name>
+    </author>
+    <author>
+      <name>Yaxiao Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.06718v3</id>
+    <title>CASE: Cadence-Aware Set Encoding for Large-Scale Next Basket Repurchase Recommendation</title>
+    <updated>2026-04-24T22:27:45Z</updated>
+    <link href="https://arxiv.org/abs/2604.06718v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.06718v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Repurchase behavior is a primary signal in large-scale retail recommendation, particularly in categories with frequent replenishment: many items in a user's next basket were previously purchased, and their timing follows stable, item-specific cadences. Yet most next basket repurchase recommendation models represent history as a sequence of discrete basket events indexed by visit order, which cannot explicitly model elapsed calendar time or update item rankings as days pass between purchases. We present CASE (Cadence-Aware Set Encoding) for next basket repurchase recommendation, which decouples item-level cadence learning from cross-item interaction, enabling explicit calendar-time modeling while remaining production-scalable. CASE represents each item's purchase history as a calendar-time signal over a fixed horizon, applies shared multi-scale temporal convolutions to capture recurring rhythms, and uses induced set attention to model cross-item dependencies with sub-quadratic complexity, allowing efficient batch inference at scale. Across three public benchmarks and a proprietary dataset, CASE consistently improves precision, recall, and NDCG at multiple cutoffs compared to strong next basket recommendation baselines. In a production-scale evaluation with tens of millions of users and a large item catalog, CASE achieves up to 8.6% relative precision lift and 9.9% relative recall lift at top-5, showing that scalable cadence-aware modeling yields measurable gains in both benchmark and industrial settings.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-08T06:31:34Z</published>
+    <arxiv:comment>Accepted at SIGIR 2026 Industry Track</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Yanan Cao</name>
+    </author>
+    <author>
+      <name>Ashish Ranjan</name>
+    </author>
+    <author>
+      <name>Sinduja Subramaniam</name>
+    </author>
+    <author>
+      <name>Evren Korpeoglu</name>
+    </author>
+    <author>
+      <name>Kaushiki Nag</name>
+    </author>
+    <author>
+      <name>Kannan Achan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.23620v2</id>
+    <title>Synthetic Data Powers Product Retrieval for Long-tail Knowledge-Intensive Queries in E-commerce Search</title>
+    <updated>2026-04-27T03:42:57Z</updated>
+    <link href="https://arxiv.org/abs/2602.23620v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.23620v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Product retrieval is the backbone of e-commerce search: for each user query, it identifies a high-recall candidate set from billions of items, laying the foundation for high-quality ranking and user experience. Despite extensive optimization for mainstream queries, existing systems still struggle with long-tail queries, especially knowledge-intensive ones. These queries exhibit diverse linguistic patterns, often lack explicit purchase intent, and require domain-specific knowledge reasoning for accurate interpretation. They also suffer from a shortage of reliable behavioral logs, which makes such queries a persistent challenge for retrieval optimization. To address these issues, we propose an efficient data synthesis framework tailored to retrieval involving long-tail, knowledge-intensive queries. The key idea is to implicitly distill the capabilities of a powerful offline query-rewriting model into an efficient online retrieval system. Leveraging the strong language understanding of LLMs, we train a multi-candidate query rewriting model with multiple reward signals and capture its rewriting capability in well-curated query-product pairs through a powerful offline retrieval pipeline. This design mitigates distributional shift in rewritten queries, which might otherwise limit incremental recall or introduce irrelevant products. Experiments demonstrate that without any additional tricks, simply incorporating this synthetic data into retrieval model training leads to significant improvements. Online Side-By-Side (SBS) human evaluation results indicate a notable enhancement in user search experience.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-27T02:53:17Z</published>
+    <arxiv:comment>Accepted to SIGIR2026</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Gui Ling</name>
+    </author>
+    <author>
+      <name>Weiyuan Li</name>
+    </author>
+    <author>
+      <name>Yue Jiang</name>
+    </author>
+    <author>
+      <name>Wenjun Peng</name>
+    </author>
+    <author>
+      <name>Xingxian Liu</name>
+    </author>
+    <author>
+      <name>Dongshuai Li</name>
+    </author>
+    <author>
+      <name>Fuyu Lv</name>
+    </author>
+    <author>
+      <name>Dan Ou</name>
+    </author>
+    <author>
+      <name>Haihong Tang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.05987v1</id>
+    <title>Flowr -- Scaling Up Retail Supply Chain Operations Through Agentic AI in Large Scale Supermarket Chains</title>
+    <updated>2026-04-07T15:15:12Z</updated>
+    <link href="https://arxiv.org/abs/2604.05987v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.05987v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Retail supply chain operations in supermarket chains involve continuous, high-volume manual workflows spanning demand forecasting, procurement, supplier coordination, and inventory replenishment, processes that are repetitive, decision-intensive, and difficult to scale without significant human effort. Despite growing investment in data analytics, the decision-making and coordination layers of these workflows remain predominantly manual, reactive, and fragmented across outlets, distribution centers, and supplier networks. This paper introduces Flowr, a novel agentic AI framework for automating end-to-end retail supply chain workflows in large-scale supermarket operations. Flowr systematically decomposes manual supply chain operations into specialized AI agents, each responsible for a clearly defined cognitive role, enabling automation of processes previously dependent on continuous human coordination. To ensure task accuracy and adherence to responsible AI principles, the framework employs a consortium of fine-tuned, domain-specialized large language models coordinated by a central reasoning LLM. Central to the framework is a human-in-the-loop orchestration model in which supply chain managers supervise and intervene across workflow stages via a Model Context Protocol (MCP)-enabled interface, preserving accountability and organizational control. Evaluation demonstrates that Flowr significantly reduces manual coordination overhead, improves demand-supply alignment, and enables proactive exception handling at a scale unachievable through manual processes. The framework was validated in collaboration with a large-scale supermarket chain and is domain-independent, offering a generalizable blueprint for agentic AI-driven supply chain automation across large-scale enterprise settings.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-07T15:15:12Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Eranga Bandara</name>
+    </author>
+    <author>
+      <name>Ross Gore</name>
+    </author>
+    <author>
+      <name>Sachin Shetty</name>
+    </author>
+    <author>
+      <name>Piumi Siyambalapitiya</name>
+    </author>
+    <author>
+      <name>Sachini Rajapakse</name>
+    </author>
+    <author>
+      <name>Isurunima Kularathna</name>
+    </author>
+    <author>
+      <name>Pramoda Karunarathna</name>
+    </author>
+    <author>
+      <name>Ravi Mukkamala</name>
+    </author>
+    <author>
+      <name>Peter Foytik</name>
+    </author>
+    <author>
+      <name>Safdar H. Bouk</name>
+    </author>
+    <author>
+      <name>Abdul Rahman</name>
+    </author>
+    <author>
+      <name>Xueping Liang</name>
+    </author>
+    <author>
+      <name>Amin Hass</name>
+    </author>
+    <author>
+      <name>Tharaka Hewa</name>
+    </author>
+    <author>
+      <name>Ng Wee Keong</name>
+    </author>
+    <author>
+      <name>Kasun De Zoysa</name>
+    </author>
+    <author>
+      <name>Aruna Withanage</name>
+    </author>
+    <author>
+      <name>Nilaan Loganathan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.00513v3</id>
+    <title>MOON3.0: Reasoning-aware Multimodal Representation Learning for E-commerce Product Understanding</title>
+    <updated>2026-08-05T07:58:19Z</updated>
+    <link href="https://arxiv.org/abs/2604.00513v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.00513v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>With the rapid growth of e-commerce, exploring general representations rather than task-specific ones has attracted increasing attention. Although recent multimodal large language models (MLLMs) have driven significant progress in product understanding, they are typically employed as feature extractors that implicitly encode product information into global embeddings, thereby limiting their ability to capture fine-grained attributes. Therefore, we argue that leveraging the reasoning capabilities of MLLMs to explicitly model fine-grained product attributes holds significant potential. Nevertheless, achieving this goal remains non-trivial due to several key challenges: (i) long-context reasoning tends to dilute the model's attention to salient information in the raw input; (ii) supervised fine-tuning (SFT) primarily encourages rigid imitation, limiting the exploration of effective reasoning strategies; and (iii) fine-grained details are progressively attenuated during forward propagation. To address these issues, we propose MOON3.0, the first reasoning-aware MLLM-based model for product representation learning. Our method (1) employs a multi-head modality fusion module to adaptively integrate raw signals; (2) incorporates a joint contrastive and reinforcement learning framework to autonomously explore more effective reasoning strategies; and (3) introduces a fine-grained residual enhancement module to progressively preserve local details throughout the network. Additionally, we release a large-scale multimodal e-commerce benchmark MBE3.0. Experimentally, our model demonstrates state-of-the-art zero-shot performance across various downstream tasks on both our benchmark and public datasets.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-01T05:55:25Z</published>
+    <arxiv:comment>Accepted by the 34th ACM International Conference on Multimedia (ACM MM), 2026. 10 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Junxian Wu</name>
+    </author>
+    <author>
+      <name>Chenghan Fu</name>
+    </author>
+    <author>
+      <name>Zhanheng Nie</name>
+    </author>
+    <author>
+      <name>Daoze Zhang</name>
+    </author>
+    <author>
+      <name>Bowen Wan</name>
+    </author>
+    <author>
+      <name>Wanxian Guan</name>
+    </author>
+    <author>
+      <name>Chuan Yu</name>
+    </author>
+    <author>
+      <name>Jian Xu</name>
+    </author>
+    <author>
+      <name>Bo Zheng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.02184v2</id>
+    <title>MAC: A Conversion Rate Prediction Benchmark Featuring Labels Under Multiple Attribution Mechanisms</title>
+    <updated>2026-08-07T03:38:17Z</updated>
+    <link href="https://arxiv.org/abs/2603.02184v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.02184v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multi-attribution learning (MAL), which enhances model performance by learning from conversion labels yielded by multiple attribution mechanisms, has emerged as a promising learning paradigm for conversion rate (CVR) prediction. However, the conversion labels in public CVR datasets are generated by a single attribution mechanism, hindering the development of MAL approaches.
+  To address this data gap, we establish the Multi-Attribution Benchmark (MAC), the first public CVR dataset featuring labels from multiple attribution mechanisms. Besides, to promote reproducible research on MAL, we develop PyMAL, an open-source library covering a wide array of baseline methods. We conduct comprehensive experimental analyses on MAC and reveal three key insights: (1) MAL brings consistent performance gains across different attribution settings, especially for users featuring long conversion paths. (2) The performance growth scales up with objective complexity in most settings; however, when predicting first-click conversion targets, simply adding auxiliary objectives is counterproductive, underscoring the necessity of careful selection of auxiliary objectives. (3) Two architectural design principles are paramount: first, to fully learn the multi-attribution knowledge, and second, to fully leverage this knowledge to serve the main task. Motivated by these findings, we propose Mixture of Asymmetric Experts (MoAE), an effective MAL approach incorporating multi-attribution knowledge learning and main task-centric knowledge utilization. Experiments on MAC show that MoAE substantially surpasses the existing state-of-the-art MAL method. We believe that our benchmark and insights will foster future research in the MAL field. Our MAC benchmark and the PyMAL algorithm library are publicly available at https://github.com/alimama-tech/PyMAL.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-02T18:51:01Z</published>
+    <arxiv:comment>11 pages, 5 figures. Updated to the camera-ready version published in the proceedings of KDD 2026. Code and data available at https://github.com/alimama-tech/PyMAL</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2 (KDD '26), pp. 10009-10019, 2026</arxiv:journal_ref>
+    <author>
+      <name>Jinqi Wu</name>
+    </author>
+    <author>
+      <name>Sishuo Chen</name>
+    </author>
+    <author>
+      <name>Zhangming Chan</name>
+    </author>
+    <author>
+      <name>Yong Bai</name>
+    </author>
+    <author>
+      <name>Lei Zhang</name>
+    </author>
+    <author>
+      <name>Sheng Chen</name>
+    </author>
+    <author>
+      <name>Chenghuan Hou</name>
+    </author>
+    <author>
+      <name>Xiang-Rong Sheng</name>
+    </author>
+    <author>
+      <name>Han Zhu</name>
+    </author>
+    <author>
+      <name>Jian Xu</name>
+    </author>
+    <author>
+      <name>Bo Zheng</name>
+    </author>
+    <author>
+      <name>Chaoyou Fu</name>
+    </author>
+    <arxiv:doi>10.1145/3770855.3817488</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3770855.3817488" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.08332v1</id>
+    <title>Detecting Fake Reviewer Groups in Dynamic Networks: An Adaptive Graph Learning Method</title>
+    <updated>2026-03-09T12:49:17Z</updated>
+    <link href="https://arxiv.org/abs/2603.08332v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.08332v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The proliferation of fake reviews, often produced by organized groups, undermines consumer trust and fair competition on online platforms. These groups employ sophisticated strategies that evade traditional detection methods, particularly in cold-start scenarios involving newly launched products with sparse data. To address this, we propose the \underline{D}iversity- and \underline{S}imilarity-aware \underline{D}ynamic \underline{G}raph \underline{A}ttention-enhanced \underline{G}raph \underline{C}onvolutional \underline{N}etwork (DS-DGA-GCN), a new graph learning model for detecting fake reviewer groups. DS-DGA-GCN achieves robust detection since it focuses on the joint relationships among products, reviews, and reviewers by modeling product-review-reviewer networks. DS-DGA-GCN also achieves adaptive detection by integrating a Network Feature Scoring (NFS) system and a new dynamic graph attention mechanism. The NFS system quantifies network attributes, including neighbor diversity, network self-similarity, as a unified feature score. The dynamic graph attention mechanism improves the adaptability and computational efficiency by captures features related to temporal information, node importance, and global network structure. Extensive experiments conducted on two real-world datasets derived from Amazon and Xiaohongshu demonstrate that DS-DGA-GCN significantly outperforms state-of-the-art baselines, achieving accuracies of up to \textbf{89.8\% and 88.3\%}, respectively.</summary>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-09T12:49:17Z</published>
+    <arxiv:primary_category term="cs.SI"/>
+    <author>
+      <name>Jing Zhang</name>
+    </author>
+    <author>
+      <name>Ke Huang</name>
+    </author>
+    <author>
+      <name>Yao Zhang</name>
+    </author>
+    <author>
+      <name>Bin Guo</name>
+    </author>
+    <author>
+      <name>Zhiwen Yu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.13940v1</id>
+    <title>GroupGuard: A Framework for Modeling and Defending Collusive Attacks in Multi-Agent Systems</title>
+    <updated>2026-03-14T13:19:13Z</updated>
+    <link href="https://arxiv.org/abs/2603.13940v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.13940v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While large language model-based agents demonstrate great potential in collaborative tasks, their interactivity also introduces security vulnerabilities. In this paper, we propose and model group collusive attacks, a highly destructive threat in which multiple agents coordinate via sociological strategies to mislead the system. To address this challenge, we introduce GroupGuard, a training-free defense framework that employs a multi-layered defense strategy, including continuous graph-based monitoring, active honeypot inducement, and structural pruning, to identify and isolate collusive agents. Experimental results across five datasets and four topologies demonstrate that group collusive attacks increase the attack success rate by up to 15\% compared to individual attacks. GroupGuard consistently achieves high detection accuracy (up to 88\%) and effectively restores collaborative performance, providing a robust solution for securing multi-agent systems.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-14T13:19:13Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Yiling Tao</name>
+    </author>
+    <author>
+      <name>Xinran Zheng</name>
+    </author>
+    <author>
+      <name>Shuo Yang</name>
+    </author>
+    <author>
+      <name>Meiling Tao</name>
+    </author>
+    <author>
+      <name>Xingjun Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.29161v1</id>
+    <title>Webscraper: Leverage Multimodal Large Language Models for Index-Content Web Scraping</title>
+    <updated>2026-03-31T02:20:27Z</updated>
+    <link href="https://arxiv.org/abs/2603.29161v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.29161v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Modern web scraping struggles with dynamic, interactive websites that require more than static HTML parsing. Current methods are often brittle and require manual customization for each site. To address this, we introduce Webscraper, a framework designed to handle the challenges of modern, dynamic web applications. It leverages a Multimodal Large Language Model (MLLM) to autonomously navigate interactive interfaces, invoke specialized tools, and perform structured data extraction in environments where traditional scrapers are ineffective. Webscraper utilizes a structured five-stage prompting procedure and a set of custom-built tools to navigate and extract data from websites following the common ``index-and-content'' architecture. Our experiments, conducted on six news websites, demonstrate that the full Webscraper framework, equipped with both our guiding prompt and specialized tools, achieves a significant improvement in extraction accuracy over the baseline agent Anthropic's Computer Use. We also applied the framework to e-commerce platforms to validate its generalizability.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-31T02:20:27Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Guan-Lun Huang</name>
+    </author>
+    <author>
+      <name>Yuh-Jzer Joung</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.08852v1</id>
+    <title>LDP: An Identity-Aware Protocol for Multi-Agent LLM Systems</title>
+    <updated>2026-03-09T19:13:17Z</updated>
+    <link href="https://arxiv.org/abs/2603.08852v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.08852v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As multi-agent AI systems grow in complexity, the protocols connecting them constrain their capabilities. Current protocols such as A2A and MCP do not expose model-level properties as first-class primitives, ignoring properties fundamental to effective delegation: model identity, reasoning profile, quality calibration, and cost characteristics. We present the LLM Delegate Protocol (LDP), an AI-native communication protocol introducing five mechanisms: (1) rich delegate identity cards with quality hints and reasoning profiles; (2) progressive payload modes with negotiation and fallback; (3) governed sessions with persistent context; (4) structured provenance tracking confidence and verification status; (5) trust domains enforcing security boundaries at the protocol level. We implement LDP as a plugin for the JamJet agent runtime and evaluate against A2A and random baselines using local Ollama models and LLM-as-judge evaluation. Identity-aware routing achieves ~12x lower latency on easy tasks through delegate specialization, though it does not improve aggregate quality in our small delegate pool; semantic frame payloads reduce token count by 37% (p=0.031) with no observed quality loss; governed sessions eliminate 39% token overhead at 10 rounds; and noisy provenance degrades synthesis quality below the no-provenance baseline, arguing that confidence metadata is harmful without verification. Simulated analyses show architectural advantages in attack detection (96% vs. 6%) and failure recovery (100% vs. 35% completion). This paper contributes a protocol design, reference implementation, and initial evidence that AI-native protocol primitives enable more efficient and governable delegation.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-09T19:13:17Z</published>
+    <arxiv:comment>16 pages, 9 figures, 8 tables, 4 appendices</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Sunil Prakash</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.15661v1</id>
+    <title>DynaTrust: Defending Multi-Agent Systems Against Sleeper Agents via Dynamic Trust Graphs</title>
+    <updated>2026-03-09T05:53:16Z</updated>
+    <link href="https://arxiv.org/abs/2603.15661v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.15661v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Model-based Multi-Agent Systems (MAS) have demonstrated remarkable collaborative reasoning capabilities but introduce new attack surfaces, such as the sleeper agent, which behave benignly during routine operation and gradually accumulate trust, only revealing malicious behaviors when specific conditions or triggers are met. Existing defense works primarily focus on static graph optimization or hierarchical data management, often failing to adapt to evolving adversarial strategies or suffering from high false-positive rates (FPR) due to rigid blocking policies. To address this, we propose DynaTrust, a novel defense method against sleeper agents. DynaTrust models MAS as a dynamic trust graph~(DTG), and treats trust as a continuous, evolving process rather than a static attribute. It dynamically updates the trust of each agent based on its historical behaviors and the confidence of selected expert agents. Instead of simply blocking, DynaTrust autonomously restructures the graph to isolate compromised agents and restore task connectivity to ensure the usability of MAS. To assess the effectiveness of DynaTrust, we evaluate it on mixed benchmarks derived from AdvBench and HumanEval. The results demonstrate that DynaTrust outperforms the state-of-the-art method AgentShield by increasing the defense success rate by 41.7%, achieving rates exceeding 86% under adversarial conditions. Furthermore, it effectively balances security with utility by significantly reducing FPR, ensuring uninterrupted system operations through graph adaptation.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-09T05:53:16Z</published>
+    <arxiv:comment>9 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Yu Li</name>
+    </author>
+    <author>
+      <name>Qiang Hu</name>
+    </author>
+    <author>
+      <name>Yao Zhang</name>
+    </author>
+    <author>
+      <name>Lili Quan</name>
+    </author>
+    <author>
+      <name>Jiongchi Yu</name>
+    </author>
+    <author>
+      <name>Junjie Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.25737v1</id>
+    <title>Training the Knowledge Base through Evidence Distillation and Write-Back Enrichment</title>
+    <updated>2026-03-26T17:59:49Z</updated>
+    <link href="https://arxiv.org/abs/2603.25737v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.25737v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The knowledge base in a retrieval-augmented generation (RAG) system is typically assembled once and never revised, even though the facts a query requires are often fragmented across documents and buried in irrelevant content. We argue that the knowledge base should be treated as a trainable component and propose WriteBack-RAG, a framework that uses labeled examples to identify where retrieval succeeds, isolate the relevant documents, and distill them into compact knowledge units that are indexed alongside the original corpus. Because the method modifies only the corpus, it can be applied once as an offline preprocessing step and combined with any RAG pipeline. Across four RAG methods, six benchmarks, and two LLM backbones, WriteBack-RAG improves every evaluated setting, with gains averaging +2.14%. Cross-method transfer experiments further show that the distilled knowledge benefits RAG pipelines other than the one used to produce it, confirming that the improvement resides in the corpus itself.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-26T17:59:49Z</published>
+    <arxiv:comment>15 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Yuxing Lu</name>
+    </author>
+    <author>
+      <name>Xukai Zhao</name>
+    </author>
+    <author>
+      <name>Wei Wu</name>
+    </author>
+    <author>
+      <name>Jinzhuo Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.08618v2</id>
+    <title>SkillForge: Forging Domain-Specific, Self-Evolving Agent Skills in Cloud Technical Support</title>
+    <updated>2026-04-29T14:40:23Z</updated>
+    <link href="https://arxiv.org/abs/2604.08618v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.08618v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deploying LLM-powered agents in enterprise scenarios such as cloud technical support demands high-quality, domain-specific skills. However, existing skill creators lack domain grounding, producing skills poorly aligned with real-world task requirements. Moreover, once deployed, there is no systematic mechanism to trace execution failures back to skill deficiencies and drive targeted refinements, leaving skill quality stagnant despite accumulating operational evidence. We introduce SkillForge, a self-evolving framework that closes an end-to-end creation-evaluation-refinement loop. To produce well-aligned initial skills, a Domain-Contextualized Skill Creator grounds skill synthesis in knowledge bases and historical support tickets. To enable continuous self-optimization, a three-stage pipeline -- Failure Analyzer, Skill Diagnostician, and Skill Optimizer -- automatically diagnoses execution failures in batch, pinpoints the underlying skill deficiencies, and rewrites the skill to eliminate them. This cycle runs iteratively, allowing skills to self-improve with every round of deployment feedback. Evaluated on five real-world cloud support scenarios spanning 1,883 tickets and 3,737 tasks, experiments show that: (1) the Domain-Contextualized Skill Creator produces substantially better initial skills than the generic skill creator, as measured by consistency with expert-authored reference responses from historical tickets; and (2) the self-evolution loop progressively improves skill quality from diverse starting points (including expert-authored, domain-created, and generic skills) across successive rounds, demonstrating that automated evolution can surpass manually curated expert knowledge.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-09T07:11:23Z</published>
+    <arxiv:comment>Accepted at ACM SIGIR 2026 Industry Track. 18 pages, 5 figures, 3 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Xingyan Liu</name>
+    </author>
+    <author>
+      <name>Xiyue Luo</name>
+    </author>
+    <author>
+      <name>Linyu Li</name>
+    </author>
+    <author>
+      <name>Ganghong Huang</name>
+    </author>
+    <author>
+      <name>Jianfeng Liu</name>
+    </author>
+    <author>
+      <name>Honglin Qiao</name>
+    </author>
+    <arxiv:doi>10.1145/3805712.3808466</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3805712.3808466" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.24262v4</id>
+    <title>Coverage-Aware Web Crawling for Domain-Specific Supplier Discovery via a Web--Knowledge--Web Pipeline</title>
+    <updated>2026-04-30T02:58:59Z</updated>
+    <link href="https://arxiv.org/abs/2602.24262v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.24262v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Identifying the full landscape of small and medium-sized enterprises (SMEs) in specialized industry sectors is critical for supply-chain resilience, yet existing business databases suffer from substantial coverage gaps -- particularly for sub-tier suppliers and firms in emerging niche markets. We propose a \textbf{Web--Knowledge--Web (W$\to$K$\to$W)} pipeline that iteratively (1)~crawls domain-specific web sources to discover candidate supplier entities, (2)~extracts and consolidates structured knowledge into a heterogeneous knowledge graph using domain-adapted few-shot LLM prompting, and (3)~uses the knowledge graph's topology and coverage signals to guide subsequent crawling toward under-represented regions of the supplier space. To quantify discovery completeness, we introduce a \textbf{coverage estimation framework} inspired by ecological species-richness estimators (Chao1, ACE) adapted for web-entity populations. Experiments on the semiconductor equipment manufacturing sector (NAICS 333242) demonstrate that the W$\to$K$\to$W pipeline achieves the highest precision (0.165) and F1 (0.123) among all methods while using only 144 pages -- 32\% fewer than the 213-page baseline budget -- building a knowledge graph of 664 entities and 542 relations with 100\% relation type-consistency.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-27T18:31:42Z</published>
+    <arxiv:comment>Accepted by 2026 7th International Conference on Computer Information and Big Data Applications</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yijiashun Qi</name>
+    </author>
+    <author>
+      <name>Yijiazhen Qi</name>
+    </author>
+    <author>
+      <name>Tanmay Wagh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.01687v3</id>
+    <title>CoEvoSkills: Self-Evolving Agent Skills via Co-Evolutionary Verification</title>
+    <updated>2026-08-10T23:18:05Z</updated>
+    <link href="https://arxiv.org/abs/2604.01687v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.01687v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Anthropic proposes the concept of skills for LLM agents to tackle multi-step professional tasks that simple tool invocations cannot address. A tool is a single, self-contained function, whereas a skill is a structured bundle of interdependent multi-file artifacts. Currently, skill generation is not only label-intensive due to manual authoring, but also may suffer from human--machine cognitive misalignment, which can lead to degraded agent performance, as evidenced by evaluations on SkillsBench. Therefore, we aim to enable agents to autonomously generate skills. However, existing self-evolving methods designed for tools cannot be directly applied to skills due to their increased complexity. To address these issues, we propose CoEvoSkills, a self-evolving skills framework that enables agents to autonomously construct complex, multi-file skill packages. Specifically, CoEvoSkills couples a Skill Generator that iteratively refines skills with a Surrogate Verifier that co-evolves to provide informative and actionable feedback without access to ground-truth test content. On SkillsBench, CoEvoSkills outperforms five baselines on both Claude Code and Codex, and generalizes strongly to six additional LLMs. The code is publicly available at https://github.com/Zhang-Henry/CoEvoSkills.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-02T06:43:20Z</published>
+    <arxiv:comment>COLM accepted</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Hanrong Zhang</name>
+      <arxiv:affiliation>Steve</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Shicheng Fan</name>
+      <arxiv:affiliation>Steve</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Henry Peng Zou</name>
+      <arxiv:affiliation>Steve</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Yankai Chen</name>
+      <arxiv:affiliation>Steve</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Zhenting Wang</name>
+      <arxiv:affiliation>Steve</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jiayu Zhou</name>
+      <arxiv:affiliation>Steve</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Chengze Li</name>
+      <arxiv:affiliation>Steve</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Wei-Chieh Huang</name>
+      <arxiv:affiliation>Steve</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Yifei Yao</name>
+      <arxiv:affiliation>Steve</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Kening Zheng</name>
+      <arxiv:affiliation>Steve</arxiv:affiliation>
+    </author>
+    <author>
+      <name> Xue</name>
+      <arxiv:affiliation>Steve</arxiv:affiliation>
+    </author>
+    <author>
+      <name> Liu</name>
+    </author>
+    <author>
+      <name>Xiaoxiao Li</name>
+    </author>
+    <author>
+      <name>Philip S. Yu</name>
+    </author>
+  </entry>
+</feed>

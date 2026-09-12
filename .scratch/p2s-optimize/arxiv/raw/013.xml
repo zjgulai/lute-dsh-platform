@@ -1,0 +1,1139 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/onIxGXsxUQE6WrIcme/Q15CvqDo</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.18059,2402.01030,2402.01032,2402.01817,2402.03216,2402.03300,2402.04238,2402.07334,2402.07867,2402.07927,2402.08234,2402.08923,2402.08930,2402.09058,2402.09176,2402.09234,2402.09812,2402.09823,2402.10946,2402.11234,2402.11748,2402.11834,2402.11934,2402.11947,2402.11965,2402.12234,2402.13178,2402.13667,2402.14253,2402.14506,2402.14517,2402.14823,2402.15758,2402.15891,2402.17289,2402.17893,2402.18341,2402.18800,2403.00817,2403.00923&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:43:07Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2401.18059,2402.01030,2402.01032,2402.01817,2402.03216,2402.03300,2402.04238,2402.07334,2402.07867,2402.07927,2402.08234,2402.08923,2402.08930,2402.09058,2402.09176,2402.09234,2402.09812,2402.09823,2402.10946,2402.11234,2402.11748,2402.11834,2402.11934,2402.11947,2402.11965,2402.12234,2402.13178,2402.13667,2402.14253,2402.14506,2402.14517,2402.14823,2402.15758,2402.15891,2402.17289,2402.17893,2402.18341,2402.18800,2403.00817,2403.00923" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2402.18800v1</id>
+    <title>BlockEcho: Retaining Long-Range Dependencies for Imputing Block-Wise Missing Data</title>
+    <updated>2024-02-29T02:13:10Z</updated>
+    <link href="https://arxiv.org/abs/2402.18800v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.18800v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Block-wise missing data poses significant challenges in real-world data imputation tasks. Compared to scattered missing data, block-wise gaps exacerbate adverse effects on subsequent analytic and machine learning tasks, as the lack of local neighboring elements significantly reduces the interpolation capability and predictive power. However, this issue has not received adequate attention. Most SOTA matrix completion methods appeared less effective, primarily due to overreliance on neighboring elements for predictions. We systematically analyze the issue and propose a novel matrix completion method ``BlockEcho" for a more comprehensive solution. This method creatively integrates Matrix Factorization (MF) within Generative Adversarial Networks (GAN) to explicitly retain long-distance inter-element relationships in the original matrix. Besides, we incorporate an additional discriminator for GAN, comparing the generator's intermediate progress with pre-trained MF results to constrain high-order feature distributions. Subsequently, we evaluate BlockEcho on public datasets across three domains. Results demonstrate superior performance over both traditional and SOTA methods when imputing block-wise missing data, especially at higher missing rates. The advantage also holds for scattered missing data at high missing rates. We also contribute on the analyses in providing theoretical justification on the optimality and convergence of fusing MF and GAN for missing block data.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-29T02:13:10Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Qiao Han</name>
+    </author>
+    <author>
+      <name>Mingqian Li</name>
+    </author>
+    <author>
+      <name>Yao Yang</name>
+    </author>
+    <author>
+      <name>Yiteng Zhai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.00923v1</id>
+    <title>An Interpretable Ensemble of Graph and Language Models for Improving Search Relevance in E-Commerce</title>
+    <updated>2024-03-01T19:08:25Z</updated>
+    <link href="https://arxiv.org/abs/2403.00923v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.00923v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The problem of search relevance in the E-commerce domain is a challenging one since it involves understanding the intent of a user's short nuanced query and matching it with the appropriate products in the catalog. This problem has traditionally been addressed using language models (LMs) and graph neural networks (GNNs) to capture semantic and inter-product behavior signals, respectively. However, the rapid development of new architectures has created a gap between research and the practical adoption of these techniques. Evaluating the generalizability of these models for deployment requires extensive experimentation on complex, real-world datasets, which can be non-trivial and expensive. Furthermore, such models often operate on latent space representations that are incomprehensible to humans, making it difficult to evaluate and compare the effectiveness of different models. This lack of interpretability hinders the development and adoption of new techniques in the field. To bridge this gap, we propose Plug and Play Graph LAnguage Model (PP-GLAM), an explainable ensemble of plug and play models. Our approach uses a modular framework with uniform data processing pipelines. It employs additive explanation metrics to independently decide whether to include (i) language model candidates, (ii) GNN model candidates, and (iii) inter-product behavioral signals. For the task of search relevance, we show that PP-GLAM outperforms several state-of-the-art baselines as well as a proprietary model on real-world multilingual, multi-regional e-commerce datasets. To promote better model comprehensibility and adoption, we also provide an analysis of the explainability and computational complexity of our model. We also provide the public codebase and provide a deployment strategy for practical implementation.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-01T19:08:25Z</published>
+    <arxiv:comment>Accepted to The Web Conference 2024 (Industry)</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Nurendra Choudhary</name>
+    </author>
+    <author>
+      <name>Edward W Huang</name>
+    </author>
+    <author>
+      <name>Karthik Subbian</name>
+    </author>
+    <author>
+      <name>Chandan K. Reddy</name>
+    </author>
+    <arxiv:doi>10.1145/3589335.3648318</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3589335.3648318" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.14517v1</id>
+    <title>The elliptical invariant tori of nearly integrable Hamiltonian system through symplectic algorithms</title>
+    <updated>2024-02-22T13:07:11Z</updated>
+    <link href="https://arxiv.org/abs/2402.14517v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.14517v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we apply symplectic algorithms to nearly integrable Hamiltonian system, and prove it can maintain lots of elliptic lower dimensional invariant tori.
+  We are committed to consider the elliptic lower dimensional invariant tori for symplectic mapping with a small twist under the Rüssmann's non-degenerate condition, and focus on its measure estimation. And then apply it to the nearly integrable Hamiltonian system to obtain lots of elliptic lower dimensional invariant tori.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-22T13:07:11Z</published>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Zaijiu Shang</name>
+    </author>
+    <author>
+      <name>Yang Xu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.08923v2</id>
+    <title>IMUOptimize: A Data-Driven Approach to Optimal IMU Placement for Human Pose Estimation with Transformer Architecture</title>
+    <updated>2024-02-16T22:06:43Z</updated>
+    <link href="https://arxiv.org/abs/2402.08923v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.08923v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents a novel approach for predicting human poses using IMU data, diverging from previous studies such as DIP-IMU, IMUPoser, and TransPose, which use up to 6 IMUs in conjunction with bidirectional RNNs. We introduce two main innovations: a data-driven strategy for optimal IMU placement and a transformer-based model architecture for time series analysis. Our findings indicate that our approach not only outperforms traditional 6 IMU-based biRNN models but also that the transformer architecture significantly enhances pose reconstruction from data obtained from 24 IMU locations, with equivalent performance to biRNNs when using only 6 IMUs. The enhanced accuracy provided by our optimally chosen locations, when coupled with the parallelizability and performance of transformers, provides significant improvements to the field of IMU-based pose estimation.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-14T03:45:26Z</published>
+    <arxiv:comment>8 pages, 16 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Varun Ramani</name>
+    </author>
+    <author>
+      <name>Hossein Khayami</name>
+    </author>
+    <author>
+      <name>Yang Bai</name>
+    </author>
+    <author>
+      <name>Nakul Garg</name>
+    </author>
+    <author>
+      <name>Nirupam Roy</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.12234v1</id>
+    <title>Task-Oriented Dialogue with In-Context Learning</title>
+    <updated>2024-02-19T15:43:35Z</updated>
+    <link href="https://arxiv.org/abs/2402.12234v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.12234v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We describe a system for building task-oriented dialogue systems combining the in-context learning abilities of large language models (LLMs) with the deterministic execution of business logic. LLMs are used to translate between the surface form of the conversation and a domain-specific language (DSL) which is used to progress the business logic. We compare our approach to the intent-based NLU approach predominantly used in industry today. Our experiments show that developing chatbots with our system requires significantly less effort than established approaches, that these chatbots can successfully navigate complex dialogues which are extremely challenging for NLU-based systems, and that our system has desirable properties for scaling task-oriented dialogue systems to a large number of tasks. We make our implementation available for use and further study.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-19T15:43:35Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Tom Bocklisch</name>
+    </author>
+    <author>
+      <name>Thomas Werkmeister</name>
+    </author>
+    <author>
+      <name>Daksh Varshneya</name>
+    </author>
+    <author>
+      <name>Alan Nichol</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.11834v1</id>
+    <title>Terahertz User-Centric Clustering in the Presence of Beam Misalignment</title>
+    <updated>2024-02-19T04:57:12Z</updated>
+    <link href="https://arxiv.org/abs/2402.11834v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.11834v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Beam misalignment is one of the main challenges for the design of reliable wireless systems in terahertz (THz) bands. This paper investigates how to apply user-centric base station (BS) clustering as a valuable add-on in THz networks. In particular, to reduce the impact of beam misalignment, a user-centric BS clustering design that provides multi-connectivity via BS cooperation is investigated. The coverage probability is derived by leveraging an accurate approximation of the aggregate interference distribution that captures the effect of beam misalignment and THz fading. The numerical results reveal the impact of beam misalignment with respect to crucial link parameters, such as the transmitter's beam width and the serving cluster size, demonstrating that user-centric BS clustering is a promising enabler of THz networks.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-19T04:57:12Z</published>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Khaled Humadi</name>
+    </author>
+    <author>
+      <name>Imene Trigui</name>
+    </author>
+    <author>
+      <name>Wei-Ping Zhu</name>
+    </author>
+    <author>
+      <name>Wessam Ajib</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.13667v1</id>
+    <title>GCOF: Self-iterative Text Generation for Copywriting Using Large Language Model</title>
+    <updated>2024-02-21T09:59:20Z</updated>
+    <link href="https://arxiv.org/abs/2402.13667v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.13667v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models(LLM) such as ChatGPT have substantially simplified the generation of marketing copy, yet producing content satisfying domain specific requirements, such as effectively engaging customers, remains a significant challenge. In this work, we introduce the Genetic Copy Optimization Framework (GCOF) designed to enhance both efficiency and engagememnt of marketing copy creation. We conduct explicit feature engineering within the prompts of LLM. Additionally, we modify the crossover operator in Genetic Algorithm (GA), integrating it into the GCOF to enable automatic feature engineering. This integration facilitates a self-iterative refinement of the marketing copy. Compared to human curated copy, Online results indicate that copy produced by our framework achieves an average increase in click-through rate (CTR) of over $50\%$.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-21T09:59:20Z</published>
+    <arxiv:comment>8 pages, 5 figures, 1 table</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jianghui Zhou</name>
+    </author>
+    <author>
+      <name>Ya Gao</name>
+    </author>
+    <author>
+      <name>Jie Liu</name>
+    </author>
+    <author>
+      <name>Xuemin Zhao</name>
+    </author>
+    <author>
+      <name>Zhaohua Yang</name>
+    </author>
+    <author>
+      <name>Yue Wu</name>
+    </author>
+    <author>
+      <name>Lirong Shi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.10946v3</id>
+    <title>CultureLLM: Incorporating Cultural Differences into Large Language Models</title>
+    <updated>2024-12-03T06:52:34Z</updated>
+    <link href="https://arxiv.org/abs/2402.10946v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.10946v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) are reported to be partial to certain cultures owing to the training data dominance from the English corpora. Since multilingual cultural data are often expensive to collect, existing efforts handle this by prompt engineering or culture-specific pre-training. However, they might overlook the knowledge deficiency of low-resource culture and require extensive computing resources. In this paper, we propose CultureLLM, a cost-effective solution to incorporate cultural differences into LLMs. CultureLLM adopts World Value Survey (WVS) as seed data and generates semantically equivalent training data via the proposed semantic data augmentation. Using only 50 seed samples from WVS with augmented data, we fine-tune culture-specific LLMs and one unified model (CultureLLM-One) for 9 cultures covering rich and low-resource languages. Extensive experiments on 60 culture-related datasets demonstrate that CultureLLM significantly outperforms various counterparts such as GPT-3.5 (by 8.1%) and Gemini Pro (by 9.5%) with comparable performance to GPT-4 or even better. Our human study shows that the generated samples are semantically equivalent to the original samples, providing an effective solution for LLMs augmentation. Code is released at https://github.com/Scarelette/CultureLLM.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-09T04:02:43Z</published>
+    <arxiv:comment>NeurIPS 2024; Code is at https://github.com/Scarelette/CultureLLM</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Cheng Li</name>
+    </author>
+    <author>
+      <name>Mengzhou Chen</name>
+    </author>
+    <author>
+      <name>Jindong Wang</name>
+    </author>
+    <author>
+      <name>Sunayana Sitaram</name>
+    </author>
+    <author>
+      <name>Xing Xie</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.07867v3</id>
+    <title>PoisonedRAG: Knowledge Corruption Attacks to Retrieval-Augmented Generation of Large Language Models</title>
+    <updated>2024-08-13T01:55:06Z</updated>
+    <link href="https://arxiv.org/abs/2402.07867v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.07867v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have achieved remarkable success due to their exceptional generative capabilities. Despite their success, they also have inherent limitations such as a lack of up-to-date knowledge and hallucination. Retrieval-Augmented Generation (RAG) is a state-of-the-art technique to mitigate these limitations. The key idea of RAG is to ground the answer generation of an LLM on external knowledge retrieved from a knowledge database. Existing studies mainly focus on improving the accuracy or efficiency of RAG, leaving its security largely unexplored. We aim to bridge the gap in this work. We find that the knowledge database in a RAG system introduces a new and practical attack surface. Based on this attack surface, we propose PoisonedRAG, the first knowledge corruption attack to RAG, where an attacker could inject a few malicious texts into the knowledge database of a RAG system to induce an LLM to generate an attacker-chosen target answer for an attacker-chosen target question. We formulate knowledge corruption attacks as an optimization problem, whose solution is a set of malicious texts. Depending on the background knowledge (e.g., black-box and white-box settings) of an attacker on a RAG system, we propose two solutions to solve the optimization problem, respectively. Our results show PoisonedRAG could achieve a 90% attack success rate when injecting five malicious texts for each target question into a knowledge database with millions of texts. We also evaluate several defenses and our results show they are insufficient to defend against PoisonedRAG, highlighting the need for new defenses.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-12T18:28:36Z</published>
+    <arxiv:comment>To appear in USENIX Security Symposium 2025. The code is available at https://github.com/sleeepeer/PoisonedRAG</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Wei Zou</name>
+    </author>
+    <author>
+      <name>Runpeng Geng</name>
+    </author>
+    <author>
+      <name>Binghui Wang</name>
+    </author>
+    <author>
+      <name>Jinyuan Jia</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.01817v3</id>
+    <title>LLMs Can't Plan, But Can Help Planning in LLM-Modulo Frameworks</title>
+    <updated>2024-06-12T01:13:11Z</updated>
+    <link href="https://arxiv.org/abs/2402.01817v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.01817v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>There is considerable confusion about the role of Large Language Models (LLMs) in planning and reasoning tasks. On one side are over-optimistic claims that LLMs can indeed do these tasks with just the right prompting or self-verification strategies. On the other side are perhaps over-pessimistic claims that all that LLMs are good for in planning/reasoning tasks are as mere translators of the problem specification from one syntactic format to another, and ship the problem off to external symbolic solvers. In this position paper, we take the view that both these extremes are misguided. We argue that auto-regressive LLMs cannot, by themselves, do planning or self-verification (which is after all a form of reasoning), and shed some light on the reasons for misunderstandings in the literature. We will also argue that LLMs should be viewed as universal approximate knowledge sources that have much more meaningful roles to play in planning/reasoning tasks beyond simple front-end/back-end format translators. We present a vision of {\bf LLM-Modulo Frameworks} that combine the strengths of LLMs with external model-based verifiers in a tighter bi-directional interaction regime. We will show how the models driving the external verifiers themselves can be acquired with the help of LLMs. We will also argue that rather than simply pipelining LLMs and symbolic components, this LLM-Modulo Framework provides a better neuro-symbolic approach that offers tighter integration between LLMs and symbolic components, and allows extending the scope of model-based planning/reasoning regimes towards more flexible knowledge, problem and preference specifications.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-02T14:43:18Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <arxiv:journal_ref>Proceedings of the 41 st International Conference on Machine Learning, Vienna, Austria. PMLR 235, 2024</arxiv:journal_ref>
+    <author>
+      <name>Subbarao Kambhampati</name>
+    </author>
+    <author>
+      <name>Karthik Valmeekam</name>
+    </author>
+    <author>
+      <name>Lin Guan</name>
+    </author>
+    <author>
+      <name>Mudit Verma</name>
+    </author>
+    <author>
+      <name>Kaya Stechly</name>
+    </author>
+    <author>
+      <name>Siddhant Bhambri</name>
+    </author>
+    <author>
+      <name>Lucas Saldyt</name>
+    </author>
+    <author>
+      <name>Anil Murthy</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.07927v2</id>
+    <title>A Systematic Survey of Prompt Engineering in Large Language Models: Techniques and Applications</title>
+    <updated>2025-03-16T06:23:34Z</updated>
+    <link href="https://arxiv.org/abs/2402.07927v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.07927v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Prompt engineering has emerged as an indispensable technique for extending the capabilities of large language models (LLMs) and vision-language models (VLMs). This approach leverages task-specific instructions, known as prompts, to enhance model efficacy without modifying the core model parameters. Rather than updating the model parameters, prompts allow seamless integration of pre-trained models into downstream tasks by eliciting desired model behaviors solely based on the given prompt. Prompts can be natural language instructions that provide context to guide the model or learned vector representations that activate relevant knowledge. This burgeoning field has enabled success across various applications, from question-answering to commonsense reasoning. However, there remains a lack of systematic organization and understanding of the diverse prompt engineering methods and techniques. This survey paper addresses the gap by providing a structured overview of recent advancements in prompt engineering, categorized by application area. For each prompting approach, we provide a summary detailing the prompting methodology, its applications, the models involved, and the datasets utilized. We also delve into the strengths and limitations of each approach and include a taxonomy diagram and table summarizing datasets, models, and critical points of each prompting technique. This systematic analysis enables a better understanding of this rapidly developing field and facilitates future research by illuminating open challenges and opportunities for prompt engineering.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-05T19:49:13Z</published>
+    <arxiv:comment>12 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Pranab Sahoo</name>
+    </author>
+    <author>
+      <name>Ayush Kumar Singh</name>
+    </author>
+    <author>
+      <name>Sriparna Saha</name>
+    </author>
+    <author>
+      <name>Vinija Jain</name>
+    </author>
+    <author>
+      <name>Samrat Mondal</name>
+    </author>
+    <author>
+      <name>Aman Chadha</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.11947v4</id>
+    <title>The Effects of the Gravitational Coupling Variation on the Local $H_0$ Estimation</title>
+    <updated>2025-09-01T11:36:59Z</updated>
+    <link href="https://arxiv.org/abs/2402.11947v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.11947v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the effects of the time evolution of the matter-gravity coupling on the luminosity distance, showing it can provide a natural explanation to the apparent Hubble tension. The gravitational coupling evolution induces a modification of the Friedman equation with respect to the $Λ$CDM model, which we study in both the Einstein and Jordan frame. We consider a phenomenological parametrization of the low redshift variation of the coupling in a narrow redshift shell, showing how it can affect the distance of the anchors used to calibrate supernovae (SNe), while higher redshift background observations are not affected. This effect is purely geometrical, and it is not related to any change of the intrinsic SNe physical properties. The effects of a time varying gravity coupling only manifest on sufficiently long time scales, such as in cosmological observations at different redshifts, and if ignored lead to apparent tensions in the values of cosmological parameters estimated with observations from different epochs of the Universe history.</summary>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-19T08:42:34Z</published>
+    <arxiv:comment>Added details about Jordan and Einstein frame modified Friedman equations; added low redshift plots; added discussion about the effects on the Geff measured by LSS</arxiv:comment>
+    <arxiv:primary_category term="gr-qc"/>
+    <arxiv:journal_ref>Universe2025,11(8),278</arxiv:journal_ref>
+    <author>
+      <name>Antonio Enea Romano</name>
+    </author>
+    <arxiv:doi>10.3390/universe11080278</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.3390/universe11080278" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.03216v5</id>
+    <title>M3-Embedding: Multi-Linguality, Multi-Functionality, Multi-Granularity Text Embeddings Through Self-Knowledge Distillation</title>
+    <updated>2025-12-12T11:26:32Z</updated>
+    <link href="https://arxiv.org/abs/2402.03216v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.03216v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we introduce a new embedding model called M3-Embedding, which is distinguished for its versatility in \textit{Multi-Linguality}, \textit{Multi-Functionality}, and \textit{Multi-Granularity}. It provides a uniform support for the semantic retrieval of more than 100 working languages. It can simultaneously accomplish the three common retrieval functionalities: dense retrieval, multi-vector retrieval, and sparse retrieval. Besides, it is also capable of processing inputs of different granularities, spanning from short sentences to long documents of up to 8,192 tokens. The effective training of M3-Embedding presents a series of technical contributions. Notably, we propose a novel self-knowledge distillation approach, where the relevance scores from different retrieval functionalities can be integrated as the teacher signal to enhance the training quality. We also optimize the batching strategy, which enables a large batch size and high training throughput to improve the discriminativeness of embeddings. M3-Embedding exhibits a superior performance in our experiment, leading to new state-of-the-art results on multilingual, cross-lingual, and long-document retrieval benchmarks.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-05T17:26:49Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jianlv Chen</name>
+    </author>
+    <author>
+      <name>Shitao Xiao</name>
+    </author>
+    <author>
+      <name>Peitian Zhang</name>
+    </author>
+    <author>
+      <name>Kun Luo</name>
+    </author>
+    <author>
+      <name>Defu Lian</name>
+    </author>
+    <author>
+      <name>Zheng Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.09058v1</id>
+    <title>Stellar Population Astrophysics (SPA) with TNG, Fluorine abundances in seven open clusters</title>
+    <updated>2024-02-14T10:14:54Z</updated>
+    <link href="https://arxiv.org/abs/2402.09058v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.09058v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The age, evolution, and chemical properties of the Galactic disk can be effectively ascertained using open clusters. Within the large program Stellar Populations Astrophysics at the Telescopio Nazionale Galileo, we specifically focused on stars in open clusters, to investigate various astrophysical topics, from the chemical content of very young systems to the abundance patterns of lesser studied intermediate-age and old open clusters. We investigate the astrophysically interesting element fluorine (F), which has an uncertain and intriguing cosmic origin. We also determine the abundance of cerium (Ce), as F abundance is expected to correlate with the s-process elements. High-resolution near-infrared spectra were obtained using the GIANO-B spectrograph. The Python version of Spectroscopy Made Easy (PySME), was used to derive atmospheric parameters and abundances. The stellar parameters were determined using OH, CN, and CO molecular lines along with Fe I lines. This paper presents the first F Galactic radial abundance gradient. Our results are also compared with literature estimates and with Galactic chemical evolution models that have been generated using different F production channels. Our results indicate a constant, solar pattern in the [F/Fe] ratios across clusters of different ages, supporting the latest findings that fluorine levels do not exhibit any secondary behavior for stars with solar or above-solar metallicity. By comparing our sample stars with the predictions of Galactic chemical evolution models, we came to the conclusion that both asymptotic giant branch stars and massive stars, including a fraction of fast rotators that increase with decreasing metallicity, are needed to explain the cosmic origin of F.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.SR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-14T10:14:54Z</published>
+    <arxiv:comment>15 pages, 6 figures, 4 tables, Accepted by A&amp;A</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <author>
+      <name>Shilpa Bijavara Seshashayana</name>
+    </author>
+    <author>
+      <name>Henrik Jönsson</name>
+    </author>
+    <author>
+      <name>Valentina D'Orazi</name>
+    </author>
+    <author>
+      <name>Govind Nandakumar</name>
+    </author>
+    <author>
+      <name>Ernesto Oliva</name>
+    </author>
+    <author>
+      <name>Angela Bragaglia</name>
+    </author>
+    <author>
+      <name>Nicoletta Sanna</name>
+    </author>
+    <author>
+      <name>Donatella Romano</name>
+    </author>
+    <author>
+      <name>Emanuele Spitoni</name>
+    </author>
+    <author>
+      <name>Amanda Karakas</name>
+    </author>
+    <author>
+      <name>Maria Lugaro</name>
+    </author>
+    <author>
+      <name>Livia Origlia</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.15891v1</id>
+    <title>Labor-based grading practices in the physics classroom</title>
+    <updated>2024-02-24T19:56:14Z</updated>
+    <link href="https://arxiv.org/abs/2402.15891v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.15891v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>I describe the assessment framework of labor-based contract grading (LBCG). In a labor-based grading scheme, the time and effort ("labor") a student spends on an assignment determines the credit they receive; the contract component requires students to design projects with clearly-defined goals and deliverables which must be satisfied to earn credit. LBCG is intended to promote student agency and engagement, and to provide a more equitable assessment framework given that students come with a wide range of prior experiences and preparation. I illustrate the LBCG framework within the context of an upper level physics course, using a particular assignment as an example; I also provide information on student experiences and engagement.</summary>
+    <category term="physics.ed-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-24T19:56:14Z</published>
+    <arxiv:comment>21 pages / 1 figure. Accepted for publication in AJP</arxiv:comment>
+    <arxiv:primary_category term="physics.ed-ph"/>
+    <author>
+      <name>Jeremy M. Wachter</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.17289v2</id>
+    <title>Active propulsion noise shaping for multi-rotor aircraft localization</title>
+    <updated>2024-02-29T15:54:46Z</updated>
+    <link href="https://arxiv.org/abs/2402.17289v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.17289v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multi-rotor aerial autonomous vehicles (MAVs) primarily rely on vision for navigation purposes. However, visual localization and odometry techniques suffer from poor performance in low or direct sunlight, a limited field of view, and vulnerability to occlusions. Acoustic sensing can serve as a complementary or even alternative modality for vision in many situations, and it also has the added benefits of lower system cost and energy footprint, which is especially important for micro aircraft. This paper proposes actively controlling and shaping the aircraft propulsion noise generated by the rotors to benefit localization tasks, rather than considering it a harmful nuisance. We present a neural network architecture for selfnoise-based localization in a known environment. We show that training it simultaneously with learning time-varying rotor phase modulation achieves accurate and robust localization. The proposed methods are evaluated using a computationally affordable simulation of MAV rotor noise in 2D acoustic environments that is fitted to real recordings of rotor pressure fields.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-27T08:02:48Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Gabriele Serussi</name>
+    </author>
+    <author>
+      <name>Tamir Shor</name>
+    </author>
+    <author>
+      <name>Tom Hirshberg</name>
+    </author>
+    <author>
+      <name>Chaim Baskin</name>
+    </author>
+    <author>
+      <name>Alex Bronstein</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.11965v4</id>
+    <title>Singularities on maxfaces constructed by node-opening</title>
+    <updated>2024-06-26T10:21:48Z</updated>
+    <link href="https://arxiv.org/abs/2402.11965v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.11965v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The node-opening technique, originally designed for constructing minimal surfaces, is adapted to construct a rich variety of new maxfaces of high genus that are embedded outside a compact set and have arbitrarily many catenoid or planar ends, thus removing the scarcity of examples of maxfaces. The surfaces look like spacelike planes connected by small necks. Among the examples are maxfaces of the Costa--Hoffman--Meeks type. Although very fruitful, the main challenge of this paper is not the construction itself, but the analysis of the positions and natures of singularities on these maxfaces. More specifically, we conclude that the singular set form curves around the waists of the necks. In generic and some symmetric cases, all but finitely many singularities are cuspidal edges, and the non-cuspidal singularities are swallowtails evenly distributed along the singular curves.</summary>
+    <category term="math.DG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-19T09:07:28Z</published>
+    <arxiv:comment>Comments and suggestions are welcome</arxiv:comment>
+    <arxiv:primary_category term="math.DG"/>
+    <author>
+      <name>Hao Chen</name>
+    </author>
+    <author>
+      <name>Anu Dhochak</name>
+    </author>
+    <author>
+      <name>Pradip Kumar</name>
+    </author>
+    <author>
+      <name>Sai Rasmi Ranjan Mohanty</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.17893v2</id>
+    <title>Measurement of Proton-Induced Reactions on Lanthanum from 55--200 MeV by Stacked-Foil Activation</title>
+    <updated>2026-03-13T22:23:05Z</updated>
+    <link href="https://arxiv.org/abs/2402.17893v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.17893v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Cerium-134 is an isotope desired for applications as a chemical analogue to the promising therapeutic radionuclide $^{225}$Ac, for use in bio-distribution assays as an in vivo generator of the short-lived positron-emitting isotope $^{134}$La. In the 50-100 MeV energy range relevant to the production of $^{134}$Ce by means of high-energy proton bombardment of lanthanum, existing cross section data are discrepant and have gaps at important energies. To address these deficiencies, a series of 17 $^{139}$La foils (99.919% natural abundance) were irradiated in two stacked-target experiments: one at the LANL's Isotope Production Facility with an incident proton energy of 100 MeV, and a second at BNL's Brookhaven Linac Isotope Producer with an incident proton energy of 200 MeV - a complete energy range spanning approximately 55-200 MeV. Cross sections are reported for 30 products of $^{139}$La(p,x) reactions (representing up to 55% of the total non-elastic cross section), in addition to 24 residual products measured in the $^{nat}$Cu and $^{nat}$Ti foils that were used as proton flux monitors. The measured production cross sections for $^{139}$La reactions were compared to literature data as well as default calculations from the nuclear reaction modeling codes TALYS, EMPIRE and ALICE, as well as the TENDL-2023 library. The default calculations typically exhibited poor predictive capability, due to the complexity of multiple interacting physics models in this energy range, and deficiencies in preequilibrium reaction modeling. Building upon previous efforts to evaluate proton-induced reactions in this energy range, a parameter adjustment procedure was performed upon the optical model and the two-component exciton model using the TALYS-2.0 code. This resulted in an improvement in $^{139}$La(p,x) cross sections for applications including isotope production, over default predictions.</summary>
+    <category term="nucl-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-27T21:14:29Z</published>
+    <arxiv:primary_category term="nucl-ex"/>
+    <author>
+      <name>Jonathan T. Morrell</name>
+    </author>
+    <author>
+      <name>Ellen M. O'Brien</name>
+    </author>
+    <author>
+      <name>Michael Skulski</name>
+    </author>
+    <author>
+      <name>Andrew S. Voyles</name>
+    </author>
+    <author>
+      <name>Dmitri G. Medvedev</name>
+    </author>
+    <author>
+      <name>Veronika Mocko</name>
+    </author>
+    <author>
+      <name>Lee A. Bernstein</name>
+    </author>
+    <author>
+      <name>C. Etienne Vermeulen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.14506v3</id>
+    <title>Enhancing Rolling Horizon Production Planning Through Stochastic Optimization Evaluated by Means of Simulation</title>
+    <updated>2026-08-11T11:20:29Z</updated>
+    <link href="https://arxiv.org/abs/2402.14506v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.14506v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Production planning must account for uncertainty in a production system, arising from fluctuating demand forecasts and execution-level friction. This article integrates scenario-based stochastic programming into a rolling horizon framework for capacitated lot sizing, evaluated via discrete-event simulation. We compare this stochastic approach against deterministic optimization and standard Material Requirements Planning (MRP) across varying customer update behaviors, shop loads, and diverse multi-stage topologies (divergent, convergent, and mixed). To accurately capture shop-floor dynamics, the framework introduces a non-anticipativity parameter controlling schedule flexibility, alongside probabilistic setup-time feedback and soft overtime constraints.
+  Results indicate that optimization consistently outperforms MRP. In unbuffered, highly congested settings, stochastic optimization natively smooths workloads and reduces costs by up to 68%. However, introducing explicit safety stocks fundamentally shifts system dynamics: physical buffers effectively absorb shop-floor noise, diminishing the stochastic model's anticipative advantage and enabling deterministic optimization to dominate. Ultimately, this study offers critical managerial insights for aligning planning algorithms, inventory buffering, and schedule flexibility.</summary>
+    <category term="econ.EM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-22T12:55:24Z</published>
+    <arxiv:primary_category term="econ.EM"/>
+    <author>
+      <name>Manuel Schlenkrich</name>
+    </author>
+    <author>
+      <name>Wolfgang Seiringer</name>
+    </author>
+    <author>
+      <name>Klaus Altendorfer</name>
+    </author>
+    <author>
+      <name>Sophie N. Parragh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.14823v1</id>
+    <title>Geothermal Energy in Sedimentary Basins: Assessing Techno-economic Viability for Sustainable Development</title>
+    <updated>2024-02-05T22:37:53Z</updated>
+    <link href="https://arxiv.org/abs/2402.14823v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.14823v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Drilling deep geothermal wells has proven to be a challenging endeavor, primarily due to issues such as loss circulation events, material limitations under high temperatures, and the production of corrosive fluids. Furthermore, the substantial upfront costs, coupled with geological and technical obstacles associated with drilling super-hot EGS wells in igneous rocks, hinder the widespread implementation of geothermal systems. Alternatively, geothermal energy development in sedimentary basins presents an opportunity for clean energy production with relatively lower investment costs compared to the development of super-hot EGS in igneous rocks. Sedimentary basins exhibit attractive temperatures for geothermal applications, and their wide distribution enhances the potential for nationwide deployment. Decades of drilling and development experience in oil and gas wells have yielded a wealth of data, knowledge, and expertise. Leveraging this experience and data for geothermal drilling can significantly reduce costs associated with subsurface data gathering, well drilling, and completion. This paper explores the economic viability of geothermal energy production systems in sedimentary basins. The study encompasses an analysis of time-to-hit-temperature (THT) and cost-to-hit-temperature (CHT) parameters, as well as Favorability maps across the United States. These maps are based on factors such as well depth, total drilling time, well cost, and subsurface temperature data. By integrating sedimentary basin maps and underground temperature maps, the THT and CHT maps can facilitate the strategic placement of EGS wells and other geothermal system applications in the most favorable locations across the United States.</summary>
+    <category term="physics.geo-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-05T22:37:53Z</published>
+    <arxiv:primary_category term="physics.geo-ph"/>
+    <arxiv:journal_ref>Geothermal Resources Council Transactions, 2023</arxiv:journal_ref>
+    <author>
+      <name>Orkhan Khankishiyev</name>
+    </author>
+    <author>
+      <name>Saeed Salehi</name>
+    </author>
+    <author>
+      <name>Runar Nygaard</name>
+    </author>
+    <author>
+      <name>Danny Rehg</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.13178v2</id>
+    <title>Benchmarking Retrieval-Augmented Generation for Medicine</title>
+    <updated>2024-02-23T16:46:58Z</updated>
+    <link href="https://arxiv.org/abs/2402.13178v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.13178v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While large language models (LLMs) have achieved state-of-the-art performance on a wide range of medical question answering (QA) tasks, they still face challenges with hallucinations and outdated knowledge. Retrieval-augmented generation (RAG) is a promising solution and has been widely adopted. However, a RAG system can involve multiple flexible components, and there is a lack of best practices regarding the optimal RAG setting for various medical purposes. To systematically evaluate such systems, we propose the Medical Information Retrieval-Augmented Generation Evaluation (MIRAGE), a first-of-its-kind benchmark including 7,663 questions from five medical QA datasets. Using MIRAGE, we conducted large-scale experiments with over 1.8 trillion prompt tokens on 41 combinations of different corpora, retrievers, and backbone LLMs through the MedRAG toolkit introduced in this work. Overall, MedRAG improves the accuracy of six different LLMs by up to 18% over chain-of-thought prompting, elevating the performance of GPT-3.5 and Mixtral to GPT-4-level. Our results show that the combination of various medical corpora and retrievers achieves the best performance. In addition, we discovered a log-linear scaling property and the "lost-in-the-middle" effects in medical RAG. We believe our comprehensive evaluations can serve as practical guidelines for implementing RAG systems for medicine.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-20T17:44:06Z</published>
+    <arxiv:comment>Homepage: https://teddy-xionggz.github.io/benchmark-medical-rag/</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Guangzhi Xiong</name>
+    </author>
+    <author>
+      <name>Qiao Jin</name>
+    </author>
+    <author>
+      <name>Zhiyong Lu</name>
+    </author>
+    <author>
+      <name>Aidong Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.00817v1</id>
+    <title>Doubly Calibrated Estimator for Recommendation on Data Missing Not At Random</title>
+    <updated>2024-02-26T05:08:52Z</updated>
+    <link href="https://arxiv.org/abs/2403.00817v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.00817v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recommender systems often suffer from selection bias as users tend to rate their preferred items. The datasets collected under such conditions exhibit entries missing not at random and thus are not randomized-controlled trials representing the target population. To address this challenge, a doubly robust estimator and its enhanced variants have been proposed as they ensure unbiasedness when accurate imputed errors or predicted propensities are provided. However, we argue that existing estimators rely on miscalibrated imputed errors and propensity scores as they depend on rudimentary models for estimation. We provide theoretical insights into how miscalibrated imputation and propensity models may limit the effectiveness of doubly robust estimators and validate our theorems using real-world datasets. On this basis, we propose a Doubly Calibrated Estimator that involves the calibration of both the imputation and propensity models. To achieve this, we introduce calibration experts that consider different logit distributions across users. Moreover, we devise a tri-level joint learning framework, allowing the simultaneous optimization of calibration experts alongside prediction and imputation models. Through extensive experiments on real-world datasets, we demonstrate the superiority of the Doubly Calibrated Estimator in the context of debiased recommendation tasks.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-26T05:08:52Z</published>
+    <arxiv:comment>WWW 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Wonbin Kweon</name>
+    </author>
+    <author>
+      <name>Hwanjo Yu</name>
+    </author>
+    <arxiv:doi>10.1145/3589334.3645417</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3589334.3645417" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.03300v3</id>
+    <title>DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models</title>
+    <updated>2024-04-27T15:25:53Z</updated>
+    <link href="https://arxiv.org/abs/2402.03300v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.03300v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Mathematical reasoning poses a significant challenge for language models due to its complex and structured nature. In this paper, we introduce DeepSeekMath 7B, which continues pre-training DeepSeek-Coder-Base-v1.5 7B with 120B math-related tokens sourced from Common Crawl, together with natural language and code data. DeepSeekMath 7B has achieved an impressive score of 51.7% on the competition-level MATH benchmark without relying on external toolkits and voting techniques, approaching the performance level of Gemini-Ultra and GPT-4. Self-consistency over 64 samples from DeepSeekMath 7B achieves 60.9% on MATH. The mathematical reasoning capability of DeepSeekMath is attributed to two key factors: First, we harness the significant potential of publicly available web data through a meticulously engineered data selection pipeline. Second, we introduce Group Relative Policy Optimization (GRPO), a variant of Proximal Policy Optimization (PPO), that enhances mathematical reasoning abilities while concurrently optimizing the memory usage of PPO.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-05T18:55:32Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zhihong Shao</name>
+    </author>
+    <author>
+      <name>Peiyi Wang</name>
+    </author>
+    <author>
+      <name>Qihao Zhu</name>
+    </author>
+    <author>
+      <name>Runxin Xu</name>
+    </author>
+    <author>
+      <name>Junxiao Song</name>
+    </author>
+    <author>
+      <name>Xiao Bi</name>
+    </author>
+    <author>
+      <name>Haowei Zhang</name>
+    </author>
+    <author>
+      <name>Mingchuan Zhang</name>
+    </author>
+    <author>
+      <name>Y. K. Li</name>
+    </author>
+    <author>
+      <name>Y. Wu</name>
+    </author>
+    <author>
+      <name>Daya Guo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.01030v4</id>
+    <title>Executable Code Actions Elicit Better LLM Agents</title>
+    <updated>2024-06-07T01:53:07Z</updated>
+    <link href="https://arxiv.org/abs/2402.01030v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.01030v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Model (LLM) agents, capable of performing a broad range of actions, such as invoking tools and controlling robots, show great potential in tackling real-world challenges. LLM agents are typically prompted to produce actions by generating JSON or text in a pre-defined format, which is usually limited by constrained action space (e.g., the scope of pre-defined tools) and restricted flexibility (e.g., inability to compose multiple tools). This work proposes to use executable Python code to consolidate LLM agents' actions into a unified action space (CodeAct). Integrated with a Python interpreter, CodeAct can execute code actions and dynamically revise prior actions or emit new actions upon new observations through multi-turn interactions. Our extensive analysis of 17 LLMs on API-Bank and a newly curated benchmark shows that CodeAct outperforms widely used alternatives (up to 20% higher success rate). The encouraging performance of CodeAct motivates us to build an open-source LLM agent that interacts with environments by executing interpretable code and collaborates with users using natural language. To this end, we collect an instruction-tuning dataset CodeActInstruct that consists of 7k multi-turn interactions using CodeAct. We show that it can be used with existing data to improve models in agent-oriented tasks without compromising their general capability. CodeActAgent, finetuned from Llama2 and Mistral, is integrated with Python interpreter and uniquely tailored to perform sophisticated tasks (e.g., model training) using existing libraries and autonomously self-debug.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-01T21:38:58Z</published>
+    <arxiv:comment>Accepted by ICML 2024; Code, data, model, and demo are available at https://github.com/xingyaoww/code-act</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Xingyao Wang</name>
+    </author>
+    <author>
+      <name>Yangyi Chen</name>
+    </author>
+    <author>
+      <name>Lifan Yuan</name>
+    </author>
+    <author>
+      <name>Yizhe Zhang</name>
+    </author>
+    <author>
+      <name>Yunzhu Li</name>
+    </author>
+    <author>
+      <name>Hao Peng</name>
+    </author>
+    <author>
+      <name>Heng Ji</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.04238v2</id>
+    <title>Error budget of parametric resonance entangling gate with a tunable coupler</title>
+    <updated>2024-08-01T15:52:22Z</updated>
+    <link href="https://arxiv.org/abs/2402.04238v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.04238v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We analyze the experimental error budget of parametric resonance gates in a tunable coupler architecture. We identify and characterize various sources of errors, including incoherent, leakage, amplitude, and phase errors. By varying the two-qubit gate time, we explore the dynamics of these errors and their impact on the gate fidelity. To accurately capture the impact of incoherent errors on gate fidelity, we measure the coherence times of qubits under gate operating conditions. Our findings reveal that the incoherent errors, mainly arising from qubit relaxation and dephasing due to white noise, limit the fidelity of the two-qubit gates. Moreover, we demonstrate that leakage to noncomputational states is the second largest contributor to the two-qubit gates infidelity, as characterized using leakage-randomized benchmarking. The error budgeting methodology we developed here can be effectively applied to other types of gate implementations.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-06T18:46:27Z</published>
+    <arxiv:comment>15 pages, 8 figures; published version</arxiv:comment>
+    <arxiv:primary_category term="quant-ph"/>
+    <arxiv:journal_ref>Phys. Rev. Applied 22, 014059 (2024)</arxiv:journal_ref>
+    <author>
+      <name>Eyob A. Sete</name>
+    </author>
+    <author>
+      <name>Vinay Tripathi</name>
+    </author>
+    <author>
+      <name>Joseph A. Valery</name>
+    </author>
+    <author>
+      <name>Daniel Lidar</name>
+    </author>
+    <author>
+      <name>Josh Y. Mutus</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.08930v1</id>
+    <title>Subwavelength Photorefractive Grating in a Thin-Film Lithium Niobate Microcavity</title>
+    <updated>2024-02-14T04:05:51Z</updated>
+    <link href="https://arxiv.org/abs/2402.08930v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.08930v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Subwavelength gratings play a fundamental and pivotal role in numerous science and applications for wave manipulation, exhibiting distinctive features such as filtering, phase manipulation, and anti-reflection. However, conventional fabrication methods for ultrasmall periodic structures are constrained by the fundamental optical diffraction limit, making it challenging to produce subwavelength gratings for optics. Here, we demonstrate a novel technique to build a reconfigurable subwavelength photorefractive grating (SPG) in a thin-film lithium niobate on the platform of an optical microcavity. Such SPGs are optically induced through the photorefractive effect and the subwavelength features originate from the spatial phase modulations of the pump's standing wave. The resulting SPGs lead to the mode splitting of two counter-propagating modes inside the microcavity, exhibiting an Electromagnetically Induced Transparency (EIT)-like transmission spectrum. Moreover, the unique subwavelength characteristic of SPGs enables first-order quasi-phase-matching for backward second-harmonic generation, a long-standing problem in nonlinear optics. Also, free-space-to-chip vertical nonlinear frequency conversion can be achieved in a similar manner. These results provide a flexible approach towards fabricating subwavelength gratings, which holds significant potential in various applications such as nonlinear frequency conversion, optical communication, sensing, and quantum technologies.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-14T04:05:51Z</published>
+    <arxiv:primary_category term="physics.optics"/>
+    <author>
+      <name>Jiankun Hou</name>
+    </author>
+    <author>
+      <name>Jiefu Zhu</name>
+    </author>
+    <author>
+      <name>Ruixin Ma</name>
+    </author>
+    <author>
+      <name>Boyi Xue</name>
+    </author>
+    <author>
+      <name>Yicheng Zhu</name>
+    </author>
+    <author>
+      <name>Jintian Lin</name>
+    </author>
+    <author>
+      <name>Xiaoshun Jiang</name>
+    </author>
+    <author>
+      <name>Xianfeng Chen</name>
+    </author>
+    <author>
+      <name>Ya Cheng</name>
+    </author>
+    <author>
+      <name>Li Ge</name>
+    </author>
+    <author>
+      <name>Yuanlin Zheng</name>
+    </author>
+    <author>
+      <name>Wenjie Wan</name>
+    </author>
+    <arxiv:doi>10.1002/lpor.202301351</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1002/lpor.202301351" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.09812v2</id>
+    <title>DreamMatcher: Appearance Matching Self-Attention for Semantically-Consistent Text-to-Image Personalization</title>
+    <updated>2024-04-23T09:53:42Z</updated>
+    <link href="https://arxiv.org/abs/2402.09812v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.09812v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The objective of text-to-image (T2I) personalization is to customize a diffusion model to a user-provided reference concept, generating diverse images of the concept aligned with the target prompts. Conventional methods representing the reference concepts using unique text embeddings often fail to accurately mimic the appearance of the reference. To address this, one solution may be explicitly conditioning the reference images into the target denoising process, known as key-value replacement. However, prior works are constrained to local editing since they disrupt the structure path of the pre-trained T2I model. To overcome this, we propose a novel plug-in method, called DreamMatcher, which reformulates T2I personalization as semantic matching. Specifically, DreamMatcher replaces the target values with reference values aligned by semantic matching, while leaving the structure path unchanged to preserve the versatile capability of pre-trained T2I models for generating diverse structures. We also introduce a semantic-consistent masking strategy to isolate the personalized concept from irrelevant regions introduced by the target prompts. Compatible with existing T2I models, DreamMatcher shows significant improvements in complex scenarios. Intensive analyses demonstrate the effectiveness of our approach.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-15T09:21:16Z</published>
+    <arxiv:comment>Project page is available at https://ku-cvlab.github.io/DreamMatcher/</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Jisu Nam</name>
+    </author>
+    <author>
+      <name>Heesu Kim</name>
+    </author>
+    <author>
+      <name>DongJae Lee</name>
+    </author>
+    <author>
+      <name>Siyoon Jin</name>
+    </author>
+    <author>
+      <name>Seungryong Kim</name>
+    </author>
+    <author>
+      <name>Seunggyu Chang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.11748v3</id>
+    <title>Low-power SNN-based audio source localisation using a Hilbert Transform spike encoding scheme</title>
+    <updated>2024-12-03T06:23:38Z</updated>
+    <link href="https://arxiv.org/abs/2402.11748v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.11748v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Sound source localisation is used in many consumer devices, to isolate audio from individual speakers and reject noise. Localization is frequently accomplished by ``beamforming'', which combines phase-shifted audio streams to increase power from chosen source directions, under a known microphone array geometry. Dense band-pass filters are often needed to obtain narrowband signal components from wideband audio. These approaches achieve high accuracy, but narrowband beamforming is computationally demanding, and not ideal for low-power IoT devices. We demonstrate a novel method for sound source localisation on arbitrary microphone arrays, designed for efficient implementation in ultra-low-power spiking neural networks (SNNs). We use a Hilbert transform to avoid dense band-pass filters, and introduce a new event-based encoding method that captures the phase of the complex analytic signal. Our approach achieves state-of-the-art accuracy for SNN methods, comparable with traditional non-SNN super-resolution beamforming. We deploy our method to low-power SNN inference hardware, with much lower power consumption than super-resolution methods. We demonstrate that signal processing approaches co-designed with spiking neural network implementations can achieve much improved power efficiency. Our new Hilbert-transform-based method for beamforming can also improve the efficiency of traditional DSP-based signal processing.</summary>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-19T00:21:13Z</published>
+    <arxiv:primary_category term="cs.SD"/>
+    <author>
+      <name>Saeid Haghighatshoar</name>
+    </author>
+    <author>
+      <name>Dylan R Muir</name>
+    </author>
+    <arxiv:doi>10.1038/s44172-025-00359-9</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1038/s44172-025-00359-9" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.01032v2</id>
+    <title>Repeat After Me: Transformers are Better than State Space Models at Copying</title>
+    <updated>2024-06-03T22:22:15Z</updated>
+    <link href="https://arxiv.org/abs/2402.01032v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.01032v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformers are the dominant architecture for sequence modeling, but there is growing interest in models that use a fixed-size latent state that does not depend on the sequence length, which we refer to as "generalized state space models" (GSSMs). In this paper we show that while GSSMs are promising in terms of inference-time efficiency, they are limited compared to transformer models on tasks that require copying from the input context. We start with a theoretical analysis of the simple task of string copying and prove that a two layer transformer can copy strings of exponential length while GSSMs are fundamentally limited by their fixed-size latent state. Empirically, we find that transformers outperform GSSMs in terms of efficiency and generalization on synthetic tasks that require copying the context. Finally, we evaluate pretrained large language models and find that transformer models dramatically outperform state space models at copying and retrieving information from context. Taken together, these results suggest a fundamental gap between transformers and GSSMs on tasks of practical interest.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-01T21:44:11Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Samy Jelassi</name>
+    </author>
+    <author>
+      <name>David Brandfonbrener</name>
+    </author>
+    <author>
+      <name>Sham M. Kakade</name>
+    </author>
+    <author>
+      <name>Eran Malach</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.09823v2</id>
+    <title>On the classification of Meromorphic Affine Connections on Complex Compact Surfaces</title>
+    <updated>2024-03-13T08:56:46Z</updated>
+    <link href="https://arxiv.org/abs/2402.09823v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.09823v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We classify meromorphic affine connections on compact complex surfaces with algebraic dimension one, extending the work of Inoue,Kobayashi and Ochiai (1981) in the holomorphic case. The motivation is to investigate possible extension of the principle of uniformization of complex compact curves by means of geometric structures, in higher dimensions and allowing singularities to the geometric structures.</summary>
+    <category term="math.AG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-15T09:39:52Z</published>
+    <arxiv:primary_category term="math.AG"/>
+    <author>
+      <name>Alexis Garcia</name>
+      <arxiv:affiliation>LMA</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.08234v2</id>
+    <title>Mixing due to Solution-switch Limits the Performance of Electro-sorption for Desalination</title>
+    <updated>2024-03-16T11:27:50Z</updated>
+    <link href="https://arxiv.org/abs/2402.08234v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.08234v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Electro-sorption (ES) is a research frontier in electrochemical separation, with proven potential applications in desalination, wastewater treatment, and selective resource extraction. However, due to the limited adsorption capacity of film electrodes, ES requires short circuiting or circuit reversal, accompanied by solution-switch between the feed solution and receiving solution, to sustain desalination over many charging-discharge cycles. In the literature, solution-switch have been commonly ignored to simplify experimental procedures and its impacts on separation performance are thus not well understood. This study aims to provide a quantitative analysis of the impacts of mixing due to solution-switch on the performance of ES-based desalination. A numerical model of ES has been employed to evaluate the adverse effects of solution-switch on the desalination performance in three different operation modes. The analysis reveals that the impacts of mixing due to solution-switch are more severe with a larger concentration difference between the desalinated water and the brine and provides insights on the effectiveness of increasing electrode loading or specific capacity in mitigating the detrimental impacts of mixing. Even with state-of-the-art systems, producing freshwater from seawater or even brackish water with medium-to-high salinity is practically challenging due to the presence of solution-switch.</summary>
+    <category term="physics.chem-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-13T05:56:40Z</published>
+    <arxiv:comment>27 pages, 6 figures, 1 table</arxiv:comment>
+    <arxiv:primary_category term="physics.chem-ph"/>
+    <author>
+      <name>Weifan Liu</name>
+    </author>
+    <author>
+      <name>Longqian Xu</name>
+    </author>
+    <author>
+      <name>Zezhou Yang</name>
+    </author>
+    <author>
+      <name>Xudong Zhang</name>
+    </author>
+    <author>
+      <name>Shihong Lin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.18341v1</id>
+    <title>Almost diagonalization of $Ψ$DO's over various generalized function spaces</title>
+    <updated>2024-02-28T14:05:58Z</updated>
+    <link href="https://arxiv.org/abs/2402.18341v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.18341v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Inductive and projective type sequence spaces of sub- and super-exponential growth, and the corresponding inductive and projective limits of modulation spaces are considered as a framework for almost diagonalization of pseudo-differential operators. Moreover, recent results of the first author and B. Prangoski related to the almost diagonalization of pseudo-differential operators in the context of Hörmander metrics are reviewed.</summary>
+    <category term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-28T14:05:58Z</published>
+    <arxiv:primary_category term="math.FA"/>
+    <author>
+      <name>Stevan Pilipović</name>
+    </author>
+    <author>
+      <name>Nenad Teofanov</name>
+    </author>
+    <author>
+      <name>Filip Tomić</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.11234v1</id>
+    <title>Polariton-Based Room Temperature Quantum Phototransistors</title>
+    <updated>2024-02-17T09:48:26Z</updated>
+    <link href="https://arxiv.org/abs/2402.11234v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.11234v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Strong light-matter coupling is a quantum process in which light and matter are coupled together, generating hybridized states. This is similar to the notion of molecular hybridization, but one of the components is light. Here, we utilized the idea and prepared quantum phototransistors using donor-acceptor combinations that can transfer energy via Rabi oscillations. As a prototype experiment, we used a cyanine J-aggregate (TDBC; donor) and MoS2 monolayer (acceptor) in a field effect transistor cavity and studied the photoresponsivity. The energy migrates through the newly formed polaritonic ladder, and the relative efficiency of the device is nearly seven-fold at the ON resonance. Further, the photon mixing fraction is calculated for each independent device and correlated with energy transfer efficiency. In the strongly coupled system, newly formed polaritonic states reshuffle the probability function. A theoretical model based on the time dependent Schrödinger equation is also used to interpret the results. Here, the entangled light-matter states act as a strong channel for funnelling the energy to the MoS2 monolayer, thereby boosting its ability to show the highest photoresponsivity at ON-resonance. These experimental findings and the proposed model suggest novel applications of strong light-matter coupling in quantum materials.</summary>
+    <category term="physics.app-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-17T09:48:26Z</published>
+    <arxiv:primary_category term="physics.app-ph"/>
+    <author>
+      <name>Jhuma Dutta</name>
+      <arxiv:affiliation>Indian Institute of Science Education and Research</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Pooja Bhatt</name>
+      <arxiv:affiliation>Indian Institute of Science Education and Research</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Kuljeet Kaur</name>
+      <arxiv:affiliation>Indian Institute of Science Education and Research</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Daniel E. Gómez</name>
+      <arxiv:affiliation>School of Science, RMIT University, Melbourne</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jino George</name>
+      <arxiv:affiliation>Indian Institute of Science Education and Research</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.14253v1</id>
+    <title>MVD$^2$: Efficient Multiview 3D Reconstruction for Multiview Diffusion</title>
+    <updated>2024-02-22T03:39:48Z</updated>
+    <link href="https://arxiv.org/abs/2402.14253v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.14253v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As a promising 3D generation technique, multiview diffusion (MVD) has received a lot of attention due to its advantages in terms of generalizability, quality, and efficiency. By finetuning pretrained large image diffusion models with 3D data, the MVD methods first generate multiple views of a 3D object based on an image or text prompt and then reconstruct 3D shapes with multiview 3D reconstruction. However, the sparse views and inconsistent details in the generated images make 3D reconstruction challenging. We present MVD$^2$, an efficient 3D reconstruction method for multiview diffusion (MVD) images. MVD$^2$ aggregates image features into a 3D feature volume by projection and convolution and then decodes volumetric features into a 3D mesh. We train MVD$^2$ with 3D shape collections and MVD images prompted by rendered views of 3D shapes. To address the discrepancy between the generated multiview images and ground-truth views of the 3D shapes, we design a simple-yet-efficient view-dependent training scheme. MVD$^2$ improves the 3D generation quality of MVD and is fast and robust to various MVD methods. After training, it can efficiently decode 3D meshes from multiview images within one second. We train MVD$^2$ with Zero-123++ and ObjectVerse-LVIS 3D dataset and demonstrate its superior performance in generating 3D models from multiview images generated by different MVD methods, using both synthetic and real images as prompts.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-22T03:39:48Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Xin-Yang Zheng</name>
+    </author>
+    <author>
+      <name>Hao Pan</name>
+    </author>
+    <author>
+      <name>Yu-Xiao Guo</name>
+    </author>
+    <author>
+      <name>Xin Tong</name>
+    </author>
+    <author>
+      <name>Yang Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.15758v2</id>
+    <title>Chimera: A Lossless Decoding Method for Accelerating Large Language Models Inference by Fusing all Tokens</title>
+    <updated>2024-04-18T16:23:16Z</updated>
+    <link href="https://arxiv.org/abs/2402.15758v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.15758v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have demonstrated remarkable capabilities across various tasks. However, their widespread application is hindered by the resource-intensive decoding process. To address this challenge, current approaches have incorporated additional decoding heads to enable parallel prediction of multiple subsequent tokens, thereby achieving inference acceleration. Nevertheless, the accuracy of these decoding heads falls short of the auto-regressive decoding approach.
+  In light of these limitations, we propose Chimera, a novel framework specifically designed for speculative sampling. Within this framework, we introduce a lightweight draft model that effectively utilizes previously generated tokens to predict subsequent words. To ensure both accuracy and efficiency, we present two strategies within the lightweight draft model. Firstly, we focus on capturing short-range dependencies at the bottom layer. Secondly, we leverage the readily available representations from the original LLM.Through empirical evaluation on the Vicuna and LlaMA-2 series, Chimera demonstrates impressive results, achieving an average latency speedup ratio of 2.7x compared to the vanilla auto-regressive decoding approach. This highlights the potential of our proposed framework in significantly improving the efficiency of large language models during the decoding process.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-24T08:10:39Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Ziqian Zeng</name>
+    </author>
+    <author>
+      <name>Jiahong Yu</name>
+    </author>
+    <author>
+      <name>Qianshi Pang</name>
+    </author>
+    <author>
+      <name>Zihao Wang</name>
+    </author>
+    <author>
+      <name>Huiping Zhuang</name>
+    </author>
+    <author>
+      <name>Hongen Shao</name>
+    </author>
+    <author>
+      <name>Xiaofeng Zou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.11934v1</id>
+    <title>Team QUST at SemEval-2024 Task 8: A Comprehensive Study of Monolingual and Multilingual Approaches for Detecting AI-generated Text</title>
+    <updated>2024-02-19T08:22:51Z</updated>
+    <link href="https://arxiv.org/abs/2402.11934v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.11934v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents the participation of team QUST in Task 8 SemEval 2024. We first performed data augmentation and cleaning on the dataset to enhance model training efficiency and accuracy. In the monolingual task, we evaluated traditional deep-learning methods, multiscale positive-unlabeled framework (MPU), fine-tuning, adapters and ensemble methods. Then, we selected the top-performing models based on their accuracy from the monolingual models and evaluated them in subtasks A and B. The final model construction employed a stacking ensemble that combined fine-tuning with MPU. Our system achieved 8th (scored 8th in terms of accuracy, officially ranked 13th) place in the official test set in multilingual settings of subtask A. We release our system code at:https://github.com/warmth27/SemEval2024_QUST</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-19T08:22:51Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Xiaoman Xu</name>
+    </author>
+    <author>
+      <name>Xiangrun Li</name>
+    </author>
+    <author>
+      <name>Taihang Wang</name>
+    </author>
+    <author>
+      <name>Jianxiang Tian</name>
+    </author>
+    <author>
+      <name>Ye Jiang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.09234v2</id>
+    <title>Multi-Hierarchical Surrogate Learning for Structural Dynamical Crash Simulations Using Graph Convolutional Neural Networks</title>
+    <updated>2024-02-15T08:10:45Z</updated>
+    <link href="https://arxiv.org/abs/2402.09234v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.09234v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Crash simulations play an essential role in improving vehicle safety, design optimization, and injury risk estimation. Unfortunately, numerical solutions of such problems using state-of-the-art high-fidelity models require significant computational effort. Conventional data-driven surrogate modeling approaches create low-dimensional embeddings for evolving the dynamics in order to circumvent this computational effort. Most approaches directly operate on high-resolution data obtained from numerical discretization, which is both costly and complicated for mapping the flow of information over large spatial distances. Furthermore, working with a fixed resolution prevents the adaptation of surrogate models to environments with variable computing capacities, different visualization resolutions, and different accuracy requirements. We thus propose a multi-hierarchical framework for structurally creating a series of surrogate models for a kart frame, which is a good proxy for industrial-relevant crash simulations, at different levels of resolution. For multiscale phenomena, macroscale features are captured on a coarse surrogate, whereas microscale effects are resolved by finer ones. The learned behavior of the individual surrogates is passed from coarse to finer levels through transfer learning. In detail, we perform a mesh simplification on the kart model to obtain multi-resolution representations of it. We then train a graph-convolutional neural network-based surrogate that learns parameter-dependent low-dimensional latent dynamics on the coarsest representation. Subsequently, another, similarly structured surrogate is trained on the residual of the first surrogate using a finer resolution. This step can be repeated multiple times. By doing so, we construct multiple surrogates for the same system with varying hardware requirements and increasing accuracy.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-14T15:22:59Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jonas Kneifl</name>
+    </author>
+    <author>
+      <name>Jörg Fehr</name>
+    </author>
+    <author>
+      <name>Steven L. Brunton</name>
+    </author>
+    <author>
+      <name>J. Nathan Kutz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.07334v1</id>
+    <title>Differentially Private Training of Mixture of Experts Models</title>
+    <updated>2024-02-11T23:57:09Z</updated>
+    <link href="https://arxiv.org/abs/2402.07334v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.07334v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This position paper investigates the integration of Differential Privacy (DP) in the training of Mixture of Experts (MoE) models within the field of natural language processing. As Large Language Models (LLMs) scale to billions of parameters, leveraging expansive datasets, they exhibit enhanced linguistic capabilities and emergent abilities. However, this growth raises significant computational and privacy concerns. Our study addresses these issues by exploring the potential of MoE models, known for their computational efficiency, and the application of DP, a standard for privacy preservation. We present the first known attempt to train MoE models under the constraints of DP, addressing the unique challenges posed by their architecture and the complexities of DP integration. Our initial experimental studies demonstrate that MoE models can be effectively trained with DP, achieving performance that is competitive with their non-private counterparts. This initial study aims to provide valuable insights and ignite further research in the domain of privacy-preserving MoE models, softly laying the groundwork for prospective developments in this evolving field.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-11T23:57:09Z</published>
+    <arxiv:comment>Preliminary work presented as a poster at the 5th AAAI Workshop on Privacy-Preserving Artificial Intelligence (PPAI 24)</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Pierre Tholoniat</name>
+    </author>
+    <author>
+      <name>Huseyin A. Inan</name>
+    </author>
+    <author>
+      <name>Janardhan Kulkarni</name>
+    </author>
+    <author>
+      <name>Robert Sim</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.18059v1</id>
+    <title>RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval</title>
+    <updated>2024-01-31T18:30:21Z</updated>
+    <link href="https://arxiv.org/abs/2401.18059v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.18059v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Retrieval-augmented language models can better adapt to changes in world state and incorporate long-tail knowledge. However, most existing methods retrieve only short contiguous chunks from a retrieval corpus, limiting holistic understanding of the overall document context. We introduce the novel approach of recursively embedding, clustering, and summarizing chunks of text, constructing a tree with differing levels of summarization from the bottom up. At inference time, our RAPTOR model retrieves from this tree, integrating information across lengthy documents at different levels of abstraction. Controlled experiments show that retrieval with recursive summaries offers significant improvements over traditional retrieval-augmented LMs on several tasks. On question-answering tasks that involve complex, multi-step reasoning, we show state-of-the-art results; for example, by coupling RAPTOR retrieval with the use of GPT-4, we can improve the best performance on the QuALITY benchmark by 20% in absolute accuracy.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-31T18:30:21Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Parth Sarthi</name>
+    </author>
+    <author>
+      <name>Salman Abdullah</name>
+    </author>
+    <author>
+      <name>Aditi Tuli</name>
+    </author>
+    <author>
+      <name>Shubh Khanna</name>
+    </author>
+    <author>
+      <name>Anna Goldie</name>
+    </author>
+    <author>
+      <name>Christopher D. Manning</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.09176v2</id>
+    <title>Large Language Model Simulator for Cold-Start Recommendation</title>
+    <updated>2024-12-25T12:38:33Z</updated>
+    <link href="https://arxiv.org/abs/2402.09176v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.09176v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recommending cold items remains a significant challenge in billion-scale online recommendation systems. While warm items benefit from historical user behaviors, cold items rely solely on content features, limiting their recommendation performance and impacting user experience and revenue. Current models generate synthetic behavioral embeddings from content features but fail to address the core issue: the absence of historical behavior data. To tackle this, we introduce the LLM Simulator framework, which leverages large language models to simulate user interactions for cold items, fundamentally addressing the cold-start problem. However, simply using LLM to traverse all users can introduce significant complexity in billion-scale systems. To manage the computational complexity, we propose a coupled funnel ColdLLM framework for online recommendation. ColdLLM efficiently reduces the number of candidate users from billions to hundreds using a trained coupled filter, allowing the LLM to operate efficiently and effectively on the filtered set. Extensive experiments show that ColdLLM significantly surpasses baselines in cold-start recommendations, including Recall and NDCG metrics. A two-week A/B test also validates that ColdLLM can effectively increase the cold-start period GMV.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-14T13:45:06Z</published>
+    <arxiv:comment>10 pages, accepted by WSDM 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Feiran Huang</name>
+    </author>
+    <author>
+      <name>Yuanchen Bei</name>
+    </author>
+    <author>
+      <name>Zhenghang Yang</name>
+    </author>
+    <author>
+      <name>Junyi Jiang</name>
+    </author>
+    <author>
+      <name>Hao Chen</name>
+    </author>
+    <author>
+      <name>Qijie Shen</name>
+    </author>
+    <author>
+      <name>Senzhang Wang</name>
+    </author>
+    <author>
+      <name>Fakhri Karray</name>
+    </author>
+    <author>
+      <name>Philip S. Yu</name>
+    </author>
+  </entry>
+</feed>

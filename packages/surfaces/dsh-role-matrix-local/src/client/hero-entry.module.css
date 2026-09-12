@@ -1,0 +1,280 @@
+/* Composer hero entry — the capability guide under the input card.
+ *
+ * ## Two structural rules, both measured rather than assumed
+ *
+ * 1. **This row sets no width and no side margin of its own.** The width axis
+ *    comes from the shipped `composerStack` (in the hero phase it is the card
+ *    axis: card width plus both clearances, centered). Giving the row its own
+ *    width puts it off-axis from the input card, and therefore off-axis from
+ *    everything above it. Geometry asserted by the probe (same parent, same
+ *    box width as the input card).
+ *
+ * 2. **The container is the wrapper; the grid is the child.** Container queries
+ *    only match *descendants* — writing `container-type` and `@container` on the
+ *    same element is a no-op and the column count never changes. `.dsh-hero-entry` is
+ *    the container, `.dsh-hero-entry__grid` is what gets queried. A container (not a viewport
+ *    media query) is what keeps the column count tied to the width this row
+ *    actually has: the composer axis is `clamp(680px, sidebar*0.64, 920px)`, so a
+ *    wide window with a narrow sidebar and a narrow window with a wide sidebar
+ *    are different cases, and a viewport breakpoint gets one of them wrong.
+ *
+ * Breakpoints (R8): three columns by default → two at ≤900px → one at ≤620px.
+ * The 680px floor on the card axis means the one-column case is reached by a
+ * genuinely narrow window, not by dragging the session sidebar inward.
+ *
+ * Colour: only tokens the shipped theme defines are referenced (no invented
+ * `--dsw-alias-*` names — a typo there fails silently into a literal fallback
+ * and stops following the theme). Radii are literal px: the platform defines no
+ * radius token family, and `var()` pointing at a name nothing defines is the
+ * same silent failure wearing a nicer outfit.
+ */
+
+.dsh-hero-entry {
+	container-type: inline-size;
+	margin-top: 4px;
+}
+
+.dsh-hero-entry__identity {
+	font-size: 12px;
+	line-height: 18px;
+	color: var(--dsw-alias-label-tertiary);
+}
+
+.dsh-hero-entry__identityName {
+	color: var(--dsw-alias-label-primary);
+	font-weight: 500;
+}
+
+.dsh-hero-entry__section {
+	margin-top: 12px;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	color: var(--dsw-alias-label-caption);
+}
+
+.dsh-hero-entry__grid {
+	display: grid;
+	/* R8: three columns side by side (≈324px each at 992px), unequal heights
+	   allowed — the group ⊃ card hierarchy is meant to be visible at a glance,
+	   not discovered by scrolling a single stack. */
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 12px;
+	margin-top: 8px;
+	align-items: start;
+}
+
+/* Degradation: two columns → one. Breakpoints are on this row's own width. */
+@container (max-width: 900px) {
+	.dsh-hero-entry__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@container (max-width: 620px) {
+	.dsh-hero-entry__grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* One column = one business-skill group: header + boundary note + supply cards. */
+.dsh-hero-entry__col {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	border: 0.5px solid var(--dsw-alias-border-l1);
+	border-radius: 12px;
+	background: var(--dsw-alias-bg-layer-1, transparent);
+	overflow: hidden;
+}
+
+.dsh-hero-entry__colHead {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	width: 100%;
+	padding: 10px 12px;
+	border: 0;
+	background: transparent;
+	color: var(--dsw-alias-label-primary);
+	font: inherit;
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 20px;
+	text-align: left;
+	cursor: pointer;
+}
+
+.dsh-hero-entry__colHead:hover { background: var(--dsw-alias-interactive-bg-hover); }
+
+.dsh-hero-entry__caret {
+	flex: none;
+	width: 10px;
+	font-size: 9px;
+	line-height: 1;
+	color: var(--dsw-alias-label-tertiary);
+	transition: transform 120ms ease;
+}
+
+.dsh-hero-entry__caret--collapsed { transform: rotate(-90deg); }
+
+.dsh-hero-entry__colName {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.dsh-hero-entry__badge {
+	flex: none;
+	border-radius: 6px;
+	padding: 1px 6px;
+	font-size: 10px;
+	font-weight: 700;
+	line-height: 16px;
+	white-space: nowrap;
+}
+
+/* Coverage grade wears the platform's own state colours (D4/R7: no new colour
+   tokens). Grade is the one thing on this surface a reader must not misread:
+   "partial" and "gap" mean the role cannot do this without help. */
+.dsh-hero-entry__badge--direct {
+	color: var(--dsw-alias-state-business-primary);
+	border: 0.5px solid var(--dsw-alias-state-business-primary);
+}
+
+.dsh-hero-entry__badge--partial {
+	color: var(--dsw-alias-state-warn-primary);
+	border: 0.5px solid var(--dsw-alias-state-warn-primary);
+}
+
+.dsh-hero-entry__badge--gap {
+	color: var(--dsw-alias-state-error-primary);
+	border: 0.5px solid var(--dsw-alias-state-error-primary);
+}
+
+.dsh-hero-entry__count {
+	margin-left: auto;
+	flex: none;
+	font-size: 12px;
+	line-height: 18px;
+	color: var(--dsw-alias-label-caption);
+}
+
+.dsh-hero-entry__colBody {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 0 10px 10px;
+}
+
+.dsh-hero-entry__note {
+	border-radius: 8px;
+	padding: 6px 8px;
+	font-size: 11px;
+	line-height: 1.5;
+	color: var(--dsw-alias-label-secondary);
+	background: var(--dsw-alias-bg-base, transparent);
+}
+
+.dsh-hero-entry__noteLabel { font-weight: 700; }
+
+/* R4: a grade with no supply says so; it never gets a placeholder card. */
+.dsh-hero-entry__gap {
+	font-size: 11px;
+	line-height: 1.5;
+	color: var(--dsw-alias-label-tertiary);
+}
+
+.dsh-hero-entry__cards {
+	display: flex;
+	flex-direction: column;
+	gap: 7px;
+}
+
+.dsh-hero-entry__card {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	border: 0.5px solid var(--dsw-alias-border-l1);
+	border-radius: 9px;
+	padding: 8px 10px;
+	background: transparent;
+	color: var(--dsw-alias-label-primary);
+	font: inherit;
+	text-align: left;
+	cursor: pointer;
+}
+
+.dsh-hero-entry__card:hover {
+	border-color: var(--dsw-alias-border-l2);
+	background: var(--dsw-alias-interactive-bg-hover);
+}
+
+.dsh-hero-entry__card:focus-visible {
+	outline: 2px solid var(--dsw-alias-state-business-primary);
+	outline-offset: 1px;
+}
+
+.dsh-hero-entry__cardTitle {
+	font-size: 12.5px;
+	font-weight: 600;
+	line-height: 1.35;
+	overflow-wrap: anywhere;
+}
+
+.dsh-hero-entry__cardSub {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 6px;
+	margin-top: 3px;
+	font-size: 11px;
+	line-height: 1.45;
+	color: var(--dsw-alias-label-tertiary);
+}
+
+.dsh-hero-entry__cardSummary {
+	min-width: 0;
+	overflow-wrap: anywhere;
+}
+
+.dsh-hero-entry__cardGo {
+	flex: none;
+	font-size: 10.5px;
+	white-space: nowrap;
+	color: var(--dsw-alias-label-caption);
+}
+
+/* Scene manuals: their own band below the columns, never mixed into a skill
+   group (R7) — a manual is a process the role takes part in, not a capability. */
+.dsh-hero-entry__manuals {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin-top: 8px;
+}
+
+.dsh-hero-entry__manual {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	border: 0.5px solid var(--dsw-alias-border-l1);
+	border-radius: 999px;
+	padding: 6px 12px;
+	font-size: 12px;
+	line-height: 18px;
+	color: var(--dsw-alias-label-secondary);
+	background: var(--dsw-alias-bg-layer-1, transparent);
+}
+
+.dsh-hero-entry__manualId {
+	font-weight: 700;
+	color: var(--dsw-alias-label-primary);
+}
+
+/* The degraded line: a thin manifest is reported on the surface itself, not
+   only in the console. */
+.dsh-hero-entry__degraded {
+	margin-top: 8px;
+	font-size: 11px;
+	line-height: 1.5;
+	color: var(--dsw-alias-state-warn-primary);
+}

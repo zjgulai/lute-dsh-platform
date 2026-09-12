@@ -1,0 +1,26 @@
+{
+  "base": "http://127.0.0.1:43120",
+  "entries": {
+    "/api/worktable/health": 401,
+    "/api/worktable/workspaces": 401,
+    "/api/worktable/file": 401,
+    "/api/worktable/fs": 401,
+    "/api/worktable/git": 401,
+    "/api/worktable/mkdir": 401,
+    "/api/worktable/write": 401,
+    "/api/worktable/term": 401,
+    "/api/worktable/site": 401,
+    "/api/worktable/template": 401
+  },
+  "static": {
+    "inBundles": false,
+    "inDeps": false,
+    "inNodeModules": false,
+    "bundleCount": 39
+  },
+  "failed": [],
+  "pendingRestart": [],
+  "diskClean": true,
+  "restartRequired": true,
+  "passed": false
+}

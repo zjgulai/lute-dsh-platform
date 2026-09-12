@@ -115,7 +115,7 @@ export interface MatrixPayload {
  * presets (`agt-NNN`) are listed by this surface; the shipped set and any other
  * local preset stay owned by the official picker.
  */
-const ROLE_PRESET_ID = /^agt-(\d{3})$/
+export const ROLE_PRESET_ID = /^agt-(\d{3})$/
 
 /** Plane display order, matching the material's `planes[]` order. */
 const PLANE_ORDER: Record<string, number> = { 'PLN-MGT': 1, 'PLN-OPS': 2, 'PLN-CTL': 3, 'PLN-PLT': 4 }

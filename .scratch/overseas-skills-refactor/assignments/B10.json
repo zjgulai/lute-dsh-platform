@@ -1,0 +1,311 @@
+{
+ "batch": "B10",
+ "assignments": [
+  {
+   "name": "grilling",
+   "roles": [],
+   "no_role_reason": "连续追问打磨方案是跨岗位通用的访谈方法论（协议 §5 明示『访谈』为通用方法示例），任何岗位都能用它澄清需求，不构成某一岗位的责任。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": []
+  },
+  {
+   "name": "grill-me",
+   "roles": [],
+   "no_role_reason": "正文只有一句「调用 Skill tool，参数为 grilling」，是同一套通用访谈方法的转发壳，没有独立岗位责任。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": []
+  },
+  {
+   "name": "grill-with-docs",
+   "roles": [],
+   "no_role_reason": "访谈加落档（CONTEXT.md 术语表与 ADR）是任何项目通用的澄清与记录方法，不产出某一岗位的标准产物。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": []
+  },
+  {
+   "name": "wait-what",
+   "roles": [],
+   "no_role_reason": "停下来核对假设是跨岗位通用的对话纠偏方法，正文只要求用简化技术英语与 CONTEXT.md 通用语言重述背景，无岗位责任可言。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": []
+  },
+  {
+   "name": "to-questionnaire",
+   "roles": [],
+   "no_role_reason": "把访谈问题整理成发给知情人的问卷，是跨岗位通用的信息采集方法（属协议 §5 所列『访谈』一族），不承担某一岗位的责任。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": []
+  },
+  {
+   "name": "research",
+   "roles": [
+    {
+     "id": "AGT-048",
+     "responsibility": "知识溯源",
+     "confidence": "high",
+     "from_skill": "把每一条论断追溯到其所属的源头",
+     "from_role": "知识溯源",
+     "note": ""
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "teach",
+   "roles": [
+    {
+     "id": "AGT-039",
+     "responsibility": "使用教育",
+     "confidence": "medium",
+     "from_skill": "课程是你产出的主要成果：知识与技能抵达用户的单元",
+     "from_role": "使用教育",
+     "note": "把概念教到真正理解的课程化教学，对上该岗教育内容的产物形态。"
+    },
+    {
+     "id": "AGT-004",
+     "responsibility": "培训与招聘支持",
+     "confidence": "low",
+     "from_skill": "用户请你教他们一些东西",
+     "from_role": "培训与招聘支持",
+     "note": "只能支撑培训一侧（有状态的多会话学习工作区），与岗位能力矩阵/招聘无关，需人工复核。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "to-spec",
+   "roles": [
+    {
+     "id": "AGT-012",
+     "responsibility": "软件需求分析",
+     "confidence": "high",
+     "from_skill": "产出一份规格说明（spec）",
+     "from_role": "软件需求分析",
+     "note": ""
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "to-tickets",
+   "roles": [
+    {
+     "id": "AGT-013",
+     "responsibility": "研发计划",
+     "confidence": "medium",
+     "from_skill": "把一个计划、规格说明或对话拆分成一组",
+     "from_role": "研发计划",
+     "note": "工单+阻塞边构成研发工作的推进计划。"
+    },
+    {
+     "id": "AGT-009",
+     "responsibility": "产品范围管理",
+     "confidence": "medium",
+     "from_skill": "一个完成的切片自身即可演示或验证",
+     "from_role": "产品范围管理",
+     "note": "垂直切片界定本次交付进/不进的边界，供立项包的范围管理使用。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "wayfinder",
+   "roles": [],
+   "no_role_reason": "把模糊大工程画成议题跟踪器上的决策工单地图，是通用的规划方法（正文明确『规划，而非执行』），任何岗位的大工作都可用，不对应单一岗位责任。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": []
+  },
+  {
+   "name": "ask-matt",
+   "roles": [
+    {
+     "id": "AGT-002",
+     "responsibility": "能力匹配",
+     "confidence": "low",
+     "from_skill": "根据处境推荐本技能集内合适的技能",
+     "from_role": "能力匹配",
+     "note": "只在该技能集内部做处境到技能/流程的匹配，不覆盖场景分类与主岗位选择，需人工复核。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "wizard",
+   "roles": [],
+   "no_role_reason": "生成 bash 向导带领人走完手动流程是跨岗位通用的引导方法，产出一次性脚本与 .env/secret 写入，不对应任何岗位的三条责任。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": []
+  },
+  {
+   "name": "codebase-design",
+   "roles": [],
+   "no_role_reason": "深模块/接口/接缝/适配器是一套跨项目的设计词汇，服务的是代码库本身；协议明确禁止因『都写代码』挂到工程类岗位。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": []
+  },
+  {
+   "name": "domain-modeling",
+   "roles": [],
+   "no_role_reason": "术语质疑、场景压力测试与就地更新 CONTEXT.md/ADR 是任何项目通用的领域建模方法；AGT-045 的指标契约与主数据治理面向业务对象与指标的来源与责任，本技能只维护代码库术语表，不治理主数据。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": []
+  },
+  {
+   "name": "improve-codebase-architecture",
+   "roles": [],
+   "no_role_reason": "扫描深化机会并产出 HTML 报告是通用的内部代码改进方法，不对应任何岗位的三条责任。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": []
+  },
+  {
+   "name": "prototype",
+   "roles": [],
+   "no_role_reason": "抛弃式代码回答设计问题是通用的设计验证方法；且 AGT-013 边界明确『不能以仿真或文档替代实物和适用合规验收』，原型不构成阶段验证。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": [
+    {
+     "id": "AGT-013",
+     "reason": "原型是抛弃式代码验证设计决策，该岗边界明确不以仿真/文档替代实物验收，对不上阶段验证责任。"
+    }
+   ]
+  },
+  {
+   "name": "implement",
+   "roles": [],
+   "no_role_reason": "按规格或工单实施一段工作是任何岗位都成立的通用实施方法（比协议点名的 TDD 更通用），收尾只跑类型检查与测试套件，不产出验证报告与缺陷闭合记录。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": [
+    {
+     "id": "AGT-013",
+     "reason": "通用实施方法，产出代码与提交，不组织阶段验收、不产出验证报告，对不上阶段验证责任。"
+    }
+   ]
+  },
+  {
+   "name": "tdd",
+   "roles": [],
+   "no_role_reason": "协议 §5 明确把 TDD 列为 GENERIC_METHOD 示例：红-绿-重构是跨岗位通用的工程纪律，测试是开发过程的产物而非岗位要求的测试方案。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": [
+    {
+     "id": "AGT-013",
+     "reason": "TDD 是协议点名的通用工程方法，产出开发过程的测试，不产出该岗要求的测试方案与验证证据。"
+    }
+   ]
+  },
+  {
+   "name": "code-review",
+   "roles": [],
+   "no_role_reason": "协议 §5 明确把代码评审列为 GENERIC_METHOD 示例：标准×可疑双轴评审对任何仓库的 diff 都成立，不对应某一岗位的责任。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": []
+  },
+  {
+   "name": "diagnosing-bugs",
+   "roles": [],
+   "no_role_reason": "构建紧凑通过/失败循环、二分与收紧循环是任何岗位调试问题时通用的诊断纪律，不承担某一岗位的责任。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": []
+  },
+  {
+   "name": "resolving-merge-conflicts",
+   "roles": [],
+   "no_role_reason": "逐 hunk 保留双方意图并运行项目自动化检查，是任何仓库协作都成立的通用流程。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": []
+  },
+  {
+   "name": "triage",
+   "roles": [
+    {
+     "id": "AGT-002",
+     "responsibility": "需求分诊",
+     "confidence": "low",
+     "from_skill": "按状态机对 issue 与外部 PR 分诊/归类/验证",
+     "from_role": "需求分诊",
+     "note": "对象是代码仓库 issue/PR 与 bug/enhancement 标签，需把对象与标签映射到业务 Case 才可用，需人工复核。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "setup-matt-pocock-skills",
+   "roles": [],
+   "no_role_reason": "仓库级配置接线（issue tracker、triage 标签、CONTEXT.md/ADR 位置）是技能集的安装配置形态，不是可承担岗位责任的业务工作。",
+   "no_role_kind": "TOOL_ONLY",
+   "drop_reasons": []
+  },
+  {
+   "name": "setup-pre-commit",
+   "roles": [],
+   "no_role_reason": "husky + lint-staged + prettier 的工程配置操作，属开发环境搭建的工具形态，不对应任何岗位责任。",
+   "no_role_kind": "TOOL_ONLY",
+   "drop_reasons": []
+  },
+  {
+   "name": "git-guardrails-claude-code",
+   "roles": [
+    {
+     "id": "AGT-050",
+     "responsibility": "访问控制",
+     "confidence": "low",
+     "from_skill": "在 Claude 执行危险的 git 命令之前拦截并阻止它们",
+     "from_role": "访问控制",
+     "note": "按工具与参数阻断危险动作，与访问边界同型；当前形态是 Claude Code 的 hook 配置，须按本平台改造后可用。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "migrate-to-shoehorn",
+   "roles": [],
+   "no_role_reason": "把测试里的 as 断言换成 shoehorn 的库级迁移配方，属纯工具改造形态，没有岗位责任。",
+   "no_role_kind": "TOOL_ONLY",
+   "drop_reasons": []
+  },
+  {
+   "name": "scaffold-exercises",
+   "roles": [],
+   "no_role_reason": "面向特定课程仓库（pnpm ai-hero-cli internal lint）的练习目录脚手架，是工程侧工具形态，不足以承担 AGT-004 的培训与招聘支持责任。",
+   "no_role_kind": "TOOL_ONLY",
+   "drop_reasons": []
+  },
+  {
+   "name": "handoff",
+   "roles": [
+    {
+     "id": "AGT-049",
+     "responsibility": "",
+     "confidence": "medium",
+     "from_skill": "让一个全新的 agent 能够继续这项工作",
+     "from_role": "保证任务状态可解释并能接管恢复",
+     "note": "只对上使命层的『任务状态可解释并能接管恢复』；运行监测/容量管理/失败恢复三条责任名都不字面成立，故 responsibility 留空。"
+    }
+   ],
+   "no_role_reason": null,
+   "no_role_kind": null,
+   "drop_reasons": []
+  },
+  {
+   "name": "writing-for-agents",
+   "roles": [],
+   "no_role_reason": "为 agent 写文档与技能是跨岗位通用的写作方法论（上下文指针、两种负载、信息层级）；AGT-048 需要的是知识溯源、技能版本与 Playbook 评估，本技能不产出其中任何一项。",
+   "no_role_kind": "GENERIC_METHOD",
+   "drop_reasons": []
+  }
+ ]
+}

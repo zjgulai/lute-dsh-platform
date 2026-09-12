@@ -1,0 +1,1147 @@
+<!doctype html><html><head><meta charset="utf-8"><title>算法技能 · light · collapsed</title>
+<style>
+/* Base variables referenced by the token sheets and component CSS but defined
+ * upstream (deepsuite theme/global.css) — supplied here so the composite
+ * --dsw-font-* variables resolve and motion rides the upstream curve. Code
+ * font stack deliberately omits a bare `monospace` tail (Windows CJK falls
+ * back to SimSun otherwise). */
+:root {
+  --dsw-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --ds-font-family-code: 'SF Mono', 'JetBrains Mono', 'Fira Code', Consolas,
+    'Liberation Mono', Menlo, Courier, 'PingFang SC', 'Microsoft YaHei';
+  --ds-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ds-transition-duration: 0.2s;
+  --ds-transition-duration-fast: 0.1s;
+  --ds-transition-duration-slow: 0.3s;
+}
+
+/* Smooth corner curvature for every rounded surface. Inside the support
+ * guard, all corners curve along superellipse(1.5) — between a circular arc
+ * (round = superellipse(1)) and a squircle (superellipse(2)) — instead of the
+ * default arc; engines without corner-shape keep circular corners because the
+ * token and the rule exist only inside the guard.
+ *
+ * corner-shape does not inherit, so the universal selector applies the token
+ * to elements and their ::before/::after; other pseudo-elements (for example
+ * the ::-webkit-scrollbar parts) stay circular.
+ *
+ * Full-round shapes opt out where they are declared: a superellipse deforms a
+ * circle into a squircle and squares off capsule ends, so every effectively
+ * uncapped radius (50%, 100%, or a pill radius far above the box size) pairs
+ * `corner-shape: round` with its `border-radius` in the owning component
+ * sheet. The corner-shape stylesheet spec enforces that pairing. */
+@supports (corner-shape: superellipse(1.5)) {
+  :root {
+    --dsw-corner-shape: superellipse(1.5);
+  }
+
+  *,
+  *::before,
+  *::after {
+    corner-shape: var(--dsw-corner-shape);
+  }
+}
+
+/* Figma font-weight 510 (an SF Pro variable-font weight) always renders as
+   font-weight: 500 in this UI — non-variable webfonts snap intermediate
+   weights unpredictably across platforms. */
+body {
+  --dsw-static-amber-100: rgb(254, 245, 231);
+  --dsw-static-amber-400: rgb(247, 173, 49);
+  --dsw-static-amber-500: rgb(245, 158, 11);
+  --dsw-static-amber-600: rgb(221, 134, 41);
+  --dsw-static-amber-900: rgb(39, 36, 31);
+  --dsw-static-blue-100: rgb(219, 234, 254);
+  --dsw-static-blue-300: rgb(147, 197, 253);
+  --dsw-static-blue-400: rgb(96, 165, 250);
+  --dsw-static-blue-450: rgb(77, 147, 248);
+  --dsw-static-blue-500: rgb(59, 130, 246);
+  --dsw-static-blue-50: rgb(239, 246, 255);
+  --dsw-static-blue-50p: rgb(234, 243, 255);
+  --dsw-static-blue-600: rgb(37, 99, 235);
+  --dsw-static-blue-75: rgb(229, 240, 255);
+  --dsw-static-blue-800: rgb(30, 64, 175);
+  --dsw-static-blue-900: rgb(14, 48, 116);
+  --dsw-static-blue-950: rgb(23, 37, 84);
+  --dsw-static-deepseek-100: rgb(228, 237, 253);
+  --dsw-static-deepseek-200: rgb(211, 226, 255);
+  --dsw-static-deepseek-300: rgb(183, 200, 254);
+  --dsw-static-deepseek-400: rgb(103, 158, 254);
+  --dsw-static-deepseek-450: rgb(86, 134, 254);
+  --dsw-static-deepseek-500: rgb(65, 118, 230);
+  --dsw-static-deepseek-50: rgb(237, 243, 254);
+  --dsw-static-deepseek-600: rgb(72, 104, 178);
+  --dsw-static-deepseek-700-delete: rgb(47, 76, 143);
+  --dsw-static-deepseek-800: rgb(52, 65, 91);
+  --dsw-static-deepseek-900: rgb(40, 49, 66);
+  --dsw-static-green-100: rgb(230, 250, 237);
+  --dsw-static-green-400: rgb(78, 209, 126);
+  --dsw-static-green-500: rgb(34, 197, 94);
+  --dsw-static-green-900: rgb(35, 60, 44);
+  --dsw-static-neutral-00: rgb(255, 255, 255);
+  --dsw-static-neutral-1000: rgb(0, 0, 0);
+  --dsw-static-neutral-100: rgb(245, 245, 245);
+  --dsw-static-neutral-150: rgb(237, 237, 237);
+  --dsw-static-neutral-200: rgb(229, 229, 229);
+  --dsw-static-neutral-250: rgb(220, 220, 220);
+  --dsw-static-neutral-300: rgb(212, 212, 212);
+  --dsw-static-neutral-400: rgb(162, 164, 166);
+  --dsw-static-neutral-500: rgb(127, 130, 135);
+  --dsw-static-neutral-50: rgb(250, 250, 250);
+  --dsw-static-neutral-550: rgb(101, 103, 107);
+  --dsw-static-neutral-600: rgb(84, 85, 87);
+  --dsw-static-neutral-700: rgb(60, 60, 61);
+  --dsw-static-neutral-800: rgb(41, 41, 41);
+  --dsw-static-neutral-850: rgb(33, 33, 35);
+  --dsw-static-neutral-900: rgb(15, 15, 15);
+  --dsw-static-neutral-bluish-00: rgb(255, 255, 255);
+  --dsw-static-neutral-bluish-1000: rgb(15, 17, 21);
+  --dsw-static-neutral-bluish-100: rgb(235, 238, 242);
+  --dsw-static-neutral-bluish-150: rgb(233, 236, 242);
+  --dsw-static-neutral-bluish-200: rgb(225, 229, 238);
+  --dsw-static-neutral-bluish-300: rgb(207, 211, 214);
+  --dsw-static-neutral-bluish-400: rgb(173, 178, 184);
+  --dsw-static-neutral-bluish-500: rgb(151, 157, 166);
+  --dsw-static-neutral-bluish-50: rgb(249, 250, 251);
+  --dsw-static-neutral-bluish-600: rgb(129, 133, 140);
+  --dsw-static-neutral-bluish-60: rgb(245, 246, 247);
+  --dsw-static-neutral-bluish-700: rgb(97, 102, 107);
+  --dsw-static-neutral-bluish-750: rgb(67, 69, 74);
+  --dsw-static-neutral-bluish-75: rgb(241, 243, 245);
+  --dsw-static-neutral-bluish-800: rgb(53, 54, 56);
+  --dsw-static-neutral-bluish-850: rgb(44, 44, 46);
+  --dsw-static-neutral-bluish-875: rgb(35, 35, 36);
+  --dsw-static-neutral-bluish-900: rgb(27, 27, 28);
+  --dsw-static-neutral-bluish-950: rgb(21, 21, 23);
+  --dsw-static-red-100: rgb(254, 226, 226);
+  --dsw-static-red-400: rgb(242, 90, 90);
+  --dsw-static-red-500: rgb(239, 68, 68);
+  --dsw-static-red-50: rgb(254, 242, 242);
+  --dsw-static-red-600: rgb(236, 19, 19);
+  --dsw-static-red-900: rgb(87, 12, 12);
+}
+
+body[data-ds-dark-theme] {
+  --dsw-static-amber-100: rgb(254, 245, 231);
+  --dsw-static-amber-400: rgb(247, 173, 49);
+  --dsw-static-amber-500: rgb(245, 158, 11);
+  --dsw-static-amber-600: rgb(221, 134, 41);
+  --dsw-static-amber-900: rgb(39, 36, 31);
+  --dsw-static-blue-100: rgb(219, 234, 254);
+  --dsw-static-blue-300: rgb(147, 197, 253);
+  --dsw-static-blue-400: rgb(96, 165, 250);
+  --dsw-static-blue-450: rgb(77, 147, 248);
+  --dsw-static-blue-500: rgb(59, 130, 246);
+  --dsw-static-blue-50: rgb(239, 246, 255);
+  --dsw-static-blue-50p: rgb(234, 243, 255);
+  --dsw-static-blue-600: rgb(37, 99, 235);
+  --dsw-static-blue-75: rgb(229, 240, 255);
+  --dsw-static-blue-800: rgb(30, 64, 175);
+  --dsw-static-blue-900: rgb(14, 48, 116);
+  --dsw-static-blue-950: rgb(23, 37, 84);
+  --dsw-static-deepseek-100: rgb(228, 237, 253);
+  --dsw-static-deepseek-200: rgb(211, 226, 255);
+  --dsw-static-deepseek-300: rgb(183, 200, 254);
+  --dsw-static-deepseek-400: rgb(103, 158, 254);
+  --dsw-static-deepseek-450: rgb(86, 134, 254);
+  --dsw-static-deepseek-500: rgb(65, 118, 230);
+  --dsw-static-deepseek-50: rgb(237, 243, 254);
+  --dsw-static-deepseek-600: rgb(72, 104, 178);
+  --dsw-static-deepseek-700-delete: rgb(47, 76, 143);
+  --dsw-static-deepseek-800: rgb(52, 65, 91);
+  --dsw-static-deepseek-900: rgb(40, 49, 66);
+  --dsw-static-green-100: rgb(230, 250, 237);
+  --dsw-static-green-400: rgb(78, 209, 126);
+  --dsw-static-green-500: rgb(34, 197, 94);
+  --dsw-static-green-900: rgb(35, 60, 44);
+  --dsw-static-neutral-00: rgb(255, 255, 255);
+  --dsw-static-neutral-1000: rgb(0, 0, 0);
+  --dsw-static-neutral-100: rgb(245, 245, 245);
+  --dsw-static-neutral-150: rgb(237, 237, 237);
+  --dsw-static-neutral-200: rgb(229, 229, 229);
+  --dsw-static-neutral-250: rgb(220, 220, 220);
+  --dsw-static-neutral-300: rgb(212, 212, 212);
+  --dsw-static-neutral-400: rgb(162, 164, 166);
+  --dsw-static-neutral-500: rgb(127, 130, 135);
+  --dsw-static-neutral-50: rgb(250, 250, 250);
+  --dsw-static-neutral-550: rgb(101, 103, 107);
+  --dsw-static-neutral-600: rgb(84, 85, 87);
+  --dsw-static-neutral-700: rgb(60, 60, 61);
+  --dsw-static-neutral-800: rgb(41, 41, 41);
+  --dsw-static-neutral-850: rgb(33, 33, 35);
+  --dsw-static-neutral-900: rgb(15, 15, 15);
+  --dsw-static-neutral-bluish-00: rgb(255, 255, 255);
+  --dsw-static-neutral-bluish-1000: rgb(15, 17, 21);
+  --dsw-static-neutral-bluish-100: rgb(235, 238, 242);
+  --dsw-static-neutral-bluish-150: rgb(233, 236, 242);
+  --dsw-static-neutral-bluish-200: rgb(225, 229, 238);
+  --dsw-static-neutral-bluish-300: rgb(207, 211, 214);
+  --dsw-static-neutral-bluish-400: rgb(173, 178, 184);
+  --dsw-static-neutral-bluish-500: rgb(151, 157, 166);
+  --dsw-static-neutral-bluish-50: rgb(249, 250, 251);
+  --dsw-static-neutral-bluish-600: rgb(129, 133, 140);
+  --dsw-static-neutral-bluish-60: rgb(249, 250, 251);
+  --dsw-static-neutral-bluish-700: rgb(97, 102, 107);
+  --dsw-static-neutral-bluish-750: rgb(67, 69, 74);
+  --dsw-static-neutral-bluish-75: rgb(241, 243, 245);
+  --dsw-static-neutral-bluish-800: rgb(53, 54, 56);
+  --dsw-static-neutral-bluish-850: rgb(44, 44, 46);
+  --dsw-static-neutral-bluish-875: rgb(35, 35, 36);
+  --dsw-static-neutral-bluish-900: rgb(27, 27, 28);
+  --dsw-static-neutral-bluish-950: rgb(21, 21, 23);
+  --dsw-static-red-100: rgb(254, 226, 226);
+  --dsw-static-red-400: rgb(242, 90, 90);
+  --dsw-static-red-500: rgb(239, 68, 68);
+  --dsw-static-red-50: rgb(254, 242, 242);
+  --dsw-static-red-600: rgb(236, 19, 19);
+  --dsw-static-red-900: rgb(87, 12, 12);
+}
+
+body {
+  --dsw-alias-bg-base: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-bg-layer-1: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-bg-layer-2: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-bg-layer-3: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-bg-mask-1: rgba(0, 0, 0, 0.24);
+  --dsw-alias-bg-mask-2: rgba(0, 0, 0, 0.12);
+  --dsw-alias-bg-mask-3: rgba(0, 0, 0, 0.48);
+  --dsw-alias-bg-mask-photo: rgba(0, 0, 0, 0.88);
+  --dsw-alias-bg-mask-drop: rgba(255, 255, 255, 0.7);
+  --dsw-alias-bg-module-platform: var(--dsw-static-neutral-bluish-60);
+  --dsw-alias-bg-multi-select: var(--dsw-static-neutral-bluish-60);
+  --dsw-alias-bg-overlay: var(--dsw-static-neutral-bluish-150);
+  --dsw-alias-bg-skeleton: rgba(0, 0, 0, 0.04);
+  --dsw-alias-border-inverted2: rgba(0, 0, 0, 0);
+  --dsw-alias-border-inverted: rgba(0, 0, 0, 0);
+  --dsw-alias-border-l1: rgba(0, 0, 0, 0.04);
+  --dsw-alias-border-l2-darkmode-thin: rgba(0, 0, 0, 0.1);
+  --dsw-alias-border-l2: rgba(0, 0, 0, 0.1);
+  --dsw-alias-border-l3: rgba(0, 0, 0, 0.12);
+  --dsw-alias-border-l4: rgba(0, 0, 0, 0.16);
+  --dsw-alias-brand-primary-invert: var(--dsw-static-neutral-bluish-1000);
+  --dsw-alias-brand-primary-new-colorprimary-new-color: rgb(65, 118, 230);
+  --dsw-alias-brand-primary: var(--dsw-static-neutral-bluish-1000);
+  --dsw-alias-brand-text: var(--dsw-static-neutral-bluish-1000);
+  --dsw-alias-button-contrast-fill: var(--dsw-static-neutral-bluish-700);
+  --dsw-alias-button-elevated-fill: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-button-floating-fill: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-button-floating-hover: var(--dsw-static-neutral-bluish-75);
+  --dsw-alias-button-ghost-active-border: var(--dsw-static-neutral-bluish-500);
+  --dsw-alias-button-ghost-active-fill: var(--dsw-static-neutral-bluish-100);
+  --dsw-alias-button-ghost-active-hover: var(--dsw-static-neutral-bluish-150);
+  --dsw-alias-button-info-fill: var(--dsw-static-deepseek-500);
+  --dsw-alias-button-info-hover: var(--dsw-static-deepseek-400);
+  --dsw-alias-button-primary-dimmed: var(--dsw-static-neutral-bluish-100);
+  --dsw-alias-button-primary-fill: var(--dsw-alias-brand-primary);
+  --dsw-alias-button-primary-hover: var(--dsw-static-neutral-bluish-750);
+  --dsw-alias-button-tool-bar-fill-invisible: rgba(31, 31, 31, 0.36);
+  --dsw-alias-button-tool-bar-fill: rgba(84, 85, 87, 0.5);
+  --dsw-alias-button-tool-bar-hover: rgba(84, 85, 87, 0.6);
+  --dsw-alias-interactive-bg-active: rgba(38, 49, 72, 0.1);
+  --dsw-alias-interactive-bg-hover-accent: rgba(38, 49, 72, 0.14);
+  --dsw-alias-interactive-bg-hover-danger: rgba(236, 19, 19, 0.05);
+  --dsw-alias-interactive-bg-hover-solid: var(--dsw-static-neutral-bluish-75);
+  --dsw-alias-interactive-bg-hover: rgba(38, 49, 72, 0.06);
+  --dsw-alias-label-caption: var(--dsw-static-neutral-bluish-400);
+  --dsw-alias-label-dimmed: var(--dsw-static-neutral-bluish-200);
+  --dsw-alias-label-primary-bluish: var(--dsw-static-blue-900);
+  --dsw-alias-label-primary-dimmed: var(--dsw-static-neutral-bluish-950);
+  --dsw-alias-label-primary-foreground: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-label-primary-inverted: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-label-primary: var(--dsw-static-neutral-bluish-1000);
+  --dsw-alias-label-secondary: var(--dsw-static-neutral-bluish-700);
+  --dsw-alias-label-tertiary: var(--dsw-static-neutral-bluish-600);
+  --dsw-alias-markdown-citation: var(--dsw-static-neutral-bluish-100);
+  --dsw-alias-markdown-code-block-banner: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-markdown-code-block: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-markdown-code-segment-selected: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-markdown-code-segment-unselected: var(--dsw-static-neutral-bluish-75);
+  --dsw-alias-markdown-inline-code: var(--dsw-static-neutral-bluish-100);
+  --dsw-alias-markdown-placeholder: var(--dsw-static-neutral-bluish-60);
+  --dsw-alias-markdown-tag: var(--dsw-static-neutral-bluish-75);
+  --dsw-alias-scrollbar-bg-l1: var(--dsw-static-neutral-200);
+  --dsw-alias-scrollbar-bg-l2: var(--dsw-static-neutral-200);
+  --dsw-alias-scrollbar-hover-l1: var(--dsw-static-neutral-300);
+  --dsw-alias-scrollbar-hover-l2: var(--dsw-static-neutral-300);
+  --dsw-alias-state-business-primary: var(--dsw-static-deepseek-500);
+  --dsw-alias-state-business-tertiary: var(--dsw-static-deepseek-100);
+  --dsw-alias-state-error-primary: var(--dsw-static-red-600);
+  --dsw-alias-state-error-secondary: var(--dsw-static-red-400);
+  --dsw-alias-state-success-primary: var(--dsw-static-green-500);
+  --dsw-alias-state-success-secondary: var(--dsw-static-green-400);
+  --dsw-alias-state-success-tertiary: var(--dsw-static-green-100);
+  --dsw-alias-state-warn-label: var(--dsw-static-amber-600);
+  --dsw-alias-state-warn-primary: var(--dsw-static-amber-500);
+  --dsw-alias-state-warn-secondary: var(--dsw-static-amber-400);
+  --dsw-alias-state-warn-tertiary: var(--dsw-static-amber-100);
+  --dsw-alias-toast-bg: var(--dsw-static-neutral-bluish-800);
+  --dsw-alias-tooltip-bg: var(--dsw-static-neutral-bluish-850);
+  --dsw-specific-bubble-highlight: var(--dsw-static-deepseek-200);
+  --dsw-specific-bubble: var(--dsw-static-deepseek-50);
+  --dsw-specific-input-major: var(--dsw-static-neutral-bluish-00);
+  --dsw-specific-login-input: var(--dsw-static-neutral-bluish-50);
+  --dsw-specific-menu: var(--dsw-alias-bg-layer-3);
+  --dsw-specific-selector: var(--dsw-static-neutral-bluish-60);
+  --dsw-specific-sidebar-fill: var(--dsw-static-neutral-bluish-50);
+  --dsw-specific-sidebar-nav-item-active-accent: var(--dsw-static-deepseek-100);
+  --dsw-specific-sidebar-nav-item-active: var(--dsw-static-neutral-bluish-100);
+  --dsw-specific-sidebar-nav-item-hover: var(--dsw-static-neutral-bluish-75);
+  --dsw-specific-tip: var(--dsw-static-neutral-bluish-60);
+}
+
+body[data-ds-dark-theme] {
+  --dsw-alias-bg-base: var(--dsw-static-neutral-bluish-950);
+  --dsw-alias-bg-layer-1: var(--dsw-static-neutral-bluish-875);
+  --dsw-alias-bg-layer-2: var(--dsw-static-neutral-bluish-850);
+  --dsw-alias-bg-layer-3: var(--dsw-static-neutral-bluish-800);
+  --dsw-alias-bg-mask-1: rgba(0, 0, 0, 0.5);
+  --dsw-alias-bg-mask-2: rgba(0, 0, 0, 0.2);
+  --dsw-alias-bg-mask-3: rgba(0, 0, 0, 0.48);
+  --dsw-alias-bg-mask-photo: rgba(0, 0, 0, 0.88);
+  --dsw-alias-bg-mask-drop: rgba(39, 39, 48, 0.7);
+  --dsw-alias-bg-module-platform: var(--dsw-static-neutral-bluish-800);
+  --dsw-alias-bg-multi-select: var(--dsw-static-neutral-850);
+  --dsw-alias-bg-overlay: var(--dsw-static-neutral-bluish-700);
+  --dsw-alias-bg-skeleton: rgba(255, 255, 255, 0.08);
+  --dsw-alias-border-inverted2: rgba(255, 255, 255, 0.08);
+  --dsw-alias-border-inverted: rgba(255, 255, 255, 0.06);
+  --dsw-alias-border-l1: rgba(255, 255, 255, 0.06);
+  --dsw-alias-border-l2-darkmode-thin: rgba(255, 255, 255, 0.06);
+  --dsw-alias-border-l2: rgba(255, 255, 255, 0.12);
+  --dsw-alias-border-l3: rgba(255, 255, 255, 0.16);
+  --dsw-alias-border-l4: rgba(255, 255, 255, 0.2);
+  --dsw-alias-brand-primary-invert: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-brand-primary-new-colorprimary-new-color: var(--dsw-static-deepseek-450);
+  --dsw-alias-brand-primary: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-brand-text: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-button-contrast-fill: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-button-elevated-fill: var(--dsw-static-neutral-bluish-750);
+  --dsw-alias-button-floating-fill: var(--dsw-static-neutral-bluish-850);
+  --dsw-alias-button-floating-hover: var(--dsw-static-neutral-bluish-800);
+  --dsw-alias-button-ghost-active-border: var(--dsw-static-neutral-bluish-600);
+  --dsw-alias-button-ghost-active-fill: var(--dsw-static-neutral-bluish-750);
+  --dsw-alias-button-ghost-active-hover: var(--dsw-static-neutral-bluish-700);
+  --dsw-alias-button-info-fill: var(--dsw-static-deepseek-400);
+  --dsw-alias-button-info-hover: var(--dsw-static-deepseek-500);
+  --dsw-alias-button-primary-dimmed: var(--dsw-static-neutral-bluish-750);
+  --dsw-alias-button-primary-fill: var(--dsw-alias-brand-primary);
+  --dsw-alias-button-primary-hover: var(--dsw-static-neutral-bluish-100);
+  --dsw-alias-button-tool-bar-fill-invisible: rgba(31, 31, 31, 0.36);
+  --dsw-alias-button-tool-bar-fill: rgba(84, 85, 87, 0.5);
+  --dsw-alias-button-tool-bar-hover: rgba(84, 85, 87, 0.6);
+  --dsw-alias-interactive-bg-active: rgba(255, 255, 255, 0.14);
+  --dsw-alias-interactive-bg-hover-accent: rgba(255, 255, 255, 0.24);
+  --dsw-alias-interactive-bg-hover-danger: rgba(242, 90, 90, 0.15);
+  --dsw-alias-interactive-bg-hover-solid: var(--dsw-static-neutral-bluish-800);
+  --dsw-alias-interactive-bg-hover: rgba(255, 255, 255, 0.08);
+  --dsw-alias-label-caption: var(--dsw-static-neutral-bluish-600);
+  --dsw-alias-label-dimmed: var(--dsw-static-neutral-bluish-750);
+  --dsw-alias-label-primary-bluish: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-label-primary-dimmed: var(--dsw-static-neutral-bluish-100);
+  --dsw-alias-label-primary-foreground: var(--dsw-static-neutral-bluish-1000);
+  --dsw-alias-label-primary-inverted: var(--dsw-static-neutral-bluish-800);
+  --dsw-alias-label-primary: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-label-secondary: var(--dsw-static-neutral-bluish-300);
+  --dsw-alias-label-tertiary: var(--dsw-static-neutral-bluish-400);
+  --dsw-alias-markdown-citation: var(--dsw-static-neutral-bluish-800);
+  --dsw-alias-markdown-code-block-banner: var(--dsw-static-neutral-bluish-850);
+  --dsw-alias-markdown-code-block: var(--dsw-static-neutral-bluish-900);
+  --dsw-alias-markdown-code-segment-selected: var(--dsw-static-neutral-bluish-800);
+  --dsw-alias-markdown-code-segment-unselected: var(--dsw-static-neutral-bluish-900);
+  --dsw-alias-markdown-inline-code: var(--dsw-static-neutral-bluish-850);
+  --dsw-alias-markdown-placeholder: var(--dsw-static-neutral-bluish-850);
+  --dsw-alias-markdown-tag: var(--dsw-static-neutral-bluish-850);
+  --dsw-alias-scrollbar-bg-l1: var(--dsw-static-neutral-700);
+  --dsw-alias-scrollbar-bg-l2: var(--dsw-static-neutral-600);
+  --dsw-alias-scrollbar-hover-l1: var(--dsw-static-neutral-600);
+  --dsw-alias-scrollbar-hover-l2: var(--dsw-static-neutral-550);
+  --dsw-alias-state-business-primary: var(--dsw-static-deepseek-400);
+  --dsw-alias-state-business-tertiary: var(--dsw-static-deepseek-800);
+  --dsw-alias-state-error-primary: var(--dsw-static-red-400);
+  --dsw-alias-state-error-secondary: var(--dsw-static-red-400);
+  --dsw-alias-state-success-primary: var(--dsw-static-green-500);
+  --dsw-alias-state-success-secondary: var(--dsw-static-green-400);
+  --dsw-alias-state-success-tertiary: var(--dsw-static-green-900);
+  --dsw-alias-state-warn-label: var(--dsw-static-amber-600);
+  --dsw-alias-state-warn-primary: var(--dsw-static-amber-500);
+  --dsw-alias-state-warn-secondary: var(--dsw-static-amber-400);
+  --dsw-alias-state-warn-tertiary: var(--dsw-static-amber-900);
+  --dsw-alias-toast-bg: var(--dsw-static-neutral-bluish-750);
+  --dsw-alias-tooltip-bg: var(--dsw-static-neutral-bluish-750);
+  --dsw-specific-bubble-highlight: var(--dsw-static-neutral-bluish-750);
+  --dsw-specific-bubble: var(--dsw-static-neutral-bluish-850);
+  --dsw-specific-input-major: var(--dsw-static-neutral-bluish-850);
+  --dsw-specific-login-input: var(--dsw-static-neutral-bluish-900);
+  --dsw-specific-menu: var(--dsw-alias-bg-layer-3);
+  --dsw-specific-selector: var(--dsw-static-neutral-bluish-800);
+  --dsw-specific-sidebar-fill: var(--dsw-static-neutral-bluish-900);
+  --dsw-specific-sidebar-nav-item-active-accent: var(--dsw-static-neutral-bluish-800);
+  --dsw-specific-sidebar-nav-item-active: var(--dsw-static-neutral-bluish-750);
+  --dsw-specific-sidebar-nav-item-hover: var(--dsw-static-neutral-bluish-850);
+  --dsw-specific-tip: var(--dsw-static-neutral-bluish-800);
+}
+
+/* Scrollbar skin: the sole consumer of the four --dsw-alias-scrollbar-*
+ * tokens. Without it every scrolling region renders the UA scrollbar, which
+ * ignores the theme — a light native bar over the dark palette.
+ *
+ * The rules sit on `body`, not `html`: design-platform.css declares the
+ * --dsw-alias-* tokens on `body` (and the dark overrides on
+ * `body[data-ds-dark-theme]`), and custom properties only inherit downward,
+ * so an `html` rule resolves them to the guaranteed-invalid value and
+ * `scrollbar-color` falls back to `auto`.
+ *
+ * Surfaces pick their elevation by rebinding --dsh-scrollbar-thumb{,-hover}:
+ * the l1 pair here is the base-surface default, and an elevated surface
+ * (menu, popover, dialog) rebinds to the l2 pair on its own container. Both
+ * rendering paths below read the indirection, so one rebind reaches whichever
+ * path the engine took. */
+
+body {
+  --dsh-scrollbar-thumb: var(--dsw-alias-scrollbar-bg-l1);
+  --dsh-scrollbar-thumb-hover: var(--dsw-alias-scrollbar-hover-l1);
+  /* The WebKit bar's layout width, mirrored by the ::-webkit-scrollbar rule
+     below. A surface that must align itself beside a space-consuming bar
+     (ConversationRoot's overlay composer seat) reads this instead of
+     hardcoding the number. */
+  --dsh-scrollbar-width: 8px;
+}
+
+/* The two paths are mutually exclusive, and the gate is load-bearing rather
+   than defensive. A non-`auto` `scrollbar-width` or `scrollbar-color` makes
+   Chromium and Safari drop every `::-webkit-scrollbar*` rule for that
+   element, including `::-webkit-scrollbar-thumb:hover` — measured in chromium
+   as an 8px `::-webkit-scrollbar` width taking effect on its own and being
+   ignored as soon as `scrollbar-width: thin` is added. Declaring both
+   unconditionally therefore leaves the hover tokens with no rendering at all,
+   because the engines that implement the hover pseudo-element are exactly the
+   ones the standard properties silence, and Firefox has no hover
+   pseudo-element to fall back on.
+
+   `not selector(::-webkit-scrollbar)` is true only where the pseudo-element
+   is unimplemented, so Firefox takes the standard path and WebKit-based
+   engines take the pseudo-element path. An engine too old for the
+   `selector()` function makes the condition invalid, which evaluates false
+   and selects the pseudo-element path — the correct side for the pre-16.4
+   Safari that is the realistic case. */
+@supports not selector(::-webkit-scrollbar) {
+  /* Declared on every element rather than inherited from `body`. Inheriting
+     would pass down the COLOUR already substituted at `body`, so a descendant
+     rebinding --dsh-scrollbar-thumb could not change it; re-declaring makes
+     each element substitute the variable as it sees it, which is what gives
+     an elevated surface a working rebind. `scrollbar-width` is not an
+     inherited property at all, so it needs the per-element declaration
+     regardless.
+
+     No hover counterpart exists on this path: `scrollbar-color` states one
+     thumb colour and the engine derives its own hover treatment. */
+  body,
+  body * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--dsh-scrollbar-thumb) transparent;
+  }
+}
+
+/* Not gated in turn: an engine that does not implement these pseudo-elements
+   drops the rules as unknown selectors, so the gate would only restate what
+   selector matching already does. Not inherited either, hence the unscoped
+   selectors. */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track stays transparent so the thumb reads against whatever surface scrolls
+   under it; only the thumb carries a token colour. */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: var(--dsh-scrollbar-thumb);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dsh-scrollbar-thumb-hover);
+}
+
+/* Both scrollbars meeting in a corner: no separate token, so the corner
+   matches the transparent track rather than the UA's opaque default. */
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+</style>
+<style>
+/**
+ * 算法技能 settings-section styles.
+ *
+ * Every colour is a theme alias token — no literal colour, no invented token.
+ * That rule has teeth here: this repo's `theme-tokens` gate fails the build on
+ * a token that no official package defines, because the failure mode is silent
+ * (a misspelt `var()` falls back to a literal forever and simply stops tracking
+ * the theme, which looks fine in light mode and wrong in dark). The radius
+ * family in particular does NOT exist on this platform — the panel uses literal
+ * radii in px, the same choice the role matrix makes.
+ *
+ * The four levels are visually ranked by indent plus weight rather than by four
+ * different accent colours, so the hierarchy survives both themes and a future
+ * re-brand of the single accent.
+ */
+
+._root_f9beb7 {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 2px 0 8px;
+  min-width: 0;
+}
+
+/* ── 页头 ─────────────────────────────────────────────── */
+._head_f9beb7 {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+._headRow_f9beb7 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+._title_f9beb7 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  color: var(--dsw-alias-label-primary);
+}
+
+._subtitle_f9beb7 {
+  margin: 0;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--dsw-alias-label-secondary);
+}
+
+._path_f9beb7 {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--dsw-alias-label-tertiary);
+  word-break: break-all;
+}
+
+/* ── 统计条 ───────────────────────────────────────────── */
+._stats_f9beb7 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+._stat_f9beb7 {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 7px 12px;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 10px;
+  background: var(--dsw-alias-bg-layer-1);
+  min-width: 0;
+}
+
+._statValue_f9beb7 {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--dsw-alias-label-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+._statLabel_f9beb7 {
+  font-size: 11px;
+  line-height: 15px;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+._statWarn_f9beb7 ._statValue_f9beb7 {
+  color: var(--dsw-alias-state-warn-primary);
+}
+
+/* ── 工具行 ───────────────────────────────────────────── */
+._toolbar_f9beb7 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+._search_f9beb7 {
+  box-sizing: border-box;
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 8px;
+  background: var(--dsw-alias-bg-layer-1);
+  color: var(--dsw-alias-label-primary);
+  font-size: 13px;
+  line-height: 20px;
+  outline: none;
+}
+
+._search_f9beb7:focus {
+  border-color: var(--dsw-alias-brand-primary);
+}
+
+._search_f9beb7::placeholder {
+  color: var(--dsw-alias-label-secondary);
+}
+
+._tool_f9beb7 {
+  flex: none;
+  border: 1px solid var(--dsw-alias-border-l1);
+  background: transparent;
+  color: var(--dsw-alias-label-secondary);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font: inherit;
+  font-size: 12px;
+  line-height: 18px;
+  cursor: pointer;
+}
+
+._tool_f9beb7:hover {
+  background: var(--dsw-alias-interactive-bg-hover);
+  color: var(--dsw-alias-label-primary);
+}
+
+._hitCount_f9beb7 {
+  flex: none;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--dsw-alias-label-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 诊断条 ───────────────────────────────────────────── */
+._issues_f9beb7 {
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 10px;
+  background: var(--dsw-alias-bg-layer-1);
+  overflow: hidden;
+}
+
+._issuesHead_f9beb7 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 8px 12px;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  color: var(--dsw-alias-state-warn-primary);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+._issuesBody_f9beb7 {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0 12px 10px 26px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+._issueLine_f9beb7 {
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--dsw-alias-label-secondary);
+}
+
+/* ── 面 ───────────────────────────────────────────────── */
+._plane_f9beb7 {
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 12px;
+  background: var(--dsw-alias-bg-layer-1);
+  overflow: hidden;
+}
+
+._planeHead_f9beb7 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 10px 12px;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  color: var(--dsw-alias-label-primary);
+}
+
+._planeHead_f9beb7:hover {
+  background: var(--dsw-alias-interactive-bg-hover);
+}
+
+._avatar_f9beb7 {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  object-fit: contain;
+}
+
+._avatarSm_f9beb7 {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+._planeText_f9beb7 {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+._planeName_f9beb7 {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+._planePurpose_f9beb7 {
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--dsw-alias-label-tertiary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+._count_f9beb7 {
+  flex: none;
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--dsw-alias-label-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+._caret_f9beb7 {
+  flex: none;
+  width: 12px;
+  font-size: 10px;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+/* ── 责任域 ───────────────────────────────────────────── */
+._planeBody_f9beb7 {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-top: 1px solid var(--dsw-alias-border-l1);
+  padding: 6px 8px 8px 14px;
+}
+
+._domain_f9beb7 {
+  display: flex;
+  flex-direction: column;
+}
+
+._domainHead_f9beb7 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 6px 8px;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  color: var(--dsw-alias-label-secondary);
+  border-radius: 8px;
+}
+
+._domainHead_f9beb7:hover {
+  background: var(--dsw-alias-interactive-bg-hover);
+  color: var(--dsw-alias-label-primary);
+}
+
+._domainName_f9beb7 {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+._domainBody_f9beb7 {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 2px 0 6px 14px;
+}
+
+/* ── 岗位 ─────────────────────────────────────────────── */
+._role_f9beb7 {
+  display: flex;
+  flex-direction: column;
+}
+
+._roleHead_f9beb7 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 5px 8px;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  color: var(--dsw-alias-label-secondary);
+  border-radius: 8px;
+}
+
+._roleHead_f9beb7:hover {
+  background: var(--dsw-alias-interactive-bg-hover);
+  color: var(--dsw-alias-label-primary);
+}
+
+._roleText_f9beb7 {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+._roleName_f9beb7 {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--dsw-alias-label-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+._roleAgt_f9beb7 {
+  font-size: 10px;
+  line-height: 14px;
+  color: var(--dsw-alias-label-tertiary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+._roleEmpty_f9beb7 {
+  flex: none;
+  font-size: 10px;
+  line-height: 14px;
+  padding: 0 6px;
+  border-radius: 999px;
+  color: var(--dsw-alias-state-warn-primary);
+  border: 1px solid var(--dsw-alias-state-warn-primary);
+}
+
+._roleBody_f9beb7 {
+  padding: 4px 0 8px 26px;
+}
+
+/* ── 技能卡 ───────────────────────────────────────────── */
+._grid_f9beb7 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 8px;
+}
+
+._card_f9beb7 {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 9px 11px;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 10px;
+  background: var(--dsw-alias-bg-layer-2);
+  min-width: 0;
+}
+
+._cardHead_f9beb7 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+._cardTitle_f9beb7 {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 17px;
+  color: var(--dsw-alias-label-primary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+._cardSummary_f9beb7 {
+  margin: 0;
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--dsw-alias-label-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+._cardFoot_f9beb7 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+._chip_f9beb7 {
+  font-size: 10px;
+  line-height: 14px;
+  padding: 0 6px;
+  border-radius: 999px;
+  color: var(--dsw-alias-label-tertiary);
+  background: var(--dsw-alias-bg-layer-1);
+  white-space: nowrap;
+}
+
+._chipWired_f9beb7 {
+  color: var(--dsw-alias-state-success-primary);
+  background: transparent;
+  border: 1px solid var(--dsw-alias-state-success-primary);
+}
+
+._chipDrift_f9beb7 {
+  color: var(--dsw-alias-state-warn-primary);
+  background: transparent;
+  border: 1px solid var(--dsw-alias-state-warn-primary);
+}
+
+._chipOff_f9beb7 {
+  color: var(--dsw-alias-label-tertiary);
+  border: 1px solid var(--dsw-alias-border-l2);
+  background: transparent;
+}
+
+/* ── 开关 ─────────────────────────────────────────────── */
+._switch_f9beb7 {
+  position: relative;
+  flex: none;
+  width: 34px;
+  height: 20px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  padding: 0;
+  background: var(--dsw-alias-border-l2);
+  transition: background 0.15s ease;
+}
+
+._switchOn_f9beb7 {
+  background: var(--dsw-alias-brand-primary);
+}
+
+._switch_f9beb7:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+._knob_f9beb7 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--dsw-alias-bg-overlay);
+  transition: left 0.15s ease;
+}
+
+._switchOn_f9beb7 ._knob_f9beb7 {
+  left: 16px;
+}
+
+/* ── 状态行 ───────────────────────────────────────────── */
+._hint_f9beb7 {
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+._error_f9beb7 {
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--dsw-alias-state-error-primary);
+}
+
+._empty_f9beb7 {
+  padding: 18px 12px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+._unplaced_f9beb7 {
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 12px;
+  background: var(--dsw-alias-bg-layer-1);
+  overflow: hidden;
+}
+
+._unplacedHead_f9beb7 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 10px 12px;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  color: var(--dsw-alias-label-secondary);
+}
+
+._unplacedHead_f9beb7:hover {
+  background: var(--dsw-alias-interactive-bg-hover);
+}
+
+._unplacedName_f9beb7 {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+._unplacedBody_f9beb7 {
+  padding: 2px 12px 12px;
+  border-top: 1px solid var(--dsw-alias-border-l1);
+}
+
+._unplacedNote_f9beb7 {
+  margin: 8px 0 10px;
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ._switch_f9beb7,
+  ._knob_f9beb7 {
+    transition: none;
+  }
+}
+
+</style>
+<style>
+
+/* Backdrop: the settings shell is a full-viewport layer over the app. */
+html,body{margin:0;padding:0;height:100%;}
+body{background:var(--dsw-alias-bg-base);font-family:var(--dsw-font-family);}
+.overlay{position:fixed;top:22px;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;}
+.mask{position:absolute;inset:0;background:var(--dsw-alias-bg-mask-1);}
+/* Panel (official .panel): fixed 800px, r32. */
+.panel{position:relative;z-index:1;display:flex;width:800px;
+  height:min(800px,calc(100vh - 48px));max-width:calc(100vw - 48px);
+  border-radius:32px;overflow:hidden;background:var(--dsw-alias-bg-layer-2);
+  box-shadow:var(--dsw-elevation-prominent);}
+/* Nav rail (official .nav): 188px, pad 22px 12px 0. */
+.nav{flex:none;display:flex;flex-direction:column;gap:18px;width:188px;
+  padding:22px 12px 0;box-sizing:border-box;}
+.navTitle{padding:0 12px;font-size:16px;line-height:24px;font-weight:500;color:var(--dsw-alias-label-primary);}
+.navList{display:flex;flex-direction:column;gap:4px;}
+.navCell{display:flex;align-items:center;gap:8px;height:40px;padding:9px 16px 9px 12px;
+  box-sizing:border-box;border:none;border-radius:12px;background:transparent;
+  font-family:inherit;font-size:14px;line-height:22px;font-weight:400;
+  color:var(--dsw-alias-label-primary);text-align:left;}
+.navCell.active{background:var(--dsw-specific-sidebar-nav-item-active);}
+.navGlyph{flex:none;width:16px;height:16px;border-radius:4px;
+  background:var(--dsw-alias-label-tertiary);opacity:.55;}
+.navLabel{flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.content{flex:1;min-width:0;display:flex;flex-direction:column;}
+/* Header (official .header): h54. */
+.header{flex:none;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;
+  height:54px;padding:20px 14px 8px 10px;box-sizing:border-box;}
+.close{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;
+  padding:0;border:none;border-radius:28px;background:transparent;cursor:pointer;
+  color:var(--dsw-alias-label-primary);font-size:14px;line-height:1;}
+/* Options (official .options): pad 0 24px 24px — the page's real seat.
+   Sized to the panel so the image shows the viewport the user scrolls, not the
+   whole document. */
+.options{flex:1;min-height:0;padding:0 24px 24px;overflow-y:auto;}
+.options.stretch{overflow:visible;height:auto;}
+.panel.stretch{height:auto;}
+
+/* Provenance strip. Sits above the panel rather than over it, so the panel is
+   never occluded in the captured image. */
+.note{position:fixed;left:0;right:0;top:0;height:22px;margin:0;z-index:5;padding:3px 10px;
+  box-sizing:border-box;font-size:10.5px;line-height:16px;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;color:var(--dsw-alias-label-tertiary);
+  background:var(--dsw-alias-bg-layer-2);border-bottom:1px solid var(--dsw-alias-border-l1);}
+</style>
+</head>
+<body>
+<div class="overlay">
+  <div class="mask"></div>
+  <div class="panel">
+    <nav class="nav">
+      <div class="navTitle">设置</div>
+      <div class="navList">
+        <button class="navCell">
+          <span class="navGlyph"></span><span class="navLabel">通用设置</span>
+        </button>
+        <button class="navCell">
+          <span class="navGlyph"></span><span class="navLabel">模型</span>
+        </button>
+        <button class="navCell">
+          <span class="navGlyph"></span><span class="navLabel">插件</span>
+        </button>
+        <button class="navCell">
+          <span class="navGlyph"></span><span class="navLabel">Agent 预设</span>
+        </button>
+        <button class="navCell">
+          <span class="navGlyph"></span><span class="navLabel">出海技能</span>
+        </button>
+        <button class="navCell">
+          <span class="navGlyph"></span><span class="navLabel">万物互联</span>
+        </button>
+        <button class="navCell active">
+          <span class="navGlyph"></span><span class="navLabel">算法技能</span>
+        </button>
+      </div>
+    </nav>
+    <div class="content">
+      <div class="header"><div></div><button class="close">✕</button></div>
+      <div class="options"><div class="_root_f9beb7" data-plugin="dsh-algo-skills-local"><header class="_head_f9beb7"><div class="_headRow_f9beb7"><h2 class="_title_f9beb7">算法技能库</h2><span class="_count_f9beb7">4 面 · 8 责任域 · 50 岗位</span></div><p class="_subtitle_f9beb7">论文算法沉淀的技能卡，按组织骨架归位：面 → 责任域 → 岗位</p><span class="_path_f9beb7">/Users/lute/.dsh/skills</span></header><div class="_stats_f9beb7"><div class="_stat_f9beb7" data-dsh-part="algo-stat"><span class="_statValue_f9beb7">1338</span><span class="_statLabel_f9beb7">已装技能卡</span></div><div class="_stat_f9beb7" data-dsh-part="algo-stat"><span class="_statValue_f9beb7">1327</span><span class="_statLabel_f9beb7">已归位</span></div><div class="_stat_f9beb7 _statWarn_f9beb7" data-dsh-part="algo-stat"><span class="_statValue_f9beb7">11</span><span class="_statLabel_f9beb7">未归类</span></div><div class="_stat_f9beb7" data-dsh-part="algo-stat"><span class="_statValue_f9beb7">326</span><span class="_statLabel_f9beb7">本岗已接线</span></div><div class="_stat_f9beb7 _statWarn_f9beb7" data-dsh-part="algo-stat"><span class="_statValue_f9beb7">2</span><span class="_statLabel_f9beb7">空白岗位</span></div></div><div class="_toolbar_f9beb7"><input class="_search_f9beb7" type="search" placeholder="搜索技能名、能力描述、岗位或责任" value=""><button type="button" class="_tool_f9beb7">全部展开</button><button type="button" class="_tool_f9beb7">全部折叠</button><button type="button" class="_tool_f9beb7">重新读取</button></div><div class="_issues_f9beb7"><button type="button" class="_issuesHead_f9beb7"><span class="_caret_f9beb7">▸</span>一致性诊断 · 2 条</button></div><section class="_plane_f9beb7" data-dsh-part="algo-plane" data-plane="PLN-MGT"><button type="button" class="_planeHead_f9beb7" aria-expanded="false"><span class="_caret_f9beb7">▸</span><img class="_avatar_f9beb7" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdwbG4tbWd0IiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNFREY2RTYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1NSUiIHN0b3AtY29sb3I9IiNEM0VBQzIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjQjREOUEwIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHJhZGlhbEdyYWRpZW50IGlkPSJoaXBsbi1tZ3QiIGN4PSIwLjMiIGN5PSIwLjIiIHI9IjEuMCI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9InJnYmEoMjU1LDI1NSwyNTUsMC42OCkiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1NSUiIHN0b3AtY29sb3I9InJnYmEoMjU1LDI1NSwyNTUsMCkiLz4KICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgICA8Y2xpcFBhdGggaWQ9ImNsaXBwbG4tbWd0Ij48cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIvPjwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjQuNSIgeT0iOC4yIiB3aWR0aD0iOTEiIGhlaWdodD0iODciIHJ4PSIxOCIgZmlsbD0icmdiYSgwLDAsMCwwLjEyKSIvPgogIDxyZWN0IHg9IjQuNSIgeT0iNC41IiB3aWR0aD0iOTEiIGhlaWdodD0iOTEiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ3Bsbi1tZ3QpIiBzdHJva2U9IiM1OEI4NDgiIHN0cm9rZS13aWR0aD0iMi4yIi8+CiAgPHBhdGggZD0iTTEwLjUgMjYgUTEwLjUgMTAuNSAyNiAxMC41IEw2MSAxMC41IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC41NSkiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNODkuNSA3NCBRODkuNSA4OS41IDc0IDg5LjUgTDM5IDg5LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSg0NiwxMjUsNjAsMC4zNSkiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIgZmlsbD0idXJsKCNoaXBsbi1tZ3QpIi8+CiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXBwbG4tbWd0KSI+CiAgPHBhdGggZD0iTTEyIDEwMCBDMTIgODQgMjcgODAgNTAgODAgQzczIDgwIDg4IDg0IDg4IDEwMCBaIiBmaWxsPSJHRCIvPgogIDxwYXRoIGQ9Ik0zOCA4MCBMNTAgODggTDYyIDgwIFoiIGZpbGw9IiNGRkZGRkYiLz48cGF0aCBkPSJNNDcgODAgTDUwIDg1IEw1MyA4MCBaIiBmaWxsPSIjNThCODQ4Ii8+CiAgPHBhdGggZD0iTTQyIDkzIEE4IDggMCAwIDEgNTggOTMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSIyLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik01MCA5MyBMNTQgODUiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxyZWN0IHg9IjQ0LjUiIHk9IjcwIiB3aWR0aD0iMTEiIGhlaWdodD0iMTMiIHJ4PSI0LjUiIGZpbGw9IiNEOUEzN0MiLz4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjQ0IiByPSIzNCIgZmlsbD0iI0VGQzQ5RSIvPgogIDxjaXJjbGUgY3g9IjE1LjUiIGN5PSI0NSIgcj0iNC4yIiBmaWxsPSIjRUZDNDlFIi8+CiAgPGNpcmNsZSBjeD0iODQuNSIgY3k9IjQ1IiByPSI0LjIiIGZpbGw9IiNFRkM0OUUiLz4KICA8cGF0aCBkPSJNMjggNTUgUTUwIDY2IDcyIDU1IEw3MiA1OS41IFE1MCA2NyAyOCA1OS41IFoiIGZpbGw9IiM5QzhBNzgiIG9wYWNpdHk9IjAuNCIvPgogIAogIDxjaXJjbGUgY3g9IjQxIiBjeT0iNDQiIHI9IjIuOSIgZmlsbD0iIzJCMjYyMiIvPjxjaXJjbGUgY3g9IjU5IiBjeT0iNDQiIHI9IjIuOSIgZmlsbD0iIzJCMjYyMiIvPgogIDxjaXJjbGUgY3g9IjQxLjkiIGN5PSI0My4xIiByPSIxLjA1IiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iNTkuOSIgY3k9IjQzLjEiIHI9IjEuMDUiIGZpbGw9IiNGRkZGRkYiLz4KICA8cGF0aCBkPSJNMzcgMzguNSBRNDEgMzYgNDUgMzgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlCQTBBOCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNTUgMzggUTU5IDM2IDYzIDM4LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlCQTBBOCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNDguNiA0OC41IFE0OS41IDUxLjUgNTAuNiA0OC41IiBmaWxsPSJub25lIiBzdHJva2U9IiNEOUEzN0MiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNDQgNTYgUTUwIDYwLjUgNTYgNTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0I1Njc0QiIgc3Ryb2tlLXdpZHRoPSIyLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIAogIAogIDxwYXRoIGQ9Ik0xNSA0NSBRMTMgMTQgNDIgMTEuNSBMMzguNSAyMiBRMjggMjQuNSAyNCA0MCBaIiBmaWxsPSIjOUJBMEE4Ii8+CiAgPHBhdGggZD0iTTg1IDQ1IFE4NyAxNCA1OCAxMS41IEw2MS41IDIyIFE3MiAyNC41IDc2IDQwIFoiIGZpbGw9IiM5QkEwQTgiLz4KICA8L2c+Cjwvc3ZnPg==" alt=""><span class="_planeText_f9beb7"><span class="_planeName_f9beb7">经营管理</span><span class="_planePurpose_f9beb7" title="目标、优先级、资源约束、经营判断与组织能力">目标、优先级、资源约束、经营判断与组织能力</span></span><span class="_count_f9beb7">5 岗 · 97 张</span></button></section><section class="_plane_f9beb7" data-dsh-part="algo-plane" data-plane="PLN-OPS"><button type="button" class="_planeHead_f9beb7" aria-expanded="false"><span class="_caret_f9beb7">▸</span><img class="_avatar_f9beb7" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdwbG4tb3BzIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNFREY2RTYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1NSUiIHN0b3AtY29sb3I9IiNEM0VBQzIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjQjREOUEwIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHJhZGlhbEdyYWRpZW50IGlkPSJoaXBsbi1vcHMiIGN4PSIwLjMiIGN5PSIwLjIiIHI9IjEuMCI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9InJnYmEoMjU1LDI1NSwyNTUsMC42OCkiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1NSUiIHN0b3AtY29sb3I9InJnYmEoMjU1LDI1NSwyNTUsMCkiLz4KICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgICA8Y2xpcFBhdGggaWQ9ImNsaXBwbG4tb3BzIj48cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIvPjwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjQuNSIgeT0iOC4yIiB3aWR0aD0iOTEiIGhlaWdodD0iODciIHJ4PSIxOCIgZmlsbD0icmdiYSgwLDAsMCwwLjEyKSIvPgogIDxyZWN0IHg9IjQuNSIgeT0iNC41IiB3aWR0aD0iOTEiIGhlaWdodD0iOTEiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ3Bsbi1vcHMpIiBzdHJva2U9IiM1OEI4NDgiIHN0cm9rZS13aWR0aD0iMi4yIi8+CiAgPHBhdGggZD0iTTEwLjUgMjYgUTEwLjUgMTAuNSAyNiAxMC41IEw2MSAxMC41IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC41NSkiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNODkuNSA3NCBRODkuNSA4OS41IDc0IDg5LjUgTDM5IDg5LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSg0NiwxMjUsNjAsMC4zNSkiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIgZmlsbD0idXJsKCNoaXBsbi1vcHMpIi8+CiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXBwbG4tb3BzKSI+CiAgPHBhdGggZD0iTTEyIDEwMCBDMTIgODQgMjcgODAgNTAgODAgQzczIDgwIDg4IDg0IDg4IDEwMCBaIiBmaWxsPSJHIi8+CiAgCiAgPHBhdGggZD0iTTQxIDkwIEw0MSA4NiBMNTQgODYgTDU5IDkyIEw0MSA5MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48Y2lyY2xlIGN4PSI0NSIgY3k9Ijk1IiByPSIyIiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMS44Ii8+PGNpcmNsZSBjeD0iNTUiIGN5PSI5NSIgcj0iMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjEuOCIvPgogIDxyZWN0IHg9IjQ0LjUiIHk9IjcwIiB3aWR0aD0iMTEiIGhlaWdodD0iMTMiIHJ4PSI0LjUiIGZpbGw9IiNDRTlDNzIiLz4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjQ0IiByPSIzNCIgZmlsbD0iI0U4Qjc4QSIvPgogIDxjaXJjbGUgY3g9IjE1LjUiIGN5PSI0NSIgcj0iNC4yIiBmaWxsPSIjRThCNzhBIi8+CiAgPGNpcmNsZSBjeD0iODQuNSIgY3k9IjQ1IiByPSI0LjIiIGZpbGw9IiNFOEI3OEEiLz4KICA8cGF0aCBkPSJNMjcgNDYgUTI0LjUgNjggNTAgNzMgUTc1LjUgNjggNzMgNDYgUTY5IDYwIDUwIDYyIFEzMSA2MCAyNyA0NiBaIiBmaWxsPSIjNkI0QjJFIi8+CiAgCiAgPGNpcmNsZSBjeD0iNDEiIGN5PSI0NCIgcj0iMi45IiBmaWxsPSIjMkIyNjIyIi8+PGNpcmNsZSBjeD0iNTkiIGN5PSI0NCIgcj0iMi45IiBmaWxsPSIjMkIyNjIyIi8+CiAgPGNpcmNsZSBjeD0iNDEuOSIgY3k9IjQzLjEiIHI9IjEuMDUiIGZpbGw9IiNGRkZGRkYiLz48Y2lyY2xlIGN4PSI1OS45IiBjeT0iNDMuMSIgcj0iMS4wNSIgZmlsbD0iI0ZGRkZGRiIvPgogIDxwYXRoIGQ9Ik0zNyAzOC41IFE0MSAzNiA0NSAzOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMkIyNjIyIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik01NSAzOCBRNTkgMzYgNjMgMzguNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMkIyNjIyIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik00OC42IDQ4LjUgUTQ5LjUgNTEuNSA1MC42IDQ4LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0NFOUM3MiIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik00NCA1NiBRNTAgNjAuNSA1NiA1NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQjU2NzRCIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgCiAgCiAgPHBhdGggZD0iTTE2IDQ0IFExNSA3LjUgNTAgNy41IFE1OC41IDcuNSA2Mi41IDEwLjUgUTcwLjUgNS41IDc2LjUgOS41IFE3OC41IDEyLjUgODQgNDQgUTc4IDI3LjUgNTAgMjggUTIyIDI3LjUgMTYgNDQgWiIgZmlsbD0iIzdBNEEyQiIvPgogIDwvZz4KPC9zdmc+" alt=""><span class="_planeText_f9beb7"><span class="_planeName_f9beb7">业务运营</span><span class="_planePurpose_f9beb7" title="产品、供应、渠道、增长、服务和GMV事实闭环">产品、供应、渠道、增长、服务和GMV事实闭环</span></span><span class="_count_f9beb7">35 岗 · 871 张</span></button></section><section class="_plane_f9beb7" data-dsh-part="algo-plane" data-plane="PLN-CTL"><button type="button" class="_planeHead_f9beb7" aria-expanded="false"><span class="_caret_f9beb7">▸</span><img class="_avatar_f9beb7" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdwbG4tY3RsIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNFREY2RTYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1NSUiIHN0b3AtY29sb3I9IiNEM0VBQzIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjQjREOUEwIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHJhZGlhbEdyYWRpZW50IGlkPSJoaXBsbi1jdGwiIGN4PSIwLjMiIGN5PSIwLjIiIHI9IjEuMCI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9InJnYmEoMjU1LDI1NSwyNTUsMC42OCkiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1NSUiIHN0b3AtY29sb3I9InJnYmEoMjU1LDI1NSwyNTUsMCkiLz4KICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgICA8Y2xpcFBhdGggaWQ9ImNsaXBwbG4tY3RsIj48cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIvPjwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjQuNSIgeT0iOC4yIiB3aWR0aD0iOTEiIGhlaWdodD0iODciIHJ4PSIxOCIgZmlsbD0icmdiYSgwLDAsMCwwLjEyKSIvPgogIDxyZWN0IHg9IjQuNSIgeT0iNC41IiB3aWR0aD0iOTEiIGhlaWdodD0iOTEiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ3Bsbi1jdGwpIiBzdHJva2U9IiM1OEI4NDgiIHN0cm9rZS13aWR0aD0iMi4yIi8+CiAgPHBhdGggZD0iTTEwLjUgMjYgUTEwLjUgMTAuNSAyNiAxMC41IEw2MSAxMC41IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC41NSkiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNODkuNSA3NCBRODkuNSA4OS41IDc0IDg5LjUgTDM5IDg5LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSg0NiwxMjUsNjAsMC4zNSkiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIgZmlsbD0idXJsKCNoaXBsbi1jdGwpIi8+CiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXBwbG4tY3RsKSI+CiAgPHBhdGggZD0iTTEyIDEwMCBDMTIgODQgMjcgODAgNTAgODAgQzczIDgwIDg4IDg0IDg4IDEwMCBaIiBmaWxsPSJXIi8+CiAgPHBhdGggZD0iTTM4IDgwIEw1MCA4NiBMNjIgODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJFN0QzQyIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik00MiA4MCBMNTAgOTEgTDU4IDgwIFoiIGZpbGw9IiM1OEI4NDgiLz48cmVjdCB4PSI0NyIgeT0iODAiIHdpZHRoPSI2IiBoZWlnaHQ9IjUiIHJ4PSIxLjUiIGZpbGw9IiMyRTdEM0MiLz4KICA8cGF0aCBkPSJNNTAgODIgTDU5IDg0LjUgTDU5IDkyIFE1MCA5NyA0MSA5MiBMNDEgODQuNSBaIiBmaWxsPSJub25lIiBzdHJva2U9IiMyRTdEM0MiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTQ1LjUgODggTDQ5IDkyIEw1NSA4NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMkU3RDNDIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDxyZWN0IHg9IjQ0LjUiIHk9IjcwIiB3aWR0aD0iMTEiIGhlaWdodD0iMTMiIHJ4PSI0LjUiIGZpbGw9IiNFMkI0OEMiLz4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjQ0IiByPSIzNCIgZmlsbD0iI0Y2RDdCOCIvPgogIDxjaXJjbGUgY3g9IjE1LjUiIGN5PSI0NSIgcj0iNC4yIiBmaWxsPSIjRjZEN0I4Ii8+CiAgPGNpcmNsZSBjeD0iODQuNSIgY3k9IjQ1IiByPSI0LjIiIGZpbGw9IiNGNkQ3QjgiLz4KICAKICAKICA8Y2lyY2xlIGN4PSI0MSIgY3k9IjQ0IiByPSIyLjkiIGZpbGw9IiMyQjI2MjIiLz48Y2lyY2xlIGN4PSI1OSIgY3k9IjQ0IiByPSIyLjkiIGZpbGw9IiMyQjI2MjIiLz4KICA8Y2lyY2xlIGN4PSI0MS45IiBjeT0iNDMuMSIgcj0iMS4wNSIgZmlsbD0iI0ZGRkZGRiIvPjxjaXJjbGUgY3g9IjU5LjkiIGN5PSI0My4xIiByPSIxLjA1IiBmaWxsPSIjRkZGRkZGIi8+CiAgPHBhdGggZD0iTTM3IDM4LjUgUTQxIDM2IDQ1IDM4IiBmaWxsPSJub25lIiBzdHJva2U9IiMyQjI2MjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTU1IDM4IFE1OSAzNiA2MyAzOC41IiBmaWxsPSJub25lIiBzdHJva2U9IiMyQjI2MjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQ4LjYgNDguNSBRNDkuNSA1MS41IDUwLjYgNDguNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRTJCNDhDIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQ0IDU2IFE1MCA2MC41IDU2IDU2IiBmaWxsPSJub25lIiBzdHJva2U9IiNCNTY3NEIiIHN0cm9rZS13aWR0aD0iMi40IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8ZWxsaXBzZSBjeD0iMzQiIGN5PSI1MSIgcng9IjUuNCIgcnk9IjMiIGZpbGw9InJnYmEoMjU1LDEyMCwxMjAsMC40MikiLz48ZWxsaXBzZSBjeD0iNjYiIGN5PSI1MSIgcng9IjUuNCIgcnk9IjMiIGZpbGw9InJnYmEoMjU1LDEyMCwxMjAsMC40MikiLz4KICA8Y2lyY2xlIGN4PSI0MSIgY3k9IjQ0IiByPSI3LjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJFN0QzQyIgc3Ryb2tlLXdpZHRoPSIyIi8+PGNpcmNsZSBjeD0iNTkiIGN5PSI0NCIgcj0iNy4yIiBmaWxsPSJub25lIiBzdHJva2U9IiMyRTdEM0MiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik00OC4yIDQ0IEg1MS44IiBzdHJva2U9IiMyRTdEM0MiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxwYXRoIGQ9Ik0xNiA0MyBRMTYuNSAxNSA1MCAxNSBRODMuNSAxNSA4NCA0MyBRNzQgMjcgNTAgMjggUTI2IDI3IDE2IDQzIFoiIGZpbGw9IiM5QzVCMzMiLz4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjEyLjUiIHI9IjYuNSIgZmlsbD0iIzlDNUIzMyIvPjwvZz4KPC9zdmc+" alt=""><span class="_planeText_f9beb7"><span class="_planeName_f9beb7">独立控制</span><span class="_planePurpose_f9beb7" title="审计、税务、法务、产品合规、隐私、安全与权限边界">审计、税务、法务、产品合规、隐私、安全与权限边界</span></span><span class="_count_f9beb7">5 岗 · 110 张</span></button></section><section class="_plane_f9beb7" data-dsh-part="algo-plane" data-plane="PLN-PLT"><button type="button" class="_planeHead_f9beb7" aria-expanded="false"><span class="_caret_f9beb7">▸</span><img class="_avatar_f9beb7" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdwbG4tcGx0IiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNFREY2RTYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1NSUiIHN0b3AtY29sb3I9IiNEM0VBQzIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjQjREOUEwIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHJhZGlhbEdyYWRpZW50IGlkPSJoaXBsbi1wbHQiIGN4PSIwLjMiIGN5PSIwLjIiIHI9IjEuMCI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9InJnYmEoMjU1LDI1NSwyNTUsMC42OCkiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1NSUiIHN0b3AtY29sb3I9InJnYmEoMjU1LDI1NSwyNTUsMCkiLz4KICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgICA8Y2xpcFBhdGggaWQ9ImNsaXBwbG4tcGx0Ij48cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIvPjwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjQuNSIgeT0iOC4yIiB3aWR0aD0iOTEiIGhlaWdodD0iODciIHJ4PSIxOCIgZmlsbD0icmdiYSgwLDAsMCwwLjEyKSIvPgogIDxyZWN0IHg9IjQuNSIgeT0iNC41IiB3aWR0aD0iOTEiIGhlaWdodD0iOTEiIHJ4PSIxOCIgZmlsbD0idXJsKCNiZ3Bsbi1wbHQpIiBzdHJva2U9IiM1OEI4NDgiIHN0cm9rZS13aWR0aD0iMi4yIi8+CiAgPHBhdGggZD0iTTEwLjUgMjYgUTEwLjUgMTAuNSAyNiAxMC41IEw2MSAxMC41IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC41NSkiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNODkuNSA3NCBRODkuNSA4OS41IDc0IDg5LjUgTDM5IDg5LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSg0NiwxMjUsNjAsMC4zNSkiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cmVjdCB4PSI2LjUiIHk9IjYuNSIgd2lkdGg9Ijg3IiBoZWlnaHQ9Ijg3IiByeD0iMTUuNSIgZmlsbD0idXJsKCNoaXBsbi1wbHQpIi8+CiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXBwbG4tcGx0KSI+CiAgPHBhdGggZD0iTTEyIDEwMCBDMTIgODQgMjcgODAgNTAgODAgQzczIDgwIDg4IDg0IDg4IDEwMCBaIiBmaWxsPSJNSU5UIi8+CiAgPHBhdGggZD0iTTQyIDgwIEw1MCA4NiBMNTggODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzU4Qjg0OCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cmVjdCB4PSI0MSIgeT0iODIiIHdpZHRoPSIxOCIgaGVpZ2h0PSI0LjUiIHJ4PSIxLjUiIGZpbGw9IiMyRTdEM0MiLz48cmVjdCB4PSI0MSIgeT0iODgiIHdpZHRoPSIxOCIgaGVpZ2h0PSI0LjUiIHJ4PSIxLjUiIGZpbGw9IiMyRTdEM0MiLz48cmVjdCB4PSI0MSIgeT0iOTQiIHdpZHRoPSIxOCIgaGVpZ2h0PSI0LjUiIHJ4PSIxLjUiIGZpbGw9IiMyRTdEM0MiLz48Y2lyY2xlIGN4PSI0NS41IiBjeT0iODQuMiIgcj0iMSIgZmlsbD0iI0ZGRkZGRiIvPjxjaXJjbGUgY3g9IjQ1LjUiIGN5PSI5MC4yIiByPSIxIiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iNDUuNSIgY3k9Ijk2LjIiIHI9IjEiIGZpbGw9IiNGRkZGRkYiLz4KICA8cmVjdCB4PSI0NC41IiB5PSI3MCIgd2lkdGg9IjExIiBoZWlnaHQ9IjEzIiByeD0iNC41IiBmaWxsPSIjRDlBMzdDIi8+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI0NCIgcj0iMzQiIGZpbGw9IiNFRkM0OUUiLz4KICA8Y2lyY2xlIGN4PSIxNS41IiBjeT0iNDUiIHI9IjQuMiIgZmlsbD0iI0VGQzQ5RSIvPgogIDxjaXJjbGUgY3g9Ijg0LjUiIGN5PSI0NSIgcj0iNC4yIiBmaWxsPSIjRUZDNDlFIi8+CiAgCiAgCiAgPGNpcmNsZSBjeD0iNDEiIGN5PSI0NCIgcj0iMi45IiBmaWxsPSIjMkIyNjIyIi8+PGNpcmNsZSBjeD0iNTkiIGN5PSI0NCIgcj0iMi45IiBmaWxsPSIjMkIyNjIyIi8+CiAgPGNpcmNsZSBjeD0iNDEuOSIgY3k9IjQzLjEiIHI9IjEuMDUiIGZpbGw9IiNGRkZGRkYiLz48Y2lyY2xlIGN4PSI1OS45IiBjeT0iNDMuMSIgcj0iMS4wNSIgZmlsbD0iI0ZGRkZGRiIvPgogIDxwYXRoIGQ9Ik0zNyAzOC41IFE0MSAzNiA0NSAzOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMkIyNjIyIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik01NSAzOCBRNTkgMzYgNjMgMzguNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMkIyNjIyIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik00OC42IDQ4LjUgUTQ5LjUgNTEuNSA1MC42IDQ4LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Q5QTM3QyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik00NCA1NiBRNTAgNjAuNSA1NiA1NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQjU2NzRCIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgCiAgPHJlY3QgeD0iMzMuNSIgeT0iMzkuNiIgd2lkdGg9IjEzLjUiIGhlaWdodD0iMTEiIHJ4PSIzLjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJFN0QzQyIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iNTMiIHk9IjM5LjYiIHdpZHRoPSIxMy41IiBoZWlnaHQ9IjExIiByeD0iMy4yIiBmaWxsPSJub25lIiBzdHJva2U9IiMyRTdEM0MiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik00NyA0NC42IEg1MyIgc3Ryb2tlPSIjMkU3RDNDIiBzdHJva2Utd2lkdGg9IjIiLz48cGF0aCBkPSJNMzMuNSA0MyBMMjYuNSA0MCIgc3Ryb2tlPSIjMkU3RDNDIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTY2LjUgNDMgTDczLjUgNDAiIHN0cm9rZT0iIzJFN0QzQyIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0xNiA0MyBRMTUgOCA1MCA4IFE4NSA4IDg0IDQzIFE3OCAyMiA1MCAyMS41IFEyMiAyMiAxNiA0MyBaIiBmaWxsPSIjMkUyQTI4Ii8+CiAgPC9nPgo8L3N2Zz4=" alt=""><span class="_planeText_f9beb7"><span class="_planeName_f9beb7">数据与Agent平台</span><span class="_planePurpose_f9beb7" title="数据口径、质量、集成工具、Skills、Memory、Model与可靠性">数据口径、质量、集成工具、Skills、Memory、Model与可靠性</span></span><span class="_count_f9beb7">5 岗 · 249 张</span></button></section><section class="_unplaced_f9beb7" data-dsh-part="algo-unplaced"><button type="button" class="_unplacedHead_f9beb7" aria-expanded="false"><span class="_caret_f9beb7">▸</span><span class="_unplacedName_f9beb7">未归类（矩阵空白）</span><span class="_count_f9beb7">11 张</span></button></section></div></div>
+    </div>
+  </div>
+</div>
+<p class="note">算法技能页 · 真实组件 + 真机 848 KB 负载（4 面 / 12 片 / 50 岗 / 1338 卡）· collapsed 状态 · 官方 SettingsRoot.module.css 几何（800px 面板 − 188px 导航 − 48px 内边距 = 页面实测 564px 宽）· 官方主题 token 原样注入</p>
+</body></html>

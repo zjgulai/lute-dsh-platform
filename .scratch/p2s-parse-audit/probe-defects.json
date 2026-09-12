@@ -1,0 +1,222 @@
+[
+ {
+  "card": "Skill-CodeXEmbed-Code-Semantic-Embedding",
+  "tier": "oracle",
+  "defect": "NESTED_TRIPLE_QUOTE",
+  "line": 208,
+  "detail": "204 行的三引号串体内第 208 行又出现三引号，外层会在内层开引号处被提前收尾",
+  "at": "    \"\"\"Calculate safety stock for inventory management\"\"\"",
+  "next_line": "    z_score = 1.645",
+  "next_is_code": true,
+  "lines": 279
+ },
+ {
+  "card": "Skill-Model-Performance-Monitor",
+  "tier": "oracle",
+  "defect": "CONTROL_CHAR",
+  "line": 62,
+  "detail": "首处 ? (U+0001)",
+  "at": "    health_\u0001",
+  "next_line": "roadmap_phase: phase1",
+  "next_is_code": false,
+  "lines": 363
+ },
+ {
+  "card": "Skill-RFM-Segment-Campaign-Dispatcher",
+  "tier": "oracle",
+  "defect": "BRACKET_MISMATCH",
+  "line": 170,
+  "detail": "收尾 '}' 与第 168 行的开符号 '(' 不匹配",
+  "at": "    }",
+  "next_line": "    ",
+  "next_is_code": false,
+  "lines": 224
+ },
+ {
+  "card": "Skill-Real-Time-Competitive-Repricing",
+  "tier": "oracle",
+  "defect": "TRIPLE_QUOTE_UNCLOSED",
+  "line": 58,
+  "detail": "58 行的 \"\"\" 到文件结束仍未收尾",
+  "at": "    \"\"\"",
+  "next_line": "    简化版 Q-Learning 重定价策略",
+  "next_is_code": false,
+  "lines": 71
+ },
+ {
+  "card": "Skill-TimeCMA-LLM-Forecasting",
+  "tier": "oracle",
+  "defect": "IMPORT_NOT_IMPORTABLE",
+  "line": 1,
+  "detail": "模块名 'paper2skills-code.03-时间序列.time_cma_llm_2025.model' 不是合法标识符",
+  "at": "from paper2skills-code.03-时间序列.time_cma_llm_2025.model import (",
+  "next_line": "    TimeCMA,",
+  "next_is_code": false,
+  "lines": 45
+ },
+ {
+  "card": "Skill-AI-Carbon-Footprint-Optimizer",
+  "tier": "unverified",
+  "defect": "BRACKET_UNCLOSED",
+  "line": 213,
+  "detail": "213 行的 '(' 未闭合（共 3 层未闭合）",
+  "at": "        'carbon_label': opt.carbon_label_rating(",
+  "next_line": "",
+  "next_is_code": false,
+  "lines": 226
+ },
+ {
+  "card": "Skill-AI-Humanities-Healing-Cards",
+  "tier": "unverified",
+  "defect": "BRACKET_UNCLOSED",
+  "line": 219,
+  "detail": "219 行的 '(' 未闭合（共 1 层未闭合）",
+  "at": "        print(f\"[消",
+  "next_line": "",
+  "next_is_code": false,
+  "lines": 232
+ },
+ {
+  "card": "Skill-Agent-Memory-Learning",
+  "tier": "unverified",
+  "defect": "UNLABELLED",
+  "line": 0,
+  "detail": "",
+  "at": "",
+  "next_line": "import numpy as np",
+  "next_is_code": true,
+  "lines": 245
+ },
+ {
+  "card": "Skill-CAMEL-Role-Playing-Agents",
+  "tier": "unverified",
+  "defect": "UNLABELLED",
+  "line": 0,
+  "detail": "",
+  "at": "",
+  "next_line": "Task Specifier 细化:",
+  "next_is_code": false,
+  "lines": 27
+ },
+ {
+  "card": "Skill-DQN-Purchase-Prediction",
+  "tier": "unverified",
+  "defect": "UNLABELLED",
+  "line": 0,
+  "detail": "",
+  "at": "",
+  "next_line": "import numpy as np",
+  "next_is_code": true,
+  "lines": 174
+ },
+ {
+  "card": "Skill-Domain-Agnostic-Context-Engine",
+  "tier": "unverified",
+  "defect": "UNLABELLED",
+  "line": 0,
+  "detail": "",
+  "at": "",
+  "next_line": "统一Context Engine核心（engine.py）",
+  "next_is_code": false,
+  "lines": 12
+ },
+ {
+  "card": "Skill-HGCN-Hyperbolic-Graph-Convolutional-Networks",
+  "tier": "unverified",
+  "defect": "UNLABELLED",
+  "line": 0,
+  "detail": "",
+  "at": "",
+  "next_line": "import numpy as np",
+  "next_is_code": true,
+  "lines": 172
+ },
+ {
+  "card": "Skill-HGT-Heterogeneous-Graph-Transformer",
+  "tier": "unverified",
+  "defect": "UNLABELLED",
+  "line": 0,
+  "detail": "",
+  "at": "",
+  "next_line": "import numpy as np",
+  "next_is_code": true,
+  "lines": 212
+ },
+ {
+  "card": "Skill-InstructUIE-Unified-Information-Extraction",
+  "tier": "unverified",
+  "defect": "UNLABELLED",
+  "line": 0,
+  "detail": "",
+  "at": "",
+  "next_line": "import numpy as np",
+  "next_is_code": true,
+  "lines": 258
+ },
+ {
+  "card": "Skill-MAS-Testing-Verification",
+  "tier": "unverified",
+  "defect": "UNLABELLED",
+  "line": 0,
+  "detail": "",
+  "at": "",
+  "next_line": "Step 1: 规格提取（Specification Extraction）",
+  "next_is_code": false,
+  "lines": 20
+ },
+ {
+  "card": "Skill-Semantic-Blueprint-Compiler",
+  "tier": "unverified",
+  "defect": "UNLABELLED",
+  "line": 0,
+  "detail": "",
+  "at": "",
+  "next_line": "import numpy as np",
+  "next_is_code": true,
+  "lines": 222
+ },
+ {
+  "card": "Skill-Skill-Registry-Dynamic-Loading",
+  "tier": "unverified",
+  "defect": "UNLABELLED",
+  "line": 0,
+  "detail": "",
+  "at": "",
+  "next_line": "import json",
+  "next_is_code": true,
+  "lines": 192
+ },
+ {
+  "card": "Skill-Subagent-Decomposition",
+  "tier": "unverified",
+  "defect": "UNLABELLED",
+  "line": 0,
+  "detail": "",
+  "at": "",
+  "next_line": "import numpy as np",
+  "next_is_code": true,
+  "lines": 246
+ },
+ {
+  "card": "Skill-Supply-Chain-ML-Features",
+  "tier": "unverified",
+  "defect": "UNLABELLED",
+  "line": 0,
+  "detail": "",
+  "at": "",
+  "next_line": "促销历史特征（过去 180 天）：",
+  "next_is_code": false,
+  "lines": 30
+ },
+ {
+  "card": "Skill-Tree-of-Thoughts-Planning",
+  "tier": "unverified",
+  "defect": "UNLABELLED",
+  "line": 0,
+  "detail": "",
+  "at": "",
+  "next_line": "import numpy as np",
+  "next_is_code": true,
+  "lines": 196
+ }
+]

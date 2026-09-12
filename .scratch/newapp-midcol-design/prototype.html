@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>输入框下方 · 分身能力导引 v3（横向 2–3 列 · 低保真原型 · 非产品代码）</title>
+<!--
+  设计交付物 · 非产品代码（用户指令：暂时不要修改代码）
+  家：.scratch/newapp-midcol-design/prototype.html（v3，2026-09-12 第三轮：横向列布局）
+  R8：下方区至少 2–3 个横向列（992px 下 3 列，窄窗 2 列 → 1 列降级）；R3 收口为「三列同显、组头保留折叠能力但默认全开」。
+  数据全部为真实接线（agt-027；skill-map.json + preset yml + 技能本体 frontmatter 实测）。
+-->
+<style>
+  :root{
+    --proto-bg:#ffffff; --proto-bg-alt:rgba(0,0,0,0.04); --proto-fg:#1a1a1a; --proto-muted:#6b6b70;
+    --proto-line:rgba(0,0,0,0.09); --proto-card:#ffffff; --proto-ink:#2b2b2e; --proto-radius:10px;
+    --proto-content:960px; --proto-card-max:992px;
+    --proto-warn:#a8641f; --proto-warn-bg:rgba(168,100,31,.08);
+    --proto-ok:#2c7a5f; --proto-ok-bg:rgba(44,122,95,.08);
+  }
+  body[data-ds-dark-theme]{
+    --proto-bg:rgb(21,21,23); --proto-bg-alt:rgba(255,255,255,0.06); --proto-fg:#f2f2f4; --proto-muted:#9c9ca3;
+    --proto-line:rgba(255,255,255,0.12); --proto-card:rgb(30,30,33); --proto-ink:#dcdcde;
+    --proto-warn:#d9a05f; --proto-warn-bg:rgba(217,160,95,.10);
+    --proto-ok:#6fbf9b; --proto-ok-bg:rgba(111,191,155,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Segoe UI",sans-serif;background:var(--proto-bg-alt);color:var(--proto-fg);padding:0 0 56px}
+  .bar{position:sticky;top:0;z-index:50;background:var(--proto-bg);border-bottom:1px solid var(--proto-line);display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 16px;font-size:12px}
+  .bar b{font-size:13px}.bar .sp{flex:1}
+  .tgl{display:inline-flex;border:1px solid var(--proto-line);border-radius:8px;overflow:hidden;background:var(--proto-bg)}
+  .tgl button{border:0;background:transparent;color:var(--proto-muted);padding:5px 12px;font-size:12px;cursor:pointer}
+  .tgl button[aria-pressed="true"]{background:var(--proto-bg-alt);color:var(--proto-fg);font-weight:600}
+  .callout{margin:14px auto 0;max-width:1180px;padding:10px 14px;border-radius:var(--proto-radius);border:1px dashed var(--proto-line);font-size:12px;color:var(--proto-muted);background:var(--proto-bg)}
+  .shell{max-width:1180px;margin:18px auto 0;display:grid;grid-template-columns:210px 1fr 240px;border:1px solid var(--proto-line);border-radius:14px;overflow:hidden;min-height:760px;background:var(--proto-bg)}
+  .ghost{background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(128,128,128,.07) 9px,rgba(128,128,128,.07) 10px);padding:12px;font-size:11px;color:var(--proto-muted)}
+  .ghost.right{border-left:1px solid var(--proto-line)}.ghost.left{border-right:1px solid var(--proto-line)}
+  .ghost .lab{background:var(--proto-bg);border:1px solid var(--proto-line);border-radius:8px;padding:6px 8px;display:block}
+  .conv{padding:0 18px;display:flex;flex-direction:column}
+  .stage{display:none}.stage.on{display:block}
+  .stitle{margin:14px 0 6px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .tag{font-size:10px;font-weight:600;border:1px solid var(--proto-line);border-radius:999px;padding:2px 8px;color:var(--proto-muted)}
+  .tag.warn{color:var(--proto-warn)}.tag.ok{color:var(--proto-ok)}
+  .hero{display:grid;grid-template-columns:34px auto auto;align-items:center;column-gap:10px;padding:26px 2px 10px;justify-content:center}
+  .mark{width:34px;height:34px;border-radius:9px;background:var(--proto-ink);color:var(--proto-bg);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+  .hl{font-size:15px;font-weight:650;max-width:430px}
+  .hl small{display:block;font-size:12.5px;font-weight:400;color:var(--proto-muted);line-height:1.45;margin-top:3px}
+  .wrow{font-size:12px;color:var(--proto-muted);border:1px solid var(--proto-line);border-radius:999px;padding:3px 10px;background:var(--proto-bg)}
+  .composer{background:var(--proto-card);border:1px solid var(--proto-line);border-radius:14px;max-width:var(--proto-card-max);margin:6px auto 0;padding:0 0 4px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+  .composer .ta{width:100%;min-height:58px;border:0;background:transparent;resize:none;outline:0;padding:14px 16px 6px;font:inherit;font-size:14px;color:var(--proto-fg)}
+  .tray{display:flex;align-items:center;gap:6px;padding:8px 12px 10px;font-size:12px;color:var(--proto-muted)}
+  .tray .sp{flex:1}
+  .chip{border:1px solid var(--proto-line);border-radius:999px;padding:4px 10px;background:var(--proto-bg);cursor:default}
+  .chip.plain{border:0;padding-left:2px}
+  .send{width:30px;height:30px;border-radius:999px;background:var(--proto-ink);color:var(--proto-bg);display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;border:0}
+  /* 现状：两胶囊（R1 移除项） */
+  .pillwrap{max-width:var(--proto-card-max);margin:10px auto 0;display:flex;flex-direction:column;gap:8px}
+  .pillcard{border:1px solid var(--proto-line);border-radius:14px;background:var(--proto-card);padding:8px 10px 10px;position:relative}
+  .pillcard.kill{outline:1.5px dashed var(--proto-warn);outline-offset:3px}
+  .pillhead{display:flex;align-items:center;gap:8px;font-size:12.5px;padding:2px 4px 8px}
+  .dot{width:8px;height:8px;border-radius:99px;background:var(--proto-ink)}
+  .pillhead .cnt{margin-left:auto;color:var(--proto-muted);font-size:11px}
+  .kill-flag{position:absolute;top:-9px;right:10px;font-size:10px;font-weight:700;color:var(--proto-warn);background:var(--proto-warn-bg);border:1px solid var(--proto-warn);border-radius:6px;padding:1px 7px}
+  .ghostlist{display:flex;flex-direction:column;gap:6px}
+  .ghostrow{border:1px solid var(--proto-line);border-radius:8px;padding:7px 10px;font-size:12px;color:var(--proto-muted);display:flex;gap:8px;align-items:center}
+  .ghostrow i{width:14px;height:14px;border-radius:4px;background:var(--proto-bg-alt);display:inline-block}
+  /* ===== 目标态：输入框下方（R8 横向 2–3 列） ===== */
+  .below{max-width:var(--proto-card-max);margin:0 auto;width:100%}
+  .ident{font-size:12px;color:var(--proto-muted);display:flex;align-items:center;gap:8px;padding:14px 2px 4px;flex-wrap:wrap}
+  .ident b{color:var(--proto-fg);font-weight:650}
+  .sectlab{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--proto-muted);margin:14px 0 0 2px;display:flex;align-items:center;gap:8px}
+  .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:8px;align-items:start}
+  @media (max-width:900px){.cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:620px){.cols{grid-template-columns:minmax(0,1fr)}}
+  .col{border:1px solid var(--proto-line);border-radius:12px;background:var(--proto-card);overflow:hidden}
+  .cHead{display:flex;align-items:center;gap:8px;width:100%;border:0;background:transparent;color:var(--proto-fg);padding:10px 12px;font:inherit;font-size:13px;cursor:pointer;text-align:left}
+  .cHead:hover{background:var(--proto-bg-alt)}
+  .tri{font-size:9px;color:var(--proto-muted);transition:transform .15s}
+  .col.closed .tri{transform:rotate(-90deg)}
+  .cName{font-weight:650;min-width:0}
+  .kbadge{font-size:10px;font-weight:700;border-radius:6px;padding:1px 6px;white-space:nowrap}
+  .kbadge.partial{color:var(--proto-warn);background:var(--proto-warn-bg);border:1px solid var(--proto-warn)}
+  .kbadge.direct{color:var(--proto-ok);background:var(--proto-ok-bg);border:1px solid var(--proto-ok)}
+  .kbadge.gap{color:#b35c5c;background:rgba(179,92,92,.08);border:1px solid #b35c5c}
+  .cCount{margin-left:auto;font-size:10.5px;color:var(--proto-muted);white-space:nowrap}
+  .cBody{padding:0 10px 10px}
+  .col.closed .cBody{display:none}
+  .note{font-size:11px;color:var(--proto-warn);background:var(--proto-warn-bg);border-radius:8px;padding:6px 8px;margin-bottom:8px;line-height:1.5}
+  .note b{font-weight:700}
+  .cards{display:flex;flex-direction:column;gap:7px}
+  .cap{border:1px solid var(--proto-line);border-radius:9px;padding:8px 10px}
+  .cap:hover{border-color:var(--proto-muted)}
+  .cap .t{font-size:12.5px;font-weight:600;line-height:1.35}
+  .cap .s{font-size:11px;color:var(--proto-muted);margin-top:3px;line-height:1.45;display:flex;gap:6px;justify-content:space-between;align-items:flex-end}
+  .cap .go{color:var(--proto-muted);white-space:nowrap;font-size:10.5px}
+  .pbrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .pb{border:1px solid var(--proto-line);border-radius:999px;padding:7px 14px;font-size:12.5px;display:inline-flex;gap:6px;align-items:center;background:var(--proto-card)}
+  .pb b{font-weight:650}
+  .anno-only{display:none;font-size:10.5px;color:var(--proto-warn);background:var(--proto-warn-bg);border-radius:6px;padding:2px 6px}
+  body.anno .anno-only{display:inline}
+  .dims{margin-top:14px;font-size:12px;color:var(--proto-muted);line-height:1.9}
+  .dim{font-size:10.5px;color:var(--proto-muted);background:var(--proto-bg);border:1px solid var(--proto-line);border-radius:6px;padding:1px 6px;display:inline-block;margin:2px 4px 0 0}
+  .foot{max-width:1180px;margin:26px auto 0;font-size:11.5px;color:var(--proto-muted);line-height:1.8;padding:0 16px}
+  .foot code{background:var(--proto-bg);border:1px solid var(--proto-line);border-radius:4px;padding:0 4px}
+</style>
+</head>
+<body>
+  <div class="bar">
+    <b>输入框下方 · 分身能力导引 v3</b>
+    <span style="color:var(--proto-muted)">横向 2–3 列 · 低保真 · 非产品代码 · 真实接线数据（agt-027）</span>
+    <span class="sp"></span>
+    <span class="tgl"><button data-state="cur" aria-pressed="true" onclick="setState('cur')">现状（含移除项）</button><button data-state="goal" aria-pressed="false" onclick="setState('goal')">目标态（横向列）</button></span>
+    <span class="tgl"><button id="t-light" aria-pressed="true" onclick="setTheme(false)">浅</button><button id="t-dark" aria-pressed="false" onclick="setTheme(true)">深</button></span>
+    <span class="tgl"><button id="t-anno" aria-pressed="false" onclick="setAnno()">标注</button></span>
+  </div>
+
+  <div class="callout">
+    <b>R1–R8 已定：</b>R1 移除上方两胶囊 · R2 只做下方 · <b>R8 下方不排垂直一列，至少 2–3 个横向列（992px 下 3 列，窄窗 2 列 → 1 列降级）</b> ·
+    R3 据此收口为「三列同显、组头保留折叠能力但默认全开」 · R4 边界如实上屏 · R5 generate.mjs 同源派生 · R6 仅声明 preset 的会话 · R7 点击预填 prompt／维持官方强调色。
+  </div>
+
+  <div class="shell">
+    <div class="ghost left"><span class="lab">侧栏（剪影）</span><p style="margin-top:10px">占位 · 本稿只讨论中间栏</p></div>
+    <div class="conv">
+
+      <!-- ============ 现状 ============ -->
+      <section class="stage on" id="s-cur">
+        <div class="stitle">现状 · 新会话 hero 态 <span class="tag warn">两胶囊＝dsh-overseas-skills 的 OverseasPaletteStack（R1 移除）</span></div>
+        <div class="hero">
+          <span class="mark">R∞T</span>
+          <div class="hl">路特创新<small>Artificial Business Intelligence Agent（保持现状不动）</small></div>
+          <span class="wrow">工作区</span>
+        </div>
+        <div class="pillwrap">
+          <div class="pillcard kill">
+            <span class="kill-flag">R1 · 移除项</span>
+            <div class="pillhead"><span class="dot"></span><b>出海技能</b><span class="cnt">四层下钻 · /list</span></div>
+            <div class="ghostlist">
+              <div class="ghostrow"><i></i>场景 → 面 → 责任域 → 岗位（占位）</div>
+              <div class="ghostrow" style="opacity:.55">… 222 项技能列表（占位）</div>
+            </div>
+          </div>
+          <div class="pillcard kill">
+            <span class="kill-flag">R1 · 移除项</span>
+            <div class="pillhead"><span class="dot"></span><b>AI全栈技能</b><span class="cnt">分组视图 · /fullstack-list</span></div>
+            <div class="ghostlist">
+              <div class="ghostrow"><i></i>分组技能列表（占位）</div>
+              <div class="ghostrow" style="opacity:.55">… 29 项技能列表（占位）</div>
+            </div>
+          </div>
+        </div>
+        <div class="composer">
+          <div class="ta">给「路特创新」发消息…</div>
+          <div class="tray"><span class="chip plain">＋</span><span class="chip plain">📎</span><span class="sp"></span><span class="chip">模型 ▾</span><span class="chip">计划 ▾</span><span class="send">↑</span></div>
+        </div>
+        <div class="dims" style="max-width:992px;margin:16px auto 0">
+          <span class="dim">两卡与输入卡同宽对齐（--dsh-composer-card-max-width）</span>
+          <span class="anno-only">移除＝改 dsh-overseas-skills 注入位，不卸载插件；技能中心保留两页完整层级</span>
+        </div>
+      </section>
+
+      <!-- ============ 目标态（横向列） ============ -->
+      <section class="stage" id="s-goal">
+        <div class="stitle">目标态 · 上方回品牌行，下方横向三列 <span class="tag ok">真实数据 · agt-027 守店</span></div>
+        <div class="hero">
+          <span class="mark">R∞T</span>
+          <div class="hl">路特创新<small>hero 保持现状；上方不新增任何面（R1/R2）</small></div>
+          <span class="wrow">工作区</span>
+        </div>
+        <div class="composer">
+          <div class="ta">给「守店」发消息…</div>
+          <div class="tray"><span class="chip plain">＋</span><span class="chip plain">📎</span><span class="sp"></span><span class="chip">模型 ▾</span><span class="chip">计划 ▾</span><span class="send">↑</span></div>
+        </div>
+
+        <div class="below">
+          <div class="ident">
+            已选分身 · 业务运营 · 渠道经营 · <b>AGT-027 守店</b>（店铺账号健康与规则）
+            <span class="anno-only">R6：平面/责任域收敛为一行身份；四层下钻留给技能中心</span>
+          </div>
+
+          <div class="sectlab">业务技能 · 三个横向列
+            <span class="anno-only">R8：992px→3 列；≤900px→2 列；≤620px→1 列</span>
+          </div>
+
+          <div class="cols">
+            <!-- 列 1 -->
+            <div class="col" id="c1">
+              <button class="cHead" onclick="toggleCol(event,'c1')" aria-expanded="true">
+                <span class="tri">▼</span><span class="cName">账号诊断</span>
+                <span class="kbadge partial">partial</span><span class="cCount">4</span>
+              </button>
+              <div class="cBody">
+                <div class="note"><b>边界：</b>有品牌保护与合规监测，无店铺账号健康度诊断</div>
+                <div class="cards">
+                  <div class="cap"><div class="t">亚马逊品牌保护</div><div class="s"><span>amazon-brand-protection</span><span class="go">预填 →</span></div></div>
+                  <div class="cap"><div class="t">Account Association Risk Detection</div><div class="s"><span>电商多账户关联风险检测</span><span class="go">预填 →</span></div></div>
+                  <div class="cap"><div class="t">账号指纹风险评分器</div><div class="s"><span>量化多账号关联被检测风险</span><span class="go">预填 →</span></div></div>
+                  <div class="cap"><div class="t">账号健康预警系统</div><div class="s"><span>ODR/LSR/VTR 多指标趋势监控</span><span class="go">预填 →</span></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 列 2 -->
+            <div class="col" id="c2">
+              <button class="cHead" onclick="toggleCol(event,'c2')" aria-expanded="true">
+                <span class="tri">▼</span><span class="cName">规则监测</span>
+                <span class="kbadge partial">partial</span><span class="cCount">5</span>
+              </button>
+              <div class="cBody">
+                <div class="note"><b>边界：</b>覆盖品牌与价格规则，不覆盖平台政策变更监测</div>
+                <div class="cards">
+                  <div class="cap"><div class="t">亚马逊品牌保护</div><div class="s"><span>两列共用同一供给（如实重复）</span><span class="go">预填 →</span></div></div>
+                  <div class="cap"><div class="t">平台价格监控</div><div class="s"><span>platform-price-monitor</span><span class="go">预填 →</span></div></div>
+                  <div class="cap"><div class="t">平台政策变更自适应监控</div><div class="s"><span>合规政策智能预警与快速响应</span><span class="go">预填 →</span></div></div>
+                  <div class="cap"><div class="t">Regulatory Change Auto-Monitor</div><div class="s"><span>合规法规变更自动监控</span><span class="go">预填 →</span></div></div>
+                  <div class="cap"><div class="t">Regulatory Change Monitoring</div><div class="s"><span>受影响品类实时映射</span><span class="go">预填 →</span></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 列 3 -->
+            <div class="col" id="c3">
+              <button class="cHead" onclick="toggleCol(event,'c3')" aria-expanded="true">
+                <span class="tri">▼</span><span class="cName">申诉材料准备</span>
+                <span class="kbadge partial">partial</span><span class="cCount">4</span>
+              </button>
+              <div class="cBody">
+                <div class="note"><b>边界：</b>只有通用文档协作，无平台申诉模板与举证清单</div>
+                <div class="cards">
+                  <div class="cap"><div class="t">文档协同编辑</div><div class="s"><span>doc-coauthoring</span><span class="go">预填 →</span></div></div>
+                  <div class="cap"><div class="t">AI Fake Review Detection</div><div class="s"><span>多模态虚假评论检测与可解释风控</span><span class="go">预填 →</span></div></div>
+                  <div class="cap"><div class="t">Amazon 账号申诉策略（POA 行动计划）</div><div class="s"><span>p2s-amazon-account-appeal-strategy</span><span class="go">预填 →</span></div></div>
+                  <div class="cap"><div class="t">多模态伪造评论检测</div><div class="s"><span>图文联合的 AI 生成评论识别</span><span class="go">预填 →</span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sectlab" style="margin-top:16px">场景手册
+            <span class="anno-only">与技能列分列，不混组；三列之下横排</span>
+          </div>
+          <div class="pbrow">
+            <span class="pb"><b>PB-001</b> 存量GMV联合经营</span>
+            <span class="pb"><b>PB-004</b> 市场进入与合规上架</span>
+            <span class="pb"><b>PB-007</b> 重大质量与账号事件</span>
+          </div>
+
+          <div class="dims">
+            <span class="dim">列宽＝(992 − 2×10) ÷ 3 ≈ 324px</span>
+            <span class="dim">列内卡片纵向排列，列高可不等（align-items:start）</span>
+            <span class="dim">gap 10px 与输入卡内间距节奏一致</span>
+            <span class="anno-only">R7 供给卡点击＝预填 prompt；gap 组为空态说明；R6 首条消息发出（phase→active）本区消失</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="ghost right"><span class="lab">右栏（剪影）</span><p style="margin-top:10px">占位 · 本稿只讨论中间栏</p></div>
+  </div>
+
+  <div class="foot">
+    验证锚（vendor 源码＋shipped bundle 逐字对照）：内容列宽 960px（LUTE 覆盖）· 输入卡与下方区同宽 992px（<code>chat-content-width+32px</code>）· hero 栅格 <code>34px auto auto</code>。
+    本轮零产品代码变更；实施清单与门禁项见 <code>plan.md</code>。
+  </div>
+
+<script>
+  function setState(s){
+    document.querySelectorAll('.stage').forEach(el=>el.classList.remove('on'));
+    document.getElementById('s-'+s).classList.add('on');
+    document.querySelectorAll('[data-state]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.state===s)));
+  }
+  function setTheme(dark){
+    dark ? document.body.setAttribute('data-ds-dark-theme','') : document.body.removeAttribute('data-ds-dark-theme');
+    document.getElementById('t-light').setAttribute('aria-pressed', String(!dark));
+    document.getElementById('t-dark').setAttribute('aria-pressed', String(dark));
+  }
+  function setAnno(){
+    const on = document.body.classList.toggle('anno');
+    document.getElementById('t-anno').setAttribute('aria-pressed', String(on));
+  }
+  function toggleCol(e,id){
+    const c=document.getElementById(id);
+    const closed=c.classList.toggle('closed');
+    e.currentTarget.setAttribute('aria-expanded',String(!closed));
+    e.preventDefault();
+  }
+</script>
+</body>
+</html>

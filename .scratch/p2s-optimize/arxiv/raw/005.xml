@@ -1,0 +1,2126 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/VavV0qHU61nZ3ImryDsMg/+O13o</id>
+  <title>arXiv Query: search_query=&amp;id_list=2104.15021,2105.10648,2105.12345,2105.13433,2105.14688,2106.01345,2106.01904,2106.03058,2106.03274,2106.03858,2106.04476,2106.04510,2106.04519,2106.04520,2106.04523,2106.04524,2106.04525,2106.04554,2106.04567,2106.04576,2106.04578,2106.05274,2106.05953,2106.06809,2106.07328,2106.07704,2106.07715,2106.07725,2106.07755,2106.08274,2106.08917,2106.08947,2106.08978,2106.08985,2106.09276,2106.09278,2106.09718,2106.09721,2106.09876,2106.11621&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:42:23Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2104.15021,2105.10648,2105.12345,2105.13433,2105.14688,2106.01345,2106.01904,2106.03058,2106.03274,2106.03858,2106.04476,2106.04510,2106.04519,2106.04520,2106.04523,2106.04524,2106.04525,2106.04554,2106.04567,2106.04576,2106.04578,2106.05274,2106.05953,2106.06809,2106.07328,2106.07704,2106.07715,2106.07725,2106.07755,2106.08274,2106.08917,2106.08947,2106.08978,2106.08985,2106.09276,2106.09278,2106.09718,2106.09721,2106.09876,2106.11621" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2106.03058v3</id>
+    <title>Approximate Graph Propagation</title>
+    <updated>2021-11-26T14:23:59Z</updated>
+    <link href="https://arxiv.org/abs/2106.03058v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.03058v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Efficient computation of node proximity queries such as transition probabilities, Personalized PageRank, and Katz are of fundamental importance in various graph mining and learning tasks. In particular, several recent works leverage fast node proximity computation to improve the scalability of Graph Neural Networks (GNN). However, prior studies on proximity computation and GNN feature propagation are on a case-by-case basis, with each paper focusing on a particular proximity measure.
+  In this paper, we propose Approximate Graph Propagation (AGP), a unified randomized algorithm that computes various proximity queries and GNN feature propagation, including transition probabilities, Personalized PageRank, heat kernel PageRank, Katz, SGC, GDC, and APPNP. Our algorithm provides a theoretical bounded error guarantee and runs in almost optimal time complexity. We conduct an extensive experimental study to demonstrate AGP's effectiveness in two concrete applications: local clustering with heat kernel PageRank and node classification with GNNs. Most notably, we present an empirical study on a billion-edge graph Papers100M, the largest publicly available GNN dataset so far. The results show that AGP can significantly improve various existing GNN models' scalability without sacrificing prediction accuracy.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-06T08:11:36Z</published>
+    <arxiv:comment>ACM SIGKDD 2021</arxiv:comment>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Hanzhi Wang</name>
+    </author>
+    <author>
+      <name>Mingguo He</name>
+    </author>
+    <author>
+      <name>Zhewei Wei</name>
+    </author>
+    <author>
+      <name>Sibo Wang</name>
+    </author>
+    <author>
+      <name>Ye Yuan</name>
+    </author>
+    <author>
+      <name>Xiaoyong Du</name>
+    </author>
+    <author>
+      <name>Ji-Rong Wen</name>
+    </author>
+    <arxiv:doi>10.1145/3447548.3467243</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3447548.3467243" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.05953v5</id>
+    <title>PeCLR: Self-Supervised 3D Hand Pose Estimation from monocular RGB via Equivariant Contrastive Learning</title>
+    <updated>2022-08-03T12:22:19Z</updated>
+    <link href="https://arxiv.org/abs/2106.05953v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.05953v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Encouraged by the success of contrastive learning on image classification tasks, we propose a new self-supervised method for the structured regression task of 3D hand pose estimation. Contrastive learning makes use of unlabeled data for the purpose of representation learning via a loss formulation that encourages the learned feature representations to be invariant under any image transformation. For 3D hand pose estimation, it too is desirable to have invariance to appearance transformation such as color jitter. However, the task requires equivariance under affine transformations, such as rotation and translation. To address this issue, we propose an equivariant contrastive objective and demonstrate its effectiveness in the context of 3D hand pose estimation. We experimentally investigate the impact of invariant and equivariant contrastive objectives and show that learning equivariant features leads to better representations for the task of 3D hand pose estimation. Furthermore, we show that standard ResNets with sufficient depth, trained on additional unlabeled data, attain improvements of up to 14.5% in PA-EPE on FreiHAND and thus achieves state-of-the-art performance without any task specific, specialized architectures. Code and models are available at https://ait.ethz.ch/projects/2021/PeCLR/</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-10T17:48:57Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <arxiv:journal_ref>Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), 2021, pp. 11230-11239</arxiv:journal_ref>
+    <author>
+      <name>Adrian Spurr</name>
+    </author>
+    <author>
+      <name>Aneesh Dahiya</name>
+    </author>
+    <author>
+      <name>Xi Wang</name>
+    </author>
+    <author>
+      <name>Xucong Zhang</name>
+    </author>
+    <author>
+      <name>Otmar Hilliges</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.06809v1</id>
+    <title>Chimera states for directed networks</title>
+    <updated>2021-06-12T16:19:31Z</updated>
+    <link href="https://arxiv.org/abs/2106.06809v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.06809v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We demonstrate that chimera behavior can be observed in ensembles of phase oscillators with unidirectional coupling. For a small network consisting of only three identical oscillators (cyclic triple), tiny {\it chimera islands} arise in the parameter space. They are surrounded by developed chaotic switching behavior caused by a collision of rotating waves propagating in opposite directions. For larger networks, as we show for hundred oscillators (cyclic century), the islands merge into a single {\it chimera continent} which incorporates the world of chimeras of different configuration. The phenomenon inherits from networks with intermediate ranges of the unidirectional coupling and it diminishes as it decreases.</summary>
+    <category term="nlin.CD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.PS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-12T16:19:31Z</published>
+    <arxiv:primary_category term="nlin.CD"/>
+    <author>
+      <name>Patrycja Jaros</name>
+    </author>
+    <author>
+      <name>Roman Levchenko</name>
+    </author>
+    <author>
+      <name>Tomasz Kapitaniak</name>
+    </author>
+    <author>
+      <name>Yuri Maistrenko</name>
+    </author>
+    <arxiv:doi>10.1063/5.0059765</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/5.0059765" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.04576v1</id>
+    <title>Chiral magnetic properties of QCD phase-diagram</title>
+    <updated>2021-06-08T12:57:54Z</updated>
+    <link href="https://arxiv.org/abs/2106.04576v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.04576v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The QCD phase diagram is studied, at finite magnetic field. Our calculations are based on the QCD effective model, the SU($3$) Polyakov linear sigma model (PLSM), in which the chiral symmetry is integrated in the hadron phase and in the parton phase, the up-, down- and strange-quark degrees of freedom are incorporated besides the inclusion of Polyakov loop potentials in the pure gauge limit, which are motivated by various underlying QCD symmetries. The Landau quantization and the magnetic catalysis are implemented. The response of the QCD matter to an external magnetic field such as magnetization, magnetic susceptibility and permeability has been estimated. We conclude that the parton phase has higher values of magnetization, magnetic susceptibility, and permeability relative to the hadron phase. Depending on the contributions to the Landau levels, we conclude that the chiral magnetic field enhances the chiral quark condensates and hence the chiral QCD phase diagram, i.e. the hadron-parton phase transition likely takes place, at lower critical temperatures and chemical potentials.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-08T12:57:54Z</published>
+    <arxiv:comment>16 pages, 11 figures, the paper is accepted for publication in The European Physical Journal A (EPJA)</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>Eur. Phys. J. A (2021) 57: 200</arxiv:journal_ref>
+    <author>
+      <name>Abdel Nasser Tawfik</name>
+      <arxiv:affiliation>Egyptian Ctr. Theor. Phys., Cairo and Goethe U., Frankfurt</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Abdel Magied Diab</name>
+      <arxiv:affiliation>MUTI, Cairo</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1140/epja/s10050-021-00501-z</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epja/s10050-021-00501-z" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.04578v1</id>
+    <title>Microstructured fiber links for THz communications and their fabrication using infinity printing</title>
+    <updated>2021-06-08T14:02:46Z</updated>
+    <link href="https://arxiv.org/abs/2106.04578v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.04578v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this work, a novel infinity 3D printing technique is explored to fabricate continuous multi-meter-long low-loss near-zero dispersion suspended-core polypropylene fibers for application in terahertz (THz) communications. Particular attention is paid to process parameter optimization for 3D printing with low-loss polypropylene plastic. Three microstructured THz fibers were 3D printed using the standard and infinity 3D printers, and an in-depth theoretical and experimental comparison between the fibers were carried out. Transmission losses (by power) of 4.79 dB/m, 17.34 dB/m and 11.13 dB/m are experimentally demonstrated for the three fibers operating at 128 GHz. Signal transmission with BER far below the forward error correction limit (10-3) for the corresponding three fiber types of lengths of 2 m, 0.75 m and 1.6 m are observed, and an error-free transmission is realized at the bit rates up to 5.2 Gbps. THz imaging of the fiber near-field is used to visualize modal distributions and study optimal fiber excitation conditions. The ability of shielding the fundamental mode from the environment, mechanical robustness and ease of handling of thus developed effectively single-mode high optical performance fibers make them excellent candidates for upcoming fiber-assisted THz communications. Additionally, novel fused deposition modeling (FDM)-based infinity printing technique allows continuous fabrication of unlimited in length fibers of complex transverse geometries using advanced thermoplastic composites, which, in our opinion, is poised to become a key fabrication technique for advanced terahertz fiber manufacturing.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-08T14:02:46Z</published>
+    <arxiv:primary_category term="physics.optics"/>
+    <author>
+      <name>Guofu Xu</name>
+    </author>
+    <author>
+      <name>Kathirvel Nallappan</name>
+    </author>
+    <author>
+      <name>Yang Cao</name>
+    </author>
+    <author>
+      <name>Maksim Skorobogatiy</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.04510v1</id>
+    <title>Random Forest classifier for EEG-based seizure prediction</title>
+    <updated>2021-06-02T15:46:35Z</updated>
+    <link href="https://arxiv.org/abs/2106.04510v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.04510v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Epileptic seizure prediction has gained considerable interest in the computational Epilepsy research community. This paper presents a Machine Learning based method for epileptic seizure prediction which outperforms state-of-the art methods. We compute a probability for a given epoch, of being pre-ictal against interictal using the Random Forest classifier and introduce new concepts to enhance the robustness of the algorithm to false alarms. We assessed our method on 20 patients of the benchmark scalp EEG CHB-MIT dataset for a seizure prediction horizon (SPH) of 5 minutes and a seizure occurrence period (SOP) of 30 minutes. Our approach achieves a sensitivity of 82.07 % and a low false positive rate (FPR) of 0.0799 /h. We also tested our approach on intracranial EEG recordings.</summary>
+    <category term="physics.med-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-02T15:46:35Z</published>
+    <arxiv:comment>all the python code used for this work can be found in this repository: https://github.com/rbm1996/seizure_prediction</arxiv:comment>
+    <arxiv:primary_category term="physics.med-ph"/>
+    <author>
+      <name>Remy Ben Messaoud</name>
+    </author>
+    <author>
+      <name>Mario Chavez</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.08985v1</id>
+    <title>Analysis and prediction of changes in the temperature of the pure freshwater ice column in the Antarctic and the Arctic</title>
+    <updated>2021-06-16T17:27:52Z</updated>
+    <link href="https://arxiv.org/abs/2106.08985v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.08985v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper investigates the initial boundary value problem for a non-stationary one-dimensional heat equation that simulates the temperature distribution in freshwater ice near the Earth's poles. The mathematical model has been constructed taking into account solid-liquid phase transitions. Data from meteorological stations were used to determine the model parameters, with the help of which the necessary physical and thermophysical characteristics of the computational domain were obtained. For the numerical solution of the problem, the finite volume method (FVM) was used. For the obtained periodic regime, the temperature versus depth dependences for each month were plotted, and the depth of the active layer, as well as the depth of zero annual amplitudes were found for each meteorological station. A forecast of the ice temperature regime for 2100 was modeled for three Representative Concentration Pathway (RCP) scenarios of global warming: moderate RCP2.6, corresponding to the current emissions of RCP7 and adopted at the Paris Agreement in 2015 RCP1.9. By analyzing the impact of an additional 0,5 degrees Celsius of warming on other areas, a reduction in the full range of risks to humanity and the planet as a whole becomes evident with the proper efforts of the global community. Thus, the conducted modeling has confirmed the need to reduce the rate of global warming.</summary>
+    <category term="physics.geo-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.ao-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-16T17:27:52Z</published>
+    <arxiv:comment>33 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.geo-ph"/>
+    <arxiv:journal_ref>International Journal of Open Information Technologies, 9 (9) (2021), 47-65</arxiv:journal_ref>
+    <author>
+      <name>A. A. Fedotov</name>
+    </author>
+    <author>
+      <name>V. V. Kaniber</name>
+    </author>
+    <author>
+      <name>P. V. Khrapov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.09278v1</id>
+    <title>Precision Higgs Measurements at the 250 GeV ILC</title>
+    <updated>2021-06-17T07:00:32Z</updated>
+    <link href="https://arxiv.org/abs/2106.09278v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.09278v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The plan for the International Linear Collider (ILC) is now being prepared as a staged design, with the first stage of 2 ${\rm ab^{-1}}$ at 250GeV and later stages achieving the full project specifications with 4 ${\rm ab^{-1}}$ at 500 GeV. The talk presents the capabilities for precision Higgs boson measurements at 250 GeV. It is shown that the 250 GeV stage of the ILC will already provide many compelling results in Higgs physics, with new measurements unavailable at the Large Hadron Collider, model-independent determinations of key parameters, and possible discrimination of a variety of scenarios for new physics.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-17T07:00:32Z</published>
+    <arxiv:comment>4 pages, 1 figures, The 39th International Conference on High Energy Physics (ICHEP2018)</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <author>
+      <name>Tomohisa Ogawa</name>
+    </author>
+    <arxiv:doi>10.22323/1.340.0681</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.22323/1.340.0681" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.07755v2</id>
+    <title>All-flavor constraints on nonstandard neutrino interactions and generalized matter potential with three years of IceCube DeepCore data</title>
+    <updated>2021-10-18T13:49:56Z</updated>
+    <link href="https://arxiv.org/abs/2106.07755v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.07755v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We report constraints on nonstandard neutrino interactions (NSI) from the observation of atmospheric neutrinos with IceCube, limiting all individual coupling strengths from a single dataset. Furthermore, IceCube is the first experiment to constrain flavor-violating and nonuniversal couplings simultaneously. Hypothetical NSI are generically expected to arise due to the exchange of a new heavy mediator particle. Neutrinos propagating in matter scatter off fermions in the forward direction with negligible momentum transfer. Hence the study of the matter effect on neutrinos propagating in the Earth is sensitive to NSI independently of the energy scale of new physics. We present constraints on NSI obtained with an all-flavor event sample of atmospheric neutrinos based on three years of IceCube DeepCore data. The analysis uses neutrinos arriving from all directions, with reconstructed energies between 5.6 GeV and 100 GeV. We report constraints on the individual NSI coupling strengths considered singly, allowing for complex phases in the case of flavor-violating couplings. This demonstrates that IceCube is sensitive to the full NSI flavor structure at a level competitive with limits from the global analysis of all other experiments. In addition, we investigate a generalized matter potential, whose overall scale and flavor structure are also constrained.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-14T20:56:00Z</published>
+    <arxiv:comment>22 pages, 12 figures. This submission matches the published version</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Phys. Rev. D104(Oct, 2021) 072006</arxiv:journal_ref>
+    <author>
+      <name> IceCube Collaboration</name>
+    </author>
+    <author>
+      <name>R. Abbasi</name>
+    </author>
+    <author>
+      <name>M. Ackermann</name>
+    </author>
+    <author>
+      <name>J. Adams</name>
+    </author>
+    <author>
+      <name>J. A. Aguilar</name>
+    </author>
+    <author>
+      <name>M. Ahlers</name>
+    </author>
+    <author>
+      <name>M. Ahrens</name>
+    </author>
+    <author>
+      <name>C. Alispach</name>
+    </author>
+    <author>
+      <name>A. A. Alves</name>
+    </author>
+    <author>
+      <name>N. M. Amin</name>
+    </author>
+    <author>
+      <name>R. An</name>
+    </author>
+    <author>
+      <name>K. Andeen</name>
+    </author>
+    <author>
+      <name>T. Anderson</name>
+    </author>
+    <author>
+      <name>I. Ansseau</name>
+    </author>
+    <author>
+      <name>G. Anton</name>
+    </author>
+    <author>
+      <name>C. Argüelles</name>
+    </author>
+    <author>
+      <name>Y. Ashida</name>
+    </author>
+    <author>
+      <name>S. Axani</name>
+    </author>
+    <author>
+      <name>X. Bai</name>
+    </author>
+    <author>
+      <name>A. Balagopal V.</name>
+    </author>
+    <author>
+      <name>A. Barbano</name>
+    </author>
+    <author>
+      <name>S. W. Barwick</name>
+    </author>
+    <author>
+      <name>B. Bastian</name>
+    </author>
+    <author>
+      <name>V. Basu</name>
+    </author>
+    <author>
+      <name>S. Baur</name>
+    </author>
+    <author>
+      <name>R. Bay</name>
+    </author>
+    <author>
+      <name>J. J. Beatty</name>
+    </author>
+    <author>
+      <name>K. -H. Becker</name>
+    </author>
+    <author>
+      <name>J. Becker Tjus</name>
+    </author>
+    <author>
+      <name>C. Bellenghi</name>
+    </author>
+    <author>
+      <name>S. BenZvi</name>
+    </author>
+    <author>
+      <name>D. Berley</name>
+    </author>
+    <author>
+      <name>E. Bernardini</name>
+    </author>
+    <author>
+      <name>D. Z. Besson</name>
+    </author>
+    <author>
+      <name>G. Binder</name>
+    </author>
+    <author>
+      <name>D. Bindig</name>
+    </author>
+    <author>
+      <name>E. Blaufuss</name>
+    </author>
+    <author>
+      <name>S. Blot</name>
+    </author>
+    <author>
+      <name>F. Bontempo</name>
+    </author>
+    <author>
+      <name>J. Borowka</name>
+    </author>
+    <author>
+      <name>S. Böser</name>
+    </author>
+    <author>
+      <name>O. Botner</name>
+    </author>
+    <author>
+      <name>J. Böttcher</name>
+    </author>
+    <author>
+      <name>E. Bourbeau</name>
+    </author>
+    <author>
+      <name>F. Bradascio</name>
+    </author>
+    <author>
+      <name>J. Braun</name>
+    </author>
+    <author>
+      <name>S. Bron</name>
+    </author>
+    <author>
+      <name>J. Brostean-Kaiser</name>
+    </author>
+    <author>
+      <name>S. Browne</name>
+    </author>
+    <author>
+      <name>A. Burgman</name>
+    </author>
+    <author>
+      <name>R. S. Busse</name>
+    </author>
+    <author>
+      <name>M. A. Campana</name>
+    </author>
+    <author>
+      <name>C. Chen</name>
+    </author>
+    <author>
+      <name>D. Chirkin</name>
+    </author>
+    <author>
+      <name>K. Choi</name>
+    </author>
+    <author>
+      <name>B. A. Clark</name>
+    </author>
+    <author>
+      <name>K. Clark</name>
+    </author>
+    <author>
+      <name>L. Classen</name>
+    </author>
+    <author>
+      <name>A. Coleman</name>
+    </author>
+    <author>
+      <name>G. H. Collin</name>
+    </author>
+    <author>
+      <name>J. M. Conrad</name>
+    </author>
+    <author>
+      <name>P. Coppin</name>
+    </author>
+    <author>
+      <name>P. Correa</name>
+    </author>
+    <author>
+      <name>D. F. Cowen</name>
+    </author>
+    <author>
+      <name>R. Cross</name>
+    </author>
+    <author>
+      <name>P. Dave</name>
+    </author>
+    <author>
+      <name>C. De Clercq</name>
+    </author>
+    <author>
+      <name>J. J. DeLaunay</name>
+    </author>
+    <author>
+      <name>H. Dembinski</name>
+    </author>
+    <author>
+      <name>K. Deoskar</name>
+    </author>
+    <author>
+      <name>S. De Ridder</name>
+    </author>
+    <author>
+      <name>A. Desai</name>
+    </author>
+    <author>
+      <name>P. Desiati</name>
+    </author>
+    <author>
+      <name>K. D. de Vries</name>
+    </author>
+    <author>
+      <name>G. de Wasseige</name>
+    </author>
+    <author>
+      <name>M. de With</name>
+    </author>
+    <author>
+      <name>T. DeYoung</name>
+    </author>
+    <author>
+      <name>S. Dharani</name>
+    </author>
+    <author>
+      <name>A. Diaz</name>
+    </author>
+    <author>
+      <name>J. C. Díaz-Vélez</name>
+    </author>
+    <author>
+      <name>H. Dujmovic</name>
+    </author>
+    <author>
+      <name>M. Dunkman</name>
+    </author>
+    <author>
+      <name>M. A. DuVernois</name>
+    </author>
+    <author>
+      <name>E. Dvorak</name>
+    </author>
+    <author>
+      <name>T. Ehrhardt</name>
+    </author>
+    <author>
+      <name>P. Eller</name>
+    </author>
+    <author>
+      <name>R. Engel</name>
+    </author>
+    <author>
+      <name>H. Erpenbeck</name>
+    </author>
+    <author>
+      <name>J. Evans</name>
+    </author>
+    <author>
+      <name>P. A. Evenson</name>
+    </author>
+    <author>
+      <name>A. R. Fazely</name>
+    </author>
+    <author>
+      <name>S. Fiedlschuster</name>
+    </author>
+    <author>
+      <name>A. T. Fienberg</name>
+    </author>
+    <author>
+      <name>K. Filimonov</name>
+    </author>
+    <author>
+      <name>C. Finley</name>
+    </author>
+    <author>
+      <name>L. Fischer</name>
+    </author>
+    <author>
+      <name>D. Fox</name>
+    </author>
+    <author>
+      <name>A. Franckowiak</name>
+    </author>
+    <author>
+      <name>E. Friedman</name>
+    </author>
+    <author>
+      <name>A. Fritz</name>
+    </author>
+    <author>
+      <name>P. Fürst</name>
+    </author>
+    <author>
+      <name>T. K. Gaisser</name>
+    </author>
+    <author>
+      <name>J. Gallagher</name>
+    </author>
+    <author>
+      <name>E. Ganster</name>
+    </author>
+    <author>
+      <name>A. Garcia</name>
+    </author>
+    <author>
+      <name>S. Garrappa</name>
+    </author>
+    <author>
+      <name>L. Gerhardt</name>
+    </author>
+    <author>
+      <name>A. Ghadimi</name>
+    </author>
+    <author>
+      <name>C. Glaser</name>
+    </author>
+    <author>
+      <name>T. Glauch</name>
+    </author>
+    <author>
+      <name>T. Glüsenkamp</name>
+    </author>
+    <author>
+      <name>A. Goldschmidt</name>
+    </author>
+    <author>
+      <name>J. G. Gonzalez</name>
+    </author>
+    <author>
+      <name>S. Goswami</name>
+    </author>
+    <author>
+      <name>D. Grant</name>
+    </author>
+    <author>
+      <name>T. Grégoire</name>
+    </author>
+    <author>
+      <name>S. Griswold</name>
+    </author>
+    <author>
+      <name>M. Gündüz</name>
+    </author>
+    <author>
+      <name>C. Günther</name>
+    </author>
+    <author>
+      <name>C. Haack</name>
+    </author>
+    <author>
+      <name>A. Hallgren</name>
+    </author>
+    <author>
+      <name>R. Halliday</name>
+    </author>
+    <author>
+      <name>L. Halve</name>
+    </author>
+    <author>
+      <name>F. Halzen</name>
+    </author>
+    <author>
+      <name>M. Ha Minh</name>
+    </author>
+    <author>
+      <name>K. Hanson</name>
+    </author>
+    <author>
+      <name>J. Hardin</name>
+    </author>
+    <author>
+      <name>A. A. Harnisch</name>
+    </author>
+    <author>
+      <name>A. Haungs</name>
+    </author>
+    <author>
+      <name>S. Hauser</name>
+    </author>
+    <author>
+      <name>D. Hebecker</name>
+    </author>
+    <author>
+      <name>K. Helbing</name>
+    </author>
+    <author>
+      <name>F. Henningsen</name>
+    </author>
+    <author>
+      <name>E. C. Hettinger</name>
+    </author>
+    <author>
+      <name>S. Hickford</name>
+    </author>
+    <author>
+      <name>J. Hignight</name>
+    </author>
+    <author>
+      <name>C. Hill</name>
+    </author>
+    <author>
+      <name>G. C. Hill</name>
+    </author>
+    <author>
+      <name>K. D. Hoffman</name>
+    </author>
+    <author>
+      <name>R. Hoffmann</name>
+    </author>
+    <author>
+      <name>T. Hoinka</name>
+    </author>
+    <author>
+      <name>B. Hokanson-Fasig</name>
+    </author>
+    <author>
+      <name>K. Hoshina</name>
+    </author>
+    <author>
+      <name>F. Huang</name>
+    </author>
+    <author>
+      <name>M. Huber</name>
+    </author>
+    <author>
+      <name>T. Huber</name>
+    </author>
+    <author>
+      <name>K. Hultqvist</name>
+    </author>
+    <author>
+      <name>M. Hünnefeld</name>
+    </author>
+    <author>
+      <name>R. Hussain</name>
+    </author>
+    <author>
+      <name>S. In</name>
+    </author>
+    <author>
+      <name>N. Iovine</name>
+    </author>
+    <author>
+      <name>A. Ishihara</name>
+    </author>
+    <author>
+      <name>M. Jansson</name>
+    </author>
+    <author>
+      <name>G. S. Japaridze</name>
+    </author>
+    <author>
+      <name>M. Jeong</name>
+    </author>
+    <author>
+      <name>B. J. P. Jones</name>
+    </author>
+    <author>
+      <name>R. Joppe</name>
+    </author>
+    <author>
+      <name>D. Kang</name>
+    </author>
+    <author>
+      <name>W. Kang</name>
+    </author>
+    <author>
+      <name>X. Kang</name>
+    </author>
+    <author>
+      <name>A. Kappes</name>
+    </author>
+    <author>
+      <name>D. Kappesser</name>
+    </author>
+    <author>
+      <name>T. Karg</name>
+    </author>
+    <author>
+      <name>M. Karl</name>
+    </author>
+    <author>
+      <name>A. Karle</name>
+    </author>
+    <author>
+      <name>U. Katz</name>
+    </author>
+    <author>
+      <name>M. Kauer</name>
+    </author>
+    <author>
+      <name>M. Kellermann</name>
+    </author>
+    <author>
+      <name>J. L. Kelley</name>
+    </author>
+    <author>
+      <name>A. Kheirandish</name>
+    </author>
+    <author>
+      <name>K. Kin</name>
+    </author>
+    <author>
+      <name>T. Kintscher</name>
+    </author>
+    <author>
+      <name>J. Kiryluk</name>
+    </author>
+    <author>
+      <name>S. R. Klein</name>
+    </author>
+    <author>
+      <name>R. Koirala</name>
+    </author>
+    <author>
+      <name>H. Kolanoski</name>
+    </author>
+    <author>
+      <name>T. Kontrimas</name>
+    </author>
+    <author>
+      <name>L. Köpke</name>
+    </author>
+    <author>
+      <name>C. Kopper</name>
+    </author>
+    <author>
+      <name>S. Kopper</name>
+    </author>
+    <author>
+      <name>D. J. Koskinen</name>
+    </author>
+    <author>
+      <name>P. Koundal</name>
+    </author>
+    <author>
+      <name>M. Kovacevich</name>
+    </author>
+    <author>
+      <name>M. Kowalski</name>
+    </author>
+    <author>
+      <name>N. Kurahashi</name>
+    </author>
+    <author>
+      <name>A. Kyriacou</name>
+    </author>
+    <author>
+      <name>N. Lad</name>
+    </author>
+    <author>
+      <name>C. Lagunas Gualda</name>
+    </author>
+    <author>
+      <name>J. L. Lanfranchi</name>
+    </author>
+    <author>
+      <name>M. J. Larson</name>
+    </author>
+    <author>
+      <name>F. Lauber</name>
+    </author>
+    <author>
+      <name>J. P. Lazar</name>
+    </author>
+    <author>
+      <name>J. W. Lee</name>
+    </author>
+    <author>
+      <name>K. Leonard</name>
+    </author>
+    <author>
+      <name>A. Leszczyńska</name>
+    </author>
+    <author>
+      <name>Y. Li</name>
+    </author>
+    <author>
+      <name>M. Lincetto</name>
+    </author>
+    <author>
+      <name>Q. R. Liu</name>
+    </author>
+    <author>
+      <name>M. Liubarska</name>
+    </author>
+    <author>
+      <name>E. Lohfink</name>
+    </author>
+    <author>
+      <name>C. J. Lozano Mariscal</name>
+    </author>
+    <author>
+      <name>L. Lu</name>
+    </author>
+    <author>
+      <name>F. Lucarelli</name>
+    </author>
+    <author>
+      <name>A. Ludwig</name>
+    </author>
+    <author>
+      <name>W. Luszczak</name>
+    </author>
+    <author>
+      <name>Y. Lyu</name>
+    </author>
+    <author>
+      <name>W. Y. Ma</name>
+    </author>
+    <author>
+      <name>J. Madsen</name>
+    </author>
+    <author>
+      <name>K. B. M. Mahn</name>
+    </author>
+    <author>
+      <name>Y. Makino</name>
+    </author>
+    <author>
+      <name>S. Mancina</name>
+    </author>
+    <author>
+      <name>I. C. Mariş</name>
+    </author>
+    <author>
+      <name>R. Maruyama</name>
+    </author>
+    <author>
+      <name>K. Mase</name>
+    </author>
+    <author>
+      <name>T. McElroy</name>
+    </author>
+    <author>
+      <name>F. McNally</name>
+    </author>
+    <author>
+      <name>K. Meagher</name>
+    </author>
+    <author>
+      <name>A. Medina</name>
+    </author>
+    <author>
+      <name>M. Meier</name>
+    </author>
+    <author>
+      <name>S. Meighen-Berger</name>
+    </author>
+    <author>
+      <name>J. Merz</name>
+    </author>
+    <author>
+      <name>J. Micallef</name>
+    </author>
+    <author>
+      <name>D. Mockler</name>
+    </author>
+    <author>
+      <name>T. Montaruli</name>
+    </author>
+    <author>
+      <name>R. W. Moore</name>
+    </author>
+    <author>
+      <name>R. Morse</name>
+    </author>
+    <author>
+      <name>M. Moulai</name>
+    </author>
+    <author>
+      <name>R. Naab</name>
+    </author>
+    <author>
+      <name>R. Nagai</name>
+    </author>
+    <author>
+      <name>U. Naumann</name>
+    </author>
+    <author>
+      <name>J. Necker</name>
+    </author>
+    <author>
+      <name>L. V. Nguyên</name>
+    </author>
+    <author>
+      <name>H. Niederhausen</name>
+    </author>
+    <author>
+      <name>M. U. Nisa</name>
+    </author>
+    <author>
+      <name>S. C. Nowicki</name>
+    </author>
+    <author>
+      <name>D. R. Nygren</name>
+    </author>
+    <author>
+      <name>A. Obertacke Pollmann</name>
+    </author>
+    <author>
+      <name>M. Oehler</name>
+    </author>
+    <author>
+      <name>A. Olivas</name>
+    </author>
+    <author>
+      <name>E. O'Sullivan</name>
+    </author>
+    <author>
+      <name>H. Pandya</name>
+    </author>
+    <author>
+      <name>D. V. Pankova</name>
+    </author>
+    <author>
+      <name>N. Park</name>
+    </author>
+    <author>
+      <name>G. K. Parker</name>
+    </author>
+    <author>
+      <name>E. N. Paudel</name>
+    </author>
+    <author>
+      <name>L. Paul</name>
+    </author>
+    <author>
+      <name>C. Pérez de los Heros</name>
+    </author>
+    <author>
+      <name>S. Philippen</name>
+    </author>
+    <author>
+      <name>D. Pieloth</name>
+    </author>
+    <author>
+      <name>S. Pieper</name>
+    </author>
+    <author>
+      <name>M. Pittermann</name>
+    </author>
+    <author>
+      <name>A. Pizzuto</name>
+    </author>
+    <author>
+      <name>M. Plum</name>
+    </author>
+    <author>
+      <name>Y. Popovych</name>
+    </author>
+    <author>
+      <name>A. Porcelli</name>
+    </author>
+    <author>
+      <name>M. Prado Rodriguez</name>
+    </author>
+    <author>
+      <name>P. B. Price</name>
+    </author>
+    <author>
+      <name>B. Pries</name>
+    </author>
+    <author>
+      <name>G. T. Przybylski</name>
+    </author>
+    <author>
+      <name>C. Raab</name>
+    </author>
+    <author>
+      <name>A. Raissi</name>
+    </author>
+    <author>
+      <name>M. Rameez</name>
+    </author>
+    <author>
+      <name>K. Rawlins</name>
+    </author>
+    <author>
+      <name>I. C. Rea</name>
+    </author>
+    <author>
+      <name>A. Rehman</name>
+    </author>
+    <author>
+      <name>R. Reimann</name>
+    </author>
+    <author>
+      <name>G. Renzi</name>
+    </author>
+    <author>
+      <name>E. Resconi</name>
+    </author>
+    <author>
+      <name>S. Reusch</name>
+    </author>
+    <author>
+      <name>W. Rhode</name>
+    </author>
+    <author>
+      <name>M. Richman</name>
+    </author>
+    <author>
+      <name>B. Riedel</name>
+    </author>
+    <author>
+      <name>S. Robertson</name>
+    </author>
+    <author>
+      <name>G. Roellinghoff</name>
+    </author>
+    <author>
+      <name>M. Rongen</name>
+    </author>
+    <author>
+      <name>C. Rott</name>
+    </author>
+    <author>
+      <name>T. Ruhe</name>
+    </author>
+    <author>
+      <name>D. Ryckbosch</name>
+    </author>
+    <author>
+      <name>D. Rysewyk Cantu</name>
+    </author>
+    <author>
+      <name>I. Safa</name>
+    </author>
+    <author>
+      <name>J. Saffer</name>
+    </author>
+    <author>
+      <name>S. E. Sanchez Herrera</name>
+    </author>
+    <author>
+      <name>A. Sandrock</name>
+    </author>
+    <author>
+      <name>J. Sandroos</name>
+    </author>
+    <author>
+      <name>M. Santander</name>
+    </author>
+    <author>
+      <name>S. Sarkar</name>
+    </author>
+    <author>
+      <name>S. Sarkar</name>
+    </author>
+    <author>
+      <name>K. Satalecka</name>
+    </author>
+    <author>
+      <name>M. Scharf</name>
+    </author>
+    <author>
+      <name>M. Schaufel</name>
+    </author>
+    <author>
+      <name>H. Schieler</name>
+    </author>
+    <author>
+      <name>P. Schlunder</name>
+    </author>
+    <author>
+      <name>T. Schmidt</name>
+    </author>
+    <author>
+      <name>A. Schneider</name>
+    </author>
+    <author>
+      <name>J. Schneider</name>
+    </author>
+    <author>
+      <name>F. G. Schröder</name>
+    </author>
+    <author>
+      <name>L. Schumacher</name>
+    </author>
+    <author>
+      <name>S. Sclafani</name>
+    </author>
+    <author>
+      <name>D. Seckel</name>
+    </author>
+    <author>
+      <name>S. Seunarine</name>
+    </author>
+    <author>
+      <name>A. Sharma</name>
+    </author>
+    <author>
+      <name>S. Shefali</name>
+    </author>
+    <author>
+      <name>M. Silva</name>
+    </author>
+    <author>
+      <name>B. Skrzypek</name>
+    </author>
+    <author>
+      <name>B. Smithers</name>
+    </author>
+    <author>
+      <name>R. Snihur</name>
+    </author>
+    <author>
+      <name>J. Soedingrekso</name>
+    </author>
+    <author>
+      <name>D. Soldin</name>
+    </author>
+    <author>
+      <name>C. Spannfellner</name>
+    </author>
+    <author>
+      <name>G. M. Spiczak</name>
+    </author>
+    <author>
+      <name>C. Spiering</name>
+    </author>
+    <author>
+      <name>J. Stachurska</name>
+    </author>
+    <author>
+      <name>M. Stamatikos</name>
+    </author>
+    <author>
+      <name>T. Stanev</name>
+    </author>
+    <author>
+      <name>R. Stein</name>
+    </author>
+    <author>
+      <name>J. Stettner</name>
+    </author>
+    <author>
+      <name>A. Steuer</name>
+    </author>
+    <author>
+      <name>T. Stezelberger</name>
+    </author>
+    <author>
+      <name>T. Stürwald</name>
+    </author>
+    <author>
+      <name>T. Stuttard</name>
+    </author>
+    <author>
+      <name>G. W. Sullivan</name>
+    </author>
+    <author>
+      <name>I. Taboada</name>
+    </author>
+    <author>
+      <name>F. Tenholt</name>
+    </author>
+    <author>
+      <name>S. Ter-Antonyan</name>
+    </author>
+    <author>
+      <name>A. Terliuk</name>
+    </author>
+    <author>
+      <name>S. Tilav</name>
+    </author>
+    <author>
+      <name>F. Tischbein</name>
+    </author>
+    <author>
+      <name>K. Tollefson</name>
+    </author>
+    <author>
+      <name>L. Tomankova</name>
+    </author>
+    <author>
+      <name>C. Tönnis</name>
+    </author>
+    <author>
+      <name>S. Toscano</name>
+    </author>
+    <author>
+      <name>D. Tosi</name>
+    </author>
+    <author>
+      <name>A. Trettin</name>
+    </author>
+    <author>
+      <name>M. Tselengidou</name>
+    </author>
+    <author>
+      <name>C. F. Tung</name>
+    </author>
+    <author>
+      <name>A. Turcati</name>
+    </author>
+    <author>
+      <name>R. Turcotte</name>
+    </author>
+    <author>
+      <name>C. F. Turley</name>
+    </author>
+    <author>
+      <name>J. P. Twagirayezu</name>
+    </author>
+    <author>
+      <name>B. Ty</name>
+    </author>
+    <author>
+      <name>M. A. Unland Elorrieta</name>
+    </author>
+    <author>
+      <name>N. Valtonen-Mattila</name>
+    </author>
+    <author>
+      <name>J. Vandenbroucke</name>
+    </author>
+    <author>
+      <name>N. van Eijndhoven</name>
+    </author>
+    <author>
+      <name>D. Vannerom</name>
+    </author>
+    <author>
+      <name>J. van Santen</name>
+    </author>
+    <author>
+      <name>S. Verpoest</name>
+    </author>
+    <author>
+      <name>M. Vraeghe</name>
+    </author>
+    <author>
+      <name>C. Walck</name>
+    </author>
+    <author>
+      <name>A. Wallace</name>
+    </author>
+    <author>
+      <name>T. B. Watson</name>
+    </author>
+    <author>
+      <name>C. Weaver</name>
+    </author>
+    <author>
+      <name>P. Weigel</name>
+    </author>
+    <author>
+      <name>A. Weindl</name>
+    </author>
+    <author>
+      <name>M. J. Weiss</name>
+    </author>
+    <author>
+      <name>J. Weldert</name>
+    </author>
+    <author>
+      <name>C. Wendt</name>
+    </author>
+    <author>
+      <name>J. Werthebach</name>
+    </author>
+    <author>
+      <name>M. Weyrauch</name>
+    </author>
+    <author>
+      <name>B. J. Whelan</name>
+    </author>
+    <author>
+      <name>N. Whitehorn</name>
+    </author>
+    <author>
+      <name>C. H. Wiebusch</name>
+    </author>
+    <author>
+      <name>D. R. Williams</name>
+    </author>
+    <author>
+      <name>M. Wolf</name>
+    </author>
+    <author>
+      <name>K. Woschnagg</name>
+    </author>
+    <author>
+      <name>G. Wrede</name>
+    </author>
+    <author>
+      <name>J. Wulff</name>
+    </author>
+    <author>
+      <name>X. W. Xu</name>
+    </author>
+    <author>
+      <name>Y. Xu</name>
+    </author>
+    <author>
+      <name>J. P. Yanez</name>
+    </author>
+    <author>
+      <name>S. Yoshida</name>
+    </author>
+    <author>
+      <name>S. Yu</name>
+    </author>
+    <author>
+      <name>T. Yuan</name>
+    </author>
+    <author>
+      <name>Z. Zhang</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.104.072006</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.104.072006" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.01345v2</id>
+    <title>Decision Transformer: Reinforcement Learning via Sequence Modeling</title>
+    <updated>2021-06-24T17:09:59Z</updated>
+    <link href="https://arxiv.org/abs/2106.01345v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.01345v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce a framework that abstracts Reinforcement Learning (RL) as a sequence modeling problem. This allows us to draw upon the simplicity and scalability of the Transformer architecture, and associated advances in language modeling such as GPT-x and BERT. In particular, we present Decision Transformer, an architecture that casts the problem of RL as conditional sequence modeling. Unlike prior approaches to RL that fit value functions or compute policy gradients, Decision Transformer simply outputs the optimal actions by leveraging a causally masked Transformer. By conditioning an autoregressive model on the desired return (reward), past states, and actions, our Decision Transformer model can generate future actions that achieve the desired return. Despite its simplicity, Decision Transformer matches or exceeds the performance of state-of-the-art model-free offline RL baselines on Atari, OpenAI Gym, and Key-to-Door tasks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-02T17:53:39Z</published>
+    <arxiv:comment>First two authors contributed equally. Last two authors advised equally</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Lili Chen</name>
+    </author>
+    <author>
+      <name>Kevin Lu</name>
+    </author>
+    <author>
+      <name>Aravind Rajeswaran</name>
+    </author>
+    <author>
+      <name>Kimin Lee</name>
+    </author>
+    <author>
+      <name>Aditya Grover</name>
+    </author>
+    <author>
+      <name>Michael Laskin</name>
+    </author>
+    <author>
+      <name>Pieter Abbeel</name>
+    </author>
+    <author>
+      <name>Aravind Srinivas</name>
+    </author>
+    <author>
+      <name>Igor Mordatch</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.03274v2</id>
+    <title>The Magellanic Edges Survey -- II. Formation of the LMC's northern arm</title>
+    <updated>2021-12-14T12:31:51Z</updated>
+    <link href="https://arxiv.org/abs/2106.03274v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.03274v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The highly-substructured outskirts of the Magellanic Clouds provide ideal locations for studying the complex interaction history between both Clouds and the Milky Way (MW). In this paper, we investigate the origin of a &gt;20$^\circ$ long arm-like feature in the northern outskirts of the Large Magellanic Cloud (LMC) using data from the Magellanic Edges Survey (MagES) and Gaia EDR3. We find that the arm has a similar geometry and metallicity to the nearby outer LMC disk, indicating that it is comprised of perturbed disk material. Whilst the azimuthal velocity and velocity dispersions along the arm are consistent with those in the outer LMC, the in-plane radial velocity and out-of-plane vertical velocity are significantly perturbed from equilibrium disk kinematics. We compare these observations to a new suite of dynamical models of the Magellanic/MW system, which describe the LMC as a collection of tracer particles within a rigid potential, and the SMC as a rigid Hernquist potential. Our models indicate the tidal force of the MW during the LMC's infall is likely responsible for the observed increasing out-of-plane velocity along the arm. Our models also suggest close LMC/SMC interactions within the past Gyr, particularly the SMC's pericentric passage ~150 Myr ago and a possible SMC crossing of the LMC disk plane ~400 Myr ago, likely do not perturb stars that today comprise the arm. Historical interactions with the SMC prior to ~1 Gyr ago may be required to explain some of the observed kinematic properties of the arm, in particular its strongly negative in-plane radial velocity.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-06T23:17:52Z</published>
+    <arxiv:comment>Accepted by MNRAS</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <author>
+      <name>L. R. Cullinane</name>
+    </author>
+    <author>
+      <name>A. D. Mackey</name>
+    </author>
+    <author>
+      <name>G. S. Da Costa</name>
+    </author>
+    <author>
+      <name>D. Erkal</name>
+    </author>
+    <author>
+      <name>S. E. Koposov</name>
+    </author>
+    <author>
+      <name>V. Belokurov</name>
+    </author>
+    <arxiv:doi>10.1093/mnras/stab3350</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1093/mnras/stab3350" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2105.13433v2</id>
+    <title>Stochastic resonance and amplification in the ac driven Duffing oscillator with added noise</title>
+    <updated>2021-06-06T15:22:25Z</updated>
+    <link href="https://arxiv.org/abs/2105.13433v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2105.13433v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Stochastic resonance (SR) is a coherence enhancement effect due to noise that occurs in periodically-driven nonlinear dynamical systems. A very broad range of physical and biological systems present this effect such as climate change, neurons, neural networks, lasers, SQUIDS, and tunnel diodes, among many others. Early theoretical models of SR dealt only with overdamped bistable oscillators. Here, we propose a simple model that accounts for SR in an underdamped driven Duffing oscillator with added white noise. Furthermore, we develop a theoretical method to predict the effect of white noise on the pump, signal, and idler responses of a Duffing amplifier. We also calculate the power spectral density of the response of the Duffing amplifier. This approach may prove to be useful for assessing the robustness of acoustic, phononic, or mechanical frequency-comb generation to the presence of noise.</summary>
+    <category term="nlin.PS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-05-27T20:19:30Z</published>
+    <arxiv:comment>27 pages, 12 figures Corrected and added a few citations</arxiv:comment>
+    <arxiv:primary_category term="nlin.PS"/>
+    <author>
+      <name>Adriano A. Batista</name>
+    </author>
+    <author>
+      <name>A. A. Lisboa de Souza</name>
+    </author>
+    <author>
+      <name>Raoni S. N. Moreira</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.05274v2</id>
+    <title>Higher cup products on hypercubic lattices: application to lattice models of topological phases</title>
+    <updated>2022-03-28T18:28:07Z</updated>
+    <link href="https://arxiv.org/abs/2106.05274v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.05274v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we derive the explicit formula for higher cup products on hypercubic lattices, based on the recently developed geometrical interpretation in the simplicial case. We illustrate how this formalism can elucidate lattice constructions on hypercubic lattices for various models and deriving them from spacetime actions. In particular, we demonstrate explicitly that the (3+1)D SPT $S = \frac{1}{2} \int w_2^2 + w_1^4$ (where $w_1$ and $w_2$ are the first and second Stiefel-Whitney classes) is dual to the 3-fermion Walker-Wang model constructed on the cubic lattice by Burnell-Chen-Fidkowski-Vishwanath. Other examples include the double-semion model, and also the `fermionic' toric code in arbitrary dimensions on hypercubic lattices. In addition, we extend previous constructions of exact boson-fermion dualities and the Gu-Wen Grassmann Integral to arbitrary dimensions. Another result which may be of independent interest is a derivation of a cochain-level action for the generalized double-semion model, reproducing a recently derived action on the cohomology level.</summary>
+    <category term="cond-mat.str-el" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-09T18:00:00Z</published>
+    <arxiv:comment>56 pages, 26 figures, v2: corrected typos</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.str-el"/>
+    <arxiv:journal_ref>J. Math. Phys. 64, 091902 (2023)</arxiv:journal_ref>
+    <author>
+      <name>Yu-An Chen</name>
+    </author>
+    <author>
+      <name>Sri Tata</name>
+    </author>
+    <arxiv:doi>10.1063/5.0095189</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/5.0095189" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.04523v4</id>
+    <title>Near-squares in binary recurrence sequences</title>
+    <updated>2024-01-04T17:46:58Z</updated>
+    <link href="https://arxiv.org/abs/2106.04523v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.04523v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We call an integer a \emph{near-square} if its absolute value is a square or a prime times a square. We investigate such near-squares in the binary recurrence sequences defined for integers $a \geq 3$ by $u_{0}(a)=0$, $u_{1}(a)=1$ and $u_{n+2}(a)=au_{n+1}(a)-u_{n}(a)$ for $n \geq 0$. We show that for a given $a \geq 3$, there is at most one $n \geq 5$ such that $u_{n}(a)$ is a near-square. With the exceptions of $u_{6}(3)=12^{2}$ and $u_{7}(6)=239 \cdot 13^{2}$, any such $u_{n}(a)$ can only be a near-square if $a \equiv 2 \bmod 4$, $n \equiv 3 \bmod 4$ is prime and $n \geq 19$.
+  This is part of a more general phenomenon regarding near-squares in non-degenerate recurrence sequences defined for integers $a$ and $b=-b_{1}^{2}$ by $u_{0}(a,b)=0$, $u_{1}(a,b)=1$ and $u_{n+2}(a,b)=au_{n+1}(a,b)+bu_{n}(a,b)$ for $n \geq 0$ (see our Conjecture 1.1). It arises from a new Aurifeuillean-like factorization of elements of recurrence sequences that we have discovered (see relation (1.1)).</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-08T17:02:32Z</published>
+    <arxiv:comment>27 pages. This version corrects a few not serious misprints of the previous (2 Nov. 2023) one. To appear in Int. J. Number Theory</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Nikos Tzanakis</name>
+    </author>
+    <author>
+      <name>Paul Voutier</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.15021v4</id>
+    <title>Formalizing the Face Lattice of Polyhedra</title>
+    <updated>2022-05-17T07:08:02Z</updated>
+    <link href="https://arxiv.org/abs/2104.15021v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.15021v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Faces play a central role in the combinatorial and computational aspects of polyhedra. In this paper, we present the first formalization of faces of polyhedra in the proof assistant Coq. This builds on the formalization of a library providing the basic constructions and operations over polyhedra, including projections, convex hulls and images under linear maps. Moreover, we design a special mechanism which automatically introduces an appropriate representation of a polyhedron or a face, depending on the context of the proof. We demonstrate the usability of this approach by establishing some of the most important combinatorial properties of faces, namely that they constitute a family of graded atomistic and coatomistic lattices closed under interval sublattices. We also prove a theorem due to Balinski on the $d$-connectedness of the adjacency graph of polytopes of dimension $d$.</summary>
+    <category term="cs.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-30T14:19:11Z</published>
+    <arxiv:primary_category term="cs.LO"/>
+    <arxiv:journal_ref>Logical Methods in Computer Science, Volume 18, Issue 2 (May 18, 2022) lmcs:7436</arxiv:journal_ref>
+    <author>
+      <name>Xavier Allamigeon</name>
+    </author>
+    <author>
+      <name>Ricardo D. Katz</name>
+    </author>
+    <author>
+      <name>Pierre-Yves Strub</name>
+    </author>
+    <arxiv:doi>10.46298/lmcs-18(2:10)2022</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.46298/lmcs-18(2:10)2022" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.04524v1</id>
+    <title>A factor matching of optimal tail between Poisson processes</title>
+    <updated>2021-06-08T17:03:24Z</updated>
+    <link href="https://arxiv.org/abs/2106.04524v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.04524v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Consider two independent Poisson point processes of unit intensity in the Euclidean space of dimension $d$ at least 3. We construct a perfect matching between the two point sets that is a factor (i.e., an equivariant measurable function of the point configurations), and with the property that the distance between a configuration point and its pair has a tail distribution that decays as fast as possible, namely, as $b\exp (-cr^d)$ with suitable constants $b,c&gt;0$. Our proof relies on two earlier results: an allocation rule of similar tail for a Poisson point process, and a recent theorem that enables one to obtain perfect matchings from fractional perfect matchings in our setup.</summary>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-08T17:03:24Z</published>
+    <arxiv:comment>5 pages</arxiv:comment>
+    <arxiv:primary_category term="math.PR"/>
+    <arxiv:journal_ref>Combinatorica, 2023, 43 (2), 421-427</arxiv:journal_ref>
+    <author>
+      <name>Adam Timar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.09721v2</id>
+    <title>Divergences in gravitational-wave emission and absorption from extreme mass ratio binaries</title>
+    <updated>2021-09-13T14:59:27Z</updated>
+    <link href="https://arxiv.org/abs/2106.09721v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.09721v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A powerful technique to calculate gravitational radiation from binary systems involves a perturbative expansion: if the masses of the two bodies are very different, the "small" body is treated as a point particle of mass $m_p$ moving in the gravitational field generated by the large mass $M$, and one keeps only linear terms in the small mass ratio $m_p/M$. This technique usually yields finite answers, which are often in good agreement with fully nonlinear numerical relativity results, even when extrapolated to nearly comparable mass ratios. Here we study two situations in which the point-particle approximation yields a divergent result: the instantaneous flux emitted by a small body as it orbits the light ring of a black hole, and the total energy absorbed by the horizon when a small body plunges into a black hole. By integrating the Teukolsky (or Zerilli/Regge-Wheeler) equations in the frequency and time domains we show that both of these quantities diverge. We find that these divergences are an artifact of the point-particle idealization, and are able to interpret and regularize this behavior by introducing a finite size for the point particle. These divergences do not play a role in black-hole imaging, e.g. by the Event Horizon Telescope.</summary>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.HE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-17T18:00:00Z</published>
+    <arxiv:comment>11 pages, 6 figures, matches version published in Physical Review D</arxiv:comment>
+    <arxiv:primary_category term="gr-qc"/>
+    <arxiv:journal_ref>Phys. Rev. D 104, 064031 (2021)</arxiv:journal_ref>
+    <author>
+      <name>Enrico Barausse</name>
+    </author>
+    <author>
+      <name>Emanuele Berti</name>
+    </author>
+    <author>
+      <name>Vitor Cardoso</name>
+    </author>
+    <author>
+      <name>Scott A. Hughes</name>
+    </author>
+    <author>
+      <name>Gaurav Khanna</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.104.064031</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.104.064031" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.08947v2</id>
+    <title>Integrals of differences of subharmonic functions. I. An integral inequality with Nevanlinna characteristic and modulus of continuity of measure</title>
+    <updated>2021-06-25T17:25:44Z</updated>
+    <link href="https://arxiv.org/abs/2106.08947v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.08947v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We obtain new integral inequalities for the integrals of the difference of subharmonic functions in measure through their Nevanlinna characteristic and some functional characteristic of the measure. These results are new also for meromorphic functions. Let us illustrate the main result for the case of a meromorphic function. We denote by $D_z(r)$ a closed disc of radius $r$ centered at $z$ in the complex plane $\mathbb C$. Let $μ\geq 0$ be a Borel measure on $D_0(r)$, and $M:=μ(D_0(r))&lt;+\infty$. The modulus of continuity of measure $μ$ is the function $h(t):=\sup_{z\in \mathbb C}μ(D_z(t)), \quad t\geq 0.$ Suppose that $\int_0\frac{h(t)}{t} dt&lt;+\infty$. Let $f\neq 0$ be a meromorphic function on a neighbourhood of $D_0(R)$ of radius $R&gt;r$ with $f(0)\in \mathbb C$ and the Nevanlinna characteristic $T_f$ . Then there is $$\int \ln^+|f| \,dμ\leq 2\frac{R+r}{R-r}T_f(R)M\biggl(1+\int_0^{R+r}\frac{h(t)}{t} dt\biggr).$$</summary>
+    <category term="math.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-05-25T11:07:58Z</published>
+    <arxiv:comment>14 pages, in Russian</arxiv:comment>
+    <arxiv:primary_category term="math.CV"/>
+    <author>
+      <name>B. N. Khabibullin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.04554v2</id>
+    <title>A Survey of Transformers</title>
+    <updated>2021-06-15T07:56:19Z</updated>
+    <link href="https://arxiv.org/abs/2106.04554v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.04554v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformers have achieved great success in many artificial intelligence fields, such as natural language processing, computer vision, and audio processing. Therefore, it is natural to attract lots of interest from academic and industry researchers. Up to the present, a great variety of Transformer variants (a.k.a. X-formers) have been proposed, however, a systematic and comprehensive literature review on these Transformer variants is still missing. In this survey, we provide a comprehensive review of various X-formers. We first briefly introduce the vanilla Transformer and then propose a new taxonomy of X-formers. Next, we introduce the various X-formers from three perspectives: architectural modification, pre-training, and applications. Finally, we outline some potential directions for future research.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-08T17:43:08Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Tianyang Lin</name>
+    </author>
+    <author>
+      <name>Yuxin Wang</name>
+    </author>
+    <author>
+      <name>Xiangyang Liu</name>
+    </author>
+    <author>
+      <name>Xipeng Qiu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.03858v1</id>
+    <title>Discovery and origins of giant optical nebulae surrounding quasar PKS 0454-22</title>
+    <updated>2021-06-07T18:00:00Z</updated>
+    <link href="https://arxiv.org/abs/2106.03858v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.03858v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We report optical integral-field spectroscopy in the field of one of the most luminous quasars in the $z &lt; 1$ Universe, PKS0454-22, with the Multi-Unit Spectroscopic Explorer. These data enable the discovery of three large ionized nebulae emitting in [O II], H$β$, and [O III] with projected areas of $1720, \ 1520,$ and $130 \ \mathrm{pkpc}^2$, which we refer to as N1, N2, and N3, respectively. N1 spatially and kinematically surrounds the quasar host and five nearby galaxies. The morphology and kinematics of N1 are most consistent with stripped interstellar medium resulting from ongoing interactions. Its ionization properties can be explained by quasar photoionization. N2 spatially and kinematically surrounds two galaxies which are at projected distances of $d \approx 90 \ \mathrm{pkpc}$ and line-of-sight velocities of $Δv \approx +1410\ \mathrm{km\ s^{-1}}$ from the quasar. The morphology and kinematics of N2 are also consistent with stripped interstellar medium. However, its ionization state requires additional ionization sources beyond the quasar, likely from fast shocks as it moves through the hot halo associated with a galaxy over-density around the quasar. N3 is not coincident with any galaxies with secure redshifts, and may arise from a cool gas structure in the intragroup medium or a dwarf galaxy. These large ionized nebulae demonstrate that interactions can produce cool gas structures on halo scales, while also possibly facilitating quasar fueling. The growing availability of wide-area integral field spectroscopic data will continue to reveal the morphologies, kinematics, and conditions of the gas flows, which may fuel galaxy and black hole growth.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-07T18:00:00Z</published>
+    <arxiv:comment>Accepted to MNRAS; main text 16 pages, 7 figures and 2 tables; appendix 2 pages and 2 figures</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <arxiv:journal_ref>MNRAS, Volume 505, Issue 4, pages 5497-5513 (2021)</arxiv:journal_ref>
+    <author>
+      <name>Jakob M. Helton</name>
+    </author>
+    <author>
+      <name>Sean D. Johnson</name>
+    </author>
+    <author>
+      <name>Jenny E. Greene</name>
+    </author>
+    <author>
+      <name>Hsiao-Wen Chen</name>
+    </author>
+    <arxiv:doi>10.1093/mnras/stab1647</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1093/mnras/stab1647" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.07704v4</id>
+    <title>Efficient (Soft) Q-Learning for Text Generation with Limited Good Data</title>
+    <updated>2022-10-22T13:32:13Z</updated>
+    <link href="https://arxiv.org/abs/2106.07704v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.07704v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Maximum likelihood estimation (MLE) is the predominant algorithm for training text generation models. This paradigm relies on direct supervision examples, which is not applicable to many emerging applications, such as generating adversarial attacks or generating prompts to control language models. Reinforcement learning (RL) on the other hand offers a more flexible solution by allowing users to plug in arbitrary task metrics as reward. Yet previous RL algorithms for text generation, such as policy gradient (on-policy RL) and Q-learning (off-policy RL), are often notoriously inefficient or unstable to train due to the large sequence space and the sparse reward received only at the end of sequences. In this paper, we introduce a new RL formulation for text generation from the soft Q-learning (SQL) perspective. It enables us to draw from the latest RL advances, such as path consistency learning, to combine the best of on-/off-policy updates, and learn effectively from sparse reward. We apply the approach to a wide range of novel text generation tasks, including learning from noisy/negative examples, adversarial attacks, and prompt generation. Experiments show our approach consistently outperforms both task-specialized algorithms and the previous RL methods.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-14T18:48:40Z</published>
+    <arxiv:comment>Code available at https://github.com/HanGuo97/soft-Q-learning-for-text-generation</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Han Guo</name>
+    </author>
+    <author>
+      <name>Bowen Tan</name>
+    </author>
+    <author>
+      <name>Zhengzhong Liu</name>
+    </author>
+    <author>
+      <name>Eric P. Xing</name>
+    </author>
+    <author>
+      <name>Zhiting Hu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.04525v1</id>
+    <title>A critical look at the current train/test split in machine learning</title>
+    <updated>2021-06-08T17:07:20Z</updated>
+    <link href="https://arxiv.org/abs/2106.04525v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.04525v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The randomized or cross-validated split of training and testing sets has been adopted as the gold standard of machine learning for decades. The establishment of these split protocols are based on two assumptions: (i)-fixing the dataset to be eternally static so we could evaluate different machine learning algorithms or models; (ii)-there is a complete set of annotated data available to researchers or industrial practitioners. However, in this article, we intend to take a closer and critical look at the split protocol itself and point out its weakness and limitation, especially for industrial applications. In many real-world problems, we must acknowledge that there are numerous situations where assumption (ii) does not hold. For instance, for interdisciplinary applications like drug discovery, it often requires real lab experiments to annotate data which poses huge costs in both time and financial considerations. In other words, it can be very difficult or even impossible to satisfy assumption (ii). In this article, we intend to access this problem and reiterate the paradigm of active learning, and investigate its potential on solving problems under unconventional train/test split protocols. We further propose a new adaptive active learning architecture (AAL) which involves an adaptation policy, in comparison with the traditional active learning that only unidirectionally adds data points to the training pool. We primarily justify our points by extensively investigating an interdisciplinary drug-protein binding problem. We additionally evaluate AAL on more conventional machine learning benchmarking datasets like CIFAR-10 to demonstrate the generalizability and efficacy of the new framework.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-08T17:07:20Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jimin Tan</name>
+      <arxiv:affiliation>Junbo</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jianan Yang</name>
+      <arxiv:affiliation>Junbo</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sai Wu</name>
+      <arxiv:affiliation>Junbo</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Gang Chen</name>
+      <arxiv:affiliation>Junbo</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jake Zhao</name>
+      <arxiv:affiliation>Junbo</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.01904v1</id>
+    <title>Representing Syntax and Composition with Geometric Transformations</title>
+    <updated>2021-06-03T14:53:34Z</updated>
+    <link href="https://arxiv.org/abs/2106.01904v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.01904v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The exploitation of syntactic graphs (SyGs) as a word's context has been shown to be beneficial for distributional semantic models (DSMs), both at the level of individual word representations and in deriving phrasal representations via composition. However, notwithstanding the potential performance benefit, the syntactically-aware DSMs proposed to date have huge numbers of parameters (compared to conventional DSMs) and suffer from data sparsity. Furthermore, the encoding of the SyG links (i.e., the syntactic relations) has been largely limited to linear maps. The knowledge graphs' literature, on the other hand, has proposed light-weight models employing different geometric transformations (GTs) to encode edges in a knowledge graph (KG). Our work explores the possibility of adopting this family of models to encode SyGs. Furthermore, we investigate which GT better encodes syntactic relations, so that these representations can be used to enhance phrase-level composition via syntactic contextualisation.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-03T14:53:34Z</published>
+    <arxiv:comment>to appear in Findings of ACL 2021</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Lorenzo Bertolini</name>
+    </author>
+    <author>
+      <name>Julie Weeds</name>
+    </author>
+    <author>
+      <name>David Weir</name>
+    </author>
+    <author>
+      <name>Qiwei Peng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2105.10648v1</id>
+    <title>Deconfounded Recommendation for Alleviating Bias Amplification</title>
+    <updated>2021-05-22T06:20:39Z</updated>
+    <link href="https://arxiv.org/abs/2105.10648v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2105.10648v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recommender systems usually amplify the biases in the data. The model learned from historical interactions with imbalanced item distribution will amplify the imbalance by over-recommending items from the major groups. Addressing this issue is essential for a healthy ecosystem of recommendation in the long run. Existing works apply bias control to the ranking targets (e.g., calibration, fairness, and diversity), but ignore the true reason for bias amplification and trade-off the recommendation accuracy.
+  In this work, we scrutinize the cause-effect factors for bias amplification, identifying the main reason lies in the confounder effect of imbalanced item distribution on user representation and prediction score. The existence of such confounder pushes us to go beyond merely modeling the conditional probability and embrace the causal modeling for recommendation. Towards this end, we propose a Deconfounded Recommender System (DecRS), which models the causal effect of user representation on the prediction score. The key to eliminating the impact of the confounder lies in backdoor adjustment, which is however difficult to do due to the infinite sample space of the confounder. For this challenge, we contribute an approximation operator for backdoor adjustment which can be easily plugged into most recommender models. Lastly, we devise an inference strategy to dynamically regulate backdoor adjustment according to user status. We instantiate DecRS on two representative models FM and NFM, and conduct extensive experiments over two benchmarks to validate the superiority of our proposed DecRS.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-05-22T06:20:39Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <arxiv:journal_ref>Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discoveryand Data Mining (KDD 2021)</arxiv:journal_ref>
+    <author>
+      <name>Wenjie Wang</name>
+    </author>
+    <author>
+      <name>Fuli Feng</name>
+    </author>
+    <author>
+      <name>Xiangnan He</name>
+    </author>
+    <author>
+      <name>Xiang Wang</name>
+    </author>
+    <author>
+      <name>Tat-Seng Chua</name>
+    </author>
+    <arxiv:doi>10.1145/3447548.3467249</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3447548.3467249" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.11621v1</id>
+    <title>Near-Delaunay Metrics</title>
+    <updated>2021-06-22T09:11:26Z</updated>
+    <link href="https://arxiv.org/abs/2106.11621v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.11621v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study metrics that assess how close a triangulation is to being a Delaunay triangulation, for use in contexts where a good triangulation is desired but constraints (e.g., maximum degree) prevent the use of the Delaunay triangulation itself. Our near-Delaunay metrics derive from common Delaunay properties and satisfy a basic set of design criteria, such as being invariant under similarity transformations. We compare the metrics, showing that each can make different judgments as to which triangulation is closer to Delaunay. We also present a preliminary experiment, showing how optimizing for these metrics under different constraints gives similar, but not necessarily identical results, on random and constructed small point sets.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-22T09:11:26Z</published>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Nathan van Beusekom</name>
+    </author>
+    <author>
+      <name>Kevin Buchin</name>
+    </author>
+    <author>
+      <name>Hidde Koerts</name>
+    </author>
+    <author>
+      <name>Wouter Meulemans</name>
+    </author>
+    <author>
+      <name>Benjamin Rodatz</name>
+    </author>
+    <author>
+      <name>Bettina Speckmann</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.08978v1</id>
+    <title>Pattern recognition in Deep Boltzmann machines</title>
+    <updated>2021-06-16T17:19:59Z</updated>
+    <link href="https://arxiv.org/abs/2106.08978v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.08978v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider a multi-layer Sherrington-Kirkpatrick spin-glass as a model for deep restricted Boltzmann machines and we solve for its quenched free energy, in the thermodynamic limit and allowing for a first step of replica symmetry breaking. This result is accomplished rigorously exploiting interpolating techniques and recovering the expression already known for the replica-symmetry case. Further, we drop the restriction constraint by introducing intra-layer connections among spins and we show that the resulting system can be mapped into a modular Hopfield network, which is also addressed rigorously via interpolating techniques up to the first step of replica symmetry breaking.</summary>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-16T17:19:59Z</published>
+    <arxiv:comment>24 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.dis-nn"/>
+    <arxiv:journal_ref>Journal of Physics A: Mathematical and Theoretical, Volume 54, Number 50 (2021)</arxiv:journal_ref>
+    <author>
+      <name>Elena Agliari</name>
+    </author>
+    <author>
+      <name>Linda Albanese</name>
+    </author>
+    <author>
+      <name>Francesco Alemanno</name>
+    </author>
+    <author>
+      <name>Alberto Fachechi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.07328v2</id>
+    <title>An energy decomposition theorem for matrices and related questions</title>
+    <updated>2021-06-25T17:54:52Z</updated>
+    <link href="https://arxiv.org/abs/2106.07328v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.07328v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given $A\subseteq GL_2(\mathbb{F}_q)$, we prove that there exist disjoint subsets $B, C\subseteq A$ such that $A = B \sqcup C$ and their additive and multiplicative energies satisfying \[ \max\{\,E_{+}(B),\, E_{\times}(C)\,\}\ll \frac{|A|^3}{M(|A|)}, \] where \begin{equation*} \label{eqn:MAminBVPolyLSSS}
+  M(|A|) = \min\Bigg\{\,\frac{q^{4/3}}{|A|^{1/3}(\log|A|)^{2/3}},\, \frac{|A|^{4/5}}{q^{13/5}(\log|A|)^{27/10}}\,\Bigg\}. \end{equation*} We also study some related questions on moderate expanders over matrix rings, namely, for $A, B, C\subseteq GL_2(\mathbb{F}_q)$, we have \[|AB+C|, ~|(A+B)C|\gg q^4,\] whenever $|A||B||C|\gg q^{10 + 1/2}$. These improve earlier results due to Karabulut, Koh, Pham, Shen, and Vinh (2019).</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-14T12:09:57Z</published>
+    <arxiv:comment>18 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Ali Mohammadi</name>
+    </author>
+    <author>
+      <name>Thang Pham</name>
+    </author>
+    <author>
+      <name>Yiting Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2105.14688v1</id>
+    <title>Learning to Expand Audience via Meta Hybrid Experts and Critics for Recommendation and Advertising</title>
+    <updated>2021-05-31T03:43:10Z</updated>
+    <link href="https://arxiv.org/abs/2105.14688v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2105.14688v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In recommender systems and advertising platforms, marketers always want to deliver products, contents, or advertisements to potential audiences over media channels such as display, video, or social. Given a set of audiences or customers (seed users), the audience expansion technique (look-alike modeling) is a promising solution to identify more potential audiences, who are similar to the seed users and likely to finish the business goal of the target campaign. However, look-alike modeling faces two challenges: (1) In practice, a company could run hundreds of marketing campaigns to promote various contents within completely different categories every day, e.g., sports, politics, society. Thus, it is difficult to utilize a common method to expand audiences for all campaigns. (2) The seed set of a certain campaign could only cover limited users. Therefore, a customized approach based on such a seed set is likely to be overfitting.
+  In this paper, to address these challenges, we propose a novel two-stage framework named Meta Hybrid Experts and Critics (MetaHeac) which has been deployed in WeChat Look-alike System. In the offline stage, a general model which can capture the relationships among various tasks is trained from a meta-learning perspective on all existing campaign tasks. In the online stage, for a new campaign, a customized model is learned with the given seed set based on the general model. According to both offline and online experiments, the proposed MetaHeac shows superior effectiveness for both content marketing campaigns in recommender systems and advertising campaigns in advertising platforms. Besides, MetaHeac has been successfully deployed in WeChat for the promotion of both contents and advertisements, leading to great improvement in the quality of marketing. The code has been available at \url{https://github.com/easezyc/MetaHeac}.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-05-31T03:43:10Z</published>
+    <arxiv:comment>accepted by KDD2021</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Yongchun Zhu</name>
+    </author>
+    <author>
+      <name>Yudan Liu</name>
+    </author>
+    <author>
+      <name>Ruobing Xie</name>
+    </author>
+    <author>
+      <name>Fuzhen Zhuang</name>
+    </author>
+    <author>
+      <name>Xiaobo Hao</name>
+    </author>
+    <author>
+      <name>Kaikai Ge</name>
+    </author>
+    <author>
+      <name>Xu Zhang</name>
+    </author>
+    <author>
+      <name>Leyu Lin</name>
+    </author>
+    <author>
+      <name>Juan Cao</name>
+    </author>
+    <arxiv:doi>10.1145/3447548.3467093</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3447548.3467093" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.04520v2</id>
+    <title>MVT: Mask Vision Transformer for Facial Expression Recognition in the wild</title>
+    <updated>2021-07-10T13:03:06Z</updated>
+    <link href="https://arxiv.org/abs/2106.04520v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.04520v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Facial Expression Recognition (FER) in the wild is an extremely challenging task in computer vision due to variant backgrounds, low-quality facial images, and the subjectiveness of annotators. These uncertainties make it difficult for neural networks to learn robust features on limited-scale datasets. Moreover, the networks can be easily distributed by the above factors and perform incorrect decisions. Recently, vision transformer (ViT) and data-efficient image transformers (DeiT) present their significant performance in traditional classification tasks. The self-attention mechanism makes transformers obtain a global receptive field in the first layer which dramatically enhances the feature extraction capability. In this work, we first propose a novel pure transformer-based mask vision transformer (MVT) for FER in the wild, which consists of two modules: a transformer-based mask generation network (MGN) to generate a mask that can filter out complex backgrounds and occlusion of face images, and a dynamic relabeling module to rectify incorrect labels in FER datasets in the wild. Extensive experimental results demonstrate that our MVT outperforms state-of-the-art methods on RAF-DB with 88.62%, FERPlus with 89.22%, and AffectNet-7 with 64.57%, respectively, and achieves a comparable result on AffectNet-8 with 61.40%.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-08T16:58:10Z</published>
+    <arxiv:comment>11 pages, 6 figures, 5 tables, conference</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Hanting Li</name>
+    </author>
+    <author>
+      <name>Mingzhe Sui</name>
+    </author>
+    <author>
+      <name>Feng Zhao</name>
+    </author>
+    <author>
+      <name>Zhengjun Zha</name>
+    </author>
+    <author>
+      <name>Feng Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.08274v2</id>
+    <title>Elasticity Based Demand Forecasting and Price Optimization for Online Retail</title>
+    <updated>2021-06-16T02:40:03Z</updated>
+    <link href="https://arxiv.org/abs/2106.08274v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.08274v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study a problem of an online retailer who observes the unit sales of a product, and dynamically changes the retail price, in order to maximize the expected revenue. Assuming the demand of the product is price sensitive, we are interested in the optimal pricing policy when future demand is uncertain. We build a system to investigate the relationship between retail price and demand and estimate the demand function. The system predicts demand and revenue at a given retail price. We formulate a revenue maximization problem over a discrete finite time horizon with discrete retail price. The optimal pricing policy is solved based on the predicted demand and revenue values. With computational experiments, we investigate the effect of optimal pricing policy to inventory management.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-03T22:23:32Z</published>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Chengcheng Liu</name>
+    </author>
+    <author>
+      <name>Mátyás A. Sustik</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.07715v1</id>
+    <title>How to Test the Randomness from the Wireless Channel for Security?</title>
+    <updated>2021-06-14T19:23:21Z</updated>
+    <link href="https://arxiv.org/abs/2106.07715v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.07715v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We revisit the traditional framework of wireless secret key generation, where two parties leverage the wireless channel randomness to establish a secret key. The essence in the framework is to quantify channel randomness into bit sequences for key generation. Conducting randomness tests on such bit sequences has been a common practice to provide the confidence to validate whether they are random. Interestingly, despite different settings in the tests, existing studies interpret the results the same: passing tests means that the bit sequences are indeed random.
+  In this paper, we investigate how to properly test the wireless channel randomness to ensure enough security strength and key generation efficiency. In particular, we define an adversary model that leverages the imperfect randomness of the wireless channel to search the generated key, and create a guideline to set up randomness testing and privacy amplification to eliminate security loss and achieve efficient key generation rate. We use theoretical analysis and comprehensive experiments to reveal that common practice misuses randomness testing and privacy amplification: (i) no security insurance of key strength, (ii) low efficiency of key generation rate. After revision by our guideline, security loss can be eliminated and key generation rate can be increased significantly.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-14T19:23:21Z</published>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Zhe Qu</name>
+    </author>
+    <author>
+      <name>Shangqing Zhao</name>
+    </author>
+    <author>
+      <name>Jie Xu</name>
+    </author>
+    <author>
+      <name>Zhuo Lu</name>
+    </author>
+    <author>
+      <name>Yao Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2105.12345v1</id>
+    <title>Generalized Polya's theorem on connected locally compact Abelian groups of dimension 1</title>
+    <updated>2021-05-26T06:15:59Z</updated>
+    <link href="https://arxiv.org/abs/2105.12345v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2105.12345v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>According to the generalized Polya theorem, the Gaussian distribution on the real line is characterized by the property of equidistribution of a monomial and a linear form of independent identically distributed random variables. We give a complete description of a-adic solenoids for which an analog of this theorem is true. The proof of the main theorem is reduced to solving some functional equation in the class of continuous positive definite functions on the character group of an a-adic solenoid</summary>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-05-26T06:15:59Z</published>
+    <arxiv:primary_category term="math.PR"/>
+    <author>
+      <name>G. M. Feldman</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.09876v2</id>
+    <title>Anomaly Detection in Dynamic Graphs via Transformer</title>
+    <updated>2021-10-27T23:06:41Z</updated>
+    <link href="https://arxiv.org/abs/2106.09876v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.09876v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Detecting anomalies for dynamic graphs has drawn increasing attention due to their wide applications in social networks, e-commerce, and cybersecurity. Recent deep learning-based approaches have shown promising results over shallow methods. However, they fail to address two core challenges of anomaly detection in dynamic graphs: the lack of informative encoding for unattributed nodes and the difficulty of learning discriminate knowledge from coupled spatial-temporal dynamic graphs. To overcome these challenges, in this paper, we present a novel Transformer-based Anomaly Detection framework for DYnamic graphs (TADDY). Our framework constructs a comprehensive node encoding strategy to better represent each node's structural and temporal roles in an evolving graphs stream. Meanwhile, TADDY captures informative representation from dynamic graphs with coupled spatial-temporal patterns via a dynamic graph transformer model. The extensive experimental results demonstrate that our proposed TADDY framework outperforms the state-of-the-art methods by a large margin on six real-world datasets.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-18T02:27:19Z</published>
+    <arxiv:comment>13 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yixin Liu</name>
+    </author>
+    <author>
+      <name>Shirui Pan</name>
+    </author>
+    <author>
+      <name>Yu Guang Wang</name>
+    </author>
+    <author>
+      <name>Fei Xiong</name>
+    </author>
+    <author>
+      <name>Liang Wang</name>
+    </author>
+    <author>
+      <name>Qingfeng Chen</name>
+    </author>
+    <author>
+      <name>Vincent CS Lee</name>
+    </author>
+    <arxiv:doi>10.1109/TKDE.2021.3124061</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/TKDE.2021.3124061" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.09718v1</id>
+    <title>A Detection Threshold in the Amplitude Spectra Calculated from TESS Time-Series Data</title>
+    <updated>2021-06-17T17:59:59Z</updated>
+    <link href="https://arxiv.org/abs/2106.09718v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.09718v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present results of time-series data simulation. We aimed at estimating the threshold used for detecting signals in amplitude spectra, calculated from simulating TESS photometry of up to one year duration. We selected the threshold at a false alarm probability FAP=0.1% and derived S/N ratios between 4.6 and 5.7 depending on the data cadence and coverage. We also provide a formula to estimate the threshold for any FAP adopted and a given number of data points. Our result confirms that, to avoid spurious detection, space-based photometry may require substantially higher S/N than that typically being employed for ground-based data.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-17T17:59:59Z</published>
+    <arxiv:comment>accepted for publication in Acta Astronomica</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>A. S. Baran</name>
+    </author>
+    <author>
+      <name>C. Koen</name>
+    </author>
+    <arxiv:doi>10.32023/0001-5237/71.2.3</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.32023/0001-5237/71.2.3" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.08917v2</id>
+    <title>Differentiable Diffusion for Dense Depth Estimation from Multi-view Images</title>
+    <updated>2021-06-29T15:43:24Z</updated>
+    <link href="https://arxiv.org/abs/2106.08917v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.08917v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a method to estimate dense depth by optimizing a sparse set of points such that their diffusion into a depth map minimizes a multi-view reprojection error from RGB supervision. We optimize point positions, depths, and weights with respect to the loss by differential splatting that models points as Gaussians with analytic transmittance. Further, we develop an efficient optimization routine that can simultaneously optimize the 50k+ points required for complex scene reconstruction. We validate our routine using ground truth data and show high reconstruction quality. Then, we apply this to light field and wider baseline images via self supervision, and show improvements in both average and outlier error for depth maps diffused from inaccurate sparse points. Finally, we compare qualitative and quantitative results to image processing and deep learning methods. http://visual.cs.brown.edu/diffdiffdepth</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-16T16:17:34Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <arxiv:journal_ref>CVPR 2021</arxiv:journal_ref>
+    <author>
+      <name>Numair Khan</name>
+    </author>
+    <author>
+      <name>Min H. Kim</name>
+    </author>
+    <author>
+      <name>James Tompkin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.09276v2</id>
+    <title>Uniform Convergence of Interpolators: Gaussian Width, Norm Bounds, and Benign Overfitting</title>
+    <updated>2022-01-04T00:29:21Z</updated>
+    <link href="https://arxiv.org/abs/2106.09276v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.09276v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider interpolation learning in high-dimensional linear regression with Gaussian data, and prove a generic uniform convergence guarantee on the generalization error of interpolators in an arbitrary hypothesis class in terms of the class's Gaussian width. Applying the generic bound to Euclidean norm balls recovers the consistency result of Bartlett et al. (2020) for minimum-norm interpolators, and confirms a prediction of Zhou et al. (2020) for near-minimal-norm interpolators in the special case of Gaussian data. We demonstrate the generality of the bound by applying it to the simplex, obtaining a novel consistency result for minimum l1-norm interpolators (basis pursuit). Our results show how norm-based generalization bounds can explain and be used to analyze benign overfitting, at least in some settings.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-17T06:58:10Z</published>
+    <arxiv:comment>v2: Minor changes only. As published at NeurIPS 2021: https://proceedings.neurips.cc/paper/2021/hash/ac9815bef801f58de83804bce86984ad-Abstract.html</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Frederic Koehler</name>
+    </author>
+    <author>
+      <name>Lijia Zhou</name>
+    </author>
+    <author>
+      <name>Danica J. Sutherland</name>
+    </author>
+    <author>
+      <name>Nathan Srebro</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.07725v2</id>
+    <title>Generalized kernel distance covariance in high dimensions: non-null CLTs and power universality</title>
+    <updated>2024-08-01T20:27:30Z</updated>
+    <link href="https://arxiv.org/abs/2106.07725v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.07725v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Distance covariance is a popular dependence measure for two random vectors $X$ and $Y$ of possibly different dimensions and types. Recent years have witnessed concentrated efforts in the literature to understand the distributional properties of the sample distance covariance in a high-dimensional setting, with an exclusive emphasis on the null case that $X$ and $Y$ are independent. This paper derives the first non-null central limit theorem for the sample distance covariance, and the more general sample (Hilbert-Schmidt) kernel distance covariance in high dimensions, primarily in the Gaussian case. The new non-null central limit theorem yields an asymptotically exact first-order power formula for the widely used generalized kernel distance correlation test of independence between $X$ and $Y$. The power formula in particular unveils an interesting universality phenomenon: the power of the generalized kernel distance correlation test is completely determined by $n\cdot \text{dcor}^2(X,Y)/\sqrt{2}$ in the high dimensional limit, regardless of a wide range of choices of the kernels and bandwidth parameters. Furthermore, this separation rate is also shown to be optimal in a minimax sense. The key step in the proof of the non-null central limit theorem is a precise expansion of the mean and variance of the sample distance covariance in high dimensions, which shows, among other things, that the non-null Gaussian approximation of the sample distance covariance involves a rather subtle interplay between the dimension-to-sample ratio and the dependence between $X$ and $Y$.</summary>
+    <category term="math.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-14T19:42:43Z</published>
+    <arxiv:primary_category term="math.ST"/>
+    <author>
+      <name>Qiyang Han</name>
+    </author>
+    <author>
+      <name>Yandi Shen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.04476v2</id>
+    <title>One Semantic Parser to Parse Them All: Sequence to Sequence Multi-Task Learning on Semantic Parsing Datasets</title>
+    <updated>2021-06-14T10:24:37Z</updated>
+    <link href="https://arxiv.org/abs/2106.04476v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.04476v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Semantic parsers map natural language utterances to meaning representations. The lack of a single standard for meaning representations led to the creation of a plethora of semantic parsing datasets. To unify different datasets and train a single model for them, we investigate the use of Multi-Task Learning (MTL) architectures. We experiment with five datasets (Geoquery, NLMaps, TOP, Overnight, AMR). We find that an MTL architecture that shares the entire network across datasets yields competitive or better parsing accuracies than the single-task baselines, while reducing the total number of parameters by 68%. We further provide evidence that MTL has also better compositional generalization than single-task models. We also present a comparison of task sampling methods and propose a competitive alternative to widespread proportional sampling strategies.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-08T16:03:42Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>The Tenth Joint Conference on Lexical and Computational Semantics (*SEM 2021)</arxiv:journal_ref>
+    <author>
+      <name>Marco Damonte</name>
+    </author>
+    <author>
+      <name>Emilio Monti</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.04567v2</id>
+    <title>Non-Hermitian skin effect of dislocations and its topological origin</title>
+    <updated>2021-12-15T11:38:49Z</updated>
+    <link href="https://arxiv.org/abs/2106.04567v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.04567v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We demonstrate that dislocations in two-dimensional non-Hermitian systems can give rise to density accumulation or depletion through the localization of an extensive number of states. These effects are shown by numerical simulations in a prototype lattice model and expose a different face of non-Hermitian skin effect, by disentangling it from the need for boundaries. We identify a topological invariant responsible for the dislocation skin effect, which takes the form of a ${\mathbb Z}_2$ Hopf index that depends on the Burgers vector characterizing the dislocations. Remarkably, we find that this effect and its corresponding signature for defects in Hermitian systems falls outside of the known topological classification based on bulk-defect correspondence.</summary>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-08T17:54:11Z</published>
+    <arxiv:comment>6+4 pages, 2+2 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mes-hall"/>
+    <arxiv:journal_ref>Phys. Rev. B 104, L241402 (2021)</arxiv:journal_ref>
+    <author>
+      <name>Balaganchi A. Bhargava</name>
+    </author>
+    <author>
+      <name>Ion Cosma Fulga</name>
+    </author>
+    <author>
+      <name>Jeroen van den Brink</name>
+    </author>
+    <author>
+      <name>Ali G. Moghaddam</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevB.104.L241402</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevB.104.L241402" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.04519v2</id>
+    <title>Positive bound states to nonlinear Choquard equations in the presence of nonsymmetric potentials</title>
+    <updated>2021-07-19T07:14:09Z</updated>
+    <link href="https://arxiv.org/abs/2106.04519v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.04519v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The existence of a positive solution to a class of Choquard equations with potential going at a positive limit at infinity possibly from above or oscillating is proved. Our results include the physical case and do not require any symmetry assumptions on the potential.</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-08T16:56:55Z</published>
+    <arxiv:primary_category term="math.AP"/>
+    <author>
+      <name>Liliane Maia</name>
+    </author>
+    <author>
+      <name>Benedetta Pellacci</name>
+    </author>
+    <author>
+      <name>Delia Schiera</name>
+    </author>
+  </entry>
+</feed>

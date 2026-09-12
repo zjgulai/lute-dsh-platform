@@ -1,0 +1,491 @@
+{
+  "batch": "B06",
+  "assignments": [
+    {
+      "name": "amazon-prelaunch-demand-check",
+      "roles": [
+        {
+          "id": "AGT-016",
+          "responsibility": "补货模拟",
+          "confidence": "high",
+          "from_skill": "first-order quantity",
+          "from_role": "补货方案与预测区间",
+          "note": ""
+        },
+        {
+          "id": "AGT-007",
+          "responsibility": "市场机会评估",
+          "confidence": "medium",
+          "from_skill": "Amazon demand before sourcing",
+          "from_role": "发现市场变化与尚未满足的机会",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "amazon-prelaunch-demand-mirror",
+      "roles": [
+        {
+          "id": "AGT-016",
+          "responsibility": "需求预测",
+          "confidence": "high",
+          "from_skill": "so they stock ahead of it",
+          "from_role": "补货方案与预测区间",
+          "note": ""
+        },
+        {
+          "id": "AGT-007",
+          "responsibility": "趋势监测",
+          "confidence": "medium",
+          "from_skill": "trend, seasonality",
+          "from_role": "发现市场变化与尚未满足的机会",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "amazon-prelaunch-listing-builder",
+      "roles": [
+        {
+          "id": "AGT-022",
+          "responsibility": "Listing优化",
+          "confidence": "high",
+          "from_skill": "backend search terms",
+          "from_role": "Listing优化",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "amazon-prelaunch-margin-check",
+      "roles": [
+        {
+          "id": "AGT-041",
+          "responsibility": "经济性分析",
+          "confidence": "high",
+          "from_skill": "Landed cost per unit",
+          "from_role": "经济性分析",
+          "note": ""
+        },
+        {
+          "id": "AGT-009",
+          "responsibility": "商业案例",
+          "confidence": "medium",
+          "from_skill": "GO/CAUTION/NO-GO verdict",
+          "from_role": "把需求变成可检验的产品和商业约束",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "amazon-prelaunch-trend-scout",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "趋势监测",
+          "confidence": "high",
+          "from_skill": "fast-rising Amazon niches",
+          "from_role": "趋势监测",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "analytics",
+      "roles": [
+        {
+          "id": "AGT-046",
+          "responsibility": "数据管道",
+          "confidence": "medium",
+          "from_skill": "set up tracking",
+          "from_role": "数据管道",
+          "note": "埋点与事件追踪是数据采集管道的前端实现，非营销决策本身，故取 medium。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "attribution",
+      "roles": [
+        {
+          "id": "AGT-003",
+          "responsibility": "GMV归因分析",
+          "confidence": "medium",
+          "from_skill": "caused this conversion",
+          "from_role": "GMV归因分析",
+          "note": "本技能为同一套归因方法服务三个岗位：解释GMV来源（经营分析）、归因合作触达效果（达人合作）、判定真实增量（增长实验），故按规则三岗挂载均不取 high。"
+        },
+        {
+          "id": "AGT-035",
+          "responsibility": "增量分析",
+          "confidence": "medium",
+          "from_skill": "增量实验",
+          "from_role": "增量分析",
+          "note": "同上一处说明：归因模型与增量实验同源，服务增长实验的增量判定，三岗挂载故不取 high。"
+        },
+        {
+          "id": "AGT-033",
+          "responsibility": "合作复盘",
+          "confidence": "medium",
+          "from_skill": "actually drives conversions",
+          "from_role": "把合作触达转为可追踪的品牌和销售结果",
+          "note": "既有映射保留：合作效果的可追踪归因依赖本技能的归因口径，三岗挂载故不取 high。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "brand-governance-os",
+      "roles": [
+        {
+          "id": "AGT-044",
+          "responsibility": "宣称审查",
+          "confidence": "medium",
+          "from_skill": "checklists for copy",
+          "from_role": "宣称审查",
+          "note": "既有映射保留：审批与QA清单覆盖文案与产品宣称的合规审查环节。"
+        },
+        {
+          "id": "AGT-029",
+          "responsibility": "品牌定位",
+          "confidence": "medium",
+          "from_skill": "brand governance programs",
+          "from_role": "保持Momcozy定位与市场传播一致",
+          "note": "既有映射保留：治理流程以审批与QA维持定位与传播一致，对上使命，非直接定位作业，故 medium。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "brand-measurement-dashboard",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "品牌反馈",
+          "confidence": "medium",
+          "from_skill": "tracking brand health",
+          "from_role": "品牌反馈",
+          "note": "既有映射保留：品牌健康指标与报告为品牌反馈的度量输入。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "brand-narrative-playbook",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "品牌定位",
+          "confidence": "high",
+          "from_skill": "core messaging pillars",
+          "from_role": "品牌定位",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "brand-voice-glossary",
+      "roles": [
+        {
+          "id": "AGT-028",
+          "responsibility": "术语治理",
+          "confidence": "high",
+          "from_skill": "用词规范",
+          "from_role": "术语治理",
+          "note": "既有两条 AGT-028 映射合并为一条（同岗不重复挂载）：技能产出用词规范与禁忌清单，本条目按术语治理记账；多语言品牌适配与语调维度一致性作为市场语境审查侧的证据并入本条，不另立条目。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "experience-system-blueprint",
+      "roles": [
+        {
+          "id": "AGT-010",
+          "responsibility": "使用旅程",
+          "confidence": "medium",
+          "from_skill": "Auditing touchpoints",
+          "from_role": "将产品需求转为可理解可验证的体验方案",
+          "note": "既有映射保留：蓝图是多触点体验与一致性规范，对上体验方案使命，非逐条旅程作业，故 medium。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "campaign-planning",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "confidence": "high",
+          "from_skill": "multi-channel GTM efforts",
+          "from_role": "传播规划",
+          "note": "新增：活动目标、信息架构、渠道组合与工作计划即传播规划。"
+        },
+        {
+          "id": "AGT-026",
+          "responsibility": "促销规划",
+          "confidence": "medium",
+          "from_skill": "Audience & Offers",
+          "from_role": "在供给和经营边界内设计价格与组合",
+          "note": "新增：offer与人群映射对应促销规划，场景本身归入促销子域。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": [
+        {
+          "id": "AGT-008",
+          "reason": "本技能只做活动策略与brief、KPI、工作计划，正文明确把新品上市分阶段策略转给 launch-strategy，无法承担新品孵化的实验组合责任。"
+        },
+        {
+          "id": "AGT-035",
+          "reason": "本技能无假设、对照组与测量协议，不产出实验设计，无法承担增长实验的实验设计责任。"
+        }
+      ]
+    },
+    {
+      "name": "channel-integration",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "confidence": "medium",
+          "from_skill": "Cadence Alignment",
+          "from_role": "品牌原则与传播方案",
+          "note": "新增：跨渠道信息、节奏与追踪口径的统一属传播方案的执行层。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": [
+        {
+          "id": "AGT-025",
+          "reason": "本技能的渠道指 email/social/paid 等营销渠道的信息与节奏编排，不产出零售与B2B的渠道机会与合作建议，无法承担渠道方案责任。"
+        }
+      ]
+    },
+    {
+      "name": "performance-tracking",
+      "roles": [
+        {
+          "id": "AGT-003",
+          "responsibility": "GMV归因分析",
+          "confidence": "medium",
+          "from_skill": "活动效果评估",
+          "from_role": "带来源的经营分析包",
+          "note": ""
+        },
+        {
+          "id": "AGT-026",
+          "responsibility": "促销规划",
+          "confidence": "medium",
+          "from_skill": "优化促销策略和资源配置",
+          "from_role": "促销规划",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "co-marketing",
+      "roles": [
+        {
+          "id": "AGT-025",
+          "responsibility": "线索评估",
+          "confidence": "medium",
+          "from_skill": "Evaluating partnership fit",
+          "from_role": "线索评估",
+          "note": ""
+        },
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "confidence": "medium",
+          "from_skill": "joint launches or promotions",
+          "from_role": "传播规划",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "battlecard-library",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "confidence": "high",
+          "from_skill": "competitive battlecards",
+          "from_role": "竞品研究",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "executive-briefing-kit",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "confidence": "medium",
+          "from_skill": "competitive threats",
+          "from_role": "竞品研究",
+          "note": "本技能是竞品情报的决策层打包格式，内容仍为竞争研究，故挂竞品但不取 high。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "market-signal-tracker",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "趋势监测",
+          "confidence": "high",
+          "from_skill": "competitor launches",
+          "from_role": "趋势监测",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "win-loss-dataset",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "confidence": "medium",
+          "from_skill": "win/loss insights",
+          "from_role": "竞品研究",
+          "note": "赢单输单数据含对手与失单动因，为竞争研究提供结构性证据，故 medium。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "competitor-profiling",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "confidence": "high",
+          "from_skill": "竞品档案建立",
+          "from_role": "竞品研究",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "case-studies",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "confidence": "medium",
+          "from_skill": "customer stories",
+          "from_role": "将需求与产品事实转成可测试内容",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "editorial-ops",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "confidence": "high",
+          "from_skill": "editorial calendars",
+          "from_role": "传播规划",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "seo-writing",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "confidence": "medium",
+          "from_skill": "pillar/blog content",
+          "from_role": "内容策划",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "storytelling",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "confidence": "medium",
+          "from_skill": "narrative for campaigns",
+          "from_role": "内容策划",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    }
+  ]
+}

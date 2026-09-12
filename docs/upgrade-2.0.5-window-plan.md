@@ -37,8 +37,13 @@
   的 `noImplicitAny:false` 临时宽限收回。
 
 ## 4. UI 家族迁移（品牌/主题/导航）
-- brand：`_37cUPa` / `_q2FAPq` 哈希锚点重探测（2.0.5 若改哈希类生成式，改走
-  settings/theme 官方 token 面），README 补 q2FAPq 记录；
+- brand：~~`_37cUPa` / `_q2FAPq` 哈希锚点重探测~~ **已完成（2026-09-11）**——两个锚改为运行时解析
+  （`_37cUPa_*`→`zNic4G_*`、`q2FAPq_root`→`bxNl9a_root` 由同一份实现覆盖），政策与红线见
+  [architecture.md](architecture.md) 第 2 节第 7 条、决定见 [ADR-0019](adr/ADR-0019.md)、
+  记录见 [Note](notes/implemented/architecture/2026-09-11-root-brand-live-resolver.md)；
+  本次也退役了 `brand-replay.sh` 的 `hero.headline` 锚（品牌句单一真相源）。后续窗口只需做两件事：
+  ① 跑 `pnpm run accept:root-brand`（浏览器验收，含随机新前缀的免疫断言）；
+  ② 仅当 Console 出现 `anchor drift`（说明模块文件名变了）才需重锚模块 id；
 - theme：`:root` 注入面 → 观察 `data-dsh-skin` 出现后的 overrideTokens 契约扩面，再决定
   迁移路径（D 决议：现阶段不动）；
 - team-gui：文案驱动导航（“打开设置”等文本锚）申请宿主官方 API/slot 属性替代；

@@ -1,0 +1,444 @@
+{
+  "batch": "B02",
+  "assignments": [
+    {
+      "name": "video-prompt-guide",
+      "roles": [
+        {
+          "id": "AGT-031",
+          "responsibility": "视频制作协作",
+          "confidence": "high",
+          "from_skill": "视频生成提示词统一路由",
+          "from_role": "视频制作协作",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "image-prompt-guide",
+      "roles": [
+        {
+          "id": "AGT-031",
+          "responsibility": "视觉简报",
+          "confidence": "high",
+          "from_skill": "e-commerce image sets",
+          "from_role": "视觉简报",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "ai-product-designer",
+      "roles": [
+        {
+          "id": "AGT-009",
+          "responsibility": "产品需求定义",
+          "confidence": "medium",
+          "from_skill": "产品概念设计",
+          "from_role": "产品需求定义",
+          "note": "既有先验保留：概念方案是产品需求定义的上游输入，技能产出三档概念与交互逻辑，不产出需求条目、商业案例与范围决策。"
+        },
+        {
+          "id": "AGT-010",
+          "responsibility": "工业设计简报",
+          "confidence": "high",
+          "from_skill": "工业设计方向",
+          "from_role": "工业设计简报",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "higgsfield-guide",
+      "roles": [
+        {
+          "id": "AGT-031",
+          "responsibility": "视频制作协作",
+          "confidence": "medium",
+          "from_skill": "Generate images and videos",
+          "from_role": "视频制作协作",
+          "note": "技能主体是 Higgsfield 平台的凭证与参数接入（工具接入形态），可交付的素材生成能力落在视频制作协作这条责任上。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "content-breakdown",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "confidence": "medium",
+          "from_skill": "结构、钩子与复用套路",
+          "from_role": "内容策划",
+          "note": "拆解产出复用套路与选题跟进建议，作为内容策划的输入；技能不直接交付内容方案，也不做内容实验。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "product-launch-planner",
+      "roles": [
+        {
+          "id": "AGT-008",
+          "responsibility": "阶段投资建议",
+          "confidence": "low",
+          "from_skill": "The 3-Phase Launch",
+          "from_role": "阶段投资建议",
+          "note": "既有先验保留：技能是分阶段发布编排（T-21 到 T+30），只在分阶段资源与节奏上与阶段投资建议间接对应，需人工复核。"
+        },
+        {
+          "id": "AGT-024",
+          "responsibility": "市场进入",
+          "confidence": "medium",
+          "from_skill": "multi-phase product launches",
+          "from_role": "市场进入",
+          "note": "新品上市的多阶段编排（waitlist、分层首发、多渠道协同），落在市场与渠道进入的执行面；技能侧重发布运营而非新市场战略。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "product-marketing-context",
+      "roles": [
+        {
+          "id": "AGT-028",
+          "responsibility": "市场语境审查",
+          "confidence": "low",
+          "from_skill": "product marketing context",
+          "from_role": "市场语境审查",
+          "note": "既有先验保留：技能产出单一市场的产品营销背景文档，只提供语境一致性材料，不做跨市场本地化与术语治理。"
+        },
+        {
+          "id": "AGT-029",
+          "responsibility": "品牌定位",
+          "confidence": "medium",
+          "from_skill": "positioning and messaging",
+          "from_role": "品牌定位",
+          "note": "三岗共用一份文档：主体产出是产品定位与信息表达基线（品牌定位），同一份基线同时服务本地化语境一致性（AGT-028）与售前问答的事实依据（AGT-036），故不标 high。"
+        },
+        {
+          "id": "AGT-036",
+          "responsibility": "产品问答",
+          "confidence": "low",
+          "from_skill": "foundational information",
+          "from_role": "产品问答",
+          "note": "既有先验保留：该文档是售前产品问答的事实依据，技能本身不承接问答与选购指导。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "product-marketing-brief",
+      "roles": [
+        {
+          "id": "AGT-009",
+          "responsibility": "产品需求定义",
+          "confidence": "low",
+          "from_skill": "Synthesize product features",
+          "from_role": "产品需求定义",
+          "note": "既有先验保留：技能把规格与客户洞察汇总成营销简报，仅信息汇总这一面接近需求定义，不产出需求条目与商业约束。"
+        },
+        {
+          "id": "AGT-030",
+          "responsibility": "创意简报",
+          "confidence": "medium",
+          "from_skill": "comprehensive marketing brief",
+          "from_role": "创意简报",
+          "note": "简报作为营销与销售的信息源，为创意与内容工作提供输入。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "ecommerce-marketing",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "confidence": "low",
+          "from_skill": "整合营销策略",
+          "from_role": "传播规划",
+          "note": "技能是营销技能包主协调器：产出跨渠道整合营销策略并路由子技能，不亲自执行投放、内容与文案；按传播规划间接归入，需人工复核。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "vibe-marketing",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容实验",
+          "confidence": "high",
+          "from_skill": "generate variations",
+          "from_role": "内容实验",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "content-strategy",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "confidence": "high",
+          "from_skill": "content strategist",
+          "from_role": "内容策划",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "social-media-publisher",
+      "roles": [],
+      "no_role_reason": "该技能是 Instagram 与 X 的发布通道操作（容器化两步发布、hashtag 与 caption 格式化、accio-mcp-cli 调用），只解决平台侧发布与文案格式，不承担内容策划、渠道经营或传播规划的任何一条责任。",
+      "no_role_kind": "TOOL_ONLY",
+      "drop_reasons": []
+    },
+    {
+      "name": "social-media-content-creator",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "confidence": "medium",
+          "from_skill": "platform-native content",
+          "from_role": "内容策划",
+          "note": "平台原生内容创作与内容支柱策略，服务内容策划；技能不含内容实验与传播规划责任。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "influencer-campaign-manager",
+      "roles": [
+        {
+          "id": "AGT-033",
+          "responsibility": "达人筛选",
+          "confidence": "high",
+          "from_skill": "Influencer Tier Selection",
+          "from_role": "达人筛选",
+          "note": "技能同时覆盖联盟门户与 ROI 复盘，此处按既有先验的主责任挂到达人筛选。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "copywriting",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "confidence": "medium",
+          "from_skill": "撰写营销文案",
+          "from_role": "内容策划",
+          "note": "文案执行（销售文案、品牌故事、产品描述、Landing Page）落在内容岗位的产出面；技能不含选题策划与内容实验。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "xiaohongshu-content-creator",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "confidence": "medium",
+          "from_skill": "小红书内容创作",
+          "from_role": "内容策划",
+          "note": "面向小红书算法的种草内容创作（标题、情绪、AI 合规），属内容岗位产出。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "launch-strategy",
+      "roles": [
+        {
+          "id": "AGT-024",
+          "responsibility": "市场进入",
+          "confidence": "medium",
+          "from_skill": "GTM策略制定",
+          "from_role": "市场进入",
+          "note": "既有先验保留：技能围绕产品上市 GTM 与渠道分发；其自述边界排除新市场扩张战略（gtm-strategy-planning），此处按上市进入口径归入，需人工复核。"
+        },
+        {
+          "id": "AGT-035",
+          "responsibility": "实验设计",
+          "confidence": "high",
+          "from_skill": "增长实验设计",
+          "from_role": "实验设计",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "marketing-ideas",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "创意简报",
+          "confidence": "low",
+          "from_skill": "marketing ideas",
+          "from_role": "创意简报",
+          "note": "既有先验保留：140 条跨渠道打法库是创意与传播选题的输入，不单独承担某条可验收责任，需人工复核。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "marketing-psychology",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "创意简报",
+          "confidence": "low",
+          "from_skill": "70+ mental models",
+          "from_role": "创意简报",
+          "note": "跨域心理模型库（说服、定价、转化），与 marketing-ideas 同类，按说服方法论挂到内容与创意岗位的简报支撑，需人工复核。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "instagram-marketing",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "confidence": "medium",
+          "from_skill": "Instagram marketing content",
+          "from_role": "内容策划",
+          "note": "从商品 URL 生成 Instagram 内容包（图文与视频简报、文案、hashtag），主体是内容产出。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "remotion",
+      "roles": [
+        {
+          "id": "AGT-031",
+          "responsibility": "视频制作协作",
+          "confidence": "low",
+          "from_skill": "Video creation in React",
+          "from_role": "视频制作协作",
+          "note": "代码化视频生产的技术最佳实践（React、FFmpeg、字幕、音频可视化），落在素材生产的实现层，需工程协作，属间接对应。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "product-description-generator",
+      "roles": [
+        {
+          "id": "AGT-022",
+          "responsibility": "Listing优化",
+          "confidence": "high",
+          "from_skill": "backend keywords",
+          "from_role": "Listing优化",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "programmatic-seo-strategist",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "站点运营",
+          "confidence": "medium",
+          "from_skill": "模板页批量生成",
+          "from_role": "站点运营",
+          "note": "程序化模板页与长尾落地页的规模化建设，属独立站站点运营；不含 Amazon 侧搜索运营。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "ecommerce-seo-optimizer",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "站点运营",
+          "confidence": "medium",
+          "from_skill": "关键词密度",
+          "from_role": "站点运营",
+          "note": "商品页与文章页的站内 SEO、内链与内容质量优化属独立站站点运营；技能自述排除 Amazon Listing 埋词。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "serp-ranking-analyzer",
+      "roles": [
+        {
+          "id": "AGT-022",
+          "responsibility": "搜索意图分析",
+          "confidence": "medium",
+          "from_skill": "Intent Signal Detection",
+          "from_role": "搜索意图分析",
+          "note": "既有先验保留：技能做单一查询的 SERP 解剖与意图识别，对应搜索意图分析；站点侧归属需人工复核。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    }
+  ]
+}

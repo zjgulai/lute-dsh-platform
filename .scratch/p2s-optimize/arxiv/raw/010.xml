@@ -1,0 +1,1045 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/eyyARY+snTVFXrxsIld7A+5Mg+k</id>
+  <title>arXiv Query: search_query=&amp;id_list=2309.08923,2309.09234,2309.09823,2309.10582,2309.11234,2309.11243,2309.11461,2309.11723,2309.11823,2309.12045,2309.12188,2309.12215,2309.12234,2309.12847,2309.14223,2309.14234,2309.14390,2309.14481,2309.14782,2309.14791,2309.15088,2309.15217,2309.17453,2310.01427,2310.01837,2310.02743,2310.02847,2310.05629,2310.06117,2310.07169,2310.07554,2310.08234,2310.08491,2310.08560,2310.08923,2310.08930,2310.09233,2310.09234,2310.09823,2310.10108&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:42:54Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2309.08923,2309.09234,2309.09823,2309.10582,2309.11234,2309.11243,2309.11461,2309.11723,2309.11823,2309.12045,2309.12188,2309.12215,2309.12234,2309.12847,2309.14223,2309.14234,2309.14390,2309.14481,2309.14782,2309.14791,2309.15088,2309.15217,2309.17453,2310.01427,2310.01837,2310.02743,2310.02847,2310.05629,2310.06117,2310.07169,2310.07554,2310.08234,2310.08491,2310.08560,2310.08923,2310.08930,2310.09233,2310.09234,2310.09823,2310.10108" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2309.12045v1</id>
+    <title>Collisional excitation of methyl (iso)cyanide by He atoms: rate coefficients and isomerism effects</title>
+    <updated>2023-09-21T13:15:06Z</updated>
+    <link href="https://arxiv.org/abs/2309.12045v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.12045v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Among all closed-shell species observed in molecular clouds, molecules with C$_{3v}$ symmetry play a crucial role, as their rotational spectroscopy allows them to behave as a gas thermometer. In the interstellar medium, methyl cyanide (CH$_3$CN) is the second most abundant of those (after ammonia, NH$_3$). Its isomer, methyl isocyanide (CH$_3$NC) is less abundant but has been detected in many astrophysical sources. In order to assess their absolute and relative abundances, it is essential to understand their collisional excitation properties. This paper reports the calculation of rate coefficients for rotational excitation of CH$_3$CN and CH$_3$NC molecules with He atoms, from low (5 K) to moderate (100 K) temperatures. We include the first 74 and 66 rotational states of both $para$ and $ortho$ symmetries of CH$_3$CN and CH$_3$NC, respectively. A propensity for $Δj=2$ transitions is observed in the case of CH$_3$CN-He collisions, whereas in the case of CH$_3$NC-He a propensity for $Δj=1$ is observed for transitions involving low values of $j$ and at low temperatures, while a propensity for $Δj=2$ is observed for higher values of $j$ and at high temperatures. A comparison of rate coefficients shows differences up to a factor of 3, depending on temperature and on the $ortho$/$para$ symmetries for dominant transitions. This confirms the importance of having specific collisional data for each isomer. We also examined the effect of these new rates on the CH$_3$CN and CH$_3$NC excitation in molecular clouds by performing radiative transfer calculations of the excitation and brightness temperatures for several detected lines.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-21T13:15:06Z</published>
+    <arxiv:comment>9p</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <arxiv:journal_ref>MNRAS 523, 2577 (2023)</arxiv:journal_ref>
+    <author>
+      <name>M. Ben Khalifa</name>
+    </author>
+    <author>
+      <name>P. J. Dagdigian</name>
+    </author>
+    <author>
+      <name>J. Loreau</name>
+    </author>
+    <arxiv:doi>10.1093/mnras/stad1508</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1093/mnras/stad1508" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.17453v4</id>
+    <title>Efficient Streaming Language Models with Attention Sinks</title>
+    <updated>2024-04-07T00:56:53Z</updated>
+    <link href="https://arxiv.org/abs/2309.17453v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.17453v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deploying Large Language Models (LLMs) in streaming applications such as multi-round dialogue, where long interactions are expected, is urgently needed but poses two major challenges. Firstly, during the decoding stage, caching previous tokens' Key and Value states (KV) consumes extensive memory. Secondly, popular LLMs cannot generalize to longer texts than the training sequence length. Window attention, where only the most recent KVs are cached, is a natural approach -- but we show that it fails when the text length surpasses the cache size. We observe an interesting phenomenon, namely attention sink, that keeping the KV of initial tokens will largely recover the performance of window attention. In this paper, we first demonstrate that the emergence of attention sink is due to the strong attention scores towards initial tokens as a "sink" even if they are not semantically important. Based on the above analysis, we introduce StreamingLLM, an efficient framework that enables LLMs trained with a finite length attention window to generalize to infinite sequence lengths without any fine-tuning. We show that StreamingLLM can enable Llama-2, MPT, Falcon, and Pythia to perform stable and efficient language modeling with up to 4 million tokens and more. In addition, we discover that adding a placeholder token as a dedicated attention sink during pre-training can further improve streaming deployment. In streaming settings, StreamingLLM outperforms the sliding window recomputation baseline by up to 22.2x speedup. Code and datasets are provided at https://github.com/mit-han-lab/streaming-llm.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-29T17:59:56Z</published>
+    <arxiv:comment>ICLR 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Guangxuan Xiao</name>
+    </author>
+    <author>
+      <name>Yuandong Tian</name>
+    </author>
+    <author>
+      <name>Beidi Chen</name>
+    </author>
+    <author>
+      <name>Song Han</name>
+    </author>
+    <author>
+      <name>Mike Lewis</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.08560v2</id>
+    <title>MemGPT: Towards LLMs as Operating Systems</title>
+    <updated>2024-02-12T18:59:46Z</updated>
+    <link href="https://arxiv.org/abs/2310.08560v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.08560v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have revolutionized AI, but are constrained by limited context windows, hindering their utility in tasks like extended conversations and document analysis. To enable using context beyond limited context windows, we propose virtual context management, a technique drawing inspiration from hierarchical memory systems in traditional operating systems that provide the appearance of large memory resources through data movement between fast and slow memory. Using this technique, we introduce MemGPT (Memory-GPT), a system that intelligently manages different memory tiers in order to effectively provide extended context within the LLM's limited context window, and utilizes interrupts to manage control flow between itself and the user. We evaluate our OS-inspired design in two domains where the limited context windows of modern LLMs severely handicaps their performance: document analysis, where MemGPT is able to analyze large documents that far exceed the underlying LLM's context window, and multi-session chat, where MemGPT can create conversational agents that remember, reflect, and evolve dynamically through long-term interactions with their users. We release MemGPT code and data for our experiments at https://memgpt.ai.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-12T17:51:32Z</published>
+    <arxiv:comment>Code and data available at https://research.memgpt.ai</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Charles Packer</name>
+    </author>
+    <author>
+      <name>Sarah Wooders</name>
+    </author>
+    <author>
+      <name>Kevin Lin</name>
+    </author>
+    <author>
+      <name>Vivian Fang</name>
+    </author>
+    <author>
+      <name>Shishir G. Patil</name>
+    </author>
+    <author>
+      <name>Ion Stoica</name>
+    </author>
+    <author>
+      <name>Joseph E. Gonzalez</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.01837v2</id>
+    <title>Extending CAM-based XAI methods for Remote Sensing Imagery Segmentation</title>
+    <updated>2023-11-28T13:36:58Z</updated>
+    <link href="https://arxiv.org/abs/2310.01837v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.01837v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Current AI-based methods do not provide comprehensible physical interpretations of the utilized data, extracted features, and predictions/inference operations. As a result, deep learning models trained using high-resolution satellite imagery lack transparency and explainability and can be merely seen as a black box, which limits their wide-level adoption. Experts need help understanding the complex behavior of AI models and the underlying decision-making process. The explainable artificial intelligence (XAI) field is an emerging field providing means for robust, practical, and trustworthy deployment of AI models. Several XAI techniques have been proposed for image classification tasks, whereas the interpretation of image segmentation remains largely unexplored. This paper offers to bridge this gap by adapting the recent XAI classification algorithms and making them usable for muti-class image segmentation, where we mainly focus on buildings' segmentation from high-resolution satellite images. To benchmark and compare the performance of the proposed approaches, we introduce a new XAI evaluation methodology and metric based on "Entropy" to measure the model uncertainty. Conventional XAI evaluation methods rely mainly on feeding area-of-interest regions from the image back to the pre-trained (utility) model and then calculating the average change in the probability of the target class. Those evaluation metrics lack the needed robustness, and we show that using Entropy to monitor the model uncertainty in segmenting the pixels within the target class is more suitable. We hope this work will pave the way for additional XAI research for image segmentation and applications in the remote sensing discipline.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-03T07:01:23Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Abdul Karim Gizzini</name>
+    </author>
+    <author>
+      <name>Mustafa Shukor</name>
+    </author>
+    <author>
+      <name>Ali J. Ghandour</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.14791v2</id>
+    <title>Large dilates of hypercube graphs in the plane</title>
+    <updated>2024-02-12T14:01:25Z</updated>
+    <link href="https://arxiv.org/abs/2309.14791v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.14791v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study a distance graph $Γ_n$ that is isomorphic to the $1$-skeleton of an $n$-dimensional unit hypercube. We show that every measurable set of positive upper Banach density in the plane contains all sufficiently large dilates of $Γ_n$. This provides the first examples of distance graphs other than the trees for which a dimensionally sharp embedding in positive density sets is known.</summary>
+    <category term="math.CA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-26T09:39:52Z</published>
+    <arxiv:comment>17 pages; v2: corrected typos, minor changes in the exposition</arxiv:comment>
+    <arxiv:primary_category term="math.CA"/>
+    <arxiv:journal_ref>Anal. Math. 50 (2024), 893-915</arxiv:journal_ref>
+    <author>
+      <name>Vjekoslav Kovač</name>
+    </author>
+    <author>
+      <name>Bruno Predojević</name>
+    </author>
+    <arxiv:doi>10.1007/s10476-024-00045-6</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10476-024-00045-6" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.08923v1</id>
+    <title>Fast Approximation of the Shapley Values Based on Order-of-Addition Experimental Designs</title>
+    <updated>2023-09-16T08:28:15Z</updated>
+    <link href="https://arxiv.org/abs/2309.08923v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.08923v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Shapley value is originally a concept in econometrics to fairly distribute both gains and costs to players in a coalition game. In the recent decades, its application has been extended to other areas such as marketing, engineering and machine learning. For example, it produces reasonable solutions for problems in sensitivity analysis, local model explanation towards the interpretable machine learning, node importance in social network, attribution models, etc. However, its heavy computational burden has been long recognized but rarely investigated. Specifically, in a $d$-player coalition game, calculating a Shapley value requires the evaluation of $d!$ or $2^d$ marginal contribution values, depending on whether we are taking the permutation or combination formulation of the Shapley value. Hence it becomes infeasible to calculate the Shapley value when $d$ is reasonably large. A common remedy is to take a random sample of the permutations to surrogate for the complete list of permutations. We find an advanced sampling scheme can be designed to yield much more accurate estimation of the Shapley value than the simple random sampling (SRS). Our sampling scheme is based on combinatorial structures in the field of design of experiments (DOE), particularly the order-of-addition experimental designs for the study of how the orderings of components would affect the output. We show that the obtained estimates are unbiased, and can sometimes deterministically recover the original Shapley value. Both theoretical and simulations results show that our DOE-based sampling scheme outperforms SRS in terms of estimation accuracy. Surprisingly, it is also slightly faster than SRS. Lastly, real data analysis is conducted for the C. elegans nervous system and the 9/11 terrorist network.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-16T08:28:15Z</published>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Liuqing Yang</name>
+    </author>
+    <author>
+      <name>Yongdao Zhou</name>
+    </author>
+    <author>
+      <name>Haoda Fu</name>
+    </author>
+    <author>
+      <name>Min-Qian Liu</name>
+    </author>
+    <author>
+      <name>Wei Zheng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.14390v1</id>
+    <title>Early Churn Prediction from Large Scale User-Product Interaction Time Series</title>
+    <updated>2023-09-25T08:44:32Z</updated>
+    <link href="https://arxiv.org/abs/2309.14390v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.14390v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>User churn, characterized by customers ending their relationship with a business, has profound economic consequences across various Business-to-Customer scenarios. For numerous system-to-user actions, such as promotional discounts and retention campaigns, predicting potential churners stands as a primary objective. In volatile sectors like fantasy sports, unpredictable factors such as international sports events can influence even regular spending habits. Consequently, while transaction history and user-product interaction are valuable in predicting churn, they demand deep domain knowledge and intricate feature engineering. Additionally, feature development for churn prediction systems can be resource-intensive, particularly in production settings serving 200m+ users, where inference pipelines largely focus on feature engineering. This paper conducts an exhaustive study on predicting user churn using historical data. We aim to create a model forecasting customer churn likelihood, facilitating businesses in comprehending attrition trends and formulating effective retention plans. Our approach treats churn prediction as multivariate time series classification, demonstrating that combining user activity and deep neural networks yields remarkable results for churn prediction in complex business-to-customer contexts.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-25T08:44:32Z</published>
+    <arxiv:comment>12 pages, 3 tables, 8 figures, Accepted in ICMLA</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Shamik Bhattacharjee</name>
+    </author>
+    <author>
+      <name>Utkarsh Thukral</name>
+    </author>
+    <author>
+      <name>Nilesh Patil</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.14481v1</id>
+    <title>Strange Expectations in Affine Weyl Groups</title>
+    <updated>2023-09-25T19:25:09Z</updated>
+    <link href="https://arxiv.org/abs/2309.14481v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.14481v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Our main result is a generalization, to all affine Weyl groups, of P. Johnson's proof of D. Armstrong's conjecture for the expected number of boxes in a simultaneous core. This extends earlier results by the second and third authors in simply-laced type. We do this by modifying and refining the appropriate notion of the "size" of a simultaneous core. In addition, we provide combinatorial core-like models for the coroot lattices in classical type and type $G_2$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.RT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-25T19:25:09Z</published>
+    <arxiv:comment>22 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Eric Nathan Stucky</name>
+    </author>
+    <author>
+      <name>Marko Thiel</name>
+    </author>
+    <author>
+      <name>Nathan Williams</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.11723v1</id>
+    <title>Candidate Set Sampling for Evaluating Top-N Recommendation</title>
+    <updated>2023-09-21T01:50:17Z</updated>
+    <link href="https://arxiv.org/abs/2309.11723v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.11723v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The strategy for selecting candidate sets -- the set of items that the recommendation system is expected to rank for each user -- is an important decision in carrying out an offline top-$N$ recommender system evaluation. The set of candidates is composed of the union of the user's test items and an arbitrary number of non-relevant items that we refer to as decoys. Previous studies have aimed to understand the effect of different candidate set sizes and selection strategies on evaluation. In this paper, we extend this knowledge by studying the specific interaction of candidate set selection strategies with popularity bias, and use simulation to assess whether sampled candidate sets result in metric estimates that are less biased with respect to the true metric values under complete data that is typically unavailable in ordinary experiments.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-21T01:50:17Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Ngozi Ihemelandu</name>
+    </author>
+    <author>
+      <name>Michael D. Ekstrand</name>
+    </author>
+    <arxiv:doi>10.1109/WI-IAT59888.2023.00018</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/WI-IAT59888.2023.00018" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.12234v1</id>
+    <title>Bridging the Gaps of Both Modality and Language: Synchronous Bilingual CTC for Speech Translation and Speech Recognition</title>
+    <updated>2023-09-21T16:28:42Z</updated>
+    <link href="https://arxiv.org/abs/2309.12234v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.12234v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this study, we present synchronous bilingual Connectionist Temporal Classification (CTC), an innovative framework that leverages dual CTC to bridge the gaps of both modality and language in the speech translation (ST) task. Utilizing transcript and translation as concurrent objectives for CTC, our model bridges the gap between audio and text as well as between source and target languages. Building upon the recent advances in CTC application, we develop an enhanced variant, BiL-CTC+, that establishes new state-of-the-art performances on the MuST-C ST benchmarks under resource-constrained scenarios. Intriguingly, our method also yields significant improvements in speech recognition performance, revealing the effect of cross-lingual learning on transcription and demonstrating its broad applicability. The source code is available at https://github.com/xuchennlp/S2T.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-21T16:28:42Z</published>
+    <arxiv:comment>Submitted to ICASSP 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Chen Xu</name>
+    </author>
+    <author>
+      <name>Xiaoqian Liu</name>
+    </author>
+    <author>
+      <name>Erfeng He</name>
+    </author>
+    <author>
+      <name>Yuhao Zhang</name>
+    </author>
+    <author>
+      <name>Qianqian Dong</name>
+    </author>
+    <author>
+      <name>Tong Xiao</name>
+    </author>
+    <author>
+      <name>Jingbo Zhu</name>
+    </author>
+    <author>
+      <name>Dapeng Man</name>
+    </author>
+    <author>
+      <name>Wu Yang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.11234v2</id>
+    <title>Towards medhub: A Self-Service Platform for Analysts and Physicians</title>
+    <updated>2023-09-22T11:19:41Z</updated>
+    <link href="https://arxiv.org/abs/2309.11234v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.11234v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Combining clinical and omics data can improve both daily clinical routines and research to gain more insights into complex medical procedures. We present the results of our first phase in a multi-year collaboration with analysts and physicians aiming at improved inter-disciplinary biomarker identification. We also outline our user-centered approach along its challenges, describe the intermediate technical artifacts that serve as a basis for summative and formative evaluation for the second project phase. Finally, we sketch the road ahead and how we intend to combine visualization research with user-centered design through problem-based prioritization.</summary>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-20T11:53:48Z</published>
+    <arxiv:comment>2 + 1 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.HC"/>
+    <author>
+      <name>Markus Höhn</name>
+    </author>
+    <author>
+      <name>Hendrik Lücke-Tieke</name>
+    </author>
+    <author>
+      <name>Jan Burmeister</name>
+    </author>
+    <author>
+      <name>Jörn Kohlhammer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.11243v2</id>
+    <title>Joint Minimum Processing Beamforming and Near-end Listening Enhancement</title>
+    <updated>2024-02-05T13:41:46Z</updated>
+    <link href="https://arxiv.org/abs/2309.11243v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.11243v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider speech enhancement for signals picked up in one noisy environment that must be rendered to a listener in another noisy environment. For both far-end noise reduction and near-end listening enhancement, it has been shown that excessive focus on noise suppression or intelligibility maximization may lead to excessive speech distortions and quality degradations in favorable noise conditions, where intelligibility is already at ceiling level. Recently [1,2] propose to remedy this with a minimum processing framework that either reduces noise or enhances listening a minimum amount given that a certain intelligibility criterion is still satisfied Additionally, it has been shown that joint consideration of both environments improves speech enhancement performance. In this paper, we formulate a joint far- and near-end minimum processing framework, that improves intelligibility while limiting speech distortions in favorable noise conditions. We provide closed-form solutions to specific boundary scenarios and investigate performance for the general case using numerical optimization. We also show concatenating existing minimum processing far- and near-end enhancement methods preserves the effects of the initial methods. Results show that the joint optimization can further improve performance compared to the concatenated approach.</summary>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-20T12:11:06Z</published>
+    <arxiv:comment>Accepted at IEEE ICASSP 2024 Workshop on Hands-free Speech Communication and Microphone Arrays (HSCMA) 2024</arxiv:comment>
+    <arxiv:primary_category term="eess.AS"/>
+    <author>
+      <name>Andreas J. Fuglsig</name>
+    </author>
+    <author>
+      <name>Jesper Jensen</name>
+    </author>
+    <author>
+      <name>Zheng-Hua Tan</name>
+    </author>
+    <author>
+      <name>Lars S. Bertelsen</name>
+    </author>
+    <author>
+      <name>Jens Christian Lindof</name>
+    </author>
+    <author>
+      <name>Jan Østergaard</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.08234v1</id>
+    <title>CiRA: An Open-Source Python Package for Automated Generation of Test Case Descriptions from Natural Language Requirements</title>
+    <updated>2023-10-12T11:30:59Z</updated>
+    <link href="https://arxiv.org/abs/2310.08234v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.08234v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deriving acceptance tests from high-level, natural language requirements that achieve full coverage is a major manual challenge at the interface between requirements engineering and testing. Conditional requirements (e.g., "If A or B then C.") imply causal relationships which - when extracted - allow to generate these acceptance tests automatically. This paper presents a tool from the CiRA (Causality In Requirements Artifacts) initiative, which automatically processes conditional natural language requirements and generates a minimal set of test case descriptions achieving full coverage. We evaluate the tool on a publicly available data set of 61 requirements from the requirements specification of the German Corona-Warn-App. The tool infers the correct test variables in 84.5% and correct variable configurations in 92.3% of all cases, which corroborates the feasibility of our approach.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-12T11:30:59Z</published>
+    <arxiv:comment>Tenth International Workshop on Artificial Intelligence and Requirements Engineering</arxiv:comment>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Julian Frattini</name>
+    </author>
+    <author>
+      <name>Jannik Fischbach</name>
+    </author>
+    <author>
+      <name>Andreas Bauer</name>
+    </author>
+    <arxiv:doi>10.1109/REW57809.2023.00019</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/REW57809.2023.00019" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.09234v5</id>
+    <title>ClickPrompt: CTR Models are Strong Prompt Generators for Adapting Language Models to CTR Prediction</title>
+    <updated>2024-06-26T08:59:47Z</updated>
+    <link href="https://arxiv.org/abs/2310.09234v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.09234v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Click-through rate (CTR) prediction has become increasingly indispensable for various Internet applications. Traditional CTR models convert the multi-field categorical data into ID features via one-hot encoding, and extract the collaborative signals among features. Such a paradigm suffers from the problem of semantic information loss. Another line of research explores the potential of pretrained language models (PLMs) for CTR prediction by converting input data into textual sentences through hard prompt templates. Although semantic signals are preserved, they generally fail to capture the collaborative information (e.g., feature interactions, pure ID features), not to mention the unacceptable inference overhead brought by the huge model size. In this paper, we aim to model both the semantic knowledge and collaborative knowledge for accurate CTR estimation, and meanwhile address the inference inefficiency issue. To benefit from both worlds and close their gaps, we propose a novel model-agnostic framework (i.e., ClickPrompt), where we incorporate CTR models to generate interaction-aware soft prompts for PLMs. We design a prompt-augmented masked language modeling (PA-MLM) pretraining task, where PLM has to recover the masked tokens based on the language context, as well as the soft prompts generated by CTR model. The collaborative and semantic knowledge from ID and textual features would be explicitly aligned and interacted via the prompt interface. Then, we can either tune the CTR model with PLM for superior performance, or solely tune the CTR model without PLM for inference efficiency. Experiments on four real-world datasets validate the effectiveness of ClickPrompt compared with existing baselines.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-13T16:37:53Z</published>
+    <arxiv:comment>Accepted by WWW 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Jianghao Lin</name>
+    </author>
+    <author>
+      <name>Bo Chen</name>
+    </author>
+    <author>
+      <name>Hangyu Wang</name>
+    </author>
+    <author>
+      <name>Yunjia Xi</name>
+    </author>
+    <author>
+      <name>Yanru Qu</name>
+    </author>
+    <author>
+      <name>Xinyi Dai</name>
+    </author>
+    <author>
+      <name>Kangning Zhang</name>
+    </author>
+    <author>
+      <name>Ruiming Tang</name>
+    </author>
+    <author>
+      <name>Yong Yu</name>
+    </author>
+    <author>
+      <name>Weinan Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.02847v2</id>
+    <title>On the Length of Strongly Monotone Descending Chains over $\mathbb{N}^d$</title>
+    <updated>2024-04-20T08:16:15Z</updated>
+    <link href="https://arxiv.org/abs/2310.02847v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.02847v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A recent breakthrough by Künnemann, Mazowiecki, Schütze, Sinclair-Banks, and Wegrzycki (ICALP, 2023) bounds the running time for the coverability problem in $d$-dimensional vector addition systems under unary encoding to $n^{2^{O(d)}}$, improving on Rackoff's $n^{2^{O(d\lg d)}}$ upper bound (Theor. Comput. Sci., 1978), and provides conditional matching lower bounds.
+  In this paper, we revisit Lazić and Schmitz' "ideal view" of the backward coverability algorithm (Inform. Comput., 2021) in the light of this breakthrough. We show that the controlled strongly monotone descending chains of downwards-closed sets over $\mathbb{N}^d$ that arise from the dual backward coverability algorithm of Lazić and Schmitz on $d$-dimensional unary vector addition systems also enjoy this tight $n^{2^{O(d)}}$ upper bound on their length, and that this also translates into the same bound on the running time of the backward coverability algorithm.
+  Furthermore, our analysis takes place in a more general setting than that of Lazić and Schmitz, which allows to show the same results and improve on the 2EXPSPACE upper bound derived by Benedikt, Duff, Sharad, and Worrell (LICS, 2017) for the coverability problem in invertible affine nets.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-04T14:32:54Z</published>
+    <arxiv:primary_category term="cs.DS"/>
+    <arxiv:journal_ref>Proceedings of ICALP 2024</arxiv:journal_ref>
+    <author>
+      <name>Sylvain Schmitz</name>
+    </author>
+    <author>
+      <name>Lia Schütze</name>
+    </author>
+    <arxiv:doi>10.4230/LIPIcs.ICALP.2024.153</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.4230/LIPIcs.ICALP.2024.153" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.10108v3</id>
+    <title>On Generative Agents in Recommendation</title>
+    <updated>2024-11-08T03:58:00Z</updated>
+    <link href="https://arxiv.org/abs/2310.10108v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.10108v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recommender systems are the cornerstone of today's information dissemination, yet a disconnect between offline metrics and online performance greatly hinders their development. Addressing this challenge, we envision a recommendation simulator, capitalizing on recent breakthroughs in human-level intelligence exhibited by Large Language Models (LLMs). We propose Agent4Rec, a user simulator in recommendation, leveraging LLM-empowered generative agents equipped with user profile, memory, and actions modules specifically tailored for the recommender system. In particular, these agents' profile modules are initialized using real-world datasets (e.g. MovieLens, Steam, Amazon-Book), capturing users' unique tastes and social traits; memory modules log both factual and emotional memories and are integrated with an emotion-driven reflection mechanism; action modules support a wide variety of behaviors, spanning both taste-driven and emotion-driven actions. Each agent interacts with personalized recommender models in a page-by-page manner, relying on a pre-implemented collaborative filtering-based recommendation algorithm. We delve into both the capabilities and limitations of Agent4Rec, aiming to explore an essential research question: ``To what extent can LLM-empowered generative agents faithfully simulate the behavior of real, autonomous humans in recommender systems?'' Extensive and multi-faceted evaluations of Agent4Rec highlight both the alignment and deviation between agents and user-personalized preferences. Beyond mere performance comparison, we explore insightful experiments, such as emulating the filter bubble effect and discovering the underlying causal relationships in recommendation tasks. Our codes are available at https://github.com/LehengTHU/Agent4Rec.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-16T06:41:16Z</published>
+    <arxiv:comment>SIGIR 2024 perspective paper</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>An Zhang</name>
+    </author>
+    <author>
+      <name>Yuxin Chen</name>
+    </author>
+    <author>
+      <name>Leheng Sheng</name>
+    </author>
+    <author>
+      <name>Xiang Wang</name>
+    </author>
+    <author>
+      <name>Tat-Seng Chua</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.09823v1</id>
+    <title>Finite size corrections for real eigenvalues of the elliptic Ginibre matrices</title>
+    <updated>2023-10-15T13:07:56Z</updated>
+    <link href="https://arxiv.org/abs/2310.09823v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.09823v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the elliptic Ginibre matrices in the orthogonal symmetry class that interpolates between the real Ginibre ensemble and the Gaussian orthogonal ensemble. We obtain the finite size corrections of the real eigenvalue densities in both the global and edge scaling regimes, as well as in both the strong and weak non-Hermiticity regimes. Our results extend and provide the rate of convergence to the previous recent findings in the aforementioned limits. In particular, in the Hermitian limit, our results recover the finite size corrections of the Gaussian orthogonal ensemble established by Forrester, Frankel and Garoni.</summary>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-15T13:07:56Z</published>
+    <arxiv:comment>27 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="math.PR"/>
+    <arxiv:journal_ref>Random Matrices Theory Appl. 13 (2024) 2450005</arxiv:journal_ref>
+    <author>
+      <name>Sung-Soo Byun</name>
+    </author>
+    <author>
+      <name>Yong-Woo Lee</name>
+    </author>
+    <arxiv:doi>10.1142/S2010326324500059</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1142/S2010326324500059" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.08491v2</id>
+    <title>Prometheus: Inducing Fine-grained Evaluation Capability in Language Models</title>
+    <updated>2024-03-09T10:44:58Z</updated>
+    <link href="https://arxiv.org/abs/2310.08491v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.08491v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recently, using a powerful proprietary Large Language Model (LLM) (e.g., GPT-4) as an evaluator for long-form responses has become the de facto standard. However, for practitioners with large-scale evaluation tasks and custom criteria in consideration (e.g., child-readability), using proprietary LLMs as an evaluator is unreliable due to the closed-source nature, uncontrolled versioning, and prohibitive costs. In this work, we propose Prometheus, a fully open-source LLM that is on par with GPT-4's evaluation capabilities when the appropriate reference materials (reference answer, score rubric) are accompanied. We first construct the Feedback Collection, a new dataset that consists of 1K fine-grained score rubrics, 20K instructions, and 100K responses and language feedback generated by GPT-4. Using the Feedback Collection, we train Prometheus, a 13B evaluator LLM that can assess any given long-form text based on customized score rubric provided by the user. Experimental results show that Prometheus scores a Pearson correlation of 0.897 with human evaluators when evaluating with 45 customized score rubrics, which is on par with GPT-4 (0.882), and greatly outperforms ChatGPT (0.392). Furthermore, measuring correlation with GPT-4 with 1222 customized score rubrics across four benchmarks (MT Bench, Vicuna Bench, Feedback Bench, Flask Eval) shows similar trends, bolstering Prometheus's capability as an evaluator LLM. Lastly, Prometheus achieves the highest accuracy on two human preference benchmarks (HHH Alignment &amp; MT Bench Human Judgment) compared to open-sourced reward models explicitly trained on human preference datasets, highlighting its potential as an universal reward model. We open-source our code, dataset, and model at https://kaistai.github.io/prometheus/.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-12T16:50:08Z</published>
+    <arxiv:comment>ICLR 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Seungone Kim</name>
+    </author>
+    <author>
+      <name>Jamin Shin</name>
+    </author>
+    <author>
+      <name>Yejin Cho</name>
+    </author>
+    <author>
+      <name>Joel Jang</name>
+    </author>
+    <author>
+      <name>Shayne Longpre</name>
+    </author>
+    <author>
+      <name>Hwaran Lee</name>
+    </author>
+    <author>
+      <name>Sangdoo Yun</name>
+    </author>
+    <author>
+      <name>Seongjin Shin</name>
+    </author>
+    <author>
+      <name>Sungdong Kim</name>
+    </author>
+    <author>
+      <name>James Thorne</name>
+    </author>
+    <author>
+      <name>Minjoon Seo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.12215v1</id>
+    <title>Regionally Additive Models: Explainable-by-design models minimizing feature interactions</title>
+    <updated>2023-09-21T16:16:22Z</updated>
+    <link href="https://arxiv.org/abs/2309.12215v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.12215v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Generalized Additive Models (GAMs) are widely used explainable-by-design models in various applications. GAMs assume that the output can be represented as a sum of univariate functions, referred to as components. However, this assumption fails in ML problems where the output depends on multiple features simultaneously. In these cases, GAMs fail to capture the interaction terms of the underlying function, leading to subpar accuracy. To (partially) address this issue, we propose Regionally Additive Models (RAMs), a novel class of explainable-by-design models. RAMs identify subregions within the feature space where interactions are minimized. Within these regions, it is more accurate to express the output as a sum of univariate functions (components). Consequently, RAMs fit one component per subregion of each feature instead of one component per feature. This approach yields a more expressive model compared to GAMs while retaining interpretability. The RAM framework consists of three steps. Firstly, we train a black-box model. Secondly, using Regional Effect Plots, we identify subregions where the black-box model exhibits near-local additivity. Lastly, we fit a GAM component for each identified subregion. We validate the effectiveness of RAMs through experiments on both synthetic and real-world datasets. The results confirm that RAMs offer improved expressiveness compared to GAMs while maintaining interpretability.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-21T16:16:22Z</published>
+    <arxiv:comment>Accepted at ECMLPKDD 2023 Workshop Uncertainty meets Explainability</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Vasilis Gkolemis</name>
+    </author>
+    <author>
+      <name>Anargiros Tzerefos</name>
+    </author>
+    <author>
+      <name>Theodore Dalamagas</name>
+    </author>
+    <author>
+      <name>Eirini Ntoutsi</name>
+    </author>
+    <author>
+      <name>Christos Diou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.12847v1</id>
+    <title>Numerical Simulation of Radiative Transfer of Electromagnetic Angular Momentum</title>
+    <updated>2023-09-22T13:17:54Z</updated>
+    <link href="https://arxiv.org/abs/2309.12847v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.12847v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present numerical simulations of light emitted by a source and scattered by surrounding electric dipoles with Zeeman splitting. We calculate the leakage of electromagnetic angular momentum to infinity.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-22T13:17:54Z</published>
+    <arxiv:comment>submitted to Acta Physica Polonica A: Conference Proceedings of 11th Workshop on Quantum Chaos and Localisation Phenomena, May 2023</arxiv:comment>
+    <arxiv:primary_category term="physics.optics"/>
+    <author>
+      <name>B. A. van Tiggelen</name>
+    </author>
+    <author>
+      <name>R. Le Fournis</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.15088v1</id>
+    <title>RankVicuna: Zero-Shot Listwise Document Reranking with Open-Source Large Language Models</title>
+    <updated>2023-09-26T17:31:57Z</updated>
+    <link href="https://arxiv.org/abs/2309.15088v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.15088v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Researchers have successfully applied large language models (LLMs) such as ChatGPT to reranking in an information retrieval context, but to date, such work has mostly been built on proprietary models hidden behind opaque API endpoints. This approach yields experimental results that are not reproducible and non-deterministic, threatening the veracity of outcomes that build on such shaky foundations. To address this significant shortcoming, we present RankVicuna, the first fully open-source LLM capable of performing high-quality listwise reranking in a zero-shot setting. Experimental results on the TREC 2019 and 2020 Deep Learning Tracks show that we can achieve effectiveness comparable to zero-shot reranking with GPT-3.5 with a much smaller 7B parameter model, although our effectiveness remains slightly behind reranking with GPT-4. We hope our work provides the foundation for future research on reranking with modern LLMs. All the code necessary to reproduce our results is available at https://github.com/castorini/rank_llm.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-26T17:31:57Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Ronak Pradeep</name>
+    </author>
+    <author>
+      <name>Sahel Sharifymoghaddam</name>
+    </author>
+    <author>
+      <name>Jimmy Lin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.14782v1</id>
+    <title>Perturbative computation of thermal characteristics of the Stoner phase transition</title>
+    <updated>2023-09-26T09:31:02Z</updated>
+    <link href="https://arxiv.org/abs/2309.14782v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.14782v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We apply the thermal (imaginary time) perturbative expansion to the relevant effective field theory to compute characteristics of the phase transition to the ordered state which can occur at low temperatures in the gas of (nonrelativistic) spin 1/2 fermions interacting through a short-range spin independent repulsive binary interaction potential. We show how to obtain a systematic expansion of the system's free energy depending on the densities $n_+$ and $n_-$ of spin-up and spin-down fermions. In this paper we truncate this expansion at the second order and determine, by numerically minimizing the free energy, the equilibrium proportions of $n_+$ and $n_-$ (that is, the system's polarization) as functions of the temperature, the system's overall density $n = n_+ + n_-$ and the strength of the interaction.</summary>
+    <category term="cond-mat.quant-gas" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-26T09:31:02Z</published>
+    <arxiv:primary_category term="cond-mat.quant-gas"/>
+    <author>
+      <name>Oskar Grocholski</name>
+    </author>
+    <author>
+      <name>Piotr H. Chankowski</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.11823v1</id>
+    <title>Low luminosity observation of BeXRB source IGR J21347+4737</title>
+    <updated>2023-09-21T06:49:31Z</updated>
+    <link href="https://arxiv.org/abs/2309.11823v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.11823v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we report the results of the detailed temporal and spectral studies of the BeXRB J21347+4737 based on the data from the NuSTAR and \textit{SWIFT/XRT} in a wide energy range of 0.5-50 keV. Coherent pulsation with a period of 322.738$\;\pm\;0.018$ s was found in the light curve, implying, the source pulsation has spun down by 0.341 s $yr^{-1}$ when compared with the coherent pulsation estimated from XMM Newton more than 7 years ago.
+  The pulse profile of the source demonstrates energy dependence and has evolved with time. The pulse fraction of the source observed by NuSTAR initially decreases with energy upto $\sim$15 keV, followed by a non-monotonic increasing trend above 15 keV. The source spectrum can be well approximated by an absorbed power-law model with modification by an exponential cutoff at high energies. The absorbed flux of the source is $4\times10^{-11}\;erg\;cm^{-2}\;s^{-1}$ and its corresponding luminosity is $3.5\times10^{35}\;erg\;s^{-1}$. The study of pulse-phase resolved spectroscopy shows a strong variation of spectral parameters on the phase. No additional emission or absorption features in the form of Fe line or Cyclotron lines were observed both in the phase-averaged and phase-resolved spectra of IGR J21347+4737.</summary>
+    <category term="astro-ph.HE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-21T06:49:31Z</published>
+    <arxiv:comment>Accepted for publication in Journal of Astrophysics and Astronomy (JOAA), 10 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.HE"/>
+    <author>
+      <name>Manoj Ghising</name>
+    </author>
+    <author>
+      <name>Ruchi Tamang</name>
+    </author>
+    <author>
+      <name>Binay Rai</name>
+    </author>
+    <author>
+      <name>Mohammed Tobrej</name>
+    </author>
+    <author>
+      <name>Bikash Chandra Paul</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.08930v2</id>
+    <title>When $D$-companion matrix meets incomplete polynomials</title>
+    <updated>2024-01-08T04:01:37Z</updated>
+    <link href="https://arxiv.org/abs/2310.08930v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.08930v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we provide a simple proof of a generalization of the Gauss-Lucas theorem. By using methods of D-companion matrix, we get the majorization relationship between the zeros of convex combinations of incomplete polynomials and an origin polynomial. Moreover, we prove that the set of all zeros of all convex combinations of incomplete polynomials coincides with the closed convex hull of zeros of the original polynomial. The location of zeros of convex combinations of incomplete polynomials is determined.</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-13T07:52:25Z</published>
+    <arxiv:comment>13 pages</arxiv:comment>
+    <arxiv:primary_category term="math.NA"/>
+    <author>
+      <name>Teng Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.01427v1</id>
+    <title>Attention Sorting Combats Recency Bias In Long Context Language Models</title>
+    <updated>2023-09-28T05:19:06Z</updated>
+    <link href="https://arxiv.org/abs/2310.01427v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.01427v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Current language models often fail to incorporate long contexts efficiently during generation. We show that a major contributor to this issue are attention priors that are likely learned during pre-training: relevant information located earlier in context is attended to less on average. Yet even when models fail to use the information from a relevant document in their response, they still pay preferential attention to that document compared to an irrelevant document at the same position. We leverage this fact to introduce ``attention sorting'': perform one step of decoding, sort documents by the attention they receive (highest attention going last), repeat the process, generate the answer with the newly sorted context. We find that attention sorting improves performance of long context models. Our findings highlight some challenges in using off-the-shelf language models for retrieval augmented generation.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-28T05:19:06Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Alexander Peysakhovich</name>
+    </author>
+    <author>
+      <name>Adam Lerer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.09823v1</id>
+    <title>Integration of Quantum, Statistical, and Irreversible Thermodynamics in A Coherent Framework</title>
+    <updated>2023-09-18T14:46:52Z</updated>
+    <link href="https://arxiv.org/abs/2309.09823v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.09823v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The combined law of thermodynamics derived by Gibbs laid the foundation of thermodynamics though only applicable to systems without internal processes. Gibbs further derived the classical statistical thermodynamics in terms of the probability of configurations in a system, which was extended to quantum mechanics-based statistical thermodynamics by Landau, while the irreversible thermodynamics was systemized by Onsager and expanded to chemical reactions by Prigogine. The development of density function theory (DFT) by Kohn enabled the quantitative prediction of properties of the ground-state configuration of a system from quantum mechanics. Here, we will present our theories that integrate quantum, statistical, and irreversible thermodynamics in a coherent framework by utilizing the predicative capability of DFT to revise the statistical thermodynamics (zentropy theory) and by keeping the entropy production due to irreversible processes in the combine law of thermodynamics to derive flux equations (theory of cross phenomena). The zentropy theory is shown capable of predicting the free energy landscape including singularity and instability at critical point and emergent positive or negative divergences of properties. The theory of cross phenomena can predict the coefficients of internal processes between conjugate variables (direct phenomena) and non-conjugate variables (cross phenomena) in the combined law of thermodynamics. Both are with inputs from DFT-based calculations only and without fitting parameters.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-18T14:46:52Z</published>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>Zi-Kui Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.09234v1</id>
+    <title>Well-posedness of scattering data for the derivative nonlinear Schrödinger equation in $H^s(\mathbb{R})$</title>
+    <updated>2023-09-17T10:30:27Z</updated>
+    <link href="https://arxiv.org/abs/2309.09234v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.09234v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove the well-posedness results of scattering data for the derivative nonlinear Schrödinger equation in $H^{s}(\mathbb{R})(s\geq\frac12)$. We show that the reciprocal of the transmission coefficient can be written as the sum of some iterative integrals, and its logarithm can be written as the sum of some connected iterative integrals. And we provide the asymptotic properties of the first few iterative integrals of the reciprocal of the transmission coefficient. Moreover, we provide some regularity properties of the reciprocal of the transmission coefficient related to scattering data in $H^{s}(\mathbb{R})$.</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-17T10:30:27Z</published>
+    <arxiv:comment>26 pages, 1 figure</arxiv:comment>
+    <arxiv:primary_category term="math.AP"/>
+    <author>
+      <name>Weifang Weng</name>
+    </author>
+    <author>
+      <name>Zhenya Yan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.14223v3</id>
+    <title>Wigner measures of electromagnetic waves in heterogeneous bianisotropic media</title>
+    <updated>2024-02-05T10:52:39Z</updated>
+    <link href="https://arxiv.org/abs/2309.14223v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.14223v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the propagation of high-frequency electromagnetic waves in randomly heterogeneous bianisotropic media with dissipative properties. For that purpose we consider randomly fluctuating optical responses of such media with correlation lengths comparable to the typical wavelength of the waves. Although the fluctuations are weak, they induce multiple scattering over long propagation times and/or distances such that the waves end up travelling in many different directions with mixed polarizations. We derive the dispersion and evolution properties of the Wigner measure of the electromagnetic fields, which describes their angularly-resolved energy density in this propagation regime. The analysis starts from Maxwell's equations with general constitutive equations. We first ignore the random fluctuations of the optical response and obtain uncoupled transport equations for the components of the Wigner measure on the different propagation modes (polarizations). Then we use a multi-scale expansion of the Wigner mesure to obtain the radiative transfer equations satisfied by these components when the fluctuations are no longer ignored. The radiative transfer equations are coupled through their collisional parts, which account for the scattering of waves by the random fluctuations and their possible changes in polarization. The collisional kernels describing these processes depend on the power and cross-power spectral densities of the fluctuations at the wavelength scale. The overall derivation is based on the interpretation of Wigner transforms and Wigner measures in terms of semiclassical pseudo-differential operators in their standard quantization.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-25T15:28:29Z</published>
+    <arxiv:primary_category term="math-ph"/>
+    <arxiv:journal_ref>Wave Motion 2024</arxiv:journal_ref>
+    <author>
+      <name>Jean-Luc Akian</name>
+    </author>
+    <author>
+      <name>Éric Savin</name>
+    </author>
+    <arxiv:doi>10.1016/j.wavemoti.2024.103296</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.wavemoti.2024.103296" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.09233v1</id>
+    <title>AgentCF: Collaborative Learning with Autonomous Language Agents for Recommender Systems</title>
+    <updated>2023-10-13T16:37:14Z</updated>
+    <link href="https://arxiv.org/abs/2310.09233v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.09233v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recently, there has been an emergence of employing LLM-powered agents as believable human proxies, based on their remarkable decision-making capability. However, existing studies mainly focus on simulating human dialogue. Human non-verbal behaviors, such as item clicking in recommender systems, although implicitly exhibiting user preferences and could enhance the modeling of users, have not been deeply explored. The main reasons lie in the gap between language modeling and behavior modeling, as well as the incomprehension of LLMs about user-item relations.
+  To address this issue, we propose AgentCF for simulating user-item interactions in recommender systems through agent-based collaborative filtering. We creatively consider not only users but also items as agents, and develop a collaborative learning approach that optimizes both kinds of agents together. Specifically, at each time step, we first prompt the user and item agents to interact autonomously. Then, based on the disparities between the agents' decisions and real-world interaction records, user and item agents are prompted to reflect on and adjust the misleading simulations collaboratively, thereby modeling their two-sided relations. The optimized agents can also propagate their preferences to other agents in subsequent interactions, implicitly capturing the collaborative filtering idea. Overall, the optimized agents exhibit diverse interaction behaviors within our framework, including user-item, user-user, item-item, and collective interactions. The results show that these agents can demonstrate personalized behaviors akin to those of real-world individuals, sparking the development of next-generation user behavior simulation.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-13T16:37:14Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Junjie Zhang</name>
+    </author>
+    <author>
+      <name>Yupeng Hou</name>
+    </author>
+    <author>
+      <name>Ruobing Xie</name>
+    </author>
+    <author>
+      <name>Wenqi Sun</name>
+    </author>
+    <author>
+      <name>Julian McAuley</name>
+    </author>
+    <author>
+      <name>Wayne Xin Zhao</name>
+    </author>
+    <author>
+      <name>Leyu Lin</name>
+    </author>
+    <author>
+      <name>Ji-Rong Wen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.05629v2</id>
+    <title>Super Denoise Net: Speech Super Resolution with Noise Cancellation in Low Sampling Rate Noisy Environments</title>
+    <updated>2023-10-10T02:14:18Z</updated>
+    <link href="https://arxiv.org/abs/2310.05629v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.05629v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Speech super-resolution (SSR) aims to predict a high resolution (HR) speech signal from its low resolution (LR) corresponding part. Most neural SSR models focus on producing the final result in a noise-free environment by recovering the spectrogram of high-frequency part of the signal and concatenating it with the original low-frequency part. Although these methods achieve high accuracy, they become less effective when facing the real-world scenario, where unavoidable noise is present. To address this problem, we propose a Super Denoise Net (SDNet), a neural network for a joint task of super-resolution and noise reduction from a low sampling rate signal. To that end, we design gated convolution and lattice convolution blocks to enhance the repair capability and capture information in the time-frequency axis, respectively. The experiments show our method outperforms baseline speech denoising and SSR models on DNS 2020 no-reverb test set with higher objective and subjective scores.</summary>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-09T11:40:09Z</published>
+    <arxiv:primary_category term="eess.AS"/>
+    <author>
+      <name>Junkang Yang</name>
+    </author>
+    <author>
+      <name>Hongqing Liu</name>
+    </author>
+    <author>
+      <name>Lu Gan</name>
+    </author>
+    <author>
+      <name>Yi Zhou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.06117v2</id>
+    <title>Take a Step Back: Evoking Reasoning via Abstraction in Large Language Models</title>
+    <updated>2024-03-12T04:38:27Z</updated>
+    <link href="https://arxiv.org/abs/2310.06117v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.06117v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present Step-Back Prompting, a simple prompting technique that enables LLMs to do abstractions to derive high-level concepts and first principles from instances containing specific details. Using the concepts and principles to guide reasoning, LLMs significantly improve their abilities in following a correct reasoning path towards the solution. We conduct experiments of Step-Back Prompting with PaLM-2L, GPT-4 and Llama2-70B models, and observe substantial performance gains on various challenging reasoning-intensive tasks including STEM, Knowledge QA, and Multi-Hop Reasoning. For instance, Step-Back Prompting improves PaLM-2L performance on MMLU (Physics and Chemistry) by 7% and 11% respectively, TimeQA by 27%, and MuSiQue by 7%.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-09T19:48:55Z</published>
+    <arxiv:comment>ICLR 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Huaixiu Steven Zheng</name>
+    </author>
+    <author>
+      <name>Swaroop Mishra</name>
+    </author>
+    <author>
+      <name>Xinyun Chen</name>
+    </author>
+    <author>
+      <name>Heng-Tze Cheng</name>
+    </author>
+    <author>
+      <name>Ed H. Chi</name>
+    </author>
+    <author>
+      <name>Quoc V Le</name>
+    </author>
+    <author>
+      <name>Denny Zhou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.07169v1</id>
+    <title>On the Number of Periodic Points for Expansive Pseudo-Groups</title>
+    <updated>2023-10-11T03:35:33Z</updated>
+    <link href="https://arxiv.org/abs/2310.07169v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.07169v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this work we consider foliations of compact manifolds whose holonomy pseudo-group is expansive, and analyze their number of compact leaves. Our main result is that in the codimension-one case this number is at most finite, and we give examples of such foliations having one compact leaf.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-11T03:35:33Z</published>
+    <arxiv:comment>10 pages</arxiv:comment>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Pablo D. Carrasco</name>
+    </author>
+    <author>
+      <name>Elias Rego</name>
+    </author>
+    <author>
+      <name>Jana Rodriguez-Hertz</name>
+    </author>
+    <arxiv:doi>10.1016/j.chaos.2024.115245</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.chaos.2024.115245" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.10582v1</id>
+    <title>Investigating the Magnetic Structure of Interplanetary Coronal Mass Ejections using Simultaneous Multi-Spacecraft In situ Measurements</title>
+    <updated>2023-09-19T12:45:56Z</updated>
+    <link href="https://arxiv.org/abs/2309.10582v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.10582v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In situ measurements from spacecraft typically provide a time series at a single location through coronal mass ejections (CMEs) and they have been one of the main methods to investigate CMEs. CME properties derived from these in situ measurements are affected by temporal changes that occur as the CME passes over the spacecraft, such as radial expansion and ageing, as well as spatial variations within a CME. This study uses multi-spacecraft measurements of the same CME at close separations to investigate both the spatial variability (how different a CME profile is when probed by two spacecraft close to each other) and the so-called ageing effect (the effect of the time evolution on in situ properties). We compile a database of 19 events from the past four decades measured by two spacecraft with a radial separation &lt;0.2 au and an angular separation &lt;10°. We find that the average magnetic field strength measured by the two spacecraft differs by 18% of the typical average value, which highlights non-negligible spatial or temporal variations. For one particular event, measurements taken by the two spacecraft allow us to quantify and significantly reduce the ageing effect to estimate the asymmetry of the magnetic field strength profile. This study reveals that single-spacecraft time series near 1 au can be strongly affected by ageing and that correcting for self-similar expansion does not capture the whole ageing effect.</summary>
+    <category term="astro-ph.SR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.space-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-19T12:45:56Z</published>
+    <arxiv:comment>Accepted for publication at ApJ. 18 pages, 6 figures, 2 tables</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.SR"/>
+    <author>
+      <name>F. Regnault</name>
+    </author>
+    <author>
+      <name>N. Al-Haddad</name>
+    </author>
+    <author>
+      <name>N. Lugaz</name>
+    </author>
+    <author>
+      <name>C. J. Farrugia</name>
+    </author>
+    <author>
+      <name>W. Yu</name>
+    </author>
+    <author>
+      <name>E. E. Davies</name>
+    </author>
+    <author>
+      <name>A. B. Galvin</name>
+    </author>
+    <author>
+      <name>B. Zhuang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.11461v1</id>
+    <title>Digital twins of nonlinear dynamical systems: A perspective</title>
+    <updated>2023-09-20T16:57:11Z</updated>
+    <link href="https://arxiv.org/abs/2309.11461v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.11461v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Digital twins have attracted a great deal of recent attention from a wide range of fields. A basic requirement for digital twins of nonlinear dynamical systems is the ability to generate the system evolution and predict potentially catastrophic emergent behaviors so as to providing early warnings. The digital twin can then be used for system "health" monitoring in real time and for predictive problem solving. In particular, if the digital twin forecasts a possible system collapse in the future due to parameter drifting as caused by environmental changes or perturbations, an optimal control strategy can be devised and executed as early intervention to prevent the collapse. Two approaches exist for constructing digital twins of nonlinear dynamical systems: sparse optimization and machine learning. The basics of these two approaches are described and their advantages and caveats are discussed.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.CD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.data-an" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-20T16:57:11Z</published>
+    <arxiv:comment>12 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Ying-Cheng Lai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.08923v1</id>
+    <title>Towards Informative Few-Shot Prompt with Maximum Information Gain for In-Context Learning</title>
+    <updated>2023-10-13T07:49:11Z</updated>
+    <link href="https://arxiv.org/abs/2310.08923v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.08923v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language models (LLMs) possess the capability to engage In-context Learning (ICL) by leveraging a few demonstrations pertaining to a new downstream task as conditions. However, this particular learning paradigm suffers from high instability stemming from substantial variances induced by factors such as the input distribution of selected examples, their ordering, and prompt formats. In this work, we demonstrate that even when all these factors are held constant, the random selection of examples still results in high variance. Consequently, we aim to explore the informative ability of data examples by quantifying the Information Gain (IG) obtained in prediction after observing a given example candidate. Then we propose to sample those with maximum IG. Additionally, we identify the presence of template bias, which can lead to unfair evaluations of IG during the sampling process. To mitigate this bias, we introduce Calibration Before Sampling strategy. The experimental results illustrate that our proposed method can yield an average relative improvement of 14.3% across six classification tasks using three LLMs.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-13T07:49:11Z</published>
+    <arxiv:comment>Accepted to the Findings of EMNLP 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Hongfu Liu</name>
+    </author>
+    <author>
+      <name>Ye Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.02743v2</id>
+    <title>Reward Model Ensembles Help Mitigate Overoptimization</title>
+    <updated>2024-03-10T16:14:58Z</updated>
+    <link href="https://arxiv.org/abs/2310.02743v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.02743v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Reinforcement learning from human feedback (RLHF) is a standard approach for fine-tuning large language models to follow instructions. As part of this process, learned reward models are used to approximately model human preferences. However, as imperfect representations of the "true" reward, these learned reward models are susceptible to overoptimization. Gao et al. (2023) studied this phenomenon in a synthetic human feedback setup with a significantly larger "gold" reward model acting as the true reward (instead of humans) and showed that overoptimization remains a persistent problem regardless of the size of the proxy reward model and training data used. Using a similar setup, we conduct a systematic study to evaluate the efficacy of using ensemble-based conservative optimization objectives, specifically worst-case optimization (WCO) and uncertainty-weighted optimization (UWO), for mitigating reward model overoptimization when using two optimization methods: (a) best-of-n sampling (BoN) (b) proximal policy optimization (PPO). We additionally extend the setup of Gao et al. (2023) to include 25% label noise to better mirror real-world conditions. Both with and without label noise, we find that conservative optimization practically eliminates overoptimization and improves performance by up to 70% for BoN sampling. For PPO, ensemble-based conservative optimization always reduces overoptimization and outperforms single reward model optimization. Moreover, combining it with a small KL penalty successfully prevents overoptimization at no performance cost. Overall, our results demonstrate that ensemble-based conservative optimization can effectively counter overoptimization.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-04T11:34:22Z</published>
+    <arxiv:comment>Accepted at ICLR 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Thomas Coste</name>
+    </author>
+    <author>
+      <name>Usman Anwar</name>
+    </author>
+    <author>
+      <name>Robert Kirk</name>
+    </author>
+    <author>
+      <name>David Krueger</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.12188v2</id>
+    <title>SG-Bot: Object Rearrangement via Coarse-to-Fine Robotic Imagination on Scene Graphs</title>
+    <updated>2024-03-24T17:19:14Z</updated>
+    <link href="https://arxiv.org/abs/2309.12188v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.12188v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Object rearrangement is pivotal in robotic-environment interactions, representing a significant capability in embodied AI. In this paper, we present SG-Bot, a novel rearrangement framework that utilizes a coarse-to-fine scheme with a scene graph as the scene representation. Unlike previous methods that rely on either known goal priors or zero-shot large models, SG-Bot exemplifies lightweight, real-time, and user-controllable characteristics, seamlessly blending the consideration of commonsense knowledge with automatic generation capabilities. SG-Bot employs a three-fold procedure--observation, imagination, and execution--to adeptly address the task. Initially, objects are discerned and extracted from a cluttered scene during the observation. These objects are first coarsely organized and depicted within a scene graph, guided by either commonsense or user-defined criteria. Then, this scene graph subsequently informs a generative model, which forms a fine-grained goal scene considering the shape information from the initial scene and object semantics. Finally, for execution, the initial and envisioned goal scenes are matched to formulate robotic action policies. Experimental results demonstrate that SG-Bot outperforms competitors by a large margin.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-21T15:54:33Z</published>
+    <arxiv:comment>ICRA 2024 accepted. Project website: https://sites.google.com/view/sg-bot</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Guangyao Zhai</name>
+    </author>
+    <author>
+      <name>Xiaoni Cai</name>
+    </author>
+    <author>
+      <name>Dianye Huang</name>
+    </author>
+    <author>
+      <name>Yan Di</name>
+    </author>
+    <author>
+      <name>Fabian Manhardt</name>
+    </author>
+    <author>
+      <name>Federico Tombari</name>
+    </author>
+    <author>
+      <name>Nassir Navab</name>
+    </author>
+    <author>
+      <name>Benjamin Busam</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.14234v1</id>
+    <title>Mitigating Worst-Case Exozodiacal Dust Structure in High-contrast Images of Earth-like Exoplanets</title>
+    <updated>2023-09-25T15:46:47Z</updated>
+    <link href="https://arxiv.org/abs/2309.14234v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.14234v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Detecting Earth-like exoplanets in direct images of nearby Sun-like systems brings a unique set of challenges that must be addressed in the early phases of designing a space-based direct imaging mission. In particular, these systems may contain exozodiacal dust, which is expected to be the dominant source of astrophysical noise. Previous work has shown that it may be feasible to subtract smooth, symmetric dust from observations; however, we do not expect exozodiacal dust to be perfectly smooth. Exozodiacal dust can be trapped into mean motion resonances with planetary bodies, producing large-scale structures that orbit in lock with the planet. This dust can obscure the planet, complicate noise estimation, or be mistaken for a planetary body. Our ability to subtract these structures from high-contrast images of Earth-like exoplanets is not well understood. In this work, we investigate exozodi mitigation for Earth--Sun-like systems with significant mean motion resonant disk structures. We find that applying a simple high-pass filter allows us to remove structured exozodi to the Poisson noise limit for systems with inclinations $&lt; 60^\circ$ and up to 100 zodis. However, subtracting exozodiacal disk structures from edge-on systems may be challenging, except for cases with densities $&lt;5$ zodis. For systems with three times the dust of the Solar System, which is the median of the best fit to survey data in the habitable zones of nearby Sun-like stars, this method shows promising results for mitigating exozodiacal dust in future HWO observations, even if the dust exhibits significant mean-motion resonance structure.</summary>
+    <category term="astro-ph.EP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-25T15:46:47Z</published>
+    <arxiv:comment>Accepted to AJ. 18 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.EP"/>
+    <author>
+      <name>Miles H. Currie</name>
+    </author>
+    <author>
+      <name>Christopher C. Stark</name>
+    </author>
+    <author>
+      <name>Jens Kammerer</name>
+    </author>
+    <author>
+      <name>Roser Juanola-Parramon</name>
+    </author>
+    <author>
+      <name>Victoria S. Meadows</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.07554v3</id>
+    <title>A Multi-Task Embedder For Retrieval Augmented LLMs</title>
+    <updated>2026-01-03T08:53:59Z</updated>
+    <link href="https://arxiv.org/abs/2310.07554v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.07554v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LLMs confront inherent limitations in terms of its knowledge, memory, and action. The retrieval augmentation stands as a vital mechanism to address these limitations, which brings in useful information from external sources to augment the LLM. However, existing retrieval methods encounter two pressing issues. On one hand, the general retrievers are not properly optimized for retrieval augmentation hence exhibit limited effectiveness; on the other hand, the task-specific retrievers excel in the targeted retrieval augmentation scenario, while lack the versatility to handle diverse scenarios. In this work, we propose \textbf{LLM-Embedder} for the unified support of diverse retrieval augmentation scenarios. Our method presents three technical contributions. Firstly, we introduce a new \textit{reward formulation}, namely {rank-aware reward}. It exploits the ranking position of the desired output among $N$ sampled outputs from the LLM, which leads to fine-grained and robust computation of reward from the LLM's feedback. Secondly, we design a novel \textit{distillation objective}, called graded distillation. It incorporates both the absolute value and the relative order of the reward for more sufficient utilization of the LLM's feedback. Thirdly, we systematically optimize the \textit{multi-task learning}, which effectively unifies the multiple retrieval functionalities into one model. In our experiment, LLM-Embedder notably improves the LLM's performances in various downstream tasks, and outperforms both general and task-specific retrievers with a substantial advantage.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-11T14:59:53Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Peitian Zhang</name>
+    </author>
+    <author>
+      <name>Shitao Xiao</name>
+    </author>
+    <author>
+      <name>Zheng Liu</name>
+    </author>
+    <author>
+      <name>Zhicheng Dou</name>
+    </author>
+    <author>
+      <name>Jian-Yun Nie</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.15217v2</id>
+    <title>Ragas: Automated Evaluation of Retrieval Augmented Generation</title>
+    <updated>2025-04-28T05:09:12Z</updated>
+    <link href="https://arxiv.org/abs/2309.15217v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.15217v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce Ragas (Retrieval Augmented Generation Assessment), a framework for reference-free evaluation of Retrieval Augmented Generation (RAG) pipelines. RAG systems are composed of a retrieval and an LLM based generation module, and provide LLMs with knowledge from a reference textual database, which enables them to act as a natural language layer between a user and textual databases, reducing the risk of hallucinations. Evaluating RAG architectures is, however, challenging because there are several dimensions to consider: the ability of the retrieval system to identify relevant and focused context passages, the ability of the LLM to exploit such passages in a faithful way, or the quality of the generation itself. With Ragas, we put forward a suite of metrics which can be used to evaluate these different dimensions \textit{without having to rely on ground truth human annotations}. We posit that such a framework can crucially contribute to faster evaluation cycles of RAG architectures, which is especially important given the fast adoption of LLMs.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-26T19:23:54Z</published>
+    <arxiv:comment>Reference-free (not tied to having ground truth available) evaluation framework for retrieval agumented generation</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shahul Es</name>
+    </author>
+    <author>
+      <name>Jithin James</name>
+    </author>
+    <author>
+      <name>Luis Espinosa-Anke</name>
+    </author>
+    <author>
+      <name>Steven Schockaert</name>
+    </author>
+  </entry>
+</feed>

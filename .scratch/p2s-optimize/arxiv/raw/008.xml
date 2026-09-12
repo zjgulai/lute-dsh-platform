@@ -1,0 +1,1200 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/vI7nzP1g3LeeA9MnhgBwb6TNtQE</id>
+  <title>arXiv Query: search_query=&amp;id_list=2304.00686,2304.02819,2304.03215,2304.04690,2304.08085,2304.08485,2304.09105,2304.09123,2304.09542,2304.09653,2304.10545,2304.11756,2304.13734,2305.00050,2305.01210,2305.02345,2305.03111,2305.05176,2305.06883,2305.06983,2305.08328,2305.10086,2305.10601,2305.10973,2305.11478,2305.11893,2305.12345,2305.14481,2305.14892,2305.15145,2305.16291,2305.18290,2305.18365,2305.19118,2305.20050,2306.05165,2306.09517,2306.11246,2306.11284,2306.12232&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:42:43Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2304.00686,2304.02819,2304.03215,2304.04690,2304.08085,2304.08485,2304.09105,2304.09123,2304.09542,2304.09653,2304.10545,2304.11756,2304.13734,2305.00050,2305.01210,2305.02345,2305.03111,2305.05176,2305.06883,2305.06983,2305.08328,2305.10086,2305.10601,2305.10973,2305.11478,2305.11893,2305.12345,2305.14481,2305.14892,2305.15145,2305.16291,2305.18290,2305.18365,2305.19118,2305.20050,2306.05165,2306.09517,2306.11246,2306.11284,2306.12232" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2304.03215v2</id>
+    <title>Hierarchical Graph Neural Network with Cross-Attention for Cross-Device User Matching</title>
+    <updated>2023-10-20T03:12:02Z</updated>
+    <link href="https://arxiv.org/abs/2304.03215v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.03215v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Cross-device user matching is a critical problem in numerous domains, including advertising, recommender systems, and cybersecurity. It involves identifying and linking different devices belonging to the same person, utilizing sequence logs. Previous data mining techniques have struggled to address the long-range dependencies and higher-order connections between the logs. Recently, researchers have modeled this problem as a graph problem and proposed a two-tier graph contextual embedding (TGCE) neural network architecture, which outperforms previous methods. In this paper, we propose a novel hierarchical graph neural network architecture (HGNN), which has a more computationally efficient second level design than TGCE. Furthermore, we introduce a cross-attention (Cross-Att) mechanism in our model, which improves performance by 5% compared to the state-of-the-art TGCE method.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-06T16:48:34Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Ali Taghibakhshi</name>
+    </author>
+    <author>
+      <name>Mingyuan Ma</name>
+    </author>
+    <author>
+      <name>Ashwath Aithal</name>
+    </author>
+    <author>
+      <name>Onur Yilmaz</name>
+    </author>
+    <author>
+      <name>Haggai Maron</name>
+    </author>
+    <author>
+      <name>Matthew West</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.10086v1</id>
+    <title>Studies on the hadronization of charm and beauty quarks</title>
+    <updated>2023-05-17T09:45:21Z</updated>
+    <link href="https://arxiv.org/abs/2305.10086v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.10086v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this contribution, the latest results on hadronization studies of charm and beauty quarks obtained with the data collected with the ALICE experiment at the LHC are presented. Measurements of prompt and non-prompt charm-hadron production in pp, p-Pb and Pb-Pb are shown. The results are also compared with theoretical models that consider different implementations of the heavy-quark hadronization across collision systems.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nucl-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-17T09:45:21Z</published>
+    <arxiv:comment>Proceedings, contribution to the 2023 QCD session of the 57th Rencontres de Moriond</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <author>
+      <name>Mattia Faggin</name>
+      <arxiv:affiliation>on behalf of ALICE Collaboration</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.04690v2</id>
+    <title>Digraph Colouring and Arc-Connectivity</title>
+    <updated>2023-09-13T13:39:03Z</updated>
+    <link href="https://arxiv.org/abs/2304.04690v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.04690v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The dichromatic number $\vecχ(D)$ of a digraph $D$ is the minimum size of a partition of its vertices into acyclic induced subgraphs. We denote by $λ(D)$ the maximum local edge connectivity of a digraph $D$. Neumann-Lara proved that for every digraph $D$, $\vecχ(D) \leq λ(D) + 1$. In this paper, we characterize the digraphs $D$ for which $\vecχ(D) = λ(D) + 1$. This generalizes an analogue result for undirected graph proved by Stiebitz and Toft as well as the directed version of Brooks' Theorem proved by Mohar. Along the way, we introduce a generalization of Hajós join that gives a new way to construct families of dicritical digraphs that is of independent interest.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-10T16:11:23Z</published>
+    <arxiv:comment>34 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Pierre Aboulker</name>
+    </author>
+    <author>
+      <name>Guillaume Aubian</name>
+    </author>
+    <author>
+      <name>Pierre Charbit</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.02819v3</id>
+    <title>GPT detectors are biased against non-native English writers</title>
+    <updated>2023-07-10T18:48:45Z</updated>
+    <link href="https://arxiv.org/abs/2304.02819v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.02819v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The rapid adoption of generative language models has brought about substantial advancements in digital communication, while simultaneously raising concerns regarding the potential misuse of AI-generated content. Although numerous detection methods have been proposed to differentiate between AI and human-generated content, the fairness and robustness of these detectors remain underexplored. In this study, we evaluate the performance of several widely-used GPT detectors using writing samples from native and non-native English writers. Our findings reveal that these detectors consistently misclassify non-native English writing samples as AI-generated, whereas native writing samples are accurately identified. Furthermore, we demonstrate that simple prompting strategies can not only mitigate this bias but also effectively bypass GPT detectors, suggesting that GPT detectors may unintentionally penalize writers with constrained linguistic expressions. Our results call for a broader conversation about the ethical implications of deploying ChatGPT content detectors and caution against their use in evaluative or educational settings, particularly when they may inadvertently penalize or exclude non-native English speakers from the global discourse. The published version of this study can be accessed at: www.cell.com/patterns/fulltext/S2666-3899(23)00130-7</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-06T01:51:15Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Weixin Liang</name>
+    </author>
+    <author>
+      <name>Mert Yuksekgonul</name>
+    </author>
+    <author>
+      <name>Yining Mao</name>
+    </author>
+    <author>
+      <name>Eric Wu</name>
+    </author>
+    <author>
+      <name>James Zou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.09105v1</id>
+    <title>Exploring 360-Degree View of Customers for Lookalike Modeling</title>
+    <updated>2023-04-17T14:01:12Z</updated>
+    <link href="https://arxiv.org/abs/2304.09105v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.09105v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Lookalike models are based on the assumption that user similarity plays an important role towards product selling and enhancing the existing advertising campaigns from a very large user base. Challenges associated to these models reside on the heterogeneity of the user base and its sparsity. In this work, we propose a novel framework that unifies the customers different behaviors or features such as demographics, buying behaviors on different platforms, customer loyalty behaviors and build a lookalike model to improve customer targeting for Rakuten Group, Inc. Extensive experiments on real e-commerce and travel datasets demonstrate the effectiveness of our proposed lookalike model for user targeting task.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-17T14:01:12Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <arxiv:journal_ref>SIGIR 2023</arxiv:journal_ref>
+    <author>
+      <name>Md Mostafizur Rahman</name>
+    </author>
+    <author>
+      <name>Daisuke Kikuta</name>
+    </author>
+    <author>
+      <name>Satyen Abrol</name>
+    </author>
+    <author>
+      <name>Yu Hirate</name>
+    </author>
+    <author>
+      <name>Toyotaro Suzumura</name>
+    </author>
+    <author>
+      <name>Pablo Loyola</name>
+    </author>
+    <author>
+      <name>Takuma Ebisu</name>
+    </author>
+    <author>
+      <name>Manoj Kondapaka</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.05176v1</id>
+    <title>FrugalGPT: How to Use Large Language Models While Reducing Cost and Improving Performance</title>
+    <updated>2023-05-09T05:11:02Z</updated>
+    <link href="https://arxiv.org/abs/2305.05176v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.05176v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>There is a rapidly growing number of large language models (LLMs) that users can query for a fee. We review the cost associated with querying popular LLM APIs, e.g. GPT-4, ChatGPT, J1-Jumbo, and find that these models have heterogeneous pricing structures, with fees that can differ by two orders of magnitude. In particular, using LLMs on large collections of queries and text can be expensive. Motivated by this, we outline and discuss three types of strategies that users can exploit to reduce the inference cost associated with using LLMs: 1) prompt adaptation, 2) LLM approximation, and 3) LLM cascade. As an example, we propose FrugalGPT, a simple yet flexible instantiation of LLM cascade which learns which combinations of LLMs to use for different queries in order to reduce cost and improve accuracy. Our experiments show that FrugalGPT can match the performance of the best individual LLM (e.g. GPT-4) with up to 98% cost reduction or improve the accuracy over GPT-4 by 4% with the same cost. The ideas and findings presented here lay a foundation for using LLMs sustainably and efficiently.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-09T05:11:02Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Lingjiao Chen</name>
+    </author>
+    <author>
+      <name>Matei Zaharia</name>
+    </author>
+    <author>
+      <name>James Zou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.06883v1</id>
+    <title>Cross-channel Budget Coordination for Online Advertising System</title>
+    <updated>2023-05-09T08:57:33Z</updated>
+    <link href="https://arxiv.org/abs/2305.06883v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.06883v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In online advertising (Ad), advertisers are always eager to know how to globally optimize their budget allocation strategies across different channels for more conversions such as orders, payments, etc. Ignoring competition among different advertisers causes objective inconsistency, that is, a single advertiser locally optimizes the conversions only based on its own historical statistics, which is far behind the global conversions maximization. In this paper, we present a cross-channel Advertising Coordinated budget allocation framework (AdCob) to globally optimize the budget allocation strategy for overall conversions maximization. We are the first to provide deep insight into modeling the competition among different advertisers in cross-channel budget allocation problems. The proposed iterative algorithm combined with entropy constraint is fast to converge and easy to implement in large-scale online Ad systems. Both results from offline experiments and online A/B budget bucketing experiments demonstrate the effectiveness of AdCob.</summary>
+    <category term="cs.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-09T08:57:33Z</published>
+    <arxiv:comment>under review</arxiv:comment>
+    <arxiv:primary_category term="cs.GT"/>
+    <author>
+      <name>Guangyuan Shen</name>
+    </author>
+    <author>
+      <name>Shenjie Sun</name>
+    </author>
+    <author>
+      <name>Dehong Gao</name>
+    </author>
+    <author>
+      <name>Shaolei Li</name>
+    </author>
+    <author>
+      <name>Libin Yang</name>
+    </author>
+    <author>
+      <name>Yongping Shi</name>
+    </author>
+    <author>
+      <name>Wei Ning</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.14481v2</id>
+    <title>FOCUS: Effective Embedding Initialization for Monolingual Specialization of Multilingual Models</title>
+    <updated>2023-11-06T17:47:47Z</updated>
+    <link href="https://arxiv.org/abs/2305.14481v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.14481v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Using model weights pretrained on a high-resource language as a warm start can reduce the need for data and compute to obtain high-quality language models for other, especially low-resource, languages. However, if we want to use a new tokenizer specialized for the target language, we cannot transfer the source model's embedding matrix. In this paper, we propose FOCUS - Fast Overlapping Token Combinations Using Sparsemax, a novel embedding initialization method that initializes the embedding matrix effectively for a new tokenizer based on information in the source model's embedding matrix. FOCUS represents newly added tokens as combinations of tokens in the overlap of the source and target vocabularies. The overlapping tokens are selected based on semantic similarity in an auxiliary static token embedding space. We focus our study on using the multilingual XLM-R as a source model and empirically show that FOCUS outperforms random initialization and previous work in language modeling and on a range of downstream tasks (NLI, QA, and NER).</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-23T19:21:53Z</published>
+    <arxiv:comment>Accepted to EMNLP 2023 Main Conference (Long Paper). Code: https://github.com/konstantinjdobler/focus</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Konstantin Dobler</name>
+    </author>
+    <author>
+      <name>Gerard de Melo</name>
+    </author>
+    <arxiv:doi>10.18653/v1/2023.emnlp-main.829</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.18653/v1/2023.emnlp-main.829" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.13734v2</id>
+    <title>The Internal State of an LLM Knows When It's Lying</title>
+    <updated>2023-10-17T09:34:30Z</updated>
+    <link href="https://arxiv.org/abs/2304.13734v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.13734v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While Large Language Models (LLMs) have shown exceptional performance in various tasks, one of their most prominent drawbacks is generating inaccurate or false information with a confident tone. In this paper, we provide evidence that the LLM's internal state can be used to reveal the truthfulness of statements. This includes both statements provided to the LLM, and statements that the LLM itself generates. Our approach is to train a classifier that outputs the probability that a statement is truthful, based on the hidden layer activations of the LLM as it reads or generates the statement. Experiments demonstrate that given a set of test sentences, of which half are true and half false, our trained classifier achieves an average of 71\% to 83\% accuracy labeling which sentences are true versus false, depending on the LLM base model. Furthermore, we explore the relationship between our classifier's performance and approaches based on the probability assigned to the sentence by the LLM. We show that while LLM-assigned sentence probability is related to sentence truthfulness, this probability is also dependent on sentence length and the frequencies of words in the sentence, resulting in our trained classifier providing a more reliable approach to detecting truthfulness, highlighting its potential to enhance the reliability of LLM-generated content and its practical applicability in real-world scenarios.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-26T02:49:38Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Amos Azaria</name>
+    </author>
+    <author>
+      <name>Tom Mitchell</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.10973v2</id>
+    <title>Drag Your GAN: Interactive Point-based Manipulation on the Generative Image Manifold</title>
+    <updated>2024-07-17T10:27:55Z</updated>
+    <link href="https://arxiv.org/abs/2305.10973v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.10973v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Synthesizing visual content that meets users' needs often requires flexible and precise controllability of the pose, shape, expression, and layout of the generated objects. Existing approaches gain controllability of generative adversarial networks (GANs) via manually annotated training data or a prior 3D model, which often lack flexibility, precision, and generality. In this work, we study a powerful yet much less explored way of controlling GANs, that is, to "drag" any points of the image to precisely reach target points in a user-interactive manner, as shown in Fig.1. To achieve this, we propose DragGAN, which consists of two main components: 1) a feature-based motion supervision that drives the handle point to move towards the target position, and 2) a new point tracking approach that leverages the discriminative generator features to keep localizing the position of the handle points. Through DragGAN, anyone can deform an image with precise control over where pixels go, thus manipulating the pose, shape, expression, and layout of diverse categories such as animals, cars, humans, landscapes, etc. As these manipulations are performed on the learned generative image manifold of a GAN, they tend to produce realistic outputs even for challenging scenarios such as hallucinating occluded content and deforming shapes that consistently follow the object's rigidity. Both qualitative and quantitative comparisons demonstrate the advantage of DragGAN over prior approaches in the tasks of image manipulation and point tracking. We also showcase the manipulation of real images through GAN inversion.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-18T13:41:25Z</published>
+    <arxiv:comment>Accepted to SIGGRAPH 2023. Project page: https://vcai.mpi-inf.mpg.de/projects/DragGAN/</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Xingang Pan</name>
+    </author>
+    <author>
+      <name>Ayush Tewari</name>
+    </author>
+    <author>
+      <name>Thomas Leimkühler</name>
+    </author>
+    <author>
+      <name>Lingjie Liu</name>
+    </author>
+    <author>
+      <name>Abhimitra Meka</name>
+    </author>
+    <author>
+      <name>Christian Theobalt</name>
+    </author>
+    <arxiv:doi>10.1145/3588432.3591500</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3588432.3591500" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.14892v2</id>
+    <title>Segmented GRAND: Complexity Reduction through Sub-Pattern Combination</title>
+    <updated>2025-02-04T06:58:05Z</updated>
+    <link href="https://arxiv.org/abs/2305.14892v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.14892v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The ordered-reliability bits (ORB) variant of guessing random additive noise decoding (GRAND), known as ORBGRAND, achieves remarkably low time complexity at high code rates compared to other GRAND variants. However, its computational complexity remains higher than other near-ML universal decoders like ordered-statistics decoding (OSD). To address this, we propose segmented ORBGRAND, which partitions the error pattern search space based on code properties, generates syndrome-consistent sub-patterns (reducing invalid error patterns), and combines them in a near-ML order using sub-weights derived from two-level integer partitions of logistic weight. Numerical results show that segmented ORBGRAND reduces the average number of queries by at least 66\% across all SNRs and cuts basic operations by over an order of magnitude, depending on segmentation and code rate. Further efficiency gains come from leveraging pre-generated shared sub-patterns, reducing average decoding time. Furthermore, with abandonment ($b=10^{5}$ or smaller), segmented ORBGRAND provides a 0.2 dB power gain over ORBGRAND. Additionally, we provide an analytical justification for why the logistic weight-based ordering of error patterns in ORBGRAND closely approximates the ML order and discuss the underlying assumptions of ORBGRAND.</summary>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-24T08:43:07Z</published>
+    <arxiv:comment>Accepted for publication in a forthcoming issue of IEEE Transactions on Communications. This version contains two additional sections, 17 pages, and 15 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.IT"/>
+    <author>
+      <name>Mohammad Rowshan</name>
+    </author>
+    <author>
+      <name>Jinhong Yuan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2306.05165v1</id>
+    <title>The Chang-Skjelbred lemma and generalizations</title>
+    <updated>2023-06-08T12:56:59Z</updated>
+    <link href="https://arxiv.org/abs/2306.05165v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2306.05165v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We review the Chang-Skjelbred lemma for torus-equivariant cohomology and discuss several generalizations of it: to other coefficients, other groups and also to syzygies in equivariant cohomology and the Atiyah-Bredon sequence.</summary>
+    <category term="math.AT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-06-08T12:56:59Z</published>
+    <arxiv:comment>9 pages; based on a talk given at an AMS Sectional Meeting, March 2022</arxiv:comment>
+    <arxiv:primary_category term="math.AT"/>
+    <arxiv:journal_ref>Contemp. Math. 808 (2024), 103-112</arxiv:journal_ref>
+    <author>
+      <name>Matthias Franz</name>
+    </author>
+    <arxiv:doi>10.1090/conm/808/16182</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1090/conm/808/16182" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.09542v3</id>
+    <title>Is ChatGPT Good at Search? Investigating Large Language Models as Re-Ranking Agents</title>
+    <updated>2024-12-28T06:20:54Z</updated>
+    <link href="https://arxiv.org/abs/2304.09542v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.09542v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) have demonstrated remarkable zero-shot generalization across various language-related tasks, including search engines. However, existing work utilizes the generative ability of LLMs for Information Retrieval (IR) rather than direct passage ranking. The discrepancy between the pre-training objectives of LLMs and the ranking objective poses another challenge. In this paper, we first investigate generative LLMs such as ChatGPT and GPT-4 for relevance ranking in IR. Surprisingly, our experiments reveal that properly instructed LLMs can deliver competitive, even superior results to state-of-the-art supervised methods on popular IR benchmarks. Furthermore, to address concerns about data contamination of LLMs, we collect a new test set called NovelEval, based on the latest knowledge and aiming to verify the model's ability to rank unknown knowledge. Finally, to improve efficiency in real-world applications, we delve into the potential for distilling the ranking capabilities of ChatGPT into small specialized models using a permutation distillation scheme. Our evaluation results turn out that a distilled 440M model outperforms a 3B supervised model on the BEIR benchmark. The code to reproduce our results is available at www.github.com/sunnweiwei/RankGPT.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-19T10:16:03Z</published>
+    <arxiv:comment>EMNLP 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Weiwei Sun</name>
+    </author>
+    <author>
+      <name>Lingyong Yan</name>
+    </author>
+    <author>
+      <name>Xinyu Ma</name>
+    </author>
+    <author>
+      <name>Shuaiqiang Wang</name>
+    </author>
+    <author>
+      <name>Pengjie Ren</name>
+    </author>
+    <author>
+      <name>Zhumin Chen</name>
+    </author>
+    <author>
+      <name>Dawei Yin</name>
+    </author>
+    <author>
+      <name>Zhaochun Ren</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.11478v1</id>
+    <title>On unconditionality of fractional Rademacher chaos in symmetric spaces</title>
+    <updated>2023-05-19T07:05:56Z</updated>
+    <link href="https://arxiv.org/abs/2305.11478v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.11478v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study density estimates of an index set $\mathcal{A}$, under which unconditionality (or even a weaker property of the random unconditional divergence) of the corresponding Rademacher fractional chaos $\{r_{j_1}(t)\cdot r_{j_2}(t)\cdot\dots\cdot r_{j_d}(t)\}_{(j_1,j_2,\dots,j_d)\in \mathcal{A}}$ in a symmetric space $X$ implies its equivalence in $X$ to the canonical basis in $\ell_2$. In the special case of Orlicz spaces $L_M$, unconditionality of this system is also equivalent to the fact that a certain exponential Orlicz space embeds into $L_M$.</summary>
+    <category term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-19T07:05:56Z</published>
+    <arxiv:comment>to appear in Izv. RAN</arxiv:comment>
+    <arxiv:primary_category term="math.FA"/>
+    <author>
+      <name>S. V. Astashkin</name>
+    </author>
+    <author>
+      <name>K. V. Lykov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.16291v2</id>
+    <title>Voyager: An Open-Ended Embodied Agent with Large Language Models</title>
+    <updated>2023-10-19T16:27:03Z</updated>
+    <link href="https://arxiv.org/abs/2305.16291v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.16291v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce Voyager, the first LLM-powered embodied lifelong learning agent in Minecraft that continuously explores the world, acquires diverse skills, and makes novel discoveries without human intervention. Voyager consists of three key components: 1) an automatic curriculum that maximizes exploration, 2) an ever-growing skill library of executable code for storing and retrieving complex behaviors, and 3) a new iterative prompting mechanism that incorporates environment feedback, execution errors, and self-verification for program improvement. Voyager interacts with GPT-4 via blackbox queries, which bypasses the need for model parameter fine-tuning. The skills developed by Voyager are temporally extended, interpretable, and compositional, which compounds the agent's abilities rapidly and alleviates catastrophic forgetting. Empirically, Voyager shows strong in-context lifelong learning capability and exhibits exceptional proficiency in playing Minecraft. It obtains 3.3x more unique items, travels 2.3x longer distances, and unlocks key tech tree milestones up to 15.3x faster than prior SOTA. Voyager is able to utilize the learned skill library in a new Minecraft world to solve novel tasks from scratch, while other techniques struggle to generalize. We open-source our full codebase and prompts at https://voyager.minedojo.org/.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-25T17:46:38Z</published>
+    <arxiv:comment>Project website and open-source codebase: https://voyager.minedojo.org/</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Guanzhi Wang</name>
+    </author>
+    <author>
+      <name>Yuqi Xie</name>
+    </author>
+    <author>
+      <name>Yunfan Jiang</name>
+    </author>
+    <author>
+      <name>Ajay Mandlekar</name>
+    </author>
+    <author>
+      <name>Chaowei Xiao</name>
+    </author>
+    <author>
+      <name>Yuke Zhu</name>
+    </author>
+    <author>
+      <name>Linxi Fan</name>
+    </author>
+    <author>
+      <name>Anima Anandkumar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.20050v1</id>
+    <title>Let's Verify Step by Step</title>
+    <updated>2023-05-31T17:24:00Z</updated>
+    <link href="https://arxiv.org/abs/2305.20050v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.20050v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In recent years, large language models have greatly improved in their ability to perform complex multi-step reasoning. However, even state-of-the-art models still regularly produce logical mistakes. To train more reliable models, we can turn either to outcome supervision, which provides feedback for a final result, or process supervision, which provides feedback for each intermediate reasoning step. Given the importance of training reliable models, and given the high cost of human feedback, it is important to carefully compare the both methods. Recent work has already begun this comparison, but many questions still remain. We conduct our own investigation, finding that process supervision significantly outperforms outcome supervision for training models to solve problems from the challenging MATH dataset. Our process-supervised model solves 78% of problems from a representative subset of the MATH test set. Additionally, we show that active learning significantly improves the efficacy of process supervision. To support related research, we also release PRM800K, the complete dataset of 800,000 step-level human feedback labels used to train our best reward model.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-31T17:24:00Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hunter Lightman</name>
+    </author>
+    <author>
+      <name>Vineet Kosaraju</name>
+    </author>
+    <author>
+      <name>Yura Burda</name>
+    </author>
+    <author>
+      <name>Harri Edwards</name>
+    </author>
+    <author>
+      <name>Bowen Baker</name>
+    </author>
+    <author>
+      <name>Teddy Lee</name>
+    </author>
+    <author>
+      <name>Jan Leike</name>
+    </author>
+    <author>
+      <name>John Schulman</name>
+    </author>
+    <author>
+      <name>Ilya Sutskever</name>
+    </author>
+    <author>
+      <name>Karl Cobbe</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.15145v2</id>
+    <title>Bert4XMR: Cross-Market Recommendation with Bidirectional Encoder Representations from Transformer</title>
+    <updated>2023-07-26T08:18:38Z</updated>
+    <link href="https://arxiv.org/abs/2305.15145v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.15145v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Real-world multinational e-commerce companies, such as Amazon and eBay, serve in multiple countries and regions. Some markets are data-scarce, while others are data-rich. In recent years, cross-market recommendation (XMR) has been proposed to bolster data-scarce markets by leveraging auxiliary information from data-rich markets. Previous XMR algorithms have employed techniques such as sharing bottom or incorporating inter-market similarity to optimize the performance of XMR. However, the existing approaches suffer from two crucial limitations: (1) They ignore the co-occurrences of items provided by data-rich markets. (2) They do not adequately tackle the issue of negative transfer stemming from disparities across diverse markets. In order to address these limitations, we propose a novel session-based model called Bert4XMR, which is able to model item co-occurrences across markets and mitigate negative transfer. Specifically, we employ the pre-training and fine-tuning paradigm to facilitate knowledge transfer across markets. Pre-training occurs on global markets to learn item co-occurrences, while fine-tuning happens in the target market for model customization. To mitigate potential negative transfer, we separate the item representations into market embeddings and item embeddings. Market embeddings model the bias associated with different markets, while item embeddings learn generic item representations. Extensive experiments conducted on seven real-world datasets illustrate our model's effectiveness. It outperforms the suboptimal model by an average of $4.82\%$, $4.73\%$, $7.66\%$, and $6.49\%$ across four metrics. Through the ablation study, we experimentally demonstrate that the market embedding approach helps prevent negative transfer, especially in data-scarce markets. Our implementations are available at https://github.com/laowangzi/Bert4XMR.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-24T13:39:14Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <arxiv:journal_ref>Information Systems, 124 (2024): 102388</arxiv:journal_ref>
+    <author>
+      <name>Zheng Hu</name>
+    </author>
+    <author>
+      <name>Satoshi Nakagawa</name>
+    </author>
+    <author>
+      <name>Shi-Min Cai</name>
+    </author>
+    <author>
+      <name>Fuji Ren</name>
+    </author>
+    <arxiv:doi>10.1016/j.is.2024.102388</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.is.2024.102388" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.09123v3</id>
+    <title>Finite-Sample Bounds for Adaptive Inverse Reinforcement Learning using Passive Langevin Dynamics</title>
+    <updated>2025-01-15T02:19:34Z</updated>
+    <link href="https://arxiv.org/abs/2304.09123v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.09123v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper provides a finite-sample analysis of a passive stochastic gradient Langevin dynamics (PSGLD) algorithm. This algorithm is designed to achieve adaptive inverse reinforcement learning (IRL). Adaptive IRL aims to estimate the cost function of a forward learner performing a stochastic gradient algorithm (e.g., policy gradient reinforcement learning) by observing their estimates in real-time. The PSGLD algorithm is considered passive because it incorporates noisy gradients provided by an external stochastic gradient algorithm (forward learner), of which it has no control. The PSGLD algorithm acts as a randomized sampler to achieve adaptive IRL by reconstructing the forward learner's cost function nonparametrically from the stationary measure of a Langevin diffusion. This paper analyzes the non-asymptotic (finite-sample) performance; we provide explicit bounds on the 2-Wasserstein distance between PSGLD algorithm sample measure and the stationary measure encoding the cost function, and provide guarantees for a kernel density estimation scheme which reconstructs the cost function from empirical samples. Our analysis uses tools from the study of Markov diffusion operators. The derived bounds have both practical and theoretical significance. They provide finite-time guarantees for an adaptive IRL mechanism, and substantially generalize the analytical framework of a line of research in passive stochastic gradient algorithms.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-18T16:39:51Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Luke Snow</name>
+    </author>
+    <author>
+      <name>Vikram Krishnamurthy</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2306.09517v1</id>
+    <title>Competitive and Resource Efficient Factored Hybrid HMM Systems are Simpler Than You Think</title>
+    <updated>2023-06-15T21:34:31Z</updated>
+    <link href="https://arxiv.org/abs/2306.09517v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2306.09517v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Building competitive hybrid hidden Markov model~(HMM) systems for automatic speech recognition~(ASR) requires a complex multi-stage pipeline consisting of several training criteria. The recent sequence-to-sequence models offer the advantage of having simpler pipelines that can start from-scratch. We propose a purely neural based single-stage from-scratch pipeline for a context-dependent hybrid HMM that offers similar simplicity. We use an alignment from a full-sum trained zero-order posterior HMM with a BLSTM encoder. We show that with this alignment we can build a Conformer factored hybrid that performs even better than both a state-of-the-art classic hybrid and a factored hybrid trained with alignments taken from more complex Gaussian mixture based systems. Our finding is confirmed on Switchboard 300h and LibriSpeech 960h tasks with comparable results to other approaches in the literature, and by additionally relying on a responsible choice of available computational resources.</summary>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-06-15T21:34:31Z</published>
+    <arxiv:comment>Accepted for presentation at InterSpeech 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.SD"/>
+    <author>
+      <name>Tina Raissi</name>
+    </author>
+    <author>
+      <name>Christoph Lüscher</name>
+    </author>
+    <author>
+      <name>Moritz Gunz</name>
+    </author>
+    <author>
+      <name>Ralf Schlüter</name>
+    </author>
+    <author>
+      <name>Hermann Ney</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.10545v1</id>
+    <title>Revival of the Silk Road using the applications of AR/VR and its role on cultural tourism</title>
+    <updated>2023-04-13T11:31:53Z</updated>
+    <link href="https://arxiv.org/abs/2304.10545v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.10545v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This research project seeks to investigate the incorporation of augmented reality (AR) and virtual reality (VR) technology with human-computer interaction (HCI) in order to revitalize the Silk Road - specifically in Kermanshah, Iran - and its effect on cultural tourism. Kermanshah has underexplored the rich historical significance of the Silk Road, despite the presence of 24 UNESCO World Heritage sites. From the 2nd century BCE to the 18th century CE, the Silk Road was a vital trade route connecting the West and the East and had enormous cultural, economic, religious, and political effects. The purpose of this study is to examine the application of AR/VR technologies in HCI for the preservation, interpretation, and promotion of the Silk Road's tangible and intangible cultural heritage in Kermanshah, as well as their impact on cultural tourism development. The study also investigates how these innovative technologies can enhance visitors' experiences through immersive and interactive approaches, promote sustainable tourism practices, and contribute to the region's broader socioeconomic benefits. The research will analyze the challenges and opportunities of implementing AR/VR technology in HCI within the context of cultural heritage and tourism in Kermanshah and the Silk Road region more broadly. By combining HCI, AR/VR, and cultural tourism, this research seeks to provide valuable insights into the development of user-centered, immersive experiences that promote a deeper understanding and appreciation of the Silk Road's distinctive cultural heritage.</summary>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-13T11:31:53Z</published>
+    <arxiv:primary_category term="cs.HC"/>
+    <author>
+      <name>Sahar Zandi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.11756v1</id>
+    <title>Introducing the Perturbative Solution of the Inter-Channel Stimulated Raman Scattering in Single-Mode Optical Fibers</title>
+    <updated>2023-04-23T21:56:44Z</updated>
+    <link href="https://arxiv.org/abs/2304.11756v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.11756v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The continuously increasing IP data traffic demand, with geometrical growth rate exceeding 26%, requires a large transmission capacity increment from the fiber optical infrastructure. As the deploy of new fiber cables requires extensive investments, the development of multi-band amplifiers and transceivers, already available as prototypes, is progressively considered towards the entire low-loss single-mode bandwidth beyond the 5 THz C-band. In this perspective, an adequate handling of the variations along the frequency of the fiber physical features becomes crucial for the fiber propagation modeling in multi-band wavelength division multiplexing (WDM) channel comb transmission scenarios. In particular, the inter-channel stimulated Raman scattering (SRS) is the fundamental inter-band effect in this context. The SRS effect on the WDM comb propagated through a single-mode optical fiber is described by a set of ordinary differential equations (ODEs). To date, an exact solution of the SRS ODEs has not been proposed, and in the literature numerical solutions or approximations have been considered in order to take into account this effect. In this work, a perturbative solution of the SRS ODEs is presented enabling an efficient trade-off between the target accuracy and the computational time. Considering a C+L+S transmission scenario, the perturbative expansion up to the 2nd order ensures an excellent accuracy. Whereas, in an U-to-E transmission scenario, the 3rd order is required in order to reach an equivalent accuracy.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-23T21:56:44Z</published>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Andrea D'Amico</name>
+    </author>
+    <author>
+      <name>Giacomo Borraccini</name>
+    </author>
+    <author>
+      <name>Vittorio Curri</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.18365v3</id>
+    <title>What can Large Language Models do in chemistry? A comprehensive benchmark on eight tasks</title>
+    <updated>2023-12-28T04:29:36Z</updated>
+    <link href="https://arxiv.org/abs/2305.18365v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.18365v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) with strong abilities in natural language processing tasks have emerged and have been applied in various kinds of areas such as science, finance and software engineering. However, the capability of LLMs to advance the field of chemistry remains unclear. In this paper, rather than pursuing state-of-the-art performance, we aim to evaluate capabilities of LLMs in a wide range of tasks across the chemistry domain. We identify three key chemistry-related capabilities including understanding, reasoning and explaining to explore in LLMs and establish a benchmark containing eight chemistry tasks. Our analysis draws on widely recognized datasets facilitating a broad exploration of the capacities of LLMs within the context of practical chemistry. Five LLMs (GPT-4, GPT-3.5, Davinci-003, Llama and Galactica) are evaluated for each chemistry task in zero-shot and few-shot in-context learning settings with carefully selected demonstration examples and specially crafted prompts. Our investigation found that GPT-4 outperformed other models and LLMs exhibit different competitive levels in eight chemistry tasks. In addition to the key findings from the comprehensive benchmark analysis, our work provides insights into the limitation of current LLMs and the impact of in-context learning settings on LLMs' performance across various chemistry tasks. The code and datasets used in this study are available at https://github.com/ChemFoundationModels/ChemLLMBench.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-27T14:17:33Z</published>
+    <arxiv:comment>NeurIPS 2023 Datasets and Benchmarks Track camera-ready version</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Taicheng Guo</name>
+    </author>
+    <author>
+      <name>Kehan Guo</name>
+    </author>
+    <author>
+      <name>Bozhao Nan</name>
+    </author>
+    <author>
+      <name>Zhenwen Liang</name>
+    </author>
+    <author>
+      <name>Zhichun Guo</name>
+    </author>
+    <author>
+      <name>Nitesh V. Chawla</name>
+    </author>
+    <author>
+      <name>Olaf Wiest</name>
+    </author>
+    <author>
+      <name>Xiangliang Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.11893v1</id>
+    <title>Solutions of the (3 + 1) dimensional Charney-Obukhov equation for the ocean, Part I: case of "separation'' of variables</title>
+    <updated>2023-05-12T14:34:04Z</updated>
+    <link href="https://arxiv.org/abs/2305.11893v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.11893v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Exact solutions describing Rossby waves and vortices in ocean propagating along the zonal direction at a constant velocity are considered for the (3+1)-dimensional nonlinear Charney-Obukhov equation. In the first part of our work, we give examples of solutions of the Charney-Obukhov equation that satisfy the nonlinear boundary conditions of the ocean, for a special case that corresponds to the "separation" of variables.</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-12T14:34:04Z</published>
+    <arxiv:primary_category term="math.AP"/>
+    <author>
+      <name>V. A. Goloveshkin</name>
+    </author>
+    <author>
+      <name>A. G. Kudryavtsev</name>
+    </author>
+    <author>
+      <name>N. N. Myagkov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.10601v2</id>
+    <title>Tree of Thoughts: Deliberate Problem Solving with Large Language Models</title>
+    <updated>2023-12-03T22:50:35Z</updated>
+    <link href="https://arxiv.org/abs/2305.10601v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.10601v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Language models are increasingly being deployed for general problem solving across a wide range of tasks, but are still confined to token-level, left-to-right decision-making processes during inference. This means they can fall short in tasks that require exploration, strategic lookahead, or where initial decisions play a pivotal role. To surmount these challenges, we introduce a new framework for language model inference, Tree of Thoughts (ToT), which generalizes over the popular Chain of Thought approach to prompting language models, and enables exploration over coherent units of text (thoughts) that serve as intermediate steps toward problem solving. ToT allows LMs to perform deliberate decision making by considering multiple different reasoning paths and self-evaluating choices to decide the next course of action, as well as looking ahead or backtracking when necessary to make global choices. Our experiments show that ToT significantly enhances language models' problem-solving abilities on three novel tasks requiring non-trivial planning or search: Game of 24, Creative Writing, and Mini Crosswords. For instance, in Game of 24, while GPT-4 with chain-of-thought prompting only solved 4% of tasks, our method achieved a success rate of 74%. Code repo with all prompts: https://github.com/princeton-nlp/tree-of-thought-llm.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-17T23:16:17Z</published>
+    <arxiv:comment>NeurIPS 2023 camera ready version. Code repo with all prompts: https://github.com/princeton-nlp/tree-of-thought-llm</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shunyu Yao</name>
+    </author>
+    <author>
+      <name>Dian Yu</name>
+    </author>
+    <author>
+      <name>Jeffrey Zhao</name>
+    </author>
+    <author>
+      <name>Izhak Shafran</name>
+    </author>
+    <author>
+      <name>Thomas L. Griffiths</name>
+    </author>
+    <author>
+      <name>Yuan Cao</name>
+    </author>
+    <author>
+      <name>Karthik Narasimhan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.06983v2</id>
+    <title>Active Retrieval Augmented Generation</title>
+    <updated>2023-10-22T00:11:13Z</updated>
+    <link href="https://arxiv.org/abs/2305.06983v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.06983v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Despite the remarkable ability of large language models (LMs) to comprehend and generate language, they have a tendency to hallucinate and create factually inaccurate output. Augmenting LMs by retrieving information from external knowledge resources is one promising solution. Most existing retrieval augmented LMs employ a retrieve-and-generate setup that only retrieves information once based on the input. This is limiting, however, in more general scenarios involving generation of long texts, where continually gathering information throughout generation is essential. In this work, we provide a generalized view of active retrieval augmented generation, methods that actively decide when and what to retrieve across the course of the generation. We propose Forward-Looking Active REtrieval augmented generation (FLARE), a generic method which iteratively uses a prediction of the upcoming sentence to anticipate future content, which is then utilized as a query to retrieve relevant documents to regenerate the sentence if it contains low-confidence tokens. We test FLARE along with baselines comprehensively over 4 long-form knowledge-intensive generation tasks/datasets. FLARE achieves superior or competitive performance on all tasks, demonstrating the effectiveness of our method. Code and datasets are available at https://github.com/jzbjyb/FLARE.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-11T17:13:40Z</published>
+    <arxiv:comment>EMNLP 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zhengbao Jiang</name>
+    </author>
+    <author>
+      <name>Frank F. Xu</name>
+    </author>
+    <author>
+      <name>Luyu Gao</name>
+    </author>
+    <author>
+      <name>Zhiqing Sun</name>
+    </author>
+    <author>
+      <name>Qian Liu</name>
+    </author>
+    <author>
+      <name>Jane Dwivedi-Yu</name>
+    </author>
+    <author>
+      <name>Yiming Yang</name>
+    </author>
+    <author>
+      <name>Jamie Callan</name>
+    </author>
+    <author>
+      <name>Graham Neubig</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.02345v3</id>
+    <title>Mitigating crosstalk errors by randomized compiling: Simulation of the BCS model on a superconducting quantum computer</title>
+    <updated>2024-02-06T09:32:49Z</updated>
+    <link href="https://arxiv.org/abs/2305.02345v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.02345v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We develop and apply an extension of the randomized compiling (RC) protocol that includes a special treatment of neighboring qubits and dramatically reduces crosstalk effects caused by the application of faulty gates on superconducting qubits in IBMQ quantum computers (\texttt{ibm\_lagos} and \texttt{ibmq\_ehningen}). Crosstalk errors, stemming from CNOT two-qubit gates, are a crucial source of errors on numerous quantum computing platforms. For the IBMQ machines, their magnitude is often overlooked-9. Our RC protocol turns coherent noise due to crosstalk into a depolarising noise channel that can then be treated using established error mitigation schemes, such as noise estimation circuits. We apply our approach to the quantum simulation of the non-equilibrium dynamics of the Bardeen-Cooper-Schrieffer (BCS) Hamiltonian for superconductivity, a particularly challenging model to simulate on quantum hardware because of the long-range interaction of Cooper pairs. With 135 CNOT gates, we work in a regime where crosstalk, as opposed to either trotterization or qubit decoherence, dominates the error. Our twirling of neighboring qubits is shown to dramatically improve the noise estimation protocol without the need to add new qubits or circuits and allows for a quantitative simulation of the BCS model.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.supr-con" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-03T18:00:02Z</published>
+    <arxiv:comment>27 pages, 15 figures</arxiv:comment>
+    <arxiv:primary_category term="quant-ph"/>
+    <arxiv:journal_ref>Phys. Rev. Research 6, 013142 (2024)</arxiv:journal_ref>
+    <author>
+      <name>Hugo Perrin</name>
+    </author>
+    <author>
+      <name>Thibault Scoquart</name>
+    </author>
+    <author>
+      <name>Alexander Shnirman</name>
+    </author>
+    <author>
+      <name>Jörg Schmalian</name>
+    </author>
+    <author>
+      <name>Kyrylo Snizhko</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevResearch.6.013142</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevResearch.6.013142" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.18290v3</id>
+    <title>Direct Preference Optimization: Your Language Model is Secretly a Reward Model</title>
+    <updated>2024-07-29T22:26:36Z</updated>
+    <link href="https://arxiv.org/abs/2305.18290v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.18290v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While large-scale unsupervised language models (LMs) learn broad world knowledge and some reasoning skills, achieving precise control of their behavior is difficult due to the completely unsupervised nature of their training. Existing methods for gaining such steerability collect human labels of the relative quality of model generations and fine-tune the unsupervised LM to align with these preferences, often with reinforcement learning from human feedback (RLHF). However, RLHF is a complex and often unstable procedure, first fitting a reward model that reflects the human preferences, and then fine-tuning the large unsupervised LM using reinforcement learning to maximize this estimated reward without drifting too far from the original model. In this paper we introduce a new parameterization of the reward model in RLHF that enables extraction of the corresponding optimal policy in closed form, allowing us to solve the standard RLHF problem with only a simple classification loss. The resulting algorithm, which we call Direct Preference Optimization (DPO), is stable, performant, and computationally lightweight, eliminating the need for sampling from the LM during fine-tuning or performing significant hyperparameter tuning. Our experiments show that DPO can fine-tune LMs to align with human preferences as well as or better than existing methods. Notably, fine-tuning with DPO exceeds PPO-based RLHF in ability to control sentiment of generations, and matches or improves response quality in summarization and single-turn dialogue while being substantially simpler to implement and train.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-29T17:57:46Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Rafael Rafailov</name>
+    </author>
+    <author>
+      <name>Archit Sharma</name>
+    </author>
+    <author>
+      <name>Eric Mitchell</name>
+    </author>
+    <author>
+      <name>Stefano Ermon</name>
+    </author>
+    <author>
+      <name>Christopher D. Manning</name>
+    </author>
+    <author>
+      <name>Chelsea Finn</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2306.11246v3</id>
+    <title>Deep Reinforcement Learning for Inventory Networks: Toward Reliable Policy Optimization</title>
+    <updated>2025-09-10T21:32:10Z</updated>
+    <link href="https://arxiv.org/abs/2306.11246v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2306.11246v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We argue that inventory management presents unique opportunities for the reliable application of deep reinforcement learning (DRL). To enable this, we emphasize and test two complementary techniques. The first is Hindsight Differentiable Policy Optimization (HDPO), which uses pathwise gradients from offline counterfactual simulations to directly and efficiently optimize policy performance. Unlike standard policy gradient methods that rely on high-variance score-function estimators, HDPO computes gradients by differentiating through the known system dynamics. Via extensive benchmarking, we show that HDPO recovers near-optimal policies in settings with known or bounded optima, is more robust than variants of the REINFORCE algorithm, and significantly outperforms generalized newsvendor heuristics on problems using real time series data. Our second technique aligns neural policy architectures with the topology of the inventory network. We exploit Graph Neural Networks (GNNs) as a natural inductive bias for encoding supply chain structure, demonstrate that they can represent optimal and near-optimal policies in two theoretical settings, and empirically show that they reduce data requirements across six diverse inventory problems. A key obstacle to progress in this area is the lack of standardized benchmark problems. To address this gap, we open-source a suite of benchmark environments, along with our full codebase, to promote transparency and reproducibility. All resources are available at github.com/MatiasAlvo/Neural_inventory_control.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-06-20T02:58:25Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Matias Alvo</name>
+    </author>
+    <author>
+      <name>Daniel Russo</name>
+    </author>
+    <author>
+      <name>Yash Kanoria</name>
+    </author>
+    <author>
+      <name>Minuk Lee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2306.12232v1</id>
+    <title>STAN: Stage-Adaptive Network for Multi-Task Recommendation by Learning User Lifecycle-Based Representation</title>
+    <updated>2023-06-21T12:45:17Z</updated>
+    <link href="https://arxiv.org/abs/2306.12232v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2306.12232v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recommendation systems play a vital role in many online platforms, with their primary objective being to satisfy and retain users. As directly optimizing user retention is challenging, multiple evaluation metrics are often employed. Existing methods generally formulate the optimization of these evaluation metrics as a multitask learning problem, but often overlook the fact that user preferences for different tasks are personalized and change over time. Identifying and tracking the evolution of user preferences can lead to better user retention. To address this issue, we introduce the concept of "user lifecycle", consisting of multiple stages characterized by users' varying preferences for different tasks. We propose a novel Stage-Adaptive Network (STAN) framework for modeling user lifecycle stages. STAN first identifies latent user lifecycle stages based on learned user preferences, and then employs the stage representation to enhance multi-task learning performance. Our experimental results using both public and industrial datasets demonstrate that the proposed model significantly improves multi-task prediction performance compared to state-of-the-art methods, highlighting the importance of considering user lifecycle stages in recommendation systems. Furthermore, online A/B testing reveals that our model outperforms the existing model, achieving a significant improvement of 3.05% in staytime per user and 0.88% in CVR. These results indicate that our approach effectively improves the overall efficiency of the multi-task recommendation system.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-06-21T12:45:17Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <arxiv:journal_ref>RecSys 2023</arxiv:journal_ref>
+    <author>
+      <name>Wanda Li</name>
+    </author>
+    <author>
+      <name>Wenhao Zheng</name>
+    </author>
+    <author>
+      <name>Xuanji Xiao</name>
+    </author>
+    <author>
+      <name>Suhang Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.08485v2</id>
+    <title>Visual Instruction Tuning</title>
+    <updated>2023-12-11T17:46:14Z</updated>
+    <link href="https://arxiv.org/abs/2304.08485v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.08485v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Instruction tuning large language models (LLMs) using machine-generated instruction-following data has improved zero-shot capabilities on new tasks, but the idea is less explored in the multimodal field. In this paper, we present the first attempt to use language-only GPT-4 to generate multimodal language-image instruction-following data. By instruction tuning on such generated data, we introduce LLaVA: Large Language and Vision Assistant, an end-to-end trained large multimodal model that connects a vision encoder and LLM for general-purpose visual and language understanding.Our early experiments show that LLaVA demonstrates impressive multimodel chat abilities, sometimes exhibiting the behaviors of multimodal GPT-4 on unseen images/instructions, and yields a 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction-following dataset. When fine-tuned on Science QA, the synergy of LLaVA and GPT-4 achieves a new state-of-the-art accuracy of 92.53%. We make GPT-4 generated visual instruction tuning data, our model and code base publicly available.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-17T17:59:25Z</published>
+    <arxiv:comment>NeurIPS 2023 Oral; project page: https://llava-vl.github.io/</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Haotian Liu</name>
+    </author>
+    <author>
+      <name>Chunyuan Li</name>
+    </author>
+    <author>
+      <name>Qingyang Wu</name>
+    </author>
+    <author>
+      <name>Yong Jae Lee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.01210v3</id>
+    <title>Is Your Code Generated by ChatGPT Really Correct? Rigorous Evaluation of Large Language Models for Code Generation</title>
+    <updated>2023-10-30T19:37:09Z</updated>
+    <link href="https://arxiv.org/abs/2305.01210v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.01210v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Program synthesis has been long studied with recent approaches focused on directly using the power of Large Language Models (LLMs) to generate code. Programming benchmarks, with curated synthesis problems and test-cases, are used to measure the performance of various LLMs on code synthesis. However, these test-cases can be limited in both quantity and quality for fully assessing the functional correctness of the generated code. Such limitation in the existing benchmarks begs the following question: In the era of LLMs, is the code generated really correct? To answer this, we propose EvalPlus -- a code synthesis evaluation framework to rigorously benchmark the functional correctness of LLM-synthesized code. EvalPlus augments a given evaluation dataset with large amounts of test-cases newly produced by an automatic test input generator, powered by both LLM- and mutation-based strategies. While EvalPlus is general, we extend the test-cases of the popular HumanEval benchmark by 80x to build HumanEval+. Our extensive evaluation across 26 popular LLMs (e.g., GPT-4 and ChatGPT) demonstrates that HumanEval+ is able to catch significant amounts of previously undetected wrong code synthesized by LLMs, reducing the pass@k by up-to 19.3-28.9%. We also surprisingly found that test insufficiency can lead to mis-ranking. For example, both WizardCoder-CodeLlama and Phind-CodeLlama now outperform ChatGPT on HumanEval+, while none of them could on HumanEval. Our work not only indicates that prior popular code synthesis evaluation results do not accurately reflect the true performance of LLMs for code synthesis, but also opens up a new direction to improve such programming benchmarks through automated testing. We have open-sourced our tools, enhanced datasets as well as all LLM-generated code at https://github.com/evalplus/evalplus to facilitate and accelerate future LLM-for-code research.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-02T05:46:48Z</published>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Jiawei Liu</name>
+    </author>
+    <author>
+      <name>Chunqiu Steven Xia</name>
+    </author>
+    <author>
+      <name>Yuyao Wang</name>
+    </author>
+    <author>
+      <name>Lingming Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.08328v1</id>
+    <title>FedAds: A Benchmark for Privacy-Preserving CVR Estimation with Vertical Federated Learning</title>
+    <updated>2023-05-15T03:34:42Z</updated>
+    <link href="https://arxiv.org/abs/2305.08328v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.08328v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Conversion rate (CVR) estimation aims to predict the probability of conversion event after a user has clicked an ad. Typically, online publisher has user browsing interests and click feedbacks, while demand-side advertising platform collects users' post-click behaviors such as dwell time and conversion decisions. To estimate CVR accurately and protect data privacy better, vertical federated learning (vFL) is a natural solution to combine two sides' advantages for training models, without exchanging raw data. Both CVR estimation and applied vFL algorithms have attracted increasing research attentions. However, standardized and systematical evaluations are missing: due to the lack of standardized datasets, existing studies adopt public datasets to simulate a vFL setting via hand-crafted feature partition, which brings challenges to fair comparison. We introduce FedAds, the first benchmark for CVR estimation with vFL, to facilitate standardized and systematical evaluations for vFL algorithms. It contains a large-scale real world dataset collected from Alibaba's advertising platform, as well as systematical evaluations for both effectiveness and privacy aspects of various vFL algorithms. Besides, we also explore to incorporate unaligned data in vFL to improve effectiveness, and develop perturbation operations to protect privacy well. We hope that future research work in vFL and CVR estimation benefits from the FedAds benchmark.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-15T03:34:42Z</published>
+    <arxiv:comment>SIGIR 2023, Resource Track</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Penghui Wei</name>
+    </author>
+    <author>
+      <name>Hongjian Dou</name>
+    </author>
+    <author>
+      <name>Shaoguo Liu</name>
+    </author>
+    <author>
+      <name>Rongjun Tang</name>
+    </author>
+    <author>
+      <name>Li Liu</name>
+    </author>
+    <author>
+      <name>Liang Wang</name>
+    </author>
+    <author>
+      <name>Bo Zheng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.12345v1</id>
+    <title>Overspinning a rotating black hole in semiclassical gravity with type-A trace anomaly</title>
+    <updated>2023-05-21T04:43:55Z</updated>
+    <link href="https://arxiv.org/abs/2305.12345v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.12345v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recently, Fernandes discovered an analytic solution for rotating black holes in semiclassical gravity induced by the trace anomaly. These solutions exhibit some distinctive characteristics, including a non-spherically symmetric event horizon and violations of the Kerr bound. As a crucial assumption to uphold causality in spacetime, we investigate the validity of the weak cosmic censorship conjecture (WCCC) within this class of solutions with type-A trace anomaly by introducing a test particle on the equatorial plane. Our study reveals three distinct mechanisms that can potentially destroy the event horizon, leading to a violation of the WCCC. Our findings indicate that, with the exception of extremal Kerr, static extremal, and static singular black holes, the WCCC may be violated under the first-order perturbation of the test particle. These results suggest the need for further exploration of modifications to the behavior of the test particle under quantum effects in order to address the violation of the WCCC in this system.</summary>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-21T04:43:55Z</published>
+    <arxiv:comment>10 pages and 7 figures</arxiv:comment>
+    <arxiv:primary_category term="gr-qc"/>
+    <author>
+      <name>Jie Jiang</name>
+    </author>
+    <author>
+      <name>Ming Zhang</name>
+    </author>
+    <arxiv:doi>10.1140/epjc/s10052-023-11868-2</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epjc/s10052-023-11868-2" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.00050v3</id>
+    <title>Causal Reasoning and Large Language Models: Opening a New Frontier for Causality</title>
+    <updated>2024-08-20T17:16:20Z</updated>
+    <link href="https://arxiv.org/abs/2305.00050v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.00050v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The causal capabilities of large language models (LLMs) are a matter of significant debate, with critical implications for the use of LLMs in societally impactful domains such as medicine, science, law, and policy. We conduct a "behavorial" study of LLMs to benchmark their capability in generating causal arguments. Across a wide range of tasks, we find that LLMs can generate text corresponding to correct causal arguments with high probability, surpassing the best-performing existing methods. Algorithms based on GPT-3.5 and 4 outperform existing algorithms on a pairwise causal discovery task (97%, 13 points gain), counterfactual reasoning task (92%, 20 points gain) and event causality (86% accuracy in determining necessary and sufficient causes in vignettes). We perform robustness checks across tasks and show that the capabilities cannot be explained by dataset memorization alone, especially since LLMs generalize to novel datasets that were created after the training cutoff date.
+  That said, LLMs exhibit unpredictable failure modes, and we discuss the kinds of errors that may be improved and what are the fundamental limits of LLM-based answers. Overall, by operating on the text metadata, LLMs bring capabilities so far understood to be restricted to humans, such as using collected knowledge to generate causal graphs or identifying background causal context from natural language. As a result, LLMs may be used by human domain experts to save effort in setting up a causal analysis, one of the biggest impediments to the widespread adoption of causal methods. Given that LLMs ignore the actual data, our results also point to a fruitful research direction of developing algorithms that combine LLMs with existing causal techniques. Code and datasets are available at https://github.com/py-why/pywhy-llm.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-28T19:00:43Z</published>
+    <arxiv:comment>Added three novel datasets. To be published in TMLR. Authors listed alphabetically</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Emre Kıcıman</name>
+    </author>
+    <author>
+      <name>Robert Ness</name>
+    </author>
+    <author>
+      <name>Amit Sharma</name>
+    </author>
+    <author>
+      <name>Chenhao Tan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.00686v4</id>
+    <title>DiffuRec: A Diffusion Model for Sequential Recommendation</title>
+    <updated>2023-10-30T11:43:46Z</updated>
+    <link href="https://arxiv.org/abs/2304.00686v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.00686v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Mainstream solutions to Sequential Recommendation (SR) represent items with fixed vectors. These vectors have limited capability in capturing items' latent aspects and users' diverse preferences. As a new generative paradigm, Diffusion models have achieved excellent performance in areas like computer vision and natural language processing. To our understanding, its unique merit in representation generation well fits the problem setting of sequential recommendation. In this paper, we make the very first attempt to adapt Diffusion model to SR and propose DiffuRec, for item representation construction and uncertainty injection. Rather than modeling item representations as fixed vectors, we represent them as distributions in DiffuRec, which reflect user's multiple interests and item's various aspects adaptively. In diffusion phase, DiffuRec corrupts the target item embedding into a Gaussian distribution via noise adding, which is further applied for sequential item distribution representation generation and uncertainty injection. Afterward, the item representation is fed into an Approximator for target item representation reconstruction. In reverse phase, based on user's historical interaction behaviors, we reverse a Gaussian noise into the target item representation, then apply a rounding operation for target item prediction. Experiments over four datasets show that DiffuRec outperforms strong baselines by a large margin.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-03T02:22:01Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Zihao Li</name>
+    </author>
+    <author>
+      <name>Aixin Sun</name>
+    </author>
+    <author>
+      <name>Chenliang Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.03111v3</id>
+    <title>Can LLM Already Serve as A Database Interface? A BIg Bench for Large-Scale Database Grounded Text-to-SQLs</title>
+    <updated>2023-11-15T04:56:25Z</updated>
+    <link href="https://arxiv.org/abs/2305.03111v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.03111v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Text-to-SQL parsing, which aims at converting natural language instructions into executable SQLs, has gained increasing attention in recent years. In particular, Codex and ChatGPT have shown impressive results in this task. However, most of the prevalent benchmarks, i.e., Spider, and WikiSQL, focus on database schema with few rows of database contents leaving the gap between academic study and real-world applications. To mitigate this gap, we present Bird, a big benchmark for large-scale database grounded in text-to-SQL tasks, containing 12,751 pairs of text-to-SQL data and 95 databases with a total size of 33.4 GB, spanning 37 professional domains. Our emphasis on database values highlights the new challenges of dirty database contents, external knowledge between NL questions and database contents, and SQL efficiency, particularly in the context of massive databases. To solve these problems, text-to-SQL models must feature database value comprehension in addition to semantic parsing. The experimental results demonstrate the significance of database values in generating accurate text-to-SQLs for big databases. Furthermore, even the most effective text-to-SQL models, i.e. ChatGPT, only achieves 40.08% in execution accuracy, which is still far from the human result of 92.96%, proving that challenges still stand. Besides, we also provide an efficiency analysis to offer insights into generating text-to-efficient-SQLs that are beneficial to industries. We believe that BIRD will contribute to advancing real-world applications of text-to-SQL research. The leaderboard and source code are available: https://bird-bench.github.io/.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-04T19:02:29Z</published>
+    <arxiv:comment>NeurIPS 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jinyang Li</name>
+    </author>
+    <author>
+      <name>Binyuan Hui</name>
+    </author>
+    <author>
+      <name>Ge Qu</name>
+    </author>
+    <author>
+      <name>Jiaxi Yang</name>
+    </author>
+    <author>
+      <name>Binhua Li</name>
+    </author>
+    <author>
+      <name>Bowen Li</name>
+    </author>
+    <author>
+      <name>Bailin Wang</name>
+    </author>
+    <author>
+      <name>Bowen Qin</name>
+    </author>
+    <author>
+      <name>Rongyu Cao</name>
+    </author>
+    <author>
+      <name>Ruiying Geng</name>
+    </author>
+    <author>
+      <name>Nan Huo</name>
+    </author>
+    <author>
+      <name>Xuanhe Zhou</name>
+    </author>
+    <author>
+      <name>Chenhao Ma</name>
+    </author>
+    <author>
+      <name>Guoliang Li</name>
+    </author>
+    <author>
+      <name>Kevin C. C. Chang</name>
+    </author>
+    <author>
+      <name>Fei Huang</name>
+    </author>
+    <author>
+      <name>Reynold Cheng</name>
+    </author>
+    <author>
+      <name>Yongbin Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.08085v1</id>
+    <title>InstructUIE: Multi-task Instruction Tuning for Unified Information Extraction</title>
+    <updated>2023-04-17T09:00:50Z</updated>
+    <link href="https://arxiv.org/abs/2304.08085v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.08085v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models have unlocked strong multi-task capabilities from reading instructive prompts. However, recent studies have shown that existing large models still have difficulty with information extraction tasks. For example, gpt-3.5-turbo achieved an F1 score of 18.22 on the Ontonotes dataset, which is significantly lower than the state-of-the-art performance. In this paper, we propose InstructUIE, a unified information extraction framework based on instruction tuning, which can uniformly model various information extraction tasks and capture the inter-task dependency. To validate the proposed method, we introduce IE INSTRUCTIONS, a benchmark of 32 diverse information extraction datasets in a unified text-to-text format with expert-written instructions. Experimental results demonstrate that our method achieves comparable performance to Bert in supervised settings and significantly outperforms the state-of-the-art and gpt3.5 in zero-shot settings.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-17T09:00:50Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Xiao Wang</name>
+    </author>
+    <author>
+      <name>Weikang Zhou</name>
+    </author>
+    <author>
+      <name>Can Zu</name>
+    </author>
+    <author>
+      <name>Han Xia</name>
+    </author>
+    <author>
+      <name>Tianze Chen</name>
+    </author>
+    <author>
+      <name>Yuansen Zhang</name>
+    </author>
+    <author>
+      <name>Rui Zheng</name>
+    </author>
+    <author>
+      <name>Junjie Ye</name>
+    </author>
+    <author>
+      <name>Qi Zhang</name>
+    </author>
+    <author>
+      <name>Tao Gui</name>
+    </author>
+    <author>
+      <name>Jihua Kang</name>
+    </author>
+    <author>
+      <name>Jingsheng Yang</name>
+    </author>
+    <author>
+      <name>Siyuan Li</name>
+    </author>
+    <author>
+      <name>Chunsai Du</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.09653v3</id>
+    <title>ReelFramer: Human-AI Co-Creation for News-to-Video Translation</title>
+    <updated>2024-03-11T03:06:46Z</updated>
+    <link href="https://arxiv.org/abs/2304.09653v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.09653v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Short videos on social media are the dominant way young people consume content. News outlets aim to reach audiences through news reels -- short videos conveying news -- but struggle to translate traditional journalistic formats into short, entertaining videos. To translate news into social media reels, we support journalists in reframing the narrative. In literature, narrative framing is a high-level structure that shapes the overall presentation of a story. We identified three narrative framings for reels that adapt social media norms but preserve news value, each with a different balance of information and entertainment. We introduce ReelFramer, a human-AI co-creative system that helps journalists translate print articles into scripts and storyboards. ReelFramer supports exploring multiple narrative framings to find one appropriate to the story. AI suggests foundational narrative details, including characters, plot, setting, and key information. ReelFramer also supports visual framing; AI suggests character and visual detail designs before generating a full storyboard. Our studies show that narrative framing introduces the necessary diversity to translate various articles into reels, and establishing foundational details helps generate scripts that are more relevant and coherent. We also discuss the benefits of using narrative framing and foundational details in content retargeting.</summary>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-19T13:44:35Z</published>
+    <arxiv:primary_category term="cs.HC"/>
+    <author>
+      <name>Sitong Wang</name>
+    </author>
+    <author>
+      <name>Samia Menon</name>
+    </author>
+    <author>
+      <name>Tao Long</name>
+    </author>
+    <author>
+      <name>Keren Henderson</name>
+    </author>
+    <author>
+      <name>Dingzeyu Li</name>
+    </author>
+    <author>
+      <name>Kevin Crowston</name>
+    </author>
+    <author>
+      <name>Mark Hansen</name>
+    </author>
+    <author>
+      <name>Jeffrey V. Nickerson</name>
+    </author>
+    <author>
+      <name>Lydia B. Chilton</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2306.11284v2</id>
+    <title>In-plane anisotropy of the single-$q$ and multiple-$q$ ordered phases in the antiferromagnetic metal CeRh$_2$Si$_2$ unveiled by the bulk measurements under uniaxial stress and neutron scattering</title>
+    <updated>2023-06-22T06:23:37Z</updated>
+    <link href="https://arxiv.org/abs/2306.11284v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2306.11284v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We performed magnetization, resistivity, and neutron diffraction measurements under uniaxial stress applied along [1-10] direction on the tetragonal magnet CeRh$_2$Si$_2$ with commensurate magnetic orders.
+  CeRh$_2$Si$_2$ has two successive antiferromagnetic (AF) orders in zero magnetic field.
+  The high temperature phase (AF1 phase) has the magnetic modulation wave vector of $q = (\frac{1}{2}, \frac{1}{2}, 0)$, and the low temperature phase (AF2 phase) is characterized by the four $q$-vectors of $q = (\frac{1}{2}, \frac{1}{2}, 0), (\frac{1}{2}, -\frac{1}{2}, 0), (\frac{1}{2}, \frac{1}{2}, \frac{1}{2})$, and $(\frac{1}{2}, -\frac{1}{2}, \frac{1}{2})$.
+  By measuring the uniaxial stress dependence of the magnetization, resistivity and the intensities of magnetic Bragg reflections, we confirmed that the AF1 phase has the single-$q$ magnetic order with two-fold rotational symmetry and the AF2 phase has the multi-$q$ magnetic order with four-fold rotational symmetry.
+  In order to understand the origin of multi-$q$ order of CeRh$_2$Si$_2$, we also performed inelastic neutron scattering measurement on the single crystal samples.
+  We found a magnetic excitation at the transfer energy $\hbar ω\sim$ 8 meV.
+  By applying the linear spin-wave theory, we found that the nearest and the next-nearest neighbor exchange interactions on the $ab$-plane, $J_1$ and $J_2$, are dominant in the AF2 phase.
+  However, the $J_1$-$J_2$ model cannot lift the degeneracy between the single-$q$ (AF1) and multi-$q$ (AF2) phases.
+  We suggest that it can be lifted by taking into account the biquadratic interaction derived from the perturbative expansion for the Kondo lattice Hamiltonian. [S. Hayami et al., Phys. Rev. B 95, 224424 (2017).</summary>
+    <category term="cond-mat.str-el" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-06-20T04:35:43Z</published>
+    <arxiv:comment>7 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.str-el"/>
+    <author>
+      <name>Hiraku Saito</name>
+    </author>
+    <author>
+      <name>Fusako Kon</name>
+    </author>
+    <author>
+      <name>Hiroyuki Hidaka</name>
+    </author>
+    <author>
+      <name>Hiroshi Amitsuka</name>
+    </author>
+    <author>
+      <name>Cho Kwanghee</name>
+    </author>
+    <author>
+      <name>Masato Hagihala</name>
+    </author>
+    <author>
+      <name>Takashi Kamiyama</name>
+    </author>
+    <author>
+      <name>Shinichi Itoh</name>
+    </author>
+    <author>
+      <name>Taro Nakajima</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevB.108.094440</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevB.108.094440" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.19118v4</id>
+    <title>Encouraging Divergent Thinking in Large Language Models through Multi-Agent Debate</title>
+    <updated>2024-10-09T02:41:21Z</updated>
+    <link href="https://arxiv.org/abs/2305.19118v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.19118v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Modern large language models (LLMs) like ChatGPT have shown remarkable performance on general language tasks but still struggle on complex reasoning tasks, which drives the research on cognitive behaviors of LLMs to explore human-like problem-solving strategies. Along this direction, one representative strategy is self-reflection, which asks an LLM to refine the solution with the feedback generated by itself iteratively. However, our study shows that such reflection-style methods suffer from the Degeneration-of-Thought (DoT) problem: once the LLM has established confidence in its solutions, it is unable to generate novel thoughts later through reflection even if its initial stance is incorrect. To address the DoT problem, we propose a Multi-Agent Debate (MAD) framework, in which multiple agents express their arguments in the state of "tit for tat" and a judge manages the debate process to obtain a final solution. Clearly, our MAD framework encourages divergent thinking in LLMs which would be helpful for tasks that require deep levels of contemplation. Experiment results on two challenging datasets, commonsense machine translation and counter-intuitive arithmetic reasoning, demonstrate the effectiveness of our MAD framework. Extensive analyses suggest that the adaptive break of debate and the modest level of "tit for tat" state are required for MAD to obtain good performance. Moreover, we find that LLMs might not be a fair judge if different LLMs are used for agents. Code is available at https://github.com/Skytliang/Multi-Agents-Debate.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-30T15:25:45Z</published>
+    <arxiv:comment>EMNLP 2024 (main conference)</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Tian Liang</name>
+    </author>
+    <author>
+      <name>Zhiwei He</name>
+    </author>
+    <author>
+      <name>Wenxiang Jiao</name>
+    </author>
+    <author>
+      <name>Xing Wang</name>
+    </author>
+    <author>
+      <name>Yan Wang</name>
+    </author>
+    <author>
+      <name>Rui Wang</name>
+    </author>
+    <author>
+      <name>Yujiu Yang</name>
+    </author>
+    <author>
+      <name>Shuming Shi</name>
+    </author>
+    <author>
+      <name>Zhaopeng Tu</name>
+    </author>
+  </entry>
+</feed>

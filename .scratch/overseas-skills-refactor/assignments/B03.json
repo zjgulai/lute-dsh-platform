@@ -1,0 +1,549 @@
+{
+  "batch": "B03",
+  "assignments": [
+    {
+      "name": "amz-product-optimizer",
+      "roles": [
+        {
+          "id": "AGT-022",
+          "responsibility": "商品诊断",
+          "confidence": "high",
+          "from_skill": "CTR低于1%或CVR低于5%时的诊断优化",
+          "from_role": "提高商品信息质量和合规可发现性",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "amz-hot-keywords",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "趋势监测",
+          "confidence": "low",
+          "from_skill": "trend (up/down/flat)",
+          "from_role": "趋势监测",
+          "note": "low：工具只产出关键词周排名与趋势 CSV，属取数来源，不是岗位分析动作，需人工复核。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "amazon-listing-expert",
+      "roles": [
+        {
+          "id": "AGT-022",
+          "responsibility": "Listing优化",
+          "confidence": "high",
+          "from_skill": "创建或重写 Listing",
+          "from_role": "提高商品信息质量和合规可发现性",
+          "note": ""
+        },
+        {
+          "id": "AGT-021",
+          "responsibility": "行动组合",
+          "confidence": "low",
+          "from_skill": "决策中断点和品牌优势提升转化",
+          "from_role": "对指定Amazon经营范围的增长方案负责",
+          "note": "low：Listing 改写属 Amazon 增长动作之一，但本技能不编排行动组合，保留人工先验待复核。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "amazon-ppc-campaign-manager",
+      "roles": [
+        {
+          "id": "AGT-032",
+          "responsibility": "投放诊断",
+          "confidence": "high",
+          "from_skill": "ACoS高于目标值时的诊断优化",
+          "from_role": "投放诊断",
+          "note": ""
+        },
+        {
+          "id": "AGT-021",
+          "responsibility": "行动组合",
+          "confidence": "low",
+          "from_skill": "预算重分配方案",
+          "from_role": "对指定Amazon经营范围的增长方案负责",
+          "note": "low：广告预算是 Amazon 增长动作的组成部分，行动组合本身不由本技能编排。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "ab-test-setup",
+      "roles": [
+        {
+          "id": "AGT-008",
+          "responsibility": "实验组合",
+          "confidence": "medium",
+          "from_skill": "实验设计",
+          "from_role": "实验组合",
+          "note": "通用实验设计方法（假设—单变量—样本量—统计显著），可同时服务多岗位的实验与验证责任；本技能共挂 6 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-010",
+          "responsibility": "可用性验证",
+          "confidence": "medium",
+          "from_skill": "button color",
+          "from_role": "可用性验证",
+          "note": "通用实验设计方法（假设—单变量—样本量—统计显著），可同时服务多岗位的实验与验证责任；本技能共挂 6 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-030",
+          "responsibility": "内容实验",
+          "confidence": "medium",
+          "from_skill": "variant copy",
+          "from_role": "内容实验",
+          "note": "通用实验设计方法（假设—单变量—样本量—统计显著），可同时服务多岗位的实验与验证责任；本技能共挂 6 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-034",
+          "responsibility": "复购实验",
+          "confidence": "medium",
+          "from_skill": "Start with a Hypothesis",
+          "from_role": "复购实验",
+          "note": "通用实验设计方法（假设—单变量—样本量—统计显著），可同时服务多岗位的实验与验证责任；本技能共挂 6 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-035",
+          "responsibility": "实验设计",
+          "confidence": "medium",
+          "from_skill": "statistically valid",
+          "from_role": "区分真实增量、归因偏差与偶然波动",
+          "note": "通用实验设计方法（假设—单变量—样本量—统计显著），可同时服务多岗位的实验与验证责任；本技能共挂 6 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-038",
+          "responsibility": "改进验证",
+          "confidence": "medium",
+          "from_skill": "actionable results",
+          "from_role": "改进验证",
+          "note": "通用实验设计方法（假设—单变量—样本量—统计显著），可同时服务多岗位的实验与验证责任；本技能共挂 6 岗，故全部不标 high。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "etsy-seo-optimizer",
+      "roles": [
+        {
+          "id": "AGT-024",
+          "responsibility": "平台运营",
+          "confidence": "high",
+          "from_skill": "Etsy 平台 Listing 优化",
+          "from_role": "平台运营",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "google-shopping-feed-optimizer",
+      "roles": [
+        {
+          "id": "AGT-024",
+          "responsibility": "平台运营",
+          "confidence": "high",
+          "from_skill": "Optimize Google Shopping Feed",
+          "from_role": "平台运营",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "seo-keyword-research",
+      "roles": [
+        {
+          "id": "AGT-022",
+          "responsibility": "搜索意图分析",
+          "confidence": "high",
+          "from_skill": "classify search intent",
+          "from_role": "搜索意图分析",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "seo-competitor-analysis",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "confidence": "high",
+          "from_skill": "抓取并对比竞品页面、关键词与反向链接",
+          "from_role": "竞品研究",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "seo-page-audit",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "站点运营",
+          "confidence": "medium",
+          "from_skill": "诊断网站结构、性能、移动适配与索引问题",
+          "from_role": "站点运营",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "tiktok-ads-strategy",
+      "roles": [
+        {
+          "id": "AGT-032",
+          "responsibility": "广告实验",
+          "confidence": "high",
+          "from_skill": "creative-first testing",
+          "from_role": "广告实验",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "warehouse-fulfillment-workflow",
+      "roles": [
+        {
+          "id": "AGT-020",
+          "responsibility": "仓储协作",
+          "confidence": "high",
+          "from_skill": "拣货、打包、打单仓库作业标准化",
+          "from_role": "仓储协作",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "ecommerce-gdpr-compliance",
+      "roles": [
+        {
+          "id": "AGT-044",
+          "responsibility": "隐私需求分析",
+          "confidence": "high",
+          "from_skill": "cookie consent",
+          "from_role": "隐私需求分析",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "multi-currency-checkout",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "站点运营",
+          "confidence": "medium",
+          "from_skill": "local currency",
+          "from_role": "改善品牌独立站的购买闭环与经营结果",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "multi-location-order-router",
+      "roles": [
+        {
+          "id": "AGT-020",
+          "responsibility": "仓储协作",
+          "confidence": "medium",
+          "from_skill": "multi-warehouse routing",
+          "from_role": "协调出库交付退货与库存状态",
+          "note": "订单生命周期引擎，主责落在 AGT-020 履约仓储；订单协调与库存占用由另两岗责任边缘承接。本技能共挂 3 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-015",
+          "responsibility": "订单协调",
+          "confidence": "low",
+          "from_skill": "the lifecycle of an order",
+          "from_role": "订单协调",
+          "note": "订单生命周期引擎，主责落在 AGT-020 履约仓储；订单协调与库存占用由另两岗责任边缘承接。本技能共挂 3 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-017",
+          "responsibility": "调拨清货建议",
+          "confidence": "low",
+          "from_skill": "manage inventory reservations",
+          "from_role": "调拨清货建议",
+          "note": "订单生命周期引擎，主责落在 AGT-020 履约仓储；订单协调与库存占用由另两岗责任边缘承接。本技能共挂 3 岗，故全部不标 high。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "multichannel-inventory-sync",
+      "roles": [
+        {
+          "id": "AGT-045",
+          "responsibility": "账号商品映射",
+          "confidence": "medium",
+          "from_skill": "UPC/GTIN Barcodes",
+          "from_role": "让业务对象和指标有统一来源与责任",
+          "note": "多渠道库存单一事实源，主责在 AGT-045 主数据与 AGT-016 供需协调，库存分层为边缘承接。本技能共挂 3 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-016",
+          "responsibility": "供需协调",
+          "confidence": "medium",
+          "from_skill": "prevent overselling",
+          "from_role": "供需协调",
+          "note": "多渠道库存单一事实源，主责在 AGT-045 主数据与 AGT-016 供需协调，库存分层为边缘承接。本技能共挂 3 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-017",
+          "responsibility": "库存分层",
+          "confidence": "low",
+          "from_skill": "Accurate Stock Levels",
+          "from_role": "库存分层",
+          "note": "多渠道库存单一事实源，主责在 AGT-045 主数据与 AGT-016 供需协调，库存分层为边缘承接。本技能共挂 3 岗，故全部不标 high。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "invoice-generator",
+      "roles": [
+        {
+          "id": "AGT-042",
+          "responsibility": "税务资料",
+          "confidence": "high",
+          "from_skill": "EU VAT regulations",
+          "from_role": "税务资料",
+          "note": ""
+        },
+        {
+          "id": "AGT-040",
+          "responsibility": "收入与费用核对",
+          "confidence": "medium",
+          "from_skill": "every completed order",
+          "from_role": "贯通订单支付退款结算与财务记录",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "chargeback-dispute-manager",
+      "roles": [
+        {
+          "id": "AGT-043",
+          "responsibility": "争议证据组织",
+          "confidence": "medium",
+          "from_skill": "evidence automation",
+          "from_role": "争议证据组织",
+          "note": ""
+        },
+        {
+          "id": "AGT-037",
+          "responsibility": "服务补救",
+          "confidence": "low",
+          "from_skill": "disputes a transaction",
+          "from_role": "服务补救",
+          "note": "low：拒付属支付争议，与售后客诉仅场景相邻，保留人工先验待复核。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "social-commerce-sync",
+      "roles": [
+        {
+          "id": "AGT-045",
+          "responsibility": "账号商品映射",
+          "confidence": "medium",
+          "from_skill": "product catalogs",
+          "from_role": "让业务对象和指标有统一来源与责任",
+          "note": ""
+        },
+        {
+          "id": "AGT-024",
+          "responsibility": "平台运营",
+          "confidence": "medium",
+          "from_skill": "TikTok Shop",
+          "from_role": "验证其余渠道和潜力市场的增长路径",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "return-policy-designer",
+      "roles": [
+        {
+          "id": "AGT-037",
+          "responsibility": "售后处理",
+          "confidence": "high",
+          "from_skill": "return and refund policies",
+          "from_role": "售后处理",
+          "note": ""
+        },
+        {
+          "id": "AGT-020",
+          "responsibility": "退货分流",
+          "confidence": "medium",
+          "from_skill": "restocking fees",
+          "from_role": "协调出库交付退货与库存状态",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "buy-now-pay-later-setup",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "转化优化",
+          "confidence": "medium",
+          "from_skill": "installment payments",
+          "from_role": "转化优化",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "amazon-brand-protection",
+      "roles": [
+        {
+          "id": "AGT-027",
+          "responsibility": "规则监测",
+          "confidence": "medium",
+          "from_skill": "policy violations",
+          "from_role": "监测账号经营状态并推动规则问题解决",
+          "note": ""
+        },
+        {
+          "id": "AGT-043",
+          "responsibility": "知识产权检索",
+          "confidence": "medium",
+          "from_skill": "IP infringement claims",
+          "from_role": "识别合同权利与知识产权问题",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "amazon-fba-inventory-optimizer",
+      "roles": [
+        {
+          "id": "AGT-016",
+          "responsibility": "补货模拟",
+          "confidence": "high",
+          "from_skill": "restock quantities",
+          "from_role": "补货模拟",
+          "note": ""
+        },
+        {
+          "id": "AGT-017",
+          "responsibility": "调拨清货建议",
+          "confidence": "high",
+          "from_skill": "清算（回收率报价对比）",
+          "from_role": "调拨清货建议",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "optimize-ecommerce-page-conversion",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "漏斗诊断",
+          "confidence": "high",
+          "from_skill": "转化漏斗分析",
+          "from_role": "漏斗诊断",
+          "note": ""
+        },
+        {
+          "id": "AGT-010",
+          "responsibility": "可用性验证",
+          "confidence": "medium",
+          "from_skill": "热力图分析建议",
+          "from_role": "可用性验证",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "payment-fraud-detector",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "站点运营",
+          "confidence": "low",
+          "from_skill": "checkout flow",
+          "from_role": "站点运营",
+          "note": "low：支付风控在 50 岗中无对口职能，仅从 checkout 配置角度挂独立站站点运营，需人工复核。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    }
+  ]
+}

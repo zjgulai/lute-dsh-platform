@@ -1,0 +1,446 @@
+{
+ "batch": "B10",
+ "count": 29,
+ "skills": [
+  {
+   "name": "grilling",
+   "title": "无情访谈",
+   "catalog": "fs",
+   "scenario": "fs-clarify",
+   "scenario_title": "需求澄清",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "连续追问打磨方案与设计，产出更锋利的计划。触发词：无情访谈、grilling、连续追问打磨方案与设计，产出更锋利的计划。",
+   "body_excerpt": "对用户进行不间断的访谈，直到你们达成共识。把整个过程映射为一棵**设计树**：每个决策都会分出挂在它下面的子决策。\n\n按**轮次**推进这棵树。**前沿**是所有前置条件已经确定的决策：也就是你_现在_就能提出、而不必去猜尚未听到的答案的那些问题。一轮之内问完整个前沿：给每个问题编号，并给出你的推荐答案。然后等用户回答，再进行下一轮。\n\n一轮的格式如下：\n\n```\n❓ **Q1** - **<question title>**: <question body, might be multiple paragraphs, including multiple choices>\n\n➡️ <your recommended answer>\n\n---\n\n❓ **Q2** - **<question title>**: <question body, might be multiple paragraphs, including multiple choices>\n\n➡️ <your recommended answer>\n```\n\n用户每一轮的回答都会重塑这棵树：已确定的决策把前沿向外推进，并解锁依赖于它们的那些问题。重新计算前沿，再问下一轮。某个问题的答案若取决于本轮中仍未回答的另一个问题，它就属于_之后_的某一轮，而不是本轮。\n\n查找_事实_是你的职责，永远不是用户的。当前沿问题需要来自环境（文件系统、工具等）的事实时，派一个子代理去找；凡是你能自己查到的，都不要问用户。不要因此阻塞：进行中的探索只是一个未确定的前置条件，因此只有它下游的问题需要等子代理回报；前沿的其余部分现在就问。_决策_属于用户：把每一个都交给他们，然后等待。\n\n当前沿为空时，会话即告完成：设计树的每个分支都已遍历，没有任何东西被悄悄假定。在用户确认你们已达成共识之前，不要据此采取行动。",
+   "existing": []
+  },
+  {
+   "name": "grill-me",
+   "title": "方案访谈（转发）",
+   "catalog": "fs",
+   "scenario": "fs-clarify",
+   "scenario_title": "需求澄清",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "转发器：调用 grilling 执行无情访谈。触发词：方案访谈（转发）、grill-me、转发器：调用 grilling 执行无情访谈。",
+   "body_excerpt": "调用 Skill tool（Skill 工具），参数为 \"grilling\"。",
+   "existing": []
+  },
+  {
+   "name": "grill-with-docs",
+   "title": "文档式访谈",
+   "catalog": "fs",
+   "scenario": "fs-clarify",
+   "scenario_title": "需求澄清",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "访谈+落档：调用 grilling 与 domain-modeling，产出 ADR 与词汇表。触发词：文档式访谈、grill-with-docs、访谈+落档：调用 grilling 与 domain-modeling，产出 ADR 与词汇表。",
+   "body_excerpt": "调用 Skill tool（Skill 工具）两次，分别加载 \"grilling\" 和 \"domain-modeling\"。",
+   "existing": []
+  },
+  {
+   "name": "wait-what",
+   "title": "打断纠偏",
+   "catalog": "fs",
+   "scenario": "fs-clarify",
+   "scenario_title": "需求澄清",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "感觉不对劲时停下核对假设、指出问题再继续。触发词：打断纠偏、wait-what、感觉不对劲时停下核对假设、指出问题再继续。",
+   "body_excerpt": "等等，我不明白你现在进展到哪了。请重新说明：给我一点背景上下文，用 ASD-STE100 Simplified Technical English（简化技术英语）表述，并使用 `CONTEXT.md` 中的通用语言（ubiquitous language）（如果仓库中有多个，按 `CONTEXT-MAP.md` 找到正确的那一个）。",
+   "existing": []
+  },
+  {
+   "name": "to-questionnaire",
+   "title": "访谈转问卷",
+   "catalog": "fs",
+   "scenario": "fs-clarify",
+   "scenario_title": "需求澄清",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "把访谈问题整理为问卷文档。触发词：访谈转问卷、to-questionnaire、把访谈问题整理为问卷文档。",
+   "body_excerpt": "把用户无法独自回答的事情变成一份**问卷**：一份 Markdown 文档，交给某个人异步填写，或者在会议中一起填写。接收者掌握着用户所缺的知识；问卷就是要把这些知识从他们那里挖出来。\n\n**拷问发送，而非主题。** 只就_发送_访谈用户——这是他们永远答得上来的：发给谁，以及需要从对方那里拿回什么。文档中的问题则瞄准接收者所知与用户所需之间的**差距**。\n\n1. **发给谁？** 在一次问答中问清接收者的角色、专长以及与用户的关系。这决定了问卷的语气，以及它需要携带多少上下文。当你弄清接收者是谁、以及他们知道哪些用户不知道的东西时，此步完成。\n\n2. **你需要拿回什么？** 在一次问答中问清用户无法独自解决、需要从这个人那里获得的具体决策或事实。当你得到一份具体清单——用户完事之后必须能够做什么或决定什么——时，此步完成。\n\n3. **撰写问卷。** 针对第 1–2 步得到的差距起草问题，遵循下文的「文档结构」。写入当前目录的 `to-questionnaire-<slug>.md`（slug 取自主题），并报告路径。当文件存在、且第 2 步用户提到的每一项都有对应问题时，此步完成。\n\n## 文档结构\n\n把文档设计为一份**探索问卷**：用户缺少上下文，接收者掌握着它。问题按最重要者优先排序——因为异步场景下你可能只有一次机会——一旦问题超过几个，就用 `##` 标题按主题分组。使用下面的模板来撰写。\n\n<questionnaire-template>\n\n# <问卷标题>\n\n**目的：** 这份问卷为何存在，以及取决于它的决策是什么。\n\n**发件人：** <用户>，**收件人：** <接收者>，**你的回答将如何被使用：** <回答的去向>\n\n## 背景\n\n用一段话让不了解用户想法的接收者了解背景。足以好好作答即可，不必写满一页。\n\n## 如何回答\n\n截止时间与大致工作量。部分回答和「我不知道」同样有用：凡是不确定的就标出来，而不是跳过。\n\n## <主题标题>\n\n每个主题一个 `##` 小节。每节之下是它的问题，按最重要者优先。每个问题只包含一个要点，绝不复合；正下方附回答占位行；只有当问题可能被误解、或可能招来敷衍回答时，才加一行_为什么这很重要_。\n\n<question-example>\n### 系统在发布时预计要承受多大负载？\n\n_为什么这很重要：它决定我们是现在就为突发流量做容量预留，还是推迟。_\n\n>\n</question-example>\n\n## 还有什么？\n\n结尾的兜底问题：有什么我们没问、但应该知道的吗？\n\n</questionnaire-template>",
+   "existing": []
+  },
+  {
+   "name": "research",
+   "title": "一手资料调研",
+   "catalog": "fs",
+   "scenario": "fs-clarify",
+   "scenario_title": "需求澄清",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "针对高可信一手资料调研并沉淀为 Markdown 结论。触发词：一手资料调研、research、针对高可信一手资料调研并沉淀为 Markdown 结论。",
+   "body_excerpt": "启动一个**后台代理**来做研究，这样它阅读时你仍可继续工作。\n\n它的任务是：\n\n1. 对照**一手来源**（官方文档、源代码、规范、第一方 API）调查问题，而不是参考对它们的二手转述。把每一条论断追溯到其所属的源头。\n2. 把调查结果写入单个 Markdown 文件，为每条论断注明来源。\n3. 保存到仓库中此类笔记已有的存放位置；沿用既有约定，如果没有，就放到某个合理的位置并说明在哪。",
+   "existing": [
+    {
+     "responsibility": "知识溯源",
+     "role": "AGT-048"
+    }
+   ]
+  },
+  {
+   "name": "teach",
+   "title": "概念教学",
+   "catalog": "fs",
+   "scenario": "fs-clarify",
+   "scenario_title": "需求澄清",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "把一个概念教到用户真正理解并验证理解。触发词：概念教学、teach、把一个概念教到用户真正理解并验证理解。",
+   "body_excerpt": "用户请你教他们一些东西。这是一个有状态的请求——他们打算跨越多个会话学习该主题。\n\n## 教学工作区\n\n把当前目录当作教学工作区。他们的学习状态记录在这个目录中的若干文件里：\n\n- `MISSION.md`：一份记录用户对该主题产生兴趣的_原因_的文档。所有教学都应以此为依据。使用 [MISSION-FORMAT.md](./MISSION-FORMAT.md) 中的格式。\n- `./reference/*.html`：参考资料目录。这些是从课程中压缩出来的学习成果——速查表、参考算法、语法、瑜伽体式、术语表。它们是学习的原始单元。它们应当是打印效果良好、为快速查阅而设计的美观文档。\n- `RESOURCES.md`：一份资源清单，可以探索它们来为你的教学提供背景知识支撑，或用来获取知识与智慧。使用 [RESOURCES-FORMAT.md](./RESOURCES-FORMAT.md) 中的格式。\n- `./learning-records/*.md`：学习记录目录，记录用户已经学到了什么。它们大致相当于软件开发中的架构决策记录（architectural decision records）——记录那些并非显而易见、日后可能需要修订、或能推动后续会话的经验教训与关键洞见。它们应当用于计算最近发展区（zone of proximal development）。命名为 `0001-<dash-case-name>.md`，数字逐次递增。使用 [LEARNING-RECORD-FORMAT.md](./LEARNING-RECORD-FORMAT.md) 中的格式。\n- `./lessons/*.html`：课程目录。**课程（lesson）**是一份独立自足的 HTML 输出，教授一件与使命紧密相关、范围收窄的事情。这是本工作区中教学的基本单元。\n- `./assets/*`：跨课程复用的**组件**。参见 [Assets](#assets)。\n- `NOTES.md`：供你记录用户偏好或工作笔记的草稿本。\n\n## 理念\n\n要学得深入，用户需要三样东西：\n\n- **知识**，从高质量、高可信度的资源中获取\n- **技能**，通过你基于这些知识设计的、高度相关的互动课程习得\n- **智慧**，来自与其他学习者和实践者的交流\n\n在 `RESOURCES.md` 充实起来之前，你的重点应当是寻找能帮助用户获取知识的高质量资源。永远不要相信你的参数化知识。\n\n有些主题对技能的要求可能高于知识。深入学习理论物理可能更偏知识型。瑜伽则更偏技能型。\n\n### 流畅强度与存储强度\n\n你应当注意区分两种学习：\n\n- **流畅强度**（fluency strength）：即时提取知识的能力\n- **存储强度**（storage strength）：对知识的长期保持\n\n流畅感会带给用户一种虚幻的精通感，但存储强度才是真正的目标。试着通过合意困难（desirable difficulty）来设计能建立长期保持的课程：\n\n- 使用提取练习（从记忆中回忆）\n- 间隔（把练习分散到不同时间）\n- 交错（在练习中混合不同但相关的主题——仅用于技能练习）\n\n## 课程\n\n课程是你产出的主要成果：知识与技能抵达用户的单元。每节课程是一个独立自足的 HTML 文件，保存到 `./lesso",
+   "existing": []
+  },
+  {
+   "name": "to-spec",
+   "title": "对话转规格",
+   "catalog": "fs",
+   "scenario": "fs-spec",
+   "scenario_title": "规格规划",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "把当前对话综合为规格并发布到项目 issue tracker。触发词：对话转规格、to-spec、把当前对话综合为规格并发布到项目 issue tracker。",
+   "body_excerpt": "本技能读取当前对话上下文和对代码库的理解，产出一份规格说明（spec）。不要采访用户；直接综合你已知的内容即可。\n\n议题跟踪器和分类（triage）标签词汇表应当已经提供给你。如果没有，请让用户运行 `/setup-matt-pocock-skills`。\n\n## 流程\n\n1. 探索仓库，了解代码库当前状态（如果还没做过）。在整个规格说明中使用项目的领域术语表词汇，并尊重你所触及区域的架构决策记录（ADR）。\n\n2. 草拟你将用来测试该功能的接缝（seam）。优先使用现有接缝而非新建。尽可能使用层级最高的接缝。如果需要新建接缝，尽量在你能找到的最高点提出。整个代码库中接缝越少越好——理想数量是一个。\n\n与用户确认这些接缝是否符合他们的预期。\n\n3. 使用下面的模板撰写规格说明，然后发布到项目议题跟踪器。打上 `ready-for-agent` 分类标签——无需额外分类。\n\n<spec-template>\n\n## 问题陈述\n\n用户所面临的问题，从用户的视角描述。\n\n## 解决方案\n\n该问题的解决方案，从用户的视角描述。\n\n## 用户故事\n\n一份很长的、带编号的用户故事列表。每条用户故事应采用以下格式：\n\n1. 作为<角色>，我想要<功能>，以便<收益>\n\n<user-story-example>\n1. 作为移动银行客户，我想查看我账户的余额，以便更明智地决定我的开支\n</user-story-example>\n\n这份用户故事列表应极其详尽，覆盖该功能的所有方面。\n\n## 实现决策\n\n已做出的实现决策列表。可以包括：\n\n- 将要构建/修改的模块\n- 这些模块中将被修改的接口\n- 来自开发者的技术澄清\n- 架构决策\n- 模式（schema）变更\n- API 契约\n- 具体交互\n\n不要包含具体文件路径或代码片段。它们可能很快过时。\n\n例外：如果某个原型产出的一段代码比文字更能精确地表达一项决策（状态机、reducer、模式、类型形态），就把它内联到相关决策中，并简要注明它来自原型。裁剪到决策密集的部分，不是可运行的演示，只保留重要部分。\n\n## 测试决策\n\n已做出的测试决策列表。包括：\n\n- 什么才算好测试的描述（只测试外部行为，不测试实现细节）\n- 哪些模块将被测试\n- 测试的先行范例（即代码库中同类型的测试）\n\n## 范围之外\n\n本规格说明范围之外事项的描述。\n\n## 补充说明\n\n关于该功能的任何补充说明。\n\n</spec-template>",
+   "existing": [
+    {
+     "responsibility": "软件需求分析",
+     "role": "AGT-012"
+    }
+   ]
+  },
+  {
+   "name": "to-tickets",
+   "title": "规格转任务卡",
+   "catalog": "fs",
+   "scenario": "fs-spec",
+   "scenario_title": "规格规划",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "把计划/规格拆成 tracer-bullet 任务卡，声明阻塞依赖。触发词：规格转任务卡、to-tickets、把计划/规格拆成 tracer-bullet 任务卡，声明阻塞依赖。",
+   "body_excerpt": "# To Tickets\n\n把一个计划、规格说明或对话拆分成一组**工单（ticket）**：示踪弹（tracer-bullet）式垂直切片，每张工单都声明**阻塞（block）**它的那些工单。\n\n议题跟踪器和分类标签词汇表应当已经提供给你。如果没有，请让用户运行 `/setup-matt-pocock-skills`。\n\n## 流程\n\n### 1. 收集上下文\n\n基于对话上下文中已有的内容工作。如果用户以参数形式传入一个引用（规格说明路径、议题编号或 URL），就获取它并通读其完整正文和评论。\n\n### 2. 探索代码库（可选）\n\n如果你还没有探索过代码库，先探索以了解代码当前状态。工单标题和描述应使用项目的领域术语表词汇，并尊重你所触及区域的架构决策记录（ADR）。\n\n寻找对代码做预重构（prefactor）的机会，让实现更容易。「先让变更变得容易，再做那个容易的变更。」\n\n### 3. 起草垂直切片\n\n把工作拆成**示踪弹（tracer bullet）**工单。\n\n<vertical-slice-rules>\n\n- 每个切片都贯穿每一层（模式、API、UI、测试）切出一条窄但**完整**的路径：是垂直的，**不是**某一层的水平切片\n- 一个完成的切片自身即可演示或验证\n- 每个切片的规模要能装进一个全新的上下文窗口\n- 任何预重构都应最先完成\n\n</vertical-slice-rules>\n\n给每张工单标出它的**阻塞边（blocking edges）**：必须先完成的其他工单。没有阻塞项的工单可以立即开工。\n\n**宽幅重构（wide refactor）是垂直切片的例外。**宽幅重构是指单个机械性变更（重命名一个列、修改一个共享符号的类型），其**波及面（blast radius）**扩散到整个代码库，一次编辑就会同时破坏成千上万个调用点，任何垂直切片都无法独立保持绿灯通过。不要把它硬塞进示踪弹；按**扩展—收缩（expand–contract）**来排序。先扩展：在旧形式旁边加上新形式，让一切照常工作。然后按波及面分批迁移调用点（按包、按目录），每批各是一张工单，都被「扩展」这一步的工单阻塞，因为旧形式仍然存在，所以批与批之间持续集成（CI）保持绿灯。最后收缩：一旦不再有调用方，就删除旧形式，这张工单被所有迁移批次阻塞。当连各批次都无法单独保持绿灯时，保持这个顺序，但让它们共用一个集成分支，全部阻塞一张最终的「集成并验证」工单；只有在那里才承诺绿灯。\n\n### 4. 向用户提问确认\n\n把提议的拆分以编号列表呈现。对每张工单，展示：\n\n- **标题**：简短的描述性名称\n- **被谁阻塞**：哪些其他工单（如果有）必须先完成\n- **交付什么**：这张工单实现并跑通的端到端行为\n\n询问用户：\n\n- 粒度是否合适？（太粗 / 太细）\n- 阻塞边是否正确：每张工单是否只依赖真正卡住它的工单？\n- 是否有工单需要合并或进一步拆分？\n\n反复迭代，直到用户批准该拆分方案。\n\n### 5. 将工单发布到已配置的跟踪器\n\n发布已批准的工单。**发布方式**取决于 `/setup-matt-pocock-skills` 配置的跟踪器；无论哪种方式工单本身都一样，只有阻塞边的形态不同：\n\n- **本地文件** -> 在 `.scratch/<feature",
+   "existing": [
+    {
+     "responsibility": "产品范围管理",
+     "role": "AGT-009"
+    },
+    {
+     "responsibility": "研发计划",
+     "role": "AGT-013"
+    }
+   ]
+  },
+  {
+   "name": "wayfinder",
+   "title": "巨型工程地图",
+   "catalog": "fs",
+   "scenario": "fs-spec",
+   "scenario_title": "规格规划",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "把超大工程规划为 issue 上的决策票地图。触发词：巨型工程地图、wayfinder、把超大工程规划为 issue 上的决策票地图。",
+   "body_excerpt": "一个模糊的想法来了——大到一个代理会话装不下，且笼罩在迷雾中：从这里到**目的地（destination）**的路还看不见。寻路（wayfinding）的要义是找到那条路，而不是朝目的地猛冲。本技能把这条路绘制成仓库议题跟踪器上的一张**共享地图（shared map）**，然后一张一张地推进它的**决策工单（decision tickets）**（其解决方式是一份决策，而不是要执行的一块构建切片），直到路线清晰为止。\n\n目的地因任务而异，而命名它是绘制地图的第一个动作：它塑造每一张工单。它可能是要交接并继续迭代的一份规格说明，是规划开始前要敲定的一项决策，或是一处就地完成的变更，比如数据结构迁移。地图与领域无关：工程工作、课程内容，任何符合这个形态的事情都行。\n\n## 规划，而非执行\n\nWayfinder 默认是**规划**：每张工单解决一项决策，当路线清晰、在别人动手去做之前已无可决策之事时，地图即告完成。那种「不如直接动手干」的冲动，通常正是你已经走到地图边缘、该交接出去的信号。一次任务可以在其 **Notes（备注）**中推翻这个默认，把执行本身纳入地图；但如果没有这么写，就只产出决策，不产出交付物。\n\n## 以名称引用\n\n每张地图和每张工单都是一个议题，所以它有一个**名称**：它的标题。在所有人类会读到的内容里（叙述、地图的「已定决策」），都要用这个名称来引用它，绝不要只写一个光秃秃的 id、编号或 slug。满屏的 `#42, #43, #44` 难以阅读；名称一眼就能看懂。id 和 URL 并没有消失；一个名称包裹着它的链接，但它们嵌在名称*之内*，绝不取代名称。\n\n## 地图\n\n地图是仓库议题跟踪器上的一个单独议题，打上 `wayfinder:map` 标签，是权威性制品。它的工单都是地图的子议题。\n\n地图是**索引**，不是存储。它列出已做出的决策，并指向保存其细节的工单；一项决策只存在于一个地方——它的工单，所以地图从不复述它，只给出要点并附上链接。\n\n**地图、其子工单、阻塞关系与前沿查询实际存放在哪里，取决于具体的跟踪器。**议题跟踪器应当已经提供给你。如果没有，请让用户运行 `/setup-matt-pocock-skills`。查阅跟踪器文档的「Wayfinding operations（寻路操作）」一节，了解*这个*仓库如何表达它们。如果尚未提供任何跟踪器，默认使用本地 Markdown 跟踪器。\n\n### 地图正文\n\n整个地图以低分辨率呈现，每个会话加载一次。未关闭的工单**不**列在这里：它们是未关闭的子议题，通过查询来发现。\n\n```markdown\n## Destination\n\n<what reaching the end of this map looks like: the spec, decision, or change this effort is finding its way to. One or two lines; every session orients to it before choosing a ticket.>\n\n## Notes\n\n<domain; skills every session should consult; standing preferences for thi",
+   "existing": []
+  },
+  {
+   "name": "ask-matt",
+   "title": "技能路由顾问",
+   "catalog": "fs",
+   "scenario": "fs-spec",
+   "scenario_title": "规格规划",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "技能路由器：根据处境推荐本技能集内合适的技能/流程。触发词：技能路由顾问、ask-matt、技能路由器：根据处境推荐本技能集内合适的技能/流程。",
+   "body_excerpt": "# Ask Matt\n\n你记不住每个技能，所以开口问。\n\n**流程（flow）**是一条穿过各技能的路径。大多数路径沿一条**主流程**行进，另有两个**入口匝道（on-ramp）**汇入其中。其余的一切要么是独立技能，要么是运行在底层的词汇层。\n\n## 主流程：想法 -> 交付\n\n大多数工作所走的路线。你有一个想法，想把它做出来。\n\n1. **`/grill-with-docs`** 通过访谈把想法打磨清晰。只要你**正在一个工作目录中工作**，就从这里开始：它是有状态的，把学到的东西保存在 `CONTEXT.md` 和架构决策记录（ADR）中。（没有工作目录？改用 `/grill-me`，见「独立技能」一节。两者运行的是同一个 `/grilling` 原语；`grill-with-docs` 是会留下书面痕迹的那个，因此只要有仓库可留，它就是两者中更好的选择。）\n2. **分支：所有问题都能在对话中解决吗？**如果某个问题需要一个可运行的答案（状态、业务逻辑、一个必须亲眼看看的 UI），就绕道做一个原型，往返都用 **`/handoff`** 作桥梁（原型住在自己的目录里，这正是 `/handoff` 的用途；见「阶段边界」）：\n   - **`/handoff`** 出去，然后针对那个文件开一个新会话，\n   - **`/prototype`** 用一次性代码回答该问题，\n   - **`/handoff`** 把学到的东西带回来，并在最初的想法线索中引用它。\n3. **分支：这是一个多会话的构建吗？**\n   - **是** -> 先 **`/to-spec`**（把线索变成一份规格说明），再 **`/to-tickets`** 把它拆成示踪弹（tracer-bullet）工单，每张工单声明自己的**阻塞边**。在本地跟踪器上，就是 `.scratch/<feature>/issues/` 下每张工单一个文件，按「阻塞方优先」手工推进；在真实跟踪器上，这些边变成原生的阻塞链接，于是任何阻塞项已完成的工单都可以被领取：按工单启动 **`/implement`**，每张之间 **`/clear`** 清掉上下文。每张工单都自包含，所以上一张的上下文可以丢弃。\n   - **否** -> 就在这里、同一个上下文窗口中 **`/implement`**。\n\n   无论哪种方式，**`/implement`** 都是靠内部驱动 **`/tdd`**（一次一个红-绿切片）来构建每个议题，然后在提交前运行 **`/code-review`** 收尾——对 diff 做双轴评审（Standards 标准 + Spec 规格）。当你只想在没有完整规格的情况下先测试再构建一个具体行为时，单独使用 **`/tdd`**；当你随时想对照一个固定基准评审某个分支或 PR 时，单独使用 **`/code-review`**。\n\n### 上下文卫生\n\n把步骤 1–3 保持在**一个不间断的上下文窗口**里（在 `/to-tickets` 之前不要压缩或清空），这样盘问、规格说明和工单都建立在同一套思考之上。然后每次 `/implement` 都全新开始，从工单出发。\n\n这上面的限制是**[智能区（smart zone）](https://www.aihero.dev/ai",
+   "existing": []
+  },
+  {
+   "name": "wizard",
+   "title": "人类操作向导",
+   "catalog": "fs",
+   "scenario": "fs-spec",
+   "scenario_title": "规格规划",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "生成引导人类完成专属步骤的交互式 bash 向导。触发词：人类操作向导、wizard、生成引导人类完成专属步骤的交互式 bash 向导。",
+   "body_excerpt": "# Wizard\n\n**向导（wizard）**是一个 bash 脚本，一步步带领人类走完一套手动流程——这套流程亲手做很繁琐，每次向 AI 重新解释也很繁琐。它打开每个 URL，说清楚该点什么、该复制什么，捕获各项值，把它们写到该去的地方（`.env`、GitHub secrets），在每个阶段确认，并显示还剩多少个阶段。它可能配置第三方服务、执行一次性迁移，或把项目从一种状态挪到另一种状态。\n\n令人愉悦的 UX 已经由 [template.sh](template.sh) 解决了：逐阶段进度、确认关卡、跨平台打开 URL（含 WSL）、隐藏式密钥输入、幂等的 `.env` 更新插入（upsert）、`gh secret`/`gh variable` 写入，以及结尾摘要。**你的工作只是划定流程范围并撰写它的各个阶段。** `STAGES` 标记之上的库在每个向导中完全相同；这种一致性正是关键所在：永远不要手工编辑它。\n\n向导默认是短命的：为一次运行而建，存到临时目录或 `scripts/` 路径，活干完就删。只有当用户想要一条应长期留在仓库里的可重复安装路径时，才提交它。\n\n## 流程\n\n### 1. 划定流程范围\n\n理清人类必须执行的每一个手动步骤，以及沿途要捕获的每一个值。先读仓库，不要凭空发问：\n\n- 对于安装类：`.env`、`.env.example`、`.env.*`、`README`、`docker-compose*`、框架配置，以及 `.github/workflows/*`（每处 `secrets.*` / `vars.*` 引用都是向导必须产出的一个值）。\n- 对于迁移或状态转换类：当前状态、目标状态，以及两者之间不可逆的动作。\n\n然后把按顺序排列的阶段列表以及每个阶段产出的值展示给用户并确认：用户可以增、删或重排。\n\n**完成标准：**每个阶段都按顺序命名，且对每个要捕获的值，你知道 (a) 人类从哪里拿到它，(b) 它写到哪（`.env`、GitHub secret、两者都要，或哪儿都不写；有些阶段是纯动作），以及 (c) 它是否机密（隐藏输入）或公开。\n\n### 2. 映射每个阶段的路径\n\n为每个阶段写下人类要走的精确路径：打开哪个 URL、在那里做什么、值显示在哪里、填入哪个变量，例如「Dashboard -> Developers -> API keys -> Reveal test key -> copy」。对于你并不真正了解当前界面或确切命令的地方，直说，并询问用户或查文档：绝不要编造可能并不存在的步骤。\n\n**完成标准：**每个阶段都能落到一个陌生人也能照做的具体指引上。\n\n### 3. 撰写向导\n\n把 `template.sh` 复制到目标路径。按依赖顺序，把示例阶段替换为每步一个 `stage`。使用库提供的辅助函数：`stage`、`say`/`step`、`open_url`、`ask`/`ask_secret`、`write_env`、`set_secret`/`set_var`、`pause`/`confirm`。把 `TOTAL_STAGES` 设为你写的阶段数。\n\n守住模板立下的标准：先打开 URL 再索取它的值，任何机密内容用 `ask_secret`，每个要持久化的值都 `write_env",
+   "existing": []
+  },
+  {
+   "name": "codebase-design",
+   "title": "代码库深模块设计",
+   "catalog": "fs",
+   "scenario": "fs-architecture",
+   "scenario_title": "架构设计",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "深模块设计词汇：设计与改进模块接口。触发词：代码库深模块设计、codebase-design、深模块设计词汇：设计与改进模块接口。",
+   "body_excerpt": "# Codebase Design\n\n设计**深层模块（deep module）**：一个小接口背后装下大量行为，落在一个干净的接缝上，可以通过这个接口测试。在任何设计或重构代码的地方，都使用这套语言和这些原则。目标是为调用方提供杠杆（leverage）、为维护者提供局部性（locality）、为所有人提供可测试性。\n\n## 术语表\n\n精确使用这些术语：不要用「component（组件）」「service（服务）」「API」「boundary（边界）」来替代。语言一致正是全部意义所在。\n\n**Module（模块）**：任何有接口和实现的东西。刻意与规模无关：可以是一个函数、一个类、一个包，或一个跨层的切片。_避免说_：unit（单元）、component（组件）、service（服务）。\n\n**Interface（接口）**：调用方为正确使用该模块而必须知道的一切：类型签名，但也包括不变量、顺序约束、错误模式、必需的配置，以及性能特征。_避免说_：API、signature（签名，太窄了，它们只指类型层面的表面）。\n\n**Implementation（实现）**：模块内部的东西，它的代码主体。与 **Adapter（适配器）**不同：一个东西可以是一个实现很大的小适配器（比如 Postgres 仓库），也可以是一个实现很小的大适配器（比如内存中的 fake）。当话题是接缝时，用「适配器」；否则用「实现」。\n\n**Depth（深度）**：接口处的杠杆。调用方（或测试）每学习一单位接口，能调动多少行为。当一个模块在小接口背后装下大量行为时，它就是**深的**；当接口几乎和实现一样复杂时，它就是**浅的**。\n\n**Seam（接缝）**（_Michael Feathers 提出_）：一个你可以在不编辑该处代码的情况下改变行为的地方；是模块接口所在的*位置*。把接缝放在哪里本身就是一项设计决策，与它背后装什么无关。_避免说_：boundary（与 DDD 的限界上下文含义重载）。\n\n**Adapter（适配器）**：在接缝处满足一个接口的具体事物。描述的是*角色*（它填哪个槽位），而不是实质（它里面是什么）。\n\n**Leverage（杠杆）**：调用方从深度中获得的东西。每学习一单位接口获得更多能力。一份实现，在 N 个调用点和 M 个测试上回本。\n\n**Locality（局部性）**：维护者从深度中获得的东西。变更、缺陷、知识和验证集中在一个地方，而不是散布在调用方之间。修一次，处处修好。\n\n## 深 vs 浅\n\n**深层模块** = 小接口 + 大量实现：\n\n```\n+---------------------+\n|   Small Interface   |  <- Few methods, simple params\n+---------------------+\n|                     |\n|  Deep Implementation|  <- Complex logic hidden\n|                     |\n+---------------------+\n```\n\n**浅层模块** = 大接口 + 少量实现（要避免）：\n\n```\n+---------------------------------+\n|",
+   "existing": []
+  },
+  {
+   "name": "domain-modeling",
+   "title": "领域建模",
+   "catalog": "fs",
+   "scenario": "fs-architecture",
+   "scenario_title": "架构设计",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "建立并打磨项目领域模型（术语/ADR/词汇表）。触发词：领域建模、domain-modeling、建立并打磨项目领域模型（术语/ADR/词汇表）。",
+   "body_excerpt": "# Domain Modeling\n\n在设计过程中，积极构建并打磨项目的领域模型。这是一门*主动*的纪律：质疑术语、发明边缘场景，并在它们成形的当下就把术语表和决策写下来。（仅仅为了词汇而*读* `CONTEXT.md` 不算是这个技能：那是任何技能都能做到的一行习惯。这个技能是给你**改变**模型、而不只是消费模型的时候用的。）\n\n## 文件结构\n\n大多数仓库只有一个上下文：\n\n```\n/\n+-- CONTEXT.md\n+-- docs/\n|   +-- adr/\n|       +-- 0001-event-sourced-orders.md\n|       +-- 0002-postgres-for-write-model.md\n+-- src/\n```\n\n如果根目录下存在 `CONTEXT-MAP.md`，这个仓库就有多个上下文。这张地图指向每个上下文所在的位置：\n\n```\n/\n+-- CONTEXT-MAP.md\n+-- docs/\n|   +-- adr/                          <- system-wide decisions\n+-- src/\n|   +-- ordering/\n|   |   +-- CONTEXT.md\n|   |   +-- docs/adr/                 <- context-specific decisions\n|   +-- billing/\n|       +-- CONTEXT.md\n|       +-- docs/adr/\n```\n\n惰性创建文件：只有当你有东西要写时才创建。如果没有 `CONTEXT.md`，就在第一个术语敲定的时候创建一份。如果没有 `docs/adr/`，就在需要第一份架构决策记录（ADR）的时候创建它。\n\n## 会话进行中\n\n### 对照术语表质疑\n\n当用户使用了一个与 `CONTEXT.md` 中既有语言冲突的术语时，立刻指出来。「你的术语表把『cancellation』定义为 X，但你似乎指的是 Y。到底是哪个？」\n\n### 打磨模糊的语言\n\n当用户使用含糊或超载的术语时，提出一个精确的规范术语。「你说的是『account』：你指的是 Customer 还是 User？那是两个不同的东西。」\n\n### 讨论具体场景\n\n当讨论领域关系时，用具体场景对它们做压力测试。发明能探测边缘情况、迫使用户精确界定概念之间边界的场景。\n\n### 与代码交叉核对\n\n当用户陈述某件事如何运作时，核对代码是否一致。如果发现矛盾，就把它摆出来：「你的代码取消的是整个 Order，但你刚说部分取消是可能的。哪个才是对的？」\n\n### 就地更新 CONTEXT.md\n\n术语敲定之时，就地更新 `CONTEXT.md`。不要攒着批量做：随时发生随时记。使用 [CONTEXT-FORMAT.md](./CONTEXT-FORMAT.md) 中的格式。\n\n`CONTEXT.md` 应当完全不包含实现细节。不要把 `CONTEXT.md` 当作规格说明、草稿纸或实现决策的存放处。它是术语表，仅此而已。\n\n### 谨慎地提议 ADR\n\n只有当以下三条全部成立时，才提议创建 ADR：\n\n1. **难以逆转**：日后改变主意的代价是可观的\n2. **脱离上下文会令人费",
+   "existing": []
+  },
+  {
+   "name": "improve-codebase-architecture",
+   "title": "架构深化扫描",
+   "catalog": "fs",
+   "scenario": "fs-architecture",
+   "scenario_title": "架构设计",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "扫描深化机会→HTML 报告→逐项访谈。触发词：架构深化扫描、improve-codebase-architecture、扫描深化机会→HTML 报告→逐项访谈。",
+   "body_excerpt": "# Improve Codebase Architecture\n\n浮现架构摩擦，并提议**深化机会（deepening opportunities）**：把浅层模块变成深层模块的重构。目标是可测试性和 AI 可导航性。\n\n这个命令以项目的领域模型为_依据_，建立在一套共享的设计词汇之上：\n\n- 调用 Skill 工具并传入 \"codebase-design\"，获取架构词汇（**module 模块**、**interface 接口**、**depth 深度**、**seam 接缝**、**adapter 适配器**、**leverage 杠杆**、**locality 局部性**）及其原则（删除测试、「接口就是测试面」、「一个适配器 = 假设的接缝，两个 = 真实的」）。在每一条建议中精确使用这些术语，不要滑向「component」「service」「API」或「boundary」。\n- `CONTEXT.md` 中的领域语言为好的接缝提供命名；`docs/adr/` 中的架构决策记录（ADR）记录了这个命令不应重新争论的决策。\n\n## 流程\n\n### 1. 探索\n\n**先定范围，再扫描：YAGNI。**深化一个模块的回报在于让未来对它的变更更容易，所以要给最近变更过的代码库部分加额外权重。在动手看之前先决定*看哪里*：\n\n- 如果用户指明了一个方向（一个模块、一个子系统、一个痛点），就采用它，并跳过下面的推断。\n- 否则，往回追溯一大段提交历史（`git log --oneline`），找出代码库的热点——那些反复出现的文件和区域，让这些路径首先牵引你的注意力。如果变更很分散、没有明显的热点，就扩大搜索面。\n\n先读项目的领域术语表（`CONTEXT.md`）和你所触及区域里的任何 ADR。\n\n然后派一个子代理去走查代码库。不要遵循僵化的启发式规则；有机地探索，并记下你在哪里感到摩擦：\n\n- 哪里要理解一个概念就必须在许多小模块之间来回跳？\n- 哪些模块是**浅层**的，接口几乎和实现一样复杂？\n- 哪里只是为了可测试性而抽出了纯函数，但真正的缺陷藏在它们的调用方式里（没有**局部性**）？\n- 哪里紧耦合的模块在接缝之间泄漏？\n- 代码库的哪些部分未经测试，或难以通过其当前接口测试？\n\n对任何你怀疑是浅层的东西应用**删除测试**：删掉它会让复杂度集中起来，还是只是挪个地方？「是的，会集中」正是你要的信号。\n\n### 2. 以 HTML 报告呈现候选者\n\n把一个自包含的 HTML 文件写到操作系统临时目录，这样仓库里不会落下任何东西。从 `$TMPDIR` 解析临时目录，回退到 `/tmp`（Windows 上是 `%TEMP%`），写到 `<tmpdir>/architecture-review-<timestamp>.html`，让每次运行都得到一个全新文件。为用户打开它（Linux 用 `xdg-open <path>`，macOS 用 `open <path>`，Windows 用 `start <path>`），并告诉他们绝对路径。\n\n报告用**CDN 引入的 Tailwind**做布局和样式，用**CDN 引入的 Mermaid**画那些图/流程/序列能可靠传达结构的图。把 Mermaid 与手工打造的 CSS/SVG 视觉混用：关系呈图",
+   "existing": []
+  },
+  {
+   "name": "prototype",
+   "title": "一次性原型",
+   "catalog": "fs",
+   "scenario": "fs-architecture",
+   "scenario_title": "架构设计",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "一次性原型验证设计问题，用完即弃。触发词：一次性原型、prototype、一次性原型验证设计问题，用完即弃。",
+   "body_excerpt": "# Prototype\n\n原型（prototype）是**回答一个问题的抛弃式代码**。问题决定它的形态。\n\n## 选一个分支\n\n利用用户的提示、周边代码，或者趁用户在场时直接问，确定要回答的是哪个问题：\n\n- **「这套逻辑 / 状态模型感觉对吗？」** -> [LOGIC.md](LOGIC.md)。构建一个可分享的单个 HTML 文件（自由把玩的按钮加上分页的引导式走查），推动状态机穿过那些纸上难以推理的用例，而且非开发者也能操作。\n- **「它应该长什么样？」** -> [UI.md](UI.md)。在单一路由上生成几个截然不同的 UI 变体，通过 URL 查询参数和一个悬浮底栏切换。\n\n两个分支产出的制品截然不同，选错会浪费整个原型。如果问题确实模棱两可且联系不上用户，就默认选择与周边代码更匹配的那个分支（后端模块 -> logic；页面或组件 -> UI），并在原型顶部写明这个假设。\n\n## 两者共同适用的规则\n\n1. **从第一天起就是抛弃式的，并且明确标注。**把原型代码放在它真正会被用到的地方附近（挨着它为原型而服务的模块或页面），让上下文一目了然，但命名要让随便一个读者都能看出它是原型、不是生产代码。对于抛弃式 UI 路由，遵守项目已有的路由约定；不要发明新的顶层结构。\n2. **运行起来毫不费力。**UI 原型从项目任务运行器里的一条命令启动：`pnpm <name>`、`python <path>`、`bun <path>` 等。逻辑演示是用户双击即开的单个 HTML 文件。无论哪种，启动都不需要动脑。\n3. **默认不做持久化。**状态住在内存里。持久化正是原型要*检验*的东西，而不是它应当依赖的东西。如果问题明确涉及数据库，就使用一个临时数据库或本地文件，并取一个明确的「PROTOTYPE, wipe me（原型，可清空）」名字。\n4. **跳过打磨。**不写测试，不做超出让原型_跑得起来_之外的错误处理，不搞抽象。目的是快速学到东西。\n5. **把状态亮出来。**每次动作之后（逻辑），或每次切换变体时（UI），打印或渲染完整的相关状态，让用户看到什么变了。\n6. **完成后把它留存下来。**把任何经过验证的决策折进真实代码，然后把原型本身留存为**一手来源**：提交到一个主干之外的一次性分支，并在实现议题上留下指向该分支的上下文指针。答案（结论和它所敲定的问题）也要记录在议题或某次提交中。主干分支只保留经过验证的决策。",
+   "existing": [
+    {
+     "responsibility": "阶段验证",
+     "role": "AGT-013"
+    }
+   ]
+  },
+  {
+   "name": "implement",
+   "title": "规格实施",
+   "catalog": "fs",
+   "scenario": "fs-implement",
+   "scenario_title": "实现",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "按规格或任务卡实施一段工作。触发词：规格实施、implement、按规格或任务卡实施一段工作。",
+   "body_excerpt": "实施用户在 spec 或工单（tickets）中描述的工作。\n\n在可能的情况下，于预先商定的接缝（seam）处使用 /tdd。\n\n定期运行类型检查，定期运行单个测试文件，最后运行一次完整测试套件。\n\n完成后，使用 /code-review 审查所做的工作。\n\n将你的工作提交到当前分支。",
+   "existing": [
+    {
+     "responsibility": "阶段验证",
+     "role": "AGT-013"
+    }
+   ]
+  },
+  {
+   "name": "tdd",
+   "title": "TDD 测试先行",
+   "catalog": "fs",
+   "scenario": "fs-implement",
+   "scenario_title": "实现",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "测试先行开发（红-绿-重构）。触发词：TDD 测试先行、tdd、测试先行开发（红-绿-重构）。",
+   "body_excerpt": "# 测试驱动开发\n\nTDD 是红 -> 绿的循环。本技能是让这个循环产出值得保留的测试的参考基准：什么是好的测试、测试放在哪里、反模式，以及循环的规则。每一节在每一轮循环中都适用：要在循环之前和循环进行中查阅它们，而不是在循环之后。\n\n探索代码库时，请阅读 `CONTEXT.md`（如果存在），让测试名称和接口词汇与项目的领域语言保持一致，并尊重你所触及区域的 ADR。\n\n## 什么是好的测试\n\n测试通过公共接口验证行为，而不是验证实现细节。代码可以彻底改变；测试不应改变。好的测试读起来像一份规格说明：「user can checkout with valid cart」（用户可以用有效的购物车结账）精确地告诉你存在什么能力，而且它不关心内部结构，因此在重构后依然存活。\n\n示例见 [tests.md](tests.md)，mock 指南见 [mocking.md](mocking.md)。\n\n## 接缝（Seam）：测试放在哪里\n\n**接缝（seam）**是你进行测试的公共边界：即无需深入内部即可观察行为的接口。测试位于接缝处，绝不针对内部实现。\n\n**只在预先商定的接缝处测试。**在编写任何测试之前，写下被测的接缝并与用户确认。不得在未经确认的接缝上编写测试。你不可能测试一切，因此预先商定接缝能让测试精力落在关键路径和复杂逻辑上，而不是每一个边界情况。\n\n提问：「公共接口是什么，我们应该测试哪些接缝？」\n\n当接口本身的形态存疑时（模块有多深、接缝应归属何处、接口应暴露什么），以 \"codebase-design\" 调用 Skill 工具来获取术语。它是模块、接口、深度、接缝、适配器、杠杆与局部性等术语的共同出处，是一份供查阅的参考，而非一个需要运行的会话。\n\n## 反模式\n\n- **与实现耦合（Implementation-coupled）**：mock 内部协作者、测试私有方法，或通过旁路验证（不通过接口而直接查询数据库）。识别信号：行为没有变化，重构后测试却失败了。\n- **同义反复（Tautological）**：断言以与代码相同的方式重新计算期望值（`expect(add(a, b)).toBe(a + b)`、以同样方式手工推导的快照、断言一个常量等于其自身），因此它天然成立，永远不会与代码产生分歧。期望值必须来自独立的真实来源：一个已知正确的字面量、一个演算过的示例、spec。\n- **水平切片（Horizontal slicing）**：先写完全部测试，再写完全部实现。批量测试验证的是_想象出来的_行为：你测试的是事物的_形态_而非面向用户的行为，测试对真实变化变得不敏感，而且你在理解实现之前就锁定了测试结构。改为按**垂直切片（vertical slice）**工作：一个测试 -> 一个实现 -> 重复，每个测试都是一颗**曳光弹（tracer bullet）**，对上一轮循环教给你的东西作出响应。\n\n## 循环的规则\n\n- **先红后绿。**先写失败的测试，然后只写足以让它通过的代码。不要预判未来的测试，也不要添加投机性的功能。\n- **一次一个切片。**每轮循环一个接缝、一个测试、一个最小实现。\n- **重构不属于循环。**它属于审查阶段（见 `code-review` 技能），不属于红 -> 绿的实现循环。",
+   "existing": [
+    {
+     "responsibility": "测试方案",
+     "role": "AGT-013"
+    }
+   ]
+  },
+  {
+   "name": "code-review",
+   "title": "代码评审",
+   "catalog": "fs",
+   "scenario": "fs-quality",
+   "scenario_title": "质量排查",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "沿标准×可疑双轴评审相对固定点的改动。触发词：代码评审、code-review、沿标准×可疑双轴评审相对固定点的改动。",
+   "body_excerpt": "对 `HEAD` 与用户给定的固定点之间的 diff 进行双轴审查：\n\n- **Standards（规范）**：代码是否符合本仓库成文的编码规范？\n- **Spec（规格）**：代码是否忠实实现了来源 issue / spec？\n\n两个轴都以**并行子代理（sub-agent）**运行，互不污染对方上下文，然后由本技能汇总它们的发现。\n\n你应该已经被提供了 issue 跟踪器配置。如果 `docs/agents/issue-tracker.md` 缺失，请告诉用户运行 `/setup-matt-pocock-skills`。\n\n## 流程\n\n### 1. 确定固定点\n\n用户所说的任何内容就是固定点（提交 SHA、分支名、tag、`main`、`HEAD~5` 等）。如果用户没有指定，就询问用户。\n\n一次性记录 diff 命令：`git diff <fixed-point>...HEAD`（三个点，即与 merge-base 比较）。同时通过 `git log <fixed-point>..HEAD --oneline` 记下提交列表。\n\n继续之前，确认固定点可以解析（`git rev-parse <fixed-point>`）且 diff 非空。无效的引用或空 diff 应在此处失败，而不是在两个并行子代理内部失败。\n\n### 2. 确定 spec 来源\n\n按以下顺序查找来源 spec：\n\n1. 提交信息中的 issue 引用（`#123`、`Closes #45`、GitLab `!67` 等），通过 `docs/agents/issue-tracker.md` 中的工作流获取。\n2. 用户作为参数传入的路径。\n3. `docs/`、`specs/` 或 `.scratch/` 下与分支名或功能匹配的 spec 文件。\n4. 如果什么都没找到，询问用户 spec 在哪里。如果用户说没有，**Spec** 子代理将跳过并报告「no spec available（无可用 spec）」。\n\n### 3. 确定规范来源\n\n仓库中任何记录代码应该如何编写的文档，例如 `CODING_STANDARDS.md` 或 `CONTRIBUTING.md`。\n\n在仓库自有文档的基础上，Standards 轴始终附带下面的**坏味道基线（smell baseline）**：一组固定的 Fowler 代码坏味道（_《重构》_第 3 章），即使仓库没有任何文档也适用。它受两条规则约束：\n\n- **仓库优先。**仓库成文的标准永远胜出；当仓库标准认可了基线会标记的某种做法时，抑制该坏味道。\n- **永远是主观判断。**每个坏味道都是一种带标签的启发式判断（如「可能是 Feature Envy」），绝不是硬性违规。与这里的任何标准一样，跳过工具链已经在强制执行的内容。\n\n每个坏味道都按*它是什么* -> *如何修复*的格式阅读；对照 diff 进行匹配：\n\n- **神秘命名（Mysterious Name）**：函数、变量或类型的名称没有揭示它的作用或所持有的内容。-> 重命名它；如果找不到一个诚实的名字，说明设计本身是模糊的。\n- **重复代码（Duplicated Code）**：相同的逻辑形态在该变更的多个 hunk 或文件中出现。-> 提取共享的形态，两处都调用它。\n",
+   "existing": []
+  },
+  {
+   "name": "diagnosing-bugs",
+   "title": "Bug 诊断",
+   "catalog": "fs",
+   "scenario": "fs-quality",
+   "scenario_title": "质量排查",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "硬 bug 与性能回归的诊断循环。触发词：Bug 诊断、diagnosing-bugs、硬 bug 与性能回归的诊断循环。",
+   "body_excerpt": "# 诊断 Bug\n\n针对疑难 bug 的一套纪律。只有在明确说明理由时才能跳过阶段。\n\n探索代码库时，请阅读 `CONTEXT.md`（如果存在），以获得相关模块清晰的心智模型，并检查你所触及区域的 ADR。\n\n## 脱敏\n\n本技能会让你展示命令、输出和捕获的产物。**先对每个秘密脱敏**：在原处写上 `<REDACTED>`。让循环针对环境变量构建，这样凭据留在环境中，而不是出现在你展示的内容里。捕获的产物带有鉴权头：只引用携带信号的那些行。\n\n如果脱敏后的输出不足以诊断 bug，请明确说出来并向用户求助。\n\n## 阶段 1：构建反馈循环\n\n**这就是本技能的精髓。**其余一切都是机械操作。如果你拥有针对该 bug 的**紧凑**通过/失败信号（一个会在这个 bug 上变红的信号），你就能找到原因；二分定位、假设检验和埋点都只是消费这个信号。如果没有这样的信号，盯着代码看多久都救不了你。\n\n在这里投入不成比例的努力。**要激进。要有创造力。拒绝放弃。**\n\n### 构建方法，大致按以下顺序\n\n1. **失败的测试**：在能触达 bug 的任何接缝（seam）上写：单元、集成、e2e。\n2. **Curl / HTTP 脚本**：针对运行中的开发服务器。\n3. **CLI 调用**：使用固定样本输入，将 stdout 与已知正确的快照做 diff。\n4. **无头浏览器脚本**（Playwright / Puppeteer）：驱动 UI 并对 DOM/console/network 做断言。\n5. **回放捕获的追踪记录。**把真实的网络请求 / 载荷 / 事件日志保存到磁盘；在隔离环境中沿代码路径重放它。\n6. **一次性测试装置（harness）。**拉起系统的最小子集（一个服务、mock 掉的依赖），用一次函数调用即可驱动 bug 代码路径。\n7. **属性 / 模糊测试循环。**如果 bug 是「有时输出错误」，运行 1000 个随机输入并寻找失败模式。\n8. **二分定位装置。**如果 bug 出现在两个已知状态之间（提交、数据集、版本），把「在状态 X 启动、检查、重复」自动化，这样就能 `git bisect run`。\n9. **差异循环。**让相同输入分别经过旧版本与新版本（或两种配置）运行，然后 diff 输出。\n10. **人在环（HITL）bash 脚本。**最后的手段。如果必须由人来点击，用 `scripts/hitl-loop.template.sh` 驱动_他们_，使循环依然有结构。捕获的输出会反馈给你。\n\n构建出正确的反馈循环，bug 就解决了 90%。\n\n### 收紧循环\n\n把循环当作产品对待。一旦你有了_一个_循环，就**收紧**它：\n\n- 能更快吗？（缓存设置、跳过无关初始化、缩小测试范围。）\n- 能让信号更锐利吗？（断言具体的症状，而不是「没有崩溃」。）\n- 能让它更确定吗？（固定时间、给 RNG 播种、隔离文件系统、冻结网络。）\n\n一个 30 秒的不稳定循环几乎不比没有循环强；一个 2 秒的确定性循环才是紧凑的，是调试的超能力。\n\n### 非确定性 bug\n\n目标不是干净的复现，而是**更高的复现率**。把触发器循环 100 次、并行化、施加压力、收窄时间窗口、注入 sleep。复现率 50% 的 bug 是",
+   "existing": []
+  },
+  {
+   "name": "resolving-merge-conflicts",
+   "title": "合并冲突消解",
+   "catalog": "fs",
+   "scenario": "fs-quality",
+   "scenario_title": "质量排查",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "消解进行中的 git 合并/变基冲突。触发词：合并冲突消解、resolving-merge-conflicts、消解进行中的 git 合并/变基冲突。",
+   "body_excerpt": "1. **查看 merge/rebase 的当前状态。**检查 git 历史，以及冲突的文件。\n\n2. **为每个冲突找到主要来源。**深入理解每处改动为什么发生、原始意图是什么。阅读 commit 信息，查看 PR，查看原始 issues/tickets。\n\n3. **解决每个 hunk。**尽可能同时保留双方的意图。在意图不相容时，选择符合本次 merge 既定目标的一方，并记录取舍。**不要**发明新行为。始终解决冲突；绝不 `--abort`。\n\n4. 找出项目的**自动化检查**并运行它们，通常是类型检查、然后测试、然后格式化。修复 merge 破坏的一切。\n\n5. **完成 merge/rebase。**暂存所有内容并提交。如果是 rebase，继续 rebase 流程，直到所有提交都完成 rebase。",
+   "existing": []
+  },
+  {
+   "name": "triage",
+   "title": "Issue 分诊",
+   "catalog": "fs",
+   "scenario": "fs-quality",
+   "scenario_title": "质量排查",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "按状态机对 issue 与外部 PR 分诊/归类/验证。触发词：Issue 分诊、triage、按状态机对 issue 与外部 PR 分诊/归类/验证。",
+   "body_excerpt": "# 分诊（Triage）\n\n将项目 issue 跟踪器上的 issue 依次通过由分诊角色组成的小型状态机推进。\n\n如果本仓库把外部 pull request 视为一种请求入口（见 issue-tracker 配置），分诊同样覆盖它们：**PR 就是附带了代码的 issue**，使用相同的角色、相同的状态和相同的状态机，只有下文标注「for a PR（针对 PR）」的少数差异。按 tracker 配置把一个光秃秃的 `#42` 解析为 issue 或 PR。\n\n分诊期间发布到 issue 跟踪器的每条评论或 issue **必须**以这段免责声明开头：\n\n```\n> *This was generated by AI during triage.*\n```\n\n## 参考文档\n\n- [AGENT-BRIEF.md](AGENT-BRIEF.md)：如何撰写持久的代理简报（agent brief）\n- [OUT-OF-SCOPE.md](OUT-OF-SCOPE.md)：`.out-of-scope/` 知识库如何运作\n\n## 角色\n\n两个**分类（category）**角色：\n\n- `bug`：某样东西坏了\n- `enhancement`：新功能或改进\n\n五个**状态（state）**角色：\n\n- `needs-triage`：需要维护者评估\n- `needs-info`：等待报告者提供更多信息\n- `ready-for-agent`：规格完整，随时可交给离线的代理（agent）\n- `ready-for-human`：需要人工实现\n- `wontfix`：不予处理\n\n对于 PR，同样的状态是针对所附代码而言的：`ready-for-agent` 意味着已附带简报，代理应对该 diff 采取下一步行动；`ready-for-human` 意味着已准备好由人工合并。\n\n每个完成分诊的 issue 都应恰好带有一个分类角色和一个状态角色。如果状态角色互相冲突，标记出来，并在做任何其他事情之前询问维护者。\n\n以上是规范的角色名称。issue 跟踪器中实际使用的标签字符串可能不同。映射关系应该已经提供给你。如果没有，请告诉用户运行 `/setup-matt-pocock-skills`。\n\n状态迁移：无标签的 issue 通常先进入 `needs-triage`；从那里再迁移到 `needs-info`、`ready-for-agent`、`ready-for-human` 或 `wontfix`。一旦报告者回复，`needs-info` 返回 `needs-triage`。维护者随时可以覆盖；对看起来不寻常的迁移要标记出来，并在继续之前询问。\n\n## 调用方式\n\n维护者调用 `/triage` 并用自然语言描述他们想要什么。解读请求并执行。示例：\n\n- 「给我看看任何需要我关注的内容」\n- 「我们来看看 #42」（issue 或 PR）\n- 「把 #42 移到 ready-for-agent」\n- 「哪些已经准备好让代理接手了？」\n\n## 展示需要关注的内容\n\n查询 issue 跟踪器并展示三个桶（bucket），按最旧的优先排序：\n\n1. **无标签**：从未分诊过。\n2. **`needs-triage`**：评估进行中。\n3. **自上次分诊记录以来报",
+   "existing": []
+  },
+  {
+   "name": "setup-matt-pocock-skills",
+   "title": "技能集仓库接线",
+   "catalog": "fs",
+   "scenario": "fs-infra",
+   "scenario_title": "工程基建",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "为工程技能集配置仓库（issue tracker/分诊标签/领域文档）。触发词：技能集仓库接线、setup-matt-pocock-skills、为工程技能集配置仓库（issue tracker/分诊标签/领域文档）。",
+   "body_excerpt": "# Setup Matt Pocock's Skills\n\n搭建工程类技能所假定的仓库级配置：\n\n- **Issue tracker**：issues 存放的地方（默认 GitHub；本地 markdown 也开箱即用）\n- **Triage labels**：五个标准 triage 角色所用的标签字符串\n- **Domain docs**：`CONTEXT.md` 和 ADR 存放的位置，以及读取它们的消费方规则\n\n这是一个提示词驱动的技能，而不是确定性脚本。先探索，展示你的发现，与用户确认，然后再写入。\n\n## 流程\n\n### 1. 探索\n\n查看当前仓库，了解它的起始状态。有什么就读什么，不要想当然：\n\n- `git remote -v` 和 `.git/config`：这是 GitHub 仓库吗？是哪一个？\n- 仓库根目录的 `AGENTS.md` 和 `CLAUDE.md`：两者中是否存在任何一个？其中是否已有 `## Agent skills` 章节？\n- 仓库根目录的 `CONTEXT.md` 和 `CONTEXT-MAP.md`\n- `docs/adr/` 以及任何 `src/*/docs/adr/` 目录\n- `docs/agents/`：这个技能先前的产出是否已经存在？\n- `.scratch/`：本地 markdown issue tracker 约定已在使用的迹象\n- `triage` 技能是否已安装？（与本技能并列的 `triage` 技能文件夹，或者你的可用技能列表里有 `triage`。）这决定 B 部分是否要执行。\n- Monorepo 信号：`pnpm-workspace.yaml`、`package.json` 里的 `workspaces` 字段，或者带各自 `src/` 的已填充 `packages/*`。这些信号只出现在真正的大型多包仓库中；没有它们就意味着 single-context（单上下文），而几乎所有仓库都是如此。\n\n### 2. 展示发现并提问\n\n总结哪些已就绪、哪些缺失。然后按顺序处理各部分。一次一个部分、一个答复，然后再进行下一个。\n\n每个部分都以推荐答案开头，让用户一句话就能接受。只有当选择确实存在分叉时才给出一行解释；当探索已经敲定了结论时，就整个跳过该部分（`triage` 未安装时跳过 B 部分，没有 monorepo 时跳过 C 部分）。\n\n**A 部分：issue tracker。**\n\n> 说明：issue tracker 是这个仓库 issues 的存放处。`to-tickets`、`triage`、`to-spec` 等技能会读写它。它们需要知道该调用 `gh issue create`、在 `.scratch/` 下写 markdown 文件，还是遵循你描述的某种其他工作流。请选择你实际跟踪本仓库工作的那个地方。\n\n默认姿态：这些技能是为 GitHub 设计的。如果 `git remote` 指向 GitHub，就提议 GitHub。如果 `git remote` 指向 GitLab（`gitlab.com` 或自托管主机），就提议 GitLab。否则（或用户另有偏好），提供以下选项：\n\n- **GitHub**：issues 存放在仓库的 GitHub Issues 中（使",
+   "existing": []
+  },
+  {
+   "name": "setup-pre-commit",
+   "title": "Pre-commit 配置",
+   "catalog": "fs",
+   "scenario": "fs-infra",
+   "scenario_title": "工程基建",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "配置 pre-commit 钩子。触发词：Pre-commit 配置、setup-pre-commit、配置 pre-commit 钩子。",
+   "body_excerpt": "# 配置 Pre-Commit Hook\n\n## 这会搭建什么\n\n- **Husky** pre-commit hook\n- **lint-staged**，对所有已暂存文件运行 Prettier\n- **Prettier** 配置（如果缺失）\n- pre-commit hook 中的 **typecheck** 和 **test** 脚本\n\n## 步骤\n\n### 1. 检测包管理器\n\n检查 `package-lock.json`（npm）、`pnpm-lock.yaml`（pnpm）、`yarn.lock`（yarn）、`bun.lockb`（bun）。哪个存在就用哪个。无法确定时默认使用 npm。\n\n### 2. 安装依赖\n\n以 devDependencies 方式安装：\n\n```\nhusky lint-staged prettier\n```\n\n### 3. 初始化 Husky\n\n```bash\nnpx husky init\n```\n\n这会创建 `.husky/` 目录，并在 package.json 中添加 `prepare: \"husky\"`。\n\n### 4. 创建 `.husky/pre-commit`\n\n写入以下文件（Husky v9+ 不需要 shebang）：\n\n```\nnpx lint-staged\nnpm run typecheck\nnpm run test\n```\n\n**适配**：把 `npm` 替换为检测到的包管理器。如果仓库的 package.json 中没有 `typecheck` 或 `test` 脚本，则省略对应行并告知用户。\n\n### 5. 创建 `.lintstagedrc`\n\n```json\n{\n  \"*\": \"prettier --ignore-unknown --write\"\n}\n```\n\n### 6. 创建 `.prettierrc`（如果缺失）\n\n仅当不存在任何 Prettier 配置时才创建。使用以下默认值：\n\n```json\n{\n  \"useTabs\": false,\n  \"tabWidth\": 2,\n  \"printWidth\": 80,\n  \"singleQuote\": false,\n  \"trailingComma\": \"es5\",\n  \"semi\": true,\n  \"arrowParens\": \"always\"\n}\n```\n\n### 7. 验证\n\n- [ ] `.husky/pre-commit` 存在且可执行\n- [ ] `.lintstagedrc` 存在\n- [ ] package.json 中的 `prepare` 脚本为 `\"husky\"`\n- [ ] `prettier` 配置存在\n- [ ] 运行 `npx lint-staged` 验证其可用\n\n### 8. 提交\n\n暂存所有更改/新建的文件，并以如下信息提交：`Add pre-commit hooks (husky + lint-staged + prettier)`\n\n这次提交会跑一遍新的 pre-commit hook：正好作为一次冒烟测试，验证一切正常。\n\n## 注意事项\n\n- Husky v9+ 的 hook 文件不需要 shebang\n- `prettier --ignore-unknown` 会跳过 Pretti",
+   "existing": []
+  },
+  {
+   "name": "git-guardrails-claude-code",
+   "title": "Git 操作护栏",
+   "catalog": "fs",
+   "scenario": "fs-infra",
+   "scenario_title": "工程基建",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "git 操作护栏（防危险操作）。触发词：Git 操作护栏、git-guardrails-claude-code、git 操作护栏（防危险操作）。",
+   "body_excerpt": "# 配置 Git 防护\n\n设置一个 PreToolUse hook，在 Claude 执行危险的 git 命令之前拦截并阻止它们。\n\n## 会被拦截的命令\n\n- `git push`（包括 `--force` 在内的所有变体）\n- `git reset --hard`\n- `git clean -f` / `git clean -fd`\n- `git branch -D`\n- `git checkout .` / `git restore .`\n\n被拦截时，Claude 会看到一条消息，告知它无权访问这些命令。\n\n## 步骤\n\n### 1. 询问安装范围\n\n询问用户：是**仅为当前项目**安装（`.claude/settings.json`），还是**为所有项目**安装（`~/.claude/settings.json`）？\n\n### 2. 复制 hook 脚本\n\n随附的脚本位于：[scripts/block-dangerous-git.sh](scripts/block-dangerous-git.sh)\n\n根据安装范围复制到目标位置：\n\n- **项目级**：`.claude/hooks/block-dangerous-git.sh`\n- **全局**：`~/.claude/hooks/block-dangerous-git.sh`\n\n用 `chmod +x` 使其可执行。\n\n### 3. 把 hook 加入设置\n\n添加到相应的设置文件：\n\n**项目级**（`.claude/settings.json`）：\n\n```json\n{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"\\\"$CLAUDE_PROJECT_DIR\\\"/.claude/hooks/block-dangerous-git.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}\n```\n\n**全局**（`~/.claude/settings.json`）：\n\n```json\n{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"~/.claude/hooks/block-dangerous-git.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}\n```\n\n如果设置文件已存在，把 hook 合并进已有的 `hooks.PreToolUse` 数组。不要覆盖其他设置。\n\n### 4. 询问是否需要自定义\n\n询问用户是否想从拦截列表中增加或移除某些模式。据此修改复制出来的脚本。\n\n### 5. 验证\n\n运行一次快速测试：\n\n```bash\necho '{\"tool_input\":{\"command\":",
+   "existing": []
+  },
+  {
+   "name": "migrate-to-shoehorn",
+   "title": "Shoehorn 结构迁移",
+   "catalog": "fs",
+   "scenario": "fs-infra",
+   "scenario_title": "工程基建",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "把代码迁移到 shoehorn 结构。触发词：Shoehorn 结构迁移、migrate-to-shoehorn、把代码迁移到 shoehorn 结构。",
+   "body_excerpt": "# 迁移到 shoehorn\n\n## 为什么用 shoehorn？\n\n`shoehorn` 让你在测试中传入部分数据，同时让 TypeScript 满意。它用类型安全的替代方案取代 `as` 断言。\n\n**只用于测试代码。**绝不要在生产代码中使用 shoehorn。\n\n在测试中使用 `as` 的问题：\n\n- 被训练成不要使用它\n- 必须手动指定目标类型\n- 故意传入错误数据时要用双重 as（`as unknown as Type`）\n\n## 安装\n\n```bash\nnpm i @total-typescript/shoehorn\n```\n\n## 迁移模式\n\n### 只需要少数属性的巨大对象\n\n之前：\n\n```ts\ntype Request = {\n  body: { id: string };\n  headers: Record<string, string>;\n  cookies: Record<string, string>;\n  // ...20 more properties\n};\n\nit(\"gets user by id\", () => {\n  // Only care about body.id but must fake entire Request\n  getUser({\n    body: { id: \"123\" },\n    headers: {},\n    cookies: {},\n    // ...fake all 20 properties\n  });\n});\n```\n\n之后：\n\n```ts\nimport { fromPartial } from \"@total-typescript/shoehorn\";\n\nit(\"gets user by id\", () => {\n  getUser(\n    fromPartial({\n      body: { id: \"123\" },\n    }),\n  );\n});\n```\n\n### `as Type` -> `fromPartial()`\n\n之前：\n\n```ts\ngetUser({ body: { id: \"123\" } } as Request);\n```\n\n之后：\n\n```ts\nimport { fromPartial } from \"@total-typescript/shoehorn\";\n\ngetUser(fromPartial({ body: { id: \"123\" } }));\n```\n\n### `as unknown as Type` -> `fromAny()`\n\n之前：\n\n```ts\ngetUser({ body: { id: 123 } } as unknown as Request); // wrong type on purpose\n```\n\n之后：\n\n```ts\nimport { fromAny } from \"@total-typescript/shoehorn\";\n\ngetUser(fromAny({ body: { id: 123 } }));\n```\n\n## 何时用哪个\n\n| 函数            | 使用场景                                           |\n| --------------- |",
+   "existing": []
+  },
+  {
+   "name": "scaffold-exercises",
+   "title": "练习脚手架",
+   "catalog": "fs",
+   "scenario": "fs-infra",
+   "scenario_title": "工程基建",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "脚手架练习题（workshop 用）。触发词：练习脚手架、scaffold-exercises、脚手架练习题（workshop 用）。",
+   "body_excerpt": "# 搭建练习脚手架\n\n创建能通过 `pnpm ai-hero-cli internal lint` 的练习目录结构，然后用 `git commit` 提交。\n\n## 目录命名\n\n- **章节（Sections）**：位于 `exercises/` 内的 `XX-章节名/`（例如 `01-retrieval-skill-building`）\n- **练习（Exercises）**：位于章节内的 `XX.YY-练习名/`（例如 `01.03-retrieval-with-bm25`）\n- 章节编号 = `XX`，练习编号 = `XX.YY`\n- 名称使用 dash-case（全小写、连字符）\n\n## 练习变体\n\n每个练习至少需要以下子文件夹之一：\n\n- `problem/`——带 TODO 的学生工作区\n- `solution/`——参考实现\n- `explainer/`——概念性材料，不含 TODO\n\n生成骨架（stub）时，除非计划另有指定，默认使用 `explainer/`。\n\n## 必需文件\n\n每个子文件夹（`problem/`、`solution/`、`explainer/`）都需要一个 `readme.md`，要求：\n\n- **不为空**（必须有真实内容，哪怕只有一行标题也行）\n- 没有坏链接\n\n生成骨架时，创建一个包含标题和描述的最小 readme：\n\n```md\n# Exercise Title\n\nDescription here\n```\n\n如果子文件夹里有代码，还需要一个 `main.ts`（多于 1 行）。但对骨架来说，只有 readme 的练习也可以。\n\n## 工作流程\n\n1. **解析计划**——提取章节名、练习名和变体类型\n2. **创建目录**——对每个路径执行 `mkdir -p`\n3. **创建骨架 readme**——每个变体文件夹一个带标题的 `readme.md`\n4. **运行 lint**——用 `pnpm ai-hero-cli internal lint` 验证\n5. **修复错误**——反复修改直到 lint 通过\n\n## Lint 规则摘要\n\nlinter（`pnpm ai-hero-cli internal lint`）会检查：\n\n- 每个练习都有子文件夹（`problem/`、`solution/`、`explainer/`）\n- `problem/`、`explainer/`、`explainer.1/` 中至少有一个存在\n- 主子文件夹中的 `readme.md` 存在且不为空\n- 没有 `.gitkeep` 文件\n- 没有 `speaker-notes.md` 文件\n- readme 中没有坏链接\n- readme 中没有 `pnpm run exercise` 命令\n- 每个子文件夹都需要 `main.ts`，除非它只有 readme\n\n## 移动/重命名练习\n\n重新编号或移动练习时：\n\n1. 用 `git mv`（而不是 `mv`）重命名目录——这样可以保留 git 历史\n2. 更新数字前缀以保持顺序\n3. 移动后重新运行 lint\n\n示例：\n\n```bash\ngit mv exercises/01-retrieval/01.03-embeddings exercises/01-retrie",
+   "existing": []
+  },
+  {
+   "name": "handoff",
+   "title": "会话交接",
+   "catalog": "fs",
+   "scenario": "fs-collab",
+   "scenario_title": "协作复盘",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "把会话交接给新 agent 的交接文档。触发词：会话交接、handoff、把会话交接给新 agent 的交接文档。",
+   "body_excerpt": "写一份交接文档（handoff document），总结当前会话，让一个全新的 agent 能够继续这项工作。保存到用户操作系统的临时目录——而不是当前工作区。\n\n在文档中包含一个「suggested skills」章节，指明下一个 agent 应该对哪些技能调用 Skill 工具（Skill tool）。\n\n不要重复其他产物（spec、计划、ADR、issue、提交、diff）中已经记录的内容。改为通过路径或 URL 引用它们。\n\n对任何敏感信息做脱敏处理，例如 API key、密码或个人身份信息。\n\n如果用户传入了参数，把它们当作对下一个会话关注点的描述，并据此定制文档。",
+   "existing": []
+  },
+  {
+   "name": "writing-for-agents",
+   "title": "Agent 文档写作",
+   "catalog": "fs",
+   "scenario": "fs-writing",
+   "scenario_title": "写作内容",
+   "sub": "",
+   "summary_zh": "",
+   "tool_gap": "",
+   "installed": true,
+   "description": "为 AI agent 编写清晰文档/指令。触发词：Agent 文档写作、writing-for-agents、为 AI agent 编写清晰文档/指令。",
+   "body_excerpt": "这是编写任何 agent 会消费的文档时的参考：一个技能、一份 `AGENTS.md` / `CLAUDE.md`、一份通过指针抵达的文档。包装形式各不相同，但写法是相通的：同一组杠杆让每一份文档都变得可预测，因为 agent 每次运行走的是同一个_过程_，而不是产出相同的输出。\n\n当你编写的文档是技能时，请阅读 [`SKILL-MECHANICS.md`](SKILL-MECHANICS.md)，了解 frontmatter、调用方式选择以及 router 技能。\n\n## 上下文指针\n\n**上下文指针（context pointer）**是 agent 上下文中的一个引用：它点名某份上下文之外的材料，并编码了抵达这份材料的条件。技能的 description 是一个指针；`AGENTS.md` 中点名某份文档的一行文字也是同一类对象。决定 agent 何时抵达该材料、抵达得有多可靠的，是指针的_措辞_，而不是指针的目标。一个「必须有」的目标配上一个措辞无力的指针，就是一个 variance bug（方差型缺陷：行为随运行而波动的 bug）：先打磨措辞，只有在打磨无效时才把材料内联进来。\n\n指针做两件事：说明材料是什么，并列出应当触发抵达它的**分支（branches）**（分支是文档处理的某个独立情形，因此不同运行会走文档的不同路径）。常驻加载的指针，每个词在每一轮都要付出代价，所以它比正文更值得严格修剪：\n\n- **把引导词（leading word）前置**：指针正是靠它完成触发工作的。\n- **每个分支一个触发词。**给同一个分支换名的同义词，等于把同一个分支写了两遍；合并它们，只保留真正不同的分支。\n- **删掉正文已经承载的标识信息。**\n\n## 两种负载\n\n你添加的每份文档、每个指针，都在消耗两种预算之一：\n\n- **上下文负载（context load）**是常驻加载材料对 agent 窗口造成的成本：一行 `AGENTS.md`、一条技能 description、任何每一轮都躺在上下文里的东西——无论是否触发，都在消耗 token 和注意力。\n- **认知负载（cognitive load）**是落在人身上的成本：存在哪些文档、何时该去翻哪一份。人是索引。这不是需要最小化的成本：它是人类主动权的代价；在人类判断重要的地方花掉它，在人类判断不重要的地方移除它。\n\n只通过指针抵达的材料，以指针自身那一行的代价换取了免除上下文负载；完全没有指针的材料，则完全依靠认知负载。\n\n## 信息层级\n\n一份文档由两种内容构成：**步骤（steps）**（agent 按顺序执行的动作）和**参考（reference）**（按需查阅的定义、规则、事实）。两者可以任意混合：全是步骤（一份配方）、全是参考（评审规则、本技能），或者兼而有之。核心决策是每一块内容放在**信息层级（information hierarchy）**的哪一级——这是一个按 agent 对材料的需求紧迫程度排序的阶梯：\n\n1. **文件内步骤（in-file step）**是第一层级：agent 要做什么，按顺序排列。\n2. **文件内参考（in-file reference）**按需查阅。它常常是一组合法的平级集合（一次评审的所有规则都放在同一级），这是合理的安排，不是坏味道。\n3",
+   "existing": []
+  }
+ ]
+}

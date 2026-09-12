@@ -6,7 +6,7 @@
 
 - **基座只 pin 不改**：`deepseek-harness` 与 `vendor/dsh-desktop` 均为 pin 的只读参照（[ADR-0008](docs/adr/ADR-0008.md)）；补丁与 pin 的实际契约在 `vendor/dsh-desktop.pin`，改 pin 必须与行为变更分开提交。
 - **版本跟进走观察窗**：上游新稳定版先观察 2 周，仅红线触发才跟进（[ADR-0006](docs/adr/ADR-0006.md)）。
-- 架构红线（凭证不落仓库、不碰 shadows-shipped-ui slot、编辑工具会打破 `file:` 硬链接须 tmp+mv 同步）见 [docs/architecture.md](docs/architecture.md) 第 2 节。
+- 架构红线（凭证不落仓库、不碰 shadows-shipped-ui slot、编辑工具会打破 `file:` 硬链接须 tmp+mv 同步、**官方 UI 改写锚禁止钉哈希**）见 [docs/architecture.md](docs/architecture.md) 第 2 节。
 
 ## 改动的验收方式
 

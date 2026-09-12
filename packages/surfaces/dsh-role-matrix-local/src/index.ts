@@ -44,15 +44,33 @@ export interface Config {
   dshHome?: string
   /** Preset root override (wins over `dshHome`). */
   presetRoot?: string
+  /** Installed-skills root override (wins over `dshHome`). */
+  skillsRoot?: string
+}
+
+/** The harness home both roots are derived from, resolved the official way. */
+function resolveDshHome(config: Config | undefined): string {
+  if (config?.dshHome !== undefined && config.dshHome !== '') return config.dshHome
+  const fromEnv = process.env['DSH_HOME']
+  return fromEnv !== undefined && fromEnv !== '' ? fromEnv : join(homedir(), '.dsh')
 }
 
 /** The user preset root, derived the same way `@deepseek-ai/dsh-agent-presets` derives its own. */
-function resolvePresetRoot(config: Config | undefined): string {
+function resolvePresetRoot(config: Config | undefined, home: string): string {
   if (config?.presetRoot !== undefined && config.presetRoot !== '') return config.presetRoot
-  const home = config?.dshHome !== undefined && config.dshHome !== ''
-    ? config.dshHome
-    : (process.env['DSH_HOME'] !== undefined && process.env['DSH_HOME'] !== '' ? process.env['DSH_HOME'] : join(homedir(), '.dsh'))
   return join(home, '.agent-presets')
+}
+
+/**
+ * The installed-skills root, derived the same way the skill loader derives it.
+ *
+ * Read for exactly one thing: a supply skill's own `SKILL.md` frontmatter, which
+ * is where its display name lives (ADR-0041 — the installed skill body is the
+ * runtime home). Nothing in this plugin writes into it.
+ */
+function resolveSkillsRoot(config: Config | undefined, home: string): string {
+  if (config?.skillsRoot !== undefined && config.skillsRoot !== '') return config.skillsRoot
+  return join(home, 'skills')
 }
 
 /**
@@ -62,9 +80,12 @@ function resolvePresetRoot(config: Config | undefined): string {
  */
 function applyImpl(ctx: Context, config?: Config): void {
   if (config?.enabled === false) return
-  const presetRoot = resolvePresetRoot(config)
+  const home = resolveDshHome(config)
+  const presetRoot = resolvePresetRoot(config, home)
+  const skillsRoot = resolveSkillsRoot(config, home)
   const routes = makeRoutes(ctx, {
     presetRoot: () => presetRoot,
+    skillsRoot: () => skillsRoot,
     logger: { warn: (error: unknown) => { ctx.logger?.warn?.(error) } },
   })
   const webServer = (ctx as unknown as { webServer: { register(route: unknown): () => void } }).webServer

@@ -1,0 +1,1218 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/Dltdx4rKP/FosiD8I+UwVygbxwg</id>
+  <title>arXiv Query: search_query=&amp;id_list=2310.10688,2310.11220,2310.11234,2310.11423,2310.11511,2310.11823,2310.11834,2310.11847,2310.12183,2310.14823,2310.14918,2310.14922,2310.15141,2310.16765,2310.17168,2310.18339,2311.04920,2311.05698,2311.05853,2311.06782,2311.08407,2311.08562,2311.09476,2311.09735,2311.12045,2311.12983,2311.15423,2311.15462,2311.16817,2312.00601,2312.01044,2312.04892,2312.06648,2312.07206,2312.08841,2312.09154,2312.09187,2312.09395,2312.09654,2312.09821&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:42:58Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2310.10688,2310.11220,2310.11234,2310.11423,2310.11511,2310.11823,2310.11834,2310.11847,2310.12183,2310.14823,2310.14918,2310.14922,2310.15141,2310.16765,2310.17168,2310.18339,2311.04920,2311.05698,2311.05853,2311.06782,2311.08407,2311.08562,2311.09476,2311.09735,2311.12045,2311.12983,2311.15423,2311.15462,2311.16817,2312.00601,2312.01044,2312.04892,2312.06648,2312.07206,2312.08841,2312.09154,2312.09187,2312.09395,2312.09654,2312.09821" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2310.14823v3</id>
+    <title>Prompt-driven Target Speech Diarization</title>
+    <updated>2024-01-08T14:13:30Z</updated>
+    <link href="https://arxiv.org/abs/2310.14823v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.14823v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce a novel task named `target speech diarization', which seeks to determine `when target event occurred' within an audio signal. We devise a neural architecture called Prompt-driven Target Speech Diarization (PTSD), that works with diverse prompts that specify the target speech events of interest. We train and evaluate PTSD using sim2spk, sim3spk and sim4spk datasets, which are derived from the Librispeech. We show that the proposed framework accurately localizes target speech events. Furthermore, our framework exhibits versatility through its impressive performance in three diarization-related tasks: target speaker voice activity detection, overlapped speech detection and gender diarization. In particular, PTSD achieves comparable performance to specialized models across these tasks on both real and simulated data. This work serves as a reference benchmark and provides valuable insights into prompt-driven target speech processing.</summary>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-23T11:42:38Z</published>
+    <arxiv:comment>Accepted by ICASSP 2024</arxiv:comment>
+    <arxiv:primary_category term="eess.AS"/>
+    <author>
+      <name>Yidi Jiang</name>
+    </author>
+    <author>
+      <name>Zhengyang Chen</name>
+    </author>
+    <author>
+      <name>Ruijie Tao</name>
+    </author>
+    <author>
+      <name>Liqun Deng</name>
+    </author>
+    <author>
+      <name>Yanmin Qian</name>
+    </author>
+    <author>
+      <name>Haizhou Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.14922v1</id>
+    <title>The Complex Network Patterns of Human Migration at Different Geographical Scales: Network Science meets Regression Analysis</title>
+    <updated>2023-10-23T13:28:36Z</updated>
+    <link href="https://arxiv.org/abs/2310.14922v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.14922v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Migration's influence in shaping population dynamics in times of impending climate and population crises exposes its crucial role in upholding societal cohesion. As migration impacts virtually all aspects of life, it continues to require attention across scientific disciplines. This study delves into two distinctive substrates of Migration Studies: the "why" substrate, which deals with identifying the factors driving migration relying primarily on regression modeling, encompassing economic, demographic, geographic, cultural, political, and other variables; and the "how" substrate, which focuses on identifying migration flows and patterns, drawing from Network Science tools and visualization techniques to depict complex migration networks. Despite the growing percentage of Network Science studies in migration, the explanations of the identified network traits remain very scarce, highlighting the detachment between the two research substrates. Our study includes real-world network analyses of human migration across different geographical levels: city, country, and global. We examine inter-district migration in Vienna at the city level, review internal migration networks in Austria and Croatia at the country level, and analyze migration exchange between Croatia and the world at the global level. By comparing network structures, we demonstrate how distinct network traits impact regression modeling. This work not only uncovers migration network patterns in previously unexplored areas but also presents a comprehensive overview of recent research, highlighting gaps in each field and their interconnectedness. Our contribution offers suggestions for integrating both fields to enhance methodological rigor and support future research.</summary>
+    <category term="physics.soc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-23T13:28:36Z</published>
+    <arxiv:comment>25 pages,6 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.soc-ph"/>
+    <author>
+      <name>Dino Pitoski</name>
+    </author>
+    <author>
+      <name>Ana Meštrović</name>
+    </author>
+    <author>
+      <name>Hans Schmeets</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.09154v1</id>
+    <title>CMG-Net: Robust Normal Estimation for Point Clouds via Chamfer Normal Distance and Multi-scale Geometry</title>
+    <updated>2023-12-14T17:23:16Z</updated>
+    <link href="https://arxiv.org/abs/2312.09154v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.09154v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This work presents an accurate and robust method for estimating normals from point clouds. In contrast to predecessor approaches that minimize the deviations between the annotated and the predicted normals directly, leading to direction inconsistency, we first propose a new metric termed Chamfer Normal Distance to address this issue. This not only mitigates the challenge but also facilitates network training and substantially enhances the network robustness against noise. Subsequently, we devise an innovative architecture that encompasses Multi-scale Local Feature Aggregation and Hierarchical Geometric Information Fusion. This design empowers the network to capture intricate geometric details more effectively and alleviate the ambiguity in scale selection. Extensive experiments demonstrate that our method achieves the state-of-the-art performance on both synthetic and real-world datasets, particularly in scenarios contaminated by noise. Our implementation is available at https://github.com/YingruiWoo/CMG-Net_Pytorch.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-14T17:23:16Z</published>
+    <arxiv:comment>Accepted by AAAI 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yingrui Wu</name>
+    </author>
+    <author>
+      <name>Mingyang Zhao</name>
+    </author>
+    <author>
+      <name>Keqiang Li</name>
+    </author>
+    <author>
+      <name>Weize Quan</name>
+    </author>
+    <author>
+      <name>Tianqi Yu</name>
+    </author>
+    <author>
+      <name>Jianfeng Yang</name>
+    </author>
+    <author>
+      <name>Xiaohong Jia</name>
+    </author>
+    <author>
+      <name>Dong-Ming Yan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.09654v2</id>
+    <title>The cost of artificial latency in the PBS context</title>
+    <updated>2024-01-11T15:24:16Z</updated>
+    <link href="https://arxiv.org/abs/2312.09654v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.09654v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a comprehensive analysis of the implications of artificial latency in the Proposer-Builder Separation framework on the Ethereum network. Focusing on the MEV-Boost auction system, we analyze how strategic latency manipulation affects Maximum Extractable Value yields and network integrity. Our findings reveal both increased profitability for node operators and significant systemic challenges, including heightened network inefficiencies and centralization risks. We empirically validates these insights with a pilot that Chorus One has been operating on Ethereum mainnet. We demonstrate the nuanced effects of latency on bid selection and validator dynamics. Ultimately, this research underscores the need for balanced strategies that optimize Maximum Extractable Value capture while preserving the Ethereum network's decentralization ethos.</summary>
+    <category term="cs.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-fin.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-15T10:00:22Z</published>
+    <arxiv:primary_category term="cs.GT"/>
+    <author>
+      <name>Umberto Natale</name>
+    </author>
+    <author>
+      <name>Michael Moser</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.09476v2</id>
+    <title>ARES: An Automated Evaluation Framework for Retrieval-Augmented Generation Systems</title>
+    <updated>2024-03-31T20:58:46Z</updated>
+    <link href="https://arxiv.org/abs/2311.09476v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.09476v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Evaluating retrieval-augmented generation (RAG) systems traditionally relies on hand annotations for input queries, passages to retrieve, and responses to generate. We introduce ARES, an Automated RAG Evaluation System, for evaluating RAG systems along the dimensions of context relevance, answer faithfulness, and answer relevance. By creating its own synthetic training data, ARES finetunes lightweight LM judges to assess the quality of individual RAG components. To mitigate potential prediction errors, ARES utilizes a small set of human-annotated datapoints for prediction-powered inference (PPI). Across eight different knowledge-intensive tasks in KILT, SuperGLUE, and AIS, ARES accurately evaluates RAG systems while using only a few hundred human annotations during evaluation. Furthermore, ARES judges remain effective across domain shifts, proving accurate even after changing the type of queries and/or documents used in the evaluated RAG systems. We make our code and datasets publicly available on Github.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-16T00:39:39Z</published>
+    <arxiv:comment>NAACL 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jon Saad-Falcon</name>
+    </author>
+    <author>
+      <name>Omar Khattab</name>
+    </author>
+    <author>
+      <name>Christopher Potts</name>
+    </author>
+    <author>
+      <name>Matei Zaharia</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.04920v2</id>
+    <title>Bayesian mortality modelling with pandemics: a vanishing jump approach</title>
+    <updated>2024-08-29T14:22:11Z</updated>
+    <link href="https://arxiv.org/abs/2311.04920v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.04920v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper extends the Lee-Carter model for single- and multi-populations to account for pandemic jump effects of vanishing kind, allowing for a more comprehensive and accurate representation of mortality rates during a pandemic, characterised by a high impact at the beginning and gradually vanishing effects over subsequent periods. While the Lee-Carter model is effective in capturing mortality trends, it may not be able to account for large, unexpected jumps in mortality rates caused by pandemics or wars. Existing models allow either for transient jumps with an effect of one period only or persistent jumps. However, there is no literature on estimating mortality time series with jumps having an effect over a small number of periods as typically observed in pandemics. The Bayesian approach allows to quantify the uncertainty around the parameter estimates. Empirical data from the COVID-19 pandemic shows the superiority of the proposed approach, compared to models with a transitory shock effect.</summary>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-02T15:27:58Z</published>
+    <arxiv:primary_category term="stat.AP"/>
+    <author>
+      <name>Julius Goes</name>
+    </author>
+    <author>
+      <name>Karim Barigou</name>
+    </author>
+    <author>
+      <name>Anne Leucht</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.11823v3</id>
+    <title>Coulomb contribution to Shockley-Read-Hall (SRH) recombination</title>
+    <updated>2024-01-26T08:54:50Z</updated>
+    <link href="https://arxiv.org/abs/2310.11823v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.11823v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Defect-mediated nonradiative recombination, known as Shockley-Read-Hall (SRH) recombination is reformulated. The introduced model considers Coulomb attraction between charged deep defect and the approaching free carrier, showing that this effect may cause considerable increase of the carrier velocity approaching the recombination center. The effect considerably increases the carrier capture rates. It is demonstrated that in the typical semiconductor device or semiconductor medium, the SRH recombination cannot be neglected at low temperatures. The SRH is more effective in the case of low doped semiconductors. Effective screening by mobile carrier density could reduce the effect, leading to SRH rate increase.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-18T09:24:02Z</published>
+    <arxiv:comment>14 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <arxiv:journal_ref>Materials - 18 September 2024; 17: 4581</arxiv:journal_ref>
+    <author>
+      <name>Konrad Sakowski</name>
+    </author>
+    <author>
+      <name>Pawel Strak</name>
+    </author>
+    <author>
+      <name>Pawel Kempisty</name>
+    </author>
+    <author>
+      <name>Jacek Piechota</name>
+    </author>
+    <author>
+      <name>Izabella Grzegory</name>
+    </author>
+    <author>
+      <name>Piotr Perlin</name>
+    </author>
+    <author>
+      <name>Eva Monroy</name>
+    </author>
+    <author>
+      <name>Agata Kaminska</name>
+    </author>
+    <author>
+      <name>Stanislaw Krukowski</name>
+    </author>
+    <arxiv:doi>10.3390/ma17184581</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.3390/ma17184581" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.16817v1</id>
+    <title>Acquisition of high-quality three-dimensional electron diffuse scattering data</title>
+    <updated>2023-11-28T14:28:07Z</updated>
+    <link href="https://arxiv.org/abs/2311.16817v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.16817v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The diffraction patterns of crystalline materials with local order contain sharp Bragg reflections as well as highly structured diffuse scattering. The instrumental requirements, experimental parameters and data processing techniques for obtaining high-quality diffuse scattering data have previously been determined for X-ray and neutron diffraction, but not yet for electron diffraction. In this study, we show that the spatial resolution of the diffuse scattering in three-dimensional electron diffraction (3D ED) data depends on various effects, including the convergence of the electron beam, the point spread function of the detector and the crystal mosaicity. In contrast to single-crystal X-ray diffraction, the detector point spread function for 3D ED is broader for a hybrid pixel detector than for a CCD. In our study, we also compare the diffuse scattering in 3D ED data with the diffuse scattering in single-crystal X-ray diffraction data and show that the diffuse scattering in 3D ED data can be obtained with a quality comparable to that from single-crystal X-ray diffraction. As electron diffraction requires much smaller crystal sizes than X-ray diffraction, this opens up the possibility to investigate the local structure of many technologically relevant materials for which no crystals large enough for single-crystal X-ray diffraction are available.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-28T14:28:07Z</published>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <author>
+      <name>Romy Poppe</name>
+    </author>
+    <author>
+      <name>Joke Hadermann</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.11834v1</id>
+    <title>HB-net: Holistic bursting cell cluster integrated network for occluded multi-objects recognition</title>
+    <updated>2023-10-18T09:38:51Z</updated>
+    <link href="https://arxiv.org/abs/2310.11834v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.11834v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Within the realm of image recognition, a specific category of multi-label classification (MLC) challenges arises when objects within the visual field may occlude one another, demanding simultaneous identification of both occluded and occluding objects. Traditional convolutional neural networks (CNNs) can tackle these challenges; however, those models tend to be bulky and can only attain modest levels of accuracy. Leveraging insights from cutting-edge neural science research, specifically the Holistic Bursting (HB) cell, this paper introduces a pioneering integrated network framework named HB-net. Built upon the foundation of HB cell clusters, HB-net is designed to address the intricate task of simultaneously recognizing multiple occluded objects within images. Various Bursting cell cluster structures are introduced, complemented by an evidence accumulation mechanism. Testing is conducted on multiple datasets comprising digits and letters. The results demonstrate that models incorporating the HB framework exhibit a significant $2.98\%$ enhancement in recognition accuracy compared to models without the HB framework ($1.0298$ times, $p=0.0499$). Although in high-noise settings, standard CNNs exhibit slightly greater robustness when compared to HB-net models, the models that combine the HB framework and EA mechanism achieve a comparable level of accuracy and resilience to ResNet50, despite having only three convolutional layers and approximately $1/30$ of the parameters. The findings of this study offer valuable insights for improving computer vision algorithms. The essential code is provided at https://github.com/d-lab438/hb-net.git.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-18T09:38:51Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Xudong Gao</name>
+    </author>
+    <author>
+      <name>Xiao Guang Gao</name>
+    </author>
+    <author>
+      <name>Jia Rong</name>
+    </author>
+    <author>
+      <name>Xiaowei Chen</name>
+    </author>
+    <author>
+      <name>Xiang Liao</name>
+    </author>
+    <author>
+      <name>Jun Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.09821v2</id>
+    <title>Fragility, Robustness and Antifragility in Deep Learning</title>
+    <updated>2023-12-23T11:53:41Z</updated>
+    <link href="https://arxiv.org/abs/2312.09821v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.09821v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose a systematic analysis of deep neural networks (DNNs) based on a signal processing technique for network parameter removal, in the form of synaptic filters that identifies the fragility, robustness and antifragility characteristics of DNN parameters. Our proposed analysis investigates if the DNN performance is impacted negatively, invariantly, or positively on both clean and adversarially perturbed test datasets when the DNN undergoes synaptic filtering. We define three \textit{filtering scores} for quantifying the fragility, robustness and antifragility characteristics of DNN parameters based on the performances for (i) clean dataset, (ii) adversarial dataset, and (iii) the difference in performances of clean and adversarial datasets. We validate the proposed systematic analysis on ResNet-18, ResNet-50, SqueezeNet-v1.1 and ShuffleNet V2 x1.0 network architectures for MNIST, CIFAR10 and Tiny ImageNet datasets. The filtering scores, for a given network architecture, identify network parameters that are invariant in characteristics across different datasets over learning epochs. Vice-versa, for a given dataset, the filtering scores identify the parameters that are invariant in characteristics across different network architectures. We show that our synaptic filtering method improves the test accuracy of ResNet and ShuffleNet models on adversarial datasets when only the robust and antifragile parameters are selectively retrained at any given epoch, thus demonstrating applications of the proposed strategy in improving model robustness.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-15T14:20:16Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Artificial Intelligence 2023</arxiv:journal_ref>
+    <author>
+      <name>Chandresh Pravin</name>
+    </author>
+    <author>
+      <name>Ivan Martino</name>
+    </author>
+    <author>
+      <name>Giuseppe Nicosia</name>
+    </author>
+    <author>
+      <name>Varun Ojha</name>
+    </author>
+    <arxiv:doi>10.1016/j.artint.2023.104060</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.artint.2023.104060" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.05853v1</id>
+    <title>Reframing Audience Expansion through the Lens of Probability Density Estimation</title>
+    <updated>2023-11-10T03:25:53Z</updated>
+    <link href="https://arxiv.org/abs/2311.05853v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.05853v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Audience expansion has become an important element of prospective marketing, helping marketers create target audiences based on a mere representative sample of their current customer base. Within the realm of machine learning, a favored algorithm for scaling this sample into a broader audience hinges on a binary classification task, with class probability estimates playing a crucial role. In this paper, we review this technique and introduce a key change in how we choose training examples to ensure the quality of the generated audience. We present a simulation study based on the widely used MNIST dataset, where consistent high precision and recall values demonstrate our approach's ability to identify the most relevant users for an expanded audience. Our results are easily reproducible and a Python implementation is openly available on GitHub: \url{https://github.com/carvalhaes-ai/audience-expansion}</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-10T03:25:53Z</published>
+    <arxiv:comment>12 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Claudio Carvalhaes</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.08407v1</id>
+    <title>Hom-associative algebras, Admissibility and Relative averaging operators</title>
+    <updated>2023-08-20T22:51:11Z</updated>
+    <link href="https://arxiv.org/abs/2311.08407v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.08407v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce the notion of relative averaging operators on Hom-associative algebras with a representation. Relative averaging operators are twisted generalizations of relative averaging operators on associative algebras. We give two characterizations of relative averaging operators of Hom-associative algebras via graphs and Nijenhuis operators. A (homomorphic) relative averaging operator of Hom-associative algebras with respect to a given representation gives rise to Hom-associative (tri)dialgebras. By admissibility, a Hom-Jordan (tri)dialgebra and a Hom-(tri)Leibniz algebra can be obtained from Hom-associative (tri)dialgebra.</summary>
+    <category term="math.RA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.RT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-08-20T22:51:11Z</published>
+    <arxiv:comment>arXiv admin note: text overlap with arXiv:2304.12593 by other authors</arxiv:comment>
+    <arxiv:primary_category term="math.RA"/>
+    <author>
+      <name>Safa Braiek</name>
+    </author>
+    <author>
+      <name>Taoufik Chtioui</name>
+    </author>
+    <author>
+      <name>Sami Mabrouk</name>
+    </author>
+    <author>
+      <name>Mohamed Elhamdadi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.06782v1</id>
+    <title>Star Formation in Self-gravitating Disks in Active Galactic Nuclei. III. Efficient Production of Iron and Infrared Spectral Energy Distributions</title>
+    <updated>2023-11-12T09:08:24Z</updated>
+    <link href="https://arxiv.org/abs/2311.06782v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.06782v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Strong iron lines are a common feature of the optical spectra of active galactic nuclei (AGNs) and quasars from $z\sim 6-7$ to the local Universe, and [Fe/Mg] ratios do not show cosmic evolution. During active episodes, accretion disks surrounding supermassive black holes (SMBHs) inevitably form stars in the self-gravitating part and these stars accrete with high accretion rates. In this paper, we investigate the population evolution of accretion-modified stars (AMSs) to produce irons and magnesium in AGNs. The AMSs as a new type of stars are allowed to have any metallicity but without significant loss from stellar winds since the winds are choked by the dense medium of the disks and return to the core stars. Mass functions of the AMS population show a pile-up or cutoff pile-up shape in top-heavy or top-dominant forms if the stellar winds are strong, consistent with the narrow range of supernovae (SN) explosions driven by the known pair-instability. This provides an efficient way to produce metals. Meanwhile, SN explosions support an inflated disk as a dusty torus. Furthermore, the evolving top-heavy initial mass functions (IMFs) lead to bright luminosity in infrared bands in dusty regions. This contributes a new component in infrared bands which is independent of the emissions from the central part of accretion disks, appearing as a long-term trending of the NIR continuum compared to optical variations. Moreover, the model can be further tested through reverberation mapping of emission lines, including LIGO/LISA detections of gravitational waves and signatures from spatially resolved observations of GRAVITY+/VLTI.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-12T09:08:24Z</published>
+    <arxiv:comment>35 pages, 22 figures</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <arxiv:journal_ref>2023, ApJ, 954, 84</arxiv:journal_ref>
+    <author>
+      <name>J. -M. Wang</name>
+    </author>
+    <author>
+      <name> S.</name>
+    </author>
+    <author>
+      <name> Zhai</name>
+    </author>
+    <author>
+      <name>Y. -R. Li</name>
+    </author>
+    <author>
+      <name>Y. -Y. Songsheng</name>
+    </author>
+    <author>
+      <name>L. C. Ho</name>
+    </author>
+    <author>
+      <name>Y. -J. Chen</name>
+    </author>
+    <author>
+      <name>J. -R. Liu</name>
+    </author>
+    <author>
+      <name>P. Du</name>
+    </author>
+    <author>
+      <name>Y. -F. Yuan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.18339v2</id>
+    <title>When MOE Meets LLMs: Parameter Efficient Fine-tuning for Multi-task Medical Applications</title>
+    <updated>2024-05-31T07:56:08Z</updated>
+    <link href="https://arxiv.org/abs/2310.18339v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.18339v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The recent surge in Large Language Models (LLMs) has garnered significant attention across numerous fields. Fine-tuning is often required to fit general LLMs for a specific domain, like the web-based healthcare system. However, two problems arise during fine-tuning LLMs for medical applications. One is the task variety problem, which involves distinct tasks in real-world medical scenarios. The variety often leads to sub-optimal fine-tuning for data imbalance and seesaw problems. Besides, the large amount of parameters in LLMs leads to huge time and computation consumption by fine-tuning. To address these two problems, we propose a novel parameter efficient fine-tuning framework for multi-task medical applications, dubbed as MOELoRA. The designed framework aims to absorb both the benefits of mixture-of-expert (MOE) for multi-task learning and low-rank adaptation (LoRA) for parameter efficient fine-tuning. For unifying MOE and LoRA, we devise multiple experts as the trainable parameters, where each expert consists of a pair of low-rank matrices to retain the small size of trainable parameters. Then, a task-motivated gate function for all MOELoRA layers is proposed, which can control the contributions of each expert and produce distinct parameters for various tasks. We conduct experiments on a multi-task medical dataset, indicating MOELoRA outperforms the existing parameter efficient fine-tuning methods. The code is available online.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-21T17:18:09Z</published>
+    <arxiv:comment>accepted by SIGIR'24</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Qidong Liu</name>
+    </author>
+    <author>
+      <name>Xian Wu</name>
+    </author>
+    <author>
+      <name>Xiangyu Zhao</name>
+    </author>
+    <author>
+      <name>Yuanshao Zhu</name>
+    </author>
+    <author>
+      <name>Derong Xu</name>
+    </author>
+    <author>
+      <name>Feng Tian</name>
+    </author>
+    <author>
+      <name>Yefeng Zheng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.04892v2</id>
+    <title>Floquet engineering of many-body states by the ponderomotive potential</title>
+    <updated>2024-09-06T10:17:36Z</updated>
+    <link href="https://arxiv.org/abs/2312.04892v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.04892v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The ponderomotive force is an effective static force that a particle feels in an oscillating field, whose static potential may be called the ponderomotive potential. We generalize this notion to periodically driven quantum many-body systems, and propose it as a convenient tool to engineer their non-equilibrium steady states beyond the single particle level. Applied to materials driven by light, the ponderomotive potential is intimately related to the equilibrium optical conductivity, which is enhanced close to resonances. We show that the ponderomotive potential from the incident light may be used to induce exciton condensates in semiconductors, to generate attractive interactions leading to superconductivity in certain electron-phonon systems, and to create additional free energy minima in systems with charge/spin/excitonic orders. These effects are presented with experimentally relevant parameters.</summary>
+    <category term="cond-mat.str-el" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.other" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.supr-con" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-08T08:18:14Z</published>
+    <arxiv:comment>6 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.str-el"/>
+    <arxiv:journal_ref>Phys. Rev. B 110, 104301 (2024)</arxiv:journal_ref>
+    <author>
+      <name>Zhiyuan Sun</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevB.110.104301</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevB.110.104301" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.11847v3</id>
+    <title>On gravity unification in SL(2N,C) gauge theories</title>
+    <updated>2024-11-06T09:41:08Z</updated>
+    <link href="https://arxiv.org/abs/2310.11847v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.11847v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The local $SL(2N,C)$ symmetry is shown to provide, when appropriately constrained, a viable framework for a consistent unification of the known elementary forces, including gravity. Such a covariant constraint implies that an actual gauge field multiplet in the $SL(2N,C)$ theory is ultimately determined by the associated tetrad fields which not only specify the geometric features of spacetime but also govern which local internal symmetries are permissible within it. As a consequence, upon the covariant removal of all "redundant" gauge field components, the entire theory only exhibits the effective $SL(2,C)\times SU(N)$ symmetry, comprising $SL(2,C)$ gauge gravity on one hand and $SU(N)$ grand unified theory on the other. Given that all states involved in the $SL(2N,C)$ theories are additionally classified according to their spin values, many potential $SU(N)$ GUTs, including the conventional $SU(5)$ theory, appear to be irrelevant for standard spin $1/2$ quarks and leptons. Meanwhile, applying the $SL(2N,C)$ symmetry to the model of composite quarks and leptons with constituent chiral preons in its fundamental representations reveals, under certain natural conditions, that among all accompanying $SU(N)_{L}\times SU(N)_{R}$ chiral symmetries of preons and their composites only the $SU(8)_{L}\times SU(8)_{R}$ meets the anomaly matching condition ensuring masslessness of these composites at large distances. This, in turn, identifies $SL(16,C)$ with the effective $SL(2,C)\times SU(8)$ symmetry, accommodating all three families of composite quarks and leptons, as the most likely candidate for hyperunification of the existing elementary forces.</summary>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-18T09:53:55Z</published>
+    <arxiv:comment>26 pages, published version, to appear in Eur Phys Jour C. arXiv admin note: text overlap with arXiv:2208.01478</arxiv:comment>
+    <arxiv:primary_category term="hep-th"/>
+    <author>
+      <name>J. L. Chkareuli</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.08562v3</id>
+    <title>MAgIC: Investigation of Large Language Model Powered Multi-Agent in Cognition, Adaptability, Rationality and Collaboration</title>
+    <updated>2024-11-27T12:25:28Z</updated>
+    <link href="https://arxiv.org/abs/2311.08562v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.08562v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) have significantly advanced natural language processing, demonstrating exceptional reasoning, tool usage, and memory capabilities. As their applications expand into multi-agent environments, there arises a need for a comprehensive evaluation framework that captures LLMs' reasoning, planning, collaboration, and other social abilities. This work introduces a novel competition-based benchmark framework specifically designed to assess LLMs within multi-agent settings, providing quantitative metrics to evaluate their judgment, reasoning, deception, self-awareness, cooperation, coordination, and rationality. We utilize two social deduction games alongside three game-theory scenarios to create diverse environments. Our frame is fortified with the probabilistic graphic modeling (PGM) method, enhancing the LLMs' capabilities in navigating complex social and cognitive dimensions. We evaluate seven LLMs, quantitatively highlighting a significant capability gap of over threefold between the strongest, GPT o1, and the weakest, Llama-2-70B. It also confirms that our PGM enhancement boosts the abilities of all selected models by an average of 37%. Our data and code can be found here https://github.com/cathyxl/MAgIC.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-14T21:46:27Z</published>
+    <arxiv:comment>EMNLP 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Lin Xu</name>
+    </author>
+    <author>
+      <name>Zhiyuan Hu</name>
+    </author>
+    <author>
+      <name>Daquan Zhou</name>
+    </author>
+    <author>
+      <name>Hongyu Ren</name>
+    </author>
+    <author>
+      <name>Zhen Dong</name>
+    </author>
+    <author>
+      <name>Kurt Keutzer</name>
+    </author>
+    <author>
+      <name>See Kiong Ng</name>
+    </author>
+    <author>
+      <name>Jiashi Feng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.12045v1</id>
+    <title>Using Guided Transfer Learning to Predispose AI Agent to Learn Efficiently from Small RNA-sequencing Datasets</title>
+    <updated>2023-11-17T22:47:46Z</updated>
+    <link href="https://arxiv.org/abs/2311.12045v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.12045v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given the increasing availability of RNA-seq data and its complex and heterogeneous nature, there has been growing interest in applying AI/machine learning methodologies to work with such data modalities. However, because omics data is characterized by high dimensionality and low sample size (HDLSS), current attempts at integrating AI in this domain require significant human guidance and expertise to mitigate overfitting. In this work we look at how transfer learning can be improved to learn from small RNA-seq sample sizes without significant human interference. The strategy is to gain general prior knowledge about a particular domain of data (e.g. RNA-seq data) by pre-training on a general task with a large aggregate of data, then fine-tuning to various specific, downstream target tasks in the same domain. Because previous attempts have shown traditional transfer learning failing on HLDSS, we propose to improve performance by using Guided Transfer Learning (GTL). Collaborating with Robots Go Mental, the AI we deploy here not only learns good initial parameters during pre-training, but also learns inductive biases that affect how the AI learns downstream tasks. In this approach, we first pre-trained on recount3 data, a collection of over 400,000 mouse RNA-seq samples sourced from thousands of individual studies. With such a large collection, patterns of expression between the ~30,000 genes in mammalian systems were pre-determined. Such patterns were sufficient for the pre-trained AI agent to efficiently learn new downstream tasks involving RNA-seq datasets with very low sample sizes and performed notably better on few-shot learning tasks compared to the same model without pre-training.</summary>
+    <category term="q-bio.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-17T22:47:46Z</published>
+    <arxiv:primary_category term="q-bio.GN"/>
+    <author>
+      <name>Kevin Li</name>
+    </author>
+    <author>
+      <name>Danko Nikolić</name>
+    </author>
+    <author>
+      <name>Vjekoslav Nikolić</name>
+    </author>
+    <author>
+      <name>Davor Andrić</name>
+    </author>
+    <author>
+      <name>Lauren M. Sanders</name>
+    </author>
+    <author>
+      <name>Sylvain V. Costes</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.15141v2</id>
+    <title>SpecTr: Fast Speculative Decoding via Optimal Transport</title>
+    <updated>2024-01-18T04:42:34Z</updated>
+    <link href="https://arxiv.org/abs/2310.15141v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.15141v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Autoregressive sampling from large language models has led to state-of-the-art results in several natural language tasks. However, autoregressive sampling generates tokens one at a time making it slow, and even prohibitive in certain tasks. One way to speed up sampling is $\textit{speculative decoding}$: use a small model to sample a $\textit{draft}$ (block or sequence of tokens), and then score all tokens in the draft by the large language model in parallel. A subset of the tokens in the draft are accepted (and the rest rejected) based on a statistical method to guarantee that the final output follows the distribution of the large model. In this work, we provide a principled understanding of speculative decoding through the lens of optimal transport (OT) with $\textit{membership cost}$. This framework can be viewed as an extension of the well-known $\textit{maximal-coupling}$ problem. This new formulation enables us to generalize the speculative decoding method to allow for a set of $k$ candidates at the token-level, which leads to an improved optimal membership cost. We show that the optimal draft selection algorithm (transport plan) can be computed via linear programming, whose best-known runtime is exponential in $k$. We then propose a valid draft selection algorithm whose acceptance probability is $(1-1/e)$-optimal multiplicatively. Moreover, it can be computed in time almost linear with size of domain of a single token. Using this $new draft selection$ algorithm, we develop a new autoregressive sampling algorithm called $\textit{SpecTr}$, which provides speedup in decoding while ensuring that there is no quality degradation in the decoded output. We experimentally demonstrate that for state-of-the-art large language models, the proposed approach achieves a wall clock speedup of 2.13X, a further 1.37X speedup over speculative decoding on standard benchmarks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-23T17:47:34Z</published>
+    <arxiv:comment>NeurIPS 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Ziteng Sun</name>
+    </author>
+    <author>
+      <name>Ananda Theertha Suresh</name>
+    </author>
+    <author>
+      <name>Jae Hun Ro</name>
+    </author>
+    <author>
+      <name>Ahmad Beirami</name>
+    </author>
+    <author>
+      <name>Himanshu Jain</name>
+    </author>
+    <author>
+      <name>Felix Yu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.15423v1</id>
+    <title>Machine Learning-based estimation and explainable artificial intelligence-supported interpretation of the critical temperature from magnetic ab initio Heusler alloys data</title>
+    <updated>2023-11-26T21:11:12Z</updated>
+    <link href="https://arxiv.org/abs/2311.15423v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.15423v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Machine Learning (ML) has impacted numerous areas of materials science, most prominently improving molecular simulations, where force fields were trained on previously relaxed structures. One natural next step is to predict material properties beyond structure. In this work, we investigate the applicability and explainability of ML methods in the use case of estimating the critical temperature for magnetic Heusler alloys calculated using ab initio methods determined materials-specific magnetic interactions and a subsequent Monte Carlo (MC) approach. We compare the performance of regression and classification models to predict the range of the critical temperature of given compounds without performing the MC calculations. Since the MC calculation requires computational resources in the same order of magnitude as the density-functional theory (DFT) calculation, it would be advantageous to replace either step with a less computationally intensive method such as ML. We discuss the necessity to generate the magnetic ab initio results to make a quantitative prediction of the critical temperature. We used state-of-the-art explainable artificial intelligence (XAI) methods to extract physical relations and deepen our understanding of patterns learned by our models from the examined data.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-26T21:11:12Z</published>
+    <arxiv:comment>12 pages, 9 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <author>
+      <name>Robin Hilgers</name>
+    </author>
+    <author>
+      <name>Daniel Wortmann</name>
+    </author>
+    <author>
+      <name>Stefan Blügel</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.01044v1</id>
+    <title>Large Language Models Are Zero-Shot Text Classifiers</title>
+    <updated>2023-12-02T06:33:23Z</updated>
+    <link href="https://arxiv.org/abs/2312.01044v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.01044v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Retrained large language models (LLMs) have become extensively used across various sub-disciplines of natural language processing (NLP). In NLP, text classification problems have garnered considerable focus, but still faced with some limitations related to expensive computational cost, time consumption, and robust performance to unseen classes. With the proposal of chain of thought prompting (CoT), LLMs can be implemented using zero-shot learning (ZSL) with the step by step reasoning prompts, instead of conventional question and answer formats. The zero-shot LLMs in the text classification problems can alleviate these limitations by directly utilizing pretrained models to predict both seen and unseen classes. Our research primarily validates the capability of GPT models in text classification. We focus on effectively utilizing prompt strategies to various text classification scenarios. Besides, we compare the performance of zero shot LLMs with other state of the art text classification methods, including traditional machine learning methods, deep learning methods, and ZSL methods. Experimental results demonstrate that the performance of LLMs underscores their effectiveness as zero-shot text classifiers in three of the four datasets analyzed. The proficiency is especially advantageous for small businesses or teams that may not have extensive knowledge in text classification.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-02T06:33:23Z</published>
+    <arxiv:comment>9 pages, 3 figures, 6 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zhiqiang Wang</name>
+    </author>
+    <author>
+      <name>Yiran Pang</name>
+    </author>
+    <author>
+      <name>Yanbin Lin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.08841v1</id>
+    <title>Roadmap on Nanoscale Magnetic Resonance Imaging</title>
+    <updated>2023-12-14T11:54:01Z</updated>
+    <link href="https://arxiv.org/abs/2312.08841v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.08841v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The field of nanoscale magnetic resonance imaging (NanoMRI) was started 30 years ago. It was motivated by the desire to image single molecules and molecular assemblies, such as proteins and virus particles, with near-atomic spatial resolution and on a length scale of 100 nm. Over the years, the NanoMRI field has also expanded to include the goal of useful high-resolution nuclear magnetic resonance (NMR) spectroscopy of molecules under ambient conditions, including samples up to the micron-scale. The realization of these goals requires the development of spin detection techniques that are many orders of magnitude more sensitive than conventional NMR and MRI, capable of detecting and controlling nanoscale ensembles of spins. Over the years, a number of different technical approaches to NanoMRI have emerged, each possessing a distinct set of capabilities for basic and applied areas of science. The goal of this roadmap article is to report the current state of the art in NanoMRI technologies, outline the areas where they are poised to have impact, identify the challenges that lie ahead, and propose methods to meet these challenges. This roadmap also shows how developments in NanoMRI techniques can lead to breakthroughs in emerging quantum science and technology applications.</summary>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.chem-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.ins-det" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-14T11:54:01Z</published>
+    <arxiv:primary_category term="cond-mat.mes-hall"/>
+    <arxiv:journal_ref>Nanotechnology 35, 412001 (2024)</arxiv:journal_ref>
+    <author>
+      <name>Raffi Budakian</name>
+    </author>
+    <author>
+      <name>Amit Finkler</name>
+    </author>
+    <author>
+      <name>Alexander Eichler</name>
+    </author>
+    <author>
+      <name>Martino Poggio</name>
+    </author>
+    <author>
+      <name>Christian L. Degen</name>
+    </author>
+    <author>
+      <name>Sahand Tabatabaei</name>
+    </author>
+    <author>
+      <name>Inhee Lee</name>
+    </author>
+    <author>
+      <name>P. Chris Hammel</name>
+    </author>
+    <author>
+      <name>Eugene S. Polzik</name>
+    </author>
+    <author>
+      <name>Tim H. Taminiau</name>
+    </author>
+    <author>
+      <name>Ronald L. Walsworth</name>
+    </author>
+    <author>
+      <name>Paz London</name>
+    </author>
+    <author>
+      <name>Ania Bleszynski Jayich</name>
+    </author>
+    <author>
+      <name>Ashok Ajoy</name>
+    </author>
+    <author>
+      <name>Arjun Pillai</name>
+    </author>
+    <author>
+      <name>Jörg Wrachtrup</name>
+    </author>
+    <author>
+      <name>Fedor Jelezko</name>
+    </author>
+    <author>
+      <name>Yujeong Bae</name>
+    </author>
+    <author>
+      <name>Andreas J. Heinrich</name>
+    </author>
+    <author>
+      <name>Christian R. Ast</name>
+    </author>
+    <author>
+      <name>Patrice Bertet</name>
+    </author>
+    <author>
+      <name>Paola Cappellaro</name>
+    </author>
+    <author>
+      <name>Cristian Bonato</name>
+    </author>
+    <author>
+      <name>Yoann Altmann</name>
+    </author>
+    <author>
+      <name>Erik Gauger</name>
+    </author>
+    <arxiv:doi>10.1088/1361-6528/ad4b23</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1361-6528/ad4b23" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.11511v1</id>
+    <title>Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection</title>
+    <updated>2023-10-17T18:18:32Z</updated>
+    <link href="https://arxiv.org/abs/2310.11511v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.11511v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Despite their remarkable capabilities, large language models (LLMs) often produce responses containing factual inaccuracies due to their sole reliance on the parametric knowledge they encapsulate. Retrieval-Augmented Generation (RAG), an ad hoc approach that augments LMs with retrieval of relevant knowledge, decreases such issues. However, indiscriminately retrieving and incorporating a fixed number of retrieved passages, regardless of whether retrieval is necessary, or passages are relevant, diminishes LM versatility or can lead to unhelpful response generation. We introduce a new framework called Self-Reflective Retrieval-Augmented Generation (Self-RAG) that enhances an LM's quality and factuality through retrieval and self-reflection. Our framework trains a single arbitrary LM that adaptively retrieves passages on-demand, and generates and reflects on retrieved passages and its own generations using special tokens, called reflection tokens. Generating reflection tokens makes the LM controllable during the inference phase, enabling it to tailor its behavior to diverse task requirements. Experiments show that Self-RAG (7B and 13B parameters) significantly outperforms state-of-the-art LLMs and retrieval-augmented models on a diverse set of tasks. Specifically, Self-RAG outperforms ChatGPT and retrieval-augmented Llama2-chat on Open-domain QA, reasoning and fact verification tasks, and it shows significant gains in improving factuality and citation accuracy for long-form generations relative to these models.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-17T18:18:32Z</published>
+    <arxiv:comment>30 pages, 2 figures, 12 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Akari Asai</name>
+    </author>
+    <author>
+      <name>Zeqiu Wu</name>
+    </author>
+    <author>
+      <name>Yizhong Wang</name>
+    </author>
+    <author>
+      <name>Avirup Sil</name>
+    </author>
+    <author>
+      <name>Hannaneh Hajishirzi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.05698v3</id>
+    <title>Mirasol3B: A Multimodal Autoregressive model for time-aligned and contextual modalities</title>
+    <updated>2024-04-03T20:04:49Z</updated>
+    <link href="https://arxiv.org/abs/2311.05698v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.05698v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>One of the main challenges of multimodal learning is the need to combine heterogeneous modalities (e.g., video, audio, text). For example, video and audio are obtained at much higher rates than text and are roughly aligned in time. They are often not synchronized with text, which comes as a global context, e.g., a title, or a description. Furthermore, video and audio inputs are of much larger volumes, and grow as the video length increases, which naturally requires more compute dedicated to these modalities and makes modeling of long-range dependencies harder.
+  We here decouple the multimodal modeling, dividing it into separate, focused autoregressive models, processing the inputs according to the characteristics of the modalities. We propose a multimodal model, called Mirasol3B, consisting of an autoregressive component for the time-synchronized modalities (audio and video), and an autoregressive component for the context modalities which are not necessarily aligned in time but are still sequential. To address the long-sequences of the video-audio inputs, we propose to further partition the video and audio sequences in consecutive snippets and autoregressively process their representations. To that end, we propose a Combiner mechanism, which models the audio-video information jointly within a timeframe. The Combiner learns to extract audio and video features from raw spatio-temporal signals, and then learns to fuse these features producing compact but expressive representations per snippet.
+  Our approach achieves the state-of-the-art on well established multimodal benchmarks, outperforming much larger models. It effectively addresses the high computational demand of media inputs by both learning compact representations, controlling the sequence length of the audio-video feature representations, and modeling their dependencies in time.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-09T19:15:12Z</published>
+    <arxiv:comment>CVPR 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>AJ Piergiovanni</name>
+    </author>
+    <author>
+      <name>Isaac Noble</name>
+    </author>
+    <author>
+      <name>Dahun Kim</name>
+    </author>
+    <author>
+      <name>Michael S. Ryoo</name>
+    </author>
+    <author>
+      <name>Victor Gomes</name>
+    </author>
+    <author>
+      <name>Anelia Angelova</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.07206v1</id>
+    <title>A churn prediction dataset from the telecom sector: a new benchmark for uplift modeling</title>
+    <updated>2023-12-12T12:19:13Z</updated>
+    <link href="https://arxiv.org/abs/2312.07206v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.07206v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Uplift modeling, also known as individual treatment effect (ITE) estimation, is an important approach for data-driven decision making that aims to identify the causal impact of an intervention on individuals. This paper introduces a new benchmark dataset for uplift modeling focused on churn prediction, coming from a telecom company in Belgium, Orange Belgium. Churn, in this context, refers to customers terminating their subscription to the telecom service. This is the first publicly available dataset offering the possibility to evaluate the efficiency of uplift modeling on the churn prediction problem. Moreover, its unique characteristics make it more challenging than the few other public uplift datasets.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-12T12:19:13Z</published>
+    <arxiv:comment>8 pages, 2 figures, 5 tables, post-proceedings of the ECML PKDD 2023 Workshop on Uplift Modeling and Causal Machine Learning for Operational Decision Making</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Théo Verhelst</name>
+    </author>
+    <author>
+      <name>Denis Mercier</name>
+    </author>
+    <author>
+      <name>Jeevan Shrestha</name>
+    </author>
+    <author>
+      <name>Gianluca Bontempi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.00601v1</id>
+    <title>Online Graph Coloring with Predictions</title>
+    <updated>2023-12-01T14:07:10Z</updated>
+    <link href="https://arxiv.org/abs/2312.00601v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.00601v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce learning augmented algorithms to the online graph coloring problem. Although the simple greedy algorithm FirstFit is known to perform poorly in the worst case, we are able to establish a relationship between the structure of any input graph $G$ that is revealed online and the number of colors that FirstFit uses for $G$. Based on this relationship, we propose an online coloring algorithm FirstFitPredictions that extends FirstFit while making use of machine learned predictions. We show that FirstFitPredictions is both \emph{consistent} and \emph{smooth}. Moreover, we develop a novel framework for combining online algorithms at runtime specifically for the online graph coloring problem. Finally, we show how this framework can be used to robustify by combining it with any classical online coloring algorithm (that disregards the predictions).</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-01T14:07:10Z</published>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Antonios Antoniadis</name>
+    </author>
+    <author>
+      <name>Hajo Broersma</name>
+    </author>
+    <author>
+      <name>Yang Meng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.11234v2</id>
+    <title>Imaging of nonlinear materials via the Monotonicity Principle</title>
+    <updated>2023-12-13T20:23:43Z</updated>
+    <link href="https://arxiv.org/abs/2310.11234v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.11234v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Inverse problems, which are related to Maxwell's equations, in the presence of nonlinear materials is a quite new topic in the literature. The lack of contributions in this area can be ascribed to the significant challenges that such problems pose. Retrieving the spatial behaviour of some unknown physical property, from boundary measurements, is a nonlinear and highly ill-posed problem even in the presence of linear materials. Furthermore, this complexity grows exponentially in the presence of nonlinear materials. In the tomography of linear materials, the Monotonicity Principle (MP) is the foundation of a class of non-iterative algorithms able to guarantee excellent performances and compatibility with real-time applications. Recently, the MP has been extended to nonlinear materials under very general assumptions. Starting from the theoretical background for this extension, we develop a first real-time inversion method for the inverse obstacle problem in the presence of nonlinear materials. The proposed method is intendend for all problems governed by the quasilinear Laplace equation, i.e. static problems involving nonlinear materials. In this paper, we provide some preliminary results which give the foundation of our method and some extended numerical examples.</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-17T13:06:24Z</published>
+    <arxiv:primary_category term="math.NA"/>
+    <arxiv:journal_ref>Inverse Problems 40.035007 (2024), 1-27</arxiv:journal_ref>
+    <author>
+      <name>Vincenzo Mottola</name>
+    </author>
+    <author>
+      <name>Antonio Corbo Esposito</name>
+    </author>
+    <author>
+      <name>Gianpaolo Piscitelli</name>
+    </author>
+    <author>
+      <name>Antonello Tamburrino</name>
+    </author>
+    <arxiv:doi>10.1088/1361-6420/ad22e9</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1361-6420/ad22e9" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.09735v3</id>
+    <title>GEO: Generative Engine Optimization</title>
+    <updated>2024-06-28T17:59:26Z</updated>
+    <link href="https://arxiv.org/abs/2311.09735v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.09735v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The advent of large language models (LLMs) has ushered in a new paradigm of search engines that use generative models to gather and summarize information to answer user queries. This emerging technology, which we formalize under the unified framework of generative engines (GEs), can generate accurate and personalized responses, rapidly replacing traditional search engines like Google and Bing. Generative Engines typically satisfy queries by synthesizing information from multiple sources and summarizing them using LLMs. While this shift significantly improves $\textit{user}$ utility and $\textit{generative search engine}$ traffic, it poses a huge challenge for the third stakeholder -- website and content creators. Given the black-box and fast-moving nature of generative engines, content creators have little to no control over $\textit{when}$ and $\textit{how}$ their content is displayed. With generative engines here to stay, we must ensure the creator economy is not disadvantaged. To address this, we introduce Generative Engine Optimization (GEO), the first novel paradigm to aid content creators in improving their content visibility in generative engine responses through a flexible black-box optimization framework for optimizing and defining visibility metrics. We facilitate systematic evaluation by introducing GEO-bench, a large-scale benchmark of diverse user queries across multiple domains, along with relevant web sources to answer these queries. Through rigorous evaluation, we demonstrate that GEO can boost visibility by up to $40\%$ in generative engine responses. Moreover, we show the efficacy of these strategies varies across domains, underscoring the need for domain-specific optimization methods. Our work opens a new frontier in information discovery systems, with profound implications for both developers of generative engines and content creators.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-16T10:06:09Z</published>
+    <arxiv:comment>Accepted to KDD 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Pranjal Aggarwal</name>
+    </author>
+    <author>
+      <name>Vishvak Murahari</name>
+    </author>
+    <author>
+      <name>Tanmay Rajpurohit</name>
+    </author>
+    <author>
+      <name>Ashwin Kalyan</name>
+    </author>
+    <author>
+      <name>Karthik Narasimhan</name>
+    </author>
+    <author>
+      <name>Ameet Deshpande</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.09187v3</id>
+    <title>Vision-Language Models as a Source of Rewards</title>
+    <updated>2024-07-12T21:14:32Z</updated>
+    <link href="https://arxiv.org/abs/2312.09187v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.09187v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Building generalist agents that can accomplish many goals in rich open-ended environments is one of the research frontiers for reinforcement learning. A key limiting factor for building generalist agents with RL has been the need for a large number of reward functions for achieving different goals. We investigate the feasibility of using off-the-shelf vision-language models, or VLMs, as sources of rewards for reinforcement learning agents. We show how rewards for visual achievement of a variety of language goals can be derived from the CLIP family of models, and used to train RL agents that can achieve a variety of language goals. We showcase this approach in two distinct visual domains and present a scaling trend showing how larger VLMs lead to more accurate rewards for visual goal achievement, which in turn produces more capable RL agents.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-14T18:06:17Z</published>
+    <arxiv:comment>10 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Kate Baumli</name>
+    </author>
+    <author>
+      <name>Satinder Baveja</name>
+    </author>
+    <author>
+      <name>Feryal Behbahani</name>
+    </author>
+    <author>
+      <name>Harris Chan</name>
+    </author>
+    <author>
+      <name>Gheorghe Comanici</name>
+    </author>
+    <author>
+      <name>Sebastian Flennerhag</name>
+    </author>
+    <author>
+      <name>Maxime Gazeau</name>
+    </author>
+    <author>
+      <name>Kristian Holsheimer</name>
+    </author>
+    <author>
+      <name>Dan Horgan</name>
+    </author>
+    <author>
+      <name>Michael Laskin</name>
+    </author>
+    <author>
+      <name>Clare Lyle</name>
+    </author>
+    <author>
+      <name>Hussain Masoom</name>
+    </author>
+    <author>
+      <name>Kay McKinney</name>
+    </author>
+    <author>
+      <name>Volodymyr Mnih</name>
+    </author>
+    <author>
+      <name>Alexander Neitz</name>
+    </author>
+    <author>
+      <name>Dmitry Nikulin</name>
+    </author>
+    <author>
+      <name>Fabio Pardo</name>
+    </author>
+    <author>
+      <name>Jack Parker-Holder</name>
+    </author>
+    <author>
+      <name>John Quan</name>
+    </author>
+    <author>
+      <name>Tim Rocktäschel</name>
+    </author>
+    <author>
+      <name>Himanshu Sahni</name>
+    </author>
+    <author>
+      <name>Tom Schaul</name>
+    </author>
+    <author>
+      <name>Yannick Schroecker</name>
+    </author>
+    <author>
+      <name>Stephen Spencer</name>
+    </author>
+    <author>
+      <name>Richie Steigerwald</name>
+    </author>
+    <author>
+      <name>Luyu Wang</name>
+    </author>
+    <author>
+      <name>Lei Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.09395v2</id>
+    <title>Towards Incorporating Researcher Safety into Information Integrity Research Ethics</title>
+    <updated>2023-12-28T23:59:45Z</updated>
+    <link href="https://arxiv.org/abs/2312.09395v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.09395v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Traditional research ethics has mainly and rightly been focused on making sure that participants are treated safely, justly, and ethically, to avoid the violation of their rights or putting participants in harm's way. Information integrity research within CSCW has also correspondingly mainly focused on these issues, and the focus of internet research ethics has primarily focused on increasing protections of participant data. However, as branches of internet research focus on more fraught contexts such as information integrity and problematic information, more explicit consideration of other ethical frames and subjects is warranted. In this workshop paper, we argue that researcher protections should be more explicitly considered and acknowledged in these studies, and should be considered alongside more standard ethical considerations for participants and for broader society.</summary>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-14T23:16:12Z</published>
+    <arxiv:comment>5 pages, presented at the pluralism@CSCW workshop at ACM CSCW 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.CY"/>
+    <author>
+      <name>Joseph S. Schafer</name>
+    </author>
+    <author>
+      <name>Kate Starbird</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.17168v2</id>
+    <title>Learning an Inventory Control Policy with General Inventory Arrival Dynamics</title>
+    <updated>2024-01-22T00:12:20Z</updated>
+    <link href="https://arxiv.org/abs/2310.17168v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.17168v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we address the problem of learning and backtesting inventory control policies in the presence of general arrival dynamics -- which we term as a quantity-over-time arrivals model (QOT). We also allow for order quantities to be modified as a post-processing step to meet vendor constraints such as order minimum and batch size constraints -- a common practice in real supply chains. To the best of our knowledge this is the first work to handle either arbitrary arrival dynamics or an arbitrary downstream post-processing of order quantities. Building upon recent work (Madeka et al., 2022) we similarly formulate the periodic review inventory control problem as an exogenous decision process, where most of the state is outside the control of the agent. Madeka et al., 2022 show how to construct a simulator that replays historic data to solve this class of problem. In our case, we incorporate a deep generative model for the arrivals process as part of the history replay. By formulating the problem as an exogenous decision process, we can apply results from Madeka et al., 2022 to obtain a reduction to supervised learning. Via simulation studies we show that this approach yields statistically significant improvements in profitability over production baselines. Using data from a real-world A/B test, we show that Gen-QOT generalizes well to off-policy data and that the resulting buying policy outperforms traditional inventory management systems in real world settings.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-26T05:49:13Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Sohrab Andaz</name>
+    </author>
+    <author>
+      <name>Carson Eisenach</name>
+    </author>
+    <author>
+      <name>Dhruv Madeka</name>
+    </author>
+    <author>
+      <name>Kari Torkkola</name>
+    </author>
+    <author>
+      <name>Randy Jia</name>
+    </author>
+    <author>
+      <name>Dean Foster</name>
+    </author>
+    <author>
+      <name>Sham Kakade</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.12983v1</id>
+    <title>GAIA: a benchmark for General AI Assistants</title>
+    <updated>2023-11-21T20:34:47Z</updated>
+    <link href="https://arxiv.org/abs/2311.12983v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.12983v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce GAIA, a benchmark for General AI Assistants that, if solved, would represent a milestone in AI research. GAIA proposes real-world questions that require a set of fundamental abilities such as reasoning, multi-modality handling, web browsing, and generally tool-use proficiency. GAIA questions are conceptually simple for humans yet challenging for most advanced AIs: we show that human respondents obtain 92\% vs. 15\% for GPT-4 equipped with plugins. This notable performance disparity contrasts with the recent trend of LLMs outperforming humans on tasks requiring professional skills in e.g. law or chemistry. GAIA's philosophy departs from the current trend in AI benchmarks suggesting to target tasks that are ever more difficult for humans. We posit that the advent of Artificial General Intelligence (AGI) hinges on a system's capability to exhibit similar robustness as the average human does on such questions. Using GAIA's methodology, we devise 466 questions and their answer. We release our questions while retaining answers to 300 of them to power a leader-board available at https://huggingface.co/gaia-benchmark.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-21T20:34:47Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Grégoire Mialon</name>
+    </author>
+    <author>
+      <name>Clémentine Fourrier</name>
+    </author>
+    <author>
+      <name>Craig Swift</name>
+    </author>
+    <author>
+      <name>Thomas Wolf</name>
+    </author>
+    <author>
+      <name>Yann LeCun</name>
+    </author>
+    <author>
+      <name>Thomas Scialom</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.15462v1</id>
+    <title>Double duals and Hilbert modules</title>
+    <updated>2023-11-27T00:27:03Z</updated>
+    <link href="https://arxiv.org/abs/2311.15462v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.15462v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $A$ be a $C^*$-algebra, $H$ be a Hilbert $A$-module and $K(H)$ be the closure of the set of finite rank module maps. We show that the $W^*$-algebra of all bounded $A^{**}$-module maps on the smallest self-dual Hilbert $A^{**}$-module containing $H$ is isomorphic to $K(H)^{**}$ as $W^*$-algebras. We also show that the unit ball of $H$ is closed in $H^\sharp,$ the dual of $H,$ in an $A$-weak topology of $H^\sharp$ as well as dense in the unit ball of $H^\sharp$ in a weak*-topology and some versions of Kaplansky density theorem for Hilbert $C^*$-modules.</summary>
+    <category term="math.OA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-27T00:27:03Z</published>
+    <arxiv:primary_category term="math.OA"/>
+    <author>
+      <name>Huaxin Lin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.11220v1</id>
+    <title>KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models</title>
+    <updated>2023-10-17T12:51:35Z</updated>
+    <link href="https://arxiv.org/abs/2310.11220v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.11220v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While large language models (LLMs) have made considerable advancements in understanding and generating unstructured text, their application in structured data remains underexplored. Particularly, using LLMs for complex reasoning tasks on knowledge graphs (KGs) remains largely untouched. To address this, we propose KG-GPT, a multi-purpose framework leveraging LLMs for tasks employing KGs. KG-GPT comprises three steps: Sentence Segmentation, Graph Retrieval, and Inference, each aimed at partitioning sentences, retrieving relevant graph components, and deriving logical conclusions, respectively. We evaluate KG-GPT using KG-based fact verification and KGQA benchmarks, with the model showing competitive and robust performance, even outperforming several fully-supervised models. Our work, therefore, marks a significant step in unifying structured and unstructured data processing within the realm of LLMs.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-17T12:51:35Z</published>
+    <arxiv:comment>Accepted to EMNLP 2023 Findings</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jiho Kim</name>
+    </author>
+    <author>
+      <name>Yeonsu Kwon</name>
+    </author>
+    <author>
+      <name>Yohan Jo</name>
+    </author>
+    <author>
+      <name>Edward Choi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.11423v1</id>
+    <title>Predicting polymerization reactions via transfer learning using chemical language models</title>
+    <updated>2023-10-17T17:31:52Z</updated>
+    <link href="https://arxiv.org/abs/2310.11423v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.11423v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Polymers are candidate materials for a wide range of sustainability applications such as carbon capture and energy storage. However, computational polymer discovery lacks automated analysis of reaction pathways and stability assessment through retro-synthesis. Here, we report the first extension of transformer-based language models to polymerization reactions for both forward and retrosynthesis tasks. To that end, we have curated a polymerization dataset for vinyl polymers covering reactions and retrosynthesis for representative homo-polymers and co-polymers. Overall, we obtain a forward model Top-4 accuracy of 80% and a backward model Top-4 accuracy of 60%. We further analyze the model performance with representative polymerization and retro-synthesis examples and evaluate its prediction quality from a materials science perspective.</summary>
+    <category term="physics.chem-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-17T17:31:52Z</published>
+    <arxiv:comment>23 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.chem-ph"/>
+    <author>
+      <name>Brenda S. Ferrari</name>
+    </author>
+    <author>
+      <name>Matteo Manica</name>
+    </author>
+    <author>
+      <name>Ronaldo Giro</name>
+    </author>
+    <author>
+      <name>Teodoro Laino</name>
+    </author>
+    <author>
+      <name>Mathias B. Steiner</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.10688v4</id>
+    <title>A decoder-only foundation model for time-series forecasting</title>
+    <updated>2024-04-17T18:24:45Z</updated>
+    <link href="https://arxiv.org/abs/2310.10688v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.10688v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Motivated by recent advances in large language models for Natural Language Processing (NLP), we design a time-series foundation model for forecasting whose out-of-the-box zero-shot performance on a variety of public datasets comes close to the accuracy of state-of-the-art supervised forecasting models for each individual dataset. Our model is based on pretraining a patched-decoder style attention model on a large time-series corpus, and can work well across different forecasting history lengths, prediction lengths and temporal granularities.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-14T17:01:37Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Abhimanyu Das</name>
+    </author>
+    <author>
+      <name>Weihao Kong</name>
+    </author>
+    <author>
+      <name>Rajat Sen</name>
+    </author>
+    <author>
+      <name>Yichen Zhou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.16765v1</id>
+    <title>How to Extend 3D GBSM to Integrated Sensing and Communication Channel with Sharing Feature?</title>
+    <updated>2023-10-25T16:53:02Z</updated>
+    <link href="https://arxiv.org/abs/2310.16765v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.16765v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Integrated Sensing and Communication (ISAC) is a promising technology in 6G systems. The existing 3D Geometry-Based Stochastic Model (GBSM), as standardized for 5G systems, addresses solely communication channels and lacks consideration of the integration with sensing channel. Therefore, this letter extends 3D GBSM to support ISAC research, with a particular focus on capturing the sharing feature of both channels, including shared scatterers, clusters, paths, and similar propagation param-eters, which have been experimentally verified in the literature. The proposed approach can be summarized as follows: Firstly, an ISAC channel model is proposed, where shared and non-shared components are superimposed for both communication and sensing. Secondly, sensing channel is characterized as a cascade of TX-target, radar cross section, and target-RX, with the introduction of a novel parameter S for shared target extraction. Finally, an ISAC channel implementation framework is proposed, allowing flexible configuration of sharing feature and the joint generation of communication and sensing channels. The proposed ISAC channel model can be compatible with the 3GPP standards and offers promising support for ISAC technology evaluation.</summary>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-25T16:53:02Z</published>
+    <arxiv:primary_category term="eess.SP"/>
+    <author>
+      <name>Yameng Liu</name>
+    </author>
+    <author>
+      <name>Jianhua Zhang</name>
+    </author>
+    <author>
+      <name>Yuxiang Zhang</name>
+    </author>
+    <author>
+      <name>Huiwen Gong</name>
+    </author>
+    <author>
+      <name>Tao Jiang</name>
+    </author>
+    <author>
+      <name>Guangyi Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.14918v2</id>
+    <title>ARNIQA: Learning Distortion Manifold for Image Quality Assessment</title>
+    <updated>2023-11-04T18:51:11Z</updated>
+    <link href="https://arxiv.org/abs/2310.14918v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.14918v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>No-Reference Image Quality Assessment (NR-IQA) aims to develop methods to measure image quality in alignment with human perception without the need for a high-quality reference image. In this work, we propose a self-supervised approach named ARNIQA (leArning distoRtion maNifold for Image Quality Assessment) for modeling the image distortion manifold to obtain quality representations in an intrinsic manner. First, we introduce an image degradation model that randomly composes ordered sequences of consecutively applied distortions. In this way, we can synthetically degrade images with a large variety of degradation patterns. Second, we propose to train our model by maximizing the similarity between the representations of patches of different images distorted equally, despite varying content. Therefore, images degraded in the same manner correspond to neighboring positions within the distortion manifold. Finally, we map the image representations to the quality scores with a simple linear regressor, thus without fine-tuning the encoder weights. The experiments show that our approach achieves state-of-the-art performance on several datasets. In addition, ARNIQA demonstrates improved data efficiency, generalization capabilities, and robustness compared to competing methods. The code and the model are publicly available at https://github.com/miccunifi/ARNIQA.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-20T17:22:25Z</published>
+    <arxiv:comment>WACV2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Lorenzo Agnolucci</name>
+    </author>
+    <author>
+      <name>Leonardo Galteri</name>
+    </author>
+    <author>
+      <name>Marco Bertini</name>
+    </author>
+    <author>
+      <name>Alberto Del Bimbo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.12183v2</id>
+    <title>An Optimistic-Robust Approach for Dynamic Positioning of Omnichannel Inventories</title>
+    <updated>2025-04-01T15:59:59Z</updated>
+    <link href="https://arxiv.org/abs/2310.12183v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.12183v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce a new class of data-driven and distribution-free optimistic-robust bimodal inventory optimization (BIO) strategy to effectively allocate inventory across a retail chain to meet time-varying, uncertain omnichannel demand. The bimodal nature of BIO stems from its ability to balance downside risk, as in traditional Robust Optimization (RO), which focuses on worst-case adversarial demand, with upside potential to enhance average-case performance. This enables BIO to remain as resilient as RO while capturing benefits that would otherwise be lost due to endogenous outliers. Omnichannel inventory planning provides a suitable problem setting for analyzing the effectiveness of BIO's bimodal strategy in managing the tradeoff between lost sales at stores and cross-channel e-commerce fulfillment costs, factors that are inherently asymmetric due to channel-specific behaviors. We provide structural insights about the BIO solution and how it can be tuned to achieve a preferred tradeoff between robustness and the average-case performance. Using a real-world dataset from a large American omnichannel retail chain, a business value assessment during a peak period indicates that BIO outperforms pure RO by 27% in terms of realized average profitability and surpasses other competitive baselines under imperfect distributional information by over 10%. This demonstrates that BIO provides a novel, data-driven, and distribution-free alternative to traditional RO that achieves strong average performance while carefully balancing robustness.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-17T23:10:57Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Pavithra Harsha</name>
+    </author>
+    <author>
+      <name>Shivaram Subramanian</name>
+    </author>
+    <author>
+      <name>Ali Koc</name>
+    </author>
+    <author>
+      <name>Mahesh Ramakrishna</name>
+    </author>
+    <author>
+      <name>Brian Quanz</name>
+    </author>
+    <author>
+      <name>Dhruv Shah</name>
+    </author>
+    <author>
+      <name>Chandra Narayanaswami</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.06648v3</id>
+    <title>Dense X Retrieval: What Retrieval Granularity Should We Use?</title>
+    <updated>2024-10-04T05:33:51Z</updated>
+    <link href="https://arxiv.org/abs/2312.06648v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.06648v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Dense retrieval has become a prominent method to obtain relevant context or world knowledge in open-domain NLP tasks. When we use a learned dense retriever on a retrieval corpus at inference time, an often-overlooked design choice is the retrieval unit in which the corpus is indexed, e.g. document, passage, or sentence. We discover that the retrieval unit choice significantly impacts the performance of both retrieval and downstream tasks. Distinct from the typical approach of using passages or sentences, we introduce a novel retrieval unit, proposition, for dense retrieval. Propositions are defined as atomic expressions within text, each encapsulating a distinct factoid and presented in a concise, self-contained natural language format. We conduct an empirical comparison of different retrieval granularity. Our experiments reveal that indexing a corpus by fine-grained units such as propositions significantly outperforms passage-level units in retrieval tasks. Moreover, constructing prompts with fine-grained retrieved units for retrieval-augmented language models improves the performance of downstream QA tasks given a specific computation budget.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-11T18:57:35Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Tong Chen</name>
+    </author>
+    <author>
+      <name>Hongwei Wang</name>
+    </author>
+    <author>
+      <name>Sihao Chen</name>
+    </author>
+    <author>
+      <name>Wenhao Yu</name>
+    </author>
+    <author>
+      <name>Kaixin Ma</name>
+    </author>
+    <author>
+      <name>Xinran Zhao</name>
+    </author>
+    <author>
+      <name>Hongming Zhang</name>
+    </author>
+    <author>
+      <name>Dong Yu</name>
+    </author>
+  </entry>
+</feed>

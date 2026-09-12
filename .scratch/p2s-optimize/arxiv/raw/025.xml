@@ -1,0 +1,1441 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/cJqoz0x/lFL3l/TPNnWfibor+yU</id>
+  <title>arXiv Query: search_query=&amp;id_list=2601.07526,2601.07577,2601.08928,2601.10176,2601.11565,2601.12024,2601.12213,2601.13013,2601.13671,2601.14711,2601.16492,2601.17567,2601.19793,2601.19965,2601.21742,2601.21844,2601.22569,2601.23068,2601.23219,2602.00966,2602.01966,2602.05524,2602.06008,2602.06025,2602.07298,2602.07695,2602.09222,2602.11733,2602.11780,2602.11874,2602.12430,2602.12670,2602.12941,2602.13370,2602.14849,2602.14878,2602.15055,2602.16299,2602.16873,2602.17547&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:44:23Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2601.07526,2601.07577,2601.08928,2601.10176,2601.11565,2601.12024,2601.12213,2601.13013,2601.13671,2601.14711,2601.16492,2601.17567,2601.19793,2601.19965,2601.21742,2601.21844,2601.22569,2601.23068,2601.23219,2602.00966,2602.01966,2602.05524,2602.06008,2602.06025,2602.07298,2602.07695,2602.09222,2602.11733,2602.11780,2602.11874,2602.12430,2602.12670,2602.12941,2602.13370,2602.14849,2602.14878,2602.15055,2602.16299,2602.16873,2602.17547" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2602.15055v1</id>
+    <title>Beyond Context Sharing: A Unified Agent Communication Protocol (ACP) for Secure, Federated, and Autonomous Agent-to-Agent (A2A) Orchestration</title>
+    <updated>2026-02-11T17:02:12Z</updated>
+    <link href="https://arxiv.org/abs/2602.15055v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.15055v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the artificial intelligence space, as we transition from isolated large language models to autonomous agents capable of complex reasoning and tool use. While foundational architectures and local context management protocols have been established, the challenge of cross-platform, decentralized, and secure interaction remains a significant barrier to the realization of a truly Agentic Web. Building upon the foundations of AI agent architectures and the Model Context Protocol (MCP) for multi-agent coordination, this paper introduces the Agent Communication Protocol (ACP). ACP provides a standardized framework for Agent-to-Agent (AA) interaction, enabling heterogeneous agents to discover, negotiate, and execute collaborative workflows across disparate environments. We propose a federated orchestration model that integrates decentralized identity verification, semantic intent mapping, and automated service-level agreements. Our evaluation demonstrates that ACP reduces inter-agent communication latency by % while maintaining a zero-trust security posture. This work represents a critical advancement toward a scalable and interoperable ecosystem of autonomous digital entities</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-11T17:02:12Z</published>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>Naveen Kumar Krishnan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.11780v1</id>
+    <title>RELATE: A Reinforcement Learning-Enhanced LLM Framework for Advertising Text Generation</title>
+    <updated>2026-02-12T10:00:55Z</updated>
+    <link href="https://arxiv.org/abs/2602.11780v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.11780v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In online advertising, advertising text plays a critical role in attracting user engagement and driving advertiser value. Existing industrial systems typically follow a two-stage paradigm, where candidate texts are first generated and subsequently aligned with online performance metrics such as click-through rate(CTR). This separation often leads to misaligned optimization objectives and low funnel efficiency, limiting global optimality.
+  To address these limitations, we propose RELATE, a reinforcement learning-based end-to-end framework that unifies generation and objective alignment within a single model. Instead of decoupling text generation from downstream metric alignment, RELATE integrates performance and compliance objectives directly into the generation process via policy learning. To better capture ultimate advertiser value beyond click-level signals, We incorporate conversion-oriented metrics into the objective and jointly model them with compliance constraints as multi-dimensional rewards, enabling the model to generate high-quality ad texts that improve conversion performance under policy constraints.
+  Extensive experiments on large-scale industrial datasets demonstrate that RELATE consistently outperforms baselines. Furthermore, online deployment on a production advertising platform yields statistically significant improvements in click-through conversion rate(CTCVR) under strict policy constraints, validating the robustness and real-world effectiveness of the proposed framework.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-12T10:00:55Z</published>
+    <arxiv:comment>10 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Jinfang Wang</name>
+    </author>
+    <author>
+      <name>Jiajie Liu</name>
+    </author>
+    <author>
+      <name>Jianwei Wu</name>
+    </author>
+    <author>
+      <name>Ziqin Luo</name>
+    </author>
+    <author>
+      <name>Zhen Chen</name>
+    </author>
+    <author>
+      <name>Chunlei Li</name>
+    </author>
+    <author>
+      <name>Biao Han</name>
+    </author>
+    <author>
+      <name>Tao Deng</name>
+    </author>
+    <author>
+      <name>Yi Li</name>
+    </author>
+    <author>
+      <name>Shuanglong Li</name>
+    </author>
+    <author>
+      <name>Lin Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.01966v1</id>
+    <title>Self-Consolidation for Self-Evolving Agents</title>
+    <updated>2026-02-02T11:16:07Z</updated>
+    <link href="https://arxiv.org/abs/2602.01966v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.01966v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While large language model (LLM) agents have demonstrated impressive problem-solving capabilities, they typically operate as static systems, lacking the ability to evolve through lifelong interaction. Existing attempts to bridge this gap primarily rely on retrieving successful past trajectories as demonstrations. However, this paradigm faces two critical limitations. First, by focusing solely on success, agents overlook the rich pedagogical value embedded in failed attempts, preventing them from identifying and avoiding recurrent pitfalls. Second, continually accumulating textual experiences not only increases the time consumption during retrieval but also inevitably introduces noise and exhausts the largest context window of current LLMs. To address these challenges, we propose a novel self-evolving framework for LLM agents that introduces a complementary evolution mechanism: First, a contrastive reflection strategy is introduced to explicitly summarize error-prone patterns and capture reusable insights. Second, we propose a self-consolidation mechanism that distills non-parametric textual experience into compact learnable parameters. This enables the agent to internalize extensive historical experience directly into its latent space. Extensive experiments demonstrate the advantages of our method in long-term agent evolution.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-02T11:16:07Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hongzhuo Yu</name>
+    </author>
+    <author>
+      <name>Fei Zhu</name>
+    </author>
+    <author>
+      <name>Guo-Sen Xie</name>
+    </author>
+    <author>
+      <name>Ling Shao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.19965v2</id>
+    <title>Modeling Cascaded Delay Feedback for Online Net Conversion Rate Prediction: Benchmark, Insights and Solutions</title>
+    <updated>2026-01-29T07:50:32Z</updated>
+    <link href="https://arxiv.org/abs/2601.19965v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.19965v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In industrial recommender systems, conversion rate (CVR) is widely used for traffic allocation, but it fails to fully reflect recommendation effectiveness because it ignores refund behavior. To better capture true user satisfaction and business value, net conversion rate (NetCVR), defined as the probability that a clicked item is purchased and not refunded, has been proposed.Unlike CVR, NetCVR prediction involves a more complex multi-stage cascaded delayed feedback process. The two cascaded delays from click to conversion and from conversion to refund have opposite effects, making traditional CVR modeling methods inapplicable. Moreover, the lack of open-source datasets and online continuous training schemes further hinders progress in this area.To address these challenges, we introduce CASCADE (Cascaded Sequences of Conversion and Delayed Refund), the first large-scale open dataset derived from the Taobao app for online continuous NetCVR prediction. Through an in-depth analysis of CASCADE, we identify three key insights: (1) NetCVR exhibits strong temporal dynamics, necessitating online continuous modeling; (2) cascaded modeling of CVR and refund rate outperforms direct NetCVR modeling; and (3) delay time, which correlates with both CVR and refund rate, is an important feature for NetCVR prediction.Based on these insights, we propose TESLA, a continuous NetCVR modeling framework featuring a CVR-refund-rate cascaded architecture, stage-wise debiasing, and a delay-time-aware ranking loss. Extensive experiments demonstrate that TESLA consistently outperforms state-of-the-art methods on CASCADE, achieving absolute improvements of 12.41 percent in RI-AUC and 14.94 percent in RI-PRAUC on NetCVR prediction. The code and dataset are publicly available at https://github.com/alimama-tech/NetCVR.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-27T13:24:32Z</published>
+    <arxiv:comment>This paper has been accepted by the ACM Web Conference (WWW) 2026. This is the camera-ready version. Please refer to the published version for citation once available</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Mingxuan Luo</name>
+    </author>
+    <author>
+      <name>Guipeng Xv</name>
+    </author>
+    <author>
+      <name>Sishuo Chen</name>
+    </author>
+    <author>
+      <name>Xinyu Li</name>
+    </author>
+    <author>
+      <name>Li Zhang</name>
+    </author>
+    <author>
+      <name>Zhangming Chan</name>
+    </author>
+    <author>
+      <name>Xiang-Rong Sheng</name>
+    </author>
+    <author>
+      <name>Han Zhu</name>
+    </author>
+    <author>
+      <name>Jian Xu</name>
+    </author>
+    <author>
+      <name>Bo Zheng</name>
+    </author>
+    <author>
+      <name>Chen Lin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.16873v1</id>
+    <title>AdaptOrch: Task-Adaptive Multi-Agent Orchestration in the Era of LLM Performance Convergence</title>
+    <updated>2026-02-18T21:00:05Z</updated>
+    <link href="https://arxiv.org/abs/2602.16873v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.16873v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As large language models from diverse providers converge toward comparable benchmark performance, the traditional paradigm of selecting a single best model per task yields diminishing returns. We argue that orchestration topology -- the structural composition of how multiple agents are coordinated, parallelized, and synthesized -- now dominates system-level performance over individual model capability. We present AdaptOrch, a formal framework for task-adaptive multi-agent orchestration that dynamically selects among four canonical topologies (parallel, sequential, hierarchical, and hybrid) based on task dependency graphs and empirically derived domain characteristics. Our framework introduces three key contributions: (1) a Performance Convergence Scaling Law, formalizing conditions under which orchestration selection outweighs model selection; (2) a Topology Routing Algorithm that maps task decomposition DAGs to optimal orchestration patterns in O(|V| + |E|) time; and (3) an Adaptive Synthesis Protocol with provable termination guarantees and heuristic consistency scoring for parallel agent outputs. We validate AdaptOrch across coding (SWE-bench), reasoning (GPQA), and retrieval-augmented generation tasks, demonstrating that topology-aware orchestration achieves 12-23% improvement over static single-topology baselines, even when using identical underlying models. Our results establish orchestration design as a first-class optimization target independent of model scaling.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-18T21:00:05Z</published>
+    <arxiv:comment>21 pages, 10 figures, 6 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>Geunbin Yu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.10176v2</id>
+    <title>CC-OR-Net: A Unified Framework for LTV Prediction through Structural Decoupling</title>
+    <updated>2026-01-25T06:26:27Z</updated>
+    <link href="https://arxiv.org/abs/2601.10176v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.10176v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Customer Lifetime Value (LTV) prediction, a central problem in modern marketing, is characterized by a unique zero-inflated and long-tail data distribution. This distribution presents two fundamental challenges: (1) the vast majority of low-to-medium value users numerically overwhelm the small but critically important segment of high-value "whale" users, and (2) significant value heterogeneity exists even within the low-to-medium value user base. Common approaches either rely on rigid statistical assumptions or attempt to decouple ranking and regression using ordered buckets; however, they often enforce ordinality through loss-based constraints rather than inherent architectural design, failing to balance global accuracy with high-value precision. To address this gap, we propose \textbf{C}onditional \textbf{C}ascaded \textbf{O}rdinal-\textbf{R}esidual Networks \textbf{(CC-OR-Net)}, a novel unified framework that achieves a more robust decoupling through \textbf{structural decomposition}, where ranking is architecturally guaranteed. CC-OR-Net integrates three specialized components: a \textit{structural ordinal decomposition module} for robust ranking, an \textit{intra-bucket residual module} for fine-grained regression, and a \textit{targeted high-value augmentation module} for precision on top-tier users. Evaluated on real-world datasets with over 300M users, CC-OR-Net achieves a superior trade-off across all key business metrics, outperforming state-of-the-art methods in creating a holistic and commercially valuable LTV prediction solution.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-15T08:35:17Z</published>
+    <arxiv:comment>Accepted by WWW'26 main</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Mingyu Zhao</name>
+    </author>
+    <author>
+      <name>Haoran Bai</name>
+    </author>
+    <author>
+      <name>Yu Tian</name>
+    </author>
+    <author>
+      <name>Bing Zhu</name>
+    </author>
+    <author>
+      <name>Hengliang Luo</name>
+    </author>
+    <arxiv:doi>10.1145/3774904.3792259</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3774904.3792259" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.12941v2</id>
+    <title>JARVIS: An Evidence-Grounded Retrieval System for Interpretable Deceptive Reviews Adjudication</title>
+    <updated>2026-05-07T10:12:01Z</updated>
+    <link href="https://arxiv.org/abs/2602.12941v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.12941v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deceptive reviews, refer to fabricated feedback designed to artificially manipulate the perceived quality of products. Within modern e-commerce ecosystems, these reviews remain a critical governance challenge. Despite advances in review-level and graph-based detection methods, two pivotal limitations remain: inadequate generalization and lack of interpretability. To address these challenges, we propose JARVIS, a framework providing Judgment via Augmented Retrieval and eVIdence graph Structures. Starting from the review to be evaluated, it retrieves semantically similar evidence via hybrid dense-sparse multimodal retrieval, expands relational signals through shared entities, and constructs a heterogeneous evidence graph. Large language model then performs evidence-grounded adjudication to produce interpretable risk assessments. Offline experiments demonstrate that JARVIS enhances performance on our constructed review dataset, achieving a precision increase from 0.953 to 0.988 and a recall boost from 0.830 to 0.901. In the production environment, our framework achieves a 27% increase in the recall volume and reduces manual inspection time by 75%. Furthermore, the adoption rate of the model-generated analysis reaches 96.4%.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-13T13:57:45Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Nan Lu</name>
+    </author>
+    <author>
+      <name>Leyang Li</name>
+    </author>
+    <author>
+      <name>Yurong Hu</name>
+    </author>
+    <author>
+      <name>Rui Lin</name>
+    </author>
+    <author>
+      <name>Shaoyi Xu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.23068v2</id>
+    <title>ExplainerPFN: Towards tabular foundation models for model-free zero-shot feature importance estimations</title>
+    <updated>2026-05-15T09:50:09Z</updated>
+    <link href="https://arxiv.org/abs/2601.23068v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.23068v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Computing the importance of features in supervised classification tasks is critical for model interpretability. Shapley values are a widely used approach for explaining model predictions, but require direct access to the underlying model, an assumption frequently violated in real-world deployments. We investigate whether meaningful feature attributions can be obtained in a zero-shot setting, using only the input data distribution and no evaluations of the target model. Because multiple models can produce identical predictions yet yield different Shapley decompositions, the mapping from data to attributions is not uniquely identifiable. We therefore target attributions that are "true to the data" rather than "true to the model", learning a posterior mean attribution under a meta-training prior. To this end, we introduce ExplainerPFN, a tabular foundation model built on TabPFN, pretrained on synthetic structural causal datasets supervised with exact or near-exact Shapley values, that predicts feature attributions for unseen tabular datasets without model access, gradients, or example explanations.
+  Our contributions are fourfold: (1) we show that few-shot surrogate explainers achieve high SHAP fidelity with as few as two reference observations; (2) we propose ExplainerPFN, the first zero-shot method for estimating Shapley-value-style feature attributions without access to the underlying model or reference explanations, providing a principled attribution where no existing explainer can be applied; (3) we release an open-source implementation including the full training pipeline and synthetic data generator; and (4) through extensive experiments on real and synthetic datasets, we show that ExplainerPFN achieves performance competitive with few-shot surrogate explainers that rely on 2-10 SHAP examples.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-30T15:17:36Z</published>
+    <arxiv:comment>35 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Joao Fonseca</name>
+    </author>
+    <author>
+      <name>Julia Stoyanovich</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.21742v1</id>
+    <title>Epistemic Context Learning: Building Trust the Right Way in LLM-Based Multi-Agent Systems</title>
+    <updated>2026-01-29T13:59:32Z</updated>
+    <link href="https://arxiv.org/abs/2601.21742v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.21742v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Individual agents in multi-agent (MA) systems often lack robustness, tending to blindly conform to misleading peers. We show this weakness stems from both sycophancy and inadequate ability to evaluate peer reliability. To address this, we first formalize the learning problem of history-aware reference, introducing the historical interactions of peers as additional input, so that agents can estimate peer reliability and learn from trustworthy peers when uncertain. This shifts the task from evaluating peer reasoning quality to estimating peer reliability based on interaction history. We then develop Epistemic Context Learning (ECL): a reasoning framework that conditions predictions on explicitly-built peer profiles from history. We further optimize ECL by reinforcement learning using auxiliary rewards. Our experiments reveal that our ECL enables small models like Qwen 3-4B to outperform a history-agnostic baseline 8x its size (Qwen 3-30B) by accurately identifying reliable peers. ECL also boosts frontier models to near-perfect (100%) performance. We show that ECL generalizes well to various MA configurations and we find that trust is modeled well by LLMs, revealing a strong correlation in trust modeling accuracy and final answer quality.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-29T13:59:32Z</published>
+    <arxiv:comment>Codes and data are available at https://github.com/skyriver-2000/epistemic-context-learning</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Ruiwen Zhou</name>
+    </author>
+    <author>
+      <name>Maojia Song</name>
+    </author>
+    <author>
+      <name>Xiaobao Wu</name>
+    </author>
+    <author>
+      <name>Sitao Cheng</name>
+    </author>
+    <author>
+      <name>Xunjian Yin</name>
+    </author>
+    <author>
+      <name>Yuxi Xie</name>
+    </author>
+    <author>
+      <name>Zhuoqun Hao</name>
+    </author>
+    <author>
+      <name>Wenyue Hua</name>
+    </author>
+    <author>
+      <name>Liangming Pan</name>
+    </author>
+    <author>
+      <name>Soujanya Poria</name>
+    </author>
+    <author>
+      <name>Min-Yen Kan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.13013v1</id>
+    <title>HT-GNN: Hyper-Temporal Graph Neural Network for Customer Lifetime Value Prediction in Baidu Ads</title>
+    <updated>2026-01-19T12:47:31Z</updated>
+    <link href="https://arxiv.org/abs/2601.13013v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.13013v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Lifetime value (LTV) prediction is crucial for news feed advertising, enabling platforms to optimize bidding and budget allocation for long-term revenue growth. However, it faces two major challenges: (1) demographic-based targeting creates segment-specific LTV distributions with large value variations across user groups; and (2) dynamic marketing strategies generate irregular behavioral sequences where engagement patterns evolve rapidly. We propose a Hyper-Temporal Graph Neural Network (HT-GNN), which jointly models demographic heterogeneity and temporal dynamics through three key components: (i) a hypergraph-supervised module capturing inter-segment relationships; (ii) a transformer-based temporal encoder with adaptive weighting; and (iii) a task-adaptive mixture-of-experts with dynamic prediction towers for multi-horizon LTV forecasting. Experiments on \textit{Baidu Ads} with 15 million users demonstrate that HT-GNN consistently outperforms state-of-the-art methods across all metrics and prediction horizons.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-19T12:47:31Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Xiaohui Zhao</name>
+    </author>
+    <author>
+      <name>Xinjian Zhao</name>
+    </author>
+    <author>
+      <name>Jiahui Zhang</name>
+    </author>
+    <author>
+      <name>Guoyu Liu</name>
+    </author>
+    <author>
+      <name>Houzhi Wang</name>
+    </author>
+    <author>
+      <name>Shu Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.17567v1</id>
+    <title>Real-Time Trend Prediction via Continually-Aligned LLM Query Generation</title>
+    <updated>2026-01-24T19:37:11Z</updated>
+    <link href="https://arxiv.org/abs/2601.17567v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.17567v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Trending news detection in low-traffic search environments faces a fundamental cold-start problem, where a lack of query volume prevents systems from identifying emerging or long-tail trends. Existing methods relying on keyword frequency or query spikes are inherently slow and ineffective in these sparse settings, lagging behind real-world shifts in attention. We introduce RTTP, a novel Real-Time Trending Prediction framework that generates search queries directly from news content instead of waiting for users to issue them. RTTP leverages a continual learning LLM (CL-LLM) that converts posts into search-style queries and scores them using engagement strength + creator authority, enabling early trend surfacing before search volume forms. To ensure adaptation without degrading reasoning, we propose Mix-Policy DPO, a new preference-based continual learning approach that combines on-policy stability with off-policy novelty to mitigate catastrophic forgetting during model upgrades. Deployed at production scale on Facebook and Meta AI products, RTTP delivers +91.4% improvement in tail-trend detection precision@500 and +19% query generation accuracy over industry baselines, while sustaining stable performance after multi-week online training. This work demonstrates that LLM-generated synthetic search signals, when aligned and continually updated, unlock timely trend understanding in low-traffic search environments.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-24T19:37:11Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Zijing Hui</name>
+    </author>
+    <author>
+      <name>Wenhan Lyu</name>
+    </author>
+    <author>
+      <name>Shusen Wang</name>
+    </author>
+    <author>
+      <name>Li Chen</name>
+    </author>
+    <author>
+      <name>Chu Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.14878v3</id>
+    <title>Model Context Protocol (MCP) Tool Descriptions Are Smelly! Towards Improving AI Agent Efficiency with Augmented MCP Tool Descriptions</title>
+    <updated>2026-05-31T05:10:10Z</updated>
+    <link href="https://arxiv.org/abs/2602.14878v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.14878v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Model Context Protocol (MCP) introduces a standard specification that defines how Foundation Model (FM)-based agents should interact with external systems by invoking tools. However, to understand a tool's purpose and features, FMs rely on natural-language tool descriptions, making these descriptions a critical component in guiding FMs to select the optimal tool for a given (sub)task and to pass the right arguments to the tool. While defects or smells in these descriptions can misguide FM-based agents, their prevalence and consequences in the MCP ecosystem remain unclear.
+  Hence, we examine 856 tools spread across 103 MCP servers empirically, assess their description quality, and their impact on agent performance. We identify six components of tool descriptions from the literature, develop a scoring rubric utilizing these components, and then formalize tool description smells based on this rubric. By operationalizing this rubric through an FM-based scanner, we find that 97.1% of the analyzed tool descriptions contain at least one smell, with 56% failing to state their purpose clearly. While augmenting these descriptions for all components improves task success rates by a median of 5.85 percentage points and improves partial goal completion by 15.12%, it also increases the number of execution steps by 67.46% and regresses performance in 16.67% of cases. These results indicate that achieving performance gains is not straightforward; while execution cost can act as a trade-off, execution context can also impact. Furthermore, component ablations show that compact variants of different component combinations often preserve behavioral reliability while reducing unnecessary token overhead, enabling more efficient use of the FM context window and lower execution costs.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.ET" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-16T16:10:11Z</published>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Mohammed Mehedi Hasan</name>
+    </author>
+    <author>
+      <name>Hao Li</name>
+    </author>
+    <author>
+      <name>Gopi Krishnan Rajbahadur</name>
+    </author>
+    <author>
+      <name>Bram Adams</name>
+    </author>
+    <author>
+      <name>Ahmed E. Hassan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.12430v4</id>
+    <title>Agent Skills for Large Language Models: Architecture, Acquisition, Security, and the Path Forward</title>
+    <updated>2026-06-02T16:14:54Z</updated>
+    <link href="https://arxiv.org/abs/2602.12430v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.12430v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The transition from monolithic language models to modular, skill-equipped agents marks a defining shift in how large language models (LLMs) are deployed in practice. Rather than encoding all procedural knowledge within model weights, agent skills -- composable packages of instructions, code, and resources that agents load on demand -- enable dynamic capability extension without retraining. It is formalized in a paradigm of progressive disclosure, portable skill definitions, and integration with the Model Context Protocol (MCP). This survey provides a comprehensive treatment of the agent skills landscape, as it has rapidly evolved during the last few months. We organize the field along four axes: (i) architectural foundations, examining the SKILL$.$md specification, progressive context loading, and the complementary roles of skills and MCP; (ii) skill acquisition, covering reinforcement learning with skill libraries, autonomous skill discovery (SEAgent), and compositional skill synthesis; (iii) deployment at scale, including the computer-use agent (CUA) stack, GUI grounding advances, and benchmark progress on OSWorld and SWE-bench; and (iv) security, where recent empirical analyses reveal that 26.1% of community-contributed skills contain vulnerabilities, motivating our proposed Skill Trust and Lifecycle Governance Framework -- a four-tier, gate-based permission model that maps skill provenance to graduated deployment capabilities. We identify seven open challenges -- from cross-platform skill portability to capability-based permission models -- and propose a research agenda for realizing trustworthy, self-improving skill ecosystems. Unlike prior surveys that broadly cover LLM agents or tool use, this work focuses specifically on the emerging skill abstraction layer and its implications for the next generation of agentic systems. Project repo: https://github.com/scienceaix/agentskills</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-12T21:33:25Z</published>
+    <arxiv:comment>Accepted by Agent Skills '26 Workshop at ACM Conference on AI and Agentic Systems 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>Renjun Xu</name>
+    </author>
+    <author>
+      <name>Yang Yan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.06025v3</id>
+    <title>Learning Query-Aware Budget-Tier Routing for Runtime Agent Memory</title>
+    <updated>2026-05-27T12:03:28Z</updated>
+    <link href="https://arxiv.org/abs/2602.06025v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.06025v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Memory is increasingly central to Large Language Model (LLM) agents operating beyond a single context window, yet most existing systems rely on offline, query-agnostic memory construction that can be inefficient and may discard query-critical information. Although runtime memory utilization is a natural alternative, prior work often incurs substantial overhead and offers limited explicit control over the performance-cost trade-off. In this work, we present \textbf{BudgetMem}, a runtime agent memory framework for explicit, query-aware performance-cost control. BudgetMem structures memory processing as a set of memory modules, each offered in three budget tiers (i.e., \textsc{Low}/\textsc{Mid}/\textsc{High}). A lightweight router performs budget-tier routing across modules to balance task performance and memory construction cost, which is implemented as a compact neural policy trained with reinforcement learning. Using BudgetMem as a unified testbed, we study three complementary strategies for realizing budget tiers: implementation (method complexity), reasoning (inference behavior), and capacity (module model size). Across LoCoMo, LongMemEval, and HotpotQA, BudgetMem surpasses strong baselines when performance is prioritized (i.e., high-budget setting), and delivers better accuracy-cost frontiers under tighter budgets. Moreover, our analysis disentangles the strengths and weaknesses of different tiering strategies, clarifying when each axis delivers the most favorable trade-offs under varying budget regimes.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-05T18:57:09Z</published>
+    <arxiv:comment>Accepted by ICML 2026. Code is available at https://github.com/ViktorAxelsen/BudgetMem</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Haozhen Zhang</name>
+    </author>
+    <author>
+      <name>Haodong Yue</name>
+    </author>
+    <author>
+      <name>Tao Feng</name>
+    </author>
+    <author>
+      <name>Quanyu Long</name>
+    </author>
+    <author>
+      <name>Jianzhu Bao</name>
+    </author>
+    <author>
+      <name>Bowen Jin</name>
+    </author>
+    <author>
+      <name>Weizhi Zhang</name>
+    </author>
+    <author>
+      <name>Xiao Li</name>
+    </author>
+    <author>
+      <name>Jiaxuan You</name>
+    </author>
+    <author>
+      <name>Chengwei Qin</name>
+    </author>
+    <author>
+      <name>Wenya Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.17547v3</id>
+    <title>KLong: Training LLM Agent for Extremely Long-horizon Tasks</title>
+    <updated>2026-04-25T16:40:05Z</updated>
+    <link href="https://arxiv.org/abs/2602.17547v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.17547v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper introduces KLong, an open-source LLM agent trained to solve extremely long-horizon tasks. The principle is to first cold-start the model via trajectory-splitting SFT, then scale it via progressive RL training. Specifically, we first activate basic agentic abilities of a base model with a comprehensive SFT recipe. Then, we introduce Research-Factory, an automated pipeline that generates high-quality training data by collecting research papers and constructing evaluation rubrics. Using this pipeline, we build thousands of long-horizon trajectories distilled from Claude 4.5 Sonnet (Thinking). To train with these extremely long trajectories, we propose a new trajectory-splitting SFT, which preserves early context, progressively truncates later context, and maintains overlap between sub-trajectories. In addition, to further improve long-horizon task-solving capability, we propose a novel progressive RL, which schedules training into multiple stages with progressively extended timeouts. Experiments demonstrate the superiority and generalization of KLong, as shown in Figure 1. Notably, our proposed KLong (106B) surpasses Kimi K2 Thinking (1T) by 11.28% on PaperBench, and the performance improvement generalizes to other coding benchmarks like SWE-bench Verified and MLE-bench.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-19T17:01:08Z</published>
+    <arxiv:comment>We request standard withdrawal of this submission because significant errors were discovered in the data after submission, which affect the validity of the results. We may submit a corrected version later</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Yue Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.12213v1</id>
+    <title>One-Sided Matrix Completion from Ultra-Sparse Samples</title>
+    <updated>2026-01-18T01:33:48Z</updated>
+    <link href="https://arxiv.org/abs/2601.12213v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.12213v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Matrix completion is a classical problem that has received recurring interest across a wide range of fields. In this paper, we revisit this problem in an ultra-sparse sampling regime, where each entry of an unknown, $n\times d$ matrix $M$ (with $n \ge d$) is observed independently with probability $p = C / d$, for a fixed integer $C \ge 2$. This setting is motivated by applications involving large, sparse panel datasets, where the number of rows far exceeds the number of columns. When each row contains only $C$ entries -- fewer than the rank of $M$ -- accurate imputation of $M$ is impossible. Instead, we estimate the row span of $M$ or the averaged second-moment matrix $T = M^{\top} M / n$.
+  The empirical second-moment matrix computed from observed entries exhibits non-random and sparse missingness. We propose an unbiased estimator that normalizes each nonzero entry of the second moment by its observed frequency, followed by gradient descent to impute the missing entries of $T$. The normalization divides a weighted sum of $n$ binomial random variables by the total number of ones. We show that the estimator is unbiased for any $p$ and enjoys low variance. When the row vectors of $M$ are drawn uniformly from a rank-$r$ factor model satisfying an incoherence condition, we prove that if $n \ge O({d r^5 ε^{-2} C^{-2} \log d})$, any local minimum of the gradient-descent objective is approximately global and recovers $T$ with error at most $ε^2$.
+  Experiments on both synthetic and real-world data validate our approach. On three MovieLens datasets, our algorithm reduces bias by $88\%$ relative to baseline estimators. We also empirically validate the linear sampling complexity of $n$ relative to $d$ on synthetic data. On an Amazon reviews dataset with sparsity $10^{-7}$, our method reduces the recovery error of $T$ by $59\%$ and $M$ by $38\%$ compared to baseline methods.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-18T01:33:48Z</published>
+    <arxiv:comment>41 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Trans. Mach. Learn. Res. 2026</arxiv:journal_ref>
+    <author>
+      <name>Hongyang R. Zhang</name>
+    </author>
+    <author>
+      <name>Zhenshuo Zhang</name>
+    </author>
+    <author>
+      <name>Huy L. Nguyen</name>
+    </author>
+    <author>
+      <name>Guanghui Lan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.19793v1</id>
+    <title>CASTER: Breaking the Cost-Performance Barrier in Multi-Agent Orchestration via Context-Aware Strategy for Task Efficient Routing</title>
+    <updated>2026-01-27T16:52:47Z</updated>
+    <link href="https://arxiv.org/abs/2601.19793v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.19793v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Graph-based Multi-Agent Systems (MAS) enable complex cyclic workflows but suffer from inefficient static model allocation, where deploying strong models uniformly wastes computation on trivial sub-tasks. We propose CASTER (Context-Aware Strategy for Task Efficient Routing), a lightweight router for dynamic model selection in graph-based MAS. CASTER employs a Dual-Signal Router that combines semantic embeddings with structural meta-features to estimate task difficulty. During training, the router self-optimizes through a Cold Start to Iterative Evolution paradigm, learning from its own routing failures via on-policy negative feedback. Experiments using LLM-as-a-Judge evaluation across Software Engineering, Data Analysis, Scientific Discovery, and Cybersecurity demonstrate that CASTER reduces inference cost by up to 72.4% compared to strong-model baselines while matching their success rates, and consistently outperforms both heuristic routing and FrugalGPT across all domains.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-27T16:52:47Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Shanyv Liu</name>
+    </author>
+    <author>
+      <name>Xuyang Yuan</name>
+    </author>
+    <author>
+      <name>Tao Chen</name>
+    </author>
+    <author>
+      <name>Zijun Zhan</name>
+    </author>
+    <author>
+      <name>Zhu Han</name>
+    </author>
+    <author>
+      <name>Danyang Zheng</name>
+    </author>
+    <author>
+      <name>Weishan Zhang</name>
+    </author>
+    <author>
+      <name>Shaohua Cao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.21844v2</id>
+    <title>Bridging Forecast Accuracy and Inventory KPIs: A Simulation-Based Software Framework</title>
+    <updated>2026-01-31T12:21:26Z</updated>
+    <link href="https://arxiv.org/abs/2601.21844v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.21844v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Efficient management of spare parts inventory is crucial in the automotive aftermarket, where demand is highly intermittent and uncertainty drives substantial cost and service risks. Forecasting is therefore central, but the quality of forecasting models should be judged not by statistical accuracy (e.g., MAE, RMSE) but rather by its impact on key operational performance indicators (KPIs), such as total cost and service level. Yet most existing work evaluates models exclusively using accuracy metrics, and the relationship between these metrics and KPIs remains poorly understood. To address this gap, we propose a decision-centric simulation software framework that enables systematic evaluation of forecasting models in realistic inventory management setting. The framework comprises: (i) a synthetic demand generator tailored to spare-parts demand characteristics, (ii) a flexible forecasting module that can host arbitrary predictive models, and (iii) an inventory control simulator that consumes the forecasts and computes operational KPIs. This closed-loop setup enables researchers to evaluate models not only in terms of statistical error but also in terms of downstream inventory implications. Using a wide range of simulation scenarios, we show that improvements in accuracy metrics do not necessarily lead to better KPIs, and that models with similar error profiles can induce different cost-service trade-offs. We analyze these discrepancies to characterize how forecast performance affects inventory outcomes and derive guidance for model selection. Overall, the framework links demand forecasting and inventory management, shifting evaluation from predictive accuracy toward operational relevance in the automotive aftermarket and related domains. An open-source implementation of the software is available at https://github.com/caisr-hh/TruckParts-Demand-Inventory-Simulator/releases/tag/IDA_2026.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-29T15:20:33Z</published>
+    <arxiv:comment>12 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>So Fukuhara</name>
+    </author>
+    <author>
+      <name>Abdallah Alabdallah</name>
+    </author>
+    <author>
+      <name>Nuwan Gunasekara</name>
+    </author>
+    <author>
+      <name>Slawomir Nowaczyk</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.16492v1</id>
+    <title>LLM-based Semantic Search for Conversational Queries in E-commerce</title>
+    <updated>2026-01-23T06:35:28Z</updated>
+    <link href="https://arxiv.org/abs/2601.16492v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.16492v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Conversational user queries are increasingly challenging traditional e-commerce platforms, whose search systems are typically optimized for keyword-based queries. We present an LLM-based semantic search framework that effectively captures user intent from conversational queries by combining domain-specific embeddings with structured filters. To address the challenge of limited labeled data, we generate synthetic data using LLMs to guide the fine-tuning of two models: an embedding model that positions semantically similar products close together in the representation space, and a generative model for converting natural language queries into structured constraints. By combining similarity-based retrieval with constraint-based filtering, our framework achieves strong precision and recall across various settings compared to baseline approaches on a real-world dataset.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-23T06:35:28Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Emad Siddiqui</name>
+    </author>
+    <author>
+      <name>Venkatesh Terikuti</name>
+    </author>
+    <author>
+      <name>Xuan Lu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.11874v1</id>
+    <title>Efficient Crawling for Scalable Web Data Acquisition (Extended Version)</title>
+    <updated>2026-02-12T12:23:53Z</updated>
+    <link href="https://arxiv.org/abs/2602.11874v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.11874v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Journalistic fact-checking, as well as social or economic research, require analyzing high-quality statistics datasets (SDs, in short). However, retrieving SD corpora at scale may be hard, inefficient, or impossible, depending on how they are published online. To improve open statistics data accessibility, we present a focused Web crawling algorithm that retrieves as many targets, i.e., resources of certain types, as possible, from a given website, in an efficient and scalable way, by crawling (much) less than the full website. We show that optimally solving this problem is intractable, and propose an approach based on reinforcement learning, namely using sleeping bandits. We propose SB-CLASSIFIER, a crawler that efficiently learns which hyperlinks lead to pages that link to many targets, based on the paths leading to the links in their enclosing webpages. Our experiments on websites with millions of webpages show that our crawler is highly efficient, delivering high fractions of a site's targets while crawling only a small part.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-12T12:23:53Z</published>
+    <arxiv:comment>Extended version of a paper published at the EDBT 2026 conference</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Antoine Gauquier</name>
+    </author>
+    <author>
+      <name>Ioana Manolescu</name>
+    </author>
+    <author>
+      <name>Pierre Senellart</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.12670v4</id>
+    <title>SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks</title>
+    <updated>2026-06-14T21:21:07Z</updated>
+    <link href="https://arxiv.org/abs/2602.12670v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.12670v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Agent Skills are structured packages of procedural knowledge that augment large language model (LLM) agents at inference time. Despite rapid adoption, there is no standard way to measure whether they actually help. We present SkillsBench, a benchmark whose current inventory contains 87 tasks across 8 domains paired with curated Skills and deterministic verifiers. Our latest aggregate evaluation runs the 87-task benchmark under matched no-Skills and curated-Skills conditions for 18 model-harness configurations. Curated Skills raise the average pass rate from 33.9% to 50.5% (+16.6 percentage points; 25.5% normalized gain), with configuration-level gains ranging from +4.1 to +25.7 pp. Focused Skills with at most three modules outperform larger or exhaustive bundles, and smaller models with Skills can match larger models without them. SkillsBench establishes paired evaluation as the foundation for rigorous measurement of Skill efficacy on agentic, expertise-heavy work.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-13T07:06:06Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Xiangyi Li</name>
+    </author>
+    <author>
+      <name>Yimin Liu</name>
+    </author>
+    <author>
+      <name>Wenbo Chen</name>
+    </author>
+    <author>
+      <name>Bingran You</name>
+    </author>
+    <author>
+      <name>Zonglin Di</name>
+    </author>
+    <author>
+      <name>Yifeng He</name>
+    </author>
+    <author>
+      <name>Shenghan Zheng</name>
+    </author>
+    <author>
+      <name>Kyoung Whan Choe</name>
+    </author>
+    <author>
+      <name>Jiankai Sun</name>
+    </author>
+    <author>
+      <name>Shuyi Wang</name>
+    </author>
+    <author>
+      <name>Chujun Tao</name>
+    </author>
+    <author>
+      <name>Binxu Li</name>
+    </author>
+    <author>
+      <name>Xuandong Zhao</name>
+    </author>
+    <author>
+      <name>Hejia Geng</name>
+    </author>
+    <author>
+      <name>Xiaojun Wu</name>
+    </author>
+    <author>
+      <name>Junwei Zhou</name>
+    </author>
+    <author>
+      <name>Xiaokun Chen</name>
+    </author>
+    <author>
+      <name>Hanwen Xing</name>
+    </author>
+    <author>
+      <name>Yubo Li</name>
+    </author>
+    <author>
+      <name>Qunhong Zeng</name>
+    </author>
+    <author>
+      <name>Di Wang</name>
+    </author>
+    <author>
+      <name>Yuanli Wang</name>
+    </author>
+    <author>
+      <name>Roey Ben Chaim</name>
+    </author>
+    <author>
+      <name>Penghao Jiang</name>
+    </author>
+    <author>
+      <name>Haotian Shen</name>
+    </author>
+    <author>
+      <name>Luyang Kong</name>
+    </author>
+    <author>
+      <name>Xinyi Liu</name>
+    </author>
+    <author>
+      <name>Runhui Wang</name>
+    </author>
+    <author>
+      <name>Xuanqing Liu</name>
+    </author>
+    <author>
+      <name>Jiachen Li</name>
+    </author>
+    <author>
+      <name>Xin Lan</name>
+    </author>
+    <author>
+      <name>Yueqian Lin</name>
+    </author>
+    <author>
+      <name>Wengao Ye</name>
+    </author>
+    <author>
+      <name>Junwei He</name>
+    </author>
+    <author>
+      <name>Songlin Li</name>
+    </author>
+    <author>
+      <name>Yue Zhang</name>
+    </author>
+    <author>
+      <name>Yipeng Gao</name>
+    </author>
+    <author>
+      <name>Yijiang Li</name>
+    </author>
+    <author>
+      <name>Ze Ma</name>
+    </author>
+    <author>
+      <name>Liqiang Jing</name>
+    </author>
+    <author>
+      <name>Tianyu Wang</name>
+    </author>
+    <author>
+      <name>Kaixin Li</name>
+    </author>
+    <author>
+      <name>Yiqi Xue</name>
+    </author>
+    <author>
+      <name>Haoran Lyu</name>
+    </author>
+    <author>
+      <name>Yizhuo He</name>
+    </author>
+    <author>
+      <name>Yuchen Tian</name>
+    </author>
+    <author>
+      <name>Shutong Wu</name>
+    </author>
+    <author>
+      <name>Bowei Wang</name>
+    </author>
+    <author>
+      <name>Yixuan Gao</name>
+    </author>
+    <author>
+      <name>Bo Chen</name>
+    </author>
+    <author>
+      <name>Litong Liu</name>
+    </author>
+    <author>
+      <name>Sikai Cheng</name>
+    </author>
+    <author>
+      <name>Jiajun Bao</name>
+    </author>
+    <author>
+      <name>Shuaicheng Tong</name>
+    </author>
+    <author>
+      <name>Shuwen Xu</name>
+    </author>
+    <author>
+      <name>Terry Yue Zhuo</name>
+    </author>
+    <author>
+      <name>Tinghan Ye</name>
+    </author>
+    <author>
+      <name>Qi Qi</name>
+    </author>
+    <author>
+      <name>Miao Li</name>
+    </author>
+    <author>
+      <name>Longtai Liao</name>
+    </author>
+    <author>
+      <name>Zelin Tan</name>
+    </author>
+    <author>
+      <name>Chang Shi</name>
+    </author>
+    <author>
+      <name>Xilin Tang</name>
+    </author>
+    <author>
+      <name>Srinath Tankasala</name>
+    </author>
+    <author>
+      <name>Boqin Yuan</name>
+    </author>
+    <author>
+      <name>Yaoyao Qian</name>
+    </author>
+    <author>
+      <name>Jianhong Tu</name>
+    </author>
+    <author>
+      <name>Chenguang Wang</name>
+    </author>
+    <author>
+      <name>Yizhou Sun</name>
+    </author>
+    <author>
+      <name>Wei Wang</name>
+    </author>
+    <author>
+      <name>Aaron Taylor</name>
+    </author>
+    <author>
+      <name>Ziyue Yang</name>
+    </author>
+    <author>
+      <name>Changkun Guan</name>
+    </author>
+    <author>
+      <name>Zhikang Dong</name>
+    </author>
+    <author>
+      <name>Xinyu Zhang</name>
+    </author>
+    <author>
+      <name>Steven Dillmann</name>
+    </author>
+    <author>
+      <name>Han-chung Lee</name>
+    </author>
+    <author>
+      <name>Dawn Song</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.14711v1</id>
+    <title>DARA: Few-shot Budget Allocation in Online Advertising via In-Context Decision Making with RL-Finetuned LLMs</title>
+    <updated>2026-01-21T06:58:44Z</updated>
+    <link href="https://arxiv.org/abs/2601.14711v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.14711v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Optimizing the advertiser's cumulative value of winning impressions under budget constraints poses a complex challenge in online advertising, under the paradigm of AI-Generated Bidding (AIGB). Advertisers often have personalized objectives but limited historical interaction data, resulting in few-shot scenarios where traditional reinforcement learning (RL) methods struggle to perform effectively. Large Language Models (LLMs) offer a promising alternative for AIGB by leveraging their in-context learning capabilities to generalize from limited data. However, they lack the numerical precision required for fine-grained optimization. To address this limitation, we introduce GRPO-Adaptive, an efficient LLM post-training strategy that enhances both reasoning and numerical precision by dynamically updating the reference policy during training. Built upon this foundation, we further propose DARA, a novel dual-phase framework that decomposes the decision-making process into two stages: a few-shot reasoner that generates initial plans via in-context prompting, and a fine-grained optimizer that refines these plans using feedback-driven reasoning. This separation allows DARA to combine LLMs' in-context learning strengths with precise adaptability required by AIGB tasks. Extensive experiments on both real-world and synthetic data environments demonstrate that our approach consistently outperforms existing baselines in terms of cumulative advertiser value under budget constraints.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-21T06:58:44Z</published>
+    <arxiv:comment>Accepted at The ACM Web Conference (WWW) 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Mingxuan Song</name>
+    </author>
+    <author>
+      <name>Yusen Huo</name>
+    </author>
+    <author>
+      <name>Bohan Zhou</name>
+    </author>
+    <author>
+      <name>Shenglin Yin</name>
+    </author>
+    <author>
+      <name>Zhen Xiao</name>
+    </author>
+    <author>
+      <name>Jieyi Long</name>
+    </author>
+    <author>
+      <name>Zhilin Zhang</name>
+    </author>
+    <author>
+      <name>Chuan Yu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.11565v1</id>
+    <title>Compass-Embedding v4: Robust Contrastive Learning for Multilingual E-commerce Embeddings</title>
+    <updated>2025-12-25T13:41:53Z</updated>
+    <link href="https://arxiv.org/abs/2601.11565v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.11565v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As global e-commerce rapidly expands into emerging markets, the lack of high-quality semantic representations for low-resource languages has become a decisive bottleneck for retrieval, recommendation, and search systems. In this work, we present Compass-Embedding v4, a high-efficiency multilingual embedding framework specifically optimized for Southeast Asian (SEA) e-commerce scenarios, where data scarcity, noisy supervision, and strict production constraints jointly challenge representation learning. Compass-Embedding v4 addresses three core challenges. First, large-batch contrastive training under mixed task supervision introduces systematic false negatives that degrade semantic alignment. We propose Class-Aware Masking (CAM), a lightweight modification to the InfoNCE objective that suppresses invalid in-batch negatives and improves semantic discrimination without altering training efficiency. Second, low-resource SEA languages suffer from limited and uneven data coverage. We construct a diversified training corpus through context-grounded synthetic data generation, cross-lingual translation, and structured e-commerce data construction, enabling robust multilingual and domain-specific learning. Third, production deployment requires high-throughput inference while preserving embedding quality. We combine robustness-driven large-batch training with spherical model merging to mitigate catastrophic forgetting, and optimize inference via vLLM and FP8 quantization. Extensive evaluations across multilingual benchmarks and proprietary e-commerce tasks show that Compass-Embedding v4 achieves state-of-the-art performance on major SEA languages, significantly outperforming general-purpose embedding models in domain-specific retrieval and classification, while maintaining competitive performance on high-resource languages.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-25T13:41:53Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Pakorn Ueareeworakul</name>
+    </author>
+    <author>
+      <name>Shuman Liu</name>
+    </author>
+    <author>
+      <name>Jinghao Feng</name>
+    </author>
+    <author>
+      <name>Ling Hu</name>
+    </author>
+    <author>
+      <name>Zhantang Shi</name>
+    </author>
+    <author>
+      <name>Chengqi Sun</name>
+    </author>
+    <author>
+      <name>Liang Yao</name>
+    </author>
+    <author>
+      <name>Panyi Ouyang</name>
+    </author>
+    <author>
+      <name>Haibo Zhang</name>
+    </author>
+    <author>
+      <name>Anxiang Zeng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.08928v1</id>
+    <title>DriftGuard: A Hierarchical Framework for Concept Drift Detection and Remediation in Supply Chain Forecasting</title>
+    <updated>2026-01-13T19:08:11Z</updated>
+    <link href="https://arxiv.org/abs/2601.08928v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.08928v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Supply chain forecasting models degrade over time as real-world conditions change. Promotions shift, consumer preferences evolve, and supply disruptions alter demand patterns, causing what is known as concept drift. This silent degradation leads to stockouts or excess inventory without triggering any system warnings. Current industry practice relies on manual monitoring and scheduled retraining every 3-6 months, which wastes computational resources during stable periods while missing rapid drift events. Existing academic methods focus narrowly on drift detection without addressing diagnosis or remediation, and they ignore the hierarchical structure inherent in supply chain data. What retailers need is an end-to-end system that detects drift early, explains its root causes, and automatically corrects affected models. We propose DriftGuard, a five-module framework that addresses the complete drift lifecycle. The system combines an ensemble of four complementary detection methods, namely error-based monitoring, statistical tests, autoencoder anomaly detection, and Cumulative Sum (CUSUM) change-point analysis, with hierarchical propagation analysis to identify exactly where drift occurs across product lines. Once detected, Shapley Additive Explanations (SHAP) analysis diagnoses the root causes, and a cost-aware retraining strategy selectively updates only the most affected models. Evaluated on over 30,000 time series from the M5 retail dataset, DriftGuard achieves 97.8% detection recall within 4.2 days and delivers up to 417 return on investment through targeted remediation.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-13T19:08:11Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Shahnawaz Alam</name>
+    </author>
+    <author>
+      <name>Mohammed Abdul Rahman</name>
+    </author>
+    <author>
+      <name>Bareera Sadeqa</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.06008v1</id>
+    <title>AgenticPay: A Multi-Agent LLM Negotiation System for Buyer-Seller Transactions</title>
+    <updated>2026-02-05T18:50:36Z</updated>
+    <link href="https://arxiv.org/abs/2602.06008v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.06008v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language model (LLM)-based agents are increasingly expected to negotiate, coordinate, and transact autonomously, yet existing benchmarks lack principled settings for evaluating language-mediated economic interaction among multiple agents. We introduce AgenticPay, a benchmark and simulation framework for multi-agent buyer-seller negotiation driven by natural language. AgenticPay models markets in which buyers and sellers possess private constraints and product-dependent valuations, and must reach agreements through multi-round linguistic negotiation rather than numeric bidding alone. The framework supports a diverse suite of over 110 tasks ranging from bilateral bargaining to many-to-many markets, with structured action extraction and metrics for feasibility, efficiency, and welfare. Benchmarking state-of-the-art proprietary and open-weight LLMs reveals substantial gaps in negotiation performance and highlights challenges in long-horizon strategic reasoning, establishing AgenticPay as a foundation for studying agentic commerce and language-based market interaction. Code and dataset are available at the link: https://github.com/SafeRL-Lab/AgenticPay.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-05T18:50:36Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Xianyang Liu</name>
+    </author>
+    <author>
+      <name>Shangding Gu</name>
+    </author>
+    <author>
+      <name>Dawn Song</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.13370v1</id>
+    <title>G2CP: A Graph-Grounded Communication Protocol for Verifiable and Efficient Multi-Agent Reasoning</title>
+    <updated>2026-02-13T13:58:57Z</updated>
+    <link href="https://arxiv.org/abs/2602.13370v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.13370v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multi-agent systems powered by Large Language Models face a critical challenge: agents communicate through natural language, leading to semantic drift, hallucination propagation, and inefficient token consumption. We propose G2CP (Graph-Grounded Communication Protocol), a structured agent communication language where messages are graph operations rather than free text. Agents exchange explicit traversal commands, subgraph fragments, and update operations over a shared knowledge graph, enabling verifiable reasoning traces and eliminating ambiguity. We validate G2CP within an industrial knowledge management system where specialized agents (Diagnostic, Procedural, Synthesis, and Ingestion) coordinate to answer complex queries. Experimental results on 500 industrial scenarios and 21 real-world maintenance cases show that G2CP reduces inter-agent communication tokens by 73%, improves task completion accuracy by 34% over free-text baselines, eliminates cascading hallucinations, and produces fully auditable reasoning chains. G2CP represents a fundamental shift from linguistic to structural communication in multi-agent systems, with implications for any domain requiring precise agent coordination. Code, data, and evaluation scripts are publicly available.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-13T13:58:57Z</published>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>Karim Ben Khaled</name>
+    </author>
+    <author>
+      <name>Davy Monticolo</name>
+    </author>
+    <arxiv:doi>10.65109/JHFW8307</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.65109/JHFW8307" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.13671v1</id>
+    <title>The Orchestration of Multi-Agent Systems: Architectures, Protocols, and Enterprise Adoption</title>
+    <updated>2026-01-20T07:13:53Z</updated>
+    <link href="https://arxiv.org/abs/2601.13671v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.13671v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Orchestrated multi-agent systems represent the next stage in the evolution of artificial intelligence, where autonomous agents collaborate through structured coordination and communication to achieve complex, shared objectives. This paper consolidates and formalizes the technical composition of such systems, presenting a unified architectural framework that integrates planning, policy enforcement, state management, and quality operations into a coherent orchestration layer. Another primary contribution of this work is the in-depth technical delineation of two complementary communication protocols - the Model Context Protocol, which standardizes how agents access external tools and contextual data, and the Agent2Agent protocol, which governs peer coordination, negotiation, and delegation. Together, these protocols establish an interoperable communication substrate that enables scalable, auditable, and policy-compliant reasoning across distributed agent collectives. Beyond protocol design, the paper details how orchestration logic, governance frameworks, and observability mechanisms collectively sustain system coherence, transparency, and accountability. By synthesizing these elements into a cohesive technical blueprint, this paper provides comprehensive treatments of orchestrated multi-agent systems - bridging conceptual architectures with implementation-ready design principles for enterprise-scale AI ecosystems.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-20T07:13:53Z</published>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>Apoorva Adimulam</name>
+    </author>
+    <author>
+      <name>Rajesh Gupta</name>
+    </author>
+    <author>
+      <name>Sumit Kumar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.05524v1</id>
+    <title>AI Agent Systems for Supply Chains: Structured Decision Prompts and Memory Retrieval</title>
+    <updated>2026-02-05T10:35:00Z</updated>
+    <link href="https://arxiv.org/abs/2602.05524v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.05524v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This study investigates large language model (LLM) -based multi-agent systems (MASs) as a promising approach to inventory management, which is a key component of supply chain management. Although these systems have gained considerable attention for their potential to address the challenges associated with typical inventory management methods, key uncertainties regarding their effectiveness persist. Specifically, it is unclear whether LLM-based MASs can consistently derive optimal ordering policies and adapt to diverse supply chain scenarios. To address these questions, we examine an LLM-based MAS with a fixed-ordering strategy prompt that encodes the stepwise processes of the problem setting and a safe-stock strategy commonly used in inventory management. Our empirical results demonstrate that, even without detailed prompt adjustments, an LLM-based MAS can determine optimal ordering decisions in a restricted scenario. To enhance adaptability, we propose a novel agent called AIM-RM, which leverages similar historical experiences through similarity matching. Our results show that AIM-RM outperforms benchmark methods across various supply chain scenarios, highlighting its robustness and adaptability.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-05T10:35:00Z</published>
+    <arxiv:comment>A full version of the extended abstract accepted by the 25th International Conference on Autonomous Agents and Multiagent Systems(AAMAS 2026)</arxiv:comment>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>Konosuke Yoshizato</name>
+    </author>
+    <author>
+      <name>Kazuma Shimizu</name>
+    </author>
+    <author>
+      <name>Ryota Higa</name>
+    </author>
+    <author>
+      <name>Takanobu Otsuka</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.12024v2</id>
+    <title>Beyond Sentiment: A Multi-Agent Pipeline for Actionable Business Advice from Reviews</title>
+    <updated>2026-05-03T08:13:27Z</updated>
+    <link href="https://arxiv.org/abs/2601.12024v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.12024v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Customer reviews contain valuable signals about service quality, but converting large-scale review corpora into actionable business recommendations remains difficult. Standard sentiment/aspect analysis is largely descriptive, while direct prompting of large language models (LLMs) often yields generic and repetitive advice that is weakly grounded in user feedback. We propose a hierarchical decision-support pipeline that explicitly separates signal compression, problem abstraction, candidate generation, objective-based evaluation, and cost-aware routing into different agents. This architectural decomposition produces auditable intermediate artifacts and enables controllable trade-offs between advice quality and token budget. Experiments on Yelp reviews from three service domains show consistent improvements over single-pass LLM baselines across multiple advice quality dimensions, including actionability, relevance, and non-redundancy. A human evaluation further indicates that users generally prefer our system's recommendations. These results highlight the value of structured agentic decomposition for scalable, cost-aware business decision support.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-17T12:07:55Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Kartikey Singh Bhandari</name>
+    </author>
+    <author>
+      <name>Tanish Jain</name>
+    </author>
+    <author>
+      <name>Archit Agrawal</name>
+    </author>
+    <author>
+      <name>Dhruv Kumar</name>
+    </author>
+    <author>
+      <name>Praveen Kumar</name>
+    </author>
+    <author>
+      <name>Pratik Narang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.00966v2</id>
+    <title>Symphony-Coord: Adaptive Routing for Multi-Agent LLM Systems</title>
+    <updated>2026-05-29T19:36:44Z</updated>
+    <link href="https://arxiv.org/abs/2602.00966v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.00966v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multi-agent large language model systems can tackle complex multi-step tasks by decomposing work and coordinating specialized behaviors. However, current coordination mechanisms typically rely on statically assigned roles and centralized controllers. As agent pools and task distributions evolve, these design choices can lead to inefficient routing, poor adaptability, and fragile fault recovery. We introduce Symphony-Coord, a task-local coordination framework with decentralized execution that transforms agent selection into an online multi-armed bandit problem. Instead of relying on a fixed task-to-role map, Symphony-Coord allows routing specializations to emerge from interaction and feedback. The framework employs a two-stage dynamic beacon protocol:(i) a lightweight candidate screening mechanism to limit communication and computation overhead; and (ii) an adaptive LinUCB selector that routes subtasks using context features derived from task requirements and agent states, updated through delayed post-execution feedback. Under candidate-conditional linear bandit assumptions, we prove sublinear regret bounds for the immediate-feedback selector and explicitly separate the deferred-update effects introduced by post-vote rewards. Validation through simulation experiments and real-world large language model benchmarks shows that Symphony-Coord improves task routing efficiency and recovery behavior under distribution shifts and agent failures.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-01T01:59:16Z</published>
+    <arxiv:comment>41 pages,15 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>Zhaoyang Guan</name>
+    </author>
+    <author>
+      <name>Huixi Cao</name>
+    </author>
+    <author>
+      <name>Ming Zhong</name>
+    </author>
+    <author>
+      <name>Yin Wang</name>
+    </author>
+    <author>
+      <name>Guanyu Liu</name>
+    </author>
+    <author>
+      <name>Eric Yang</name>
+    </author>
+    <author>
+      <name>Lynn Ai</name>
+    </author>
+    <author>
+      <name>Yongxin Ni</name>
+    </author>
+    <author>
+      <name>Bill Shi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.14849v2</id>
+    <title>Atomix: Timely, Transactional Tool Use for Reliable Agentic Workflows</title>
+    <updated>2026-05-29T14:05:41Z</updated>
+    <link href="https://arxiv.org/abs/2602.14849v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.14849v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LLM agents execute multi-step workflows that mutate external state through tools. Common orchestrators treat tool return as the settlement trigger, so faults, speculation, and concurrent agents can leave partial effects, losing-branch residue, stale writes, or irreversible sends. Correct settlement needs two facts that retries, checkpoint replay, locks, and compensation each conflate: which effects must settle together, and when earlier conflicting work is exhausted. Atomix makes this split explicit with progress-aware transactions. The runtime records reads and effects during execution, seals a transaction when its footprint is complete, and commits only after per-resource frontiers show that no earlier conflicting work can still arrive. Commit is final settlement: Atomix releases bufferable effects, accepts reversible external effects as final, and lets irreversible effects leave the gate. Abort suppresses unreleased effects and compensates externalized reversible effects where possible. On representative agent workloads, this composition improves clean recovery under injected faults, isolates contending and speculative work, and prevents correctly classified irreversible actions from leaking; microbenchmarks show microsecond-scale wrapper overhead relative to tool latency.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-16T15:46:19Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Bardia Mohammadi</name>
+    </author>
+    <author>
+      <name>Nearchos Potamitis</name>
+    </author>
+    <author>
+      <name>Lars Klein</name>
+    </author>
+    <author>
+      <name>Akhil Arora</name>
+    </author>
+    <author>
+      <name>Laurent Bindschaedler</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.16299v4</id>
+    <title>MICE: Minimal Interaction Cross-Encoders for efficient Re-ranking</title>
+    <updated>2026-08-31T11:41:38Z</updated>
+    <link href="https://arxiv.org/abs/2602.16299v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.16299v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In Information Retrieval (IR), cross-encoders deliver state-of-the-art ranking effectiveness but have a high inference cost, limiting their use to second-stage re-rankers. Prior work has addressed this bottleneck from two largely separate directions: accelerating cross-encoder inference through attention sparsification, or improving first-stage retrieval effectiveness to alleviate the need of a re-ranker, using more complex models, e.g. late-interactions. In this work, we bridge these two directions through an in-depth analysis of cross-encoder internal mechanisms. By identifying and removing superfluous interactions, we derive MICE (Minimal Interaction Cross-Encoders), a new cross-encoder architecture that retains effectiveness while reducing computational overhead. Extensive evaluations show MICE retains most of the performances of its cross-encoder counterparts in-domain and matches or even exceeds it in out-of-domain, while reducing FLOPs down to 2.5 times.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-18T09:30:29Z</published>
+    <arxiv:comment>9 pages, 5 figures. Accepted as a Main Conference paper to EMNLP 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Mathias Vast</name>
+    </author>
+    <author>
+      <name>Victor Morand</name>
+    </author>
+    <author>
+      <name>Josiane Mothe</name>
+    </author>
+    <author>
+      <name>Benjamin Piwowarski</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.07526v2</id>
+    <title>MegaFlow: Large-Scale Distributed Orchestration System for the Agentic Era</title>
+    <updated>2026-01-13T12:02:57Z</updated>
+    <link href="https://arxiv.org/abs/2601.07526v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.07526v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The rapid development of interactive and autonomous AI systems signals our entry into the agentic era. Training and evaluating agents on complex agentic tasks such as software engineering and computer use requires not only efficient model computation but also sophisticated infrastructure capable of coordinating vast agent-environment interactions. However, no open-source infrastructure can effectively support large-scale training and evaluation on such complex agentic tasks. To address this challenge, we present MegaFlow, a large-scale distributed orchestration system that enables efficient scheduling, resource allocation, and fine-grained task management for agent-environment workloads. MegaFlow abstracts agent training infrastructure into three independent services (Model Service, Agent Service, and Environment Service) that interact through unified interfaces, enabling independent scaling and flexible resource allocation across diverse agent-environment configurations. In our agent training deployments, MegaFlow successfully orchestrates tens of thousands of concurrent agent tasks while maintaining high system stability and achieving efficient resource utilization. By enabling such large-scale agent training, MegaFlow addresses a critical infrastructure gap in the emerging agentic AI landscape.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-12T13:25:33Z</published>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>Lei Zhang</name>
+    </author>
+    <author>
+      <name>Mouxiang Chen</name>
+    </author>
+    <author>
+      <name>Ruisheng Cao</name>
+    </author>
+    <author>
+      <name>Jiawei Chen</name>
+    </author>
+    <author>
+      <name>Fan Zhou</name>
+    </author>
+    <author>
+      <name>Yiheng Xu</name>
+    </author>
+    <author>
+      <name>Jiaxi Yang</name>
+    </author>
+    <author>
+      <name>Zeyao Ma</name>
+    </author>
+    <author>
+      <name>Liang Chen</name>
+    </author>
+    <author>
+      <name>Changwei Luo</name>
+    </author>
+    <author>
+      <name>Kai Zhang</name>
+    </author>
+    <author>
+      <name>Fan Yan</name>
+    </author>
+    <author>
+      <name>KaShun Shum</name>
+    </author>
+    <author>
+      <name>Jiajun Zhang</name>
+    </author>
+    <author>
+      <name>Zeyu Cui</name>
+    </author>
+    <author>
+      <name>Feng Hu</name>
+    </author>
+    <author>
+      <name>Junyang Lin</name>
+    </author>
+    <author>
+      <name>Binyuan Hui</name>
+    </author>
+    <author>
+      <name>Min Yang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.07577v1</id>
+    <title>Beyond Entangled Planning: Task-Decoupled Planning for Long-Horizon Agents</title>
+    <updated>2026-01-12T14:30:10Z</updated>
+    <link href="https://arxiv.org/abs/2601.07577v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.07577v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent advances in large language models (LLMs) have enabled agents to autonomously execute complex, long-horizon tasks, yet planning remains a primary bottleneck for reliable task execution. Existing methods typically fall into two paradigms: step-wise planning, which is reactive but often short-sighted; and one-shot planning, which generates a complete plan upfront yet is brittle to execution errors. Crucially, both paradigms suffer from entangled contexts, where the agent must reason over a monolithic history spanning multiple sub-tasks. This entanglement increases cognitive load and lets local errors propagate across otherwise independent decisions, making recovery computationally expensive. To address this, we propose Task-Decoupled Planning (TDP), a training-free framework that replaces entangled reasoning with task decoupling. TDP decomposes tasks into a directed acyclic graph (DAG) of sub-goals via a Supervisor. Using a Planner and Executor with scoped contexts, TDP confines reasoning and replanning to the active sub-task. This isolation prevents error propagation and corrects deviations locally without disrupting the workflow. Results on TravelPlanner, ScienceWorld, and HotpotQA show that TDP outperforms strong baselines while reducing token consumption by up to 82%, demonstrating that sub-task decoupling improves both robustness and efficiency for long-horizon agents.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-12T14:30:10Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Yunfan Li</name>
+    </author>
+    <author>
+      <name>Bingbing Xu</name>
+    </author>
+    <author>
+      <name>Xueyun Tian</name>
+    </author>
+    <author>
+      <name>Xiucheng Xu</name>
+    </author>
+    <author>
+      <name>Huawei Shen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.09222v2</id>
+    <title>MUZZLE: Adaptive Agentic Red-Teaming of Web Agents Against Indirect Prompt Injection Attacks</title>
+    <updated>2026-06-14T21:10:58Z</updated>
+    <link href="https://arxiv.org/abs/2602.09222v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.09222v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language model (LLM) based web agents are increasingly deployed to automate complex online tasks by directly interacting with web sites and performing actions on users' behalf. While these agents offer powerful capabilities, their design exposes them to indirect prompt injection attacks embedded in untrusted web content, enabling adversaries to hijack agent behavior and violate user intent. Despite growing awareness of this threat, existing evaluations rely on fixed attack templates, manually selected injection surfaces, or narrowly scoped scenarios, limiting their ability to capture realistic, adaptive attacks encountered in practice.
+  We present MUZZLE, an automated agentic framework for evaluating the security of web agents against indirect prompt injection attacks. MUZZLE utilizes the agent's trajectories to automatically identify high-salience injection surfaces, and adaptively generate context-aware malicious instructions that target violations of confidentiality, integrity, and availability. Unlike prior approaches, MUZZLE adapts its attack strategy based on the agent's observed execution trajectory and iteratively refines attacks using feedback from failed executions.
+  We evaluate MUZZLE across diverse web applications, user tasks, and agent configurations, demonstrating its ability to automatically and adaptively assess the security of web agents with minimal human intervention. Our results show that MUZZLE effectively discovers 44 new attacks on 4 web applications with 10 adversarial objectives that violate confidentiality, availability, or privacy properties across different LLMs and agent scaffolds. MUZZLE also identifies novel attack strategies, including 3 cross-application prompt injection attacks and an agent-tailored phishing scenario.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-09T21:46:18Z</published>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Georgios Syros</name>
+    </author>
+    <author>
+      <name>Evan Rose</name>
+    </author>
+    <author>
+      <name>Brian Grinstead</name>
+    </author>
+    <author>
+      <name>Christoph Kerschbaumer</name>
+    </author>
+    <author>
+      <name>William Robertson</name>
+    </author>
+    <author>
+      <name>Cristina Nita-Rotaru</name>
+    </author>
+    <author>
+      <name>Alina Oprea</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.07298v3</id>
+    <title>Principled Synthetic Data Enables the First Scaling Laws for LLMs in Recommendation</title>
+    <updated>2026-06-01T00:58:50Z</updated>
+    <link href="https://arxiv.org/abs/2602.07298v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.07298v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) represent a promising frontier for recommender systems, yet their development has been impeded by the absence of predictable scaling laws, which are crucial for guiding research and optimizing resource allocation. We hypothesize that this may be attributed to the inherent noise, bias, and incompleteness of raw user interaction data in prior continual pre-training (CPT) efforts. This paper introduces a novel, layered framework for generating high-quality synthetic data that circumvents such issues by creating a curated, pedagogical curriculum for the LLM. We provide powerful, direct evidence for the utility of our curriculum by showing that standard sequential models trained on our principled synthetic data significantly outperform ($+130\%$ on recall@100 for SasRec) models trained on real data in downstream ranking tasks, demonstrating its superiority for learning generalizable user preference patterns. Building on this, we empirically demonstrate, for the first time, robust power-law scaling for an LLM that is continually pre-trained on our high-quality, recommendation-specific data. Our experiments reveal consistent and predictable perplexity reduction across multiple synthetic data modalities. These findings establish a foundational methodology for reliable scaling LLM capabilities in the recommendation domain, thereby shifting the research focus from mitigating data deficiencies to leveraging high-quality, structured information.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-07T01:15:15Z</published>
+    <arxiv:comment>update according to icml reviewers feedback</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <arxiv:journal_ref>ICML 2026</arxiv:journal_ref>
+    <author>
+      <name>Benyu Zhang</name>
+    </author>
+    <author>
+      <name>Qiang Zhang</name>
+    </author>
+    <author>
+      <name>Jianpeng Cheng</name>
+    </author>
+    <author>
+      <name>Hong-You Chen</name>
+    </author>
+    <author>
+      <name>Qifei Wang</name>
+    </author>
+    <author>
+      <name>Wei Sun</name>
+    </author>
+    <author>
+      <name>Shen Li</name>
+    </author>
+    <author>
+      <name>Jia Li</name>
+    </author>
+    <author>
+      <name>Jiahao Wu</name>
+    </author>
+    <author>
+      <name>Qunshu Zhang</name>
+    </author>
+    <author>
+      <name>Neeraj Bhatia</name>
+    </author>
+    <author>
+      <name>Xiangjun Fan</name>
+    </author>
+    <author>
+      <name>Hong Yan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.23219v2</id>
+    <title>MonoScale: Scaling Multi-Agent System with Monotonic Improvement</title>
+    <updated>2026-05-20T19:24:29Z</updated>
+    <link href="https://arxiv.org/abs/2601.23219v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.23219v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In recent years, LLM-based multi-agent systems (MAS) have advanced rapidly, using a router to decompose tasks and delegate subtasks to specialized agents. A natural way to expand capability is to scale up the agent pool by continually integrating new functional agents or tool interfaces, but naive expansion can trigger performance collapse when the router cold-starts on newly added, heterogeneous, and unreliable agents. We propose MonoScale, an expansion-aware update framework that proactively generates a small set of agent-conditioned familiarization tasks, harvests evidence from both successful and failed interactions, and distills it into auditable natural-language memory to guide future routing. We formalize sequential augmentation as a contextual bandit and perform trust-region memory updates, yielding a monotonic non-decreasing performance guarantee across onboarding rounds. Experiments on GAIA and Humanity's Last Exam show stable gains as the agent pool grows, outperforming naive scale-up and strong-router fixed-pool baselines.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-30T17:44:49Z</published>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>Shuai Shao</name>
+    </author>
+    <author>
+      <name>Yixiang Liu</name>
+    </author>
+    <author>
+      <name>Bingwei Lu</name>
+    </author>
+    <author>
+      <name>Weinan Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.11733v1</id>
+    <title>Adapting Vision-Language Models for E-commerce Understanding at Scale</title>
+    <updated>2026-02-12T08:59:22Z</updated>
+    <link href="https://arxiv.org/abs/2602.11733v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.11733v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>E-commerce product understanding demands by nature, strong multimodal comprehension from text, images, and structured attributes. General-purpose Vision-Language Models (VLMs) enable generalizable multimodal latent modelling, yet there is no documented, well-known strategy for adapting them to the attribute-centric, multi-image, and noisy nature of e-commerce data, without sacrificing general performance. In this work, we show through a large-scale experimental study, how targeted adaptation of general VLMs can substantially improve e-commerce performance while preserving broad multimodal capabilities. Furthermore, we propose a novel extensive evaluation suite covering deep product understanding, strict instruction following, and dynamic attribute extraction.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-12T08:59:22Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Matteo Nulli</name>
+    </author>
+    <author>
+      <name>Vladimir Orshulevich</name>
+    </author>
+    <author>
+      <name>Tala Bazazo</name>
+    </author>
+    <author>
+      <name>Christian Herold</name>
+    </author>
+    <author>
+      <name>Michael Kozielski</name>
+    </author>
+    <author>
+      <name>Marcin Mazur</name>
+    </author>
+    <author>
+      <name>Szymon Tuzel</name>
+    </author>
+    <author>
+      <name>Cees G. M. Snoek</name>
+    </author>
+    <author>
+      <name>Seyyed Hadi Hashemi</name>
+    </author>
+    <author>
+      <name>Omar Javed</name>
+    </author>
+    <author>
+      <name>Yannick Versley</name>
+    </author>
+    <author>
+      <name>Shahram Khadivi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.22569v2</id>
+    <title>Whispers of Wealth: Red-Teaming Google's Agent Payments Protocol via Prompt Injection</title>
+    <updated>2026-05-18T21:06:40Z</updated>
+    <link href="https://arxiv.org/abs/2601.22569v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.22569v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language model (LLM) based agents are increasingly used to automate financial transactions, yet their reliance on contextual reasoning exposes payment systems to prompt-driven manipulation. The Agent Payments Protocol (AP2) aims to secure agent-led purchases through cryptographically verifiable mandates, but its practical robustness remains underexplored. In this work, we perform an AI red-teaming evaluation of AP2 and identify vulnerabilities arising from indirect and direct prompt injection. We introduce two attack techniques, the Branded Whisper Attack and the Vault Whisper Attack which manipulate product ranking and extract sensitive user data. Using a functional AP2 based shopping agent built with Gemini-2.5-Flash and the Google ADK framework, we experimentally validate that simple adversarial prompts can reliably subvert agent behavior. Our findings reveal critical weaknesses in current agentic payment architectures and highlight the need for stronger isolation and defensive safeguards in LLM-mediated financial systems.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-30T05:10:16Z</published>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Tanusree Debi</name>
+    </author>
+    <author>
+      <name>Wentian Zhu</name>
+    </author>
+    <author>
+      <name>Pranjol Sen Gupta</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.07695v2</id>
+    <title>EventCast: Hybrid Demand Forecasting in E-Commerce with LLM-Based Event Knowledge</title>
+    <updated>2026-02-11T14:52:27Z</updated>
+    <link href="https://arxiv.org/abs/2602.07695v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.07695v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Demand forecasting is a cornerstone of e-commerce operations, directly impacting inventory planning and fulfillment scheduling. However, existing forecasting systems often fail during high-impact periods such as flash sales, holiday campaigns, and sudden policy interventions, where demand patterns shift abruptly and unpredictably. In this paper, we introduce EventCast, a modular forecasting framework that integrates future event knowledge into time-series prediction. Unlike prior approaches that ignore future interventions or directly use large language models (LLMs) for numerical forecasting, EventCast leverages LLMs solely for event-driven reasoning. Unstructured business data, which covers campaigns, holiday schedules, and seller incentives, from existing operational databases, is processed by an LLM that converts it into interpretable textual summaries leveraging world knowledge for cultural nuances and novel event combinations. These summaries are fused with historical demand features within a dual-tower architecture, enabling accurate, explainable, and scalable forecasts. Deployed on real-world e-commerce scenarios spanning 4 countries of 160 regions over 10 months, EventCast achieves up to 86.9% and 97.7% improvement on MAE and MSE compared to the variant without event knowledge, and reduces MAE by up to 57.0% and MSE by 83.3% versus the best industrial baseline during event-driven periods. EventCast has deployed into real-world industrial pipelines since March 2025, offering a practical solution for improving operational decision-making in dynamic e-commerce environments.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-07T20:36:37Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Congcong Hu</name>
+    </author>
+    <author>
+      <name>Yuang Shi</name>
+    </author>
+    <author>
+      <name>Fan Huang</name>
+    </author>
+    <author>
+      <name>Yang Xiang</name>
+    </author>
+    <author>
+      <name>Zhou Ye</name>
+    </author>
+    <author>
+      <name>Ming Jin</name>
+    </author>
+    <author>
+      <name>Shiyu Wang</name>
+    </author>
+  </entry>
+</feed>

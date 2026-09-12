@@ -1,0 +1,453 @@
+{
+  "batch": "B07",
+  "assignments": [
+    {
+      "name": "thought-leadership",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "confidence": "high",
+          "from_skill": "Pre-brief PR/AR teams",
+          "from_role": "传播规划",
+          "note": "高管 POV、品类叙事与主题演讲内容由本技能策划，并预先对齐 PR/AR 口径以统一对外声音，属对外传播规划；既有映射保留。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "webinars",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "confidence": "medium",
+          "from_skill": "webinars or virtual events",
+          "from_role": "内容策划",
+          "note": "研讨会的选题、议程、演讲人 brief 与会后内容再利用属内容项目策划；技能不含投放与品牌定位，故 medium。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "whitepapers",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "confidence": "medium",
+          "from_skill": "research-heavy whitepapers",
+          "from_role": "内容策划",
+          "note": "研究型长文的论证结构、方法论、引用与图表规范属内容策划；合规声明与法务复核只是其中一步，不单独构成合规责任。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "influencer-marketing",
+      "roles": [
+        {
+          "id": "AGT-033",
+          "responsibility": "达人筛选",
+          "confidence": "high",
+          "from_skill": "finding and vetting partners",
+          "from_role": "达人筛选",
+          "note": "同一岗位的『联盟运营』（大使/联盟计划机制）与『合作复盘』（真实 ROI 测量）也由本技能覆盖，一个岗位只挂一条，故合并于此；既有映射保留。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "insights-repository-kit",
+      "roles": [
+        {
+          "id": "AGT-048",
+          "responsibility": "知识溯源",
+          "confidence": "medium",
+          "from_skill": "changelog, superseded flags",
+          "from_role": "知识溯源",
+          "note": "调研资产的元数据（persona/方法/confidence/expiry）、版本与检索治理服务知识的溯源与复用；技能是库的治理模式而非岗位能力本体，故 medium。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "market-scenario-modeler",
+      "roles": [
+        {
+          "id": "AGT-003",
+          "responsibility": "情景模拟",
+          "confidence": "high",
+          "from_skill": "Scenario Matrix",
+          "from_role": "情景模拟",
+          "note": "基准/乐观/悲观情景矩阵、敏感性分析与决策触发点即情景模拟。"
+        },
+        {
+          "id": "AGT-001",
+          "responsibility": "资源情景比较",
+          "confidence": "medium",
+          "from_skill": "required investments",
+          "from_role": "资源情景比较",
+          "note": "情景输出含投资触发点与所需投入，为资源方案的情景比较提供输入；不含现金与编制约束，故 medium。既有映射保留。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "participant-operations-hub",
+      "roles": [
+        {
+          "id": "AGT-006",
+          "responsibility": "用户访谈分析",
+          "confidence": "medium",
+          "from_skill": "调研招募、排期、同意与激励",
+          "from_role": "用户访谈分析",
+          "note": "承担访谈的运营侧（招募、筛查、排期、知情同意、激励发放与隐私隔离），是需求证据的生产管线；不做访谈内容分析，故 medium。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "research-brief-blueprint",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "市场机会评估",
+          "confidence": "medium",
+          "from_skill": "市场调研项目立项的标准模板与检查清单",
+          "from_role": "发现市场变化与尚未满足的机会",
+          "note": "简报界定要支撑的决策、样本、方法与交付物，是市场机会评估的立项前置件；不执行评估本身，故 medium。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "co-marketing-governance",
+      "roles": [
+        {
+          "id": "AGT-025",
+          "responsibility": "渠道方案",
+          "confidence": "medium",
+          "from_skill": "Planning joint campaigns",
+          "from_role": "渠道方案",
+          "note": "与伙伴的联合活动立项、审批矩阵、MDF 预算与结项复盘属渠道合作方案的可执行部分；技能为 B2B 伙伴联合营销治理，需人工复核与经销零售渠道的契合度。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "joint-solution-blueprint",
+      "roles": [
+        {
+          "id": "AGT-009",
+          "responsibility": "商业案例",
+          "confidence": "medium",
+          "from_skill": "customer outcomes, ROI proof",
+          "from_role": "商业案例",
+          "note": "合作方案的用例定义、价值叙事与 ROI 证明构成商业案例的内容；既有映射（kind=partial，材料缺专门立项模板）保留。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "partner-ecosystem-map",
+      "roles": [
+        {
+          "id": "AGT-012",
+          "responsibility": "应用生态规划",
+          "confidence": "medium",
+          "from_skill": "whitespace analysis",
+          "from_role": "应用生态规划",
+          "note": "既有映射保留：伙伴分层、区域覆盖与空白分析是『应用生态规划』的最近供给；技能对象是渠道/合作方生态而非软件模块，需人工复核。"
+        },
+        {
+          "id": "AGT-025",
+          "responsibility": "线索评估",
+          "confidence": "medium",
+          "from_skill": "partner recruitment",
+          "from_role": "线索评估",
+          "note": "待招募优先段与缺口清单即伙伴线索来源，支撑线索评估；既有映射保留。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "partner-revenue-desk",
+      "roles": [
+        {
+          "id": "AGT-025",
+          "responsibility": "渠道方案",
+          "confidence": "medium",
+          "from_skill": "MDF utilization tracker",
+          "from_role": "渠道方案",
+          "note": "伙伴来源营收口径、激励与 MDF 治理是渠道合作方案的运营执行件；既有映射保留。"
+        },
+        {
+          "id": "AGT-033",
+          "responsibility": "联盟运营",
+          "confidence": "medium",
+          "from_skill": "incentives, SPIFs",
+          "from_role": "联盟运营",
+          "note": "伙伴营收归因、激励发放与争议升级属联盟/伙伴运营；既有映射保留。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "crisis-playbooks",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "confidence": "medium",
+          "from_skill": "holding statements",
+          "from_role": "传播规划",
+          "note": "分级矩阵、升级路径、声明包与渠道时序构成危机传播预案；AGT-029 边界明写危机表态只能用已审批内容，故归此岗（对上使命与边界，非责任名逐字）。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "media-database",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "confidence": "medium",
+          "from_skill": "Building pitch lists",
+          "from_role": "传播规划",
+          "note": "记者分层、互动与禁运/同意记录是媒体关系基础设施，服务传播规划；技能本身不做发布与对外声明，故 medium。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "messaging-frameworks",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "confidence": "high",
+          "from_skill": "Message house diagram",
+          "from_role": "传播规划",
+          "note": "信息屋（headline/pillars/proof）、FAQ 与发言人要点表就是对外传播的计划件，直接承担传播规划。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "public-relations",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "confidence": "high",
+          "from_skill": "earned media",
+          "from_role": "传播规划",
+          "note": "记者拓展、选题与发布会/播客预热属赢媒体传播规划；既有映射保留。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "social-content",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "confidence": "high",
+          "from_skill": "批量生成多平台社交媒体内容",
+          "from_role": "内容策划",
+          "note": "按平台批量产出图文文案、短视频脚本与 hashtag 策略即内容策划；不产出视频/图片素材，故不挂素材生产。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "social-operations",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "confidence": "medium",
+          "from_skill": "content calendars",
+          "from_role": "内容策划",
+          "note": "内容日历、审批矩阵与发布工具箱是内容生产的计划与流程侧，归内容策划；不含内容创作本身。"
+        },
+        {
+          "id": "AGT-007",
+          "responsibility": "趋势监测",
+          "confidence": "medium",
+          "from_skill": "TikTok Creative Center",
+          "from_role": "趋势监测",
+          "note": "平台/行业/受众/创作者四路监听与趋势评分（品牌契合、人群兴趣、风险等级）支撑趋势监测；舆情看板只做品牌侧读取。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "geo-optimizer",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "站点运营",
+          "confidence": "medium",
+          "from_skill": "生成式引擎可见性",
+          "from_role": "站点运营",
+          "note": "站点侧 Product/FAQ Schema 与 AI 搜索、AI Shopping 可见性优化属独立站站点运营；不含漏斗诊断与转化实验。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "gtm-strategy-planning",
+      "roles": [
+        {
+          "id": "AGT-024",
+          "responsibility": "市场进入",
+          "confidence": "high",
+          "from_skill": "市场进入策略",
+          "from_role": "市场进入",
+          "note": "上市/市场进入/扩张战略与渠道、定价建议即市场进入责任；既有映射保留。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "jtbd-analyzer",
+      "roles": [
+        {
+          "id": "AGT-006",
+          "responsibility": "用户访谈分析",
+          "confidence": "medium",
+          "from_skill": "用户访谈记录",
+          "from_role": "用户访谈分析",
+          "note": "本技能同时服务三岗：Jobs/痛点分析供 AGT-006 的需求侧分析、情境触发因素供 AGT-010 的使用旅程、购买动机供 AGT-036 的售前需求识别；挂 3 岗故不给 high（技能本体是需求研究方法，非任一岗位的专属执行件）。以评价/访谈为输入产出 Jobs 与机会矩阵；AI persona 只能作假设，不得当真实调研证据。既有映射保留。"
+        },
+        {
+          "id": "AGT-010",
+          "responsibility": "使用旅程",
+          "confidence": "medium",
+          "from_skill": "情境触发因素",
+          "from_role": "使用旅程",
+          "note": "任务情境与触发因素是使用旅程的输入侧；技能不产出设计简报与可用性验证，故 medium。既有映射保留。"
+        },
+        {
+          "id": "AGT-036",
+          "responsibility": "需求识别",
+          "confidence": "medium",
+          "from_skill": "购买动机",
+          "from_role": "需求识别",
+          "note": "既有两条映射（选购指导/需求识别）合并为一条：技能从数据识别用户任务与购买动机，可作为售前需求识别的依据，但不面向客户实时应答，故 medium。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "llm-tech-research",
+      "roles": [
+        {
+          "id": "AGT-048",
+          "responsibility": "知识溯源",
+          "confidence": "medium",
+          "from_skill": "为每条关键信息保留可追溯证据",
+          "from_role": "知识溯源",
+          "note": "证据卡（来源类型/发布者/URL/时间/置信度）与来源分级是知识溯源机制，用于技能与 Playbook 更新；技能是外部生态情报方法，非岗位能力本体。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "mece-knowledge-extractor",
+      "roles": [
+        {
+          "id": "AGT-048",
+          "responsibility": "知识溯源",
+          "confidence": "high",
+          "from_skill": "支持血缘追溯",
+          "from_role": "知识溯源",
+          "note": "每个知识单元带 chunk_id/start_line/snippet 来源血缘，逐字对应知识溯源；并产出可复用知识单元库供岗位能力使用。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "seo-controller",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "站点运营",
+          "confidence": "medium",
+          "from_skill": "为跨境电商独立站提供完整SEO整合方案",
+          "from_role": "站点运营",
+          "note": "技术审计/内容/竞品/多语言/GEO 五模块统筹产出独立站 SEO 整合方案，属站点运营；不承担 Amazon Listing 与广告投放。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "skill-optimizer",
+      "roles": [
+        {
+          "id": "AGT-048",
+          "responsibility": "Playbook评估",
+          "confidence": "medium",
+          "from_skill": "结构化评估报告",
+          "from_role": "Playbook评估",
+          "note": "以结构化评估报告为依据执行修复与版本改进，支撑 Playbook 评估之后的岗位能力更新；评估本身由 lute-skills-eval 生成，故 medium。既有映射保留。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    }
+  ]
+}

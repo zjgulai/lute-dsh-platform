@@ -2,6 +2,47 @@
 
 本项目遵循语义化版本，版本号 = git tag = 打包版本（1.x 序列；历史 v0.1.0 视为早期实验）。
 
+## [2.2.0] - 2026-09-12（出货面最小闭环 + 输入框下方能力导引）
+
+决策留痕：[ADR-0056](docs/adr/ADR-0056.md) · Note [2026-09-12-shipping-surface](docs/notes/implemented/architecture/2026-09-12-shipping-surface.md)、
+[2026-09-12-packaging-surface-hardening](docs/notes/implemented/architecture/2026-09-12-packaging-surface-hardening.md)。
+
+### 出货面（打包 / 安装 / 门禁）
+- **跨项目依赖移出产品面**：`dsh-kol-hunter-local` 从 profile 依赖与 bundles 移除（ADR-0033「本仓库不吞并产品代码」）。
+  出货 profile 里的 `/Users/lute/project/KOL-Hunter` 绝对路径随之消失（该路径此前三处失守：vendor 抽取、`rewrite-file-deps` 前缀、`--check` 存在性判据）。
+- **RootOutlet 白屏兜底进打包面（P0-9）**：该守卫原先只存在于开发机 `/Applications` 的 app 上，源码构建路径（`BASE=source`）发的是 pristine（`throw`）——**客户机的白屏兜底一直是缺的**。
+  本次固化为 NM 补丁 + 锚点登记，`verify-patches-v2` 锚点 35→36。
+- **技能交付面 1611 → 539**：只随包「被 preset / 仓库映射引用」的技能，并剔除受限许可（PolyForm Noncommercial）。
+  选择在打包时现算（`scripts/select-skills.mjs`），不存第二份清单（ADR-0009）。
+- **内部取证材料不随包**：`dsh-patches/` 整体退出出货 profile，只留校验 / 品牌 / 重写工具（决策 K10）。
+- **机器路径守卫**：新增 `packaging/scripts/scan-machine-paths.mjs` + 只减不增基线，出货面出现新的构建机绝对路径即中止。
+- **校验面修正**：冒烟断言改为布局无关（归组后的嵌套 vendor 对正确产物不再假红）；新增 `staging-freshness`（陈旧产物即红）；
+  补丁锚点校验扩到打包面（`staging/*/app`）；安装器三处校验改为「收集失败 + 非零退出」（不再被 `|| true` 吞掉）；
+  DMG 构建互斥锁移出 `release/`；升级前清点并保留自装插件清单；v1 校验脚本退役、不随包。
+
+### 产品面
+- **输入框下方能力导引**：移除输入框上方两胶囊；下方以横向列展示所选岗位的能力层级（列＝业务技能组，卡＝供给，边界如实标注）。
+  数据由宿主路由现读现投影（ADR-0053），点击卡片经官方 `conversation.input.shell(id).actions.setDraft` 预填。
+
+### 门禁
+- `pnpm run gate` 17/17、`pnpm run gate:full` 22/22（新增 `profile-bundle-sync`、`patch-anchors` 的打包面目标、`staging-freshness`）。
+
+## [2.0.0] - 2026-09-10（DSH 基座 2.0.4→2.0.5 / runtime 0.1.2-rc.1 大版本迁移）
+
+### 基座迁移
+- 35 补丁全量重锚（verify-patches-v2 35 锚点 ALL VERIFIED）+ 品牌重放 ALL VERIFIED（含 Electron Helper 重命名回归修复）
+- 30 bundles rc 化：6 生态插件最新版 + 16 本地 + 8 无依赖升级（pocket/im/modlens/modsearch/git-graph）
+- P0-7v2/v2c 首启兜底 + setup-wizard 免向导（含发货级卡死修复：全新用户环境首启 healthy）
+- dsh-overseas-skills files 清单修复（PR #1，全新安装整树失败）
+
+### 打包与发布
+- 流水线全套适配 2.0.5（assemble/brand-replay/smoke/rewrite/install，dmg+pkg 双格式 + SHA256 校验清单 + 构建竞态锁）
+- 验证：smoke 37/37、打包产物真实启动 healthy、升级场景端到端（数据保留）
+
+### 文档与研究
+- docs/research/01-10 全链（基座盘点/上游侦察/差距分析/升级方案/验证矩阵/rc-eval 手册/补丁登记/复盘/四维审计/债务方案）
+- ADR-0005（rc.1 迁移立项）/ ADR-0006（上游跟进策略）/ 灰度发布 SOP
+
 ## [1.2.2] - 2026-09-09（request extension 修复 + 品牌 app 图标）
 
 ### 修复（客户真机报障）

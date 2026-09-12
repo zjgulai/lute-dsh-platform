@@ -1,0 +1,1339 @@
+id	src_domain	title	body_chars
+Skill-3D-Bin-Packing-Optimization	18-物流履约	3D Bin Packing Optimization — 3D 装箱优化：集装箱/货架空间利用率最大化	2293
+Skill-A-MEM-Agentic-Memory-System	16-智能体工程	A-MEM — 动态结构化Agent记忆系统	3398
+Skill-A-Plus-Content-Template-Engine	20-AI视频生成	A+Content模板引擎 — VOC驱动的A+内容自动排版生成	2701
+Skill-A-Plus-Content-Video-Embedding	20-AI视频生成	Skill-A-Plus-Content-Video-Embedding — A+ 内容视频嵌入转化率优化	3212
+Skill-A9-Algorithm-Sales-Velocity-Optimization	25-搜索流量工程	Skill-A9-Algorithm-Sales-Velocity-Optimization — A9 算法销量速度优化	3400
+Skill-AB-Experimental-Design	02-A_B实验	Skill: A/B 实验设计基础	986
+Skill-AB-Test-Logistics-SLA	02-A_B实验	物流 SLA A/B 实验因果效应评估 — 承诺变化对复购率的因果识别	3377
+Skill-AB-Test-Result-Interpretation	02-A_B实验	A/B Test Result Interpretation and Practical Significance	2446
+Skill-AB-Testing-Platform-Infrastructure	02-A_B实验	AB Testing Platform Infrastructure — A/B 实验平台基础设施：可扩展的在线实验框架	2547
+Skill-AB-Variance-Downstream	02-A_B实验	AB-Variance-Downstream — AI 辅助方差缩减在电商多场景的下游应用	2696
+Skill-AGRS-Aspect-Guided-Review-Summarization	14-用户分析	AGRS 属性引导评论摘要 - 大规模零幻觉 Review 摘要 pipeline	4049
+Skill-AI-Algorithmic-Bias-Audit	11-AI人文	AI Algorithmic Bias Audit — AI 算法偏见审计：跨境电商推荐公平性检测	3547
+Skill-AI-Brand-Storytelling	11-AI人文	AI Brand Storytelling — AI 辅助品牌故事创作：情感连接与文化适应	1583
+Skill-AI-Carbon-Footprint-Optimizer	11-AI人文	母婴出海AI碳足迹优化器 — 绿色供应链的能耗与排放量化	1863
+Skill-AI-Consumer-Wellbeing-Ethics	11-AI人文	AI Consumer Wellbeing Ethics — 消费者福祉与 AI 伦理：母婴场景	1605
+Skill-AI-Content-Marketing-Growth	11-AI人文	AI内容营销增长 — AIGC驱动的内容→用户增长因果链路	4185
+Skill-AI-Cultural-Sensitivity-Localization	11-AI人文	AI Cultural Sensitivity Localization — AI文化敏感性本地化评估（跨市场内容风险）	2005
+Skill-AI-Ethics-Fairness-Audit	11-AI人文	AI 公平性审计 — 推荐/定价/广告系统偏差溯源与修复	3569
+Skill-AI-Explainability-Consumer-Trust	11-AI人文	AI Explainability for Consumer Trust — AI 推荐可解释性：消费者信任构建	2481
+Skill-AI-Fake-Review-Detection	11-AI人文	AI Fake Review Detection — 多模态虚假评论检测与可解释风控	2751
+Skill-AI-Generated-Content-Detection	11-AI人文	AI 生成内容检测 — Perplexity/Burstiness 统计特征分类器	3299
+Skill-AI-Generated-Content-Watermarking	11-AI人文	AIGC数字水印与内容溯源 — DCT不可见水印嵌入与版权追踪	3367
+Skill-AI-Humanities-Healing-Cards	11-AI人文	AI情感陪伴 × 母婴育儿焦虑缓解决策卡片库	1338
+Skill-AI-Parenting-Advice-Hallucination-Guard	11-AI人文	AI Parenting Advice Hallucination Guard — AI育儿建议幻觉防护（LLM医疗内容安全）	1779
+Skill-AI-Product-Safety-Certification	21-合规决策	AI Product Safety Certification — AI驱动产品安全认证自动化：从测试报告解析到合规路径规划	2628
+Skill-AI-Product-Video-Script-Generator	20-AI视频生成	Skill-AI-Product-Video-Script-Generator — AI 母婴产品视频脚本自动生成	3148
+Skill-AI-Social-Impact-Measurement	11-AI人文	AI Social Impact Measurement	4140
+Skill-AI-Transparency-Explanation	11-AI人文	AI决策透明度与可解释性 — LIME/SHAP合规说明生成	3387
+Skill-AI-Video-AB-Test-Creative	20-AI视频生成	AI Video AB Test Creative — AI视频素材A/B测试（广告创意自动化迭代优化）	904
+Skill-AI-Video-Script-Generation	20-AI视频生成	AI Video Script Generation — 分层 CoT 电商短视频脚本自动生成	2461
+Skill-AIGC-Authenticity-Trust-Framework	11-AI人文	AIGC Authenticity Trust Framework — 图文双轨 AIGC 真实性检测与消费者信任管理	3166
+Skill-AIGC-Content-Compliance-Review	21-合规决策	AI生成内容合规审查 — 图文/视频虚假宣传自动检测	2666
+Skill-AIGC-Content-Detection	11-AI人文	AIGC Content Detection — AI生成内容鉴别：母婴评论真实性保护	1526
+Skill-AIGC-Copyright-Revenue-Sharing	11-AI人文	AIGC版权分配 — AI生成内容的创作者收益模型	3368
+Skill-AIGC-Revenue-Attribution	11-AI人文	AIGC Revenue Attribution — AI内容生成 ROI 财务归因：从内容投入到 GMV 的量化路径	3571
+Skill-AIGP-LLM-Dynamic-Pricing	17-价格优化	AIGP — LLM 动态定价：长期 GMV 对齐框架（+13% GMV A/B实测）	2816
+Skill-AIM-RM-LLM-Inventory-MAS-Memory	10-MAS	AIM-RM — LLM 多 Agent 库存管理：历史经验相似匹配	2729
+Skill-AR-Logistics-Visualization	18-物流履约	AR Logistics Visualization — 增强现实包裹可视化追踪：跨境物流透明化与客服AI视频答复	2214
+Skill-ARES-RAG-Evaluation	08-知识图谱	ARES — 自动化RAG系统评测框架	3093
+Skill-ARIMA-GARCH-Demand-Volatility	03-时间序列	ARIMA-GARCH Demand Volatility — 需求波动率预测（不确定性区间建模）	1342
+Skill-ATLAS-Gradient-Free-Continual	16-智能体工程	ATLAS — 梯度无关持续学习：Teacher-Student 双架构在线适应	2940
+Skill-ATLAS-HTS-Tariff-Classification	04-供应链	ATLAS HTS Tariff Classification — LLM 驱动跨境 HS 关税编码自动分类	3841
+Skill-ATO-Spatio-Temporal-Graph	19-风控反欺诈	账号盗用时空图检测 — GraphSAGE+因果标签传播	2766
+Skill-Abandoned-Cart-Recovery-ML	14-用户分析	Abandoned Cart Recovery ML — 弃购挽回机器学习：预测意图×序列触达×个性化优惠	3053
+Skill-Abandoned-Cart-Recovery-Trigger	14-用户分析	Abandoned-Cart-Recovery-Trigger — 加购未购超时自动触发个性化挽回序列	3437
+Skill-Account-Association-Risk-Detection	19-风控反欺诈	Account Association Risk Detection — 电商多账户关联风险检测	4135
+Skill-Account-Fingerprint-Risk-Scorer	19-风控反欺诈	账号指纹风险评分器 — 量化多账号关联被检测风险	2933
+Skill-Account-Health-Early-Warning-System	19-风控反欺诈	账号健康预警系统 — ODR/LSR/VTR多指标趋势监控与早期预警	2787
+Skill-Account-Health-Proactive-Monitor	19-风控反欺诈	Account Health Proactive Monitor — 账号健康主动监控：从被动处罚到提前预防	3236
+Skill-Accounts-Receivable-Intelligence	23-运营财务	Accounts Receivable Intelligence — 账期智能管理：跨境应收账款预测与催收优化	3085
+Skill-Active-Context-Pruning	16-智能体工程	仿生粘菌主动上下文剪枝 — Focus Agent 自主压缩架构	2627
+Skill-Active-Learning-Annotation	12-ML基础	Active Learning Annotation — 主动学习标注策略（最小标注成本最大化模型性能）	2835
+Skill-Ad-Attribution-Modeling	13-广告分析	Multi-Touch Attribution Modeling for Digital Advertising	2587
+Skill-Ad-Aware-Recommendation	05-推荐系统	Ad-Aware Recommendation — 广告感知协同排序：有机推荐与赞助商品的联合优化	2138
+Skill-Ad-Creative-Personalization-Bandit	13-广告分析	Ad Creative Personalization Bandit — 上下文 Bandit 动态为不同人群选最优广告创意	3119
+Skill-Ad-Fraud-IVT-Detection	19-风控反欺诈	Ad Fraud IVT Detection — 行为图 + GNN 无效流量实时检测	3579
+Skill-Ad-Spend-Inventory-Sync	13-广告分析	Ad Spend Inventory Sync — 广告投放与库存联动的协同优化	3090
+Skill-Ad-Spend-Time-Series-Attribution	13-广告分析	Ad Spend Time Series Attribution — Adstock 衰减 + 因果 MMM 广告效果归因	2903
+Skill-Ad-to-Behavior-Funnel	13-广告分析	Ad-to-Behavior Funnel（广告→用户行为漏斗）	1949
+Skill-AdaCtx-Dynamic-Context-Budget-Allocation	10-MAS	AdaCtx动态上下文预算分配 — 子Agent间Token预算自适应调度与边际价值追踪	3796
+Skill-Adaptive-Crawl-Scheduling	22-数据采集工程	Adaptive Crawl Scheduling — 自适应爬取调度：Sleeping Bandit + 神经质量优先级	2895
+Skill-Adaptive-Experiment-Design	02-A_B实验	Adaptive Experiment Design — 自适应实验设计（提前停止与样本再分配）	2810
+Skill-Adaptive-Forecast-Accuracy-Optimization	03-时间序列	Adaptive Forecast Accuracy Optimization — 自适应预测精准化：滚动误差修正驱动库存精度	3169
+Skill-Adaptive-RAG-Query-Routing	08-知识图谱	Adaptive-RAG — 自适应查询复杂度路由	3275
+Skill-Adaptive-Reorder-Point-Kalman	04-供应链	自适应补货点 Kalman 版 — 让 ROP 随市场需求动态漂移	2837
+Skill-Advertising-API-Unified-Schema	22-数据采集工程	Advertising API Unified Schema — 多平台广告统一数据模型（Amazon/Meta/TikTok/Google）	3296
+Skill-Advertising-TACOS-PnL-Integration	23-运营财务	Skill-Advertising-TACOS-PnL-Integration — 广告TACoS与P&L集成	2667
+Skill-Affective-Computing-Maternal-Anxiety	11-AI人文	情感计算×母婴焦虑 — 多模态情绪识别与干预	3739
+Skill-AgeMem-Unified-Agent-Memory	16-智能体工程	AgeMem — LTM+STM 统一 Agent 记忆：RL 自适应管理跨会话知识	2881
+Skill-AgenTracer-MAS-Failure-Attribution	10-MAS	AgenTracer多智能体故障归因 — 反事实回放+故障注入定位MAS决策性错误步骤	3540
+Skill-Agent-Capability-Evaluation	09-DataAgent-LLM	Agent能力评估基准 — 任务完成率与工具调用准确率评测	2854
+Skill-Agent-Cost-Optimization-Budget-Control	16-智能体工程	Agent 成本优化与预算管控 — 让 LLM Agent 可持续运行的 Token 经济学	3333
+Skill-Agent-Decision-Confidence-Threshold	16-智能体工程	Agent 置信度决策门控 — 高置信自动执行，低置信升级人工，防止 AI 乱操作	2885
+Skill-Agent-Error-Budget	16-智能体工程	Agent Error Budget — 双向错误预算：自主权随可靠性动态调整	2606
+Skill-Agent-Fault-Tolerance	16-智能体工程	Skill Card: Agent 容错回退机制	2762
+Skill-Agent-Finance-Autopilot	23-运营财务	Agent Finance Autopilot — LLM 多 Agent 财务自动化与 P&L 实时分析	2864
+Skill-Agent-Knowledge-Distillation-SOP	16-智能体工程	企业 SOP 蒸馏进 Agent — 让 AI 掌握老运营经验的知识蒸馏框架	3299
+Skill-Agent-Memory-KV-Store	09-DataAgent-LLM	Agent 长期记忆 KV 存储设计 — 跨会话业务上下文保持	2350
+Skill-Agent-Memory-Learning	10-MAS	MemGPT — 长期记忆与虚拟上下文管理	712
+Skill-Agent-Observability-Tracing	16-智能体工程	Agent Observability Tracing — AI Agent 可观测性追踪：生产环境全链路监控	2717
+Skill-Agent-Payment-Security-Red-Team	16-智能体工程	Whispers of Wealth — Agent 支付协议安全红队：Branded/Vault Whisper 攻击	2240
+Skill-Agent-Production-Engineering	10-MAS	Skill Card: Agent Production Engineering（Agent 生产化工程）	3072
+Skill-Agent-QMix-Topology-Learning	10-MAS	Agent Q-Mix — MARL 学习最优 MAS 通信拓扑（QMIX 值分解）	2660
+Skill-Agent-ROI-Measurement-Framework	16-智能体工程	Agent ROI 测量框架 — 量化 AI Agent 实际商业价值的三维评估体系	3014
+Skill-Agent-Registry-Discovery	10-MAS	Agent Registry & Discovery — 动态 Agent 能力注册与路由	2943
+Skill-Agent-SLO-Manager	16-智能体工程	Agent SLO Manager — 三层 SLI 体系：服务/任务/判断质量	2401
+Skill-Agent-Safety-Guardrails	16-智能体工程	Agent Safety Guardrails（Agent 安全对抗护栏）	3636
+Skill-Agent-Skill-Runtime-Orchestrator	16-智能体工程	Agent Skill Runtime Orchestrator — 运行时动态选取并执行 Skill 的编排框架	2483
+Skill-Agent-Stage-Evaluation	16-智能体工程	EComStage — 电商 Agent 三阶段(Perception/Planning/Action)双向 Benchmark	2001
+Skill-Agent-Time-Series-Forecasting	16-智能体工程	Agent时序预测 — 智能体驱动的自适应需求预测工作流	3839
+Skill-Agent-Workforce-Replacement-Calculator	16-智能体工程	AI Agent 人力替代计算器 — 量化哪些运营岗位可被 Agent 替代及 ROI	2810
+Skill-AgentRouter-KG-Guided	08-知识图谱	AgentRouter — 知识图谱引导的多智能体路由器	2824
+Skill-AgentTrace-Causal-RCA	16-智能体工程	AgentTrace — 因果图根因分析：0.12s 定位多 Agent 故障	3006
+Skill-AgentTrust-Runtime-Safety-Interception	16-智能体工程	AgentTrust — 运行时安全拦截：95% 准确率，< 1ms，MCP 集成	2333
+Skill-Agentic-AB-Testing	02-A_B实验	Agentic AB Testing — AI Agent 驱动 A/B 实验：假设→设计→解读→决策	1452
+Skill-Agentic-Competitor-Intelligence	09-DataAgent-LLM	Agent 自动化竞品情报采集与分析 — Amazon/TikTok 全渠道监控	2773
+Skill-Agentic-ETL-Data-Pipeline	09-DataAgent-LLM	Agentic ETL数据管道 — LLM驱动的自动化数据清洗与转换	4204
+Skill-Agentic-Memory-Management	16-智能体工程	AgeMem — 统一 LTM+STM 管理的 Agentic Memory	2750
+Skill-Agentic-PnL-Analyst	09-DataAgent-LLM	Agent 驱动的 P&L 归因分析 — SKU 级成本拆解	2352
+Skill-Agentic-RAG-2025-Framework	08-知识图谱	Skill-Agentic-RAG-2025-Framework	643
+Skill-Agentic-RAG-Active-Retrieval	09-DataAgent-LLM	Agentic RAG主动检索 — 自主规划多轮检索的知识增强Agent	4036
+Skill-Agentic-SCKG-Risk	08-知识图谱	Agentic SCKG Risk Analyzer — 供应链知识图谱智能风险分析框架	4001
+Skill-Agentic-Workflow-Compilation	16-智能体工程	Subterranean Agent — 将工作流 SOP 编译进 LLM 权重	2982
+Skill-AgenticPay-Procurement-Negotiation	10-MAS	AgenticPay — LLM 多 Agent 采购谈判：自主完成价格与 MOQ 协商	2746
+Skill-Algorithmic-Accountability-Audit	11-AI人文	Algorithmic Accountability Audit — 算法问责审计（推荐系统可解释性合规报告）	1902
+Skill-Algorithmic-Fairness-in-Pricing	11-AI人文	算法定价公平性审计 — 群体公平指标与价格歧视检测	3005
+Skill-AlphaFold-Bin-Packing	04-供应链	蛋白质折叠启发的异形 SKU 极限装箱 (AlphaFold Bin-Packing)	787
+Skill-Amazon-A10-Algorithm-Ranking	13-广告分析	Amazon A10 Algorithm Ranking — 亚马逊搜索排名因子建模与 Listing 可见度优化	2835
+Skill-Amazon-Account-Appeal-Strategy	21-合规决策	Amazon 账号申诉策略（POA 行动计划）	2734
+Skill-Amazon-Compliance-Error-Auto-Resolver	21-合规决策	Amazon Compliance Error Auto-Resolver — 合规错误码语义解析与修复自动化	3504
+Skill-Amazon-External-Traffic-Boost	13-广告分析	Amazon External Traffic Boost — 站外流量对 A10 排名速度的提升效应建模	2472
+Skill-Amazon-Lending-Decision	23-运营财务	Amazon Lending Decision — 电商平台卖家信用评估与融资决策	3696
+Skill-Amazon-Payment-Cycle-Forecast	23-运营财务	Amazon Payment Cycle Forecast — Amazon 回款周期预测与现金流规划	3503
+Skill-Amazon-SP-API-Data-Pipeline	22-数据采集工程	Amazon SP-API Data Pipeline — 增量采集标准化管道（订单/库存/财务报告）	3102
+Skill-Amazon-Search-Ranking-Factor-Model	25-搜索流量工程	Amazon 搜索排名因子权重建模 — 用 LightGBM+SHAP 解构 A9/A10 算法	3271
+Skill-Amazon-ToS-Compliance-Guardrail	13-广告分析	Amazon ToS Compliance Guardrail（亚马逊合规护栏）	3856
+Skill-AnchorCrafter-Virtual-Anchor-Demo	20-AI视频生成	AnchorCrafter — Virtual Anchor Product Demo（虚拟主播带货视频生成）	3584
+Skill-Anchoring-Effect-Pricing-Optimization	17-价格优化	锚定效应定价优化 — 划线原价最优锚定比率让相同折扣感知价值提升25%	3443
+Skill-Anomaly-Detection-Foundation-Model	19-风控反欺诈	Anomaly Detection Foundation Model — 异常检测基础模型：零样本时序异常感知	2716
+Skill-Aquarius-Brand-Video-Generation	20-AI视频生成	Aquarius — Brand Video Generation（品牌营销视频生成）	2989
+Skill-Argos-Agentic-Anomaly-Detection	09-DataAgent-LLM	Argos — Agentic时序异常检测	1898
+Skill-Atomix-Transactional-Tool-Calls	16-智能体工程	Atomix — Agent 工具调用事务性：故障注入成功率 0-7% → 37-57%	2784
+Skill-Auction-Theory-Advertising-Bidding	13-广告分析	拍卖理论广告竞价优化 — GSP 拍卖机制下的最优出价策略	3787
+Skill-Audience-Knowledge-Graph	08-知识图谱	Skill Card: Audience Knowledge Graph（广告受众知识图谱）	2756
+Skill-Augmented-Synthetic-Control-ML	01-因果推断	Augmented Synthetic Control — 机器学习增强的合成控制法	3726
+Skill-Auto-Skill-Synthesis	16-智能体工程	SkillForge — 领域特定自演化 Agent Skill 萃取与优化	2677
+Skill-Auto-Tagging-Pipeline-Rule-ML-LLM	24-标签工程	三层自动打标流水线 — 规则引擎+ML分类器+LLM抽取的混合置信度打标体系	3274
+Skill-AutoGen-Multi-Agent-Conversation	10-MAS	AutoGen — 多智能体对话编排框架	2651
+Skill-AutoML-Pipeline-Design	12-ML基础	AutoML 流水线设计 — Optuna TPE + FLAML 自动化建模	3397
+Skill-AutoPKG-Multimodal-Product-Attribute-KG	08-知识图谱	AutoPKG — 多模态产品属性图谱自动构建：文本+图片→GMV提升	3147
+Skill-AutoQual-Review-Quality-Assessment	14-用户分析	AutoQual Review Quality Assessment — LLM Agent 自动化评论质量评估	4245
+Skill-AutoSkill-Lifelong-Learning	16-智能体工程	AutoSkill — 经验驱动终身学习：Skill 自进化版本管理	2700
+Skill-Autobidding-Budget-Allocation-Optimization	13-广告分析	自动化竞价与预算动态分配 — 跨平台广告Autobidding与ROI约束下的预算优化	3003
+Skill-Automated-Causal-Discovery	01-因果推断	Automated Causal Discovery — 自动化因果发现：从数据自动识别业务驱动因素	3139
+Skill-Automated-Replenishment-Decision-Engine	04-供应链	Automated Replenishment Decision Engine — 备货决策自动化引擎：从规则到智能补货	3048
+Skill-Autonomous-AB-Report-Agent	09-DataAgent-LLM	Agent 自动生成 AB 实验分析报告 — 含统计检验解读	2418
+Skill-B2C-Delivery-Timeliness-Experience-KPI	04-供应链	B2C配送时效与体验KPI体系 — 配送及时率/消费者满意度/NPS的量化监控与提升	3348
+Skill-BCCB-Causal-Bandits	02-A_B实验	预算约束因果Bandit - 新渠道从Day1开始的转化率估计	2954
+Skill-BERT-SRL-Event-Frame-Extraction	07-NLP-VOC	&#x27;Skill: BERT-SRL + 事件框架 — 母婴出海评论语义结构化抽取&#x27;	3228
+Skill-BERTopic-Neural-Topic-Modeling	07-NLP-VOC	BERTopic — 神经主题模型与动态知识分类	3274
+Skill-BGE-M3-Multilingual-Embedding	08-知识图谱	Skill-BGE-M3-Multilingual-Embedding	2689
+Skill-BOM-Cost-Rollup-Tag-Engine	04-供应链	BOM成本卷积标签引擎 — 从原材料到制成品的全层级成本精算与Tag驱动	2579
+Skill-Baby-Age-Aware-Recommendation	05-推荐系统	Baby Age Aware Recommendation — 基于推断婴儿月龄的实时品类推荐动态切换	3184
+Skill-Baby-Age-Clock-RFM-Enhancement	14-用户分析	Baby Age Clock RFM Enhancement — 从购买品类序列推断婴儿月龄，扩展 RFM 的第四时间维度	3177
+Skill-Baby-Age-Stage-Demand-Segmentation	07-NLP-VOC	Skill-Baby-Age-Stage-Demand-Segmentation — 婴儿月龄需求分层	2995
+Skill-Baby-Food-Allergen-Label-Validator	21-合规决策	婴儿食品过敏原标签验证器 — FALCPA/FASTER Act九大过敏原自动合规校验	5830
+Skill-Bass-Diffusion-New-Product-Forecasting	06-增长模型	GEANN + Bass 新品冷启动需求预测 - 母婴跨境新品备货	3836
+Skill-Bayesian-AB-Testing	02-A_B实验	贝叶斯A/B实验 — 小样本快速决策的概率推断框架	3641
+Skill-Bayesian-Hyperparameter-Optimization	12-ML基础	贝叶斯超参搜索 — Optuna/BO 替代随机搜索	3196
+Skill-Bayesian-MMM-Action-Plan-Generator	15-营销投放分析	Bayesian MMM Action Plan Generator — 贝叶斯后验分布生成保守/中性/激进三版预算方案	3104
+Skill-Bayesian-MMM-Scenario-Action-Plan	15-营销投放分析	Bayesian-MMM-Scenario-Action-Plan — 贝叶斯MMM后验驱动Q+1季度预算三情景决策方案	3182
+Skill-Bayesian-Structural-Time-Series	03-时间序列	Bayesian Structural Time Series — 贝叶斯结构时间序列分离促销/季节/趋势效应	1920
+Skill-Black-Swan-Scenario-Simulation-Tag	24-标签工程	黑天鹅情景模拟标签 — 极端事件供应链压力测试与预案激活机制	2774
+Skill-BlockEcho-Missing-Data	14-用户分析	块缺失数据补全 - 整段流量数据丢失时的恢复	2383
+Skill-Blue-Ocean-Category-Discovery	06-增长模型	Blue Ocean Category Discovery — AI 驱动的蓝海品类机会识别与先验测试	4228
+Skill-Bonded-Warehouse-Inventory-Intelligence	18-物流履约	保税仓智能库存 — 监管合规×资金效率双优化	3440
+Skill-Bonded-Zone-Compliance-Auto	18-物流履约	Bonded Zone Compliance Auto — 保税区合规自动化（保税仓入出区监管）	842
+Skill-Brand-Defense-Search-Strategy	25-搜索流量工程	品牌词防守策略 — 品牌词投放防竞品截流与自然排名协同	3210
+Skill-Brand-Hijacking-Realtime-Monitor	19-风控反欺诈	Buy Box劫持实时监控 — 品牌跟卖检测与自动预警	2811
+Skill-Brand-Keyword-Hijack-Alert	25-搜索流量工程	Brand-Keyword-Hijack-Alert — 品牌词搜索下竞品展示份额超30%触发品牌防守广告扩展	3167
+Skill-Brand-Listing-Hijacking-Detection	19-风控反欺诈	Brand Listing Hijacking Detection — 电商品牌 Listing 劫持网络检测	3798
+Skill-Brand-Penetration-Modeling	15-营销投放分析	Brand Penetration Modeling — 品牌渗透率建模：Bass 扩散 × 跨市场品牌增长预测	2818
+Skill-Brand-Registry-Infringement-Tracker	19-风控反欺诈	Brand Registry Infringement Tracker — 品牌注册侵权追踪自动监控 EUIPO/USPTO	2003
+Skill-Brand-Safety-Video-Content-Filter	20-AI视频生成	Skill-Brand-Safety-Video-Content-Filter — 品牌安全视频内容过滤	3588
+Skill-Brand-Video-Generation	20-AI视频生成	Brand Video Generation — AI品牌视频生成：从文本/图像到高保真营销视频的全链路技术	2436
+Skill-BrandFusion-Multi-Agent	20-AI视频生成	BrandFusion — Multi-Agent Brand Integration（品牌无缝植入视频）	3044
+Skill-Budget-Reforecast-Rolling	23-运营财务	Budget Reforecast Rolling — 滚动预算再预测（月度滚动reforecast自动化）	902
+Skill-Bullwhip-Effect-Kalman-Mitigation	04-供应链	Bullwhip Effect Kalman Mitigation—用 Kalman Filter 消除牛鞭效应	2216
+Skill-Bullwhip-Effect-Mitigation	04-供应链	Bullwhip Effect Mitigation — 牛鞭效应量化与 LNN+XGBoost 抑制	3716
+Skill-Bundle-Pricing-Strategy	17-价格优化	Bundle Pricing Strategy（捆绑定价策略）	3010
+Skill-Bundle-Recommendation-Complementary	05-推荐系统	Bundle Recommendation Complementary — 互补商品捆绑推荐	3143
+Skill-Business-Problem-to-Skill-Retrieval	16-智能体工程	业务问题→Skill 检索 — Sentence-BERT + RRF 多路召回引擎	3179
+Skill-Business-Scale-KPI-Growth-Achievement	04-供应链	生意规模三维KPI监控 — 销售增长率/计划达成率/GMV完成比的实时预警与归因	3664
+Skill-CABB-Cross-Category-Attribution	13-广告分析	Click A Buy B 跨品类归因去偏 - 点击与购买商品不一致的归因修正	3064
+Skill-CAGED-Debiased-Rec	05-推荐系统	因果图聚合权重去偏推荐 - CAGED	2408
+Skill-CAMEL-Role-Playing-Agents	10-MAS	CAMEL — 角色扮演式自主协作多 Agent 框架	822
+Skill-CAR-Agent-Causal-Shapley	16-智能体工程	CAR — Agent步骤因果Shapley归因：多步交互效应定量拆解	2753
+Skill-CASCADE-Deployment-Time-Learning	16-智能体工程	CASCADE — 案例推理部署时学习：Contextual Bandit 无参数自适应	2811
+Skill-CASE-Cadence-Aware-Repurchase-Prediction	14-用户分析	CASE节奏感知补购预测 — 日历时序多尺度卷积+诱导集注意力的大规模次篮复购推荐	3033
+Skill-CASTER-Context-Aware-Model-Routing	10-MAS	CASTER上下文感知模型路由 — 任务步骤级强弱LLM动态调度以破解性能-成本铁三角	3418
+Skill-CC-OR-Net-LTV-Prediction	06-增长模型	CC-OR-Net条件级联有序残差网络LTV预测 — 结构分解破解零膨胀长尾分布的鲸鱼用户精准预测	3399
+Skill-CDA-Cookieless-Attribution	13-广告分析	CDA（Causal-Driven Attribution）— 无用户级数据的因果驱动归因	2152
+Skill-CDA-Privacy-Causal-Attribution	15-营销投放分析	CDA — 隐私保护因果渠道归因：无用户数据的多触点归因	2499
+Skill-CONCAT-Consensus-Decentralized-MAS	10-MAS	CONCAT共识驱动去中心化MAS协同 — 无需中央Orchestrator的自组织Agent网络	3809
+Skill-CPSC-Children-Product-Safety	21-合规决策	CPSC 儿童产品安全合规（美国强制认证）	3117
+Skill-CPSC-eFiling-Auto-Mapper	21-合规决策	CPSC eFiling Auto-Mapper — NLP驱动的电子申报字段自动填充	3227
+Skill-CRAG-Comprehensive-RAG-Benchmark	08-知识图谱	CRAG — 综合RAG评测基准	3522
+Skill-CS-Supply-Chain-Feedback-Loop-Tag	24-标签工程	客服反馈供应链改善闭环 — 差评/投诉自动归因到供应链节点并触发改善Action	3222
+Skill-CS-Ticket-Intelligence	09-DataAgent-LLM	CS Ticket Intelligence — 客服工单智能分诊：自动分类路由与优先级排序	4054
+Skill-CSDM-Diffusion-ColdStart	05-推荐系统	扩散模型冷启动CTR - 新品零交互时的转化潜力预热	2801
+Skill-CUPED-Variance-Reduction	02-A_B实验	Skill Card: CUPED 方差缩减法——母婴跨境电商 A/B 实验加速器	2507
+Skill-CVaR-Inventory-Risk-Portfolio	04-供应链	CVaR多SKU库存风险组合 — 金融条件风险价值迁移至库存尾部风险管理	3147
+Skill-Calibrated-Audience-Expansion-Uncertainty	15-营销投放分析	Calibrated Audience Expansion Uncertainty — Lookalike 扩展置信度校准防止受众过泛导致 ROAS 崩盘	3306
+Skill-California-Prop65-Label-Check	21-合规决策	加州65号提案标签合规 — 母婴产品化学物质自动检查	2435
+Skill-CapSeal-Agent-Secret-Mediation	16-智能体工程	CapSeal — Agent 秘密中介：能力封装取代直接密钥暴露	3040
+Skill-Capacity-Constraint-Production-Schedule-KPI	04-供应链	产能约束生产排程KPI — 产能利用率/排程达成率/换线时间/瓶颈识别	4000
+Skill-Carbon-Footprint-ML-Model	12-ML基础	ML模型碳足迹评估 — 可持续AI的算力碳排放量化	3377
+Skill-Carrier-Selection-ML	18-物流履约	承运商智能选择 — ML驱动的跨境配送商优化决策	4447
+Skill-Cash-Conversion-Cycle-Optimization	23-运营财务	Skill-Cash-Conversion-Cycle-Optimization — 现金转换周期优化	2262
+Skill-Category-Compliance-Prescan	21-合规决策	Skill-Category-Compliance-Prescan	3639
+Skill-Category-Tree-Placement-Optimizer	25-搜索流量工程	Skill-Category-Tree-Placement-Optimizer — 品类树节点竞争密度优化	3414
+Skill-Category-Trend-Forecasting	06-增长模型	Category Trend Forecasting（品类趋势预测）	2125
+Skill-Causal-Attribution-Bridge	01-因果推断	Causal Attribution Bridge（因果归因桥梁）	1604
+Skill-Causal-Churn-Retention-Attribution	01-因果推断	Causal Churn Retention Attribution — Uplift + DiD 因果用户流失归因与留存优化	3942
+Skill-Causal-Cohort-Analysis	01-因果推断	Causal Cohort Analysis — 因果队列分析：促销干预的长期用户行为效应	2497
+Skill-Causal-Decision-Graph-SC-Inference	24-标签工程	供应链因果决策图推理 — 从相关性到因果性，Palantir分析→行动的核心跨越	3122
+Skill-Causal-Deconfounded-Recommendation	05-推荐系统	去混淆因果推荐 — 暴露偏差校正的无偏推荐系统	3769
+Skill-Causal-Discovery-PC-Algorithm	01-因果推断	PC算法因果发现：从观测数据识别销售驱动因果链	2924
+Skill-Causal-Forest-HTE-Experiment	02-A_B实验	因果森林异质处理效应 — 实验数据挖掘个体级 CATE	2699
+Skill-Causal-Forest-HTE-Experiments	02-A_B实验	Causal Forest for HTE in Experiments — 实验数据的异质处理效应估计	2725
+Skill-Causal-ML-Feature-Engineering	12-ML基础	Causal ML Feature Engineering — 因果驱动的特征工程：消除混淆提升模型可靠性	3344
+Skill-Causal-RL-Decision-Making	01-因果推断	因果强化学习 — 从相关驱动到因果驱动的决策优化	3478
+Skill-Causal-RL-Dynamic-Pricing	17-价格优化	Causal RL Dynamic Pricing — 因果强化学习动态定价：可信赖的自适应价格策略	2663
+Skill-Causal-Representation-Disentangle	01-因果推断	Causal Representation Learning Disentangle — 解耦因果表示学习（VAE+因果图）	3020
+Skill-Causal-Representation-Learning	01-因果推断	因果表示学习 — 从观测数据中学习干预不变的因果潜变量	3443
+Skill-Causal-Representation-Transfer-Learning	12-ML基础	因果表示学习跨域迁移 — 从源域提取不变因果特征用于目标域零样本适配	3471
+Skill-Causal-SEO-Search-Attribution	25-搜索流量工程	搜索流量因果归因 — SEO排名提升的真实增量效果识别	3305
+Skill-Causal-Sentiment-Attribution	01-因果推断	DINER — 因果去偏的方面级情感分析	2921
+Skill-Causal-Supply-Chain-Attribution	04-供应链	供应链成本因果归因 — DAG 因果图拆解成本驱动因子	3101
+Skill-Causal-Time-Series-CausalImpact	01-因果推断	CausalImpact时序因果 — 政策/活动对时序指标的因果冲击估计	3433
+Skill-Causal-Time-Series-Forecasting-GCF	03-时间序列	因果时间序列预测 - GCF 反事实需求建模	3554
+Skill-Causal-Uplift-Modeling	01-因果推断	Causal Uplift Modeling — 因果提升模型：识别"可说服者"的跨域基础层	3326
+Skill-Causal-VOC-Sentiment-Attribution	01-因果推断	Causal VOC Sentiment Attribution — DiD+情感分析识别评论情绪变化真实因果驱动	3397
+Skill-CausalFlow-Agent-Failure-Repair	16-智能体工程	CausalFlow — LLM Agent 因果调试：失败轨迹 → 最小反事实修复	2463
+Skill-CausalRAG-Causal-Graph-Retrieval	08-知识图谱	CausalRAG — 因果图增强检索：语义相似 + 因果链路双轨 RAG	2488
+Skill-CausalRAG-Knowledge-Retrieval	08-知识图谱	CausalRAG - 因果图驱动的检索增强生成	2482
+Skill-Channel-Budget-Reallocation-Trigger	15-营销投放分析	Channel Budget Reallocation Trigger — 饱和度超阈值时自动削减并重分配渠道预算	3237
+Skill-Channel-Saturation-Curve	15-营销投放分析	Channel Saturation Curve（渠道饱和曲线建模）	2327
+Skill-Churn-Revenue-Impact	23-运营财务	Churn Revenue Impact — 用户流失的财务损失量化与 P&L 影响分析	2622
+Skill-Class-Conditional-Generation-Augment	12-ML基础	条件生成数据增强 — 稀有类别的扩散模型精准数据合成	3728
+Skill-Class-Imbalance-Handling	12-ML基础	Class Imbalance Handling — SMOTE/ADASYN/Focal Loss 处理低频事件	3296
+Skill-Cleanroom-Audience-Collaboration	22-数据采集工程	Cleanroom Audience Collaboration — 数据洁净室跨品牌受众协作无需共享原始数据	3298
+Skill-Click-Fraud-Detection	19-风控反欺诈	Click Fraud Detection（广告刷量检测）	2022
+Skill-Click-Through-Rate-Title-Optimizer	25-搜索流量工程	Skill-Click-Through-Rate-Title-Optimizer — 标题 CTR 机器学习优化器	3374
+Skill-Clickstream-Persona-Pipeline	22-数据采集工程	Clickstream Persona Pipeline — 点击流用户画像：VQ-VAE 离散 Persona + 多层行为 KG	2821
+Skill-Climate-ESG-Supply-Chain-Tag	24-标签工程	气候与ESG供应链风险标签 — 碳足迹追踪、CSRD合规与可持续供应链评级	2956
+Skill-ClusterSC-Synthetic-Control	01-因果推断	ClusterSC - 聚类合成控制法	2870
+Skill-Co-Evolutionary-Skill-Verification	16-智能体工程	Skill 自动演化与验证 — EvoSkills 双 LLM 协同优化	2439
+Skill-CodeRAG-Repository-Level-Retrieval	08-知识图谱	Skill-CodeRAG-Repository-Level-Retrieval	1659
+Skill-CodeXEmbed-Code-Semantic-Embedding	08-知识图谱	Skill-CodeXEmbed-Code-Semantic-Embedding	2218
+Skill-Cognitive-Architecture-Agent-Memory	16-智能体工程	Skill: 认知架构智能体记忆系统	1053
+Skill-Cognitive-Load-UX-Optimizer	11-AI人文	认知负荷UX优化器 — 信息架构与注意力资源管理	3786
+Skill-Cohort-Churn-Intervention-Dispatcher	14-用户分析	Cohort Churn Intervention Dispatcher — 低留存队列自动触发差异化挽回干预序列	2797
+Skill-Cohort-Retention-Analysis	14-用户分析	Cohort Retention Analysis for User Lifecycle	2833
+Skill-ColBERTv2-Multi-Vector-Late-Interaction	08-知识图谱	ColBERTv2 — 多向量后期交互精细检索	3137
+Skill-Cold-Chain-Temperature-Monitoring	18-物流履约	冷链温控全程监测 — 母婴辅食物流的温度合规智能预警	4125
+Skill-Cold-Start-Meta-Learning-PAM	05-推荐系统	Popularity-Aware Meta-Learning for Cold-Start Recommendation	2323
+Skill-Cold-Start-Product-Recommendation	06-增长模型	Cold-Start Product Recommendation (冷启动商品推荐)	2095
+Skill-Combo-Ad-ROI-Maximizer	15-营销投放分析	广告ROI最大化 Combo Pattern — 从归因分析到预算自动重分配的 6 步优化链路	3751
+Skill-Combo-Customer-Churn-Recovery	06-增长模型	客户流失预警→挽回 Combo Pattern — 从流失预测到精准干预的 5 步完整链路	3522
+Skill-Combo-Inventory-Crisis-Response	16-智能体工程	库存危机响应 Combo Pattern — 断货/积压异常触发的 5 步自动响应链路	3761
+Skill-Combo-New-Product-Launch-Playbook	16-智能体工程	新品上市全链路 Combo Pattern — 从蓝海选品到首月排名突破的 7 步编排	4430
+Skill-Commodity-Futures-Cost-Baseline	04-供应链	大宗商品期货驱动的竞品成本底线穿透 (Commodity Futures Arbitrage)	397
+Skill-Competitive-Price-Monitoring	17-价格优化	Competitive Price Monitoring（竞品价格监测与响应）	3472
+Skill-Competitive-Response-Modeling	15-营销投放分析	Competitive Response Modeling（竞争响应建模）	1820
+Skill-Competitive-VOC-Benchmarking	07-NLP-VOC	Competitive VOC Benchmarking — 竞品VOC横向对标（评论主题差异分析）	1673
+Skill-Competitor-Ad-Surge-Defense-Trigger	13-广告分析	Competitor-Ad-Surge-Defense-Trigger — 竞品广告份额单日激增自动触发防御性出价提升	3291
+Skill-Competitor-Keyword-Gap-Analysis	25-搜索流量工程	Skill-Competitor-Keyword-Gap-Analysis — 竞品关键词缺口分析	3529
+Skill-Competitor-Negative-Campaign-Detection	19-风控反欺诈	Competitor Negative Campaign Detection — 竞品恶意投诉攻击检测（批量举报模式）	2658
+Skill-Competitor-New-Product-Detection	06-增长模型	Competitor New Product Detection — 竞品新品预测：提前发现竞品动向的信号挖掘	2738
+Skill-Competitor-Price-Intelligence	17-价格优化	Competitor Price Intelligence — 竞品价格实时监控与智能响应	3903
+Skill-Competitor-Product-Intelligence	06-增长模型	Competitor Product Intelligence（竞品选品监测）	2019
+Skill-Competitor-SKU-Ontology	04-供应链	竞品SKU本体 — 竞争关系图谱建模、差异化标签与定价策略连接	3125
+Skill-Compliance-ML-Risk-Scoring	21-合规决策	Compliance ML Risk Scoring — 合规 ML 风险评分：用机器学习量化违规概率	3455
+Skill-Compliance-Scored-Guardrail-Orchestration	21-合规决策	Compliance-Scored Guardrail Orchestration — 合规评分 Best-of-N 守护编排	2190
+Skill-Compliance-Violation-Auto-Escalation	21-合规决策	Compliance-Violation-Auto-Escalation — 平台合规警告按严重程度自动分级升级响应	3212
+Skill-Compliant-Dynamic-Pricing-Guard	17-价格优化	Compliant Dynamic Pricing Guard（合规-定价双约束优化）	3057
+Skill-Concept-Drift-Detection	12-ML基础	Concept Drift Detection — 在线监控模型分布漂移	2662
+Skill-Conformal-Prediction-Demand-UQ	03-时间序列	Conformal Prediction Demand UQ（需求预测不确定性量化）	3109
+Skill-Conformal-Prediction-Framework	12-ML基础	Conformal Prediction — 无分布假设的预测区间保证框架	3880
+Skill-Conformal-ROI-Prediction	01-因果推断	共形预测ROI区间估计 - 小样本下的可信转化贡献量化	2678
+Skill-Conformal-Risk-Assessment	01-因果推断	Conformal Risk Assessment — 共形预测业务风险量化：覆盖率保证的区间估计	1252
+Skill-Conformal-TS-Intervals	03-时间序列	Conformal TS Intervals（时序 Conformal 预测区间）	1951
+Skill-Conformal-Time-Series-Forecasting	03-时间序列	Conformal Time Series Forecasting — 共形时序预测：有覆盖保证的需求预测区间	2142
+Skill-Conjoint-Analysis-Product-Design	05-推荐系统	联合分析产品设计 — 用CBC+层次贝叶斯量化消费者属性偏好	3782
+Skill-Constrained-Multi-Objective-Ad-Delivery	13-广告分析	Constrained Multi-Objective Ad Delivery — 约束多目标广告投放同时满足 ROAS + 品牌 + 预算硬约束	3299
+Skill-Consumer-Complaint-Recall-Prediction	21-合规决策	Consumer Complaint Recall Prediction — 消费者投诉驱动的召回风险预测	1318
+Skill-Content-ROI-Budget-Shift-Trigger	13-广告分析	Content ROI Budget Shift Trigger — 内容ROI连续低于目标时自动削减并转向高ROI内容类型	2983
+Skill-Context-Compression	16-智能体工程	ACON — Agent 长上下文压缩与 NL 准则优化	2922
+Skill-Context-Engine-Architecture	10-MAS	Context Engine三层架构 — engine/agents/registry分离的可复用MAS骨架	1767
+Skill-Context-Kubernetes-KB-Orchestration	08-知识图谱	知识库声明式编排治理 — Context Kubernetes：右知识×右Agent×右权限×右新鲜度	3643
+Skill-Context-Token-Compression	10-MAS	上下文Token压缩 — Summarizer Agent语义保真压缩与成本效益优化	3286
+Skill-ContextRL-Contrastive-Context-Selection	10-MAS	ContextRL对比上下文选择强化学习 — 细粒度上下文锚定训练突破长时域推理瓶颈	3420
+Skill-Contextual-Bandits-Rec	05-推荐系统	Contextual Bandits Recommendation — 在线探索-利用均衡推荐	3418
+Skill-Contextual-Dynamic-Pricing-Optimal	17-价格优化	Contextual Dynamic Pricing — 最优上下文定价：O(√dT) Regret + LDP 隐私保护	1651
+Skill-Continual-Learning-Production	12-ML基础	持续学习生产模型 — 无遗忘的在线模型知识更新	3487
+Skill-Continuous-NLP-SEO-Morphing	22-数据采集工程	连续语义漂移 SEO 文本对抗变异	2633
+Skill-Contrastive-Learning-Ecommerce	12-ML基础	Contrastive Learning for Ecommerce — 对比学习用于电商表示学习（SimCLR/MoCo 迁移）	2816
+Skill-Contrastive-Sequential-Recommendation	05-推荐系统	Contrastive Sequential Recommendation — 对比学习序列推荐：高质量自监督训练	2894
+Skill-Contrastive-Time-Series-Cold-Start	03-时间序列	Contrastive Time Series Cold Start — 对比学习驱动的新品需求冷启动预测	3427
+Skill-Contribution-Margin-By-Channel	23-运营财务	Contribution Margin By Channel — 按渠道贡献毛利分析（多平台ROAS→毛利拆解）	903
+Skill-Conversational-Commerce-Agent	16-智能体工程	Conversational Commerce Agent — 对话式商务 Agent：LLM 驱动的购物引导与成交	3103
+Skill-Corrective-RAG-CRAG	08-知识图谱	Corrective-RAG — 纠错式检索增强生成	3317
+Skill-Cost-Aware-Agent-Scheduling	16-智能体工程	Cost-Aware Agent Scheduling（成本感知智能体调度）	2835
+Skill-Cost-Plus-Dynamic-Tariff-Pricing	17-价格优化	成本加成+关税动态定价 — 关税波动下的自动调价模型	2357
+Skill-Counterfactual-Ad-Attribution-Debiasing	01-因果推断	Counterfactual Ad Attribution Debiasing — 因果去混淆广告归因区分"广告真正带来的转化"与"用户本来就会买	3424
+Skill-Counterfactual-Evaluation	01-因果推断	反事实评估 — Potential Outcomes + 合成控制反事实基线	2991
+Skill-Counterfactual-Price-Elasticity	17-价格优化	反事实动态价格弹性测算 (Counterfactual Price Elasticity via DML)	739
+Skill-Counterfactual-Recommendation-DCE	05-推荐系统	反事实推荐 - 双重校准估计器（DCE）	3489
+Skill-Counterfactual-SC-Scenario-Sim	24-标签工程	供应链反事实情景仿真 — 决策前的数字沙盘，支撑Palantir高风险Action验证	2857
+Skill-Counterfeit-Detection-Supply-Chain	21-合规决策	Counterfeit Detection Supply Chain — 供应链假货检测与溯源（区块链+图谱+视觉指纹）	2679
+Skill-Counterfeit-Product-Visual-Detection	19-风控反欺诈	假冒商品视觉检测 — 感知哈希批量比对竞品图识别疑似仿品	3216
+Skill-Creative-Fatigue-Detection	13-广告分析	Creative Fatigue Detection — 生存分析驱动的广告素材疲劳检测	2010
+Skill-Creator-Economy-ROI-Model	20-AI视频生成	Creator Economy ROI Model — KOL 分级评估、内容衰减曲线与 GMV 净贡献量化	2654
+Skill-Cross-Border-Cash-Flow-Forecasting	04-供应链	Cross-Border Cash Flow Forecasting（跨境电商现金流预测与融资窗口规划）	2649
+Skill-Cross-Border-Cold-Start-Forecast	06-增长模型	Cross-Border Cold-Start Forecast（跨境冷启动需求预测）	2826
+Skill-Cross-Border-Compliance-Framework	21-合规决策	Cross-Border Compliance Framework — 跨境电商多辖区合规自动映射	797
+Skill-Cross-Border-Last-Mile-Routing	18-物流履约	Cross-Border Last Mile Routing — 跨境最后一公里路由优化：时效×成本双目标决策	3642
+Skill-Cross-Border-Logistics-Routing	18-物流履约	Cross-Border Logistics Routing（跨境物流路径优化）	2097
+Skill-Cross-Border-Member-Onboarding-Optimization	06-增长模型	Cross-Border Member Onboarding Optimization — 跨境会员注册漏斗优化结合早期行为预测 LTV 决定激励力度	3830
+Skill-Cross-Border-Payment-Fraud-Detection	19-风控反欺诈	Cross-Border Payment Fraud Detection — 跨境支付欺诈检测：多源信号图谱风险建模	3134
+Skill-Cross-Border-Price-Harmonization	17-价格优化	Cross-Border Price Harmonization（跨境价格协调）	3372
+Skill-Cross-Border-Return-Rate-By-Country-KPI	04-供应链	跨境分国退货率KPI与差异分析 — 美/德/英退货率差异根因与退货成本管控	4831
+Skill-Cross-Border-Returns-Cost-Model	18-物流履约	Cross-Border Returns Cost Model — 跨境退货成本建模	877
+Skill-Cross-Border-Tax-Tariff-Modeling	23-运营财务	HTS Tariff Intelligence — LLM 驱动的跨境关税分类与节税优化	3421
+Skill-Cross-Channel-Budget-Pacing-Controller	15-营销投放分析	Cross-Channel Budget Pacing Controller — 跨渠道预算节奏控制防止早耗尽与末期停投	2872
+Skill-Cross-Cultural-AI-Bias-Correction	11-AI人文	Cross Cultural AI Bias Correction	3904
+Skill-Cross-Cultural-Content-Adaptation	11-AI人文	跨文化内容自动适配 — 文化距离量化与内容风格迁移	3728
+Skill-Cross-Cultural-Marketing-Adaptation	11-AI人文	Cross-Cultural Marketing Adaptation — 多语言 CAM 嵌入驱动的跨文化营销适配	3121
+Skill-Cross-Cultural-VOC-Alignment	11-AI人文	Cross-Cultural VOC Alignment — 跨文化用户声音对齐：消除翻译偏差的多语言评论分析	4704
+Skill-Cross-Domain-Supply-Chain-Signal-Fusion	24-标签工程	跨域供应链信号融合引擎 — 多域Tag汇聚、冲突消解与统一决策信号生成	3465
+Skill-Cross-Market-Content-Localization	20-AI视频生成	文化感知内容本地化 — 跨市场文化风险识别与自动替换	3013
+Skill-Cross-Market-Product-Transfer	06-增长模型	Cross-Market Product Transfer（跨市场产品适配性预测）	3551
+Skill-Cross-Market-Transfer-Demand	03-时间序列	跨市场需求迁移学习 — 用成熟市场数据加速新市场冷启动	3378
+Skill-Cross-Org-Agent-Protocol	10-MAS	Cross-Org Agent Protocol — 跨组织多智能体协调协议：多委托人、联邦编排、工作区委托	2416
+Skill-Cross-Platform-Account-Linkage-Risk	19-风控反欺诈	Cross-Platform Account Linkage Risk — 跨平台账号关联风险（Amazon+Walmart+eBay）	2555
+Skill-Cross-Platform-Brand-Search-Volume	15-营销投放分析	Cross-Platform Brand Search Volume — 品牌搜索量作为营销效果领先指标	2791
+Skill-Cross-Platform-Listing-Sync-Optimizer	13-广告分析	多平台 Listing 差异化同步优化器 — Amazon / TikTok Shop / Shopee 参数矩阵建模	3032
+Skill-Cross-Platform-Transfer-Rec	05-推荐系统	Cross-Platform Transfer Recommendation — 跨平台迁移推荐	3607
+Skill-Cross-Platform-User-Identity-Resolution	22-数据采集工程	Cross-Platform User Identity Resolution — 跨平台用户 ID 统一	3254
+Skill-Cross-Platform-User-Identity	22-数据采集工程	跨平台用户 ID 统一 — Amazon/TikTok/独立站身份解析	2607
+Skill-Cross-Platform-User-Transfer	14-用户分析	Cross-Platform User Behavior Transfer — 跨平台用户行为迁移：亚马逊行为驱动独立站冷启动	3314
+Skill-Cross-Platform-Video-Repurposing	20-AI视频生成	Skill-Cross-Platform-Video-Repurposing — 跨平台视频内容复用适配	4218
+Skill-Cross-SKU-Demand-Correlation-Mining	03-时间序列	Cross-SKU Demand Correlation Mining — 跨 SKU 需求相关性挖掘组合补货优化	2107
+Skill-Cross-Sell-LLM-GNN	06-增长模型	交叉销售LLM+GNN — 三阶段粗到精检索框架	3112
+Skill-Cross-System-Data-Reconciliation	24-标签工程	跨系统数据对账 — ERP/WMS/OMS三系统库存一致性自动比对与差异处置	2136
+Skill-Cross-Validation-Strategies	12-ML基础	Cross-Validation Strategies（交叉验证策略）	3062
+Skill-CrossBorder-Customs-Compliance-Rate-KPI	04-供应链	跨境关检务合规率KPI体系 — 清关时效/合规申报率/风险等级分类的全流程量化	3526
+Skill-CrossBorder-Logistics-Mode-Selection	18-物流履约	跨境物流模式动态选择 — 需求预测驱动的保税仓与直邮模式联合优化框架	3161
+Skill-Crowdsourced-Last-Mile-AI-Dispatch	18-物流履约	众包最后一公里AI调度 — 动态定价与配送网络优化	3830
+Skill-Crypto-Anomaly-Review-Fraud	19-风控反欺诈	区块链女巫攻击检测驱动的虚假评论清洗 (Crypto Sybil Review Detection)	505
+Skill-Cultural-Adaptation-Agent	16-智能体工程	Cultural Adaptation Agent — 跨文化适应：母婴跨境的本地化 AI 策略	1703
+Skill-Cultural-Data-Collection	11-AI人文	Cultural Data Collection — 跨文化 UGC 采集与母婴消费文化差异识别	2404
+Skill-Customer-Churn-Prediction	06-增长模型	Customer Churn Prediction (用户流失预测)	3478
+Skill-Customer-Complaint-Supply-Root-Cause-KPI	04-供应链	客诉供应链根因KPI与闭环治理 — 供应链原因导致客诉率/处理时效/预防闭环	3563
+Skill-Customer-Journey-Analytics	14-用户分析	Customer Journey Analytics — 用户旅程分析：全链路转化漏斗诊断与优化	3463
+Skill-Customer-Journey-Decision-Tree	09-DataAgent-LLM	客服对话决策树 - 从日志中自学策略	3212
+Skill-Customer-Journey-Prototype	06-增长模型	Customer Journey Prototype Detection 客户旅程序列原型检测	2301
+Skill-Customer-Survival-Analysis	06-增长模型	Customer Survival Analysis — 用户生存分析	2469
+Skill-Customs-Clearance-Risk-Scoring	18-物流履约	Customs Clearance Risk Scoring — 跨境清关多维风险预警	3735
+Skill-DAG-Task-Decomposition-Planning	16-智能体工程	TDP — DAG 任务解耦规划：82% Token 节省 + 错误隔离	2606
+Skill-DARA-Agentic-MMM-Optimizer	15-营销投放分析	DARA - LLM+RL 双阶段广告预算分配 Agent	3710
+Skill-DARA-Agentic-MMM	15-营销投放分析	DARA Agentic MMM — LLM Agent 驱动的营销组合建模：双阶段自动调参与智能归因	2811
+Skill-DAWN-Talking-Head-Review	20-AI视频生成	DAWN — Talking-Head Review Video（AI口播Review视频）	2516
+Skill-DECRL-Temporal-KG-Evolution-Prediction	08-知识图谱	DECRL — 深度进化聚类时序知识图谱表示学习	3026
+Skill-DIAL-KG-Schema-Free-Incremental	08-知识图谱	DIAL-KG无Schema增量知识图谱构建 — 动态Schema归纳+治理裁决+增量演化闭环	2950
+Skill-DML-Cohort-Causal-Effect	01-因果推断	DML Cohort 因果效应 - 群体异质性 HTE 估计	3483
+Skill-DQN-Purchase-Prediction	06-增长模型	DQN-Inspired Purchase Intent Prediction	1025
+Skill-DRL-Inventory-Optimization	04-供应链	DRL Inventory Optimization — 深度强化学习库存优化：端到端自适应补货决策	2854
+Skill-DS-DGA-GCN-Fake-Review-Group-Detection	19-风控反欺诈	DS-DGA-GCN假评论群体检测 — 多样性与自相似性感知的动态图注意力GCN	3135
+Skill-DS-DGA-GCN-Fake-Review-Group	19-风控反欺诈	DS-DGA-GCN — 动态图假评论群组检测：冷启动新品防刷评	3259
+Skill-DTC-Customer-Acquisition-Attribution	06-增长模型	DTC Customer Acquisition Attribution — 独立站全渠道获客归因：从首触到首单的因果追踪	3480
+Skill-Dangerous-Goods-DG-Classification	21-合规决策	Dangerous Goods Classification — 危险品自动分类（锂电池/液体/气溶胶跨境合规）	2631
+Skill-Dark-Pattern-Review-Detection	22-数据采集工程	Dark Pattern Detection in Reviews — 评论水军与暗模式检测	3147
+Skill-Data-Agent-Error-Recovery	09-DataAgent-LLM	数据 Agent 执行失败自修复 — 自动重试+降级策略	2307
+Skill-Data-Collection-Agent-Pipeline	09-DataAgent-LLM	Data Collection Agent Pipeline — LLM Agent 自动化多源数据采集 Pipeline	2370
+Skill-Data-Collection-Causal-Debiasing	22-数据采集工程	Data Collection Causal Debiasing — 采集偏差因果修正：爬虫选择性采集对因果分析的去污染	2640
+Skill-Data-Drift-Detection	12-ML基础	Skill-Data-Drift-Detection	2702
+Skill-Data-Mesh-Ecommerce	22-数据采集工程	Data Mesh for Ecommerce — 数据网格架构	3282
+Skill-Data-Provenance-Lineage	22-数据采集工程	Data Provenance & Lineage — 数据血缘追踪：LLM 训练数据溯源与 AI 法规合规	2856
+Skill-Data-Quality-Monitor-Alert	22-数据采集工程	Data Quality Monitor Alert — 多维数据质量监控与异常告警（SPC + KL 散度）	3133
+Skill-Data-to-Dashboard-Multi-Agent-Visualization	09-DataAgent-LLM	Data-to-Dashboard — 多Agent智能可视化生成	2975
+Skill-DataAgent-Marketing-Attribution	09-DataAgent-LLM	DataAgent营销归因分析 — LLM驱动的多渠道营销效果自动归因	3290
+Skill-Decision-Audit-Trail-Ontology	24-标签工程	AI决策审计追踪本体 — 供应链自动化决策的完整记录、回溯与合规证明	3105
+Skill-Decision-Confidence-Calibration-SC	24-标签工程	供应链决策置信度校准与分层触发 — 从置信度到人机分工的动态决策框架	3444
+Skill-Decision-Outcome-Closed-Loop-Learning	24-标签工程	供应链决策结果闭环学习 — 从执行结果到模型改进的Palantir决策飞轮	3281
+Skill-Deep-Learning-Churn-Prediction	06-增长模型	&#x27;Skill: Deep Learning for Customer Churn Prediction&#x27;	3589
+Skill-Deep-Learning-Recommendation-HI	05-推荐系统	Deep Learning Recommendation with Heterogeneous Inference	2949
+Skill-DeepAnalyze-Autonomous-Data-Science-Agent	09-DataAgent-LLM	DeepAnalyze — 自主数据科学Agent	2388
+Skill-DeepRAG-Step-by-Step-Retrieval	08-知识图谱	DeepRAG — 逐步推理驱动的原子检索决策	3896
+Skill-DeepSeek-R1-RAG-Reasoning	08-知识图谱	DeepSeek-R1 RAG推理增强 — 逐步推理驱动的自主检索决策	3540
+Skill-Delayed-Conversion-Causal-MTL	02-A_B实验	促销延迟转化因果多任务建模 — 大促期用户行为的反事实分析	3713
+Skill-Delivery-Promise-Optimization	18-物流履约	Delivery Promise Optimization — 时效承诺优化：转化率与准时率的帕累托	1567
+Skill-Demand-Anomaly-Causal-Attribution	03-时间序列	Demand Anomaly Causal Attribution — 需求异常因果归因（销量突变根因诊断）	1879
+Skill-Demand-Driven-KB-Construction	08-知识图谱	需求驱动知识库构建 — Agent失败即信号：用任务失败驱动最小化知识摄入	3153
+Skill-Demand-Forecasting-Booking-Curve	17-价格优化	Demand Forecasting via Booking Curve — 酒店预订曲线迁移到电商搜索量超前指标预测	3158
+Skill-Demand-Forecasting-Supply-Chain	04-供应链	Demand Forecasting for Supply Chain	3054
+Skill-Demand-Quantile-Forecast	03-时间序列	Demand Quantile Forecast — 需求分位数预测：备货决策的置信区间框架	2816
+Skill-Demand-Signal-Nowcasting	03-时间序列	Demand Signal Nowcasting — 用搜索词/评论量实时修正需求预测	2281
+Skill-Demand-Supply-Matching-Gap-Analysis	04-供应链	供需缺口分析与优先级分配决策 — 供给不足时的SKU优先级量化与分配算法	3869
+Skill-Dense-Passage-Retrieval	08-知识图谱	Dense Passage Retrieval — 密集段落检索：超越关键词的语义搜索基础设施	2731
+Skill-Dense-Retrieval-Ecommerce-Semantic-Search	08-知识图谱	面向电商的稠密检索与语义排序	2039
+Skill-DiD-Difference-in-Differences	01-因果推断	Difference-in-Differences (DiD) for Causal Effect Estimation	2452
+Skill-DialIn-LLM-Case-Intent-Clustering	09-DataAgent-LLM	Dial-In LLM 层次化客服意图聚类 - 无监督发现 Case 意图树	3436
+Skill-Differential-Privacy-Recommendation	11-AI人文	差分隐私推荐系统 — 本地化隐私保护下的个性化	2802
+Skill-Diffusion-Model-Product-Image	20-AI视频生成	Diffusion Model Product Image Generation — 扩散模型产品图生成：AI 主图替代专业摄影	3490
+Skill-Diffusion-Model-Recommendation	05-推荐系统	Diffusion Model Recommendation — 扩散模型推荐：生成式推荐的范式革命	3304
+Skill-Digital-Wellbeing-Screen-Time-Model	11-AI人文	Digital Wellbeing Screen Time Model — 数字健康屏幕时间建模（婴幼儿数字暴露伦理）	1896
+Skill-Diversity-Reranking-SMMR	05-推荐系统	Diversity-Aware Reranking with SMMR	2129
+Skill-DocRE-Document-Level-Relation-Extraction	08-知识图谱	Skill-DocRE-Document-Level-Relation-Extraction	1931
+Skill-Document-Intelligence-Parsing	22-数据采集工程	Document Intelligence Parsing — LLM 驱动的文档智能解析：图文统一 OCR、跨页表格恢复、布局感知推理	2195
+Skill-Domain-Adaptive-Continual-Pretraining	16-智能体工程	Domain Adaptive Continual Pretraining — 领域持续预训练	2938
+Skill-Domain-Adaptive-RAG-Ecommerce	08-知识图谱	电商领域自适应RAG — 垂直领域知识注入优化	3562
+Skill-Domain-Agnostic-Context-Engine	10-MAS	域无关Context Engine — 一套引擎跨域复用的通用MAS架构	1255
+Skill-Double-Debiased-ML-Price	01-因果推断	双重去偏机器学习价格弹性 — 高维混淆下的价格因果效应估计	3531
+Skill-Doubly-Robust-Cross-Fitting	01-因果推断	Doubly Robust + Cross-fitting — 双重稳健估计与交叉拟合	3089
+Skill-Drone-UAV-Last-Mile-Delivery	18-物流履约	无人机末端配送调度 — UAV最后一公里的路径规划	3663
+Skill-Dual-RAG-Context-Engine	10-MAS	双通道RAG上下文引擎 — 指令RAG与事实RAG协同的高保真信息检索架构	1756
+Skill-Dual-Tower-Lookalike-Modeling	15-营销投放分析	Dual-Tower Lookalike Modeling — 双塔自建相似受众扩展脱离平台黑箱	3562
+Skill-Dynamic-ABC-Stratification-Adaptive-Policy	04-供应链	动态ABC分层与策略自适应 — 帕累托分类自动更新与差异化库存策略绑定	4997
+Skill-Dynamic-Bundle-Pricing	17-价格优化	Dynamic Bundle Pricing — 动态捆绑定价：配套商品组合最优定价策略	2474
+Skill-Dynamic-Carrier-Selection-Tag-Driven	24-标签工程	Tag驱动动态承运商选择引擎 — 基于实时标签的末程承运商智能匹配与成本优化	3655
+Skill-Dynamic-DAG-Orchestration	10-MAS	Dynamic DAG Orchestration — 运行时动态调整工作流拓扑	3005
+Skill-Dynamic-Lot-Sizing-MOQ	04-供应链	Efficient Algorithms for the Joint Replenishment Problem with Minimum Order Quantities	2779
+Skill-Dynamic-Payment-Terms-Tag-Engine	04-供应链	动态账期标签引擎 — 基于现金流预测的供应商账期智能优化与动态调整	2528
+Skill-Dynamic-Pricing-Elasticity	17-价格优化	Dynamic Pricing with Demand Elasticity（动态定价与需求弹性）	3662
+Skill-E-Commerce-Video-Benchmark	20-AI视频生成	E-Commerce Video Benchmark（电商视频质量评估基准）	1892
+Skill-EMSR-Bid-Price-Inventory-Control	17-价格优化	EMSR-b Bid-Price Inventory Control — 酒店边际座位收益模型迁移到FBA库存动态定价	3489
+Skill-EPICSCORE-Uncertainty	01-因果推断	认知不确定性共形评分 - 数据稀疏区域自适应区间加宽	2717
+Skill-EPR-Auto-Calculator	21-合规决策	EPR扩展生产者责任自动费用测算 — 欧盟/英国/法国合规	2253
+Skill-EPR-Extended-Producer-Responsibility-Tag	24-标签工程	欧盟EPR扩大生产者责任标签体系 — EPR注册合规、包装标签与回收报告自动化	3157
+Skill-EU-AI-Act-Compliance-Framework	11-AI人文	EU AI Act合规框架 — 高风险AI系统的透明度与问责制	2961
+Skill-Early-Stopping-Regularization	12-ML基础	Early Stopping and Regularization — 防止过拟合的训练控制技术	3231
+Skill-Ecommerce-Data-Quality-Assessment	22-数据采集工程	E-commerce Data Quality Assessment — 产品目录数据质量双轨评分与门控	2529
+Skill-Elasticity-Based-Repricing-Gate	17-价格优化	Elasticity-Based Repricing Gate — 弹性阈值自动触发涨价/降价A/B测试	2932
+Skill-Email-Sequence-Multiarm-Optimizer	06-增长模型	Email Sequence Multiarm Optimizer — Thompson Sampling 驱动的邮件序列多臂老虎机优化	3260
+Skill-Email-Sequence-RL-Optimizer	15-营销投放分析	Email Sequence RL Optimizer — 邮件序列强化学习优化：自动发现最优营养序列	2701
+Skill-Embedding-Fundamentals	12-ML基础	Embedding Fundamentals — 嵌入表示学习基础：从 ID 映射到多模态语义对齐	2356
+Skill-Emotional-AI-Customer-Care	11-AI人文	Emotional AI Customer Care — 情感感知客服：高压场景的同理心 AI	2376
+Skill-Empirical-Bayes-Multiple-Testing	02-A_B实验	Empirical Bayes for Multiple Testing — 多重检验的经验贝叶斯校正（eBH/qvalue）	2744
+Skill-Endowment-Effect-Trial-Conversion	06-增长模型	禀赋效应试用转化 — 先拥有再付款，利用放弃厌恶将付费转化率提升40-60%	3299
+Skill-Ensemble-Methods	12-ML基础	Skill Card: Ensemble Methods（集成学习方法）	3371
+Skill-Entity-Resolution-KG-Dedup	08-知识图谱	KG 实体消歧与去重（Entity Resolution & Deduplication）	2635
+Skill-Epidemiological-Viral-Traffic-SIR	06-增长模型	SIR传染病模型TikTok流量拐点预测 — 提前2周锁定爆款峰值	2849
+Skill-Error-Cascade-Propagation-Defense	10-MAS	MAS错误级联传播防御 — 有向依赖图传播建模与血统追踪治理层	4022
+Skill-Event-Driven-Demand-MAS	10-MAS	Event-Driven Demand MAS — 事件感知补货 MAS：大促/季节自动触发	2484
+Skill-EventCast-LLM-Event-Forecasting	03-时间序列	EventCast — LLM 事件感知需求预测：大促/节假日场景 MAE-57%	3589
+Skill-EvoSC-Self-Consolidation	10-MAS	EvoSC — 对比反思 + 自我巩固：Agent 从失败轨迹进化	1247
+Skill-Experiment-Data-Quality-Guard	02-A_B实验	Experiment Data Quality Guard — A/B 实验数据采集质量保障：爬虫/日志污染检测与因果实验完整性	2836
+Skill-Experiment-Logging-Observability	02-A_B实验	Experiment Logging & Observability — 实验数据质量监控与溯源	2710
+Skill-Experiment-Sensitivity-Robustness	02-A_B实验	Experiment Sensitivity & Robustness — 实验结果鲁棒性检验（Winsorization/截尾）	2594
+Skill-Expiry-Date-Aging-Baby-Products-KPI	04-供应链	母婴产品效期管理与临期品KPI — 保质期预警/临期库存占比/过期销毁成本管控	3972
+Skill-Explainable-Recommendation	05-推荐系统	Explainable Recommendation for Business Trust	2277
+Skill-Explainable-Review-Adjudication	19-风控反欺诈	可解释评论真伪裁决 — 证据图+LLM推理	3317
+Skill-FActScore-Claim-Verification-Pipeline	08-知识图谱	FActScore — 原子声明级事实核查流水线	2734
+Skill-FBA-Cost-Forecast-Adjustment	23-运营财务	FBA Cost Forecast Adjustment — 不对称惩罚驱动的履约成本最小化	2115
+Skill-FBA-Fee-Intelligence	23-运营财务	FBA Fee Intelligence（FBA 费用结构分析与长库龄预警）	2912
+Skill-FBA-Fee-Waterfall-Attribution	23-运营财务	Skill-FBA-Fee-Waterfall-Attribution — FBA费用瀑布归因	2645
+Skill-FBA-Stranded-Unfulfillable-Inventory-KPI	04-供应链	FBA滞销不可售库存KPI与处置策略 — 滞销率/仓储过长费预警/移除决策优化	4011
+Skill-FDC-RDC-Inventory-Allocation	04-供应链	FDC/RDC Inventory Allocation — 前置仓选品与库存分配端到端学习	3920
+Skill-FRAMES-RAG-Factuality-Multihop	08-知识图谱	Skill-FRAMES-RAG-Factuality-Multihop	254
+Skill-FSDA-DRL	04-供应链	FSDA-DRL 快慢双智能体动态定价与补货联合优化	1463
+Skill-FX-Dynamic-Pricing-Adjustment	23-运营财务	汇率联动动态定价 — 保持目标毛利率的实时定价调整	2821
+Skill-FX-Exposure-Measurement	23-运营财务	外汇敞口测量 — 跨境电商货币风险定量分析	3060
+Skill-FX-Hedging-Strategy	23-运营财务	FX Hedging Strategy — 跨境汇率风险对冲：动态套期保值降低外汇损失	2858
+Skill-FX-Natural-Hedging-Strategy	23-运营财务	自然对冲策略 — 跨境电商外汇敞口零成本对冲	3225
+Skill-Facebook-Audience-Lookalike-Scaling	15-营销投放分析	Facebook Audience Lookalike Scaling — Meta 相似受众建模与 LTV 种子优化	2719
+Skill-Fake-Review-Detection	22-数据采集工程	Fake Review Detection — 假评论检测：图神经网络+LLM 可解释欺诈识别	2739
+Skill-FastKGE-Incremental-LoRA-KG-Embedding	08-知识图谱	FastKGE — 增量 LoRA 知识图谱嵌入	2718
+Skill-Feature-Engineering	12-ML基础	Feature Engineering for E-Commerce Machine Learning	2745
+Skill-Feature-Selection	12-ML基础	Feature Selection（特征选择）	2767
+Skill-Feature-Store-Architecture	22-数据采集工程	Feature Store Architecture — 特征工程平台化	2892
+Skill-Federated-Cross-Seller-Recommendation	05-推荐系统	Federated Cross-Seller Recommendation — 隐私保护的跨卖家联邦推荐	3084
+Skill-Federated-Learning-Privacy	12-ML基础	联邦学习隐私保护 — 跨数据孤岛的协作训练框架	3798
+Skill-Few-Shot-Review-Classification	07-NLP-VOC	少样本评论分类 — Prototypical Networks 从英语迁移到新市场语言	3591
+Skill-Fill-Rate-OOS-Cost-Quantification	04-供应链	需求满足率与缺货成本全量化 — Fill Rate三层模型与OOS全链路损失计算	3079
+Skill-First-Last-Mile-Cost-KPI-CrossBorder	04-供应链	跨境头程末程成本KPI与路线优化 — 头程运费率/末程成本率/跨境物流综合成本体系	4351
+Skill-First-Mile-Pickup-Optimization	18-物流履约	首公里取货路径优化 — 国内工厂到货代的调度算法	2445
+Skill-First-Mile-Pickup-Route-Optimization	18-物流履约	First Mile Pickup Route Optimization — 首公里取货路径优化	847
+Skill-Flash-Sale-Price-Optimization	17-价格优化	闪购定价优化 — 限时折扣期间最优折扣率与时间窗口计算	2507
+Skill-Flash-Sale-Realtime-Sellthrough-Forecast	04-供应链	大促实时售罄模拟与流量协同 — 电商大促中实时预测与紧急资源调配	3348
+Skill-FlashRAG-Efficient-RAG-Toolkit	08-知识图谱	FlashRAG — 高效模块化RAG研究工具包	3996
+Skill-Flexible-Supply-Chain-Small-Batch-Agile	04-供应链	柔性供应链小单快返 — SHEIN模式敏捷采购与快速响应算法	3384
+Skill-Flowr-Supply-Chain-MAS	10-MAS	Flowr — 零售供应链多 Agent 端到端自动化	2890
+Skill-Forecast-Bias-Adjustment-Detection	04-供应链	预测偏差加减码检测与校正 — 供应链计划主动修正行为的量化分析与偏差溯源	3076
+Skill-Forecast-Driven-Inventory	03-时间序列	Forecast-Driven Inventory（预测驱动库存优化）	1649
+Skill-Forecast-MAPE-MinMax-Accuracy-System	04-供应链	需求预测准确率MAPE/MinMax双口径体系 — 陈凤霞标准行业对标值与AB类分层目标	3733
+Skill-Forecast-to-PL-Bridge	23-运营财务	Forecast-to-PL-Bridge — 需求预测误差的财务损失量化与成本优化	2788
+Skill-Fraud-PL-Impact	23-运营财务	Fraud PL Impact — 电商欺诈的财务损失量化与检测成本权衡	2504
+Skill-Fraud-Signal-Collection	19-风控反欺诈	Fraud Signal Collection — 欺诈信号数据采集（刷单行为、虚假评论、异常流量）	2063
+Skill-FraudSquad-LLM-Review-Detection	19-风控反欺诈	FraudSquad — LLM 生成虚假评论检测：LM 嵌入 + 门控图变换器	3067
+Skill-FrontDoor-Causal-MTA	13-广告分析	ALM-MTA 前门因果多触点归因 - 剔除隐藏混淆的广告真实 ROI 剥离	2979
+Skill-Full-Funnel-Growth-Dashboard	14-用户分析	Full Funnel Growth Dashboard — 多归因视角聚合的全漏斗增长量化看板	2702
+Skill-GAN-Red-Team-Listing	16-智能体工程	GAN 红队驱动的 Listing 上线前免疫接种 (Adversarial Listing Defense)	799
+Skill-GCC-CPC-Document-Validator	21-合规决策	GCC/CPC Document Validator — 合规认证文档完整性自动验证	3779
+Skill-GCF-Counterfactual-Unobserved-Demand	24-标签工程	图因果预测GCF — 时空GNN+Synthetic Control估计Listing删除的隐性需求	3161
+Skill-GEO-Generative-Engine-Optimization	15-营销投放分析	GEO — 生成式引擎优化：让 AI 搜索引擎主动引用你的品牌内容	2981
+Skill-GMROI-Inventory-Investment-Efficiency	04-供应链	GMROI库存资金投资回报优化 — 毛利润/平均库存比率最大化决策模型	3229
+Skill-GNN-Ecommerce-Recommendation	05-推荐系统	GNN Ecommerce Recommendation — 图神经网络电商推荐：用户-商品图谱深度学习	2757
+Skill-GNN-Foundations	08-知识图谱	GNN Foundations（图神经网络基础）	2043
+Skill-GNN-Fraud-Detection	19-风控反欺诈	图神经网络欺诈检测 — 关系图结构感知的电商欺诈识别	3675
+Skill-GP-New-Product-Demand	03-时间序列	GP New Product Demand — 高斯过程新品冷启动需求预测	2709
+Skill-GP-Tweedie-Intermittent-New-Product-Demand	06-增长模型	GP+Tweedie 间歇稀疏新品需求预测 — 零膨胀冷启动概率预测	3771
+Skill-GPLR-Persona-Generation	14-用户分析	GPLR 用户人群标签生成 - 购买行为到可解释 Persona 的低成本桥接	3489
+Skill-GPSR-EU-Risk-Assessment-Auto	21-合规决策	GPSR EU Risk Assessment Auto — 欧盟GPSR风险评估自动化	3727
+Skill-Generative-Agent-Simulation	06-增长模型	生成式智能体营销沙盒仿真 - 零数据消费者行为推演	3305
+Skill-Generative-Audience-LLM-Auction	15-营销投放分析	GenAI Advertising — 无 Cookie 生成式受众定向 & LLM 原生广告拍卖	2403
+Skill-Generative-Bidding-MoE	13-广告分析	生成式广告竞价 — MoE路由+因果Transformer	2483
+Skill-Geo-Holdout-Experiment	02-A_B实验	Geo Holdout实验 — 地理区域控制实验消除网络效应偏差	3367
+Skill-Geo-Incrementality-DML	13-广告分析	Geo-Level增量效果测量 — 面板DML vs 合成控制法	2108
+Skill-Geo-Level-Marketing-Effectiveness	15-营销投放分析	Geo-Level Marketing Effectiveness（地理级营销效果）	1911
+Skill-Geopolitical-Risk-Tag-Supply-Impact	24-标签工程	地缘政治风险供应链影响标签 — 贸易限制/区域冲突对供应链的实时风险量化	2541
+Skill-Glass-Box-MAS-Observability	10-MAS	玻璃盒MAS可观测性 — Agent推理轨迹追踪、Token成本仪表盘与透明度工程	3464
+Skill-Graph-Attention-Network-Recommendation	08-知识图谱	Graph Attention Network Recommendation — 图注意力网络推荐：动态权重的高精度图推荐	2838
+Skill-Graph-Foundation-Model-Recommendation	08-知识图谱	Graph Foundation Model Recommendation — 图基础模型推荐：跨图迁移的零样本推荐	2888
+Skill-Graph-Grounded-MAS-Protocol	10-MAS	G²CP — 图结构 MAS 通信协议：消除级联幻觉	2311
+Skill-Graph-Knowledge-Distillation-Recommendation	08-知识图谱	Graph Knowledge Distillation Recommendation — 图知识蒸馏推荐：轻量化GNN的高效部署	3418
+Skill-Graph-Neural-Lookalike-Propagation	08-知识图谱	Graph Neural Lookalike Propagation — 知识图谱关系传播扩展高质量相似受众	3342
+Skill-Graph-OKB-Design-SC	24-标签工程	供应链操作知识库OKB图谱设计 — Neo4j+Delta双层架构与CDC实时同步策略	3150
+Skill-Graph-RAG-Knowledge-Retrieval	08-知识图谱	Graph RAG Knowledge Retrieval — 知识图谱增强检索：结构化知识驱动精准问答	2692
+Skill-GraphDeepAR-Demand-Forecasting	18-物流履约	GraphDeepAR — 图神经网络概率需求预测：商品关联 + 退货预测	1754
+Skill-GraphRAG-Knowledge-Enhanced-Retrieval	08-知识图谱	GraphRAG - 知识图谱增强检索生成	2640
+Skill-GraphTrack-Cross-Device-Tracking	13-广告分析	图基跨设备追踪 - 无监督IP-Domain图谱用户拼接	2630
+Skill-Green-Logistics-Carbon-Optimization	18-物流履约	碳最优物流路径规划 — ESG合规与成本的多目标优化	3556
+Skill-Green-Supply-Chain-Carbon-Footprint	04-供应链	Green Supply Chain Carbon Footprint — 绿色供应链碳足迹：ESG合规与可持续运营优化	2805
+Skill-Growth-DataAgent-Analytics	06-增长模型	增长DataAgent分析 — LLM驱动的用户增长全链路智能诊断	3505
+Skill-Guardrailed-CATE-NBA	06-增长模型	Guardrailed CATE-NBA	2346
+Skill-Guardrailed-Uplift-Targeting	01-因果推断	Guardrailed Uplift Targeting — 约束优化 CATE：业务护栏驱动的精准干预	3324
+Skill-HCCE-Concept-Hierarchy-Embedding	08-知识图谱	HCCE — 超球面锥概念层次嵌入	3316
+Skill-HELMET-LongContext-RAG-Evaluation	08-知识图谱	Skill-HELMET-LongContext-RAG-Evaluation	272
+Skill-HGCN-Hyperbolic-Graph-Convolutional-Networks	08-知识图谱	HGCN — 双曲图卷积网络	902
+Skill-HGNN-Cross-Device-Matching	13-广告分析	层次图神经网络跨设备用户匹配 - 无ID的跨端行为拼接	2961
+Skill-HGT-Heterogeneous-Graph-Transformer	08-知识图谱	HGT — 异构图 Transformer 表示学习	1154
+Skill-HMMCB-Cross-Channel-Bidding	13-广告分析	HMMCB — 跨渠道广告竞价 MARL：CPC 约束下最大化总点击（美团真实 A/B）	1962
+Skill-HNSW-ANN-Vector-Index-Engineering	08-知识图谱	HNSW — 向量索引工程与 ANN 检索优化	3348
+Skill-HS-Code-Auto-Classification	18-物流履约	HS编码自动分类 — 跨境关税智能核算引擎	3810
+Skill-HTS-Agentic-Tariff-Classification	21-合规决策	HTS多Agent关税编码分类 — 共识验证+层级推理+不确定性感知的跨境清关自动化	3830
+Skill-HTS-Code-Risk-Classifier	21-合规决策	HTS Code Risk Classifier — 基于HTS码的CPSC多标签风险分类	3518
+Skill-HTS-Tariff-Classification	21-合规决策	HTS 关税编码分类与优化（跨境电商关税合规）	2687
+Skill-Healthy-Inventory-Three-Layer-KPI	04-供应链	健康库存三层数字化KPI体系 — 可视层/分析层/应用层的量化指标与联通机制	2930
+Skill-Helicase-Supply-Chain-KG-MAS	10-MAS	Helicase — 不确定性感知供应链知识图谱：多 Agent 自主构建	3392
+Skill-Heterogeneous-Treatment-Effect-XLearner	01-因果推断	X-Learner异质处理效应 — 识别不同用户群的差异化因果效应	3978
+Skill-Hierarchical-Demand-Forecasting-Reconciliation	03-时间序列	HiFoReAd 多层时序预测调和 - 母婴跨境补货分层一致性	3405
+Skill-Hierarchical-Product-KG-Construction	08-知识图谱	层级商品知识图谱自动构建（图片→KG）	3251
+Skill-Hierarchical-Search-Intent-Classification	13-广告分析	电商搜索层次化意图分类 - 母婴跨境广告自动词分类	3589
+Skill-High-Fidelity-RAG-Defense	10-MAS	高保真RAG防御 — 引用链溯源、数据投毒与提示注入三层防御体系	3636
+Skill-High-Value-Customer-Alert-Action	14-用户分析	High-Value-Customer-Alert-Action — RFM高价值客户30天沉默自动触发客服主动介入+个性化钩子生成	2876
+Skill-High-Value-Customer-Proactive-Alert	14-用户分析	High Value Customer Proactive Alert — 高价值客户出现沉默信号时自动触发客服主动联系	2731
+Skill-Hijacker-Seller-Network-Analysis	19-风控反欺诈	Hijacker Seller Network Analysis — 跟卖卖家网络图谱识别有组织的跟卖集团	2086
+Skill-HippoRAG-Multi-Hop-Reasoning-Retrieval	08-知识图谱	HippoRAG — 多跳推理检索与知识图谱路径规划	3116
+Skill-HippoRAG-v2-Knowledge-Integration	08-知识图谱	HippoRAG v2 — 知识整合的记忆增强多跳推理	3557
+Skill-Holiday-Spike-Demand-Decomposition	03-时间序列	Holiday Spike Demand Decomposition — 节假日需求峰值分解（Prime Day/黑五）	2154
+Skill-Human-AI-Calibrated-Trust	11-AI人文	人机信任校准 — 防止过度依赖与自动化偏见的决策框架	3731
+Skill-Human-AI-Collaborative-Decision	11-AI人文	人机协作决策框架 — 最优介入时机识别与置信阈值路由	3088
+Skill-Human-AI-Trust-Calibration-Maternal	11-AI人文	Human-AI Trust Calibration — 母婴场景人机信任校准（过信与不信的双向风险）	2000
+Skill-Human-in-Loop-Approval-Gate-Tag	24-标签工程	人工审批门控标签系统 — 高影响Action的分级审批、工作流设计与审计追踪	2731
+Skill-HyDE-Hypothetical-Document	08-知识图谱	HyDE - 假设文档嵌入查询扩展	2497
+Skill-Hybrid-SQL-Vector-RAG	08-知识图谱	Skill: Skill-Hybrid-SQL-Vector-RAG | 母婴跨境电商知识图谱	852
+Skill-Hybrid-Search-BM25-Vector	08-知识图谱	稀疏+稠密混合检索 — BM25 与向量检索融合	2116
+Skill-Hyperparameter-Optimization	12-ML基础	Hyperparameter Optimization（超参调优）	2982
+Skill-IIA-Substitution-Pattern-Analysis	05-推荐系统	IIA替代模式分析 — Nested Logit建立商品品类树竞争结构	3403
+Skill-IP-Infringement-Risk-Scan	21-合规决策	IP Infringement Risk Scan — 上架前知识产权侵权风险自动扫描（商标+专利+著作权）	2890
+Skill-IP-Trademark-Brand-Monitoring	19-风控反欺诈	IP Trademark Brand Monitoring — 知识产权主动监控：商标侵权自动检测与预警	2566
+Skill-ITO-DOI-Inventory-Turnover-Optimizer	04-供应链	ITO/DOI库存周转率优化闭环 — 库存效率KPI驱动的补货与清仓决策	3313
+Skill-ITO-Three-Phase-Health-Tracking	04-供应链	ITO备货前中后三阶段健康度追踪 — 库存周转全周期过程KPI与干预决策闭环	3625
+Skill-IV-Instrumental-Variables	01-因果推断	Instrumental Variables (IV) for Causal Inference with Endogeneity	2603
+Skill-Identified-Bayesian-MMM	15-营销投放分析	Identified Bayesian MMM — 基于高斯过程的无混淆贝叶斯营销归因	3308
+Skill-Identity-Fragmentation-Debiasing	13-广告分析	Identity Fragmentation Debiasing（身份碎片化纠偏）	2489
+Skill-Identity-Fraud-Detection	19-风控反欺诈	Identity Fraud Detection — 多维账号欺诈检测：设备+行为+网络三重验证	1298
+Skill-Imbalanced-Data-Handling	12-ML基础	Skill Card: Imbalanced Data Handling in Mother-Baby Cross-Border E-commerce	2541
+Skill-In-Context-Learning-Tabular	12-ML基础	In-Context Learning表格数据 — 无需训练的少样本电商数据分析	3843
+Skill-In-Transit-Inventory-Tracking-Visibility	04-供应链	在途库存追踪与全链路可视化 — 海运/空运实物流信息流双轨监控	3465
+Skill-InPromo-Realtime-Decision-KPI	04-供应链	大促中实时决策KPI与流量协同阈值 — 售罄速率监控/流量协同触发/紧急干预决策	2863
+Skill-Inbound-ETA-Accuracy-KPI	04-供应链	在途ETA准确率与到货履约率KPI — 过程数据vs结果数据的全链路在途管理体系	3322
+Skill-Inclusive-Design-Accessibility-AI	11-AI人文	Inclusive Design Accessibility AI — 包容性设计AI（无障碍母婴产品推荐与界面优化）	1884
+Skill-Index-Health-Monitoring	25-搜索流量工程	索引健康度监控 — 全链路搜索索引覆盖率与收录状态追踪	3212
+Skill-Infant-Formula-FDA-Compliance-Checker	21-合规决策	婴儿配方奶粉FDA合规检查器 — 自动验证21 CFR Part 107标签合规性	4790
+Skill-Infant-Lifecycle-Purchase-Rhythm	06-增长模型	Infant Lifecycle Purchase Rhythm — 婴儿 0-24 月龄标准消费品类时序图谱建模	3384
+Skill-Instagram-Reels-Commerce-Attribution	15-营销投放分析	Instagram Reels Commerce Attribution — Reels 商品发现链路归因与转化量化	2735
+Skill-InstructUIE-Unified-Information-Extraction	07-NLP-VOC	Skill: InstructUIE — 统一信息抽取框架	1092
+Skill-Intelligent-Attribution-Causal-Forest	01-因果推断	智能归因 - 因果森林 (Causal Forest)	2465
+Skill-Intelligent-Prediction-Doubly-Robust	03-时间序列	智能预测 - 双重稳健估计 (Doubly Robust Estimation)	2261
+Skill-Interference-Networks-Causal	01-因果推断	网络干扰因果推断 — 社交溢出效应与 Peer Effects 估计	2658
+Skill-Interference-Spillover-Correction	02-A_B实验	实验溢出效应纠正 — 网络干扰下A/B实验的因果偏差修正	2917
+Skill-Interleaving-Experiment-Design	02-A_B实验	Interleaving 实验设计 — 用混排对照替代传统 A/B，提升排序策略评估效率 10 倍	2615
+Skill-Interleaving-Experiment-Recommendation	02-A_B实验	推荐系统交错实验 — 快速在线评估推荐算法的位置无关方法	3424
+Skill-Interleaving-Ranking-AB-Test	02-A_B实验	Interleaving for Ranking AB Test — 排序系统的交叉实验（比传统 AB 更灵敏）	2799
+Skill-Intermittent-Demand-Croston-TSB	03-时间序列	Intermittent Demand Croston TSB — 母婴长尾 SKU 间歇需求预测	1823
+Skill-International-Search-Localization	25-搜索流量工程	Skill-International-Search-Localization — 跨市场搜索关键词本地化	3170
+Skill-Inventory-Aging-Cost-Management	04-供应链	库龄分段管理与资金成本化 — 库存账龄结构诊断、持有成本精算与阶梯清仓触发	3855
+Skill-Inventory-Carrying-Cost-Model	23-运营财务	Skill-Inventory-Carrying-Cost-Model — 库存持有成本模型	2512
+Skill-Inventory-Demand-Sensing	18-物流履约	Inventory Demand Sensing — 库存需求感知：实时信号融合驱动智能补货	2826
+Skill-Inventory-Event-Sourcing-Architecture	24-标签工程	库存事件溯源架构 — Event Sourcing模式下的库存状态完全可追溯与重放	2441
+Skill-Inventory-Financing-Optimization	23-运营财务	Inventory Financing Optimization — 库存融资与供应链金融决策优化	3738
+Skill-Inventory-Health-Aging-Attribution	04-供应链	Business Metric-Aware Forecasting for Inventory Management	2876
+Skill-Inventory-Positioning-Multi-DC	18-物流履约	Inventory Positioning Multi-DC — 多仓库存定位优化（FBA+海外仓+自营仓协同）	892
+Skill-Inventory-Theft-Warehouse-Anomaly	19-风控反欺诈	Inventory Theft Warehouse Anomaly — 海外仓库存异常检测盗窃/错发/损耗识别	2176
+Skill-Inventory-Turnover-ABC-Classification	04-供应链	ABC动销率动态分层与差异化策略 — ABCDE五级动销管理与80/20库存结构优化	3677
+Skill-Inventory-Write-Down-Impairment	23-运营财务	Inventory Write-Down Impairment — 库存减值准备计算（滞销品会计处理+税务）	898
+Skill-Joint-Ads-Recommendation-Optimization	13-广告分析	Joint Ads Recommendation Optimization — 广告推荐联合优化：消除目标冲突的统一框架	2502
+Skill-KB-RBAC-Access-Control	16-智能体工程	Skill-KB-RBAC-Access-Control	2045
+Skill-KG-Application-Patterns	08-知识图谱	KG Application Patterns — 知识图谱下游应用：从构建到推荐/搜索/冷启动	2715
+Skill-KG-Augmented-Recommendation-CoLaKG	08-知识图谱	知识图谱增强推荐 - CoLaKG (LLM × KG)	3532
+Skill-KG-Auto-Construction-Agent-Driven	08-知识图谱	AI Agent 驱动的电商知识图谱自动构建	2198
+Skill-KG-Data-Fusion-Pipeline	08-知识图谱	KG Data Fusion Pipeline — 多源采集数据驱动的知识图谱自动构建：竞品属性图谱融合	2332
+Skill-KG-Hallucination-Detection	08-知识图谱	KG三元组幻觉检测 — 将LLM响应结构化为知识图谱进行事实级一致性验证	3649
+Skill-KG-Incremental-Update-Pipeline	22-数据采集工程	知识图谱增量更新流水线 — 实体变更检测与一致性维护	2420
+Skill-KG-Incremental-Update	08-知识图谱	知识图谱增量更新（KG Incremental Update）	2364
+Skill-KG-Logistics-Intelligence	08-知识图谱	知识图谱物流智能 — 供应链实体关系图驱动的物流决策	3602
+Skill-KG-Powered-User-Profiling	08-知识图谱	KG-Powered User Profiling — 知识图谱驱动的用户画像：产品知识增强推荐	2067
+Skill-KG-RAG-Structured-Knowledge-Reasoning	08-知识图谱	KG-RAG — 知识图谱结构化推理路径增强	3079
+Skill-KG-Relation-Completion-CBLiP	08-知识图谱	Knowledge Graph Relation Completion with CBLiP	2443
+Skill-KG-Supply-Chain-Cost-Attribution	08-知识图谱	KG Supply Chain Cost Attribution — 图神经网络 + 因果推断的供应链成本归因	4275
+Skill-KGQA-Question-Answering	08-知识图谱	Knowledge Graph Question Answering (KGQA)	2300
+Skill-KLong-Long-Horizon-Agent-Training	16-智能体工程	KLong — 超长时域 Agent 训练：轨迹分割 SFT + 渐进 RL	2128
+Skill-KOL-Creator-Matching	15-营销投放分析	KOL Creator Matching — KOL/达人精准匹配与 ROI 预测	3919
+Skill-KOL-ROI-Causal-Attribution	15-营销投放分析	KOL ROI 因果归因（网红/达人投放效果的真实增量测算）	3538
+Skill-KOL-Video-ROI-Attribution	20-AI视频生成	KOL Video ROI Attribution — KOL视频ROI归因（网红营销效果因果估计）	852
+Skill-KV-Cache-Optimization-Agent	16-智能体工程	KV-Cache优化 — Agent推理内存效率的系统级提升	3531
+Skill-Kalman-Filter-Demand-Tracking	03-时间序列	Kalman Filter 需求状态追踪 — 在噪声销售数据中实时追踪真实需求	3228
+Skill-Keyword-Bid-Auto-Adjuster	13-广告分析	Keyword-Bid-Auto-Adjuster — 关键词转化率偏差自动调整出价	3130
+Skill-Keyword-Cannibalization-Detection	25-搜索流量工程	关键词自相竞争检测 — 用二部图 Jaccard 算法发现同店 SKU 流量内耗	3327
+Skill-Keyword-Competition-Scoring	13-广告分析	Keyword Competition Scoring — 搜索词竞争力量化评分	4377
+Skill-Keyword-Demand-Gap-Analysis	25-搜索流量工程	关键词需求缺口矩阵分析 — 识别高需求低竞争关键词蓝海	3128
+Skill-Knowledge-Base-Version-Control	08-知识图谱	Skill: 知识库版本控制系统	530
+Skill-Knowledge-Conflict-Detection-LLM	08-知识图谱	知识冲突检测 — 参数知识与外部知识的一致性对齐	3117
+Skill-Knowledge-Conflict-Detection-Resolution	08-知识图谱	Knowledge Conflict Detection — 知识冲突检测与消解	2982
+Skill-Knowledge-Graph-Auto-Update	22-数据采集工程	Knowledge Graph Auto-Update — 知识图谱增量更新与一致性维护	2935
+Skill-Knowledge-Graph-Rec	05-推荐系统	Knowledge Graph Enhanced Recommendation — 知识图谱增强推荐	3533
+Skill-Knowledge-Graph-for-Skills-Management	08-知识图谱	Knowledge Graph for Skills Management（知识图谱驱动的技能管理）	2687
+Skill-LACA-CrossLingual-ABSA	14-用户分析	LACA 跨语言 ABSA - LLM 数据增强多语种情感分析	3641
+Skill-LDP-Identity-Aware-Protocol	16-智能体工程	LDP — 身份感知 Agent 通信协议：模型级路由 + 37% Token 节省	2705
+Skill-LLM-Annotation-Weak-Supervision	09-DataAgent-LLM	EvoPool — 进化式多智能体弱监督标注	2820
+Skill-LLM-Augmented-Recommendation	05-推荐系统	LLM Augmented Recommendation — 大语言模型增强个性化推荐：自然语言驱动的跨域用户意图理解	2655
+Skill-LLM-AutoBidding-MAS	10-MAS	LLM AutoBidding MAS — 大语言模型驱动的层次化自动竞价系统	2374
+Skill-LLM-Business-Intelligence-Reasoning	09-DataAgent-LLM	LLM Business Intelligence Reasoning — LLM 商业智能推理：从数据到决策的 CoT 分析	2972
+Skill-LLM-Causal-Discovery	01-因果推断	LLM辅助因果图发现 — 用语言模型先验加速因果结构学习	4353
+Skill-LLM-Causal-Graph-Prior	01-因果推断	LLM as Causal Graph Prior — LLM 辅助因果图先验注入	3006
+Skill-LLM-Code-Generation-Data-Pipeline	09-DataAgent-LLM	LLM驱动数据管道代码生成 — 自然语言生成ETL/数据清洗代码	4604
+Skill-LLM-Contract-Compliance-Review	21-合规决策	LLM Contract Compliance Review — LLM 采购合同合规审查：跨境协议风险自动化识别	2933
+Skill-LLM-Data-Annotation-Pipeline	22-数据采集工程	LLM-based Data Annotation Pipeline — LLM 辅助数据标注流水线	3519
+Skill-LLM-Demand-Signal-Extraction	09-DataAgent-LLM	LLM 从非结构化数据抽取需求信号 — 评论/社媒挖掘	2929
+Skill-LLM-Ecommerce-Report-Automation	09-DataAgent-LLM	LLM 驱动电商经营报表自动生成 — 日报/周报零代码落地	2442
+Skill-LLM-Experiment-Hypothesis-Generation	02-A_B实验	LLM-Assisted Experiment Hypothesis Generation — LLM 辅助实验假设生成与优先级排序	1235
+Skill-LLM-Experiment-Hypothesis	02-A_B实验	LLM 辅助实验假设生成 — AI 驱动的 A/B 测试优先级排序	1181
+Skill-LLM-Financial-Report-Analyst	09-DataAgent-LLM	LLM Financial Report Analyst — 迭代精化 + 代码验证的智能财务报告解读	2794
+Skill-LLM-Focused-Web-Crawling	22-数据采集工程	LLM-Focused Web Crawling — LLM/MLLM 引导的主题爬取：KG 驱动发现与动态 JS 页面抽取	2135
+Skill-LLM-Generative-Product-Search	08-知识图谱	LLM Generative Product Search — LLM 生成式商品搜索：超越关键词的意图理解	3479
+Skill-LLM-Hallucination-Detection-BI	09-DataAgent-LLM	LLM幻觉检测 — 商业智能场景的事实一致性验证引擎	3840
+Skill-LLM-Mixer-New-Product-Forecast	06-增长模型	LLM-Mixer 多尺度时序新品销量预测 — LLM 增强多分辨率分解	3468
+Skill-LLM-Multi-DC-Inventory	04-供应链	LLM Multi-DC Inventory — LLM 驱动多仓库存再平衡与可解释优化	3555
+Skill-LLM-Negotiation-Conversion-Agent	16-智能体工程	LLM Negotiation Conversion Agent — LLM 谈判代理驱动的成交率优化	3681
+Skill-LLM-Review-Manipulation-Detection	19-风控反欺诈	LLM刷评检测 — 门控图Transformer+语言模型嵌入	3199
+Skill-LLM-Review-Structured-Extraction	07-NLP-VOC	LLM Review Structured Extraction — 方面情感 JSON 批量提取与语义聚类	3321
+Skill-LLM-SC-MultiAgent-Consensus-Replenishment	24-标签工程	LLM多智能体共识补货决策 — InvAgent框架：需求/采购/仓储三方博弈自动达成最优	2837
+Skill-LLM-Schema-Inference	09-DataAgent-LLM	LLM 自动推断数据结构 — 无 schema 的电商 API 接入	2314
+Skill-LLM-Search-Query-Expansion	25-搜索流量工程	LLM搜索词语义扩展 — 用大模型覆盖长尾搜索意图提升Listing覆盖面	4025
+Skill-LLM-Session-Personalization-Cache	05-推荐系统	LLM Session Personalization Cache — LLM 驱动的会话意图缓存与千人千面推荐	4401
+Skill-LLM-Tool-Selection-Router	09-DataAgent-LLM	LLM工具路由与意图识别 — 意图分类与置信过滤	3383
+Skill-LLM-Uncertainty-Quantification-BI	09-DataAgent-LLM	LLM输出不确定性量化 — BI场景的置信度感知决策	3766
+Skill-LLM-as-Judge-Evaluator	09-DataAgent-LLM	LLM-as-Judge — 用大模型自动评估生成内容质量	3129
+Skill-LLMForecaster-Seasonal-Event	04-供应链	LLMForecaster Seasonal Event — LLM 增强的季节性事件需求预测	3405
+Skill-LLMLingua-Context-Compression	16-智能体工程	LLMLingua-2 — 大语言模型上下文压缩	3069
+Skill-LMM-Searcher-Multimodal-Context	16-智能体工程	LMM-Searcher — 长链多模态 Agent：UID 占位符按需加载图片	2576
+Skill-LTV-Acquisition-Budget-Gate	06-增长模型	LTV-Acquisition-Budget-Gate — LTV/CAC比值驱动的获客预算自动开闸/熔断决策器	3095
+Skill-LTV-CAC-Acquisition-Gate	06-增长模型	LTV CAC Acquisition Gate — LTV/CAC比率触发渠道获客自动暂停或扩投	2714
+Skill-LTV-Prediction-BTYD	06-增长模型	LTV Prediction BTYD — BG/NBD + Gamma-Gamma 客户生命周期价值预测	3314
+Skill-LTV-Prediction-ZILN	06-增长模型	LTV预测 - 零膨胀对数正态模型 (ZILN)	2240
+Skill-Label-Smoothing-Regularization	12-ML基础	标签平滑正则化 — 改善过拟合与模型置信度校准	3085
+Skill-Last-Mile-Cost-Per-Zone-Analytics	24-标签工程	末程分区成本精算 — 农村/偏远/标准区域差异化成本分解与路线优化	2482
+Skill-Last-Mile-Delivery-Prediction	18-物流履约	Last-Mile Delivery Prediction（最后一公里配送时效预测）	2424
+Skill-Last-Mile-Network-Planning	18-物流履约	Last Mile Network Planning — VRP变体+海外仓选址末端网络优化	3186
+Skill-Latent-Class-Demand-Segmentation	14-用户分析	潜在类别需求分群 — EM算法自动发现购买决策者类型	3329
+Skill-LayoutLM-Document-Structure-Parsing	08-知识图谱	LayoutLM — 文档版面理解与结构化解析	2906
+Skill-Lead-Time-Demand-Integration-Model	03-时间序列	Lead Time Demand Integration Model — 前置期×需求联合分布建模缺货概率量化	2366
+Skill-Lead-Time-Distribution-Risk-GenQOT	04-供应链	Gen-QOT 提前期分布建模 - 动态安全库存防海运延误	3607
+Skill-Lead-Time-Safety-Stock-Auto-Adjuster	04-供应链	Lead Time Safety Stock Auto Adjuster — P95前置期超标时自动上调安全库存至P99覆盖水平	3048
+Skill-Lifecycle-Stage-Aware-Rec	05-推荐系统	Lifecycle Stage Aware Recommendation — 用户生命周期感知推荐	3291
+Skill-Listing-AB-Testing-Automation	13-广告分析	Listing AB Testing Automation — LLM Agent 驱动的 Listing A/B 测试自动化	4252
+Skill-Listing-AI-Copywriting	13-广告分析	Amazon Listing 文案 AI 生成（标题+Bullet+描述全套）	3873
+Skill-Listing-Compliance-Auto-Repair	21-合规决策	Listing Compliance Auto Repair — AI 驱动违规 Listing 自动修复	3517
+Skill-Listing-Conversion-Rate-Optimizer	25-搜索流量工程	Skill-Listing-Conversion-Rate-Optimizer — Listing 转化率 A/B 测试优化器	3775
+Skill-Listing-Health-Diagnostic	13-广告分析	Listing Health Diagnostic — Listing 快诊：多维度评分驱动的上架质量诊断	3137
+Skill-Listing-Quality-Scoring	13-广告分析	Skill-Listing-Quality-Scoring	3270
+Skill-Listing-Semantic-Relevance-Scoring	25-搜索流量工程	Listing 语义相关性评分 — 用 Sentence-BERT 诊断 SEO 缺口	3770
+Skill-Listing-Suppression-Detection	19-风控反欺诈	Listing Suppression Detection — Listing 被平台隐藏/降权检测（非账号问题）	2231
+Skill-Live-Audience-Real-Time-Personalization	14-用户分析	直播间实时受众画像 — 弹幕意图分类与动态话术切换	3010
+Skill-Live-Commerce-Stream-Algorithm	20-AI视频生成	Live Commerce Stream Algorithm — 直播电商算法建模与互动信号优化	2699
+Skill-Live-Script-Optimization-NLP	07-NLP-VOC	直播话术优化NLP — 情感曲线+格兰杰因果挖掘高转化话术模式	3210
+Skill-Live-Stream-Conversion-Predictor	20-AI视频生成	Live Stream Conversion Predictor — 直播转化率实时预测（GMV预警+切品时机）	890
+Skill-Live-Stream-Highlight-Extraction	20-AI视频生成	Live-Stream-Highlight-Extraction — 直播高光片段自动提取与二次传播内容生产	3092
+Skill-Local-Order-Fulfillment-Rate-FDC	04-供应链	本地订单达成率与FDC仓网覆盖KPI — 本地发货率/跨仓调拨成本/仓网优化决策	3432
+Skill-Logistics-Anomaly-Fraud-Signal	18-物流履约	Logistics Anomaly Fraud Signal — 物流轨迹异常作为欺诈信号特征工程	2816
+Skill-Logistics-Carbon-Scope3-Tracker	18-物流履约	物流碳排放Scope3追踪 — 全链路碳足迹核算引擎	3606
+Skill-Logistics-Cost-Lifecycle-KPI	04-供应链	物流成本前中后生命周期管理KPI — 生意前模拟/生意中账单/生意后分析的三段成本闭环	3600
+Skill-Logistics-Cost-Model	23-运营财务	Logistics Cost Model — 跨境物流全链路成本建模与关税不确定性优化	2906
+Skill-Logistics-Cost-PL-Attribution	18-物流履约	Logistics Cost PL Attribution — 物流成本 P&L 归因：每单头程+FBA+退货的利润拆解	3649
+Skill-Logistics-Cost-Structure-Decomposition	04-供应链	全链路物流成本结构分解 — 进存销三段成本拆解与降本杠杆识别	3141
+Skill-Logistics-Fraud-Detection	18-物流履约	Logistics Fraud Detection — 物流链路欺诈检测：虚假收货、刷单物流与地址篡改的识别与拦截	2513
+Skill-Logistics-Plan-Three-Dimension-Accuracy	04-供应链	物流计划进销存三维准确率体系 — 入库/存货/销售三层预测准确率量化与根因归因	3821
+Skill-Logistics-SLA-Causal-Impact	18-物流履约	物流SLA变更的因果影响 — 时效承诺对复购率的DiD分析	2953
+Skill-Long-Horizon-Experiment-Effect	02-A_B实验	长期实验遗留效应估计 — 避免实验期偏差的因果推断	3613
+Skill-Long-Tail-Keyword-Mining	25-搜索流量工程	长尾关键词挖掘 — NLP词频+竞品反查+搜索建议词三路融合	3271
+Skill-Long-Tail-Opportunity-Auto-Capture	25-搜索流量工程	Long-Tail-Opportunity-Auto-Capture — 新兴长尾词周搜索量激增自动创建定向广告组	3163
+Skill-Long-Tail-SKU-Clearance-Optimization	04-供应链	长尾SKU管理与滞销清仓优化 — 缺货率与长尾品双向治理算法	3261
+Skill-Long-Tail-Search-Embedding-SEO	13-广告分析	Long Tail Search Embedding SEO — 双塔嵌入模型驱动的电商长尾搜索词排名优化	4127
+Skill-Long-Term-Holdout-Group-Design	02-A_B实验	Long-term Holdout Group Design — 长期保留组设计（防止学习效应污染）	2887
+Skill-Long-Term-Holdout-Group	02-A_B实验	长期保留组设计 — 防止新奇效应污染实验结论	2521
+Skill-Long-Term-Preference-Memory	16-智能体工程	Shopping Companion — 记忆增强的长期偏好购物 Agent	2785
+Skill-LongRAG-Long-Context-Hybrid	08-知识图谱	LongRAG — 长上下文与RAG混合决策策略	3275
+Skill-Loss-Aversion-Promotion-Design	15-营销投放分析	损失厌恶促销设计 — 「限时最后3件」比「立省30元」点击率高35%	3167
+Skill-Low-Cost-Dependency-KG-Construction	08-知识图谱	低成本依存解析KG构建 — 1/10成本达到LLM 94%质量的无监督知识图谱构建	3335
+Skill-Loyalty-Program-ROI-Modeling	06-增长模型	Loyalty Program ROI Modeling — 双重差分评估会员积分体系 LTV 增量价值	3161
+Skill-MAA-Review-to-Action-Decision	14-用户分析	MAA 多 Agent 行动建议 - 从评论到产品改进决策链	3228
+Skill-MAPPO-GAT-Dynamic-Pricing	17-价格优化	MAPPO+GAT多智能体图注意力动态定价 — 产品关系图驱动的多SKU协同价格优化	3621
+Skill-MAS-Ad-Budget-Multi-Platform-Negotiation	10-MAS	MAS多平台广告预算Stackelberg博弈 — 多平台广告Agent序贯博弈预算分配	3448
+Skill-MAS-Adversarial-Defense	10-MAS	MAS Adversarial Defense — 多智能体系统攻防：群体合谋检测、规划时攻击防御、路由感知注入	2655
+Skill-MAS-Collaborative-Recommendation	05-推荐系统	MAS Collaborative Recommendation — 多智能体协同个性化推荐：LLM Agent 异构协作框架	2329
+Skill-MAS-Competitive-Intelligence-Agent	10-MAS	多 Agent 竞品情报系统 — 7×24 小时全天候竞品监控与预警	2872
+Skill-MAS-Compliance-Multi-Market-Orchestrator	10-MAS	MAS-Compliance-Multi-Market-Orchestrator — 多市场合规检查Agent并行编排与跨市场合规矩阵生成	3683
+Skill-MAS-Consensus-Mechanism	10-MAS	MAS Consensus Mechanism — 多智能体共识协议：分布式一致性与拜占庭容错	2867
+Skill-MAS-Cross-Market-Compliance-Orchestrator	10-MAS	MAS跨市场合规编排 — 多市场合规Agent并行处理与冲突解决	3473
+Skill-MAS-Customer-Journey-Orchestration	10-MAS	多 Agent 客户旅程编排 — 从首曝光到复购的全链路 Agent 协作	3065
+Skill-MAS-Customer-Service-Intelligent-Escalation	10-MAS	MAS客服智能升级路由 — 首答Agent/人工升级/风控三者协作路由机制	4137
+Skill-MAS-Dynamic-KG-Collaboration	10-MAS	MAS Dynamic KG Collaboration — 多智能体动态知识图谱协同：实时构建、冲突解决、协同进化	2669
+Skill-MAS-Dynamic-Pricing-Coalition	10-MAS	MAS多SKU定价联盟博弈 — 母婴品牌多SKU组合利润最大化联合定价	3248
+Skill-MAS-Dynamic-Trust	10-MAS	MAS Dynamic Trust — 多智能体动态信任图：抵御 Sleeper Agent 与历史感知可信聚合	2263
+Skill-MAS-Ecommerce-Ops-Automation	10-MAS	多 Agent 电商运营自动化 — 补货/广告/客服全天候自动化编排	3143
+Skill-MAS-Inventory-Consensus-Action	10-MAS	MAS-Inventory-Consensus-Action — 多仓Agent协商补货分配共识与库存均衡执行	2756
+Skill-MAS-Multi-Warehouse-Replenishment-Consensus	10-MAS	MAS多仓库补货Nash协商 — 多仓库Agent协商最优库存调拨方案	3386
+Skill-MAS-Orchestrator	10-MAS	MAS Orchestrator — 多智能体编排与调度	794
+Skill-MAS-Pricing-Coalition-Stability	10-MAS	MAS-Pricing-Coalition-Stability — 多SKU联合定价纳什均衡检测与联合体稳定性维持	3142
+Skill-MAS-Resource-Scheduling	10-MAS	MAS Resource Scheduling — OS 调度原语驱动的多智能体资源管理	2482
+Skill-MAS-Revenue-Operations	10-MAS	MAS运营财务协同 — 多智能体驱动的P&L实时归因与决策	3640
+Skill-MAS-Scale-Management	10-MAS	MAS Scale Management — 大规模多智能体集群管理：万级并发、单调扩展、公司制架构	2700
+Skill-MAS-Search-Optimization	10-MAS	MAS驱动搜索流量优化 — 多智能体协同的A9算法自动化运营	3694
+Skill-MAS-Testing-Verification	10-MAS	MAS Testing & Verification — 多智能体系统测试验证：覆盖制导 Fuzzing + 跨框架可观测性	1170
+Skill-MAS-VOC-Multi-Agent-Analysis	10-MAS	MAS VOC Multi-Agent Analysis — 多智能体用户声音分析：协作挖掘产品迭代洞察	3442
+Skill-MAS-Video-Content-Optimization	10-MAS	MAS视频内容优化 — 多智能体协同的短视频全链路运营	3427
+Skill-MASEval-System-Evaluation	10-MAS	MASEval — 系统级 MAS 评估：Framework 影响与模型影响同等重要	1917
+Skill-MCP-A2A-Protocol-Stack	16-智能体工程	MCP + A2A 双协议栈 — Orchestrated Multi-Agent 企业架构	2497
+Skill-MCP-Tool-Use-Benchmark	16-智能体工程	MCP Tool Use 评估基准 — TFS/TEFS 双指标与干扰测试	2895
+Skill-ML-AB-Randomization-Test	02-A_B实验	ML辅助A/B随机化检验 — 有限样本随机化测试检测异质处理效应与干扰效应	3026
+Skill-ML-Model-Serving-Optimization	16-智能体工程	ML Model Serving Optimization — 知识蒸馏 + 量化 + 异步推理的模型生产化部署	3577
+Skill-ML-Pipeline-Observability	22-数据采集工程	ML 数据管道可观测性 — 数据漂移监控与告警	2360
+Skill-MMM-Budget-PL-Alignment	15-营销投放分析	MMM Budget PL Alignment — 营销预算分配与利润约束下的 ROI 优化	2908
+Skill-MMM-Budget-Reallocation-Executor	15-营销投放分析	MMM Budget Reallocation Executor — 将MMM最优权重转化为渠道预算调整API执行指令	3146
+Skill-MNL-Purchase-Choice-Model	05-推荐系统	MNL购买选择模型 — 用效用函数建模「为什么选A不选B」	3238
+Skill-MOQ-Payment-Terms-Optimization	04-供应链	MOQ与账期联动优化决策 — 最小起订量与付款条件的现金流效益模型	3598
+Skill-MOS-Multi-Source-Opinion-Summary	14-用户分析	MOS Multi-Source Opinion Summary — LLM 多源评论整合摘要	4953
+Skill-MTEB-Embedding-Benchmark-Selection	08-知识图谱	Skill-MTEB-Embedding-Benchmark-Selection	2238
+Skill-MTL-Churn-LTV-Joint-Prediction	06-增长模型	MTL Churn-LTV Joint Prediction — 流失预测与LTV联合建模	3990
+Skill-MTL-Cold-Start-SKU-Demand	03-时间序列	MTL 冷启动 SKU 需求预测 — 共享编码器加速新品上线	3583
+Skill-MTL-Multi-Objective-Ad-Optimization	13-广告分析	MTL 广告多目标联合优化 — ROAS/排名/曝光 Pareto 最优分配	3691
+Skill-MUZZLE-Web-Agent-Red-Teaming	16-智能体工程	MUZZLE — Web Agent 间接 Prompt Injection 红队框架	1543
+Skill-Markdown-Clearance-Auto-Trigger	04-供应链	Markdown Clearance Auto Trigger — 库龄超标且库存积压时自动触发降价清仓阶梯	3209
+Skill-Markdown-Optimization	17-价格优化	Markdown Optimization（折扣清仓定价优化）	2520
+Skill-Markdown-Schedule-Auto-Trigger	04-供应链	Markdown-Schedule-Auto-Trigger — Amazon FBA 滞销库存库龄触发三阶段自动降价序列	3331
+Skill-Market-Signal-Realtime-Collection	22-数据采集工程	Market Signal Realtime Collection — 实时市场信号采集：事件驱动感知与趋势冷启动检测	2364
+Skill-Market-Size-Estimation	06-增长模型	Skill-Market-Size-Estimation	3177
+Skill-Marketing-Data-Pipeline	15-营销投放分析	Marketing Data Pipeline — 营销归因多渠道数据采集管道	2557
+Skill-Marketing-Driven-Recommendation	05-推荐系统	Marketing-Driven Recommendation — 营销活动驱动的推荐系统：Promotion-Aware 个性化协同优化	2283
+Skill-Marketing-Mix-Modeling	15-营销投放分析	Marketing Mix Modeling (MMM) for Macro Budget Allocation	2424
+Skill-Matrix-Factorization	05-推荐系统	Skill Card: Matrix Factorization for Recommendation (矩阵分解推荐)	2371
+Skill-Matryoshka-Representation-Learning	08-知识图谱	Matryoshka表示学习 — 嵌套多尺度嵌入压缩	3558
+Skill-MedRAG-Domain-Vertical-RAG	08-知识图谱	垂直领域RAG — 医疗→电商迁移学习的最佳实践	3824
+Skill-Mediation-Causal-Mechanism-Analysis	01-因果推断	Causal Mediation Analysis — Decomposing "Why It Works	2284
+Skill-MemGPT-Virtual-Context-Management	16-智能体工程	Skill-MemGPT-Virtual-Context-Management	557
+Skill-Member-Lifecycle-Intervention-Sequencing	06-增长模型	Member Lifecycle Intervention Sequencing — RL 序列干预优化会员生命周期各阶段触达时机	2813
+Skill-Membership-Churn-Early-Warning-Graph	06-增长模型	Membership Churn Early Warning Graph — 图神经网络会员流失预警比行为序列早 15-30 天识别风险	3727
+Skill-Membership-Tier-Design-Optimization	06-增长模型	Membership Tier Design Optimization — 多层会员体系结构的最优设计与 CLV 最大化	3381
+Skill-Memory-as-Action	16-智能体工程	Memory-as-Action — RL 内嵌式记忆操作策略 (DCPO 训练)	2824
+Skill-MemoryOS-Agent-Memory-Management	16-智能体工程	MemoryOS — OS启发的Agent分级记忆管理	3932
+Skill-Mental-Accounting-Bundle-Psychology	17-价格优化	心理账户捆绑定价心理学 — 识别同一心智账户商品组合使 AOV 提升22%	3813
+Skill-MetaGPT-SOP-Driven-Collaboration	10-MAS	MetaGPT — SOP 驱动的多智能体协作框架	2567
+Skill-MetaIE-Unified-Information-Extraction-Distillation	07-NLP-VOC	MetaIE — 统一信息抽取蒸馏框架	2689
+Skill-MinHash-LSH-Knowledge-Dedup	08-知识图谱	Skill-MinHash-LSH-Knowledge-Dedup	2054
+Skill-Mixed-Strategy-Pricing-Unpredictability	17-价格优化	混合策略定价不可预测性 — 随机化定价规避竞品跟价算法	3399
+Skill-Mixture-of-Experts-Routing	12-ML基础	Mixture of Experts Routing — MoE 路由机制（多任务条件激活，降低推理成本）	2675
+Skill-MoE-Multi-Task-Learning	12-ML基础	MoE多任务学习 — 专家混合架构的多任务电商建模	3836
+Skill-Model-Calibration	12-ML基础	Model Calibration — 让预测概率真正可信的校准技术	3249
+Skill-Model-Compression-Edge-Deployment	12-ML基础	模型压缩与边缘部署 — INT8 量化 + 结构化剪枝 + ONNX 导出	3384
+Skill-Model-Evaluation-Metrics	12-ML基础	Skill Card: Model Evaluation Metrics（模型评估体系）	2754
+Skill-Model-Performance-Monitor	12-ML基础	Skill-Model-Performance-Monitor	2528
+Skill-Modular-RAG-Architecture	08-知识图谱	Modular RAG — 积木式RAG工程化架构	2634
+Skill-Monodense-单品价格弹性估计	04-供应链	Skill: Monodense 单品价格弹性估计	898
+Skill-MonteCarlo-Tariff-Risk	21-合规决策	蒙特卡洛地缘政治尾部风险量化 (Monte Carlo Tariff Risk)	907
+Skill-Multi-Account-Operational-Isolation	19-风控反欺诈	多账号操作隔离规范 — 风险传染模型与安全运营SOP	3236
+Skill-Multi-Agent-Debate	10-MAS	Multi-Agent Debate — 多智能体辩论共识	2567
+Skill-Multi-Agent-Skill-Composition	10-MAS	Multi-Agent Skill Composition — 多 Agent 协作 Skill 链式 DAG 编排	2757
+Skill-Multi-Armed-Bandit-AB-Hybrid	02-A_B实验	MAB×A/B混合实验 — 探索利用动态平衡策略	1360
+Skill-Multi-Armed-Bandit	02-A_B实验	Multi-Armed Bandit Algorithm for Mother-Baby Cross-Border E-commerce	2933
+Skill-Multi-Cell-Factorial-Experiment	02-A_B实验	Multi-cell Factorial Experiment — 多因素析因实验设计（电商 2^k 实验）	2903
+Skill-Multi-Channel-Inventory-Pooling	04-供应链	Multi-Channel Inventory Pooling（多渠道库存池化）	2975
+Skill-Multi-Channel-Inventory-Sync	04-供应链	Multi-Channel Inventory Sync — 多渠道库存协同：Amazon+独立站+TikTok联动库存管理	2556
+Skill-Multi-Channel-Price-Consistency	17-价格优化	Multi-Channel Price Consistency — 多渠道价格一致性管理（防跨平台价格冲突）	1157
+Skill-Multi-Currency-PnL-Reconciliation	23-运营财务	Skill-Multi-Currency-PnL-Reconciliation — 多币种P&L对账	3139
+Skill-Multi-Echelon-Inventory	04-供应链	Multi-Echelon Inventory Optimization (多阶库存优化)	2332
+Skill-Multi-Factory-Capacity-Allocation	04-供应链	多工厂产能分配算法 — OEM/ODM多厂商协同下的弹性产能调度优化	2458
+Skill-Multi-Horizon-Forecast-Reconciliation	03-时间序列	Multi-Horizon Forecast Reconciliation — 多时间粒度预测协调（日/周/月一致性）	1709
+Skill-Multi-KB-Federated-Reasoning	08-知识图谱	Skill-Multi-KB-Federated-Reasoning	618
+Skill-Multi-Market-Ad-Copy-Compliance	21-合规决策	多市场广告文案合规矩阵 — FDA/FTC/ASA 差异自动对比	2599
+Skill-Multi-Market-Compliance-Matrix-Ontology	24-标签工程	多市场合规矩阵本体 — US/EU/JP/AU跨境合规要求统一建模与差异分析	4207
+Skill-Multi-Market-Search-Localization	25-搜索流量工程	多市场搜索词本地化 — 多站点关键词迁移与本地语言适配	3301
+Skill-Multi-Market-VOC-Cross-Analysis	07-NLP-VOC	Skill-Multi-Market-VOC-Cross-Analysis — 多市场VOC交叉分析	3622
+Skill-Multi-Metric-Experiment-Tradeoff	02-A_B实验	多指标实验权衡决策 — OEC与帕累托最优实验评估	4006
+Skill-Multi-Objective-Budget-Allocation	15-营销投放分析	Multi-Objective Budget Allocation（多目标预算分配）	2656
+Skill-Multi-Objective-Constrained-Action-Planning	24-标签工程	供应链多目标约束感知行动规划 — MILP+LLM的Pareto最优决策方案自动生成	2888
+Skill-Multi-Platform-Ad-Budget-Allocator	15-营销投放分析	多平台广告预算最优分配 — 约束优化最大化跨平台 ROAS	3385
+Skill-Multi-SKU-Copula-Risk	04-供应链	Multi-SKU Copula Risk — 多SKU库存风险联合建模：Copula 协动分析	2805
+Skill-Multi-SKU-Procurement-Budget-Allocation	04-供应链	Constructing decision rules for multiproduct newsvendors	3128
+Skill-Multi-Seller-Account-Portfolio	23-运营财务	Multi-Seller Account Portfolio Management — 多店铺账号组合管理：跨账号资源协同与风险隔离	2970
+Skill-Multi-Source-User-Identity-Unification	14-用户分析	Multi-Source User Identity Unification — 跨平台用户身份统一打通 Amazon/TikTok/独立站同一用户	3844
+Skill-Multi-Step-Ahead-Forecast-Calibration	03-时间序列	Multi-Step-Ahead Forecast Calibration — 多步预测校准滚动修正减少累积偏差	1986
+Skill-Multi-Step-Reasoning-BI	09-DataAgent-LLM	多步推理BI分析 — LLM链式推理自动生成财务归因报告	3527
+Skill-Multi-Task-Ad-CTR-CVR	12-ML基础	多任务广告CTR/CVR联合学习 — 共享底层的多目标广告预测	3398
+Skill-Multi-Task-User-Representation	14-用户分析	Multi-Task User Representation — 多任务用户表示学习：统一用户画像驱动全业务	3281
+Skill-Multi-Temperature-Logistics	18-物流履约	Multi-Temperature Logistics — 多温区混合配送成本优化	3337
+Skill-MultiModal-Product-Rec	05-推荐系统	MultiModal Product Recommendation — 多模态产品推荐	3663
+Skill-MultiTurn-RAG-Context-Management	08-知识图谱	Skill-MultiTurn-RAG-Context-Management	633
+Skill-Multicarrier-Parcel-Tracking-Fusion	18-物流履约	多承运商包裹追踪融合 — 跨境物流可见性引擎	3140
+Skill-Multicurrency-FX-Hedging	23-运营财务	Multicurrency FX Hedging — 跨境卖家多货币外汇风险对冲	3710
+Skill-Multilevel_FLP	04-供应链	Multilevel Facility Location Optimization (多级设施选址优化)	2382
+Skill-Multilingual-Customer-Service-Translation	14-用户分析	Multilingual Customer Service Translation — 多语言客服自动翻译与情绪感知保全	2295
+Skill-Multilingual-Listing-Generation	20-AI视频生成	LLM多语言Listing批量生成 — 1小时完成5语言新品入驻	3656
+Skill-Multilingual-Listing-Localization	13-广告分析	Multilingual Listing Localization — LLM 驱动的多语言 Listing 本地化与文化适配	2525
+Skill-Multilingual-Live-Virtual-Anchor-Clone	20-AI视频生成	多语言直播虚拟主播实时克隆 — 跨语言直播带货数字人生成与实时驱动	3369
+Skill-Multilingual-NER-Universal-v2	08-知识图谱	Multilingual Named Entity Recognition (Universal NER v2)	3745
+Skill-Multilingual-NLP-Pipeline	07-NLP-VOC	多语言 NLP 管道 — mBERT Zero-Shot 跨语言情感/实体提取	3266
+Skill-Multilingual-Sentiment-Alignment	07-NLP-VOC	Multilingual Sentiment Alignment — 多语言情感对齐（跨语言评论情感一致性）	1456
+Skill-Multilingual-Subtitle-Auto-Generator	20-AI视频生成	Skill-Multilingual-Subtitle-Auto-Generator — 多语言字幕自动生成	2809
+Skill-Multimarket-Expansion-Readiness-Scorer	06-增长模型	Multimarket Expansion Readiness Scorer（多市场拓展就绪度评分）	2931
+Skill-Multimodal-Fake-Review-Detection	11-AI人文	多模态伪造评论检测 — 图文联合的AI生成评论识别	3833
+Skill-Multimodal-New-Product-Sales-Forecast	06-增长模型	多模态外部信号新品销量预测 — Google Trends + 图片融合预测	3551
+Skill-Multimodal-Product-Search	08-知识图谱	UniECS — 统一多模态电商搜索与商品匹配	3310
+Skill-Multimodal-Product-Understanding	08-知识图谱	Multimodal Product Understanding — 多模态商品理解：图文统一表示驱动搜索与推荐	2818
+Skill-Multimodal-RAG	08-知识图谱	Multimodal RAG - 图文混合多模态检索增强生成	2349
+Skill-Multimodal-Table-Understanding	09-DataAgent-LLM	Multimodal Table Understanding Agent — 表格理解：规格对比/认证矩阵/价格表	1637
+Skill-Multimodal-UGC-Cross-Platform-Fusion	22-数据采集工程	跨平台UGC多模态融合采集 — 图文视频评论统一信号采集与去噪	3702
+Skill-Multivariate-Cointegration	03-时间序列	Multivariate Cointegration（多变量协整 VECM）	2787
+Skill-NEO_LRP	04-供应链	NEO-LRP（Neural Embedded Optimization for Location-Routing）	1873
+Skill-NL2Dashboard-Automation	09-DataAgent-LLM	NL2Dashboard Automation（自然语言→智能仪表盘）	3517
+Skill-NLP-Copy-AB-Test-Optimizer	02-A_B实验	NLP Copy AB Test Optimizer — CTR 加权偏好优化 + 遗传算法的文案 A/B 测试闭环	2866
+Skill-NLP-Sentiment-ML-Pipeline	07-NLP-VOC	NLP Sentiment ML Pipeline — 评论情感→ML 特征工程桥梁：将 VOC 转化为可训练信号	3847
+Skill-NLP-Text-Classification	07-NLP-VOC	NLP Text Classification — 跨品类零样本评论分类与客服工单智能分流	2709
+Skill-NOTEARS-Causal-Discovery	01-因果推断	NOTEARS/DAGMA — 连续优化因果图结构学习	2669
+Skill-NPS-Proxy-Retention-Predictor	07-NLP-VOC	NPS-Proxy-Retention-Predictor — 评论语言特征构建NPS代理指标与次月留存预测	3101
+Skill-Nash-Equilibrium-Pricing-Model	17-价格优化	纳什均衡定价模型 — 多卖家竞争价格博弈均衡求解	3627
+Skill-Navier-Stokes-Warehouse	04-供应链	Navier-Stokes 流体力学驱动的旺季仓储人流最优化 (CFD Warehouse Picking)	383
+Skill-Negative-Keyword-Safe-Guard	13-广告分析	Negative Keyword Safe Guard — 贝叶斯小样本负关键词安全过滤	2404
+Skill-Negative-Review-Root-Cause-Analyzer	07-NLP-VOC	差评根因分析器 — ABSA方面级情感分析定位产品修复优先级	4573
+Skill-Network-Effect-Experiments	02-A_B实验	Network Effect Experiments（网络效应实验）	2683
+Skill-Network-Interference-Causal	01-因果推断	Network Interference Causal — 网络干扰下的因果推断（peer effects）	2637
+Skill-Neural-Architecture-Search-NAS	12-ML基础	Neural Architecture Search (NAS) — 轻量神经网络自动设计（母婴电商边缘部署）	2714
+Skill-NeuralNDCG-Learning-to-Rank	05-推荐系统	NeuralNDCG — 可微分排序优化与Learning to Rank	2807
+Skill-New-Market-Entry-Readiness-Gate	06-增长模型	New-Market-Entry-Readiness-Gate — 新市场进入评分超阈值自动生成进入Checklist并分配任务	1689
+Skill-New-Product-Demand-Cold-Start	04-供应链	New Product Demand Cold Start — 新品需求预测：零历史数据的条件扩散模型	2410
+Skill-New-Product-Inventory-Coldstart	04-供应链	Pre-launch new product demand forecasting using Bass model with ML	2529
+Skill-New-Product-Opportunity-Mining	06-增长模型	New Product Opportunity Mining (新品机会挖掘模型)	2808
+Skill-New-SKU-Launch-Readiness-Gate	04-供应链	新品上市准入门控 — 从选品到发布的全量检查清单与Tag驱动的上市就绪评估	2406
+Skill-NonItem-Page-Path-Modeling	14-用户分析	非商品页路径建模 - 导航页在用户旅程中的转化贡献	2927
+Skill-Nonlinear-Multi-Touch-Attribution	14-用户分析	多触点非线性归因建模 — 跨渠道用户旅程因果归因与预算决策	3611
+Skill-Nudge-Architecture-Ethics	11-AI人文	Nudge Architecture Ethics — 暗模式vs正向助推：电商UX伦理边界识别	1730
+Skill-NuggetIndex-Atomic-Knowledge-Management	08-知识图谱	NuggetIndex原子知识单元管理 — 最小事实粒度+时效区间+生命周期状态的可维护RAG	3512
+Skill-OOS-Emergency-Airfreight-Gate	04-供应链	OOS-Emergency-Airfreight-Gate — 库存DOS危急+海运延误自动触发紧急空运决策门控	2924
+Skill-OT-Cross-Market-Demand-Transfer	04-供应链	OT Cross-Market Demand Transfer — 最优传输跨市场需求分布迁移	2711
+Skill-OTIF-On-Time-In-Full-Analytics	04-供应链	OTIF准时足量交货分析 — 供应商交货履约率量化与预测性缓冲策略	3634
+Skill-Observability-ML-Pipelines	22-数据采集工程	Observability for ML Pipelines — ML 数据管道可观测性	2809
+Skill-OmniThink-Knowledge-Boundary-Expansion	09-DataAgent-LLM	Skill-OmniThink-Knowledge-Boundary-Expansion	347
+Skill-Omnichannel-Inventory-Sync	04-供应链	Omnichannel Inventory Sync — 跨站多平台库存实时同步	3951
+Skill-Omnichannel-Order-Orchestration-MAS	24-标签工程	全渠道订单编排MAS — 多智能体协同的跨平台订单统一调度与冲突消解	2791
+Skill-On-Shelf-Availability-SKU-Matrix	04-供应链	在架率多仓SKU矩阵计算 — 多仓×多SKU有货率精确口径与缺货金额加权	4314
+Skill-Online-Feature-Store-SC-Realtime	24-标签工程	供应链实时特征存储架构 — Online/Offline分离+毫秒级读取的Zalando母婴SKU模式	2797
+Skill-Online-Incremental-Learning	12-ML基础	Online Incremental Learning — 在线增量学习：模型无需重训即可适应数据漂移	2496
+Skill-Ontology-LLM-AutoBuild-SC	24-标签工程	LLM驱动供应链本体自动构建 — 从ERP文档到语义图谱的零样本迭代萃取	2937
+Skill-Ontology-Schema-Design	08-知识图谱	领域 Ontology 与图谱 Schema 设计	2658
+Skill-Open-Source-Tool-Use-Model	16-智能体工程	开源 Tool Use 基座模型选型 — Hermes 4 混合推理家族	2932
+Skill-OpenRE-LLM-Knowledge-Extraction	08-知识图谱	Skill-OpenRE-LLM-Knowledge-Extraction	1979
+Skill-Operating-Cash-Flow-Forecast	23-运营财务	Operating Cash Flow Forecast — 需求预测驱动的运营现金流预测与库存融资优化	3214
+Skill-Orchestration-Trace-RL	16-智能体工程	编排轨迹驱动的强化学习 — MAS RL 三维设计框架	3342
+Skill-Order-Accuracy-Exception-Rate-KPI	04-供应链	订单准确率与异常处理KPI — 录单差错率/错发漏发率/订单异常闭环体系	4030
+Skill-Order-Cycle-Time-OTD-Analytics	04-供应链	订单交付周期OTD全链路分解 — On-Time Delivery率/交付阶段拆解/延迟根因归因	4084
+Skill-Order-Fulfillment-Rate-Dispatch-Timeliness	04-供应链	订单履约率与发货及时率 — 全链路订单从下单到签收的履约质量量化体系	3522
+Skill-Order-Promise-Date-Calculation	24-标签工程	ATP/CTP动态承诺交期计算 — 基于实时库存+PLT的订单交货承诺日期引擎	2433
+Skill-Order-Routing-Intelligence-Engine	24-标签工程	智能订单路由引擎 — 多约束订单履约路径优化与实时分配决策	3063
+Skill-Order-Splitting-Merging-Optimizer	04-供应链	订单拆合单优化器 — 多仓多渠道场景下拆单合单的成本-时效平衡决策	2535
+Skill-Organic-Content-Causal-Attribution	15-营销投放分析	Organic Content Causal Attribution — 无用户数据的有机内容因果归因 (CDA)	3881
+Skill-Organic-Paid-Rank-Synergy-Model	25-搜索流量工程	自然排名与广告排名协同效应建模 — 用 Panel DiD 量化广告飞轮 ROI	2727
+Skill-Out-of-Distribution-Detection	12-ML基础	Out-of-Distribution Detection — OOD 检测识别分布外样本（新品/新市场冷启动防御）	3143
+Skill-Overbooking-Safety-Stock-Model	17-价格优化	Overbooking Safety Stock Model — 酒店超售模型迁移到FBA补货安全超备量优化	3417
+Skill-PASTA-Offline-Assortment	04-供应链	PASTA - 离线悲观选品框架	1617
+Skill-PID-Safety-Stock-Controller	04-供应链	PID 安全库存控制器 — 将工业自动控制迁移到动态安全库存调整	2936
+Skill-PIE-Experimental-MTA	13-广告分析	PIE 实验增量预测多触点归因 - Amazon MTA 框架落地	3874
+Skill-PIKE-RAG-Specialized-Knowledge	08-知识图谱	Skill-PIKE-RAG-Specialized-Knowledge	249
+Skill-PL-Attribution-Analysis	23-运营财务	P&L Attribution Analysis（SKU 级损益归因分析）	3260
+Skill-PO-Exception-Handling-Workflow	04-供应链	采购异常处理工作流 — PO延误/取消/变更的Tag驱动自动处置与升级机制	2625
+Skill-PPC-Bid-Manipulation-Defense	19-风控反欺诈	PPC Bid Manipulation Defense — 识别竞品恶意点击耗费广告费	2354
+Skill-PPC-Keyword-Bid-Automation	13-广告分析	PPC Keyword Bid Automation — PPC 关键词出价自动化：ML 驱动的竞价优化引擎	2630
+Skill-PPC-Rule-Automation-Engine	13-广告分析	PPC Rule Automation Engine — PPC 规则自动化引擎：条件触发的广告出价智能运营	2684
+Skill-PPO_swap	04-供应链	PPO-swap（图上设施选址强化学习）	2397
+Skill-PVM-Attribution-Window-Harmonization	13-广告分析	PVM 跨平台广告归因窗口统一化 - 母婴跨境多渠道 ROAS 去偏	3117
+Skill-ParaManager-Parallel-Orchestration	10-MAS	ParaManager — 小模型主编排：Agent-as-Tool 并行子任务分解	1029
+Skill-Parcel-Damage-Prediction	18-物流履约	Parcel Damage Prediction — 包裹破损预测（物流轨迹+特征联合模型）	850
+Skill-Partial-Identification-Bounds	01-因果推断	Partial Identification Bounds — 部分识别与 ATE 边界估计（Manski Bounds）	2883
+Skill-Patent-Prior-Art-Risk-Scan	21-合规决策	专利先验技术风险扫描 — 新品上市前侵权风险评估	2809
+Skill-Peak-End-Rule-Customer-Experience	14-用户分析	峰终定律体验设计 — 体验由峰值和终点决定，把资源投向峰值触点使 NPS 提升15点	2874
+Skill-Perishable-Inventory-Markdown-Optimization	17-价格优化	Perishable Inventory Markdown Optimization — 超市易腐品定价运筹学迁移到母婴临期/过季商品	3369
+Skill-PersonaBot-RAG-Profiling	14-用户分析	PersonaBot RAG画像生成 - LLM+RAG驱动的客户画像落地工具	3195
+Skill-PersonaRAG-User-Persona-Retrieval	08-知识图谱	PersonaRAG — 用户画像驱动的个性化检索增强	3895
+Skill-Personalized-ML-Pricing	17-价格优化	Personalized ML Pricing — 个性化 ML 定价：用户级支付意愿驱动的差异化定价	3010
+Skill-Personalized-Promotion-Targeting	14-用户分析	Personalized Promotion Targeting — 个性化促销定向：用户响应异质性建模	2390
+Skill-Personalized-Search-Ranking	05-推荐系统	Personalized Search Ranking — 个性化搜索排名：用户历史驱动的搜索结果重排	2727
+Skill-Phantom-Product-Showcase-I2V	20-AI视频生成	Phantom — Product Showcase I2V（商品主体一致性视频生成）	3642
+Skill-Platform-Commission-Fee-Tracker	23-运营财务	Platform Commission Fee Tracker — 平台佣金费率变化监控（Amazon/TikTok/Shopee）	913
+Skill-Platform-Policy-Change-Adaptive-Monitor	21-合规决策	平台政策变更自适应监控 — 跨境电商合规政策智能预警与快速响应	2908
+Skill-Points-Expiry-Redemption-Liability-Model	06-增长模型	Points Expiry Redemption Liability Model — 积分过期负债精算与兑换率动态定价	3300
+Skill-PoisonedRAG-Knowledge-Poisoning-Defense	08-知识图谱	PoisonedRAG防御 — 知识库投毒攻击检测与防御	2825
+Skill-Policy-Driven-Meta-Controller	10-MAS	策略驱动元控制器 — 内容审核、延迟控制与多域通用控制面	3461
+Skill-Policy-Learning-Observational	01-因果推断	Policy Learning from Observational Data — 从观测数据学习最优决策策略	3317
+Skill-Port-Congestion-ETA-Prediction	18-物流履约	港口拥堵ETA预测 — 多因子动态到港时间估计	3784
+Skill-Position-Bias-Debiasing-Rec	05-推荐系统	Position Bias Debiasing Recommendation — 位置偏差去偏公平推荐	3424
+Skill-Post-Purchase-Email-Sequence-Optimizer	15-营销投放分析	Post-Purchase Email Sequence Optimizer（购后邮件序列优化）	2910
+Skill-Post-Purchase-Review-Request-Dispatcher	14-用户分析	Post-Purchase-Review-Request-Dispatcher — 订单完成后按满意度预测分层分发评论邀请	2990
+Skill-PostPromo-Retrospective-KPI	04-供应链	大促后复盘KPI体系 — 售罄率分析/备货vs实销对比/履约回顾/改善行动计划	3653
+Skill-Power-Analysis-Sample-Size	02-A_B实验	Power Analysis and Sample Size Calculation for A/B Testing	1955
+Skill-Pre-Launch-Compliance-Gate	21-合规决策	Pre-Launch-Compliance-Gate — 新品上架前合规评分低于阈值自动阻断并触发修复工作流	2947
+Skill-Pre-Promo-Stocktaking-KPI	04-供应链	大促前盘货量化KPI与补货触发阈值 — 盘货差距分析/补货优先级/紧急空运决策框架	3282
+Skill-Predictive-Batch-Returns-Routing	18-物流履约	退货批量逆向路由预测 — 跨境退货智能分拣与逆向物流优化	3788
+Skill-Predictive-Returns-Management	18-物流履约	Predictive Returns Management — 退货量预测与主动处理：降低逆向物流成本	2920
+Skill-Predictive-Tag-Engine-Supply-Chain	24-标签工程	预测型标签引擎 — 将未来风险转化为当前可查询标签的供应链预测打标体系	3677
+Skill-Price-Elasticity-Estimation	17-价格优化	Price Elasticity Estimation — 需求价格弹性估算：跨境 SKU 定价底线测算	3729
+Skill-Price-Elasticity-Time-Series-Fusion	03-时间序列	Price Elasticity Time Series Fusion — 价格弹性×时间序列融合预测	1994
+Skill-Price-Fence-Segmentation-Ecommerce	17-价格优化	Price Fence Segmentation — 航空分舱定价策略迁移到母婴电商三级价格歧视	3428
+Skill-Price-Scraping-Defense	17-价格优化	Price Scraping Defense — 价格爬取防御（防竞品监控+反监测策略）	1440
+Skill-Price-Sensitive-Personalized-Recommendation	17-价格优化	Price-Sensitive Personalized Recommendation — 价格感知个性化推荐：弹性×用户偏好协同	2984
+Skill-Price-Sensitive-Recommendation	05-推荐系统	Price-Sensitive Recommendation — 价格感知推荐：弹性感知的个性化定价与排序融合	2454
+Skill-Price-Signal-Collection	17-价格优化	Price Signal Collection — 竞品价格信号实时采集与结构化	2735
+Skill-Pricing-Causal-Identification	17-价格优化	Pricing Causal Identification — 工具变量 IV 识别真实价格弹性（去除内生性偏差）	2880
+Skill-Privacy-COPPA-Compliance	21-合规决策	Privacy COPPA Compliance — COPPA 儿童隐私合规（母婴 App/网站数据采集法律限制）	3050
+Skill-Privacy-Compliant-Data-Collection-GDPR-CCPA	22-数据采集工程	Privacy-Compliant Data Collection GDPR/CCPA — 隐私合规数据采集架构	3156
+Skill-Privacy-GDPR-CCPA-Collection	22-数据采集工程	隐私合规数据采集架构 — GDPR/CCPA 合规设计	2552
+Skill-Privacy-Preserving-Ad-Measurement	13-广告分析	隐私保护广告测量 — OPRF+差分隐私跨平台归因	2293
+Skill-Privacy-Preserving-Federated-Collection	22-数据采集工程	Privacy-Preserving Federated Collection — 隐私保护联邦采集：差分隐私预算与联邦推荐	3166
+Skill-Privacy-Preserving-Lookalike-FL	15-营销投放分析	Privacy-Preserving Lookalike FL — 联邦学习跨平台相似受众建模 GDPR 合规下不上传原始用户数据	3764
+Skill-Privacy-Preserving-Personalization	11-AI人文	隐私保护个性化 — 差分隐私下的用户偏好学习	3325
+Skill-Privacy-Safe-Identity-Resolution	22-数据采集工程	Privacy-Safe Identity Resolution — 隐私合规跨平台 ID 解析：多方对齐与差分隐私	2857
+Skill-ProRCA-Business-Analysis	09-DataAgent-LLM	ProRCA — 因果图路径溯源根因分析	2475
+Skill-Proactive-Customer-Alert-Supply-Chain	24-标签工程	主动客户预警供应链 — 基于在途延误Tag的客户主动通知与体验保护	3189
+Skill-Probabilistic-Hierarchical-New-Product-Forecast	06-增长模型	概率层次预测 DPMN — 品类→子类→SKU 一致性联合预测	3441
+Skill-Procurement-Budget-Rolling-Reforecast	04-供应链	采购预算滚动重测 — 季度滚动预测与偏差管理的动态预算调整机制	2903
+Skill-Procurement-Cost-KPI-Price-Achievement	04-供应链	采购价格达成率与降本KPI体系 — 全链路降本量化追踪与价格偏差归因	3698
+Skill-Procurement-Cycle-Time-KPI	04-供应链	采购前置期PLT全链路KPI体系 — 采购周期时效量化与断货风险预警	3717
+Skill-Procurement-Email-Extraction	22-数据采集工程	Procurement Email Extraction — 采购邮件结构化提取：多供应商报价聚合与合规验证	3384
+Skill-Product-3D-Visualization-AR-Preview	20-AI视频生成	Product-3D-Visualization-AR-Preview — 产品 3D 可视化与 AR 预览降低退货率	2766
+Skill-Product-Attribute-Completion	22-数据采集工程	Product Attribute Completion — 商品属性自动补全：AI 填补 Listing 属性空白	4056
+Skill-Product-Background-Scene-Generation	20-AI视频生成	SD+ControlNet商品场景图生成 — 白底转场景化主图的AI摄影替代	3764
+Skill-Product-Category-Opportunity-Scoring	04-供应链	品类机会评分引擎 — 市场空间×竞争强度×可操作性的选品决策矩阵	2631
+Skill-Product-Demo-Video-Auto-Edit	20-AI视频生成	Product Demo Video Auto-Edit — 产品演示视频自动剪辑（婴儿产品使用场景拼接）	901
+Skill-Product-Image-Quality-Assessment	20-AI视频生成	CLIP商品主图质量评分 — 上新门控自动化评估引擎	3200
+Skill-Product-Knowledge-Graph-Query	08-知识图谱	Product KG Query — 多 Agent 产品知识图谱查询与 SKU 跨平台映射	2730
+Skill-Product-Lifecycle-Stage	06-增长模型	Skill-Product-Lifecycle-Stage	3206
+Skill-Product-Opportunity-Scoring	06-增长模型	Product Opportunity Scoring（新品机会评分卡）	2596
+Skill-Product-Safety-Complaint-Risk-Model	19-风控反欺诈	Product Safety Complaint Risk Model — 产品安全投诉风险模型基于历史预测封号概率	2409
+Skill-Product-Safety-Testing-Requirements	21-合规决策	Product Safety Testing Requirements — 产品安全测试需求：品类×市场映射	2328
+Skill-Product-Unboxing-Video-Generator	20-AI视频生成	Skill-Product-Unboxing-Video-Generator — AI 产品开箱视频合成	3396
+Skill-Profitability-Waterfall-By-ASIN	23-运营财务	Skill-Profitability-Waterfall-By-ASIN — 单品盈利瀑布分析	3288
+Skill-Progent-Privilege-Control	16-智能体工程	Progent — 最小权限 Agent 框架：SMT 验证 + 单调约束性	2337
+Skill-Promo-Inventory-Pulse-Auto-Trigger	04-供应链	Promo-Inventory-Pulse-Auto-Trigger — 大促前14天库存不足自动触发紧急补货与广告降速保护	2939
+Skill-Promo-ROI-Attribution-Supply-Side	04-供应链	促销活动供应侧ROI归因 — 备货成本+促销库存持有成本+尾货损失的全成本核算	3694
+Skill-Promo-Stocktaking-SOP-Automation	04-供应链	大促盘货S&OP流程自动化 — 备货追踪、预案生成与紧急补货闭环	3257
+Skill-PromoGuardian-Promotion-Fraud-GNN	19-风控反欺诈	PromoGuardian — 促销欺诈多关系图神经网络检测	3110
+Skill-Promotion-Demand-Decomposition	04-供应链	Demand Forecasting During Grand Promotion for Online Retailing (JD.com)	3082
+Skill-Promotion-Effectiveness	15-营销投放分析	Promotion Effectiveness Evaluation with Causal ML	2365
+Skill-Promotion-Logistics-Surge-Forecast	15-营销投放分析	Promotion Logistics Surge Forecast — 大促物流爆仓预测：营销-履约联动容量规划	2867
+Skill-Promotion-ROI-Pre-Post-Analysis	23-运营财务	Promotion ROI Pre-Post Analysis — 促销ROI前后对比分析（大促PnL归因）	898
+Skill-Promotional-Lift-Decomposition	03-时间序列	Promotional Lift Decomposition — 促销提升分解剥离促销带来的虚假需求	2003
+Skill-PromptGuard-Injection-Defense	16-智能体工程	PromptGuard — Agent Prompt注入攻击防御	2372
+Skill-Propensity-Score-Matching-QuasiExp	01-因果推断	倾向得分匹配准实验 — 无随机分配场景的因果效应估计	4142
+Skill-Property-Graph-Query-Optimization	08-知识图谱	Property Graph Query Optimization — 属性图查询工程	2934
+Skill-Prophet-Forecasting	03-时间序列	Prophet Forecasting with Seasonality and Holidays	2322
+Skill-Psychological-Pricing-AB-Test	17-价格优化	心理定价A/B测试 — $9.99 vs $10 效果量化与最优价格尾数选择	2543
+Skill-Purchase-Intent-Prediction	14-用户分析	Purchase Intent Prediction — 买家购买意图预测：从行为序列到转化概率	3287
+Skill-Purchase-Sales-Inventory-3D-Tracking	04-供应链	进销存三维动态追踪 — 进货/销售/库存联动监控与比率预警体系	3474
+Skill-Purchase-Sequence-Prediction	14-用户分析	Purchase Sequence Prediction — 买家下一购买行为序列预测	4271
+Skill-Push-Notification-Decision-Transformer	06-增长模型	推送通知优化 — Decision Transformer多目标时机预测	2364
+Skill-QUBO-Ad-Budget-Allocation	13-广告分析	量子退火 (QUBO) 驱动的跨平台广告预算全局最优分配	504
+Skill-Query-Intent-Classification-Routing	08-知识图谱	Skill: 查询意图分类与动态路由	546
+Skill-Query2Doc-Query-Expansion	08-知识图谱	Query2Doc — LLM驱动的查询扩展	3136
+Skill-RAG-Adversarial-Robustness-2025	08-知识图谱	Skill-RAG-Adversarial-Robustness-2025	262
+Skill-RAG-CoT-Interleaved-Reasoning	08-知识图谱	Skill-RAG-CoT-Interleaved-Reasoning	349
+Skill-RAG-Enhanced-Data-Analysis	09-DataAgent-LLM	RAG-Enhanced Data Analysis（RAG 增强数据分析）	3077
+Skill-RAG-Fusion-Multi-Query	08-知识图谱	RAG-Fusion — 多查询并行检索融合	1290
+Skill-RAG-Production-Observability	16-智能体工程	Skill-RAG-Production-Observability	633
+Skill-RAG-Reranking-CrossEncoder	08-知识图谱	检索后精排 — Cross-Encoder Reranking	2083
+Skill-RAG-Structured-Data-Fusion	09-DataAgent-LLM	RAG与结构化数据混合检索 — 向量检索与SQL查询融合	3725
+Skill-RAG-vs-Finetuning-Decision-Framework	08-知识图谱	Skill-RAG-vs-Finetuning-Decision-Framework	718
+Skill-RAGAS-RAG-Evaluation-Framework	08-知识图谱	RAGAS — RAG 质量自动化评估框架	2840
+Skill-RAGLAB-Research-RAG-Framework	08-知识图谱	RAGLAB — 研究导向的模块化RAG实验框架	3574
+Skill-RAPTOR-Hierarchical-RAG	08-知识图谱	RAPTOR - 递归抽象树型分层检索	2583
+Skill-RCR-Router-Role-Aware-Context-Routing	10-MAS	RCR-Router角色感知上下文路由 — Token预算约束下的多Agent记忆子集动态分配	4428
+Skill-RDD-Regression-Discontinuity-Design	01-因果推断	断点回归设计 — 利用政策阈值识别因果效应	3730
+Skill-REACH-Chemical-Compliance	21-合规决策	REACH化学品合规 — 母婴玩具/床品化学物质限制自动检查	3220
+Skill-RELATE-RL-Ad-Text-Generation	13-广告分析	RELATE强化学习广告文案生成 — RL端到端优化CTCVR的LLM广告创意框架	3563
+Skill-RFM-Campaign-Auto-Dispatcher	14-用户分析	RFM Campaign Auto Dispatcher — 按RFM分群自动映射并触发差异化营销序列	3250
+Skill-RFM-Customer-Segmentation	06-增长模型	RFM Customer Segmentation for Targeted Marketing	2469
+Skill-RFM-Segment-Campaign-Dispatcher	14-用户分析	RFM-Segment-Campaign-Dispatcher — RFM分群结果自动触发差异化营销序列调度器	3119
+Skill-RFM-to-Action-Policy-Engine	06-增长模型	RFM to Action Policy Engine — RFM 分层驱动的自动化触达策略决策引擎	3783
+Skill-RL-Dynamic-Promotion-Optimization	15-营销投放分析	RL Dynamic Promotion Optimization — 强化学习动态促销优化：时机×力度×对象的联合决策	3266
+Skill-RLHF-Recommendation	05-推荐系统	RLHF推荐系统 — 人类偏好对齐的个性化推荐	3481
+Skill-ROAS-Below-Target-Budget-Freeze	13-广告分析	ROAS-Below-Target-Budget-Freeze — ROAS连续3天低于目标自动冻结广告组预算触发创意审查	3269
+Skill-ROAS-Budget-Optimization	13-广告分析	ROAS Optimization and Ad Budget Allocation	2437
+Skill-ROI-Prioritized-Skill-Ranking	16-智能体工程	ROI 优先级排名 — AHP 三维度 Skill 智能推荐	2910
+Skill-RTB-Multi-Objective-Bidding	15-营销投放分析	RTB Multi-Objective Bidding — 实时竞价多目标优化：广告出价的帕累托前沿策略	2839
+Skill-RTB-Realtime-Bidding-Optimization	13-广告分析	RTB Realtime Bidding Optimization — 生成式自动出价与多约束实时竞价优化	3156
+Skill-RankGPT-Listwise-Reranking	08-知识图谱	RankGPT — LLM 驱动 Listwise 重排序	2620
+Skill-Ranking-Interleaving-AB	02-A_B实验	排序交叉实验 — 比传统 AB 更灵敏的排序系统评估	2456
+Skill-ReAct-Reasoning-Acting	10-MAS	&#x27;Skill: ReAct — 推理与行动交替执行&#x27;	941
+Skill-Real-Options-Product-Launch-Timing	17-价格优化	实物期权新品上架时机决策 — Black-Scholes期权定价迁移至新品发布	2941
+Skill-Real-Time-Competitive-Repricing	17-价格优化	Real-Time Competitive Repricing — 竞品价格监测与深度强化学习自动重定价	3294
+Skill-Real-Time-Fleet-Dynamic-Routing	18-物流履约	实时车队动态重路由 — 突发事件下的物流路径自适应优化	3371
+Skill-Real-Time-Inventory-Event-Stream	22-数据采集工程	Real-Time Inventory Event Stream — FBA 库存事件溯源架构（Event Sourcing + CQRS）	3323
+Skill-Real-Time-Streaming-Recommendation	05-推荐系统	Real-Time Streaming Recommendation — 流式实时推荐：毫秒级个性化更新架构	2975
+Skill-Real-Time-Supply-Chain-Drift-Detection	24-标签工程	供应链信号漂移实时检测 — 从概念漂移到Tag失效预警的在线检测体系	3220
+Skill-Realtime-Feature-Collection	22-数据采集工程	Realtime Feature Collection — 流式特征采集与在线特征仓库：推荐系统实时个性化的数据基础设施	2343
+Skill-Recommendation-Compliance-Filter	05-推荐系统	Recommendation Compliance Filter — 推荐系统实时合规内容过滤	3032
+Skill-Recommendation-Finance	23-运营财务	Recommendation Finance — 推荐系统 GMV 贡献归因与毛利影响量化	2759
+Skill-Recommendation-TS-Demand	05-推荐系统	推荐系统时序需求预测 — 购买序列驱动的个性化需求预警	3380
+Skill-Reddit-Community-Signal-Mining	07-NLP-VOC	Reddit Community Signal Mining — Reddit 社区信号挖掘与品牌口碑监测	3276
+Skill-Referral-Network-Value-Attribution	06-增长模型	Referral Network Value Attribution — 量化会员裂变价值定价推荐激励额度	3923
+Skill-Referral-Viral-Loop-Trigger	06-增长模型	Referral-Viral-Loop-Trigger — 高NPS用户自动触发裂变邀请优惠分享码	3282
+Skill-Reflexion-Self-Improvement	10-MAS	Reflexion — 言语强化学习与自我反思	760
+Skill-Refund-Rate-Financial-Impact	23-运营财务	Refund Rate Financial Impact — 退款率对利润的财务量化模型	4425
+Skill-Regulatory-Change-Auto-Monitor	21-合规决策	Regulatory Change Auto-Monitor — 合规法规变更自动监控：实时追踪政策更新的预警系统	3380
+Skill-Regulatory-Change-Impact-Propagation	24-标签工程	法规变更影响传播引擎 — 新规 → 受影响SKU/市场的Tag传播与行动触发	3304
+Skill-Regulatory-Change-Monitoring	21-合规决策	Regulatory Change Monitoring — 法规变更自动监控：受影响品类实时映射	2969
+Skill-Regulatory-Graph-Compliance-Monitor	21-合规决策	Regulatory Graph Compliance Monitor — 合规知识图谱+GenAI实时监控	3199
+Skill-Regulatory-Update-Impact-Dispatcher	21-合规决策	Regulatory-Update-Impact-Dispatcher — 法规变更影响品类自动分发合规更新任务	2394
+Skill-ReliabilityBench-Agent-Reliability	16-智能体工程	ReliabilityBench — Agent 生产可靠性三维评估：pass@1 高估 20-40%	2763
+Skill-Repeated-Game-Long-Term-Pricing-Cooperation	17-价格优化	重复博弈长期定价合作 — Tit-for-Tat 策略维持价格高位	3554
+Skill-Replenishment-Parameter-Calibration	04-供应链	补货系统4参数动态校准 — 前置期/安全库存/补货点/最大库存的精准化维护体系	3342
+Skill-Repurchase-Trigger-Timing-Model	06-增长模型	Repurchase Trigger Timing Model — 生存分析驱动的最佳复购触达时间窗预测	3791
+Skill-ResMAS-Resilience-Topology-Optimization	10-MAS	ResMAS韧性拓扑优化 — GNN韧性预测+GRPO拓扑生成+拓扑感知Prompt优化	3615
+Skill-Responsible-AI-Red-Teaming	11-AI人文	负责任AI红队测试 — 母婴AI助手的安全边界系统化审计	3686
+Skill-Responsible-AI-Supply-Chain-Disclosure	11-AI人文	Responsible AI Supply Chain Disclosure — 负责任AI供应链披露（算法决策透明度）	2219
+Skill-Retail-Media-LP-Ranking	13-广告分析	零售媒体LP赞助商品排名优化	2241
+Skill-Return-Fraud-Detection-Tag-Engine	24-标签工程	退货欺诈检测标签引擎 — 识别假退货/滥用退货政策的行为模式与Tag自动标记	2574
+Skill-Return-Fraud-Detection	19-风控反欺诈	Return Fraud Detection — 退货欺诈识别：GNN 检测虚假退货与促销滥用	3202
+Skill-Return-Rate-Forecasting-Model	03-时间序列	Return Rate Forecasting Model — 退货率时序预测节后退货浪潮提前量化	2065
+Skill-Return-Root-Cause-Attribution-Graph	24-标签工程	退货根因归因图谱 — 多层次退货原因知识图谱与供应链改善闭环	3384
+Skill-Return-Value-Recovery-Auction	04-供应链	退货价值回收竞价 — 二手/翻新/零部件/捐赠的最优处置价格发现机制	2766
+Skill-Returnformer-Returns-Prediction	04-供应链	Returnformer Returns Prediction — 图 Transformer 电商退货预测	3772
+Skill-Returns-Quality-Grading-Engine	18-物流履约	退货品质分级引擎 — 计算机视觉驱动的再销售路径决策	3962
+Skill-Returns-Reverse-Logistics	18-物流履约	Returns Reverse Logistics（退货逆向物流）	2061
+Skill-Revenue-Per-Available-SKU-REVPAS	17-价格优化	Revenue Per Available SKU（REVPAS）— 以可售库存单位衡量定价效率	2550
+Skill-Reverse-Logistics-Disposition-Optimization	04-供应链	逆向物流全链路处置决策 — 退货质检分流、二次销售与价值最大化	3739
+Skill-Review-Attack-Hawkes-Process	19-风控反欺诈	Review Attack Hawkes Process — 差评攻击 Hawkes 过程建模与预警	2087
+Skill-Review-Dedup-Quality-Filter	22-数据采集工程	Review Dedup & Quality Filter — 多平台评论在线去重与质量排序	2678
+Skill-Review-Defense-Vine-Optimizer	13-广告分析	Vine评论防御优化器 — 贝叶斯建模计算最优Vine投入对冲差评影响	2886
+Skill-Review-Driven-Growth-Opportunity-Scorer	07-NLP-VOC	跨竞品评论选品机会评分 — 从未满足需求到量化机会得分	3931
+Skill-Review-Fraud-Detection	19-风控反欺诈	Review Fraud Detection（虚假评论检测）	2963
+Skill-Review-Helpfulness-Prediction	07-NLP-VOC	Review Helpfulness Prediction — 评论有用性预测：识别高说服力评论提升转化	3219
+Skill-Review-Helpfulness-Ranking-Model	07-NLP-VOC	Skill-Review-Helpfulness-Ranking-Model — 评论有用性排序模型	2674
+Skill-Review-Keyword-Mining-SEO	25-搜索流量工程	Skill-Review-Keyword-Mining-SEO — 评论关键词挖掘 SEO	3380
+Skill-Review-Pain-Point-Mining	14-用户分析	Review Pain-Point Mining（竞品差评痛点挖掘）	3282
+Skill-Review-QA-Extraction	07-NLP-VOC	Review QA Extraction — 评论问答抽取（从评论隐含Q&A生成FAQ）	1441
+Skill-Review-Sentiment-Growth-Trigger	07-NLP-VOC	Review-Sentiment-Growth-Trigger — 评论情感趋势监控与产品迭代自动触发	3290
+Skill-Review-Temporal-Trend-Mining	07-NLP-VOC	Review 时序趋势挖掘 — LDA 滑动窗口演化分析	3097
+Skill-Review-Velocity-Anomaly-Detector	22-数据采集工程	差评速率异常检测 — 区分竞品恶意攻击与真实产品问题	2981
+Skill-Reward-Model-RLHF-Ecommerce	12-ML基础	RLHF奖励模型电商 — 人类偏好对齐的电商AI质量提升	3636
+Skill-Root-Cause-Analysis-Agent	09-DataAgent-LLM	Root Cause Analysis Agent for Business Anomalies	1889
+Skill-SC-Agent-MCP-ERP-Integration	16-智能体工程	供应链智能体MCP多ERP集成 — Model Context Protocol驱动的多系统双向协调模式	2851
+Skill-SC-Causal-DAG-E2E-Attribution	24-标签工程	供应链端到端因果DAG归因框架 — Amazon PC算法+SCM实现缺货根因30分钟诊断	2731
+Skill-SC-Digital-Twin-Sync-Architecture	24-标签工程	供应链数字孪生同步架构 — 物理→数字实时镜像与仿真决策支持	2648
+Skill-SC-Ontology-Schema-Versioning	24-标签工程	供应链本体Schema版本化与迁移 — 向后兼容的本体演化策略防止Agent系统崩溃	3136
+Skill-SC-Resilience-Hypergraph	04-供应链	Supply Chain Resilience Hypergraph — 超图神经网络供应链韧性推断	3469
+Skill-SC-WhatIf-Scenario-Analysis-Engine	24-标签工程	供应链What-If情景分析引擎 — 因果ML参数化多情景对比与韧性量化评估	2780
+Skill-SCM-ML-Enhanced	01-因果推断	Synthetic Control + ML — 机器学习增强合成控制法	2702
+Skill-SCPA-Autonomous-SC-Planning-Agent	16-智能体工程	自主供应链规划智能体SCPA — 自然语言→结构化规划报告的JD.com完整框架	3076
+Skill-SCRABLE-Review-Response-Generation	14-用户分析	SCRABLE Review Response Generation — RAG+LLM 自优化差评回复生成	4648
+Skill-SDOF-State-Constrained-Orchestration	10-MAS	SDOF — 状态机约束 MAS 编排：屏蔽非法操作，任务完成率 86.5%	843
+Skill-SDPM-Semantic-Chunking	08-知识图谱	SDPM语义双阶段分块 — 边界感知的智能分块策略	3542
+Skill-SEO-Organic-Ranking-Optimization	13-广告分析	SEO Organic Ranking Optimization — 电商 SEO 自然排名元数据优化	4545
+Skill-SHAP-Shapley-Feature-Attribution	12-ML基础	SHAP Shapley值特征归因 — 可解释AI的通用特征重要性引擎	3950
+Skill-SIR-Viral-Product-Adoption-Forecasting	06-增长模型	SIR爆品传播预测 — 流行病学模型迁移至TikTok短视频爆款需求预测	3174
+Skill-SKU-Entity-Unified-ID-Tagging	24-标签工程	SKU跨平台实体统一标识与标签同步 — ASIN/SKU/ERP三码合一的实体对齐与标签一致性保障	3498
+Skill-SKU-Level-Margin-Attribution-Ontology	24-标签工程	SKU级利润归因本体 — 从GMV到净利润的全链路成本拆解与Tag驱动的利润诊断	3808
+Skill-SKU-Level-PL-Dashboard	23-运营财务	SKU-Level PL Dashboard — 单品利润核算：每个 SKU 今天赚了多少钱	2745
+Skill-SKU-Master-Data-Golden-Record	24-标签工程	SKU主数据黄金记录治理 — MDM体系、主键统一与多源冲突消解	3577
+Skill-SKU-Warehouse-Footprint-Monitoring	04-供应链	SKU级仓容占用实时监控 — 体积换算精细化测算与存山如山预警机制	3485
+Skill-SLM-Tool-Calling-Optimization	16-智能体工程	SLM Tool Calling 成本优化 — 350M 参数击败 LLM	1212
+Skill-SOP-Sales-Operations-Planning	04-供应链	S&OP销售与运营计划协同 — 需求供应全链路对齐与月度计划闭环	3156
+Skill-SPLADE-Learned-Sparse-Retrieval	08-知识图谱	SPLADE — 学习式稀疏检索与语义倒排索引	2687
+Skill-SPOT-Freight-Consolidation	04-供应链	SPOT Freight Consolidation — 时空模式挖掘的货运拼箱优化	3437
+Skill-SQL-Agent-Text-to-SQL	09-DataAgent-LLM	Text-to-SQL Agent for Natural Language Data Query	2194
+Skill-SRL-Semantic-Blueprint-MAS	10-MAS	SRL语义蓝图构建 — 用语义角色标注替代单一Prompt的结构化上下文工程	3963
+Skill-SSBC-Small-Sample-Conformal	01-因果推断	小样本Beta修正共形预测 - 50个样本也能保证覆盖	2285
+Skill-SSM-Realtime-Signal-Tracking	03-时间序列	SSM Realtime Signal Tracking — 状态空间模型实时信号追踪	2398
+Skill-STAMImputer-SpatioTemporal	14-用户分析	时空注意力混合专家补全 - 高缺失率下的多维流量恢复	2210
+Skill-STATE-Robust-Variance-Reduction	02-A_B实验	STATE — 重尾指标鲁棒 A/B 方差减少：Student-t 回归调整（-70% 方差）	4249
+Skill-STL-Seasonal-Decomposition	03-时间序列	STL Seasonal Decomposition — STL 季节性分解：时间序列趋势×季节×残差三层分离	2416
+Skill-Safety-Concern-Signal-Extraction	07-NLP-VOC	Skill-Safety-Concern-Signal-Extraction — 安全隐患信号提取	2709
+Skill-Safety-Stock-Replenishment	04-供应链	Safety Stock and Replenishment Strategy	2711
+Skill-Sales-Velocity-Momentum-Detection	03-时间序列	Sales Velocity Momentum Detection — BSR 销量加速度检测识别爆品起飞信号	1969
+Skill-Sandlock-Agent-Execution-Sandbox	16-智能体工程	Sandlock — 轻量 Agent 沙箱：5ms 启动，HTTP ACL，可逆文件系统	2265
+Skill-Schema-Evolution-Data-Contract	22-数据采集工程	Schema Evolution & Data Contract — 数据契约与 Schema 演化管理	2841
+Skill-Search-Ad-Budget-ROI-Integration	25-搜索流量工程	自然搜索与广告预算联合优化 — 有机排名提升vs广告CPC的边际收益对比	3147
+Skill-Search-Aware-Recommendation-Reranking	25-搜索流量工程	搜索意图感知推荐重排序 — 将实时搜索信号注入推荐排序	4225
+Skill-Search-Compliance-Guard	25-搜索流量工程	搜索词合规预扫描 — Amazon TOS + FDA 双轨违禁词实时过滤	3143
+Skill-Search-Conversion-Rate-Predictor	25-搜索流量工程	搜索词级 CVR 预测 — 关键词维度转化率预测模型	3862
+Skill-Search-Driven-Logistics-Promise	25-搜索流量工程	Search-Driven Logistics Promise — 搜索词意图信号驱动履约时效承诺优化	2946
+Skill-Search-Driven-Product-KG	25-搜索流量工程	搜索驱动商品知识图谱 — 用搜索共现行为揭示品类语义结构	4453
+Skill-Search-Funnel-Attribution	25-搜索流量工程	搜索漏斗分归因 — 搜索→展示→点击→加购→购买各层转化拆解	3199
+Skill-Search-Organic-Growth-Attribution	25-搜索流量工程	搜索有机增长归因 — SEO流量驱动用户生命周期价值的因果建模	4120
+Skill-Search-Position-Click-Elasticity	25-搜索流量工程	搜索位置点击弹性分析 — 用 Examination Model 分离位置偏差估计真实 CTR	2747
+Skill-Search-Query-Performance-Attribution	25-搜索流量工程	Skill-Search-Query-Performance-Attribution — 搜索词业绩归因	3630
+Skill-Search-Rank-Recovery-Auto-Action	25-搜索流量工程	Search-Rank-Recovery-Auto-Action — 核心关键词排名跌出Page1自动触发三步恢复行动	3141
+Skill-Search-Revenue-Attribution	25-搜索流量工程	搜索流量财务归因 — 有机搜索对运营利润的全链路价值量化	4049
+Skill-Search-Share-of-Voice	25-搜索流量工程	搜索声量份额 — 关键词维度市场份额追踪与竞争格局监测	3896
+Skill-Search-Signal-Realtime-Pipeline	25-搜索流量工程	A9 搜索信号实时采集 Pipeline — 排名变化与竞品动态的流式监控	3258
+Skill-Search-Tag-Keyword-Auto-Mapping	25-搜索流量工程	标签→关键词自动映射矩阵 — SKU 标签体系驱动搜索词包生成	4603
+Skill-Search-Term-Negative-Optimization	25-搜索流量工程	Skill-Search-Term-Negative-Optimization — 搜索词否定优化	3351
+Skill-Search-VOC-Signal-Loop	25-搜索流量工程	搜索词VOC信号闭环 — 从买家搜索语言挖掘真实需求并反哺产品迭代	4169
+Skill-Seasonal-Keyword-Rotation-Strategy	25-搜索流量工程	Skill-Seasonal-Keyword-Rotation-Strategy — 季节性关键词轮换策略	3439
+Skill-Seasonal-Pattern-Transfer-Learning	03-时间序列	旺季模式迁移学习 — 新品首次黑五从老品学习放大系数	3531
+Skill-Seasonal-Search-Trend-Modeling	25-搜索流量工程	季节性搜索趋势建模 — 搜索峰值预测与备货节奏对齐	3416
+Skill-Seed-Quality-Optimization-for-Lookalike	15-营销投放分析	Seed Quality Optimization for Lookalike — 种子净化自动剔除噪声用户提升 Lookalike 质量上限	3194
+Skill-Self-Improving-Agent-Feedback-Loop	10-MAS	Self-Refine + RL — 反馈闭环与自进化 Agent	2553
+Skill-Self-RAG-Reflective-Retrieval	08-知识图谱	Self-RAG — 自反思检索生成框架	2667
+Skill-Sell-Through-Rate-Promo-Inventory	04-供应链	售罄率精细化KPI体系 — 大促/新品/季节性多口径售罄率计算与库存水位判断	3769
+Skill-Seller-Rating-Attack-Pattern	19-风控反欺诈	Seller Rating Attack Pattern — 卖家评分攻击模式识别恶意 A-to-Z 索赔检测	2620
+Skill-Semantic-Blueprint-Compiler	07-NLP-VOC	Schema-Guided Generation — 语义蓝图编译器	758
+Skill-Semantic-Cache-RAG-Acceleration	16-智能体工程	Skill: Skill-Semantic-Cache-RAG-RAG-Acceleration	743
+Skill-Semantic-Chunking-Strategy	08-知识图谱	语义分块策略 — RAG 管道的基础层	996
+Skill-Semantic-ID-Retrieval-RPG	05-推荐系统	Semantic ID Retrieval for Recommendation (RPG)	2312
+Skill-Sensitivity-Analysis-Causal	01-因果推断	Sensitivity Analysis Causal — 因果推断中的敏感性分析（Rosenbaum Bounds）	2783
+Skill-Sensitivity-Analysis-Rosenbaum	01-因果推断	Rosenbaum 敏感性分析 — 未测量混淆对因果结论的影响量化	2556
+Skill-Sequential-AB-Testing	02-A_B实验	Sequential AB Testing（序列化 A/B 检验）	2463
+Skill-Sequential-Recommendation-Transformer	05-推荐系统	序列推荐Transformer — 基于购买序列的个性化下一步推荐	4725
+Skill-Sequential-User-Behavior-Modeling	14-用户分析	Sequential User Behavior Modeling — 用户行为序列建模：时序上下文驱动的意图理解	2902
+Skill-Session-Based-Recommendation-SR-GNN	05-推荐系统	Session-Based Recommendation with SR-GNN	3223
+Skill-Session-Intent-Shift	14-用户分析	Session意图漂移建模 - 跨会话用户购买意图变化检测	2915
+Skill-Share-of-Voice-Tracking	13-广告分析	Share of Voice Tracking — AI 时代跨平台品牌可见度份额测量	2546
+Skill-Shipment-Risk-Tag-Realtime-Tracker	24-标签工程	在途货物实时风险标签追踪器 — 海运/空运全链路可视化与预警Tag实时更新	2880
+Skill-Shopee-Lazada-SEA-Market-Intelligence	14-用户分析	东南亚市场情报与选品分群 — Shopee/Lazada 热搜词 + K-Means 价格带定位	3469
+Skill-Shopify-Landing-Page-CRO	14-用户分析	Shopify Landing Page CRO — 独立站落地页转化率优化：ML驱动的A/B测试与个性化元素配置	2787
+Skill-Shoppable-Video-CTA-Optimizer	20-AI视频生成	Skill-Shoppable-Video-CTA-Optimizer — 可购物视频 CTA 时机与文案优化	3264
+Skill-Shopping-Companion-Agent	14-用户分析	Shopping Companion — 跨会话偏好记忆购物助手（4B≈GPT-5，Lazada真实数据）	2769
+Skill-Short-Video-Commerce-Attribution	13-广告分析	短视频内容归因建模 — 视频特征 XGBoost 驱动转化分析	3982
+Skill-Short-Video-Thumbnail-CTR-Predictor	20-AI视频生成	Short Video Thumbnail CTR Predictor — 封面图CTR预测（AB测试前AI预评估）	911
+Skill-Signal-Uncertainty-Quantification-SC	24-标签工程	供应链信号不确定性量化 — 从点预测到区间估计，支撑置信度分层决策	3345
+Skill-Signaling-Game-Brand-Premium	17-价格优化	Signaling Game for Brand Premium—价格作为质量信号	2221
+Skill-Skill-Card-API-Serving	16-智能体工程	Skill Card API Serving — 将 Skill 代码模板包装为参数化 REST 微服务	2621
+Skill-Skill-Dependency-Path-Planner	16-智能体工程	Skill 依赖路径规划器 — BFS/Dijkstra 学习路径导航	3351
+Skill-Skill-Lifecycle-Design	16-智能体工程	SoK Agentic Skills — Agent Skill 全生命周期与方法论底座	3012
+Skill-Skill-Registry-Dynamic-Loading	10-MAS	Skill Registry — 技能注册表与动态发现	687
+Skill-Smart-Packaging-Optimizer	18-物流履约	智能包装优化器 — 包材选择与填充率最大化	3962
+Skill-SmartVector-Self-Aware-Embeddings	08-知识图谱	SmartVector自感知向量嵌入 — 时间感知+置信度衰减+关系感知的活嵌入框架	3572
+Skill-Social-Engineering-Attack-Detection	19-风控反欺诈	Social Engineering Attack Detection — 社会工程攻击检测钓鱼邮件/虚假供应商识别	2838
+Skill-Social-Network-Viral-Growth-Simulation	06-增长模型	社交网络病毒式增长模拟与放大 — 跨境品牌UGC传播建模与爆发点预测	3031
+Skill-Social-Proof-Amplification	14-用户分析	Social Proof Amplification — 评分/评论/UGC 密度对转化率的因果效应量化	2509
+Skill-Social-Proof-Viral-Rec	05-推荐系统	Social Proof Viral Recommendation — 社交证明病毒式推荐	3655
+Skill-Social-VOC-Viral-Potential-Score	07-NLP-VOC	Social-VOC-Viral-Potential-Score — 社媒UGC传播特征分析与爆品传播潜力评分	3093
+Skill-Sparse-Autoencoder-Feature	12-ML基础	Sparse Autoencoder Feature — 稀疏自编码器特征提取（电商用户行为压缩与可解释特征）	2860
+Skill-Sparse-Matrix-Completion	14-用户分析	超稀疏矩阵补全 - 每行仅2-5个观测值的页面转移矩阵恢复	2693
+Skill-Speculative-Decoding-Agent	16-智能体工程	投机解码推理加速 — LLM Agent运行成本降低的核心引擎	3343
+Skill-Speculative-RAG	08-知识图谱	Speculative RAG — 推测性检索加速框架	2762
+Skill-Sponsored-Organic-Rank-Synergy	25-搜索流量工程	Skill-Sponsored-Organic-Rank-Synergy — 广告-自然排名协同模型	3287
+Skill-StaR-Review-Statement-Ranking	14-用户分析	StaR 观点语句排序 - 排序而非生成的可解释评论分析	3833
+Skill-Stackelberg-Equilibrium-Competitive-Pricing	17-价格优化	Stackelberg均衡竞争定价 — 博弈论领导者-跟随者模型迁移至竞品定价防御	3259
+Skill-Stackelberg-Price-Leadership-Strategy	17-价格优化	栈尔伯格价格领导策略 — 市场领导者主动先动定价模型	3621
+Skill-State-Space-Inventory-Signal-Smoothing	04-供应链	状态空间库存信号平滑 — FBA数据三层分解（趋势+季节+噪声）	3062
+Skill-Step-Back-Prompting	09-DataAgent-LLM	Step-Back Prompting — 抽象推理提升复杂问题准确率	3193
+Skill-Streaming-Analytics-Agent	09-DataAgent-LLM	实时流式分析Agent — 毫秒级事件驱动的AI决策管道	3254
+Skill-Streaming-Data-Forecasting	03-时间序列	Streaming Data Forecasting — 流式采集数据驱动的实时需求预测：采集→特征→预测端到端	2466
+Skill-Streaming-ETL-Flink-Kafka	22-数据采集工程	Streaming ETL with Flink/Kafka — 实时流式 ETL 工程化	3118
+Skill-StreamingRAG-Realtime-Knowledge	08-知识图谱	Streaming-RAG — 实时流式知识库动态更新	4093
+Skill-Subagent-Decomposition	10-MAS	Subagent Decomposer — 复杂任务子智能体分解	696
+Skill-Subscription-Renewal-Intervention-Gate	06-增长模型	Subscription-Renewal-Intervention-Gate — 订阅到期前14天沉默用户自动触发个性化续订挽回	3034
+Skill-Supplier-Capacity-Booking-Engine	04-供应链	供应商产能预订引擎 — 旺季弹性产能锁定与长期产能保障协议管理	2337
+Skill-Supplier-Capacity-Planning	04-供应链	Multi-objective multi-site supplier selection and order splitting	2523
+Skill-Supplier-Delivery-Quality-Rate-KPI	04-供应链	供应商来料质量IQC-KPI体系 — 入库检验合格率、质量成本与批次拒收分析	3824
+Skill-Supplier-Development-Roadmap-Tracking	04-供应链	供应商发展路线图追踪 — 改进计划执行跟踪与供应商升降级Tag管理	2650
+Skill-Supplier-Evaluation-Model	06-增长模型	Supplier Evaluation Model（供应商评估模型）	2063
+Skill-Supplier-Lead-Time-Buffer	18-物流履约	Supplier Lead Time Buffer — 供应商交货期缓冲：非正态分布下的安全库存	2878
+Skill-Supplier-Negotiation-LLM-Agent	16-智能体工程	LLM驱动供应商谈判智能体 — 结构化采购谈判自动化与议价策略优化	3332
+Skill-Supplier-Ontology-Capability-Map	24-标签工程	供应商本体能力图谱 — 产能/质量/认证/风险四维供应商Ontology设计与实例化	3242
+Skill-Supplier-Performance-Alert-Action	04-供应链	Supplier-Performance-Alert-Action — 供应商OTIF连续不达标自动触发备选供应商激活	3113
+Skill-Supplier-Performance-Scorecard	04-供应链	Supplier Performance Scorecard — 供应商绩效量化追踪系统	4272
+Skill-Supplier-Qualification-Onboarding-KPI	04-供应链	供应商准入认证KPI体系 — 新供应商评估、认证审核与准入门槛量化	4629
+Skill-Supplier-Risk-XGBoost	04-供应链	Supplier Risk XGBoost — AHP-TOPSIS+XGBoost 供应商风险评分	3851
+Skill-Supply-Chain-Agent-Orchestration-Hub	24-标签工程	供应链Agent编排中枢 — 多Agent协作、任务分发与跨域决策自动化	3106
+Skill-Supply-Chain-Carbon-Risk-GCN	04-供应链	供应链碳排放风险 — 元学习GCN低碳转型评估	2684
+Skill-Supply-Chain-Causal-SCM-Attribution	04-供应链	Supply Chain Causal SCM — 数据驱动供应链根因归因：DAG + DoWhy GCM	4217
+Skill-Supply-Chain-Counterfeit-Detection	19-风控反欺诈	Supply Chain Counterfeit Detection — 供应链仿冒品检测原材料/包装视觉验真	2141
+Skill-Supply-Chain-Data-Lineage-Tracking	24-标签工程	供应链数据血缘追踪 — 从原始数据到Tag决策的全链路溯源与影响分析	2421
+Skill-Supply-Chain-Data-Mesh-Architecture	24-标签工程	供应链数据网格架构 — 领域自治的分布式数据治理与跨域数据共享协议	2903
+Skill-Supply-Chain-Due-Diligence	21-合规决策	Supply Chain Due Diligence — 供应链合规尽职调查：劳工+环境+产品三维	3136
+Skill-Supply-Chain-Finance-Risk-Modeling	23-运营财务	Supply Chain Finance Risk Modeling — 供应链金融风险建模：跨境贸易融资信用评估	3122
+Skill-Supply-Chain-Finance-Risk-Tag	24-标签工程	供应链金融风险标签 — 融资依赖度/信用评级/现金流压力的综合风险画像	3154
+Skill-Supply-Chain-KPI-Health-Dashboard	04-供应链	全链路供应链KPI健康度仪表盘 — 三层KPI体系整合、健康评分与智能预警	4386
+Skill-Supply-Chain-ML-Features	12-ML基础	Supply Chain ML Feature Engineering — 供应链 ML 特征工程：时序+图+统计三维	1465
+Skill-Supply-Chain-Network-Betweenness-Resilience	04-供应链	供应链网络中介中心性韧性分析 — 复杂网络科学迁移至供应链瓶颈识别	2973
+Skill-Supply-Chain-Network-Design	04-供应链	跨境供应链网络设计 — P-Median 选址 + MIP 库存分配优化	3444
+Skill-Supply-Chain-Ontology-Action-Trigger	24-标签工程	供应链本体驱动行动触发 — Palantir风格Object-Action-Writeback全链路闭环	3166
+Skill-Supply-Chain-Resilience-Modeling	04-供应链	Supply Chain Resilience Modeling — 供应链韧性建模：断链风险预测与备选方案规划	2792
+Skill-Supply-Chain-Resilience-Stress-Test	18-物流履约	供应链弹性压力测试 — 中断情景模拟与备用路由	3789
+Skill-Supply-Chain-Total-Cost-TCO-Model	04-供应链	全供应链总成本TCO模型 — 采购+仓储+物流+质量全链路成本分摊与年降目标	4093
+Skill-Supply-Chain-Working-Capital-Optimization	04-供应链	供应链营运资金优化与CCC现金转换周期 — DIO/DSO/DPO三角分析与现金效率提升	3687
+Skill-Survival-Causal-Effect	01-因果推断	Survival Analysis Causal Effect — 生存分析因果效应（竞争风险+Cox+IPW）	2983
+Skill-Switchback-Experiment-Design	02-A_B实验	Switchback 实验设计 - 数据驱动的双边市场实验	3541
+Skill-Synthetic-Control-ML-Enhanced	01-因果推断	机器学习增强合成控制法 — Doudchenko & Imbens 方法与 ML 扩展	2920
+Skill-Synthetic-Data-Ecommerce	22-数据采集工程	Synthetic Data for E-commerce — 电商合成数据生成：解决新品冷启动与长尾数据稀缺	2380
+Skill-Synthetic-Data-Generation-Tabular	22-数据采集工程	合成表格数据生成 — 隐私保护的数据增强与分享框架	3828
+Skill-TESLA-NetCVR-Cascade	13-广告分析	级联延迟净转化建模 - 扣除退款的真实转化桑基图	3267
+Skill-TG-RAG-Temporal-Knowledge-Graph	08-知识图谱	时序知识图谱RAG — 双层时序图增量更新与时间窗口检索	3707
+Skill-TRACE-Clickstream-Embedding	14-用户分析	TRACE 跨会话点击流用户嵌入	3306
+Skill-TRACE-Delayed-CVR	13-广告分析	轨迹条件延迟转化建模 - 不等归因窗口即可实时更新CVR	2541
+Skill-TableRAG-Structured-Data-Retrieval	08-知识图谱	Skill-TableRAG-Structured-Data-Retrieval	2013
+Skill-Tabular-Deep-Learning-FT-Transformer	12-ML基础	FT-Transformer表格深度学习 — 超越GBDT的表格数据神经网络	4277
+Skill-Tag-AB-Experiment-Design	24-标签工程	标签-AB实验设计 — 基于用户标签的精准实验分层与分析	3630
+Skill-Tag-Causal-Treatment-Effect	24-标签工程	标签因果效应估计 — 用户行为标签的处理效应量化	3636
+Skill-Tag-Driven-Ad-Audience-Segmentation	24-标签工程	Tag-Driven Ad Audience Segmentation — 标签工程驱动广告受众精准分割	4074
+Skill-Tag-Driven-Marketing-Attribution	24-标签工程	Tag-Driven Marketing Attribution — 营销渠道标签驱动MMM三维归因	3929
+Skill-Tag-Driven-User-Behavior-Analytics	24-标签工程	Tag-Driven User Behavior Analytics — 实时行为事件流标签化与动态用户画像	3220
+Skill-Tag-Driven-User-Growth-Trigger	24-标签工程	Tag-Driven User Growth Trigger — 用户生命周期标签驱动增长干预自动化	3534
+Skill-Tag-Driven-VOC-Signal-Routing	24-标签工程	Tag-Driven VOC Signal Routing — VOC信号自动标签化与业务路由	3985
+Skill-Tag-Enhanced-Personalized-Recommendation	24-标签工程	Tag-Enhanced Personalized Recommendation — 标签感知的个性化推荐系统	3845
+Skill-Tag-Fairness-Bias-Audit	24-标签工程	Tag Fairness & Bias Audit — 标签系统算法偏见检测与公平性修正	2749
+Skill-Tag-Fraud-Risk-Intelligence	24-标签工程	标签驱动风险智能 — 用户行为标签的多维欺诈特征工程	4712
+Skill-Tag-Informed-Dynamic-Pricing	24-标签工程	Tag-Informed Dynamic Pricing — SKU标签驱动动态定价策略自动化	3233
+Skill-Tag-ML-Causal-Feature-Selection	24-标签工程	标签驱动因果特征选择 — 用业务标签指导ML特征工程的因果框架	3316
+Skill-Tag-Optimized-Logistics-Routing	24-标签工程	Tag-Optimized Logistics Routing — SKU物流属性标签驱动智能配送路由	3366
+Skill-Tag-Propagation-Supply-Chain	24-标签工程	供应链知识图谱标签传播算法 — LPA/层级继承/关系链传播的Tag扩散引擎	3432
+Skill-Tag-Quality-Coverage-KPI	24-标签工程	标签质量KPI监控体系 — 覆盖率/准确率/时效性/一致性的全维度Tag质量仪表盘	3906
+Skill-Tag-Schema-Engineering-Lifecycle	24-标签工程	标签Schema工程与生命周期管理 — 企业级Tag类型设计、Schema约束与版本治理	3378
+Skill-Tag-Video-Commerce-Tagging	24-标签工程	视频商品标签化 — AI驱动的短视频商品识别与自动标签体系	4924
+Skill-TagRAG-Hierarchical-Label-KG	08-知识图谱	TagRAG层级标签知识图谱 — 对象标签链驱动的超高效KG构建与检索	3214
+Skill-Tariff-FX-FBA-Cost-Dynamics	23-运营财务	关税-汇率-FBA费率三联动成本动态测算 — 跨境利润实时压力测试模型	3427
+Skill-Tariff-Impact-Margin-Stress-Test	23-运营财务	Skill-Tariff-Impact-Margin-Stress-Test — 关税冲击利润压力测试	2319
+Skill-Task-Adaptive-Topology	16-智能体工程	任务自适应拓扑路由 — AdaptOrch 动态多智能体编排	2704
+Skill-Tax-Compliance-VAT-GST	23-运营财务	Tax Compliance VAT GST — 跨境电商增值税/GST 自动合规	3743
+Skill-Tax-Evasion-Risk-Signal-Monitor	19-风控反欺诈	Tax Evasion Risk Signal Monitor — 税务合规风险信号监控（VAT/GST 异常）	2636
+Skill-Temporal-Fusion-Transformer-Inventory	03-时间序列	Temporal Fusion Transformer Inventory — TFT 多变量时序库存补货决策	2029
+Skill-Temporal-Fusion-Transformer	03-时间序列	&#x27;Skill: Temporal Fusion Transformer (TFT) 多水平时序预测&#x27;	2891
+Skill-Temu-Consignment-Analytics	23-运营财务	Temu 全托管/半托管利润分析 — 成本拆解矩阵与定价决策模型	3602
+Skill-Text-to-Edit-Video-Ad	20-AI视频生成	Skill Card: Text-to-Edit — MLLM母婴视频广告智能剪辑	2845
+Skill-Text2SQL-Schema-Linking	09-DataAgent-LLM	Schema-Linking感知Text2SQL — 列对齐与表联接推断	3448
+Skill-Thompson-Sampling-MAB	02-A_B实验	Thompson Sampling for Multi-Armed Bandit	2522
+Skill-Thompson-Sampling-Traffic-Allocation	02-A_B实验	Thompson Sampling Traffic Allocation — Thompson 采样流量分配：自适应在线实验设计	2589
+Skill-TikTok-Algorithm-Content-Boost	20-AI视频生成	TikTok Algorithm Content Boost — FYP 算法建模与内容传播速度优化	2787
+Skill-TikTok-Algorithm-Traffic-Amplification	15-营销投放分析	TikTok推流算法流量放大 — 逆向工程完播率/互动率临界点识别	2897
+Skill-TikTok-Content-Lifecycle-Analytics	20-AI视频生成	TikTok内容生命周期分析 — 指数衰减建模与二次投流最佳时机	2784
+Skill-TikTok-Creator-ROI-Attribution	13-广告分析	TikTok达人直播ROI归因 — PSM分离主播效应与流量效应	3197
+Skill-TikTok-Flash-Sale-Inventory-Pulse	04-供应链	TikTok直播闪购库存脉冲管理 — 泊松实时估计 + EWMA动态补货触发	3127
+Skill-TikTok-Hook-Optimizer	20-AI视频生成	Skill-TikTok-Hook-Optimizer — TikTok 开头钩子前3秒留存预测	3860
+Skill-TikTok-Live-Real-Time-CVR-Prediction	15-营销投放分析	TikTok直播间实时CVR预测 — 基于弹幕情绪与互动信号的秒级转化率预测	3459
+Skill-TikTok-Repurchase-From-Live-Audience	06-增长模型	TikTok Live Audience Repurchase—直播首购用户复购转化	2174
+Skill-TikTok-Shop-Content-Attribution	13-广告分析	TikTok Shop Content Attribution — 短视频带货兴趣图谱归因	2505
+Skill-TikTok-Shop-Content-Commerce-Funnel	15-营销投放分析	TikTok Shop 内容电商漏斗建模 — 短视频→直播→下单三段式转化率优化	3193
+Skill-TikTok-Trending-Product-Signal	15-营销投放分析	TikTok爆款商品信号挖掘 — 话题标签增速分析提前发现下一个爆款品类	2758
+Skill-Time-Series-Anomaly-Detection	03-时间序列	Time Series Anomaly Detection for E-Commerce Monitoring	2327
+Skill-Time-Series-Forecasting	03-时间序列	Skill Card: 时间序列预测 (Time Series Forecasting)	2607
+Skill-Time-Series-Foundation-Model-Zero-Shot	03-时间序列	时序基础模型零样本预测 — 无需训练的跨域需求预测	3772
+Skill-Time-Series-Foundation-Model	03-时间序列	Time Series Foundation Model — 时序基础模型：零样本跨品类需求预测	2883
+Skill-Time-Series-Pretraining-Foundation	12-ML基础	Time Series Foundation Model Pretraining — 时序基础模型预训练迁移（Moirai/TimesFM/Chronos）	2838
+Skill-TimeCMA-LLM-Forecasting	03-时间序列	TimeCMA - LLM-Empowered Multivariate Time Series Forecasting via Cross-Modality Alignment	2303
+Skill-TokenPilot-Lifecycle-Context-Eviction	10-MAS	TokenPilot生命周期感知上下文驱逐 — 双粒度上下文管理：摄入压实+驱逐调度	3456
+Skill-Tool-Auto-Discovery	16-智能体工程	Tool Auto Discovery — Agent 工具自动发现：OpenAPI + MCP Schema 自注册	1316
+Skill-Tool-Call-Decision-Framework	16-智能体工程	Tool Call Decision Framework — 必要性/效用/可负担性三维工具调用决策	1307
+Skill-Tool-Calling-Chain-of-Thought	09-DataAgent-LLM	工具调用链式推理 — Function Calling + CoT 结合实现可解释 Agent	2295
+Skill-Tool-Description-Audit	16-智能体工程	MCP Tool 描述质量审核 — 六维 Smell 扫描与动态路由	3166
+Skill-Topological-Data-Analysis-Cross-Sell	05-推荐系统	拓扑数据分析 (TDA) 挖掘时空隐性关联销售路径	796
+Skill-Traffic-Source-Analysis	14-用户分析	电商流量来源全维度分析 - 设备/浏览器/来源的转化率诊断	2576
+Skill-Trajectory-Pattern-Mining	14-用户分析	用户行为轨迹模式挖掘与预测 - 变阶马尔可夫模型	2685
+Skill-Transaction-Anomaly-Detection	19-风控反欺诈	Transaction Anomaly Detection（异常交易检测）	1750
+Skill-Transfer-Learning-New-Product-Forecast	06-增长模型	迁移学习新品销量预测 — 网络权重迁移从相似品借力	3904
+Skill-Tree-of-Thoughts-Planning	10-MAS	Tree of Thoughts — 树搜索式任务规划	742
+Skill-Two-Echelon-Inventory-DRL	04-供应链	Deep RL for Two-Echelon Inventory Optimization	2514
+Skill-UCB-LDP-Dynamic-Pricing	06-增长模型	UCB-LDP Dynamic Pricing（上下文动态定价）	1957
+Skill-UGC-Viral-Content-Potential-Scorer	07-NLP-VOC	UGC病毒传播潜力评分 — 识别可引发病毒扩散的高潜力内容	4238
+Skill-Unified-Cross-Border-Inventory-Dispatch	04-供应链	一盘货跨境库存统一调度 — 多平台多国统一库存决策与分配引擎	3503
+Skill-Unit-Economics-Decomposition	23-运营财务	Unit Economics Decomposition — 单位经济拆解（每单CAC/LTV/贡献毛利全链路）	917
+Skill-Uplift-Churn-Prediction	06-增长模型	Uplift Modeling for Churn Prediction	1330
+Skill-Uplift-Intervention-Priority-Queue	14-用户分析	Uplift-Intervention-Priority-Queue — Uplift×LTV加权排序生成有限促销资源干预执行队列	3003
+Skill-Uplift-Intervention-Queue-Optimizer	06-增长模型	Uplift Intervention Queue Optimizer — 在预算约束下按CATE排序生成最优干预名单	3097
+Skill-Uplift-Modeling	01-因果推断	Uplift Modeling (元学习框架)	2765
+Skill-User-Analytics-Logistics-Bridge	14-用户分析	用户分析×物流履约桥接 — 用户行为预测驱动物流前置备货	4053
+Skill-User-Funnel-Analysis	14-用户分析	User Funnel and Behavior Path Analysis	2425
+Skill-User-LTV-Financial-Bridge	14-用户分析	User LTV Financial Bridge — 用户生命周期价值预测驱动财务规划	3538
+Skill-User-Lifecycle-STAN	06-增长模型	STAN 用户生命周期自适应建模	2883
+Skill-User-Profile-Long-Memory	14-用户分析	User Profile Long Memory — 跨会话用户画像：育儿阶段感知与偏好记忆	2883
+Skill-Utimac-Uncertainty-Completion	14-用户分析	不确定性感知矩阵补全 - 补全值带置信区间的页面转移矩阵恢复	2307
+Skill-VAT-GST-Compliance-Automation	21-合规决策	VAT GST Compliance Automation — 跨境 VAT/GST 合规自动化：欧洲税务申报自动化	4318
+Skill-VIP-Tier-Upgrade-Action	14-用户分析	VIP-Tier-Upgrade-Action — LTV超阈值自动触发VIP等级升级与礼遇通知	3036
+Skill-VLM-Ecommerce-Adaptation	16-智能体工程	VLM E-commerce Adaptation — 大规模视觉语言模型电商适配	2877
+Skill-VMI-DRL-Inventory-Routing	04-供应链	VMI DRL Inventory Routing — VMI 模式下库存补货与配送路径联合 DRL 优化	4161
+Skill-VOC-Aspect-Sentiment-Extraction	07-NLP-VOC	InstructABSA — 指令微调驱动的方面级情感分析与评论解构	3384
+Skill-VOC-Churn-Early-Warning-Signal	07-NLP-VOC	VOC流失预警信号提取 — 从评论/客服文本捕获用户流失早期信号	3976
+Skill-VOC-Churn-Signal-Extraction	07-NLP-VOC	VOC-Churn-Signal-Extraction — 差评文本语义流失信号提取与流失概率预测	2960
+Skill-VOC-Competitive-Positioning-Map	07-NLP-VOC	Skill-VOC-Competitive-Positioning-Map — VOC竞争定位地图	3206
+Skill-VOC-Compliance-Signal-Mining	07-NLP-VOC	VOC Compliance Signal Mining — 评论合规信号挖掘：NLP-VOC×合规决策桥梁	4206
+Skill-VOC-Driven-Recommendation-Signal	07-NLP-VOC	VOC-Driven Recommendation Signal — 评论语义驱动的推荐增强：NLP-VOC×推荐系统桥梁	3724
+Skill-VOC-Fraud-Review-Detection	07-NLP-VOC	VOC Fraud Review Detection — 评论质量与虚假评论识别：NLP-VOC×风控桥梁	2803
+Skill-VOC-NPS-Retention-Predictor	07-NLP-VOC	VOC代理NPS留存预测 — 无需问卷从评论语言预测用户留存率	3719
+Skill-VOC-New-Product-Gap-Scoring	07-NLP-VOC	VOC-New-Product-Gap-Scoring — 竞品差评驱动的新品机会评分与选品决策	3309
+Skill-VOC-Price-Signal-Analysis	17-价格优化	VOC Price Signal Analysis — 评论价格信号分析：用户定价反馈驱动定价策略优化	3198
+Skill-VOC-Product-Iteration-Signal-Extractor	07-NLP-VOC	VOC产品迭代信号提取 — 从差评到优先级排序的产品改进需求清单	4851
+Skill-VOC-Proxy-NPS-AIPL-统一萃取引擎	07-NLP-VOC	&#x27;Skill: VOC Proxy NPS × AIPL 统一标签萃取引擎&#x27;	2769
+Skill-VOC-Returns-Cost-Driver	07-NLP-VOC	VOC Returns Cost Driver — 退货原因 NLP 分析：从评论挖掘退货成本驱动因子	4069
+Skill-VOC-Supply-Chain-Signal-Bridge	07-NLP-VOC	VOC Supply Chain Signal Bridge — 用户评论信号驱动供应链决策的跨域桥梁	3626
+Skill-VOC-Trend-Signal-Forecasting	07-NLP-VOC	VOC Trend Signal Forecasting — 评论趋势信号预测：用用户声音预测未来需求拐点	3456
+Skill-VOC-Triggered-Inventory-Signal	07-NLP-VOC	VOC Triggered Inventory Signal — VOC触发库存信号（差评激增→供应链预警）	1714
+Skill-Variance-Reduction-Control-Variates	02-A_B实验	Variance Reduction via Control Variates — 控制变量法降方差（MLRATE/RLMRT）	2899
+Skill-VectorDB-Production-Engineering	08-知识图谱	Skill-VectorDB-Production-Engineering	652
+Skill-Video-Compliance-Pre-Screen	20-AI视频生成	Video Compliance Pre-Screen — 视频内容上架前合规预筛（违禁词/画面检测）	847
+Skill-Video-Emotion-Resonance-Score	20-AI视频生成	Video Emotion Resonance Score — 视频情感共鸣评分（母婴内容感动度量化）	878
+Skill-Video-ROI-Attribution	20-AI视频生成	Video ROI Attribution — 短视频内容 GMV 归因与财务 ROI 量化	2569
+Skill-Video-Sentiment-Analysis-VOC	20-AI视频生成	Skill-Video-Sentiment-Analysis-VOC — 视频弹幕/评论情感实时监控	3284
+Skill-VideoRAG-Video-Knowledge-Retrieval	08-知识图谱	VideoRAG — 视频知识库检索增强生成	3795
+Skill-Viral-Marketing-Model	06-增长模型	Viral Marketing Model — 病毒式传播建模：K 因子裂变增长的量化设计	2644
+Skill-Virbo-Multilingual-Avatar-UGC	20-AI视频生成	Virbo — Multilingual Avatar UGC（多语言虚拟人UGC批量生产）	1972
+Skill-Virtual-Influencer-Baby-Demo	20-AI视频生成	Skill-Virtual-Influencer-Baby-Demo — 虚拟 KOL 母婴演示视频生成	3799
+Skill-VisRAG-Vision-Document-RAG	08-知识图谱	VisRAG — 纯视觉文档页面RAG	3326
+Skill-Visual-Data-Collection	20-AI视频生成	Visual Data Collection — 电商图文视频数据采集与 AI 视频生成素材库构建	2137
+Skill-Visual-Product-Search	08-知识图谱	Visual Product Search — 视觉商品搜索：以图搜货与相似款发现	2790
+Skill-Voice-Search-Optimization-Amazon	25-搜索流量工程	Skill-Voice-Search-Optimization-Amazon — Amazon 语音搜索优化	3525
+Skill-WMS-Exception-Action-Trigger	24-标签工程	WMS异常Tag触发引擎 — 仓储操作异常实时检测、标签化与自动处置触发	3256
+Skill-WRITEBACK-RAG-Trainable-KB	08-知识图谱	WRITEBACK-RAG可训练知识库 — 门控证据蒸馏让知识库从检索模式中持续自我优化	3272
+Skill-Warehouse-Capacity-Efficiency-Planning	04-供应链	仓容管理与仓储效率规划 — 仓容测算、仓储效率模拟与精细化5步运营	3417
+Skill-Warehouse-Cost-Per-Unit-KPI	04-供应链	仓储单位成本与费效比KPI — FBA/自营仓单件成本分解与效率提升量化	3625
+Skill-Warehouse-Inbound-Quality-Accuracy-KPI	04-供应链	仓储入库质量与收货准确率KPI — 收货差异检测、破损率管控与验收时效	3786
+Skill-Warehouse-Location-Optimization	18-物流履约	Warehouse Location Optimization — 仓储选址优化：多仓库布局最优化决策	2822
+Skill-Warehouse-Operations-KPI-Picking-Efficiency	04-供应链	仓储运营精细化KPI体系 — 拣货准确率/入出库效率/破损率/人均处理效率的全量化管理	3796
+Skill-Warehouse-Outbound-Fulfillment-SLA	04-供应链	仓储出库履约SLA时效KPI — 拣货准确率/出库及时率/包装合格率全量化体系	3996
+Skill-Warehouse-Slotting-AI-Optimization	18-物流履约	仓库货位AI优化 — 婴儿产品拣货效率最大化	2621
+Skill-Warehouse-Slotting-Optimization-Tag	24-标签工程	仓储货位优化Tag引擎 — ABC分层驱动的智能货位分配与拣货效率提升	2810
+Skill-Warehouse-Slotting-Optimization	18-物流履约	Warehouse Slotting Optimization — 仓库货位智能分配（拣货路径最短化）	830
+Skill-Weak-Supervision-Data-Labeling	22-数据采集工程	Weak Supervision Data Labeling — 弱监督数据标注：用规则函数替代人工标注	2950
+Skill-Web-Page-Change-Detection	22-数据采集工程	Web Page Change Detection — 网页变化检测：VLM 视觉差异识别与 DOM 原子性保护	2614
+Skill-WhatsApp-Private-Domain-Analytics	06-增长模型	WhatsApp Private Domain Analytics — Shapley Value 多渠道归因与私域触达效率分析	3289
+Skill-Willingness-to-Pay-Estimation	17-价格优化	支付意愿估计 — 从MNL参数推导用户真实WTP分布	3349
+Skill-Working-Capital-Cycle-Optimizer	23-运营财务	Skill-Working-Capital-Cycle-Optimizer — 营运资金周期优化	2606
+Skill-Working-Capital-Stress-Test	23-运营财务	Working Capital Stress Test — 营运资金压力测试（旺季备货资金缺口模拟）	852
+Skill-XAI-Regulatory-Compliance	11-AI人文	XAI监管合规 — AI决策可解释性的监管报告自动化	4332
+Skill-XSkill-Multimodal-Self-Improvement	16-智能体工程	XSkill — 多模态 Agent 双流自进化：经验+技能协同积累	2711
+Skill-Zero-Click-Search-Optimization	13-广告分析	Zero-Click Search Optimization — 零点击搜索时代的流量保全与特色摘要抢占	2828
+Skill-Zone-GNN-Last-Mile-Routing	18-物流履约	Zone-GNN — 区域化最后一公里路径优化：GNN + 指针网络	2744
+Skill-iText2KG-Schema-Free-KG-Induction	08-知识图谱	iText2KG — 零样本增量知识图谱构建	2379

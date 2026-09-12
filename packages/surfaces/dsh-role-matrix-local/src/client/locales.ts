@@ -47,6 +47,19 @@ export const zh = {
   'detail.none': '无',
 
   'footer.hint': '本面板只读。切换默认预设请用官方「设置 → 预设」，开新会话时在输入框上方选择岗位。',
+
+  'hero.identity': '已选分身',
+  'hero.section.skills': '业务技能 · 平台供给',
+  'hero.section.manuals': '场景手册',
+  'hero.noteLabel': '边界',
+  'hero.gap.empty': '这个业务技能在平台技能库里没有任何对应供给——按其本来样子登记，不编造技能名，也不放占位卡。',
+  'hero.card.go': '预填 →',
+  'hero.card.tip': '点击把这条提示词预填进输入框（不发送）',
+  'hero.group.expand': '展开这一组',
+  'hero.group.collapse': '收起这一组',
+  'hero.degraded': '能力数据不完整：{detail}',
+  'hero.loadFailed': '能力数据读取失败：{error}',
+  'hero.prefillFailed': '预填失败：{error}',
 } as const
 
 export type RoleMatrixKey = keyof typeof zh
@@ -94,4 +107,17 @@ export const en: Record<RoleMatrixKey, string> = {
   'detail.none': 'none',
 
   'footer.hint': 'This panel is read-only. Set the default preset in Settings → Presets; pick a role above the composer when starting a new session.',
+
+  'hero.identity': 'Selected role',
+  'hero.section.skills': 'Business skills · platform supply',
+  'hero.section.manuals': 'Scene manuals',
+  'hero.noteLabel': 'Boundary',
+  'hero.gap.empty': 'The platform has no skill for this business skill at all. It is recorded as it stands — no invented skill names, and no placeholder card.',
+  'hero.card.go': 'Prefill →',
+  'hero.card.tip': 'Prefill this prompt into the composer (it is not sent)',
+  'hero.group.expand': 'Expand this group',
+  'hero.group.collapse': 'Collapse this group',
+  'hero.degraded': 'Capability data is incomplete: {detail}',
+  'hero.loadFailed': 'Could not read capability data: {error}',
+  'hero.prefillFailed': 'Prefill failed: {error}',
 }

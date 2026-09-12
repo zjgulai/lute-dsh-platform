@@ -1,0 +1,1125 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/GK/blJgVeB4Yu1uMHOSFWUVZ0WU</id>
+  <title>arXiv Query: search_query=&amp;id_list=2405.09123,2405.09234,2405.09321,2405.09832,2405.10469,2405.11233,2405.11234,2405.11833,2405.12232,2405.12234,2405.12345,2405.12834,2405.13576,2405.13821,2405.13892,2405.14382,2405.14644,2405.14682,2405.14831,2405.16871,2405.16884,2405.18634,2405.18684,2405.19456,2406.00853,2406.01089,2406.01638,2406.02344,2406.02424,2406.02463,2406.02817,2406.03219,2406.03421,2406.03915,2406.04053,2406.04356,2406.04744,2406.06768,2406.07382,2406.07496&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:43:22Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2405.09123,2405.09234,2405.09321,2405.09832,2405.10469,2405.11233,2405.11234,2405.11833,2405.12232,2405.12234,2405.12345,2405.12834,2405.13576,2405.13821,2405.13892,2405.14382,2405.14644,2405.14682,2405.14831,2405.16871,2405.16884,2405.18634,2405.18684,2405.19456,2406.00853,2406.01089,2406.01638,2406.02344,2406.02424,2406.02463,2406.02817,2406.03219,2406.03421,2406.03915,2406.04053,2406.04356,2406.04744,2406.06768,2406.07382,2406.07496" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2405.12834v4</id>
+    <title>Effect of Synthetic Jets Actuator Parameters on Deep Reinforcement Learning-Based Flow Control Performance in a Square Cylinder</title>
+    <updated>2024-09-30T13:10:18Z</updated>
+    <link href="https://arxiv.org/abs/2405.12834v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.12834v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We conduct an active flow control (AFC) study on the mass flow rate of synthetic jets on the upper and lower surfaces of a square cylinder using a deep reinforcement learning (DRL) algorithm, with a focus on investigating the influence of the position and width of the synthetic jets on the flow control performance. At Reynolds numbers ($Re$) of 100 and 500, it is found that our proposed method significantly reduced the lift and drag coefficients of the square cylinder, and completely suppressed vortex shedding in the wake. In particular, at $Re=100$, placing the synthetic jets near the tail corner was beneficial for reducing drag, with a maximum drag reduction rate of 14.4%. When $Re=500$, positioning the synthetic jets near the leading edge corner resulted in a maximum optimal drag reduction effect of 65.5%. This indicates that locating the synthetic jet at the main flow separation point can achieve optimal control. Furthermore, we notice that when the synthetic jets are positioned near the tail corner, vortex shedding can be completely suppressed. Additionally, a narrower width of the synthetic jets can enhance flow instability and increase the cost of flow control.</summary>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-21T14:37:53Z</published>
+    <arxiv:primary_category term="physics.flu-dyn"/>
+    <author>
+      <name>Wang Jia</name>
+    </author>
+    <author>
+      <name>Hang Xu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.16871v2</id>
+    <title>Multi-Behavior Generative Recommendation</title>
+    <updated>2024-07-30T00:59:51Z</updated>
+    <link href="https://arxiv.org/abs/2405.16871v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.16871v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multi-behavior sequential recommendation (MBSR) aims to incorporate behavior types of interactions for better recommendations. Existing approaches focus on the next-item prediction objective, neglecting the value of integrating the target behavior type into the learning objective. In this paper, we propose MBGen, a novel Multi-Behavior sequential Generative recommendation framework. We formulate the MBSR task into a consecutive two-step process: (1) given item sequences, MBGen first predicts the next behavior type to frame the user intention, (2) given item sequences and a target behavior type, MBGen then predicts the next items. To model such a two-step process, we tokenize both behaviors and items into tokens and construct one single token sequence with both behaviors and items placed interleaved. Furthermore, MBGen learns to autoregressively generate the next behavior and item tokens in a unified generative recommendation paradigm, naturally enabling a multi-task capability. Additionally, we exploit the heterogeneous nature of token sequences in the generative recommendation and propose a position-routed sparse architecture to efficiently and effectively scale up models. Extensive experiments on public datasets demonstrate that MBGen significantly outperforms existing MBSR models across multiple tasks.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-27T06:39:36Z</published>
+    <arxiv:comment>Camera ready; accepted by CIKM 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Zihan Liu</name>
+    </author>
+    <author>
+      <name>Yupeng Hou</name>
+    </author>
+    <author>
+      <name>Julian McAuley</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.07496v1</id>
+    <title>TextGrad: Automatic "Differentiation" via Text</title>
+    <updated>2024-06-11T17:32:21Z</updated>
+    <link href="https://arxiv.org/abs/2406.07496v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.07496v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>AI is undergoing a paradigm shift, with breakthroughs achieved by systems orchestrating multiple large language models (LLMs) and other complex components. As a result, developing principled and automated optimization methods for compound AI systems is one of the most important new challenges. Neural networks faced a similar challenge in its early days until backpropagation and automatic differentiation transformed the field by making optimization turn-key. Inspired by this, we introduce TextGrad, a powerful framework performing automatic ``differentiation'' via text. TextGrad backpropagates textual feedback provided by LLMs to improve individual components of a compound AI system. In our framework, LLMs provide rich, general, natural language suggestions to optimize variables in computation graphs, ranging from code snippets to molecular structures. TextGrad follows PyTorch's syntax and abstraction and is flexible and easy-to-use. It works out-of-the-box for a variety of tasks, where the users only provide the objective function without tuning components or prompts of the framework. We showcase TextGrad's effectiveness and generality across a diverse range of applications, from question answering and molecule optimization to radiotherapy treatment planning. Without modifying the framework, TextGrad improves the zero-shot accuracy of GPT-4o in Google-Proof Question Answering from $51\%$ to $55\%$, yields $20\%$ relative performance gain in optimizing LeetCode-Hard coding problem solutions, improves prompts for reasoning, designs new druglike small molecules with desirable in silico binding, and designs radiation oncology treatment plans with high specificity. TextGrad lays a foundation to accelerate the development of the next-generation of AI systems.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-11T17:32:21Z</published>
+    <arxiv:comment>41 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Mert Yuksekgonul</name>
+    </author>
+    <author>
+      <name>Federico Bianchi</name>
+    </author>
+    <author>
+      <name>Joseph Boen</name>
+    </author>
+    <author>
+      <name>Sheng Liu</name>
+    </author>
+    <author>
+      <name>Zhi Huang</name>
+    </author>
+    <author>
+      <name>Carlos Guestrin</name>
+    </author>
+    <author>
+      <name>James Zou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.18684v3</id>
+    <title>Learning Diffeomorphism for Image Registration with Time-Continuous Networks using Semigroup Regularization</title>
+    <updated>2025-03-16T21:22:43Z</updated>
+    <link href="https://arxiv.org/abs/2405.18684v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.18684v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Diffeomorphic image registration (DIR) is a fundamental task in 3D medical image analysis that seeks topology-preserving deformations between image pairs. To ensure diffeomorphism, a common approach is to model the deformation field as the flow map solution of a differential equation, which is solved using efficient schemes such as scaling and squaring along with multiple smoothness regularization terms. In this paper, we propose a novel learning-based approach for diffeomorphic 3D image registration that models diffeomorphisms in a continuous-time framework using only a single regularization term, without requiring additional integration. We exploit the semigroup property-a fundamental characteristic of flow maps-as the sole form of regularization, ensuring temporally continuous diffeomorphic flows between image pairs. Leveraging this property, we prove that our formulation directly learns the flow map solution of an ODE, ensuring continuous inverse and cycle consistencies without explicit enforcement, while eliminating additional integration schemes and regularization terms. To achieve time-continuous diffeomorphisms, we employ time-embedded UNets, an architecture commonly used in diffusion models. Our results demonstrate that modeling diffeomorphism continuously in time improves registration performance. Experimental results on four public datasets demonstrate the superiority of our model over state-of-the-art diffeomorphic methods. Additionally, comparison to several recent non-diffeomorphic deformable image registration methods shows that our method achieves competitive Dice scores while significantly improving topology preservation.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-29T01:25:43Z</published>
+    <arxiv:comment>27 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Mohammadjavad Matinkia</name>
+    </author>
+    <author>
+      <name>Nilanjan Ray</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.07382v3</id>
+    <title>Multilevel Facility Location Optimization: A Novel Integer Programming Formulation and Approaches to Heuristic Solutions</title>
+    <updated>2025-04-19T03:19:55Z</updated>
+    <link href="https://arxiv.org/abs/2406.07382v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.07382v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We attack the 4-level facility location problem (4L-FLP), a critical component in supply chains. Foundational tasks here involve selecting markets, plants, warehouses, and distribution centers to maximize profits while considering related constraints. Based on a variation of the quadratic assignment problem, we propose a novel integer programming formula that significantly reduces the variables. Our model incorporates several realistic features, including transportation costs and upper bounds on facilities at each level. It accounts for one-time fixed costs associated with selecting each facility. To solve this complex problem, we develop and experimentally test two solution procedures: a multi-start greedy heuristic and a multi-start tabu search. We conduct extensive sensitivity analyses on the results to assess the reliability of proposed algorithms. This study contributes to improved solution methods for large-scale 4L-FLPs, providing a valuable tool for supply chain maturity.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-11T15:50:35Z</published>
+    <arxiv:comment>38 pages</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Bahram Alidaee</name>
+    </author>
+    <author>
+      <name>Haibo Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.09123v1</id>
+    <title>A new infinite family of maximum $h$-scattered $\mathbb{F}_q$-subspaces of $V(m(h+1),q^n)$ and associated MRD codes</title>
+    <updated>2024-05-15T06:38:01Z</updated>
+    <link href="https://arxiv.org/abs/2405.09123v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.09123v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The exploration of linear subspaces, particularly scattered subspaces, has garnered considerable attention across diverse mathematical disciplines in recent years, notably within finite geometries and coding theory. Scattered subspaces play a pivotal role in analyzing various geometric structures such as blocking sets, two-intersection sets, complete arcs, caps in affine and projective spaces over finite fields and rank metric codes. This paper introduces a new infinite family of $h$-subspaces, along with their associated MRD codes. Additionally, it addresses the task of determining the generalized weights of these codes. Notably, we demonstrate that these MRD codes exhibit some larger generalized weights compared to those previously identified.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-15T06:38:01Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Daniele Bartoli</name>
+    </author>
+    <author>
+      <name>Alessandro Giannoni</name>
+    </author>
+    <author>
+      <name>Giuseppe Marino</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.13576v2</id>
+    <title>FlashRAG: A Modular Toolkit for Efficient Retrieval-Augmented Generation Research</title>
+    <updated>2025-02-24T02:46:52Z</updated>
+    <link href="https://arxiv.org/abs/2405.13576v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.13576v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>With the advent of large language models (LLMs) and multimodal large language models (MLLMs), the potential of retrieval-augmented generation (RAG) has attracted considerable research attention. Various novel algorithms and models have been introduced to enhance different aspects of RAG systems. However, the absence of a standardized framework for implementation, coupled with the inherently complex RAG process, makes it challenging and time-consuming for researchers to compare and evaluate these approaches in a consistent environment. Existing RAG toolkits, such as LangChain and LlamaIndex, while available, are often heavy and inflexibly, failing to meet the customization needs of researchers. In response to this challenge, we develop \ours{}, an efficient and modular open-source toolkit designed to assist researchers in reproducing and comparing existing RAG methods and developing their own algorithms within a unified framework. Our toolkit has implemented 16 advanced RAG methods and gathered and organized 38 benchmark datasets. It has various features, including a customizable modular framework, multimodal RAG capabilities, a rich collection of pre-implemented RAG works, comprehensive datasets, efficient auxiliary pre-processing scripts, and extensive and standard evaluation metrics. Our toolkit and resources are available at https://github.com/RUC-NLPIR/FlashRAG.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-22T12:12:40Z</published>
+    <arxiv:comment>The paper is accepted by WWW2025 Resource Track</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jiajie Jin</name>
+    </author>
+    <author>
+      <name>Yutao Zhu</name>
+    </author>
+    <author>
+      <name>Guanting Dong</name>
+    </author>
+    <author>
+      <name>Yuyao Zhang</name>
+    </author>
+    <author>
+      <name>Xinyu Yang</name>
+    </author>
+    <author>
+      <name>Chenghao Zhang</name>
+    </author>
+    <author>
+      <name>Tong Zhao</name>
+    </author>
+    <author>
+      <name>Zhao Yang</name>
+    </author>
+    <author>
+      <name>Zhicheng Dou</name>
+    </author>
+    <author>
+      <name>Ji-Rong Wen</name>
+    </author>
+    <arxiv:doi>10.1145/3701716.3715313.</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3701716.3715313." title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.13892v1</id>
+    <title>Emergence of Navier-Stokes hydrodynamics in chaotic quantum circuits</title>
+    <updated>2024-05-22T18:02:17Z</updated>
+    <link href="https://arxiv.org/abs/2405.13892v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.13892v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We construct an ensemble of two-dimensional nonintegrable quantum circuits that are chaotic but have a conserved particle current, and thus a finite Drude weight. The long-wavelength hydrodynamics of such systems is given by the incompressible Navier-Stokes equations. By analyzing circuit-to-circuit fluctuations in the ensemble we argue that these are negligible, so the circuit-averaged value of transport coefficients like the viscosity is also (in the long-time limit) the value in a typical circuit. The circuit-averaged transport coefficients can be mapped onto a classical irreversible Markov process. Therefore, remarkably, our construction allows us to efficiently compute the viscosity of a family of strongly interacting chaotic two-dimensional quantum systems.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.CD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-22T18:02:17Z</published>
+    <arxiv:comment>4+epsilon pages, 3 figures; 8 pages supplemental material</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Phys. Rev. Lett. 134, 230401 (2025)</arxiv:journal_ref>
+    <author>
+      <name>Hansveer Singh</name>
+    </author>
+    <author>
+      <name>Ewan McCulloch</name>
+    </author>
+    <author>
+      <name>Sarang Gopalakrishnan</name>
+    </author>
+    <author>
+      <name>Romain Vasseur</name>
+    </author>
+    <arxiv:doi>10.1103/z9ym-kqln</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/z9ym-kqln" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.09234v1</id>
+    <title>Enhancing Image Privacy in Semantic Communication over Wiretap Channels leveraging Differential Privacy</title>
+    <updated>2024-05-15T10:30:18Z</updated>
+    <link href="https://arxiv.org/abs/2405.09234v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.09234v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Semantic communication (SemCom) enhances transmission efficiency by sending only task-relevant information compared to traditional methods. However, transmitting semantic-rich data over insecure or public channels poses security and privacy risks. This paper addresses the privacy problem of transmitting images over wiretap channels and proposes a novel SemCom approach ensuring privacy through a differential privacy (DP)-based image protection and deprotection mechanism. The method utilizes the GAN inversion technique to extract disentangled semantic features and applies a DP mechanism to protect sensitive features within the extracted semantic information. To address the non-invertibility of DP, we introduce two neural networks to approximate the DP application and removal processes, offering a privacy protection level close to that by the original DP process. Simulation results validate the effectiveness of our method in preventing eavesdroppers from obtaining sensitive information while maintaining high-fidelity image reconstruction at the legitimate receiver.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-15T10:30:18Z</published>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Weixuan Chen</name>
+    </author>
+    <author>
+      <name>Shunpu Tang</name>
+    </author>
+    <author>
+      <name>Qianqian Yang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.10469v1</id>
+    <title>Simulation-Based Benchmarking of Reinforcement Learning Agents for Personalized Retail Promotions</title>
+    <updated>2024-05-16T23:27:21Z</updated>
+    <link href="https://arxiv.org/abs/2405.10469v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.10469v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The development of open benchmarking platforms could greatly accelerate the adoption of AI agents in retail. This paper presents comprehensive simulations of customer shopping behaviors for the purpose of benchmarking reinforcement learning (RL) agents that optimize coupon targeting. The difficulty of this learning problem is largely driven by the sparsity of customer purchase events. We trained agents using offline batch data comprising summarized customer purchase histories to help mitigate this effect. Our experiments revealed that contextual bandit and deep RL methods that are less prone to over-fitting the sparse reward distributions significantly outperform static policies. This study offers a practical framework for simulating AI agents that optimize the entire retail customer journey. It aims to inspire the further development of simulation tools for retail AI systems.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="econ.EM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-16T23:27:21Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Yu Xia</name>
+    </author>
+    <author>
+      <name>Sriram Narayanamoorthy</name>
+    </author>
+    <author>
+      <name>Zhengyuan Zhou</name>
+    </author>
+    <author>
+      <name>Joshua Mabry</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.11233v1</id>
+    <title>Bridge and Hint: Extending Pre-trained Language Models for Long-Range Code</title>
+    <updated>2024-05-18T09:06:41Z</updated>
+    <link href="https://arxiv.org/abs/2405.11233v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.11233v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the field of code intelligence, effectively modeling long-range code poses a significant challenge. Existing pre-trained language models (PLMs) such as UniXcoder have achieved remarkable success, but they still face difficulties with long code inputs. This is mainly due to their limited capacity to maintain contextual continuity and memorize the key information over long-range code. To alleviate the difficulties, we propose EXPO, a framework for EXtending Pre-trained language models for lOng-range code. EXPO incorporates two innovative memory mechanisms we propose in this paper: Bridge Memory and Hint Memory. Bridge Memory uses a tagging mechanism to connect disparate snippets of long-range code, helping the model maintain contextual coherence. Hint Memory focuses on crucial code elements throughout the global context, such as package imports, by integrating a kNN attention layer to adaptively select the relevant code elements. This dual-memory approach bridges the gap between understanding local code snippets and maintaining global code coherence, thereby enhancing the model overall comprehension of long code sequences. We validate the effectiveness of EXPO on five popular pre-trained language models such as UniXcoder and two code intelligence tasks including API recommendation and vulnerability detection. Experimental results demonstrate that EXPO significantly improves the pre-training language models.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-18T09:06:41Z</published>
+    <arxiv:comment>Accepted by ISSTA 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Yujia Chen</name>
+    </author>
+    <author>
+      <name>Cuiyun Gao</name>
+    </author>
+    <author>
+      <name>Zezhou Yang</name>
+    </author>
+    <author>
+      <name>Hongyu Zhang</name>
+    </author>
+    <author>
+      <name>Qing Liao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.14644v1</id>
+    <title>Adoption of a token-based authentication model for the CMS Submission Infrastructure</title>
+    <updated>2024-05-23T14:46:10Z</updated>
+    <link href="https://arxiv.org/abs/2405.14644v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.14644v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The CMS Submission Infrastructure (SI) is the main computing resource provisioning system for CMS workloads. A number of HTCondor pools are employed to manage this infrastructure, which aggregates geographically distributed resources from the WLCG and other providers. Historically, the model of authentication among the diverse components of this infrastructure has relied on the Grid Security Infrastructure (GSI), based on identities and X509 certificates. In contrast, commonly used modern authentication standards are based on capabilities and tokens. The WLCG has identified this trend and aims at a transparent replacement of GSI for all its workload management, data transfer and storage access operations, to be completed during the current LHC Run 3. As part of this effort, and within the context of CMS computing, the Submission Infrastructure group is in the process of phasing out the GSI part of its authentication layers, in favor of IDTokens and Scitokens. The use of tokens is already well integrated into the HTCondor Software Suite, which has allowed us to fully migrate the authentication between internal components of SI. Additionally, recent versions of the HTCondor-CE support tokens as well, enabling CMS resource requests to Grid sites employing this CE technology to be granted by means of token exchange. After a rollout campaign to sites, successfully completed by the third quarter of 2022, the totality of HTCondor CEs in use by CMS are already receiving Scitoken-based pilot jobs. On the ARC CE side, a parallel campaign was launched to foster the adoption of the REST interface at CMS sites (required to enable token-based job submission via HTCondor-G), which is nearing completion as well. In this contribution, the newly adopted authentication model will be described. We will then report on the migration status and final steps towards complete GSI phase out in the CMS SI.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-23T14:46:10Z</published>
+    <arxiv:comment>26TH INTERNATIONAL CONFERENCE ON COMPUTING IN HIGH ENERGY &amp; NUCLEAR PHYSICS - 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>Antonio Perez-Calero Yzquierdo</name>
+    </author>
+    <author>
+      <name>Marco Mascheroni</name>
+    </author>
+    <author>
+      <name>Edita Kizinevic</name>
+    </author>
+    <author>
+      <name>Farrukh Aftab Khan</name>
+    </author>
+    <author>
+      <name>Hyunwoo Kim</name>
+    </author>
+    <author>
+      <name>Maria Acosta Flechas</name>
+    </author>
+    <author>
+      <name>Nikos Tsipinakis</name>
+    </author>
+    <author>
+      <name>Saqib Haleem</name>
+    </author>
+    <author>
+      <name>Frank Wurthwein</name>
+    </author>
+    <arxiv:doi>10.1051/epjconf/202429504003</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1051/epjconf/202429504003" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.06768v1</id>
+    <title>Data-Driven Switchback Experiments: Theoretical Tradeoffs and Empirical Bayes Designs</title>
+    <updated>2024-06-10T20:06:53Z</updated>
+    <link href="https://arxiv.org/abs/2406.06768v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.06768v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the design and analysis of switchback experiments conducted on a single aggregate unit. The design problem is to partition the continuous time space into intervals and switch treatments between intervals, in order to minimize the estimation error of the treatment effect. We show that the estimation error depends on four factors: carryover effects, periodicity, serially correlated outcomes, and impacts from simultaneous experiments. We derive a rigorous bias-variance decomposition and show the tradeoffs of the estimation error from these factors. The decomposition provides three new insights in choosing a design: First, balancing the periodicity between treated and control intervals reduces the variance; second, switching less frequently reduces the bias from carryover effects while increasing the variance from correlated outcomes, and vice versa; third, randomizing interval start and end points reduces both bias and variance from simultaneous experiments. Combining these insights, we propose a new empirical Bayes design approach. This approach uses prior data and experiments for designing future experiments. We illustrate this approach using real data from a ride-sharing platform, yielding a design that reduces MSE by 33% compared to the status quo design used on the platform.</summary>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="econ.EM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.QM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-10T20:06:53Z</published>
+    <arxiv:primary_category term="stat.ME"/>
+    <author>
+      <name>Ruoxuan Xiong</name>
+    </author>
+    <author>
+      <name>Alex Chin</name>
+    </author>
+    <author>
+      <name>Sean J. Taylor</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.00853v2</id>
+    <title>A Tutorial on Doubly Robust Learning for Causal Inference</title>
+    <updated>2024-07-08T16:15:08Z</updated>
+    <link href="https://arxiv.org/abs/2406.00853v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.00853v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Doubly robust learning offers a robust framework for causal inference from observational data by integrating propensity score and outcome modeling. Despite its theoretical appeal, practical adoption remains limited due to perceived complexity and inaccessible software. This tutorial aims to demystify doubly robust methods and demonstrate their application using the EconML package. We provide an introduction to causal inference, discuss the principles of outcome modeling and propensity scores, and illustrate the doubly robust approach through simulated case studies. By simplifying the methodology and offering practical coding examples, we intend to make doubly robust learning accessible to researchers and practitioners in data science and statistics.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-02T20:18:40Z</published>
+    <arxiv:comment>This paper is being withdrawn due to significant revisions and updates required based on new findings and internal review</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Hlynur Davíð Hlynsson</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.03915v3</id>
+    <title>Impact of ageostrophic dynamics on the predictability of Lagrangian trajectories in surface-ocean turbulence</title>
+    <updated>2024-10-25T12:45:08Z</updated>
+    <link href="https://arxiv.org/abs/2406.03915v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.03915v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Turbulent flows at the surface of the ocean deviate from geostrophic equilibrium on scales smaller than about 10 km. These scales are associated with important vertical transport of active and passive tracers, and should play a prominent role in the heat transport at climatic scales and for plankton dynamics. Measuring velocity fields on such small scales is notoriously difficult but new, high-resolution satellite altimetry is starting to reveal them. However, the satellite-derived velocities essentially represent the geostrophic flow component, and the impact of unresolved ageostrophic motions on particle dispersion needs to be understood to properly characterize transport properties. Here, we investigate ocean fine-scale turbulence using a model that represents some of the processes due to ageostrophic dynamics. We take a Lagrangian approach and focus on the predictability of the particle dynamics, comparing trajectories advected by either the full flow or by its geostrophic component only. Our results indicate that, over long times, relative dispersion is marginally affected by the filtering of the ageostrophic component. Nevertheless, advection by the filtered flow leads to an overestimation of the typical pair-separation rate, and to a bias on trajectories (in terms of displacement from the actual ones), whose importance grows with the Rossby number. We further explore the intensity of the transient particle clustering induced by ageostrophic motions and find that it can be significant, even for small flow compressibility. Indeed, we show that clustering is here due to the interplay between compressibility and persistent flow structures that trap particles, enhancing their aggregation.</summary>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.CD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.ao-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-06T09:53:32Z</published>
+    <arxiv:comment>19 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.flu-dyn"/>
+    <arxiv:journal_ref>Phys. Rev. Fluids 9, 104503 (2024)</arxiv:journal_ref>
+    <author>
+      <name>Michael Maalouly</name>
+    </author>
+    <author>
+      <name>Guillaume Lapeyre</name>
+    </author>
+    <author>
+      <name>Stefano Berti</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevFluids.9.104503</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevFluids.9.104503" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.04053v2</id>
+    <title>Floquet Analysis on an Irradiated Nodal Surface Semimetal with Non-Symmorphic Symmetry</title>
+    <updated>2024-12-20T11:24:52Z</updated>
+    <link href="https://arxiv.org/abs/2406.04053v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.04053v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A nodal surface semimetal (NSSM) features symmetry enforced band crossings along a surface within the three-dimensional (3D) Brillouin zone (BZ) and a presence of a nonsymmorphic symmetry there pushes such surfaces to stick to the BZ center or boundaries. The topological robustness of the same does not always come with nonzero Berry fluxes. We consider two such nodal surfaces (NS), one with zero and another with nonzero topological charges and investigate the effect of light irradiation on them. We find that depending on the state of polarization, one can obtain additional Weyl points/ nodal surfaces in the corresponding Floquet Hamiltonians. Particularly, using a simple two band spinless/spin polarized models with no spin orbit coupling, we emphasize the low energy behavior of the continuum Hamiltonians close to the band crossings and its evolution in a Floquet system in the high frequency limit. In the Floquet system, we also find the nodal surfaces to perish or new multi Weyl points to get popped up for different polarization scenario or different NSSM Hamiltonians. Our findings open up important avenues on what out of equilibrium NSSM systems can offer in many active fields including quantum computations.</summary>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.str-el" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-06T13:20:47Z</published>
+    <arxiv:comment>Final version</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mes-hall"/>
+    <arxiv:journal_ref>J. Phys.: Condens. Matter 37 075601 (2025)</arxiv:journal_ref>
+    <author>
+      <name>Bhaskar Pandit</name>
+    </author>
+    <author>
+      <name>Satyaki Kar</name>
+    </author>
+    <arxiv:doi>10.1088/1361-648X/ad9722</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1361-648X/ad9722" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.02424v3</id>
+    <title>Contextual Dynamic Pricing: Algorithms, Optimality, and Local Differential Privacy Constraints</title>
+    <updated>2025-04-04T01:39:21Z</updated>
+    <link href="https://arxiv.org/abs/2406.02424v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.02424v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study contextual dynamic pricing problems where a firm sells products to $T$ sequentially-arriving consumers, behaving according to an unknown demand model. The firm aims to minimize its regret over a clairvoyant that knows the model in advance. The demand follows a generalized linear model (GLM), allowing for stochastic feature vectors in $\mathbb R^d$ encoding product and consumer information. We first show the optimal regret is of order $\sqrt{dT}$, up to logarithmic factors, improving existing upper bounds by a $\sqrt{d}$ factor. This optimal rate is materialized by two algorithms: a confidence bound-type algorithm and an explore-then-commit (ETC) algorithm. A key insight is an intrinsic connection between dynamic pricing and contextual multi-armed bandit problems with many arms with a careful discretization. We further study contextual dynamic pricing under local differential privacy (LDP) constraints. We propose a stochastic gradient descent-based ETC algorithm achieving regret upper bounds of order $d\sqrt{T}/ε$, up to logarithmic factors, where $ε&gt;0$ is the privacy parameter. The upper bounds with and without LDP constraints are matched by newly constructed minimax lower bounds, characterizing costs of privacy. Moreover, we extend our study to dynamic pricing under mixed privacy constraints, improving the privacy-utility tradeoff by leveraging public data. This is the first time such setting is studied in the dynamic pricing literature and our theoretical results seamlessly bridge dynamic pricing with and without LDP. Extensive numerical experiments and real data applications are conducted to illustrate the efficiency and practical value of our algorithms.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-04T15:44:10Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Zifeng Zhao</name>
+    </author>
+    <author>
+      <name>Feiyu Jiang</name>
+    </author>
+    <author>
+      <name>Yi Yu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.02463v4</id>
+    <title>Click Without Compromise: Online Advertising Measurement via Per User Differential Privacy</title>
+    <updated>2025-09-08T20:10:24Z</updated>
+    <link href="https://arxiv.org/abs/2406.02463v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.02463v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Online advertising is a cornerstone of the Internet ecosystem, with advertising measurement playing a crucial role in optimizing efficiency. Ad measurement entails attributing desired behaviors, such as purchases, to ad exposures across various platforms, necessitating the collection of user activities across these platforms. As this practice faces increasing restrictions due to rising privacy concerns, safeguarding user privacy in this context is imperative. Our work is the first to formulate the real-world challenge of advertising measurement systems with real-time reporting of streaming data in advertising campaigns. We introduce AdsBPC, a novel user-level differential privacy protection scheme for online advertising measurement results. This approach optimizes global noise power and results in a non-identically distributed noise distribution that preserves differential privacy while enhancing measurement accuracy. Through experiments on both real-world advertising campaigns and synthetic datasets, AdsBPC achieves a 33% to 95% increase in accuracy over existing streaming DP mechanisms applied to advertising measurement. This highlights our method's effectiveness in achieving superior accuracy alongside a formal privacy guarantee, thereby advancing the state-of-the-art in privacy-preserving advertising measurement.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-04T16:31:19Z</published>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Yingtai Xiao</name>
+    </author>
+    <author>
+      <name>Jian Du</name>
+    </author>
+    <author>
+      <name>Shikun Zhang</name>
+    </author>
+    <author>
+      <name>Wanrong Zhang</name>
+    </author>
+    <author>
+      <name>Qiang Yan</name>
+    </author>
+    <author>
+      <name>Danfeng Zhang</name>
+    </author>
+    <author>
+      <name>Daniel Kifer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.01089v1</id>
+    <title>Sub-symmetry Protected Topology in Topological Insulators and Superconductors</title>
+    <updated>2024-06-03T08:17:53Z</updated>
+    <link href="https://arxiv.org/abs/2406.01089v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.01089v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Exploration of topology protected by a certain symmetry is central in condensed matter physics. A recent idea of sub-symmetry-protected (SSP) topology--remains of a broken symmetry can still protect specific topological boundary states--has been developed and demonstrated in an optical system [Nat. Phys. 19, 992-998 (2023)]. Here, we extend this idea further by applying sub-symmetry-protecting perturbation (SSPP) to one-dimensional topological insulating and superconducting systems using the Su-Schrieffer-Hegger (SSH) and Kitaev models. Using the tight-binding and low-energy effective theory, we show that the SSP boundary states retain topological properties while the SSPP results in the asymmetry of boundary states. For the SSH model, an SSP zero-energy edge state localized on one edge possesses quantized polarization. In contrast, the other edge state is perturbed to have non-zero energy, and its polarization is not quantized. For topological superconductors, zero-energy SSP Majorana boundary states for spinful Kitaev models emerge on only one edge, contrary to the conventional belief that Majorana fermions emerge at opposite edges. Our findings can be used as a platform to expand our understanding of topological materials as they broaden our understanding of the symmetry in a topological system and a method to engineer Majorana fermions.</summary>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.supr-con" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-03T08:17:53Z</published>
+    <arxiv:primary_category term="cond-mat.mes-hall"/>
+    <author>
+      <name>Myungjun Kang</name>
+    </author>
+    <author>
+      <name>Mingyu Lee</name>
+    </author>
+    <author>
+      <name>Sangmo Cheon</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevResearch.6.033323</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevResearch.6.033323" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.12234v2</id>
+    <title>Joint Prediction Regions for time-series models</title>
+    <updated>2024-05-27T13:52:39Z</updated>
+    <link href="https://arxiv.org/abs/2405.12234v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.12234v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Machine Learning algorithms are notorious for providing point predictions but not prediction intervals. There are many applications where one requires confidence in predictions and prediction intervals. Stringing together, these intervals give rise to joint prediction regions with the desired significance level. It is an easy task to compute Joint Prediction regions (JPR) when the data is IID. However, the task becomes overly difficult when JPR is needed for time series because of the dependence between the observations. This project aims to implement Wolf and Wunderli's method for constructing JPRs and compare it with other methods (e.g. NP heuristic, Joint Marginals). The method under study is based on bootstrapping and is applied to different datasets (Min Temp, Sunspots), using different predictors (e.g. ARIMA and LSTM). One challenge of applying the method under study is to derive prediction standard errors for models, it cannot be obtained analytically. A novel method to estimate prediction standard error for different predictors is also devised. Finally, the method is applied to a synthetic dataset to find empirical averages and empirical widths and the results from the Wolf and Wunderli paper are consolidated. The experimental results show a narrowing of width with strong predictors like neural nets, widening of width with increasing forecast horizon H and decreasing significance level alpha, controlling the width with parameter k in K-FWE, and loss of information using Joint Marginals.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-14T02:38:49Z</published>
+    <arxiv:comment>This work is a Master Thesis</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Eshant English</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.12345v1</id>
+    <title>Existence and uniqueness of solutions in the Lipschitz space of a functional equation and its application to the behavior of the paradise fish</title>
+    <updated>2024-05-20T19:42:20Z</updated>
+    <link href="https://arxiv.org/abs/2405.12345v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.12345v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we examine the solvability of a functional equation in a Lipschitz space. As an application, we use our result to determine the existence and uniqueness of solutions to an equation describing a specific type of choice behavior model for the learning process of the paradise fish. Finally, we present some concrete examples where, using numerical techniques, we obtain approximations to the solution of the functional equation. As the straightforward Picard's iteration can be very expensive, we show that an analytical suboptimal least-squares approximation can be chosen in practice, resulting in very good accuracy.</summary>
+    <category term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-20T19:42:20Z</published>
+    <arxiv:primary_category term="math.FA"/>
+    <arxiv:journal_ref>Applied Mathematics and Computation 477 (2024), 128798</arxiv:journal_ref>
+    <author>
+      <name>Josefa Caballero</name>
+    </author>
+    <author>
+      <name>Łukasz Płociniczak</name>
+    </author>
+    <author>
+      <name>Kishin Sadarangani</name>
+    </author>
+    <arxiv:doi>10.1016/j.amc.2024.128798</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.amc.2024.128798" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.14382v1</id>
+    <title>Multi-purpose robot for rehabilitation of small diameter water pipes</title>
+    <updated>2024-05-23T09:59:04Z</updated>
+    <link href="https://arxiv.org/abs/2405.14382v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.14382v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Rehabilitating cast iron pipes through lining offers several advantages, including increased durability, reduced water leaks, and minimal disruption.This approach presents a cost effective and environmentally friendly solution by sealing cracks and joints, extending the pipeline's lifespan, and reducing water wastage, all while avoiding the need for trench excavation. However, due to the relining process, branch connections are sealed and need to be reestablished. To address the issue of rehabilitating small-diameter water pipes, we have designed a modular robot capable of traversing and working within 200 meter long, 100 mm diameter cast iron pipes. This robot is equipped with perception functions to detect, locate, and characterize the branch connections in cast iron pipes and relocate them after lining, as well as machining functions. A first prototype of this system has been developed and validated on an 8 meter long section, in a laboratory environment.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-23T09:59:04Z</published>
+    <arxiv:comment>Accepted to the IEEE ICRA Workshop on Field Robotics 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Julien Feiguel</name>
+    </author>
+    <author>
+      <name>Mouhamed NDiaye</name>
+    </author>
+    <author>
+      <name>Pascal Chambaud</name>
+    </author>
+    <author>
+      <name>Adrien Chambellan</name>
+    </author>
+    <author>
+      <name>Pierre Blanc</name>
+    </author>
+    <author>
+      <name>Steve Bourgeois</name>
+    </author>
+    <author>
+      <name>Lucas Labarussiat</name>
+    </author>
+    <author>
+      <name>Clemence Dubois</name>
+    </author>
+    <author>
+      <name>Audrey Vigneron</name>
+    </author>
+    <author>
+      <name>Thomas Desrez</name>
+    </author>
+    <author>
+      <name>Alain Riwan</name>
+    </author>
+    <author>
+      <name>Caroline Vienne</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.11234v1</id>
+    <title>Peculiarities of the chemical enrichment of metal-poor Stars in the Milky Way Galaxy</title>
+    <updated>2024-05-18T09:11:57Z</updated>
+    <link href="https://arxiv.org/abs/2405.11234v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.11234v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The oldest stars in the Milky Way are metal-poor with [Fe/H] &lt; -- 1.0, displaying peculiar elemental abundances compared to solar values. The relative variations in the chemical compositions among stars is also increasing with decreasing stellar metallicity, allowing for the pure signature of unique nucleosynthesis processes to be revealed. In this work, we report the atmospheric parameters, main dynamic properties, and the abundances of four metal-poor stars: HE 1523--0901, HD 6268, HD 121135, and HD 195636 (--1.5 &gt; [Fe/H] &gt;--3.0). The abundances were derived from spectra obtained with the HRS echelle spectrograph at the SALT, using both LTE and NLTE approaches. Based on their kinematical properties, we show that HE 1523--0901 and HD 195636 are halo stars with typical high velocities. In particular, HD 121135 displays a peculiar kinematical behaviour, making it unclear whether it is a halo or an accreted star. Furthermore, HD 6268 is possibly a rare prototype of very metal-poor thick disk stars. The abundances derived for our stars are compared with theoretical stellar models and with other stars with similar metallicity values from the literature. HD 121135 is Al-poor and Sc-poor, compared to stars observed in the same metallicity range (--1.62 &gt; [Fe/H] &gt;--1.12). The most metal-poor stars in our sample, HE 1523 -- 0901, HD 6268, and HD 195636, exhibit anomalies that are better explained by supernova models from fast-rotating stellar progenitors for elements up to the Fe group. Compared to other stars in the same metallicity range, their common biggest anomaly is represented by the low Sc abundances. If we consider the elements beyond Zn, HE 1523--0901 can be classified as an r-II star, HD 6268 as an r-I candidate, and HD 195636 and HD 121135 exhibiting a borderline r-process enrichment between limited-r and r-I star.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.SR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-18T09:11:57Z</published>
+    <arxiv:comment>27 pages, 15 figures, accepted in A&amp;A 23.04.2024</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <author>
+      <name>T. Mishenina</name>
+    </author>
+    <author>
+      <name>M. Pignatari</name>
+    </author>
+    <author>
+      <name>I. Usenko</name>
+    </author>
+    <author>
+      <name>C. Soubiran</name>
+    </author>
+    <author>
+      <name>F. -K. Thielemann</name>
+    </author>
+    <author>
+      <name>A. Yu. Kniazev</name>
+    </author>
+    <author>
+      <name>S. A. Korotin</name>
+    </author>
+    <author>
+      <name>T. Gorbaneva</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.09832v2</id>
+    <title>Mixed-Integer Linear Optimization for Cardinality-Constrained Random Forests</title>
+    <updated>2025-01-23T11:34:00Z</updated>
+    <link href="https://arxiv.org/abs/2405.09832v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.09832v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Random forests are among the most famous algorithms for solving classification problems, in particular for large-scale data sets. Considering a set of labeled points and several decision trees, the method takes the majority vote to classify a new given point. In some scenarios, however, labels are only accessible for a proper subset of the given points. Moreover, this subset can be non-representative, e.g., due to collection bias. Semi-supervised learning considers the setting of labeled and unlabeled data and often improves the reliability of the results. In addition, it can be possible to obtain additional information about class sizes from undisclosed sources. We propose a mixed-integer linear optimization model for computing a semi-supervised random forest that covers the setting of labeled and unlabeled data points as well as the overall number of points in each class for a binary classification. Since the solution time rapidly grows as the number of variables increases, we present some problem-tailored preprocessing techniques and an intuitive branching rule. Our numerical results show that our approach leads to a better accuracy and a better Matthews correlation coefficient for biased samples compared to random forests by majority vote, even if only few labeled points are available.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-16T06:09:22Z</published>
+    <arxiv:comment>16 pages,3 figures. arXiv admin note: text overlap with arXiv:2401.09848, arXiv:2303.12532</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Jan Pablo Burgard</name>
+    </author>
+    <author>
+      <name>Maria Eduarda Pinheiro</name>
+    </author>
+    <author>
+      <name>Martin Schmidt</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.11833v2</id>
+    <title>Determination of the Néel vector in rutile altermagnets through x-ray magnetic circular dichroism: the case of MnF$_2$</title>
+    <updated>2024-09-06T10:12:56Z</updated>
+    <link href="https://arxiv.org/abs/2405.11833v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.11833v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a numerical simulation of the X-ray magnetic circular dichroism (XMCD) at the $L_{2,3}$ edge of Mn in altermagnetic MnF$_2$ using a combination of density functional + exact diagonlization of an atomic model. We explore how the dichroic spectra vary with the light propagation vector and the Néel vector. We show how XMCD in rutile structures can be employed to determine the orientation of the Néel vector. An exact relationship between the XMCD spectra for different orientation of the Néel vector valid in the absence on the valence spin-orbit coupling and core-valence multipole interaction is derived and its approximate validity demonstrated by numerical calculation for the full Hamiltonian.</summary>
+    <category term="cond-mat.str-el" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-20T07:10:27Z</published>
+    <arxiv:comment>12 pages, 9 figures. arXiv admin note: text overlap with arXiv:2312.02629</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.str-el"/>
+    <arxiv:journal_ref>Phys. Rev. B 110, L100402 (2024)</arxiv:journal_ref>
+    <author>
+      <name>A. Hariki</name>
+    </author>
+    <author>
+      <name>T. Okauchi</name>
+    </author>
+    <author>
+      <name>Y. Takahashi</name>
+    </author>
+    <author>
+      <name>J. Kuneš</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevB.110.L100402</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevB.110.L100402" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.12232v2</id>
+    <title>Quantum dynamics evolution predicted by the long short-term memory network in the photosystem II reaction center</title>
+    <updated>2025-03-23T08:31:38Z</updated>
+    <link href="https://arxiv.org/abs/2405.12232v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.12232v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Predicting future physical behavior from limited theoretical simulation data is an emerging research paradigm driven by the integration of artificial intelligence and quantum physics. In this work, charge transport (CT) behavior was predicted over extended time scales using a deep learning model-the long short-term memory (LSTM) network with an error-threshold training method-in the photosystem II reaction center (PSII-RC). Theoretical simulation data within 8 fs were used to train the modified LSTM network, yielding distinct predictions with differences on the order of $10^{-4}$ over prolonged periods compared to the training set collection time. The results highlight the potential of LSTM to uncover the underlying physics governing CT beyond conventional quantum physical methods. These findings warrant further investigation to fully explore the scope and efficacy of LSTM in advancing our understanding of photosynthesis at the molecular scale.</summary>
+    <category term="physics.chem-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-12T01:21:41Z</published>
+    <arxiv:comment>7 pages, 13 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.chem-ph"/>
+    <arxiv:journal_ref>Optics Communications 2025</arxiv:journal_ref>
+    <author>
+      <name>Zi-Ran Zhao</name>
+    </author>
+    <author>
+      <name>Shun-Cai Zhao</name>
+    </author>
+    <author>
+      <name>Yi-Meng Huang</name>
+    </author>
+    <arxiv:doi>10.1016/j.optcom.2025.132045</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.optcom.2025.132045" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.14831v3</id>
+    <title>HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models</title>
+    <updated>2025-01-14T16:17:49Z</updated>
+    <link href="https://arxiv.org/abs/2405.14831v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.14831v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In order to thrive in hostile and ever-changing natural environments, mammalian brains evolved to store large amounts of knowledge about the world and continually integrate new information while avoiding catastrophic forgetting. Despite the impressive accomplishments, large language models (LLMs), even with retrieval-augmented generation (RAG), still struggle to efficiently and effectively integrate a large amount of new experiences after pre-training. In this work, we introduce HippoRAG, a novel retrieval framework inspired by the hippocampal indexing theory of human long-term memory to enable deeper and more efficient knowledge integration over new experiences. HippoRAG synergistically orchestrates LLMs, knowledge graphs, and the Personalized PageRank algorithm to mimic the different roles of neocortex and hippocampus in human memory. We compare HippoRAG with existing RAG methods on multi-hop question answering and show that our method outperforms the state-of-the-art methods remarkably, by up to 20%. Single-step retrieval with HippoRAG achieves comparable or better performance than iterative retrieval like IRCoT while being 10-30 times cheaper and 6-13 times faster, and integrating HippoRAG into IRCoT brings further substantial gains. Finally, we show that our method can tackle new types of scenarios that are out of reach of existing methods. Code and data are available at https://github.com/OSU-NLP-Group/HippoRAG.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-23T17:47:55Z</published>
+    <arxiv:comment>NeurIPS 2024. Code and data: https://github.com/OSU-NLP-Group/HippoRAG</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Bernal Jiménez Gutiérrez</name>
+    </author>
+    <author>
+      <name>Yiheng Shu</name>
+    </author>
+    <author>
+      <name>Yu Gu</name>
+    </author>
+    <author>
+      <name>Michihiro Yasunaga</name>
+    </author>
+    <author>
+      <name>Yu Su</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.02344v3</id>
+    <title>Incorporating Navigation Context into Inland Vessel Trajectory Prediction: A Gaussian Mixture Model and Transformer Approach</title>
+    <updated>2024-10-21T20:58:59Z</updated>
+    <link href="https://arxiv.org/abs/2406.02344v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.02344v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Using data sources beyond the Automatic Identification System to represent the context a vessel is navigating in and consequently improve situation awareness is still rare in machine learning approaches to vessel trajectory prediction (VTP). In inland shipping, where vessel movement is constrained within fairways, navigational context information is indispensable. In this contribution targeting inland VTP, Gaussian Mixture Models (GMMs) are applied, on a fused dataset of AIS and discharge measurements, to generate multi-modal distribution curves, capturing typical lateral vessel positioning in the fairway and dislocation speeds along the waterway. By sampling the probability density curves of the GMMs, feature vectors are derived which are used, together with spatio-temporal vessel features and fairway geometries, as input to a VTP transformer model. The incorporation of these distribution features of both the current and forthcoming navigation context improves prediction accuracy. The superiority of the model over a previously proposed transformer model for inland VTP is shown. The novelty lies in the provision of preprocessed, statistics-based features representing the conditioned spatial context, rather than relying on the model to extract relevant features for the VTP task from contextual data. Oversimplification of the complexity of inland navigation patterns by assuming a single typical route or selecting specific clusters prior to model application is avoided by giving the model access to the entire distribution information. The methodology's generalizability is demonstrated through the usage of data of 3 distinct river sections. It can be integrated into an interaction-aware prediction framework, where insights into the positioning of the actual vessel behavior in the overall distribution at the current location and discharge can enhance trajectory prediction accuracy.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-04T14:20:10Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>2024 27th International Conference on Information Fusion (FUSION)</arxiv:journal_ref>
+    <author>
+      <name>Kathrin Donandt</name>
+    </author>
+    <author>
+      <name>Dirk Söffker</name>
+    </author>
+    <arxiv:doi>10.23919/FUSION59988.2024.10706281</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.23919/FUSION59988.2024.10706281" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.02817v3</id>
+    <title>Instabilities of Gauged Q-Balls</title>
+    <updated>2024-11-06T22:05:25Z</updated>
+    <link href="https://arxiv.org/abs/2406.02817v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.02817v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present the first analytical calculation that shows that perturbations with angular dependence can lead to an instability in gauged Q-balls. We find an explicit condition on the parameters for the Q-ball to become unstable. We compare our predictions to the numerical calculation in Kinach et al., and show agreement, including a correct prediction of the instability/stability of the two parameter points analyzed in that paper.</summary>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-04T23:33:08Z</published>
+    <arxiv:comment>12 pages</arxiv:comment>
+    <arxiv:primary_category term="hep-th"/>
+    <author>
+      <name>Arvind Rajaraman</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.04356v1</id>
+    <title>BugBlitz-AI: An Intelligent QA Assistant</title>
+    <updated>2024-05-17T11:09:10Z</updated>
+    <link href="https://arxiv.org/abs/2406.04356v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.04356v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The evolution of software testing from manual to automated methods has significantly influenced quality assurance (QA) practices. However, challenges persist in post-execution phases, particularly in result analysis and reporting. Traditional post-execution validation phases require manual intervention for result analysis and report generation, leading to inefficiencies and potential development cycle delays. This paper introduces BugBlitz-AI, an AI-powered validation toolkit designed to enhance end-to-end test automation by automating result analysis and bug reporting processes. BugBlitz-AI leverages recent advancements in artificial intelligence to reduce the time-intensive tasks of manual result analysis and report generation, allowing QA teams to focus more on crucial aspects of product quality. By adopting BugBlitz-AI, organizations can advance automated testing practices and integrate AI into QA processes, ensuring higher product quality and faster time-to-market. The paper outlines BugBlitz-AI's architecture, discusses related work, details its quality enhancement strategies, and presents results demonstrating its effectiveness in real-world scenarios.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-17T11:09:10Z</published>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Yi Yao</name>
+    </author>
+    <author>
+      <name>Jun Wang</name>
+    </author>
+    <author>
+      <name>Yabai Hu</name>
+    </author>
+    <author>
+      <name>Lifeng Wang</name>
+    </author>
+    <author>
+      <name>Yi Zhou</name>
+    </author>
+    <author>
+      <name>Jack Chen</name>
+    </author>
+    <author>
+      <name>Xuming Gai</name>
+    </author>
+    <author>
+      <name>Zhenming Wang</name>
+    </author>
+    <author>
+      <name>Wenjun Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.13821v3</id>
+    <title>Normalizing Basis Functions: Approximate Stationary Models for Large Spatial Data</title>
+    <updated>2024-09-13T19:28:14Z</updated>
+    <link href="https://arxiv.org/abs/2405.13821v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.13821v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In geostatistics, traditional spatial models often rely on the Gaussian Process (GP) to fit stationary covariances to data. It is well known that this approach becomes computationally infeasible when dealing with large data volumes, necessitating the use of approximate methods. A powerful class of methods approximate the GP as a sum of basis functions with random coefficients. Although this technique offers computational efficiency, it does not inherently guarantee a stationary covariance. To mitigate this issue, the basis functions can be "normalized" to maintain a constant marginal variance, avoiding unwanted artifacts and edge effects. This allows for the fitting of nearly stationary models to large, potentially non-stationary datasets, providing a rigorous base to extend to more complex problems. Unfortunately, the process of normalizing these basis functions is computationally demanding. To address this, we introduce two fast and accurate algorithms to the normalization step, allowing for efficient prediction on fine grids. The practical value of these algorithms is showcased in the context of a spatial analysis on a large dataset, where significant computational speedups are achieved. While implementation and testing are done specifically within the LatticeKrig framework, these algorithms can be adapted to other basis function methods operating on regular grids.</summary>
+    <category term="stat.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-22T16:52:29Z</published>
+    <arxiv:comment>Version 3</arxiv:comment>
+    <arxiv:primary_category term="stat.CO"/>
+    <author>
+      <name>Antony Sikorski</name>
+    </author>
+    <author>
+      <name>Daniel McKenzie</name>
+    </author>
+    <author>
+      <name>Douglas Nychka</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.14682v1</id>
+    <title>Turing instabilities for three interacting species</title>
+    <updated>2024-05-23T15:17:21Z</updated>
+    <link href="https://arxiv.org/abs/2405.14682v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.14682v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, I prove necessary and sufficient conditions for the existence of Turing instabilities in a general system with three interacting species. Turing instabilities describe situations when a stable steady state of a reaction system (ordinary differential equation) becomes an unstable homogeneous steady state of the corresponding reaction-diffusion system (partial differential equation). Similarly to a well-known inequality condition for Turing instabilities in a system with two species, I find a set of inequality conditions for a system with three species. Furthermore, I distinguish conditions for the Turing instability when spatial perturbations grow steadily and the Turing-Hopf instability when spatial perturbations grow and oscillate in time simultaneously.</summary>
+    <category term="nlin.PS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.QM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-23T15:17:21Z</published>
+    <arxiv:comment>6 pages, 1 figure</arxiv:comment>
+    <arxiv:primary_category term="nlin.PS"/>
+    <author>
+      <name>Vit Piskovsky</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.03219v2</id>
+    <title>A comprehensive analysis toward the Fermi-LAT source 4FGL J1846.9-0227: Jets of a proto-planetary nebula producing gamma-rays?</title>
+    <updated>2024-07-09T17:58:18Z</updated>
+    <link href="https://arxiv.org/abs/2406.03219v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.03219v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Most of the $γ$-ray sources in the Fermi-LAT 14-year Source Catalogue are associated with pulsars and blazars. However, unveiling the nature of the still unassociated $γ$-ray sources is important for the understanding of high energy emission mechanisms in astrophysical objects. This work presents a comprehensive study towards the region covered by the Fermi source 4FGL J1846.9$-$0227, previously suggested to be a blazar and a massive protostar. Using multiwavelength observations, we analysed several astrophysical objects in the region as possible counterparts of the Fermi-LAT source. Having discarded most of them after a detailed and comprehensive analysis, we suggest that the most likely candidate to be such a counterpart is IRAS 18443$-$0231, a likely proto-planetary nebula. We found that the radio continuum emission at 3 GHz of IRAS 18443$-$0231 shows a compact source related to faint emission with jet-like morphology. Additionally, we identified an associated red-shifted CO molecular outflow. Using data from several catalogues, we obtained radio spectral index values ranging from $-$0.57 to $-$0.39 for IRAS 18443$-$0231, indicating syncrothron emission due to particles accelerated by the jets. We point out that these jets could explain the $γ$-ray emission through mechanisms such as proton-proton collisions and relativistic Bremsstrahlung. IRAS 18443$-$0231, lying almost at the centre of the Fermi confidence ellipse and related to the hard X-ray source 4XMM J184700.4$-$022752, would be the first association between a proto-planetary nebula and $γ$-ray emission.</summary>
+    <category term="astro-ph.HE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-05T12:58:18Z</published>
+    <arxiv:comment>Accepted to be published in MNRAS (July 8, 2024)</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.HE"/>
+    <author>
+      <name>M. E. Ortega</name>
+    </author>
+    <author>
+      <name>A. Petriella</name>
+    </author>
+    <author>
+      <name>S. Paron</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.01638v5</id>
+    <title>TimeCMA: Towards LLM-Empowered Multivariate Time Series Forecasting via Cross-Modality Alignment</title>
+    <updated>2025-03-29T08:44:30Z</updated>
+    <link href="https://arxiv.org/abs/2406.01638v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.01638v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multivariate time series forecasting (MTSF) aims to learn temporal dynamics among variables to forecast future time series. Existing statistical and deep learning-based methods suffer from limited learnable parameters and small-scale training data. Recently, large language models (LLMs) combining time series with textual prompts have achieved promising performance in MTSF. However, we discovered that current LLM-based solutions fall short in learning disentangled embeddings. We introduce TimeCMA, an intuitive yet effective framework for MTSF via cross-modality alignment. Specifically, we present a dual-modality encoding with two branches: the time series encoding branch extracts disentangled yet weak time series embeddings, and the LLM-empowered encoding branch wraps the same time series with text as prompts to obtain entangled yet robust prompt embeddings. As a result, such a cross-modality alignment retrieves both disentangled and robust time series embeddings, "the best of two worlds", from the prompt embeddings based on time series and prompt modality similarities. As another key design, to reduce the computational costs from time series with their length textual prompts, we design an effective prompt to encourage the most essential temporal information to be encapsulated in the last token: only the last token is passed to downstream prediction. We further store the last token embeddings to accelerate inference speed. Extensive experiments on eight real datasets demonstrate that TimeCMA outperforms state-of-the-arts.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-03T00:27:29Z</published>
+    <arxiv:comment>Accepted as an Oral Presentation at AAAI 2025 (Main Technical Track)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Chenxi Liu</name>
+    </author>
+    <author>
+      <name>Qianxiong Xu</name>
+    </author>
+    <author>
+      <name>Hao Miao</name>
+    </author>
+    <author>
+      <name>Sun Yang</name>
+    </author>
+    <author>
+      <name>Lingzheng Zhang</name>
+    </author>
+    <author>
+      <name>Cheng Long</name>
+    </author>
+    <author>
+      <name>Ziyue Li</name>
+    </author>
+    <author>
+      <name>Rui Zhao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.16884v3</id>
+    <title>Match, Compare, or Select? An Investigation of Large Language Models for Entity Matching</title>
+    <updated>2024-12-12T08:05:10Z</updated>
+    <link href="https://arxiv.org/abs/2405.16884v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.16884v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Entity matching (EM) is a critical step in entity resolution (ER). Recently, entity matching based on large language models (LLMs) has shown great promise. However, current LLM-based entity matching approaches typically follow a binary matching paradigm that ignores the global consistency among record relationships. In this paper, we investigate various methodologies for LLM-based entity matching that incorporate record interactions from different perspectives. Specifically, we comprehensively compare three representative strategies: matching, comparing, and selecting, and analyze their respective advantages and challenges in diverse scenarios. Based on our findings, we further design a compound entity matching framework (ComEM) that leverages the composition of multiple strategies and LLMs. ComEM benefits from the advantages of different sides and achieves improvements in both effectiveness and efficiency. Experimental results on 8 ER datasets and 10 LLMs verify the superiority of incorporating record interactions through the selecting strategy, as well as the further cost-effectiveness brought by ComEM.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DB" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-27T07:05:27Z</published>
+    <arxiv:comment>Accepted at COLING 2025. Our code is available at https://github.com/tshu-w/ComEM</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Tianshu Wang</name>
+    </author>
+    <author>
+      <name>Xiaoyang Chen</name>
+    </author>
+    <author>
+      <name>Hongyu Lin</name>
+    </author>
+    <author>
+      <name>Xuanang Chen</name>
+    </author>
+    <author>
+      <name>Xianpei Han</name>
+    </author>
+    <author>
+      <name>Hao Wang</name>
+    </author>
+    <author>
+      <name>Zhenyu Zeng</name>
+    </author>
+    <author>
+      <name>Le Sun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.19456v2</id>
+    <title>SSFF: Investigating LLM Predictive Capabilities for Startup Success through a Multi-Agent Framework with Enhanced Explainability and Performance</title>
+    <updated>2025-04-19T17:18:29Z</updated>
+    <link href="https://arxiv.org/abs/2405.19456v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.19456v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LLM based agents have recently demonstrated strong potential in automating complex tasks, yet accurately predicting startup success remains an open challenge with few benchmarks and tailored frameworks. To address these limitations, we propose the Startup Success Forecasting Framework, an autonomous system that emulates the reasoning of venture capital analysts through a multi agent collaboration model. Our framework integrates traditional machine learning methods such as random forests and neural networks within a retrieval augmented generation framework composed of three interconnected modules: a prediction block, an analysis block, and an external knowledge block. We evaluate our framework and identify three main findings. First, by leveraging founder segmentation, startups led by L5 founders are 3.79 times more likely to succeed than those led by L1 founders. Second, baseline large language models consistently overpredict startup success and struggle under realistic class imbalances largely due to overreliance on founder claims. Third, our framework significantly enhances prediction accuracy, yielding a 108.3 percent relative improvement over GPT 4o mini and a 30.8 percent relative improvement over GPT 4o. These results demonstrate the value of a multi agent approach combined with discriminative machine learning in mitigating the limitations of standard large language model based prediction methods.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-29T19:07:42Z</published>
+    <arxiv:comment>For relevant code: https://github.com/Xisen-Wang/Startup-Success-Forecasting-Framework</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Xisen Wang</name>
+    </author>
+    <author>
+      <name>Yigit Ihlamur</name>
+    </author>
+    <author>
+      <name>Fuat Alican</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.03421v1</id>
+    <title>Post-hoc Part-prototype Networks</title>
+    <updated>2024-06-05T16:16:03Z</updated>
+    <link href="https://arxiv.org/abs/2406.03421v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.03421v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Post-hoc explainability methods such as Grad-CAM are popular because they do not influence the performance of a trained model. However, they mainly reveal "where" a model looks at for a given input, fail to explain "what" the model looks for (e.g., what is important to classify a bird image to a Scott Oriole?). Existing part-prototype networks leverage part-prototypes (e.g., characteristic Scott Oriole's wing and head) to answer both "where" and "what", but often under-perform their black box counterparts in the accuracy. Therefore, a natural question is: can one construct a network that answers both "where" and "what" in a post-hoc manner to guarantee the model's performance? To this end, we propose the first post-hoc part-prototype network via decomposing the classification head of a trained model into a set of interpretable part-prototypes. Concretely, we propose an unsupervised prototype discovery and refining strategy to obtain prototypes that can precisely reconstruct the classification head, yet being interpretable. Besides guaranteeing the performance, we show that our network offers more faithful explanations qualitatively and yields even better part-prototypes quantitatively than prior part-prototype networks.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-05T16:16:03Z</published>
+    <arxiv:comment>ICML 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Andong Tan</name>
+    </author>
+    <author>
+      <name>Fengtao Zhou</name>
+    </author>
+    <author>
+      <name>Hao Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.09321v1</id>
+    <title>ReconBoost: Boosting Can Achieve Modality Reconcilement</title>
+    <updated>2024-05-15T13:22:39Z</updated>
+    <link href="https://arxiv.org/abs/2405.09321v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.09321v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper explores a novel multi-modal alternating learning paradigm pursuing a reconciliation between the exploitation of uni-modal features and the exploration of cross-modal interactions. This is motivated by the fact that current paradigms of multi-modal learning tend to explore multi-modal features simultaneously. The resulting gradient prohibits further exploitation of the features in the weak modality, leading to modality competition, where the dominant modality overpowers the learning process. To address this issue, we study the modality-alternating learning paradigm to achieve reconcilement. Specifically, we propose a new method called ReconBoost to update a fixed modality each time. Herein, the learning objective is dynamically adjusted with a reconcilement regularization against competition with the historical models. By choosing a KL-based reconcilement, we show that the proposed method resembles Friedman's Gradient-Boosting (GB) algorithm, where the updated learner can correct errors made by others and help enhance the overall performance. The major difference with the classic GB is that we only preserve the newest model for each modality to avoid overfitting caused by ensembling strong learners. Furthermore, we propose a memory consolidation scheme and a global rectification scheme to make this strategy more effective. Experiments over six multi-modal benchmarks speak to the efficacy of the method. We release the code at https://github.com/huacong/ReconBoost.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-15T13:22:39Z</published>
+    <arxiv:comment>This paper has been accepted by ICML2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Cong Hua</name>
+    </author>
+    <author>
+      <name>Qianqian Xu</name>
+    </author>
+    <author>
+      <name>Shilong Bao</name>
+    </author>
+    <author>
+      <name>Zhiyong Yang</name>
+    </author>
+    <author>
+      <name>Qingming Huang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.18634v2</id>
+    <title>A Theoretical Understanding of Self-Correction through In-context Alignment</title>
+    <updated>2024-11-18T02:42:23Z</updated>
+    <link href="https://arxiv.org/abs/2405.18634v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.18634v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Going beyond mimicking limited human experiences, recent studies show initial evidence that, like humans, large language models (LLMs) are capable of improving their abilities purely by self-correction, i.e., correcting previous responses through self-examination, in certain circumstances. Nevertheless, little is known about how such capabilities arise. In this work, based on a simplified setup akin to an alignment task, we theoretically analyze self-correction from an in-context learning perspective, showing that when LLMs give relatively accurate self-examinations as rewards, they are capable of refining responses in an in-context way. Notably, going beyond previous theories on over-simplified linear transformers, our theoretical construction underpins the roles of several key designs of realistic transformers for self-correction: softmax attention, multi-head attention, and the MLP block. We validate these findings extensively on synthetic datasets. Inspired by these findings, we also illustrate novel applications of self-correction, such as defending against LLM jailbreaks, where a simple self-correction step does make a large difference. We believe that these findings will inspire further research on understanding, exploiting, and enhancing self-correction for building better foundation models.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-28T22:33:02Z</published>
+    <arxiv:comment>Accepted at NeurIPS 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yifei Wang</name>
+    </author>
+    <author>
+      <name>Yuyang Wu</name>
+    </author>
+    <author>
+      <name>Zeming Wei</name>
+    </author>
+    <author>
+      <name>Stefanie Jegelka</name>
+    </author>
+    <author>
+      <name>Yisen Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.04744v2</id>
+    <title>CRAG -- Comprehensive RAG Benchmark</title>
+    <updated>2024-11-01T05:30:17Z</updated>
+    <link href="https://arxiv.org/abs/2406.04744v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.04744v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Retrieval-Augmented Generation (RAG) has recently emerged as a promising solution to alleviate Large Language Model (LLM)'s deficiency in lack of knowledge. Existing RAG datasets, however, do not adequately represent the diverse and dynamic nature of real-world Question Answering (QA) tasks. To bridge this gap, we introduce the Comprehensive RAG Benchmark (CRAG), a factual question answering benchmark of 4,409 question-answer pairs and mock APIs to simulate web and Knowledge Graph (KG) search. CRAG is designed to encapsulate a diverse array of questions across five domains and eight question categories, reflecting varied entity popularity from popular to long-tail, and temporal dynamisms ranging from years to seconds. Our evaluation of this benchmark highlights the gap to fully trustworthy QA. Whereas most advanced LLMs achieve &lt;=34% accuracy on CRAG, adding RAG in a straightforward manner improves the accuracy only to 44%. State-of-the-art industry RAG solutions only answer 63% of questions without any hallucination. CRAG also reveals much lower accuracy in answering questions regarding facts with higher dynamism, lower popularity, or higher complexity, suggesting future research directions. The CRAG benchmark laid the groundwork for a KDD Cup 2024 challenge and attracted thousands of participants and submissions. We commit to maintaining CRAG to serve research communities in advancing RAG solutions and general QA solutions. CRAG is available at https://github.com/facebookresearch/CRAG/.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-07T08:43:07Z</published>
+    <arxiv:comment>NeurIPS 2024 Datasets and Benchmarks Track</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Xiao Yang</name>
+    </author>
+    <author>
+      <name>Kai Sun</name>
+    </author>
+    <author>
+      <name>Hao Xin</name>
+    </author>
+    <author>
+      <name>Yushi Sun</name>
+    </author>
+    <author>
+      <name>Nikita Bhalla</name>
+    </author>
+    <author>
+      <name>Xiangsen Chen</name>
+    </author>
+    <author>
+      <name>Sajal Choudhary</name>
+    </author>
+    <author>
+      <name>Rongze Daniel Gui</name>
+    </author>
+    <author>
+      <name>Ziran Will Jiang</name>
+    </author>
+    <author>
+      <name>Ziyu Jiang</name>
+    </author>
+    <author>
+      <name>Lingkun Kong</name>
+    </author>
+    <author>
+      <name>Brian Moran</name>
+    </author>
+    <author>
+      <name>Jiaqi Wang</name>
+    </author>
+    <author>
+      <name>Yifan Ethan Xu</name>
+    </author>
+    <author>
+      <name>An Yan</name>
+    </author>
+    <author>
+      <name>Chenyu Yang</name>
+    </author>
+    <author>
+      <name>Eting Yuan</name>
+    </author>
+    <author>
+      <name>Hanwen Zha</name>
+    </author>
+    <author>
+      <name>Nan Tang</name>
+    </author>
+    <author>
+      <name>Lei Chen</name>
+    </author>
+    <author>
+      <name>Nicolas Scheffer</name>
+    </author>
+    <author>
+      <name>Yue Liu</name>
+    </author>
+    <author>
+      <name>Nirav Shah</name>
+    </author>
+    <author>
+      <name>Rakesh Wanga</name>
+    </author>
+    <author>
+      <name>Anuj Kumar</name>
+    </author>
+    <author>
+      <name>Wen-tau Yih</name>
+    </author>
+    <author>
+      <name>Xin Luna Dong</name>
+    </author>
+  </entry>
+</feed>

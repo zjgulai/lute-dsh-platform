@@ -1,0 +1,560 @@
+{
+  "batch": "B04",
+  "assignments": [
+    {
+      "name": "returns-exchange-automator",
+      "roles": [
+        {
+          "id": "AGT-037",
+          "responsibility": "售后处理",
+          "confidence": "high",
+          "from_skill": "自动退款",
+          "from_role": "解决客户问题并使补救可追踪",
+          "note": "自助RMA门户/退换路由/自动退款与Store Credit直接执行售后问题处理与补救。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": [
+        {
+          "id": "AGT-020",
+          "reason": "全文只覆盖自助退货门户、退换货路由与退款发放，无仓储侧退货收货/退货分流/在库处置的定位表述，对不上退货分流责任。"
+        }
+      ]
+    },
+    {
+      "name": "etsy-pod-automation",
+      "roles": [
+        {
+          "id": "AGT-024",
+          "responsibility": "平台运营",
+          "confidence": "high",
+          "from_skill": "publishing",
+          "from_role": "验证其余渠道和潜力市场的增长路径",
+          "note": "Etsy 店铺的建品、上架发布与监测属其余平台运营。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "tiktok-shop-setup",
+      "roles": [
+        {
+          "id": "AGT-024",
+          "responsibility": "平台运营",
+          "confidence": "high",
+          "from_skill": "TikTok Shop",
+          "from_role": "验证其余渠道和潜力市场的增长路径",
+          "note": "TikTok Shop 开店、目录同步与订单履约同步属其余平台运营。"
+        },
+        {
+          "id": "AGT-033",
+          "responsibility": "联盟运营",
+          "confidence": "medium",
+          "from_skill": "Creator Affiliate ecosystem",
+          "from_role": "把合作触达转为可追踪的品牌和销售结果",
+          "note": "含创作者联盟计划配置与运营，属联盟触达侧。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "tariff-search",
+      "roles": [
+        {
+          "id": "AGT-019",
+          "responsibility": "关务资料检查",
+          "confidence": "high",
+          "from_skill": "import tariffs",
+          "from_role": "关务资料检查",
+          "note": "HS 编码归类与税率查询是报关资料的直接依据。"
+        },
+        {
+          "id": "AGT-042",
+          "responsibility": "税务资料",
+          "confidence": "high",
+          "from_skill": "Landed cost calculation",
+          "from_role": "提供不同市场和实体的税务资料与执行协调",
+          "note": "按起运国/目的国批量取税率，产出跨市场税务资料。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "international-shipping-customs",
+      "roles": [
+        {
+          "id": "AGT-019",
+          "responsibility": "物流方案",
+          "confidence": "high",
+          "from_skill": "承运商选择与关务合规",
+          "from_role": "运输方案与异常处置建议",
+          "note": "同一岗位两条责任同属本技能：技能同时产出物流方案与关务资料检查（报关要求、HS 编码建议、税费测算、禁限运检查）。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "sales-tax-vat-automator",
+      "roles": [
+        {
+          "id": "AGT-042",
+          "responsibility": "税务资料",
+          "confidence": "high",
+          "from_skill": "automated filing",
+          "from_role": "提供不同市场和实体的税务资料与执行协调",
+          "note": "同一岗位三条责任同属本技能覆盖：技能含经济关联(nexus)与注册义务判定（对应实体口径核对）及自动申报缴款记录（对应申报协作）。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "creating-financial-models",
+      "roles": [
+        {
+          "id": "AGT-001",
+          "responsibility": "资源情景比较",
+          "confidence": "medium",
+          "from_skill": "scenario planning",
+          "from_role": "资源情景比较",
+          "note": ""
+        },
+        {
+          "id": "AGT-003",
+          "responsibility": "情景模拟",
+          "confidence": "medium",
+          "from_skill": "best/base/worst case scenarios",
+          "from_role": "提供可追溯的经营解释与备选方案",
+          "note": ""
+        },
+        {
+          "id": "AGT-009",
+          "responsibility": "商业案例",
+          "confidence": "medium",
+          "from_skill": "investment analysis",
+          "from_role": "产品定义与立项包",
+          "note": ""
+        },
+        {
+          "id": "AGT-041",
+          "responsibility": "资金预测",
+          "confidence": "medium",
+          "from_skill": "Working capital",
+          "from_role": "资金预测",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "ecommerce-financial-dashboard",
+      "roles": [
+        {
+          "id": "AGT-040",
+          "responsibility": "渠道对账",
+          "confidence": "high",
+          "from_skill": "reconciling merchant payouts",
+          "from_role": "贯通订单支付退款结算与财务记录",
+          "note": "同一岗位两条责任同属本技能：技能把平台收款(Stripe/PayPal)与订单对齐，并把损益/资产负债/现金流整合为费用核对视图。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "ecommerce-sales-dashboard",
+      "roles": [
+        {
+          "id": "AGT-003",
+          "responsibility": "GMV归因分析",
+          "confidence": "medium",
+          "from_skill": "Gross Merchandise Value (GMV)",
+          "from_role": "提供可追溯的经营解释与备选方案",
+          "note": "看板以 GMV/转化率/AOV 口径建立日周月经营视图，仅支撑可追溯的经营解释。"
+        },
+        {
+          "id": "AGT-021",
+          "responsibility": "渠道经营分析",
+          "confidence": "medium",
+          "from_skill": "channel performance",
+          "from_role": "对指定Amazon经营范围的增长方案负责",
+          "note": "渠道表现追踪可支撑 Amazon 渠道经营分析。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "ecommerce-budget-forecaster",
+      "roles": [
+        {
+          "id": "AGT-001",
+          "responsibility": "经营目标拆解",
+          "confidence": "medium",
+          "from_skill": "rolling operating budgets",
+          "from_role": "目标与资源决策包",
+          "note": ""
+        },
+        {
+          "id": "AGT-003",
+          "responsibility": "经营预测",
+          "confidence": "medium",
+          "from_skill": "Revenue Forecasting",
+          "from_role": "带来源的经营分析包",
+          "note": ""
+        },
+        {
+          "id": "AGT-032",
+          "responsibility": "预算分配",
+          "confidence": "medium",
+          "from_skill": "allocating monthly marketing",
+          "from_role": "将广告预算转成可解释的业务增长",
+          "note": ""
+        },
+        {
+          "id": "AGT-041",
+          "responsibility": "经营预算",
+          "confidence": "medium",
+          "from_skill": "Inventory Open-to-Buy (OTB)",
+          "from_role": "经营预算",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "dynamic-pricing-engine",
+      "roles": [
+        {
+          "id": "AGT-017",
+          "responsibility": "调拨清货建议",
+          "confidence": "medium",
+          "from_skill": "slow-moving inventory",
+          "from_role": "管理SKU状态、库存占用和退出策略",
+          "note": "自动降价与清货节奏针对滞销 SKU，服务清货建议侧。"
+        },
+        {
+          "id": "AGT-026",
+          "responsibility": "价格敏感性",
+          "confidence": "high",
+          "from_skill": "elasticity",
+          "from_role": "价格与促销决策包",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "inventory-demand-forecaster",
+      "roles": [
+        {
+          "id": "AGT-016",
+          "responsibility": "补货模拟",
+          "confidence": "high",
+          "from_skill": "安全库存",
+          "from_role": "补货模拟",
+          "note": "同一岗位两条责任同属本技能：技能同时产出补货方案（ROP/EOQ、补货时点）与需求预测区间（历史趋势、季节性、安全库存）。"
+        },
+        {
+          "id": "AGT-017",
+          "responsibility": "库存分层",
+          "confidence": "medium",
+          "from_skill": "滞销预警",
+          "from_role": "管理SKU状态、库存占用和退出策略",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "profit-margin-analyzer",
+      "roles": [
+        {
+          "id": "AGT-040",
+          "responsibility": "收入与费用核对",
+          "confidence": "medium",
+          "from_skill": "Payment Processing Fees",
+          "from_role": "收入与费用核对",
+          "note": "按费用科目把收入拆到净利，可支撑费用侧核对。"
+        },
+        {
+          "id": "AGT-041",
+          "responsibility": "经济性分析",
+          "confidence": "high",
+          "from_skill": "Contribution Margin",
+          "from_role": "使增长计划匹配现金和经营承受能力",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "freemium-upgrade-optimizer",
+      "roles": [],
+      "no_role_reason": "技能全程针对 SaaS 产品免费转付费：付费墙触发时机、Aha Moment、feature gate/usage limit/试用到期与付费墙文案要素，不涉及商品价格、促销机制或 DTC 购买闭环；材料《AI组织变革》的 50 个岗位中没有任何一条责任对应此职能。",
+      "no_role_kind": "OUT_OF_SCOPE",
+      "drop_reasons": []
+    },
+    {
+      "name": "sycm-analysis-skill",
+      "roles": [
+        {
+          "id": "AGT-003",
+          "responsibility": "GMV归因分析",
+          "confidence": "medium",
+          "from_skill": "Weekly Business Report",
+          "from_role": "GMV归因分析",
+          "note": "取回店铺周报数据作为经营分析输入；仅取数，不含深层归因建模。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "marketing-roas-analyzer",
+      "roles": [
+        {
+          "id": "AGT-032",
+          "responsibility": "投放诊断",
+          "confidence": "medium",
+          "from_skill": "Analyze Marketing Spend",
+          "from_role": "投放诊断",
+          "note": ""
+        },
+        {
+          "id": "AGT-035",
+          "responsibility": "增量分析",
+          "confidence": "medium",
+          "from_skill": "incrementality testing",
+          "from_role": "区分真实增量、归因偏差与偶然波动",
+          "note": ""
+        },
+        {
+          "id": "AGT-003",
+          "responsibility": "GMV归因分析",
+          "confidence": "medium",
+          "from_skill": "platform-reported metrics",
+          "from_role": "提供可追溯的经营解释与备选方案",
+          "note": "区分平台口径与自有口径的回报差异，属可追溯的经营解释。"
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "dcf-valuation",
+      "roles": [
+        {
+          "id": "AGT-041",
+          "responsibility": "资金预测",
+          "confidence": "medium",
+          "from_skill": "Project future cash flows",
+          "from_role": "资金预测",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": [
+        {
+          "id": "AGT-001",
+          "reason": "技能是单一标的自上而下的 DCF 内在价值估值流程（取数→WACC→终值→目标价），不产出资源投放情景方案，对不上资源情景比较责任。"
+        }
+      ]
+    },
+    {
+      "name": "product-review-intelligence-collector",
+      "roles": [
+        {
+          "id": "AGT-018",
+          "responsibility": "质量分析",
+          "confidence": "high",
+          "from_skill": "customer pain points",
+          "from_role": "推动生产质量、客诉与根因改进闭环",
+          "note": ""
+        },
+        {
+          "id": "AGT-038",
+          "responsibility": "改进验证",
+          "confidence": "medium",
+          "from_skill": "customer feedback",
+          "from_role": "把售后体验转为产品与经营改进证据",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "email-automation-flow-builder",
+      "roles": [
+        {
+          "id": "AGT-034",
+          "responsibility": "生命周期触达",
+          "confidence": "high",
+          "from_skill": "弃购挽回",
+          "from_role": "生命周期触达",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "seasonal-campaign-automator",
+      "roles": [
+        {
+          "id": "AGT-026",
+          "responsibility": "促销规划",
+          "confidence": "high",
+          "from_skill": "discount scheduling",
+          "from_role": "价格与促销决策包",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "checkout-flow-optimizer",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "转化优化",
+          "confidence": "high",
+          "from_skill": "abandonment",
+          "from_role": "改善品牌独立站的购买闭环与经营结果",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "helpdesk-order-integration",
+      "roles": [
+        {
+          "id": "AGT-015",
+          "responsibility": "订单协调",
+          "confidence": "medium",
+          "from_skill": "order history",
+          "from_role": "把采购需求转成可追踪的承诺与履约",
+          "note": "工单侧直接呈现订单与物流状态，支撑履约信息协调。"
+        },
+        {
+          "id": "AGT-036",
+          "responsibility": "产品问答",
+          "confidence": "medium",
+          "from_skill": "order details",
+          "from_role": "帮助客户理解产品适用场景并完成选择",
+          "note": "让客服在有订单依据的前提下答复客户。"
+        },
+        {
+          "id": "AGT-037",
+          "responsibility": "客诉分诊",
+          "confidence": "medium",
+          "from_skill": "VIP routing",
+          "from_role": "解决客户问题并使补救可追踪",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "customer-retention-automator",
+      "roles": [
+        {
+          "id": "AGT-034",
+          "responsibility": "生命周期触达",
+          "confidence": "high",
+          "from_skill": "personalized campaigns",
+          "from_role": "生命周期触达",
+          "note": ""
+        },
+        {
+          "id": "AGT-038",
+          "responsibility": "体验分析",
+          "confidence": "low",
+          "from_skill": "decreasing order values",
+          "from_role": "把售后体验转为产品与经营改进证据",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": []
+    },
+    {
+      "name": "customer-ltv-calculator",
+      "roles": [
+        {
+          "id": "AGT-034",
+          "responsibility": "分群",
+          "confidence": "high",
+          "from_skill": "VIP programs, and win-back",
+          "from_role": "用户经营计划与实验结果",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": [
+        {
+          "id": "AGT-033",
+          "reason": "技能只做客户级 LTV 计算与客户分层，不计算达人/联盟渠道的合作效果，对不上合作复盘责任。"
+        }
+      ]
+    },
+    {
+      "name": "customer-winback-automator",
+      "roles": [
+        {
+          "id": "AGT-034",
+          "responsibility": "复购实验",
+          "confidence": "high",
+          "from_skill": "reactivation sequences",
+          "from_role": "复购实验",
+          "note": ""
+        }
+      ],
+      "no_role_reason": null,
+      "no_role_kind": null,
+      "drop_reasons": [
+        {
+          "id": "AGT-037",
+          "reason": "技能内容是流失客户分层与阶梯折扣召回序列，不含客诉处理或补救动作，对不上售后客诉与服务补救责任。"
+        }
+      ]
+    }
+  ]
+}

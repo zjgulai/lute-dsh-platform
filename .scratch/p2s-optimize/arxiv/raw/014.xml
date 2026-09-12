@@ -1,0 +1,1071 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/ugC0S7x9No1UgdOr8HcYb6Q3uS4</id>
+  <title>arXiv Query: search_query=&amp;id_list=2403.01166,2403.04521,2403.05819,2403.06021,2403.07562,2403.07571,2403.07815,2403.08179,2403.08234,2403.08299,2403.08319,2403.08812,2403.08821,2403.08823,2403.08920,2403.08923,2403.09234,2403.09812,2403.09814,2403.09823,2403.11234,2403.11700,2403.11705,2403.11823,2403.12345,2403.12891,2403.12968,2403.14271,2403.14403,2403.14862,2403.15621,2403.15891,2403.15892,2403.16115,2403.17821,2403.18252,2403.18536,2404.00457,2404.01230,2404.01234&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:43:12Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2403.01166,2403.04521,2403.05819,2403.06021,2403.07562,2403.07571,2403.07815,2403.08179,2403.08234,2403.08299,2403.08319,2403.08812,2403.08821,2403.08823,2403.08920,2403.08923,2403.09234,2403.09812,2403.09814,2403.09823,2403.11234,2403.11700,2403.11705,2403.11823,2403.12345,2403.12891,2403.12968,2403.14271,2403.14403,2403.14862,2403.15621,2403.15891,2403.15892,2403.16115,2403.17821,2403.18252,2403.18536,2404.00457,2404.01230,2404.01234" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2403.07562v1</id>
+    <title>A Flexible Cell Classification for ML Projects in Jupyter Notebooks</title>
+    <updated>2024-03-12T11:50:47Z</updated>
+    <link href="https://arxiv.org/abs/2403.07562v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.07562v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Jupyter Notebook is an interactive development environment commonly used for rapid experimentation of machine learning (ML) solutions. Describing the ML activities performed along code cells improves the readability and understanding of Notebooks. Manual annotation of code cells is time-consuming and error-prone. Therefore, tools have been developed that classify the cells of a notebook concerning the ML activity performed in them. However, the current tools are not flexible, as they work based on look-up tables that have been created, which map function calls of commonly used ML libraries to ML activities. These tables must be manually adjusted to account for new or changed libraries.
+  This paper presents a more flexible approach to cell classification based on a hybrid classification approach that combines a rule-based and a decision tree classifier. We discuss the design rationales and describe the developed classifiers in detail. We implemented the new flexible cell classification approach in a tool called JupyLabel. Its evaluation and the obtained metric scores regarding precision, recall, and F1-score are discussed. Additionally, we compared JupyLabel with HeaderGen, an existing cell classification tool. We were able to show that the presented flexible cell classification approach outperforms this tool significantly.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-12T11:50:47Z</published>
+    <arxiv:comment>9 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Miguel Perez</name>
+    </author>
+    <author>
+      <name>Selin Aydin</name>
+    </author>
+    <author>
+      <name>Horst Lichter</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.07571v1</id>
+    <title>Proactive Recommendation with Iterative Preference Guidance</title>
+    <updated>2024-03-12T11:58:50Z</updated>
+    <link href="https://arxiv.org/abs/2403.07571v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.07571v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recommender systems mainly tailor personalized recommendations according to user interests learned from user feedback. However, such recommender systems passively cater to user interests and even reinforce existing interests in the feedback loop, leading to problems like filter bubbles and opinion polarization. To counteract this, proactive recommendation actively steers users towards developing new interests in a target item or topic by strategically modulating recommendation sequences. Existing work for proactive recommendation faces significant hurdles: 1) overlooking the user feedback in the guidance process; 2) lacking explicit modeling of the guiding objective; and 3) insufficient flexibility for integration into existing industrial recommender systems. To address these issues, we introduce an Iterative Preference Guidance (IPG) framework. IPG performs proactive recommendation in a flexible post-processing manner by ranking items according to their IPG scores that consider both interaction probability and guiding value. These scores are explicitly estimated with iteratively updated user representation that considers the most recent user interactions. Extensive experiments validate that IPG can effectively guide user interests toward target interests with a reasonable trade-off in recommender accuracy. The code is available at https://github.com/GabyUSTC/IPG-Rec.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-12T11:58:50Z</published>
+    <arxiv:comment>Accepted by WWW 2024 (Short)</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Shuxian Bi</name>
+    </author>
+    <author>
+      <name>Wenjie Wang</name>
+    </author>
+    <author>
+      <name>Hang Pan</name>
+    </author>
+    <author>
+      <name>Fuli Feng</name>
+    </author>
+    <author>
+      <name>Xiangnan He</name>
+    </author>
+    <arxiv:doi>10.1145/3589335.3651548</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3589335.3651548" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.15891v1</id>
+    <title>Human Motion Prediction under Unexpected Perturbation</title>
+    <updated>2024-03-23T17:17:08Z</updated>
+    <link href="https://arxiv.org/abs/2403.15891v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.15891v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate a new task in human motion prediction, which is predicting motions under unexpected physical perturbation potentially involving multiple people. Compared with existing research, this task involves predicting less controlled, unpremeditated and pure reactive motions in response to external impact and how such motions can propagate through people. It brings new challenges such as data scarcity and predicting complex interactions. To this end, we propose a new method capitalizing differential physics and deep neural networks, leading to an explicit Latent Differential Physics (LDP) model. Through experiments, we demonstrate that LDP has high data efficiency, outstanding prediction accuracy, strong generalizability and good explainability. Since there is no similar research, a comprehensive comparison with 11 adapted baselines from several relevant domains is conducted, showing LDP outperforming existing research both quantitatively and qualitatively, improving prediction accuracy by as much as 70%, and demonstrating significantly stronger generalization.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-23T17:17:08Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Jiangbei Yue</name>
+    </author>
+    <author>
+      <name>Baiyi Li</name>
+    </author>
+    <author>
+      <name>Julien Pettré</name>
+    </author>
+    <author>
+      <name>Armin Seyfried</name>
+    </author>
+    <author>
+      <name>He Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.12891v1</id>
+    <title>Adaptive Visual Imitation Learning for Robotic Assisted Feeding Across Varied Bowl Configurations and Food Types</title>
+    <updated>2024-03-19T16:40:57Z</updated>
+    <link href="https://arxiv.org/abs/2403.12891v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.12891v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this study, we introduce a novel visual imitation network with a spatial attention module for robotic assisted feeding (RAF). The goal is to acquire (i.e., scoop) food items from a bowl. However, achieving robust and adaptive food manipulation is particularly challenging. To deal with this, we propose a framework that integrates visual perception with imitation learning to enable the robot to handle diverse scenarios during scooping. Our approach, named AVIL (adaptive visual imitation learning), exhibits adaptability and robustness across different bowl configurations in terms of material, size, and position, as well as diverse food types including granular, semi-solid, and liquid, even in the presence of distractors. We validate the effectiveness of our approach by conducting experiments on a real robot. We also compare its performance with a baseline. The results demonstrate improvement over the baseline across all scenarios, with an enhancement of up to 2.5 times in terms of a success metric. Notably, our model, trained solely on data from a transparent glass bowl containing granular cereals, showcases generalization ability when tested zero-shot on other bowl configurations with different types of food.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-19T16:40:57Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Rui Liu</name>
+    </author>
+    <author>
+      <name>Amisha Bhaskar</name>
+    </author>
+    <author>
+      <name>Pratap Tokekar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.06021v1</id>
+    <title>Hierarchical Query Classification in E-commerce Search</title>
+    <updated>2024-03-09T21:55:55Z</updated>
+    <link href="https://arxiv.org/abs/2403.06021v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.06021v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>E-commerce platforms typically store and structure product information and search data in a hierarchy. Efficiently categorizing user search queries into a similar hierarchical structure is paramount in enhancing user experience on e-commerce platforms as well as news curation and academic research. The significance of this task is amplified when dealing with sensitive query categorization or critical information dissemination, where inaccuracies can lead to considerable negative impacts. The inherent complexity of hierarchical query classification is compounded by two primary challenges: (1) the pronounced class imbalance that skews towards dominant categories, and (2) the inherent brevity and ambiguity of search queries that hinder accurate classification.
+  To address these challenges, we introduce a novel framework that leverages hierarchical information through (i) enhanced representation learning that utilizes the contrastive loss to discern fine-grained instance relationships within the hierarchy, called ''instance hierarchy'', and (ii) a nuanced hierarchical classification loss that attends to the intrinsic label taxonomy, named ''label hierarchy''. Additionally, based on our observation that certain unlabeled queries share typographical similarities with labeled queries, we propose a neighborhood-aware sampling technique to intelligently select these unlabeled queries to boost the classification performance. Extensive experiments demonstrate that our proposed method is better than state-of-the-art (SOTA) on the proprietary Amazon dataset, and comparable to SOTA on the public datasets of Web of Science and RCV1-V2. These results underscore the efficacy of our proposed solution, and pave the path toward the next generation of hierarchy-aware query classification systems.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-09T21:55:55Z</published>
+    <arxiv:comment>Published at: the ACM Web Conference 2024 in the industry track (WWW'24)</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Bing He</name>
+    </author>
+    <author>
+      <name>Sreyashi Nag</name>
+    </author>
+    <author>
+      <name>Limeng Cui</name>
+    </author>
+    <author>
+      <name>Suhang Wang</name>
+    </author>
+    <author>
+      <name>Zheng Li</name>
+    </author>
+    <author>
+      <name>Rahul Goutam</name>
+    </author>
+    <author>
+      <name>Zhen Li</name>
+    </author>
+    <author>
+      <name>Haiyang Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.14271v1</id>
+    <title>Resonances in nonlinear systems with a decaying chirped-frequency excitation and noise</title>
+    <updated>2024-03-21T10:20:34Z</updated>
+    <link href="https://arxiv.org/abs/2403.14271v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.14271v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The influence of multiplicative white noise on the resonance capture of strongly nonlinear oscillatory systems under chirped-frequency excitations is investigated. It is assumed that the intensity of the perturbation decays polynomially with time, and its frequency grows according to a power low. Resonant solutions with a growing amplitude and phase, synchronized with the excitation, are considered. The persistence of such a regime in the presence of stochastic perturbations is discussed. In particular, conditions are described that guarantee the stochastic stability of the resonant modes on infinite or asymptotically large time intervals. The technique used is based on a combination of the averaging method, stability analysis and construction of stochastic Lyapunov functions. The proposed theory is applied to the Duffing oscillator with a chirped-frequency excitation and noise.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-21T10:20:34Z</published>
+    <arxiv:comment>23 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Oskar A. Sultanov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.01234v1</id>
+    <title>GFLean: An Autoformalisation Framework for Lean via GF</title>
+    <updated>2024-04-01T16:51:50Z</updated>
+    <link href="https://arxiv.org/abs/2404.01234v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.01234v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present an autoformalisation framework for the Lean theorem prover, called GFLean. GFLean uses a high-level grammar writing tool called Grammatical Framework (GF) for parsing and linearisation. GFLean is implemented in Haskell. We explain the functionalities of GFLean, its inner working and discuss its limitations. We also discuss how we can use neural network based translation programs and rule based translation programs together complimenting each other to build robust autoformalisation frameworks.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-01T16:51:50Z</published>
+    <arxiv:comment>19 Pages, 3 Figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shashank Pathak</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.08234v2</id>
+    <title>Phase transitions in typical fluorite-type ferroelectrics</title>
+    <updated>2024-06-05T00:28:02Z</updated>
+    <link href="https://arxiv.org/abs/2403.08234v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.08234v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While ferroelectric hafnia ($\mathrm{HfO_2}$) has become a technically important material for microelectronics, the physical origin of its ferroelectricity remains poorly understood. The tetragonal $P4_2/nmc$ phase is commonly assigned as its paraelectric mother phase but has no soft mode at the Brillouin zone center. In this work, we propose that the paraelectric-ferroelectric transition in hafnia-like $Pca2_1$ ferroelectric family can be described by a $Pcca$-$Pca2_1$ transition, where the $Pcca$ mother phase will evolve into either the $Pca2_1$ ferroelectric phase or the centrosymmetric $P2_1/c$ monoclinic phase, depending on the strain conditions. The $Pcca$ phase is directly linked to both phases in the context of continuous phase transition. Hafnia is regarded as a special case of this family, in that it has accidental atomic degeneracy because all anions are oxygen. The theory is also correlated to the seven-coordination theory that explains the ferroelectricity in hafnia from a chemical perspective. In addition, the strain conditions to promote the ferroelectric phase in hafnia are discussed.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-13T04:32:33Z</published>
+    <arxiv:comment>12 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <arxiv:journal_ref>Applied Physics Letters 125, 102903 (2024)</arxiv:journal_ref>
+    <author>
+      <name>Heng Yu</name>
+    </author>
+    <author>
+      <name>Kan-Hao Xue</name>
+    </author>
+    <author>
+      <name>Nan Feng</name>
+    </author>
+    <author>
+      <name>Yunzhe Zheng</name>
+    </author>
+    <author>
+      <name>Yan Cheng</name>
+    </author>
+    <author>
+      <name>Ben Xu</name>
+    </author>
+    <author>
+      <name>Xiangshui Miao</name>
+    </author>
+    <arxiv:doi>10.1063/5.0224576</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/5.0224576" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.12968v2</id>
+    <title>LLMLingua-2: Data Distillation for Efficient and Faithful Task-Agnostic Prompt Compression</title>
+    <updated>2024-08-12T04:48:11Z</updated>
+    <link href="https://arxiv.org/abs/2403.12968v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.12968v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper focuses on task-agnostic prompt compression for better generalizability and efficiency. Considering the redundancy in natural language, existing approaches compress prompts by removing tokens or lexical units according to their information entropy obtained from a causal language model such as LLaMa-7B. The challenge is that information entropy may be a suboptimal compression metric: (i) it only leverages unidirectional context and may fail to capture all essential information needed for prompt compression; (ii) it is not aligned with the prompt compression objective.
+  To address these issues, we propose a data distillation procedure to derive knowledge from an LLM to compress prompts without losing crucial information, and meantime, introduce an extractive text compression dataset. We formulate prompt compression as a token classification problem to guarantee the faithfulness of the compressed prompt to the original one, and use a Transformer encoder as the base architecture to capture all essential information for prompt compression from the full bidirectional context. Our approach leads to lower latency by explicitly learning the compression objective with smaller models such as XLM-RoBERTa-large and mBERT.
+  We evaluate our method on both in-domain and out-of-domain datasets, including MeetingBank, LongBench, ZeroScrolls, GSM8K, and BBH. Despite its small size, our model shows significant performance gains over strong baselines and demonstrates robust generalization ability across different LLMs. Additionally, our model is 3x-6x faster than existing prompt compression methods, while accelerating the end-to-end latency by 1.6x-2.9x with compression ratios of 2x-5x. Our code is available at https://aka.ms/LLMLingua-2.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-19T17:59:56Z</published>
+    <arxiv:comment>Accepted at Findings of ACL 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zhuoshi Pan</name>
+    </author>
+    <author>
+      <name>Qianhui Wu</name>
+    </author>
+    <author>
+      <name>Huiqiang Jiang</name>
+    </author>
+    <author>
+      <name>Menglin Xia</name>
+    </author>
+    <author>
+      <name>Xufang Luo</name>
+    </author>
+    <author>
+      <name>Jue Zhang</name>
+    </author>
+    <author>
+      <name>Qingwei Lin</name>
+    </author>
+    <author>
+      <name>Victor Rühle</name>
+    </author>
+    <author>
+      <name>Yuqing Yang</name>
+    </author>
+    <author>
+      <name>Chin-Yew Lin</name>
+    </author>
+    <author>
+      <name>H. Vicky Zhao</name>
+    </author>
+    <author>
+      <name>Lili Qiu</name>
+    </author>
+    <author>
+      <name>Dongmei Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.08319v2</id>
+    <title>Knowledge Conflicts for LLMs: A Survey</title>
+    <updated>2024-06-22T08:31:40Z</updated>
+    <link href="https://arxiv.org/abs/2403.08319v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.08319v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This survey provides an in-depth analysis of knowledge conflicts for large language models (LLMs), highlighting the complex challenges they encounter when blending contextual and parametric knowledge. Our focus is on three categories of knowledge conflicts: context-memory, inter-context, and intra-memory conflict. These conflicts can significantly impact the trustworthiness and performance of LLMs, especially in real-world applications where noise and misinformation are common. By categorizing these conflicts, exploring the causes, examining the behaviors of LLMs under such conflicts, and reviewing available solutions, this survey aims to shed light on strategies for improving the robustness of LLMs, thereby serving as a valuable resource for advancing research in this evolving area.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-13T08:02:23Z</published>
+    <arxiv:comment>Our GitHub repo is available at https://github.com/pillowsofwind/Knowledge-Conflicts-Survey</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Rongwu Xu</name>
+    </author>
+    <author>
+      <name>Zehan Qi</name>
+    </author>
+    <author>
+      <name>Zhijiang Guo</name>
+    </author>
+    <author>
+      <name>Cunxiang Wang</name>
+    </author>
+    <author>
+      <name>Hongru Wang</name>
+    </author>
+    <author>
+      <name>Yue Zhang</name>
+    </author>
+    <author>
+      <name>Wei Xu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.17821v1</id>
+    <title>Multiple solutions for quasilinear elliptic problems with concave and convex nonlinearities</title>
+    <updated>2024-03-26T15:57:16Z</updated>
+    <link href="https://arxiv.org/abs/2403.17821v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.17821v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove the existence of multiple signed bounded solutions for a quasilinear elliptic equation with concave and convex nonlinearities. For this, we use a variational approach in an intersection Banach space indroduced by Candela and Palmieri, and a truncation technique given by Garcia Azorero and Peral.</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-26T15:57:16Z</published>
+    <arxiv:primary_category term="math.AP"/>
+    <author>
+      <name>Federica Mennuni</name>
+    </author>
+    <author>
+      <name>Addolorata Salvatore</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.16115v1</id>
+    <title>From Clicks to Conversions: Analysis of Traffic Sources in E-Commerce</title>
+    <updated>2024-03-24T12:13:24Z</updated>
+    <link href="https://arxiv.org/abs/2403.16115v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.16115v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Over the past years, e-commerce platforms have expanded substantially, providing customers with convenient shopping experiences. To enhance e-commerce websites, it's essential to grasp user engagement and factors affecting conversion rates. This optimization is achieved by aligning platforms with user expectations, thereby fostering successful online shopping experiences, and contributing to sustained growth in the dynamic digital marketplace. In this paper, we conduct a comprehensive analysis focusing on user interactions, conversion metrics, and the entire user journey within an e-commerce platform. Our exploration spans exit rates and sessions across different devices and browsers, conversion rates for various traffic sources, and the user journey from product details to checkout. Findings suggest a need for targeted improvements in mobile optimization and browser compatibility, indicated by higher exit rates on mobile devices and varying rates on different browsers. The conversion rate analysis emphasizes the varying effectiveness of traffic sources, highlighting the potential of advertised mediums, while identifying areas for improvement in referral and affiliate traffic. Examining the user journey showed potential bottlenecks in the conversion process, the identified gap was between user interest and completed transactions. Our study suggests improving the checkout process strategically to streamline user transactions. These insights provide actionable guidance for businesses seeking to refine their platforms and optimize performance in the ever-evolving landscape of e-commerce.</summary>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-24T12:13:24Z</published>
+    <arxiv:comment>12th INTERNATIONAL CONFERENCE ON CONTEMPORARY ISSUES IN MANAGEMENT</arxiv:comment>
+    <arxiv:primary_category term="cs.SI"/>
+    <author>
+      <name>Amrutha Muralidhar</name>
+    </author>
+    <author>
+      <name>Yathindra Lakkanna</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.11705v1</id>
+    <title>Coarsening of chiral domains in itinerant electron magnets: A machine learning force field approach</title>
+    <updated>2024-03-18T12:07:46Z</updated>
+    <link href="https://arxiv.org/abs/2403.11705v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.11705v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Frustrated itinerant magnets often exhibit complex noncollinear or noncoplanar magnetic orders which support topological electronic structures. A canonical example is the anomalous quantum Hall state with a chiral spin order stabilized by electron-spin interactions on a triangular lattice. While a long-range magnetic order cannot survive thermal fluctuations in two dimensions, the chiral order which results from the breaking of a discrete Ising symmetry persists even at finite temperatures. We present a scalable machine learning (ML) framework to model the complex electron-mediated spin-spin interactions that stabilize the chiral magnetic domains in a triangular lattice. Large-scale dynamical simulations, enabled by the ML force-field models, are performed to investigate the coarsening of chiral domains after a thermal quench. While the chiral phase is described by a broken $Z_2$ Ising-type symmetry, we find that the characteristic size of chiral domains increases linearly with time, in stark contrast to the expected Allen-Cahn domain growth law for a non-conserved Ising order parameter field. The linear growth of the chiral domains is attributed to the orientational anisotropy of domain boundaries. Our work also demonstrates the promising potential of ML models for large-scale spin dynamics of itinerant magnets.</summary>
+    <category term="cond-mat.str-el" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-18T12:07:46Z</published>
+    <arxiv:comment>16 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.str-el"/>
+    <author>
+      <name>Yunhao Fan</name>
+    </author>
+    <author>
+      <name>Sheng Zhang</name>
+    </author>
+    <author>
+      <name>Gia-Wei Chern</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.08821v1</id>
+    <title>Effective Gradient Sample Size via Variation Estimation for Accelerating Sharpness aware Minimization</title>
+    <updated>2024-02-24T05:48:05Z</updated>
+    <link href="https://arxiv.org/abs/2403.08821v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.08821v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Sharpness-aware Minimization (SAM) has been proposed recently to improve model generalization ability. However, SAM calculates the gradient twice in each optimization step, thereby doubling the computation costs compared to stochastic gradient descent (SGD). In this paper, we propose a simple yet efficient sampling method to significantly accelerate SAM. Concretely, we discover that the gradient of SAM is a combination of the gradient of SGD and the Projection of the Second-order gradient matrix onto the First-order gradient (PSF). PSF exhibits a gradually increasing frequency of change during the training process. To leverage this observation, we propose an adaptive sampling method based on the variation of PSF, and we reuse the sampled PSF for non-sampling iterations. Extensive empirical results illustrate that the proposed method achieved state-of-the-art accuracies comparable to SAM on diverse network architectures.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-24T05:48:05Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Jiaxin Deng</name>
+    </author>
+    <author>
+      <name>Junbiao Pang</name>
+    </author>
+    <author>
+      <name>Baochang Zhang</name>
+    </author>
+    <author>
+      <name>Tian Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.08299v1</id>
+    <title>AutoDev: Automated AI-Driven Development</title>
+    <updated>2024-03-13T07:12:03Z</updated>
+    <link href="https://arxiv.org/abs/2403.08299v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.08299v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The landscape of software development has witnessed a paradigm shift with the advent of AI-powered assistants, exemplified by GitHub Copilot. However, existing solutions are not leveraging all the potential capabilities available in an IDE such as building, testing, executing code, git operations, etc. Therefore, they are constrained by their limited capabilities, primarily focusing on suggesting code snippets and file manipulation within a chat-based interface. To fill this gap, we present AutoDev, a fully automated AI-driven software development framework, designed for autonomous planning and execution of intricate software engineering tasks. AutoDev enables users to define complex software engineering objectives, which are assigned to AutoDev's autonomous AI Agents to achieve. These AI agents can perform diverse operations on a codebase, including file editing, retrieval, build processes, execution, testing, and git operations. They also have access to files, compiler output, build and testing logs, static analysis tools, and more. This enables the AI Agents to execute tasks in a fully automated manner with a comprehensive understanding of the contextual information required. Furthermore, AutoDev establishes a secure development environment by confining all operations within Docker containers. This framework incorporates guardrails to ensure user privacy and file security, allowing users to define specific permitted or restricted commands and operations within AutoDev. In our evaluation, we tested AutoDev on the HumanEval dataset, obtaining promising results with 91.5% and 87.8% of Pass@1 for code generation and test generation respectively, demonstrating its effectiveness in automating software engineering tasks while maintaining a secure and user-controlled development environment.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-13T07:12:03Z</published>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Michele Tufano</name>
+    </author>
+    <author>
+      <name>Anisha Agarwal</name>
+    </author>
+    <author>
+      <name>Jinu Jang</name>
+    </author>
+    <author>
+      <name>Roshanak Zilouchian Moghaddam</name>
+    </author>
+    <author>
+      <name>Neel Sundaresan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.08920v1</id>
+    <title>Timed Strategies for Real-Time Rewrite Theories</title>
+    <updated>2024-03-13T19:21:23Z</updated>
+    <link href="https://arxiv.org/abs/2403.08920v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.08920v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we propose a language for conveniently defining a wide range of execution strategies for real-time rewrite theories, and provide Maude-strategy-implemented versions of most Real-Time Maude analysis methods, albeit with user-defined discrete and timed strategies. We also identify a new time sampling strategy that should provide both efficient and exhaustive analysis for many distributed real-time systems. We exemplify the use of our language and its analyses on a simple round trip time protocol, and compare the performance of standard Maude search with our strategy-implemented reachability analyses on the CASH scheduling algorithm benchmark.</summary>
+    <category term="cs.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-13T19:21:23Z</published>
+    <arxiv:primary_category term="cs.LO"/>
+    <author>
+      <name>Carlos Olarte</name>
+    </author>
+    <author>
+      <name>Peter Csaba Ölveczky</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.08179v2</id>
+    <title>Effects of wave damping and finite perpendicular scale on three-dimensional Alfven wave parametric decay in low-beta plasmas</title>
+    <updated>2024-05-01T23:15:46Z</updated>
+    <link href="https://arxiv.org/abs/2403.08179v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.08179v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Shear Alfven wave parametric decay instability (PDI) provides a potential path toward significant wave dissipation and plasma heating. However, fundamental questions regarding how PDI is excited in a realistic three-dimensional (3D) open system and how critically the finite perpendicular wave scale--as found in both laboratory and space plasmas--affects the excitation remain poorly understood. Here, we present the first 3D, open-boundary, hybrid kinetic-fluid simulations of kinetic Alfven wave PDI in low-beta plasmas. Key findings are that the PDI excitation is strongly limited by the wave damping present, including electron-ion collisional damping (represented by a constant resistivity) and geometrical attenuation associated with the finite-scale Alfven wave, and ion Landau damping of the child acoustic wave. The perpendicular wave scale alone, however, plays no discernible role: waves of different perpendicular scales exhibit similar instability growth as long as the magnitude of the parallel ponderomotive force remains unchanged. These findings are corroborated by theoretical analysis and estimates. The new understanding of 3D kinetic Alfvén wave PDI physics is essential for laboratory study of the basic plasma process and may also help evaluate the relevance/role of PDI in low-beta space plasmas.</summary>
+    <category term="physics.plasm-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.SR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.space-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-13T02:05:21Z</published>
+    <arxiv:comment>8 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.plasm-ph"/>
+    <author>
+      <name>Feiyu Li</name>
+    </author>
+    <author>
+      <name>Xiangrong Fu</name>
+    </author>
+    <author>
+      <name>Seth Dorfman</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.01166v2</id>
+    <title>DINER: Debiasing Aspect-based Sentiment Analysis with Multi-variable Causal Inference</title>
+    <updated>2024-06-06T07:27:33Z</updated>
+    <link href="https://arxiv.org/abs/2403.01166v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.01166v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Though notable progress has been made, neural-based aspect-based sentiment analysis (ABSA) models are prone to learn spurious correlations from annotation biases, resulting in poor robustness on adversarial data transformations. Among the debiasing solutions, causal inference-based methods have attracted much research attention, which can be mainly categorized into causal intervention methods and counterfactual reasoning methods. However, most of the present debiasing methods focus on single-variable causal inference, which is not suitable for ABSA with two input variables (the target aspect and the review). In this paper, we propose a novel framework based on multi-variable causal inference for debiasing ABSA. In this framework, different types of biases are tackled based on different causal intervention methods. For the review branch, the bias is modeled as indirect confounding from context, where backdoor adjustment intervention is employed for debiasing. For the aspect branch, the bias is described as a direct correlation with labels, where counterfactual reasoning is adopted for debiasing. Extensive experiments demonstrate the effectiveness of the proposed method compared to various baselines on the two widely used real-world aspect robustness test set datasets.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-02T10:38:31Z</published>
+    <arxiv:comment>Accepted by ACL2024(Findings)</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jialong Wu</name>
+    </author>
+    <author>
+      <name>Linhai Zhang</name>
+    </author>
+    <author>
+      <name>Deyu Zhou</name>
+    </author>
+    <author>
+      <name>Guoqiang Xu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.15621v3</id>
+    <title>Multi-Robot Task Allocation using Global Games with Negative Feedback: The Colony Maintenance Problem</title>
+    <updated>2024-12-17T21:33:26Z</updated>
+    <link href="https://arxiv.org/abs/2403.15621v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.15621v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this article we address the multi-robot task allocation problem, where robots must cooperatively assign themselves to accomplish a set of tasks. We consider the colony maintenance problem as an example, where a team of robots are tasked with continuously maintaining the energy supply of a central colony. We model this as a global game, where each robot measures the energy level of the colony, and the current number of assigned robots, to determine whether or not to forage for energy sources. The key to our approach is introducing a negative feedback term into the robots' utility, which also eliminates the trivial solution where foraging or not foraging are strictly dominant strategies. We compare our approach qualitatively to existing an global games approach, where a positive positive feedback term admits threshold-based decision making that encourages many robots to forage. We discuss how positive feedback can lead to a cascading failure when robots are removed from the system, and we demonstrate the resilience of our approach in simulation.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-22T21:16:25Z</published>
+    <arxiv:comment>8 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Logan E. Beaver</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.11234v1</id>
+    <title>Universal Semi-Supervised Domain Adaptation by Mitigating Common-Class Bias</title>
+    <updated>2024-03-17T14:43:47Z</updated>
+    <link href="https://arxiv.org/abs/2403.11234v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.11234v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Domain adaptation is a critical task in machine learning that aims to improve model performance on a target domain by leveraging knowledge from a related source domain. In this work, we introduce Universal Semi-Supervised Domain Adaptation (UniSSDA), a practical yet challenging setting where the target domain is partially labeled, and the source and target label space may not strictly match. UniSSDA is at the intersection of Universal Domain Adaptation (UniDA) and Semi-Supervised Domain Adaptation (SSDA): the UniDA setting does not allow for fine-grained categorization of target private classes not represented in the source domain, while SSDA focuses on the restricted closed-set setting where source and target label spaces match exactly. Existing UniDA and SSDA methods are susceptible to common-class bias in UniSSDA settings, where models overfit to data distributions of classes common to both domains at the expense of private classes. We propose a new prior-guided pseudo-label refinement strategy to reduce the reinforcement of common-class bias due to pseudo-labeling, a common label propagation strategy in domain adaptation. We demonstrate the effectiveness of the proposed strategy on benchmark datasets Office-Home, DomainNet, and VisDA. The proposed strategy attains the best performance across UniSSDA adaptation settings and establishes a new baseline for UniSSDA.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-17T14:43:47Z</published>
+    <arxiv:comment>Accepted to CVPR 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Wenyu Zhang</name>
+    </author>
+    <author>
+      <name>Qingmu Liu</name>
+    </author>
+    <author>
+      <name>Felix Ong Wei Cong</name>
+    </author>
+    <author>
+      <name>Mohamed Ragab</name>
+    </author>
+    <author>
+      <name>Chuan-Sheng Foo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.18536v1</id>
+    <title>A Novel Behavior-Based Recommendation System for E-commerce</title>
+    <updated>2024-03-27T13:12:41Z</updated>
+    <link href="https://arxiv.org/abs/2403.18536v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.18536v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The majority of existing recommender systems rely on user ratings, which are limited by the lack of user collaboration and the sparsity problem. To address these issues, this study proposes a behavior-based recommender system that leverages customers' natural behaviors, such as browsing and clicking, on e-commerce platforms. The proposed recommendation system involves clustering active customers, determining neighborhoods, collecting similar users, calculating product reputation based on similar users, and recommending high-reputation products. To overcome the complexity of customer behaviors and traditional clustering methods, an unsupervised clustering approach based on product categories is developed to enhance the recommendation methodology. This study makes notable contributions in several aspects. Firstly, a groundbreaking behavior-based recommendation methodology is developed, incorporating customer behavior to generate accurate and tailored recommendations leading to improved customer satisfaction and engagement. Secondly, an original unsupervised clustering method, focusing on product categories, enables more precise clustering and facilitates accurate recommendations. Finally, an approach to determine neighborhoods for active customers within clusters is established, ensuring grouping of customers with similar behavioral patterns to enhance recommendation accuracy and relevance. The proposed recommendation methodology and clustering method contribute to improved recommendation performance, offering valuable insights for researchers and practitioners in the field of e-commerce recommendation systems. Additionally, the proposed method outperforms benchmark methods in experiments conducted using a behavior dataset from the well-known e-commerce site Alibaba.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-27T13:12:41Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Reza Barzegar Nozari</name>
+    </author>
+    <author>
+      <name>Mahdi Divsalar</name>
+    </author>
+    <author>
+      <name>Sepehr Akbarzadeh Abkenar</name>
+    </author>
+    <author>
+      <name>Mohammadreza Fadavi Amiri</name>
+    </author>
+    <author>
+      <name>Ali Divsalar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.07815v3</id>
+    <title>Chronos: Learning the Language of Time Series</title>
+    <updated>2024-11-04T17:42:45Z</updated>
+    <link href="https://arxiv.org/abs/2403.07815v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.07815v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce Chronos, a simple yet effective framework for pretrained probabilistic time series models. Chronos tokenizes time series values using scaling and quantization into a fixed vocabulary and trains existing transformer-based language model architectures on these tokenized time series via the cross-entropy loss. We pretrained Chronos models based on the T5 family (ranging from 20M to 710M parameters) on a large collection of publicly available datasets, complemented by a synthetic dataset that we generated via Gaussian processes to improve generalization. In a comprehensive benchmark consisting of 42 datasets, and comprising both classical local models and deep learning methods, we show that Chronos models: (a) significantly outperform other methods on datasets that were part of the training corpus; and (b) have comparable and occasionally superior zero-shot performance on new datasets, relative to methods that were trained specifically on them. Our results demonstrate that Chronos models can leverage time series data from diverse domains to improve zero-shot accuracy on unseen forecasting tasks, positioning pretrained models as a viable tool to greatly simplify forecasting pipelines.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-12T16:53:54Z</published>
+    <arxiv:comment>Code and model checkpoints available at https://github.com/amazon-science/chronos-forecasting</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Abdul Fatir Ansari</name>
+    </author>
+    <author>
+      <name>Lorenzo Stella</name>
+    </author>
+    <author>
+      <name>Caner Turkmen</name>
+    </author>
+    <author>
+      <name>Xiyuan Zhang</name>
+    </author>
+    <author>
+      <name>Pedro Mercado</name>
+    </author>
+    <author>
+      <name>Huibin Shen</name>
+    </author>
+    <author>
+      <name>Oleksandr Shchur</name>
+    </author>
+    <author>
+      <name>Syama Sundar Rangapuram</name>
+    </author>
+    <author>
+      <name>Sebastian Pineda Arango</name>
+    </author>
+    <author>
+      <name>Shubham Kapoor</name>
+    </author>
+    <author>
+      <name>Jasper Zschiegner</name>
+    </author>
+    <author>
+      <name>Danielle C. Maddix</name>
+    </author>
+    <author>
+      <name>Hao Wang</name>
+    </author>
+    <author>
+      <name>Michael W. Mahoney</name>
+    </author>
+    <author>
+      <name>Kari Torkkola</name>
+    </author>
+    <author>
+      <name>Andrew Gordon Wilson</name>
+    </author>
+    <author>
+      <name>Michael Bohlke-Schneider</name>
+    </author>
+    <author>
+      <name>Yuyang Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.11700v2</id>
+    <title>Virbo: Multimodal Multilingual Avatar Video Generation in Digital Marketing</title>
+    <updated>2024-03-22T08:13:11Z</updated>
+    <link href="https://arxiv.org/abs/2403.11700v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.11700v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>With the widespread popularity of internet celebrity marketing all over the world, short video production has gradually become a popular way of presenting products information. However, the traditional video production industry usually includes series of procedures as script writing, video filming in a professional studio, video clipping, special effects rendering, customized post-processing, and so forth. Not to mention that multilingual videos is not accessible for those who could not speak multilingual languages. These complicated procedures usually needs a professional team to complete, and this made short video production costly in both time and money. This paper presents an intelligent system that supports the automatic generation of talking avatar videos, namely Virbo. With simply a user-specified script, Virbo could use a deep generative model to generate a target talking videos. Meanwhile, the system also supports multimodal inputs to customize the video with specified face, specified voice and special effects. This system also integrated a multilingual customization module that supports generate multilingual talking avatar videos in a batch with hundreds of delicate templates and creative special effects. Through a series of user studies and demo tests, we found that Virbo can generate talking avatar videos that maintained a high quality of videos as those from a professional team while reducing the entire production costs significantly. This intelligent system will effectively promote the video production industry and facilitate the internet marketing neglecting of language barriers and cost challenges.</summary>
+    <category term="cs.MM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-18T11:56:35Z</published>
+    <arxiv:primary_category term="cs.MM"/>
+    <author>
+      <name>Juan Zhang</name>
+    </author>
+    <author>
+      <name>Jiahao Chen</name>
+    </author>
+    <author>
+      <name>Cheng Wang</name>
+    </author>
+    <author>
+      <name>Zhiwang Yu</name>
+    </author>
+    <author>
+      <name>Tangquan Qi</name>
+    </author>
+    <author>
+      <name>Can Liu</name>
+    </author>
+    <author>
+      <name>Di Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.15892v1</id>
+    <title>Coarsely separation of groups and spaces</title>
+    <updated>2024-03-23T17:19:04Z</updated>
+    <link href="https://arxiv.org/abs/2403.15892v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.15892v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Inspired by a classical theorem of topological dimension theory, we prove that every geodesic metric space of asymptotic dimension $n$ containing a bi-infinite geodesic can be coarsely separated by a subset $S$ of asymptotic dimension equal to or smaller than $n-1$.\\ We define asymptotic Cantor manifolds, and we prove that every finitely generated group contains such a manifold. We also state some questions related to them.</summary>
+    <category term="math.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-23T17:19:04Z</published>
+    <arxiv:comment>21 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="math.GR"/>
+    <author>
+      <name>Panagiotis Tselekidis</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.08823v1</id>
+    <title>A Novel Approach to Personalized Personality Assessment with the Attachment-Caregiving Questionnaire (ACQ): First Evidence in favor of AI-Oriented Inventory Designs</title>
+    <updated>2024-03-06T17:31:31Z</updated>
+    <link href="https://arxiv.org/abs/2403.08823v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.08823v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Background. Personality is a primary object of interest in clinical psychology and psychiatry. It is most often measured using questionnaires, which rely on Factor Analysis (FA) to identify essential domains corresponding to highly correlated questions/items that define a (sub)scale. This procedure implies the rigid assignment of each question to one scale - giving the item the same meaning regardless of how the respondent may interpret it - arguably affecting the assessment capability of the instrument.
+  Methods. To test this hypothesis, we use the Attachment-Caregiving Questionnaire (ACQ), a clinical and personality self-report that - through extra-scale information - allows the clinician to infer the possible different meanings subjects attribute to the items. Considering four psychotherapy patients, we compare the scoring of the ACQ provided by expert clinicians to the detailed information gained from therapy and the patients.
+  Results. Our analysis suggests that a question can be interpreted differently - receiving the same score for different (clinically relevant) reasons - potentially impacting personality assessment and clinical decision-making. Moreover, accounting for multiple interpretations requires a specific questionnaire design and a more advanced pattern recognition than FA - which Artificial Intelligence (AI) could provide.
+  Conclusion. Our results indicate that a meaning-sensitive, personalized read of a personality self-report can affect profiling and treatment. Since a machine learning model can mimic the interpretative performance of an expert clinician, our results also imply a novel, AI-oriented approach to inventory design, of which we envision the first implementation steps. More evidence is required to support these preliminary findings.</summary>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-06T17:31:31Z</published>
+    <arxiv:comment>20 Pages, 1 Figure, 4 Tables</arxiv:comment>
+    <arxiv:primary_category term="cs.HC"/>
+    <author>
+      <name>Marcantonio Gagliardi</name>
+      <arxiv:affiliation>University of Greenwich UK</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Marina Bonadeni</name>
+      <arxiv:affiliation>Italian Professional Body of Psychologists &amp; Psychotherapists</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sara Billai</name>
+      <arxiv:affiliation>Italian Professional Body of Psychologists &amp; Psychotherapists</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Gian Luca Marcialis</name>
+      <arxiv:affiliation>University of Cagliari Italy</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.09823v1</id>
+    <title>Multi-droplet combustion in the presence of homogeneous and heterogeneous atomizations</title>
+    <updated>2024-03-14T19:25:05Z</updated>
+    <link href="https://arxiv.org/abs/2403.09823v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.09823v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The effects of heterogeneous and homogeneous atomizations on combustion dynamics and flame spread rates of multi-droplets are experimentally investigated. The utilized fuel is biodiesel, which is doped with graphene oxide and blended with ethanol. Stable fuel suspensions are prepared. Either one droplet is positioned at the intersection of two thin fibers or an array of three droplets are positioned along a horizontal line and at the intersections of fibers. Simultaneous and time-resolved flame chemiluminescence and shadowgraphy techniques are utilized for imaging the flame and droplets, respectively. It is observed that, for a single droplet combustion of biodiesel, relatively low frequency (about 10 Hz) dynamics appear in the second half of the droplet life-time, which is due to heterogeneous atomizations. Blending with ethanol leads to homogeneous atomizations with dynamics featuring frequencies smaller than 50 Hz and at the beginning of the droplet lifetime. It is reported that the homogeneous atomizations lead to at least three times larger root-mean-square oscillations of the flame chemiluminescence compared to that for heterogeneous atomizations. For all tested multi-droplet configurations, independent of the graphene oxide doping concentration and blending with ethanol, the most dominant frequency of flame chemiluminescence oscillations is about 10-15 Hz. It is observed that the heterogeneous atomizations lead to a flame spread rate of about 6-8 mm2/s, with largest values reported for doping with moderate concentration of graphene oxide. Compared to that for heterogeneous atomizations, the flame spread rate for homogeneous atomizations are significantly larger 10-40 mm2/s, are not sensitive to graphene oxide doping concentration, and feature a positive relation with the root-mean-square of the flame chemiluminescence oscillations.</summary>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-14T19:25:05Z</published>
+    <arxiv:primary_category term="physics.flu-dyn"/>
+    <author>
+      <name>Sepehr Mosadegh</name>
+    </author>
+    <author>
+      <name>Sina Kheirkhah</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.00457v1</id>
+    <title>MetaIE: Distilling a Meta Model from LLM for All Kinds of Information Extraction Tasks</title>
+    <updated>2024-03-30T19:43:45Z</updated>
+    <link href="https://arxiv.org/abs/2404.00457v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.00457v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Information extraction (IE) is a fundamental area in natural language processing where prompting large language models (LLMs), even with in-context examples, cannot defeat small LMs tuned on very small IE datasets. We observe that IE tasks, such as named entity recognition and relation extraction, all focus on extracting important information, which can be formalized as a label-to-span matching. In this paper, we propose a novel framework MetaIE to build a small LM as meta-model by learning to extract "important information", i.e., the meta-understanding of IE, so that this meta-model can be adapted to all kind of IE tasks effectively and efficiently. Specifically, MetaIE obtains the small LM via a symbolic distillation from an LLM following the label-to-span scheme. We construct the distillation dataset via sampling sentences from language model pre-training datasets (e.g., OpenWebText in our implementation) and prompting an LLM to identify the typed spans of "important information". We evaluate the meta-model under the few-shot adaptation setting. Extensive results on 13 datasets from 6 IE tasks confirm that MetaIE can offer a better starting point for few-shot tuning on IE datasets and outperform other meta-models from (1) vanilla language model pre-training, (2) multi-IE-task pre-training with human annotations, and (3) single-IE-task symbolic distillation from LLM. Moreover, we provide comprehensive analyses of MetaIE, such as the size of the distillation dataset, the meta-model architecture, and the size of the meta-model.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-30T19:43:45Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Letian Peng</name>
+    </author>
+    <author>
+      <name>Zilong Wang</name>
+    </author>
+    <author>
+      <name>Feng Yao</name>
+    </author>
+    <author>
+      <name>Zihan Wang</name>
+    </author>
+    <author>
+      <name>Jingbo Shang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.05819v3</id>
+    <title>Dark matter, CE$ν$NS and neutrino new physics scrutinized by a statistical method in Xenon-based experiments</title>
+    <updated>2024-11-25T12:21:02Z</updated>
+    <link href="https://arxiv.org/abs/2403.05819v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.05819v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Dark matter direct detection experiments are going to touch the neutrino floor with a good chance to measure coherent elastic neutrino-nucleus scattering (CE$ν$NS) and a probe of neutrino-related new physics ($ν$NP). In this study, we emphatically investigate the simultaneous presence of dark matter and $ν$NP revealing a response resembling of Standard Model neutrino backgrounds in Xenon-based dark matter experiments. Demonstrated by three U(1) extension models, we figure out that dark matter signals can be distinguished from an excess or a depletion of neutrino contributions from $ν$NP by a statistically defined distinction method in nuclear and electronic recoil spectra. We also present the influence of $ν$NP on the exclusion limits for spin-independent dark matter-nucleon interactions. Our work might pave the way for new physics discrimination in future dark matter experiments.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-09T06:59:20Z</published>
+    <arxiv:comment>30 pages, 12 figures, accepted for publication in JHEP, Github repository: https://github.com/zhangblong/DistinctionLimit</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <author>
+      <name>Jian Tang</name>
+    </author>
+    <author>
+      <name>Bing-Long Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.09812v1</id>
+    <title>BANG-MaNGA: A census of kinematic discs and bulges across mass and star formation in the local Universe</title>
+    <updated>2024-03-14T19:00:00Z</updated>
+    <link href="https://arxiv.org/abs/2403.09812v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.09812v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate the relevance of kinematically identified bulges, discs and their role relative to galaxy quenching. We utilize an analysis of the SDSS-MaNGA survey conducted with the GPU-based code BANG which simultaneously models galaxy photometry and kinematics to decompose galaxies into their structural components. Below M~1011 Msun, galaxies exhibit a wide range of dynamical properties, determined by the relative prominence of a dispersion-supported inner region and a rotationally-supported disc. Our analysis reveals a natural separation between these classes, with only a minor fraction of stellar mass retained by structures exhibiting intermediate dynamical support. When examining galaxies in terms of their star formation activity, an apparent decrease in rotational support is observed as they move below the star-forming main sequence. This behaviour is evident with luminosity-weighted tracers of kinematics, while it almost vanishes with mass-weighted tracers. Luminosity-weighted quantities not only capture differences in kinematics but also in the stellar population, potentially leading to biased interpretations of galaxy dynamical properties and quenching. Our findings suggest that quenching does not imply almost any structural transformation in galaxies below M~10^11 Msun. Processes as disc fading more likely account for observed differences in mass-weighted and luminosity-weighted galaxy properties; when the galactic disc ceases star formation, its mass-to-light ratio grows without any significant morphological transformation. The picture is remarkably different above M~10^11 Msun. Regardless of the tracer used, a substantial increase in galaxy dispersion support is observed along with a significant structural change. A different quenching mechanism, most likely associated with mergers, dominates. Notably, this mechanism is confined to a very limited range of high masses.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-14T19:00:00Z</published>
+    <arxiv:comment>Accepted for publication in A&amp;A. 16 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <author>
+      <name>Fabio Rigamonti</name>
+    </author>
+    <author>
+      <name>Luca Cortese</name>
+    </author>
+    <author>
+      <name>Francesco Bollati</name>
+    </author>
+    <author>
+      <name>Stefano Covino</name>
+    </author>
+    <author>
+      <name>Massimo Dotti</name>
+    </author>
+    <author>
+      <name>A. Fraser-McKelvie</name>
+    </author>
+    <author>
+      <name>Francesco Haardt</name>
+    </author>
+    <arxiv:doi>10.1051/0004-6361/202449191</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1051/0004-6361/202449191" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.01230v1</id>
+    <title>LLM as a Mastermind: A Survey of Strategic Reasoning with Large Language Models</title>
+    <updated>2024-04-01T16:50:54Z</updated>
+    <link href="https://arxiv.org/abs/2404.01230v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.01230v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents a comprehensive survey of the current status and opportunities for Large Language Models (LLMs) in strategic reasoning, a sophisticated form of reasoning that necessitates understanding and predicting adversary actions in multi-agent settings while adjusting strategies accordingly. Strategic reasoning is distinguished by its focus on the dynamic and uncertain nature of interactions among multi-agents, where comprehending the environment and anticipating the behavior of others is crucial. We explore the scopes, applications, methodologies, and evaluation metrics related to strategic reasoning with LLMs, highlighting the burgeoning development in this area and the interdisciplinary approaches enhancing their decision-making performance. It aims to systematize and clarify the scattered literature on this subject, providing a systematic review that underscores the importance of strategic reasoning as a critical cognitive capability and offers insights into future research directions and potential improvements.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-01T16:50:54Z</published>
+    <arxiv:comment>9 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yadong Zhang</name>
+    </author>
+    <author>
+      <name>Shaoguang Mao</name>
+    </author>
+    <author>
+      <name>Tao Ge</name>
+    </author>
+    <author>
+      <name>Xun Wang</name>
+    </author>
+    <author>
+      <name>Adrian de Wynter</name>
+    </author>
+    <author>
+      <name>Yan Xia</name>
+    </author>
+    <author>
+      <name>Wenshan Wu</name>
+    </author>
+    <author>
+      <name>Ting Song</name>
+    </author>
+    <author>
+      <name>Man Lan</name>
+    </author>
+    <author>
+      <name>Furu Wei</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.08812v1</id>
+    <title>Gore Diffusion LoRA Model</title>
+    <updated>2024-02-09T18:16:17Z</updated>
+    <link href="https://arxiv.org/abs/2403.08812v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.08812v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Emergence of Artificial Intelligence (AI) has significantly impacted our engagement with violence, sparking ethical deliberations regarding the algorithmic creation of violent imagery. This paper scrutinizes the "Gore Diffusion LoRA Model," an innovative AI model proficient in generating hyper-realistic visuals portraying intense violence and bloodshed. Our exploration encompasses the model's technical intricacies, plausible applications, and the ethical quandaries inherent in its utilization. We contend that the creation and implementation of such models warrant a meticulous discourse concerning the convergence of AI, art, and violence. Furthermore, we advocate for a structured framework advocating responsible development and ethical deployment of these potent technologies.</summary>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-09T18:16:17Z</published>
+    <arxiv:primary_category term="cs.HC"/>
+    <author>
+      <name>Ayush Thakur</name>
+    </author>
+    <author>
+      <name>Ashwani Kumar Dubey</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.04521v2</id>
+    <title>Uncertainty-Aware Relational Graph Neural Network for Few-Shot Knowledge Graph Completion</title>
+    <updated>2024-03-21T04:28:45Z</updated>
+    <link href="https://arxiv.org/abs/2403.04521v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.04521v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Few-shot knowledge graph completion (FKGC) aims to query the unseen facts of a relation given its few-shot reference entity pairs. The side effect of noises due to the uncertainty of entities and triples may limit the few-shot learning, but existing FKGC works neglect such uncertainty, which leads them more susceptible to limited reference samples with noises. In this paper, we propose a novel uncertainty-aware few-shot KG completion framework (UFKGC) to model uncertainty for a better understanding of the limited data by learning representations under Gaussian distribution. Uncertainty representation is first designed for estimating the uncertainty scope of the entity pairs after transferring feature representations into a Gaussian distribution. Further, to better integrate the neighbors with uncertainty characteristics for entity features, we design an uncertainty-aware relational graph neural network (UR-GNN) to conduct convolution operations between the Gaussian distributions. Then, multiple random samplings are conducted for reference triples within the Gaussian distribution to generate smooth reference representations during the optimization. The final completion score for each query instance is measured by the designed uncertainty optimization to make our approach more robust to the noises in few-shot scenarios. Experimental results show that our approach achieves excellent performance on two benchmark datasets compared to its competitors.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-07T14:23:25Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Qian Li</name>
+    </author>
+    <author>
+      <name>Shu Guo</name>
+    </author>
+    <author>
+      <name>Yinjia Chen</name>
+    </author>
+    <author>
+      <name>Cheng Ji</name>
+    </author>
+    <author>
+      <name>Jiawei Sheng</name>
+    </author>
+    <author>
+      <name>Jianxin Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.12345v1</id>
+    <title>Performance Portable Monte Carlo Particle Transport on Intel, NVIDIA, and AMD GPUs</title>
+    <updated>2024-03-19T01:28:01Z</updated>
+    <link href="https://arxiv.org/abs/2403.12345v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.12345v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>OpenMC is an open source Monte Carlo neutral particle transport application that has recently been ported to GPU using the OpenMP target offloading model. We examine the performance of OpenMC at scale on the Frontier, Polaris, and Aurora supercomputers, demonstrating that performance portability has been achieved by OpenMC across all three major GPU vendors (AMD, NVIDIA, and Intel). OpenMC's GPU performance is compared to both the traditional CPU-based version of OpenMC as well as several other state-of-the-art CPU-based Monte Carlo particle transport applications. We also provide historical context by analyzing OpenMC's performance on several legacy GPU and CPU architectures. This work includes some of the first published results for a scientific simulation application at scale on a supercomputer featuring Intel's Max series "Ponte Vecchio" GPUs. It is also one of the first demonstrations of a large scientific production application using the OpenMP target offloading model to achieve high performance on all three major GPU platforms.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-19T01:28:01Z</published>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>John Tramm</name>
+    </author>
+    <author>
+      <name>Paul Romano</name>
+    </author>
+    <author>
+      <name>Patrick Shriwise</name>
+    </author>
+    <author>
+      <name>Amanda Lund</name>
+    </author>
+    <author>
+      <name>Johannes Doerfert</name>
+    </author>
+    <author>
+      <name>Patrick Steinbrecher</name>
+    </author>
+    <author>
+      <name>Andrew Siegel</name>
+    </author>
+    <author>
+      <name>Gavin Ridley</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.14403v2</id>
+    <title>Adaptive-RAG: Learning to Adapt Retrieval-Augmented Large Language Models through Question Complexity</title>
+    <updated>2024-03-28T06:45:11Z</updated>
+    <link href="https://arxiv.org/abs/2403.14403v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.14403v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Retrieval-Augmented Large Language Models (LLMs), which incorporate the non-parametric knowledge from external knowledge bases into LLMs, have emerged as a promising approach to enhancing response accuracy in several tasks, such as Question-Answering (QA). However, even though there are various approaches dealing with queries of different complexities, they either handle simple queries with unnecessary computational overhead or fail to adequately address complex multi-step queries; yet, not all user requests fall into only one of the simple or complex categories. In this work, we propose a novel adaptive QA framework, that can dynamically select the most suitable strategy for (retrieval-augmented) LLMs from the simplest to the most sophisticated ones based on the query complexity. Also, this selection process is operationalized with a classifier, which is a smaller LM trained to predict the complexity level of incoming queries with automatically collected labels, obtained from actual predicted outcomes of models and inherent inductive biases in datasets. This approach offers a balanced strategy, seamlessly adapting between the iterative and single-step retrieval-augmented LLMs, as well as the no-retrieval methods, in response to a range of query complexities. We validate our model on a set of open-domain QA datasets, covering multiple query complexities, and show that ours enhances the overall efficiency and accuracy of QA systems, compared to relevant baselines including the adaptive retrieval approaches. Code is available at: https://github.com/starsuzi/Adaptive-RAG.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-21T13:52:30Z</published>
+    <arxiv:comment>NAACL 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Soyeong Jeong</name>
+    </author>
+    <author>
+      <name>Jinheon Baek</name>
+    </author>
+    <author>
+      <name>Sukmin Cho</name>
+    </author>
+    <author>
+      <name>Sung Ju Hwang</name>
+    </author>
+    <author>
+      <name>Jong C. Park</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.08923v2</id>
+    <title>A formal definition of loop unrolling with applications to test coverage</title>
+    <updated>2024-08-12T17:31:01Z</updated>
+    <link href="https://arxiv.org/abs/2403.08923v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.08923v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Techniques to achieve various forms of test coverage, such as branch coverage, typically do not iterate loops; in other words, they treat a loop as a conditional, executed zero or one time. Existing work by the author and collaborators produces test suites guaranteeing full branch coverage. More recent work has shown that by "unrolling" loops the approach can find significantly more bugs. The present discussion provides the theoretical basis and precise definition for this concept of unrolling.
+  While initially motivated by the need to improve standard test coverage practices (which execute loop bodies only once), to better testing coverage, the framework presented here is applicable to any form of reasoning about loops.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-13T19:28:04Z</published>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Bertrand Meyer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.18252v2</id>
+    <title>Beyond Embeddings: The Promise of Visual Table in Visual Reasoning</title>
+    <updated>2024-06-17T09:57:09Z</updated>
+    <link href="https://arxiv.org/abs/2403.18252v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.18252v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Visual representation learning has been a cornerstone in computer vision, involving typical forms such as visual embeddings, structural symbols, and text-based representations. Despite the success of CLIP-type visual embeddings, they often lack access to world knowledge critical for visual reasoning. In this work, we propose Visual Table, a novel form of visual representation tailored for visual reasoning. Visual tables are constructed as hierarchical descriptions of visual scenes, featuring a scene description and multiple object-centric descriptions covering categories, attributes, and knowledge. Thanks to the structural and textual formats, visual tables offer unique advantages over mere visual embeddings, such as interpretability and controllable editing. Furthermore, they deliver instance-level world knowledge and detailed attributes that are essential for visual reasoning. To create visual tables, we develop a generator trained on the dataset with collected, small-scale annotations. Extensive results on 11 visual reasoning benchmarks demonstrate that the generated visual tables significantly outperform previous structural and text-based representations. Moreover, they consistently enhance state-of-the-art multimodal large language models across diverse benchmarks, showcasing their potential for advancing visual reasoning tasks. Our code is available at https://github.com/LaVi-Lab/Visual-Table.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-27T04:49:23Z</published>
+    <arxiv:comment>Project page: https://github.com/LaVi-Lab/Visual-Table</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yiwu Zhong</name>
+    </author>
+    <author>
+      <name>Zi-Yuan Hu</name>
+    </author>
+    <author>
+      <name>Michael R. Lyu</name>
+    </author>
+    <author>
+      <name>Liwei Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.14862v4</id>
+    <title>The Power of Linear Programming in Sponsored Listings Ranking: Evidence from a Large-Scale Field Experiment</title>
+    <updated>2025-11-12T15:53:43Z</updated>
+    <link href="https://arxiv.org/abs/2403.14862v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.14862v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Sponsored product advertisements constitute a major revenue source for online marketplaces such as Amazon, Walmart, and Alibaba. A key operational challenge in these systems lies in the Sponsored Listings Ranking (SLR) problem, that is, determining which items to include and how to rank them to balance short-term revenue with long-term relevance and user experience. Industry practice predominantly relies on score-based algorithms, which construct heuristic composite scores to rank items efficiently within strict real-time latency constraints. However, such methods offer limited control over objective trade-offs and cannot readily accommodate additional operational constraints. We propose and evaluate a Linear Programming (LP)-based algorithm as a principled alternative to score-based approaches. We first formulate the SLR problem as a constrained mixed integer programming (MIP) model and develop a dual-based algorithm that approximately solves its LP relaxation within 0.1 second, satisfying production-level latency requirements. In collaboration with a leading online marketplace, we conduct a 19-day field experiment encompassing approximately 329 million impressions. The LP-based algorithm significantly outperforms the industry-standard benchmark in key marketplace metrics, demonstrating both higher revenue and maintained relevance. Mechanism analyses reveal that the performance gains are most pronounced when the revenue-relevance tradeoff is stronger. Our framework also generalizes to settings with inventory, sales, or fairness constraints, offering a flexible and deployable optimization paradigm. The LP-based algorithm was deployed in production at our partner marketplace in January 2023, marking a rare large-scale implementation of a mathematically grounded ranking algorithm in real-world online advertising.</summary>
+    <category term="econ.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-21T22:17:20Z</published>
+    <arxiv:primary_category term="econ.GN"/>
+    <author>
+      <name>Haihao Lu</name>
+    </author>
+    <author>
+      <name>Luyang Zhang</name>
+    </author>
+    <author>
+      <name>Yuting Zhu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.09814v2</id>
+    <title>Doppler-free three-photon spectroscopy on narrow-line optical transitions</title>
+    <updated>2024-12-21T21:51:13Z</updated>
+    <link href="https://arxiv.org/abs/2403.09814v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.09814v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We demonstrate coherent Doppler-free three-photon excitation of the $^{1}S_{0}$$\leftrightarrow$$^{3}P_{0}$ optical clock transition and the $^{1}S_{0}$$\leftrightarrow$$^{3}P_{1}$ intercombination transition in free-space thermal clouds of $^{88}$Sr atoms. By appropriate orientation of the wavevectors of three lasers incident on the atoms, the first-order Doppler shift can be eliminated for all velocity classes. Three-photon excitation of the $^{1}S_{0}$$\leftrightarrow$$^{3}P_{1}$ transition enables high-contrast Ramsey spectroscopy with interrogation times comparable to the 21$μ$s natural lifetime using a single near-resonant laser source. Three-photon spectroscopy on the $^{1}S_{0}$$\leftrightarrow$$^{3}P_{0}$ clock transition, using only laser frequencies nearly resonant with the $^{1}S_{0}$$\leftrightarrow$$^{3}P_{0}$ and $^{1}S_{0}$$\leftrightarrow$$^{3}P_{1}$ transitions, enables a reduction in Doppler broadening by two orders of magnitude and a corresponding $\sim470$Hz linewidth without a confining potential.</summary>
+    <category term="physics.atom-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-14T19:07:07Z</published>
+    <arxiv:primary_category term="physics.atom-ph"/>
+    <author>
+      <name>Guglielmo Panelli</name>
+    </author>
+    <author>
+      <name>Shaun C. Burd</name>
+    </author>
+    <author>
+      <name>Erik J. Porter</name>
+    </author>
+    <author>
+      <name>Mark Kasevich</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.11823v2</id>
+    <title>Logarithmic correction to the entropy of a Kerr-Newman family of black holes in $U(1)^2$-charged STU supergravity models</title>
+    <updated>2025-03-25T15:12:41Z</updated>
+    <link href="https://arxiv.org/abs/2403.11823v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.11823v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The leading quantum-gravitational correction to the black hole entropy is known to be a universal logarithmic term. In this study, we investigate the logarithmic corrections for the black holes in the STU supergravity models, which are a bosonic truncation into a specific class of $U(1)^2$-charged Einstein-Maxwell-dilaton theory. We demonstrate how the entire Kerr-Newman-AdS and Kerr-Newman family of black holes can be recovered within the gauged and ungauged STU supergravity models as special embedding choices in 4D. Logarithmic corrections are computed using two distinct Euclidean quantum gravity setups for extremal and non-extremal limits of all embedded rotating, static, charged, and neutral black holes. Our calculations employ the on-shell heat kernel method based Seeley-DeWitt expansion computations. Notably, all the AdS$_4$ results exhibit a confirmed non-topological nature as compared to the flat counterparts, offering a natural and more comprehensive ``infrared window into the microstates'' of black holes.</summary>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-18T14:29:45Z</published>
+    <arxiv:comment>v2: version published in PHYSICAL REVIEW D</arxiv:comment>
+    <arxiv:primary_category term="hep-th"/>
+    <arxiv:journal_ref>Physical Review D 111, 066016 (2025)</arxiv:journal_ref>
+    <author>
+      <name>Sudip Karan</name>
+    </author>
+    <author>
+      <name>Gurmeet Singh Punia</name>
+    </author>
+    <author>
+      <name>Surajit Biswas</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.111.066016</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.111.066016" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.09234v2</id>
+    <title>Infrared structure beyond locality in electrodynamics</title>
+    <updated>2024-10-30T15:33:26Z</updated>
+    <link href="https://arxiv.org/abs/2403.09234v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.09234v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The infrared problems of quantum electrodynamics, in contrast to ultraviolet difficulties which are of technical nature, are related to fundamental, conceptual physical questions, such as: what is a charged particle, is the particle interpretation of the electromagnetic field complete, does a vacuum state exist, or what is the quantum status of long range degrees of freedom. On the calculational level, the standard local formulations of quantum field theory have achieved procedures to deal with infinities related to long range correlations. However, the answers to the conceptual questions formulated above, based on the locality paradigm, do not seem to be fully convincing, which is confirmed by the fact that no canonical picture did emerge. This contribution briefly characterizes perspectives which open with an admission of nonlocal variables residing in infinity, or at the boundary of spacetime after compactification. Recently, this line of investigation gains popularity.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-14T09:57:50Z</published>
+    <arxiv:comment>24 pages, enlarged version; contribution to the Encyclopedia of Mathematical Physics, 2nd edition</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <author>
+      <name>Andrzej Herdegen</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,3192 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/hoqezS5LNKmVNoKtofdhlt/aBqw</id>
+  <title>arXiv Query: search_query=&amp;id_list=2106.11959,2106.12345,2106.12634,2107.01404,2107.05720,2108.10732,2109.09824,2110.13179,2112.01488,2112.09380,2201.11903,2202.07282,2203.02155,2203.04567,2203.05794,2203.06833,2203.07467,2204.00464,2204.00791,2204.08387,2204.09603,2204.11588,2205.11916,2205.13147,2206.01161,2206.04615,2206.07845,2206.08127,2206.12147,2207.01848,2207.09786,2207.12396,2209.00014,2209.01987,2209.04485,2209.07858,2209.15421,2210.01813,2210.02928,2210.03629&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:42:32Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2106.11959,2106.12345,2106.12634,2107.01404,2107.05720,2108.10732,2109.09824,2110.13179,2112.01488,2112.09380,2201.11903,2202.07282,2203.02155,2203.04567,2203.05794,2203.06833,2203.07467,2204.00464,2204.00791,2204.08387,2204.09603,2204.11588,2205.11916,2205.13147,2206.01161,2206.04615,2206.07845,2206.08127,2206.12147,2207.01848,2207.09786,2207.12396,2209.00014,2209.01987,2209.04485,2209.07858,2209.15421,2210.01813,2210.02928,2210.03629" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2210.02928v2</id>
+    <title>MuRAG: Multimodal Retrieval-Augmented Generator for Open Question Answering over Images and Text</title>
+    <updated>2022-10-20T17:16:27Z</updated>
+    <link href="https://arxiv.org/abs/2210.02928v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2210.02928v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While language Models store a massive amount of world knowledge implicitly in their parameters, even very large models often fail to encode information about rare entities and events, while incurring huge computational costs. Recently, retrieval-augmented models, such as REALM, RAG, and RETRO, have incorporated world knowledge into language generation by leveraging an external non-parametric index and have demonstrated impressive performance with constrained model sizes. However, these methods are restricted to retrieving only textual knowledge, neglecting the ubiquitous amount of knowledge in other modalities like images -- much of which contains information not covered by any text. To address this limitation, we propose the first Multimodal Retrieval-Augmented Transformer (MuRAG), which accesses an external non-parametric multimodal memory to augment language generation. MuRAG is pre-trained with a mixture of large-scale image-text and text-only corpora using a joint contrastive and generative loss. We perform experiments on two different datasets that require retrieving and reasoning over both images and text to answer a given query: WebQA, and MultimodalQA. Our results show that MuRAG achieves state-of-the-art accuracy, outperforming existing models by 10-20\% absolute on both datasets and under both distractor and full-wiki settings.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-10-06T13:58:03Z</published>
+    <arxiv:comment>Accepted to EMNLP 2022 main conference</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Wenhu Chen</name>
+    </author>
+    <author>
+      <name>Hexiang Hu</name>
+    </author>
+    <author>
+      <name>Xi Chen</name>
+    </author>
+    <author>
+      <name>Pat Verga</name>
+    </author>
+    <author>
+      <name>William W. Cohen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2209.07858v2</id>
+    <title>Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned</title>
+    <updated>2022-11-22T19:12:57Z</updated>
+    <link href="https://arxiv.org/abs/2209.07858v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2209.07858v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We describe our early efforts to red team language models in order to simultaneously discover, measure, and attempt to reduce their potentially harmful outputs. We make three main contributions. First, we investigate scaling behaviors for red teaming across 3 model sizes (2.7B, 13B, and 52B parameters) and 4 model types: a plain language model (LM); an LM prompted to be helpful, honest, and harmless; an LM with rejection sampling; and a model trained to be helpful and harmless using reinforcement learning from human feedback (RLHF). We find that the RLHF models are increasingly difficult to red team as they scale, and we find a flat trend with scale for the other model types. Second, we release our dataset of 38,961 red team attacks for others to analyze and learn from. We provide our own analysis of the data and find a variety of harmful outputs, which range from offensive language to more subtly harmful non-violent unethical outputs. Third, we exhaustively describe our instructions, processes, statistical methodologies, and uncertainty about red teaming. We hope that this transparency accelerates our ability to work together as a community in order to develop shared norms, practices, and technical standards for how to red team language models.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-08-23T23:37:14Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Deep Ganguli</name>
+    </author>
+    <author>
+      <name>Liane Lovitt</name>
+    </author>
+    <author>
+      <name>Jackson Kernion</name>
+    </author>
+    <author>
+      <name>Amanda Askell</name>
+    </author>
+    <author>
+      <name>Yuntao Bai</name>
+    </author>
+    <author>
+      <name>Saurav Kadavath</name>
+    </author>
+    <author>
+      <name>Ben Mann</name>
+    </author>
+    <author>
+      <name>Ethan Perez</name>
+    </author>
+    <author>
+      <name>Nicholas Schiefer</name>
+    </author>
+    <author>
+      <name>Kamal Ndousse</name>
+    </author>
+    <author>
+      <name>Andy Jones</name>
+    </author>
+    <author>
+      <name>Sam Bowman</name>
+    </author>
+    <author>
+      <name>Anna Chen</name>
+    </author>
+    <author>
+      <name>Tom Conerly</name>
+    </author>
+    <author>
+      <name>Nova DasSarma</name>
+    </author>
+    <author>
+      <name>Dawn Drain</name>
+    </author>
+    <author>
+      <name>Nelson Elhage</name>
+    </author>
+    <author>
+      <name>Sheer El-Showk</name>
+    </author>
+    <author>
+      <name>Stanislav Fort</name>
+    </author>
+    <author>
+      <name>Zac Hatfield-Dodds</name>
+    </author>
+    <author>
+      <name>Tom Henighan</name>
+    </author>
+    <author>
+      <name>Danny Hernandez</name>
+    </author>
+    <author>
+      <name>Tristan Hume</name>
+    </author>
+    <author>
+      <name>Josh Jacobson</name>
+    </author>
+    <author>
+      <name>Scott Johnston</name>
+    </author>
+    <author>
+      <name>Shauna Kravec</name>
+    </author>
+    <author>
+      <name>Catherine Olsson</name>
+    </author>
+    <author>
+      <name>Sam Ringer</name>
+    </author>
+    <author>
+      <name>Eli Tran-Johnson</name>
+    </author>
+    <author>
+      <name>Dario Amodei</name>
+    </author>
+    <author>
+      <name>Tom Brown</name>
+    </author>
+    <author>
+      <name>Nicholas Joseph</name>
+    </author>
+    <author>
+      <name>Sam McCandlish</name>
+    </author>
+    <author>
+      <name>Chris Olah</name>
+    </author>
+    <author>
+      <name>Jared Kaplan</name>
+    </author>
+    <author>
+      <name>Jack Clark</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2201.11903v6</id>
+    <title>Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</title>
+    <updated>2023-01-10T23:07:57Z</updated>
+    <link href="https://arxiv.org/abs/2201.11903v6" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2201.11903v6" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We explore how generating a chain of thought -- a series of intermediate reasoning steps -- significantly improves the ability of large language models to perform complex reasoning. In particular, we show how such reasoning abilities emerge naturally in sufficiently large language models via a simple method called chain of thought prompting, where a few chain of thought demonstrations are provided as exemplars in prompting. Experiments on three large language models show that chain of thought prompting improves performance on a range of arithmetic, commonsense, and symbolic reasoning tasks. The empirical gains can be striking. For instance, prompting a 540B-parameter language model with just eight chain of thought exemplars achieves state of the art accuracy on the GSM8K benchmark of math word problems, surpassing even finetuned GPT-3 with a verifier.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-01-28T02:33:07Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jason Wei</name>
+    </author>
+    <author>
+      <name>Xuezhi Wang</name>
+    </author>
+    <author>
+      <name>Dale Schuurmans</name>
+    </author>
+    <author>
+      <name>Maarten Bosma</name>
+    </author>
+    <author>
+      <name>Brian Ichter</name>
+    </author>
+    <author>
+      <name>Fei Xia</name>
+    </author>
+    <author>
+      <name>Ed Chi</name>
+    </author>
+    <author>
+      <name>Quoc Le</name>
+    </author>
+    <author>
+      <name>Denny Zhou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.08127v3</id>
+    <title>Random Access Concatenated Libraries and dd enable a short-latency high-content website on an inexpensive shared server</title>
+    <updated>2022-10-15T23:53:34Z</updated>
+    <link href="https://arxiv.org/abs/2206.08127v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.08127v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Content-rich websites typically house their images as individual files or as more costly binary database objects. Both methods place high demands on storage resources with commensurate high monetary cost. Inexpensive shared service accounts come with strict limits on disk and computing resources which prevent their use for hosting content-rich websites. To minimize the load on these limited resources, large numbers of images or other records may be concatenated into a single file and delivered with short latency independent of location within the file using Linux utility dd. This solution and its performance are presented for (a) a website which houses 8000+ genealogical reference books with more than 3.5 million 250-Kbyte page images, (b) a website-based database of 86 million death records, and (c) a cluster computing application which utilizes 800 neuroimaging databases, each with 1.5 million records. These disparate applications demonstrate the efficacy, scalability, and general utility of the solution.</summary>
+    <category term="cs.DB" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-14T22:12:32Z</published>
+    <arxiv:comment>16 pages, 9 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.DB"/>
+    <arxiv:journal_ref>Computer, vol. 56, no. 3, pp. 92-100, March 2023</arxiv:journal_ref>
+    <author>
+      <name>Don Krieger</name>
+    </author>
+    <arxiv:doi>10.1109/MC.2022.3205557</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/MC.2022.3205557" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2204.00464v2</id>
+    <title>Differential Liquidity Provision in Uniswap v3 and Implications for Contract Design</title>
+    <updated>2022-08-25T21:02:28Z</updated>
+    <link href="https://arxiv.org/abs/2204.00464v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2204.00464v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Decentralized exchanges (DEXs) provide a means for users to trade pairs of assets on-chain without the need for a trusted third party to effectuate a trade. Amongst these, constant function market maker DEXs such as Uniswap handle the most volume of trades between ERC-20 tokens. With the introduction of Uniswap v3, liquidity providers can differentially allocate liquidity to trades that occur within specific price intervals. In this paper, we formalize the profit and loss that liquidity providers can earn when providing specific liquidity allocations to a v3 contract. We give a convex stochastic optimization problem for computing optimal liquidity allocation for a liquidity provider who holds a belief on how prices will evolve over time and use this to study the design question regarding how v3 contracts should partition the price space for permissible liquidity allocations. Our results show that making a greater diversity of price-space partitions available to a contract designer can simultaneously benefit both liquidity providers and traders.</summary>
+    <category term="cs.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-04-01T14:22:40Z</published>
+    <arxiv:comment>44 pages, 15 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.GT"/>
+    <author>
+      <name>Zhou Fan</name>
+    </author>
+    <author>
+      <name>Francisco Marmolejo-Cossío</name>
+    </author>
+    <author>
+      <name>Ben Altschuler</name>
+    </author>
+    <author>
+      <name>He Sun</name>
+    </author>
+    <author>
+      <name>Xintong Wang</name>
+    </author>
+    <author>
+      <name>David C. Parkes</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.01161v1</id>
+    <title>Optimizing Relevance Maps of Vision Transformers Improves Robustness</title>
+    <updated>2022-06-02T17:24:48Z</updated>
+    <link href="https://arxiv.org/abs/2206.01161v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.01161v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It has been observed that visual classification models often rely mostly on the image background, neglecting the foreground, which hurts their robustness to distribution changes. To alleviate this shortcoming, we propose to monitor the model's relevancy signal and manipulate it such that the model is focused on the foreground object. This is done as a finetuning step, involving relatively few samples consisting of pairs of images and their associated foreground masks. Specifically, we encourage the model's relevancy map (i) to assign lower relevance to background regions, (ii) to consider as much information as possible from the foreground, and (iii) we encourage the decisions to have high confidence. When applied to Vision Transformer (ViT) models, a marked improvement in robustness to domain shifts is observed. Moreover, the foreground masks can be obtained automatically, from a self-supervised variant of the ViT model itself; therefore no additional supervision is required.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-02T17:24:48Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Hila Chefer</name>
+    </author>
+    <author>
+      <name>Idan Schwartz</name>
+    </author>
+    <author>
+      <name>Lior Wolf</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2204.11588v1</id>
+    <title>Ad Creative Discontinuation Prediction with Multi-Modal Multi-Task Neural Survival Networks</title>
+    <updated>2022-04-02T04:57:23Z</updated>
+    <link href="https://arxiv.org/abs/2204.11588v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2204.11588v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Discontinuing ad creatives at an appropriate time is one of the most important ad operations that can have a significant impact on sales. Such operational support for ineffective ads has been less explored than that for effective ads. After pre-analyzing 1,000,000 real-world ad creatives, we found that there are two types of discontinuation: short-term (i.e., cut-out) and long-term (i.e., wear-out). In this paper, we propose a practical prediction framework for the discontinuation of ad creatives with a hazard function-based loss function inspired by survival analysis. Our framework predicts the discontinuations with a multi-modal deep neural network that takes as input the ad creative (e.g., text, categorical, image, numerical features). To improve the prediction performance for the two different types of discontinuations and for the ad creatives that contribute to sales, we introduce two new techniques: (1) a two-term estimation technique with multi-task learning and (2) a click-through rate-weighting technique for the loss function. We evaluated our framework using the large-scale ad creative dataset, including 10 billion scale impressions. In terms of the concordance index (short: 0.896, long: 0.939, and overall: 0.792), our framework achieved significantly better performance than the conventional method (0.531). Additionally, we confirmed that our framework (i) demonstrated the same degree of discontinuation effect as manual operations for short-term cases, and (ii) accurately predicted the ad discontinuation order, which is important for long-running ad creatives for long-term cases.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-04-02T04:57:23Z</published>
+    <arxiv:comment>23 pages, 5 figures. Accepted by Appl. Sci. on March 29th, 2022</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <arxiv:journal_ref>Appl. Sci. 2022, 12(7), 3594</arxiv:journal_ref>
+    <author>
+      <name>Shunsuke Kitada</name>
+    </author>
+    <author>
+      <name>Hitoshi Iyatomi</name>
+    </author>
+    <author>
+      <name>Yoshifumi Seki</name>
+    </author>
+    <arxiv:doi>10.3390/app12073594</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.3390/app12073594" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2202.07282v1</id>
+    <title>Adaptive Conformal Predictions for Time Series</title>
+    <updated>2022-02-15T09:57:01Z</updated>
+    <link href="https://arxiv.org/abs/2202.07282v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2202.07282v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Uncertainty quantification of predictive models is crucial in decision-making problems. Conformal prediction is a general and theoretically sound answer. However, it requires exchangeable data, excluding time series. While recent works tackled this issue, we argue that Adaptive Conformal Inference (ACI, Gibbs and Cand{è}s, 2021), developed for distribution-shift time series, is a good procedure for time series with general dependency. We theoretically analyse the impact of the learning rate on its efficiency in the exchangeable and auto-regressive case. We propose a parameter-free method, AgACI, that adaptively builds upon ACI based on online expert aggregation. We lead extensive fair simulations against competing methods that advocate for ACI's use in time series. We conduct a real case study: electricity price forecasting. The proposed aggregation algorithm provides efficient prediction intervals for day-ahead forecasting. All the code and data to reproduce the experiments is made available.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-02-15T09:57:01Z</published>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Margaux Zaffran</name>
+      <arxiv:affiliation>EDF R&amp;D, CRISAM, CMAP, PARIETAL</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Aymeric Dieuleveut</name>
+      <arxiv:affiliation>CMAP</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Olivier Féron</name>
+      <arxiv:affiliation>EDF R&amp;D, FiME Lab</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Yannig Goude</name>
+      <arxiv:affiliation>EDF R&amp;D</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Julie Josse</name>
+      <arxiv:affiliation>CRISAM, IDESP</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2209.00014v1</id>
+    <title>BASS XXXVII: The role of radiative feedback in the growth and obscuration properties of nearby supermassive black holes</title>
+    <updated>2022-08-31T18:00:00Z</updated>
+    <link href="https://arxiv.org/abs/2209.00014v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2209.00014v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the relation between obscuration and supermassive black hole (SMBH) growth using a large sample of hard X-ray selected Active Galactic Nuclei (AGN). We find a strong decrease in the fraction of obscured sources above the Eddington limit for dusty gas ($\log λ_{\rm Edd}\gtrsim -2$) confirming earlier results, and consistent with the radiation-regulated unification model. This also explains the difference in the Eddington ratio distribution functions (ERDFs) of type 1 and type 2 AGN obtained by a recent study. The break in the ERDF of nearby AGN is at $\log λ_{\rm Edd}^{*}=-1.34\pm0.07$. This corresponds to the $λ_{\rm Edd}$ where AGN transition from having most of their sky covered by obscuring material to being mostly devoid of absorbing material. A similar trend is observed for the luminosity function, which implies that most of the SMBH growth in the local Universe happens when the AGN is covered by a large reservoir of gas and dust. These results could be explained with a radiation-regulated growth model, in which AGN move in the $N_{\rm H}-λ_{\rm Edd}$ plane during their life cycle. The growth episode starts with the AGN mostly unobscured and accreting at low $λ_{\rm Edd}$. As the SMBH is further fueled, $λ_{\rm Edd}$, $N_{\rm H}$ and covering factor increase, leading AGN to be preferentially observed as obscured. Once $λ_{\rm Edd}$ reaches the Eddington limit for dusty gas, the covering factor and $N_{\rm H}$ rapidly decrease, leading the AGN to be typically observed as unobscured. As the remaining fuel is depleted, the SMBH goes back into a quiescent phase.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.HE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-08-31T18:00:00Z</published>
+    <arxiv:comment>Accepted for publication in ApJ</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <author>
+      <name>C. Ricci</name>
+    </author>
+    <author>
+      <name>T. T. Ananna</name>
+    </author>
+    <author>
+      <name>M. J. Temple</name>
+    </author>
+    <author>
+      <name>C. M. Urry</name>
+    </author>
+    <author>
+      <name>M. J. Koss</name>
+    </author>
+    <author>
+      <name>B. Trakhtenbrot</name>
+    </author>
+    <author>
+      <name>Y. Ueda</name>
+    </author>
+    <author>
+      <name>D. Stern</name>
+    </author>
+    <author>
+      <name>F. E. Bauer</name>
+    </author>
+    <author>
+      <name>E. Treister</name>
+    </author>
+    <author>
+      <name>G. C. Privon</name>
+    </author>
+    <author>
+      <name>K. Oh</name>
+    </author>
+    <author>
+      <name>S. Paltani</name>
+    </author>
+    <author>
+      <name>M. Stalevski</name>
+    </author>
+    <author>
+      <name>L. C. Ho</name>
+    </author>
+    <author>
+      <name>A. C. Fabian</name>
+    </author>
+    <author>
+      <name>R. Mushotzky</name>
+    </author>
+    <author>
+      <name>C. S. Chang</name>
+    </author>
+    <author>
+      <name>F. Ricci</name>
+    </author>
+    <author>
+      <name>D. Kakkad</name>
+    </author>
+    <author>
+      <name>L. Sartori</name>
+    </author>
+    <author>
+      <name>R. Baer</name>
+    </author>
+    <author>
+      <name>T. Caglar</name>
+    </author>
+    <author>
+      <name>M. Powell</name>
+    </author>
+    <author>
+      <name>F. Harrison</name>
+    </author>
+    <arxiv:doi>10.3847/1538-4357/ac8e67</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.3847/1538-4357/ac8e67" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2205.13147v4</id>
+    <title>Matryoshka Representation Learning</title>
+    <updated>2024-02-08T03:21:26Z</updated>
+    <link href="https://arxiv.org/abs/2205.13147v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2205.13147v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Learned representations are a central component in modern ML systems, serving a multitude of downstream tasks. When training such representations, it is often the case that computational and statistical constraints for each downstream task are unknown. In this context rigid, fixed capacity representations can be either over or under-accommodating to the task at hand. This leads us to ask: can we design a flexible representation that can adapt to multiple downstream tasks with varying computational resources? Our main contribution is Matryoshka Representation Learning (MRL) which encodes information at different granularities and allows a single embedding to adapt to the computational constraints of downstream tasks. MRL minimally modifies existing representation learning pipelines and imposes no additional cost during inference and deployment. MRL learns coarse-to-fine representations that are at least as accurate and rich as independently trained low-dimensional representations. The flexibility within the learned Matryoshka Representations offer: (a) up to 14x smaller embedding size for ImageNet-1K classification at the same level of accuracy; (b) up to 14x real-world speed-ups for large-scale retrieval on ImageNet-1K and 4K; and (c) up to 2% accuracy improvements for long-tail few-shot classification, all while being as robust as the original representations. Finally, we show that MRL extends seamlessly to web-scale datasets (ImageNet, JFT) across various modalities -- vision (ViT, ResNet), vision + language (ALIGN) and language (BERT). MRL code and pretrained models are open-sourced at https://github.com/RAIVNLab/MRL.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-05-26T04:33:56Z</published>
+    <arxiv:comment>Edited related work to include intrinsic dimensionality works</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Aditya Kusupati</name>
+    </author>
+    <author>
+      <name>Gantavya Bhatt</name>
+    </author>
+    <author>
+      <name>Aniket Rege</name>
+    </author>
+    <author>
+      <name>Matthew Wallingford</name>
+    </author>
+    <author>
+      <name>Aditya Sinha</name>
+    </author>
+    <author>
+      <name>Vivek Ramanujan</name>
+    </author>
+    <author>
+      <name>William Howard-Snyder</name>
+    </author>
+    <author>
+      <name>Kaifeng Chen</name>
+    </author>
+    <author>
+      <name>Sham Kakade</name>
+    </author>
+    <author>
+      <name>Prateek Jain</name>
+    </author>
+    <author>
+      <name>Ali Farhadi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2107.05720v1</id>
+    <title>SPLADE: Sparse Lexical and Expansion Model for First Stage Ranking</title>
+    <updated>2021-07-12T20:17:44Z</updated>
+    <link href="https://arxiv.org/abs/2107.05720v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2107.05720v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In neural Information Retrieval, ongoing research is directed towards improving the first retriever in ranking pipelines. Learning dense embeddings to conduct retrieval using efficient approximate nearest neighbors methods has proven to work well. Meanwhile, there has been a growing interest in learning sparse representations for documents and queries, that could inherit from the desirable properties of bag-of-words models such as the exact matching of terms and the efficiency of inverted indexes. In this work, we present a new first-stage ranker based on explicit sparsity regularization and a log-saturation effect on term weights, leading to highly sparse representations and competitive results with respect to state-of-the-art dense and sparse methods. Our approach is simple, trained end-to-end in a single stage. We also explore the trade-off between effectiveness and efficiency, by controlling the contribution of the sparsity regularization.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-07-12T20:17:44Z</published>
+    <arxiv:comment>5 pages, SIGIR'21 short paper</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Thibault Formal</name>
+    </author>
+    <author>
+      <name>Benjamin Piwowarski</name>
+    </author>
+    <author>
+      <name>Stéphane Clinchant</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2109.09824v6</id>
+    <title>Well Googled is Half Done: Multimodal Forecasting of New Fashion Product Sales with Image-based Google Trends</title>
+    <updated>2024-01-14T18:23:37Z</updated>
+    <link href="https://arxiv.org/abs/2109.09824v6" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2109.09824v6" rel="related" type="application/pdf" title="pdf"/>
+    <summary>New fashion product sales forecasting is a challenging problem that involves many business dynamics and cannot be solved by classical forecasting approaches. In this paper, we investigate the effectiveness of systematically probing exogenous knowledge in the form of Google Trends time series and combining it with multi-modal information related to a brand-new fashion item, in order to effectively forecast its sales despite the lack of past data. In particular, we propose a neural network-based approach, where an encoder learns a representation of the exogenous time series, while the decoder forecasts the sales based on the Google Trends encoding and the available visual and metadata information. Our model works in a non-autoregressive manner, avoiding the compounding effect of large first-step errors. As a second contribution, we present VISUELLE, a publicly available dataset for the task of new fashion product sales forecasting, containing multimodal information for 5577 real, new products sold between 2016-2019 from Nunalie, an Italian fast-fashion company. The dataset is equipped with images of products, metadata, related sales, and associated Google Trends. We use VISUELLE to compare our approach against state-of-the-art alternatives and several baselines, showing that our neural network-based approach is the most accurate in terms of both percentage and absolute error. It is worth noting that the addition of exogenous knowledge boosts the forecasting accuracy by 1.5% in terms of Weighted Absolute Percentage Error (WAPE), revealing the importance of exploiting informative external information. The code and dataset are both available at https://github.com/HumaticsLAB/GTM-Transformer.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-09-20T20:15:08Z</published>
+    <arxiv:comment>Accepted by the Wiley Journal of Forecasting</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Geri Skenderi</name>
+    </author>
+    <author>
+      <name>Christian Joppi</name>
+    </author>
+    <author>
+      <name>Matteo Denitto</name>
+    </author>
+    <author>
+      <name>Marco Cristani</name>
+    </author>
+    <arxiv:doi>10.1002/for.3104</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1002/for.3104" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2203.05794v1</id>
+    <title>BERTopic: Neural topic modeling with a class-based TF-IDF procedure</title>
+    <updated>2022-03-11T08:35:15Z</updated>
+    <link href="https://arxiv.org/abs/2203.05794v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.05794v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Topic models can be useful tools to discover latent topics in collections of documents. Recent studies have shown the feasibility of approach topic modeling as a clustering task. We present BERTopic, a topic model that extends this process by extracting coherent topic representation through the development of a class-based variation of TF-IDF. More specifically, BERTopic generates document embedding with pre-trained transformer-based language models, clusters these embeddings, and finally, generates topic representations with the class-based TF-IDF procedure. BERTopic generates coherent topics and remains competitive across a variety of benchmarks involving classical models and those that follow the more recent clustering approach of topic modeling.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-11T08:35:15Z</published>
+    <arxiv:comment>BERTopic has a python implementation, see https://github.com/MaartenGr/BERTopic</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Maarten Grootendorst</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2203.07467v1</id>
+    <title>Current-driven Langmuir Oscillations and Streaming Instabilities</title>
+    <updated>2022-03-14T20:02:24Z</updated>
+    <link href="https://arxiv.org/abs/2203.07467v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.07467v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Buneman and ion acoustic instabilities are usually associated with different electron and ion drift velocities, in such a way that there is a large current through the plasma. However, due to the recently discovered current-driven Langmuir oscillations (1-3), the relative drift velocity in these configurations will oscillate at the plasma frequency, and with an amplitude of at least the initial drift velocity. In contrast, the textbooks assume a constant drift velocity. Since the growth rates arrived at under that assumption are far less than the plasma frequency, several oscillation periods will take place during the linear growth phase, and this will dampen the instabilities. We provide general theoretical derivations of these oscillations, and show simulation results of the altered behavior of the instabilities. Towards the end, we hypothesize that drift-averaging might be a viable method of calculating the modified growth rates.</summary>
+    <category term="physics.plasm-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-14T20:02:24Z</published>
+    <arxiv:primary_category term="physics.plasm-ph"/>
+    <author>
+      <name>Sigvald Marholm</name>
+    </author>
+    <author>
+      <name>Sayan Adhikari</name>
+    </author>
+    <author>
+      <name>Wojciech J. Miloch</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2210.03629v3</id>
+    <title>ReAct: Synergizing Reasoning and Acting in Language Models</title>
+    <updated>2023-03-10T01:00:17Z</updated>
+    <link href="https://arxiv.org/abs/2210.03629v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2210.03629v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While large language models (LLMs) have demonstrated impressive capabilities across tasks in language understanding and interactive decision making, their abilities for reasoning (e.g. chain-of-thought prompting) and acting (e.g. action plan generation) have primarily been studied as separate topics. In this paper, we explore the use of LLMs to generate both reasoning traces and task-specific actions in an interleaved manner, allowing for greater synergy between the two: reasoning traces help the model induce, track, and update action plans as well as handle exceptions, while actions allow it to interface with external sources, such as knowledge bases or environments, to gather additional information. We apply our approach, named ReAct, to a diverse set of language and decision making tasks and demonstrate its effectiveness over state-of-the-art baselines, as well as improved human interpretability and trustworthiness over methods without reasoning or acting components. Concretely, on question answering (HotpotQA) and fact verification (Fever), ReAct overcomes issues of hallucination and error propagation prevalent in chain-of-thought reasoning by interacting with a simple Wikipedia API, and generates human-like task-solving trajectories that are more interpretable than baselines without reasoning traces. On two interactive decision making benchmarks (ALFWorld and WebShop), ReAct outperforms imitation and reinforcement learning methods by an absolute success rate of 34% and 10% respectively, while being prompted with only one or two in-context examples. Project site with code: https://react-lm.github.io</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-10-06T01:00:32Z</published>
+    <arxiv:comment>v3 is the ICLR camera ready version with some typos fixed. Project site with code: https://react-lm.github.io</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shunyu Yao</name>
+    </author>
+    <author>
+      <name>Jeffrey Zhao</name>
+    </author>
+    <author>
+      <name>Dian Yu</name>
+    </author>
+    <author>
+      <name>Nan Du</name>
+    </author>
+    <author>
+      <name>Izhak Shafran</name>
+    </author>
+    <author>
+      <name>Karthik Narasimhan</name>
+    </author>
+    <author>
+      <name>Yuan Cao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.12147v2</id>
+    <title>MCMF: Multi-Constraints With Merging Features Bid Optimization in Online Display Advertising</title>
+    <updated>2022-06-27T12:23:40Z</updated>
+    <link href="https://arxiv.org/abs/2206.12147v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.12147v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the Real-Time Bidding (RTB), advertisers are increasingly relying on bid optimization to gain more conversions (i.e trade or arrival). Currently, the efficiency of bid optimization is still challenged by the (1) sparse feedback, (2) the budget management separated from the optimization, and (3) absence of bidding environment modeling. The conversion feedback is delayed and sparse, yet most methods rely on dense input (impression or click). Furthermore, most approaches are implemented in two stages: optimum formulation and budget management, but the separation always degrades performance. Meanwhile, absence of bidding environment modeling, model-free controllers are commonly utilized, which perform poorly on sparse feedback and lead to control instability. We address these challenges and provide the Multi-Constraints with Merging Features (MCMF) framework. It collects various bidding statuses as merging features to promise performance on the sparse and delayed feedback. A cost function is formulated as dynamic optimum solution with budget management, the optimization and budget management are not separated. According to the cost function, the approximated gradients based on the Hebbian Learning Rule are capable of updating the MCMF, even without modeling of the bidding environment. Our technique performs the best in the open dataset and provides stable budget management even in extreme sparsity. The MCMF is applied in our real RTB production and we get 2.69% more conversions with 2.46% fewer expenditures.</summary>
+    <category term="cs.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-24T08:25:28Z</published>
+    <arxiv:comment>5 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.GT"/>
+    <author>
+      <name>Xiao Wang</name>
+    </author>
+    <author>
+      <name>Shaoguo Liu</name>
+    </author>
+    <author>
+      <name>Yidong Jia</name>
+    </author>
+    <author>
+      <name>Yuxin Fu</name>
+    </author>
+    <author>
+      <name>Yufang Yu</name>
+    </author>
+    <author>
+      <name>Liang Wang</name>
+    </author>
+    <author>
+      <name>Bo Zheng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2210.01813v1</id>
+    <title>The DAWES review 10: The impact of deep learning for the analysis of galaxy surveys</title>
+    <updated>2022-10-04T18:00:01Z</updated>
+    <link href="https://arxiv.org/abs/2210.01813v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2210.01813v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The amount and complexity of data delivered by modern galaxy surveys has been steadily increasing over the past years. Extracting coherent scientific information from these large and multi-modal data sets remains an open issue and data driven approaches such as deep learning have rapidly emerged as a potentially powerful solution to some long lasting challenges. This enthusiasm is reflected in an unprecedented exponential growth of publications using neural networks. Half a decade after the first published work in astronomy mentioning deep learning, we believe it is timely to review what has been the real impact of this new technology in the field and its potential to solve key challenges raised by the size and complexity of the new datasets. In this review we first aim at summarizing the main applications of deep learning for galaxy surveys that have emerged so far. We then extract the major achievements and lessons learned and highlight key open questions and limitations. Overall, state-of-the art deep learning methods are rapidly adopted by the astronomical community, reflecting a democratization of these methods. We show that the majority of works using deep learning up to date are oriented to computer vision tasks. This is also the domain of application where deep learning has brought the most important breakthroughs so far. We report that the applications are becoming more diverse and deep learning is used for estimating galaxy properties, identifying outliers or constraining the cosmological model. Most of these works remain at the exploratory level. Some common challenges will most likely need to be addressed before moving to the next phase of deployment of deep learning in the processing of future surveys; e.g. uncertainty quantification, interpretability, data labeling and domain shift issues from training with simulations, which constitutes a common practice in astronomy.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-10-04T18:00:01Z</published>
+    <arxiv:comment>Invited DAWES review. Accepted for publication in PASA</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>Marc Huertas-Company</name>
+    </author>
+    <author>
+      <name>François Lanusse</name>
+    </author>
+    <arxiv:doi>10.1017/pasa.2022.55</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1017/pasa.2022.55" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.07845v1</id>
+    <title>Optimality of Matched-Pair Designs in Randomized Controlled Trials</title>
+    <updated>2022-06-15T23:21:13Z</updated>
+    <link href="https://arxiv.org/abs/2206.07845v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.07845v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In randomized controlled trials (RCTs), treatment is often assigned by stratified randomization. I show that among all stratified randomization schemes which treat all units with probability one half, a certain matched-pair design achieves the maximum statistical precision for estimating the average treatment effect (ATE). In an important special case, the optimal design pairs units according to the baseline outcome. In a simulation study based on datasets from 10 RCTs, this design lowers the standard error for the estimator of the ATE by 10% on average, and by up to 34%, relative to the original designs.</summary>
+    <category term="econ.EM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-15T23:21:13Z</published>
+    <arxiv:primary_category term="econ.EM"/>
+    <author>
+      <name>Yuehao Bai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2207.09786v1</id>
+    <title>Non-Uniform Diffusion Models</title>
+    <updated>2022-07-20T09:59:28Z</updated>
+    <link href="https://arxiv.org/abs/2207.09786v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2207.09786v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Diffusion models have emerged as one of the most promising frameworks for deep generative modeling. In this work, we explore the potential of non-uniform diffusion models. We show that non-uniform diffusion leads to multi-scale diffusion models which have similar structure to this of multi-scale normalizing flows. We experimentally find that in the same or less training time, the multi-scale diffusion model achieves better FID score than the standard uniform diffusion model. More importantly, it generates samples $4.4$ times faster in $128\times 128$ resolution. The speed-up is expected to be higher in higher resolutions where more scales are used. Moreover, we show that non-uniform diffusion leads to a novel estimator for the conditional score function which achieves on par performance with the state-of-the-art conditional denoising estimator. Our theoretical and experimental findings are accompanied by an open source library MSDiff which can facilitate further research of non-uniform diffusion models.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-07-20T09:59:28Z</published>
+    <arxiv:comment>arXiv admin note: substantial text overlap with arXiv:2111.13606</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Georgios Batzolis</name>
+    </author>
+    <author>
+      <name>Jan Stanczuk</name>
+    </author>
+    <author>
+      <name>Carola-Bibiane Schönlieb</name>
+    </author>
+    <author>
+      <name>Christian Etmann</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2209.04485v2</id>
+    <title>Chiral spin liquids on the kagome lattice with projected entangled simplex states</title>
+    <updated>2022-12-14T10:30:00Z</updated>
+    <link href="https://arxiv.org/abs/2209.04485v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2209.04485v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The infinite projected entangled simplex state (iPESS), a type of tensor network (TN) state, has been used successfully for simulating and characterizing {\it non-chiral} spin liquids on the kagome lattice. Here, we demonstrate that iPESS also provides a faithful representation of a {\it chiral} spin liquid (CSL) on the same lattice, namely the ground state of the spin-$1/2$ kagome Heisenberg antiferromagnet with a scalar chirality. By classifying local tensors according to SU$(2)$ and point group symmetries, we construct a chiral ansatz breaking reflection $P$ and time reversal $T$ symmetries while preserving $PT$. The variational TN states are shown to host, for bond dimension $D\ge 8$, a chiral gapless entanglement spectrum following SU$(2)_1$ conformal field theory. The correlation function shows a small weight long-range tail complying with the prediction of the TN bulk-edge correspondence. %{\color{red}With more constraints included, the chiral ansatz is reduced to a non-chiral one which preserves full point group symmetries due to an emergent {\it tensor conservation law} and is of relevance to the ground state at the Heisenberg point. Lastly, by simulations in the complete ansatz family we discuss the transition from the non-chiral spin liquid to the CSL induced by the scalar chirality term.} We identify a non-chiral manifold spanned by only a subset of symmetric tensors where a new emergent {\it tensor conservation law} is realized. This allows us to both probe the stability of the non-chiral spin liquid and discuss its transition to CSL induced by a scalar chirality term.</summary>
+    <category term="cond-mat.str-el" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-09-09T18:28:35Z</published>
+    <arxiv:primary_category term="cond-mat.str-el"/>
+    <arxiv:journal_ref>Phys. Rev. B 106, 245119 (2022)</arxiv:journal_ref>
+    <author>
+      <name>Sen Niu</name>
+    </author>
+    <author>
+      <name>Juraj Hasik</name>
+    </author>
+    <author>
+      <name>Ji-Yao Chen</name>
+    </author>
+    <author>
+      <name>Didier Poilblanc</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevB.106.245119</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevB.106.245119" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.04615v3</id>
+    <title>Beyond the Imitation Game: Quantifying and extrapolating the capabilities of language models</title>
+    <updated>2023-06-12T17:51:15Z</updated>
+    <link href="https://arxiv.org/abs/2206.04615v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.04615v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Language models demonstrate both quantitative improvement and new qualitative capabilities with increasing scale. Despite their potentially transformative impact, these new capabilities are as yet poorly characterized. In order to inform future research, prepare for disruptive new model capabilities, and ameliorate socially harmful effects, it is vital that we understand the present and near-future capabilities and limitations of language models. To address this challenge, we introduce the Beyond the Imitation Game benchmark (BIG-bench). BIG-bench currently consists of 204 tasks, contributed by 450 authors across 132 institutions. Task topics are diverse, drawing problems from linguistics, childhood development, math, common-sense reasoning, biology, physics, social bias, software development, and beyond. BIG-bench focuses on tasks that are believed to be beyond the capabilities of current language models. We evaluate the behavior of OpenAI's GPT models, Google-internal dense transformer architectures, and Switch-style sparse transformers on BIG-bench, across model sizes spanning millions to hundreds of billions of parameters. In addition, a team of human expert raters performed all tasks in order to provide a strong baseline. Findings include: model performance and calibration both improve with scale, but are poor in absolute terms (and when compared with rater performance); performance is remarkably similar across model classes, though with benefits from sparsity; tasks that improve gradually and predictably commonly involve a large knowledge or memorization component, whereas tasks that exhibit "breakthrough" behavior at a critical scale often involve multiple steps or components, or brittle metrics; social bias typically increases with scale in settings with ambiguous context, but this can be improved with prompting.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-09T17:05:34Z</published>
+    <arxiv:comment>27 pages, 17 figures + references and appendices, repo: https://github.com/google/BIG-bench</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>Transactions on Machine Learning Research, May/2022, https://openreview.net/forum?id=uyTL5Bvosj</arxiv:journal_ref>
+    <author>
+      <name>Aarohi Srivastava</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Abhinav Rastogi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Abhishek Rao</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Abu Awal Md Shoeb</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Abubakar Abid</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Adam Fisch</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Adam R. Brown</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Adam Santoro</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Aditya Gupta</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Adrià Garriga-Alonso</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Agnieszka Kluska</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Aitor Lewkowycz</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Akshat Agarwal</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Alethea Power</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Alex Ray</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Alex Warstadt</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Alexander W. Kocurek</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ali Safaya</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ali Tazarv</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Alice Xiang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Alicia Parrish</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Allen Nie</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Aman Hussain</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Amanda Askell</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Amanda Dsouza</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ambrose Slone</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ameet Rahane</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Anantharaman S. Iyer</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Anders Andreassen</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Andrea Madotto</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Andrea Santilli</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Andreas Stuhlmüller</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Andrew Dai</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Andrew La</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Andrew Lampinen</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Andy Zou</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Angela Jiang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Angelica Chen</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Anh Vuong</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Animesh Gupta</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Anna Gottardi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Antonio Norelli</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Anu Venkatesh</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Arash Gholamidavoodi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Arfa Tabassum</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Arul Menezes</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Arun Kirubarajan</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Asher Mullokandov</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ashish Sabharwal</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Austin Herrick</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Avia Efrat</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Aykut Erdem</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ayla Karakaş</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>B. Ryan Roberts</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Bao Sheng Loe</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Barret Zoph</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Bartłomiej Bojanowski</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Batuhan Özyurt</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Behnam Hedayatnia</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Behnam Neyshabur</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Benjamin Inden</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Benno Stein</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Berk Ekmekci</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Bill Yuchen Lin</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Blake Howald</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Bryan Orinion</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Cameron Diao</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Cameron Dour</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Catherine Stinson</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Cedrick Argueta</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>César Ferri Ramírez</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Chandan Singh</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Charles Rathkopf</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Chenlin Meng</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Chitta Baral</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Chiyu Wu</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Chris Callison-Burch</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Chris Waites</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Christian Voigt</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Christopher D. Manning</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Christopher Potts</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Cindy Ramirez</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Clara E. Rivera</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Clemencia Siro</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Colin Raffel</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Courtney Ashcraft</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Cristina Garbacea</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Damien Sileo</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Dan Garrette</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Dan Hendrycks</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Dan Kilman</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Dan Roth</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Daniel Freeman</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Daniel Khashabi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Daniel Levy</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Daniel Moseguí González</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Danielle Perszyk</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Danny Hernandez</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Danqi Chen</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Daphne Ippolito</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Dar Gilboa</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>David Dohan</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>David Drakard</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>David Jurgens</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Debajyoti Datta</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Deep Ganguli</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Denis Emelin</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Denis Kleyko</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Deniz Yuret</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Derek Chen</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Derek Tam</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Dieuwke Hupkes</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Diganta Misra</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Dilyar Buzan</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Dimitri Coelho Mollo</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Diyi Yang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Dong-Ho Lee</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Dylan Schrader</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ekaterina Shutova</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ekin Dogus Cubuk</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Elad Segal</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Eleanor Hagerman</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Elizabeth Barnes</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Elizabeth Donoway</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ellie Pavlick</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Emanuele Rodola</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Emma Lam</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Eric Chu</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Eric Tang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Erkut Erdem</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ernie Chang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ethan A. Chi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ethan Dyer</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ethan Jerzak</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ethan Kim</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Eunice Engefu Manyasi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Evgenii Zheltonozhskii</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Fanyue Xia</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Fatemeh Siar</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Fernando Martínez-Plumed</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Francesca Happé</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Francois Chollet</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Frieda Rong</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Gaurav Mishra</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Genta Indra Winata</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Gerard de Melo</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Germán Kruszewski</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Giambattista Parascandolo</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Giorgio Mariani</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Gloria Wang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Gonzalo Jaimovitch-López</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Gregor Betz</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Guy Gur-Ari</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Hana Galijasevic</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Hannah Kim</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Hannah Rashkin</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Hannaneh Hajishirzi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Harsh Mehta</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Hayden Bogar</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Henry Shevlin</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Hinrich Schütze</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Hiromu Yakura</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Hongming Zhang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Hugh Mee Wong</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ian Ng</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Isaac Noble</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jaap Jumelet</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jack Geissinger</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jackson Kernion</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jacob Hilton</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jaehoon Lee</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jaime Fernández Fisac</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>James B. Simon</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>James Koppel</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>James Zheng</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>James Zou</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jan Kocoń</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jana Thompson</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Janelle Wingfield</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jared Kaplan</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jarema Radom</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jascha Sohl-Dickstein</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jason Phang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jason Wei</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jason Yosinski</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jekaterina Novikova</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jelle Bosscher</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jennifer Marsh</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jeremy Kim</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jeroen Taal</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jesse Engel</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jesujoba Alabi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jiacheng Xu</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jiaming Song</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jillian Tang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Joan Waweru</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>John Burden</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>John Miller</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>John U. Balis</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jonathan Batchelder</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jonathan Berant</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jörg Frohberg</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jos Rozen</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jose Hernandez-Orallo</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Joseph Boudeman</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Joseph Guerr</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Joseph Jones</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Joshua B. Tenenbaum</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Joshua S. Rule</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Joyce Chua</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Kamil Kanclerz</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Karen Livescu</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Karl Krauth</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Karthik Gopalakrishnan</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Katerina Ignatyeva</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Katja Markert</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Kaustubh D. Dhole</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Kevin Gimpel</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Kevin Omondi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Kory Mathewson</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Kristen Chiafullo</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ksenia Shkaruta</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Kumar Shridhar</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Kyle McDonell</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Kyle Richardson</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Laria Reynolds</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Leo Gao</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Li Zhang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Liam Dugan</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Lianhui Qin</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Lidia Contreras-Ochando</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Louis-Philippe Morency</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Luca Moschella</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Lucas Lam</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Lucy Noble</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ludwig Schmidt</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Luheng He</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Luis Oliveros Colón</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Luke Metz</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Lütfi Kerem Şenel</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Maarten Bosma</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Maarten Sap</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Maartje ter Hoeve</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Maheen Farooqi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Manaal Faruqui</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Mantas Mazeika</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Marco Baturan</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Marco Marelli</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Marco Maru</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Maria Jose Ramírez Quintana</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Marie Tolkiehn</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Mario Giulianelli</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Martha Lewis</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Martin Potthast</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Matthew L. Leavitt</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Matthias Hagen</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Mátyás Schubert</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Medina Orduna Baitemirova</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Melody Arnaud</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Melvin McElrath</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Michael A. Yee</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Michael Cohen</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Michael Gu</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Michael Ivanitskiy</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Michael Starritt</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Michael Strube</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Michał Swędrowski</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Michele Bevilacqua</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Michihiro Yasunaga</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Mihir Kale</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Mike Cain</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Mimee Xu</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Mirac Suzgun</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Mitch Walker</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Mo Tiwari</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Mohit Bansal</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Moin Aminnaseri</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Mor Geva</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Mozhdeh Gheini</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Mukund Varma T</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Nanyun Peng</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Nathan A. Chi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Nayeon Lee</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Neta Gur-Ari Krakover</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Nicholas Cameron</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Nicholas Roberts</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Nick Doiron</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Nicole Martinez</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Nikita Nangia</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Niklas Deckers</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Niklas Muennighoff</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Nitish Shirish Keskar</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Niveditha S. Iyer</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Noah Constant</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Noah Fiedel</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Nuan Wen</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Oliver Zhang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Omar Agha</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Omar Elbaghdadi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Omer Levy</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Owain Evans</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Pablo Antonio Moreno Casares</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Parth Doshi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Pascale Fung</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Paul Pu Liang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Paul Vicol</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Pegah Alipoormolabashi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Peiyuan Liao</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Percy Liang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Peter Chang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Peter Eckersley</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Phu Mon Htut</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Pinyu Hwang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Piotr Miłkowski</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Piyush Patil</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Pouya Pezeshkpour</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Priti Oli</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Qiaozhu Mei</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Qing Lyu</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Qinlang Chen</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Rabin Banjade</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Rachel Etta Rudolph</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Raefer Gabriel</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Rahel Habacker</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ramon Risco</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Raphaël Millière</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Rhythm Garg</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Richard Barnes</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Rif A. Saurous</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Riku Arakawa</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Robbe Raymaekers</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Robert Frank</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Rohan Sikand</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Roman Novak</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Roman Sitelew</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ronan LeBras</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Rosanne Liu</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Rowan Jacobs</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Rui Zhang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ruslan Salakhutdinov</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ryan Chi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ryan Lee</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ryan Stovall</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ryan Teehan</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Rylan Yang</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sahib Singh</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Saif M. Mohammad</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sajant Anand</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sam Dillavou</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sam Shleifer</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sam Wiseman</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Samuel Gruetter</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Samuel R. Bowman</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Samuel S. Schoenholz</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sanghyun Han</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sanjeev Kwatra</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sarah A. Rous</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sarik Ghazarian</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sayan Ghosh</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sean Casey</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sebastian Bischoff</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sebastian Gehrmann</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sebastian Schuster</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sepideh Sadeghi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Shadi Hamdan</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sharon Zhou</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Shashank Srivastava</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sherry Shi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Shikhar Singh</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Shima Asaadi</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Shixiang Shane Gu</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Shubh Pachchigar</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Shubham Toshniwal</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Shyam Upadhyay</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name> Shyamolima</name>
+      <arxiv:affiliation>Shammie</arxiv:affiliation>
+    </author>
+    <author>
+      <name> Debnath</name>
+    </author>
+    <author>
+      <name>Siamak Shakeri</name>
+    </author>
+    <author>
+      <name>Simon Thormeyer</name>
+    </author>
+    <author>
+      <name>Simone Melzi</name>
+    </author>
+    <author>
+      <name>Siva Reddy</name>
+    </author>
+    <author>
+      <name>Sneha Priscilla Makini</name>
+    </author>
+    <author>
+      <name>Soo-Hwan Lee</name>
+    </author>
+    <author>
+      <name>Spencer Torene</name>
+    </author>
+    <author>
+      <name>Sriharsha Hatwar</name>
+    </author>
+    <author>
+      <name>Stanislas Dehaene</name>
+    </author>
+    <author>
+      <name>Stefan Divic</name>
+    </author>
+    <author>
+      <name>Stefano Ermon</name>
+    </author>
+    <author>
+      <name>Stella Biderman</name>
+    </author>
+    <author>
+      <name>Stephanie Lin</name>
+    </author>
+    <author>
+      <name>Stephen Prasad</name>
+    </author>
+    <author>
+      <name>Steven T. Piantadosi</name>
+    </author>
+    <author>
+      <name>Stuart M. Shieber</name>
+    </author>
+    <author>
+      <name>Summer Misherghi</name>
+    </author>
+    <author>
+      <name>Svetlana Kiritchenko</name>
+    </author>
+    <author>
+      <name>Swaroop Mishra</name>
+    </author>
+    <author>
+      <name>Tal Linzen</name>
+    </author>
+    <author>
+      <name>Tal Schuster</name>
+    </author>
+    <author>
+      <name>Tao Li</name>
+    </author>
+    <author>
+      <name>Tao Yu</name>
+    </author>
+    <author>
+      <name>Tariq Ali</name>
+    </author>
+    <author>
+      <name>Tatsu Hashimoto</name>
+    </author>
+    <author>
+      <name>Te-Lin Wu</name>
+    </author>
+    <author>
+      <name>Théo Desbordes</name>
+    </author>
+    <author>
+      <name>Theodore Rothschild</name>
+    </author>
+    <author>
+      <name>Thomas Phan</name>
+    </author>
+    <author>
+      <name>Tianle Wang</name>
+    </author>
+    <author>
+      <name>Tiberius Nkinyili</name>
+    </author>
+    <author>
+      <name>Timo Schick</name>
+    </author>
+    <author>
+      <name>Timofei Kornev</name>
+    </author>
+    <author>
+      <name>Titus Tunduny</name>
+    </author>
+    <author>
+      <name>Tobias Gerstenberg</name>
+    </author>
+    <author>
+      <name>Trenton Chang</name>
+    </author>
+    <author>
+      <name>Trishala Neeraj</name>
+    </author>
+    <author>
+      <name>Tushar Khot</name>
+    </author>
+    <author>
+      <name>Tyler Shultz</name>
+    </author>
+    <author>
+      <name>Uri Shaham</name>
+    </author>
+    <author>
+      <name>Vedant Misra</name>
+    </author>
+    <author>
+      <name>Vera Demberg</name>
+    </author>
+    <author>
+      <name>Victoria Nyamai</name>
+    </author>
+    <author>
+      <name>Vikas Raunak</name>
+    </author>
+    <author>
+      <name>Vinay Ramasesh</name>
+    </author>
+    <author>
+      <name>Vinay Uday Prabhu</name>
+    </author>
+    <author>
+      <name>Vishakh Padmakumar</name>
+    </author>
+    <author>
+      <name>Vivek Srikumar</name>
+    </author>
+    <author>
+      <name>William Fedus</name>
+    </author>
+    <author>
+      <name>William Saunders</name>
+    </author>
+    <author>
+      <name>William Zhang</name>
+    </author>
+    <author>
+      <name>Wout Vossen</name>
+    </author>
+    <author>
+      <name>Xiang Ren</name>
+    </author>
+    <author>
+      <name>Xiaoyu Tong</name>
+    </author>
+    <author>
+      <name>Xinran Zhao</name>
+    </author>
+    <author>
+      <name>Xinyi Wu</name>
+    </author>
+    <author>
+      <name>Xudong Shen</name>
+    </author>
+    <author>
+      <name>Yadollah Yaghoobzadeh</name>
+    </author>
+    <author>
+      <name>Yair Lakretz</name>
+    </author>
+    <author>
+      <name>Yangqiu Song</name>
+    </author>
+    <author>
+      <name>Yasaman Bahri</name>
+    </author>
+    <author>
+      <name>Yejin Choi</name>
+    </author>
+    <author>
+      <name>Yichi Yang</name>
+    </author>
+    <author>
+      <name>Yiding Hao</name>
+    </author>
+    <author>
+      <name>Yifu Chen</name>
+    </author>
+    <author>
+      <name>Yonatan Belinkov</name>
+    </author>
+    <author>
+      <name>Yu Hou</name>
+    </author>
+    <author>
+      <name>Yufang Hou</name>
+    </author>
+    <author>
+      <name>Yuntao Bai</name>
+    </author>
+    <author>
+      <name>Zachary Seid</name>
+    </author>
+    <author>
+      <name>Zhuoye Zhao</name>
+    </author>
+    <author>
+      <name>Zijian Wang</name>
+    </author>
+    <author>
+      <name>Zijie J. Wang</name>
+    </author>
+    <author>
+      <name>Zirui Wang</name>
+    </author>
+    <author>
+      <name>Ziyi Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2203.06833v1</id>
+    <title>GraphTrack: A Graph-based Cross-Device Tracking Framework</title>
+    <updated>2022-03-14T03:07:02Z</updated>
+    <link href="https://arxiv.org/abs/2203.06833v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.06833v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Cross-device tracking has drawn growing attention from both commercial companies and the general public because of its privacy implications and applications for user profiling, personalized services, etc. One particular, wide-used type of cross-device tracking is to leverage browsing histories of user devices, e.g., characterized by a list of IP addresses used by the devices and domains visited by the devices. However, existing browsing history based methods have three drawbacks. First, they cannot capture latent correlations among IPs and domains. Second, their performance degrades significantly when labeled device pairs are unavailable. Lastly, they are not robust to uncertainties in linking browsing histories to devices. We propose GraphTrack, a graph-based cross-device tracking framework, to track users across different devices by correlating their browsing histories. Specifically, we propose to model the complex interplays among IPs, domains, and devices as graphs and capture the latent correlations between IPs and between domains. We construct graphs that are robust to uncertainties in linking browsing histories to devices. Moreover, we adapt random walk with restart to compute similarity scores between devices based on the graphs. GraphTrack leverages the similarity scores to perform cross-device tracking. GraphTrack does not require labeled device pairs and can incorporate them if available. We evaluate GraphTrack on two real-world datasets, i.e., a publicly available mobile-desktop tracking dataset (around 100 users) and a multiple-device tracking dataset (154K users) we collected. Our results show that GraphTrack substantially outperforms the state-of-the-art on both datasets.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-14T03:07:02Z</published>
+    <arxiv:comment>Accepted by AsiaCCS'22</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Binghui Wang</name>
+    </author>
+    <author>
+      <name>Tianchen Zhou</name>
+    </author>
+    <author>
+      <name>Song Li</name>
+    </author>
+    <author>
+      <name>Yinzhi Cao</name>
+    </author>
+    <author>
+      <name>Neil Zhenqiang Gong</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2204.08387v3</id>
+    <title>LayoutLMv3: Pre-training for Document AI with Unified Text and Image Masking</title>
+    <updated>2022-07-19T06:41:15Z</updated>
+    <link href="https://arxiv.org/abs/2204.08387v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2204.08387v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Self-supervised pre-training techniques have achieved remarkable progress in Document AI. Most multimodal pre-trained models use a masked language modeling objective to learn bidirectional representations on the text modality, but they differ in pre-training objectives for the image modality. This discrepancy adds difficulty to multimodal representation learning. In this paper, we propose \textbf{LayoutLMv3} to pre-train multimodal Transformers for Document AI with unified text and image masking. Additionally, LayoutLMv3 is pre-trained with a word-patch alignment objective to learn cross-modal alignment by predicting whether the corresponding image patch of a text word is masked. The simple unified architecture and training objectives make LayoutLMv3 a general-purpose pre-trained model for both text-centric and image-centric Document AI tasks. Experimental results show that LayoutLMv3 achieves state-of-the-art performance not only in text-centric tasks, including form understanding, receipt understanding, and document visual question answering, but also in image-centric tasks such as document image classification and document layout analysis. The code and models are publicly available at \url{https://aka.ms/layoutlmv3}.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-04-18T16:19:52Z</published>
+    <arxiv:comment>ACM Multimedia 2022</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yupan Huang</name>
+    </author>
+    <author>
+      <name>Tengchao Lv</name>
+    </author>
+    <author>
+      <name>Lei Cui</name>
+    </author>
+    <author>
+      <name>Yutong Lu</name>
+    </author>
+    <author>
+      <name>Furu Wei</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.12634v1</id>
+    <title>Characterization of resistive Micromegas detectors for the upgrade of the T2K Near Detector Time Projection Chambers</title>
+    <updated>2021-06-23T19:10:06Z</updated>
+    <link href="https://arxiv.org/abs/2106.12634v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.12634v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The second phase of the T2K experiment is expected to start data taking in autumn 2022. An upgrade of the Near Detector (ND280) is under development and includes the construction of two new Time Projection Chambers called High-Angle TPC (HA-TPC). The two endplates of these TPCs will be paved with eight Micromegas type charge readout modules. The Micromegas detector charge amplification structure uses a resistive anode to spread the charges over several pads to improve the space point resolution. This innovative technique is combined with the bulk-Micromegas technology to compose the "Encapsulated Resistive Anode Micromegas" detector. A prototype has been designed, built and exposed to an electron beam at the DESY II test beam facility.
+  The data have been used to characterize the charge spreading and to produce a RC map. Spatial resolution better than 600 $μ$m and energy resolution better than 9% are obtained for all incident angles. These performances fulfil the requirements for the upgrade of the ND280 TPC.</summary>
+    <category term="physics.ins-det" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-23T19:10:06Z</published>
+    <arxiv:comment>32 pages, 22 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.ins-det"/>
+    <author>
+      <name>D. Attié</name>
+    </author>
+    <author>
+      <name>M. Batkiewicz-Kwasniak</name>
+    </author>
+    <author>
+      <name>P. Billoir</name>
+    </author>
+    <author>
+      <name>A. Blanchet</name>
+    </author>
+    <author>
+      <name>A. Blondel</name>
+    </author>
+    <author>
+      <name>S. Bolognesi</name>
+    </author>
+    <author>
+      <name>D. Calvet</name>
+    </author>
+    <author>
+      <name>M. G. Catanesi</name>
+    </author>
+    <author>
+      <name>M. Cicerchia</name>
+    </author>
+    <author>
+      <name>G. Cogo</name>
+    </author>
+    <author>
+      <name>P. Colas</name>
+    </author>
+    <author>
+      <name>G. Collazuol</name>
+    </author>
+    <author>
+      <name>A. Delbart</name>
+    </author>
+    <author>
+      <name>J. Dumarchez</name>
+    </author>
+    <author>
+      <name>S. Emery-Schrenk</name>
+    </author>
+    <author>
+      <name>M. Feltre</name>
+    </author>
+    <author>
+      <name>C. Giganti</name>
+    </author>
+    <author>
+      <name>F. Gramegna</name>
+    </author>
+    <author>
+      <name>M. Grassi</name>
+    </author>
+    <author>
+      <name>M. Guigue</name>
+    </author>
+    <author>
+      <name>P. Hamacher-Baumann</name>
+    </author>
+    <author>
+      <name>S. Hassani</name>
+    </author>
+    <author>
+      <name>F. Iacob</name>
+    </author>
+    <author>
+      <name>C. Jesús-Valls</name>
+    </author>
+    <author>
+      <name>R. Kurjata</name>
+    </author>
+    <author>
+      <name>M. Lamoureux</name>
+    </author>
+    <author>
+      <name>M. Lehuraux</name>
+    </author>
+    <author>
+      <name>A. Longhin</name>
+    </author>
+    <author>
+      <name>T. Lux</name>
+    </author>
+    <author>
+      <name>L. Magaletti</name>
+    </author>
+    <author>
+      <name>T. Marchi</name>
+    </author>
+    <author>
+      <name>A. Maurel</name>
+    </author>
+    <author>
+      <name>L. Mellet</name>
+    </author>
+    <author>
+      <name>M. Mezzetto</name>
+    </author>
+    <author>
+      <name>L. Munteanu</name>
+    </author>
+    <author>
+      <name>Q. V. Nguyen</name>
+    </author>
+    <author>
+      <name>Y. Orain</name>
+    </author>
+    <author>
+      <name>M. Pari</name>
+    </author>
+    <author>
+      <name>J. -M. Parraud</name>
+    </author>
+    <author>
+      <name>C. Pastore</name>
+    </author>
+    <author>
+      <name>A. Pepato</name>
+    </author>
+    <author>
+      <name>E. Pierre</name>
+    </author>
+    <author>
+      <name>B. Popov</name>
+    </author>
+    <author>
+      <name>H. Przybiliski</name>
+    </author>
+    <author>
+      <name>T. Radermacher</name>
+    </author>
+    <author>
+      <name>E. Radicioni</name>
+    </author>
+    <author>
+      <name>M. Riallot</name>
+    </author>
+    <author>
+      <name>S. Roth</name>
+    </author>
+    <author>
+      <name>A. Rychter</name>
+    </author>
+    <author>
+      <name>L. Scomparin</name>
+    </author>
+    <author>
+      <name>J. Steinmann</name>
+    </author>
+    <author>
+      <name>S. Suvorov</name>
+    </author>
+    <author>
+      <name>J. Swierblewski</name>
+    </author>
+    <author>
+      <name>D. Terront</name>
+    </author>
+    <author>
+      <name>N. Thamm</name>
+    </author>
+    <author>
+      <name>F. Toussenel</name>
+    </author>
+    <author>
+      <name>V. Valentino</name>
+    </author>
+    <author>
+      <name>G. Vasseur</name>
+    </author>
+    <author>
+      <name>U. Yevarouskaya</name>
+    </author>
+    <author>
+      <name>M. Ziembicki</name>
+    </author>
+    <author>
+      <name>M. Zito</name>
+    </author>
+    <arxiv:doi>10.1016/j.nima.2021.166109</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.nima.2021.166109" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2207.12396v2</id>
+    <title>Exploring CLIP for Assessing the Look and Feel of Images</title>
+    <updated>2022-11-23T13:17:33Z</updated>
+    <link href="https://arxiv.org/abs/2207.12396v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2207.12396v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Measuring the perception of visual content is a long-standing problem in computer vision. Many mathematical models have been developed to evaluate the look or quality of an image. Despite the effectiveness of such tools in quantifying degradations such as noise and blurriness levels, such quantification is loosely coupled with human language. When it comes to more abstract perception about the feel of visual content, existing methods can only rely on supervised models that are explicitly trained with labeled data collected via laborious user study. In this paper, we go beyond the conventional paradigms by exploring the rich visual language prior encapsulated in Contrastive Language-Image Pre-training (CLIP) models for assessing both the quality perception (look) and abstract perception (feel) of images in a zero-shot manner. In particular, we discuss effective prompt designs and show an effective prompt pairing strategy to harness the prior. We also provide extensive experiments on controlled datasets and Image Quality Assessment (IQA) benchmarks. Our results show that CLIP captures meaningful priors that generalize well to different perceptual assessments. Code is avaliable at https://github.com/IceClear/CLIP-IQA.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-07-25T17:58:16Z</published>
+    <arxiv:comment>Accepted by AAAI2023. Code: https://github.com/IceClear/CLIP-IQA</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Jianyi Wang</name>
+    </author>
+    <author>
+      <name>Kelvin C. K. Chan</name>
+    </author>
+    <author>
+      <name>Chen Change Loy</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2112.09380v1</id>
+    <title>Simulating pharmaceutical treatment effects on osteoporosis via a bone remodeling algorithm targeting hypermineralized sites</title>
+    <updated>2021-12-17T08:33:39Z</updated>
+    <link href="https://arxiv.org/abs/2112.09380v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2112.09380v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Pharmaceutical treatments can slow bone degradation, thus reducing the fracture risk inherent in osteoporosis. Antiresorptive treatments block the over-activation of osteoclasts vs osteoblasts, but the resulting decrease in bone remodeling frequency may weaken bone structure over time, with no gain in bone volume. Anabolic treatments, however, induce gain in bone volume. The quantitative results from existing studies on the effects of treatments over time are general and nonpatient-specific, while numerical models simulating evolution of patient-specific bone microarchitecture consider a spatially random distribution of the remodeling process. Here, we propose a new approach to simulate the remodeling over decades of an individual patient's bone microarchitecture, based on the hypothesis that the oldest sites, which are hypermineralized and more brittle, are remodeled first. Taking these older sites as prime targets of remodeling, simulations show that severe osteoporosis profoundly degrades the mechanical properties of the bone structure, which can be restored and even improved by anabolic, more than by antiresorptive, therapies.</summary>
+    <category term="physics.med-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-12-17T08:33:39Z</published>
+    <arxiv:primary_category term="physics.med-ph"/>
+    <arxiv:journal_ref>Medical Engineering and Physics, Elsevier, 2020, 76, pp.56 - 68</arxiv:journal_ref>
+    <author>
+      <name>Jean-Louis Milan</name>
+      <arxiv:affiliation>ISM</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Chan Yone Claudia</name>
+      <arxiv:affiliation>ISM</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Rossi Jean-Marie</name>
+      <arxiv:affiliation>ISM</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Chabrand Patrick</name>
+      <arxiv:affiliation>ISM</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1016/j.medengphy.2019.10.011</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.medengphy.2019.10.011" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2207.01848v6</id>
+    <title>TabPFN: A Transformer That Solves Small Tabular Classification Problems in a Second</title>
+    <updated>2023-09-16T09:33:32Z</updated>
+    <link href="https://arxiv.org/abs/2207.01848v6" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2207.01848v6" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present TabPFN, a trained Transformer that can do supervised classification for small tabular datasets in less than a second, needs no hyperparameter tuning and is competitive with state-of-the-art classification methods. TabPFN performs in-context learning (ICL), it learns to make predictions using sequences of labeled examples (x, f(x)) given in the input, without requiring further parameter updates. TabPFN is fully entailed in the weights of our network, which accepts training and test samples as a set-valued input and yields predictions for the entire test set in a single forward pass. TabPFN is a Prior-Data Fitted Network (PFN) and is trained offline once, to approximate Bayesian inference on synthetic datasets drawn from our prior. This prior incorporates ideas from causal reasoning: It entails a large space of structural causal models with a preference for simple structures. On the 18 datasets in the OpenML-CC18 suite that contain up to 1 000 training data points, up to 100 purely numerical features without missing values, and up to 10 classes, we show that our method clearly outperforms boosted trees and performs on par with complex state-of-the-art AutoML systems with up to 230$\times$ speedup. This increases to a 5 700$\times$ speedup when using a GPU. We also validate these results on an additional 67 small numerical datasets from OpenML. We provide all our code, the trained TabPFN, an interactive browser demo and a Colab notebook at https://github.com/automl/TabPFN.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-07-05T07:17:43Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Noah Hollmann</name>
+    </author>
+    <author>
+      <name>Samuel Müller</name>
+    </author>
+    <author>
+      <name>Katharina Eggensperger</name>
+    </author>
+    <author>
+      <name>Frank Hutter</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2110.13179v8</id>
+    <title>Probabilistic Hierarchical Forecasting with Deep Poisson Mixtures</title>
+    <updated>2023-04-11T16:24:41Z</updated>
+    <link href="https://arxiv.org/abs/2110.13179v8" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2110.13179v8" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Hierarchical forecasting problems arise when time series have a natural group structure, and predictions at multiple levels of aggregation and disaggregation across the groups are needed. In such problems, it is often desired to satisfy the aggregation constraints in a given hierarchy, referred to as hierarchical coherence in the literature. Maintaining coherence while producing accurate forecasts can be a challenging problem, especially in the case of probabilistic forecasting. We present a novel method capable of accurate and coherent probabilistic forecasts for time series when reliable hierarchical information is present. We call it Deep Poisson Mixture Network (DPMN). It relies on the combination of neural networks and a statistical model for the joint distribution of the hierarchical multivariate time series structure. By construction, the model guarantees hierarchical coherence and provides simple rules for aggregation and disaggregation of the predictive distributions. We perform an extensive empirical evaluation comparing the DPMN to other state-of-the-art methods which produce hierarchically coherent probabilistic forecasts on multiple public datasets. Comparing to existing coherent probabilistic models, we obtain a relative improvement in the overall Continuous Ranked Probability Score (CRPS) of 11.8% on Australian domestic tourism data, and 8.1% on the Favorita grocery sales dataset, where time series are grouped with geographical hierarchies or travel intent hierarchies. For San Francisco Bay Area highway traffic, where the series' hierarchical structure is randomly assigned, and their correlations are less informative, our method does not show significant performance differences over statistical baselines.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-10-25T18:02:03Z</published>
+    <arxiv:comment>Hierarchical Forecasting, Probabilistic Coherence, Neural Networks, Poisson Mixtures, Multivariate Time Series</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>International Journal of Forecasting 2023, Hierarchical Forecasting Special Issue</arxiv:journal_ref>
+    <author>
+      <name>Kin G. Olivares</name>
+    </author>
+    <author>
+      <name>O. Nganba Meetei</name>
+    </author>
+    <author>
+      <name>Ruijun Ma</name>
+    </author>
+    <author>
+      <name>Rohan Reddy</name>
+    </author>
+    <author>
+      <name>Mengfei Cao</name>
+    </author>
+    <author>
+      <name>Lee Dicker</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2203.04567v2</id>
+    <title>Efficient quadrature-squeezing from biexcitonic parametric gain in atomically thin semiconductors</title>
+    <updated>2022-11-11T13:25:48Z</updated>
+    <link href="https://arxiv.org/abs/2203.04567v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.04567v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Modification of electromagnetic quantum fluctuations in the form of quadrature-squeezing is a central quantum resource, which can be generated from nonlinear optical processes. Such a process is facilitated by coherent two-photon excitation of the strongly bound biexciton in atomically thin semiconductors. We show theoretically that interfacing an atomically thin semiconductor with an optical cavity allows to harness this two-photon resonance and use the biexcitonic parametric gain to generate squeezed light with input power an order of magnitude below current state-of-the-art devices with conventional third-order nonlinear materials that rely on far off-resonant nonlinearities. Furthermore, the squeezing bandwidth is found to be in the range of several meV. These results identify atomically thin semiconductors as a promising candidate for on-chip squeezed-light sources.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-09T08:06:20Z</published>
+    <arxiv:comment>Postprint version</arxiv:comment>
+    <arxiv:primary_category term="quant-ph"/>
+    <arxiv:journal_ref>Phys. Rev. Lett. 129, 097401 (2022)</arxiv:journal_ref>
+    <author>
+      <name>Emil V. Denning</name>
+    </author>
+    <author>
+      <name>Andreas Knorr</name>
+    </author>
+    <author>
+      <name>Florian Katsch</name>
+    </author>
+    <author>
+      <name>Marten Richter</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.129.097401</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.129.097401" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2204.00791v5</id>
+    <title>CL-XABSA: Contrastive Learning for Cross-lingual Aspect-based Sentiment Analysis</title>
+    <updated>2023-01-09T08:07:15Z</updated>
+    <link href="https://arxiv.org/abs/2204.00791v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2204.00791v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As an extensive research in the field of natural language processing (NLP), aspect-based sentiment analysis (ABSA) is the task of predicting the sentiment expressed in a text relative to the corresponding aspect. Unfortunately, most languages lack sufficient annotation resources, thus more and more recent researchers focus on cross-lingual aspect-based sentiment analysis (XABSA). However, most recent researches only concentrate on cross-lingual data alignment instead of model alignment. To this end, we propose a novel framework, CL-XABSA: Contrastive Learning for Cross-lingual Aspect-Based Sentiment Analysis. Based on contrastive learning, we close the distance between samples with the same label in different semantic spaces, thus achieving a convergence of semantic spaces of different languages. Specifically, we design two contrastive strategies, token level contrastive learning of token embeddings (TL-CTE) and sentiment level contrastive learning of token embeddings (SL-CTE), to regularize the semantic space of source and target language to be more uniform. Since our framework can receive datasets in multiple languages during training, our framework can be adapted not only for XABSA task but also for multilingual aspect-based sentiment analysis (MABSA). To further improve the performance of our model, we perform knowledge distillation technology leveraging data from unlabeled target language. In the distillation XABSA task, we further explore the comparative effectiveness of different data (source dataset, translated dataset, and code-switched dataset). The results demonstrate that the proposed method has a certain improvement in the three tasks of XABSA, distillation XABSA and MABSA. For reproducibility, our code for this paper is available at https://github.com/GKLMIP/CL-XABSA.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-04-02T07:40:03Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Nankai Lin</name>
+    </author>
+    <author>
+      <name>Yingwen Fu</name>
+    </author>
+    <author>
+      <name>Xiaotian Lin</name>
+    </author>
+    <author>
+      <name>Aimin Yang</name>
+    </author>
+    <author>
+      <name>Shengyi Jiang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2204.09603v3</id>
+    <title>Comparing Deep Reinforcement Learning Algorithms in Two-Echelon Supply Chains</title>
+    <updated>2023-11-17T16:42:46Z</updated>
+    <link href="https://arxiv.org/abs/2204.09603v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2204.09603v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this study, we analyze and compare the performance of state-of-the-art deep reinforcement learning algorithms for solving the supply chain inventory management problem. This complex sequential decision-making problem consists of determining the optimal quantity of products to be produced and shipped across different warehouses over a given time horizon. In particular, we present a mathematical formulation of a two-echelon supply chain environment with stochastic and seasonal demand, which allows managing an arbitrary number of warehouses and product types. Through a rich set of numerical experiments, we compare the performance of different deep reinforcement learning algorithms under various supply chain structures, topologies, demands, capacities, and costs. The results of the experimental plan indicate that deep reinforcement learning algorithms outperform traditional inventory management strategies, such as the static (s, Q)-policy. Furthermore, this study provides detailed insight into the design and development of an open-source software library that provides a customizable environment for solving the supply chain inventory management problem using a wide range of data-driven approaches.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-04-20T16:33:01Z</published>
+    <arxiv:comment>The paper has been accepted for presentation and inclusion in the proceedings of the AI for Manufacturing workshop (AI4M), co-located with the ECML PKDD 2023 (European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases). For supplementary material and source code, please visit https://github.com/frenkowski/SCIMAI-Gym</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Francesco Stranieri</name>
+    </author>
+    <author>
+      <name>Fabio Stella</name>
+    </author>
+    <arxiv:doi>10.1007/978-3-031-74640-6_37</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/978-3-031-74640-6_37" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.11959v5</id>
+    <title>Revisiting Deep Learning Models for Tabular Data</title>
+    <updated>2023-10-26T12:00:03Z</updated>
+    <link href="https://arxiv.org/abs/2106.11959v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.11959v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The existing literature on deep learning for tabular data proposes a wide range of novel architectures and reports competitive results on various datasets. However, the proposed models are usually not properly compared to each other and existing works often use different benchmarks and experiment protocols. As a result, it is unclear for both researchers and practitioners what models perform best. Additionally, the field still lacks effective baselines, that is, the easy-to-use models that provide competitive performance across different problems.
+  In this work, we perform an overview of the main families of DL architectures for tabular data and raise the bar of baselines in tabular DL by identifying two simple and powerful deep architectures. The first one is a ResNet-like architecture which turns out to be a strong baseline that is often missing in prior works. The second model is our simple adaptation of the Transformer architecture for tabular data, which outperforms other solutions on most tasks. Both models are compared to many existing architectures on a diverse set of tasks under the same training and tuning protocols. We also compare the best DL models with Gradient Boosted Decision Trees and conclude that there is still no universally superior solution.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-22T17:58:10Z</published>
+    <arxiv:comment>NeurIPS 2021 camera-ready. Code: https://github.com/yandex-research/tabular-dl-revisiting-models (v3-v5: minor changes)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yury Gorishniy</name>
+    </author>
+    <author>
+      <name>Ivan Rubachev</name>
+    </author>
+    <author>
+      <name>Valentin Khrulkov</name>
+    </author>
+    <author>
+      <name>Artem Babenko</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2203.02155v1</id>
+    <title>Training language models to follow instructions with human feedback</title>
+    <updated>2022-03-04T07:04:42Z</updated>
+    <link href="https://arxiv.org/abs/2203.02155v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.02155v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Making language models bigger does not inherently make them better at following a user's intent. For example, large language models can generate outputs that are untruthful, toxic, or simply not helpful to the user. In other words, these models are not aligned with their users. In this paper, we show an avenue for aligning language models with user intent on a wide range of tasks by fine-tuning with human feedback. Starting with a set of labeler-written prompts and prompts submitted through the OpenAI API, we collect a dataset of labeler demonstrations of the desired model behavior, which we use to fine-tune GPT-3 using supervised learning. We then collect a dataset of rankings of model outputs, which we use to further fine-tune this supervised model using reinforcement learning from human feedback. We call the resulting models InstructGPT. In human evaluations on our prompt distribution, outputs from the 1.3B parameter InstructGPT model are preferred to outputs from the 175B GPT-3, despite having 100x fewer parameters. Moreover, InstructGPT models show improvements in truthfulness and reductions in toxic output generation while having minimal performance regressions on public NLP datasets. Even though InstructGPT still makes simple mistakes, our results show that fine-tuning with human feedback is a promising direction for aligning language models with human intent.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-04T07:04:42Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Long Ouyang</name>
+    </author>
+    <author>
+      <name>Jeff Wu</name>
+    </author>
+    <author>
+      <name>Xu Jiang</name>
+    </author>
+    <author>
+      <name>Diogo Almeida</name>
+    </author>
+    <author>
+      <name>Carroll L. Wainwright</name>
+    </author>
+    <author>
+      <name>Pamela Mishkin</name>
+    </author>
+    <author>
+      <name>Chong Zhang</name>
+    </author>
+    <author>
+      <name>Sandhini Agarwal</name>
+    </author>
+    <author>
+      <name>Katarina Slama</name>
+    </author>
+    <author>
+      <name>Alex Ray</name>
+    </author>
+    <author>
+      <name>John Schulman</name>
+    </author>
+    <author>
+      <name>Jacob Hilton</name>
+    </author>
+    <author>
+      <name>Fraser Kelton</name>
+    </author>
+    <author>
+      <name>Luke Miller</name>
+    </author>
+    <author>
+      <name>Maddie Simens</name>
+    </author>
+    <author>
+      <name>Amanda Askell</name>
+    </author>
+    <author>
+      <name>Peter Welinder</name>
+    </author>
+    <author>
+      <name>Paul Christiano</name>
+    </author>
+    <author>
+      <name>Jan Leike</name>
+    </author>
+    <author>
+      <name>Ryan Lowe</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2205.11916v4</id>
+    <title>Large Language Models are Zero-Shot Reasoners</title>
+    <updated>2023-01-29T05:14:17Z</updated>
+    <link href="https://arxiv.org/abs/2205.11916v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2205.11916v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Pretrained large language models (LLMs) are widely used in many sub-fields of natural language processing (NLP) and generally known as excellent few-shot learners with task-specific exemplars. Notably, chain of thought (CoT) prompting, a recent technique for eliciting complex multi-step reasoning through step-by-step answer examples, achieved the state-of-the-art performances in arithmetics and symbolic reasoning, difficult system-2 tasks that do not follow the standard scaling laws for LLMs. While these successes are often attributed to LLMs' ability for few-shot learning, we show that LLMs are decent zero-shot reasoners by simply adding "Let's think step by step" before each answer. Experimental results demonstrate that our Zero-shot-CoT, using the same single prompt template, significantly outperforms zero-shot LLM performances on diverse benchmark reasoning tasks including arithmetics (MultiArith, GSM8K, AQUA-RAT, SVAMP), symbolic reasoning (Last Letter, Coin Flip), and other logical reasoning tasks (Date Understanding, Tracking Shuffled Objects), without any hand-crafted few-shot examples, e.g. increasing the accuracy on MultiArith from 17.7% to 78.7% and GSM8K from 10.4% to 40.7% with large InstructGPT model (text-davinci-002), as well as similar magnitudes of improvements with another off-the-shelf large model, 540B parameter PaLM. The versatility of this single prompt across very diverse reasoning tasks hints at untapped and understudied fundamental zero-shot capabilities of LLMs, suggesting high-level, multi-task broad cognitive capabilities may be extracted by simple prompting. We hope our work not only serves as the minimal strongest zero-shot baseline for the challenging reasoning benchmarks, but also highlights the importance of carefully exploring and analyzing the enormous zero-shot knowledge hidden inside LLMs before crafting finetuning datasets or few-shot exemplars.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-05-24T09:22:26Z</published>
+    <arxiv:comment>Accepted to NeurIPS2022. Our code is available at https://github.com/kojima-takeshi188/zero_shot_cot</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Takeshi Kojima</name>
+    </author>
+    <author>
+      <name>Shixiang Shane Gu</name>
+    </author>
+    <author>
+      <name>Machel Reid</name>
+    </author>
+    <author>
+      <name>Yutaka Matsuo</name>
+    </author>
+    <author>
+      <name>Yusuke Iwasawa</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2107.01404v1</id>
+    <title>Impact of Channel Aging on Zero-Forcing Precoding in Cell-Free Massive MIMO Systems</title>
+    <updated>2021-07-03T10:54:38Z</updated>
+    <link href="https://arxiv.org/abs/2107.01404v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2107.01404v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the context of cell-free massive multi-input multi-output (mMIMO), zero-forcing precoding (ZFP) requires the exchange of instantaneous channel state information and precoded data symbols via a fronthaul network. It causes considerable propagation and processing delays, which degrade performance. This letter analyzes the impact of channel aging on the performance of ZFP in cell-free mMIMO. The aging effects of not only user mobility but also phase noise are considered. Numerical results in terms of per-user spectral efficiency are illustrated.</summary>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-07-03T10:54:38Z</published>
+    <arxiv:primary_category term="cs.IT"/>
+    <arxiv:journal_ref>IEEE Communications Letters, 2021</arxiv:journal_ref>
+    <author>
+      <name>Wei Jiang</name>
+    </author>
+    <author>
+      <name>Hans Dieter Schotten</name>
+    </author>
+    <arxiv:doi>10.1109/LCOMM.2021.3094266</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/LCOMM.2021.3094266" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2108.10732v1</id>
+    <title>Search for enhanced magnetism at the interface between Bi$_2$Se$_3$ and EuSe</title>
+    <updated>2021-08-24T13:44:08Z</updated>
+    <link href="https://arxiv.org/abs/2108.10732v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2108.10732v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Enhanced magnetism has recently been reported for the topological-insulator/ferromagnet interface Bi$_2$Se$_3$/EuS with Curie temperatures claimed to be raised above room temperature from the bulk EuS value of 16 K. Here we investigate the analogous interface Bi$_2$Se$_3$/EuSe. EuSe is a low-temperature layered ferrimagnet that is particularly sensitive to external perturbations. We find that superconducting quantum interference device (SQUID) magnetometry of Bi$_2$Se$_3$/EuSe heterostructures reveals precisely the magnetic phase diagram known from EuSe, including the ferrimagnetic phase below 5 K, without any apparent changes from the bulk behavior. Choosing a temperature of 10 K to search for magnetic enhancement, we determine an upper limit for a possible magnetic coercive field of 3 mT. Using interface sensitive x-ray absorption spectroscopy we verify the magnetic divalent configuration of the Eu at the interface without contamination by Eu3+, and by x-ray magnetic circular dichroism (XMCD) we confirm at the interface the magnetic hysteresis obtained by SQUID. XMCD data obtained at 10 K in a magnetic field of 6 T indicate a magnetic spin moment of mz,spin = 7 $μ$B/Eu$^{2+}$, in good agreement with the SQUID data and the expected theoretical moment of Eu2+. Subsequent XMCD measurements in zero field show, however, that sizable remanent magnetization is absent at the interface for temperatures down to about 10 K.</summary>
+    <category term="cond-mat.str-el" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-08-24T13:44:08Z</published>
+    <arxiv:comment>11 figures, 35 references</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.str-el"/>
+    <arxiv:journal_ref>Phys. Rev. B 103, (2021) 115438</arxiv:journal_ref>
+    <author>
+      <name>K. Prokeš</name>
+    </author>
+    <author>
+      <name>Chen Luo</name>
+    </author>
+    <author>
+      <name>H. Ryll</name>
+    </author>
+    <author>
+      <name>E. Schierle</name>
+    </author>
+    <author>
+      <name>D. Marchenko</name>
+    </author>
+    <author>
+      <name>E. Weschke</name>
+    </author>
+    <author>
+      <name>F. Radu</name>
+    </author>
+    <author>
+      <name>R. Abrudan</name>
+    </author>
+    <author>
+      <name>V. V. Volobuev</name>
+    </author>
+    <author>
+      <name>G. Springholz</name>
+    </author>
+    <author>
+      <name>O. Rader</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevB.103.115438</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevB.103.115438" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.12345v1</id>
+    <title>On a new statistical technique for the real-time recognition of ultra-low multiplicity astrophysical neutrino burst</title>
+    <updated>2021-06-23T12:32:37Z</updated>
+    <link href="https://arxiv.org/abs/2106.12345v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.12345v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The real-time recognition of neutrino signals from astrophysical objects with very-low false alarm rate and short-latency, is crucial to perform multi-messenger detection, especially in the case of distant core-collapse supernovae accessible with the next generation of large-scale neutrino telescopes. The current time-based selection algorithms implemented in operating online monitors depend mainly on the number of events (multiplicity) detected in a fixed time window, under the hypothesis of Poisson-distributed background. However, these methods are not capable of exploiting the time profile discrepancies between the expected supernova neutrino burst and the stationary background.
+  In this paper we propose a new general and flexible technique (beta filter method) which provides specific decision boundaries on the cluster multiplicity-duration plane, guaranteeing the desired false alarm rate in an analytical way. The performance is evaluated using the injection of a general purpose SN-like signal on top of realistic background rates in current detectors. An absolute gain in efficiency of up to $\sim 80\%$ is achieved compared with the standard techniques, and a new ultra-low multiplicity region is unveiled.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.HE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.data-an" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-23T12:32:37Z</published>
+    <arxiv:comment>7 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>Marco Mattiazzi</name>
+    </author>
+    <author>
+      <name>Mathieu Lamoureux</name>
+    </author>
+    <author>
+      <name>Gianmaria Collazuol</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2112.01488v3</id>
+    <title>ColBERTv2: Effective and Efficient Retrieval via Lightweight Late Interaction</title>
+    <updated>2022-07-10T17:28:51Z</updated>
+    <link href="https://arxiv.org/abs/2112.01488v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2112.01488v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Neural information retrieval (IR) has greatly advanced search and other knowledge-intensive language tasks. While many neural IR methods encode queries and documents into single-vector representations, late interaction models produce multi-vector representations at the granularity of each token and decompose relevance modeling into scalable token-level computations. This decomposition has been shown to make late interaction more effective, but it inflates the space footprint of these models by an order of magnitude. In this work, we introduce ColBERTv2, a retriever that couples an aggressive residual compression mechanism with a denoised supervision strategy to simultaneously improve the quality and space footprint of late interaction. We evaluate ColBERTv2 across a wide range of benchmarks, establishing state-of-the-art quality within and outside the training domain while reducing the space footprint of late interaction models by 6--10$\times$.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-12-02T18:38:50Z</published>
+    <arxiv:comment>NAACL 2022. Omar and Keshav contributed equally to this work</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Keshav Santhanam</name>
+    </author>
+    <author>
+      <name>Omar Khattab</name>
+    </author>
+    <author>
+      <name>Jon Saad-Falcon</name>
+    </author>
+    <author>
+      <name>Christopher Potts</name>
+    </author>
+    <author>
+      <name>Matei Zaharia</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2209.01987v2</id>
+    <title>Strong coupling in chiral cavities: nonperturbative framework for enantiomer discrimination</title>
+    <updated>2023-02-06T12:01:20Z</updated>
+    <link href="https://arxiv.org/abs/2209.01987v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2209.01987v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The development of efficient techniques to distinguish mirror images of chiral molecules (enantiomers) is very important in both chemistry and physics. Enantiomers share most molecular properties except, for instance, the absorption of circularly polarized light. Enantiomer purification is therefore a challenging task that requires specialized equipment. Strong coupling between quantized fields and matter (e.g. in optical cavities) is a promising technique to modify molecular processes in a non-invasive way. The modulation of molecular properties is achieved by changing the field characteristics. In this work, we investigate whether strong coupling to circularly polarized electromagnetic fields is a viable way to discriminate chiral molecules. To this end, we develop a nonperturbative framework to calculate the behavior of molecules in chiral cavities. We show that in this setting the enantiomers have different energies -- that is, one is more stable than the other. The field-induced energy differences are also shown to give rise to enantiospecific signatures in rotational spectra.</summary>
+    <category term="physics.chem-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-09-05T14:35:26Z</published>
+    <arxiv:comment>18 pages and 14 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.chem-ph"/>
+    <author>
+      <name>Rosario R. Riso</name>
+    </author>
+    <author>
+      <name>Laura Grazioli</name>
+    </author>
+    <author>
+      <name>Enrico Ronca</name>
+    </author>
+    <author>
+      <name>Tommaso Giovannini</name>
+    </author>
+    <author>
+      <name>Henrik Koch</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevX.13.031002</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevX.13.031002" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2209.15421v2</id>
+    <title>TabDDPM: Modelling Tabular Data with Diffusion Models</title>
+    <updated>2024-10-07T12:38:57Z</updated>
+    <link href="https://arxiv.org/abs/2209.15421v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2209.15421v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Denoising diffusion probabilistic models are currently becoming the leading paradigm of generative modeling for many important data modalities. Being the most prevalent in the computer vision community, diffusion models have also recently gained some attention in other domains, including speech, NLP, and graph-like data. In this work, we investigate if the framework of diffusion models can be advantageous for general tabular problems, where datapoints are typically represented by vectors of heterogeneous features. The inherent heterogeneity of tabular data makes it quite challenging for accurate modeling, since the individual features can be of completely different nature, i.e., some of them can be continuous and some of them can be discrete. To address such data types, we introduce TabDDPM -- a diffusion model that can be universally applied to any tabular dataset and handles any type of feature. We extensively evaluate TabDDPM on a wide set of benchmarks and demonstrate its superiority over existing GAN/VAE alternatives, which is consistent with the advantage of diffusion models in other fields. Additionally, we show that TabDDPM is eligible for privacy-oriented setups, where the original datapoints cannot be publicly shared.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-09-30T12:26:14Z</published>
+    <arxiv:comment>code https://github.com/yandex-research/tab-ddpm</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Proceedings of the 40 th International Conference on Machine Learning, Honolulu, Hawaii, USA. PMLR 202, 2023</arxiv:journal_ref>
+    <author>
+      <name>Akim Kotelnikov</name>
+    </author>
+    <author>
+      <name>Dmitry Baranchuk</name>
+    </author>
+    <author>
+      <name>Ivan Rubachev</name>
+    </author>
+    <author>
+      <name>Artem Babenko</name>
+    </author>
+    <arxiv:doi>10.5555/3618408.3619133</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.5555/3618408.3619133" title="doi"/>
+  </entry>
+</feed>

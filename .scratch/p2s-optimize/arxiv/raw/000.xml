@@ -1,0 +1,1688 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/k9x9x+lW9sJaPg9sBG9nAf3wH60</id>
+  <title>arXiv Query: search_query=&amp;id_list=0704.1859,0904.1234,1003.0146,1104.3919,1105.3875,1112.1234,1205.2678,1206.5533,1206.6451,1208.3671,1305.2828,1407.2904,1409.3119,1502.01592,1502.01852,1502.04066,1502.04637,1506.00356,1507.05259,1509.02472,1512.03385,1602.04938,1603.02754,1606.00142,1607.06520,1608.00060,1609.02907,1609.07528,1610.02413,1611.09032,1703.06547,1703.07015,1703.07793,1704.06690,1704.08173,1705.07204,1706.02216,1706.03461,1706.03478,1706.03762&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:40:55Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=0704.1859,0904.1234,1003.0146,1104.3919,1105.3875,1112.1234,1205.2678,1206.5533,1206.6451,1208.3671,1305.2828,1407.2904,1409.3119,1502.01592,1502.01852,1502.04066,1502.04637,1506.00356,1507.05259,1509.02472,1512.03385,1602.04938,1603.02754,1606.00142,1607.06520,1608.00060,1609.02907,1609.07528,1610.02413,1611.09032,1703.06547,1703.07015,1703.07793,1704.06690,1704.08173,1705.07204,1706.02216,1706.03461,1706.03478,1706.03762" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/0904.1234v3</id>
+    <title>Mapping the evolution of scientific fields</title>
+    <updated>2010-04-23T02:53:29Z</updated>
+    <link href="https://arxiv.org/abs/0904.1234v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0904.1234v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Despite the apparent cross-disciplinary interactions among scientific fields, a formal description of their evolution is lacking. Here we describe a novel approach to study the dynamics and evolution of scientific fields using a network-based analysis. We build an idea network consisting of American Physical Society Physics and Astronomy Classification Scheme (PACS) numbers as nodes representing scientific concepts. Two PACS numbers are linked if there exist publications that reference them simultaneously. We locate scientific fields using a community finding algorithm, and describe the time evolution of these fields over the course of 1985-2006. The communities we identify map to known scientific fields, and their age depends on their size and activity. We expect our approach to quantifying the evolution of ideas to be relevant for making predictions about the future of science and thus help to guide its development.</summary>
+    <category term="physics.soc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-04-07T22:24:11Z</published>
+    <arxiv:comment>v3: re-ran analysis with new noise parameter choice; 10 pages for main paper; 11 pages for suppl. info</arxiv:comment>
+    <arxiv:primary_category term="physics.soc-ph"/>
+    <arxiv:journal_ref>PLoS ONE 5(5): e10355. 2010</arxiv:journal_ref>
+    <author>
+      <name>Mark Herrera</name>
+    </author>
+    <author>
+      <name>David C. Roberts</name>
+    </author>
+    <author>
+      <name>Natali Gulbahce</name>
+    </author>
+    <arxiv:doi>10.1371/journal.pone.0010355</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1371/journal.pone.0010355" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1704.06690v1</id>
+    <title>Electronic Metamaterials with Tunable Second-order Optical Nonlinearities</title>
+    <updated>2017-04-21T19:45:52Z</updated>
+    <link href="https://arxiv.org/abs/1704.06690v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1704.06690v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The ability to engineer metamaterials with tunable nonlinear optical properties is crucial for nonlinear optics. Traditionally, metals have been employed to enhance nonlinear optical interactions through field localization. Here, inspired by the electronic properties of materials, we introduce and demonstrate experimentally an asymmetric metal-semiconductor-metal (MSM) metamaterial that exhibits a large and electronically tunable effective second-order optical susceptibility (\c{hi}(2)). The induced \c{hi}(2) originates from the interaction between the third-order optical susceptibility of the semiconductor (\c{hi}(3)) with the engineered internal electric field resulting from the two metals with dissimilar work function at its interfaces. We demonstrate a five times larger second-harmonic intensity from the MSM metamaterial, compared to contributions from its constituents with electrically tunable nonlinear coefficient ranging from 2.8 to 15.6 pm/V.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-04-21T19:45:52Z</published>
+    <arxiv:comment>12 pages, 4 figures, 1 table</arxiv:comment>
+    <arxiv:primary_category term="physics.optics"/>
+    <author>
+      <name>Hung-Hsi Lin</name>
+    </author>
+    <author>
+      <name>Felipe Vallini</name>
+    </author>
+    <author>
+      <name>Mu-Han Yang</name>
+    </author>
+    <author>
+      <name>Rajat Sharma</name>
+    </author>
+    <author>
+      <name>Matthew W. Puckett</name>
+    </author>
+    <author>
+      <name>Sergio Montoya</name>
+    </author>
+    <author>
+      <name>Christian D. Wurm</name>
+    </author>
+    <author>
+      <name>Eric E. Fullerton</name>
+    </author>
+    <author>
+      <name>Yeshaiahu Fainman</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1704.08173v3</id>
+    <title>Scalar products of Bethe vectors in the models with $\mathfrak{gl}(m|n)$ symmetry</title>
+    <updated>2017-09-20T06:55:16Z</updated>
+    <link href="https://arxiv.org/abs/1704.08173v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1704.08173v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study scalar products of Bethe vectors in the models solvable by the nested algebraic Bethe ansatz and described by $\mathfrak{gl}(m|n)$ superalgebra. Using coproduct properties of the Bethe vectors we obtain a sum formula for their scalar products. This formula describes the scalar product in terms of a sum over partitions of Bethe parameters. We also obtain recursions for the Bethe vectors. This allows us to find recursions for the highest coefficient of the scalar product.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-04-26T15:58:31Z</published>
+    <arxiv:comment>LATEX, 33 pages, no figures, typos are corrected</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <arxiv:journal_ref>Nucl. Phys. B, 923 (2017) 277-311</arxiv:journal_ref>
+    <author>
+      <name>A. Hutsalyuk</name>
+    </author>
+    <author>
+      <name>A. Liashyk</name>
+    </author>
+    <author>
+      <name>S. Z. Pakuliak</name>
+    </author>
+    <author>
+      <name>E. Ragoucy</name>
+    </author>
+    <author>
+      <name>N. A. Slavnov</name>
+    </author>
+    <arxiv:doi>10.1016/j.nuclphysb.2017.07.020</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.nuclphysb.2017.07.020" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1512.03385v1</id>
+    <title>Deep Residual Learning for Image Recognition</title>
+    <updated>2015-12-10T19:51:55Z</updated>
+    <link href="https://arxiv.org/abs/1512.03385v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1512.03385v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deeper neural networks are more difficult to train. We present a residual learning framework to ease the training of networks that are substantially deeper than those used previously. We explicitly reformulate the layers as learning residual functions with reference to the layer inputs, instead of learning unreferenced functions. We provide comprehensive empirical evidence showing that these residual networks are easier to optimize, and can gain accuracy from considerably increased depth. On the ImageNet dataset we evaluate residual nets with a depth of up to 152 layers---8x deeper than VGG nets but still having lower complexity. An ensemble of these residual nets achieves 3.57% error on the ImageNet test set. This result won the 1st place on the ILSVRC 2015 classification task. We also present analysis on CIFAR-10 with 100 and 1000 layers.
+  The depth of representations is of central importance for many visual recognition tasks. Solely due to our extremely deep representations, we obtain a 28% relative improvement on the COCO object detection dataset. Deep residual nets are foundations of our submissions to ILSVRC &amp; COCO 2015 competitions, where we also won the 1st places on the tasks of ImageNet detection, ImageNet localization, COCO detection, and COCO segmentation.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-12-10T19:51:55Z</published>
+    <arxiv:comment>Tech report</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Kaiming He</name>
+    </author>
+    <author>
+      <name>Xiangyu Zhang</name>
+    </author>
+    <author>
+      <name>Shaoqing Ren</name>
+    </author>
+    <author>
+      <name>Jian Sun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1706.03762v7</id>
+    <title>Attention Is All You Need</title>
+    <updated>2023-08-02T00:41:18Z</updated>
+    <link href="https://arxiv.org/abs/1706.03762v7" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1706.03762v7" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train. Our model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles by over 2 BLEU. On the WMT 2014 English-to-French translation task, our model establishes a new single-model state-of-the-art BLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction of the training costs of the best models from the literature. We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-06-12T17:57:34Z</published>
+    <arxiv:comment>15 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Ashish Vaswani</name>
+    </author>
+    <author>
+      <name>Noam Shazeer</name>
+    </author>
+    <author>
+      <name>Niki Parmar</name>
+    </author>
+    <author>
+      <name>Jakob Uszkoreit</name>
+    </author>
+    <author>
+      <name>Llion Jones</name>
+    </author>
+    <author>
+      <name>Aidan N. Gomez</name>
+    </author>
+    <author>
+      <name>Lukasz Kaiser</name>
+    </author>
+    <author>
+      <name>Illia Polosukhin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1706.03478v2</id>
+    <title>Menon-type identities concerning Dirichlet characters</title>
+    <updated>2018-05-21T08:46:01Z</updated>
+    <link href="https://arxiv.org/abs/1706.03478v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1706.03478v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $χ$ be a Dirichlet character (mod $n$) with conductor $d$. In a quite recent paper Zhao and Cao deduced the identity $\sum_{k=1}^n (k-1,n) χ(k)= \varphi(n)τ(n/d)$, which reduces to Menon's identity if $χ$ is the principal character (mod $n$). We generalize the above identity by considering even functions (mod $n$), and offer an alternative approach to proof. We also obtain certain related formulas concerning Ramanujan sums.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-06-12T06:09:00Z</published>
+    <arxiv:comment>8 pages</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <arxiv:journal_ref>Int. J. Number Theory 14, No. 4 (2018), 1047-1054</arxiv:journal_ref>
+    <author>
+      <name>László Tóth</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1609.07528v3</id>
+    <title>Compressed Hypothesis Testing: To Mix or Not to Mix?</title>
+    <updated>2024-09-06T02:20:22Z</updated>
+    <link href="https://arxiv.org/abs/1609.07528v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1609.07528v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we study the problem of determining $k$ anomalous random variables that have different probability distributions from the rest $(n-k)$ random variables. Instead of sampling each individual random variable separately as in the conventional hypothesis testing, we propose to perform hypothesis testing using mixed observations that are functions of multiple random variables. We characterize the error exponents for correctly identifying the $k$ anomalous random variables under fixed time-invariant mixed observations, random time-varying mixed observations, and deterministic time-varying mixed observations. For our error exponent characterization, we introduce the notions of inner conditional Chernoff information and outer conditional Chernoff information. It is demonstrated that mixed observations can strictly improve the error exponents of hypothesis testing, over separate observations of individual random variables. We further characterize the optimal sensing vector maximizing the error exponents, which leads to explicit constructions of the optimal mixed observations in special cases of hypothesis testing for Gaussian random variables. These results show that mixed observations of random variables can reduce the number of required samples in hypothesis testing applications. In order to solve large-scale hypothesis testing problems, we also propose efficient algorithms - LASSO based and message passing based hypothesis testing algorithms.</summary>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-09-23T21:58:38Z</published>
+    <arxiv:comment>compressed sensing, hypothesis testing, Chernoff information, anomaly detection, anomalous random variable, quickest detection. arXiv admin note: substantial text overlap with arXiv:1208.2311</arxiv:comment>
+    <arxiv:primary_category term="cs.IT"/>
+    <author>
+      <name>Myung Cho</name>
+    </author>
+    <author>
+      <name>Weiyu Xu</name>
+    </author>
+    <author>
+      <name>Lifeng Lai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1608.00060v7</id>
+    <title>Double/Debiased Machine Learning for Treatment and Causal Parameters</title>
+    <updated>2024-11-03T18:37:44Z</updated>
+    <link href="https://arxiv.org/abs/1608.00060v7" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1608.00060v7" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Most modern supervised statistical/machine learning (ML) methods are explicitly designed to solve prediction problems very well. Achieving this goal does not imply that these methods automatically deliver good estimators of causal parameters. Examples of such parameters include individual regression coefficients, average treatment effects, average lifts, and demand or supply elasticities. In fact, estimates of such causal parameters obtained via naively plugging ML estimators into estimating equations for such parameters can behave very poorly due to the regularization bias. Fortunately, this regularization bias can be removed by solving auxiliary prediction problems via ML tools. Specifically, we can form an orthogonal score for the target low-dimensional parameter by combining auxiliary and main ML predictions. The score is then used to build a de-biased estimator of the target parameter which typically will converge at the fastest possible 1/root(n) rate and be approximately unbiased and normal, and from which valid confidence intervals for these parameters of interest may be constructed. The resulting method thus could be called a "double ML" method because it relies on estimating primary and auxiliary predictive models. In order to avoid overfitting, our construction also makes use of the K-fold sample splitting, which we call cross-fitting. This allows us to use a very broad set of ML predictive methods in solving the auxiliary and main prediction problems, such as random forest, lasso, ridge, deep neural nets, boosted trees, as well as various hybrids and aggregators of these methods.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="econ.EM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-07-30T01:58:04Z</published>
+    <arxiv:comment>71 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Victor Chernozhukov</name>
+    </author>
+    <author>
+      <name>Denis Chetverikov</name>
+    </author>
+    <author>
+      <name>Mert Demirer</name>
+    </author>
+    <author>
+      <name>Esther Duflo</name>
+    </author>
+    <author>
+      <name>Christian Hansen</name>
+    </author>
+    <author>
+      <name>Whitney Newey</name>
+    </author>
+    <author>
+      <name>James Robins</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1607.06520v1</id>
+    <title>Man is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings</title>
+    <updated>2016-07-21T22:26:20Z</updated>
+    <link href="https://arxiv.org/abs/1607.06520v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1607.06520v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The blind application of machine learning runs the risk of amplifying biases present in data. Such a danger is facing us with word embedding, a popular framework to represent text data as vectors which has been used in many machine learning and natural language processing tasks. We show that even word embeddings trained on Google News articles exhibit female/male gender stereotypes to a disturbing extent. This raises concerns because their widespread use, as we describe, often tends to amplify these biases. Geometrically, gender bias is first shown to be captured by a direction in the word embedding. Second, gender neutral words are shown to be linearly separable from gender definition words in the word embedding. Using these properties, we provide a methodology for modifying an embedding to remove gender stereotypes, such as the association between between the words receptionist and female, while maintaining desired associations such as between the words queen and female. We define metrics to quantify both direct and indirect gender biases in embeddings, and develop algorithms to "debias" the embedding. Using crowd-worker evaluation as well as standard benchmarks, we empirically demonstrate that our algorithms significantly reduce gender bias in embeddings while preserving the its useful properties such as the ability to cluster related concepts and to solve analogy tasks. The resulting embeddings can be used in applications without amplifying gender bias.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-07-21T22:26:20Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Tolga Bolukbasi</name>
+    </author>
+    <author>
+      <name>Kai-Wei Chang</name>
+    </author>
+    <author>
+      <name>James Zou</name>
+    </author>
+    <author>
+      <name>Venkatesh Saligrama</name>
+    </author>
+    <author>
+      <name>Adam Kalai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1205.2678v1</id>
+    <title>Evaluation of Proactive, Reactive and Hybrid Ad hoc Routing Protocol for various Battery models in VANET using Qualnet</title>
+    <updated>2012-02-08T15:00:32Z</updated>
+    <link href="https://arxiv.org/abs/1205.2678v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1205.2678v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In VANET high speed is the real characteristics which leads frequent breakdown, interference etc. In this paper we studied various Ad hoc routing protocols, Reactive, Proactive &amp; Hybrid, taking into consideration various VANET parameters like speed, altitude etc in real traffic scenario and evaluated them for various battery models for energy conservation.. The AODV and DYMO (Reactive), OLSR (Proactive) and ZRP (hybrid) protocols are compared for battery models Duracell AA(MX- 1500),Duracell AAA(MN-2400),Duracell AAA(MX-2400), Duracell C-MN(MN-1400),Panasonic AA standard using Qualnet as a Simulation tool. Since Energy conservation is main focus area nowadays. Hence performance of the protocols with various battery models counts and helps to make a right selection. Varying parameters of VANET shows that in the real traffic scenarios proactive protocol performs more efficiently for energy conservation.</summary>
+    <category term="cs.PF" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-02-08T15:00:32Z</published>
+    <arxiv:comment>5 Pages, 5 Figures. arXiv admin note: substantial text overlap with arXiv:1202.1720</arxiv:comment>
+    <arxiv:primary_category term="cs.PF"/>
+    <arxiv:journal_ref>International Journal of Smart Sensors and Ad Hoc Networks (IJSSAN) ISSN No. 2248-9738 Vol.1(2) 2011</arxiv:journal_ref>
+    <author>
+      <name>Manish Sharma</name>
+    </author>
+    <author>
+      <name>Gurpadam Singh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1305.2828v1</id>
+    <title>Image Optimization and Prediction</title>
+    <updated>2013-05-10T08:43:59Z</updated>
+    <link href="https://arxiv.org/abs/1305.2828v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1305.2828v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Image Processing, Optimization and Prediction of an Image play a key role in Computer Science. Image processing provides a way to analyze and identify an image .Many areas like medical image processing, Satellite images, natural images and artificial images requires lots of analysis and research on optimization. In Image Optimization and Prediction we are combining the features of Query Optimization, Image Processing and Prediction . Image optimization is used in Pattern analysis, object recognition, in medical Image processing to predict the type of diseases, in satellite images for predicting weather forecast, availability of water or mineral etc. Image Processing, Optimization and analysis is a wide open area for research .Lots of research has been conducted in the area of Image analysis and many techniques are available for image analysis but, a single technique is not yet identified for image analysis and prediction .our research is focused on identifying a global technique for image analysis and Prediction.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-05-10T08:43:59Z</published>
+    <arxiv:comment>Pages: 08 Figures: 02, Proceedings of International Conferences CAAM-09 BITS, Durg, India, 10 Jan 2009</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Shweta Jain</name>
+    </author>
+    <author>
+      <name>Urmila Shrawankar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1206.6451v1</id>
+    <title>The Greedy Miser: Learning under Test-time Budgets</title>
+    <updated>2012-06-27T19:59:59Z</updated>
+    <link href="https://arxiv.org/abs/1206.6451v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1206.6451v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As machine learning algorithms enter applications in industrial settings, there is increased interest in controlling their cpu-time during testing. The cpu-time consists of the running time of the algorithm and the extraction time of the features. The latter can vary drastically when the feature set is diverse. In this paper, we propose an algorithm, the Greedy Miser, that incorporates the feature extraction cost during training to explicitly minimize the cpu-time during testing. The algorithm is a straightforward extension of stage-wise regression and is equally suitable for regression or multi-class classification. Compared to prior work, it is significantly more cost-effective and scales to larger data sets.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-06-27T19:59:59Z</published>
+    <arxiv:comment>Appears in Proceedings of the 29th International Conference on Machine Learning (ICML 2012)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Zhixiang Xu</name>
+      <arxiv:affiliation>Washington University, St. Louis</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Kilian Weinberger</name>
+      <arxiv:affiliation>Washington University, St. Louis</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Olivier Chapelle</name>
+      <arxiv:affiliation>Criteo</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1509.02472v2</id>
+    <title>Light Stops in a minimal U(1)x extension of the MSSM</title>
+    <updated>2015-12-16T19:47:27Z</updated>
+    <link href="https://arxiv.org/abs/1509.02472v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1509.02472v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In order to reproduce the measured mass of the Higgs boson mh = 125GeV in the minimal supersymmetric standard model, one usually has to rely on heavy stops, increasing the fine tuning of the electroweak scale. By introducing a new gauge sector, the Higgs mass gets a tree-level contribution via a non-decoupling D-term, and mh = 125 GeV can be obtained with lighter stops. In this paper, we study the values of the stops masses needed to achieve the correct Higgs mass in a setup where the gauge group is extended by a single U(1)x interaction. We derive the experimental limits on the mass of the Z' gauge boson in this setup, then discuss how the stops masses vary as a function of the free parameters introduced by the new sector. We find that the correct Higgs mass can be reproduced with stops in a region between 700 - 800 GeV and a Z' resonance close to the 2.5 TeV bound from the run-I of the LHC, or in a higher region 800 - 900 GeV if the Z' resonance is heavier (3.1 TeV). This region of parameter space will be quickly accessible at run-II of the LHC, and we discuss the impact of the projected run-II bounds on the U(1)x parameter space. We also discuss the phenomenology of the Higgs-like particles introduced to break U(1)x and conclude their effects are too small to be detected at current colliders.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-09-08T17:54:48Z</published>
+    <arxiv:comment>8 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>Phys. Rev. D 92, 115020 (2015)</arxiv:journal_ref>
+    <author>
+      <name>R. M. Capdevilla</name>
+    </author>
+    <author>
+      <name>A. Delgado</name>
+    </author>
+    <author>
+      <name>A. Martin</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.92.115020</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.92.115020" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1706.03461v6</id>
+    <title>Meta-learners for Estimating Heterogeneous Treatment Effects using Machine Learning</title>
+    <updated>2019-04-24T03:01:02Z</updated>
+    <link href="https://arxiv.org/abs/1706.03461v6" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1706.03461v6" rel="related" type="application/pdf" title="pdf"/>
+    <summary>There is growing interest in estimating and analyzing heterogeneous treatment effects in experimental and observational studies. We describe a number of meta-algorithms that can take advantage of any supervised learning or regression method in machine learning and statistics to estimate the Conditional Average Treatment Effect (CATE) function. Meta-algorithms build on base algorithms---such as Random Forests (RF), Bayesian Additive Regression Trees (BART) or neural networks---to estimate the CATE, a function that the base algorithms are not designed to estimate directly. We introduce a new meta-algorithm, the X-learner, that is provably efficient when the number of units in one treatment group is much larger than in the other, and can exploit structural properties of the CATE function. For example, if the CATE function is linear and the response functions in treatment and control are Lipschitz continuous, the X-learner can still achieve the parametric rate under regularity conditions. We then introduce versions of the X-learner that use RF and BART as base learners. In extensive simulation studies, the X-learner performs favorably, although none of the meta-learners is uniformly the best. In two persuasion field experiments from political science, we demonstrate how our new X-learner can be used to target treatment regimes and to shed light on underlying mechanisms. A software package is provided that implements our methods.</summary>
+    <category term="math.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-06-12T04:10:09Z</published>
+    <arxiv:primary_category term="math.ST"/>
+    <author>
+      <name>Sören R. Künzel</name>
+    </author>
+    <author>
+      <name>Jasjeet S. Sekhon</name>
+    </author>
+    <author>
+      <name>Peter J. Bickel</name>
+    </author>
+    <author>
+      <name>Bin Yu</name>
+    </author>
+    <arxiv:doi>10.1073/pnas.1804597116</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1073/pnas.1804597116" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1610.02413v1</id>
+    <title>Equality of Opportunity in Supervised Learning</title>
+    <updated>2016-10-07T20:16:29Z</updated>
+    <link href="https://arxiv.org/abs/1610.02413v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1610.02413v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose a criterion for discrimination against a specified sensitive attribute in supervised learning, where the goal is to predict some target based on available features. Assuming data about the predictor, target, and membership in the protected group are available, we show how to optimally adjust any learned predictor so as to remove discrimination according to our definition. Our framework also improves incentives by shifting the cost of poor classification from disadvantaged groups to the decision maker, who can respond by improving the classification accuracy.
+  In line with other studies, our notion is oblivious: it depends only on the joint statistics of the predictor, the target and the protected attribute, but not on interpretation of individualfeatures. We study the inherent limits of defining and identifying biases based on such oblivious measures, outlining what can and cannot be inferred from different oblivious tests.
+  We illustrate our notion using a case study of FICO credit scores.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-10-07T20:16:29Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Moritz Hardt</name>
+    </author>
+    <author>
+      <name>Eric Price</name>
+    </author>
+    <author>
+      <name>Nathan Srebro</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1206.5533v2</id>
+    <title>Practical recommendations for gradient-based training of deep architectures</title>
+    <updated>2012-09-16T17:49:12Z</updated>
+    <link href="https://arxiv.org/abs/1206.5533v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1206.5533v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Learning algorithms related to artificial neural networks and in particular for Deep Learning may seem to involve many bells and whistles, called hyper-parameters. This chapter is meant as a practical guide with recommendations for some of the most commonly used hyper-parameters, in particular in the context of learning algorithms based on back-propagated gradient and gradient-based optimization. It also discusses how to deal with the fact that more interesting results can be obtained when allowing one to adjust many hyper-parameters. Overall, it describes elements of the practice used to successfully and efficiently train and debug large-scale and often deep multi-layer neural networks. It closes with open questions about the training difficulties observed with deeper architectures.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-06-24T19:17:35Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yoshua Bengio</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1502.04637v1</id>
+    <title>Orientation of the linear polarization plane of H-alpha emission in prominences</title>
+    <updated>2015-02-16T17:20:34Z</updated>
+    <link href="https://arxiv.org/abs/1502.04637v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1502.04637v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>2D distributions of deviations of the polarization plane from the direction tangential to the solar limb (angle χ) and the sign of χare presented for Hα prominences of March 29, 2006. The obtained values of χare in agreement with non-eclipse coronagraphic measurements and indicate the existence of longitudinal magnetic fields. The 2D distributions of the sign of χshow the existence of both «+» and «-» polarities for each prominence. An interpretation in the frame of the existence of oppositely directed magnetic fields is noted.</summary>
+    <category term="astro-ph.SR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-02-16T17:20:34Z</published>
+    <arxiv:comment>Conference, Proceedings of the All-Russian annual conference "Solar and Solar-Terrestrial Physics-2014", 2014, St Petersburg State University, p. 403-406 (in Russian)</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.SR"/>
+    <author>
+      <name>E. Z. Suyunova</name>
+    </author>
+    <author>
+      <name>I. S. Kim</name>
+    </author>
+    <author>
+      <name>A. R. Osokin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1502.01852v1</id>
+    <title>Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification</title>
+    <updated>2015-02-06T10:44:00Z</updated>
+    <link href="https://arxiv.org/abs/1502.01852v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1502.01852v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Rectified activation units (rectifiers) are essential for state-of-the-art neural networks. In this work, we study rectifier neural networks for image classification from two aspects. First, we propose a Parametric Rectified Linear Unit (PReLU) that generalizes the traditional rectified unit. PReLU improves model fitting with nearly zero extra computational cost and little overfitting risk. Second, we derive a robust initialization method that particularly considers the rectifier nonlinearities. This method enables us to train extremely deep rectified models directly from scratch and to investigate deeper or wider network architectures. Based on our PReLU networks (PReLU-nets), we achieve 4.94% top-5 test error on the ImageNet 2012 classification dataset. This is a 26% relative improvement over the ILSVRC 2014 winner (GoogLeNet, 6.66%). To our knowledge, our result is the first to surpass human-level performance (5.1%, Russakovsky et al.) on this visual recognition challenge.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-02-06T10:44:00Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Kaiming He</name>
+    </author>
+    <author>
+      <name>Xiangyu Zhang</name>
+    </author>
+    <author>
+      <name>Shaoqing Ren</name>
+    </author>
+    <author>
+      <name>Jian Sun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1703.06547v2</id>
+    <title>Truth-Telling Mechanism for Secure Two-Way Relay Communications with Energy-Harvesting Revenue</title>
+    <updated>2017-03-21T12:10:10Z</updated>
+    <link href="https://arxiv.org/abs/1703.06547v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1703.06547v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper brings the novel idea of paying the utility to the winning agents in terms of some physical entity in cooperative communications. Our setting is a secret two-way communication channel where two transmitters exchange information in the presence of an eavesdropper. The relays are selected from a set of interested parties such that the secrecy sum rate is maximized. In return, the selected relay nodes' energy harvesting requirements will be fulfilled up to a certain threshold through their own payoff so that they have the natural incentive to be selected and involved in the communication. However, relays may exaggerate their private information in order to improve their chance to be selected. Our objective is to develop a mechanism for relay selection that enforces them to reveal the truth since otherwise they may be penalized. We also propose a joint cooperative relay beamforming and transmit power optimization scheme based on an alternating optimization approach. Note that the problem is highly non-convex since the objective function appears as a product of three correlated Rayleigh quotients. While a common practice in the existing literature is to optimize the relay beamforming vector for given transmit power via rank relaxation, we propose a second-order cone programming (SOCP)-based approach in this paper which requires a significantly lower computational task. The performance of the incentive control mechanism and the optimization algorithm has been evaluated through numerical simulations.</summary>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-03-20T00:29:36Z</published>
+    <arxiv:comment>Accepted in IEEE Transactions on Wireless Communications</arxiv:comment>
+    <arxiv:primary_category term="cs.IT"/>
+    <author>
+      <name>Muhammad R. A. Khandaker</name>
+    </author>
+    <author>
+      <name>Kai-Kit Wong</name>
+    </author>
+    <author>
+      <name>Gan Zheng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1506.00356v1</id>
+    <title>Inferring causal impact using Bayesian structural time-series models</title>
+    <updated>2015-06-01T05:55:13Z</updated>
+    <link href="https://arxiv.org/abs/1506.00356v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1506.00356v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>An important problem in econometrics and marketing is to infer the causal impact that a designed market intervention has exerted on an outcome metric over time. This paper proposes to infer causal impact on the basis of a diffusion-regression state-space model that predicts the counterfactual market response in a synthetic control that would have occurred had no intervention taken place. In contrast to classical difference-in-differences schemes, state-space models make it possible to (i) infer the temporal evolution of attributable impact, (ii) incorporate empirical priors on the parameters in a fully Bayesian treatment, and (iii) flexibly accommodate multiple sources of variation, including local trends, seasonality and the time-varying influence of contemporaneous covariates. Using a Markov chain Monte Carlo algorithm for posterior inference, we illustrate the statistical properties of our approach on simulated data. We then demonstrate its practical utility by estimating the causal effect of an online advertising campaign on search-related site visits. We discuss the strengths and limitations of state-space models in enabling causal attribution in those settings where a randomised experiment is unavailable. The CausalImpact R package provides an implementation of our approach.</summary>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-06-01T05:55:13Z</published>
+    <arxiv:comment>Published at http://dx.doi.org/10.1214/14-AOAS788 in the Annals of Applied Statistics (http://www.imstat.org/aoas/) by the Institute of Mathematical Statistics (http://www.imstat.org)</arxiv:comment>
+    <arxiv:primary_category term="stat.AP"/>
+    <arxiv:journal_ref>Annals of Applied Statistics 2015, Vol. 9, No. 1, 247-274</arxiv:journal_ref>
+    <author>
+      <name>Kay H. Brodersen</name>
+    </author>
+    <author>
+      <name>Fabian Gallusser</name>
+    </author>
+    <author>
+      <name>Jim Koehler</name>
+    </author>
+    <author>
+      <name>Nicolas Remy</name>
+    </author>
+    <author>
+      <name>Steven L. Scott</name>
+    </author>
+    <arxiv:doi>10.1214/14-AOAS788</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1214/14-AOAS788" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1705.07204v5</id>
+    <title>Ensemble Adversarial Training: Attacks and Defenses</title>
+    <updated>2020-04-26T22:20:25Z</updated>
+    <link href="https://arxiv.org/abs/1705.07204v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1705.07204v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Adversarial examples are perturbed inputs designed to fool machine learning models. Adversarial training injects such examples into training data to increase robustness. To scale this technique to large datasets, perturbations are crafted using fast single-step methods that maximize a linear approximation of the model's loss. We show that this form of adversarial training converges to a degenerate global minimum, wherein small curvature artifacts near the data points obfuscate a linear approximation of the loss. The model thus learns to generate weak perturbations, rather than defend against strong ones. As a result, we find that adversarial training remains vulnerable to black-box attacks, where we transfer perturbations computed on undefended models, as well as to a powerful novel single-step attack that escapes the non-smooth vicinity of the input data via a small random step. We further introduce Ensemble Adversarial Training, a technique that augments training data with perturbations transferred from other models. On ImageNet, Ensemble Adversarial Training yields models with strong robustness to black-box attacks. In particular, our most robust model won the first round of the NIPS 2017 competition on Defenses against Adversarial Attacks. However, subsequent work found that more elaborate black-box attacks could significantly enhance transferability and reduce the accuracy of our models.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-05-19T21:56:43Z</published>
+    <arxiv:comment>22 pages, 5 figures, International Conference on Learning Representations (ICLR) 2018 (amended in April 2020 to include subsequent attacks that significantly reduced the robustness of our models)</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Florian Tramèr</name>
+    </author>
+    <author>
+      <name>Alexey Kurakin</name>
+    </author>
+    <author>
+      <name>Nicolas Papernot</name>
+    </author>
+    <author>
+      <name>Ian Goodfellow</name>
+    </author>
+    <author>
+      <name>Dan Boneh</name>
+    </author>
+    <author>
+      <name>Patrick McDaniel</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1602.04938v3</id>
+    <title>"Why Should I Trust You?": Explaining the Predictions of Any Classifier</title>
+    <updated>2016-08-09T17:54:52Z</updated>
+    <link href="https://arxiv.org/abs/1602.04938v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1602.04938v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Despite widespread adoption, machine learning models remain mostly black boxes. Understanding the reasons behind predictions is, however, quite important in assessing trust, which is fundamental if one plans to take action based on a prediction, or when choosing whether to deploy a new model. Such understanding also provides insights into the model, which can be used to transform an untrustworthy model or prediction into a trustworthy one. In this work, we propose LIME, a novel explanation technique that explains the predictions of any classifier in an interpretable and faithful manner, by learning an interpretable model locally around the prediction. We also propose a method to explain models by presenting representative individual predictions and their explanations in a non-redundant way, framing the task as a submodular optimization problem. We demonstrate the flexibility of these methods by explaining different models for text (e.g. random forests) and image classification (e.g. neural networks). We show the utility of explanations via novel experiments, both simulated and with human subjects, on various scenarios that require trust: deciding if one should trust a prediction, choosing between models, improving an untrustworthy classifier, and identifying why a classifier should not be trusted.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-02-16T08:20:14Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Marco Tulio Ribeiro</name>
+    </author>
+    <author>
+      <name>Sameer Singh</name>
+    </author>
+    <author>
+      <name>Carlos Guestrin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1105.3875v1</id>
+    <title>Tunnel Spectroscopy of a Proximity Josephson Junction</title>
+    <updated>2011-05-19T13:59:50Z</updated>
+    <link href="https://arxiv.org/abs/1105.3875v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1105.3875v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present tunnel spectroscopy experiments on the proximity effect in lateral superconductor-normal metal-superconductor (SNS) Josephson junctions. Our weak link is embedded into a superconducting (S) ring allowing phase biasing of the Josephson junction by an external magnetic field. We explore the temperature and phase dependence of both the induced mini-gap and the modification of the density of states in the normal (N) metal. Our results agree with a model based on the quasiclassical theory in the diffusive limit. The device presents an advanced version of the superconducting quantum interference proximity transistor (SQUIPT), now reaching flux sensitivities of 3 nA$/Φ_0$ where $Φ_0$ is the flux quantum.</summary>
+    <category term="cond-mat.supr-con" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-05-19T13:59:50Z</published>
+    <arxiv:comment>5 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.supr-con"/>
+    <author>
+      <name>M. Meschke</name>
+    </author>
+    <author>
+      <name>J. T. Peltonen</name>
+    </author>
+    <author>
+      <name>J. P. Pekola</name>
+    </author>
+    <author>
+      <name>F. Giazotto</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevB.84.214514</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevB.84.214514" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1003.0146v2</id>
+    <title>A Contextual-Bandit Approach to Personalized News Article Recommendation</title>
+    <updated>2012-03-01T23:49:42Z</updated>
+    <link href="https://arxiv.org/abs/1003.0146v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1003.0146v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Personalized web services strive to adapt their services (advertisements, news articles, etc) to individual users by making use of both content and user information. Despite a few recent advances, this problem remains challenging for at least two reasons. First, web service is featured with dynamically changing pools of content, rendering traditional collaborative filtering methods inapplicable. Second, the scale of most web services of practical interest calls for solutions that are both fast in learning and computation.
+  In this work, we model personalized recommendation of news articles as a contextual bandit problem, a principled approach in which a learning algorithm sequentially selects articles to serve users based on contextual information about the users and articles, while simultaneously adapting its article-selection strategy based on user-click feedback to maximize total user clicks.
+  The contributions of this work are three-fold. First, we propose a new, general contextual bandit algorithm that is computationally efficient and well motivated from learning theory. Second, we argue that any bandit algorithm can be reliably evaluated offline using previously recorded random traffic. Finally, using this offline evaluation method, we successfully applied our new algorithm to a Yahoo! Front Page Today Module dataset containing over 33 million events. Results showed a 12.5% click lift compared to a standard context-free bandit algorithm, and the advantage becomes even greater when data gets more scarce.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-02-28T02:18:59Z</published>
+    <arxiv:comment>10 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Presented at the Nineteenth International Conference on World Wide Web (WWW 2010), Raleigh, NC, USA, 2010</arxiv:journal_ref>
+    <author>
+      <name>Lihong Li</name>
+    </author>
+    <author>
+      <name>Wei Chu</name>
+    </author>
+    <author>
+      <name>John Langford</name>
+    </author>
+    <author>
+      <name>Robert E. Schapire</name>
+    </author>
+    <arxiv:doi>10.1145/1772690.1772758</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/1772690.1772758" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1407.2904v1</id>
+    <title>An eigenanalysis of data centering in machine learning</title>
+    <updated>2014-07-10T19:04:49Z</updated>
+    <link href="https://arxiv.org/abs/1407.2904v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1407.2904v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Many pattern recognition methods rely on statistical information from centered data, with the eigenanalysis of an empirical central moment, such as the covariance matrix in principal component analysis (PCA), as well as partial least squares regression, canonical-correlation analysis and Fisher discriminant analysis. Recently, many researchers advocate working on non-centered data. This is the case for instance with the singular value decomposition approach, with the (kernel) entropy component analysis, with the information-theoretic learning framework, and even with nonnegative matrix factorization. Moreover, one can also consider a non-centered PCA by using the second-order non-central moment.
+  The main purpose of this paper is to bridge the gap between these two viewpoints in designing machine learning methods. To provide a study at the cornerstone of kernel-based machines, we conduct an eigenanalysis of the inner product matrices from centered and non-centered data. We derive several results connecting their eigenvalues and their eigenvectors. Furthermore, we explore the outer product matrices, by providing several results connecting the largest eigenvectors of the covariance matrix and its non-centered counterpart. These results lay the groundwork to several extensions beyond conventional centering, with the weighted mean shift, the rank-one update, and the multidimensional scaling. Experiments conducted on simulated and real data illustrate the relevance of this work.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-07-10T19:04:49Z</published>
+    <arxiv:comment>14 pages</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Paul Honeine</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1703.07793v1</id>
+    <title>A model for continuous thermal Metal to Insulator Transition</title>
+    <updated>2017-03-22T18:01:27Z</updated>
+    <link href="https://arxiv.org/abs/1703.07793v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1703.07793v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose a $d-$dimensional interacting Majorana fermion model with quenched disorder, which gives us a continuous quantum phase transition between a diffusive thermal metal phase with a finite entropy density to an insulator phase with zero entropy density. This model is based on coupled Sachdev-Ye-Kitaev model clusters, and hence has a controlled large-$N$ limit. The metal-insulator transition is accompanied by a spontaneous time-reversal symmetry breaking. We perform controlled calculations to show that the diffusion constant jumps to zero discontinuously at the metal-insulator transition, while the time-reversal symmetry breaking order parameter increases continuously.</summary>
+    <category term="cond-mat.str-el" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-03-22T18:01:27Z</published>
+    <arxiv:comment>11 pages</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.str-el"/>
+    <arxiv:journal_ref>Phys. Rev. B 96, 115122 (2017)</arxiv:journal_ref>
+    <author>
+      <name>Chao-Ming Jian</name>
+    </author>
+    <author>
+      <name>Zhen Bi</name>
+    </author>
+    <author>
+      <name>Cenke Xu</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevB.96.115122</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevB.96.115122" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1703.07015v3</id>
+    <title>Modeling Long- and Short-Term Temporal Patterns with Deep Neural Networks</title>
+    <updated>2018-04-18T21:54:36Z</updated>
+    <link href="https://arxiv.org/abs/1703.07015v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1703.07015v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multivariate time series forecasting is an important machine learning problem across many domains, including predictions of solar plant energy output, electricity consumption, and traffic jam situation. Temporal data arise in these real-world applications often involves a mixture of long-term and short-term patterns, for which traditional approaches such as Autoregressive models and Gaussian Process may fail. In this paper, we proposed a novel deep learning framework, namely Long- and Short-term Time-series network (LSTNet), to address this open challenge. LSTNet uses the Convolution Neural Network (CNN) and the Recurrent Neural Network (RNN) to extract short-term local dependency patterns among variables and to discover long-term patterns for time series trends. Furthermore, we leverage traditional autoregressive model to tackle the scale insensitive problem of the neural network model. In our evaluation on real-world data with complex mixtures of repetitive patterns, LSTNet achieved significant performance improvements over that of several state-of-the-art baseline methods. All the data and experiment codes are available online.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-03-21T00:33:36Z</published>
+    <arxiv:comment>Accepted by SIGIR 2018</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Guokun Lai</name>
+    </author>
+    <author>
+      <name>Wei-Cheng Chang</name>
+    </author>
+    <author>
+      <name>Yiming Yang</name>
+    </author>
+    <author>
+      <name>Hanxiao Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1706.02216v4</id>
+    <title>Inductive Representation Learning on Large Graphs</title>
+    <updated>2018-09-10T14:26:58Z</updated>
+    <link href="https://arxiv.org/abs/1706.02216v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1706.02216v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Low-dimensional embeddings of nodes in large graphs have proved extremely useful in a variety of prediction tasks, from content recommendation to identifying protein functions. However, most existing approaches require that all nodes in the graph are present during training of the embeddings; these previous approaches are inherently transductive and do not naturally generalize to unseen nodes. Here we present GraphSAGE, a general, inductive framework that leverages node feature information (e.g., text attributes) to efficiently generate node embeddings for previously unseen data. Instead of training individual embeddings for each node, we learn a function that generates embeddings by sampling and aggregating features from a node's local neighborhood. Our algorithm outperforms strong baselines on three inductive node-classification benchmarks: we classify the category of unseen nodes in evolving information graphs based on citation and Reddit post data, and we show that our algorithm generalizes to completely unseen graphs using a multi-graph dataset of protein-protein interactions.</summary>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-06-07T14:51:05Z</published>
+    <arxiv:comment>Published in NIPS 2017; version with full appendix and minor corrections</arxiv:comment>
+    <arxiv:primary_category term="cs.SI"/>
+    <author>
+      <name>William L. Hamilton</name>
+    </author>
+    <author>
+      <name>Rex Ying</name>
+    </author>
+    <author>
+      <name>Jure Leskovec</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1609.02907v4</id>
+    <title>Semi-Supervised Classification with Graph Convolutional Networks</title>
+    <updated>2017-02-22T09:55:36Z</updated>
+    <link href="https://arxiv.org/abs/1609.02907v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1609.02907v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a scalable approach for semi-supervised learning on graph-structured data that is based on an efficient variant of convolutional neural networks which operate directly on graphs. We motivate the choice of our convolutional architecture via a localized first-order approximation of spectral graph convolutions. Our model scales linearly in the number of graph edges and learns hidden layer representations that encode both local graph structure and features of nodes. In a number of experiments on citation networks and on a knowledge graph dataset we demonstrate that our approach outperforms related methods by a significant margin.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-09-09T19:48:41Z</published>
+    <arxiv:comment>Published as a conference paper at ICLR 2017</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Thomas N. Kipf</name>
+    </author>
+    <author>
+      <name>Max Welling</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1603.02754v3</id>
+    <title>XGBoost: A Scalable Tree Boosting System</title>
+    <updated>2016-06-10T23:23:51Z</updated>
+    <link href="https://arxiv.org/abs/1603.02754v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1603.02754v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Tree boosting is a highly effective and widely used machine learning method. In this paper, we describe a scalable end-to-end tree boosting system called XGBoost, which is used widely by data scientists to achieve state-of-the-art results on many machine learning challenges. We propose a novel sparsity-aware algorithm for sparse data and weighted quantile sketch for approximate tree learning. More importantly, we provide insights on cache access patterns, data compression and sharding to build a scalable tree boosting system. By combining these insights, XGBoost scales beyond billions of examples using far fewer resources than existing systems.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-03-09T01:11:51Z</published>
+    <arxiv:comment>KDD'16 changed all figures to type1</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Tianqi Chen</name>
+    </author>
+    <author>
+      <name>Carlos Guestrin</name>
+    </author>
+    <arxiv:doi>10.1145/2939672.2939785</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/2939672.2939785" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1502.01592v2</id>
+    <title>Planck 2015 results. XVII. Constraints on primordial non-Gaussianity</title>
+    <updated>2016-07-19T09:19:34Z</updated>
+    <link href="https://arxiv.org/abs/1502.01592v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1502.01592v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Planck full mission cosmic microwave background(CMB) temperature and E-mode polarization maps are analysed to obtain constraints on primordial non-Gaussianity(NG). Using three classes of optimal bispectrum estimators - separable template-fitting (KSW), binned, and modal - we obtain consistent values for the local, equilateral, and orthogonal bispectrum amplitudes, quoting as our final result from temperature alone fNL^local=2.5+\-5.7, fNL^equil=-16+\-70 and fNL^ortho=-34+\-33(68%CL). Combining temperature and polarization data we obtain fNL^local=0.8+\-5.0, fNL^equil=-4+\-43 and fNL^ortho=-26+\-21 (68%CL). The results are based on cross-validation of these estimators on simulations, are stable across component separation techniques, pass an extensive suite of tests, and are consistent with Minkowski functionals based measurements. The effect of time-domain de-glitching systematics on the bispectrum is negligible. In spite of these test outcomes we conservatively label the results including polarization data as preliminary, owing to a known mismatch of the noise model in simulations and the data. Beyond fNL estimates, we present model-independent reconstructions of the CMB bispectrum and derive constraints on early universe scenarios that generate NG, including general single-field and axion inflation, initial state modifications, parity-violating tensor bispectra, and directionally dependent vector models. We also present a wide survey of scale-dependent oscillatory bispectra, and we look for isocurvature NG. Our constraint on the local primordial trispectrum amplitude is gNL^local=(-9.0+\-7.7)x10^4 (68%CL), and we perform an analysis of additional trispectrum shapes. The global picture is one of consistency with the premises of the LambdaCDM cosmology, namely that the structure we observe today was sourced by adiabatic, passive, Gaussian, and primordial seed perturbations.[abridged]</summary>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-02-05T15:08:36Z</published>
+    <arxiv:comment>68 pages, 32 figures, 31 tables. Subsection 6.3 on "Primordial curvature reconstruction" added; analysis in subsection 8.3 extended (paragraph "High frequency resonance model estimator" added); introduction to Section 10 and Appendix B added. This paper is one of a set associated with the 2015 data release from Planck. Matches version accepted for publication in Astronomy &amp; Astrophysics</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.CO"/>
+    <author>
+      <name> Planck Collaboration</name>
+    </author>
+    <author>
+      <name>P. A. R. Ade</name>
+    </author>
+    <author>
+      <name>N. Aghanim</name>
+    </author>
+    <author>
+      <name>M. Arnaud</name>
+    </author>
+    <author>
+      <name>F. Arroja</name>
+    </author>
+    <author>
+      <name>M. Ashdown</name>
+    </author>
+    <author>
+      <name>J. Aumont</name>
+    </author>
+    <author>
+      <name>C. Baccigalupi</name>
+    </author>
+    <author>
+      <name>M. Ballardini</name>
+    </author>
+    <author>
+      <name>A. J. Banday</name>
+    </author>
+    <author>
+      <name>R. B. Barreiro</name>
+    </author>
+    <author>
+      <name>N. Bartolo</name>
+    </author>
+    <author>
+      <name>S. Basak</name>
+    </author>
+    <author>
+      <name>E. Battaner</name>
+    </author>
+    <author>
+      <name>K. Benabed</name>
+    </author>
+    <author>
+      <name>A. Benoît</name>
+    </author>
+    <author>
+      <name>A. Benoit-Lévy</name>
+    </author>
+    <author>
+      <name>J. -P. Bernard</name>
+    </author>
+    <author>
+      <name>M. Bersanelli</name>
+    </author>
+    <author>
+      <name>P. Bielewicz</name>
+    </author>
+    <author>
+      <name>J. J. Bock</name>
+    </author>
+    <author>
+      <name>A. Bonaldi</name>
+    </author>
+    <author>
+      <name>L. Bonavera</name>
+    </author>
+    <author>
+      <name>J. R. Bond</name>
+    </author>
+    <author>
+      <name>J. Borrill</name>
+    </author>
+    <author>
+      <name>F. R. Bouchet</name>
+    </author>
+    <author>
+      <name>F. Boulanger</name>
+    </author>
+    <author>
+      <name>M. Bucher</name>
+    </author>
+    <author>
+      <name>C. Burigana</name>
+    </author>
+    <author>
+      <name>R. C. Butler</name>
+    </author>
+    <author>
+      <name>E. Calabrese</name>
+    </author>
+    <author>
+      <name>J. -F. Cardoso</name>
+    </author>
+    <author>
+      <name>A. Catalano</name>
+    </author>
+    <author>
+      <name>A. Challinor</name>
+    </author>
+    <author>
+      <name>A. Chamballu</name>
+    </author>
+    <author>
+      <name>H. C. Chiang</name>
+    </author>
+    <author>
+      <name>P. R. Christensen</name>
+    </author>
+    <author>
+      <name>S. Church</name>
+    </author>
+    <author>
+      <name>D. L. Clements</name>
+    </author>
+    <author>
+      <name>S. Colombi</name>
+    </author>
+    <author>
+      <name>L. P. L. Colombo</name>
+    </author>
+    <author>
+      <name>C. Combet</name>
+    </author>
+    <author>
+      <name>F. Couchot</name>
+    </author>
+    <author>
+      <name>A. Coulais</name>
+    </author>
+    <author>
+      <name>B. P. Crill</name>
+    </author>
+    <author>
+      <name>A. Curto</name>
+    </author>
+    <author>
+      <name>F. Cuttaia</name>
+    </author>
+    <author>
+      <name>L. Danese</name>
+    </author>
+    <author>
+      <name>R. D. Davies</name>
+    </author>
+    <author>
+      <name>R. J. Davis</name>
+    </author>
+    <author>
+      <name>P. de Bernardis</name>
+    </author>
+    <author>
+      <name>A. de Rosa</name>
+    </author>
+    <author>
+      <name>G. de Zotti</name>
+    </author>
+    <author>
+      <name>J. Delabrouille</name>
+    </author>
+    <author>
+      <name>F. -X. Désert</name>
+    </author>
+    <author>
+      <name>J. M. Diego</name>
+    </author>
+    <author>
+      <name>H. Dole</name>
+    </author>
+    <author>
+      <name>S. Donzelli</name>
+    </author>
+    <author>
+      <name>O. Doré</name>
+    </author>
+    <author>
+      <name>M. Douspis</name>
+    </author>
+    <author>
+      <name>A. Ducout</name>
+    </author>
+    <author>
+      <name>X. Dupac</name>
+    </author>
+    <author>
+      <name>G. Efstathiou</name>
+    </author>
+    <author>
+      <name>F. Elsner</name>
+    </author>
+    <author>
+      <name>T. A. Enßlin</name>
+    </author>
+    <author>
+      <name>H. K. Eriksen</name>
+    </author>
+    <author>
+      <name>J. Fergusson</name>
+    </author>
+    <author>
+      <name>F. Finelli</name>
+    </author>
+    <author>
+      <name>O. Forni</name>
+    </author>
+    <author>
+      <name>M. Frailis</name>
+    </author>
+    <author>
+      <name>A. A. Fraisse</name>
+    </author>
+    <author>
+      <name>E. Franceschi</name>
+    </author>
+    <author>
+      <name>A. Frejsel</name>
+    </author>
+    <author>
+      <name>S. Galeotta</name>
+    </author>
+    <author>
+      <name>S. Galli</name>
+    </author>
+    <author>
+      <name>K. Ganga</name>
+    </author>
+    <author>
+      <name>C. Gauthier</name>
+    </author>
+    <author>
+      <name>T. Ghosh</name>
+    </author>
+    <author>
+      <name>M. Giard</name>
+    </author>
+    <author>
+      <name>Y. Giraud-Héraud</name>
+    </author>
+    <author>
+      <name>E. Gjerløw</name>
+    </author>
+    <author>
+      <name>J. González-Nuevo</name>
+    </author>
+    <author>
+      <name>K. M. Górski</name>
+    </author>
+    <author>
+      <name>S. Gratton</name>
+    </author>
+    <author>
+      <name>A. Gregorio</name>
+    </author>
+    <author>
+      <name>A. Gruppuso</name>
+    </author>
+    <author>
+      <name>J. E. Gudmundsson</name>
+    </author>
+    <author>
+      <name>J. Hamann</name>
+    </author>
+    <author>
+      <name>F. K. Hansen</name>
+    </author>
+    <author>
+      <name>D. Hanson</name>
+    </author>
+    <author>
+      <name>D. L. Harrison</name>
+    </author>
+    <author>
+      <name>A. Heavens</name>
+    </author>
+    <author>
+      <name>G. Helou</name>
+    </author>
+    <author>
+      <name>S. Henrot-Versillé</name>
+    </author>
+    <author>
+      <name>C. Hernández-Monteagudo</name>
+    </author>
+    <author>
+      <name>D. Herranz</name>
+    </author>
+    <author>
+      <name>S. R. Hildebrandt</name>
+    </author>
+    <author>
+      <name>E. Hivon</name>
+    </author>
+    <author>
+      <name>M. Hobson</name>
+    </author>
+    <author>
+      <name>W. A. Holmes</name>
+    </author>
+    <author>
+      <name>A. Hornstrup</name>
+    </author>
+    <author>
+      <name>W. Hovest</name>
+    </author>
+    <author>
+      <name>Z. Huang</name>
+    </author>
+    <author>
+      <name>K. M. Huffenberger</name>
+    </author>
+    <author>
+      <name>G. Hurier</name>
+    </author>
+    <author>
+      <name>A. H. Jaffe</name>
+    </author>
+    <author>
+      <name>T. R. Jaffe</name>
+    </author>
+    <author>
+      <name>W. C. Jones</name>
+    </author>
+    <author>
+      <name>M. Juvela</name>
+    </author>
+    <author>
+      <name>E. Keihänen</name>
+    </author>
+    <author>
+      <name>R. Keskitalo</name>
+    </author>
+    <author>
+      <name>J. Kim</name>
+    </author>
+    <author>
+      <name>T. S. Kisner</name>
+    </author>
+    <author>
+      <name>J. Knoche</name>
+    </author>
+    <author>
+      <name>M. Kunz</name>
+    </author>
+    <author>
+      <name>H. Kurki-Suonio</name>
+    </author>
+    <author>
+      <name>F. Lacasa</name>
+    </author>
+    <author>
+      <name>G. Lagache</name>
+    </author>
+    <author>
+      <name>A. Lähteenmäki</name>
+    </author>
+    <author>
+      <name>J. -M. Lamarre</name>
+    </author>
+    <author>
+      <name>A. Lasenby</name>
+    </author>
+    <author>
+      <name>M. Lattanzi</name>
+    </author>
+    <author>
+      <name>C. R. Lawrence</name>
+    </author>
+    <author>
+      <name>R. Leonardi</name>
+    </author>
+    <author>
+      <name>J. Lesgourgues</name>
+    </author>
+    <author>
+      <name>F. Levrier</name>
+    </author>
+    <author>
+      <name>A. Lewis</name>
+    </author>
+    <author>
+      <name>M. Liguori</name>
+    </author>
+    <author>
+      <name>P. B. Lilje</name>
+    </author>
+    <author>
+      <name>M. Linden-Vørnle</name>
+    </author>
+    <author>
+      <name>M. López-Caniego</name>
+    </author>
+    <author>
+      <name>P. M. Lubin</name>
+    </author>
+    <author>
+      <name>J. F. Macías-Pérez</name>
+    </author>
+    <author>
+      <name>G. Maggio</name>
+    </author>
+    <author>
+      <name>D. Maino</name>
+    </author>
+    <author>
+      <name>N. Mandolesi</name>
+    </author>
+    <author>
+      <name>A. Mangilli</name>
+    </author>
+    <author>
+      <name>D. Marinucci</name>
+    </author>
+    <author>
+      <name>M. Maris</name>
+    </author>
+    <author>
+      <name>P. G. Martin</name>
+    </author>
+    <author>
+      <name>E. Martínez-González</name>
+    </author>
+    <author>
+      <name>S. Masi</name>
+    </author>
+    <author>
+      <name>S. Matarrese</name>
+    </author>
+    <author>
+      <name>P. McGehee</name>
+    </author>
+    <author>
+      <name>P. R. Meinhold</name>
+    </author>
+    <author>
+      <name>A. Melchiorri</name>
+    </author>
+    <author>
+      <name>L. Mendes</name>
+    </author>
+    <author>
+      <name>A. Mennella</name>
+    </author>
+    <author>
+      <name>M. Migliaccio</name>
+    </author>
+    <author>
+      <name>S. Mitra</name>
+    </author>
+    <author>
+      <name>M. -A. Miville-Deschênes</name>
+    </author>
+    <author>
+      <name>A. Moneti</name>
+    </author>
+    <author>
+      <name>L. Montier</name>
+    </author>
+    <author>
+      <name>G. Morgante</name>
+    </author>
+    <author>
+      <name>D. Mortlock</name>
+    </author>
+    <author>
+      <name>A. Moss</name>
+    </author>
+    <author>
+      <name>M. Münchmeyer</name>
+    </author>
+    <author>
+      <name>D. Munshi</name>
+    </author>
+    <author>
+      <name>J. A. Murphy</name>
+    </author>
+    <author>
+      <name>P. Naselsky</name>
+    </author>
+    <author>
+      <name>F. Nati</name>
+    </author>
+    <author>
+      <name>P. Natoli</name>
+    </author>
+    <author>
+      <name>C. B. Netterfield</name>
+    </author>
+    <author>
+      <name>H. U. Nørgaard-Nielsen</name>
+    </author>
+    <author>
+      <name>F. Noviello</name>
+    </author>
+    <author>
+      <name>D. Novikov</name>
+    </author>
+    <author>
+      <name>I. Novikov</name>
+    </author>
+    <author>
+      <name>C. A. Oxborrow</name>
+    </author>
+    <author>
+      <name>F. Paci</name>
+    </author>
+    <author>
+      <name>L. Pagano</name>
+    </author>
+    <author>
+      <name>F. Pajot</name>
+    </author>
+    <author>
+      <name>D. Paoletti</name>
+    </author>
+    <author>
+      <name>F. Pasian</name>
+    </author>
+    <author>
+      <name>G. Patanchon</name>
+    </author>
+    <author>
+      <name>H. V. Peiris</name>
+    </author>
+    <author>
+      <name>O. Perdereau</name>
+    </author>
+    <author>
+      <name>L. Perotto</name>
+    </author>
+    <author>
+      <name>F. Perrotta</name>
+    </author>
+    <author>
+      <name>V. Pettorino</name>
+    </author>
+    <author>
+      <name>F. Piacentini</name>
+    </author>
+    <author>
+      <name>M. Piat</name>
+    </author>
+    <author>
+      <name>E. Pierpaoli</name>
+    </author>
+    <author>
+      <name>D. Pietrobon</name>
+    </author>
+    <author>
+      <name>S. Plaszczynski</name>
+    </author>
+    <author>
+      <name>E. Pointecouteau</name>
+    </author>
+    <author>
+      <name>G. Polenta</name>
+    </author>
+    <author>
+      <name>L. Popa</name>
+    </author>
+    <author>
+      <name>G. W. Pratt</name>
+    </author>
+    <author>
+      <name>G. Prézeau</name>
+    </author>
+    <author>
+      <name>S. Prunet</name>
+    </author>
+    <author>
+      <name>J. -L. Puget</name>
+    </author>
+    <author>
+      <name>J. P. Rachen</name>
+    </author>
+    <author>
+      <name>B. Racine</name>
+    </author>
+    <author>
+      <name>R. Rebolo</name>
+    </author>
+    <author>
+      <name>M. Reinecke</name>
+    </author>
+    <author>
+      <name>M. Remazeilles</name>
+    </author>
+    <author>
+      <name>C. Renault</name>
+    </author>
+    <author>
+      <name>A. Renzi</name>
+    </author>
+    <author>
+      <name>I. Ristorcelli</name>
+    </author>
+    <author>
+      <name>G. Rocha</name>
+    </author>
+    <author>
+      <name>C. Rosset</name>
+    </author>
+    <author>
+      <name>M. Rossetti</name>
+    </author>
+    <author>
+      <name>G. Roudier</name>
+    </author>
+    <author>
+      <name>J. A. Rubiño-Martín</name>
+    </author>
+    <author>
+      <name>B. Rusholme</name>
+    </author>
+    <author>
+      <name>M. Sandri</name>
+    </author>
+    <author>
+      <name>D. Santos</name>
+    </author>
+    <author>
+      <name>M. Savelainen</name>
+    </author>
+    <author>
+      <name>G. Savini</name>
+    </author>
+    <author>
+      <name>D. Scott</name>
+    </author>
+    <author>
+      <name>M. D. Seiffert</name>
+    </author>
+    <author>
+      <name>E. P. S. Shellard</name>
+    </author>
+    <author>
+      <name>M. Shiraishi</name>
+    </author>
+    <author>
+      <name>K. Smith</name>
+    </author>
+    <author>
+      <name>L. D. Spencer</name>
+    </author>
+    <author>
+      <name>V. Stolyarov</name>
+    </author>
+    <author>
+      <name>R. Stompor</name>
+    </author>
+    <author>
+      <name>R. Sudiwala</name>
+    </author>
+    <author>
+      <name>R. Sunyaev</name>
+    </author>
+    <author>
+      <name>P. Sutter</name>
+    </author>
+    <author>
+      <name>D. Sutton</name>
+    </author>
+    <author>
+      <name>A. -S. Suur-Uski</name>
+    </author>
+    <author>
+      <name>J. -F. Sygnet</name>
+    </author>
+    <author>
+      <name>J. A. Tauber</name>
+    </author>
+    <author>
+      <name>L. Terenzi</name>
+    </author>
+    <author>
+      <name>L. Toffolatti</name>
+    </author>
+    <author>
+      <name>M. Tomasi</name>
+    </author>
+    <author>
+      <name>M. Tristram</name>
+    </author>
+    <author>
+      <name>A. Troja</name>
+    </author>
+    <author>
+      <name>M. Tucci</name>
+    </author>
+    <author>
+      <name>J. Tuovinen</name>
+    </author>
+    <author>
+      <name>L. Valenziano</name>
+    </author>
+    <author>
+      <name>J. Valiviita</name>
+    </author>
+    <author>
+      <name>F. Van Tent</name>
+    </author>
+    <author>
+      <name>P. Vielva</name>
+    </author>
+    <author>
+      <name>F. Villa</name>
+    </author>
+    <author>
+      <name>L. A. Wade</name>
+    </author>
+    <author>
+      <name>B. D. Wandelt</name>
+    </author>
+    <author>
+      <name>I. K. Wehus</name>
+    </author>
+    <author>
+      <name>D. Yvon</name>
+    </author>
+    <author>
+      <name>A. Zacchei</name>
+    </author>
+    <author>
+      <name>A. Zonca</name>
+    </author>
+    <arxiv:doi>10.1051/0004-6361/201525836</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1051/0004-6361/201525836" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1502.04066v2</id>
+    <title>Viscous corrections to anisotropic flow and transverse momentum spectra from transport theory</title>
+    <updated>2015-07-10T14:19:30Z</updated>
+    <link href="https://arxiv.org/abs/1502.04066v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1502.04066v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Viscous hydrodynamics is commonly used to model the evolution of the matter created in an ultra-relativistic heavy-ion collision. It provides a good description of transverse momentum spectra and anisotropic flow. These observables, however, cannot be consistently derived using viscous hydrodynamics alone, because they depend on the microscopic interactions at freeze-out. We derive the ideal hydrodynamic limit and the first-order viscous correction to anisotropic flow ($v_2$, $v_3$ and $v_4$) and momentum spectrum using a transport calculation. The linear response coefficient to the initial anisotropy, $v_n(p_T)/\varepsilon_n$, depends little on $n$ in the ideal hydrodynamic limit. The viscous correction to the spectrum depends not only on the differential cross section, but also on the initial momentum distribution. This dependence is not captured by standard second-order viscous hydrodynamics. The viscous correction to anisotropic flow increases with $p_T$, but this increase is slower than usually assumed in viscous hydrodynamic calculations. In particular, it is too slow to explain the observed maximum of $v_n$ at $p_T\sim 3$ GeV/c.</summary>
+    <category term="nucl-th" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-02-13T17:38:47Z</published>
+    <arxiv:comment>minor revision</arxiv:comment>
+    <arxiv:primary_category term="nucl-th"/>
+    <arxiv:journal_ref>Nucl. Phys. A 941 (2015) 87-96</arxiv:journal_ref>
+    <author>
+      <name>Salvatore Plumari</name>
+    </author>
+    <author>
+      <name>Giovanni Luca Guardo</name>
+    </author>
+    <author>
+      <name>Vincenzo Greco</name>
+    </author>
+    <author>
+      <name>Jean-Yves Ollitrault</name>
+    </author>
+    <arxiv:doi>10.1016/j.nuclphysa.2015.06.005</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.nuclphysa.2015.06.005" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1606.00142v1</id>
+    <title>Model selection consistency from the perspective of generalization ability and VC theory with an application to Lasso</title>
+    <updated>2016-06-01T07:22:01Z</updated>
+    <link href="https://arxiv.org/abs/1606.00142v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1606.00142v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Model selection is difficult to analyse yet theoretically and empirically important, especially for high-dimensional data analysis. Recently the least absolute shrinkage and selection operator (Lasso) has been applied in the statistical and econometric literature. Consis- tency of Lasso has been established under various conditions, some of which are difficult to verify in practice. In this paper, we study model selection from the perspective of generalization ability, under the framework of structural risk minimization (SRM) and Vapnik-Chervonenkis (VC) theory. The approach emphasizes the balance between the in-sample and out-of-sample fit, which can be achieved by using cross-validation to select a penalty on model complexity. We show that an exact relationship exists between the generalization ability of a model and model selection consistency. By implementing SRM and the VC inequality, we show that Lasso is L2-consistent for model selection under assumptions similar to those imposed on OLS. Furthermore, we derive a probabilistic bound for the distance between the penalized extremum estimator and the extremum estimator without penalty, which is dominated by overfitting. We also propose a new measurement of overfitting, GR2, based on generalization ability, that converges to zero if model selection is consistent. Using simulations, we demonstrate that the proposed CV-Lasso algorithm performs well in terms of model selection and overfitting control.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="econ.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-06-01T07:22:01Z</published>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Ning Xu</name>
+    </author>
+    <author>
+      <name>Jian Hong</name>
+    </author>
+    <author>
+      <name>Timothy C. G. Fisher</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1208.3671v1</id>
+    <title>The Frieden-Soffer Extreme Physical Information Principle in a Non-extensive Setting</title>
+    <updated>2012-08-17T00:24:28Z</updated>
+    <link href="https://arxiv.org/abs/1208.3671v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1208.3671v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show that the Frieden and Soffer's Extreme Physical Information principle, applied to a non-extensive {\it statistical} scenario, yields solutions to several well-known classical {\it dynamical} problems.</summary>
+    <category term="physics.class-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-08-17T00:24:28Z</published>
+    <arxiv:comment>9 pages. arXiv admin note: text overlap with arXiv:1207.3377</arxiv:comment>
+    <arxiv:primary_category term="physics.class-ph"/>
+    <arxiv:journal_ref>Phys. Lett. A257 (1999) 275-282</arxiv:journal_ref>
+    <author>
+      <name>L. P. Chimento</name>
+    </author>
+    <author>
+      <name>F. Pennini</name>
+    </author>
+    <author>
+      <name>A. Plastino</name>
+    </author>
+    <arxiv:doi>10.1016/S0375-9601(99)00321-7</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/S0375-9601(99)00321-7" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1104.3919v1</id>
+    <title>Some results on triangle partitions</title>
+    <updated>2011-04-20T02:05:48Z</updated>
+    <link href="https://arxiv.org/abs/1104.3919v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1104.3919v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show that there exist efficient algorithms for the triangle packing problem in colored permutation graphs, complete multipartite graphs, distance-hereditary graphs, k-modular permutation graphs and complements of k-partite graphs (when k is fixed). We show that there is an efficient algorithm for C_4-packing on bipartite permutation graphs and we show that C_4-packing on bipartite graphs is NP-complete. We characterize the cobipartite graphs that have a triangle partition.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-04-20T02:05:48Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Ton Kloks</name>
+    </author>
+    <author>
+      <name>Sheung-Hung Poon</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0704.1859v1</id>
+    <title>Weak type radial convolution operators on free group</title>
+    <updated>2007-04-14T10:53:15Z</updated>
+    <link href="https://arxiv.org/abs/0704.1859v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0704.1859v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Radial convolution operators on free groups with nonnegative kernel of weak type $(2,2)$ and of restricted weak type $(2,2)$ are characterized. Estimates of weak type $(p,p)$ are obtained as well for $1&lt;p&lt;2.$</summary>
+    <category term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-04-14T10:53:15Z</published>
+    <arxiv:primary_category term="math.FA"/>
+    <author>
+      <name>T. Pytlik</name>
+    </author>
+    <author>
+      <name>R. Szwarc</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1112.1234v2</id>
+    <title>Bound States at Threshold resulting from Coulomb Repulsion</title>
+    <updated>2012-10-22T12:56:42Z</updated>
+    <link href="https://arxiv.org/abs/1112.1234v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1112.1234v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The eigenvalue absorption for a many-particle Hamiltonian depending on a parameter is analyzed in the framework of non-relativistic quantum mechanics. The long-range part of pair potentials is assumed to be pure Coulomb and no restriction on the particle statistics is imposed. It is proved that if the lowest dissociation threshold corresponds to the decay into two likewise non-zero charged clusters then the bound state, which approaches the threshold, does not spread and eventually becomes the bound state at threshold. The obtained results have applications in atomic and nuclear physics. In particular, we prove that atomic ion with atomic critical charge $Z_{cr}$ and $N_e$ electrons has a bound state at threshold given that $Z_{cr} \in (N_e -2, N_e -1)$, whereby the electrons are treated as fermions and the mass of the nucleus is finite.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-12-06T11:19:43Z</published>
+    <arxiv:comment>This is a combined and updated version of the manuscripts arXiv:math-ph/0611075v2 and arXiv:math-ph/0610058v2</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <arxiv:journal_ref>Journal of Mathematical Physics Vol. 53, 102108 (2012)</arxiv:journal_ref>
+    <author>
+      <name>Dmitry K. Gridnev</name>
+    </author>
+    <arxiv:doi>10.1063/1.4758076</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/1.4758076" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1611.09032v1</id>
+    <title>Gravitational waves induced by massless vector fields with non-minimal coupling to gravity</title>
+    <updated>2016-11-28T09:16:11Z</updated>
+    <link href="https://arxiv.org/abs/1611.09032v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1611.09032v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we calculate the contribution of the late time mode of a massless vector field to the power spectrum of the primordial gravitational wave using retarded Green's propagator. We consider a non-trivial coupling between gravity and the vector field. We find that the correction is scale-invariant and of order $\frac{H^4}{M_P^4}$. The non-minimal coupling leads to a dependence of $\frac{H^2}{M^2}$, which can amplify the correlation function up to the level of $\frac{H^2}{M^2_P}$.</summary>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-11-28T09:16:11Z</published>
+    <arxiv:comment>13 pages</arxiv:comment>
+    <arxiv:primary_category term="gr-qc"/>
+    <author>
+      <name>Kaixi Feng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1507.05259v5</id>
+    <title>Fairness Constraints: Mechanisms for Fair Classification</title>
+    <updated>2017-03-23T18:10:34Z</updated>
+    <link href="https://arxiv.org/abs/1507.05259v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1507.05259v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Algorithmic decision making systems are ubiquitous across a wide variety of online as well as offline services. These systems rely on complex learning methods and vast amounts of data to optimize the service functionality, satisfaction of the end user and profitability. However, there is a growing concern that these automated decisions can lead, even in the absence of intent, to a lack of fairness, i.e., their outcomes can disproportionately hurt (or, benefit) particular groups of people sharing one or more sensitive attributes (e.g., race, sex). In this paper, we introduce a flexible mechanism to design fair classifiers by leveraging a novel intuitive measure of decision boundary (un)fairness. We instantiate this mechanism with two well-known classifiers, logistic regression and support vector machines, and show on real-world data that our mechanism allows for a fine-grained control on the degree of fairness, often at a small cost in terms of accuracy.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-07-19T07:34:25Z</published>
+    <arxiv:comment>To appear in Proceedings of the 20th International Conference on Artificial Intelligence and Statistics (AISTATS). Open-source code implementation of our scheme is available at: https://github.com/mbilalzafar/fair-classification</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Muhammad Bilal Zafar</name>
+    </author>
+    <author>
+      <name>Isabel Valera</name>
+    </author>
+    <author>
+      <name>Manuel Gomez Rodriguez</name>
+    </author>
+    <author>
+      <name>Krishna P. Gummadi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1409.3119v1</id>
+    <title>pde2path - version 2.0: faster FEM, multi-parameter continuation, nonlinear boundary conditions, and periodic domains - a short manual</title>
+    <updated>2014-09-10T15:44:19Z</updated>
+    <link href="https://arxiv.org/abs/1409.3119v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1409.3119v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>pdepath 2.0 is an upgrade of the continuation/bifurcation package pde2path for elliptic systems of PDEs over bounded 2D domains, based on the Matlab pdetoolbox. The new features include a more efficient use of FEM, easier switching between different single parameter continuations, genuine multi-parameter continuation (e.g., fold continuation), more efficient implementation of nonlinear boundary conditions, cylinder and torus geometries (i.e., periodic boundary conditions), and a general interface for adding auxiliary equations like mass conservation or phase equations for continuation of traveling waves. The package (library, demos, manuals) can be downloaded at www.staff.uni-oldenburg.de/hannes.uecker/pde2path</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-09-10T15:44:19Z</published>
+    <arxiv:primary_category term="math.AP"/>
+    <author>
+      <name>Tomas Dohnal</name>
+    </author>
+    <author>
+      <name>Jens D. M. Rademacher</name>
+    </author>
+    <author>
+      <name>Hannes Uecker</name>
+    </author>
+    <author>
+      <name>Daniel Wetzel</name>
+    </author>
+  </entry>
+</feed>

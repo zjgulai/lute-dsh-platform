@@ -1,0 +1,403 @@
+{
+  "generatedAt": "2026-09-12T05:50:32.774Z",
+  "artifact": {
+    "entry": "/Users/lute/.dsh/profiles/desktop/node_modules/dsh-worktable/lib/index.js",
+    "isInstalledEntry": true,
+    "realpath": "/Users/lute/project/Magpie-Horch/vendor/dsh-worktable/01_content/lib/index.js",
+    "sha256": "94d1e4cdccc0b842b7292803205b7f8eca16e048f6de1da9b25a210ddb6bb7fc",
+    "bytes": 41373
+  },
+  "fence": {
+    "anchorHits": 1,
+    "version": "1",
+    "sourceVersion": "1"
+  },
+  "routes": {
+    "exact": [
+      "/api/worktable/file",
+      "/api/worktable/fs",
+      "/api/worktable/git",
+      "/api/worktable/health",
+      "/api/worktable/mkdir",
+      "/api/worktable/workspaces",
+      "/api/worktable/write"
+    ],
+    "prefix": [
+      "/api/worktable/site",
+      "/api/worktable/template"
+    ],
+    "upgrade": [
+      "/api/worktable/term"
+    ]
+  },
+  "substitutions": {
+    "sessions": "最小替身 { get: () => undefined }——插件只用它解析终端 cwd（serverCwd），与栅栏判据无关",
+    "webServer": "应用自带 @deepseek-ai/dsh-host-webserver（未改动）",
+    "transport": "真实 curl 子进程 + 真实 TCP；未经过 Electron 壳",
+    "platformApiGate": "阶段 C 用行为替身（未认证 → 401 `unauthorized`）复现 dsh-client-connection 的 /api 前缀栅栏；真实实现先过 isTrustedApiRequest 再查 browserAuth 会话 cookie。探针问的是**路由优先级**，不是重测 DSH 自己的栅栏。"
+  },
+  "mutations": [
+    {
+      "mutantSha256": "9d6322beb9fdc2842f5210729ce450d293633297375af7d3ddf334be5392ed7e",
+      "childExit": 1,
+      "failedProbeIds": [
+        "N1",
+        "N2",
+        "N3",
+        "N4",
+        "N5",
+        "N6",
+        "N7",
+        "N8",
+        "N9",
+        "N10",
+        "N11",
+        "N13",
+        "N14",
+        "N15",
+        "N16",
+        "C2"
+      ],
+      "observed": {
+        "N1": 200,
+        "N2": 200,
+        "N3": 200,
+        "N4": 200,
+        "N5": 200,
+        "N6": 200,
+        "N7": 200,
+        "N8": 200,
+        "N9": 200,
+        "N10": 200,
+        "N11": 200,
+        "N13": 101,
+        "N14": 101,
+        "N15": 101,
+        "N16": 200,
+        "C2": 200
+      }
+    }
+  ],
+  "positives": [
+    {
+      "id": "ctl-curl-alive",
+      "kind": "control",
+      "what": "连一个没人监听的端口必须失败",
+      "pass": true,
+      "expect": null,
+      "actual": null,
+      "reason": null,
+      "detail": "curl exit=7，无 HTTP 响应"
+    },
+    {
+      "id": "ctl-404",
+      "kind": "control",
+      "what": "不存在的路由回 404（证明服务在真派发）",
+      "pass": true,
+      "expect": 404,
+      "actual": 404,
+      "reason": null,
+      "detail": "404"
+    },
+    {
+      "id": "ctl-health",
+      "kind": "control",
+      "what": "健康路由回 200 且自报身份",
+      "pass": true,
+      "expect": 200,
+      "actual": 200,
+      "reason": null,
+      "detail": "200 · {\"plugin\":\"dsh-worktable\"}"
+    },
+    {
+      "id": "allow-health",
+      "kind": "positive",
+      "what": "无 Origin 的 curl（非浏览器客户端）",
+      "pass": true,
+      "expect": 200,
+      "actual": 200,
+      "reason": null,
+      "detail": "200 · 放行"
+    },
+    {
+      "id": "allow-same-origin",
+      "kind": "positive",
+      "what": "Origin 与 Host 同源的浏览器请求",
+      "pass": true,
+      "expect": 200,
+      "actual": 200,
+      "reason": null,
+      "detail": "200 · 放行"
+    },
+    {
+      "id": "allow-file-in-home",
+      "kind": "positive",
+      "what": "读家目录内的文件（允许根之内）",
+      "pass": true,
+      "expect": 200,
+      "actual": 200,
+      "reason": null,
+      "detail": "200 · 读到 profile/package.json"
+    },
+    {
+      "id": "allow-file-in-tmp",
+      "kind": "positive",
+      "what": "读临时目录内的文件（另一个允许根）",
+      "pass": true,
+      "expect": 200,
+      "actual": 200,
+      "reason": null,
+      "detail": "200 · 读到探针写下的内容"
+    },
+    {
+      "id": "allow-write-in-tmp",
+      "kind": "positive",
+      "what": "写临时目录内的文件（允许根之内）",
+      "pass": true,
+      "expect": 200,
+      "actual": 200,
+      "reason": null,
+      "detail": "200 · 文件已落盘"
+    },
+    {
+      "id": "allow-ws-same-origin",
+      "kind": "positive",
+      "what": "同源 Origin 的 WebSocket 升级（浏览器正常路径）",
+      "pass": true,
+      "expect": 101,
+      "actual": 101,
+      "reason": null,
+      "detail": "101 Switching Protocols · 栅栏放行，路由接管"
+    },
+    {
+      "id": "allow-site-in-tmp",
+      "kind": "positive",
+      "what": "prefix 路由的根 token 在允许根之内",
+      "pass": true,
+      "expect": 200,
+      "actual": 200,
+      "reason": null,
+      "detail": "200 · 栅栏放行，读到探针写下的内容"
+    },
+    {
+      "id": "allow-mkdir-nopath",
+      "kind": "positive",
+      "what": "mkdir 缺 path：栅栏放行、由 handler 判 400（不误伤空请求）",
+      "pass": true,
+      "expect": 400,
+      "actual": 400,
+      "reason": null,
+      "detail": "400 · 栅栏放行、handler 拒绝（根约束只在有路径时生效）"
+    },
+    {
+      "id": "C1",
+      "kind": "control",
+      "what": "exact 路由压过平台 `/api` 前缀：插件绕开了 DSH 自己的来源栅栏与浏览器认证",
+      "pass": true,
+      "expect": 200,
+      "actual": 200,
+      "reason": null,
+      "detail": "200 · 平台前缀在场，插件的 exact 路由照样直达——本栅栏因此不是纵深里的第二层，是唯一防线"
+    },
+    {
+      "id": "C3",
+      "kind": "control",
+      "what": "插件没注册的 /api 路径仍回平台那条 401（证明 C1 的成因是优先级）",
+      "pass": true,
+      "expect": 401,
+      "actual": 401,
+      "reason": null,
+      "detail": "401 unauthorized · 平台前缀仍在生效"
+    },
+    {
+      "id": "M1",
+      "kind": "control",
+      "what": "未打栅栏的原版 bundle 必须让全部负向探针转红、且正控不受影响",
+      "pass": true,
+      "expect": "negatives all red / positives all green / exit 1",
+      "actual": "exit 1 · 负向红 16/16 · 正控绿 13/13",
+      "reason": null,
+      "detail": "探针能红：去掉栅栏后 16 条负向全部转红，13 条正控/自检全部仍绿"
+    }
+  ],
+  "negatives": [
+    {
+      "id": "N1",
+      "kind": "negative",
+      "what": "跨站页面发起的 fetch（Sec-Fetch-Site: cross-site）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "reason": "cross-site",
+      "detail": "403 · cross-site"
+    },
+    {
+      "id": "N2",
+      "kind": "negative",
+      "what": "外来 Origin（Origin 与 Host 不同源）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "reason": "origin-mismatch",
+      "detail": "403 · origin-mismatch"
+    },
+    {
+      "id": "N3",
+      "kind": "negative",
+      "what": "显式 Origin: null（沙箱 iframe / file:// 页面）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "reason": "null-origin",
+      "detail": "403 · null-origin"
+    },
+    {
+      "id": "N4",
+      "kind": "negative",
+      "what": "Host 非回环（DNS rebinding 后的请求）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "reason": "host-not-loopback",
+      "detail": "403 · host-not-loopback"
+    },
+    {
+      "id": "N5",
+      "kind": "negative",
+      "what": "形似同源实则不同源（后缀伪装）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "reason": "origin-mismatch",
+      "detail": "403 · origin-mismatch"
+    },
+    {
+      "id": "N6",
+      "kind": "negative",
+      "what": "读允许根之外（/etc/passwd）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "reason": "path-outside-allowed-roots",
+      "detail": "403 · path-outside-allowed-roots"
+    },
+    {
+      "id": "N7",
+      "kind": "negative",
+      "what": "穿越归一（/etc/passwd）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "reason": "path-outside-allowed-roots",
+      "detail": "403 · path-outside-allowed-roots"
+    },
+    {
+      "id": "N8",
+      "kind": "negative",
+      "what": "写允许根之外（RCE 路径：~/.zshrc 那一类）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "reason": "path-outside-allowed-roots",
+      "detail": "403 · path-outside-allowed-roots"
+    },
+    {
+      "id": "N9",
+      "kind": "negative",
+      "what": "body.cwd 指向允许根之外（git 状态读取）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "reason": "path-outside-allowed-roots",
+      "detail": "403 · path-outside-allowed-roots"
+    },
+    {
+      "id": "N10",
+      "kind": "negative",
+      "what": "body.path 指向允许根之外（目录枚举）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "reason": "path-outside-allowed-roots",
+      "detail": "403 · path-outside-allowed-roots"
+    },
+    {
+      "id": "N11",
+      "kind": "negative",
+      "what": "prefix 路由的根 token 为 /etc（目录级读取）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "reason": "path-outside-allowed-roots",
+      "detail": "403 · path-outside-allowed-roots"
+    },
+    {
+      "id": "N13",
+      "kind": "negative",
+      "what": "跨源 WebSocket 升级（浏览器不做同源检查，这是唯一防线）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "reason": "origin-mismatch",
+      "detail": "403 · origin-mismatch（裸 403 形态 + 栅栏日志增量各 1 条）"
+    },
+    {
+      "id": "N14",
+      "kind": "negative",
+      "what": "WebSocket 升级不带 Origin（HTTP 允许缺失，WS 不允许）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "reason": "missing-origin",
+      "detail": "403 · missing-origin（裸 403 形态 + 栅栏日志增量各 1 条）"
+    },
+    {
+      "id": "N15",
+      "kind": "negative",
+      "what": "WebSocket 升级带显式 Origin: null",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "reason": "null-origin",
+      "detail": "403 · null-origin（裸 403 形态 + 栅栏日志增量各 1 条）"
+    },
+    {
+      "id": "N16",
+      "kind": "negative",
+      "what": "非回环对端（192.168.12.105 → 0.0.0.0）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "reason": "socket-not-loopback",
+      "detail": "403 · socket-not-loopback"
+    },
+    {
+      "id": "C2",
+      "kind": "negative",
+      "what": "平台栅栏在场时越根读取仍被本栅栏拒绝（且 reason 是本栅栏的）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "reason": "path-outside-allowed-roots",
+      "detail": "403 · path-outside-allowed-roots"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-logged",
+      "kind": "evidence",
+      "what": "每次拒绝都写一条 warn 日志（可观测性）",
+      "pass": true,
+      "expect": ">=12",
+      "actual": 14,
+      "reason": null,
+      "detail": "14 条 [lute-fence] 拒绝日志（证明拒绝路径统一走 __wtReject*）"
+    }
+  ],
+  "notes": [],
+  "totals": {
+    "probes": 31,
+    "passed": 31,
+    "failed": 0
+  }
+}

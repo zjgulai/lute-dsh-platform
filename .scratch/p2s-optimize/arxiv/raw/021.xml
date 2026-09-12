@@ -1,0 +1,1976 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/A8sTTy1+67/sfbojK9z5nK//DYU</id>
+  <title>arXiv Query: search_query=&amp;id_list=2501.11551,2501.12547,2501.12823,2501.12847,2501.12948,2501.14170,2501.14423,2501.14523,2502.01142,2502.02110,2502.02327,2502.06472,2502.06995,2502.08834,2502.09986,2502.11079,2502.12110,2502.13447,2502.13595,2502.14051,2502.14802,2502.16071,2502.19086,2503.01475,2503.05292,2503.07612,2503.09217,2503.12345,2503.12640,2503.19878,2503.20231,2503.21629,2503.22182,2503.23213,2504.03692,2504.06270,2504.07823,2504.09680,2504.09723,2504.09993&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:43:49Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2501.11551,2501.12547,2501.12823,2501.12847,2501.12948,2501.14170,2501.14423,2501.14523,2502.01142,2502.02110,2502.02327,2502.06472,2502.06995,2502.08834,2502.09986,2502.11079,2502.12110,2502.13447,2502.13595,2502.14051,2502.14802,2502.16071,2502.19086,2503.01475,2503.05292,2503.07612,2503.09217,2503.12345,2503.12640,2503.19878,2503.20231,2503.21629,2503.22182,2503.23213,2504.03692,2504.06270,2504.07823,2504.09680,2504.09723,2504.09993" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2502.02110v1</id>
+    <title>Multi-Study Causal Forest (MCF): A flexible framework for data borrowing in the presence of varying treatment effect heterogeneity</title>
+    <updated>2025-02-04T08:43:50Z</updated>
+    <link href="https://arxiv.org/abs/2502.02110v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.02110v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Tailoring treatment assignment to specific individuals can improve the health outcomes, but a single study may offer inadequate information for this purpose. The ability to leverage information from an auxiliary data source deemed to be `most similar' to a primary data source has been shown to improve estimates of treatment effects. In this paper, we introduce a framework, the Multi-Study Causal Forest (MCF), to borrow individual patient-level data from an auxiliary data source in the presence of `varying sources' of treatment effect heterogeneity. We utilise a simulation study to demonstrate the superiority of the MCF in the presence of varying treatment allocation models (between-study heterogeneity) in addition to being able to account for the presence of within-study heterogeneity. This approach can combine data from randomised controlled trials, observational studies or a combination of both. We illustrate using Breast cancer data that the MCF performs favourably compared to an existing methodology in the presence of varying sources of (both between and within) heterogeneity.</summary>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-04T08:43:50Z</published>
+    <arxiv:comment>5 figures</arxiv:comment>
+    <arxiv:primary_category term="stat.ME"/>
+    <author>
+      <name>Ashwini Venkatasubramaniam</name>
+    </author>
+    <author>
+      <name>Julian Wolfson</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.12640v1</id>
+    <title>What is unethical about software? User perceptions in the Netherlands</title>
+    <updated>2025-03-16T20:29:25Z</updated>
+    <link href="https://arxiv.org/abs/2503.12640v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.12640v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Software has the potential to improve lives. Yet, unethical and uninformed software practices are at the root of an increasing number of ethical concerns. Despite its pervasiveness, few research has analyzed end-users perspectives on the ethical issues of the software they use. We address this gap, and investigate end-user's ethical concerns in software through 19 semi-structured interviews with residents of the Netherlands. We ask a diverse group of users about their ethical concerns when using everyday software applications. We investigate the underlying reasons for their concerns and what solutions they propose to eliminate them. We find that our participants actively worry about privacy, transparency, manipulation, safety and inappropriate content; with privacy and manipulation often being at the center of their worries. Our participants demand software solutions to improve information clarity in applications and provide more control over the user experience. They further expect larger systematic changes within software practices and government regulation.</summary>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-16T20:29:25Z</published>
+    <arxiv:comment>13 pages, 3 figures, 1 table, conference submission</arxiv:comment>
+    <arxiv:primary_category term="cs.CY"/>
+    <author>
+      <name>Yagil Elias</name>
+    </author>
+    <author>
+      <name>Tom P. Humbert</name>
+    </author>
+    <author>
+      <name>Lauren Olson</name>
+    </author>
+    <author>
+      <name>Emitzá Guzmán</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.09993v1</id>
+    <title>AimTS: Augmented Series and Image Contrastive Learning for Time Series Classification</title>
+    <updated>2025-04-14T08:55:16Z</updated>
+    <link href="https://arxiv.org/abs/2504.09993v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.09993v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Time series classification (TSC) is an important task in time series analysis. Existing TSC methods mainly train on each single domain separately, suffering from a degradation in accuracy when the samples for training are insufficient in certain domains. The pre-training and fine-tuning paradigm provides a promising direction for solving this problem. However, time series from different domains are substantially divergent, which challenges the effective pre-training on multi-source data and the generalization ability of pre-trained models. To handle this issue, we introduce Augmented Series and Image Contrastive Learning for Time Series Classification (AimTS), a pre-training framework that learns generalizable representations from multi-source time series data. We propose a two-level prototype-based contrastive learning method to effectively utilize various augmentations in multi-source pre-training, which learns representations for TSC that can be generalized to different domains. In addition, considering augmentations within the single time series modality are insufficient to fully address classification problems with distribution shift, we introduce the image modality to supplement structural information and establish a series-image contrastive learning to improve the generalization of the learned representations for TSC tasks. Extensive experiments show that after multi-source pre-training, AimTS achieves good generalization performance, enabling efficient learning and even few-shot learning on various downstream TSC datasets.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-14T08:55:16Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yuxuan Chen</name>
+    </author>
+    <author>
+      <name>Shanshan Huang</name>
+    </author>
+    <author>
+      <name>Yunyao Cheng</name>
+    </author>
+    <author>
+      <name>Peng Chen</name>
+    </author>
+    <author>
+      <name>Zhongwen Rao</name>
+    </author>
+    <author>
+      <name>Yang Shu</name>
+    </author>
+    <author>
+      <name>Bin Yang</name>
+    </author>
+    <author>
+      <name>Lujia Pan</name>
+    </author>
+    <author>
+      <name>Chenjuan Guo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.12847v2</id>
+    <title>Single spin asymmetry in forward $pA$ collisions from Pomeron-Odderon interference</title>
+    <updated>2025-07-17T09:02:49Z</updated>
+    <link href="https://arxiv.org/abs/2501.12847v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.12847v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Working in the hybrid framework of the high energy $pA$ collisions we identify a new contribution to transverse single spin asymmetry (SSA). The phase necessary for the SSA is provided by the Pomeron-Odderon interference in the dense nuclear target. The complete formula for the $pA \to h X$ polarized cross section also contains the transversity distribution for the polarized projectile as well as the real part of the twist-3 fragmentation function. We numerically estimate the asymmetry $A_N$ and its nuclear dependence. Based on a model computation we find that $A_N$ can be a percent level in the forward and low-$P_{h\perp}$ region. For large nuclei we find significant suppression, with $A_N \propto A^{-7/6}$ parametrically. As a notable feature we find a node of $A_N$ as a function of the $P_{h\perp}$ around the values of the initial saturation scale that could be used to test this mechanism experimentally.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-22T12:50:37Z</published>
+    <arxiv:comment>16 pages 3 figures Matches the published version</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>Phys. Rev. D 111, 094027, 2025</arxiv:journal_ref>
+    <author>
+      <name>Sanjin Benić</name>
+    </author>
+    <author>
+      <name>Eric Andreas Vivoda</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.111.094027</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.111.094027" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.19878v3</id>
+    <title>CausalRAG: Integrating Causal Graphs into Retrieval-Augmented Generation</title>
+    <updated>2025-10-21T18:10:49Z</updated>
+    <link href="https://arxiv.org/abs/2503.19878v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.19878v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have revolutionized natural language processing (NLP), particularly through Retrieval-Augmented Generation (RAG), which enhances LLM capabilities by integrating external knowledge. However, traditional RAG systems face critical limitations, including disrupted contextual integrity due to text chunking, and over-reliance on semantic similarity for retrieval. To address these issues, we propose CausalRAG, a novel framework that incorporates causal graphs into the retrieval process. By constructing and tracing causal relationships, CausalRAG preserves contextual continuity and improves retrieval precision, leading to more accurate and interpretable responses. We evaluate CausalRAG against regular RAG and graph-based RAG approaches, demonstrating its superiority across several metrics. Our findings suggest that grounding retrieval in causal reasoning provides a promising approach to knowledge-intensive tasks.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-25T17:43:08Z</published>
+    <arxiv:comment>Accepted at Findings of ACL 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Nengbo Wang</name>
+    </author>
+    <author>
+      <name>Xiaotian Han</name>
+    </author>
+    <author>
+      <name>Jagdip Singh</name>
+    </author>
+    <author>
+      <name>Jing Ma</name>
+    </author>
+    <author>
+      <name>Vipin Chaudhary</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.01475v1</id>
+    <title>ProRCA: A Causal Python Package for Actionable Root Cause Analysis in Real-world Business Scenarios</title>
+    <updated>2025-03-03T12:33:17Z</updated>
+    <link href="https://arxiv.org/abs/2503.01475v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.01475v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Root Cause Analysis (RCA) is becoming ever more critical as modern systems grow in complexity, volume of data, and interdependencies. While traditional RCA methods frequently rely on correlation-based or rule-based techniques, these approaches can prove inadequate in highly dynamic, multi-layered environments. In this paper, we present a pathway-tracing package built on the DoWhy causal inference library. Our method integrates conditional anomaly scoring, noise-based attribution, and depth-first path exploration to reveal multi-hop causal chains. By systematically tracing entire causal pathways from an observed anomaly back to the initial triggers, our approach provides a comprehensive, end-to-end RCA solution. Experimental evaluations with synthetic anomaly injections demonstrate the package's ability to accurately isolate triggers and rank root causes by their overall significance.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-03T12:33:17Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Ahmed Dawoud</name>
+    </author>
+    <author>
+      <name>Shravan Talupula</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.14523v2</id>
+    <title>HEFT Numerators from Kinematic Algebra</title>
+    <updated>2025-05-20T11:46:00Z</updated>
+    <link href="https://arxiv.org/abs/2501.14523v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.14523v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We derive the kinematic numerator factors for heavy-mass effective field theory from the field theory limit of the string theory vertex operator kinematic algebra introduced in arXiv:1806.09584. The kinematic numerators are derived as correlators of nested commutators of gluon vertex operators evaluated between massive tachyonic vertex operators. The resulting numerators are given by products of structure constants of the vertex operator algebra which yield gauge invariant expressions. The computation of the nested commutators leads to a natural organisation in the form of rooted trees, endowed with an order that facilitates the enumeration of the various contributions. This kinematic algebra gives a string theory understanding of the field theory fusion rules for constructing the heavy-mass effective field theory numerator of arXiv:2104.11206 and arXiv:2111.15649.</summary>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-24T14:26:13Z</published>
+    <arxiv:comment>latex 32 pages. v2: Assorted grammatical corrections. Version to appear in JHEP. Codes and results for kinematic numerators are on the repository : https://github.com/Yi-hongWang/Stringy-Numerator</arxiv:comment>
+    <arxiv:primary_category term="hep-th"/>
+    <author>
+      <name>Chih-Hao Fu</name>
+    </author>
+    <author>
+      <name>Pierre Vanhove</name>
+    </author>
+    <author>
+      <name>Yihong Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.03692v1</id>
+    <title>A Theoretical Framework for Graph-based Digital Twins for Supply Chain Management and Optimization</title>
+    <updated>2025-03-23T19:27:58Z</updated>
+    <link href="https://arxiv.org/abs/2504.03692v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.03692v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Supply chain management is growing increasingly complex due to globalization, evolving market demands, and sustainability pressures, yet traditional systems struggle with fragmented data and limited analytical capabilities. Graph-based modeling offers a powerful way to capture the intricate relationships within supply chains, while Digital Twins (DTs) enable real-time monitoring and dynamic simulations. However, current implementations often face challenges related to scalability, data integration, and the lack of sustainability-focused metrics. To address these gaps, we propose a Graph-Based Digital Twin Framework for Supply Chain Optimization, which combines graph modeling with DT architecture to create a dynamic, real-time representation of supply networks. Our framework integrates a Data Integration Layer to harmonize disparate sources, a Graph Construction Module to model complex dependencies, and a Simulation and Analysis Engine for scalable optimization. Importantly, we embed sustainability metrics - such as carbon footprints and resource utilization - into operational dashboards to drive eco-efficiency. By leveraging the synergy between graph-based modeling and DTs, our approach enhances scalability, improves decision-making, and enables organizations to proactively manage disruptions, cut costs, and transition toward greener, more resilient supply chains.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-23T19:27:58Z</published>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>Azmine Toushik Wasi</name>
+    </author>
+    <author>
+      <name>Mahfuz Ahmed Anik</name>
+    </author>
+    <author>
+      <name>Abdur Rahman</name>
+    </author>
+    <author>
+      <name>Md. Iqramul Hoque</name>
+    </author>
+    <author>
+      <name>MD Shafikul Islam</name>
+    </author>
+    <author>
+      <name>Md Manjurul Ahsan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.09723v4</id>
+    <title>AgentA/B: Automated and Scalable Web A/BTesting with Interactive LLM Agents</title>
+    <updated>2026-03-10T20:51:15Z</updated>
+    <link href="https://arxiv.org/abs/2504.09723v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.09723v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A/B testing experiment is a widely adopted method for evaluating UI/UX design decisions in modern web applications. Yet, traditional A/B testing remains constrained by its dependence on the large-scale and live traffic of human participants, and the long time of waiting for the testing result. Through formative interviews with six experienced industry practitioners, we identified critical bottlenecks in current A/B testing workflows. In response, we present AgentA/B, a novel system that leverages Large Language Model-based autonomous agents (LLM Agents) to automatically simulate user interaction behaviors with real webpages. AgentA/B enables scalable deployment of LLM agents with diverse personas, each capable of navigating the dynamic webpage and interactively executing multi-step interactions like search, clicking, filtering, and purchasing. In a demonstrative controlled experiment, we employ AgentA/B to simulate a between-subject A/B testing with 1,000 LLM agents Amazon.com, and compare agent behaviors with real human shopping behaviors at a scale. Our findings suggest AgentA/B can emulate human-like behavior patterns.</summary>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-13T21:10:56Z</published>
+    <arxiv:primary_category term="cs.HC"/>
+    <author>
+      <name>Yuxuan Lu</name>
+    </author>
+    <author>
+      <name>Ting-Yao Hsu</name>
+    </author>
+    <author>
+      <name>Hansu Gu</name>
+    </author>
+    <author>
+      <name>Limeng Cui</name>
+    </author>
+    <author>
+      <name>Yaochen Xie</name>
+    </author>
+    <author>
+      <name>William Headden</name>
+    </author>
+    <author>
+      <name>Bingsheng Yao</name>
+    </author>
+    <author>
+      <name>Akash Veeragouni</name>
+    </author>
+    <author>
+      <name>Jiapeng Liu</name>
+    </author>
+    <author>
+      <name>Sreyashi Nag</name>
+    </author>
+    <author>
+      <name>Jessie Wang</name>
+    </author>
+    <author>
+      <name>Dakuo Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.02327v1</id>
+    <title>Policy-Guided Causal State Representation for Offline Reinforcement Learning Recommendation</title>
+    <updated>2025-02-04T13:58:20Z</updated>
+    <link href="https://arxiv.org/abs/2502.02327v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.02327v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In offline reinforcement learning-based recommender systems (RLRS), learning effective state representations is crucial for capturing user preferences that directly impact long-term rewards. However, raw state representations often contain high-dimensional, noisy information and components that are not causally relevant to the reward. Additionally, missing transitions in offline data make it challenging to accurately identify features that are most relevant to user satisfaction. To address these challenges, we propose Policy-Guided Causal Representation (PGCR), a novel two-stage framework for causal feature selection and state representation learning in offline RLRS. In the first stage, we learn a causal feature selection policy that generates modified states by isolating and retaining only the causally relevant components (CRCs) while altering irrelevant components. This policy is guided by a reward function based on the Wasserstein distance, which measures the causal effect of state components on the reward and encourages the preservation of CRCs that directly influence user interests. In the second stage, we train an encoder to learn compact state representations by minimizing the mean squared error (MSE) loss between the latent representations of the original and modified states, ensuring that the representations focus on CRCs. We provide a theoretical analysis proving the identifiability of causal effects from interventions, validating the ability of PGCR to isolate critical state components for decision-making. Extensive experiments demonstrate that PGCR significantly improves recommendation performance, confirming its effectiveness for offline RL-based recommender systems.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-04T13:58:20Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Siyu Wang</name>
+    </author>
+    <author>
+      <name>Xiaocong Chen</name>
+    </author>
+    <author>
+      <name>Lina Yao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.14051v3</id>
+    <title>RocketKV: Accelerating Long-Context LLM Inference via Two-Stage KV Cache Compression</title>
+    <updated>2025-08-13T17:55:58Z</updated>
+    <link href="https://arxiv.org/abs/2502.14051v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.14051v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformer-based Large Language Models rely critically on the KV cache to efficiently handle extended contexts during the decode phase. Yet, the size of the KV cache grows proportionally with the input length, burdening both memory bandwidth and capacity as decoding progresses. To address this challenge, we present RocketKV, a training-free KV cache compression strategy containing two consecutive stages. In the first stage, it performs coarse-grain permanent KV cache eviction on the input sequence tokens. In the second stage, it adopts a hybrid sparse attention method to conduct fine-grain top-k sparse attention, approximating the attention scores by leveraging both head and sequence dimensionality reductions. We show that RocketKV provides a compression ratio of up to 400$\times$, end-to-end speedup of up to 3.7$\times$ as well as peak memory reduction of up to 32.6% in the decode phase on an NVIDIA A100 GPU compared to the full KV cache baseline, while achieving negligible accuracy loss on a variety of long-context tasks. We also propose a variant of RocketKV for multi-turn scenarios, which consistently outperforms other existing methods and achieves accuracy nearly on par with an oracle top-k attention scheme. The source code is available here: https://github.com/NVlabs/RocketKV.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-19T19:12:46Z</published>
+    <arxiv:comment>ICML 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Payman Behnam</name>
+    </author>
+    <author>
+      <name>Yaosheng Fu</name>
+    </author>
+    <author>
+      <name>Ritchie Zhao</name>
+    </author>
+    <author>
+      <name>Po-An Tsai</name>
+    </author>
+    <author>
+      <name>Zhiding Yu</name>
+    </author>
+    <author>
+      <name>Alexey Tumanov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.05292v1</id>
+    <title>Understanding the core limitations of second-order correlation-based functionals through: functional, orbital, and eigenvalue-driven analysis</title>
+    <updated>2025-03-07T10:11:03Z</updated>
+    <link href="https://arxiv.org/abs/2503.05292v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.05292v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Density Functional Theory has long struggled to obtain the exact exchange-correlational (XC) functional. Numerous approximations have been designed with the hope of achieving chemical accuracy. However, designing a functional involves numerous methodologies, which has a greater possibility for error accumulation if the functionals are poorly formulated. This study aims to investigate the performance and limitations of second-order correlation functionals within the framework of density functional theory. Specifically, we focus on three major classes of density functional approximations that incorporate second-order energy expressions: \textit{ab initio} (primarily Görling-Levy) functionals, adiabatic connection models, and double-hybrid functionals. The principal objectives of this research are to evaluate the accuracy of second-order correlation functionals, to understand how the choice of reference orbitals and eigenvalues affects the performance of these functionals, to identify the intrinsic limitations of second-order energy expressions, especially when using arbitrary orbitals or non-canonical configurations, and propose strategies for improving their accuracy. By addressing these questions, we aim to provide deeper insights into the factors governing the accuracy of second-order correlation functionals, thereby guiding future functional development.</summary>
+    <category term="physics.chem-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.atom-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-07T10:11:03Z</published>
+    <arxiv:primary_category term="physics.chem-ph"/>
+    <author>
+      <name>Aditi Singh</name>
+    </author>
+    <author>
+      <name>Eduardo Fabiano</name>
+    </author>
+    <author>
+      <name>Szymon Śmiga</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.23213v1</id>
+    <title>RECALL-MM: A Multimodal Dataset of Consumer Product Recalls for Risk Analysis using Computational Methods and Large Language Models</title>
+    <updated>2025-03-29T20:27:28Z</updated>
+    <link href="https://arxiv.org/abs/2503.23213v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.23213v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Product recalls provide valuable insights into potential risks and hazards within the engineering design process, yet their full potential remains underutilized. In this study, we curate data from the United States Consumer Product Safety Commission (CPSC) recalls database to develop a multimodal dataset, RECALL-MM, that informs data-driven risk assessment using historical information, and augment it using generative methods. Patterns in the dataset highlight specific areas where improved safety measures could have significant impact. We extend our analysis by demonstrating interactive clustering maps that embed all recalls into a shared latent space based on recall descriptions and product names. Leveraging these data-driven tools, we explore three case studies to demonstrate the dataset's utility in identifying product risks and guiding safer design decisions. The first two case studies illustrate how designers can visualize patterns across recalled products and situate new product ideas within the broader recall landscape to proactively anticipate hazards. In the third case study, we extend our approach by employing a large language model (LLM) to predict potential hazards based solely on product images. This demonstrates the model's ability to leverage visual context to identify risk factors, revealing strong alignment with historical recall data across many hazard categories. However, the analysis also highlights areas where hazard prediction remains challenging, underscoring the importance of risk awareness throughout the design process. Collectively, this work aims to bridge the gap between historical recall data and future product safety, presenting a scalable, data-driven approach to safer engineering design.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-29T20:27:28Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Diana Bolanos</name>
+    </author>
+    <author>
+      <name>Mohammadmehdi Ataei</name>
+    </author>
+    <author>
+      <name>Daniele Grandi</name>
+    </author>
+    <author>
+      <name>Kosa Goucher-Lambert</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.12547v4</id>
+    <title>Revealing emergent human-like conceptual representations from language prediction</title>
+    <updated>2025-11-08T09:32:54Z</updated>
+    <link href="https://arxiv.org/abs/2501.12547v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.12547v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>People acquire concepts through rich physical and social experiences and use them to understand and navigate the world. In contrast, large language models (LLMs), trained solely through next-token prediction on text, exhibit strikingly human-like behaviors. Are these models developing concepts akin to those of humans? If so, how are such concepts represented, organized, and related to behavior? Here, we address these questions by investigating the representations formed by LLMs during an in-context concept inference task. We found that LLMs can flexibly derive concepts from linguistic descriptions in relation to contextual cues about other concepts. The derived representations converge toward a shared, context-independent structure, and alignment with this structure reliably predicts model performance across various understanding and reasoning tasks. Moreover, the convergent representations effectively capture human behavioral judgments and closely align with neural activity patterns in the human brain, providing evidence for biological plausibility. Together, these findings establish that structured, human-like conceptual representations can emerge purely from language prediction without real-world grounding, highlighting the role of conceptual structure in understanding intelligent behavior. More broadly, our work suggests that LLMs offer a tangible window into the nature of human concepts and lays the groundwork for advancing alignment between artificial and human intelligence.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-21T23:54:17Z</published>
+    <arxiv:comment>66 pages. Accepted manuscript. Final version published in Proceedings of the National Academy of Sciences (PNAS): https://www.pnas.org/doi/10.1073/pnas.2512514122</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>Proceedings of the National Academy of Sciences, U.S.A., 122 (44) e2512514122 (2025)</arxiv:journal_ref>
+    <author>
+      <name>Ningyu Xu</name>
+    </author>
+    <author>
+      <name>Qi Zhang</name>
+    </author>
+    <author>
+      <name>Chao Du</name>
+    </author>
+    <author>
+      <name>Qiang Luo</name>
+    </author>
+    <author>
+      <name>Xipeng Qiu</name>
+    </author>
+    <author>
+      <name>Xuanjing Huang</name>
+    </author>
+    <author>
+      <name>Menghan Zhang</name>
+    </author>
+    <arxiv:doi>10.1073/pnas.2512514122</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1073/pnas.2512514122" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.01142v2</id>
+    <title>DeepRAG: Thinking to Retrieve Step by Step for Large Language Models</title>
+    <updated>2025-06-08T17:17:01Z</updated>
+    <link href="https://arxiv.org/abs/2502.01142v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.01142v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) have shown remarkable reasoning capabilities, while their practical applications are limited by severe factual hallucinations due to limitations in the timeliness, accuracy, and comprehensiveness of their parametric knowledge. Meanwhile, enhancing retrieval-augmented generation (RAG) with reasoning remains challenging due to ineffective task decomposition and redundant retrieval, which can introduce noise and degrade response quality. In this paper, we propose DeepRAG, a framework that models retrieval-augmented reasoning as a Markov Decision Process (MDP), enabling reasonable and adaptive retrieval. By iteratively decomposing queries, DeepRAG dynamically determines whether to retrieve external knowledge or rely on parametric reasoning at each step. Experiments show that DeepRAG improves retrieval efficiency and boosts answer accuracy by 26.4%, demonstrating its effectiveness in enhancing retrieval-augmented reasoning.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-03T08:22:45Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Xinyan Guan</name>
+    </author>
+    <author>
+      <name>Jiali Zeng</name>
+    </author>
+    <author>
+      <name>Fandong Meng</name>
+    </author>
+    <author>
+      <name>Chunlei Xin</name>
+    </author>
+    <author>
+      <name>Yaojie Lu</name>
+    </author>
+    <author>
+      <name>Hongyu Lin</name>
+    </author>
+    <author>
+      <name>Xianpei Han</name>
+    </author>
+    <author>
+      <name>Le Sun</name>
+    </author>
+    <author>
+      <name>Jie Zhou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.07823v2</id>
+    <title>A new look into the atmospheric composition of WASP-39 b</title>
+    <updated>2026-05-07T15:09:10Z</updated>
+    <link href="https://arxiv.org/abs/2504.07823v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.07823v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Being one of the first exoplanets observed by the James Webb Space Telescope, WASP-39 b has become an iconic target and many transit spectra recorded with different instruments (NIRISS, NIRCAM, NIRSpec G395H, NIRSpec PRISM and MIRI) are currently available, allowing in-depth studies of its atmosphere. We present here a novel approach to interpret WASP-39 b's transit spectroscopic data, consisting of a multi-step process where ab initio equilibrium chemistry models and blind retrievals are used iteratively to find physically robust, optimal solutions. Following this approach, we have identified a new scenario to explain WASP-39 b's atmospheric composition, in which silicon-based chemistry plays a major role. In this scenario, SiO may explain the spectral absorption at 4.1 $μ$m, currently interpreted as being due to SO$_2$. SiO and the other gas species identified by the retrieval models, i.e. H$_2$O, CO$_2$, Na and K, are consistent with an atmosphere in chemical equilibrium with a temperature-pressure profile constrained by H$_2$O and CO$_2$ absorption bands. In addition, silicate clouds and hazes can produce the spectral features observed by MIRI in the spectral window 5-12 $μ$m. While we advocate the need for more data, possibly at higher spectral resolution, to confirm our results for WASP-39 b's atmospheric composition, we highlight a refined atmospheric retrieval strategy with pre-selection and post-reconstruction to guide the next generation of transit spectroscopy.</summary>
+    <category term="astro-ph.EP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-10T15:01:28Z</published>
+    <arxiv:comment>32 pages, 22 figures, published in ApJ</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.EP"/>
+    <arxiv:journal_ref>ApJ 1002 208 (2026)</arxiv:journal_ref>
+    <author>
+      <name>Sushuang Ma</name>
+    </author>
+    <author>
+      <name>Arianna Saba</name>
+    </author>
+    <author>
+      <name>Ahmed Faris Al-Refaie</name>
+    </author>
+    <author>
+      <name>Giovanna Tinetti</name>
+    </author>
+    <author>
+      <name>Sergei N. Yurchenko</name>
+    </author>
+    <author>
+      <name>Jonathan Tennyson</name>
+    </author>
+    <author>
+      <name>Cesare Cecchi Pestellini</name>
+    </author>
+    <arxiv:doi>10.3847/1538-4357/ae5620</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.3847/1538-4357/ae5620" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.14170v1</id>
+    <title>Argos: Agentic Time-Series Anomaly Detection with Autonomous Rule Generation via Large Language Models</title>
+    <updated>2025-01-24T01:38:37Z</updated>
+    <link href="https://arxiv.org/abs/2501.14170v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.14170v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Observability in cloud infrastructure is critical for service providers, driving the widespread adoption of anomaly detection systems for monitoring metrics. However, existing systems often struggle to simultaneously achieve explainability, reproducibility, and autonomy, which are three indispensable properties for production use. We introduce Argos, an agentic system for detecting time-series anomalies in cloud infrastructure by leveraging large language models (LLMs). Argos proposes to use explainable and reproducible anomaly rules as intermediate representation and employs LLMs to autonomously generate such rules. The system will efficiently train error-free and accuracy-guaranteed anomaly rules through multiple collaborative agents and deploy the trained rules for low-cost online anomaly detection. Through evaluation results, we demonstrate that Argos outperforms state-of-the-art methods, increasing $F_1$ scores by up to $9.5\%$ and $28.3\%$ on public anomaly detection datasets and an internal dataset collected from Microsoft, respectively.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-24T01:38:37Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yile Gu</name>
+    </author>
+    <author>
+      <name>Yifan Xiong</name>
+    </author>
+    <author>
+      <name>Jonathan Mace</name>
+    </author>
+    <author>
+      <name>Yuting Jiang</name>
+    </author>
+    <author>
+      <name>Yigong Hu</name>
+    </author>
+    <author>
+      <name>Baris Kasikci</name>
+    </author>
+    <author>
+      <name>Peng Cheng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.13595v4</id>
+    <title>MMTEB: Massive Multilingual Text Embedding Benchmark</title>
+    <updated>2025-11-13T08:51:24Z</updated>
+    <link href="https://arxiv.org/abs/2502.13595v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.13595v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Text embeddings are typically evaluated on a limited set of tasks, which are constrained by language, domain, and task diversity. To address these limitations and provide a more comprehensive evaluation, we introduce the Massive Multilingual Text Embedding Benchmark (MMTEB) - a large-scale, community-driven expansion of MTEB, covering over 500 quality-controlled evaluation tasks across 250+ languages. MMTEB includes a diverse set of challenging, novel tasks such as instruction following, long-document retrieval, and code retrieval, representing the largest multilingual collection of evaluation tasks for embedding models to date. Using this collection, we develop several highly multilingual benchmarks, which we use to evaluate a representative set of models. We find that while large language models (LLMs) with billions of parameters can achieve state-of-the-art performance on certain language subsets and task categories, the best-performing publicly available model is multilingual-e5-large-instruct with only 560 million parameters. To facilitate accessibility and reduce computational cost, we introduce a novel downsampling method based on inter-task correlation, ensuring a diverse selection while preserving relative model rankings. Furthermore, we optimize tasks such as retrieval by sampling hard negatives, creating smaller but effective splits. These optimizations allow us to introduce benchmarks that drastically reduce computational demands. For instance, our newly introduced zero-shot English benchmark maintains a ranking order similar to the full-scale version but at a fraction of the computational cost.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-19T10:13:43Z</published>
+    <arxiv:comment>Accepted for ICLR: https://openreview.net/forum?id=zl3pfz4VCV</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Kenneth Enevoldsen</name>
+    </author>
+    <author>
+      <name>Isaac Chung</name>
+    </author>
+    <author>
+      <name>Imene Kerboua</name>
+    </author>
+    <author>
+      <name>Márton Kardos</name>
+    </author>
+    <author>
+      <name>Ashwin Mathur</name>
+    </author>
+    <author>
+      <name>David Stap</name>
+    </author>
+    <author>
+      <name>Jay Gala</name>
+    </author>
+    <author>
+      <name>Wissam Siblini</name>
+    </author>
+    <author>
+      <name>Dominik Krzemiński</name>
+    </author>
+    <author>
+      <name>Genta Indra Winata</name>
+    </author>
+    <author>
+      <name>Saba Sturua</name>
+    </author>
+    <author>
+      <name>Saiteja Utpala</name>
+    </author>
+    <author>
+      <name>Mathieu Ciancone</name>
+    </author>
+    <author>
+      <name>Marion Schaeffer</name>
+    </author>
+    <author>
+      <name>Gabriel Sequeira</name>
+    </author>
+    <author>
+      <name>Diganta Misra</name>
+    </author>
+    <author>
+      <name>Shreeya Dhakal</name>
+    </author>
+    <author>
+      <name>Jonathan Rystrøm</name>
+    </author>
+    <author>
+      <name>Roman Solomatin</name>
+    </author>
+    <author>
+      <name>Ömer Çağatan</name>
+    </author>
+    <author>
+      <name>Akash Kundu</name>
+    </author>
+    <author>
+      <name>Martin Bernstorff</name>
+    </author>
+    <author>
+      <name>Shitao Xiao</name>
+    </author>
+    <author>
+      <name>Akshita Sukhlecha</name>
+    </author>
+    <author>
+      <name>Bhavish Pahwa</name>
+    </author>
+    <author>
+      <name>Rafał Poświata</name>
+    </author>
+    <author>
+      <name>Kranthi Kiran GV</name>
+    </author>
+    <author>
+      <name>Shawon Ashraf</name>
+    </author>
+    <author>
+      <name>Daniel Auras</name>
+    </author>
+    <author>
+      <name>Björn Plüster</name>
+    </author>
+    <author>
+      <name>Jan Philipp Harries</name>
+    </author>
+    <author>
+      <name>Loïc Magne</name>
+    </author>
+    <author>
+      <name>Isabelle Mohr</name>
+    </author>
+    <author>
+      <name>Mariya Hendriksen</name>
+    </author>
+    <author>
+      <name>Dawei Zhu</name>
+    </author>
+    <author>
+      <name>Hippolyte Gisserot-Boukhlef</name>
+    </author>
+    <author>
+      <name>Tom Aarsen</name>
+    </author>
+    <author>
+      <name>Jan Kostkan</name>
+    </author>
+    <author>
+      <name>Konrad Wojtasik</name>
+    </author>
+    <author>
+      <name>Taemin Lee</name>
+    </author>
+    <author>
+      <name>Marek Šuppa</name>
+    </author>
+    <author>
+      <name>Crystina Zhang</name>
+    </author>
+    <author>
+      <name>Roberta Rocca</name>
+    </author>
+    <author>
+      <name>Mohammed Hamdy</name>
+    </author>
+    <author>
+      <name>Andrianos Michail</name>
+    </author>
+    <author>
+      <name>John Yang</name>
+    </author>
+    <author>
+      <name>Manuel Faysse</name>
+    </author>
+    <author>
+      <name>Aleksei Vatolin</name>
+    </author>
+    <author>
+      <name>Nandan Thakur</name>
+    </author>
+    <author>
+      <name>Manan Dey</name>
+    </author>
+    <author>
+      <name>Dipam Vasani</name>
+    </author>
+    <author>
+      <name>Pranjal Chitale</name>
+    </author>
+    <author>
+      <name>Simone Tedeschi</name>
+    </author>
+    <author>
+      <name>Nguyen Tai</name>
+    </author>
+    <author>
+      <name>Artem Snegirev</name>
+    </author>
+    <author>
+      <name>Michael Günther</name>
+    </author>
+    <author>
+      <name>Mengzhou Xia</name>
+    </author>
+    <author>
+      <name>Weijia Shi</name>
+    </author>
+    <author>
+      <name>Xing Han Lù</name>
+    </author>
+    <author>
+      <name>Jordan Clive</name>
+    </author>
+    <author>
+      <name>Gayatri Krishnakumar</name>
+    </author>
+    <author>
+      <name>Anna Maksimova</name>
+    </author>
+    <author>
+      <name>Silvan Wehrli</name>
+    </author>
+    <author>
+      <name>Maria Tikhonova</name>
+    </author>
+    <author>
+      <name>Henil Panchal</name>
+    </author>
+    <author>
+      <name>Aleksandr Abramov</name>
+    </author>
+    <author>
+      <name>Malte Ostendorff</name>
+    </author>
+    <author>
+      <name>Zheng Liu</name>
+    </author>
+    <author>
+      <name>Simon Clematide</name>
+    </author>
+    <author>
+      <name>Lester James Miranda</name>
+    </author>
+    <author>
+      <name>Alena Fenogenova</name>
+    </author>
+    <author>
+      <name>Guangyu Song</name>
+    </author>
+    <author>
+      <name>Ruqiya Bin Safi</name>
+    </author>
+    <author>
+      <name>Wen-Ding Li</name>
+    </author>
+    <author>
+      <name>Alessia Borghini</name>
+    </author>
+    <author>
+      <name>Federico Cassano</name>
+    </author>
+    <author>
+      <name>Hongjin Su</name>
+    </author>
+    <author>
+      <name>Jimmy Lin</name>
+    </author>
+    <author>
+      <name>Howard Yen</name>
+    </author>
+    <author>
+      <name>Lasse Hansen</name>
+    </author>
+    <author>
+      <name>Sara Hooker</name>
+    </author>
+    <author>
+      <name>Chenghao Xiao</name>
+    </author>
+    <author>
+      <name>Vaibhav Adlakha</name>
+    </author>
+    <author>
+      <name>Orion Weller</name>
+    </author>
+    <author>
+      <name>Siva Reddy</name>
+    </author>
+    <author>
+      <name>Niklas Muennighoff</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.14423v1</id>
+    <title>Human Activity Recognition with a 6.5 GHz Reconfigurable Intelligent Surface for Wi-Fi 6E</title>
+    <updated>2025-01-24T11:50:00Z</updated>
+    <link href="https://arxiv.org/abs/2501.14423v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.14423v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Human Activity Recognition (HAR) is the identification and classification of static and dynamic human activities, which find applicability in domains like healthcare, entertainment, security, and cyber-physical systems. Traditional HAR approaches rely on wearable sensors, vision-based systems, or ambient sensing, each with inherent limitations such as privacy concerns or restricted sensing conditions. Recently, Radio Frequency (RF)-based HAR has emerged, relying on the interaction of RF signals with people to infer activities. Reconfigurable Intelligent Surfaces (RISs) offers significant potential in this domain by enabling dynamic control over the wireless environment, thus enhancing the information extracted from RF signals. We present an Hand Gesture Recognition (HGR) approach that employs our own 6.5 GHz RIS design to manipulate the RF medium in an area of interest. We validate the capability of our RIS to control the medium by characterizing its steering response, and further we gather and publish a dataset for HGR classification for three different hand gestures. By employing two Convolutional Neural Networks (CNNs) models trained on data gathered under random and optimized RIS configuration sequences, we achieved classification accuracies exceeding 90%.</summary>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-24T11:50:00Z</published>
+    <arxiv:primary_category term="eess.SP"/>
+    <author>
+      <name>Nuno Paulino</name>
+    </author>
+    <author>
+      <name>Mariana Oliveira</name>
+    </author>
+    <author>
+      <name>Francisco Ribeiro</name>
+    </author>
+    <author>
+      <name>Luís Outeiro</name>
+    </author>
+    <author>
+      <name>Pedro A. Lopes</name>
+    </author>
+    <author>
+      <name>Francisco Vilarinho</name>
+    </author>
+    <author>
+      <name>Sofia Inácio</name>
+    </author>
+    <author>
+      <name>Luís M. Pessoa</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.06270v1</id>
+    <title>Addressing Cold-start Problem in Click-Through Rate Prediction via Supervised Diffusion Modeling</title>
+    <updated>2025-03-01T13:43:06Z</updated>
+    <link href="https://arxiv.org/abs/2504.06270v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.06270v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Predicting Click-Through Rates is a crucial function within recommendation and advertising platforms, as the output of CTR prediction determines the order of items shown to users. The Embedding \&amp; MLP paradigm has become a standard approach for industrial recommendation systems and has been widely deployed. However, this paradigm suffers from cold-start problems, where there is either no or only limited user action data available, leading to poorly learned ID embeddings. The cold-start problem hampers the performance of new items. To address this problem, we designed a novel diffusion model to generate a warmed-up embedding for new items. Specifically, we define a novel diffusion process between the ID embedding space and the side information space. In addition, we can derive a sub-sequence from the diffusion steps to expedite training, given that our diffusion model is non-Markovian. Our diffusion model is supervised by both the variational inference and binary cross-entropy objectives, enabling it to generate warmed-up embeddings for items in both the cold-start and warm-up phases. Additionally, we have conducted extensive experiments on three recommendation datasets. The results confirmed the effectiveness of our approach.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-01T13:43:06Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Wenqiao Zhu</name>
+    </author>
+    <author>
+      <name>Lulu Wang</name>
+    </author>
+    <author>
+      <name>Jun Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.11079v2</id>
+    <title>Phantom: Subject-consistent video generation via cross-modal alignment</title>
+    <updated>2025-04-10T10:24:37Z</updated>
+    <link href="https://arxiv.org/abs/2502.11079v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.11079v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The continuous development of foundational models for video generation is evolving into various applications, with subject-consistent video generation still in the exploratory stage. We refer to this as Subject-to-Video, which extracts subject elements from reference images and generates subject-consistent videos following textual instructions. We believe that the essence of subject-to-video lies in balancing the dual-modal prompts of text and image, thereby deeply and simultaneously aligning both text and visual content. To this end, we propose Phantom, a unified video generation framework for both single- and multi-subject references. Building on existing text-to-video and image-to-video architectures, we redesign the joint text-image injection model and drive it to learn cross-modal alignment via text-image-video triplet data. The proposed method achieves high-fidelity subject-consistent video generation while addressing issues of image content leakage and multi-subject confusion. Evaluation results indicate that our method outperforms other state-of-the-art closed-source commercial solutions. In particular, we emphasize subject consistency in human generation, covering existing ID-preserving video generation while offering enhanced advantages.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-16T11:02:50Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Lijie Liu</name>
+    </author>
+    <author>
+      <name>Tianxiang Ma</name>
+    </author>
+    <author>
+      <name>Bingchuan Li</name>
+    </author>
+    <author>
+      <name>Zhuowei Chen</name>
+    </author>
+    <author>
+      <name>Jiawei Liu</name>
+    </author>
+    <author>
+      <name>Gen Li</name>
+    </author>
+    <author>
+      <name>Siyu Zhou</name>
+    </author>
+    <author>
+      <name>Qian He</name>
+    </author>
+    <author>
+      <name>Xinglong Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.12948v2</id>
+    <title>DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning</title>
+    <updated>2026-01-04T03:57:36Z</updated>
+    <link href="https://arxiv.org/abs/2501.12948v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.12948v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>General reasoning represents a long-standing and formidable challenge in artificial intelligence. Recent breakthroughs, exemplified by large language models (LLMs) and chain-of-thought prompting, have achieved considerable success on foundational reasoning tasks. However, this success is heavily contingent upon extensive human-annotated demonstrations, and models' capabilities are still insufficient for more complex problems. Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labeled reasoning trajectories. The proposed RL framework facilitates the emergent development of advanced reasoning patterns, such as self-reflection, verification, and dynamic strategy adaptation. Consequently, the trained model achieves superior performance on verifiable tasks such as mathematics, coding competitions, and STEM fields, surpassing its counterparts trained via conventional supervised learning on human demonstrations. Moreover, the emergent reasoning patterns exhibited by these large-scale models can be systematically harnessed to guide and enhance the reasoning capabilities of smaller models.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-22T15:19:35Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>Nature volume 645, pages 633-638 (2025)</arxiv:journal_ref>
+    <author>
+      <name> DeepSeek-AI</name>
+    </author>
+    <author>
+      <name>Daya Guo</name>
+    </author>
+    <author>
+      <name>Dejian Yang</name>
+    </author>
+    <author>
+      <name>Haowei Zhang</name>
+    </author>
+    <author>
+      <name>Junxiao Song</name>
+    </author>
+    <author>
+      <name>Peiyi Wang</name>
+    </author>
+    <author>
+      <name>Qihao Zhu</name>
+    </author>
+    <author>
+      <name>Runxin Xu</name>
+    </author>
+    <author>
+      <name>Ruoyu Zhang</name>
+    </author>
+    <author>
+      <name>Shirong Ma</name>
+    </author>
+    <author>
+      <name>Xiao Bi</name>
+    </author>
+    <author>
+      <name>Xiaokang Zhang</name>
+    </author>
+    <author>
+      <name>Xingkai Yu</name>
+    </author>
+    <author>
+      <name>Yu Wu</name>
+    </author>
+    <author>
+      <name>Z. F. Wu</name>
+    </author>
+    <author>
+      <name>Zhibin Gou</name>
+    </author>
+    <author>
+      <name>Zhihong Shao</name>
+    </author>
+    <author>
+      <name>Zhuoshu Li</name>
+    </author>
+    <author>
+      <name>Ziyi Gao</name>
+    </author>
+    <author>
+      <name>Aixin Liu</name>
+    </author>
+    <author>
+      <name>Bing Xue</name>
+    </author>
+    <author>
+      <name>Bingxuan Wang</name>
+    </author>
+    <author>
+      <name>Bochao Wu</name>
+    </author>
+    <author>
+      <name>Bei Feng</name>
+    </author>
+    <author>
+      <name>Chengda Lu</name>
+    </author>
+    <author>
+      <name>Chenggang Zhao</name>
+    </author>
+    <author>
+      <name>Chengqi Deng</name>
+    </author>
+    <author>
+      <name>Chenyu Zhang</name>
+    </author>
+    <author>
+      <name>Chong Ruan</name>
+    </author>
+    <author>
+      <name>Damai Dai</name>
+    </author>
+    <author>
+      <name>Deli Chen</name>
+    </author>
+    <author>
+      <name>Dongjie Ji</name>
+    </author>
+    <author>
+      <name>Erhang Li</name>
+    </author>
+    <author>
+      <name>Fangyun Lin</name>
+    </author>
+    <author>
+      <name>Fucong Dai</name>
+    </author>
+    <author>
+      <name>Fuli Luo</name>
+    </author>
+    <author>
+      <name>Guangbo Hao</name>
+    </author>
+    <author>
+      <name>Guanting Chen</name>
+    </author>
+    <author>
+      <name>Guowei Li</name>
+    </author>
+    <author>
+      <name>H. Zhang</name>
+    </author>
+    <author>
+      <name>Han Bao</name>
+    </author>
+    <author>
+      <name>Hanwei Xu</name>
+    </author>
+    <author>
+      <name>Haocheng Wang</name>
+    </author>
+    <author>
+      <name>Honghui Ding</name>
+    </author>
+    <author>
+      <name>Huajian Xin</name>
+    </author>
+    <author>
+      <name>Huazuo Gao</name>
+    </author>
+    <author>
+      <name>Hui Qu</name>
+    </author>
+    <author>
+      <name>Hui Li</name>
+    </author>
+    <author>
+      <name>Jianzhong Guo</name>
+    </author>
+    <author>
+      <name>Jiashi Li</name>
+    </author>
+    <author>
+      <name>Jiawei Wang</name>
+    </author>
+    <author>
+      <name>Jingchang Chen</name>
+    </author>
+    <author>
+      <name>Jingyang Yuan</name>
+    </author>
+    <author>
+      <name>Junjie Qiu</name>
+    </author>
+    <author>
+      <name>Junlong Li</name>
+    </author>
+    <author>
+      <name>J. L. Cai</name>
+    </author>
+    <author>
+      <name>Jiaqi Ni</name>
+    </author>
+    <author>
+      <name>Jian Liang</name>
+    </author>
+    <author>
+      <name>Jin Chen</name>
+    </author>
+    <author>
+      <name>Kai Dong</name>
+    </author>
+    <author>
+      <name>Kai Hu</name>
+    </author>
+    <author>
+      <name>Kaige Gao</name>
+    </author>
+    <author>
+      <name>Kang Guan</name>
+    </author>
+    <author>
+      <name>Kexin Huang</name>
+    </author>
+    <author>
+      <name>Kuai Yu</name>
+    </author>
+    <author>
+      <name>Lean Wang</name>
+    </author>
+    <author>
+      <name>Lecong Zhang</name>
+    </author>
+    <author>
+      <name>Liang Zhao</name>
+    </author>
+    <author>
+      <name>Litong Wang</name>
+    </author>
+    <author>
+      <name>Liyue Zhang</name>
+    </author>
+    <author>
+      <name>Lei Xu</name>
+    </author>
+    <author>
+      <name>Leyi Xia</name>
+    </author>
+    <author>
+      <name>Mingchuan Zhang</name>
+    </author>
+    <author>
+      <name>Minghua Zhang</name>
+    </author>
+    <author>
+      <name>Minghui Tang</name>
+    </author>
+    <author>
+      <name>Meng Li</name>
+    </author>
+    <author>
+      <name>Miaojun Wang</name>
+    </author>
+    <author>
+      <name>Mingming Li</name>
+    </author>
+    <author>
+      <name>Ning Tian</name>
+    </author>
+    <author>
+      <name>Panpan Huang</name>
+    </author>
+    <author>
+      <name>Peng Zhang</name>
+    </author>
+    <author>
+      <name>Qiancheng Wang</name>
+    </author>
+    <author>
+      <name>Qinyu Chen</name>
+    </author>
+    <author>
+      <name>Qiushi Du</name>
+    </author>
+    <author>
+      <name>Ruiqi Ge</name>
+    </author>
+    <author>
+      <name>Ruisong Zhang</name>
+    </author>
+    <author>
+      <name>Ruizhe Pan</name>
+    </author>
+    <author>
+      <name>Runji Wang</name>
+    </author>
+    <author>
+      <name>R. J. Chen</name>
+    </author>
+    <author>
+      <name>R. L. Jin</name>
+    </author>
+    <author>
+      <name>Ruyi Chen</name>
+    </author>
+    <author>
+      <name>Shanghao Lu</name>
+    </author>
+    <author>
+      <name>Shangyan Zhou</name>
+    </author>
+    <author>
+      <name>Shanhuang Chen</name>
+    </author>
+    <author>
+      <name>Shengfeng Ye</name>
+    </author>
+    <author>
+      <name>Shiyu Wang</name>
+    </author>
+    <author>
+      <name>Shuiping Yu</name>
+    </author>
+    <author>
+      <name>Shunfeng Zhou</name>
+    </author>
+    <author>
+      <name>Shuting Pan</name>
+    </author>
+    <author>
+      <name>S. S. Li</name>
+    </author>
+    <author>
+      <name>Shuang Zhou</name>
+    </author>
+    <author>
+      <name>Shaoqing Wu</name>
+    </author>
+    <author>
+      <name>Shengfeng Ye</name>
+    </author>
+    <author>
+      <name>Tao Yun</name>
+    </author>
+    <author>
+      <name>Tian Pei</name>
+    </author>
+    <author>
+      <name>Tianyu Sun</name>
+    </author>
+    <author>
+      <name>T. Wang</name>
+    </author>
+    <author>
+      <name>Wangding Zeng</name>
+    </author>
+    <author>
+      <name>Wanjia Zhao</name>
+    </author>
+    <author>
+      <name>Wen Liu</name>
+    </author>
+    <author>
+      <name>Wenfeng Liang</name>
+    </author>
+    <author>
+      <name>Wenjun Gao</name>
+    </author>
+    <author>
+      <name>Wenqin Yu</name>
+    </author>
+    <author>
+      <name>Wentao Zhang</name>
+    </author>
+    <author>
+      <name>W. L. Xiao</name>
+    </author>
+    <author>
+      <name>Wei An</name>
+    </author>
+    <author>
+      <name>Xiaodong Liu</name>
+    </author>
+    <author>
+      <name>Xiaohan Wang</name>
+    </author>
+    <author>
+      <name>Xiaokang Chen</name>
+    </author>
+    <author>
+      <name>Xiaotao Nie</name>
+    </author>
+    <author>
+      <name>Xin Cheng</name>
+    </author>
+    <author>
+      <name>Xin Liu</name>
+    </author>
+    <author>
+      <name>Xin Xie</name>
+    </author>
+    <author>
+      <name>Xingchao Liu</name>
+    </author>
+    <author>
+      <name>Xinyu Yang</name>
+    </author>
+    <author>
+      <name>Xinyuan Li</name>
+    </author>
+    <author>
+      <name>Xuecheng Su</name>
+    </author>
+    <author>
+      <name>Xuheng Lin</name>
+    </author>
+    <author>
+      <name>X. Q. Li</name>
+    </author>
+    <author>
+      <name>Xiangyue Jin</name>
+    </author>
+    <author>
+      <name>Xiaojin Shen</name>
+    </author>
+    <author>
+      <name>Xiaosha Chen</name>
+    </author>
+    <author>
+      <name>Xiaowen Sun</name>
+    </author>
+    <author>
+      <name>Xiaoxiang Wang</name>
+    </author>
+    <author>
+      <name>Xinnan Song</name>
+    </author>
+    <author>
+      <name>Xinyi Zhou</name>
+    </author>
+    <author>
+      <name>Xianzu Wang</name>
+    </author>
+    <author>
+      <name>Xinxia Shan</name>
+    </author>
+    <author>
+      <name>Y. K. Li</name>
+    </author>
+    <author>
+      <name>Y. Q. Wang</name>
+    </author>
+    <author>
+      <name>Y. X. Wei</name>
+    </author>
+    <author>
+      <name>Yang Zhang</name>
+    </author>
+    <author>
+      <name>Yanhong Xu</name>
+    </author>
+    <author>
+      <name>Yao Li</name>
+    </author>
+    <author>
+      <name>Yao Zhao</name>
+    </author>
+    <author>
+      <name>Yaofeng Sun</name>
+    </author>
+    <author>
+      <name>Yaohui Wang</name>
+    </author>
+    <author>
+      <name>Yi Yu</name>
+    </author>
+    <author>
+      <name>Yichao Zhang</name>
+    </author>
+    <author>
+      <name>Yifan Shi</name>
+    </author>
+    <author>
+      <name>Yiliang Xiong</name>
+    </author>
+    <author>
+      <name>Ying He</name>
+    </author>
+    <author>
+      <name>Yishi Piao</name>
+    </author>
+    <author>
+      <name>Yisong Wang</name>
+    </author>
+    <author>
+      <name>Yixuan Tan</name>
+    </author>
+    <author>
+      <name>Yiyang Ma</name>
+    </author>
+    <author>
+      <name>Yiyuan Liu</name>
+    </author>
+    <author>
+      <name>Yongqiang Guo</name>
+    </author>
+    <author>
+      <name>Yuan Ou</name>
+    </author>
+    <author>
+      <name>Yuduan Wang</name>
+    </author>
+    <author>
+      <name>Yue Gong</name>
+    </author>
+    <author>
+      <name>Yuheng Zou</name>
+    </author>
+    <author>
+      <name>Yujia He</name>
+    </author>
+    <author>
+      <name>Yunfan Xiong</name>
+    </author>
+    <author>
+      <name>Yuxiang Luo</name>
+    </author>
+    <author>
+      <name>Yuxiang You</name>
+    </author>
+    <author>
+      <name>Yuxuan Liu</name>
+    </author>
+    <author>
+      <name>Yuyang Zhou</name>
+    </author>
+    <author>
+      <name>Y. X. Zhu</name>
+    </author>
+    <author>
+      <name>Yanhong Xu</name>
+    </author>
+    <author>
+      <name>Yanping Huang</name>
+    </author>
+    <author>
+      <name>Yaohui Li</name>
+    </author>
+    <author>
+      <name>Yi Zheng</name>
+    </author>
+    <author>
+      <name>Yuchen Zhu</name>
+    </author>
+    <author>
+      <name>Yunxian Ma</name>
+    </author>
+    <author>
+      <name>Ying Tang</name>
+    </author>
+    <author>
+      <name>Yukun Zha</name>
+    </author>
+    <author>
+      <name>Yuting Yan</name>
+    </author>
+    <author>
+      <name>Z. Z. Ren</name>
+    </author>
+    <author>
+      <name>Zehui Ren</name>
+    </author>
+    <author>
+      <name>Zhangli Sha</name>
+    </author>
+    <author>
+      <name>Zhe Fu</name>
+    </author>
+    <author>
+      <name>Zhean Xu</name>
+    </author>
+    <author>
+      <name>Zhenda Xie</name>
+    </author>
+    <author>
+      <name>Zhengyan Zhang</name>
+    </author>
+    <author>
+      <name>Zhewen Hao</name>
+    </author>
+    <author>
+      <name>Zhicheng Ma</name>
+    </author>
+    <author>
+      <name>Zhigang Yan</name>
+    </author>
+    <author>
+      <name>Zhiyu Wu</name>
+    </author>
+    <author>
+      <name>Zihui Gu</name>
+    </author>
+    <author>
+      <name>Zijia Zhu</name>
+    </author>
+    <author>
+      <name>Zijun Liu</name>
+    </author>
+    <author>
+      <name>Zilin Li</name>
+    </author>
+    <author>
+      <name>Ziwei Xie</name>
+    </author>
+    <author>
+      <name>Ziyang Song</name>
+    </author>
+    <author>
+      <name>Zizheng Pan</name>
+    </author>
+    <author>
+      <name>Zhen Huang</name>
+    </author>
+    <author>
+      <name>Zhipeng Xu</name>
+    </author>
+    <author>
+      <name>Zhongyu Zhang</name>
+    </author>
+    <author>
+      <name>Zhen Zhang</name>
+    </author>
+    <arxiv:doi>10.1038/s41586-025-09422-z</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1038/s41586-025-09422-z" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.13447v1</id>
+    <title>Enhancing Chest X-ray Classification through Knowledge Injection in Cross-Modality Learning</title>
+    <updated>2025-02-19T05:45:56Z</updated>
+    <link href="https://arxiv.org/abs/2502.13447v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.13447v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The integration of artificial intelligence in medical imaging has shown tremendous potential, yet the relationship between pre-trained knowledge and performance in cross-modality learning remains unclear. This study investigates how explicitly injecting medical knowledge into the learning process affects the performance of cross-modality classification, focusing on Chest X-ray (CXR) images. We introduce a novel Set Theory-based knowledge injection framework that generates captions for CXR images with controllable knowledge granularity. Using this framework, we fine-tune CLIP model on captions with varying levels of medical information. We evaluate the model's performance through zero-shot classification on the CheXpert dataset, a benchmark for CXR classification. Our results demonstrate that injecting fine-grained medical knowledge substantially improves classification accuracy, achieving 72.5\% compared to 49.9\% when using human-generated captions. This highlights the crucial role of domain-specific knowledge in medical cross-modality learning. Furthermore, we explore the influence of knowledge density and the use of domain-specific Large Language Models (LLMs) for caption generation, finding that denser knowledge and specialized LLMs contribute to enhanced performance. This research advances medical image analysis by demonstrating the effectiveness of knowledge injection for improving automated CXR classification, paving the way for more accurate and reliable diagnostic tools.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-19T05:45:56Z</published>
+    <arxiv:comment>Accepted by ICASSP'25</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yang Yan</name>
+    </author>
+    <author>
+      <name>Bingqing Yue</name>
+    </author>
+    <author>
+      <name>Qiaxuan Li</name>
+    </author>
+    <author>
+      <name>Man Huang</name>
+    </author>
+    <author>
+      <name>Jingyu Chen</name>
+    </author>
+    <author>
+      <name>Zhenzhong Lan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.09986v5</id>
+    <title>Statistical description and dimension reduction of continuous time categorical trajectories with multivariate functional principal components</title>
+    <updated>2026-05-03T14:27:32Z</updated>
+    <link href="https://arxiv.org/abs/2502.09986v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.09986v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Getting tools that allow simple representations and comparisons of a set of categorical trajectories is of major interest for statisticians. Without loosing any information, we associate to each state a binary random indicator function, taking values in $\{0,1\}$, and turn the problem of statistical description of the categorical trajectories into a multivariate functional principal components analysis. This viewpoint encompasses experimental frameworks where two or more states can be observed simultaneously. The sample paths being piecewise constant, with a finite number of jumps, this a rare case in functional data analysis in which the trajectories are not supposed to be continuous and can be observed exhaustively. Under the weak hypothesis assuming only continuity in probability of the $0-1$ trajectories, the means and the (multivariate) covariance function are continuous and have interpretations in terms of departure from independence of the joint probabilities. Considering a functional data point of view, we show that the binary trajectories, which are right-continuous functions with left-hand limits, can be seen as random elements in the Hilbert space of square integrable functions. The multivariate functional principal components are simple to interpret and we show that we can get consistent estimators of the mean trajectories and the covariance functions under weak regularity assumptions. The ability of the approach to represent categorical trajectories in a small dimension space is illustrated on a data set of sensory perceptions, considering different gustometer-controlled stimuli experiments.</summary>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-14T08:15:17Z</published>
+    <arxiv:primary_category term="stat.ME"/>
+    <author>
+      <name>Hervé Cardot</name>
+    </author>
+    <author>
+      <name>Caroline Peltier</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.09680v1</id>
+    <title>SPOT: Spatio-Temporal Pattern Mining and Optimization for Load Consolidation in Freight Transportation Networks</title>
+    <updated>2025-04-13T18:14:38Z</updated>
+    <link href="https://arxiv.org/abs/2504.09680v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.09680v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Freight consolidation has significant potential to reduce transportation costs and mitigate congestion and pollution. An effective load consolidation plan relies on carefully chosen consolidation points to ensure alignment with existing transportation management processes, such as driver scheduling, personnel planning, and terminal operations. This complexity represents a significant challenge when searching for optimal consolidation strategies. Traditional optimization-based methods provide exact solutions, but their computational complexity makes them impractical for large-scale instances and they fail to leverage historical data. Machine learning-based approaches address these issues but often ignore operational constraints, leading to infeasible consolidation plans.
+  This work proposes SPOT, an end-to-end approach that integrates the benefits of machine learning (ML) and optimization for load consolidation. The ML component plays a key role in the planning phase by identifying the consolidation points through spatio-temporal clustering and constrained frequent itemset mining, while the optimization selects the most cost-effective feasible consolidation routes for a given operational day. Extensive experiments conducted on industrial load data demonstrate that SPOT significantly reduces travel distance and transportation costs (by about 50% on large terminals) compared to the existing industry-standard load planning strategy and a neighborhood-based heuristic. Moreover, the ML component provides valuable tactical-level insights by identifying frequently recurring consolidation opportunities that guide proactive planning. In addition, SPOT is computationally efficient and can be easily scaled to accommodate large transportation networks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-13T18:14:38Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Sikai Cheng</name>
+    </author>
+    <author>
+      <name>Amira Hijazi</name>
+    </author>
+    <author>
+      <name>Jeren Konak</name>
+    </author>
+    <author>
+      <name>Alan Erera</name>
+    </author>
+    <author>
+      <name>Pascal Van Hentenryck</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.20231v1</id>
+    <title>Dynamics of Algorithmic Content Amplification on TikTok</title>
+    <updated>2025-03-26T04:54:24Z</updated>
+    <link href="https://arxiv.org/abs/2503.20231v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.20231v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Intelligent algorithms increasingly shape the content we encounter and engage with online. TikTok's For You feed exemplifies extreme algorithm-driven curation, tailoring the stream of video content almost exclusively based on users' explicit and implicit interactions with the platform. Despite growing attention, the dynamics of content amplification on TikTok remain largely unquantified. How quickly, and to what extent, does TikTok's algorithm amplify content aligned with users' interests? To address these questions, we conduct a sock-puppet audit, deploying bots with different interests to engage with TikTok's "For You" feed. Our findings reveal that content aligned with the bots' interests undergoes strong amplification, with rapid reinforcement typically occurring within the first 200 videos watched. While amplification is consistently observed across all interests, its intensity varies by interest, indicating the emergence of topic-specific biases. Time series analyses and Markov models uncover distinct phases of recommendation dynamics, including persistent content reinforcement and a gradual decline in content diversity over time. Although TikTok's algorithm preserves some content diversity, we find a strong negative correlation between amplification and exploration: as the amplification of interest-aligned content increases, engagement with unseen hashtags declines. These findings contribute to discussions on socio-algorithmic feedback loops in the digital age and the trade-offs between personalization and content diversity.</summary>
+    <category term="physics.soc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-26T04:54:24Z</published>
+    <arxiv:comment>34 pages</arxiv:comment>
+    <arxiv:primary_category term="physics.soc-ph"/>
+    <author>
+      <name>Fabian Baumann</name>
+    </author>
+    <author>
+      <name>Nipun Arora</name>
+    </author>
+    <author>
+      <name>Iyad Rahwan</name>
+    </author>
+    <author>
+      <name>Agnieszka Czaplicka</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.22182v2</id>
+    <title>Sell It Before You Make It: Revolutionizing E-Commerce with Personalized AI-Generated Items</title>
+    <updated>2025-12-19T06:24:33Z</updated>
+    <link href="https://arxiv.org/abs/2503.22182v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.22182v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>E-commerce has revolutionized retail, yet its traditional workflows remain inefficient, with significant resource costs tied to product design and inventory. This paper introduces a novel system deployed at Alibaba that uses AI-generated items (AIGI) to address these challenges with personalized text-to-image generation for e-commerce product design. AIGI enables an innovative business mode called "sell it before you make it", where merchants can design fashion items and generate photorealistic images with digital models based on textual descriptions. Only when the items have received a certain number of orders, do the merchants start to produce them, which largely reduces reliance on physical prototypes and thus accelerates time to market. For such a promising application, we identify the underlying key scientific challenge, i.e., capturing users' group-level personalized preferences towards multiple generated images. To this end, we propose a Personalized Group-Level Preference Alignment Framework for Diffusion Models (PerFusion). We first design PerFusion Reward Model for user preference estimation with a feature-crossing-based personalized plug-in. Then we develop PerFusion with a personalized adaptive network to model diverse preferences across users, and meanwhile derive the group-level preference optimization objective to model comparative behaviors among multiple images. Both offline and online experiments demonstrate the effectiveness of our proposed algorithm. The AI-generated items achieve over 13% relative improvements for both click-through rate and conversion rate, as well as 7.9% decrease in return rate, compared to their human-designed counterparts, validating the transformative potential of AIGI for e-commerce platforms.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-28T07:00:33Z</published>
+    <arxiv:comment>Accepted by KDD 2026 ADS Track</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Jianghao Lin</name>
+    </author>
+    <author>
+      <name>Peng Du</name>
+    </author>
+    <author>
+      <name>Jiaqi Liu</name>
+    </author>
+    <author>
+      <name>Weite Li</name>
+    </author>
+    <author>
+      <name>Yong Yu</name>
+    </author>
+    <author>
+      <name>Weinan Zhang</name>
+    </author>
+    <author>
+      <name>Yang Cao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.06472v2</id>
+    <title>KARMA: Leveraging Multi-Agent LLMs for Automated Knowledge Graph Enrichment</title>
+    <updated>2026-01-11T02:16:42Z</updated>
+    <link href="https://arxiv.org/abs/2502.06472v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.06472v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Maintaining comprehensive and up-to-date knowledge graphs (KGs) is critical for modern AI systems, but manual curation struggles to scale with the rapid growth of scientific literature. This paper presents KARMA, a novel framework employing multi-agent large language models (LLMs) to automate KG enrichment through structured analysis of unstructured text. Our approach employs nine collaborative agents, spanning entity discovery, relation extraction, schema alignment, and conflict resolution that iteratively parse documents, verify extracted knowledge, and integrate it into existing graph structures while adhering to domain-specific schema. Experiments on 1,200 PubMed articles from three different domains demonstrate the effectiveness of KARMA in knowledge graph enrichment, with the identification of up to 38,230 new entities while achieving 83.1\% LLM-verified correctness and reducing conflict edges by 18.6\% through multi-layer assessments.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-10T13:51:36Z</published>
+    <arxiv:comment>24 pages, 3 figures, 2 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>Spotlight paper of NeurIPS 2025</arxiv:journal_ref>
+    <author>
+      <name>Yuxing Lu</name>
+    </author>
+    <author>
+      <name>Wei Wu</name>
+    </author>
+    <author>
+      <name>Xukai Zhao</name>
+    </author>
+    <author>
+      <name>Rui Peng</name>
+    </author>
+    <author>
+      <name>Jinzhuo Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.19086v5</id>
+    <title>Forecasting intermittent time series with Gaussian Processes and Tweedie likelihood</title>
+    <updated>2025-11-10T07:58:55Z</updated>
+    <link href="https://arxiv.org/abs/2502.19086v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.19086v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We adopt Gaussian Processes (GPs) as latent functions for probabilistic forecasting of intermittent time series. The model is trained in a Bayesian framework that accounts for the uncertainty about the latent function. We couple the latent GP variable with two types of forecast distributions: the negative binomial (NegBinGP) and the Tweedie distribution (TweedieGP). While the negative binomial has already been used in forecasting intermittent time series, this is the first time in which a fully parameterized Tweedie density is used for intermittent time series. We properly evaluate the Tweedie density, which has both a point mass at zero and heavy tails, avoiding simplifying assumptions made in existing models. We test our models on thousands of intermittent count time series. Results show that our models provide consistently better probabilistic forecasts than the competitors. In particular, TweedieGP obtains the best estimates of the highest quantiles, thus showing that it is more flexible than NegBinGP.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-26T12:31:56Z</published>
+    <arxiv:comment>Published in International Journal of Forecasting</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <arxiv:journal_ref>International Journal of Forecasting (2025)</arxiv:journal_ref>
+    <author>
+      <name>Stefano Damato</name>
+    </author>
+    <author>
+      <name>Dario Azzimonti</name>
+    </author>
+    <author>
+      <name>Giorgio Corani</name>
+    </author>
+    <arxiv:doi>10.1016/j.ijforecast.2025.10.001</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.ijforecast.2025.10.001" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.14802v2</id>
+    <title>From RAG to Memory: Non-Parametric Continual Learning for Large Language Models</title>
+    <updated>2025-06-19T21:34:45Z</updated>
+    <link href="https://arxiv.org/abs/2502.14802v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.14802v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Our ability to continuously acquire, organize, and leverage knowledge is a key feature of human intelligence that AI systems must approximate to unlock their full potential. Given the challenges in continual learning with large language models (LLMs), retrieval-augmented generation (RAG) has become the dominant way to introduce new information. However, its reliance on vector retrieval hinders its ability to mimic the dynamic and interconnected nature of human long-term memory. Recent RAG approaches augment vector embeddings with various structures like knowledge graphs to address some of these gaps, namely sense-making and associativity. However, their performance on more basic factual memory tasks drops considerably below standard RAG. We address this unintended deterioration and propose HippoRAG 2, a framework that outperforms standard RAG comprehensively on factual, sense-making, and associative memory tasks. HippoRAG 2 builds upon the Personalized PageRank algorithm used in HippoRAG and enhances it with deeper passage integration and more effective online use of an LLM. This combination pushes this RAG system closer to the effectiveness of human long-term memory, achieving a 7% improvement in associative memory tasks over the state-of-the-art embedding model while also exhibiting superior factual knowledge and sense-making memory capabilities. This work paves the way for non-parametric continual learning for LLMs. Code and data are available at https://github.com/OSU-NLP-Group/HippoRAG.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-20T18:26:02Z</published>
+    <arxiv:comment>ICML 2025. Code and data are available at: https://github.com/OSU-NLP-Group/HippoRAG</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Bernal Jiménez Gutiérrez</name>
+    </author>
+    <author>
+      <name>Yiheng Shu</name>
+    </author>
+    <author>
+      <name>Weijian Qi</name>
+    </author>
+    <author>
+      <name>Sizhe Zhou</name>
+    </author>
+    <author>
+      <name>Yu Su</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.12345v3</id>
+    <title>General Table Question Answering via Answer-Formula Joint Generation</title>
+    <updated>2025-08-31T14:11:57Z</updated>
+    <link href="https://arxiv.org/abs/2503.12345v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.12345v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Advanced table question answering (TableQA) methods prompt large language models (LLMs) to generate answer text, SQL query, Python code, or custom operation, which impressively improve the complex reasoning problems in the TableQA task. However, these methods lack the versatility to cope with specific question types or table structures. In contrast, the Spreadsheet Formula, the widely used and well-defined operation language for tabular data, has not been thoroughly explored to solve TableQA. In this paper, we first attempt to use the Formula as the executable representation for solving complex reasoning on tables with different structures. Specifically, we construct \texttt{FromulaQA}, a large Formula-annotated TableQA dataset from existing datasets. In addition, we propose \texttt{TabAF}, a general table answering framework to solve multiple types of tasks over multiple types of tables simultaneously, which decodes answers and Formulas with a single LLM backbone. Extensive experiments demonstrate the versatility and generalization of \texttt{TabAF}. Under the same model size, \texttt{TabAF} achieves new state-of-the-art performance on the WikiTableQuestion, HiTab, and TabFact.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-16T03:51:06Z</published>
+    <arxiv:comment>work in progress</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zhongyuan Wang</name>
+    </author>
+    <author>
+      <name>Richong Zhang</name>
+    </author>
+    <author>
+      <name>Zhijie Nie</name>
+    </author>
+    <author>
+      <name>Hangyu Mao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.08834v5</id>
+    <title>Rex: A Family of Reversible Exponential (Stochastic) Runge-Kutta Solvers</title>
+    <updated>2026-08-04T14:52:59Z</updated>
+    <link href="https://arxiv.org/abs/2502.08834v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.08834v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deep generative models based on neural differential equations have become state-of-the-art for many generation tasks. These models rely on ODE/SDE solvers that integrate from a prior distribution to the data distribution; in many applications it is also highly desirable to integrate in the inverse direction. Standard solvers, however, accumulate discretization errors that prohibit exact inversion, an inaccuracy that is unacceptable in precision-critical applications. Existing inversion methods suffer from poor stability and low order of convergence, and are strictly limited to the ODE setting. In this work, we propose Rex, a family of reversible exponential (stochastic) Runge-Kutta solvers obtained by applying Lawson methods to convert any explicit (stochastic) Runge-Kutta scheme into an algebraically reversible one for both diffusion ODEs and SDEs. Beyond a rigorous theoretical analysis -- establishing arbitrary-order convergence and a non-zero region of linear stability -- we empirically demonstrate that Rex achieves near-machine-precision reconstruction and improves Boltzmann sampling with flow models as well as image generation and editing with diffusion models.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-12T22:51:54Z</published>
+    <arxiv:comment>Accepted as an Oral presentation at ICML 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Zander W. Blasingame</name>
+    </author>
+    <author>
+      <name>Chen Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.12823v1</id>
+    <title>To Measure or Not: A Cost-Sensitive, Selective Measuring Environment for Agricultural Management Decisions with Reinforcement Learning</title>
+    <updated>2025-01-22T12:03:53Z</updated>
+    <link href="https://arxiv.org/abs/2501.12823v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.12823v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Farmers rely on in-field observations to make well-informed crop management decisions to maximize profit and minimize adverse environmental impact. However, obtaining real-world crop state measurements is labor-intensive, time-consuming and expensive. In most cases, it is not feasible to gather crop state measurements before every decision moment. Moreover, in previous research pertaining to farm management optimization, these observations are often assumed to be readily available without any cost, which is unrealistic. Hence, enabling optimization without the need to have temporally complete crop state observations is important. An approach to that problem is to include measuring as part of decision making. As a solution, we apply reinforcement learning (RL) to recommend opportune moments to simultaneously measure crop features and apply nitrogen fertilizer. With realistic considerations, we design an RL environment with explicit crop feature measuring costs. While balancing costs, we find that an RL agent, trained with recurrent PPO, discovers adaptive measuring policies that follow critical crop development stages, with results aligned by what domain experts would consider a sensible approach. Our results highlight the importance of measuring when crop feature measurements are not readily available.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-22T12:03:53Z</published>
+    <arxiv:comment>10 pages, 3 figures, accepted after peer-review at the 39th Annual AAAI Conference on Artificial Intelligence, AI for Social Impact Track, February 2025, Philadelphia, Pennsylvania, USA</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hilmy Baja</name>
+    </author>
+    <author>
+      <name>Michiel Kallenberg</name>
+    </author>
+    <author>
+      <name>Ioannis N. Athanasiadis</name>
+    </author>
+    <arxiv:doi>10.1609/aaai.v39i27.34999</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1609/aaai.v39i27.34999" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.12110v11</id>
+    <title>A-MEM: Agentic Memory for LLM Agents</title>
+    <updated>2025-10-08T01:46:37Z</updated>
+    <link href="https://arxiv.org/abs/2502.12110v11" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.12110v11" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While large language model (LLM) agents can effectively use external tools for complex real-world tasks, they require memory systems to leverage historical experiences. Current memory systems enable basic storage and retrieval but lack sophisticated memory organization, despite recent attempts to incorporate graph databases. Moreover, these systems' fixed operations and structures limit their adaptability across diverse tasks. To address this limitation, this paper proposes a novel agentic memory system for LLM agents that can dynamically organize memories in an agentic way. Following the basic principles of the Zettelkasten method, we designed our memory system to create interconnected knowledge networks through dynamic indexing and linking. When a new memory is added, we generate a comprehensive note containing multiple structured attributes, including contextual descriptions, keywords, and tags. The system then analyzes historical memories to identify relevant connections, establishing links where meaningful similarities exist. Additionally, this process enables memory evolution - as new memories are integrated, they can trigger updates to the contextual representations and attributes of existing historical memories, allowing the memory network to continuously refine its understanding. Our approach combines the structured organization principles of Zettelkasten with the flexibility of agent-driven decision making, allowing for more adaptive and context-aware memory management. Empirical experiments on six foundation models show superior improvement against existing SOTA baselines. The source code for evaluating performance is available at https://github.com/WujiangXu/A-mem, while the source code of the agentic memory system is available at https://github.com/WujiangXu/A-mem-sys.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-17T18:36:14Z</published>
+    <arxiv:comment>Advances in Neural Information Processing Systems (NeurIPS 2025)</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Wujiang Xu</name>
+    </author>
+    <author>
+      <name>Zujie Liang</name>
+    </author>
+    <author>
+      <name>Kai Mei</name>
+    </author>
+    <author>
+      <name>Hang Gao</name>
+    </author>
+    <author>
+      <name>Juntao Tan</name>
+    </author>
+    <author>
+      <name>Yongfeng Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.11551v4</id>
+    <title>PIKE-RAG: sPecIalized KnowledgE and Rationale Augmented Generation</title>
+    <updated>2025-03-12T05:09:10Z</updated>
+    <link href="https://arxiv.org/abs/2501.11551v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.11551v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Despite notable advancements in Retrieval-Augmented Generation (RAG) systems that expand large language model (LLM) capabilities through external retrieval, these systems often struggle to meet the complex and diverse needs of real-world industrial applications. The reliance on retrieval alone proves insufficient for extracting deep, domain-specific knowledge performing in logical reasoning from specialized corpora. To address this, we introduce sPecIalized KnowledgE and Rationale Augmentation Generation (PIKE-RAG), focusing on extracting, understanding, and applying specialized knowledge, while constructing coherent rationale to incrementally steer LLMs toward accurate responses. Recognizing the diverse challenges of industrial tasks, we introduce a new paradigm that classifies tasks based on their complexity in knowledge extraction and application, allowing for a systematic evaluation of RAG systems' problem-solving capabilities. This strategic approach offers a roadmap for the phased development and enhancement of RAG systems, tailored to meet the evolving demands of industrial applications. Furthermore, we propose knowledge atomizing and knowledge-aware task decomposition to effectively extract multifaceted knowledge from the data chunks and iteratively construct the rationale based on original query and the accumulated knowledge, respectively, showcasing exceptional performance across various benchmarks.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-20T15:39:39Z</published>
+    <arxiv:comment>38 pages, 18 figures, technique report</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jinyu Wang</name>
+    </author>
+    <author>
+      <name>Jingjing Fu</name>
+    </author>
+    <author>
+      <name>Rui Wang</name>
+    </author>
+    <author>
+      <name>Lei Song</name>
+    </author>
+    <author>
+      <name>Jiang Bian</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.09217v1</id>
+    <title>Evaluating the Generalizability of LLMs in Automated Program Repair</title>
+    <updated>2025-03-12T10:03:58Z</updated>
+    <link href="https://arxiv.org/abs/2503.09217v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.09217v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LLM-based automated program repair methods have attracted significant attention for their state-of-the-art performance. However, they were primarily evaluated on a few well known datasets like Defects4J, raising questions about their effectiveness on new datasets. In this study, we evaluate 11 top-performing LLMs on DEFECTS4J-TRANS, a new dataset derived from transforming Defects4J while maintaining the original semantics. Results from experiments on both Defects4J and DEFECTS4J-TRANS show that all studied LLMs have limited generalizability in APR tasks, with the average number of correct and plausible patches decreasing by 49.48% and 42.90%, respectively, on DEFECTS4J-TRANS. Further investigation into incorporating additional repair-relevant information in repair prompts reveals that, although this information significantly enhances the LLMs' capabilities (increasing the number of correct and plausible patches by up to 136.67% and 121.82%, respectively), performance still falls short of their original results. This indicates that prompt engineering alone is insufficient to substantially enhance LLMs' repair capabilities. Based on our study, we also offer several recommendations for future research.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-12T10:03:58Z</published>
+    <arxiv:comment>5 pages, 1 figure, to be published in ICSE2025-NIER</arxiv:comment>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Fengjie Li</name>
+    </author>
+    <author>
+      <name>Jiajun Jiang</name>
+    </author>
+    <author>
+      <name>Jiajun Sun</name>
+    </author>
+    <author>
+      <name>Hongyu Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.21629v1</id>
+    <title>ClusterSC: Advancing Synthetic Control with Donor Selection</title>
+    <updated>2025-03-27T15:50:32Z</updated>
+    <link href="https://arxiv.org/abs/2503.21629v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.21629v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In causal inference with observational studies, synthetic control (SC) has emerged as a prominent tool. SC has traditionally been applied to aggregate-level datasets, but more recent work has extended its use to individual-level data. As they contain a greater number of observed units, this shift introduces the curse of dimensionality to SC. To address this, we propose Cluster Synthetic Control (ClusterSC), based on the idea that groups of individuals may exist where behavior aligns internally but diverges between groups. ClusterSC incorporates a clustering step to select only the relevant donors for the target. We provide theoretical guarantees on the improvements induced by ClusterSC, supported by empirical demonstrations on synthetic and real-world datasets. The results indicate that ClusterSC consistently outperforms classical SC approaches.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-27T15:50:32Z</published>
+    <arxiv:comment>35 pages, 11 figures, to be published in Proceedings of The 28th International Conference on Artificial Intelligence and Statistics (AIStats) 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Saeyoung Rho</name>
+    </author>
+    <author>
+      <name>Andrew Tang</name>
+    </author>
+    <author>
+      <name>Noah Bergam</name>
+    </author>
+    <author>
+      <name>Rachel Cummings</name>
+    </author>
+    <author>
+      <name>Vishal Misra</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.06995v2</id>
+    <title>Epistemic Uncertainty in Conformal Scores: A Unified Approach</title>
+    <updated>2025-06-10T16:12:20Z</updated>
+    <link href="https://arxiv.org/abs/2502.06995v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.06995v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Conformal prediction methods create prediction bands with distribution-free guarantees but do not explicitly capture epistemic uncertainty, which can lead to overconfident predictions in data-sparse regions. Although recent conformal scores have been developed to address this limitation, they are typically designed for specific tasks, such as regression or quantile regression. Moreover, they rely on particular modeling choices for epistemic uncertainty, restricting their applicability. We introduce $\texttt{EPICSCORE}$, a model-agnostic approach that enhances any conformal score by explicitly integrating epistemic uncertainty. Leveraging Bayesian techniques such as Gaussian Processes, Monte Carlo Dropout, or Bayesian Additive Regression Trees, $\texttt{EPICSCORE}$ adaptively expands predictive intervals in regions with limited data while maintaining compact intervals where data is abundant. As with any conformal method, it preserves finite-sample marginal coverage. Additionally, it also achieves asymptotic conditional coverage. Experiments demonstrate its good performance compared to existing methods. Designed for compatibility with any Bayesian model, but equipped with distribution-free guarantees, $\texttt{EPICSCORE}$ provides a general-purpose framework for uncertainty quantification in prediction problems.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-10T19:42:54Z</published>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Luben M. C. Cabezas</name>
+    </author>
+    <author>
+      <name>Vagner S. Santos</name>
+    </author>
+    <author>
+      <name>Thiago R. Ramos</name>
+    </author>
+    <author>
+      <name>Rafael Izbicki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.07612v1</id>
+    <title>Fuzzy Variational Calculus in Linearly Correlated Space: Part I</title>
+    <updated>2025-02-13T22:36:51Z</updated>
+    <link href="https://arxiv.org/abs/2503.07612v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.07612v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This article is the first part of series of articles that aim to present the foundations for fuzzy variational calculus for functions taking values in the space of linearly correlated fuzzy numbers $\mathbb{R}_{\mathcal{F}(A)}$. Recall that the space $\mathbb{R}_{\mathcal{F}(A)}$ is composed by all sums of a real number $r$ and a fuzzy number $qA$, where $A$ is a given asymmetric fuzzy number. Two advantages of this space are that it can be equipped with a Banach space structure and, similar to additive models in Statistics, its elements can be interpreted as the sum of a deterministic expected/predictable value with an uncertain/noise component. The foundation of variational calculus theory requires the definition and establishement of many concepts and results. This aritcle presents a total order relation on $\mathbb{R}_{\mathcal{F}(A)}$ for wihch the notions of local minimal and maximal of a $\mathbb{R}_{\mathcal{F}(A)}$-valued function $f$ can be derived. We present a fuzzy version of the first and second optimality conditions in terms of derivatives of $f$. Finally, we present a generalized fuzzy version of du Bois-Reymond lemma which is essential in variational calculus theory.</summary>
+    <category term="math.GM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-13T22:36:51Z</published>
+    <arxiv:primary_category term="math.GM"/>
+    <author>
+      <name>Gastão S. F. Frederico</name>
+    </author>
+    <author>
+      <name>Estevão Esmi</name>
+    </author>
+    <author>
+      <name>Laécio C. Barros</name>
+    </author>
+    <arxiv:doi>10.1016/j.fss.2025.109431</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.fss.2025.109431" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.16071v1</id>
+    <title>Improving Deep Assertion Generation via Fine-Tuning Retrieval-Augmented Pre-trained Language Models</title>
+    <updated>2025-02-22T04:17:04Z</updated>
+    <link href="https://arxiv.org/abs/2502.16071v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.16071v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Unit testing validates the correctness of the units of the software system under test and serves as the cornerstone in improving software quality and reliability. To reduce manual efforts in writing unit tests, some techniques have been proposed to automatically generate test assertions, with recent integration-based approaches considered state-of-the-art. Despite being promising, such integration-based approaches face several limitations, including reliance on lexical matching for assertion retrieval and a limited training corpus for assertion generation.
+  This paper proposes a novel retrieval-augmented deep assertion generation approach, namely RetriGen, based on a hybrid retriever and a pre-trained language model (PLM)-based generator. Given a focal-test, RetriGen first builds a hybrid assertion retriever to search for the most relevant Test-Assert Pair from external codebases. The retrieval process considers lexical similarity and semantical similarity via a token-based and an embedding-based retriever, respectively. RetriGen then treats assertion generation as a sequence-to-sequence task and designs a PLM-based assertion generator to predict a correct assertion. We conduct extensive experiments to evaluate RetriGen against six state-of-the-art approaches across two large-scale datasets and two metrics. The results demonstrate that RetriGen achieves 57.66% accuracy and 73.24% CodeBLEU, outperforming all baselines with average improvements of 50.66% and 14.14%, respectively.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-22T04:17:04Z</published>
+    <arxiv:comment>Accepted to ACM Transactions on Software Engineering and Methodology (TOSEM 2025)</arxiv:comment>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Quanjun Zhang</name>
+    </author>
+    <author>
+      <name>Chunrong Fang</name>
+    </author>
+    <author>
+      <name>Yi Zheng</name>
+    </author>
+    <author>
+      <name>Yaxin Zhang</name>
+    </author>
+    <author>
+      <name>Yuan Zhao</name>
+    </author>
+    <author>
+      <name>Rubing Huang</name>
+    </author>
+    <author>
+      <name>Jianyi Zhou</name>
+    </author>
+    <author>
+      <name>Yun Yang</name>
+    </author>
+    <author>
+      <name>Tao Zheng</name>
+    </author>
+    <author>
+      <name>Zhenyu Chen</name>
+    </author>
+  </entry>
+</feed>

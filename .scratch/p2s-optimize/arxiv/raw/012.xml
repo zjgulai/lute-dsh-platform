@@ -1,0 +1,1052 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/6Po6Xujt8WSqfPm+gnyx3Wp2MXA</id>
+  <title>arXiv Query: search_query=&amp;id_list=2312.09823,2312.09841,2312.09847,2312.10699,2312.11642,2312.12750,2312.14557,2401.00368,2401.05312,2401.05823,2401.05847,2401.06195,2401.07823,2401.08234,2401.08290,2401.08765,2401.08825,2401.08834,2401.08875,2401.08923,2401.09234,2401.09237,2401.09416,2401.09823,2401.10234,2401.10827,2401.11234,2401.11823,2401.11903,2401.11924,2401.12038,2401.12834,2401.13096,2401.13919,2401.14523,2401.14823,2401.15285,2401.15884,2401.15892,2401.17823&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:43:03Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2312.09823,2312.09841,2312.09847,2312.10699,2312.11642,2312.12750,2312.14557,2401.00368,2401.05312,2401.05823,2401.05847,2401.06195,2401.07823,2401.08234,2401.08290,2401.08765,2401.08825,2401.08834,2401.08875,2401.08923,2401.09234,2401.09237,2401.09416,2401.09823,2401.10234,2401.10827,2401.11234,2401.11823,2401.11903,2401.11924,2401.12038,2401.12834,2401.13096,2401.13919,2401.14523,2401.14823,2401.15285,2401.15884,2401.15892,2401.17823" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.14823v1</id>
+    <title>A Deep Reinforcement Learning-based Approach for Adaptive Handover Protocols in Mobile Networks</title>
+    <updated>2024-01-26T12:51:26Z</updated>
+    <link href="https://arxiv.org/abs/2401.14823v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.14823v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Due to an ever-increasing number of participants and new areas of application, the demands on mobile communications systems are continually increasing. In order to deliver higher data rates, enable mobility and guarantee QoS requirements of subscribers, these systems and the protocols used are becoming more complex. By using higher frequency spectrums, cells become smaller and more base stations have to be deployed. This leads to an increased number of handovers of user equipments between base stations in order to enable mobility, resulting in potentially more frequent radio link failures and rate reduction. The persistent switching between the same base stations, commonly referred to as "ping-pong", leads to a consistent reduction of data rates. In this work, we propose a method for handover optimization by using proximal policy optimization in mobile communications to learn an adaptive handover protocol. The resulting agent is highly flexible regarding different travelling speeds of user equipments, while outperforming the standard 5G NR handover protocol by 3GPP in terms of average data rate and number of radio link failures. Furthermore, the design of the proposed environment demonstrates remarkable accuracy, ensuring a fair comparison with the standard 3GPP protocol.</summary>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-26T12:51:26Z</published>
+    <arxiv:comment>Submitted to EuCNC</arxiv:comment>
+    <arxiv:primary_category term="cs.NI"/>
+    <author>
+      <name>Peter J. Gu</name>
+    </author>
+    <author>
+      <name>Johannes Voigt</name>
+    </author>
+    <author>
+      <name>Peter M. Rost</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.11642v1</id>
+    <title>The Challenge of Measuring Asteroid Masses with Gaia DR2 astrometry</title>
+    <updated>2023-12-18T19:00:14Z</updated>
+    <link href="https://arxiv.org/abs/2312.11642v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.11642v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Gaia second data release contains high-accuracy astrometric measurements of thousands of solar system bodies. These measurements raise the possibility of determining asteroid masses by modeling scattering events between massive objects observed by Gaia. In this paper, we identify promising encounters between small asteroids that occur during the second data release and quantify the various errors involved in mass determination. We argue that in the best case, Gaia astrometry can provide constraints as tight as 1 km on the positions of asteroids. Further, we find that even with general relativistic corrections, integrations of the solar system accumulate 1 km errors after 700 days. While not a problem for modeling DR2 astrometry, future Gaia data releases may require models accounting for additional effects such as gravitational harmonics of the sun and planets. Additionally, due to sub-optimal astrometric uncertainty, the geometry of the observations, and the Gaia observing pattern result in much looser constraints in most cases, with constraints being several orders of magnitude weaker in some cases. This suggests that accurate mass determination for the smallest asteroids will require additional observations, either from future Gaia data releases or from other sources. We provide a list of encounters that are most promising for further investigation.</summary>
+    <category term="astro-ph.EP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-18T19:00:14Z</published>
+    <arxiv:primary_category term="astro-ph.EP"/>
+    <arxiv:journal_ref>Planet. Sci. J. 4 239 (2023)</arxiv:journal_ref>
+    <author>
+      <name>Zachary Murray</name>
+    </author>
+    <arxiv:doi>10.3847/PSJ/ad0be5</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.3847/PSJ/ad0be5" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.13096v1</id>
+    <title>Probabilistic Demand Forecasting with Graph Neural Networks</title>
+    <updated>2024-01-23T21:20:48Z</updated>
+    <link href="https://arxiv.org/abs/2401.13096v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.13096v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Demand forecasting is a prominent business use case that allows retailers to optimize inventory planning, logistics, and core business decisions. One of the key challenges in demand forecasting is accounting for relationships and interactions between articles. Most modern forecasting approaches provide independent article-level predictions that do not consider the impact of related articles. Recent research has attempted addressing this challenge using Graph Neural Networks (GNNs) and showed promising results. This paper builds on previous research on GNNs and makes two contributions. First, we integrate a GNN encoder into a state-of-the-art DeepAR model. The combined model produces probabilistic forecasts, which are crucial for decision-making under uncertainty. Second, we propose to build graphs using article attribute similarity, which avoids reliance on a pre-defined graph structure. Experiments on three real-world datasets show that the proposed approach consistently outperforms non-graph benchmarks. We also show that our approach produces article embeddings that encode article similarity and demand dynamics and are useful for other downstream business tasks beyond forecasting.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-23T21:20:48Z</published>
+    <arxiv:comment>Preprint of the paper accepted to ECML PKDD 2023 ML4ITS Workshop</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Nikita Kozodoi</name>
+    </author>
+    <author>
+      <name>Elizaveta Zinovyeva</name>
+    </author>
+    <author>
+      <name>Simon Valentin</name>
+    </author>
+    <author>
+      <name>João Pereira</name>
+    </author>
+    <author>
+      <name>Rodrigo Agundez</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.09416v1</id>
+    <title>TextureDreamer: Image-guided Texture Synthesis through Geometry-aware Diffusion</title>
+    <updated>2024-01-17T18:55:49Z</updated>
+    <link href="https://arxiv.org/abs/2401.09416v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.09416v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present TextureDreamer, a novel image-guided texture synthesis method to transfer relightable textures from a small number of input images (3 to 5) to target 3D shapes across arbitrary categories. Texture creation is a pivotal challenge in vision and graphics. Industrial companies hire experienced artists to manually craft textures for 3D assets. Classical methods require densely sampled views and accurately aligned geometry, while learning-based methods are confined to category-specific shapes within the dataset. In contrast, TextureDreamer can transfer highly detailed, intricate textures from real-world environments to arbitrary objects with only a few casually captured images, potentially significantly democratizing texture creation. Our core idea, personalized geometry-aware score distillation (PGSD), draws inspiration from recent advancements in diffuse models, including personalized modeling for texture information extraction, variational score distillation for detailed appearance synthesis, and explicit geometry guidance with ControlNet. Our integration and several essential modifications substantially improve the texture quality. Experiments on real images spanning different categories show that TextureDreamer can successfully transfer highly realistic, semantic meaningful texture to arbitrary objects, surpassing the visual quality of previous state-of-the-art.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-17T18:55:49Z</published>
+    <arxiv:comment>Project page: https://texturedreamer.github.io</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yu-Ying Yeh</name>
+    </author>
+    <author>
+      <name>Jia-Bin Huang</name>
+    </author>
+    <author>
+      <name>Changil Kim</name>
+    </author>
+    <author>
+      <name>Lei Xiao</name>
+    </author>
+    <author>
+      <name>Thu Nguyen-Phuoc</name>
+    </author>
+    <author>
+      <name>Numair Khan</name>
+    </author>
+    <author>
+      <name>Cheng Zhang</name>
+    </author>
+    <author>
+      <name>Manmohan Chandraker</name>
+    </author>
+    <author>
+      <name>Carl S Marshall</name>
+    </author>
+    <author>
+      <name>Zhao Dong</name>
+    </author>
+    <author>
+      <name>Zhengqin Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.08875v2</id>
+    <title>DCRMTA: Unbiased Causal Representation for Multi-touch Attribution</title>
+    <updated>2024-02-05T08:43:29Z</updated>
+    <link href="https://arxiv.org/abs/2401.08875v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.08875v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multi-touch attribution (MTA) currently plays a pivotal role in achieving a fair estimation of the contributions of each advertising touchpoint to-wards conversion behavior, deeply influencing budget allocation and advertising recommenda-tion. Previous works attempted to eliminate the bias caused by user preferences to achieve the unbiased assumption of the conversion model. The multi-model collaboration method is not ef-ficient, and the complete elimination of user in-fluence also eliminates the causal effect of user features on conversion, resulting in limited per-formance of the conversion model. This paper re-defines the causal effect of user features on con-versions and proposes a novel end-to-end ap-proach, Deep Causal Representation for MTA (DCRMTA). Our model focuses on extracting causa features between conversions and users while eliminating confounding variables. Fur-thermore, extensive experiments demonstrate DCRMTA's superior performance in converting prediction across varying data distributions, while also effectively attributing value across dif-ferent advertising channels.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-16T23:16:18Z</published>
+    <arxiv:comment>9 pages, 9 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jiaming Tang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.09847v1</id>
+    <title>Investigating the effect of turbulence on hemolysis through cell-resolved fluid-structure interaction simulations</title>
+    <updated>2023-12-15T14:51:41Z</updated>
+    <link href="https://arxiv.org/abs/2312.09847v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.09847v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Existing hemolysis algorithms are often constructed for laminar flows that expose red blood cells to a constant rate of shear. It remains an open question whether such models are applicable to turbulent flows, where there is a significant variation in shear rate along cell trajectories. To evaluate the effect of turbulence on hemolysis, we perform cell-resolved simulations of red blood cells in turbulent channel flow at $Re_τ=180$ and 360 and compare them against the results obtained from laminar flow simulations at an equivalent wall shear stress. This comparison shows that, while the laminar flow generally induces greater stretch in the cell in a time-averaged sense, cells experience an overall larger deformation in turbulence. This difference is attributed to extreme events in turbulence that occasionally create bursts of high shear conditions, which, consequently, induce a large deformation in the cells. Associating damage with the most extreme deformation regimes, we observe that, in the worst case, the turbulent flow can produce deformation in the cell that is higher than the absolute maximum value in the analogous laminar case approximately 14\% of the time. Additionally, the $Re_τ=180$ universally induced greater deformation in the cells than the $Re_τ= 360$ case, suggesting that increasing the range of scales in the flow does not necessarily yield greater deformation when all other parameters are kept constant. A strong direct correlation ($R&gt;0.8$) between shear rate and deformation metrics was observed in turbulence. The correlation against $Q$-criterion is inverse and weaker ($R\approx -0.26$), but once the shear contribution is subtracted, it improves in terms of areal dilatation ($R\approx -0.6$).</summary>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-15T14:51:41Z</published>
+    <arxiv:comment>27 pages, 9 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.flu-dyn"/>
+    <author>
+      <name>Grant Rydquist</name>
+    </author>
+    <author>
+      <name>Mahdi Esmaily</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.10699v2</id>
+    <title>Some Properties of normal subgroups determined from character tables</title>
+    <updated>2024-04-26T15:18:56Z</updated>
+    <link href="https://arxiv.org/abs/2312.10699v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.10699v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Gcharacter tables of a finite group G were defined before. These tables can be very useful to obtain certain structural information of a normal subgroup from the character table of G. We analyze certain structural properties of normal subgroups which can be determined using their Gcharacter tables. For instance, we prove an extension of the Thompsons theorem from minimal Ginvariant characters of a normal subgroup. We also obtain a variation of Taketas theorem for hypercentral normal subgroups considering their minimal G-invariant characters. This generalization allows us to introduce a new class of nilpotent groups, the class of nMIgroups, whose members verify that its nilpotency class is bounded by the number of irreducible character degrees of the group.</summary>
+    <category term="math.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-17T12:26:08Z</published>
+    <arxiv:primary_category term="math.GR"/>
+    <author>
+      <name>Zeinab Akhlaghi</name>
+    </author>
+    <author>
+      <name>Maria Jose Felipe</name>
+    </author>
+    <author>
+      <name>Kelly Jean-Philippe</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.08923v1</id>
+    <title>Subwavelength Imaging using a Solid-Immersion Diffractive Optical Processor</title>
+    <updated>2024-01-17T02:12:57Z</updated>
+    <link href="https://arxiv.org/abs/2401.08923v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.08923v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Phase imaging is widely used in biomedical imaging, sensing, and material characterization, among other fields. However, direct imaging of phase objects with subwavelength resolution remains a challenge. Here, we demonstrate subwavelength imaging of phase and amplitude objects based on all-optical diffractive encoding and decoding. To resolve subwavelength features of an object, the diffractive imager uses a thin, high-index solid-immersion layer to transmit high-frequency information of the object to a spatially-optimized diffractive encoder, which converts/encodes high-frequency information of the input into low-frequency spatial modes for transmission through air. The subsequent diffractive decoder layers (in air) are jointly designed with the encoder using deep-learning-based optimization, and communicate with the encoder layer to create magnified images of input objects at its output, revealing subwavelength features that would otherwise be washed away due to diffraction limit. We demonstrate that this all-optical collaboration between a diffractive solid-immersion encoder and the following decoder layers in air can resolve subwavelength phase and amplitude features of input objects in a highly compact design. To experimentally demonstrate its proof-of-concept, we used terahertz radiation and developed a fabrication method for creating monolithic multi-layer diffractive processors. Through these monolithically fabricated diffractive encoder-decoder pairs, we demonstrated phase-to-intensity transformations and all-optically reconstructed subwavelength phase features of input objects by directly transforming them into magnified intensity features at the output. This solid-immersion-based diffractive imager, with its compact and cost-effective design, can find wide-ranging applications in bioimaging, endoscopy, sensing and materials characterization.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.app-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-17T02:12:57Z</published>
+    <arxiv:comment>32 Pages, 9 Figures</arxiv:comment>
+    <arxiv:primary_category term="physics.optics"/>
+    <arxiv:journal_ref>eLight (2024)</arxiv:journal_ref>
+    <author>
+      <name>Jingtian Hu</name>
+    </author>
+    <author>
+      <name>Kun Liao</name>
+    </author>
+    <author>
+      <name>Niyazi Ulas Dinc</name>
+    </author>
+    <author>
+      <name>Carlo Gigli</name>
+    </author>
+    <author>
+      <name>Bijie Bai</name>
+    </author>
+    <author>
+      <name>Tianyi Gan</name>
+    </author>
+    <author>
+      <name>Xurong Li</name>
+    </author>
+    <author>
+      <name>Hanlong Chen</name>
+    </author>
+    <author>
+      <name>Xilin Yang</name>
+    </author>
+    <author>
+      <name>Yuhang Li</name>
+    </author>
+    <author>
+      <name>Cagatay Isil</name>
+    </author>
+    <author>
+      <name>Md Sadman Sakib Rahman</name>
+    </author>
+    <author>
+      <name>Jingxi Li</name>
+    </author>
+    <author>
+      <name>Xiaoyong Hu</name>
+    </author>
+    <author>
+      <name>Mona Jarrahi</name>
+    </author>
+    <author>
+      <name>Demetri Psaltis</name>
+    </author>
+    <author>
+      <name>Aydogan Ozcan</name>
+    </author>
+    <arxiv:doi>10.1186/s43593-024-00067-5</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1186/s43593-024-00067-5" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.12038v2</id>
+    <title>A Skew-Symmetric Energy Stable Almost Dissipation Free Formulation of the Compressible Navier-Stokes Equations</title>
+    <updated>2024-05-24T08:45:48Z</updated>
+    <link href="https://arxiv.org/abs/2401.12038v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.12038v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show that a specific skew-symmetric formulation of the nonlinear terms in the compressible Navier-Stokes equations leads to an energy rate in terms of surface integrals only. No dissipative volume integrals contribute to the energy rate. We also discuss boundary conditions that bounds the surface integrals.</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-22T15:24:43Z</published>
+    <arxiv:primary_category term="math.AP"/>
+    <arxiv:journal_ref>Journal of Computational Physics 512 (2024) 113145</arxiv:journal_ref>
+    <author>
+      <name>Jan Nordström</name>
+    </author>
+    <arxiv:doi>10.1016/j.jcp.2024.113145</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.jcp.2024.113145" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.10827v1</id>
+    <title>The TES-based Cryogenic AntiCoincidence Detector (CryoAC) of ATHENA X-IFU: a large area silicon microcalorimeter for background particles detection</title>
+    <updated>2024-01-19T17:21:37Z</updated>
+    <link href="https://arxiv.org/abs/2401.10827v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.10827v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We are developing the Cryogenic AntiCoincidence detector (CryoAC) of the ATHENA X-IFU spectrometer. It is a TES-based particle detector aimed to reduce the background of the instrument. Here, we present the result obtained with the last CryoAC single-pixel prototype. It is based on a 1 cm2 silicon absorber sensed by a single 2mm x 1mm Ir/Au TES, featuring an on-chip heater for calibration and diagnostic purposes. We have illuminated the sample with 55Fe (6 keV line) and 241Am (60 keV line) radioactive sources, thus studying the detector response and the heater calibration accuracy at low energy. Furthermore, we have operated the sample in combination with a past-generation CryoAC prototype. Here, by analyzing the coincident detections between the two detectors, we have been able to characterize the background spectrum of the laboratory environment and disentangle the primary (i.e. cosmic muons) and secondaries (mostly secondary photons and electrons) signatures in the spectral shape.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.ins-det" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-19T17:21:37Z</published>
+    <arxiv:comment>Accepted for publication in the Journal of Low Temperature Physics for LTD-20 special issue</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>M. D'Andrea</name>
+    </author>
+    <author>
+      <name>C. Macculi</name>
+    </author>
+    <author>
+      <name>S. Lotti</name>
+    </author>
+    <author>
+      <name>L. Piro</name>
+    </author>
+    <author>
+      <name>A. Argan</name>
+    </author>
+    <author>
+      <name>G. Minervini</name>
+    </author>
+    <author>
+      <name>G. Torrioli</name>
+    </author>
+    <author>
+      <name>F. Chiarello</name>
+    </author>
+    <author>
+      <name>L. Ferrari Barusso</name>
+    </author>
+    <author>
+      <name>E. Celasco</name>
+    </author>
+    <author>
+      <name>G. Gallucci</name>
+    </author>
+    <author>
+      <name>F. Gatti</name>
+    </author>
+    <author>
+      <name>D. Grosso</name>
+    </author>
+    <author>
+      <name>M. Rigano</name>
+    </author>
+    <author>
+      <name>D. Brienza</name>
+    </author>
+    <author>
+      <name>E. Cavazzuti</name>
+    </author>
+    <author>
+      <name>A. Volpe</name>
+    </author>
+    <arxiv:doi>10.1007/s10909-023-03034-5</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10909-023-03034-5" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.09237v1</id>
+    <title>Classification and Reconstruction Processes in Deep Predictive Coding Networks: Antagonists or Allies?</title>
+    <updated>2024-01-17T14:34:32Z</updated>
+    <link href="https://arxiv.org/abs/2401.09237v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.09237v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Predictive coding-inspired deep networks for visual computing integrate classification and reconstruction processes in shared intermediate layers. Although synergy between these processes is commonly assumed, it has yet to be convincingly demonstrated. In this study, we take a critical look at how classifying and reconstructing interact in deep learning architectures. Our approach utilizes a purposefully designed family of model architectures reminiscent of autoencoders, each equipped with an encoder, a decoder, and a classification head featuring varying modules and complexities. We meticulously analyze the extent to which classification- and reconstruction-driven information can seamlessly coexist within the shared latent layer of the model architectures. Our findings underscore a significant challenge: Classification-driven information diminishes reconstruction-driven information in intermediate layers' shared representations and vice versa. While expanding the shared representation's dimensions or increasing the network's complexity can alleviate this trade-off effect, our results challenge prevailing assumptions in predictive coding and offer guidance for future iterations of predictive coding concepts in deep networks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-17T14:34:32Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jan Rathjens</name>
+    </author>
+    <author>
+      <name>Laurenz Wiskott</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.08825v1</id>
+    <title>AiGen-FoodReview: A Multimodal Dataset of Machine-Generated Restaurant Reviews and Images on Social Media</title>
+    <updated>2024-01-16T20:57:36Z</updated>
+    <link href="https://arxiv.org/abs/2401.08825v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.08825v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Online reviews in the form of user-generated content (UGC) significantly impact consumer decision-making. However, the pervasive issue of not only human fake content but also machine-generated content challenges UGC's reliability. Recent advances in Large Language Models (LLMs) may pave the way to fabricate indistinguishable fake generated content at a much lower cost. Leveraging OpenAI's GPT-4-Turbo and DALL-E-2 models, we craft AiGen-FoodReview, a multi-modal dataset of 20,144 restaurant review-image pairs divided into authentic and machine-generated. We explore unimodal and multimodal detection models, achieving 99.80% multimodal accuracy with FLAVA. We use attributes from readability and photographic theories to score reviews and images, respectively, demonstrating their utility as hand-crafted features in scalable and interpretable detection models, with comparable performance. The paper contributes by open-sourcing the dataset and releasing fake review detectors, recommending its use in unimodal and multimodal fake review detection tasks, and evaluating linguistic and visual features in synthetic versus authentic data.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-16T20:57:36Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Alessandro Gambetti</name>
+    </author>
+    <author>
+      <name>Qiwei Han</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.08834v1</id>
+    <title>Structure and lattice excitations of the copper substituted lead oxyapatite Pb$_{9.06(7)}$Cu$_{0.94(6)}$(PO$_{3.92(4)}$)$_{6}$O$_{0.96(3)}$</title>
+    <updated>2024-01-16T21:13:49Z</updated>
+    <link href="https://arxiv.org/abs/2401.08834v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.08834v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The copper substituted lead oxyapatite, Pb$_{10-x}$Cu$_{x}$(PO$_{3.92(4)}$)$_{6}$O$_{0.96(3)}$ (x=0.94(6)) was studied using neutron and x-ray diffraction and neutron spectroscopy techniques. The crystal structure of the main phase of our sample, which has come to be colloquially known as LK-99, is verified to possess a hexagonal structure with space group $P 6_{3}/m$, alongside the presence of impurity phases Cu and Cu$_2$S. We determine the primary substitution location of the Cu as the Pb1 ($6h$) site, with a small substitution at the Pb2 ($4f$) site. Consequently, no clear Cu-doping-induced structural distortion was observed in the investigated temperature region between 10~K and 300~K. Specially, we did not observe a reduction of coordinate number at the Pb2 site or a clear tilting of PO$_4$ tetrahedron. Magnetic characterization reveals a diamagnetic signal in the specimen, accompanied by a very weak ferromagnetic component at 2 K. No long-range magnetic order down to 10 K was detected by the neutron diffraction. Inelastic neutron scattering measurements did not show magnetic excitations for energies up to 350 meV. There is no sign of a superconducting resonance in the excitation spectrum of this material. The measured phonon density of states compares well with density functional theory calculations performed for the main LK-99 phase and its impurity phases. Our study may shed some insight into the role of the favored substitution site of copper in the absence of structural distortion and superconductivity in LK-99.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-16T21:13:49Z</published>
+    <arxiv:comment>11 pages, 8 figures. Physical Review Materials, In press</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <author>
+      <name>Qiang Zhang</name>
+    </author>
+    <author>
+      <name>Yingdong Guan</name>
+    </author>
+    <author>
+      <name>Yongqiang Cheng</name>
+    </author>
+    <author>
+      <name>Lujin Min</name>
+    </author>
+    <author>
+      <name>Jong K. Keum</name>
+    </author>
+    <author>
+      <name>Zhiqiang Mao</name>
+    </author>
+    <author>
+      <name>Matthew B. Stone</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.09823v1</id>
+    <title>Enhancing Small Object Encoding in Deep Neural Networks: Introducing Fast&amp;Focused-Net with Volume-wise Dot Product Layer</title>
+    <updated>2024-01-18T09:31:25Z</updated>
+    <link href="https://arxiv.org/abs/2401.09823v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.09823v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we introduce Fast&amp;Focused-Net, a novel deep neural network architecture tailored for efficiently encoding small objects into fixed-length feature vectors. Contrary to conventional Convolutional Neural Networks (CNNs), Fast&amp;Focused-Net employs a series of our newly proposed layer, the Volume-wise Dot Product (VDP) layer, designed to address several inherent limitations of CNNs. Specifically, CNNs often exhibit a smaller effective receptive field than their theoretical counterparts, limiting their vision span. Additionally, the initial layers in CNNs produce low-dimensional feature vectors, presenting a bottleneck for subsequent learning. Lastly, the computational overhead of CNNs, particularly in capturing diverse image regions by parameter sharing, is significantly high. The VDP layer, at the heart of Fast&amp;Focused-Net, aims to remedy these issues by efficiently covering the entire image patch information with reduced computational demand. Experimental results demonstrate the prowess of Fast&amp;Focused-Net in a variety of applications. For small object classification tasks, our network outperformed state-of-the-art methods on datasets such as CIFAR-10, CIFAR-100, STL-10, SVHN-Cropped, and Fashion-MNIST. In the context of larger image classification, when combined with a transformer encoder (ViT), Fast&amp;Focused-Net produced competitive results for OpenImages V6, ImageNet-1K, and Places365 datasets. Moreover, the same combination showcased unparalleled performance in text recognition tasks across SVT, IC15, SVTP, and HOST datasets. This paper presents the architecture, the underlying motivation, and extensive empirical evidence suggesting that Fast&amp;Focused-Net is a promising direction for efficient and focused deep learning.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-18T09:31:25Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Ali Tofik</name>
+    </author>
+    <author>
+      <name>Roy Partha Pratim</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.12750v1</id>
+    <title>Parallel Ranking of Ads and Creatives in Real-Time Advertising Systems</title>
+    <updated>2023-12-20T04:05:21Z</updated>
+    <link href="https://arxiv.org/abs/2312.12750v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.12750v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>"Creativity is the heart and soul of advertising services". Effective creatives can create a win-win scenario: advertisers can reach target users and achieve marketing objectives more effectively, users can more quickly find products of interest, and platforms can generate more advertising revenue. With the advent of AI-Generated Content, advertisers now can produce vast amounts of creative content at a minimal cost. The current challenge lies in how advertising systems can select the most pertinent creative in real-time for each user personally. Existing methods typically perform serial ranking of ads or creatives, limiting the creative module in terms of both effectiveness and efficiency. In this paper, we propose for the first time a novel architecture for online parallel estimation of ads and creatives ranking, as well as the corresponding offline joint optimization model. The online architecture enables sophisticated personalized creative modeling while reducing overall latency. The offline joint model for CTR estimation allows mutual awareness and collaborative optimization between ads and creatives. Additionally, we optimize the offline evaluation metrics for the implicit feedback sorting task involved in ad creative ranking. We conduct extensive experiments to compare ours with two state-of-the-art approaches. The results demonstrate the effectiveness of our approach in both offline evaluations and real-world advertising platforms online in terms of response time, CTR, and CPM.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-20T04:05:21Z</published>
+    <arxiv:comment>9 pages, 4 figures, AAAI2024</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Zhiguang Yang</name>
+    </author>
+    <author>
+      <name>Lu Wang</name>
+    </author>
+    <author>
+      <name>Chun Gan</name>
+    </author>
+    <author>
+      <name>Liufang Sang</name>
+    </author>
+    <author>
+      <name>Haoran Wang</name>
+    </author>
+    <author>
+      <name>Wenlong Chen</name>
+    </author>
+    <author>
+      <name>Jie He</name>
+    </author>
+    <author>
+      <name>Changping Peng</name>
+    </author>
+    <author>
+      <name>Zhangang Lin</name>
+    </author>
+    <author>
+      <name>Jingping Shao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.05312v2</id>
+    <title>Hemodynamical Behavior Analysis of Anemic, Diabetic, and Healthy Blood Flow in the Carotid Artery</title>
+    <updated>2024-02-20T18:30:34Z</updated>
+    <link href="https://arxiv.org/abs/2401.05312v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.05312v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The influence of blood rheology on hemodynamic parameters is investigated using Computational Fluid Dynamics on blood flow through the human carotid artery. We performed three-dimensional modeling and simulation to study blood flow through the carotid artery, which is divided into internal and exterior parts with a decreased radius. The blood flow was classified as basic pulsatile to simulate the human heart's rhythmic pulses. For hemodynamic modeling viscosity of the fluid, the Carreau model was utilized with four distinct blood instances: Anemic, diabetic, and two healthy blood types. The boundary conditions with Carreau viscosity were applied using the Ansys Fluent simulator, and the governing equations were solved using the finite volume technique. Different time steps were tested for their impact on wall deformation, strain rate, blood velocity, pressure, wall shear, and skin friction coefficient. The hemodynamical parameters were calculated using many cross-sectional planes along the artery. Finally, the impact of the four types of blood cases listed above was investigated, and we discovered that each blood case has a substantial impact on blood velocity, pressure, wall shear, and strain rate along the artery.</summary>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-10T18:30:33Z</published>
+    <arxiv:primary_category term="physics.flu-dyn"/>
+    <author>
+      <name>Hashnayne Ahmed</name>
+    </author>
+    <author>
+      <name>Chinmayee Podder</name>
+    </author>
+    <arxiv:doi>10.1016/j.heliyon.2024.e26622</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.heliyon.2024.e26622" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.14523v1</id>
+    <title>Empathy and the Right to Be an Exception: What LLMs Can and Cannot Do</title>
+    <updated>2024-01-25T21:30:06Z</updated>
+    <link href="https://arxiv.org/abs/2401.14523v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.14523v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Advances in the performance of large language models (LLMs) have led some researchers to propose the emergence of theory of mind (ToM) in artificial intelligence (AI). LLMs can attribute beliefs, desires, intentions, and emotions, and they will improve in their accuracy. Rather than employing the characteristically human method of empathy, they learn to attribute mental states by recognizing linguistic patterns in a dataset that typically do not include that individual. We ask whether LLMs' inability to empathize precludes them from honoring an individual's right to be an exception, that is, from making assessments of character and predictions of behavior that reflect appropriate sensitivity to a person's individuality. Can LLMs seriously consider an individual's claim that their case is different based on internal mental states like beliefs, desires, and intentions, or are they limited to judging that case based on its similarities to others? We propose that the method of empathy has special significance for honoring the right to be an exception that is distinct from the value of predictive accuracy, at which LLMs excel. We conclude by considering whether using empathy to consider exceptional cases has intrinsic or merely practical value and we introduce conceptual and empirical avenues for advancing this investigation.</summary>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-25T21:30:06Z</published>
+    <arxiv:primary_category term="cs.CY"/>
+    <author>
+      <name>William Kidder</name>
+    </author>
+    <author>
+      <name>Jason D'Cruz</name>
+    </author>
+    <author>
+      <name>Kush R. Varshney</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.10234v2</id>
+    <title>On a Mixed Arithmetic-Mean, Geometric-Mean, Harmonic-Mean Inequality</title>
+    <updated>2025-06-02T16:04:11Z</updated>
+    <link href="https://arxiv.org/abs/2401.10234v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.10234v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A mixed arithmetic-mean, geometric-mean inequality was conjectured by F. Holland and proved by K. Kedlaya. In this note, we prove a mixed arithmetic-mean, harmonic-mean inequality and a mixed geometric-mean, harmonic-mean, and a more extended inequality: a mixed arithmetic-mean, geometric-mean, harmonic-mean inequality.</summary>
+    <category term="math.GM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-06-03T11:10:34Z</published>
+    <arxiv:comment>5 pages, Published with International Journal of Mathematics Trends and Technology (IJMTT), This version contains updates not present in the published version: removed unnecessary references, added more details, corrected errors</arxiv:comment>
+    <arxiv:primary_category term="math.GM"/>
+    <arxiv:journal_ref>International Journal of Mathematics Trends and Technology, 69(5), 78-81. (2023)</arxiv:journal_ref>
+    <author>
+      <name>Kyumin Nam</name>
+    </author>
+    <arxiv:doi>10.14445/22315373/IJMTT-V69I5P507</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.14445/22315373/IJMTT-V69I5P507" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.17823v3</id>
+    <title>Privacy-preserving data release leveraging optimal transport and particle gradient descent</title>
+    <updated>2024-07-29T14:12:50Z</updated>
+    <link href="https://arxiv.org/abs/2401.17823v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.17823v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a novel approach for differentially private data synthesis of protected tabular datasets, a relevant task in highly sensitive domains such as healthcare and government. Current state-of-the-art methods predominantly use marginal-based approaches, where a dataset is generated from private estimates of the marginals. In this paper, we introduce PrivPGD, a new generation method for marginal-based private data synthesis, leveraging tools from optimal transport and particle gradient descent. Our algorithm outperforms existing methods on a large range of datasets while being highly scalable and offering the flexibility to incorporate additional domain-specific constraints.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-31T13:28:07Z</published>
+    <arxiv:comment>Published at the Forty-first International Conference on Machine Learning</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Konstantin Donhauser</name>
+    </author>
+    <author>
+      <name>Javier Abad</name>
+    </author>
+    <author>
+      <name>Neha Hulkund</name>
+    </author>
+    <author>
+      <name>Fanny Yang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.07823v2</id>
+    <title>A three-grid high-order immersed finite element method for the analysis of CAD models</title>
+    <updated>2024-07-04T17:03:18Z</updated>
+    <link href="https://arxiv.org/abs/2401.07823v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.07823v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The automated finite element analysis of complex CAD models using boundary-fitted meshes is rife with difficulties. Immersed finite element methods are intrinsically more robust but usually less accurate. In this work, we introduce an efficient, robust, high-order immersed finite element method for complex CAD models. Our approach relies on three adaptive structured grids: a geometry grid for representing the implicit geometry, a finite element grid for discretising physical fields and a quadrature grid for evaluating the finite element integrals. The geometry grid is a sparse VDB (Volumetric Dynamic B+ tree) grid that is highly refined close to physical domain boundaries. The finite element grid consists of a forest of octree grids distributed over several processors, and the quadrature grid in each finite element cell is an octree grid constructed in a bottom-up fashion. We discretise physical fields on the finite element grid using high-order Lagrange basis functions. The resolution of the quadrature grid ensures that finite element integrals are evaluated with sufficient accuracy and that any sub-grid geometric features, like small holes or corners, are resolved up to a desired resolution. The conceptual simplicity and modularity of our approach make it possible to reuse open-source libraries, i.e. openVDB and p4est for implementing the geometry and finite element grids, respectively, and BDDCML for iteratively solving the discrete systems of equations in parallel using domain decomposition. We demonstrate the efficiency and robustness of the proposed approach by solving the Poisson equation on domains given by complex CAD models and discretised with tens of millions of degrees of freedom.</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-15T16:52:26Z</published>
+    <arxiv:primary_category term="math.NA"/>
+    <arxiv:journal_ref>Computer-Aided Design 173, 2024, 103730</arxiv:journal_ref>
+    <author>
+      <name>Eky Febrianto</name>
+    </author>
+    <author>
+      <name>Jakub Sistek</name>
+    </author>
+    <author>
+      <name>Pavel Kus</name>
+    </author>
+    <author>
+      <name>Matija Kecman</name>
+    </author>
+    <author>
+      <name>Fehmi Cirak</name>
+    </author>
+    <arxiv:doi>10.1016/j.cad.2024.103730</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.cad.2024.103730" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.11823v1</id>
+    <title>Towards a satisfactory conversion of messages among agent-based information systems</title>
+    <updated>2024-01-22T10:37:12Z</updated>
+    <link href="https://arxiv.org/abs/2401.11823v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.11823v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Over the last years, there has been a change of perspective concerning the management of information systems, since they are no longer isolated and need to communicate with others. However, from a semantic point of view, real communication is difficult to achieve due to the heterogeneity of the systems. We present a proposal which, considering information systems are represented by software agents, provides a framework that favours a semantic communication among them, overcoming the heterogeneity of their agent communication languages. The main components of the framework are a suite of ontologies -- conceptualizing communication acts -- that will be used for generating the communication conversion, and an Event Calculus interpretation of the communications, which will be used for formalizing the notion of a satisfactory conversion. Moreover, we present a motivating example in order to complete the explanation of the whole picture.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-22T10:37:12Z</published>
+    <arxiv:comment>Accepted manuscript of: Idoia Berges, Jesús Bermúdez, Alfredo Goñi, Arantza Illarramendi.Towards a satisfactory conversion of messages among agent-based information systems,Expert Syst. Appl.40(7):2462-2475(2013), published in final form at https://doi.org/10.1016/j.eswa.2012.10.055.Copyright 2012 Elsevier under CC BY-NC-ND license (http://creativecommons.org/licenses/by-nc-nd/4.0/)</arxiv:comment>
+    <arxiv:primary_category term="cs.MA"/>
+    <arxiv:journal_ref>Expert Syst. Appl.40(7) : 2462-2475 (2013)</arxiv:journal_ref>
+    <author>
+      <name>Idoia Berges</name>
+    </author>
+    <author>
+      <name>Jesús Bermúdez</name>
+    </author>
+    <author>
+      <name>Alfredo Goñi</name>
+    </author>
+    <author>
+      <name>Arantza Illarramendi</name>
+    </author>
+    <arxiv:doi>10.1016/j.eswa.2012.10.055</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.eswa.2012.10.055" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.09823v1</id>
+    <title>Dynamic control of the Bose-Einstein-like condensation transition in scalar active matter</title>
+    <updated>2023-12-15T14:21:23Z</updated>
+    <link href="https://arxiv.org/abs/2312.09823v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.09823v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The dynamics of a generic class of scalar active matter exhibiting a diffusivity edge is studied in a confining potential where the amplitude is governed by a time-dependent protocol. For such non-equilibrium systems, the diffusion coefficient vanishes when the single-particle density field reaches a critical threshold, inducing a condensation transition that is formally akin to Bose-Einstein condensation. We show that this transition arises even for systems that do not reach a steady state, leading to condensation in finite time. Since the transition can be induced for a fixed effective temperature by evolving the system, we effectively show that the temporal coordinate constitutes an alternative control parameter to tune the transition characteristics. For a constant-amplitude protocol, our generalised thermodynamics reduces in the steady-state limit to earlier results. Lastly, we show numerically that for periodic modulation of the potential amplitude, the condensation transition is reentrant.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-15T14:21:23Z</published>
+    <arxiv:comment>11 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>New J. Phys. 26, 033049 (2024)</arxiv:journal_ref>
+    <author>
+      <name>Jonas Berx</name>
+    </author>
+    <arxiv:doi>10.1088/1367-2630/ad34f3</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1367-2630/ad34f3" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.09234v2</id>
+    <title>SARRIGUREN: a polynomial-time complete algorithm for random $k$-SAT with relatively dense clauses</title>
+    <updated>2025-04-07T08:42:46Z</updated>
+    <link href="https://arxiv.org/abs/2401.09234v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.09234v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>SARRIGUREN, a new complete algorithm for SAT based on counting clauses (which is valid also for Unique-SAT and #SAT) is described, analyzed and tested. Although existing complete algorithms for SAT perform slower with clauses with many literals, that is an advantage for SARRIGUREN, because the more literals are in the clauses the bigger is the probability of overlapping among clauses, a property that makes the clause counting process more efficient. Actually, it provides a $O(m^2 \times n/k)$ time complexity for random $k$-SAT instances of $n$ variables and $m$ relatively dense clauses, where that density level is relative to the number of variables $n$, that is, clauses are relatively dense when $k\geq7\sqrt{n}$. Although theoretically there could be worst-cases with exponential complexity, the probability of those cases to happen in random $k$-SAT with relatively dense clauses is practically zero. The algorithm has been empirically tested and that polynomial time complexity maintains also for $k$-SAT instances with less dense clauses ($k\geq5\sqrt{n}$). That density could, for example, be of only 0.049 working with $n=20000$ variables and $k=989$ literals. In addition, they are presented two more complementary algorithms that provide the solutions to $k$-SAT instances and valuable information about number of solutions for each literal. Although this algorithm does not solve the NP=P problem (it is not a polynomial algorithm for 3-SAT), it broads the knowledge about that subject, because $k$-SAT with $k&gt;3$ and dense clauses is not harder than 3-SAT. Moreover, the Python implementation of the algorithms, and all the input datasets and obtained results in the experiments are made available.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-17T14:23:55Z</published>
+    <arxiv:comment>24 pages, 2 figures, 8 tables, algorithms, results and data in https://goo.su/zV3Pt6E</arxiv:comment>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Alfredo Goñi Sarriguren</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.15285v2</id>
+    <title>Ransomware threat mitigation through network traffic analysis and machine learning techniques</title>
+    <updated>2024-02-04T03:52:09Z</updated>
+    <link href="https://arxiv.org/abs/2401.15285v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.15285v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In recent years, there has been a noticeable increase in cyberattacks using ransomware. Attackers use this malicious software to break into networks and harm computer systems. This has caused significant and lasting damage to various organizations, including government, private companies, and regular users. These attacks often lead to the loss or exposure of sensitive information, disruptions in normal operations, and persistent vulnerabilities. This paper focuses on a method for recognizing and identifying ransomware in computer networks. The approach relies on using machine learning algorithms and analyzing the patterns of network traffic. By collecting and studying this traffic, and then applying machine learning models, we can accurately identify and detect ransomware. The results of implementing this method show that machine learning algorithms can effectively pinpoint ransomware based on network traffic, achieving high levels of precision and accuracy.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-27T03:55:28Z</published>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Ali Mehrban</name>
+    </author>
+    <author>
+      <name>Shirin Karimi Geransayeh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.12834v1</id>
+    <title>Application of multivariate Tromp functions for evaluating the joint impact of particle size, shape and wettability on the separation of ultrafine particles via flotation</title>
+    <updated>2024-01-23T15:15:25Z</updated>
+    <link href="https://arxiv.org/abs/2401.12834v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.12834v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Froth flotation predominantly separates particles according to their differences in wettability. However, other particle properties such as size, shape or density significantly influence the separation outcome as well. Froth flotation is most efficient for particles within a size range of about $20-200μm$, but challenges arise for very fine or coarse particles that are accompanied by low recoveries and poor selectivity. While the impact of particle size on the separation behavior in flotation is well-known by now, the effect of particle shape is less studied and varies based on the investigated zone (suspension or froth) and the separation apparatus used. A multidimensional perspective on the separation process, considering multiple particle properties, enhances the understanding of their collective influence. In this paper the two-dimensional case is studied, i.e., a parametric modeling approach is applied to determine bivariate Tromp functions from scanning electron microscopy-based image data of the feed and the separated fractions. With these functions it is possible to characterize the separation behavior of particle systems. Using a model system of ultrafine ($&lt;10μm$) particles, consisting of differently shaped glass particles with different wettability states as the floatable and magnetite as the non-floatable fraction, allows for investigating the influence of particle size, shape and wettability, on the separation. In this way, the present paper contributes to a better understanding of the complex interplay between certain property vectors for the case of ultrafine particles. Furthermore, it demonstrates the benefits of using multivariate Tromp functions for evaluating separation processes, and points out the limitations of SEM based image measurements by means of mineral liberation analysis (MLA) for the studied particle size fraction.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-23T15:15:25Z</published>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <author>
+      <name>Johanna Sygusch</name>
+    </author>
+    <author>
+      <name>Thomas Wilhelm</name>
+    </author>
+    <author>
+      <name>Orkun Furat</name>
+    </author>
+    <author>
+      <name>Kai Bachmann</name>
+    </author>
+    <author>
+      <name>Volker Schmidt</name>
+    </author>
+    <author>
+      <name>Martin Rudolph</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.08765v1</id>
+    <title>A Bigger Cloud 9? New HI Observations of the RELHIC Candidate M94-Cloud 9</title>
+    <updated>2024-01-16T19:00:04Z</updated>
+    <link href="https://arxiv.org/abs/2401.08765v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.08765v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present new HI observations of the REionization-Limited HI Cloud (RELHIC) candidate, M94-CL9, detected around M94 by Zhou et al. using the Five-hundred-meter Aperture Spherical Telescope (FAST). M94-CL9's HI properties as detected by FAST are consistent with a RELHIC as noted by Benitez-Llambay &amp; Navarro. Our observations with the Robert C. Byrd Green Bank Telescope (GBT) detect greater HI emission in M94-CL9 and result in HI properties that are larger (corrected velocity width, $W_{50,c,t}=35.7\pm0.6\,\mathrm{km\,s^{-1}}$; and integrated flux, $\int\mathrm{Sdv}=0.28\pm0.04\,\mathrm{Jy}\cdot\mathrm{km\,s^{-1}}$) than those found by Zhou et al. but that match those from the FAST All-Sky HI (FASHI) survey. These larger properties do not preclude M94-CL9 from being a RELHIC, but the wider spectral extent and spectral asymmetry reported here may be in tension with predictions of RELHIC properties.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-16T19:00:04Z</published>
+    <arxiv:comment>Accepted for publication in RNAAS</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <author>
+      <name>Ananthan Karunakaran</name>
+    </author>
+    <author>
+      <name>Kristine Spekkens</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.08234v1</id>
+    <title>Detection of the neutral iron line from the supernova remnant W49B with Suzaku</title>
+    <updated>2024-01-16T09:34:31Z</updated>
+    <link href="https://arxiv.org/abs/2401.08234v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.08234v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent studies of supernova remnants (SNRs) have revealed that some SNRs exhibit a neutral iron line emission at 6.4 keV. This line has been proposed to originate from the interaction of high-energy particles formed in the SNR shell with the surrounding cold matter. We searched for the neutral iron line emission in the SNR W49B. Significant detection of the 6.4 keV line is found in the northwest region, close to the molecular cloud interacting with the SNR shell. In addition, an excess emission at 8-9 keV, in which K_gamma, K_delta, and K_epsilon lines of He-like iron exist, is also significantly found in the region where the radio shell is not bright. We discuss the origin of the 6.4 keV line and the excess emission at 8-9 keV.</summary>
+    <category term="astro-ph.HE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-16T09:34:31Z</published>
+    <arxiv:comment>Accepted for publication in PASJ (9 pages, 4 figures)</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.HE"/>
+    <author>
+      <name>Nari Suzuki</name>
+    </author>
+    <author>
+      <name>Shigeo Yamauchi</name>
+    </author>
+    <author>
+      <name>Kumiko K. Nobukawa</name>
+    </author>
+    <author>
+      <name>Masayoshi Nobukawa</name>
+    </author>
+    <author>
+      <name>Satoru Katsuda</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.05823v1</id>
+    <title>Quantum Probability Theoretic Asset Return Modeling: A Novel Schrödinger-Like Trading Equation and Multimodal Distribution</title>
+    <updated>2024-01-11T10:38:55Z</updated>
+    <link href="https://arxiv.org/abs/2401.05823v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.05823v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Quantum theory provides a comprehensive framework for quantifying uncertainty, often applied in quantum finance to explore the stochastic nature of asset returns. This perspective likens returns to microscopic particle motion, governed by quantum probabilities akin to physical laws. However, such approaches presuppose specific microscopic quantum effects in return changes, a premise criticized for lack of guarantee. This paper diverges by asserting that quantum probability is a mathematical extension of classical probability to complex numbers. It isn't exclusively tied to microscopic quantum phenomena, bypassing the need for quantum effects in returns.By directly linking quantum probability's mathematical structure to traders' decisions and market behaviors, it avoids assuming quantum effects for returns and invoking the wave function. The complex phase of quantum probability, capturing transitions between long and short decisions while considering information interaction among traders, offers an inherent advantage over classical probability in characterizing the multimodal distribution of asset returns.Utilizing Fourier decomposition, we derive a Schrödinger-like trading equation, where each term explicitly corresponds to implications of market trading. The equation indicates discrete energy levels in financial trading, with returns following a normal distribution at the lowest level. As the market transitions to higher trading levels, a phase shift occurs in the return distribution, leading to multimodality and fat tails. Empirical research on the Chinese stock market supports the existence of energy levels and multimodal distributions derived from this quantum probability asset returns model.</summary>
+    <category term="q-fin.MF" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-11T10:38:55Z</published>
+    <arxiv:primary_category term="q-fin.MF"/>
+    <author>
+      <name>Li Lin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.05847v1</id>
+    <title>Ferroelectric topological superconductor</title>
+    <updated>2024-01-11T11:30:48Z</updated>
+    <link href="https://arxiv.org/abs/2401.05847v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.05847v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Two-dimensional topological superconductor (TSC) represents an exotic quantum material with quasiparticle excitation manifesting in dispersive Majorana mode (DMM) at the boundaries. A domain-wall DMM can arise at the boundary between two TSC domains with opposite Chern numbers or with a $π$-phase shift in their pairing gap, which can only be tuned by magnetic field. Here we propose the concept of ferroelectric (FE) TSC, which not only enriches the domain-wall DMMs but also significantly makes them electrically tunable. The $π$-phase shift of the pairing gap is shown to be attained between two TSC domains of opposite FE polarization, and switchable by reversing FE polarizations. In combination with ferromagnetic (FM) polarization, the domain wall can host helical, doubled chiral, and fused DMMs, which can be transferred into each other by changing the direction of electrical and/or magnetic field. Furthermore, based on first-principles calculations, we demonstrate $α$-In$_2$Se$_3$ to be a promising FE TSC candidate in proximity with a FM layer and a superconductor substrate. We envision that FE TSC will significantly ease the manipulation of DMM by electrical field to realize fault-tolerant quantum computation.</summary>
+    <category term="cond-mat.supr-con" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-11T11:30:48Z</published>
+    <arxiv:comment>14 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.supr-con"/>
+    <author>
+      <name>Xiaoming Zhang</name>
+    </author>
+    <author>
+      <name>Pei Zhao</name>
+    </author>
+    <author>
+      <name>Feng Liu</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevB.109.125130</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevB.109.125130" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.11924v1</id>
+    <title>LCODE: Quasistatic code for simulating long-term evolution of three-dimensional plasma wakefields</title>
+    <updated>2024-01-22T13:11:04Z</updated>
+    <link href="https://arxiv.org/abs/2401.11924v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.11924v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A recently developed three-dimensional version of the quasistatic code LCODE has a novel feature that enables high-accuracy simulations of the long-term evolution of waves in plasma wakefield accelerators. Equations of plasma particle motion are modified to suppress clustering and numerical heating of macroparticles, which otherwise occur because the Debye length is not resolved by the numerical grid. The previously observed effects of premature wake chaotization and wavebreaking disappear with the modified equations.</summary>
+    <category term="physics.acc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.plasm-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-22T13:11:04Z</published>
+    <arxiv:comment>21 figure</arxiv:comment>
+    <arxiv:primary_category term="physics.acc-ph"/>
+    <author>
+      <name>I. Yu. Kargapolov</name>
+    </author>
+    <author>
+      <name>N. V. Okhotnikov</name>
+    </author>
+    <author>
+      <name>I. A. Shalimova</name>
+    </author>
+    <author>
+      <name>A. P. Sosedkin</name>
+    </author>
+    <author>
+      <name>K. V. Lotov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.15884v3</id>
+    <title>Corrective Retrieval Augmented Generation</title>
+    <updated>2024-10-07T02:19:21Z</updated>
+    <link href="https://arxiv.org/abs/2401.15884v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.15884v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) inevitably exhibit hallucinations since the accuracy of generated texts cannot be secured solely by the parametric knowledge they encapsulate. Although retrieval-augmented generation (RAG) is a practicable complement to LLMs, it relies heavily on the relevance of retrieved documents, raising concerns about how the model behaves if retrieval goes wrong. To this end, we propose the Corrective Retrieval Augmented Generation (CRAG) to improve the robustness of generation. Specifically, a lightweight retrieval evaluator is designed to assess the overall quality of retrieved documents for a query, returning a confidence degree based on which different knowledge retrieval actions can be triggered. Since retrieval from static and limited corpora can only return sub-optimal documents, large-scale web searches are utilized as an extension for augmenting the retrieval results. Besides, a decompose-then-recompose algorithm is designed for retrieved documents to selectively focus on key information and filter out irrelevant information in them. CRAG is plug-and-play and can be seamlessly coupled with various RAG-based approaches. Experiments on four datasets covering short- and long-form generation tasks show that CRAG can significantly improve the performance of RAG-based approaches.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-29T04:36:39Z</published>
+    <arxiv:comment>Update results, add more analysis, and fix typos</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shi-Qi Yan</name>
+    </author>
+    <author>
+      <name>Jia-Chen Gu</name>
+    </author>
+    <author>
+      <name>Yun Zhu</name>
+    </author>
+    <author>
+      <name>Zhen-Hua Ling</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.14557v2</id>
+    <title>Aurora:Activating Chinese chat capability for Mixtral-8x7B sparse Mixture-of-Experts through Instruction-Tuning</title>
+    <updated>2024-01-01T09:24:47Z</updated>
+    <link href="https://arxiv.org/abs/2312.14557v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.14557v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Existing research has demonstrated that refining large language models (LLMs) through the utilization of machine-generated instruction-following data empowers these models to exhibit impressive zero-shot capabilities for novel tasks, without requiring human-authored instructions. In this paper, we systematically investigate, preprocess, and integrate three Chinese instruction-following datasets with the aim of enhancing the Chinese conversational capabilities of Mixtral-8x7B sparse Mixture-of-Experts model. Through instruction fine-tuning on this carefully processed dataset, we successfully construct the Mixtral-8x7B sparse Mixture-of-Experts model named "Aurora." To assess the performance of Aurora, we utilize three widely recognized benchmark tests: C-Eval, MMLU, and CMMLU. Empirical studies validate the effectiveness of instruction fine-tuning applied to Mixtral-8x7B sparse Mixture-of-Experts model. This work is pioneering in the execution of instruction fine-tuning on a sparse expert-mixed model, marking a significant breakthrough in enhancing the capabilities of this model architecture. Our code, data and model are publicly available at
+  https://github.com/WangRongsheng/Aurora</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-22T09:30:41Z</published>
+    <arxiv:comment>10 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Rongsheng Wang</name>
+    </author>
+    <author>
+      <name>Haoming Chen</name>
+    </author>
+    <author>
+      <name>Ruizhe Zhou</name>
+    </author>
+    <author>
+      <name>Yaofei Duan</name>
+    </author>
+    <author>
+      <name>Kunyan Cai</name>
+    </author>
+    <author>
+      <name>Han Ma</name>
+    </author>
+    <author>
+      <name>Jiaxi Cui</name>
+    </author>
+    <author>
+      <name>Jian Li</name>
+    </author>
+    <author>
+      <name>Patrick Cheong-Iao Pang</name>
+    </author>
+    <author>
+      <name>Yapeng Wang</name>
+    </author>
+    <author>
+      <name>Tao Tan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.09841v1</id>
+    <title>Monoculture in Matching Markets</title>
+    <updated>2023-12-15T14:46:54Z</updated>
+    <link href="https://arxiv.org/abs/2312.09841v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.09841v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Algorithmic monoculture arises when many decision-makers rely on the same algorithm to evaluate applicants. An emerging body of work investigates possible harms of this kind of homogeneity, but has been limited by the challenge of incorporating market effects in which the preferences and behavior of many applicants and decision-makers jointly interact to determine outcomes.
+  Addressing this challenge, we introduce a tractable theoretical model of algorithmic monoculture in a two-sided matching market with many participants. We use the model to analyze outcomes under monoculture (when decision-makers all evaluate applicants using a common algorithm) and under polyculture (when decision-makers evaluate applicants independently). All else equal, monoculture (1) selects less-preferred applicants when noise is well-behaved, (2) matches more applicants to their top choice, though individual applicants may be worse off depending on their value to decision-makers and risk tolerance, and (3) is more robust to disparities in the number of applications submitted.</summary>
+    <category term="cs.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="econ.TH" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-15T14:46:54Z</published>
+    <arxiv:primary_category term="cs.GT"/>
+    <author>
+      <name>Kenny Peng</name>
+    </author>
+    <author>
+      <name>Nikhil Garg</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.11903v1</id>
+    <title>Automation of Triangle Ruler-and-Compass Constructions Using Constraint Solvers</title>
+    <updated>2024-01-22T12:50:46Z</updated>
+    <link href="https://arxiv.org/abs/2401.11903v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.11903v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we present an approach to automated solving of triangle ruler-and-compass construction problems using finite-domain constraint solvers. The constraint model is  described in the MiniZinc modeling language, and is based on the automated planning. The  main benefit of using general constraint solvers for such purpose, instead of developing  dedicated tools, is that we can rely on the efficient search that is already implemented  within the solver, enabling us to focus on geometric aspects of the problem. We may also  use the solver's built-in optimization capabilities to search for the shortest possible  constructions. We evaluate our approach on 74 solvable problems from the Wernick's list,  and compare it to the dedicated triangle construction solver ArgoTriCS. The results show  that our approach is comparable to dedicated tools, while it requires much less effort to  implement. Also, our model often finds shorter constructions, thanks to the optimization  capabilities offered by the constraint solvers.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-22T12:50:46Z</published>
+    <arxiv:comment>In Proceedings ADG 2023, arXiv:2401.10725</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <arxiv:journal_ref>EPTCS 398, 2024, pp. 62-72</arxiv:journal_ref>
+    <author>
+      <name>Milan Banković</name>
+      <arxiv:affiliation>Faculty of Mathematics, University of Belgrade, Serbia</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.4204/EPTCS.398.10</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.4204/EPTCS.398.10" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.06195v1</id>
+    <title>NeuSpin: Design of a Reliable Edge Neuromorphic System Based on Spintronics for Green AI</title>
+    <updated>2024-01-11T13:27:19Z</updated>
+    <link href="https://arxiv.org/abs/2401.06195v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.06195v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Internet of Things (IoT) and smart wearable devices for personalized healthcare will require storing and computing ever-increasing amounts of data. The key requirements for these devices are ultra-low-power, high-processing capabilities, autonomy at low cost, as well as reliability and accuracy to enable Green AI at the edge. Artificial Intelligence (AI) models, especially Bayesian Neural Networks (BayNNs) are resource-intensive and face challenges with traditional computing architectures due to the memory wall problem. Computing-in-Memory (CIM) with emerging resistive memories offers a solution by combining memory blocks and computing units for higher efficiency and lower power consumption. However, implementing BayNNs on CIM hardware, particularly with spintronic technologies, presents technical challenges due to variability and manufacturing defects. The NeuSPIN project aims to address these challenges through full-stack hardware and software co-design, developing novel algorithmic and circuit design approaches to enhance the performance, energy-efficiency and robustness of BayNNs on sprintronic-based CIM platforms.</summary>
+    <category term="cs.ET" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-11T13:27:19Z</published>
+    <arxiv:primary_category term="cs.ET"/>
+    <author>
+      <name>Soyed Tuhin Ahmed</name>
+    </author>
+    <author>
+      <name>Kamal Danouchi</name>
+    </author>
+    <author>
+      <name>Guillaume Prenat</name>
+    </author>
+    <author>
+      <name>Lorena Anghel</name>
+    </author>
+    <author>
+      <name>Mehdi B. Tahoori</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.00368v3</id>
+    <title>Improving Text Embeddings with Large Language Models</title>
+    <updated>2024-05-31T07:22:01Z</updated>
+    <link href="https://arxiv.org/abs/2401.00368v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.00368v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we introduce a novel and simple method for obtaining high-quality text embeddings using only synthetic data and less than 1k training steps. Unlike existing methods that often depend on multi-stage intermediate pre-training with billions of weakly-supervised text pairs, followed by fine-tuning with a few labeled datasets, our method does not require building complex training pipelines or relying on manually collected datasets that are often constrained by task diversity and language coverage. We leverage proprietary LLMs to generate diverse synthetic data for hundreds of thousands of text embedding tasks across 93 languages. We then fine-tune open-source decoder-only LLMs on the synthetic data using standard contrastive loss. Experiments demonstrate that our method achieves strong performance on highly competitive text embedding benchmarks without using any labeled data. Furthermore, when fine-tuned with a mixture of synthetic and labeled data, our model sets new state-of-the-art results on the BEIR and MTEB benchmarks.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-31T02:13:18Z</published>
+    <arxiv:comment>Accepted by ACL 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Liang Wang</name>
+    </author>
+    <author>
+      <name>Nan Yang</name>
+    </author>
+    <author>
+      <name>Xiaolong Huang</name>
+    </author>
+    <author>
+      <name>Linjun Yang</name>
+    </author>
+    <author>
+      <name>Rangan Majumder</name>
+    </author>
+    <author>
+      <name>Furu Wei</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.08290v3</id>
+    <title>Causal Machine Learning for Moderation Effects</title>
+    <updated>2025-01-09T10:13:29Z</updated>
+    <link href="https://arxiv.org/abs/2401.08290v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.08290v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It is valuable for any decision maker to know the impact of decisions (treatments) on average and for subgroups. The causal machine learning literature has recently provided tools for estimating group average treatment effects (GATE) to better describe treatment heterogeneity. This paper addresses the challenge of interpreting such differences in treatment effects between groups while accounting for variations in other covariates. We propose a new parameter, the balanced group average treatment effect (BGATE), which measures a GATE with a specific distribution of a priori-determined covariates. By taking the difference between two BGATEs, we can analyze heterogeneity more meaningfully than by comparing two GATEs, as we can separate the difference due to the different distributions of other variables and the difference due to the variable of interest. The main estimation strategy for this parameter is based on double/debiased machine learning for discrete treatments in an unconfoundedness setting, and the estimator is shown to be $\sqrt{N}$-consistent and asymptotically normal under standard conditions. We propose two additional estimation strategies: automatic debiased machine learning and a specific reweighting procedure. Last, we demonstrate the usefulness of these parameters in a small-scale simulation study and in an empirical example.</summary>
+    <category term="econ.EM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-16T11:34:59Z</published>
+    <arxiv:primary_category term="econ.EM"/>
+    <author>
+      <name>Nora Bearth</name>
+    </author>
+    <author>
+      <name>Michael Lechner</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.15892v3</id>
+    <title>A generalization of the Romanoff theorem</title>
+    <updated>2024-12-16T05:17:02Z</updated>
+    <link href="https://arxiv.org/abs/2401.15892v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.15892v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $\mathcal{P}$ be the set of primes and $\mathbb{N}$ the set of positive integers. Let also $r_1,...,r_t$ be positive real numbers and $R_2(r_1,...,r_t)$ the set of odd integers which can be represented as $$ p+2^{\lfloor k_1^{r_1}\rfloor}+\cdot\cdot\cdot+2^{\lfloor k_t^{r_t}\rfloor}, $$ where $p\in \mathcal{P}$ and $k_1,...,k_t\in\mathbb{N}$. Recently, Chen and Xu proved that the set $R_2(r_1,...,r_t)$ has positive lower asymptotic density, provided that $r_1^{-1}+\cdot\cdot\cdot+r_t^{-1}\ge 1$ and at least one of $r_1,...,r_t$ is an integer. Their result reduces to the famous theorem of Romanoff by taking $t=r_1=1.$ In this note, we remove the unnecessary condition that `{\it at least one of $r_1,...,r_t$ is an integer}'.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-29T05:08:06Z</published>
+    <arxiv:comment>some gaps are fixed in the new version</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Yuchen Ding</name>
+    </author>
+    <author>
+      <name>Wenguang Zhai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.11234v3</id>
+    <title>Multi-objective optimization for targeted self-assembly among competing polymorphs</title>
+    <updated>2025-02-28T18:23:07Z</updated>
+    <link href="https://arxiv.org/abs/2401.11234v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.11234v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Most approaches for designing self-assembled materials focus on the thermodynamic stability of a target structure or crystal polymorph. Yet in practice, the outcome of a self-assembly process is often controlled by kinetic pathways. Here we present an efficient machine learning-guided design algorithm to identify globally optimal interaction potentials that maximize both the thermodynamic yield and kinetic accessibility of a target polymorph. We show that optimal potentials exist along a Pareto front, indicating the possibility of a trade-off between the thermodynamic and kinetic objectives. Although the extent of this trade-off depends on the target polymorph and the assembly conditions, we generically find that the trade-off arises from a competition among alternative polymorphs: The most kinetically optimal potentials, which favor the target polymorph on short timescales, tend to stabilize a competing polymorph at longer times. Our work establishes a general-purpose approach for multi-objective self-assembly optimization, reveals fundamental trade-offs between crystallization speed and defect formation in the presence of competing polymorphs, and suggests guiding principles for materials design algorithms that optimize for kinetic accessibility.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-20T14:07:32Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Phys. Rev. X 15, 011075 (2025)</arxiv:journal_ref>
+    <author>
+      <name>Sambarta Chatterjee</name>
+    </author>
+    <author>
+      <name>William M. Jacobs</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevX.15.011075</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevX.15.011075" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.13919v4</id>
+    <title>WebVoyager: Building an End-to-End Web Agent with Large Multimodal Models</title>
+    <updated>2024-06-06T18:37:34Z</updated>
+    <link href="https://arxiv.org/abs/2401.13919v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.13919v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The rapid advancement of large language models (LLMs) has led to a new era marked by the development of autonomous applications in real-world scenarios, which drives innovation in creating advanced web agents. Existing web agents typically only handle one input modality and are evaluated only in simplified web simulators or static web snapshots, greatly limiting their applicability in real-world scenarios. To bridge this gap, we introduce WebVoyager, an innovative Large Multimodal Model (LMM) powered web agent that can complete user instructions end-to-end by interacting with real-world websites. Moreover, we establish a new benchmark by compiling real-world tasks from 15 popular websites and introduce an automatic evaluation protocol leveraging multimodal understanding abilities of GPT-4V to evaluate open-ended web agents. We show that WebVoyager achieves a 59.1% task success rate on our benchmark, significantly surpassing the performance of both GPT-4 (All Tools) and the WebVoyager (text-only) setups, underscoring the exceptional capability of WebVoyager. The proposed automatic evaluation metric achieves 85.3% agreement with human judgment, indicating its effectiveness in providing reliable and accurate assessments of web agents.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-25T03:33:18Z</published>
+    <arxiv:comment>Accepted to ACL 2024 (main). Code and data is released at https://github.com/MinorJerry/WebVoyager</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Hongliang He</name>
+    </author>
+    <author>
+      <name>Wenlin Yao</name>
+    </author>
+    <author>
+      <name>Kaixin Ma</name>
+    </author>
+    <author>
+      <name>Wenhao Yu</name>
+    </author>
+    <author>
+      <name>Yong Dai</name>
+    </author>
+    <author>
+      <name>Hongming Zhang</name>
+    </author>
+    <author>
+      <name>Zhenzhong Lan</name>
+    </author>
+    <author>
+      <name>Dong Yu</name>
+    </author>
+  </entry>
+</feed>

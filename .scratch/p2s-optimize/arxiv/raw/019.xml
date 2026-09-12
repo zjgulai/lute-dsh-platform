@@ -1,0 +1,1300 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/QeXlKx6fJzLZPcovHuTgSHRD/hY</id>
+  <title>arXiv Query: search_query=&amp;id_list=2408.05874,2408.07678,2408.07765,2408.08585,2408.09812,2408.09826,2408.09885,2408.09992,2408.11349,2408.11381,2408.11589,2408.13556,2408.14267,2408.15953,2408.16714,2408.17253,2409.00400,2409.02332,2409.03168,2409.03284,2409.04329,2409.11203,2409.12941,2409.12972,2409.14832,2409.16040,2409.17234,2409.18512,2410.01933,2410.02694,2410.09832,2410.10594,2410.10813,2410.11674,2410.12229,2410.13726,2410.13765,2410.13959,2410.17507,2410.21109&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:43:40Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2408.05874,2408.07678,2408.07765,2408.08585,2408.09812,2408.09826,2408.09885,2408.09992,2408.11349,2408.11381,2408.11589,2408.13556,2408.14267,2408.15953,2408.16714,2408.17253,2409.00400,2409.02332,2409.03168,2409.03284,2409.04329,2409.11203,2409.12941,2409.12972,2409.14832,2409.16040,2409.17234,2409.18512,2410.01933,2410.02694,2410.09832,2410.10594,2410.10813,2410.11674,2410.12229,2410.13726,2410.13765,2410.13959,2410.17507,2410.21109" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2408.09885v1</id>
+    <title>Joint Auction in the Online Advertising Market</title>
+    <updated>2024-08-19T10:59:04Z</updated>
+    <link href="https://arxiv.org/abs/2408.09885v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.09885v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Online advertising is a primary source of income for e-commerce platforms. In the current advertising pattern, the oriented targets are the online store owners who are willing to pay extra fees to enhance the position of their stores. On the other hand, brand suppliers are also desirable to advertise their products in stores to boost brand sales. However, the currently used advertising mode cannot satisfy the demand of both stores and brand suppliers simultaneously. To address this, we innovatively propose a joint advertising model termed Joint Auction, allowing brand suppliers and stores to collaboratively bid for advertising slots, catering to both their needs. However, conventional advertising auction mechanisms are not suitable for this novel scenario. In this paper, we propose JRegNet, a neural network architecture for the optimal joint auction design, to generate mechanisms that can achieve the optimal revenue and guarantee near dominant strategy incentive compatibility and individual rationality. Finally, multiple experiments are conducted on synthetic and real data to demonstrate that our proposed joint auction significantly improves platform revenue compared to the known baselines.</summary>
+    <category term="cs.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-19T10:59:04Z</published>
+    <arxiv:primary_category term="cs.GT"/>
+    <author>
+      <name>Zhen Zhang</name>
+    </author>
+    <author>
+      <name>Weian Li</name>
+    </author>
+    <author>
+      <name>Yahui Lei</name>
+    </author>
+    <author>
+      <name>Bingzhe Wang</name>
+    </author>
+    <author>
+      <name>Zhicheng Zhang</name>
+    </author>
+    <author>
+      <name>Qi Qi</name>
+    </author>
+    <author>
+      <name>Qiang Liu</name>
+    </author>
+    <author>
+      <name>Xingxing Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.04329v1</id>
+    <title>Enhancing Sequential Music Recommendation with Personalized Popularity Awareness</title>
+    <updated>2024-09-06T15:05:12Z</updated>
+    <link href="https://arxiv.org/abs/2409.04329v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.04329v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the realm of music recommendation, sequential recommender systems have shown promise in capturing the dynamic nature of music consumption. Nevertheless, traditional Transformer-based models, such as SASRec and BERT4Rec, while effective, encounter challenges due to the unique characteristics of music listening habits. In fact, existing models struggle to create a coherent listening experience due to rapidly evolving preferences. Moreover, music consumption is characterized by a prevalence of repeated listening, i.e., users frequently return to their favourite tracks, an important signal that could be framed as individual or personalized popularity.
+  This paper addresses these challenges by introducing a novel approach that incorporates personalized popularity information into sequential recommendation. By combining user-item popularity scores with model-generated scores, our method effectively balances the exploration of new music with the satisfaction of user preferences. Experimental results demonstrate that a Personalized Most Popular recommender, a method solely based on user-specific popularity, outperforms existing state-of-the-art models. Furthermore, augmenting Transformer-based models with personalized popularity awareness yields superior performance, showing improvements ranging from 25.2% to 69.8%. The code for this paper is available at https://github.com/sisinflab/personalized-popularity-awareness.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-06T15:05:12Z</published>
+    <arxiv:comment>Accepted by RecSys'24 as an LBR paper</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Davide Abbattista</name>
+    </author>
+    <author>
+      <name>Vito Walter Anelli</name>
+    </author>
+    <author>
+      <name>Tommaso Di Noia</name>
+    </author>
+    <author>
+      <name>Craig Macdonald</name>
+    </author>
+    <author>
+      <name>Aleksandr Vladimirovich Petrov</name>
+    </author>
+    <arxiv:doi>10.1145/3640457.3691719</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3640457.3691719" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.16714v2</id>
+    <title>ARINC 429 Cyber-vulnerabilities and Voltage Data in a Hardware-in-the-Loop Simulator</title>
+    <updated>2024-08-30T13:50:37Z</updated>
+    <link href="https://arxiv.org/abs/2408.16714v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.16714v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>ARINC 429 is a ubiquitous data bus for civil avionics, enabling reliable communication between devices from disparate manufacturers. However, ARINC 429 lacks any form of encryption or authentication, making it an inherently insecure communication protocol and rendering any connected avionics vulnerable to a range of attacks. We constructed a hardware-in-the-loop simulator with ARINC 429 buses, explored these vulnerabilities, and identified their potential to deny, degrade, or disrupt aircraft capabilities. We performed a denial-of-service attack against a multi-function display via a compromised ARINC 429 bus using commercially available tools, which succeeded in disabling important navigational aids. This proven attack on physical avionics illustrates the risk inherent in ARINC 429 and the need for the ability to detect these attacks. One potential mitigation is an intrusion detection system (IDS) trained on data collected from the electrical properties of the physical bus. Although previous research has demonstrated the feasibility of an IDS on an ARINC 429 bus, no IDS has been trained on data generated by avionics hardware. To facilitate this, we recorded voltage traces and message history generated by avionics and adversarial devices on the ARINC 429 bus. To the best of our knowledge, this is the first publicly available collection of hardware-generated ARINC 429 signal data.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-29T17:06:20Z</published>
+    <arxiv:comment>7 pages, 3 figures. Intended for publication in IEEE Transactions on Aerospace and Electronic Systems</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Connor Trask</name>
+    </author>
+    <author>
+      <name>Steve Movit</name>
+    </author>
+    <author>
+      <name>Justace Clutter</name>
+    </author>
+    <author>
+      <name>Rosene Clark</name>
+    </author>
+    <author>
+      <name>Mark Herrera</name>
+    </author>
+    <author>
+      <name>Kelly Tran</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.05874v2</id>
+    <title>LLM-Based Robust Product Classification in Commerce and Compliance</title>
+    <updated>2024-10-15T16:18:10Z</updated>
+    <link href="https://arxiv.org/abs/2408.05874v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.05874v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Product classification is a crucial task in international trade, as compliance regulations are verified and taxes and duties are applied based on product categories. Manual classification of products is time-consuming and error-prone, and the sheer volume of products imported and exported renders the manual process infeasible. Consequently, e-commerce platforms and enterprises involved in international trade have turned to automatic product classification using machine learning. However, current approaches do not consider the real-world challenges associated with product classification, such as very abbreviated and incomplete product descriptions. In addition, recent advancements in generative Large Language Models (LLMs) and their reasoning capabilities are mainly untapped in product classification and e-commerce. In this research, we explore the real-life challenges of industrial classification and we propose data perturbations that allow for realistic data simulation. Furthermore, we employ LLM-based product classification to improve the robustness of the prediction in presence of incomplete data. Our research shows that LLMs with in-context learning outperform the supervised approaches in the clean-data scenario. Additionally, we illustrate that LLMs are significantly more robust than the supervised approaches when data attacks are present.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-11T22:59:32Z</published>
+    <arxiv:comment>Camera-ready version for Customizable NLP Workshop at EMNLP 2024. 11 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Sina Gholamian</name>
+    </author>
+    <author>
+      <name>Gianfranco Romani</name>
+    </author>
+    <author>
+      <name>Bartosz Rudnikowicz</name>
+    </author>
+    <author>
+      <name>Stavroula Skylaki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.13726v3</id>
+    <title>DAWN: Dynamic Frame Avatar with Non-autoregressive Diffusion Framework for Talking Head Video Generation</title>
+    <updated>2025-03-26T06:38:56Z</updated>
+    <link href="https://arxiv.org/abs/2410.13726v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.13726v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Talking head generation intends to produce vivid and realistic talking head videos from a single portrait and speech audio clip. Although significant progress has been made in diffusion-based talking head generation, almost all methods rely on autoregressive strategies, which suffer from limited context utilization beyond the current generation step, error accumulation, and slower generation speed. To address these challenges, we present DAWN (Dynamic frame Avatar With Non-autoregressive diffusion), a framework that enables all-at-once generation of dynamic-length video sequences. Specifically, it consists of two main components: (1) audio-driven holistic facial dynamics generation in the latent motion space, and (2) audio-driven head pose and blink generation. Extensive experiments demonstrate that our method generates authentic and vivid videos with precise lip motions, and natural pose/blink movements. Additionally, with a high generation speed, DAWN possesses strong extrapolation capabilities, ensuring the stable production of high-quality long videos. These results highlight the considerable promise and potential impact of DAWN in the field of talking head video generation. Furthermore, we hope that DAWN sparks further exploration of non-autoregressive approaches in diffusion models. Our code will be publicly available at https://github.com/Hanbo-Cheng/DAWN-pytorch.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-17T16:32:36Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Hanbo Cheng</name>
+    </author>
+    <author>
+      <name>Limin Lin</name>
+    </author>
+    <author>
+      <name>Chenyu Liu</name>
+    </author>
+    <author>
+      <name>Pengcheng Xia</name>
+    </author>
+    <author>
+      <name>Pengfei Hu</name>
+    </author>
+    <author>
+      <name>Jiefeng Ma</name>
+    </author>
+    <author>
+      <name>Jun Du</name>
+    </author>
+    <author>
+      <name>Jia Pan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.10813v2</id>
+    <title>LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory</title>
+    <updated>2025-03-04T22:19:41Z</updated>
+    <link href="https://arxiv.org/abs/2410.10813v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.10813v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent large language model (LLM)-driven chat assistant systems have integrated memory components to track user-assistant chat histories, enabling more accurate and personalized responses. However, their long-term memory capabilities in sustained interactions remain underexplored. We introduce LongMemEval, a comprehensive benchmark designed to evaluate five core long-term memory abilities of chat assistants: information extraction, multi-session reasoning, temporal reasoning, knowledge updates, and abstention. With 500 meticulously curated questions embedded within freely scalable user-assistant chat histories, LongMemEval presents a significant challenge to existing long-term memory systems, with commercial chat assistants and long-context LLMs showing a 30% accuracy drop on memorizing information across sustained interactions. We then present a unified framework that breaks down the long-term memory design into three stages: indexing, retrieval, and reading. Built upon key experimental insights, we propose several memory design optimizations including session decomposition for value granularity, fact-augmented key expansion for indexing, and time-aware query expansion for refining the search scope. Extensive experiments show that these optimizations greatly improve both memory recall and downstream question answering on LongMemEval. Overall, our study provides valuable resources and guidance for advancing the long-term memory capabilities of LLM-based chat assistants, paving the way toward more personalized and reliable conversational AI. Our benchmark and code are publicly available at https://github.com/xiaowu0162/LongMemEval.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-14T17:59:44Z</published>
+    <arxiv:comment>ICLR 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Di Wu</name>
+    </author>
+    <author>
+      <name>Hongwei Wang</name>
+    </author>
+    <author>
+      <name>Wenhao Yu</name>
+    </author>
+    <author>
+      <name>Yuwei Zhang</name>
+    </author>
+    <author>
+      <name>Kai-Wei Chang</name>
+    </author>
+    <author>
+      <name>Dong Yu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.01933v2</id>
+    <title>TAEGAN: Generating Synthetic Tabular Data For Data Augmentation</title>
+    <updated>2025-12-12T09:08:02Z</updated>
+    <link href="https://arxiv.org/abs/2410.01933v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.01933v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Synthetic tabular data generation has gained significant attention for its potential in data augmentation and privacy-preserving data sharing. While recent methods like diffusion and auto-regressive models (i.e., transformer) have advanced the field, generative adversarial networks (GANs) remain highly competitive due to their training efficiency and strong data generation capabilities. In this paper, we introduce Tabular Auto-Encoder Generative Adversarial Network (TAEGAN), a novel GAN-based framework that leverages a masked auto-encoder as the generator. TAEGAN is the first to incorporate self-supervised warmup training of generator into tabular GANs. It enhances GAN stability and exposes the generator to richer information beyond the discriminator's feedback. Additionally, we propose a novel sampling method tailored for imbalanced or skewed data and an improved loss function to better capture data distribution and correlations. We evaluate TAEGAN against seven state-of-the-art synthetic tabular data generation algorithms. Results from eight datasets show that TAEGAN outperforms all baselines on five datasets, achieving a 27% overall utility boost over the best-performing baseline while maintaining a model size less than 5% of the best-performing baseline model. Code is available at: https://github.com/BetterdataLabs/taegan.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-02T18:33:06Z</published>
+    <arxiv:comment>This paper is accepted at ACML 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jiayu Li</name>
+    </author>
+    <author>
+      <name>Zilong Zhao</name>
+    </author>
+    <author>
+      <name>Kevin Yee</name>
+    </author>
+    <author>
+      <name>Uzair Javaid</name>
+    </author>
+    <author>
+      <name>Biplab Sikdar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.11349v2</id>
+    <title>Image Score: Learning and Evaluating Human Preferences for Mercari Search</title>
+    <updated>2026-05-01T04:20:00Z</updated>
+    <link href="https://arxiv.org/abs/2408.11349v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.11349v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Mercari is the largest C2C e-commerce marketplace in Japan, having more than 20 million active monthly users. Search being the fundamental way to discover desired items, we have always had a substantial amount of data with implicit feedback. Although we actively take advantage of that to provide the best service for our users, the correlation of implicit feedback for such tasks as image quality assessment is not trivial. Many traditional lines of research in Machine Learning (ML) are similarly motivated by the insatiable appetite of Deep Learning (DL) models for well-labelled training data. Weak supervision is about leveraging higher-level and/or noisier supervision over unlabeled data. Large Language Models (LLMs) are being actively studied and used for data labelling tasks. We present how we leverage a Chain-of-Thought (CoT) to enable LLM to produce image aesthetics labels that correlate well with human behavior in e-commerce settings. Leveraging LLMs is more cost-effective compared to explicit human judgment, while significantly improving the explainability of deep image quality evaluation which is highly important for customer journey optimization at Mercari. We propose a cost-efficient LLM-driven approach for assessing and predicting image quality in e-commerce settings, which is very convenient for proof-of-concept testing. We show that our LLM-produced labels correlate with user behavior on Mercari. Finally, we show our results from an online experimentation, where we achieved a significant growth in sales on the web platform.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-21T05:30:06Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Chingis Oinar</name>
+    </author>
+    <author>
+      <name>Miao Cao</name>
+    </author>
+    <author>
+      <name>Shanshan Fu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.02332v1</id>
+    <title>Double Machine Learning at Scale to Predict Causal Impact of Customer Actions</title>
+    <updated>2024-09-03T23:13:04Z</updated>
+    <link href="https://arxiv.org/abs/2409.02332v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.02332v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Causal Impact (CI) of customer actions are broadly used across the industry to inform both short- and long-term investment decisions of various types. In this paper, we apply the double machine learning (DML) methodology to estimate the CI values across 100s of customer actions of business interest and 100s of millions of customers. We operationalize DML through a causal ML library based on Spark with a flexible, JSON-driven model configuration approach to estimate CI at scale (i.e., across hundred of actions and millions of customers). We outline the DML methodology and implementation, and associated benefits over the traditional potential outcomes based CI model. We show population-level as well as customer-level CI values along with confidence intervals. The validation metrics show a 2.2% gain over the baseline methods and a 2.5X gain in the computational time. Our contribution is to advance the scalable application of CI, while also providing an interface that allows faster experimentation, cross-platform support, ability to onboard new use cases, and improves accessibility of underlying code for partner teams.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="econ.EM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-03T23:13:04Z</published>
+    <arxiv:comment>16 pages, 11 figures. Accepted at the European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases (ECML PKDD) 2023, Turin, Italy</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Lecture Notes in Computer Science, vol 14174. (2023) Springer, Cham</arxiv:journal_ref>
+    <author>
+      <name>Sushant More</name>
+    </author>
+    <author>
+      <name>Priya Kotwal</name>
+    </author>
+    <author>
+      <name>Sujith Chappidi</name>
+    </author>
+    <author>
+      <name>Dinesh Mandalapu</name>
+    </author>
+    <author>
+      <name>Chris Khawand</name>
+    </author>
+    <arxiv:doi>10.1007/978-3-031-43427-3_31</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/978-3-031-43427-3_31" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.08585v1</id>
+    <title>OptDist: Learning Optimal Distribution for Customer Lifetime Value Prediction</title>
+    <updated>2024-08-16T07:39:38Z</updated>
+    <link href="https://arxiv.org/abs/2408.08585v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.08585v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Customer Lifetime Value (CLTV) prediction is a critical task in business applications. Accurately predicting CLTV is challenging in real-world business scenarios, as the distribution of CLTV is complex and mutable. Firstly, there is a large number of users without any consumption consisting of a long-tailed part that is too complex to fit. Secondly, the small set of high-value users spent orders of magnitude more than a typical user leading to a wide range of the CLTV distribution which is hard to capture in a single distribution. Existing approaches for CLTV estimation either assume a prior probability distribution and fit a single group of distribution-related parameters for all samples, or directly learn from the posterior distribution with manually predefined buckets in a heuristic manner. However, all these methods fail to handle complex and mutable distributions. In this paper, we propose a novel optimal distribution selection model OptDist for CLTV prediction, which utilizes an adaptive optimal sub-distribution selection mechanism to improve the accuracy of complex distribution modeling. Specifically, OptDist trains several candidate sub-distribution networks in the distribution learning module (DLM) for modeling the probability distribution of CLTV. Then, a distribution selection module (DSM) is proposed to select the sub-distribution for each sample, thus making the selection automatically and adaptively. Besides, we design an alignment mechanism that connects both modules, which effectively guides the optimization. We conduct extensive experiments on both two public and one private dataset to verify that OptDist outperforms state-of-the-art baselines. Furthermore, OptDist has been deployed on a large-scale financial platform for customer acquisition marketing campaigns and the online experiments also demonstrate the effectiveness of OptDist.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-16T07:39:38Z</published>
+    <arxiv:comment>CIKM 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Yunpeng Weng</name>
+    </author>
+    <author>
+      <name>Xing Tang</name>
+    </author>
+    <author>
+      <name>Zhenhao Xu</name>
+    </author>
+    <author>
+      <name>Fuyuan Lyu</name>
+    </author>
+    <author>
+      <name>Dugang Liu</name>
+    </author>
+    <author>
+      <name>Zexu Sun</name>
+    </author>
+    <author>
+      <name>Xiuqiang He</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.14267v1</id>
+    <title>1-Bit FQT: Pushing the Limit of Fully Quantized Training to 1-bit</title>
+    <updated>2024-08-26T13:42:43Z</updated>
+    <link href="https://arxiv.org/abs/2408.14267v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.14267v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Fully quantized training (FQT) accelerates the training of deep neural networks by quantizing the activations, weights, and gradients into lower precision. To explore the ultimate limit of FQT (the lowest achievable precision), we make a first attempt to 1-bit FQT. We provide a theoretical analysis of FQT based on Adam and SGD, revealing that the gradient variance influences the convergence of FQT. Building on these theoretical results, we introduce an Activation Gradient Pruning (AGP) strategy. The strategy leverages the heterogeneity of gradients by pruning less informative gradients and enhancing the numerical precision of remaining gradients to mitigate gradient variance. Additionally, we propose Sample Channel joint Quantization (SCQ), which utilizes different quantization strategies in the computation of weight gradients and activation gradients to ensure that the method is friendly to low-bitwidth hardware. Finally, we present a framework to deploy our algorithm. For fine-tuning VGGNet-16 and ResNet-18 on multiple datasets, our algorithm achieves an average accuracy improvement of approximately 6%, compared to per-sample quantization. Moreover, our training speedup can reach a maximum of 5.13x compared to full precision training.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-26T13:42:43Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Chang Gao</name>
+    </author>
+    <author>
+      <name>Jianfei Chen</name>
+    </author>
+    <author>
+      <name>Kang Zhao</name>
+    </author>
+    <author>
+      <name>Jiaqi Wang</name>
+    </author>
+    <author>
+      <name>Liping Jing</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.12941v3</id>
+    <title>Fact, Fetch, and Reason: A Unified Evaluation of Retrieval-Augmented Generation</title>
+    <updated>2025-01-24T19:23:15Z</updated>
+    <link href="https://arxiv.org/abs/2409.12941v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.12941v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) have demonstrated significant performance improvements across various cognitive tasks. An emerging application is using LLMs to enhance retrieval-augmented generation (RAG) capabilities. These systems require LLMs to understand user queries, retrieve relevant information, and synthesize coherent and accurate responses. Given the increasing real-world deployment of such systems, comprehensive evaluation becomes crucial. To this end, we propose FRAMES (Factuality, Retrieval, And reasoning MEasurement Set), a high-quality evaluation dataset designed to test LLMs' ability to provide factual responses, assess retrieval capabilities, and evaluate the reasoning required to generate final answers. While previous work has provided datasets and benchmarks to evaluate these abilities in isolation, FRAMES offers a unified framework that provides a clearer picture of LLM performance in end-to-end RAG scenarios. Our dataset comprises challenging multi-hop questions that require the integration of information from multiple sources. We present baseline results demonstrating that even state-of-the-art LLMs struggle with this task, achieving 0.40 accuracy with no retrieval. The accuracy is significantly improved with our proposed multi-step retrieval pipeline, achieving an accuracy of 0.66 (&gt;50% improvement). We hope our work will help bridge evaluation gaps and assist in developing more robust and capable RAG systems.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-19T17:52:07Z</published>
+    <arxiv:comment>Annual Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics (NAACL), 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Satyapriya Krishna</name>
+    </author>
+    <author>
+      <name>Kalpesh Krishna</name>
+    </author>
+    <author>
+      <name>Anhad Mohananey</name>
+    </author>
+    <author>
+      <name>Steven Schwarcz</name>
+    </author>
+    <author>
+      <name>Adam Stambler</name>
+    </author>
+    <author>
+      <name>Shyam Upadhyay</name>
+    </author>
+    <author>
+      <name>Manaal Faruqui</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.13765v2</id>
+    <title>Knowledge-Aware Query Expansion with Large Language Models for Textual and Relational Retrieval</title>
+    <updated>2025-02-05T22:04:33Z</updated>
+    <link href="https://arxiv.org/abs/2410.13765v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.13765v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have been used to generate query expansions augmenting original queries for improving information search. Recent studies also explore providing LLMs with initial retrieval results to generate query expansions more grounded to document corpus. However, these methods mostly focus on enhancing textual similarities between search queries and target documents, overlooking document relations. For queries like "Find me a highly rated camera for wildlife photography compatible with my Nikon F-Mount lenses", existing methods may generate expansions that are semantically similar but structurally unrelated to user intents. To handle such semi-structured queries with both textual and relational requirements, in this paper we propose a knowledge-aware query expansion framework, augmenting LLMs with structured document relations from knowledge graph (KG). To further address the limitation of entity-based scoring in existing KG-based methods, we leverage document texts as rich KG node representations and use document-based relation filtering for our Knowledge-Aware Retrieval (KAR). Extensive experiments on three datasets of diverse domains show the advantages of our method compared against state-of-the-art baselines on textual and relational semi-structured retrieval.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-17T17:03:23Z</published>
+    <arxiv:comment>NAACL 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yu Xia</name>
+    </author>
+    <author>
+      <name>Junda Wu</name>
+    </author>
+    <author>
+      <name>Sungchul Kim</name>
+    </author>
+    <author>
+      <name>Tong Yu</name>
+    </author>
+    <author>
+      <name>Ryan A. Rossi</name>
+    </author>
+    <author>
+      <name>Haoliang Wang</name>
+    </author>
+    <author>
+      <name>Julian McAuley</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.16040v4</id>
+    <title>Time-MoE: Billion-Scale Time Series Foundation Models with Mixture of Experts</title>
+    <updated>2025-02-27T05:38:14Z</updated>
+    <link href="https://arxiv.org/abs/2409.16040v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.16040v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deep learning for time series forecasting has seen significant advancements over the past decades. However, despite the success of large-scale pre-training in language and vision domains, pre-trained time series models remain limited in scale and operate at a high cost, hindering the development of larger capable forecasting models in real-world applications. In response, we introduce Time-MoE, a scalable and unified architecture designed to pre-train larger, more capable forecasting foundation models while reducing inference costs. By leveraging a sparse mixture-of-experts (MoE) design, Time-MoE enhances computational efficiency by activating only a subset of networks for each prediction, reducing computational load while maintaining high model capacity. This allows Time-MoE to scale effectively without a corresponding increase in inference costs. Time-MoE comprises a family of decoder-only transformer models that operate in an auto-regressive manner and support flexible forecasting horizons with varying input context lengths. We pre-trained these models on our newly introduced large-scale data Time-300B, which spans over 9 domains and encompassing over 300 billion time points. For the first time, we scaled a time series foundation model up to 2.4 billion parameters, achieving significantly improved forecasting precision. Our results validate the applicability of scaling laws for training tokens and model size in the context of time series forecasting. Compared to dense models with the same number of activated parameters or equivalent computation budgets, our models consistently outperform them by large margin. These advancements position Time-MoE as a state-of-the-art solution for tackling real-world time series forecasting challenges with superior capability, efficiency, and flexibility.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-24T12:42:18Z</published>
+    <arxiv:comment>Accepted by the 13th International Conference on Learning Representations (ICLR 2025)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Xiaoming Shi</name>
+    </author>
+    <author>
+      <name>Shiyu Wang</name>
+    </author>
+    <author>
+      <name>Yuqi Nie</name>
+    </author>
+    <author>
+      <name>Dianqi Li</name>
+    </author>
+    <author>
+      <name>Zhou Ye</name>
+    </author>
+    <author>
+      <name>Qingsong Wen</name>
+    </author>
+    <author>
+      <name>Ming Jin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.17253v4</id>
+    <title>VisionTS: Visual Masked Autoencoders Are Free-Lunch Zero-Shot Time Series Forecasters</title>
+    <updated>2025-06-06T14:46:28Z</updated>
+    <link href="https://arxiv.org/abs/2408.17253v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.17253v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Foundation models have emerged as a promising approach in time series forecasting (TSF). Existing approaches either repurpose large language models (LLMs) or build large-scale time series datasets to develop TSF foundation models for universal forecasting. However, these methods face challenges due to the severe cross-domain gap or in-domain heterogeneity. This paper explores a new road to building a TSF foundation model from rich, high-quality natural images. Our key insight is that a visual masked autoencoder, pre-trained on the ImageNet dataset, can naturally be a numeric series forecaster. By reformulating TSF as an image reconstruction task, we bridge the gap between image pre-training and TSF downstream tasks. Surprisingly, without further adaptation in the time series domain, the proposed VisionTS could achieve better zero-shot forecast performance than existing TSF foundation models. With fine-tuning for one epoch, VisionTS could further improve the forecasting and achieve state-of-the-art performance in most cases. Extensive experiments reveal intrinsic similarities between images and real-world time series, suggesting that visual models may offer a "free lunch" for TSF and highlight the potential for future cross-modality research. Our code is publicly available at https://github.com/Keytoyze/VisionTS.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-30T12:51:55Z</published>
+    <arxiv:comment>v4: accepted by ICML 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Mouxiang Chen</name>
+    </author>
+    <author>
+      <name>Lefei Shen</name>
+    </author>
+    <author>
+      <name>Zhuo Li</name>
+    </author>
+    <author>
+      <name>Xiaoyun Joy Wang</name>
+    </author>
+    <author>
+      <name>Jianling Sun</name>
+    </author>
+    <author>
+      <name>Chenghao Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.17234v2</id>
+    <title>Polarized and unpolarized gluon PDFs: generative machine learning applications for lattice QCD matrix elements at short distance and large momentum</title>
+    <updated>2025-04-22T16:35:36Z</updated>
+    <link href="https://arxiv.org/abs/2409.17234v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.17234v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Lattice quantum chromodynamics (QCD) calculations share a defining challenge by requiring a small finite range of spatial separation $z$ between quark/gluon bilinears for controllable power corrections in the perturbative QCD factorization, and a large hadron boost $p_z$ for a successful determination of collinear parton distribution functions (PDFs). However, these two requirements make the determination of PDFs from lattice data very challenging. We present the application of generative machine learning algorithms to estimate the polarized and unpolarized gluon correlation functions utilizing short-distance data and extending the correlation up to $zp_z \lesssim 14$, surpassing the current capabilities of lattice QCD calculations. We train physics-informed machine learning algorithms to learn from the short-distance correlation at $z\lesssim 0.36$ fm and take the limit, $p_z \to \infty$, thereby minimizing possible contamination from the higher-twist effects for a successful reconstruction of the polarized gluon PDF. We also expose the bias and problems with underestimating uncertainties associated with the use of model-dependent and overly constrained functional forms, such as $x^α(1-x)^β$ and its variants to extract PDFs from the lattice data. We propose the use of generative machine learning algorithms to mitigate these issues and present our determination of the polarized and unpolarized gluon PDFs in the nucleon.</summary>
+    <category term="hep-lat" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nucl-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-25T18:00:02Z</published>
+    <arxiv:comment>Published Version, 24 pages, 20 figures</arxiv:comment>
+    <arxiv:primary_category term="hep-lat"/>
+    <arxiv:journal_ref>Phys.Rev.D 111 (2025) 7, 074509</arxiv:journal_ref>
+    <author>
+      <name>Talal Ahmed Chowdhury</name>
+    </author>
+    <author>
+      <name>Taku Izubuchi</name>
+    </author>
+    <author>
+      <name>Methun Kamruzzaman</name>
+    </author>
+    <author>
+      <name>Nikhil Karthik</name>
+    </author>
+    <author>
+      <name>Tanjib Khan</name>
+    </author>
+    <author>
+      <name>Tianbo Liu</name>
+    </author>
+    <author>
+      <name>Arpon Paul</name>
+    </author>
+    <author>
+      <name>Jakob Schoenleber</name>
+    </author>
+    <author>
+      <name>Raza Sabbir Sufian</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.111.074509</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.111.074509" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.14832v1</id>
+    <title>Energy-Aware Federated Learning in Satellite Constellations</title>
+    <updated>2024-09-23T09:01:17Z</updated>
+    <link href="https://arxiv.org/abs/2409.14832v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.14832v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Federated learning in satellite constellations, where the satellites collaboratively train a machine learning model, is a promising technology towards enabling globally connected intelligence and the integration of space networks into terrestrial mobile networks. The energy required for this computationally intensive task is provided either by solar panels or by an internal battery if the satellite is in Earth's shadow. Careful management of this battery and system's available energy resources is not only necessary for reliable satellite operation, but also to avoid premature battery aging. We propose a novel energy-aware computation time scheduler for satellite FL, which aims to minimize battery usage without any impact on the convergence speed. Numerical results indicate an increase of more than 3x in battery lifetime can be achieved over energy-agnostic task scheduling.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-23T09:01:17Z</published>
+    <arxiv:comment>This paper is accepted for the IEEE Global Communications Conference (GLOBECOM Workshops), 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>Nasrin Razmi</name>
+    </author>
+    <author>
+      <name>Bho Matthiesen</name>
+    </author>
+    <author>
+      <name>Armin Dekorsy</name>
+    </author>
+    <author>
+      <name>Petar Popovski</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.11381v2</id>
+    <title>RAGLAB: A Modular and Research-Oriented Unified Framework for Retrieval-Augmented Generation</title>
+    <updated>2024-09-09T11:18:16Z</updated>
+    <link href="https://arxiv.org/abs/2408.11381v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.11381v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) demonstrate human-level capabilities in dialogue, reasoning, and knowledge retention. However, even the most advanced LLMs face challenges such as hallucinations and real-time updating of their knowledge. Current research addresses this bottleneck by equipping LLMs with external knowledge, a technique known as Retrieval Augmented Generation (RAG). However, two key issues constrained the development of RAG. First, there is a growing lack of comprehensive and fair comparisons between novel RAG algorithms. Second, open-source tools such as LlamaIndex and LangChain employ high-level abstractions, which results in a lack of transparency and limits the ability to develop novel algorithms and evaluation metrics. To close this gap, we introduce RAGLAB, a modular and research-oriented open-source library. RAGLAB reproduces 6 existing algorithms and provides a comprehensive ecosystem for investigating RAG algorithms. Leveraging RAGLAB, we conduct a fair comparison of 6 RAG algorithms across 10 benchmarks. With RAGLAB, researchers can efficiently compare the performance of various algorithms and develop novel algorithms.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-21T07:20:48Z</published>
+    <arxiv:comment>6 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Xuanwang Zhang</name>
+    </author>
+    <author>
+      <name>Yunze Song</name>
+    </author>
+    <author>
+      <name>Yidong Wang</name>
+    </author>
+    <author>
+      <name>Shuyun Tang</name>
+    </author>
+    <author>
+      <name>Xinfeng Li</name>
+    </author>
+    <author>
+      <name>Zhengran Zeng</name>
+    </author>
+    <author>
+      <name>Zhen Wu</name>
+    </author>
+    <author>
+      <name>Wei Ye</name>
+    </author>
+    <author>
+      <name>Wenyuan Xu</name>
+    </author>
+    <author>
+      <name>Yue Zhang</name>
+    </author>
+    <author>
+      <name>Xinyu Dai</name>
+    </author>
+    <author>
+      <name>Shikun Zhang</name>
+    </author>
+    <author>
+      <name>Qingsong Wen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.07678v1</id>
+    <title>Your MMM is Broken: Identification of Nonlinear and Time-varying Effects in Marketing Mix Models</title>
+    <updated>2024-08-14T17:24:10Z</updated>
+    <link href="https://arxiv.org/abs/2408.07678v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.07678v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent years have seen a resurgence in interest in marketing mix models (MMMs), which are aggregate-level models of marketing effectiveness. Often these models incorporate nonlinear effects, and either implicitly or explicitly assume that marketing effectiveness varies over time. In this paper, we show that nonlinear and time-varying effects are often not identifiable from standard marketing mix data: while certain data patterns may be suggestive of nonlinear effects, such patterns may also emerge under simpler models that incorporate dynamics in marketing effectiveness. This lack of identification is problematic because nonlinearities and dynamics suggest fundamentally different optimal marketing allocations. We examine this identification issue through theory and simulations, wherein we explore the exact conditions under which conflation between the two types of models is likely to occur. In doing so, we introduce a flexible Bayesian nonparametric model that allows us to both flexibly simulate and estimate different data-generating processes. We show that conflating the two types of effects is especially likely in the presence of autocorrelated marketing variables, which are common in practice, especially given the widespread use of stock variables to capture long-run effects of advertising. We illustrate these ideas through numerous empirical applications to real-world marketing mix data, showing the prevalence of the conflation issue in practice. Finally, we show how marketers can avoid this conflation, by designing experiments that strategically manipulate spending in ways that pin down model form.</summary>
+    <category term="econ.EM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-14T17:24:10Z</published>
+    <arxiv:primary_category term="econ.EM"/>
+    <author>
+      <name>Ryan Dew</name>
+    </author>
+    <author>
+      <name>Nicolas Padilla</name>
+    </author>
+    <author>
+      <name>Anya Shchetkina</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.13556v1</id>
+    <title>What if? Causal Machine Learning in Supply Chain Risk Management</title>
+    <updated>2024-08-24T11:30:25Z</updated>
+    <link href="https://arxiv.org/abs/2408.13556v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.13556v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The penultimate goal for developing machine learning models in supply chain management is to make optimal interventions. However, most machine learning models identify correlations in data rather than inferring causation, making it difficult to systematically plan for better outcomes. In this article, we propose and evaluate the use of causal machine learning for developing supply chain risk intervention models, and demonstrate its use with a case study in supply chain risk management in the maritime engineering sector. Our findings highlight that causal machine learning enhances decision-making processes by identifying changes that can be achieved under different supply chain interventions, allowing "what-if" scenario planning. We therefore propose different machine learning developmental pathways for for predicting risk, and planning for interventions to minimise risk and outline key steps for supply chain researchers to explore causal machine learning.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-24T11:30:25Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Mateusz Wyrembek</name>
+    </author>
+    <author>
+      <name>George Baryannis</name>
+    </author>
+    <author>
+      <name>Alexandra Brintrup</name>
+    </author>
+    <arxiv:doi>10.1080/00207543.2025.2458121</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1080/00207543.2025.2458121" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.00400v1</id>
+    <title>An Enhanced Batch Query Architecture in Real-time Recommendation</title>
+    <updated>2024-08-31T09:19:41Z</updated>
+    <link href="https://arxiv.org/abs/2409.00400v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.00400v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In industrial recommendation systems on websites and apps, it is essential to recall and predict top-n results relevant to user interests from a content pool of billions within milliseconds. To cope with continuous data growth and improve real-time recommendation performance, we have designed and implemented a high-performance batch query architecture for real-time recommendation systems. Our contributions include optimizing hash structures with a cacheline-aware probing method to enhance coalesced hashing, as well as the implementation of a hybrid storage key-value service built upon it. Our experiments indicate this approach significantly surpasses conventional hash tables in batch query throughput, achieving up to 90% of the query throughput of random memory access when incorporating parallel optimization. The support for NVMe, integrating two-tier storage for hot and cold data, notably reduces resource consumption. Additionally, the system facilitates dynamic updates, automated sharding of attributes and feature embedding tables, and introduces innovative protocols for consistency in batch queries, thereby enhancing the effectiveness of real-time incremental learning updates. This architecture has been deployed and in use in the bilibili recommendation system for over a year, a video content community with hundreds of millions of users, supporting 10x increase in model computation with minimal resource growth, improving outcomes while preserving the system's real-time performance.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-31T09:19:41Z</published>
+    <arxiv:comment>8 pages, 10 figures, CIKM 2024 Applied Research Paper</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <arxiv:journal_ref>CIKM '24:(2024) Pages 5078 - 5085</arxiv:journal_ref>
+    <author>
+      <name>Qiang Zhang</name>
+    </author>
+    <author>
+      <name>Zhipeng Teng</name>
+    </author>
+    <author>
+      <name>Disheng Wu</name>
+    </author>
+    <author>
+      <name>Jiayin Wang</name>
+    </author>
+    <arxiv:doi>10.1145/3627673.3680034</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3627673.3680034" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.03284v1</id>
+    <title>iText2KG: Incremental Knowledge Graphs Construction Using Large Language Models</title>
+    <updated>2024-09-05T06:49:14Z</updated>
+    <link href="https://arxiv.org/abs/2409.03284v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.03284v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Most available data is unstructured, making it challenging to access valuable information. Automatically building Knowledge Graphs (KGs) is crucial for structuring data and making it accessible, allowing users to search for information effectively. KGs also facilitate insights, inference, and reasoning. Traditional NLP methods, such as named entity recognition and relation extraction, are key in information retrieval but face limitations, including the use of predefined entity types and the need for supervised learning. Current research leverages large language models' capabilities, such as zero- or few-shot learning. However, unresolved and semantically duplicated entities and relations still pose challenges, leading to inconsistent graphs and requiring extensive post-processing. Additionally, most approaches are topic-dependent. In this paper, we propose iText2KG, a method for incremental, topic-independent KG construction without post-processing. This plug-and-play, zero-shot method is applicable across a wide range of KG construction scenarios and comprises four modules: Document Distiller, Incremental Entity Extractor, Incremental Relation Extractor, and Graph Integrator and Visualization. Our method demonstrates superior performance compared to baseline methods across three scenarios: converting scientific papers to graphs, websites to graphs, and CVs to graphs.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-05T06:49:14Z</published>
+    <arxiv:comment>Accepted at The International Web Information Systems Engineering conference (the WISE conference) 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Yassir Lairgi</name>
+    </author>
+    <author>
+      <name>Ludovic Moncla</name>
+    </author>
+    <author>
+      <name>Rémy Cazabet</name>
+    </author>
+    <author>
+      <name>Khalid Benabdeslem</name>
+    </author>
+    <author>
+      <name>Pierre Cléau</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.02694v3</id>
+    <title>HELMET: How to Evaluate Long-Context Language Models Effectively and Thoroughly</title>
+    <updated>2025-03-06T18:41:54Z</updated>
+    <link href="https://arxiv.org/abs/2410.02694v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.02694v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Many benchmarks exist for evaluating long-context language models (LCLMs), yet developers often rely on synthetic tasks such as needle-in-a-haystack (NIAH) or an arbitrary subset of tasks. However, it remains unclear whether these benchmarks reflect the diverse downstream applications of LCLMs, and such inconsistencies further complicate model comparison. We investigate the underlying reasons behind these practices and find that existing benchmarks often provide noisy signals due to limited coverage of applications, insufficient context lengths, unreliable metrics, and incompatibility with base models. In this work, we introduce HELMET (How to Evaluate Long-context Models Effectively and Thoroughly), a comprehensive benchmark encompassing seven diverse, application-centric categories. We also address several issues in previous benchmarks by adding controllable lengths up to 128K tokens, model-based evaluation for reliable metrics, and few-shot prompting for robustly evaluating base models. Consequently, we demonstrate that HELMET offers more reliable and consistent rankings of frontier LCLMs. Through a comprehensive study of 59 LCLMs, we find that (1) synthetic tasks like NIAH do not reliably predict downstream performance; (2) the diverse categories in HELMET exhibit distinct trends and low correlations with each other; and (3) while most LCLMs achieve perfect NIAH scores, open-source models significantly lag behind closed ones when tasks require full-context reasoning or following complex instructions -- the gap widens as length increases. Finally, we recommend using our RAG tasks for fast model development, as they are easy to run and better predict other downstream performance; ultimately, we advocate for a holistic evaluation across diverse tasks.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-03T17:20:11Z</published>
+    <arxiv:comment>ICLR 2025. Project page: https://princeton-nlp.github.io/HELMET/</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Howard Yen</name>
+    </author>
+    <author>
+      <name>Tianyu Gao</name>
+    </author>
+    <author>
+      <name>Minmin Hou</name>
+    </author>
+    <author>
+      <name>Ke Ding</name>
+    </author>
+    <author>
+      <name>Daniel Fleischer</name>
+    </author>
+    <author>
+      <name>Peter Izsak</name>
+    </author>
+    <author>
+      <name>Moshe Wasserblat</name>
+    </author>
+    <author>
+      <name>Danqi Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.18512v2</id>
+    <title>Expressive Prompting: Improving Emotion Intensity and Speaker Consistency in Zero-Shot TTS</title>
+    <updated>2026-04-03T15:54:23Z</updated>
+    <link href="https://arxiv.org/abs/2409.18512v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.18512v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent advancements in speech synthesis have enabled large language model (LLM)-based systems to perform zero-shot generation with controllable content, timbre, speaker identity, and emotion through input prompts. As a result, these models heavily rely on prompt design to guide the generation process. However, existing prompt selection methods often fail to ensure that prompts contain sufficiently stable speaker identity cues and appropriate emotional intensity indicators, which are crucial for expressive speech synthesis. To address this challenge, we propose a two-stage prompt selection strategy specifically designed for expressive speech synthesis. In the static stage (before synthesis), we first evaluate prompt candidates using pitch-based prosodic features, perceptual audio quality, and text-emotion coherence scores evaluated by an LLM. We further assess the candidates under a specific TTS model by measuring character error rate, speaker similarity, and emotional similarity between the synthesized and prompt speech. In the dynamic stage (during synthesis), we use a textual similarity model to select the prompt that is most aligned with the current input text. Experimental results demonstrate that our strategy effectively selects prompt to synthesize speech with both high-intensity emotional expression and robust speaker identity, leading to more expressive and stable zero-shot TTS performance. Audio samples and codes will be available at https://whyrrrrun.github.io/ExpPro.github.io/.</summary>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-27T07:46:52Z</published>
+    <arxiv:primary_category term="cs.SD"/>
+    <author>
+      <name>Haoyu Wang</name>
+    </author>
+    <author>
+      <name>Chunyu Qiang</name>
+    </author>
+    <author>
+      <name>Tianrui Wang</name>
+    </author>
+    <author>
+      <name>Cheng Gong</name>
+    </author>
+    <author>
+      <name>Yu Jiang</name>
+    </author>
+    <author>
+      <name>Yuheng Lu</name>
+    </author>
+    <author>
+      <name>Chen Zhang</name>
+    </author>
+    <author>
+      <name>Longbiao Wang</name>
+    </author>
+    <author>
+      <name>Jianwu Dang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.07765v3</id>
+    <title>Heterogeneous Treatment Effect Estimation under Noncompliance in the Illinois Workplace Wellness Study with Bayesian Tree Ensembles</title>
+    <updated>2026-07-29T21:59:04Z</updated>
+    <link href="https://arxiv.org/abs/2408.07765v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.07765v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Estimating varying treatment effects in randomized trials with noncompliance is inherently challenging since variation comes from two separate sources: variation in the impact itself and variation in the compliance rate. In this setting, existing flexible machine learning methods are sensitive to the weak instruments problem and can yield unstable estimates of heterogeneity when run repeatedly with different initialization or random seeds. Our main methodological contribution is to present a Bayesian Causal Forest model for binary response variables in scenarios with noncompliance. By repeatedly imputing individuals' compliance types, we can flexibly estimate heterogeneous treatment effects among compliers. Simulation studies demonstrate the usefulness of our approach when compliance and treatment effects are heterogeneous. We use this method to detect and analyze heterogeneity in the treatment effects in the Illinois Workplace Wellness Study, which not only features heterogeneous and one-sided compliance but also several binary outcomes of interest. We focus on three outcomes one year after intervention. We confirm a null effect on the presence of a chronic condition, discover meaningful heterogeneity in the impact of the intervention on metabolic parameters though the average effect is null in classical partial effect estimates, and find heterogeneity in the intervention's effect on individuals' perception of management prioritization of health and safety.</summary>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-14T18:33:55Z</published>
+    <arxiv:primary_category term="stat.AP"/>
+    <author>
+      <name>Jared D. Fisher</name>
+    </author>
+    <author>
+      <name>David W. Puelz</name>
+    </author>
+    <author>
+      <name>Sameer K. Deshpande</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.11203v2</id>
+    <title>Ultra-low $Q_β$ value for the allowed decay of $^{110}$Ag$^m$ confirmed via mass measurements</title>
+    <updated>2025-02-04T18:15:56Z</updated>
+    <link href="https://arxiv.org/abs/2409.11203v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.11203v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The mass of the electron-antineutrino can be determined in dedicated measurements of the $β$ spectral shape near the $β$ endpoint of a $β^-$ transition, with a low $Q$ value enhancing the sensitivity of the measurement. One such low-$Q$-value candidate is the transition between the $6^+$ isomer of $^{110}$Ag and the $5^+_2$ state in $^{110}$Cd ($Q^{\ast}_{β,m}=-0.12(131)$ keV). To reduce the uncertainty of the $Q$ value, we have used the phase-imaging ion-cyclotron-resonance technique with the JYFLTRAP double Penning trap and performed a high-precision atomic-mass measurement of $^{109}$Ag with $^{110}$Cd as a reference. Combined with the known spectroscopic data, we obtain a re-evaluated value $Q^{\ast}_{β,m}=405(135)$ eV, for the $^{110}\text{Ag}(6^+_\text{m}) \rightarrow {^{110}\text{Cd}}(5^+_2)$ transition. This represents the lowest $Q_β$ value for any allowed transition observed to date. In order to estimate the partial half-life ($t_{1/2}$) and branching ratio (Br) of the transition, nuclear shell-model calculations were performed using the $jj45pnb$ Hamiltonian in combination with state-of-the-art atomic calculations. The computed values $t_{1/2} = 2.23^{+5.24}_{-1.28} \times 10^7$ years and $\textrm{Br} = 3.07^{+4.16}_{-2.15} \times 10^{-8}$, along with the thermal-neutron capture on stable $^{109}$Ag as a viable production method, make $^{110}\textrm{Ag}^m$ a promising candidate for future antineutrino-mass measurements.</summary>
+    <category term="nucl-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nucl-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-17T13:59:16Z</published>
+    <arxiv:comment>9 pages, 3 figures, 1 additional figure and 3 tables in Supplemental material</arxiv:comment>
+    <arxiv:primary_category term="nucl-ex"/>
+    <arxiv:journal_ref>Phys. Rev. Lett. 134, 172501 (2025)</arxiv:journal_ref>
+    <author>
+      <name>J. Ruotsalainen</name>
+    </author>
+    <author>
+      <name>M. Stryjczyk</name>
+    </author>
+    <author>
+      <name>M. Ramalho</name>
+    </author>
+    <author>
+      <name>T. Eronen</name>
+    </author>
+    <author>
+      <name>Z. Ge</name>
+    </author>
+    <author>
+      <name>A. Kankainen</name>
+    </author>
+    <author>
+      <name>M. Mougeot</name>
+    </author>
+    <author>
+      <name>J. Suhonen</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.134.172501</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.134.172501" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.12229v3</id>
+    <title>Comprehending Knowledge Graphs with Large Language Models for Recommender Systems</title>
+    <updated>2025-04-17T11:50:59Z</updated>
+    <link href="https://arxiv.org/abs/2410.12229v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.12229v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In recent years, the introduction of knowledge graphs (KGs) has significantly advanced recommender systems by facilitating the discovery of potential associations between items. However, existing methods still face several limitations. First, most KGs suffer from missing facts or limited scopes. Second, existing methods convert textual information in KGs into IDs, resulting in the loss of natural semantic connections between different items. Third, existing methods struggle to capture high-order connections in the global KG. To address these limitations, we propose a novel method called CoLaKG, which leverages large language models (LLMs) to improve KG-based recommendations. The extensive knowledge and remarkable reasoning capabilities of LLMs enable our method to supplement missing facts in KGs, and their powerful text understanding abilities allow for better utilization of semantic information. Specifically, CoLaKG extracts useful information from KGs at both local and global levels. By employing the item-centered subgraph extraction and prompt engineering, it can accurately understand the local information. In addition, through the semantic-based retrieval module, each item is enriched by related items from the entire knowledge graph, effectively harnessing global information. Furthermore, the local and global information are effectively integrated into the recommendation model through a representation fusion module and a retrieval-augmented representation learning module, respectively. Extensive experiments on four real-world datasets demonstrate the superiority of our method.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-16T04:44:34Z</published>
+    <arxiv:comment>Accepted as a full paper by SIGIR'25</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Ziqiang Cui</name>
+    </author>
+    <author>
+      <name>Yunpeng Weng</name>
+    </author>
+    <author>
+      <name>Xing Tang</name>
+    </author>
+    <author>
+      <name>Fuyuan Lyu</name>
+    </author>
+    <author>
+      <name>Dugang Liu</name>
+    </author>
+    <author>
+      <name>Xiuqiang He</name>
+    </author>
+    <author>
+      <name>Chen Ma</name>
+    </author>
+    <arxiv:doi>10.1145/3726302.3729932</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3726302.3729932" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.15953v4</id>
+    <title>Modeling and Analyzing the Influence of Non-Item Pages on Sequential Next-Item Prediction</title>
+    <updated>2025-04-01T15:03:12Z</updated>
+    <link href="https://arxiv.org/abs/2408.15953v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.15953v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Analyzing sequences of interactions between users and items, sequential recommendation models can learn user intent and make predictions about the next item. Next to item interactions, most systems also have interactions with what we call non-item pages: these pages are not related to specific items but still can provide insights into the user's interests, as, for example, navigation pages. We therefore propose a general way to include these non-item pages in sequential recommendation models to enhance next-item prediction.
+  First, we demonstrate the influence of non-item pages on following interactions using the hypotheses testing framework HypTrails and propose methods for representing non-item pages in sequential recommendation models. Subsequently, we adapt popular sequential recommender models to integrate non-item pages and investigate their performance with different item representation strategies as well as their ability to handle noisy data. To show the general capabilities of the models to integrate non-item pages, we create a synthetic dataset for a controlled setting and then evaluate the improvements from including non-item pages on two real-world datasets.
+  Our results show that non-item pages are a valuable source of information, and incorporating them in sequential recommendation models increases the performance of next-item prediction across all analyzed model architectures.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-28T17:12:01Z</published>
+    <arxiv:comment>40 pages, 19 figures; Accepted for ACM TORS Journal, Updated copyright information</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Elisabeth Fischer</name>
+    </author>
+    <author>
+      <name>Albin Zehe</name>
+    </author>
+    <author>
+      <name>Andreas Hotho</name>
+    </author>
+    <author>
+      <name>Daniel Schlör</name>
+    </author>
+    <arxiv:doi>10.1145/3721298</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3721298" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.21109v1</id>
+    <title>Dual-Agent Deep Reinforcement Learning for Dynamic Pricing and Replenishment</title>
+    <updated>2024-10-28T15:12:04Z</updated>
+    <link href="https://arxiv.org/abs/2410.21109v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.21109v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the dynamic pricing and replenishment problems under inconsistent decision frequencies. Different from the traditional demand assumption, the discreteness of demand and the parameter within the Poisson distribution as a function of price introduce complexity into analyzing the problem property. We demonstrate the concavity of the single-period profit function with respect to product price and inventory within their respective domains. The demand model is enhanced by integrating a decision tree-based machine learning approach, trained on comprehensive market data. Employing a two-timescale stochastic approximation scheme, we address the discrepancies in decision frequencies between pricing and replenishment, ensuring convergence to local optimum. We further refine our methodology by incorporating deep reinforcement learning (DRL) techniques and propose a fast-slow dual-agent DRL algorithm. In this approach, two agents handle pricing and inventory and are updated on different scales. Numerical results from both single and multiple products scenarios validate the effectiveness of our methods.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="econ.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-28T15:12:04Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yi Zheng</name>
+    </author>
+    <author>
+      <name>Zehao Li</name>
+    </author>
+    <author>
+      <name>Peng Jiang</name>
+    </author>
+    <author>
+      <name>Yijie Peng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.09832v1</id>
+    <title>Collecting single photons from a cavity-coupled quantum dot using an adiabatic tapered fiber</title>
+    <updated>2024-10-13T13:15:21Z</updated>
+    <link href="https://arxiv.org/abs/2410.09832v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.09832v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We demonstrate efficient in-plane optical fiber collection of single photon emission from quantum dots embedded in photonic crystal cavities. This was achieved via adiabatic coupling between a tapered optical fiber and a tapered on-chip photonic waveguide coupled to the photonic crystal cavity. The collection efficiency of a dot in a photonic crystal cavity was measured to be 5 times greater via the tapered optical fiber compared to collection by a microscope objective lens above the cavity. The single photon source was also characterized by second order photon correlations measurements giving g(2)(0)=0.17 under non-resonant excitation. Numerical calculations demonstrate that the collection efficiency could be further increased by improving the dot-cavity coupling and by increasing the overlap length of the tapered fiber with the on-chip waveguide. An adiabatic coupling of near unity is predicted for an overlap length of 5 microns.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-13T13:15:21Z</published>
+    <arxiv:comment>22 pages, 12 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.optics"/>
+    <author>
+      <name>Anatole Bach</name>
+    </author>
+    <author>
+      <name>Antoine Chapuis</name>
+    </author>
+    <author>
+      <name>Corentin Morin</name>
+    </author>
+    <author>
+      <name>Richard Hostein</name>
+    </author>
+    <author>
+      <name>Savvas Germanis</name>
+    </author>
+    <author>
+      <name>Benoit Eble</name>
+    </author>
+    <author>
+      <name>Mathieu Bernard</name>
+    </author>
+    <author>
+      <name>Florent Margaillan</name>
+    </author>
+    <author>
+      <name>Paola Atkinson</name>
+    </author>
+    <author>
+      <name>Valia Voliotis</name>
+    </author>
+    <author>
+      <name>Remy Braive</name>
+    </author>
+    <author>
+      <name>Kimon Moratis</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.10594v2</id>
+    <title>VisRAG: Vision-based Retrieval-augmented Generation on Multi-modality Documents</title>
+    <updated>2025-03-02T01:19:51Z</updated>
+    <link href="https://arxiv.org/abs/2410.10594v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.10594v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Retrieval-augmented generation (RAG) is an effective technique that enables large language models (LLMs) to utilize external knowledge sources for generation. However, current RAG systems are solely based on text, rendering it impossible to utilize vision information like layout and images that play crucial roles in real-world multi-modality documents. In this paper, we introduce VisRAG, which tackles this issue by establishing a vision-language model (VLM)-based RAG pipeline. In this pipeline, instead of first parsing the document to obtain text, the document is directly embedded using a VLM as an image and then retrieved to enhance the generation of a VLM. Compared to traditional text-based RAG, VisRAG maximizes the retention and utilization of the data information in the original documents, eliminating the information loss introduced during the parsing process. We collect both open-source and synthetic data to train the retriever in VisRAG and explore a variety of generation methods. Experiments demonstrate that VisRAG outperforms traditional RAG in both the retrieval and generation stages, achieving a 20--40% end-to-end performance gain over traditional text-based RAG pipeline. Further analysis reveals that VisRAG is efficient in utilizing training data and demonstrates strong generalization capability, positioning it as a promising solution for RAG on multi-modality documents. Our code and data are available at https://github.com/openbmb/visrag.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-14T15:04:18Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Shi Yu</name>
+    </author>
+    <author>
+      <name>Chaoyue Tang</name>
+    </author>
+    <author>
+      <name>Bokai Xu</name>
+    </author>
+    <author>
+      <name>Junbo Cui</name>
+    </author>
+    <author>
+      <name>Junhao Ran</name>
+    </author>
+    <author>
+      <name>Yukun Yan</name>
+    </author>
+    <author>
+      <name>Zhenghao Liu</name>
+    </author>
+    <author>
+      <name>Shuo Wang</name>
+    </author>
+    <author>
+      <name>Xu Han</name>
+    </author>
+    <author>
+      <name>Zhiyuan Liu</name>
+    </author>
+    <author>
+      <name>Maosong Sun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.03168v1</id>
+    <title>The HI reservoir in central spiral galaxies and the implied star formation process</title>
+    <updated>2024-09-05T01:55:29Z</updated>
+    <link href="https://arxiv.org/abs/2409.03168v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.03168v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The cold interstellar medium (ISM) as the raw material for star formation is critical to understanding galaxy evolution. It is generally understood that galaxies stop making stars when, in one way or another, they run out of gas. However, here we provide evidence that central spiral galaxies remain rich in atomic gas even if their star formation rate and molecular gas fraction have dropped significantly compared to "normal" star-forming galaxies of the same mass. Since HI is sensitive to external processes, here we investigate central spiral galaxies using a combined sample from SDSS, ALFALFA, and xGASS surveys. After proper incompleteness corrections, we find that the key HI scaling relations for central spirals show significant but regular systematic dependence on stellar mass. At any given stellar mass, the HI gas mass fraction is about constant with changing specific star formation rate (sSFR), which suggests that HI reservoir is ubiquitous in central spirals with any star formation status down to M* ~ 10^9 Msun. Together with the tight correlation between the molecular gas mass fraction and sSFR for galaxies across a wide range of different properties, it suggests that the decline of SFR of all central spirals in the local universe is due to the halt of H2 supply, though there is plenty of HI gas around. These hence provide critical observations of the dramatically different behavior of the cold multi-phase ISM, and a key to understand the star formation process and quenching mechanism.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-05T01:55:29Z</published>
+    <arxiv:comment>18 pages, 7 figures; Accepted for publication in the ApJL; This is the fourth paper in the "From Haloes to Galaxies" series</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <author>
+      <name>Jing Dou</name>
+    </author>
+    <author>
+      <name>Yingjie Peng</name>
+    </author>
+    <author>
+      <name>Qiusheng Gu</name>
+    </author>
+    <author>
+      <name>Alvio Renzini</name>
+    </author>
+    <author>
+      <name>Luis C. Ho</name>
+    </author>
+    <author>
+      <name>Filippo Mannucci</name>
+    </author>
+    <author>
+      <name>Emanuele Daddi</name>
+    </author>
+    <author>
+      <name>Chengpeng Zhang</name>
+    </author>
+    <author>
+      <name>Jiaxuan Li</name>
+    </author>
+    <author>
+      <name>Yong Shi</name>
+    </author>
+    <author>
+      <name>Tao Wang</name>
+    </author>
+    <author>
+      <name>Dingyi Zhao</name>
+    </author>
+    <author>
+      <name>Cheqiu Lyu</name>
+    </author>
+    <author>
+      <name>Di Li</name>
+    </author>
+    <author>
+      <name>Feng Yuan</name>
+    </author>
+    <author>
+      <name>Roberto Maiolino</name>
+    </author>
+    <author>
+      <name>Yulong Gao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.11674v2</id>
+    <title>LLM-Mixer: Multiscale Mixing in LLMs for Time Series Forecasting</title>
+    <updated>2025-06-01T07:07:27Z</updated>
+    <link href="https://arxiv.org/abs/2410.11674v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.11674v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Time series forecasting remains a challenging task, particularly in the context of complex multiscale temporal patterns. This study presents LLM-Mixer, a framework that improves forecasting accuracy through the combination of multiscale time-series decomposition with pre-trained LLMs (Large Language Models). LLM-Mixer captures both short-term fluctuations and long-term trends by decomposing the data into multiple temporal resolutions and processing them with a frozen LLM, guided by a textual prompt specifically designed for time-series data. Extensive experiments conducted on multivariate and univariate datasets demonstrate that LLM-Mixer achieves competitive performance, outperforming recent state-of-the-art models across various forecasting horizons. This work highlights the potential of combining multiscale analysis and LLMs for effective and scalable time-series forecasting.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-15T15:08:57Z</published>
+    <arxiv:comment>Time series forecasting using LLMs</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Md Kowsher</name>
+    </author>
+    <author>
+      <name>Md. Shohanur Islam Sobuj</name>
+    </author>
+    <author>
+      <name>Nusrat Jahan Prottasha</name>
+    </author>
+    <author>
+      <name>E. Alejandro Alanis</name>
+    </author>
+    <author>
+      <name>Ozlem Ozmen Garibay</name>
+    </author>
+    <author>
+      <name>Niloofar Yousefi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.11589v2</id>
+    <title>Toward Enhancing Vehicle Color Recognition in Adverse Conditions: A Dataset and Benchmark</title>
+    <updated>2024-10-20T15:09:14Z</updated>
+    <link href="https://arxiv.org/abs/2408.11589v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.11589v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Vehicle information recognition is crucial in various practical domains, particularly in criminal investigations. Vehicle Color Recognition (VCR) has garnered significant research interest because color is a visually distinguishable attribute of vehicles and is less affected by partial occlusion and changes in viewpoint. Despite the success of existing methods for this task, the relatively low complexity of the datasets used in the literature has been largely overlooked. This research addresses this gap by compiling a new dataset representing a more challenging VCR scenario. The images - sourced from six license plate recognition datasets - are categorized into eleven colors, and their annotations were validated using official vehicle registration information. We evaluate the performance of four deep learning models on a widely adopted dataset and our proposed dataset to establish a benchmark. The results demonstrate that our dataset poses greater difficulty for the tested models and highlights scenarios that require further exploration in VCR. Remarkably, nighttime scenes account for a significant portion of the errors made by the best-performing model. This research provides a foundation for future studies on VCR, while also offering valuable insights for the field of fine-grained vehicle classification.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-21T12:54:41Z</published>
+    <arxiv:comment>Accepted for presentation at the Conference on Graphics, Patterns and Images (SIBGRAPI) 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Gabriel E. Lima</name>
+    </author>
+    <author>
+      <name>Rayson Laroca</name>
+    </author>
+    <author>
+      <name>Eduardo Santos</name>
+    </author>
+    <author>
+      <name>Eduil Nascimento</name>
+    </author>
+    <author>
+      <name>David Menotti</name>
+    </author>
+    <arxiv:doi>10.1109/SIBGRAPI62404.2024.10716307</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/SIBGRAPI62404.2024.10716307" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.09812v1</id>
+    <title>Magnetic exchange interaction in spin-valve with chiral spin-triplet superconductor</title>
+    <updated>2024-08-19T09:03:03Z</updated>
+    <link href="https://arxiv.org/abs/2408.09812v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.09812v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The coupling between two ferromagnets separated by a superconductor has been mostly investigated for the case of Cooper pairs with spin-singlet symmetry. Here, we consider a spin-triplet superconductor with chiral pairing. By full self-consistent analysis of the spatial dependent superconducting order parameter, we determine the magnetic ground state of the superconducting spin valve. The study is performed by investigating the role of the orientation and strength of the magnetization in the ferromagnets including spin-valve asymmetries in the magnetic configurations. Due to the nonvanishing angular momentum of the spin-triplet Cooper pairs we demonstrate that the induced magnetic coupling has an anisotropic character and a structure that can favor collinear or noncollinear magnetic orientations, thus mimicking a magnetic interaction of the Heisenberg or Dzyaloshinskii-Moriya type, respectively. We investigate the role of the physical parameters controlling the character of the magnetic exchange: the amplitude of the magnetization in the ferromagnets and the length of the superconducting spacer in the spin valve. Our study demonstrates that spin-triplet superconductors can be employed to devise anisotropic magnetic exchange and to allow for transitions in the spin-valve state from a collinear to noncollinear magnetic configuration.</summary>
+    <category term="cond-mat.supr-con" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-19T09:03:03Z</published>
+    <arxiv:comment>13 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.supr-con"/>
+    <arxiv:journal_ref>Phys. Rev. B 109, 134516 (2024)</arxiv:journal_ref>
+    <author>
+      <name>Alfonso Romano</name>
+    </author>
+    <author>
+      <name>Canio Noce</name>
+    </author>
+    <author>
+      <name>Mario Cuoco</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevB.109.134516</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevB.109.134516" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.09992v1</id>
+    <title>Efficient Inference of Sub-Item Id-based Sequential Recommendation Models with Millions of Items</title>
+    <updated>2024-08-19T13:43:48Z</updated>
+    <link href="https://arxiv.org/abs/2408.09992v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.09992v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformer-based recommender systems, such as BERT4Rec or SASRec, achieve state-of-the-art results in sequential recommendation. However, it is challenging to use these models in production environments with catalogues of millions of items: scaling Transformers beyond a few thousand items is problematic for several reasons, including high model memory consumption and slow inference. In this respect, RecJPQ is a state-of-the-art method of reducing the models' memory consumption; RecJPQ compresses item catalogues by decomposing item IDs into a small number of shared sub-item IDs. Despite reporting the reduction of memory consumption by a factor of up to 50x, the original RecJPQ paper did not report inference efficiency improvements over the baseline Transformer-based models. Upon analysing RecJPQ's scoring algorithm, we find that its efficiency is limited by its use of score accumulators for each item, which prevents parallelisation. In contrast, LightRec (a non-sequential method that uses a similar idea of sub-ids) reported large inference efficiency improvements using an algorithm we call PQTopK. We show that it is also possible to improve RecJPQ-based models' inference efficiency using the PQTopK algorithm. In particular, we speed up RecJPQ-enhanced SASRec by a factor of 4.5 x compared to the original SASRec's inference method and by a factor of 1.56 x compared to the method implemented in RecJPQ code on a large-scale Gowalla dataset with more than a million items. Further, using simulated data, we show that PQTopK remains efficient with catalogues of up to tens of millions of items, removing one of the last obstacles to using Transformer-based models in production environments with large catalogues.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-19T13:43:48Z</published>
+    <arxiv:comment>Accepted by RecSys 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Aleksandr V. Petrov</name>
+    </author>
+    <author>
+      <name>Craig Macdonald</name>
+    </author>
+    <author>
+      <name>Nicola Tonellotto</name>
+    </author>
+    <arxiv:doi>10.1145/3640457.3688168</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3640457.3688168" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.09826v3</id>
+    <title>Unconventional and robust light-matter interactions based on the non-Hermitian skin effect</title>
+    <updated>2025-01-22T16:56:36Z</updated>
+    <link href="https://arxiv.org/abs/2408.09826v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.09826v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Lattice models featuring the non-Hermitian skin effect have attracted rapidly growing interest due to their nontrivial spectral topology and the exotic field dynamics they enable. Such non-Hermitian lattices provide a promising paradigm for engineering exotic light-matter interactions which benefit from the intrinsic chirality and unconventional (non-Bloch) band theory. Here we study a series of unconventional light-matter interactions between quantum emitters and the prototypical Hatano--Nelson model, and briefly discuss the case with an extended lattice model dubbed the bosonic Kitaev chain. We focus on the robustness of the dynamics against various imperfections and elucidate the underlying mechanisms. We consider both small emitters, which interact with the lattice at single sites, and giant emitters coupling at multiple sites. The latter exhibit an exclusive amplification mechanism, which we find enables decoherence-free dynamics even in the presence of extra dissipation in the system. The protection from dissipation arises from the cooperation of the non-Hermiticity and the self-interference effect, and is therefore lacking for small emitters. These results not only provide deeper insights into the interplay of non-Hermiticity and various interference effects, but also have potential applications in engineering exotic spin Hamiltonians and quantum networks.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-19T09:20:32Z</published>
+    <arxiv:comment>15 pages, 8 figures. Comments are welcome!</arxiv:comment>
+    <arxiv:primary_category term="quant-ph"/>
+    <arxiv:journal_ref>Physical Review Research 7, 013140 (2025)</arxiv:journal_ref>
+    <author>
+      <name>Lei Du</name>
+    </author>
+    <author>
+      <name>Anton Frisk Kockum</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevResearch.7.013140</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevResearch.7.013140" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.17507v1</id>
+    <title>Detecting fake review buyers using network structure: Direct evidence from Amazon</title>
+    <updated>2024-10-23T02:09:40Z</updated>
+    <link href="https://arxiv.org/abs/2410.17507v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.17507v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Online reviews significantly impact consumers' decision-making process and firms' economic outcomes and are widely seen as crucial to the success of online markets. Firms, therefore, have a strong incentive to manipulate ratings using fake reviews. This presents a problem that academic researchers have tried to solve over two decades and on which platforms expend a large amount of resources. Nevertheless, the prevalence of fake reviews is arguably higher than ever. To combat this, we collect a dataset of reviews for thousands of Amazon products and develop a general and highly accurate method for detecting fake reviews. A unique difference between previous datasets and ours is that we directly observe which sellers buy fake reviews. Thus, while prior research has trained models using lab-generated reviews or proxies for fake reviews, we are able to train a model using actual fake reviews. We show that products that buy fake reviews are highly clustered in the product-reviewer network. Therefore, features constructed from this network are highly predictive of which products buy fake reviews. We show that our network-based approach is also successful at detecting fake reviews even without ground truth data, as unsupervised clustering methods can accurately identify fake review buyers by identifying clusters of products that are closely connected in the network. While text or metadata can be manipulated to evade detection, network-based features are more costly to manipulate because these features result directly from the inherent limitations of buying reviews from online review marketplaces, making our detection approach more robust to manipulation.</summary>
+    <category term="cs.SI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="econ.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.soc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-23T02:09:40Z</published>
+    <arxiv:primary_category term="cs.SI"/>
+    <arxiv:journal_ref>Proceeedings of the National Academy of Sciences, Vol. 119 (47), 2022</arxiv:journal_ref>
+    <author>
+      <name>Sherry He</name>
+    </author>
+    <author>
+      <name>Brett Hollenbeck</name>
+    </author>
+    <author>
+      <name>Gijs Overgoor</name>
+    </author>
+    <author>
+      <name>Davide Proserpio</name>
+    </author>
+    <author>
+      <name>Ali Tosyali</name>
+    </author>
+    <arxiv:doi>10.1073/pnas.2211932119</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1073/pnas.2211932119" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.12972v1</id>
+    <title>TRACE: Transformer-based user Representations from Attributed Clickstream Event sequences</title>
+    <updated>2024-09-02T23:33:19Z</updated>
+    <link href="https://arxiv.org/abs/2409.12972v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.12972v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>For users navigating travel e-commerce websites, the process of researching products and making a purchase often results in intricate browsing patterns that span numerous sessions over an extended period of time. The resulting clickstream data chronicle these user journeys and present valuable opportunities to derive insights that can significantly enhance personalized recommendations. We introduce TRACE, a novel transformer-based approach tailored to generate rich user embeddings from live multi-session clickstreams for real-time recommendation applications. Prior works largely focus on single-session product sequences, whereas TRACE leverages site-wide page view sequences spanning multiple user sessions to model long-term engagement. Employing a multi-task learning framework, TRACE captures comprehensive user preferences and intents distilled into low-dimensional representations. We demonstrate TRACE's superior performance over vanilla transformer and LLM-style architectures through extensive experiments on a large-scale travel e-commerce dataset of real user journeys, where the challenges of long page-histories and sparse targets are particularly prevalent. Visualizations of the learned embeddings reveal meaningful clusters corresponding to latent user states and behaviors, highlighting TRACE's potential to enhance recommendation systems by capturing nuanced user interactions and preferences</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-02T23:33:19Z</published>
+    <arxiv:comment>RecSys Workshop on Recommenders in Tourism (RecTour 2024), October 14th-18th, 2024, co-located with the 18th ACM Conference on Recommender Systems, Bari, Italy</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>William Black</name>
+    </author>
+    <author>
+      <name>Alexander Manlove</name>
+    </author>
+    <author>
+      <name>Jack Pennington</name>
+    </author>
+    <author>
+      <name>Andrea Marchini</name>
+    </author>
+    <author>
+      <name>Ercument Ilhan</name>
+    </author>
+    <author>
+      <name>Vilda Markeviciute</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.13959v2</id>
+    <title>FinQAPT: Empowering Financial Decisions with End-to-End LLM-driven Question Answering Pipeline</title>
+    <updated>2024-10-31T18:38:37Z</updated>
+    <link href="https://arxiv.org/abs/2410.13959v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.13959v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Financial decision-making hinges on the analysis of relevant information embedded in the enormous volume of documents in the financial domain. To address this challenge, we developed FinQAPT, an end-to-end pipeline that streamlines the identification of relevant financial reports based on a query, extracts pertinent context, and leverages Large Language Models (LLMs) to perform downstream tasks. To evaluate the pipeline, we experimented with various techniques to optimize the performance of each module using the FinQA dataset. We introduced a novel clustering-based negative sampling technique to enhance context extraction and a novel prompting method called Dynamic N-shot Prompting to boost the numerical question-answering capabilities of LLMs. At the module level, we achieved state-of-the-art accuracy on FinQA, attaining an accuracy of 80.6%. However, at the pipeline level, we observed decreased performance due to challenges in extracting relevant context from financial reports. We conducted a detailed error analysis of each module and the end-to-end pipeline, pinpointing specific challenges that must be addressed to develop a robust solution for handling complex financial tasks.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-17T18:34:43Z</published>
+    <arxiv:comment>Accepted in ICAIF 2024, 8 pages, 5 figures, 4 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Kuldeep Singh</name>
+    </author>
+    <author>
+      <name>Simerjot Kaur</name>
+    </author>
+    <author>
+      <name>Charese Smiley</name>
+    </author>
+    <arxiv:doi>10.1145/3677052.3698682</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3677052.3698682" title="doi"/>
+  </entry>
+</feed>

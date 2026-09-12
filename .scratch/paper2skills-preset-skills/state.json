@@ -1,0 +1,261 @@
+{
+ "round": 3,
+ "phase": "S3-done",
+ "started_at": "2026-09-11T19:47:30.533Z",
+ "goal": "goal-907a1dc6-3e7a-4868-8d0b-4bcf33b32cb4",
+ "batches": [
+  {
+   "id": "S2-01",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-01.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-02",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-02.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-03",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-03.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-04",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-04.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-05",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-05.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-06",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-06.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-07",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-07.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-08",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-08.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-09",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-09.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-10",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-10.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-11",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-11.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-12",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-12.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-13",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-13.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-14",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-14.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-15",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-15.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-16",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-16.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-17",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-17.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-18",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-18.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-19",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-19.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-20",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-20.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-21",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-21.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-22",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-22.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-23",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-23.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-24",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-24.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-25",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-25.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-26",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-26.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-27",
+   "cards": 48,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-27.json",
+   "gate": "ok",
+   "failed": 0
+  },
+  {
+   "id": "S2-28",
+   "cards": 42,
+   "status": "done",
+   "out": "/Users/lute/project/Magpie-Horch/packages/capabilities/dsh-paper2skills/generated/adapt/S2-28.json",
+   "gate": "ok",
+   "failed": 0
+  }
+ ],
+ "totals": {
+  "extracted": 1338,
+  "classified": 1338,
+  "assigned": 1327,
+  "unassigned": 11,
+  "adapted": 1338,
+  "installed": 1338,
+  "wired": 134
+ },
+ "gates": {
+  "classify": "PASS 1338/1338 · cross-plane 269 · L3 coverage 134/151",
+  "assemble": "PASS 1338 SKILL.md · 占位段落跳过 4520 · 脱敏 3 · 0 超限",
+  "install": "PASS 1338/1338 · 272→1610 · disable-model-invocation 1338/1338 true",
+  "wiring": "PASS 134 L3 获得供给 · 9 缺口关闭 8 · 追加 387 条引用",
+  "lossless": "PASS 4821 断言全绿（基线 4060，增量来自新增 subset 引用）· 岗位卡 142085 字节无损",
+  "repo": "PASS 14/14"
+ },
+ "gap_audit": {
+  "strong": 178,
+  "adjacent": 32,
+  "dropped": 124
+ },
+ "finished_at": "2026-09-11T20:04:10.216Z",
+ "notes": [
+  "实测纠错 1：原判据「不允许跨面多挂」被 269 张真实卡推翻，改为主归属取首个 L3 + 全量记录 + cross_plane 标记",
+  "实测纠错 2：缺口认领 41% 虚报，补 auditGapClaims 三档判据（strong/adjacent/dropped）",
+  "红线发现：全库 1 处明文 API Key（Skill-FActScore 卡第 7 段），装配器加脱敏闸门后 3 处已替换",
+  "唯一真空白：利益冲突检查（AGT-005），8 个缺口已由论文技能关闭"
+ ]
+}

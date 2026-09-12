@@ -1,0 +1,1115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/nTKezRGJfFRlnuT5xZrex8Hioz4</id>
+  <title>arXiv Query: search_query=&amp;id_list=2410.21237,2411.02771,2411.05317,2411.05852,2411.08821,2411.09283,2411.10184,2411.11533,2411.12644,2411.15944,2411.16238,2411.17383,2412.01983,2412.02266,2412.02525,2412.04806,2412.05665,2412.09049,2412.09883,2412.14718,2412.14730,2412.17018,2412.18821,2412.18834,2412.19064,2412.20295,2501.04719,2501.05874,2501.05884,2501.07722,2501.08341,2501.08591,2501.08734,2501.08974,2501.09139,2501.09223,2501.09751,2501.09876,2501.09917,2501.11220&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-12T07:43:44Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=40&amp;id_list=2410.21237,2411.02771,2411.05317,2411.05852,2411.08821,2411.09283,2411.10184,2411.11533,2411.12644,2411.15944,2411.16238,2411.17383,2412.01983,2412.02266,2412.02525,2412.04806,2412.05665,2412.09049,2412.09883,2412.14718,2412.14730,2412.17018,2412.18821,2412.18834,2412.19064,2412.20295,2501.04719,2501.05874,2501.05884,2501.07722,2501.08341,2501.08591,2501.08734,2501.08974,2501.09139,2501.09223,2501.09751,2501.09876,2501.09917,2501.11220" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2412.01983v2</id>
+    <title>Smart Parking with Pixel-Wise ROI Selection for Vehicle Detection Using YOLOv8, YOLOv9, YOLOv10, and YOLOv11</title>
+    <updated>2024-12-06T20:56:05Z</updated>
+    <link href="https://arxiv.org/abs/2412.01983v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.01983v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The increasing urbanization and the growing number of vehicles in cities have underscored the need for efficient parking management systems. Traditional smart parking solutions often rely on sensors or cameras for occupancy detection, each with its limitations. Recent advancements in deep learning have introduced new YOLO models (YOLOv8, YOLOv9, YOLOv10, and YOLOv11), but these models have not been extensively evaluated in the context of smart parking systems, particularly when combined with Region of Interest (ROI) selection for object detection. Existing methods still rely on fixed polygonal ROI selections or simple pixel-based modifications, which limit flexibility and precision. This work introduces a novel approach that integrates Internet of Things, Edge Computing, and Deep Learning concepts, by using the latest YOLO models for vehicle detection. By exploring both edge and cloud computing, it was found that inference times on edge devices ranged from 1 to 92 seconds, depending on the hardware and model version. Additionally, a new pixel-wise post-processing ROI selection method is proposed for accurately identifying regions of interest to count vehicles in parking lot images. The proposed system achieved 99.68% balanced accuracy on a custom dataset of 3,484 images, offering a cost-effective smart parking solution that ensures precise vehicle detection while preserving data privacy</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-02T21:24:31Z</published>
+    <arxiv:comment>Submitted to Elsevier Internet of Things, 22 pages, 11 figures, 6 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Gustavo P. C. P. da Luz</name>
+    </author>
+    <author>
+      <name>Gabriel Massuyoshi Sato</name>
+    </author>
+    <author>
+      <name>Luis Fernando Gomez Gonzalez</name>
+    </author>
+    <author>
+      <name>Juliana Freitag Borin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.02266v1</id>
+    <title>BOTracle: A framework for Discriminating Bots and Humans</title>
+    <updated>2024-12-03T08:38:30Z</updated>
+    <link href="https://arxiv.org/abs/2412.02266v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.02266v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Bots constitute a significant portion of Internet traffic and are a source of various issues across multiple domains. Modern bots often become indistinguishable from real users, as they employ similar methods to browse the web, including using real browsers. We address the challenge of bot detection in high-traffic scenarios by analyzing three distinct detection methods. The first method operates on heuristics, allowing for rapid detection. The second method utilizes, well known, technical features, such as IP address, window size, and user agent. It serves primarily for comparison with the third method. In the third method, we rely solely on browsing behavior, omitting all static features and focusing exclusively on how clients behave on a website. In contrast to related work, we evaluate our approaches using real-world e-commerce traffic data, comprising 40 million monthly page visits. We further compare our methods against another bot detection approach, Botcha, on the same dataset. Our performance metrics, including precision, recall, and AUC, reach 98 percent or higher, surpassing Botcha.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-03T08:38:30Z</published>
+    <arxiv:comment>Bot Detection; User Behaviour Analysis; Published at ESORICS International Workshops 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jan Kadel</name>
+    </author>
+    <author>
+      <name>August See</name>
+    </author>
+    <author>
+      <name>Ritwik Sinha</name>
+    </author>
+    <author>
+      <name>Mathias Fischer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.18821v1</id>
+    <title>Quantifying the memory and dynamical stability of magnetar bursts</title>
+    <updated>2024-12-25T08:22:36Z</updated>
+    <link href="https://arxiv.org/abs/2412.18821v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.18821v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The time series of energy and waiting time of magnetar bursts carry important information about the source activity. In this paper, we investigate the memory and dynamical stability of magnetar bursts from four soft gamma repeater (SGR) sources: SGR 1806$-$20, SGR 1900+14, SGR J1935+2154 and SGR J1550$-$5418. Based on the rescaled range analysis, we quantify the memory in magnetar bursts for the first time and find that there exists long-term memory in the time series of both waiting time and energy. We investigate the dynamical stability in the context of randomness and chaos. For all the four SGR samples, we find that the waiting time is not completely random, but the energy of two SGRs is consistent with a total random organization. Furthermore, both waiting time and energy exhibits weak chaos. We also find no significant difference between SGRs and repeating fast radio bursts (FRBs) in the randomness-chaos phase space. The statistical similarity between SGRs and repeating FRBs hints that there may be potential physical connection between these two phenomena.</summary>
+    <category term="astro-ph.HE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-25T08:22:36Z</published>
+    <arxiv:comment>10 pages, 5 figures, 4 tables. Accepted by Chinese Physics C</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.HE"/>
+    <author>
+      <name>Yu Sang</name>
+    </author>
+    <author>
+      <name>Hai-Nan Lin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.19064v1</id>
+    <title>Hierarchical Multi-agent Meta-Reinforcement Learning for Cross-channel Bidding</title>
+    <updated>2024-12-26T05:26:30Z</updated>
+    <link href="https://arxiv.org/abs/2412.19064v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.19064v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Real-time bidding (RTB) plays a pivotal role in online advertising ecosystems. Advertisers employ strategic bidding to optimize their advertising impact while adhering to various financial constraints, such as the return-on-investment (ROI) and cost-per-click (CPC). Primarily focusing on bidding with fixed budget constraints, traditional approaches cannot effectively manage the dynamic budget allocation problem where the goal is to achieve global optimization of bidding performance across multiple channels with a shared budget. In this paper, we propose a hierarchical multi-agent reinforcement learning framework for multi-channel bidding optimization. In this framework, the top-level strategy applies a CPC constrained diffusion model to dynamically allocate budgets among the channels according to their distinct features and complex interdependencies, while the bottom-level strategy adopts a state-action decoupled actor-critic method to address the problem of extrapolation errors in offline learning caused by out-of-distribution actions and a context-based meta-channel knowledge learning method to improve the state representation capability of the policy based on the shared knowledge among different channels. Comprehensive experiments conducted on a large scale real-world industrial dataset from the Meituan ad bidding platform demonstrate that our method achieves a state-of-the-art performance.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-26T05:26:30Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Shenghong He</name>
+    </author>
+    <author>
+      <name>Chao Yu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.02525v1</id>
+    <title>LLMForecaster: Improving Seasonal Event Forecasts with Unstructured Textual Data</title>
+    <updated>2024-12-03T16:18:42Z</updated>
+    <link href="https://arxiv.org/abs/2412.02525v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.02525v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Modern time-series forecasting models often fail to make full use of rich unstructured information about the time series themselves. This lack of proper conditioning can lead to obvious model failures; for example, models may be unaware of the details of a particular product, and hence fail to anticipate seasonal surges in customer demand in the lead up to major exogenous events like holidays for clearly relevant products. To address this shortcoming, this paper introduces a novel forecast post-processor -- which we call LLMForecaster -- that fine-tunes large language models (LLMs) to incorporate unstructured semantic and contextual information and historical data to improve the forecasts from an existing demand forecasting pipeline. In an industry-scale retail application, we demonstrate that our technique yields statistically significantly forecast improvements across several sets of products subject to holiday-driven demand surges.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-03T16:18:42Z</published>
+    <arxiv:comment>Presented at NeurIPS Time Series in the Age of Large Models (2024)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hanyu Zhang</name>
+    </author>
+    <author>
+      <name>Chuck Arvin</name>
+    </author>
+    <author>
+      <name>Dmitry Efimov</name>
+    </author>
+    <author>
+      <name>Michael W. Mahoney</name>
+    </author>
+    <author>
+      <name>Dominique Perrault-Joncas</name>
+    </author>
+    <author>
+      <name>Shankar Ramasubramanian</name>
+    </author>
+    <author>
+      <name>Andrew Gordon Wilson</name>
+    </author>
+    <author>
+      <name>Malcolm Wolff</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.08974v1</id>
+    <title>Learning to Extract Cross-Domain Aspects and Understanding Sentiments Using Large Language Models</title>
+    <updated>2025-01-15T17:36:56Z</updated>
+    <link href="https://arxiv.org/abs/2501.08974v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.08974v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Aspect-based sentiment analysis (ASBA) is a refined approach to sentiment analysis that aims to extract and classify sentiments based on specific aspects or features of a product, service, or entity. Unlike traditional sentiment analysis, which assigns a general sentiment score to entire reviews or texts, ABSA focuses on breaking down the text into individual components or aspects (e.g., quality, price, service) and evaluating the sentiment towards each. This allows for a more granular level of understanding of customer opinions, enabling businesses to pinpoint specific areas of strength and improvement. The process involves several key steps, including aspect extraction, sentiment classification, and aspect-level sentiment aggregation for a review paragraph or any other form that the users have provided. ABSA has significant applications in areas such as product reviews, social media monitoring, customer feedback analysis, and market research. By leveraging techniques from natural language processing (NLP) and machine learning, ABSA facilitates the extraction of valuable insights, enabling companies to make data-driven decisions that enhance customer satisfaction and optimize offerings. As ABSA evolves, it holds the potential to greatly improve personalized customer experiences by providing a deeper understanding of sentiment across various product aspects. In this work, we have analyzed the strength of LLMs for a complete cross-domain aspect-based sentiment analysis with the aim of defining the framework for certain products and using it for other similar situations. We argue that it is possible to that at an effectiveness of 92\% accuracy for the Aspect Based Sentiment Analysis dataset of SemEval-2015 Task 12.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-15T17:36:56Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Karukriti Kaushik Ghosh</name>
+    </author>
+    <author>
+      <name>Chiranjib Sur</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.08591v1</id>
+    <title>OpenMLDB: A Real-Time Relational Data Feature Computation System for Online ML</title>
+    <updated>2025-01-15T05:20:01Z</updated>
+    <link href="https://arxiv.org/abs/2501.08591v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.08591v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Efficient and consistent feature computation is crucial for a wide range of online ML applications. Typically, feature computation is divided into two distinct phases, i.e., offline stage for model training and online stage for model serving. These phases often rely on execution engines with different interface languages and function implementations, causing significant inconsistencies. Moreover, many online ML features involve complex time-series computations (e.g., functions over varied-length table windows) that differ from standard streaming and analytical queries. Existing data processing systems (e.g., Spark, Flink, DuckDB) often incur multi-second latencies for these computations, making them unsuitable for real-time online ML applications that demand timely feature updates.
+  This paper presents OpenMLDB, a feature computation system deployed in 4Paradigm's SageOne platform and over 100 real scenarios. Technically, OpenMLDB first employs a unified query plan generator for consistent computation results across the offline and online stages, significantly reducing feature deployment overhead. Second, OpenMLDB provides an online execution engine that resolves performance bottlenecks caused by long window computations (via pre-aggregation) and multi-table window unions (via data self-adjusting). It also provides a high-performance offline execution engine with window parallel optimization and time-aware data skew resolving. Third, OpenMLDB features a compact data format and stream-focused indexing to maximize memory usage and accelerate data access. Evaluations in testing and real workloads reveal significant performance improvements and resource savings compared to the baseline systems. The open community of OpenMLDB now has over 150 contributors and gained 1.6k stars on GitHub.</summary>
+    <category term="cs.DB" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-15T05:20:01Z</published>
+    <arxiv:primary_category term="cs.DB"/>
+    <author>
+      <name>Xuanhe Zhou</name>
+    </author>
+    <author>
+      <name>Wei Zhou</name>
+    </author>
+    <author>
+      <name>Liguo Qi</name>
+    </author>
+    <author>
+      <name>Hao Zhang</name>
+    </author>
+    <author>
+      <name>Dihao Chen</name>
+    </author>
+    <author>
+      <name>Bingsheng He</name>
+    </author>
+    <author>
+      <name>Mian Lu</name>
+    </author>
+    <author>
+      <name>Guoliang Li</name>
+    </author>
+    <author>
+      <name>Fan Wu</name>
+    </author>
+    <author>
+      <name>Yuqiang Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.08341v1</id>
+    <title>Dissecting a Small Artificial Neural Network</title>
+    <updated>2025-01-03T21:14:46Z</updated>
+    <link href="https://arxiv.org/abs/2501.08341v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.08341v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate the loss landscape and backpropagation dynamics of convergence for the simplest possible artificial neural network representing the logical exclusive-OR (XOR) gate. Cross-sections of the loss landscape in the nine-dimensional parameter space are found to exhibit distinct features, which help understand why backpropagation efficiently achieves convergence toward zero loss, whereas values of weights and biases keep drifting. Differences in shapes of cross-sections obtained by nonrandomized and randomized batches are discussed. In reference to statistical physics we introduce the microcanonical entropy as a unique quantity that allows to characterize the phase behavior of the network. Learning in neural networks can thus be thought of as an annealing process that experiences the analogue of phase transitions known from thermodynamic systems. It also reveals how the loss landscape simplifies as more hidden neurons are added to the network, eliminating entropic barriers caused by finite-size effects.</summary>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-03T21:14:46Z</published>
+    <arxiv:comment>12 pages, 8 figures, and 2 tables</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.dis-nn"/>
+    <arxiv:journal_ref>J. Phys. A: Math. Theor. 58 025001(1-18) (2025)</arxiv:journal_ref>
+    <author>
+      <name>Xiguang Yang</name>
+    </author>
+    <author>
+      <name>Krish Arora</name>
+    </author>
+    <author>
+      <name>Michael Bachmann</name>
+    </author>
+    <arxiv:doi>10.1088/1751-8121/ad9dc6</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1751-8121/ad9dc6" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.17018v2</id>
+    <title>GAS: Generative Auto-bidding with Post-training Search</title>
+    <updated>2025-06-03T04:11:32Z</updated>
+    <link href="https://arxiv.org/abs/2412.17018v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.17018v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Auto-bidding is essential in facilitating online advertising by automatically placing bids on behalf of advertisers. Generative auto-bidding, which generates bids based on an adjustable condition using models like transformers and diffusers, has recently emerged as a new trend due to its potential to learn optimal strategies directly from data and adjust flexibly to preferences. However, generative models suffer from low-quality data leading to a mismatch between the condition, like return to go, and true action value, especially in long sequential decision-making. Besides, the majority preference in the dataset may hinder models' generalization ability on minority advertisers' preferences. While it is possible to collect high-quality data and retrain multiple models for different preferences, the high cost makes it unaffordable, hindering the advancement of auto-bidding into the era of large foundation models. To address this, we propose a flexible and practical Generative Auto-bidding scheme using post-training Search, termed GAS, to refine a base policy model's output and adapt to various preferences. We use weak-to-strong search alignment by training small critics for different preferences and an MCTS-inspired search to refine the model's output. Specifically, a novel voting mechanism with transformer-based critics trained with policy indications could enhance search alignment performance. Additionally, utilizing the search, we provide a fine-tuning method for high-frequency preference scenarios considering computational efficiency. Extensive experiments conducted on the real-world dataset and online A/B test on the Kuaishou advertising platform demonstrate the effectiveness of GAS, achieving significant improvements, e.g., 4.60% increment of target cost.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-22T13:47:46Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Yewen Li</name>
+    </author>
+    <author>
+      <name>Shuai Mao</name>
+    </author>
+    <author>
+      <name>Jingtong Gao</name>
+    </author>
+    <author>
+      <name>Nan Jiang</name>
+    </author>
+    <author>
+      <name>Yunjian Xu</name>
+    </author>
+    <author>
+      <name>Qingpeng Cai</name>
+    </author>
+    <author>
+      <name>Fei Pan</name>
+    </author>
+    <author>
+      <name>Peng Jiang</name>
+    </author>
+    <author>
+      <name>Bo An</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.09883v2</id>
+    <title>In-medium electromagnetic form factors of pseudoscalar mesons from the quark model</title>
+    <updated>2025-06-03T13:25:30Z</updated>
+    <link href="https://arxiv.org/abs/2412.09883v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.09883v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We explore the modifications of hadron structure in a nuclear medium, focusing on the spacelike electromagnetic form factors (EMFFs) of light and heavy-light pseudoscalar mesons. By combining the light-front quark model (LFQM) with the quark-meson coupling (QMC) model, which reasonably reproduces EMFFs in free space and the saturation properties of nuclear matter, respectively, we systematically analyze the in-medium EMFFs and charge radii of mesons with various quark flavors. Our findings show that the EMFFs of charged (neutral) mesons exhibit a faster fall-off (increase) with increasing four-momentum transfer squared and nuclear density. Consequently, the absolute value of the charge radii of mesons increases with nuclear density, where the rate of increase depends on their quark flavor contents. We observe that the EMFFs of pions and kaons undergo significant modifications in the nuclear medium, while heavy-light mesons are only slightly modified. By decomposing the quark flavor contributions to EMFFs, we show that the medium effects primarily impact the light-quark sector, leaving the heavy-quark sector nearly unaffected. The results of this study further suggest the importance of the medium effects at the quark level.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nucl-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-13T05:52:35Z</published>
+    <arxiv:comment>16 pages, 9 figures, 4 tables</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>Phys. Rev. D 111, 074004 (2025)</arxiv:journal_ref>
+    <author>
+      <name>Ahmad Jafar Arifi</name>
+    </author>
+    <author>
+      <name>Parada T. P. Hutauruk</name>
+    </author>
+    <author>
+      <name>Kazuo Tsushima</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.111.074004</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.111.074004" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.17383v2</id>
+    <title>AnchorCrafter: Animate Cyber-Anchors Selling Your Products via Human-Object Interacting Video Generation</title>
+    <updated>2025-06-23T06:27:21Z</updated>
+    <link href="https://arxiv.org/abs/2411.17383v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.17383v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The generation of anchor-style product promotion videos presents promising opportunities in e-commerce, advertising, and consumer engagement. Despite advancements in pose-guided human video generation, creating product promotion videos remains challenging. In addressing this challenge, we identify the integration of human-object interactions (HOI) into pose-guided human video generation as a core issue. To this end, we introduce AnchorCrafter, a novel diffusion-based system designed to generate 2D videos featuring a target human and a customized object, achieving high visual fidelity and controllable interactions. Specifically, we propose two key innovations: the HOI-appearance perception, which enhances object appearance recognition from arbitrary multi-view perspectives and disentangles object and human appearance, and the HOI-motion injection, which enables complex human-object interactions by overcoming challenges in object trajectory conditioning and inter-occlusion management. Extensive experiments show that our system improves object appearance preservation by 7.5\% and doubles the object localization accuracy compared to existing state-of-the-art approaches. It also outperforms existing approaches in maintaining human motion consistency and high-quality video generation. Project page including data, code, and Huggingface demo: https://github.com/cangcz/AnchorCrafter.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-26T12:42:13Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Ziyi Xu</name>
+    </author>
+    <author>
+      <name>Ziyao Huang</name>
+    </author>
+    <author>
+      <name>Juan Cao</name>
+    </author>
+    <author>
+      <name>Yong Zhang</name>
+    </author>
+    <author>
+      <name>Xiaodong Cun</name>
+    </author>
+    <author>
+      <name>Qing Shuai</name>
+    </author>
+    <author>
+      <name>Yuchen Wang</name>
+    </author>
+    <author>
+      <name>Linchao Bao</name>
+    </author>
+    <author>
+      <name>Jintao Li</name>
+    </author>
+    <author>
+      <name>Fan Tang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.09139v1</id>
+    <title>A robust measure of complexity</title>
+    <updated>2025-01-15T20:45:40Z</updated>
+    <link href="https://arxiv.org/abs/2501.09139v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.09139v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce a robust belief-based measure of complexity. The idea is that task A is deemed more complex than task B if the probability of solving A correctly is smaller than the probability of solving B correctly regardless of the reward. We fully characterize the corresponding order over the set of tasks. The main characteristic of this relation is that it depends, not only on difficulty (like most complexity definitions in the literature) but also on ex ante uncertainty. Finally, we show that for every task for which information is optimally acquired, there exists a more complex task which always induces less effort regardless of the reward.</summary>
+    <category term="econ.TH" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-15T20:45:40Z</published>
+    <arxiv:primary_category term="econ.TH"/>
+    <author>
+      <name>Egor Bronnikov</name>
+    </author>
+    <author>
+      <name>Elias Tsakas</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.12644v3</id>
+    <title>CodeXEmbed: A Generalist Embedding Model Family for Multiligual and Multi-task Code Retrieval</title>
+    <updated>2025-08-08T04:35:26Z</updated>
+    <link href="https://arxiv.org/abs/2411.12644v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.12644v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Despite the success of text retrieval in many NLP tasks, code retrieval remains a largely underexplored area. Most text retrieval systems are tailored for natural language queries, often neglecting the specific challenges of retrieving code. This gap leaves existing models unable to effectively capture the diversity of programming languages and tasks across different domains, highlighting the need for more focused research in code retrieval. To address this, we introduce CodeXEmbed, a family of large-scale code embedding models ranging from 400M to 7B parameters. Our novel training pipeline unifies multiple programming languages and transforms various code-related tasks into a common retrieval framework, enhancing model generalizability and retrieval performance. Our 7B model sets a new state-of-the-art (SOTA) in code retrieval, outperforming the previous leading model, Voyage-Code, by over 20% on CoIR benchmark. In addition to excelling in code retrieval, our models demonstrate competitive performance on the widely adopted BeIR text retrieval benchmark, offering versatility across domains. Experimental results demonstrate that improving retrieval performance significantly enhances end-to-end Retrieval-Augmented Generation (RAG) performance for code-related tasks.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-19T16:54:45Z</published>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Ye Liu</name>
+    </author>
+    <author>
+      <name>Rui Meng</name>
+    </author>
+    <author>
+      <name>Shafiq Joty</name>
+    </author>
+    <author>
+      <name>Silvio Savarese</name>
+    </author>
+    <author>
+      <name>Caiming Xiong</name>
+    </author>
+    <author>
+      <name>Yingbo Zhou</name>
+    </author>
+    <author>
+      <name>Semih Yavuz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.18834v2</id>
+    <title>Adaptive Rate Control for Deep Video Compression with Rate-Distortion Prediction</title>
+    <updated>2025-05-08T08:17:43Z</updated>
+    <link href="https://arxiv.org/abs/2412.18834v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.18834v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deep video compression has made significant progress in recent years, achieving rate-distortion performance that surpasses that of traditional video compression methods. However, rate control schemes tailored for deep video compression have not been well studied. In this paper, we propose a neural network-based $λ$-domain rate control scheme for deep video compression, which determines the coding parameter $λ$ for each to-be-coded frame based on the rate-distortion-$λ$ (R-D-$λ$) relationships directly learned from uncompressed frames, achieving high rate control accuracy efficiently without the need for pre-encoding. Moreover, this content-aware scheme is able to mitigate inter-frame quality fluctuations and adapt to abrupt changes in video content. Specifically, we introduce two neural network-based predictors to estimate the relationship between bitrate and $λ$, as well as the relationship between distortion and $λ$ for each frame. Then we determine the coding parameter $λ$ for each frame to achieve the target bitrate. Experimental results demonstrate that our approach achieves high rate control accuracy at the mini-GOP level with low time overhead and mitigates inter-frame quality fluctuations across video content of varying resolutions.</summary>
+    <category term="cs.MM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-25T08:42:23Z</published>
+    <arxiv:primary_category term="cs.MM"/>
+    <author>
+      <name>Bowen Gu</name>
+    </author>
+    <author>
+      <name>Hao Chen</name>
+    </author>
+    <author>
+      <name>Ming Lu</name>
+    </author>
+    <author>
+      <name>Jie Yao</name>
+    </author>
+    <author>
+      <name>Zhan Ma</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.09876v4</id>
+    <title>Geometry-Preserving Encoder/Decoder in Latent Generative Models</title>
+    <updated>2026-06-16T15:03:18Z</updated>
+    <link href="https://arxiv.org/abs/2501.09876v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.09876v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Generative modeling aims to generate new data samples that resemble a given dataset. When using diffusion models for this task, one of the main challenges is solving the problem in the input space, which tends to be very high-dimensional. To address this, recent approaches solve diffusion models in the latent space through an encoder that maps from the data space to a lower-dimensional latent space, improving training efficiency and achieving state-of-the-art results. The variational autoencoder (VAE) is the most commonly used encoder/decoder framework in this domain, known for its ability to learn latent representations and generate data samples. In this paper, we introduce a novel encoder/decoder framework with theoretical properties distinct from those of the VAE, specifically designed to preserve the geometric structure of the data distribution. We demonstrate the significant advantages of this geometry-preserving encoder in the training process of both the encoder and decoder. Additionally, we provide theoretical results proving convergence of the training process, including convergence guarantees for encoder training, and results showing faster convergence of decoder training when using the geometry-preserving encoder.</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-16T23:14:34Z</published>
+    <arxiv:comment>50 pages</arxiv:comment>
+    <arxiv:primary_category term="math.NA"/>
+    <author>
+      <name>Wonjun Lee</name>
+    </author>
+    <author>
+      <name>Riley C. W. O'Neill</name>
+    </author>
+    <author>
+      <name>Dongmian Zou</name>
+    </author>
+    <author>
+      <name>Jeff Calder</name>
+    </author>
+    <author>
+      <name>Gilad Lerman</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.04806v2</id>
+    <title>NeST: Neighborhood-aware semantic alignment and temporal modulation for LLM based time series forecasting</title>
+    <updated>2026-08-22T08:46:11Z</updated>
+    <link href="https://arxiv.org/abs/2412.04806v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.04806v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Adapting Large Language Models (LLMs) trained on discrete text data, to forecast continuous time series signals is challenging. While finetuning the LLMs enables such adaptation, effectively integrating both textual and time series information in the prompt is critical. Current LLM-based time series forecasting methods combine the two modalities through simple concatenation or parameter heavy cross-attention. Moreover, existing methods embed time series data using decomposition techniques that may inadequately capture complex temporal dynamics. To address these limitations, we propose neighborhood-aware semantic alignment and temporal modulation based framework (NEST) to formulate a new text-integrated time series prompt to finetune the LLM. First, we generate neighborhood-aware text prototypes that are optimized to represent local neighborhoods of pretrained word token embeddings of the LLM. Second, we align them with temporal representations of the time series input using a nearest-neighbor contrastive objective, after which the top-k most relevant text prototypes are retrieved. Third, we introduce text prototype conditioned temporal modulation that uses the retrieved text prototypes to adaptively scale and shift time series features. Extensive experiments demonstrate that NeST consistently outperforms state-of-the-art methods across eight benchmarks, achieving an average 1.2\% reduction in MSE for long-term forecasting. In addition, it demonstrates strong generalization, yielding an average 4.9\% reduction in MSE in zero-shot forecasting. Beyond benchmark datasets, NeST also delivers robust performance on a real-world distributed photovoltaic power forecasting task across nine datasets, improving the average R$^2$ score by 3.3\%. These findings demonstrate the effectiveness and generalizability of NeST for adapting LLMs to diverse time series forecasting tasks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-06T06:32:47Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jayanie Bogahawatte</name>
+    </author>
+    <author>
+      <name>Sachith Seneviratne</name>
+    </author>
+    <author>
+      <name>Maneesha Perera</name>
+    </author>
+    <author>
+      <name>Saman Halgamuge</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.09283v1</id>
+    <title>Leveraging Auxiliary Classification for Rib Fracture Segmentation</title>
+    <updated>2024-11-14T08:40:08Z</updated>
+    <link href="https://arxiv.org/abs/2411.09283v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.09283v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Thoracic trauma often results in rib fractures, which demand swift and accurate diagnosis for effective treatment. However, detecting these fractures on rib CT scans poses considerable challenges, involving the analysis of many image slices in sequence. Despite notable advancements in algorithms for automated fracture segmentation, the persisting challenges stem from the diverse shapes and sizes of these fractures. To address these issues, this study introduces a sophisticated deep-learning model with an auxiliary classification task designed to enhance the accuracy of rib fracture segmentation. The auxiliary classification task is crucial in distinguishing between fractured ribs and negative regions, encompassing non-fractured ribs and surrounding tissues, from the patches obtained from CT scans. By leveraging this auxiliary task, the model aims to improve feature representation at the bottleneck layer by highlighting the regions of interest. Experimental results on the RibFrac dataset demonstrate significant improvement in segmentation performance.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-14T08:40:08Z</published>
+    <arxiv:comment>Accepted at ICVGIP'24</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Harini G.</name>
+    </author>
+    <author>
+      <name>Aiman Farooq</name>
+    </author>
+    <author>
+      <name>Deepak Mishra</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.05317v1</id>
+    <title>SeqRFM: Fast RFM Analysis in Sequence Data</title>
+    <updated>2024-11-08T04:18:07Z</updated>
+    <link href="https://arxiv.org/abs/2411.05317v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.05317v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In recent years, data mining technologies have been well applied to many domains, including e-commerce. In customer relationship management (CRM), the RFM analysis model is one of the most effective approaches to increase the profits of major enterprises. However, with the rapid development of e-commerce, the diversity and abundance of e-commerce data pose a challenge to mining efficiency. Moreover, in actual market transactions, the chronological order of transactions reflects customer behavior and preferences. To address these challenges, we develop an effective algorithm called SeqRFM, which combines sequential pattern mining with RFM models. SeqRFM considers each customer's recency (R), frequency (F), and monetary (M) scores to represent the significance of the customer and identifies sequences with high recency, high frequency, and high monetary value. A series of experiments demonstrate the superiority and effectiveness of the SeqRFM algorithm compared to the most advanced RFM algorithms based on sequential pattern mining. The source code and datasets are available at GitHub https://github.com/DSI-Lab1/SeqRFM.</summary>
+    <category term="cs.DB" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-08T04:18:07Z</published>
+    <arxiv:comment>Preprint. 5 figures, 5 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.DB"/>
+    <author>
+      <name>Yanxin Zheng</name>
+    </author>
+    <author>
+      <name>Wensheng Gan</name>
+    </author>
+    <author>
+      <name>Zefeng Chen</name>
+    </author>
+    <author>
+      <name>Pinlyu Zhou</name>
+    </author>
+    <author>
+      <name>Philippe Fournier-Viger</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.11220v2</id>
+    <title>Proof-theoretic dilator and intermediate pointclasses</title>
+    <updated>2026-05-19T20:26:18Z</updated>
+    <link href="https://arxiv.org/abs/2501.11220v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.11220v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>There are two major generalizations of the standard ordinal analysis: One is Girard's $Π^1_2$-proof theory in which dilators are assigned to theories instead of ordinals. The other is Pohlers' generalized ordinal analysis with Spector classes, where ordinals greater than $ω_1^{\mathsf{CK}}$ are assigned to theories. In this paper, we show that these two are systematically entangled, and $Σ^1_2$-proof theoretic analysis has a critical role in connecting these two.</summary>
+    <category term="math.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-20T02:09:40Z</published>
+    <arxiv:comment>44 pages. The proof of Theorem 5.19 was incorrect, so replaced by a new proof. The $β$-proof system now follows Tait-styled calculus instead of two-sided sequent calculus. Added explanations for Pohlers' framework in the introduction</arxiv:comment>
+    <arxiv:primary_category term="math.LO"/>
+    <author>
+      <name>Hanul Jeon</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.05852v2</id>
+    <title>$\spadesuit$ SPADE $\spadesuit$ Split Peak Attention DEcomposition</title>
+    <updated>2025-01-21T18:06:03Z</updated>
+    <link href="https://arxiv.org/abs/2411.05852v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.05852v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Demand forecasting faces challenges induced by Peak Events (PEs) corresponding to special periods such as promotions and holidays. Peak events create significant spikes in demand followed by demand ramp down periods. Neural networks like MQCNN and MQT overreact to demand peaks by carrying over the elevated PE demand into subsequent Post-Peak-Event (PPE) periods, resulting in significantly over-biased forecasts. To tackle this challenge, we introduce a neural forecasting model called Split Peak Attention DEcomposition, SPADE. This model reduces the impact of PEs on subsequent forecasts by modeling forecasting as consisting of two separate tasks: one for PEs; and the other for the rest. Its architecture then uses masked convolution filters and a specialized Peak Attention module. We show SPADE's performance on a worldwide retail dataset with hundreds of millions of products. Our results reveal an overall PPE improvement of 4.5%, a 30% improvement for most affected forecasts after promotions and holidays, and an improvement in PE accuracy by 3.9%, relative to current production models.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-06T22:00:07Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>31st Conference on Neural Information Processing In 38th Conference on Neural Information Processing Systems NIPS 2017, Time Series in the Age of Large Models Workshop, 2024</arxiv:journal_ref>
+    <author>
+      <name>Malcolm Wolff</name>
+    </author>
+    <author>
+      <name>Kin G. Olivares</name>
+    </author>
+    <author>
+      <name>Boris Oreshkin</name>
+    </author>
+    <author>
+      <name>Sunny Ruan</name>
+    </author>
+    <author>
+      <name>Sitan Yang</name>
+    </author>
+    <author>
+      <name>Abhinav Katoch</name>
+    </author>
+    <author>
+      <name>Shankar Ramasubramanian</name>
+    </author>
+    <author>
+      <name>Youxin Zhang</name>
+    </author>
+    <author>
+      <name>Michael W. Mahoney</name>
+    </author>
+    <author>
+      <name>Dmitry Efimov</name>
+    </author>
+    <author>
+      <name>Vincent Quenneville-Bélair</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.20295v2</id>
+    <title>Predicting Customer Lifetime Value Using Recurrent Neural Net</title>
+    <updated>2025-01-05T04:13:48Z</updated>
+    <link href="https://arxiv.org/abs/2412.20295v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.20295v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper introduces a recurrent neural network approach for predicting user lifetime value in Software as a Service (SaaS) applications. The approach accounts for three connected time dimensions. These dimensions are the user cohort (the date the user joined), user age-in-system (the time since the user joined the service) and the calendar date the user is an age-in-system (i.e., contemporaneous information).The recurrent neural networks use a multi-cell architecture, where each cell resembles a long short-term memory neural network. The approach is applied to predicting both acquisition (new users) and rolling (existing user) lifetime values for a variety of time horizons. It is found to significantly improve median absolute percent error versus light gradient boost models and Buy Until You Die models.</summary>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-28T23:16:40Z</published>
+    <arxiv:comment>4 pages, 4 figures, first presented in Customer Journey Optimization Workshop in KDD 2022</arxiv:comment>
+    <arxiv:primary_category term="stat.AP"/>
+    <author>
+      <name>Huigang Chen</name>
+    </author>
+    <author>
+      <name>Edwin Ng</name>
+    </author>
+    <author>
+      <name>Slawek Smyl</name>
+    </author>
+    <author>
+      <name>Gavin Steininger</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.05874v3</id>
+    <title>VideoRAG: Retrieval-Augmented Generation over Video Corpus</title>
+    <updated>2025-05-28T18:14:55Z</updated>
+    <link href="https://arxiv.org/abs/2501.05874v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.05874v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Retrieval-Augmented Generation (RAG) is a powerful strategy for improving the factual accuracy of models by retrieving external knowledge relevant to queries and incorporating it into the generation process. However, existing approaches primarily focus on text, with some recent advancements considering images, and they largely overlook videos, a rich source of multimodal knowledge capable of representing contextual details more effectively than any other modality. While very recent studies explore the use of videos in response generation, they either predefine query-associated videos without retrieval or convert videos into textual descriptions losing multimodal richness. To tackle these, we introduce VideoRAG, a framework that not only dynamically retrieves videos based on their relevance with queries but also utilizes both visual and textual information. The operation of VideoRAG is powered by recent Large Video Language Models (LVLMs), which enable the direct processing of video content to represent it for retrieval and the seamless integration of retrieved videos jointly with queries for response generation. Also, inspired by that the context size of LVLMs may not be sufficient to process all frames in extremely long videos and not all frames are equally important, we introduce a video frame selection mechanism to extract the most informative subset of frames, along with a strategy to extract textual information from videos (as it can aid the understanding of video content) when their subtitles are not available. We experimentally validate the effectiveness of VideoRAG, showcasing that it is superior to relevant baselines. Code is available at https://github.com/starsuzi/VideoRAG.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-10T11:17:15Z</published>
+    <arxiv:comment>ACL Findings 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Soyeong Jeong</name>
+    </author>
+    <author>
+      <name>Kangsan Kim</name>
+    </author>
+    <author>
+      <name>Jinheon Baek</name>
+    </author>
+    <author>
+      <name>Sung Ju Hwang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.11533v3</id>
+    <title>Lattice calculation of the $η_cη_c$ and $J/ψJ/ψ$ s-wave scattering length</title>
+    <updated>2025-04-15T06:58:24Z</updated>
+    <link href="https://arxiv.org/abs/2411.11533v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.11533v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We calculate the s-wave scattering length in the $0^+$ sector of $η_cη_c$ and the $2^+$ sector of $J/ψJ/ψ$ using three $N_f=2$ twisted mass gauge ensembles with the lattice spacing $a=0.0667,0.085,0.098$ fm, respectively. The scattering lengths are extracted using the conventional L{ü}scher finite size method. We observe sizable discretization effects and the results after a continuum extrapolation are $a^{0^+}_{η_cη_c}=-0.104(09)$ fm and $a^{2^+}_{J/ψJ/ψ}=-0.165(16)$ fm. The slight difference of light quark mass is ignored in this study. Our results indicate that the interaction between the two respective charmonia are repulsive in nature in both cases.</summary>
+    <category term="hep-lat" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-18T12:41:30Z</published>
+    <arxiv:comment>8 pages, 5 figures, v3: Contributions of seperated diagrams are added in the appendix, accepted by EPJC</arxiv:comment>
+    <arxiv:primary_category term="hep-lat"/>
+    <author>
+      <name>Yu Meng</name>
+    </author>
+    <author>
+      <name>Chuan Liu</name>
+    </author>
+    <author>
+      <name>Xin-Yu Tuo</name>
+    </author>
+    <author>
+      <name>Haobo Yan</name>
+    </author>
+    <author>
+      <name>Zhaolong Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.09049v4</id>
+    <title>Dial-In LLM: Human-Aligned LLM-in-the-loop Intent Clustering for Customer Service Dialogues</title>
+    <updated>2025-09-03T11:09:53Z</updated>
+    <link href="https://arxiv.org/abs/2412.09049v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.09049v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Discovering customer intentions is crucial for automated service agents, yet existing intent clustering methods often fall short due to their reliance on embedding distance metrics and neglect of underlying semantic structures. To address these limitations, we propose an LLM-in-the-loop (LLM-ITL) intent clustering framework, integrating the language understanding capabilities of LLMs into conventional clustering algorithms. Specifically, this paper (1) examines the effectiveness of fine-tuned LLMs in semantic coherence evaluation and intent cluster naming, achieving over 95% accuracy aligned with human judgments; (2) designs an LLM-ITL framework that facilitates the iterative discovery of coherent intent clusters and the optimal number of clusters; and (3) introduces context-aware techniques tailored for customer service dialogue. Since existing English benchmarks lack sufficient semantic diversity and intent coverage, we further present a comprehensive Chinese dialogue intent dataset comprising over 100k real customer service calls with 1,507 human-annotated clusters. The proposed approaches significantly outperform LLM-guided baselines, achieving notable improvements in clustering quality, cost efficiency, and downstream applications. Combined with several best practices, our findings highlight the prominence of LLM-in-the-loop techniques for scalable dialogue data mining.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-12T08:19:01Z</published>
+    <arxiv:comment>Accepted by EMNLP 2025 Main Conference</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Mengze Hong</name>
+    </author>
+    <author>
+      <name>Wailing Ng</name>
+    </author>
+    <author>
+      <name>Chen Jason Zhang</name>
+    </author>
+    <author>
+      <name>Yuanfeng Song</name>
+    </author>
+    <author>
+      <name>Di Jiang</name>
+    </author>
+    <arxiv:doi>10.18653/v1/2025.emnlp-main.300</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.18653/v1/2025.emnlp-main.300" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.08734v1</id>
+    <title>Background reduction in $^{136}$Xe double beta decay experiments through direct barium ion detection</title>
+    <updated>2025-01-15T11:28:45Z</updated>
+    <link href="https://arxiv.org/abs/2501.08734v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.08734v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Tagging barium ions in double beta decay experiments involving $^{136}$Xe offers a promising pathway to achieving an almost background-free environment, which is essential for addressing key unresolved questions in neutrino physics, such as the nature of neutrinos and their mass hierarchy. In this manuscript, we present a novel detection scheme that relies exclusively on the intrinsic energy levels of the barium ion. This method eliminates the need for additional additives in the xenon vessel, thereby simplifying the experimental setup and enhancing the potential sensitivity of the experiment.</summary>
+    <category term="physics.atom-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nucl-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-15T11:28:45Z</published>
+    <arxiv:primary_category term="physics.atom-ph"/>
+    <author>
+      <name>Álvaro Peralta Conde</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.07722v1</id>
+    <title>ML-assisted Randomization Tests for Detecting Treatment Effects in A/B Experiments</title>
+    <updated>2025-01-13T22:14:58Z</updated>
+    <link href="https://arxiv.org/abs/2501.07722v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.07722v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Experimentation is widely utilized for causal inference and data-driven decision-making across disciplines. In an A/B experiment, for example, an online business randomizes two different treatments (e.g., website designs) to their customers and then aims to infer which treatment is better. In this paper, we construct randomization tests for complex treatment effects, including heterogeneity and interference. A key feature of our approach is the use of flexible machine learning (ML) models, where the test statistic is defined as the difference between the cross-validation errors from two ML models, one including the treatment variable and the other without it. This approach combines the predictive power of modern ML tools with the finite-sample validity of randomization procedures, enabling a robust and efficient way to detect complex treatment effects in experimental settings. We demonstrate this combined benefit both theoretically and empirically through applied examples.</summary>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-13T22:14:58Z</published>
+    <arxiv:primary_category term="stat.ME"/>
+    <author>
+      <name>Wenxuan Guo</name>
+    </author>
+    <author>
+      <name>JungHo Lee</name>
+    </author>
+    <author>
+      <name>Panos Toulis</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.15944v1</id>
+    <title>Customer Lifetime Value Prediction with Uncertainty Estimation Using Monte Carlo Dropout</title>
+    <updated>2024-11-24T18:14:44Z</updated>
+    <link href="https://arxiv.org/abs/2411.15944v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.15944v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurately predicting customer Lifetime Value (LTV) is crucial for companies to optimize their revenue strategies. Traditional deep learning models for LTV prediction are effective but typically provide only point estimates and fail to capture model uncertainty in modeling user behaviors. To address this limitation, we propose a novel approach that enhances the architecture of purely neural network models by incorporating the Monte Carlo Dropout (MCD) framework. We benchmarked the proposed method using data from one of the most downloaded mobile games in the world, and demonstrated a substantial improvement in predictive Top 5\% Mean Absolute Percentage Error compared to existing state-of-the-art methods. Additionally, our approach provides confidence metric as an extra dimension for performance evaluation across various neural network models, facilitating more informed business decisions.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-24T18:14:44Z</published>
+    <arxiv:comment>9 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Xinzhe Cao</name>
+    </author>
+    <author>
+      <name>Yadong Xu</name>
+    </author>
+    <author>
+      <name>Xiaofeng Yang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.10184v1</id>
+    <title>Agentic LLMs in the Supply Chain: Towards Autonomous Multi-Agent Consensus-Seeking</title>
+    <updated>2024-11-15T13:33:10Z</updated>
+    <link href="https://arxiv.org/abs/2411.10184v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.10184v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper explores how Large Language Models (LLMs) can automate consensus-seeking in supply chain management (SCM), where frequent decisions on problems such as inventory levels and delivery times require coordination among companies. Traditional SCM relies on human consensus in decision-making to avoid emergent problems like the bullwhip effect. Some routine consensus processes, especially those that are time-intensive and costly, can be automated. Existing solutions for automated coordination have faced challenges due to high entry barriers locking out SMEs, limited capabilities, and limited adaptability in complex scenarios. However, recent advances in Generative AI, particularly LLMs, show promise in overcoming these barriers. LLMs, trained on vast datasets can negotiate, reason, and plan, facilitating near-human-level consensus at scale with minimal entry barriers. In this work, we identify key limitations in existing approaches and propose autonomous LLM agents to address these gaps. We introduce a series of novel, supply chain-specific consensus-seeking frameworks tailored for LLM agents and validate the effectiveness of our approach through a case study in inventory management. To accelerate progress within the SCM community, we open-source our code, providing a foundation for further advancements in LLM-powered autonomous supply chain solutions.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-15T13:33:10Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Valeria Jannelli</name>
+    </author>
+    <author>
+      <name>Stefan Schoepf</name>
+    </author>
+    <author>
+      <name>Matthias Bickel</name>
+    </author>
+    <author>
+      <name>Torbjørn Netland</name>
+    </author>
+    <author>
+      <name>Alexandra Brintrup</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.05884v1</id>
+    <title>Text-to-Edit: Controllable End-to-End Video Ad Creation via Multimodal LLMs</title>
+    <updated>2025-01-10T11:35:43Z</updated>
+    <link href="https://arxiv.org/abs/2501.05884v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.05884v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The exponential growth of short-video content has ignited a surge in the necessity for efficient, automated solutions to video editing, with challenges arising from the need to understand videos and tailor the editing according to user requirements. Addressing this need, we propose an innovative end-to-end foundational framework, ultimately actualizing precise control over the final video content editing. Leveraging the flexibility and generalizability of Multimodal Large Language Models (MLLMs), we defined clear input-output mappings for efficient video creation. To bolster the model's capability in processing and comprehending video content, we introduce a strategic combination of a denser frame rate and a slow-fast processing technique, significantly enhancing the extraction and understanding of both temporal and spatial video information. Furthermore, we introduce a text-to-edit mechanism that allows users to achieve desired video outcomes through textual input, thereby enhancing the quality and controllability of the edited videos. Through comprehensive experimentation, our method has not only showcased significant effectiveness within advertising datasets, but also yields universally applicable conclusions on public datasets.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-10T11:35:43Z</published>
+    <arxiv:comment>16pages conference</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Dabing Cheng</name>
+    </author>
+    <author>
+      <name>Haosen Zhan</name>
+    </author>
+    <author>
+      <name>Xingchen Zhao</name>
+    </author>
+    <author>
+      <name>Guisheng Liu</name>
+    </author>
+    <author>
+      <name>Zemin Li</name>
+    </author>
+    <author>
+      <name>Jinghui Xie</name>
+    </author>
+    <author>
+      <name>Zhao Song</name>
+    </author>
+    <author>
+      <name>Weiguo Feng</name>
+    </author>
+    <author>
+      <name>Bingyue Peng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.09751v5</id>
+    <title>OmniThink: Expanding Knowledge Boundaries in Machine Writing through Thinking</title>
+    <updated>2025-11-20T01:25:15Z</updated>
+    <link href="https://arxiv.org/abs/2501.09751v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.09751v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Machine writing with large language models often relies on retrieval-augmented generation. However, these approaches remain confined within the boundaries of the model's predefined scope, limiting the generation of content with rich information. Specifically, vanilla-retrieved information tends to lack depth, novelty, and suffers from redundancy, which negatively impacts the quality of generated articles, leading to shallow, unoriginal, and repetitive outputs. To address these issues, we propose OmniThink, a slow-thinking machine writing framework that emulates the human-like process of iterative expansion and reflection. The core idea behind OmniThink is to simulate the cognitive behavior of learners as they slowly deepen their knowledge of the topics. Experimental results demonstrate that OmniThink improves the knowledge density of generated articles without compromising metrics such as coherence and depth. Human evaluations and expert feedback further highlight the potential of OmniThink to address real-world challenges in the generation of long-form articles. Code is available at https://github.com/zjunlp/OmniThink.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-16T18:58:06Z</published>
+    <arxiv:comment>EMNLP 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zekun Xi</name>
+    </author>
+    <author>
+      <name>Wenbiao Yin</name>
+    </author>
+    <author>
+      <name>Jizhan Fang</name>
+    </author>
+    <author>
+      <name>Jialong Wu</name>
+    </author>
+    <author>
+      <name>Runnan Fang</name>
+    </author>
+    <author>
+      <name>Yong Jiang</name>
+    </author>
+    <author>
+      <name>Pengjun Xie</name>
+    </author>
+    <author>
+      <name>Fei Huang</name>
+    </author>
+    <author>
+      <name>Huajun Chen</name>
+    </author>
+    <author>
+      <name>Ningyu Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.05665v3</id>
+    <title>Neural Embedded Mixed-Integer Optimization for Location-Routing Problems</title>
+    <updated>2026-07-24T21:20:32Z</updated>
+    <link href="https://arxiv.org/abs/2412.05665v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.05665v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a framework that combines machine learning with mixed-integer optimization to solve the Capacitated Location-Routing Problem (CLRP), a classical NP-hard problem that integrates strategic facility location with operational vehicle routing decisions. The proposed method trains a neural network to approximate the cost of a Capacitated Vehicle Routing Problem (CVRP) for serving any subset of customers from a candidate facility. The network is trained on an independently generated dataset of CVRP instances from the literature, entirely separate from any CLRP test instances, thereby avoiding the overfitting and information leakage that can affect learning-based methods. The trained network is then embedded as a surrogate within a mixed-integer model for location-allocation decisions, which is solved using off-the-shelf solvers, thus leveraging decades of advances in vehicle routing and the availability of mature solvers. Computational experiments across four benchmark sets show that the method delivers reasonable solution quality and scales well to large instances, where, after a one-time training cost, it reaches solutions close to the best known at a fraction of the runtime of state-of-the-art heuristics. Our results demonstrate the value of routing cost approximations from the neural surrogate in informing high-quality location-allocation decisions. Our code and data are publicly available.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-07T14:25:22Z</published>
+    <arxiv:comment>46 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Waquar Kaleem</name>
+    </author>
+    <author>
+      <name>Doyoung Lee</name>
+    </author>
+    <author>
+      <name>Changhyun Kwon</name>
+    </author>
+    <author>
+      <name>Anirudh Subramanyam</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.04719v1</id>
+    <title>Calculating Customer Lifetime Value and Churn using Beta Geometric Negative Binomial and Gamma-Gamma Distribution in a NFT based setting</title>
+    <updated>2025-01-02T08:55:54Z</updated>
+    <link href="https://arxiv.org/abs/2501.04719v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.04719v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Customer Lifetime Value (CLV) is an important metric that measures the total value a customer will bring to a business over their lifetime. The Beta Geometric Negative Binomial Distribution (BGNBD) and Gamma Gamma Distribution are two models that can be used to calculate CLV, taking into account both the frequency and value of customer transactions. This article explains the BGNBD and Gamma Gamma Distribution models, and how they can be used to calculate CLV for NFT (Non-Fungible Token) transaction data in a blockchain setting. By estimating the parameters of these models using historical transaction data, businesses can gain insights into the lifetime value of their customers and make data-driven decisions about marketing and customer retention strategies.</summary>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-02T08:55:54Z</published>
+    <arxiv:comment>10 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="stat.AP"/>
+    <author>
+      <name>Sagarnil Das</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.14730v1</id>
+    <title>Generative AI for Banks: Benchmarks and Algorithms for Synthetic Financial Transaction Data</title>
+    <updated>2024-12-19T10:56:18Z</updated>
+    <link href="https://arxiv.org/abs/2412.14730v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.14730v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The banking sector faces challenges in using deep learning due to data sensitivity and regulatory constraints, but generative AI may offer a solution. Thus, this study identifies effective algorithms for generating synthetic financial transaction data and evaluates five leading models - Conditional Tabular Generative Adversarial Networks (CTGAN), DoppelGANger (DGAN), Wasserstein GAN, Financial Diffusion (FinDiff), and Tabular Variational AutoEncoders (TVAE) - across five criteria: fidelity, synthesis quality, efficiency, privacy, and graph structure. While none of the algorithms is able to replicate the real data's graph structure, each excels in specific areas: DGAN is ideal for privacy-sensitive tasks, FinDiff and TVAE excel in data replication and augmentation, and CTGAN achieves a balance across all five criteria, making it suitable for general applications with moderate privacy concerns. As a result, our findings offer valuable insights for choosing the most suitable algorithm.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-19T10:56:18Z</published>
+    <arxiv:comment>Presented at the 34th Workshop on Information Technologies and Systems (WITS 2024)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Fabian Sven Karst</name>
+    </author>
+    <author>
+      <name>Sook-Yee Chong</name>
+    </author>
+    <author>
+      <name>Abigail A. Antenor</name>
+    </author>
+    <author>
+      <name>Enyu Lin</name>
+    </author>
+    <author>
+      <name>Mahei Manhai Li</name>
+    </author>
+    <author>
+      <name>Jan Marco Leimeister</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.09917v1</id>
+    <title>The Evolution of Unobserved Skill Returns in the U.S.: A New Approach Using Panel Data</title>
+    <updated>2025-01-17T02:17:17Z</updated>
+    <link href="https://arxiv.org/abs/2501.09917v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.09917v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Economists disagree about the factors driving the substantial increase in residual wage inequality in the US over the past few decades. To identify changes in the returns to unobserved skills, we make a novel assumption about the dynamics of skills rather than about the stability of skill distributions across cohorts, as is standard. We show that our assumption is supported by data on test score dynamics for older workers in the HRS. Using survey data from the PSID and administrative data from the IRS and SSA, we estimate that the returns to unobserved skills $declined$ substantially in the late-1980s and 1990s despite an increase in residual inequality. Accounting for firm-specific pay differences yields similar results. Extending our framework to consider occupational differences in returns to skill and multiple unobserved skills, we further show that skill returns display similar patterns for workers employed in each of cognitive, routine, and social occupations. Finally, our results suggest that increasing skill dispersion, driven by rising skill volatility, explains most of the growth in residual wage inequality since the 1980s.</summary>
+    <category term="econ.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-17T02:17:17Z</published>
+    <arxiv:comment>124 pages, 42 figures</arxiv:comment>
+    <arxiv:primary_category term="econ.GN"/>
+    <author>
+      <name>Lance Lochner</name>
+    </author>
+    <author>
+      <name>Youngmin Park</name>
+    </author>
+    <author>
+      <name>Youngki Shin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.09223v2</id>
+    <title>Foundations of Large Language Models</title>
+    <updated>2025-06-15T13:24:11Z</updated>
+    <link href="https://arxiv.org/abs/2501.09223v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.09223v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This is a book about large language models. As indicated by the title, it primarily focuses on foundational concepts rather than comprehensive coverage of all cutting-edge technologies. The book is structured into five main chapters, each exploring a key area: pre-training, generative models, prompting, alignment, and inference. It is intended for college students, professionals, and practitioners in natural language processing and related fields, and can serve as a reference for anyone interested in large language models.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-16T01:03:56Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Tong Xiao</name>
+    </author>
+    <author>
+      <name>Jingbo Zhu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.16238v1</id>
+    <title>UVLLM: An Automated Universal RTL Verification Framework using LLMs</title>
+    <updated>2024-11-25T09:53:35Z</updated>
+    <link href="https://arxiv.org/abs/2411.16238v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.16238v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Verifying hardware designs in embedded systems is crucial but often labor-intensive and time-consuming. While existing solutions have improved automation, they frequently rely on unrealistic assumptions. To address these challenges, we introduce a novel framework, UVLLM, which combines Large Language Models (LLMs) with the Universal Verification Methodology (UVM) to relax these assumptions. UVLLM significantly enhances the automation of testing and repairing error-prone Register Transfer Level (RTL) codes, a critical aspect of verification development. Unlike existing methods, UVLLM ensures that all errors are triggered during verification, achieving a syntax error fix rate of 86.99% and a functional error fix rate of 71.92% on our proposed benchmark. These results demonstrate a substantial improvement in verification efficiency. Additionally, our study highlights the current limitations of LLM applications, particularly their reliance on extensive training data. We emphasize the transformative potential of LLMs in hardware design verification and suggest promising directions for future research in AI-driven hardware design methodologies. The Repo. of dataset and code: https://anonymous.4open.science/r/UVLLM/.</summary>
+    <category term="cs.AR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-25T09:53:35Z</published>
+    <arxiv:primary_category term="cs.AR"/>
+    <author>
+      <name>Yuchen Hu</name>
+    </author>
+    <author>
+      <name>Junhao Ye</name>
+    </author>
+    <author>
+      <name>Ke Xu</name>
+    </author>
+    <author>
+      <name>Jialin Sun</name>
+    </author>
+    <author>
+      <name>Shiyue Zhang</name>
+    </author>
+    <author>
+      <name>Xinyao Jiao</name>
+    </author>
+    <author>
+      <name>Dingrong Pan</name>
+    </author>
+    <author>
+      <name>Jie Zhou</name>
+    </author>
+    <author>
+      <name>Ning Wang</name>
+    </author>
+    <author>
+      <name>Weiwei Shan</name>
+    </author>
+    <author>
+      <name>Xinwei Fang</name>
+    </author>
+    <author>
+      <name>Xi Wang</name>
+    </author>
+    <author>
+      <name>Nan Guan</name>
+    </author>
+    <author>
+      <name>Zhe Jiang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.21237v1</id>
+    <title>Hierarchical Knowledge Graph Construction from Images for Scalable E-Commerce</title>
+    <updated>2024-10-28T17:34:05Z</updated>
+    <link href="https://arxiv.org/abs/2410.21237v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.21237v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Knowledge Graph (KG) is playing an increasingly important role in various AI systems. For e-commerce, an efficient and low-cost automated knowledge graph construction method is the foundation of enabling various successful downstream applications. In this paper, we propose a novel method for constructing structured product knowledge graphs from raw product images. The method cooperatively leverages recent advances in the vision-language model (VLM) and large language model (LLM), fully automating the process and allowing timely graph updates. We also present a human-annotated e-commerce product dataset for benchmarking product property extraction in knowledge graph construction. Our method outperforms our baseline in all metrics and evaluated properties, demonstrating its effectiveness and bright usage potential.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-28T17:34:05Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Zhantao Yang</name>
+    </author>
+    <author>
+      <name>Han Zhang</name>
+    </author>
+    <author>
+      <name>Fangyi Chen</name>
+    </author>
+    <author>
+      <name>Anudeepsekhar Bolimera</name>
+    </author>
+    <author>
+      <name>Marios Savvides</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.08821v4</id>
+    <title>Conditional Local Importance by Quantile Expectations</title>
+    <updated>2026-06-15T18:20:16Z</updated>
+    <link href="https://arxiv.org/abs/2411.08821v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.08821v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Global variable importance measures are commonly used to interpret the results of machine learning models. Local variable importance techniques assess how variables contribute to individual observations. Current, popular methods, including LIME and SHAP, provide useful measures of feature contribution in the prediction space, while leaving opportunities for improved characterization of local structure in the model loss space. Additionally, they are not natively adapted for multi-class classification problems. We propose a new model-agnostic method for calculating local variable importance, CLIQUE, that highlights locally dependent relationships, provides improved stability over permutation-based methods, and can be directly applied to multi-class classification problems. Simulated and real-world examples show that CLIQUE emphasizes locally dependent information, captures interaction behavior beyond what can be evaluated by correlations, and assigns zero importance in regions where the response is invariant to changes in variables.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-13T17:59:44Z</published>
+    <arxiv:comment>29 pages, 28 figures</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <arxiv:journal_ref>Transactions on Machine Learning Research (2026)</arxiv:journal_ref>
+    <author>
+      <name>Kelvyn K. Bladen</name>
+    </author>
+    <author>
+      <name>Adele Cutler</name>
+    </author>
+    <author>
+      <name>D. Richard Cutler</name>
+    </author>
+    <author>
+      <name>Kevin R. Moon</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.14718v1</id>
+    <title>A Comprehensive Forecasting Framework based on Multi-Stage Hierarchical Forecasting Reconciliation and Adjustment</title>
+    <updated>2024-12-19T10:33:19Z</updated>
+    <link href="https://arxiv.org/abs/2412.14718v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.14718v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Ads demand forecasting for Walmart's ad products plays a critical role in enabling effective resource planning, allocation, and management of ads performance. In this paper, we introduce a comprehensive demand forecasting system that tackles hierarchical time series forecasting in business settings. Though traditional hierarchical reconciliation methods ensure forecasting coherence, they often trade off accuracy for coherence especially at lower levels and fail to capture the seasonality unique to each time-series in the hierarchy. Thus, we propose a novel framework "Multi-Stage Hierarchical Forecasting Reconciliation and Adjustment (Multi-Stage HiFoReAd)" to address the challenges of preserving seasonality, ensuring coherence, and improving accuracy. Our system first utilizes diverse models, ensembled through Bayesian Optimization (BO), achieving base forecasts. The generated base forecasts are then passed into the Multi-Stage HiFoReAd framework. The initial stage refines the hierarchy using Top-Down forecasts and "harmonic alignment." The second stage aligns the higher levels' forecasts using MinTrace algorithm, following which the last two levels undergo "harmonic alignment" and "stratified scaling", to eventually achieve accurate and coherent forecasts across the whole hierarchy. Our experiments on Walmart's internal Ads-demand dataset and 3 other public datasets, each with 4 hierarchical levels, demonstrate that the average Absolute Percentage Error from the cross-validation sets improve from 3% to 40% across levels against BO-ensemble of models (LGBM, MSTL+ETS, Prophet) as well as from 1.2% to 92.9% against State-Of-The-Art models. In addition, the forecasts at all hierarchical levels are proved to be coherent. The proposed framework has been deployed and leveraged by Walmart's ads, sales and operations teams to track future demands, make informed decisions and plan resources.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-19T10:33:19Z</published>
+    <arxiv:comment>Published in 2024 IEEE International Conference on Big Data (BigData)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Zhengchao Yang</name>
+    </author>
+    <author>
+      <name>Mithun Ghosh</name>
+    </author>
+    <author>
+      <name>Anish Saha</name>
+    </author>
+    <author>
+      <name>Dong Xu</name>
+    </author>
+    <author>
+      <name>Konstantin Shmakov</name>
+    </author>
+    <author>
+      <name>Kuang-chih Lee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.02771v3</id>
+    <title>Doubly robust inference via calibration</title>
+    <updated>2026-08-20T21:21:48Z</updated>
+    <link href="https://arxiv.org/abs/2411.02771v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.02771v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Doubly robust estimators are widely used for estimating average treatment effects and other linear summaries of regression functions. While consistency requires only one of two nuisance functions to be estimated consistently, asymptotic normality for linear functionals typically requires sufficiently fast convergence of both. We address this mismatch by showing that calibrating the nuisance estimators within a doubly robust procedure can yield doubly robust asymptotic normality. We introduce the idea of calibrated debiased machine learning (DML) and propose a specific implementation in which standard DML is augmented with a simple isotonic regression adjustment. We show that, under a partial orthogonality condition, a calibrated DML estimator remains asymptotically normal if either the regression function or Riesz representer of the functional is estimated sufficiently well, allowing the other to converge arbitrarily slowly or even inconsistently. We also propose a bootstrap-assisted method for constructing confidence intervals, enabling doubly robust inference without additional nuisance estimation. In a range of semi-synthetic benchmark datasets, calibrated DML reduces bias and improves coverage relative to standard DML. Our method can be integrated into existing DML pipelines by adding just a few lines of code to calibrate cross-fitted estimates via isotonic regression.</summary>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-05T03:32:30Z</published>
+    <arxiv:primary_category term="stat.ME"/>
+    <author>
+      <name>Lars van der Laan</name>
+    </author>
+    <author>
+      <name>Alex Luedtke</name>
+    </author>
+    <author>
+      <name>Marco Carone</name>
+    </author>
+  </entry>
+</feed>
