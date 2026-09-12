@@ -20,6 +20,30 @@ PAYLOAD="$STAGE/payload"
 COREPACK="${COREPACK:-$HOME/.lute-toolchain/node_modules/.bin/corepack}"
 say(){ echo "[assemble] $*"; }
 
+# ── 打包源冻结检查（本机 profile 是**活的**，别的会话可以同时改它）───────────────
+# 打包源 = 本机 live profile + ~/.dsh/.agent-presets。它们是开发机的运行时状态，
+# **随时会被改**（另一个会话、apply-patches、pnpm install 都会动）。2026-09-12 实测到一次：
+# 装配进行到签名阶段时，另一个会话把「本机装配」的产品行加了回去，于是同一份载荷的两次
+# 拷贝内容不一致——内嵌副本（21:12 拷）没有该包，profile.tar.gz（21:30 打）有该包。
+# 这种不一致是**静默**的：两次拷贝各自都「成功」，只有把两份哈希放在一起才看得见。
+# 所以：装配开始前记一次指纹，两次拷贝都落盘后复核；不一致就作废本次装配（宁可不发）。
+FREEZE_START="$PKG_ROOT/staging/.freeze-$VERSION.start"
+FREEZE_END="$PKG_ROOT/staging/.freeze-$VERSION.end"
+source_fingerprint(){ # <输出文件>
+  : > "$1"
+  for f in "$PROFILE/package.json" "$PROFILE/cordis.patch.yml" "$PROFILE/pnpm-lock.yaml"; do
+    [ -f "$f" ] && shasum -a 256 "$f" >> "$1"
+  done
+  find "$DSH_HOME_DIR/.agent-presets" -name 'agent.cordis.yml' -type f 2>/dev/null | sort \
+    | xargs shasum -a 256 >> "$1" 2>/dev/null || true
+  # node_modules 顶层清单：外部产品的挂载/摘除都会改它（只改内容不改目录名的情形由下面
+  # 的 profile 文件哈希兜住；node_modules 全树哈希代价太高，不在这里做）
+  { ls "$PROFILE/node_modules" 2>/dev/null | sort | shasum -a 256; } | sed 's/$/  node_modules-top-level/' >> "$1"
+}
+mkdir -p "$PKG_ROOT/staging"
+source_fingerprint "$FREEZE_START"
+say "打包源指纹已记录（$(wc -l < "$FREEZE_START" | tr -d ' ') 项）：$(cut -c1-8 "$FREEZE_START" | tr '\n' ' ')"
+
 # ── 前置校验 ────────────────────────────────────────────────────────────────
 [ -d "$PROFILE" ] || { echo "[assemble] 缺少 profile: $PROFILE"; exit 1; }
 [ -d "$DSH_VENDOR/dsh-patches" ] || { echo "[assemble] 缺少 dsh-patches: $DSH_VENDOR/dsh-patches"; exit 1; }
@@ -200,6 +224,28 @@ done
 # file: 路径重写（包内自洽，决策 D4）→ 在暂存副本上执行，不触碰本机 profile
 node "$PKG_ROOT/scripts/rewrite-file-deps.mjs" "$STAGEP/profile"
 
+# ── 2a. 出货投影：剥离「本机装配」的外部产品（ADR-0056 的另一半）──────────────
+# ADR-0056 的两条是一对：① 出货的 preset 不烘焙任何外部产品行；② 本机产品走本机装配。
+# 打包源是本机 live profile，本机为了让开发机可用**必须**挂上外部产品（依赖 / bundles /
+# preset 行 / node_modules 副本）——那正是「本机装配」的签名，它们必须**不进包**：
+# 客户机上那些路径不存在，一条 `file:/Users/lute/project/KOL-Hunter` 会让客户机的
+# 包解析指向空。2026-09-12 实测两个洞：
+#   · KOL-Hunter 整条链漏网（vendor 抽取只认 Magpie-Horch 两个前缀 / rewrite 同前缀 /
+#     --check 只看 file:./vendor/ 存在性）；
+#   · 同一次装配进行到签名阶段时，另一个会话把本机产品行加了回去 → 同一份载荷自相矛盾
+#     （内嵌副本 21:12 拷的没有该包，profile.tar.gz 21:30 打的有该包）。
+# 判据是结构性的（重写之后本仓库的包一律 file:./vendor/，其余 file: 即外部），不存清单。
+say "出货投影：剥离本机装配的外部产品（profile + presets 一次算清）…"
+SP="$STAGE/.sp"
+mkdir -p "$SP/skills" "$SP/presets"
+if [ -d "$DSH_HOME_DIR/.agent-presets" ]; then
+  # presets 在这里就落暂存（而不是等到 §3），因为剥离要**同时**看 profile 与 presets：
+  # 外部包名只在未剥离的 profile 里算得出来，第二次跑就再也算不出来了。
+  cp -R "$DSH_HOME_DIR/.agent-presets/." "$SP/presets/"
+fi
+node "$PKG_ROOT/scripts/strip-local-products.mjs" --profile "$STAGEP/profile" --presets "$SP/presets" \
+  || { echo "[assemble] ✗ 出货投影失败（见上）：有剥离脚本不认识的残留形态，必须人工看。" >&2; exit 1; }
+
 # cordis.patch.yml 内构建机绝对路径 → 占位（安装时按目标机 $HOME 替换；
 # 内嵌兜底路径由 main.js P0-7 首启 hook 按真实 DSH home 替换）。
 #
@@ -279,8 +325,9 @@ SP="$STAGE/.sp"; mkdir -p "$SP/skills" "$SP/presets"
 # 决策 K5/K6：不再整份拷贝 ~/.dsh/skills（实测 1611 个目录 / 66M，其中 989 个 p2s 语料无人引用，
 # 并含 PolyForm 非商用的 lieflat-charts）。选择在打包时现算（preset 组合 + 仓库映射 → 被引用集，
 # 再减受限许可名单），不存第二份清单（ADR-0009）。明细与理由见 scripts/select-skills.mjs。
-DSH_HOME="$DSH_HOME_DIR" node "$PKG_ROOT/scripts/select-skills.mjs" --copy "$SP/skills"
-[ -d "$DSH_HOME_DIR/.agent-presets" ] && cp -R "$DSH_HOME_DIR/.agent-presets/." "$SP/presets/"
+# 读的是**剥离后的** preset 副本（$SP/presets，§2a 已落）：本机 preset 可能挂着外部产品行，
+# 它的技能不该随包——读本机 preset 会让「被引用」判据把客户机上不存在的技能算进来。
+PRESET_ROOT="$SP/presets" DSH_HOME="$DSH_HOME_DIR" node "$PKG_ROOT/scripts/select-skills.mjs" --copy "$SP/skills"
 # 打包后自检：落位的技能树里不得出现受限许可技能（与上面的选择互为独立判据）
 node "$PKG_ROOT/scripts/select-skills.mjs" --check "$SP/skills" \
   || { echo "[assemble] ✗ 出货技能面含受限许可技能，中止（见上）"; exit 1; }
@@ -289,6 +336,18 @@ find "$SP" \( -name '.DS_Store' -o -name '*.bak-*' -o -name '*.pre-*' -o -name '
 tar -czf "$PAYLOAD/skills-presets.tar.gz" --exclude '.DS_Store' -C "$SP" skills presets
 rm -rf "$SP"
 say "技能+预设完成 ($(du -sh "$PAYLOAD/skills-presets.tar.gz" | cut -f1))"
+
+# 打包源冻结复核：profile.tar.gz 与 skills-presets.tar.gz 都已落盘，此刻源若被改过，
+# 两份拷贝就不是同一次快照 → 作废（见文件顶部 source_fingerprint 的说明与实测案例）。
+source_fingerprint "$FREEZE_END"
+if ! diff -q "$FREEZE_START" "$FREEZE_END" >/dev/null 2>&1; then
+  echo "[assemble] ✗ 打包源在装配过程中被改动——本次载荷不是一次快照，禁止发布。" >&2
+  echo "          差异（左=开始，右=结束）：" >&2
+  diff "$FREEZE_START" "$FREEZE_END" | head -20 >&2
+  echo "          处置：等本机 profile / .agent-presets 安静下来后重跑装配。" >&2
+  exit 1
+fi
+say "打包源冻结复核通过（装配期间 profile 与 presets 未被改动）"
 
 # ── 4. 灵枢 venv 便携化（python-build-standalone 基底，免 venv 机制）──────────────
 say "4/6 灵枢 aeis 运行时便携化"
@@ -402,24 +461,31 @@ const vendorDirs=Object.entries(p.dependencies||{})
   .map(([,v])=>v.startsWith('file:../../../project/Magpie-Horch/')?v.slice('file:../../../project/Magpie-Horch/'.length).replace(/\/+\$/,''):(v.startsWith('file:./vendor/')?v.slice('file:./vendor/'.length).replace(/\/+\$/,''):v.slice('file:/Users/lute/project/Magpie-Horch/'.length).replace(/\/+\$/,'')));
 // dsh-patches 不进出货 profile 的 vendor（见上方注释），故 completeness.vendor 也不含它
 const allBundles=[...new Set([...bundles,...deps.filter(d=>typeof p.dependencies[d]==='string'&&!p.dependencies[d].startsWith('file:'))])];
-const listDir=(d)=>fs.existsSync(d)?fs.readdirSync(d).filter(x=>fs.statSync(path.join(d,x)).isDirectory()).sort():[];
-// skills 必须读**出货的那一份**（skills-presets.tar.gz 里的清单），不能读源目录 ~/.dsh/skills：
-// 技能面已按 K5/K6 收敛（1611 → 约 539），读源目录会让 smoke 断言一个客户机上根本不存在的清单。
+// skills 与 presets 都必须读**出货的那一份**（skills-presets.tar.gz 里的清单），不能读源目录
+// ~/.dsh/skills 与 ~/.dsh/.agent-presets：技能面已按 K5/K6 收敛（1611 → 约 539）、presets 也
+// 已被出货投影剥离过外部产品行，读源目录会让 smoke 断言一份客户机上根本不存在的清单。
 const { execFileSync } = require('node:child_process');
-const tarSkills = () => {
+const tarList = (re) => {
   const out = execFileSync('tar', ['-tzf', process.argv[2] + '/skills-presets.tar.gz'], { encoding: 'utf8', maxBuffer: 1 << 28 });
   const names = new Set();
   for (const line of out.split('\n')) {
-    const m = /^skills\/([^/]+)\/$/.exec(line);
+    const m = re.exec(line);
     if (m) names.add(m[1]);
   }
   return [...names].sort();
 };
 const c={bundles:allBundles.sort(),vendor:[...new Set(vendorDirs)].sort(),
-  skills:tarSkills(),presets:listDir(process.argv[3]+'/.agent-presets')};
-fs.writeFileSync(process.argv[3]+'/completeness.json',JSON.stringify(c,null,2)+'\n');
-console.log('bundles='+c.bundles.length+' vendor='+c.vendor.length+' skills='+c.skills.length+' presets='+c.presets.length);
+  skills:tarList(/^skills\/([^/]+)\/$/),presets:tarList(/^presets\/([^/]+)\/$/)};
+// 写入目标必须是 **payload**（argv[4]）。2026-09-12 的回归：这里改成「技能读出货 tar」时多插了一个
+// argv，写入目标没跟着改，于是 completeness.json 落到了 ~/.dsh/ 而不是 payload ——
+// 冒烟 4 条断言连带失败（completeness 缺失 → bundle/vendor/skills 清单比对全红）。
+// 所以写出后必须再断言一次位置，别再踩同一处。
+const out=process.argv[4]+'/completeness.json';
+fs.writeFileSync(out,JSON.stringify(c,null,2)+'\n');
+if(!fs.existsSync(out)){console.error('completeness.json 未写出: '+out);process.exit(1);}
+console.log('bundles='+c.bundles.length+' vendor='+c.vendor.length+' skills='+c.skills.length+' presets='+c.presets.length+' → '+out);
 " "$PROFILE/package.json" "$PAYLOAD" "$DSH_HOME_DIR" "$PAYLOAD"
+[ -f "$PAYLOAD/completeness.json" ] || { echo "[assemble] ✗ completeness.json 未写进 payload（冒烟的清单比对会全红）" >&2; exit 1; }
 
 say "汇编完成：$PAYLOAD"
 

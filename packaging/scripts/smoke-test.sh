@@ -75,8 +75,19 @@ assert "noema 二进制架构 arm64" yes "$(file "$NOEMA_BIN" | grep -q 'arm64' 
 QA_NOEMA="$(xattr -p com.apple.quarantine "$NOEMA_BIN" 2>/dev/null || true)"
 assert "noema 无 quarantine 残留" "" "$QA_NOEMA"
 assert "vendor 无树外符号链接" 0 "$(find "$P/vendor" -type l -exec sh -c 'case "$(readlink "$1")" in /*) echo 1;; esac' _ {} \; 2>/dev/null | grep -c 1 || true)"
-assert "cordis.patch.yml 无 __DSH_HOME__ 残留" 0 "$(grep -c '__DSH_HOME__' "$P/cordis.patch.yml" || true)"
-assert "cordis.patch.yml python 指向冒烟 aeis" 1 "$(grep -c "$DSH_HOME_SMOKE/aeis-venv/bin/python" "$P/cordis.patch.yml" || true)"
+assert "cordis.patch.yml 无未替换占位符" 0 "$(grep -cE '__[A-Z_]+__' "$P/cordis.patch.yml" || true)"
+# 占位替换的**活契约**：装完之后，出货时留的占位必须已经变成目标机的值。
+# 这条替换了原先的「python 指向冒烟 aeis」——那条断言的是 dsh-memory 记忆行里的
+# `python: __DSH_HOME__/aeis-venv/bin/python`，而 dsh-memory 自 2026-09-07 起就不在
+# profile 依赖与 bundles 里（2.0.1 载荷里那行是**陈旧配置**），断言它等于守一个不存在的形态。
+# 现在的契约按「出货副本里有没有这个占位」条件化：有就必须替换到位，没有就不许凭空出现。
+if grep -q '__LUTE_PROJECT_ROOT__' "$BUNDLED/cordis.patch.yml" 2>/dev/null; then
+  assert "安装后 productRoots 已替换为目标机项目根" 1 "$(grep -c "$HOME/project" "$P/cordis.patch.yml" || true)"
+fi
+# 出货投影的后置校验（ADR-0056）：profile 的 file: 依赖必须**全部**指向 ./vendor/。
+# 任何别的 file: 目标都是「本机装配」漏进了包——客户机上那种路径不存在。
+assert "profile 无外部 file: 依赖（本机装配未漏进包）" 0 \
+  "$(node -e 'const p=require(process.argv[1]);const bad=Object.entries(p.dependencies||{}).filter(([,v])=>typeof v==="string"&&v.startsWith("file:")&&!v.startsWith("file:./vendor/"));console.log(bad.length)' "$P/package.json" || echo ERR)"
 FILE_COUNT="$(grep -c 'file:./vendor/' "$P/package.json" || true)"
 FILE_EXPECT="$(node -e "const c=JSON.parse(require('fs').readFileSync(process.argv[1]));console.log(c.vendor.length-1)" "$CJ" 2>/dev/null)"
 assert "file: 依赖指向 ./vendor/（=vendor 数-1）" "$FILE_EXPECT" "$FILE_COUNT"
@@ -131,7 +142,14 @@ assert "内嵌 vendor 落位（非空）" yes "$([ -n "$(find "$BUNDLED/vendor" 
 # 除 cordis.patch.yml（内嵌保留占位、安装后已替换）与 node_modules（单独断言存在性）外应完全一致
 diff -rq --exclude node_modules --exclude cordis.patch.yml "$BUNDLED" "$P" > "$SMOKE_HOME/diff.log" 2>&1
 assert "内嵌 ≡ 安装后 profile" 0 "$?"
-assert "内嵌 cordis 保留 __DSH_HOME__ 占位" yes "$(grep -q '__DSH_HOME__' "$BUNDLED/cordis.patch.yml" && echo yes)"
+# 内嵌副本的两条判据（替换原先的「保留 __DSH_HOME__ 占位」）：
+#   ① 不许含构建机绝对路径——内嵌副本会在**客户机首启**时被物化成 profile，
+#      里面任何 /Users/lute/... 都会在客户机上静默指不到东西（本判据与 assemble 的
+#      machine-path 守卫是两道独立的网：那道按基线只减不增，这道对 cordis 配置零容忍）；
+#   ② 待替换占位必须在——那是首启替换机制的前提（没有占位就没有东西可替换，
+#      而「没有占位」与「占位被提前替换掉了」在只看结果时不可区分，所以要正面断言）。
+assert "内嵌 cordis 无构建机绝对路径" 0 "$(grep -c '/Users/' "$BUNDLED/cordis.patch.yml" || true)"
+assert "内嵌 cordis 保留待替换占位" 1 "$(grep -cE '__[A-Z_]+__' "$BUNDLED/cordis.patch.yml" || true)"
 
 # 6. 补丁锚点（env 指向冒烟路径）
 if [ -f "$PAYLOAD/tools/verify-patches-v2.sh" ]; then
