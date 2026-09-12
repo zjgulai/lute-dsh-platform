@@ -2,7 +2,7 @@
 
 本文件由 `scripts/gen-catalog.mjs` 从各包 `package.json` 生成，**请勿手改**——手改会被门禁 `catalog-fresh` 拒绝（ADR-0011）。
 
-受管包总数：**22**。分组规则见 [docs/architecture.md](../architecture.md#0-仓库构成与门禁2026-09-11-起) 与 [ADR-0011](../adr/ADR-0011.md)。
+受管包总数：**23**。分组规则见 [docs/architecture.md](../architecture.md#0-仓库构成与门禁2026-09-11-起) 与 [ADR-0011](../adr/ADR-0011.md)。
 
 | 组 | 目录 | 包名 | 来源 | owner | 发布 npm |
 | --- | --- | --- | --- | --- | --- |
@@ -14,6 +14,7 @@
 | capabilities | `packages/capabilities/dsh-paper2skills` | `dsh-paper2skills` | `self` | `lute` | `false` |
 | capabilities | `packages/capabilities/dsh-wanzh-hulian` | `dsh-wanzh-hulian` | `self` | `lute` | `false` |
 | surfaces | `packages/surfaces/dsh-agent-team-gui-local` | `dsh-agent-team-gui` | `internalized` | `@deepseek-ai` | `false` |
+| surfaces | `packages/surfaces/dsh-algo-skills-local` | `dsh-algo-skills-local` | `self` | `lute` | `false` |
 | surfaces | `packages/surfaces/dsh-my-quotes` | `dsh-my-quotes` | `self` | `lute` | `false` |
 | surfaces | `packages/surfaces/dsh-role-matrix-local` | `dsh-role-matrix-local` | `self` | `lute` | `false` |
 | surfaces | `packages/surfaces/dsh-skill-center-local` | `dsh-skill-center-local` | `self` | `lute` | `false` |
@@ -34,7 +35,7 @@
 | 组 | 包数 |
 | --- | --- |
 | capabilities | 7 |
-| surfaces | 5 |
+| surfaces | 6 |
 | platform | 6 |
 | contract | 2 |
 | infra | 2 |
