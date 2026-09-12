@@ -366,7 +366,6 @@ else
   say "打包源复核通过（装配期间 profile 与 presets 未被改动）"
   SNAPSHOT_LINE="PROFILE_SNAPSHOT=$(shasum -a 256 "$FREEZE_START" | cut -c1-16)"
 fi
-printf '%s\n' "$SNAPSHOT_LINE" >> "$PAYLOAD/VERSION"
 
 # ── 4. 灵枢 venv 便携化（python-build-standalone 基底，免 venv 机制）──────────────
 say "4/6 灵枢 aeis 运行时便携化"
@@ -408,6 +407,11 @@ BUILD=$BUILD
 DSH_BASELINE=2.0.5
 ARCH=arm64
 EOF
+# 打包源快照指纹：**必须在 VERSION 建好之后**追加。第一次实现把它写在 §3（复核处），
+# 而 VERSION 在 §6 才由 `cat >` 创建 → 追加的那行被整段覆盖（实测：VERSION 里没有它）。
+# 这一行是「本次载荷对应哪个源状态」的唯一凭据，丢了就只能靠猜。
+printf '%s\n' "$SNAPSHOT_LINE" >> "$PAYLOAD/VERSION"
+grep -q '^PROFILE_SNAPSHOT=' "$PAYLOAD/VERSION" || { echo "[assemble] ✗ VERSION 里缺 PROFILE_SNAPSHOT（载荷无法回溯到源状态）" >&2; exit 1; }
 if [ -f "$PAYLOAD/aeis-portable.tar.gz" ]; then
   ( cd "$PAYLOAD" && shasum -a 256 "DSH Desktop.app.tar.gz" profile.tar.gz skills-presets.tar.gz aeis-portable.tar.gz > SHA256SUMS )
 else
