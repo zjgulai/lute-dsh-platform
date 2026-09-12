@@ -52,7 +52,7 @@ if [ "$BASE" = "source" ]; then
   # 源码主路径（2026-09-11 起为唯一默认）：不依赖 /Applications 已安装 app。
   [ -d "$VENDOR_REPO/.git" ] || { echo "[assemble] BASE=source 需要 vendor 仓库: $VENDOR_REPO"; exit 1; }
   [ -f "$VENDOR_PIN" ] || { echo "[assemble] 缺少 pin 文件: $VENDOR_PIN"; exit 1; }
-  [ -x "$COREPACK" ] || { echo "[assemble] 缺少 corepack: $COREPACK（node 26 不自带，npm i --prefix ~/.lute-toolchain corepack）"; exit 1; }
+  [ -x "$COREPACK" ] || { echo "[assemble] 缺少 corepack: ${COREPACK}（node 26 不自带，npm i --prefix ~/.lute-toolchain corepack）"; exit 1; }
   # pin 门禁：vendor 仓库 HEAD 必须等于 pin 记录的 lute-sha（基座可复现性闭环）
   PIN_SHA="$(awk -F': ' '/^lute-sha:/{print $2}' "$VENDOR_PIN" | tr -d ' ')"
   HEAD_SHA="$(git -C "$VENDOR_REPO" rev-parse HEAD)"
