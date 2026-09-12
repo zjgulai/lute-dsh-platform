@@ -2,9 +2,10 @@
 
 基于 **DeepSeek Harness（DSH Desktop）** 的二次开发平台：出海技能体系 + 万物互联（连接 MCP / API / 企业应用 / 知识库）+ 全套工程插件与打包流水线。
 
-> 当前版本：**v2.0.0**（2026-09-10，DSH 基座 2.0.5 / runtime 0.1.2-rc.1）· 仓库：monorepo · 变更历史见 [CHANGELOG.md](CHANGELOG.md)（2.0.0 升级全链研究见 docs/research/）
+> 当前版本：**v2.2.0**（2026-09-12，DSH 基座 2.0.5 / runtime 0.1.2-rc.1）· 仓库：monorepo · 变更历史见 [CHANGELOG.md](CHANGELOG.md)（2.0.0 升级全链研究见 docs/research/）
 >
-> **客户安装**：下载最新 [GitHub Release](https://github.com/zjgulai/lute-dsh-platform/releases) 的 `DSH-Desktop-LUTE-<版本>-mac-arm64.pkg`，双击按向导安装（详见 [安装卡](packaging/INSTALL-CARD.md)）。
+> **客户安装**：下载 `DSH-Desktop-LUTE-<版本>-mac-arm64.dmg`，挂载后按 [安装卡](packaging/INSTALL-CARD.md) 安装（终端一条命令，或双击 `LUTE Setup.app`）。
+> **本版起只发 DMG**：全仓无 `.pkg` 产物，「pkg 为主交付」的历史说法自 2.2.0 起作废。
 
 ## 平台组成
 
@@ -16,19 +17,20 @@
 | 技能子集 | `dsh-skill-subset/` | 预设技能白名单契约（respectFileFlags） |
 | 宿主补丁集 | `dsh-patches/` | 宿主层补丁与 lint 工具 |
 | 支撑插件 | `dsh-*-local/`、`archify-local/` 等 | profile 依赖插件（deepresearch/noema/memory/loopx/agent-team/browser/theme…） |
-| 打包工程 | `packaging/` | pkg + dmg 双格式流水线（assemble.sh → sign-and-dmg.sh / build-pkg.sh；pkg 为主交付，面向无终端客户） |
+| 打包工程 | `packaging/` | DMG 流水线（assemble.sh → sign-and-dmg.sh；挂载后终端一条命令或 `LUTE Setup.app`，面向无终端客户） |
 | 技能源 | `81-Skills/` | 自研技能集（含安装与维护管线） |
 | 文档 | `docs/`（ADR/架构/发布流程/白屏排查手册）、`doc/`（HTML 文档站）、`_doc-notes/` | 决策与知识资产 |
 
 ## 安装
 
-### 客户安装（pkg 主交付，双击向导）
+### 客户安装（DMG）
 
-1. 从 [Releases](https://github.com/zjgulai/lute-dsh-platform/releases) 下载 `DSH-Desktop-LUTE-<版本>-mac-arm64.pkg`
-2. 双击 → Installer 向导 → 输入开机密码 → 完成（被 Gatekeeper 拦时右键 → 打开）
-3. 重启 DSH Desktop，重新授权 TCC（录屏/辅助功能/自动化）
+1. 从 [Releases](https://github.com/zjgulai/lute-dsh-platform/releases) 下载 `DSH-Desktop-LUTE-<版本>-mac-arm64.dmg`
+2. 双击挂载 → 终端 `cd "/Volumes/DSH Desktop LUTE <版本>" && bash install.sh`；或双击 `LUTE Setup.app` 走向导
+3. 安装后重启 DSH Desktop，重新授权 TCC（录屏/辅助功能/自动化）
 
-> 仅支持 Apple 芯片 Mac（arm64，macOS 13+）。dmg 为备用（终端 `bash install.sh`，高级用户）。
+> 仅支持 Apple 芯片 Mac（arm64，macOS 13+）。包为 adhoc 签名、**未公证**，首启会被 Gatekeeper 拦（右键 → 打开）。
+> 完整步骤、Gatekeeper 处置表、完整性校验与常见问题一律见 [安装卡](packaging/INSTALL-CARD.md)。
 
 ### 本机开发安装（profile file: 依赖）
 
@@ -45,8 +47,8 @@ pnpm add file:/Users/lute/project/Magpie-Horch/dsh-overseas-skills
 
 - 版本：平台侧使用单一版本 `vX.Y.Z`（git tag = 打包版本）；`CHANGELOG.md`（根）与 `packaging/CHANGELOG.md`（打包）双轨汇总。
 - 插件版本现状：各插件 `package.json` 保留自身版本，实测分布于 9 个取值（`0.0.3-alpha.1-port` … `1.0.1`），**尚未与平台版本对齐**；对齐机制与债务由 [ADR-0003](docs/adr/ADR-0003.md)、[ADR-0012](docs/adr/ADR-0012.md) 与门禁 `package-identity` 接管。
-- 发布：`packaging/` 构建 pkg + dmg → **GitHub Releases 附件**（二进制不进 git）+ `SHA256SUMS`/`PKG-SHA256SUMS` 校验清单 + `INSTALL-CARD.md` 客户安装卡。
-- 交付形态：**pkg 为主**（客户双击向导）、dmg 为备用（CLI）；BUILD 号标识每次打包（防同名多代混淆）。
+- 发布：`packaging/` 构建 DMG → **GitHub Releases 附件**（二进制不进 git）+ `SHA256SUMS` 校验清单 + [安装卡](packaging/INSTALL-CARD.md) 客户安装卡。
+- 交付形态：**DMG 单一格式**（挂载 → 终端 `install.sh` 或 `LUTE Setup.app`）；BUILD 号标识每次打包（防同名多代混淆）。
 - 流程 SOP：`docs/release-process.md`。
 
 ## 开发与验收

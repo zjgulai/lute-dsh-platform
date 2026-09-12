@@ -1,5 +1,46 @@
 # CHANGELOG
 
+## [2.2.0]（2026-09-12）
+
+### 交付形态：DMG 单一格式
+
+- **`.pkg` 退出交付面**：`assemble.sh` → `sign-and-dmg.sh` 只产 DMG，`release/2.2.0/` 里只有
+  `.dmg` + `SHA256SUMS` + `VERSION` + `manifest.json`。`scripts/build-pkg.sh` 与
+  `pkg-postinstall.sh` 仍留在树里但**无人调用**（历史 1.x 交付路径）；`PKG-SHA256SUMS` 同此。
+- 产物：`DSH-Desktop-LUTE-2.2.0-mac-arm64.dmg` 610 MB，
+  SHA256 `e74fb6d045fa33cc6174369b06408ed5be59dcdbe4ca22af279b6b6aff4ac86e`；
+  DMG 载荷内 app 的 `codesign --verify --deep --strict` 与挂载终验均通过。
+
+### 流水线硬化（本轮 5 次装配才绿——5 条红全部是流水线自身缺陷，不是产物）
+
+- **打包源快照**：装配一动工即对打包源做 APFS clone 快照，全程读快照。此前并发会话改 live profile
+  会让同一个载荷自相矛盾（内嵌副本与 `profile.tar.gz` 取自不同时刻）——「同源」从检查项变成构造保证。
+- **出货投影**：结构判据剥离本机装配（重写后本仓库的包一律 `file:./vendor/`，其余 `file:` 即外部产品），
+  跨项目依赖 `dsh-kol-hunter-local` 随之消失（ADR-0033）。
+- **机器路径守卫**：`scripts/scan-machine-paths.mjs` + 只减不增基线，出货面出现新的构建机绝对路径即中止。
+- **技能交付面 1611 → 539**：`scripts/select-skills.mjs` 打包时现算，不存第二份清单（ADR-0009）。
+- **内部取证材料不随包**：`dsh-patches/` 整体退出出货 profile（决策 K10）。
+- **`completeness.json` 写到 `~/.dsh` 而非 staging**——已修，并加断言。
+- **冒烟两处**：`set -u` 下 `BUNDLED` 先用后定义（打断整条冒烟而非报一条红）；
+  「vendor 数 -1」的算术在 K10 之后过期。均已修，**39/39 PASSED**。
+- **`VERSION` 的 `cat >` 覆盖了追加的快照指纹**——改为建好之后追加并断言。
+- **bash 3.2 下 `$VAR（` 会把全角括号吃进变量名**（三处同修）。
+
+### 首启实测
+
+- 拖拽即用路径的内嵌兜底**会真实物化 profile**：空 DSH home 首启 10s 内 profile 出现，P0-7v2 链路可用。
+- `scripts/first-launch-test.sh` 把四条判据脚本化。**前置条件**：同机已有实例在跑时必须跳过——
+  实测新产物与**已知可用的旧 app** 在同一隔离环境卡在同一阶段（profile-composition），
+  卡住的是「同机并存两个实例」，不是产物本身。
+
+### 已知缺口
+
+- 载荷内含一处**未入库**的 `launcher.ts` 诊断探针（并发会话在飞），tag 里没有它。
+  闭合需该改动定版后重跑装配并重打 tag。
+
+完整故事见根 [CHANGELOG.md](../CHANGELOG.md) 的 `[2.2.0]` 条目，决策留痕见 Note
+[2026-09-12-packaging-surface-hardening](../docs/notes/implemented/architecture/2026-09-12-packaging-surface-hardening.md)。
+
 ## [2.0.0]（2026-09-10）
 
 ### 基座升级：DSH Desktop 2.0.4 → 2.0.5（runtime 0.1.2-alpha.1 → 0.1.2-rc.1）

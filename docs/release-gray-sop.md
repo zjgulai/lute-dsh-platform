@@ -10,8 +10,11 @@
 
 ## 2. 灰度包
 
-- 与全量包同源（同一 pkg/dmg + 同一 SHA256SUMS），仅分发对象不同。
-- 发灰度前复核：`shasum -a 256 -c SHA256SUMS` + `pkgutil --check-signature`（当前为 unsigned，见 INSTALL-CARD 完整性说明）。
+- 与全量包同源（同一 DMG + 同一 SHA256SUMS），仅分发对象不同。
+- 发灰度前复核：`shasum -a 256 -c SHA256SUMS`，再对**挂载后**的 app 验签：
+  `codesign --verify --deep --strict "/Volumes/DSH Desktop LUTE <ver>/DSH Desktop.app"`。
+  用 `codesign` 而非 `pkgutil --check-signature`：包为 adhoc 签名（无证书），且 `pkgutil` 只认 `.pkg`——
+  本版起交付面没有 `.pkg`（见 [INSTALL-CARD](packaging/INSTALL-CARD.md) 完整性说明）。
 
 ## 3. 观察指标（一周窗口）
 

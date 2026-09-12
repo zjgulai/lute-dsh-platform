@@ -67,13 +67,14 @@ VERSION=1.0.0 ./assemble.sh                    # 产出 staging/1.0.0/payload
 - **官方更新通道已禁用**（暂存 app 的 `app-update.yml` 被清空）。
 - **单架构 arm64**：node_modules 内原生依赖为 arm64，x64 需在 x64 机重跑 assemble。
 
-## 交付形态（2026-09-09 起）
+## 交付形态（2.2.0 起：DMG 单一格式）
 
-- **pkg 为主交付**：`DSH-Desktop-LUTE-<ver>-mac-arm64.pkg`——客户双击 → Installer
-  图形向导 → 输密码 → 完成，无需终端与 AI 助手。
-- **dmg 为备用**：`DSH-Desktop-LUTE-<ver>-mac-arm64.dmg`——CLI `bash install.sh`
-  （高级用户/自动化场景）。
-- 两者共用同一 payload（同源），SHA 分别记录于 `SHA256SUMS`/`PKG-SHA256SUMS`。
+- **唯一交付**：`DSH-Desktop-LUTE-<ver>-mac-arm64.dmg`——挂载后终端 `bash install.sh`
+  或双击 `LUTE Setup.app`，两者共用同一 payload，面向无终端客户。
+- **`.pkg` 不再是交付面**：2.2.0 流水线（`assemble.sh` → `sign-and-dmg.sh`）不产出它，
+  `release/<ver>/` 只有 DMG。`scripts/build-pkg.sh` 与其 `pkg-postinstall.sh` 仍留在树里
+  但**无人调用**（历史版 `1.x` 的交付路径）；`PKG-SHA256SUMS` 同此，历史文档里的说法对 2.2.0 及以后不成立。
+- SHA 记录于 `SHA256SUMS`。
 - 二进制产物不上 git，发布走 GitHub Releases 附件（`gh release`）。
 
 ## 目标机安装（Gatekeeper 必读）

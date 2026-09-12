@@ -27,6 +27,15 @@
 ### 门禁
 - `pnpm run gate` 17/17、`pnpm run gate:full` 22/22（新增 `profile-bundle-sync`、`patch-anchors` 的打包面目标、`staging-freshness`）。
 
+### 交付形态
+- **本版起只发 DMG**：`release/2.2.0/` 只有 `DSH-Desktop-LUTE-2.2.0-mac-arm64.dmg`（610 MB，
+  SHA256 `e74fb6d0…`）+ `SHA256SUMS` + `VERSION` + `manifest.json`，**无 `.pkg`**。
+  流水线、README 与灰度 SOP 里「pkg 为主交付」的说法已同步作废（细节见 [packaging/CHANGELOG.md](packaging/CHANGELOG.md)）。
+
+### 已知缺口
+- 载荷内含一处**未入库**的 `launcher.ts` 诊断探针（另一会话在飞），本 tag 里没有它；
+  闭合需该改动定版后重跑装配并重打 tag。细节见 [packaging/CHANGELOG.md](packaging/CHANGELOG.md) 的「已知缺口」。
+
 ## [2.0.0] - 2026-09-10（DSH 基座 2.0.4→2.0.5 / runtime 0.1.2-rc.1 大版本迁移）
 
 ### 基座迁移
