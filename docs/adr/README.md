@@ -55,6 +55,7 @@
 | ADR-0049 | 完整实现从未丢失：读语料 vault 的 git 明文恢复（1,302/1,338），落 `references/implementation.py`；三档分层且无 oracle 的一档必须标注未核对（订正 ADR-0048 的两条全称断言） | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-paper2skills-source-code-recovery.md) |
 | ADR-0050 | 代码围栏按「宽松枚举候选 + 语法定终点」抽取，不按 Markdown 配对（确证 1,262→1,277、未恢复 36→21；订正 ADR-0049 的「那 21 张是真实的代际差异」） | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-paper2skills-fence-candidates.md) |
 | ADR-0051 | `parses=False` 拆成「源码写坏 5」与「判据未定终点 15」两类，逐卡带 `defect`/`defect_line`/`defect_detail`（订正 ADR-0049 收尾那句「20 张都因全角标点写坏」） | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-paper2skills-parse-defects.md) |
+| ADR-0055 | 依赖层可复现的判据：清单与锁文件逐条 specifier 相等、依赖不得指向机器绝对路径、同名不得跨字段重复声明，离线判定（`deps-reproducible`）；产物未入库的包 `build` 先于 `test` | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-dependency-reproducibility.md) |
 
 > ADR-0007 ~ ADR-0018 是「LUTE 二开平台架构重构」的十二项决策，共享同一篇决策记录 Note。
 > ADR-0019 独立成篇（品牌皮肤锚点治理），决策记录见其 Note。

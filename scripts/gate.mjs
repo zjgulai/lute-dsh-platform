@@ -27,6 +27,7 @@ import {
   checkScriptsRunnable,
   checkTrackedIgnored,
 } from './gates/checks.mjs'
+import { buildOutputRoot, checkDependencyReproducibility, packageScriptOrder } from './gates/dependency-reproducibility.mjs'
 import { checkProfileFilesSync, checkProfileMetadata } from './gates/sync-profile.mjs'
 import { checkSharedSync } from './gates/sync-shared.mjs'
 import { checkThemeTokens } from './gates/theme-tokens.mjs'
@@ -111,6 +112,24 @@ const CHECKS = [
     remediation: '修复断链：重新安装该包依赖，或把链接目标改为绝对路径（ADR-0016）',
     run() {
       return checkDependencyLinks({ links: collectDependencyLinks() })
+    },
+  },
+  {
+    name: 'deps-reproducible',
+    remediation: '在该包目录执行 pnpm install 重新生成 pnpm-lock.yaml；机器绝对路径依赖改成注册表版本区间（ADR-0055）',
+    run() {
+      return checkDependencyReproducibility({
+        packages: collectManifests()
+          .filter((entry) => entry.dir !== '.')
+          .map((entry) => {
+            const lockPath = join(repoRoot, entry.dir, 'pnpm-lock.yaml')
+            return {
+              relPath: entry.dir,
+              manifest: entry.manifest,
+              lockfileText: existsSync(lockPath) ? readFileSync(lockPath, 'utf8') : null,
+            }
+          }),
+      })
     },
   },
   {
@@ -326,8 +345,30 @@ function collectDependencyLinks() {
 }
 
 /**
- * 逐个运行受管包声明的 typecheck 与 test 脚本，收集真实退出码。
+ * 判断仓库里某个路径有没有被 git 跟踪（至少一个文件）。
+ * 用于 package-scripts 的顺序判据：产物入库与否决定 build 该在 test 之前还是之后。
+ * @param {string} relPath 仓库相对路径
+ * @returns {boolean} 是否有被跟踪的文件
+ */
+function isGitTracked(relPath) {
+  try {
+    const out = execFileSync('git', ['-C', repoRoot, 'ls-files', '--', relPath], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    })
+    return out.trim() !== ''
+  } catch {
+    return false
+  }
+}
+
+/**
+ * 逐个运行受管包声明的 typecheck / test / build 脚本，收集真实退出码。
  * 只用于 full 模式：逐包执行耗时较长，且需要各包 node_modules 已安装。
+ *
+ * 顺序不是固定的：产物（main 指向的根目录，通常 lib/）未入库时按
+ * typecheck → build → test，已入库时按 typecheck → test → build。
+ * 判据与实测见 ADR-0055 与 scripts/gates/dependency-reproducibility.mjs 的 packageScriptOrder。
  * @returns {Array<{relPath: string, scripts: Record<string, string>, results: Record<string, {code: number|null, stdout: string, stderr: string, note?: string}>}>}
  */
 function runPackageScripts() {
@@ -337,7 +378,11 @@ function runPackageScripts() {
     .map((entry) => {
       const scripts = entry.manifest.scripts ?? {}
       const results = {}
-      for (const key of ['typecheck', 'test', 'build']) {
+      const order = packageScriptOrder({
+        hasBuild: Boolean(scripts.build),
+        buildOutputTracked: isGitTracked(join(entry.dir, buildOutputRoot(entry.manifest))),
+      })
+      for (const key of order) {
         if (!scripts[key]) continue
         results[key] = runScript(join(repoRoot, entry.dir), scripts[key], timeoutMs)
       }
