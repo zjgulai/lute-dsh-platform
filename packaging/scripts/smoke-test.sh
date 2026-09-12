@@ -92,8 +92,11 @@ fi
 assert "profile 无外部 file: 依赖（本机装配未漏进包）" 0 \
   "$(node -e 'const p=require(process.argv[1]);const bad=Object.entries(p.dependencies||{}).filter(([,v])=>typeof v==="string"&&v.startsWith("file:")&&!v.startsWith("file:./vendor/"));console.log(bad.length)' "$P/package.json" || echo ERR)"
 FILE_COUNT="$(grep -c 'file:./vendor/' "$P/package.json" || true)"
-FILE_EXPECT="$(node -e "const c=JSON.parse(require('fs').readFileSync(process.argv[1]));console.log(c.vendor.length-1)" "$CJ" 2>/dev/null)"
-assert "file: 依赖指向 ./vendor/（=vendor 数-1）" "$FILE_EXPECT" "$FILE_COUNT"
+# 精确相等（**没有 -1**）。原式是 `c.vendor.length-1`，那个 1 补偿的是 completeness 里多出的
+# `dsh-patches` 一项——K10 之后它不随包了，completeness 也随之去掉（2026-09-12 实测：两边
+# 同为 22 条且逐条同名）。留着 -1 会让一条正确的载荷恒红，而「恒红的断言」的下场是被忽略。
+FILE_EXPECT="$(node -e "const c=JSON.parse(require('fs').readFileSync(process.argv[1]));console.log(c.vendor.length)" "$CJ" 2>/dev/null)"
+assert "file: 依赖逐条指向 ./vendor/（=vendor 清单条数）" "$FILE_EXPECT" "$FILE_COUNT"
 
 # 4. 灵枢
 assert "aeis-venv 落位" yes "$([ -x "$DSH_HOME_SMOKE/aeis-venv/bin/python3" ] && echo yes)"
