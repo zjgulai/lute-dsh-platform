@@ -1,0 +1,16 @@
+- insert:
+    - id: dsh-cost-guard-local
+      name: dsh-cost-guard-local
+      config:
+        # 预算闸门（USD）。单价口径见 lib/rates.js：命中价 = 未命中价 /31。
+        limits:
+          sessionUsd: 5
+          taskUsd: 1
+          dayUsd: 10
+        # 上下文保留上限（token）：超过它触发压缩，收益按 tail 价差保守计算。
+        compactKeepTokens: 100000
+        # 单次扫描最多读多少个会话。默认给足：按更新时间截断会悄悄丢掉最贵的会话，
+        # 实测 500 的上限刚好把账单最大的一条切在名单外，扫出来的金额直接少一半。
+        maxSessions: 2000
+        # 非 DeepSeek 线路单价随供应商变动，这里可换成你的实际合同价（USD / 1M tokens，谷时价）。
+        # 例：overrides: { "gemini-pro": { hit: 0.2, miss: 2.0, out: 12.0 } }

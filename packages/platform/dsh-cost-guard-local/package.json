@@ -1,0 +1,38 @@
+{
+  "name": "dsh-cost-guard-local",
+  "version": "0.1.0",
+  "luteOrigin": "self",
+  "luteOwner": "lute",
+  "lutePublish": false,
+  "description": "大模型调用成本看板与预算闸门宿主插件：把 DSH 事件流里的 token 计量折算成钱（cg_scan），给出降档路由/上下文压缩/谷时排程三条路径各自能省多少，并提供单会话预算闸门（cg_budget）与结论出口（cg_verdict）。只读，不改任何会话。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./rates": "./lib/rates.js",
+    "./aggregate": "./lib/aggregate.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/rates.js",
+    "lib/aggregate.js",
+    "lib/globals.d.ts",
+    "cordis.patch.yml"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "typescript": "5.6.3",
+    "vitest": "^4.1.11"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  }
+}
