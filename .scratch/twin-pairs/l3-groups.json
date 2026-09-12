@@ -1,0 +1,612 @@
+[
+  {
+    "l3": "规则监测",
+    "pair_contributions": 28,
+    "distinct_cards": 8
+  },
+  {
+    "l3": "安全事件处理",
+    "pair_contributions": 28,
+    "distinct_cards": 8
+  },
+  {
+    "l3": "数据管道",
+    "pair_contributions": 21,
+    "distinct_cards": 7
+  },
+  {
+    "l3": "转化优化",
+    "pair_contributions": 18,
+    "distinct_cards": 9
+  },
+  {
+    "l3": "体验分析",
+    "pair_contributions": 16,
+    "distinct_cards": 8
+  },
+  {
+    "l3": "趋势监测",
+    "pair_contributions": 15,
+    "distinct_cards": 6
+  },
+  {
+    "l3": "需求预测",
+    "pair_contributions": 15,
+    "distinct_cards": 6
+  },
+  {
+    "l3": "库存分层",
+    "pair_contributions": 15,
+    "distinct_cards": 6
+  },
+  {
+    "l3": "Listing优化",
+    "pair_contributions": 15,
+    "distinct_cards": 6
+  },
+  {
+    "l3": "价格敏感性",
+    "pair_contributions": 15,
+    "distinct_cards": 6
+  },
+  {
+    "l3": "主数据治理",
+    "pair_contributions": 15,
+    "distinct_cards": 6
+  },
+  {
+    "l3": "分群",
+    "pair_contributions": 14,
+    "distinct_cards": 10
+  },
+  {
+    "l3": "运行监测",
+    "pair_contributions": 11,
+    "distinct_cards": 6
+  },
+  {
+    "l3": "资金预测",
+    "pair_contributions": 11,
+    "distinct_cards": 6
+  },
+  {
+    "l3": "证据复核",
+    "pair_contributions": 11,
+    "distinct_cards": 7
+  },
+  {
+    "l3": "竞品研究",
+    "pair_contributions": 11,
+    "distinct_cards": 7
+  },
+  {
+    "l3": "供应商评估",
+    "pair_contributions": 11,
+    "distinct_cards": 7
+  },
+  {
+    "l3": "素材版本管理",
+    "pair_contributions": 11,
+    "distinct_cards": 7
+  },
+  {
+    "l3": "容量管理",
+    "pair_contributions": 11,
+    "distinct_cards": 7
+  },
+  {
+    "l3": "异常冻结与恢复",
+    "pair_contributions": 10,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "依赖协调",
+    "pair_contributions": 10,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "抽样审计",
+    "pair_contributions": 10,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "市场机会评估",
+    "pair_contributions": 10,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "履约跟踪",
+    "pair_contributions": 10,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "补货模拟",
+    "pair_contributions": 10,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "纠正预防措施",
+    "pair_contributions": 10,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "质量分析",
+    "pair_contributions": 10,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "本地化",
+    "pair_contributions": 10,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "内容策划",
+    "pair_contributions": 10,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "投放诊断",
+    "pair_contributions": 10,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "税务资料",
+    "pair_contributions": 10,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "账号商品映射",
+    "pair_contributions": 10,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "数据质量",
+    "pair_contributions": 10,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "集成验证",
+    "pair_contributions": 10,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "VOC编码",
+    "pair_contributions": 8,
+    "distinct_cards": 7
+  },
+  {
+    "l3": "实验设计",
+    "pair_contributions": 7,
+    "distinct_cards": 8
+  },
+  {
+    "l3": "物流方案",
+    "pair_contributions": 7,
+    "distinct_cards": 6
+  },
+  {
+    "l3": "生命周期触达",
+    "pair_contributions": 7,
+    "distinct_cards": 6
+  },
+  {
+    "l3": "接口契约",
+    "pair_contributions": 7,
+    "distinct_cards": 6
+  },
+  {
+    "l3": "需求分群",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "关务资料检查",
+    "pair_contributions": 6,
+    "distinct_cards": 6
+  },
+  {
+    "l3": "商品诊断",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "搜索意图分析",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "市场进入",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "促销规划",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "账号诊断",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "视频制作协作",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "视觉简报",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "合作复盘",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "因果局限审查",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "产品问答",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "客诉分诊",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "经济性分析",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "申报协作",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "知识产权检索",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "Playbook评估",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "知识溯源",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "访问控制",
+    "pair_contributions": 6,
+    "distinct_cards": 4
+  },
+  {
+    "l3": "增量分析",
+    "pair_contributions": 5,
+    "distinct_cards": 6
+  },
+  {
+    "l3": "经营预测",
+    "pair_contributions": 4,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "预算分配",
+    "pair_contributions": 4,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "组合取舍",
+    "pair_contributions": 4,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "订单协调",
+    "pair_contributions": 4,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "履约异常",
+    "pair_contributions": 4,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "生命周期分析",
+    "pair_contributions": 4,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "收入与费用核对",
+    "pair_contributions": 4,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "产品准入核对",
+    "pair_contributions": 4,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "授权审查",
+    "pair_contributions": 4,
+    "distinct_cards": 5
+  },
+  {
+    "l3": "月度经营复盘",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "资源情景比较",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "能力匹配",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "GMV归因分析",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "情景模拟",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "产品需求定义",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "算法评估设计",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "产能调查",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "采购比价",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "供需协调",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "调拨清货建议",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "到货异常追踪",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "退货分流",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "仓储协作",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "渠道经营分析",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "行动组合",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "漏斗诊断",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "站点运营",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "平台运营",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "组合设计",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "申诉材料准备",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "市场语境审查",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "品牌定位",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "品牌反馈",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "传播规划",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "内容实验",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "广告实验",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "联盟运营",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "达人筛选",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "复购实验",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "需求识别",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "选购指导",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "售后处理",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "服务补救",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "客诉聚类",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "用户反馈",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "会员活动",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "差异追踪",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "经营预算",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "争议证据组织",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "宣称审查",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "隐私需求分析",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "指标契约",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "溯源监测",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "业务工具实现",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "技能版本",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "失败恢复",
+    "pair_contributions": 3,
+    "distinct_cards": 3
+  },
+  {
+    "l3": "需求分诊",
+    "pair_contributions": 1,
+    "distinct_cards": 2
+  },
+  {
+    "l3": "岗位能力分析",
+    "pair_contributions": 1,
+    "distinct_cards": 2
+  },
+  {
+    "l3": "培训与招聘支持",
+    "pair_contributions": 1,
+    "distinct_cards": 2
+  },
+  {
+    "l3": "实验组合",
+    "pair_contributions": 1,
+    "distinct_cards": 2
+  },
+  {
+    "l3": "可用性验证",
+    "pair_contributions": 1,
+    "distinct_cards": 2
+  },
+  {
+    "l3": "渠道研究",
+    "pair_contributions": 1,
+    "distinct_cards": 2
+  },
+  {
+    "l3": "创意简报",
+    "pair_contributions": 1,
+    "distinct_cards": 2
+  }
+]

@@ -17,28 +17,20 @@
       "kind": "direct",
       "supply": [
         "ecommerce-quarterly-strategy",
-        "ecommerce-budget-forecaster",
         "p2s-business-scale-kpi-growth-achievement"
       ]
     },
     "资源情景比较": {
       "kind": "direct",
       "supply": [
-        "creating-financial-models",
         "market-scenario-modeler",
-        "dcf-valuation",
-        "p2s-sc-whatif-scenario-analysis-engine",
-        "p2s-multi-objective-budget-allocation",
-        "p2s-multi-objective-constrained-action-planning"
+        "p2s-sc-whatif-scenario-analysis-engine"
       ]
     },
     "月度经营复盘": {
       "kind": "direct",
       "supply": [
         "ecommerce-monthly-review",
-        "ecommerce-analytics-controller",
-        "p2s-llm-business-intelligence-reasoning",
-        "p2s-llm-ecommerce-report-automation",
         "p2s-agentic-pnl-analyst"
       ]
     },
@@ -46,7 +38,6 @@
       "kind": "partial",
       "supply": [
         "ecommerce-analytics-controller",
-        "p2s-regulatory-update-impact-dispatcher",
         "p2s-agentrouter-kg-guided"
       ],
       "note": "平台只有电商数据域的 Skill 路由主控，没有针对「场景工单」的通用分诊器"
@@ -55,30 +46,22 @@
       "kind": "direct",
       "supply": [
         "skill-family-manager",
-        "p2s-knowledge-graph-for-skills-management",
-        "p2s-llm-tool-selection-router",
         "p2s-business-problem-to-skill-retrieval"
       ]
     },
     "依赖协调": {
       "kind": "direct",
       "supply": [
-        "p2s-agent-qmix-topology-learning",
-        "p2s-autogen-multi-agent-conversation",
-        "p2s-concat-consensus-decentralized-mas",
-        "p2s-cross-org-agent-protocol",
-        "p2s-dynamic-dag-orchestration"
+        "p2s-dynamic-dag-orchestration",
+        "p2s-autogen-multi-agent-conversation"
       ],
       "note": "由论文技能库补充供给（5 项）：p2s-agent-qmix-topology-learning、p2s-autogen-multi-agent-conversation、p2s-concat-consensus-decentralized-mas、p2s-cross-org-agent-protocol、p2s-dynamic-dag-orchestration"
     },
     "异常冻结与恢复": {
       "kind": "direct",
       "supply": [
-        "p2s-agent-error-budget",
-        "p2s-black-swan-scenario-simulation-tag",
-        "p2s-ltv-acquisition-budget-gate",
         "p2s-ltv-cac-acquisition-gate",
-        "p2s-model-performance-monitor"
+        "p2s-agent-error-budget"
       ],
       "note": "由论文技能库补充供给（5 项）：p2s-agent-error-budget、p2s-black-swan-scenario-simulation-tag、p2s-ltv-acquisition-budget-gate、p2s-ltv-cac-acquisition-gate、p2s-model-performance-monitor"
     },
@@ -86,19 +69,13 @@
       "kind": "direct",
       "supply": [
         "attribution",
-        "ecommerce-business-insights",
-        "p2s-aigc-revenue-attribution",
-        "p2s-automated-causal-discovery",
-        "p2s-causal-discovery-pc-algorithm"
+        "p2s-automated-causal-discovery"
       ]
     },
     "经营预测": {
       "kind": "direct",
       "supply": [
         "ecommerce-budget-forecaster",
-        "ecommerce-ml-modeling-advisor",
-        "p2s-user-ltv-financial-bridge",
-        "p2s-aigp-llm-dynamic-pricing",
         "p2s-budget-reforecast-rolling"
       ]
     },
@@ -106,27 +83,21 @@
       "kind": "direct",
       "supply": [
         "market-scenario-modeler",
-        "creating-financial-models",
-        "p2s-black-swan-scenario-simulation-tag",
-        "p2s-counterfactual-sc-scenario-sim",
-        "p2s-sc-whatif-scenario-analysis-engine"
+        "p2s-counterfactual-sc-scenario-sim"
       ]
     },
     "岗位能力分析": {
       "kind": "direct",
       "supply": [
         "org-structure-research",
-        "people-research",
-        "p2s-agent-workforce-replacement-calculator",
-        "p2s-knowledge-graph-for-skills-management"
+        "p2s-agent-workforce-replacement-calculator"
       ]
     },
     "培训与招聘支持": {
       "kind": "partial",
       "supply": [
         "people-research",
-        "p2s-skill-dependency-path-planner",
-        "p2s-pike-rag-specialized-knowledge"
+        "p2s-skill-dependency-path-planner"
       ],
       "note": "有人员研究，无培训/招聘执行类技能"
     },
@@ -142,21 +113,15 @@
       "kind": "direct",
       "supply": [
         "p2s-compliance-ml-risk-scoring",
-        "p2s-tag-fairness-bias-audit",
-        "p2s-class-conditional-generation-augment",
-        "p2s-class-imbalance-handling",
-        "p2s-imbalanced-data-handling"
+        "p2s-tag-fairness-bias-audit"
       ],
       "note": "由论文技能库补充供给（5 项）：p2s-compliance-ml-risk-scoring、p2s-tag-fairness-bias-audit、p2s-class-conditional-generation-augment、p2s-class-imbalance-handling、p2s-imbalanced-data-handling"
     },
     "证据复核": {
       "kind": "direct",
       "supply": [
-        "p2s-decision-audit-trail-ontology",
-        "p2s-llm-uncertainty-quantification-bi",
         "p2s-explainable-review-adjudication",
-        "p2s-glass-box-mas-observability",
-        "p2s-human-in-loop-approval-gate-tag"
+        "p2s-decision-audit-trail-ontology"
       ],
       "note": "由论文技能库补充供给（5 项）：p2s-decision-audit-trail-ontology、p2s-llm-uncertainty-quantification-bi、p2s-explainable-review-adjudication、p2s-glass-box-mas-observability、p2s-human-in-loop-approval-gate-tag"
     },
@@ -169,7 +134,6 @@
       "kind": "direct",
       "supply": [
         "jtbd-analyzer",
-        "icp-profiler",
         "p2s-personabot-rag-profiling"
       ]
     },
@@ -177,52 +141,34 @@
       "kind": "direct",
       "supply": [
         "customer-rfm-analyzer",
-        "semantic-bucketer",
-        "p2s-baby-age-stage-demand-segmentation",
-        "p2s-llm-demand-signal-extraction",
         "p2s-latent-class-demand-segmentation"
       ]
     },
     "VOC编码": {
       "kind": "direct",
       "supply": [
-        "voc-sentiment-analyzer",
         "customer-voice-analyzer",
-        "review-analyst-agent",
-        "p2s-agrs-aspect-guided-review-summarization",
-        "p2s-causal-sentiment-attribution",
-        "p2s-cross-cultural-voc-alignment"
+        "p2s-causal-sentiment-attribution"
       ]
     },
     "竞品研究": {
       "kind": "direct",
       "supply": [
-        "competitor-profiling",
         "competitor-deep-analysis",
-        "competitor-alternative-analysis",
-        "p2s-competitive-voc-benchmarking",
-        "p2s-competitor-new-product-detection",
-        "p2s-competitor-product-intelligence"
+        "p2s-competitor-new-product-detection"
       ]
     },
     "趋势监测": {
       "kind": "direct",
       "supply": [
         "trend-stage-timing-analyzer",
-        "market-signal-tracker",
-        "p2s-agentic-competitor-intelligence",
-        "p2s-category-trend-forecasting",
-        "p2s-decrl-temporal-kg-evolution-prediction"
+        "p2s-category-trend-forecasting"
       ]
     },
     "市场机会评估": {
       "kind": "direct",
       "supply": [
-        "market-viability-logic-auditor",
         "market-insight-product-selection",
-        "cross-border-category-feasibility",
-        "p2s-blue-ocean-category-discovery",
-        "p2s-new-product-opportunity-mining",
         "p2s-product-category-opportunity-scoring"
       ]
     },
@@ -230,9 +176,6 @@
       "kind": "direct",
       "supply": [
         "product-attribute-analyzer",
-        "product-research-matrix",
-        "p2s-csdm-diffusion-coldstart",
-        "p2s-cold-start-meta-learning-pam",
         "p2s-contextual-bandits-rec"
       ]
     },
@@ -240,16 +183,13 @@
       "kind": "direct",
       "supply": [
         "ab-test-setup",
-        "campaign-planning",
-        "p2s-llm-experiment-hypothesis",
-        "p2s-llm-experiment-hypothesis-generation"
+        "p2s-llm-experiment-hypothesis"
       ]
     },
     "阶段投资建议": {
       "kind": "direct",
       "supply": [
         "product-launch-planner",
-        "market-viability-logic-auditor",
         "p2s-real-options-product-launch-timing"
       ]
     },
@@ -257,10 +197,7 @@
       "kind": "direct",
       "supply": [
         "ai-product-designer",
-        "product-marketing-brief",
-        "p2s-conjoint-analysis-product-design",
-        "p2s-semantic-blueprint-compiler",
-        "p2s-voc-product-iteration-signal-extractor"
+        "p2s-conjoint-analysis-product-design"
       ]
     },
     "商业案例": {
@@ -282,7 +219,6 @@
       "kind": "direct",
       "supply": [
         "experience-system-blueprint",
-        "jtbd-analyzer",
         "p2s-peak-end-rule-customer-experience"
       ]
     },
@@ -297,8 +233,6 @@
       "kind": "partial",
       "supply": [
         "optimize-ecommerce-page-conversion",
-        "ab-test-setup",
-        "p2s-inclusive-design-accessibility-ai",
         "p2s-cognitive-load-ux-optimizer"
       ],
       "note": "只有电商页面转化与 A/B，无硬件可用性测试方法"
@@ -335,9 +269,7 @@
       "kind": "direct",
       "supply": [
         "ecommerce-ml-modeling-advisor",
-        "p2s-interleaving-experiment-design",
-        "p2s-interleaving-experiment-recommendation",
-        "p2s-interleaving-ranking-ab-test"
+        "p2s-interleaving-experiment-design"
       ]
     },
     "应用生态规划": {
@@ -371,27 +303,20 @@
       "kind": "direct",
       "supply": [
         "supplier-evaluation",
-        "supplier-performance-manager",
-        "p2s-helicase-supply-chain-kg-mas",
-        "p2s-otif-on-time-in-full-analytics",
-        "p2s-sc-resilience-hypergraph"
+        "p2s-otif-on-time-in-full-analytics"
       ]
     },
     "产能调查": {
       "kind": "partial",
       "supply": [
         "supplier-performance-manager",
-        "product-supplier-sourcing",
-        "p2s-capacity-constraint-production-schedule-kpi",
-        "p2s-multi-factory-capacity-allocation",
-        "p2s-supplier-capacity-booking-engine"
+        "p2s-multi-factory-capacity-allocation"
       ],
       "note": "有供应商绩效与寻源，无产能建模"
     },
     "OEM协作": {
       "kind": "direct",
       "supply": [
-        "supplier-performance-manager",
         "dropshipping-supplier-integrator",
         "p2s-supplier-development-roadmap-tracking"
       ]
@@ -400,9 +325,6 @@
       "kind": "direct",
       "supply": [
         "product-supplier-sourcing",
-        "supplier-evaluation",
-        "p2s-agenticpay-procurement-negotiation",
-        "p2s-moq-payment-terms-optimization",
         "p2s-procurement-cost-kpi-price-achievement"
       ]
     },
@@ -410,68 +332,48 @@
       "kind": "direct",
       "supply": [
         "multi-location-order-router",
-        "helpdesk-order-integration",
-        "p2s-omnichannel-order-orchestration-mas",
-        "p2s-order-promise-date-calculation",
-        "p2s-po-exception-handling-workflow"
+        "p2s-omnichannel-order-orchestration-mas"
       ]
     },
     "履约跟踪": {
       "kind": "direct",
       "supply": [
         "shipment-tracking",
-        "supplier-performance-manager",
-        "p2s-on-shelf-availability-sku-matrix",
-        "p2s-order-cycle-time-otd-analytics",
-        "p2s-order-fulfillment-rate-dispatch-timeliness"
+        "p2s-order-cycle-time-otd-analytics"
       ]
     },
     "需求预测": {
       "kind": "direct",
       "supply": [
         "inventory-demand-forecaster",
-        "p2s-arima-garch-demand-volatility",
-        "p2s-adaptive-forecast-accuracy-optimization",
         "p2s-agent-time-series-forecasting"
       ]
     },
     "补货模拟": {
       "kind": "direct",
       "supply": [
-        "inventory-demand-forecaster",
         "amazon-fba-inventory-optimizer",
-        "p2s-aim-rm-llm-inventory-mas-memory",
-        "p2s-adaptive-reorder-point-kalman",
         "p2s-automated-replenishment-decision-engine"
       ]
     },
     "供需协调": {
       "kind": "direct",
       "supply": [
-        "supply-chain-controller",
-        "multichannel-inventory-sync",
-        "p2s-bullwhip-effect-kalman-mitigation",
-        "p2s-bullwhip-effect-mitigation",
-        "p2s-demand-supply-matching-gap-analysis"
+        "p2s-demand-supply-matching-gap-analysis",
+        "p2s-bullwhip-effect-mitigation"
       ]
     },
     "库存分层": {
       "kind": "direct",
       "supply": [
         "inventory-demand-forecaster",
-        "multichannel-inventory-sync",
-        "p2s-bonded-warehouse-inventory-intelligence",
-        "p2s-dynamic-abc-stratification-adaptive-policy",
-        "p2s-expiry-date-aging-baby-products-kpi"
+        "p2s-dynamic-abc-stratification-adaptive-policy"
       ]
     },
     "生命周期分析": {
       "kind": "partial",
       "supply": [
-        "trend-stage-timing-analyzer",
         "product-selection",
-        "p2s-cross-border-returns-cost-model",
-        "p2s-expiry-date-aging-baby-products-kpi",
         "p2s-fba-fee-intelligence"
       ],
       "note": "有趋势阶段与选品，无商品生命周期阶段模型"
@@ -480,20 +382,14 @@
       "kind": "direct",
       "supply": [
         "multi-location-order-router",
-        "dynamic-pricing-engine",
-        "p2s-fba-stranded-unfulfillable-inventory-kpi",
-        "p2s-llm-multi-dc-inventory",
         "p2s-long-tail-sku-clearance-optimization"
       ]
     },
     "质量分析": {
       "kind": "partial",
       "supply": [
-        "product-review-intelligence-collector",
         "review-analyst-agent",
-        "p2s-customer-complaint-supply-root-cause-kpi",
-        "p2s-graph-rag-knowledge-retrieval",
-        "p2s-supplier-delivery-quality-rate-kpi"
+        "p2s-customer-complaint-supply-root-cause-kpi"
       ],
       "note": "供给是「评价侧质量信号」，不含生产线质量分析与 SPC"
     },
@@ -507,11 +403,8 @@
     "纠正预防措施": {
       "kind": "direct",
       "supply": [
-        "p2s-cs-supply-chain-feedback-loop-tag",
         "p2s-return-root-cause-attribution-graph",
-        "p2s-voc-triggered-inventory-signal",
-        "p2s-causal-voc-sentiment-attribution",
-        "p2s-customer-complaint-supply-root-cause-kpi"
+        "p2s-cs-supply-chain-feedback-loop-tag"
       ],
       "note": "由论文技能库补充供给（5 项）：p2s-cs-supply-chain-feedback-loop-tag、p2s-return-root-cause-attribution-graph、p2s-voc-triggered-inventory-signal、p2s-causal-voc-sentiment-attribution、p2s-customer-complaint-supply-root-cause-kpi"
     },
@@ -519,27 +412,20 @@
       "kind": "direct",
       "supply": [
         "international-shipping-customs",
-        "p2s-3d-bin-packing-optimization",
-        "p2s-ab-test-logistics-sla",
-        "p2s-alphafold-bin-packing"
+        "p2s-3d-bin-packing-optimization"
       ]
     },
     "关务资料检查": {
       "kind": "direct",
       "supply": [
-        "international-shipping-customs",
         "tariff-search",
-        "p2s-atlas-hts-tariff-classification",
-        "p2s-bonded-zone-compliance-auto",
-        "p2s-crossborder-customs-compliance-rate-kpi"
+        "p2s-atlas-hts-tariff-classification"
       ]
     },
     "到货异常追踪": {
       "kind": "direct",
       "supply": [
         "shipment-tracking",
-        "p2s-ar-logistics-visualization",
-        "p2s-cold-chain-temperature-monitoring",
         "p2s-in-transit-inventory-tracking-visibility"
       ]
     },
@@ -547,8 +433,6 @@
       "kind": "direct",
       "supply": [
         "warehouse-fulfillment-workflow",
-        "p2s-order-accuracy-exception-rate-kpi",
-        "p2s-logistics-fraud-detection",
         "p2s-multicarrier-parcel-tracking-fusion"
       ]
     },
@@ -556,29 +440,20 @@
       "kind": "direct",
       "supply": [
         "returns-exchange-automator",
-        "return-policy-designer",
-        "p2s-cross-border-return-rate-by-country-kpi",
-        "p2s-predictive-batch-returns-routing",
-        "p2s-predictive-returns-management"
+        "p2s-predictive-batch-returns-routing"
       ]
     },
     "仓储协作": {
       "kind": "direct",
       "supply": [
-        "warehouse-fulfillment-workflow",
         "multi-location-order-router",
-        "p2s-navier-stokes-warehouse",
-        "p2s-order-routing-intelligence-engine",
-        "p2s-sku-warehouse-footprint-monitoring"
+        "p2s-order-routing-intelligence-engine"
       ]
     },
     "渠道经营分析": {
       "kind": "direct",
       "supply": [
-        "amazon-sorftime-research",
         "ecommerce-analytics-controller",
-        "p2s-growth-dataagent-analytics",
-        "p2s-causal-discovery-pc-algorithm",
         "p2s-contribution-margin-by-channel"
       ]
     },
@@ -586,16 +461,12 @@
       "kind": "direct",
       "supply": [
         "amazon-ppc-campaign-manager",
-        "amazon-listing-expert",
-        "p2s-mas-ecommerce-ops-automation",
-        "p2s-multi-objective-constrained-action-planning",
-        "p2s-competitive-response-modeling"
+        "p2s-multi-objective-constrained-action-planning"
       ]
     },
     "经营复盘": {
       "kind": "direct",
       "supply": [
-        "ecommerce-business-insights",
         "ecommerce-monthly-review",
         "p2s-postpromo-retrospective-kpi"
       ]
@@ -604,29 +475,20 @@
       "kind": "direct",
       "supply": [
         "amazon-listing-expert",
-        "amz-product-optimizer",
-        "p2s-a9-algorithm-sales-velocity-optimization",
-        "p2s-amazon-search-ranking-factor-model",
-        "p2s-autopkg-multimodal-product-attribute-kg"
+        "p2s-amazon-search-ranking-factor-model"
       ]
     },
     "搜索意图分析": {
       "kind": "direct",
       "supply": [
         "seo-keyword-research",
-        "serp-ranking-analyzer",
-        "p2s-competitor-keyword-gap-analysis",
-        "p2s-continuous-nlp-seo-morphing",
         "p2s-hierarchical-search-intent-classification"
       ]
     },
     "Listing优化": {
       "kind": "direct",
       "supply": [
-        "amazon-listing-expert",
         "multi-platform-listing-generator",
-        "p2s-a-plus-content-template-engine",
-        "p2s-a-plus-content-video-embedding",
         "p2s-amazon-a10-algorithm-ranking"
       ]
     },
@@ -634,9 +496,6 @@
       "kind": "direct",
       "supply": [
         "optimize-ecommerce-page-conversion",
-        "ecommerce-analytics-controller",
-        "p2s-ad-to-behavior-funnel",
-        "p2s-cross-border-member-onboarding-optimization",
         "p2s-customer-journey-analytics"
       ]
     },
@@ -644,28 +503,20 @@
       "kind": "direct",
       "supply": [
         "shopify-store-ops",
-        "create-website",
-        "p2s-cross-platform-user-transfer",
-        "p2s-live-commerce-stream-algorithm",
-        "p2s-search-driven-logistics-promise"
+        "p2s-live-commerce-stream-algorithm"
       ]
     },
     "转化优化": {
       "kind": "direct",
       "supply": [
         "checkout-flow-optimizer",
-        "cart-abandonment-recovery",
-        "p2s-abandoned-cart-recovery-ml",
-        "p2s-abandoned-cart-recovery-trigger",
-        "p2s-baby-age-aware-recommendation"
+        "p2s-abandoned-cart-recovery-ml"
       ]
     },
     "渠道研究": {
       "kind": "direct",
       "supply": [
         "market-insight-product-selection",
-        "cross-border-category-feasibility",
-        "p2s-multimarket-expansion-readiness-scorer",
         "p2s-new-market-entry-readiness-gate"
       ]
     },
@@ -673,10 +524,7 @@
       "kind": "direct",
       "supply": [
         "gtm-strategy-planning",
-        "launch-strategy",
-        "p2s-multimarket-expansion-readiness-scorer",
-        "p2s-brand-penetration-modeling",
-        "p2s-causal-representation-disentangle"
+        "p2s-multimarket-expansion-readiness-scorer"
       ]
     },
     "平台运营": {
@@ -685,9 +533,7 @@
         "etsy-pod-automation",
         "tiktok-shop-setup",
         "shopify-store-ops",
-        "p2s-cross-platform-transfer-rec",
-        "p2s-tiktok-algorithm-traffic-amplification",
-        "p2s-amazon-compliance-error-auto-resolver"
+        "p2s-cross-platform-transfer-rec"
       ]
     },
     "线索评估": {
@@ -715,9 +561,6 @@
       "kind": "direct",
       "supply": [
         "dynamic-pricing-engine",
-        "ecommerce-price-monitor",
-        "p2s-aigp-llm-dynamic-pricing",
-        "p2s-anchoring-effect-pricing-optimization",
         "p2s-causal-rl-dynamic-pricing"
       ]
     },
@@ -725,10 +568,6 @@
       "kind": "direct",
       "supply": [
         "discount-promotion-engine",
-        "seasonal-campaign-automator",
-        "coupon-discount-manager",
-        "p2s-causal-forest-hte-experiment",
-        "p2s-causal-forest-hte-experiments",
         "p2s-causal-uplift-modeling"
       ]
     },
@@ -736,18 +575,14 @@
       "kind": "direct",
       "supply": [
         "product-attribute-analyzer",
-        "product-research-matrix",
         "p2s-bundle-pricing-strategy",
-        "p2s-dynamic-bundle-pricing",
-        "p2s-mas-dynamic-pricing-coalition"
+        "p2s-dynamic-bundle-pricing"
       ]
     },
     "账号诊断": {
       "kind": "partial",
       "supply": [
         "amazon-brand-protection",
-        "p2s-account-association-risk-detection",
-        "p2s-account-fingerprint-risk-scorer",
         "p2s-account-health-early-warning-system"
       ],
       "note": "有品牌保护与合规监测，无店铺账号健康度诊断"
@@ -755,10 +590,7 @@
     "规则监测": {
       "kind": "partial",
       "supply": [
-        "amazon-brand-protection",
         "platform-price-monitor",
-        "p2s-platform-policy-change-adaptive-monitor",
-        "p2s-regulatory-change-auto-monitor",
         "p2s-regulatory-change-monitoring"
       ],
       "note": "覆盖品牌与价格规则，不覆盖平台政策变更监测"
@@ -767,9 +599,7 @@
       "kind": "partial",
       "supply": [
         "doc-coauthoring",
-        "p2s-ai-fake-review-detection",
-        "p2s-amazon-account-appeal-strategy",
-        "p2s-multimodal-fake-review-detection"
+        "p2s-amazon-account-appeal-strategy"
       ],
       "note": "只有通用文档协作，无平台申诉模板与举证清单"
     },
@@ -777,9 +607,6 @@
       "kind": "direct",
       "supply": [
         "multilingual-seo",
-        "terminology-standardizer",
-        "p2s-cross-cultural-content-adaptation",
-        "p2s-cross-cultural-marketing-adaptation",
         "p2s-cross-market-content-localization"
       ]
     },
@@ -787,10 +614,7 @@
       "kind": "direct",
       "supply": [
         "product-marketing-context",
-        "brand-voice-glossary",
-        "p2s-ai-cultural-sensitivity-localization",
-        "p2s-cross-market-content-localization",
-        "p2s-cultural-adaptation-agent"
+        "p2s-ai-cultural-sensitivity-localization"
       ]
     },
     "术语治理": {
@@ -804,49 +628,34 @@
       "kind": "direct",
       "supply": [
         "brand-governance-os",
-        "brand-narrative-playbook",
-        "p2s-signaling-game-brand-premium",
-        "p2s-voc-competitive-positioning-map",
-        "p2s-ai-brand-storytelling"
+        "p2s-voc-competitive-positioning-map"
       ]
     },
     "传播规划": {
       "kind": "direct",
       "supply": [
         "public-relations",
-        "editorial-ops",
-        "thought-leadership",
-        "p2s-share-of-voice-tracking",
-        "p2s-interference-networks-causal",
-        "p2s-social-network-viral-growth-simulation"
+        "p2s-share-of-voice-tracking"
       ]
     },
     "品牌反馈": {
       "kind": "direct",
       "supply": [
         "brand-mention-tracking",
-        "brand-measurement-dashboard",
-        "p2s-brand-safety-video-content-filter",
-        "p2s-cross-platform-brand-search-volume",
         "p2s-video-sentiment-analysis-voc"
       ]
     },
     "内容策划": {
       "kind": "direct",
       "supply": [
-        "marketing-content-suite",
         "content-strategy",
-        "p2s-ai-brand-storytelling",
-        "p2s-ai-content-marketing-growth",
-        "p2s-geo-generative-engine-optimization"
+        "p2s-ai-content-marketing-growth"
       ]
     },
     "创意简报": {
       "kind": "direct",
       "supply": [
-        "marketing-ideas",
         "product-marketing-brief",
-        "p2s-ai-product-video-script-generator",
         "p2s-ai-video-script-generation"
       ]
     },
@@ -854,9 +663,6 @@
       "kind": "direct",
       "supply": [
         "ab-test-setup",
-        "vibe-marketing",
-        "p2s-ai-video-ab-test-creative",
-        "p2s-nlp-copy-ab-test-optimizer",
         "p2s-ab-experimental-design"
       ]
     },
@@ -864,20 +670,13 @@
       "kind": "direct",
       "supply": [
         "image-prompt-guide",
-        "brand-logo-designer",
-        "p2s-diffusion-model-product-image",
-        "p2s-product-background-scene-generation",
-        "p2s-e-commerce-video-benchmark"
+        "p2s-diffusion-model-product-image"
       ]
     },
     "视频制作协作": {
       "kind": "direct",
       "supply": [
         "video-prompt-guide",
-        "higgsfield-guide",
-        "viral-video-analyzer",
-        "p2s-anchorcrafter-virtual-anchor-demo",
-        "p2s-aquarius-brand-video-generation",
         "p2s-brand-video-generation"
       ]
     },
@@ -885,28 +684,20 @@
       "kind": "direct",
       "supply": [
         "file-history-manager",
-        "p2s-creative-fatigue-detection",
-        "p2s-cross-platform-video-repurposing",
-        "p2s-aigc-authenticity-trust-framework"
+        "p2s-creative-fatigue-detection"
       ]
     },
     "投放诊断": {
       "kind": "direct",
       "supply": [
         "amazon-ppc-campaign-manager",
-        "marketing-roas-analyzer",
-        "p2s-ad-attribution-modeling",
-        "p2s-ad-aware-recommendation",
-        "p2s-ad-fraud-ivt-detection"
+        "p2s-ad-attribution-modeling"
       ]
     },
     "预算分配": {
       "kind": "direct",
       "supply": [
         "ecommerce-budget-forecaster",
-        "amazon-prelaunch-ad-budget",
-        "p2s-ad-spend-inventory-sync",
-        "p2s-auction-theory-advertising-bidding",
         "p2s-autobidding-budget-allocation-optimization"
       ]
     },
@@ -914,61 +705,41 @@
       "kind": "direct",
       "supply": [
         "ad-creative",
-        "tiktok-ads-strategy",
-        "paid-advertising",
-        "p2s-ad-creative-personalization-bandit",
-        "p2s-multi-armed-bandit",
-        "p2s-ai-video-ab-test-creative"
+        "p2s-multi-armed-bandit"
       ]
     },
     "达人筛选": {
       "kind": "direct",
       "supply": [
         "influencer-marketing",
-        "influencer-campaign-manager",
-        "p2s-creator-economy-roi-model",
-        "p2s-kol-creator-matching",
-        "p2s-tiktok-creator-roi-attribution"
+        "p2s-kol-creator-matching"
       ]
     },
     "联盟运营": {
       "kind": "direct",
       "supply": [
         "referral-program-builder",
-        "partner-revenue-desk",
-        "p2s-aigc-copyright-revenue-sharing",
-        "p2s-referral-network-value-attribution",
-        "p2s-referral-viral-loop-trigger"
+        "p2s-referral-network-value-attribution"
       ]
     },
     "合作复盘": {
       "kind": "direct",
       "supply": [
         "attribution",
-        "customer-ltv-calculator",
-        "p2s-kol-roi-causal-attribution",
-        "p2s-bayesian-structural-time-series",
-        "p2s-creator-economy-roi-model"
+        "p2s-bayesian-structural-time-series"
       ]
     },
     "分群": {
       "kind": "direct",
       "supply": [
         "customer-rfm-analyzer",
-        "customer-ltv-calculator",
-        "p2s-baby-age-clock-rfm-enhancement",
-        "p2s-dml-cohort-causal-effect",
-        "p2s-gplr-persona-generation"
+        "p2s-dml-cohort-causal-effect"
       ]
     },
     "生命周期触达": {
       "kind": "direct",
       "supply": [
         "lifecycle-marketing-automator",
-        "customer-retention-automator",
-        "email-automation-flow-builder",
-        "p2s-case-cadence-aware-repurchase-prediction",
-        "p2s-cc-or-net-ltv-prediction",
         "p2s-causal-churn-retention-attribution"
       ]
     },
@@ -976,20 +747,14 @@
       "kind": "direct",
       "supply": [
         "customer-winback-automator",
-        "ab-test-setup",
-        "p2s-ab-test-logistics-sla",
-        "p2s-case-cadence-aware-repurchase-prediction",
-        "p2s-causal-churn-retention-attribution"
+        "p2s-case-cadence-aware-repurchase-prediction"
       ]
     },
     "实验设计": {
       "kind": "partial",
       "supply": [
         "ab-test-setup",
-        "campaign-planning",
-        "p2s-ab-experimental-design",
-        "p2s-ab-test-result-interpretation",
-        "p2s-ab-testing-platform-infrastructure"
+        "p2s-ab-experimental-design"
       ],
       "note": "有 A/B 与活动规划，无增量实验（holdout/geo-lift）设计器"
     },
@@ -997,10 +762,7 @@
       "kind": "partial",
       "supply": [
         "attribution",
-        "marketing-roas-analyzer",
-        "p2s-augmented-synthetic-control-ml",
-        "p2s-bayesian-structural-time-series",
-        "p2s-cda-privacy-causal-attribution"
+        "p2s-augmented-synthetic-control-ml"
       ],
       "note": "归因不等于增量；平台无因果增量（lift）方法技能"
     },
@@ -1008,8 +770,6 @@
       "kind": "partial",
       "supply": [
         "market-viability-logic-auditor",
-        "p2s-sensitivity-analysis-causal",
-        "p2s-sensitivity-analysis-rosenbaum",
         "p2s-causal-decision-graph-sc-inference"
       ],
       "note": "只有可行性逻辑审计，非因果推断审查"
@@ -1018,29 +778,20 @@
       "kind": "direct",
       "supply": [
         "product-marketing-context",
-        "helpdesk-order-integration",
-        "p2s-ai-parenting-advice-hallucination-guard",
-        "p2s-agentic-rag-active-retrieval",
-        "p2s-kgqa-question-answering"
+        "p2s-agentic-rag-active-retrieval"
       ]
     },
     "选购指导": {
       "kind": "direct",
       "supply": [
-        "icp-profiler",
         "jtbd-analyzer",
-        "p2s-conversational-commerce-agent",
-        "p2s-shopping-companion-agent",
-        "p2s-long-term-preference-memory"
+        "p2s-shopping-companion-agent"
       ]
     },
     "需求识别": {
       "kind": "direct",
       "supply": [
-        "jtbd-analyzer",
         "customer-voice-analyzer",
-        "p2s-agent-memory-learning",
-        "p2s-cs-ticket-intelligence",
         "p2s-user-profile-long-memory"
       ]
     },
@@ -1048,56 +799,40 @@
       "kind": "direct",
       "supply": [
         "helpdesk-order-integration",
-        "review-analyst-agent",
-        "p2s-cs-ticket-intelligence",
-        "p2s-mas-customer-service-intelligent-escalation",
-        "p2s-nlp-text-classification"
+        "p2s-mas-customer-service-intelligent-escalation"
       ]
     },
     "售后处理": {
       "kind": "direct",
       "supply": [
         "returns-exchange-automator",
-        "return-policy-designer",
-        "p2s-multilingual-customer-service-translation",
-        "p2s-ar-logistics-visualization",
-        "p2s-mas-customer-service-intelligent-escalation"
+        "p2s-multilingual-customer-service-translation"
       ]
     },
     "服务补救": {
       "kind": "direct",
       "supply": [
         "chargeback-dispute-manager",
-        "customer-winback-automator",
-        "p2s-emotional-ai-customer-care",
-        "p2s-scrable-review-response-generation",
-        "p2s-proactive-customer-alert-supply-chain"
+        "p2s-emotional-ai-customer-care"
       ]
     },
     "客诉聚类": {
       "kind": "direct",
       "supply": [
         "voc-sentiment-analyzer",
-        "semantic-bucketer",
-        "p2s-bertopic-neural-topic-modeling",
-        "p2s-dialin-llm-case-intent-clustering",
-        "p2s-review-temporal-trend-mining"
+        "p2s-bertopic-neural-topic-modeling"
       ]
     },
     "体验分析": {
       "kind": "direct",
       "supply": [
         "customer-voice-analyzer",
-        "review-analyst-agent",
-        "p2s-bert-srl-event-frame-extraction",
-        "p2s-causal-voc-sentiment-attribution",
-        "p2s-explainable-review-adjudication"
+        "p2s-causal-voc-sentiment-attribution"
       ]
     },
     "改进验证": {
       "kind": "partial",
       "supply": [
-        "product-review-intelligence-collector",
         "ab-test-setup",
         "p2s-review-sentiment-growth-trigger"
       ],
@@ -1107,7 +842,6 @@
       "kind": "direct",
       "supply": [
         "doc-coauthoring",
-        "knowledge-extraction-expert",
         "p2s-digital-wellbeing-screen-time-model"
       ]
     },
@@ -1115,27 +849,20 @@
       "kind": "direct",
       "supply": [
         "loyalty-points-designer",
-        "referral-program-builder",
-        "p2s-vip-tier-upgrade-action",
-        "p2s-membership-tier-design-optimization",
-        "p2s-cross-border-member-onboarding-optimization"
+        "p2s-vip-tier-upgrade-action"
       ]
     },
     "用户反馈": {
       "kind": "direct",
       "supply": [
         "customer-voice-analyzer",
-        "voc-sentiment-analyzer",
-        "p2s-post-purchase-review-request-dispatcher",
-        "p2s-agrs-aspect-guided-review-summarization",
-        "p2s-mos-multi-source-opinion-summary"
+        "p2s-agrs-aspect-guided-review-summarization"
       ]
     },
     "渠道对账": {
       "kind": "direct",
       "supply": [
         "ecommerce-financial-dashboard",
-        "profit-margin-analyzer",
         "p2s-agentic-etl-data-pipeline"
       ]
     },
@@ -1143,19 +870,14 @@
       "kind": "direct",
       "supply": [
         "invoice-generator",
-        "ecommerce-financial-dashboard",
-        "p2s-agent-finance-autopilot",
-        "p2s-cross-border-returns-cost-model",
-        "p2s-fba-fee-intelligence"
+        "p2s-agent-finance-autopilot"
       ]
     },
     "差异追踪": {
       "kind": "partial",
       "supply": [
         "profit-margin-analyzer",
-        "p2s-accounts-receivable-intelligence",
-        "p2s-agent-finance-autopilot",
-        "p2s-fba-fee-intelligence"
+        "p2s-accounts-receivable-intelligence"
       ],
       "note": "有利润差异分析，无对账差异追踪与挂账台账"
     },
@@ -1163,9 +885,6 @@
       "kind": "direct",
       "supply": [
         "creating-financial-models",
-        "dcf-valuation",
-        "p2s-accounts-receivable-intelligence",
-        "p2s-amazon-lending-decision",
         "p2s-amazon-payment-cycle-forecast"
       ]
     },
@@ -1173,29 +892,21 @@
       "kind": "direct",
       "supply": [
         "ecommerce-budget-forecaster",
-        "p2s-budget-reforecast-rolling",
-        "p2s-procurement-budget-rolling-reforecast",
-        "p2s-cross-border-cash-flow-forecasting"
+        "p2s-budget-reforecast-rolling"
       ]
     },
     "经济性分析": {
       "kind": "direct",
       "supply": [
         "profit-margin-analyzer",
-        "dcf-valuation",
-        "p2s-advertising-tacos-pnl-integration",
-        "p2s-agentic-pnl-analyst",
-        "p2s-churn-revenue-impact"
+        "p2s-agentic-pnl-analyst"
       ]
     },
     "税务资料": {
       "kind": "direct",
       "supply": [
-        "sales-tax-vat-automator",
         "tariff-search",
-        "p2s-cross-border-tax-tariff-modeling",
-        "p2s-hts-agentic-tariff-classification",
-        "p2s-hts-tariff-classification"
+        "p2s-cross-border-tax-tariff-modeling"
       ]
     },
     "实体口径核对": {
@@ -1209,11 +920,8 @@
     "申报协作": {
       "kind": "direct",
       "supply": [
-        "sales-tax-vat-automator",
         "invoice-generator",
-        "p2s-tax-evasion-risk-signal-monitor",
-        "p2s-vat-gst-compliance-automation",
-        "p2s-epr-auto-calculator"
+        "p2s-vat-gst-compliance-automation"
       ]
     },
     "合同审查支持": {
@@ -1228,9 +936,7 @@
       "kind": "partial",
       "supply": [
         "amazon-brand-protection",
-        "p2s-brand-registry-infringement-tracker",
-        "p2s-counterfeit-product-visual-detection",
-        "p2s-ip-infringement-risk-scan"
+        "p2s-brand-registry-infringement-tracker"
       ],
       "note": "有品牌保护，无专利/商标检索"
     },
@@ -1238,8 +944,6 @@
       "kind": "direct",
       "supply": [
         "chargeback-dispute-manager",
-        "p2s-ai-generated-content-watermarking",
-        "p2s-brand-registry-infringement-tracker",
         "p2s-ip-trademark-brand-monitoring"
       ]
     },
@@ -1247,10 +951,7 @@
       "kind": "partial",
       "supply": [
         "cross-border-category-feasibility",
-        "ecommerce-gdpr-compliance",
-        "p2s-ai-product-safety-certification",
-        "p2s-baby-food-allergen-label-validator",
-        "p2s-cpsc-children-product-safety"
+        "p2s-ai-product-safety-certification"
       ],
       "note": "有类目可行性与数据合规，无产品准入认证矩阵（CE/FCC/CPSC 等）"
     },
@@ -1258,9 +959,7 @@
       "kind": "partial",
       "supply": [
         "brand-governance-os",
-        "p2s-aigc-content-compliance-review",
-        "p2s-amazon-tos-compliance-guardrail",
-        "p2s-multi-market-ad-copy-compliance"
+        "p2s-amazon-tos-compliance-guardrail"
       ],
       "note": "有品牌治理，无宣称合规审查规则库"
     },
@@ -1268,7 +967,6 @@
       "kind": "direct",
       "supply": [
         "ecommerce-gdpr-compliance",
-        "p2s-cleanroom-audience-collaboration",
         "p2s-privacy-coppa-compliance",
         "p2s-privacy-compliant-data-collection-gdpr-ccpa"
       ]
@@ -1277,50 +975,36 @@
       "kind": "partial",
       "supply": [
         "ecommerce-business-insights",
-        "ecommerce-analytics-controller",
-        "p2s-advertising-api-unified-schema",
-        "p2s-pvm-attribution-window-harmonization",
-        "p2s-feature-engineering"
+        "p2s-pvm-attribution-window-harmonization"
       ],
       "note": "有 KPI 树与口径实现，无「指标契约」的版本化定义治理"
     },
     "账号商品映射": {
       "kind": "direct",
       "supply": [
-        "social-commerce-sync",
         "multichannel-inventory-sync",
-        "p2s-entity-resolution-kg-dedup",
-        "p2s-product-knowledge-graph-query",
-        "p2s-sku-entity-unified-id-tagging"
+        "p2s-entity-resolution-kg-dedup"
       ]
     },
     "主数据治理": {
       "kind": "direct",
       "supply": [
         "terminology-standardizer",
-        "ecommerce-csv-processing",
-        "p2s-cross-platform-user-identity",
-        "p2s-cross-platform-user-identity-resolution",
-        "p2s-multi-source-user-identity-unification"
+        "p2s-cross-platform-user-identity"
       ]
     },
     "数据质量": {
       "kind": "direct",
       "supply": [
         "ecommerce-csv-processing",
-        "p2s-active-learning-annotation",
-        "p2s-blockecho-missing-data",
-        "p2s-dark-pattern-review-detection"
+        "p2s-blockecho-missing-data"
       ]
     },
     "数据管道": {
       "kind": "direct",
       "supply": [
-        "p2s-adaptive-crawl-scheduling",
         "p2s-agentic-etl-data-pipeline",
-        "p2s-amazon-sp-api-data-pipeline",
-        "p2s-auto-tagging-pipeline-rule-ml-llm",
-        "p2s-clickstream-persona-pipeline"
+        "p2s-amazon-sp-api-data-pipeline"
       ],
       "note": "由论文技能库补充供给（5 项）：p2s-adaptive-crawl-scheduling、p2s-agentic-etl-data-pipeline、p2s-amazon-sp-api-data-pipeline、p2s-auto-tagging-pipeline-rule-ml-llm、p2s-clickstream-persona-pipeline"
     },
@@ -1328,17 +1012,13 @@
       "kind": "partial",
       "supply": [
         "knowledge-extraction-expert",
-        "p2s-data-provenance-lineage",
-        "p2s-supply-chain-data-lineage-tracking",
-        "p2s-argos-agentic-anomaly-detection"
+        "p2s-data-provenance-lineage"
       ],
       "note": "有知识溯源，无数据血缘与新鲜度监测"
     },
     "接口契约": {
       "kind": "partial",
       "supply": [
-        "build-deepseek-harness-plugin",
-        "p2s-llm-schema-inference",
         "p2s-mcp-a2a-protocol-stack",
         "p2s-schema-evolution-data-contract"
       ],
@@ -1350,69 +1030,49 @@
         "build-deepseek-harness-plugin",
         "apify-mcp",
         "accio-mcp-cli",
-        "p2s-agent-production-engineering",
-        "p2s-automl-pipeline-design",
-        "p2s-context-compression"
+        "p2s-agent-production-engineering"
       ]
     },
     "集成验证": {
       "kind": "direct",
       "supply": [
         "dsh-dev-platform-diagnostics",
-        "dsh-plugin-acquire",
-        "p2s-mas-testing-verification",
-        "p2s-sc-agent-mcp-erp-integration",
-        "p2s-agent-production-engineering"
+        "p2s-sc-agent-mcp-erp-integration"
       ]
     },
     "知识溯源": {
       "kind": "direct",
       "supply": [
-        "knowledge-extraction-expert",
         "research",
-        "p2s-factscore-claim-verification-pipeline",
-        "p2s-graph-grounded-mas-protocol",
-        "p2s-rag-enhanced-data-analysis"
+        "p2s-factscore-claim-verification-pipeline"
       ]
     },
     "技能版本": {
       "kind": "direct",
       "supply": [
         "skill-family-manager",
-        "skill-structure-doctor",
-        "p2s-auto-skill-synthesis",
-        "p2s-autoskill-lifelong-learning",
-        "p2s-co-evolutionary-skill-verification"
+        "p2s-autoskill-lifelong-learning"
       ]
     },
     "Playbook评估": {
       "kind": "direct",
       "supply": [
         "skill-evaluator",
-        "skill-optimizer",
-        "p2s-agent-capability-evaluation",
-        "p2s-maseval-system-evaluation",
-        "p2s-auto-skill-synthesis"
+        "p2s-agent-capability-evaluation"
       ]
     },
     "运行监测": {
       "kind": "direct",
       "supply": [
         "dsh-dev-platform-diagnostics",
-        "dsh-desktop-diagnostics",
-        "p2s-agent-error-budget",
-        "p2s-agent-observability-tracing",
-        "p2s-agent-slo-manager"
+        "p2s-agent-observability-tracing"
       ]
     },
     "容量管理": {
       "kind": "direct",
       "supply": [
-        "p2s-adactx-dynamic-context-budget-allocation",
         "p2s-agent-cost-optimization-budget-control",
-        "p2s-caster-context-aware-model-routing",
-        "p2s-context-token-compression",
-        "p2s-cost-aware-agent-scheduling"
+        "p2s-context-token-compression"
       ],
       "note": "由论文技能库补充供给（5 项）：p2s-adactx-dynamic-context-budget-allocation、p2s-agent-cost-optimization-budget-control、p2s-caster-context-aware-model-routing、p2s-context-token-compression、p2s-cost-aware-agent-scheduling"
     },
@@ -1420,39 +1080,30 @@
       "kind": "direct",
       "supply": [
         "dsh-desktop-diagnostics",
-        "p2s-agentracer-mas-failure-attribution",
-        "p2s-agent-fault-tolerance",
-        "p2s-agenttrace-causal-rca"
+        "p2s-agent-fault-tolerance"
       ]
     },
     "访问控制": {
       "kind": "partial",
       "supply": [
         "skill-vetter",
-        "p2s-agent-safety-guardrails",
-        "p2s-agenttrust-runtime-safety-interception",
-        "p2s-capseal-agent-secret-mediation"
+        "p2s-agenttrust-runtime-safety-interception"
       ],
       "note": "只有 Skill 安装前的安全审查，无运行时访问控制与授权矩阵"
     },
     "授权审查": {
       "kind": "partial",
       "supply": [
-        "skill-vetter",
-        "p2s-decision-confidence-calibration-sc",
         "p2s-human-in-loop-approval-gate-tag",
-        "p2s-policy-driven-meta-controller"
+        "p2s-decision-confidence-calibration-sc"
       ],
       "note": "同上"
     },
     "安全事件处理": {
       "kind": "direct",
       "supply": [
-        "p2s-ato-spatio-temporal-graph",
-        "p2s-agent-payment-security-red-team",
-        "p2s-competitor-negative-campaign-detection",
         "p2s-cross-border-payment-fraud-detection",
-        "p2s-crypto-anomaly-review-fraud"
+        "p2s-ato-spatio-temporal-graph"
       ],
       "note": "由论文技能库补充供给（5 项）：p2s-ato-spatio-temporal-graph、p2s-agent-payment-security-red-team、p2s-competitor-negative-campaign-detection、p2s-cross-border-payment-fraud-detection、p2s-crypto-anomaly-review-fraud"
     }

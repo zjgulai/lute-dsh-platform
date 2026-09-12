@@ -1,0 +1,1997 @@
+{
+  "_meta": {
+    "purpose": "孪生对处理表（twin-pairs resolution）——独立于 skill-map.json 的覆盖层，幂等、可撤销。",
+    "source": ".scratch/twin-pairs/pairs.json（678 对枚举，2026-09-13）+ 用户 2026-09-13 拍板：合并为主、区分描述为辅；技能库侧落地、与 paper_to_skills 原项目深度解耦；试点岗每 L3 留 2 张。 阶段 2（2026-09-13 继续）：667 邻接对配额制推广——125 个拥堵 L3 条目按基线「1 原生 + 1 论文方法卡」收窄，例外：多平台面 2 条、区分保留对/卡 3 条、岗内去重 11 条。",
+    "contract": "pairs.idx 是逐对溯源主键；merge 只动 skill-map supply 与 preset subset（材料侧保留双卡、不删安装）；distinguish 只改安装态 SKILL.md 的 whenToUse（材料源站零改动）；quota 只作用于列出的 L3 entry（均已验证单岗独占）。",
+    "lifecycle": "apply → 可随时 --revert；下轮 wire-skill-map.mjs 重跑（只追加）后必须重放本表。",
+    "version": 2,
+    "applied_at": null,
+    "applied_by": "scripts/apply-skill-map-overrides.mjs"
+  },
+  "merge": [
+    {
+      "idx": [
+        28
+      ],
+      "role": "agt-002",
+      "l3": "异常冻结与恢复",
+      "keep": "p2s-ltv-cac-acquisition-gate",
+      "absorb": [
+        "p2s-ltv-acquisition-budget-gate"
+      ],
+      "reason": "功能完全相同（LTV/CAC 阈值熔断/开闸），保留名更完整的 keep；absorb 的样本量门槛与连续扩增护栏并入 keep 的 whenToUse。"
+    },
+    {
+      "idx": [
+        164
+      ],
+      "role": "agt-016",
+      "l3": "供需协调",
+      "keep": "p2s-bullwhip-effect-mitigation",
+      "absorb": [
+        "p2s-bullwhip-effect-kalman-mitigation"
+      ],
+      "reason": "同一问题（牛鞭效应抑制）两种方法；keep 名不带方法后缀、覆盖分层放大系数全链路；Kalman 平滑能力并入 keep。"
+    },
+    {
+      "idx": [
+        255
+      ],
+      "role": "agt-023",
+      "l3": "转化优化",
+      "keep": "p2s-abandoned-cart-recovery-ml",
+      "absorb": [
+        "p2s-abandoned-cart-recovery-trigger"
+      ],
+      "reason": "弃购挽回同一运营问题，机制互补；keep 的分型驱动覆盖面更全；absorb 的 T+2/24/48h 时序与支付即停护栏并入 keep。"
+    },
+    {
+      "idx": [
+        337
+      ],
+      "role": "agt-027",
+      "l3": "规则监测",
+      "keep": "p2s-regulatory-change-monitoring",
+      "absorb": [
+        "p2s-regulatory-change-auto-monitor"
+      ],
+      "reason": "法规变更监控同一论文两个切面；keep 覆盖「法规→品类/SKU 影响映射→检测排期」全链路；absorb 的 24h 分级预警与巡检配置并入 keep。"
+    },
+    {
+      "idx": [
+        368
+      ],
+      "role": "agt-030",
+      "l3": "创意简报",
+      "keep": "p2s-ai-video-script-generation",
+      "absorb": [
+        "p2s-ai-product-video-script-generator"
+      ],
+      "reason": "都是短视频脚本生成；keep 的分层 CoT 全链路（叙事弧→分镜→配音→AB 变体）更全；absorb 的 VOC 差评痛点输入与 30/60s 双版并入 keep。"
+    },
+    {
+      "idx": [
+        379
+      ],
+      "role": "agt-031",
+      "l3": "视频制作协作",
+      "keep": "p2s-brand-video-generation",
+      "absorb": [
+        "p2s-aquarius-brand-video-generation"
+      ],
+      "reason": "Aquarius 是论文名前缀，功能同为品牌视频生成；keep 覆盖文本/图像到成片全链路；absorb 的多市场本地化（换模特/语言/节日）并入 keep。"
+    },
+    {
+      "idx": [
+        458
+      ],
+      "role": "agt-036",
+      "l3": "选购指导",
+      "keep": "p2s-shopping-companion-agent",
+      "absorb": [
+        "p2s-long-term-preference-memory"
+      ],
+      "reason": "同名「Shopping Companion」同一论文同一功能；keep 的升阶触发场景更完整；absorb 的结构化记忆档案与排除项打分细节并入 keep。"
+    },
+    {
+      "idx": [
+        551,
+        554,
+        555
+      ],
+      "role": "agt-045",
+      "l3": "主数据治理",
+      "keep": "p2s-cross-platform-user-identity",
+      "absorb": [
+        "p2s-cross-platform-user-identity-resolution",
+        "p2s-multi-source-user-identity-unification"
+      ],
+      "reason": "三卡簇：三张都是「跨平台用户 ID 统一」，方法互补（哈希确定性 / 确定性+概率+身份图谱 / L1-L3 三层对齐）；3 合 1 保留名字最短的 keep；图谱与三层对齐能力并入 keep。entity-resolution-kg-dedup（商品侧消歧）独立保留，与 keep 走区分描述。"
+    }
+  ],
+  "distinguish": [
+    {
+      "idx": [
+        297
+      ],
+      "pair": [
+        "p2s-bundle-pricing-strategy",
+        "p2s-dynamic-bundle-pricing"
+      ],
+      "status": "already-present",
+      "note": "双侧 whenToUse 已互斥点名（结构决策 vs 最大利润点），无需改动；留档审计。"
+    },
+    {
+      "idx": [
+        546
+      ],
+      "pair": [
+        "p2s-privacy-compliant-data-collection-gdpr-ccpa",
+        "p2s-privacy-coppa-compliance"
+      ],
+      "status": "already-present",
+      "note": "双侧 whenToUse 已互斥点名（GDPR/CCPA 采集架构 vs COPPA 儿童专项），无需改动；留档审计。"
+    },
+    {
+      "idx": [
+        554
+      ],
+      "pair": [
+        "p2s-cross-platform-user-identity",
+        "p2s-entity-resolution-kg-dedup"
+      ],
+      "status": "patch-needed",
+      "patches": [
+        {
+          "skill": "p2s-cross-platform-user-identity",
+          "append": "商品/实体消歧与跨源去重用「KG 实体消歧与去重」（entity-resolution-kg-dedup），本技能只管用户身份，不管商品实体。"
+        },
+        {
+          "skill": "p2s-entity-resolution-kg-dedup",
+          "append": "跨平台用户身份统一（含身份图谱与 ROAS/LTV 重算）用「跨平台用户 ID 统一」（cross-platform-user-identity），本技能只管商品实体，不管用户身份。"
+        }
+      ],
+      "note": "用户身份解析 vs 商品实体消歧，同技术不同对象；原 resolution 卡被并入 keep 后，互斥点名落在 keep 与 entity 卡之间。"
+    }
+  ],
+  "absorbed_capabilities": [
+    {
+      "skill": "p2s-ltv-cac-acquisition-gate",
+      "append": "并含样本量门槛校验与连续扩增上限护栏（原「LTV-Acquisition-Budget-Gate」已并入本卡）。"
+    },
+    {
+      "skill": "p2s-bullwhip-effect-mitigation",
+      "append": "并含 Kalman 滤波平滑需求序列与多级仓配波动告警（原「Bullwhip Effect Kalman Mitigation」已并入本卡）。"
+    },
+    {
+      "skill": "p2s-abandoned-cart-recovery-ml",
+      "append": "并含 T+2h/24h/48h 时序触达与支付即停护栏（原「Abandoned-Cart-Recovery-Trigger」已并入本卡）。"
+    },
+    {
+      "skill": "p2s-regulatory-change-monitoring",
+      "append": "并含 24 小时分级预警推送与巡检源配置（原「Regulatory Change Auto-Monitor」已并入本卡）。"
+    },
+    {
+      "skill": "p2s-ai-video-script-generation",
+      "append": "并含 VOC 差评痛点提取与 30/60 秒双版输出（原「AI Product Video Script Generator」已并入本卡）。"
+    },
+    {
+      "skill": "p2s-brand-video-generation",
+      "append": "并含多市场本地化（换模特/语言/节日主题、品牌一致性保持）（原「Aquarius Brand Video Generation」已并入本卡）。"
+    },
+    {
+      "skill": "p2s-shopping-companion-agent",
+      "append": "并含结构化偏好记忆档案与排除项打分过滤（原「Long-Term Preference Memory」已并入本卡）。"
+    },
+    {
+      "skill": "p2s-cross-platform-user-identity",
+      "append": "并含确定性+概率匹配与身份图谱沉淀（ROAS/全平台 LTV 重算）及 L1 哈希/L2 行为窗口/L3 行为图三层对齐（原「Cross-Platform User Identity Resolution」「Multi-Source User Identity Unification」已并入本卡）。"
+    }
+  ],
+  "quota": [
+    {
+      "role": "AGT-001",
+      "entries": [
+        {
+          "l3": "资源情景比较",
+          "keep": [
+            "market-scenario-modeler",
+            "p2s-sc-whatif-scenario-analysis-engine"
+          ],
+          "drop": [
+            "creating-financial-models",
+            "dcf-valuation",
+            "p2s-multi-objective-budget-allocation",
+            "p2s-multi-objective-constrained-action-planning"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "月度经营复盘",
+          "keep": [
+            "ecommerce-monthly-review",
+            "p2s-agentic-pnl-analyst"
+          ],
+          "drop": [
+            "ecommerce-analytics-controller",
+            "p2s-llm-business-intelligence-reasoning",
+            "p2s-llm-ecommerce-report-automation"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "经营目标拆解",
+          "keep": [
+            "ecommerce-quarterly-strategy",
+            "p2s-business-scale-kpi-growth-achievement"
+          ],
+          "drop": [
+            "ecommerce-budget-forecaster"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-002",
+      "entries": [
+        {
+          "l3": "依赖协调",
+          "keep": [
+            "p2s-dynamic-dag-orchestration",
+            "p2s-autogen-multi-agent-conversation"
+          ],
+          "drop": [
+            "p2s-agent-qmix-topology-learning",
+            "p2s-concat-consensus-decentralized-mas",
+            "p2s-cross-org-agent-protocol"
+          ],
+          "reason": "纯论文方法条目：留核心方法 + 互补方法两张；其余为方法变体，配额收窄。"
+        },
+        {
+          "l3": "能力匹配",
+          "keep": [
+            "skill-family-manager",
+            "p2s-business-problem-to-skill-retrieval"
+          ],
+          "drop": [
+            "p2s-knowledge-graph-for-skills-management",
+            "p2s-llm-tool-selection-router"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "异常冻结与恢复",
+          "keep": [
+            "p2s-ltv-cac-acquisition-gate",
+            "p2s-agent-error-budget"
+          ],
+          "drop": [
+            "p2s-black-swan-scenario-simulation-tag",
+            "p2s-model-performance-monitor"
+          ],
+          "reason": "纯论文方法条目：留核心方法 + 互补方法两张；其余为方法变体，配额收窄。"
+        },
+        {
+          "l3": "需求分诊",
+          "keep": [
+            "ecommerce-analytics-controller",
+            "p2s-agentrouter-kg-guided"
+          ],
+          "drop": [
+            "p2s-regulatory-update-impact-dispatcher"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-003",
+      "entries": [
+        {
+          "l3": "GMV归因分析",
+          "keep": [
+            "attribution",
+            "p2s-automated-causal-discovery"
+          ],
+          "drop": [
+            "ecommerce-business-insights",
+            "p2s-aigc-revenue-attribution",
+            "p2s-causal-discovery-pc-algorithm"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "经营预测",
+          "keep": [
+            "ecommerce-budget-forecaster",
+            "p2s-budget-reforecast-rolling"
+          ],
+          "drop": [
+            "ecommerce-ml-modeling-advisor",
+            "p2s-user-ltv-financial-bridge",
+            "p2s-aigp-llm-dynamic-pricing"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "情景模拟",
+          "keep": [
+            "market-scenario-modeler",
+            "p2s-counterfactual-sc-scenario-sim"
+          ],
+          "drop": [
+            "creating-financial-models",
+            "p2s-black-swan-scenario-simulation-tag",
+            "p2s-sc-whatif-scenario-analysis-engine"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-004",
+      "entries": [
+        {
+          "l3": "岗位能力分析",
+          "keep": [
+            "org-structure-research",
+            "p2s-agent-workforce-replacement-calculator"
+          ],
+          "drop": [
+            "people-research",
+            "p2s-knowledge-graph-for-skills-management"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "培训与招聘支持",
+          "keep": [
+            "people-research",
+            "p2s-skill-dependency-path-planner"
+          ],
+          "drop": [
+            "p2s-pike-rag-specialized-knowledge"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-005",
+      "entries": [
+        {
+          "l3": "抽样审计",
+          "keep": [
+            "p2s-compliance-ml-risk-scoring",
+            "p2s-tag-fairness-bias-audit"
+          ],
+          "drop": [
+            "p2s-class-conditional-generation-augment",
+            "p2s-class-imbalance-handling",
+            "p2s-imbalanced-data-handling"
+          ],
+          "reason": "纯论文方法条目：留核心方法 + 互补方法两张；其余为方法变体，配额收窄。"
+        },
+        {
+          "l3": "证据复核",
+          "keep": [
+            "p2s-explainable-review-adjudication",
+            "p2s-decision-audit-trail-ontology"
+          ],
+          "drop": [
+            "p2s-llm-uncertainty-quantification-bi",
+            "p2s-glass-box-mas-observability",
+            "p2s-human-in-loop-approval-gate-tag"
+          ],
+          "reason": "纯论文方法条目：留核心方法 + 互补方法两张；其余为方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-006",
+      "entries": [
+        {
+          "l3": "VOC编码",
+          "keep": [
+            "customer-voice-analyzer",
+            "p2s-causal-sentiment-attribution"
+          ],
+          "drop": [
+            "voc-sentiment-analyzer",
+            "review-analyst-agent",
+            "p2s-agrs-aspect-guided-review-summarization",
+            "p2s-cross-cultural-voc-alignment"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "需求分群",
+          "keep": [
+            "customer-rfm-analyzer",
+            "p2s-latent-class-demand-segmentation"
+          ],
+          "drop": [
+            "semantic-bucketer",
+            "p2s-baby-age-stage-demand-segmentation",
+            "p2s-llm-demand-signal-extraction"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "用户访谈分析",
+          "keep": [
+            "jtbd-analyzer",
+            "p2s-personabot-rag-profiling"
+          ],
+          "drop": [
+            "icp-profiler"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-007",
+      "entries": [
+        {
+          "l3": "竞品研究",
+          "keep": [
+            "competitor-deep-analysis",
+            "p2s-competitor-new-product-detection"
+          ],
+          "drop": [
+            "competitor-profiling",
+            "competitor-alternative-analysis",
+            "p2s-competitive-voc-benchmarking",
+            "p2s-competitor-product-intelligence"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "市场机会评估",
+          "keep": [
+            "market-insight-product-selection",
+            "p2s-product-category-opportunity-scoring"
+          ],
+          "drop": [
+            "market-viability-logic-auditor",
+            "cross-border-category-feasibility",
+            "p2s-blue-ocean-category-discovery",
+            "p2s-new-product-opportunity-mining"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "趋势监测",
+          "keep": [
+            "trend-stage-timing-analyzer",
+            "p2s-category-trend-forecasting"
+          ],
+          "drop": [
+            "market-signal-tracker",
+            "p2s-agentic-competitor-intelligence",
+            "p2s-decrl-temporal-kg-evolution-prediction"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-008",
+      "entries": [
+        {
+          "l3": "组合取舍",
+          "keep": [
+            "product-attribute-analyzer",
+            "p2s-contextual-bandits-rec"
+          ],
+          "drop": [
+            "product-research-matrix",
+            "p2s-csdm-diffusion-coldstart",
+            "p2s-cold-start-meta-learning-pam"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "实验组合",
+          "keep": [
+            "ab-test-setup",
+            "p2s-llm-experiment-hypothesis"
+          ],
+          "drop": [
+            "campaign-planning",
+            "p2s-llm-experiment-hypothesis-generation"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "阶段投资建议",
+          "keep": [
+            "product-launch-planner",
+            "p2s-real-options-product-launch-timing"
+          ],
+          "drop": [
+            "market-viability-logic-auditor"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-009",
+      "entries": [
+        {
+          "l3": "产品需求定义",
+          "keep": [
+            "ai-product-designer",
+            "p2s-conjoint-analysis-product-design"
+          ],
+          "drop": [
+            "product-marketing-brief",
+            "p2s-semantic-blueprint-compiler",
+            "p2s-voc-product-iteration-signal-extractor"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-010",
+      "entries": [
+        {
+          "l3": "可用性验证",
+          "keep": [
+            "optimize-ecommerce-page-conversion",
+            "p2s-cognitive-load-ux-optimizer"
+          ],
+          "drop": [
+            "ab-test-setup",
+            "p2s-inclusive-design-accessibility-ai"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "使用旅程",
+          "keep": [
+            "experience-system-blueprint",
+            "p2s-peak-end-rule-customer-experience"
+          ],
+          "drop": [
+            "jtbd-analyzer"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-012",
+      "entries": [
+        {
+          "l3": "算法评估设计",
+          "keep": [
+            "ecommerce-ml-modeling-advisor",
+            "p2s-interleaving-experiment-design"
+          ],
+          "drop": [
+            "p2s-interleaving-experiment-recommendation",
+            "p2s-interleaving-ranking-ab-test"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-014",
+      "entries": [
+        {
+          "l3": "供应商评估",
+          "keep": [
+            "supplier-evaluation",
+            "p2s-otif-on-time-in-full-analytics"
+          ],
+          "drop": [
+            "supplier-performance-manager",
+            "p2s-helicase-supply-chain-kg-mas",
+            "p2s-sc-resilience-hypergraph"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "产能调查",
+          "keep": [
+            "supplier-performance-manager",
+            "p2s-multi-factory-capacity-allocation"
+          ],
+          "drop": [
+            "product-supplier-sourcing",
+            "p2s-capacity-constraint-production-schedule-kpi",
+            "p2s-supplier-capacity-booking-engine"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "OEM协作",
+          "keep": [
+            "dropshipping-supplier-integrator",
+            "p2s-supplier-development-roadmap-tracking"
+          ],
+          "drop": [
+            "supplier-performance-manager"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-015",
+      "entries": [
+        {
+          "l3": "采购比价",
+          "keep": [
+            "product-supplier-sourcing",
+            "p2s-procurement-cost-kpi-price-achievement"
+          ],
+          "drop": [
+            "supplier-evaluation",
+            "p2s-agenticpay-procurement-negotiation",
+            "p2s-moq-payment-terms-optimization"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "订单协调",
+          "keep": [
+            "multi-location-order-router",
+            "p2s-omnichannel-order-orchestration-mas"
+          ],
+          "drop": [
+            "helpdesk-order-integration",
+            "p2s-order-promise-date-calculation",
+            "p2s-po-exception-handling-workflow"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "履约跟踪",
+          "keep": [
+            "shipment-tracking",
+            "p2s-order-cycle-time-otd-analytics"
+          ],
+          "drop": [
+            "supplier-performance-manager",
+            "p2s-on-shelf-availability-sku-matrix",
+            "p2s-order-fulfillment-rate-dispatch-timeliness"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-017",
+      "entries": [
+        {
+          "l3": "库存分层",
+          "keep": [
+            "inventory-demand-forecaster",
+            "p2s-dynamic-abc-stratification-adaptive-policy"
+          ],
+          "drop": [
+            "multichannel-inventory-sync",
+            "p2s-bonded-warehouse-inventory-intelligence",
+            "p2s-expiry-date-aging-baby-products-kpi"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "生命周期分析",
+          "keep": [
+            "product-selection",
+            "p2s-fba-fee-intelligence"
+          ],
+          "drop": [
+            "trend-stage-timing-analyzer",
+            "p2s-cross-border-returns-cost-model",
+            "p2s-expiry-date-aging-baby-products-kpi"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "调拨清货建议",
+          "keep": [
+            "multi-location-order-router",
+            "p2s-long-tail-sku-clearance-optimization"
+          ],
+          "drop": [
+            "dynamic-pricing-engine",
+            "p2s-fba-stranded-unfulfillable-inventory-kpi",
+            "p2s-llm-multi-dc-inventory"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-018",
+      "entries": [
+        {
+          "l3": "质量分析",
+          "keep": [
+            "review-analyst-agent",
+            "p2s-customer-complaint-supply-root-cause-kpi"
+          ],
+          "drop": [
+            "product-review-intelligence-collector",
+            "p2s-graph-rag-knowledge-retrieval",
+            "p2s-supplier-delivery-quality-rate-kpi"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "纠正预防措施",
+          "keep": [
+            "p2s-return-root-cause-attribution-graph",
+            "p2s-cs-supply-chain-feedback-loop-tag"
+          ],
+          "drop": [
+            "p2s-voc-triggered-inventory-signal",
+            "p2s-causal-voc-sentiment-attribution",
+            "p2s-customer-complaint-supply-root-cause-kpi"
+          ],
+          "reason": "纯论文方法条目：留核心方法 + 互补方法两张；其余为方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-019",
+      "entries": [
+        {
+          "l3": "关务资料检查",
+          "keep": [
+            "tariff-search",
+            "p2s-atlas-hts-tariff-classification"
+          ],
+          "drop": [
+            "international-shipping-customs",
+            "p2s-bonded-zone-compliance-auto",
+            "p2s-crossborder-customs-compliance-rate-kpi"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "物流方案",
+          "keep": [
+            "international-shipping-customs",
+            "p2s-3d-bin-packing-optimization"
+          ],
+          "drop": [
+            "p2s-ab-test-logistics-sla",
+            "p2s-alphafold-bin-packing"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "到货异常追踪",
+          "keep": [
+            "shipment-tracking",
+            "p2s-in-transit-inventory-tracking-visibility"
+          ],
+          "drop": [
+            "p2s-ar-logistics-visualization",
+            "p2s-cold-chain-temperature-monitoring"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-020",
+      "entries": [
+        {
+          "l3": "退货分流",
+          "keep": [
+            "returns-exchange-automator",
+            "p2s-predictive-batch-returns-routing"
+          ],
+          "drop": [
+            "return-policy-designer",
+            "p2s-cross-border-return-rate-by-country-kpi",
+            "p2s-predictive-returns-management"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "仓储协作",
+          "keep": [
+            "multi-location-order-router",
+            "p2s-order-routing-intelligence-engine"
+          ],
+          "drop": [
+            "warehouse-fulfillment-workflow",
+            "p2s-navier-stokes-warehouse",
+            "p2s-sku-warehouse-footprint-monitoring"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "履约异常",
+          "keep": [
+            "warehouse-fulfillment-workflow",
+            "p2s-multicarrier-parcel-tracking-fusion"
+          ],
+          "drop": [
+            "p2s-order-accuracy-exception-rate-kpi",
+            "p2s-logistics-fraud-detection"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-021",
+      "entries": [
+        {
+          "l3": "渠道经营分析",
+          "keep": [
+            "ecommerce-analytics-controller",
+            "p2s-contribution-margin-by-channel"
+          ],
+          "drop": [
+            "amazon-sorftime-research",
+            "p2s-growth-dataagent-analytics",
+            "p2s-causal-discovery-pc-algorithm"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "行动组合",
+          "keep": [
+            "amazon-ppc-campaign-manager",
+            "p2s-multi-objective-constrained-action-planning"
+          ],
+          "drop": [
+            "amazon-listing-expert",
+            "p2s-mas-ecommerce-ops-automation",
+            "p2s-competitive-response-modeling"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "经营复盘",
+          "keep": [
+            "ecommerce-monthly-review",
+            "p2s-postpromo-retrospective-kpi"
+          ],
+          "drop": [
+            "ecommerce-business-insights"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-022",
+      "entries": [
+        {
+          "l3": "商品诊断",
+          "keep": [
+            "amazon-listing-expert",
+            "p2s-amazon-search-ranking-factor-model"
+          ],
+          "drop": [
+            "amz-product-optimizer",
+            "p2s-a9-algorithm-sales-velocity-optimization",
+            "p2s-autopkg-multimodal-product-attribute-kg"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "搜索意图分析",
+          "keep": [
+            "seo-keyword-research",
+            "p2s-hierarchical-search-intent-classification"
+          ],
+          "drop": [
+            "serp-ranking-analyzer",
+            "p2s-competitor-keyword-gap-analysis",
+            "p2s-continuous-nlp-seo-morphing"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "Listing优化",
+          "keep": [
+            "multi-platform-listing-generator",
+            "p2s-amazon-a10-algorithm-ranking"
+          ],
+          "drop": [
+            "amazon-listing-expert",
+            "p2s-a-plus-content-template-engine",
+            "p2s-a-plus-content-video-embedding"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-023",
+      "entries": [
+        {
+          "l3": "漏斗诊断",
+          "keep": [
+            "optimize-ecommerce-page-conversion",
+            "p2s-customer-journey-analytics"
+          ],
+          "drop": [
+            "ecommerce-analytics-controller",
+            "p2s-ad-to-behavior-funnel",
+            "p2s-cross-border-member-onboarding-optimization"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "站点运营",
+          "keep": [
+            "shopify-store-ops",
+            "p2s-live-commerce-stream-algorithm"
+          ],
+          "drop": [
+            "create-website",
+            "p2s-cross-platform-user-transfer",
+            "p2s-search-driven-logistics-promise"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "转化优化",
+          "keep": [
+            "checkout-flow-optimizer",
+            "p2s-abandoned-cart-recovery-ml"
+          ],
+          "drop": [
+            "cart-abandonment-recovery",
+            "p2s-baby-age-aware-recommendation"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-024",
+      "entries": [
+        {
+          "l3": "平台运营",
+          "keep": [
+            "etsy-pod-automation",
+            "tiktok-shop-setup",
+            "shopify-store-ops",
+            "p2s-cross-platform-transfer-rec"
+          ],
+          "drop": [
+            "p2s-tiktok-algorithm-traffic-amplification",
+            "p2s-amazon-compliance-error-auto-resolver"
+          ],
+          "reason": "例外·多平台面：Etsy/TikTok/Shopify 三个平台运营面互不替代，各留原生 + 1 跨平台迁移方法卡。"
+        },
+        {
+          "l3": "市场进入",
+          "keep": [
+            "gtm-strategy-planning",
+            "p2s-multimarket-expansion-readiness-scorer"
+          ],
+          "drop": [
+            "launch-strategy",
+            "p2s-brand-penetration-modeling",
+            "p2s-causal-representation-disentangle"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "渠道研究",
+          "keep": [
+            "market-insight-product-selection",
+            "p2s-new-market-entry-readiness-gate"
+          ],
+          "drop": [
+            "cross-border-category-feasibility",
+            "p2s-multimarket-expansion-readiness-scorer"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-026",
+      "entries": [
+        {
+          "l3": "促销规划",
+          "keep": [
+            "discount-promotion-engine",
+            "p2s-causal-uplift-modeling"
+          ],
+          "drop": [
+            "seasonal-campaign-automator",
+            "coupon-discount-manager",
+            "p2s-causal-forest-hte-experiment",
+            "p2s-causal-forest-hte-experiments"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "价格敏感性",
+          "keep": [
+            "dynamic-pricing-engine",
+            "p2s-causal-rl-dynamic-pricing"
+          ],
+          "drop": [
+            "ecommerce-price-monitor",
+            "p2s-aigp-llm-dynamic-pricing",
+            "p2s-anchoring-effect-pricing-optimization"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "组合设计",
+          "keep": [
+            "product-attribute-analyzer",
+            "p2s-bundle-pricing-strategy",
+            "p2s-dynamic-bundle-pricing"
+          ],
+          "drop": [
+            "product-research-matrix",
+            "p2s-mas-dynamic-pricing-coalition"
+          ],
+          "reason": "例外·区分保留对：静态捆绑策略与动态捆绑定价（孪生处理 v1 互斥点名）双双保留。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-027",
+      "entries": [
+        {
+          "l3": "账号诊断",
+          "keep": [
+            "amazon-brand-protection",
+            "p2s-account-health-early-warning-system"
+          ],
+          "drop": [
+            "p2s-account-association-risk-detection",
+            "p2s-account-fingerprint-risk-scorer"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "规则监测",
+          "keep": [
+            "platform-price-monitor",
+            "p2s-regulatory-change-monitoring"
+          ],
+          "drop": [
+            "amazon-brand-protection",
+            "p2s-platform-policy-change-adaptive-monitor"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "申诉材料准备",
+          "keep": [
+            "doc-coauthoring",
+            "p2s-amazon-account-appeal-strategy"
+          ],
+          "drop": [
+            "p2s-ai-fake-review-detection",
+            "p2s-multimodal-fake-review-detection"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-028",
+      "entries": [
+        {
+          "l3": "本地化",
+          "keep": [
+            "multilingual-seo",
+            "p2s-cross-market-content-localization"
+          ],
+          "drop": [
+            "terminology-standardizer",
+            "p2s-cross-cultural-content-adaptation",
+            "p2s-cross-cultural-marketing-adaptation"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "市场语境审查",
+          "keep": [
+            "product-marketing-context",
+            "p2s-ai-cultural-sensitivity-localization"
+          ],
+          "drop": [
+            "brand-voice-glossary",
+            "p2s-cross-market-content-localization",
+            "p2s-cultural-adaptation-agent"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-029",
+      "entries": [
+        {
+          "l3": "传播规划",
+          "keep": [
+            "public-relations",
+            "p2s-share-of-voice-tracking"
+          ],
+          "drop": [
+            "editorial-ops",
+            "thought-leadership",
+            "p2s-interference-networks-causal",
+            "p2s-social-network-viral-growth-simulation"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "品牌定位",
+          "keep": [
+            "brand-governance-os",
+            "p2s-voc-competitive-positioning-map"
+          ],
+          "drop": [
+            "brand-narrative-playbook",
+            "p2s-signaling-game-brand-premium",
+            "p2s-ai-brand-storytelling"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "品牌反馈",
+          "keep": [
+            "brand-mention-tracking",
+            "p2s-video-sentiment-analysis-voc"
+          ],
+          "drop": [
+            "brand-measurement-dashboard",
+            "p2s-brand-safety-video-content-filter",
+            "p2s-cross-platform-brand-search-volume"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-030",
+      "entries": [
+        {
+          "l3": "内容策划",
+          "keep": [
+            "content-strategy",
+            "p2s-ai-content-marketing-growth"
+          ],
+          "drop": [
+            "marketing-content-suite",
+            "p2s-ai-brand-storytelling",
+            "p2s-geo-generative-engine-optimization"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "内容实验",
+          "keep": [
+            "ab-test-setup",
+            "p2s-ab-experimental-design"
+          ],
+          "drop": [
+            "vibe-marketing",
+            "p2s-ai-video-ab-test-creative",
+            "p2s-nlp-copy-ab-test-optimizer"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "创意简报",
+          "keep": [
+            "product-marketing-brief",
+            "p2s-ai-video-script-generation"
+          ],
+          "drop": [
+            "marketing-ideas"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-031",
+      "entries": [
+        {
+          "l3": "视觉简报",
+          "keep": [
+            "image-prompt-guide",
+            "p2s-diffusion-model-product-image"
+          ],
+          "drop": [
+            "brand-logo-designer",
+            "p2s-product-background-scene-generation",
+            "p2s-e-commerce-video-benchmark"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "视频制作协作",
+          "keep": [
+            "video-prompt-guide",
+            "p2s-brand-video-generation"
+          ],
+          "drop": [
+            "higgsfield-guide",
+            "viral-video-analyzer",
+            "p2s-anchorcrafter-virtual-anchor-demo"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "素材版本管理",
+          "keep": [
+            "file-history-manager",
+            "p2s-creative-fatigue-detection"
+          ],
+          "drop": [
+            "p2s-cross-platform-video-repurposing",
+            "p2s-aigc-authenticity-trust-framework"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-033",
+      "entries": [
+        {
+          "l3": "达人筛选",
+          "keep": [
+            "influencer-marketing",
+            "p2s-kol-creator-matching"
+          ],
+          "drop": [
+            "influencer-campaign-manager",
+            "p2s-creator-economy-roi-model",
+            "p2s-tiktok-creator-roi-attribution"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "联盟运营",
+          "keep": [
+            "referral-program-builder",
+            "p2s-referral-network-value-attribution"
+          ],
+          "drop": [
+            "partner-revenue-desk",
+            "p2s-aigc-copyright-revenue-sharing",
+            "p2s-referral-viral-loop-trigger"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "合作复盘",
+          "keep": [
+            "attribution",
+            "p2s-bayesian-structural-time-series"
+          ],
+          "drop": [
+            "customer-ltv-calculator",
+            "p2s-kol-roi-causal-attribution",
+            "p2s-creator-economy-roi-model"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-034",
+      "entries": [
+        {
+          "l3": "生命周期触达",
+          "keep": [
+            "lifecycle-marketing-automator",
+            "p2s-causal-churn-retention-attribution"
+          ],
+          "drop": [
+            "customer-retention-automator",
+            "email-automation-flow-builder",
+            "p2s-case-cadence-aware-repurchase-prediction",
+            "p2s-cc-or-net-ltv-prediction"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "分群",
+          "keep": [
+            "customer-rfm-analyzer",
+            "p2s-dml-cohort-causal-effect"
+          ],
+          "drop": [
+            "customer-ltv-calculator",
+            "p2s-baby-age-clock-rfm-enhancement",
+            "p2s-gplr-persona-generation"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "复购实验",
+          "keep": [
+            "customer-winback-automator",
+            "p2s-case-cadence-aware-repurchase-prediction"
+          ],
+          "drop": [
+            "ab-test-setup",
+            "p2s-ab-test-logistics-sla",
+            "p2s-causal-churn-retention-attribution"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-035",
+      "entries": [
+        {
+          "l3": "实验设计",
+          "keep": [
+            "ab-test-setup",
+            "p2s-ab-experimental-design"
+          ],
+          "drop": [
+            "campaign-planning",
+            "p2s-ab-test-result-interpretation",
+            "p2s-ab-testing-platform-infrastructure"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "增量分析",
+          "keep": [
+            "attribution",
+            "p2s-augmented-synthetic-control-ml"
+          ],
+          "drop": [
+            "marketing-roas-analyzer",
+            "p2s-bayesian-structural-time-series",
+            "p2s-cda-privacy-causal-attribution"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "因果局限审查",
+          "keep": [
+            "market-viability-logic-auditor",
+            "p2s-causal-decision-graph-sc-inference"
+          ],
+          "drop": [
+            "p2s-sensitivity-analysis-causal",
+            "p2s-sensitivity-analysis-rosenbaum"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-036",
+      "entries": [
+        {
+          "l3": "产品问答",
+          "keep": [
+            "product-marketing-context",
+            "p2s-agentic-rag-active-retrieval"
+          ],
+          "drop": [
+            "helpdesk-order-integration",
+            "p2s-ai-parenting-advice-hallucination-guard",
+            "p2s-kgqa-question-answering"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "需求识别",
+          "keep": [
+            "customer-voice-analyzer",
+            "p2s-user-profile-long-memory"
+          ],
+          "drop": [
+            "jtbd-analyzer",
+            "p2s-agent-memory-learning",
+            "p2s-cs-ticket-intelligence"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "选购指导",
+          "keep": [
+            "jtbd-analyzer",
+            "p2s-shopping-companion-agent"
+          ],
+          "drop": [
+            "icp-profiler",
+            "p2s-conversational-commerce-agent"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-037",
+      "entries": [
+        {
+          "l3": "客诉分诊",
+          "keep": [
+            "helpdesk-order-integration",
+            "p2s-mas-customer-service-intelligent-escalation"
+          ],
+          "drop": [
+            "review-analyst-agent",
+            "p2s-cs-ticket-intelligence",
+            "p2s-nlp-text-classification"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "售后处理",
+          "keep": [
+            "returns-exchange-automator",
+            "p2s-multilingual-customer-service-translation"
+          ],
+          "drop": [
+            "return-policy-designer",
+            "p2s-ar-logistics-visualization",
+            "p2s-mas-customer-service-intelligent-escalation"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "服务补救",
+          "keep": [
+            "chargeback-dispute-manager",
+            "p2s-emotional-ai-customer-care"
+          ],
+          "drop": [
+            "customer-winback-automator",
+            "p2s-scrable-review-response-generation",
+            "p2s-proactive-customer-alert-supply-chain"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-038",
+      "entries": [
+        {
+          "l3": "客诉聚类",
+          "keep": [
+            "voc-sentiment-analyzer",
+            "p2s-bertopic-neural-topic-modeling"
+          ],
+          "drop": [
+            "semantic-bucketer",
+            "p2s-dialin-llm-case-intent-clustering",
+            "p2s-review-temporal-trend-mining"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "体验分析",
+          "keep": [
+            "customer-voice-analyzer",
+            "p2s-causal-voc-sentiment-attribution"
+          ],
+          "drop": [
+            "review-analyst-agent",
+            "p2s-bert-srl-event-frame-extraction",
+            "p2s-explainable-review-adjudication"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "改进验证",
+          "keep": [
+            "ab-test-setup",
+            "p2s-review-sentiment-growth-trigger"
+          ],
+          "drop": [
+            "product-review-intelligence-collector"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-039",
+      "entries": [
+        {
+          "l3": "会员活动",
+          "keep": [
+            "loyalty-points-designer",
+            "p2s-vip-tier-upgrade-action"
+          ],
+          "drop": [
+            "referral-program-builder",
+            "p2s-membership-tier-design-optimization",
+            "p2s-cross-border-member-onboarding-optimization"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "用户反馈",
+          "keep": [
+            "customer-voice-analyzer",
+            "p2s-agrs-aspect-guided-review-summarization"
+          ],
+          "drop": [
+            "voc-sentiment-analyzer",
+            "p2s-post-purchase-review-request-dispatcher",
+            "p2s-mos-multi-source-opinion-summary"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "使用教育",
+          "keep": [
+            "doc-coauthoring",
+            "p2s-digital-wellbeing-screen-time-model"
+          ],
+          "drop": [
+            "knowledge-extraction-expert"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-040",
+      "entries": [
+        {
+          "l3": "收入与费用核对",
+          "keep": [
+            "invoice-generator",
+            "p2s-agent-finance-autopilot"
+          ],
+          "drop": [
+            "ecommerce-financial-dashboard",
+            "p2s-cross-border-returns-cost-model",
+            "p2s-fba-fee-intelligence"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "差异追踪",
+          "keep": [
+            "profit-margin-analyzer",
+            "p2s-accounts-receivable-intelligence"
+          ],
+          "drop": [
+            "p2s-agent-finance-autopilot",
+            "p2s-fba-fee-intelligence"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "渠道对账",
+          "keep": [
+            "ecommerce-financial-dashboard",
+            "p2s-agentic-etl-data-pipeline"
+          ],
+          "drop": [
+            "profit-margin-analyzer"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-041",
+      "entries": [
+        {
+          "l3": "资金预测",
+          "keep": [
+            "creating-financial-models",
+            "p2s-amazon-payment-cycle-forecast"
+          ],
+          "drop": [
+            "dcf-valuation",
+            "p2s-accounts-receivable-intelligence",
+            "p2s-amazon-lending-decision"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "经济性分析",
+          "keep": [
+            "profit-margin-analyzer",
+            "p2s-agentic-pnl-analyst"
+          ],
+          "drop": [
+            "dcf-valuation",
+            "p2s-advertising-tacos-pnl-integration",
+            "p2s-churn-revenue-impact"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "经营预算",
+          "keep": [
+            "ecommerce-budget-forecaster",
+            "p2s-budget-reforecast-rolling"
+          ],
+          "drop": [
+            "p2s-procurement-budget-rolling-reforecast",
+            "p2s-cross-border-cash-flow-forecasting"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-042",
+      "entries": [
+        {
+          "l3": "税务资料",
+          "keep": [
+            "tariff-search",
+            "p2s-cross-border-tax-tariff-modeling"
+          ],
+          "drop": [
+            "sales-tax-vat-automator",
+            "p2s-hts-agentic-tariff-classification",
+            "p2s-hts-tariff-classification"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "申报协作",
+          "keep": [
+            "invoice-generator",
+            "p2s-vat-gst-compliance-automation"
+          ],
+          "drop": [
+            "sales-tax-vat-automator",
+            "p2s-tax-evasion-risk-signal-monitor",
+            "p2s-epr-auto-calculator"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-043",
+      "entries": [
+        {
+          "l3": "知识产权检索",
+          "keep": [
+            "amazon-brand-protection",
+            "p2s-brand-registry-infringement-tracker"
+          ],
+          "drop": [
+            "p2s-counterfeit-product-visual-detection",
+            "p2s-ip-infringement-risk-scan"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "争议证据组织",
+          "keep": [
+            "chargeback-dispute-manager",
+            "p2s-ip-trademark-brand-monitoring"
+          ],
+          "drop": [
+            "p2s-ai-generated-content-watermarking",
+            "p2s-brand-registry-infringement-tracker"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-044",
+      "entries": [
+        {
+          "l3": "产品准入核对",
+          "keep": [
+            "cross-border-category-feasibility",
+            "p2s-ai-product-safety-certification"
+          ],
+          "drop": [
+            "ecommerce-gdpr-compliance",
+            "p2s-baby-food-allergen-label-validator",
+            "p2s-cpsc-children-product-safety"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "宣称审查",
+          "keep": [
+            "brand-governance-os",
+            "p2s-amazon-tos-compliance-guardrail"
+          ],
+          "drop": [
+            "p2s-aigc-content-compliance-review",
+            "p2s-multi-market-ad-copy-compliance"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "隐私需求分析",
+          "keep": [
+            "ecommerce-gdpr-compliance",
+            "p2s-privacy-coppa-compliance",
+            "p2s-privacy-compliant-data-collection-gdpr-ccpa"
+          ],
+          "drop": [
+            "p2s-cleanroom-audience-collaboration"
+          ],
+          "reason": "例外·区分保留对：COPPA 儿童隐私与 GDPR/CCPA 采集架构（孪生处理 v1 互斥点名）双双保留。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-045",
+      "entries": [
+        {
+          "l3": "指标契约",
+          "keep": [
+            "ecommerce-business-insights",
+            "p2s-pvm-attribution-window-harmonization"
+          ],
+          "drop": [
+            "ecommerce-analytics-controller",
+            "p2s-advertising-api-unified-schema",
+            "p2s-feature-engineering"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "账号商品映射",
+          "keep": [
+            "multichannel-inventory-sync",
+            "p2s-entity-resolution-kg-dedup"
+          ],
+          "drop": [
+            "social-commerce-sync",
+            "p2s-product-knowledge-graph-query",
+            "p2s-sku-entity-unified-id-tagging"
+          ],
+          "reason": "例外·区分保留卡：entity-resolution-kg-dedup 是商品实体消歧（与用户身份解析互斥点名），必须保留。"
+        },
+        {
+          "l3": "主数据治理",
+          "keep": [
+            "terminology-standardizer",
+            "p2s-cross-platform-user-identity"
+          ],
+          "drop": [
+            "ecommerce-csv-processing"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-046",
+      "entries": [
+        {
+          "l3": "数据管道",
+          "keep": [
+            "p2s-agentic-etl-data-pipeline",
+            "p2s-amazon-sp-api-data-pipeline"
+          ],
+          "drop": [
+            "p2s-adaptive-crawl-scheduling",
+            "p2s-auto-tagging-pipeline-rule-ml-llm",
+            "p2s-clickstream-persona-pipeline"
+          ],
+          "reason": "纯论文方法条目：留核心方法 + 互补方法两张；其余为方法变体，配额收窄。"
+        },
+        {
+          "l3": "数据质量",
+          "keep": [
+            "ecommerce-csv-processing",
+            "p2s-blockecho-missing-data"
+          ],
+          "drop": [
+            "p2s-active-learning-annotation",
+            "p2s-dark-pattern-review-detection"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "溯源监测",
+          "keep": [
+            "knowledge-extraction-expert",
+            "p2s-data-provenance-lineage"
+          ],
+          "drop": [
+            "p2s-supply-chain-data-lineage-tracking",
+            "p2s-argos-agentic-anomaly-detection"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-047",
+      "entries": [
+        {
+          "l3": "业务工具实现",
+          "keep": [
+            "build-deepseek-harness-plugin",
+            "apify-mcp",
+            "accio-mcp-cli",
+            "p2s-agent-production-engineering"
+          ],
+          "drop": [
+            "p2s-automl-pipeline-design",
+            "p2s-context-compression"
+          ],
+          "reason": "例外·多工具面：插件构建/Apify 抓取/Accio MCP 三个工具面互不替代，各留 + 1 生产化工程卡。"
+        },
+        {
+          "l3": "集成验证",
+          "keep": [
+            "dsh-dev-platform-diagnostics",
+            "p2s-sc-agent-mcp-erp-integration"
+          ],
+          "drop": [
+            "dsh-plugin-acquire",
+            "p2s-mas-testing-verification",
+            "p2s-agent-production-engineering"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "接口契约",
+          "keep": [
+            "p2s-mcp-a2a-protocol-stack",
+            "p2s-schema-evolution-data-contract"
+          ],
+          "drop": [
+            "build-deepseek-harness-plugin",
+            "p2s-llm-schema-inference"
+          ],
+          "reason": "岗内去重：插件构建归业务工具实现；本 L3 留协议栈 + 数据契约两张方法卡。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-048",
+      "entries": [
+        {
+          "l3": "知识溯源",
+          "keep": [
+            "research",
+            "p2s-factscore-claim-verification-pipeline"
+          ],
+          "drop": [
+            "knowledge-extraction-expert",
+            "p2s-graph-grounded-mas-protocol",
+            "p2s-rag-enhanced-data-analysis"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "技能版本",
+          "keep": [
+            "skill-family-manager",
+            "p2s-autoskill-lifelong-learning"
+          ],
+          "drop": [
+            "skill-structure-doctor",
+            "p2s-auto-skill-synthesis",
+            "p2s-co-evolutionary-skill-verification"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "Playbook评估",
+          "keep": [
+            "skill-evaluator",
+            "p2s-agent-capability-evaluation"
+          ],
+          "drop": [
+            "skill-optimizer",
+            "p2s-maseval-system-evaluation",
+            "p2s-auto-skill-synthesis"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-049",
+      "entries": [
+        {
+          "l3": "运行监测",
+          "keep": [
+            "dsh-dev-platform-diagnostics",
+            "p2s-agent-observability-tracing"
+          ],
+          "drop": [
+            "dsh-desktop-diagnostics",
+            "p2s-agent-error-budget",
+            "p2s-agent-slo-manager"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "容量管理",
+          "keep": [
+            "p2s-agent-cost-optimization-budget-control",
+            "p2s-context-token-compression"
+          ],
+          "drop": [
+            "p2s-adactx-dynamic-context-budget-allocation",
+            "p2s-caster-context-aware-model-routing",
+            "p2s-cost-aware-agent-scheduling"
+          ],
+          "reason": "纯论文方法条目：留核心方法 + 互补方法两张；其余为方法变体，配额收窄。"
+        },
+        {
+          "l3": "失败恢复",
+          "keep": [
+            "dsh-desktop-diagnostics",
+            "p2s-agent-fault-tolerance"
+          ],
+          "drop": [
+            "p2s-agentracer-mas-failure-attribution",
+            "p2s-agenttrace-causal-rca"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        }
+      ]
+    },
+    {
+      "role": "AGT-050",
+      "entries": [
+        {
+          "l3": "安全事件处理",
+          "keep": [
+            "p2s-cross-border-payment-fraud-detection",
+            "p2s-ato-spatio-temporal-graph"
+          ],
+          "drop": [
+            "p2s-agent-payment-security-red-team",
+            "p2s-competitor-negative-campaign-detection",
+            "p2s-crypto-anomaly-review-fraud"
+          ],
+          "reason": "纯论文方法条目：留核心方法 + 互补方法两张；其余为方法变体，配额收窄。"
+        },
+        {
+          "l3": "访问控制",
+          "keep": [
+            "skill-vetter",
+            "p2s-agenttrust-runtime-safety-interception"
+          ],
+          "drop": [
+            "p2s-agent-safety-guardrails",
+            "p2s-capseal-agent-secret-mediation"
+          ],
+          "reason": "基线：1 原生平台技能（业务底盘）+ 1 论文方法卡；其余为次级切面/方法变体，配额收窄。"
+        },
+        {
+          "l3": "授权审查",
+          "keep": [
+            "p2s-human-in-loop-approval-gate-tag",
+            "p2s-decision-confidence-calibration-sc"
+          ],
+          "drop": [
+            "skill-vetter",
+            "p2s-policy-driven-meta-controller"
+          ],
+          "reason": "岗内去重：skill-vetter 归访问控制；本 L3 留 HITL 门控 + 置信度校准两张方法卡。"
+        }
+      ]
+    }
+  ]
+}

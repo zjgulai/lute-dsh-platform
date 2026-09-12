@@ -1,0 +1,1188 @@
+[
+  {
+    "idx": 28,
+    "preset": "agt-002",
+    "role": "AGT-002 枢衡",
+    "shared_l3": [
+      "预算分配",
+      "异常冻结与恢复"
+    ],
+    "a": {
+      "slug": "p2s-ltv-acquisition-budget-gate",
+      "title": "LTV-Acquisition-Budget-Gate — LTV/CAC比值驱动的获客预算自动开闸/熔断决策器",
+      "l3": [
+        "预算分配",
+        "异常冻结与恢复"
+      ],
+      "l1_l2_l3": "业务运营/品牌与增长/预算分配",
+      "src_domain": "06-增长模型",
+      "confidence": "high",
+      "user_summary": "按 LTV/CAC 比值自动决定哪些渠道熔断新客投放、哪些加预算，并带样本量与连续扩增护栏。",
+      "workflow": "汇总各渠道预算、30天CAC与LTV分位数 → 校验新客样本量是否达门槛 → 比值低于熔断阈值判熔断、高于开闸阈值判扩增 → 按扩增比例调整预算并受连续扩增上限约束 → 输出渠道决策与新预算表",
+      "triggers": [
+        "ltv",
+        "cac比值",
+        "获客熔断",
+        "预算开闸",
+        "ltv分位数",
+        "样本量门控"
+      ],
+      "problem_140": "增长负责人面临\"TikTok获客LTV/CAC比值跌至2.1但无自动熔断机制每月白烧$6800\"——LTV/CAC双向阈值门控将低效渠道预算自动归零，年化节省无效获客费用15-30万元",
+      "algo_140": "论文：Deep Bayesian LTV Prediction for Ecommerce | 年份：2019"
+    },
+    "b": {
+      "slug": "p2s-ltv-cac-acquisition-gate",
+      "title": "LTV CAC Acquisition Gate — LTV/CAC比率触发渠道获客自动暂停或扩投",
+      "l3": [
+        "预算分配",
+        "异常冻结与恢复"
+      ],
+      "l1_l2_l3": "业务运营/品牌与增长/预算分配",
+      "src_domain": "06-增长模型",
+      "confidence": "high",
+      "user_summary": "用 LTV/CAC 比值判断哪个渠道该暂停新客投放、哪个该加预算，并保留品牌最低预算。",
+      "workflow": "汇总各渠道预测LTV、当月CAC、新客数与预算 → 按最小新客数门槛过滤渠道 → 比值低于暂停阈值判暂停、高于扩投阈值判加预算 → 按扩投比例调整并把释放预算转入高效渠道 → 保留品牌最低预算并设观察天数后复评",
+      "triggers": [
+        "ltv",
+        "cac门控",
+        "渠道暂停",
+        "渠道扩投",
+        "新客样本门控",
+        "品牌保底预算"
+      ],
+      "problem_140": "增长团队面临\"渠道LTV/CAC低效但预算未暂停导致亏损获客\"——LTV/CAC门控自动暂停低效渠道扩投高效渠道，整体获客效率提升25%，年化节省$50,000",
+      "algo_140": "核心是「LTV/CAC比率计算 + 渠道级别决策 + 预算弹性调整」："
+    },
+    "trig_jaccard": 0.09,
+    "shared_triggers": [
+      "ltv"
+    ],
+    "title_identical": false,
+    "title_dice": 0.54,
+    "bucket": "near_dup",
+    "severity": 0.449
+  },
+  {
+    "idx": 164,
+    "preset": "agt-016",
+    "role": "AGT-016 知量",
+    "shared_l3": [
+      "供需协调",
+      "需求预测"
+    ],
+    "a": {
+      "slug": "p2s-bullwhip-effect-kalman-mitigation",
+      "title": "Bullwhip Effect Kalman Mitigation—用 Kalman Filter 消除牛鞭效应",
+      "l3": [
+        "供需协调",
+        "需求预测"
+      ],
+      "l1_l2_l3": "业务运营/供应与履约/供需协调",
+      "src_domain": "04-供应链",
+      "confidence": "high",
+      "user_summary": "用卡尔曼滤波把订单里的短期尖峰滤掉，让补货量贴近真实需求，减少上游过量备货。",
+      "workflow": "整理日订单、库存、补货提前期与促销标记 → 运行卡尔曼滤波得到平滑需求序列 → 计算牛鞭比并标注异常波动 → 输出补货建议量与多级仓配波动告警",
+      "triggers": [
+        "牛鞭效应",
+        "卡尔曼滤波",
+        "需求去噪",
+        "补货平滑",
+        "订单波动"
+      ],
+      "problem_140": "供应链总监面临\"订单在链条上层层放大采购量波动是终端需求波动的3-5倍\"——Kalman最优滤波将牛鞭效应放大系数降低50%，年化上游备货成本节省$7.6万",
+      "algo_140": "论文：A Kalman Filter Approach to Bullwhip Effect Mitigation in Supply Chains | 年份：2020"
+    },
+    "b": {
+      "slug": "p2s-bullwhip-effect-mitigation",
+      "title": "Bullwhip Effect Mitigation — 牛鞭效应量化与 LNN+XGBoost 抑制",
+      "l3": [
+        "供需协调",
+        "需求预测"
+      ],
+      "l1_l2_l3": "业务运营/供应与履约/供需协调",
+      "src_domain": "04-供应链",
+      "confidence": "high",
+      "user_summary": "分层算出订单在各环节被放大了几倍，给出订货平滑系数和大促前的合理订单区间。",
+      "workflow": "整理零售端到工厂各层周度订单与终端销售数据 → 逐层计算牛鞭效应放大系数 → 输出指数平滑系数建议值 → 给出大促前订单区间并提示去库存风险",
+      "triggers": [
+        "牛鞭效应量化",
+        "放大系数",
+        "订货平滑",
+        "大促超产",
+        "库存积压"
+      ],
+      "problem_140": "双十一大促前工厂端看到订单是终端销量的 8-12 倍，导致超产和大促后 2-3 月去库存——LNN+XGBoost 量化各层 BWE 放大系数，优化订货平滑策略，年化减少工厂超产 20-35%、节省库存持有成本 50-150 万元",
+      "algo_140": "核心思想：牛鞭效应（Bullwhip Effect）是供应链中需求信号从下游向上游逐级放大的现象——零售端小小的销量波动，经过分销商→工厂逐层传导后，工厂端看到的订单波动可达零售端的 310 倍。本 Skill 用 Liquid Neural Network（LNN）捕捉时序需求"
+    },
+    "trig_jaccard": 0,
+    "shared_triggers": [],
+    "title_identical": false,
+    "title_dice": 0.57,
+    "bucket": "near_dup",
+    "severity": 0.457
+  },
+  {
+    "idx": 255,
+    "preset": "agt-023",
+    "role": "AGT-023 自航",
+    "shared_l3": [
+      "转化优化"
+    ],
+    "a": {
+      "slug": "p2s-abandoned-cart-recovery-ml",
+      "title": "Abandoned Cart Recovery ML — 弃购挽回机器学习：预测意图×序列触达×个性化优惠",
+      "l3": [
+        "转化优化",
+        "促销规划"
+      ],
+      "l1_l2_l3": "业务运营/渠道经营/转化优化",
+      "src_domain": "14-用户分析",
+      "confidence": "high",
+      "user_summary": "月有上千个弃购订单，先分清用户是比价、卡流程还是犹豫，再决定发折扣、发提醒还是发内容。",
+      "workflow": "整理弃购会话与用户行为特征 → 把弃购用户分为比价型、摩擦型、犹豫型、意外型 → 为每一型配置触达内容并决定是否给折扣 → 按预测类型执行触达并记录结果 → 复盘各类型挽回率并迭代分型规则",
+      "triggers": [
+        "弃购挽回",
+        "弃购分型",
+        "差异化触达",
+        "挽回率",
+        "促销时机"
+      ],
+      "problem_140": "当月弃购订单超过200个时，ML将弃购用户分为比价型/摩擦型/犹豫型/意外型并分别触达——挽回率从统一发折扣的3%提升到12%，同时减少对比价型用户的无效折扣损耗。",
+      "algo_140": "弃购挽回是一个两阶段决策问题："
+    },
+    "b": {
+      "slug": "p2s-abandoned-cart-recovery-trigger",
+      "title": "Abandoned-Cart-Recovery-Trigger — 加购未购超时自动触发个性化挽回序列",
+      "l3": [
+        "转化优化",
+        "生命周期触达"
+      ],
+      "l1_l2_l3": "业务运营/渠道经营/转化优化",
+      "src_domain": "14-用户分析",
+      "confidence": "high",
+      "user_summary": "用户把商品加进购物车却没付款，按 2 小时、24 小时、48 小时三步自动追回来，一旦付款立刻停。",
+      "workflow": "监听购物车事件流，识别加购未支付会话 → 按 T+2h、T+24h、T+48h 挂载触达内容与优惠 → 设置安全护栏：支付成功立即终止、48h 无响应归档 → 统计挽回率与优惠券成本 → 按效果迭代话术与优惠力度",
+      "triggers": [
+        "加购未购",
+        "超时触发",
+        "挽回序列",
+        "定时触达",
+        "冷却期"
+      ],
+      "problem_140": "运营面临\"加购未购用户大量流失\"——加购后2h自动触发挽回序列将加购转化率从8%提升至14%，年化增收50万元",
+      "algo_140": "论文：Personalized Abandoned Cart Recovery via MultiChannel Reinforcement Learning | 年份：2021"
+    },
+    "trig_jaccard": 0,
+    "shared_triggers": [],
+    "title_identical": false,
+    "title_dice": 0.55,
+    "bucket": "near_dup",
+    "severity": 0.441
+  },
+  {
+    "idx": 297,
+    "preset": "agt-026",
+    "role": "AGT-026 衡价",
+    "shared_l3": [
+      "组合设计",
+      "价格敏感性"
+    ],
+    "a": {
+      "slug": "p2s-bundle-pricing-strategy",
+      "title": "Bundle Pricing Strategy（捆绑定价策略）",
+      "l3": [
+        "组合设计",
+        "价格敏感性"
+      ],
+      "l1_l2_l3": "业务运营/渠道经营/组合设计",
+      "src_domain": "17-价格优化",
+      "confidence": "high",
+      "user_summary": "判断配件值不值得捆、该做纯捆绑还是混合捆绑，并算出既不吓跑只买主机的用户、又能拉高客单价的套餐价。",
+      "workflow": "汇总单品成本、用户估值分布与配件回购率、回购间隔 → 用估值分布与协同效应求纯捆绑最优价格 → 按单品价与捆绑价模拟用户在买 A／买 B／买捆绑／不买之间的决策 → 对比纯捆绑、混合捆绑与纯单品的总利润 → 结合竞品捆绑包价格给出最终套餐定价建议",
+      "triggers": [
+        "捆绑定价",
+        "纯捆绑",
+        "混合捆绑",
+        "配件回购",
+        "套餐价",
+        "利润模拟"
+      ],
+      "problem_140": "定价经理面临单卖转化低——捆绑定价将客单价从68元提到89元，年化增收26万元",
+      "algo_140": "论文：The Economics of Bundling | arXiv：1502.04066"
+    },
+    "b": {
+      "slug": "p2s-dynamic-bundle-pricing",
+      "title": "Dynamic Bundle Pricing — 动态捆绑定价：配套商品组合最优定价策略",
+      "l3": [
+        "组合设计",
+        "价格敏感性"
+      ],
+      "l1_l2_l3": "业务运营/渠道经营/组合设计",
+      "src_domain": "17-价格优化",
+      "confidence": "high",
+      "user_summary": "给配套商品套餐找到利润最大的那个价格点，顺便回答该把哪几件商品捆在一起、能让多少原本只买主机的客户顺手买配件。",
+      "workflow": "汇总各单品单价、成本、月需求与价格弹性 → 枚举候选商品组合并算成本、原价合计与折扣率 → 按最小单品需求×价格弹性影响×便利性加成估套餐需求 → 扫描价格得到利润曲线，取最大利润点作为最优套餐价 → 按利润率与 ROI 排出推荐组合与定价建议",
+      "triggers": [
+        "动态捆绑定价",
+        "套餐最优价",
+        "价格弹性曲线",
+        "配件渗透率",
+        "套餐组合 roi",
+        "客单价提升"
+      ],
+      "problem_140": "吸奶器配套储奶袋消毒器独立销售只有30%客户会主动购买配件——动态捆绑定价算法找到最优套餐组合和价格，配件渗透率提升到70%套餐利润率比单品高10-20%年化增益15-40万元",
+      "algo_140": "为什么捆绑销售利润更高："
+    },
+    "trig_jaccard": 0,
+    "shared_triggers": [],
+    "title_identical": false,
+    "title_dice": 0.56,
+    "bucket": "near_dup",
+    "severity": 0.446
+  },
+  {
+    "idx": 337,
+    "preset": "agt-027",
+    "role": "AGT-027 守店",
+    "shared_l3": [
+      "规则监测",
+      "产品准入核对"
+    ],
+    "a": {
+      "slug": "p2s-regulatory-change-auto-monitor",
+      "title": "Regulatory Change Auto-Monitor — 合规法规变更自动监控：实时追踪政策更新的预警系统",
+      "l3": [
+        "规则监测",
+        "产品准入核对"
+      ],
+      "l1_l2_l3": "业务运营/渠道经营/规则监测",
+      "src_domain": "21-合规决策",
+      "confidence": "medium",
+      "user_summary": "每天自动巡一遍 FDA、EU、Amazon 的公告，把真正有影响的变更挑出来，24 小时内给出分级预警和要补的材料。",
+      "workflow": "配置监控源（机构、公告 URL、相关性关键词、巡检间隔） → 定时抓取公告并识别新增、修订、废止三类变更 → 用相关性关键词过滤无影响噪声 → 判定 P0/P1/P2 影响等级与所需动作 → 24 小时内推送预警并登记责任人",
+      "triggers": [
+        "法规变更监控",
+        "合规预警",
+        "监管公告爬取",
+        "影响分析",
+        "变更分级"
+      ],
+      "problem_140": "当欧盟 VAT 季更、Amazon ToS 月改、FDA 随时发布新指南时，手动监控极易漏报导致下架或罚款——AI 合规变更监控自动爬取官方公告并用 NLP 过滤有影响变更，24 小时内预警，将合规响应窗口从 2 周压缩到 1 天。",
+      "algo_140": "人工追踪 vs AI 自动监控："
+    },
+    "b": {
+      "slug": "p2s-regulatory-change-monitoring",
+      "title": "Regulatory Change Monitoring — 法规变更自动监控：受影响品类实时映射",
+      "l3": [
+        "规则监测",
+        "产品准入核对"
+      ],
+      "l1_l2_l3": "业务运营/渠道经营/规则监测",
+      "src_domain": "21-合规决策",
+      "confidence": "medium",
+      "user_summary": "法规一更新，马上算出哪些品类和 SKU 被波及、检测和文档还来不来得及，把发现周期从 45 天缩到 3 天。",
+      "workflow": "接入 CPSC/FDA/EU/MHRA 等法规库并入库每日新增 → 按品类与属性规则匹配受影响品类及 SKU 范围 → 测算距生效日的剩余时间与检测、文档所需周期 → 按 critical/high/medium/low 输出告警优先级 → 给出加急检测或调整上架节奏的处置建议",
+      "triggers": [
+        "法规监控",
+        "受影响品类映射",
+        "准入核对",
+        "变更分级",
+        "合规窗口"
+      ],
+      "problem_140": "法务专员面临法规更新跟不上——法规监控将响应时延从14天缩到1天，年化省13万元",
+      "algo_140": "论文：Regulatory Change Impact Analysis via MultiSource Signal Fusion and Category Mapping | 年份：2023 | 核心贡献：将非结构化法规文本自动映射至产品品类，通过优先级评分引擎驱动合规决策"
+    },
+    "trig_jaccard": 0.11,
+    "shared_triggers": [
+      "变更分级"
+    ],
+    "title_identical": false,
+    "title_dice": 0.64,
+    "bucket": "near_dup",
+    "severity": 0.53
+  },
+  {
+    "idx": 368,
+    "preset": "agt-030",
+    "role": "AGT-030 叙事",
+    "shared_l3": [
+      "创意简报",
+      "内容策划"
+    ],
+    "a": {
+      "slug": "p2s-ai-product-video-script-generator",
+      "title": "Skill-AI-Product-Video-Script-Generator — AI 母婴产品视频脚本自动生成",
+      "l3": [
+        "创意简报",
+        "内容策划"
+      ],
+      "l1_l2_l3": "业务运营/品牌与增长/创意简报",
+      "src_domain": "20-AI视频生成",
+      "confidence": "high",
+      "user_summary": "把差评里的痛点变成视频脚本，30 秒和 60 秒两个版本一起出。",
+      "workflow": "从评论提取 Top5 痛点词 → 套用痛点、方案、行动召唤模板 → 规则校验字数、情感与号召 → 输出 30 秒与 60 秒两版 → 交付剪辑与投放使用",
+      "triggers": [
+        "视频脚本生成",
+        "痛点驱动文案",
+        "脚本模板套用",
+        "创意简报",
+        "多时长版本适配"
+      ],
+      "problem_140": "内容创作面临\"母婴产品视频脚本耗时耗力\"——VOC痛点驱动自动生成将视频生产效率提升5倍，月均多产出20条内容",
+      "algo_140": "AI 产品视频脚本生成器（AI Product Video Script Generator）将买家痛点数据（VOC）、产品卖点矩阵和视频时序约束融合为结构化脚本生成流程，核心是痛点解决方案行动召唤（PSA）三段式框架。"
+    },
+    "b": {
+      "slug": "p2s-ai-video-script-generation",
+      "title": "AI Video Script Generation — 分层 CoT 电商短视频脚本自动生成",
+      "l3": [
+        "创意简报",
+        "内容策划",
+        "视频制作协作"
+      ],
+      "l1_l2_l3": "业务运营/品牌与增长/创意简报",
+      "src_domain": "20-AI视频生成",
+      "confidence": "high",
+      "user_summary": "把卖点、受众和故事线拆成三层推理，一条短视频脚本三分钟就能出。",
+      "workflow": "映射受众意图与卖点 → 设计痛点、冲突、解决、行动召唤叙事弧 → 生成分镜与配音脚本 → 输出多版本 A/B 变体 → 交付制作与投放验证",
+      "triggers": [
+        "分镜脚本",
+        "叙事弧设计",
+        "卖点映射",
+        "短视频脚本批量产出",
+        "b 变体扩展"
+      ],
+      "problem_140": "TikTok母婴广告运营面临脚本产能瓶颈——分层CoT三阶段脚本引擎（卖点映射→叙事弧→分镜配音）将每条脚本生产从2.5小时压缩至3分钟，A/B测试变体从每周5条扩展到40+条，CTR平均提升15-25%，年化内容制作成本节省12-18万元",
+      "algo_140": "分层 CoT（ChainofThought）脚本生成的核心洞察：把\"写脚本\"拆解为三个认知层次，每层都有独立推理链，避免大模型一步到位时的幻觉和结构混乱。"
+    },
+    "trig_jaccard": 0,
+    "shared_triggers": [],
+    "title_identical": false,
+    "title_dice": 0.61,
+    "bucket": "near_dup",
+    "severity": 0.488
+  },
+  {
+    "idx": 379,
+    "preset": "agt-031",
+    "role": "AGT-031 绘影",
+    "shared_l3": [
+      "视频制作协作"
+    ],
+    "a": {
+      "slug": "p2s-aquarius-brand-video-generation",
+      "title": "Aquarius — Brand Video Generation（品牌营销视频生成）",
+      "l3": [
+        "视频制作协作",
+        "本地化"
+      ],
+      "l1_l2_l3": "业务运营/品牌与增长/视频制作协作",
+      "src_domain": "20-AI视频生成",
+      "confidence": "high",
+      "user_summary": "一套品牌素材自动生成各市场的品牌视频，换模特、换语言、换节日主题，品牌色和产品外观不变。",
+      "workflow": "准备品牌主视觉素材与各市场本地化参数 → 按市场与用户分群配置视频版本 → 批量生成并保持品牌色与产品外观一致 → 产出后做个性化版本与通用版本的 A/B 测试",
+      "triggers": [
+        "品牌视频批量生成",
+        "多市场本地化",
+        "模特形象切换",
+        "节日主题",
+        "品牌视觉一致"
+      ],
+      "problem_140": "母婴品牌需要在美/德/英/日 4 个市场投放品牌视频广告——每个市场需要不同模特、不同语言字幕、不同节日主题（美国感恩节/德国圣诞节/日本新年）",
+      "algo_140": "工业级营销视频生成系统——不是\"能生成视频就行\"，而是面向\"千人千面\"品牌营销场景的完整管线：图生视频、文生视频(Avatar)、视频修复、个性化、分布式数据管线。两种 DiT 架构适配不同场景。"
+    },
+    "b": {
+      "slug": "p2s-brand-video-generation",
+      "title": "Brand Video Generation — AI品牌视频生成：从文本/图像到高保真营销视频的全链路技术",
+      "l3": [
+        "视频制作协作",
+        "视觉简报"
+      ],
+      "l1_l2_l3": "业务运营/品牌与增长/视频制作协作",
+      "src_domain": "20-AI视频生成",
+      "confidence": "high",
+      "user_summary": "用文字和产品图直接生成品牌营销视频，把十几天的外拍周期压到几小时。",
+      "workflow": "定义品牌档案（品牌色、Logo 位置、字体风格、关键词） → 按场景写生成提示词（使用场景、旋转展示、功能讲解） → 批量生成视频并校验品牌视觉一致性 → 输出成片用于 Listing、A+ 或社交媒体投放",
+      "triggers": [
+        "品牌视频生成",
+        "文本转视频",
+        "图生视频",
+        "a+ 页面视频",
+        "拍摄替代"
+      ],
+      "problem_140": "品牌经理面临视频产能跟不上投放——品牌视频生成将产出周期从5天缩到6小时，年化省18万元",
+      "algo_140": "品牌视频生成（Brand Video Generation）解决的核心问题是：如何将品牌语义（Logo、色调、产品特征）与视频扩散模型对齐，在保留用户意图（语义保真）的同时实现自然的品牌可见性。"
+    },
+    "trig_jaccard": 0,
+    "shared_triggers": [],
+    "title_identical": false,
+    "title_dice": 0.62,
+    "bucket": "near_dup",
+    "severity": 0.492
+  },
+  {
+    "idx": 458,
+    "preset": "agt-036",
+    "role": "AGT-036 安心",
+    "shared_l3": [
+      "选购指导"
+    ],
+    "a": {
+      "slug": "p2s-long-term-preference-memory",
+      "title": "Shopping Companion — 记忆增强的长期偏好购物 Agent",
+      "l3": [
+        "选购指导",
+        "生命周期触达"
+      ],
+      "l1_l2_l3": "业务运营/服务与体验/选购指导",
+      "src_domain": "16-智能体工程",
+      "confidence": "medium",
+      "user_summary": "记住每位妈妈买过什么、在意什么，宝宝进入下一阶段时主动推荐该升级的那一件。",
+      "workflow": "从会话与订单事件更新偏好（购买品牌、退货原因、尺码历史） → 把偏好写入结构化记忆档案 → 对新候选商品按偏好与排除项打分过滤 → 输出排序推荐并回写本次交互偏好",
+      "triggers": [
+        "长期偏好记忆",
+        "跨会话记忆",
+        "偏好演化",
+        "复购推荐",
+        "生命周期升级"
+      ],
+      "problem_140": "母婴用户的生命周期天然就是\"长周期\":怀孕 9 个月 + 0-3 岁宝宝 = 接近 4 年的购物窗口",
+      "algo_140": "Shopping Companion 解决两个长期被忽视的问题:(1) 缺少能评估跨 session 偏好记忆的端到端购物 benchmark;(2) 现有方法把\"偏好识别\"和\"购物执行\"当作独立模块,没有端到端联合优化。它把购物 Agent 形式化为 POMDP,并提出两阶段统"
+    },
+    "b": {
+      "slug": "p2s-shopping-companion-agent",
+      "title": "Shopping Companion — 跨会话偏好记忆购物助手（4B≈GPT-5，Lazada真实数据）",
+      "l3": [
+        "选购指导",
+        "产品问答"
+      ],
+      "l1_l2_l3": "业务运营/服务与体验/选购指导",
+      "src_domain": "14-用户分析",
+      "confidence": "high",
+      "user_summary": "记得你上次买的是哪段奶粉，宝宝满 6 个月时主动提醒升阶，并对齐同品牌有机配方。",
+      "workflow": "首次会话提取偏好并写入记忆 → 后续会话调出记忆检索同品牌同阶段商品 → 校验有机、无添加糖与过敏排除项 → 输出推荐并更新偏好记忆",
+      "triggers": [
+        "跨会话导购",
+        "偏好记忆",
+        "奶粉升阶",
+        "主动推荐",
+        "产品问答"
+      ],
+      "problem_140": "业务痛点：用户上月购买 Stage 1 奶粉（0-6月龄），宝宝即将 6 个月，需要升阶",
+      "algo_140": "传统推荐系统的致命缺陷：每次会话从零开始——用户上周告诉导购\"我要有机配方奶\"，下次进来又要重新解释，累计咨询成本极高，转化率低。Shopping Companion 的创新在于构建跨会话长期偏好记忆，将用户偏好结构化存储，Agent 可在后续会话中直接调用，像\"私人导购\"一样记"
+    },
+    "trig_jaccard": 0,
+    "shared_triggers": [],
+    "title_identical": false,
+    "title_dice": 0.5,
+    "bucket": "near_dup",
+    "severity": 0.4
+  },
+  {
+    "idx": 546,
+    "preset": "agt-044",
+    "role": "AGT-044 安界",
+    "shared_l3": [
+      "隐私需求分析"
+    ],
+    "a": {
+      "slug": "p2s-privacy-compliant-data-collection-gdpr-ccpa",
+      "title": "Privacy-Compliant Data Collection GDPR/CCPA — 隐私合规数据采集架构",
+      "l3": [
+        "隐私需求分析",
+        "授权审查"
+      ],
+      "l1_l2_l3": "独立控制/财务与合规/隐私需求分析",
+      "src_domain": "22-数据采集工程",
+      "confidence": "high",
+      "user_summary": "把同意管理、数据最小化和删数请求做进采集管道，别等被罚了再补丁式整改。",
+      "workflow": "盘点字段、埋点与下游系统 → 设计分级同意门控 → 加 PII 检测与脱敏 → 建 DSAR 级联删除与保留策略",
+      "triggers": [
+        "合规采集",
+        "同意管理",
+        "dsar",
+        "数据最小化",
+        "privacy by design"
+      ],
+      "problem_140": "独立站通过 GA4+Pixel 未经同意采集用户行为被德国 DPA 开出€1.2 万罚款——引入 GDPR/CCPA 合规数据采集架构（同意管理+数据最小化），合规覆盖率 100%，规避最高 2000 万欧元罚款风险，年化法律成本降低 96%。",
+      "algo_140": "隐私合规数据采集架构（PrivacyCompliant Data Collection）将 GDPR（欧盟通用数据保护条例）和 CCPA（加州消费者隐私法）的合规要求嵌入数据采集管道的设计层，而非事后打补丁。核心原则：Privacy by Design（隐私内建）。"
+    },
+    "b": {
+      "slug": "p2s-privacy-coppa-compliance",
+      "title": "Privacy COPPA Compliance — COPPA 儿童隐私合规（母婴 App/网站数据采集法律限制）",
+      "l3": [
+        "隐私需求分析"
+      ],
+      "l1_l2_l3": "独立控制/财务与合规/隐私需求分析",
+      "src_domain": "21-合规决策",
+      "confidence": "high",
+      "user_summary": "面向母婴家庭的 App 上架美国前，先查清哪些 SDK 和收集行为会踩 COPPA 红线。",
+      "workflow": "梳理功能、收集字段与 SDK 清单 → 判定儿童服务适用性 → 标出高风险 SDK 与采集点 → 输出 VPC 改造与合规整改清单",
+      "triggers": [
+        "coppa",
+        "儿童隐私",
+        "家长可核实同意",
+        "sdk合规审查",
+        "母婴app合规"
+      ],
+      "problem_140": "法务合规团队面临\"母婴App在美国市场违反COPPA儿童隐私法面临FTC处罚\"——COPPA合规自动审查将违规SDK识别率提升至95%，年化防范FTC罚款（单次可达百万美元）",
+      "algo_140": "核心思想：《儿童在线隐私保护法》（COPPA，1998，FTC 执法）要求面向 13 岁以下儿童的网站/App 在收集个人信息前必须获得父母可核实同意（VPC），违者最高罚款 $50,119/条/天。母婴 App（婴儿成长追踪/胎教音乐/购物 App）因目标用户是婴儿家庭，极易触"
+    },
+    "trig_jaccard": 0,
+    "shared_triggers": [],
+    "title_identical": false,
+    "title_dice": 0.52,
+    "bucket": "near_dup",
+    "severity": 0.419
+  },
+  {
+    "idx": 551,
+    "preset": "agt-045",
+    "role": "AGT-045 同尺",
+    "shared_l3": [
+      "主数据治理"
+    ],
+    "a": {
+      "slug": "p2s-cross-platform-user-identity",
+      "title": "跨平台用户 ID 统一 — Amazon/TikTok/独立站身份解析",
+      "l3": [
+        "主数据治理",
+        "账号商品映射"
+      ],
+      "l1_l2_l3": "数据与Agent平台/数据与AI运行/主数据治理",
+      "src_domain": "22-数据采集工程",
+      "confidence": "high",
+      "user_summary": "把 TikTok、Amazon、独立站的同一批用户认出来，让归因和会员运营不再各算各的账。",
+      "workflow": "归一各平台标识符并统一做 SHA-256 哈希 → 用哈希做确定性匹配得到重合用户 → 给重合用户打多渠道与单渠道分层标签 → 输出跨平台归因路径与用户分层",
+      "triggers": [
+        "跨平台身份",
+        "用户 id 统一",
+        "身份解析",
+        "归因打通",
+        "重合用户"
+      ],
+      "problem_140": "数据工程师面临\"跨平台用户身份割裂导致LTV低估和高价值用户触达不足\"——跨平台身份解析将用户识别覆盖率提升55%，年化优化高价值用户策略增收25-50万元",
+      "algo_140": "跨平台用户身份统一（Identity Resolution）解决多平台数据孤岛下的同人识别问题：Amazon 买家、TikTok 观众、独立站注册用户可能是同一个人，但使用不同 ID 体系。"
+    },
+    "b": {
+      "slug": "p2s-multi-source-user-identity-unification",
+      "title": "Multi-Source User Identity Unification — 跨平台用户身份统一打通 Amazon/TikTok/独立站同一用户",
+      "l3": [
+        "主数据治理",
+        "分群"
+      ],
+      "l1_l2_l3": "数据与Agent平台/数据与AI运行/主数据治理",
+      "src_domain": "14-用户分析",
+      "confidence": "high",
+      "user_summary": "把 Amazon 买家、独立站用户、WhatsApp 私域联系人合成一个用户池，拉新和 Lookalike 不再重复触达。",
+      "workflow": "L1 用邮箱哈希做确定性对齐 → L2 用购买时间窗口与品类重叠做概率对齐 → L3 用行为图相似度补充长尾 → 合并去重产出统一用户池",
+      "triggers": [
+        "多源身份统一",
+        "三层匹配",
+        "id 图谱",
+        "lookalike",
+        "私域打通"
+      ],
+      "problem_140": "数据团队面临\"Amazon/TikTok/独立站同一用户三套ID无法打通导致Lookalike种子质量差、广告重复触达\"——三层匹配架构将跨平台用户识别覆盖率提升至85%+，广告重复触达年化节省约8万元",
+      "algo_140": "母婴跨境卖家面临的核心数据碎片化问题：同一个\"张妈妈\"在 Amazon 是 buyer_id_A，在 TikTok Shop 是 tiktok_uid_B，在独立站是 email_C，在 WhatsApp 私域是 phone_D——四个 ID 指向同一个人，但系统无法自动打通。用"
+    },
+    "trig_jaccard": 0,
+    "shared_triggers": [],
+    "title_identical": false,
+    "title_dice": 0.5,
+    "bucket": "near_dup",
+    "severity": 0.4
+  },
+  {
+    "idx": 47,
+    "preset": "agt-005",
+    "role": "AGT-005 守衡",
+    "shared_l3": [
+      "抽样审计"
+    ],
+    "a": {
+      "slug": "p2s-class-imbalance-handling",
+      "title": "Class Imbalance Handling — SMOTE/ADASYN/Focal Loss 处理低频事件",
+      "l3": [
+        "抽样审计"
+      ],
+      "l1_l2_l3": "独立控制/经营与组织/抽样审计",
+      "src_domain": "12-ML基础",
+      "confidence": "medium",
+      "user_summary": "欺诈、退货这类低频事件样本太少时，用重采样加损失函数改造把召回率提上来。",
+      "workflow": "统计类别比例并建立不处理的基线模型 → 对训练集做 SMOTE 或 ADASYN 过采样 → 引入 Focal Loss 等损失改造重训模型 → 在未重采样的验证集上对比召回、精确率与 F1",
+      "triggers": [
+        "类别不平衡",
+        "smote",
+        "adasyn",
+        "focal loss",
+        "低频事件"
+      ],
+      "problem_140": "风控运营面临\"欺诈/退货低频事件召回率仅38%、大量漏检导致月均损失15万元\"——SMOTE+Focal Loss将欺诈召回率从38%提升至78%，年化减损85-95万元",
+      "algo_140": "真实业务数据往往严重不平衡：欺诈交易占 0.1%、产品退货 515%、高价值用户 2%。直接训练会导致模型偏向多数类，少数类召回率极低。"
+    },
+    "b": {
+      "slug": "p2s-imbalanced-data-handling",
+      "title": "Skill Card: Imbalanced Data Handling in Mother-Baby Cross-Border E-commerce",
+      "l3": [
+        "生命周期触达",
+        "抽样审计"
+      ],
+      "l1_l2_l3": "业务运营/品牌与增长/生命周期触达",
+      "src_domain": "12-ML基础",
+      "confidence": "medium",
+      "user_summary": "让模型别只顾大头，把长尾和少数类也预测准，减少滞销和漏掉的流失用户。",
+      "workflow": "统计各 SKU 或类别的样本量与波动，定位不平衡来源 → 对训练集少数类应用 SMOTE 过采样并设置类别权重 → 采用按 SKU 分层的交叉验证保证每折覆盖头部与长尾 → 按业务代价调阈值并评估召回与精确率平衡",
+      "triggers": [
+        "样本不平衡",
+        "类别权重",
+        "smote",
+        "阈值调优",
+        "长尾 sku",
+        "召回率"
+      ],
+      "problem_140": "流失率 5%，直接用 XGBoost 训练，Recall 只有 0.3——70% 的流失用户没被识别",
+      "algo_140": "在母婴跨境电商中，高价值事件（转化、复购、欺诈）往往占比 <5%，直接训练模型会严重偏向多数类，导致少数类 Recall 极低（<0.3），业务决策失效。不平衡数据处理通过重采样、成本加权或阈值调优，使模型在保持精准度的前提下大幅提升对稀有事件的识别能力。"
+    },
+    "trig_jaccard": 0.1,
+    "shared_triggers": [
+      "smote"
+    ],
+    "title_identical": false,
+    "title_dice": 0.43,
+    "bucket": "adjacent",
+    "severity": 0.366
+  },
+  {
+    "idx": 555,
+    "preset": "agt-045",
+    "role": "AGT-045 同尺",
+    "shared_l3": [
+      "主数据治理"
+    ],
+    "a": {
+      "slug": "p2s-cross-platform-user-identity-resolution",
+      "title": "Cross-Platform User Identity Resolution — 跨平台用户 ID 统一",
+      "l3": [
+        "主数据治理",
+        "账号商品映射"
+      ],
+      "l1_l2_l3": "数据与Agent平台/数据与AI运行/主数据治理",
+      "src_domain": "22-数据采集工程",
+      "confidence": "high",
+      "user_summary": "把 TikTok 点击、Amazon 订单、独立站注册对成同一个人的身份图谱，算出真实 ROAS 和全平台 LTV。",
+      "workflow": "先用邮件哈希做确定性匹配 → 再用行为与时间窗口做概率性匹配 → 把结果写入身份图谱并设置信阈值 → 基于图谱重算跨平台归因与 LTV",
+      "triggers": [
+        "身份图谱",
+        "概率匹配",
+        "跨平台归因",
+        "ltv 打通",
+        "置信阈值"
+      ],
+      "problem_140": "数据工程师面临\"同一用户在Amazon/TikTok/独立站无法识别导致营销浪费\"——跨平台用户ID统一将重复触达率降低45%，年化节省广告预算20-40万元",
+      "algo_140": "跨平台用户 ID 统一（Identity Resolution / Identity Graph）解决同一用户在 Amazon、TikTok、独立站等不同平台使用不同 ID 的碎片化问题。统一后可实现全链路归因（TikTok 广告→独立站→Amazon 回购）和跨平台 LTV 计"
+    },
+    "b": {
+      "slug": "p2s-multi-source-user-identity-unification",
+      "title": "Multi-Source User Identity Unification — 跨平台用户身份统一打通 Amazon/TikTok/独立站同一用户",
+      "l3": [
+        "主数据治理",
+        "分群"
+      ],
+      "l1_l2_l3": "数据与Agent平台/数据与AI运行/主数据治理",
+      "src_domain": "14-用户分析",
+      "confidence": "high",
+      "user_summary": "把 Amazon 买家、独立站用户、WhatsApp 私域联系人合成一个用户池，拉新和 Lookalike 不再重复触达。",
+      "workflow": "L1 用邮箱哈希做确定性对齐 → L2 用购买时间窗口与品类重叠做概率对齐 → L3 用行为图相似度补充长尾 → 合并去重产出统一用户池",
+      "triggers": [
+        "多源身份统一",
+        "三层匹配",
+        "id 图谱",
+        "lookalike",
+        "私域打通"
+      ],
+      "problem_140": "数据团队面临\"Amazon/TikTok/独立站同一用户三套ID无法打通导致Lookalike种子质量差、广告重复触达\"——三层匹配架构将跨平台用户识别覆盖率提升至85%+，广告重复触达年化节省约8万元",
+      "algo_140": "母婴跨境卖家面临的核心数据碎片化问题：同一个\"张妈妈\"在 Amazon 是 buyer_id_A，在 TikTok Shop 是 tiktok_uid_B，在独立站是 email_C，在 WhatsApp 私域是 phone_D——四个 ID 指向同一个人，但系统无法自动打通。用"
+    },
+    "trig_jaccard": 0,
+    "shared_triggers": [],
+    "title_identical": false,
+    "title_dice": 0.45,
+    "bucket": "adjacent",
+    "severity": 0.359
+  },
+  {
+    "idx": 98,
+    "preset": "agt-007",
+    "role": "AGT-007 望野",
+    "shared_l3": [
+      "竞品研究",
+      "趋势监测"
+    ],
+    "a": {
+      "slug": "p2s-competitor-new-product-detection",
+      "title": "Competitor New Product Detection — 竞品新品预测：提前发现竞品动向的信号挖掘",
+      "l3": [
+        "竞品研究",
+        "趋势监测"
+      ],
+      "l1_l2_l3": "业务运营/产品与创新/竞品研究",
+      "src_domain": "06-增长模型",
+      "confidence": "high",
+      "user_summary": "把专利申请、关键词出价异动、社媒提及和竞品清仓这些前置信号融合成上市概率评分，比竞品真正上架提前几周发出预警。",
+      "workflow": "监测竞品 ASIN 的价格、BSR 与评论数变化 → 采集关键词 CPC 历史与专利、社媒等前置信号 → 按信号权重加权聚合成综合预警评分（每周更新） → 评分达阈值时触发预警并给出备货、定价与广告防御建议",
+      "triggers": [
+        "竞品新品预警",
+        "信号融合",
+        "专利信号",
+        "cpc 异动",
+        "提前备货"
+      ],
+      "problem_140": "竞品上市后才发现已经晚了2-4周——多源信号（专利/关键词竞价/社交媒体）综合预警比竞品上市提前4-8周发出预警，提前准备备货和广告防御策略年化保护GMV 15-40万元",
+      "algo_140": "竞品新品上架的前置信号："
+    },
+    "b": {
+      "slug": "p2s-competitor-product-intelligence",
+      "title": "Competitor Product Intelligence（竞品选品监测）",
+      "l3": [
+        "竞品研究",
+        "趋势监测"
+      ],
+      "l1_l2_l3": "业务运营/产品与创新/竞品研究",
+      "src_domain": "06-增长模型",
+      "confidence": "high",
+      "user_summary": "盯着竞品密集上线的新 SKU 和它们的排名走势，判断哪些是新兴的高需求配件品类，再决定要不要跟进开发。",
+      "workflow": "采集竞品新上线 SKU 的 BSR、评论数与价格数据 → 用异常检测识别密集上新与排名异常 → 估算新 SKU 的 30 天成功概率 → 判断是否出现集体降价的价格战迹象 → 输出跟进选品建议与差异化方向",
+      "triggers": [
+        "竞品新品监测",
+        "sku 异常检测",
+        "跟进选品",
+        "价格战识别",
+        "bsr 监控"
+      ],
+      "problem_140": "监测到竞品 Momcozy 密集上线 5 个\"Silicon Flange\"（硅胶法兰）新 SKU，且上线 2 周内均进入 BSR Top 5000",
+      "algo_140": "论文：Outlier Detection for Temporal Data with Applications to Ecommerce Product Monitoring | arXiv：1802.03426"
+    },
+    "trig_jaccard": 0,
+    "shared_triggers": [],
+    "title_identical": false,
+    "title_dice": 0.45,
+    "bucket": "adjacent",
+    "severity": 0.358
+  },
+  {
+    "idx": 346,
+    "preset": "agt-028",
+    "role": "AGT-028 译境",
+    "shared_l3": [
+      "本地化"
+    ],
+    "a": {
+      "slug": "p2s-cross-cultural-marketing-adaptation",
+      "title": "Cross-Cultural Marketing Adaptation — 多语言 CAM 嵌入驱动的跨文化营销适配",
+      "l3": [
+        "本地化",
+        "搜索意图分析",
+        "Listing优化"
+      ],
+      "l1_l2_l3": "业务运营/渠道经营/本地化",
+      "src_domain": "11-AI人文",
+      "confidence": "high",
+      "user_summary": "让英文 Listing 在泰语越南语等本地搜索里真正被搜到，用多语言嵌入做跨语言语义匹配，而不是靠机翻硬套关键词。",
+      "workflow": "取英文原始 Listing 的标题与 5 条 Bullet Points，确定目标语言（TH / VN / ID） → 导出竞品本土关键词库作为候选池（Shopee 关键词工具或 Lazada 后台） → 用 CAM 嵌入模型分别为英文 Listing 与目标语言关键词生成 embedding → 计算跨语言余弦相似度并压制语言偏置，排序取 Top-K 本土关键词 → 输出可落位的本地关键词与跨语言评论情感对齐结果",
+      "triggers": [
+        "跨语言关键词匹配",
+        "多语言嵌入",
+        "cam",
+        "语言捷径",
+        "东南亚本地化",
+        "机翻listing修正"
+      ],
+      "problem_140": "母婴跨境品牌进入东南亚（TH/VN/ID）时英文 Listing 直接机翻，本地用户搜索无法匹配——Compass-Embedding v4 CAM 多语言嵌入将跨语言产品匹配准确率从 11% 提升至 88%，Top-3 关键词召回率提升 70pp，东南亚自然流量翻倍，年化增量 ",
+      "algo_140": "核心问题：多语言嵌入模型训练时存在\"语言特征捷径\"——模型只需识别\"这段文字是泰语/越南语\"就能在同语言样本中完成配对，而不是真正学习\"这是吸奶器/婴儿推车\"的语义。这种捷径在单语言数据集内表现良好，但在跨语言场景（泰文搜索词匹配英文商品标题）中会严重失效。"
+    },
+    "b": {
+      "slug": "p2s-cultural-adaptation-agent",
+      "title": "Cultural Adaptation Agent — 跨文化适应：母婴跨境的本地化 AI 策略",
+      "l3": [
+        "本地化",
+        "市场语境审查"
+      ],
+      "l1_l2_l3": "业务运营/渠道经营/本地化",
+      "src_domain": "16-智能体工程",
+      "confidence": "high",
+      "user_summary": "同一款产品按目标市场的文化偏好换一套叙事框架和客服口吻，减少因说错话导致的跨市场差评。",
+      "workflow": "输入产品信息（含认证清单）与目标市场代码 → Agent 读取该市场文化特征并选择叙事框架（美国=科学权威+个人选择，德国=有机认证+长期健康） → 按框架重排卖点与认证展示顺序，并调整价格呈现方式（如营养价值比 $/oz） → 客服场景按检测到的市场与意图适配回复口吻 → 所有适配策略通过 A/B 测试验证后才上线",
+      "triggers": [
+        "文化适配agent",
+        "叙事框架重写",
+        "目标市场偏好",
+        "客服话术适配",
+        "认证优先展示",
+        "跨市场差评"
+      ],
+      "problem_140": "同款婴儿奶粉文案在美国强调\"便利快速\"，在日本却因缺乏安全认证描述而遭遇差评——文化适配 Agent 自动识别目标市场偏好差异并重写叙事框架，跨市场差评率降低 30%",
+      "algo_140": "论文：CultureLLM: Incorporating Cultural Differences into Large Language Models via Prompt Engineering | 年份：2023"
+    },
+    "trig_jaccard": 0,
+    "shared_triggers": [],
+    "title_identical": false,
+    "title_dice": 0.41,
+    "bucket": "adjacent",
+    "severity": 0.331
+  },
+  {
+    "idx": 105,
+    "preset": "agt-008",
+    "role": "AGT-008 拓新",
+    "shared_l3": [
+      "实验设计",
+      "实验组合"
+    ],
+    "a": {
+      "slug": "p2s-llm-experiment-hypothesis",
+      "title": "LLM 辅助实验假设生成 — AI 驱动的 A/B 测试优先级排序",
+      "l3": [
+        "实验设计",
+        "实验组合"
+      ],
+      "l1_l2_l3": "业务运营/品牌与增长/实验设计",
+      "src_domain": "02-A_B实验",
+      "confidence": "high",
+      "user_summary": "让 LLM 从历史实验和用户评论里批量生成实验假设并打分排序，解决每月只能跑几个实验却不知先测哪个。",
+      "workflow": "汇总实验历史、用户评论与竞品素材并做聚合整理 → 用结构化 Prompt 让 LLM 生成候选实验假设 → 用 ICE 框架对假设自动评分 → 输出假设优先级排行榜与效应量预估 → 人工审核假设与平台规则约束后进入实验排期",
+      "triggers": [
+        "假设生成",
+        "优先级排序",
+        "ice评分",
+        "实验候选",
+        "voc提炼"
+      ],
+      "problem_140": "产品经理面临\"实验假设来源于个人经验导致覆盖面窄且漏掉高价值机会\"——LLM基于历史实验数据生成假设将候选假设多样性提升300%，年化发现更多增长机会增收20-40万元",
+      "algo_140": "传统 A/B 测试假设生成依赖人工经验，存在认知偏差（确认偏误、可得性启发）和覆盖盲区。LLM 辅助假设生成通过结构化 Prompt 框架，让大语言模型基于业务数据、用户行为洞察和学术研究，系统生成实验假设并进行多维度优先级评分。"
+    },
+    "b": {
+      "slug": "p2s-llm-experiment-hypothesis-generation",
+      "title": "LLM-Assisted Experiment Hypothesis Generation — LLM 辅助实验假设生成与优先级排序",
+      "l3": [
+        "实验设计",
+        "实验组合"
+      ],
+      "l1_l2_l3": "业务运营/品牌与增长/实验设计",
+      "src_domain": "02-A_B实验",
+      "confidence": "high",
+      "user_summary": "把团队里的一堆想法交给 LLM 批量打分排序，在有限实验位里挑出最值得测的那几个，顺带生出大促实验排期。",
+      "workflow": "汇总竞品 Listing、历史实验结果与用户 VOC 素材 → 用 LLM 生成 20 个以上候选实验假设 → 用 ICE 框架评分并筛出优先实验清单 → 补充效应量预估与实验设计建议到优先实验清单 → 按依赖关系与人力约束生成实验路线图与排期",
+      "triggers": [
+        "假设生成",
+        "ice框架",
+        "实验路线图",
+        "排期规划",
+        "假设筛选"
+      ],
+      "problem_140": "产品经理面临\"每周实验排期需要1天头脑风暴且假设质量参差不齐\"——LLM辅助假设生成将高质量实验假设产出效率提升4倍，年化加速产品迭代节省规划成本10-20万元",
+      "algo_140": "传统实验假设生成依赖专家直觉，存在确认偏误（Confirmation Bias）和覆盖盲区。LLM 辅助实验假设生成 将大语言模型作为结构化创意引擎，系统性地生成、评分和排序实验候选假设，并结合 ICE 框架（Impact × Confidence × Ease）进行优先级决策。"
+    },
+    "trig_jaccard": 0.11,
+    "shared_triggers": [
+      "假设生成"
+    ],
+    "title_identical": false,
+    "title_dice": 0.38,
+    "bucket": "adjacent",
+    "severity": 0.325
+  },
+  {
+    "idx": 341,
+    "preset": "agt-028",
+    "role": "AGT-028 译境",
+    "shared_l3": [
+      "市场语境审查",
+      "本地化"
+    ],
+    "a": {
+      "slug": "p2s-ai-cultural-sensitivity-localization",
+      "title": "AI Cultural Sensitivity Localization — AI文化敏感性本地化评估（跨市场内容风险）",
+      "l3": [
+        "市场语境审查",
+        "本地化"
+      ],
+      "l1_l2_l3": "业务运营/渠道经营/市场语境审查",
+      "src_domain": "11-AI人文",
+      "confidence": "high",
+      "user_summary": "上新前先扫一遍图文有没有踩当地文化禁忌，别等上线后被迫紧急下架。",
+      "workflow": "整理待上线素材与目标市场清单 → 载入各市场文化敏感词与禁忌知识库 → 逐市场扫描文案与图片描述并记录触发点 → 输出评分、冒犯点与修改建议",
+      "triggers": [
+        "文化敏感性扫描",
+        "跨市场内容风险",
+        "禁忌元素识别",
+        "本地化审核",
+        "上线前风险评分"
+      ],
+      "problem_140": "品牌团队面临\"产品图文进入新市场后因文化冒犯导致紧急下架危机\"——多市场文化敏感性扫描将跨市场内容风险识别率提升80%，年化节省危机公关成本20-40万元",
+      "algo_140": "母婴产品在跨境市场（美/欧/日/中东）面临文化敏感性差异：婴儿饮食禁忌（穆斯林清真认证）、育儿理念差异（美式自主睡眠 vs 日式共睡文化）、颜色禁忌（白色在日本代表丧葬）、手势/姿势禁忌等。AI文化敏感性评估通过多维度文化知识库+图像/文字分析，在上线前识别潜在冒犯内容。"
+    },
+    "b": {
+      "slug": "p2s-cultural-adaptation-agent",
+      "title": "Cultural Adaptation Agent — 跨文化适应：母婴跨境的本地化 AI 策略",
+      "l3": [
+        "本地化",
+        "市场语境审查"
+      ],
+      "l1_l2_l3": "业务运营/渠道经营/本地化",
+      "src_domain": "16-智能体工程",
+      "confidence": "high",
+      "user_summary": "同一款产品按目标市场的文化偏好换一套叙事框架和客服口吻，减少因说错话导致的跨市场差评。",
+      "workflow": "输入产品信息（含认证清单）与目标市场代码 → Agent 读取该市场文化特征并选择叙事框架（美国=科学权威+个人选择，德国=有机认证+长期健康） → 按框架重排卖点与认证展示顺序，并调整价格呈现方式（如营养价值比 $/oz） → 客服场景按检测到的市场与意图适配回复口吻 → 所有适配策略通过 A/B 测试验证后才上线",
+      "triggers": [
+        "文化适配agent",
+        "叙事框架重写",
+        "目标市场偏好",
+        "客服话术适配",
+        "认证优先展示",
+        "跨市场差评"
+      ],
+      "problem_140": "同款婴儿奶粉文案在美国强调\"便利快速\"，在日本却因缺乏安全认证描述而遭遇差评——文化适配 Agent 自动识别目标市场偏好差异并重写叙事框架，跨市场差评率降低 30%",
+      "algo_140": "论文：CultureLLM: Incorporating Cultural Differences into Large Language Models via Prompt Engineering | 年份：2023"
+    },
+    "trig_jaccard": 0,
+    "shared_triggers": [],
+    "title_identical": false,
+    "title_dice": 0.4,
+    "bucket": "adjacent",
+    "severity": 0.316
+  },
+  {
+    "idx": 111,
+    "preset": "agt-012",
+    "role": "AGT-012 灵枢",
+    "shared_l3": [
+      "算法评估设计",
+      "实验设计"
+    ],
+    "a": {
+      "slug": "p2s-interleaving-experiment-design",
+      "title": "Interleaving 实验设计 — 用混排对照替代传统 A/B，提升排序策略评估效率 10 倍",
+      "l3": [
+        "算法评估设计",
+        "实验设计"
+      ],
+      "l1_l2_l3": "业务运营/产品与创新/算法评估设计",
+      "src_domain": "02-A_B实验",
+      "confidence": "high",
+      "user_summary": "让同一个用户在同一次请求里看到 A、B 两套排序混排的结果，用他点了谁来判断哪套策略更好，几天就能出结论。",
+      "workflow": "准备搜索词、候选 ASIN 列表与 A/B 两套排序分 → 用 Team-Draft 方式混排两组列表并记录归属 → 收集用户点击并按归属归因到策略 → 用 bootstrap 做显著性检验并给出 Δ 置信区间 → 输出策略优劣结论",
+      "triggers": [
+        "interleaving",
+        "混排实验",
+        "team-draft",
+        "排序策略",
+        "显著性检验"
+      ],
+      "problem_140": "算法工程师面临\"排序策略A/B实验周期长、流量消耗大\"——Interleaving混排将实验所需样本量降低95%，年化多跑25轮迭代实验，GMV增量年化12.5万元",
+      "algo_140": "传统 A/B 实验将用户随机分为两组分别看到策略 A 或 B，需要大量流量和长时间才能检测出细微差异（因为用户间行为方差大）。Interleaving 的思路是：让同一个用户在同一次请求里同时看到两个策略混排的结果，通过用户点击哪个策略的内容来判断偏好。"
+    },
+    "b": {
+      "slug": "p2s-interleaving-ranking-ab-test",
+      "title": "Interleaving for Ranking AB Test — 排序系统的交叉实验（比传统 AB 更灵敏）",
+      "l3": [
+        "算法评估设计",
+        "实验设计"
+      ],
+      "l1_l2_l3": "业务运营/产品与创新/算法评估设计",
+      "src_domain": "02-A_B实验",
+      "confidence": "high",
+      "user_summary": "用交叉实验把两个排序列表混给同一批用户，把要 30 天才出结论的排序 A/B 压到 3 天，让模型迭代频率真正提上来。",
+      "workflow": "准备两版排序模型的候选列表与点击流日志 → 用 Team Draft 构建交叉列表并标记文档来源 → 采集 query 级点击并做归因统计 → 以 500-1,000 用户样本完成显著性判定 → 输出排序模型胜负与迭代结论",
+      "triggers": [
+        "交叉实验",
+        "排序灵敏度",
+        "搜索排序迭代",
+        "置信度加速",
+        "独立站推荐"
+      ],
+      "problem_140": "搜索产品经理面临\"排序算法微调传统AB实验不灵敏需要30天才能得出结论\"——交叉实验将相同置信度所需实验时间从30天缩短至7天，年化加速搜索排序优化周期节省机会成本25-45万元",
+      "algo_140": "交叉实验（Interleaving） 是评估排序/推荐系统优劣的高灵敏度在线实验方法，由 Netflix、Amazon、Spotify 等广泛应用。核心思想：将两个候选排序列表合并展示给同一用户，通过用户点击行为直接推断哪个列表更好，而非比较两组不同用户的平均行为。"
+    },
+    "trig_jaccard": 0,
+    "shared_triggers": [],
+    "title_identical": false,
+    "title_dice": 0.39,
+    "bucket": "adjacent",
+    "severity": 0.312
+  },
+  {
+    "idx": 302,
+    "preset": "agt-026",
+    "role": "AGT-026 衡价",
+    "shared_l3": [
+      "价格敏感性"
+    ],
+    "a": {
+      "slug": "p2s-causal-rl-dynamic-pricing",
+      "title": "Causal RL Dynamic Pricing — 因果强化学习动态定价：可信赖的自适应价格策略",
+      "l3": [
+        "价格敏感性",
+        "因果局限审查"
+      ],
+      "l1_l2_l3": "业务运营/渠道经营/价格敏感性",
+      "src_domain": "17-价格优化",
+      "confidence": "high",
+      "user_summary": "大促时又降价又加广告，帮你分清到底是哪一个在带销量，别再学错策略。",
+      "workflow": "整理日粒度价格、广告、销量与外生变量数据 → 用残差化方法剔除广告等混淆影响 → 估计真实价格弹性与置信区间 → 做反事实分析并只在不确定处小额探索",
+      "triggers": [
+        "因果定价",
+        "价格弹性",
+        "混淆剔除",
+        "double ml",
+        "反事实分析"
+      ],
+      "problem_140": "纯RL定价因广告混淆错误学到促销期降价总是有效策略大促后无效降价继续损耗利润——因果强化学习DoubleML剔除广告混淆后才估计真实价格弹性，防止策略崩溃年化避免错误策略损失20-60万元",
+      "algo_140": "经典 RL 定价的问题："
+    },
+    "b": {
+      "slug": "p2s-dynamic-bundle-pricing",
+      "title": "Dynamic Bundle Pricing — 动态捆绑定价：配套商品组合最优定价策略",
+      "l3": [
+        "组合设计",
+        "价格敏感性"
+      ],
+      "l1_l2_l3": "业务运营/渠道经营/组合设计",
+      "src_domain": "17-价格优化",
+      "confidence": "high",
+      "user_summary": "给配套商品套餐找到利润最大的那个价格点，顺便回答该把哪几件商品捆在一起、能让多少原本只买主机的客户顺手买配件。",
+      "workflow": "汇总各单品单价、成本、月需求与价格弹性 → 枚举候选商品组合并算成本、原价合计与折扣率 → 按最小单品需求×价格弹性影响×便利性加成估套餐需求 → 扫描价格得到利润曲线，取最大利润点作为最优套餐价 → 按利润率与 ROI 排出推荐组合与定价建议",
+      "triggers": [
+        "动态捆绑定价",
+        "套餐最优价",
+        "价格弹性曲线",
+        "配件渗透率",
+        "套餐组合 roi",
+        "客单价提升"
+      ],
+      "problem_140": "吸奶器配套储奶袋消毒器独立销售只有30%客户会主动购买配件——动态捆绑定价算法找到最优套餐组合和价格，配件渗透率提升到70%套餐利润率比单品高10-20%年化增益15-40万元",
+      "algo_140": "为什么捆绑销售利润更高："
+    },
+    "trig_jaccard": 0,
+    "shared_triggers": [],
+    "title_identical": false,
+    "title_dice": 0.37,
+    "bucket": "adjacent",
+    "severity": 0.295
+  },
+  {
+    "idx": 102,
+    "preset": "agt-008",
+    "role": "AGT-008 拓新",
+    "shared_l3": [
+      "组合取舍",
+      "转化优化"
+    ],
+    "a": {
+      "slug": "p2s-cold-start-meta-learning-pam",
+      "title": "Popularity-Aware Meta-Learning for Cold-Start Recommendation",
+      "l3": [
+        "组合取舍",
+        "转化优化"
+      ],
+      "l1_l2_l3": "业务运营/产品与创新/组合取舍",
+      "src_domain": "05-推荐系统",
+      "confidence": "medium",
+      "user_summary": "按流行度分层做元学习，让新品靠少量交互就获得接近成熟品的推荐效果。",
+      "workflow": "按流行度对 SKU 分层 → 在高流行度 SKU 上元训练 → 新品用少量交互快速适应 → 输出专属推荐模型",
+      "triggers": [
+        "元学习",
+        "冷启动推荐",
+        "流行度分层",
+        "快速适应"
+      ],
+      "problem_140": "推荐算法经理面临新品类冷启动——PAM将首日CTR 1.0%提到2.8%，年化增34万元",
+      "algo_140": "核心问题：母婴品类SKU迭代快（奶粉按月龄分段、辅食按月添加），新品上架无历史交互数据，传统协同过滤无法推荐。冷启动是母婴电商的结构性痛点。"
+    },
+    "b": {
+      "slug": "p2s-contextual-bandits-rec",
+      "title": "Contextual Bandits Recommendation — 在线探索-利用均衡推荐",
+      "l3": [
+        "组合取舍",
+        "转化优化"
+      ],
+      "l1_l2_l3": "业务运营/产品与创新/组合取舍",
+      "src_domain": "05-推荐系统",
+      "confidence": "medium",
+      "user_summary": "用在线探索算法主动给新品分配流量，让系统自己快速找到最优推荐位与价格点。",
+      "workflow": "定义上下文与候选臂特征 → 初始化每个臂的参数 → 按 UCB 得分选择并曝光 → 用奖励反馈更新参数 → 收敛后交回常规推荐",
+      "triggers": [
+        "在线探索",
+        "linucb",
+        "流量分配",
+        "冷启动加速"
+      ],
+      "problem_140": "运营面临\"新品上线7天曝光不足、推荐系统流量分配<0.1%\"——LinUCB在线探索将新品首周总曝光提升300%、7天后CVR高于Baseline15%，年化新品孵化成功率提升25%",
+      "algo_140": "Contextual Bandits（上下文多臂老虎机）是推荐系统中的在线学习框架，解决 Exploitation vs. Exploration 的权衡：既要推荐高置信度商品（利用已知偏好），又要探索新商品以更新用户模型，避免过度聚焦导致的过滤气泡。"
+    },
+    "trig_jaccard": 0,
+    "shared_triggers": [],
+    "title_identical": false,
+    "title_dice": 0.37,
+    "bucket": "adjacent",
+    "severity": 0.293
+  },
+  {
+    "idx": 445,
+    "preset": "agt-035",
+    "role": "AGT-035 试真",
+    "shared_l3": [
+      "因果局限审查",
+      "证据复核"
+    ],
+    "a": {
+      "slug": "p2s-sensitivity-analysis-causal",
+      "title": "Sensitivity Analysis Causal — 因果推断中的敏感性分析（Rosenbaum Bounds）",
+      "l3": [
+        "因果局限审查",
+        "证据复核"
+      ],
+      "l1_l2_l3": "业务运营/品牌与增长/因果局限审查",
+      "src_domain": "01-因果推断",
+      "confidence": "high",
+      "user_summary": "回答一个问题：要多强的隐藏因素才能推翻这个因果结论。",
+      "workflow": "完成倾向得分匹配并检查平衡性 → 跑基准显著性检验 → 计算混淆强度临界值 → 对照阈值判定稳健性 → 在汇报中附上稳健性结论",
+      "triggers": [
+        "敏感性分析",
+        "未观测混淆",
+        "混淆临界强度",
+        "匹配稳健性",
+        "结论可信度"
+      ],
+      "problem_140": "数据科学家面临\"因果推断结论是否对未观测混淆变量敏感无法判断\"——Rosenbaum敏感性分析将结论可信度从\"假设无混淆\"提升为带有敏感性边界的稳健证明，年化降低错误决策风险节省30-50万元",
+      "algo_140": "因果推断的核心威胁是未测量混淆（hidden confounders）：即使控制了所有可观测变量，仍可能有遗漏变量同时影响处理分配和结果。Rosenbaum 敏感性分析（Rosenbaum 2002）提供了一种量化工具，回答：「需要多强的未测量混淆才能推翻我的因果结论？」"
+    },
+    "b": {
+      "slug": "p2s-sensitivity-analysis-rosenbaum",
+      "title": "Rosenbaum 敏感性分析 — 未测量混淆对因果结论的影响量化",
+      "l3": [
+        "因果局限审查",
+        "证据复核"
+      ],
+      "l1_l2_l3": "业务运营/品牌与增长/因果局限审查",
+      "src_domain": "01-因果推断",
+      "confidence": "high",
+      "user_summary": "算出一个门槛值，说明要多强的隐藏偏差才能推翻促销效果的结论。",
+      "workflow": "准备匹配对与结果变量 → 计算无混淆下的基准检验 → 扫混淆强度求临界值 → 按阈值判定结论强度 → 据结论决定续约或补充实验",
+      "triggers": [
+        "混淆临界值",
+        "稳健性汇报",
+        "匹配结论复核",
+        "促销效果验证",
+        "结论强度判定"
+      ],
+      "problem_140": "PSM 因果结论因可能存在未测量混淆而被管理层质疑无法通过决策评审——引入 Rosenbaum 敏感性分析量化混淆临界值，Prime 会员促销效果结论获管理层采纳，年化决策信心价值折算提升12%。",
+      "algo_140": "核心问题：匹配法、PSM 等观测数据方法假设「强可忽略性」（无未测量混淆），但该假设不可验证。Rosenbaum（2002）提出敏感性分析，量化「需要多强的未测量混淆才能推翻当前因果结论」。"
+    },
+    "trig_jaccard": 0,
+    "shared_triggers": [],
+    "title_identical": false,
+    "title_dice": 0.36,
+    "bucket": "adjacent",
+    "severity": 0.289
+  }
+]
