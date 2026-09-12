@@ -22,8 +22,14 @@
     "types": ["node"],
     "rootDir": "src",
     "outDir": "lib/types",
-    "tsBuildInfoFile": "lib/tsconfig.tsbuildinfo"
+    "tsBuildInfoFile": "lib/tsconfig.tsbuildinfo",
+    "paths": {
+      "@deepseek-ai/dsh-session/internal-types": ["./node_modules/@deepseek-ai/dsh-session/lib/types/types.d.ts"]
+    }
   },
+  "files": [
+    "types/upstream-declaration-gaps.d.ts"
+  ],
   "include": [
     "src"
   ]

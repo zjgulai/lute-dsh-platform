@@ -48,10 +48,20 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
+    "@deepseek-ai/dsh-client-locale": "*",
+    "@deepseek-ai/dsh-client-store": "*",
+    "@deepseek-ai/dsh-client-ui-settings": "*",
+    "@deepseek-ai/dsh-client-ui-slots": "*",
+    "@deepseek-ai/dsh-client-ui-theme": "*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@deepseek-ai/dsh-client-locale": "file:../../../vendor/dsh-desktop/vendor/dsh-runtime/0.1.2-rc.1/deepseek-ai-dsh-client-locale-0.1.2-rc.1.tgz",
+    "@deepseek-ai/dsh-client-store": "file:../../../vendor/dsh-desktop/vendor/dsh-runtime/0.1.2-rc.1/deepseek-ai-dsh-client-store-0.1.2-rc.1.tgz",
+    "@deepseek-ai/dsh-client-ui-settings": "file:../../../vendor/dsh-desktop/vendor/dsh-runtime/0.1.2-rc.1/deepseek-ai-dsh-client-ui-settings-0.1.2-rc.1.tgz",
+    "@deepseek-ai/dsh-client-ui-slots": "file:../../../vendor/dsh-desktop/vendor/dsh-runtime/0.1.2-rc.1/deepseek-ai-dsh-client-ui-slots-0.1.2-rc.1.tgz",
+    "@deepseek-ai/dsh-client-ui-theme": "file:../../../vendor/dsh-desktop/vendor/dsh-runtime/0.1.2-rc.1/deepseek-ai-dsh-client-ui-theme-0.1.2-rc.1.tgz",
     "@types/node": "^22.20.1",
     "@types/react": "^18.3.31",
     "tsdown": "^0.22.14",

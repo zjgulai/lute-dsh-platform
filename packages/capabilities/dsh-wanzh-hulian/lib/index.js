@@ -942,13 +942,43 @@ async function gate() {
   if (!state.enabled) return { disconnected: true };
   return { disconnected: false };
 }
+/**
+ * 工具的纯文本卡片渲染。
+ * @param {any} _args 解析后的参数（文本投影不使用）。
+ * @param {{ ok?: boolean, text?: string, error?: string, data?: any, disconnected?: boolean }} value 规范值。
+ * @returns {Array<{ type: "text", text: string }>} 内容块。
+ */
 function renderText(_args, value) {
   if (value?.disconnected === true) return [{ type: "text", text: "得到大脑连接已断开：请在 设置 → 万物互联 → 得到大脑 卡片打开连接总开关。" }];
   if (value?.ok !== true) return [{ type: "text", text: value?.error ?? "得到大脑操作失败" }];
   return [{ type: "text", text: typeof value.text === "string" ? value.text : JSON.stringify(value.data ?? value, null, 2) }];
 }
+/**
+ * 19 个工具共用的输出投影。
+ *
+ * 规范值刻意声明成**闭合**对象（五个顶层键 = 全部 execute 返回值的并集），
+ * 而不是 `additionalProperties: true`：`defineTool` 对开放对象推出的值类型是
+ * `Record<string, JsonValue>`，而 TS 把「可能缺席的可选字段」归一成 `?: undefined`，
+ * `undefined` 不是 `JsonValue`——开放写法下 19 个工具一个都过不了 `tsc`。
+ * 闭合后推成 `{ ok?: boolean; text?: string; error?: string; data?: JsonValue; disconnected?: boolean }`，
+ * 与 19 个工具实际返回的形状一致（键集合逐一枚举过，见 ADR-0055）。
+ * @returns {{ schema: { readonly type: "object", readonly additionalProperties: false, readonly properties: { readonly ok: { readonly type: "boolean" }, readonly text: { readonly type: "string" }, readonly error: { readonly type: "string" }, readonly data: { readonly type: "json" }, readonly disconnected: { readonly type: "boolean" } } }, render: typeof renderText }} 输出投影：规范化 schema + 文本渲染。
+ */
 function textOutput() {
-  return { schema: { type: "object", additionalProperties: true }, render: renderText };
+  return {
+    schema: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        ok: { type: "boolean" },
+        text: { type: "string" },
+        error: { type: "string" },
+        data: { type: "json" },
+        disconnected: { type: "boolean" }
+      }
+    },
+    render: renderText
+  };
 }
 
 /* ── 路由 ─────────────────────────────────────────────────────────────── */

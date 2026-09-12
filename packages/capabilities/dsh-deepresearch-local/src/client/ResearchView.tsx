@@ -553,10 +553,16 @@ function EvidenceCard({ evidence, t }: { evidence: ResearchEvidenceView; t: Tran
 function ReportPane({ project, t, busy, onRewrite }: { project: ResearchProject; t: Translate; busy: boolean; onRewrite: () => void }) {
   const accepted = project.evidence.filter(item => item.status !== 'candidate' && item.status !== 'rejected')
   const writing = project.phase === 'writing' && project.runState === 'running'
+  // `MarkdownText` 的 `labels` 必须是**引用稳定**的对象（换身份会丢掉流式渲染缓存），
+  // 所以按 locale 记忆，而不是每次渲染现造一个（ADR-0055）。
+  const markdownLabels = useMemo(() => ({
+    code: { copyLabel: t('markdown.codeCopy'), copiedLabel: t('markdown.codeCopied') },
+    footnotes: t('markdown.footnotes'),
+  }), [t])
   return <section className={css.reportPane}>
     <div className={css.sectionHeader}><div><h3>{t('report.title')}</h3><p>{t('report.subtitle')}</p></div>{project.planConfirmed && !writing ? <button className={css.primaryButton} type="button" disabled={busy} onClick={onRewrite}>{project.report ? t('report.retry') : t('investigate.writeReport')}</button> : null}</div>
     {project.report !== null
-      ? <article className={css.reportDocument}><MarkdownText text={project.report} streaming={writing} /></article>
+      ? <article className={css.reportDocument}><MarkdownText text={project.report} streaming={writing} labels={markdownLabels} /></article>
       : writing
         ? <div className={css.reportPending} role="status"><IconLoading className={css.spinner} size={16} /><span>{t('report.writing')}</span></div>
         : <div className={css.reportPending}>{t('report.empty')}</div>}

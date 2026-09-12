@@ -367,6 +367,11 @@ export function normalizeExportMaps({ outDir, packages }) {
  * 这属于上游类型完整性缺陷；本仓库无法在上游修复，因此在**类型供给侧**以显式、
  * 可审计的方式补齐，而不是在各插件里散落 `as any` 或本地重复声明。
  * 每一条都写明依据，便于上游修复后删除。
+ *
+ * 同一份事实还有第二个消费面：走内建运行时 tgz **直装**的包看不到本函数的产物，
+ * 它们把同样三条写进入库的模块增强——
+ * `packages/surfaces/dsh-agent-team-gui-local/types/upstream-declaration-gaps.d.ts`。
+ * 两处同源，上游修复后一起删（ADR-0055 决策 11）。
  * @param {{outDir: string}} input 类型来源目录
  * @returns {string[]} 已补齐的条目描述
  */

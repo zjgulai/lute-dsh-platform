@@ -87,6 +87,17 @@ async function exaSearch(ctx, query, numResults, type, signal) {
   }
 }
 
+/**
+ * exa_search 的纯文本卡片渲染。
+ *
+ * 返回类型必须显式写出来：`defineTool` 的 `render` 是靠**上下文类型**把
+ * `[{ type: "text", … }]` 里的字面量收成 `"text"` 的，而独立函数声明不在
+ * 那个上下文里——不写就没有收窄，`type: string` 对不上 `ContentBlock`，
+ * `tsc` 报 TS2322（ADR-0055）。
+ * @param {any} _args 解析后的参数（文本投影不使用）。
+ * @param {any} value 规范值。
+ * @returns {Array<{ type: "text", text: string }>} 内容块。
+ */
 function renderExa(_args, value) {
   if (value?.ok !== true) return [{ type: "text", text: value?.error ?? "Exa 检索失败" }];
   if (!Array.isArray(value.results) || value.results.length === 0) return [{ type: "text", text: "Exa 无结果。" }];

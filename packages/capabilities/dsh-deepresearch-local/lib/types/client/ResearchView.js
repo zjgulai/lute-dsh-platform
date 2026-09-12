@@ -350,8 +350,14 @@ function EvidenceCard({ evidence, t }) {
 function ReportPane({ project, t, busy, onRewrite }) {
     const accepted = project.evidence.filter(item => item.status !== 'candidate' && item.status !== 'rejected');
     const writing = project.phase === 'writing' && project.runState === 'running';
+    // `MarkdownText` 的 `labels` 必须是**引用稳定**的对象（换身份会丢掉流式渲染缓存），
+    // 所以按 locale 记忆，而不是每次渲染现造一个（ADR-0055）。
+    const markdownLabels = useMemo(() => ({
+        code: { copyLabel: t('markdown.codeCopy'), copiedLabel: t('markdown.codeCopied') },
+        footnotes: t('markdown.footnotes'),
+    }), [t]);
     return _jsxs("section", { className: css.reportPane, children: [_jsxs("div", { className: css.sectionHeader, children: [_jsxs("div", { children: [_jsx("h3", { children: t('report.title') }), _jsx("p", { children: t('report.subtitle') })] }), project.planConfirmed && !writing ? _jsx("button", { className: css.primaryButton, type: "button", disabled: busy, onClick: onRewrite, children: project.report ? t('report.retry') : t('investigate.writeReport') }) : null] }), project.report !== null
-                ? _jsx("article", { className: css.reportDocument, children: _jsx(MarkdownText, { text: project.report, streaming: writing }) })
+                ? _jsx("article", { className: css.reportDocument, children: _jsx(MarkdownText, { text: project.report, streaming: writing, labels: markdownLabels }) })
                 : writing
                     ? _jsxs("div", { className: css.reportPending, role: "status", children: [_jsx(IconLoading, { className: css.spinner, size: 16 }), _jsx("span", { children: t('report.writing') })] })
                     : _jsx("div", { className: css.reportPending, children: t('report.empty') }), accepted.length === 0 ? null : _jsxs("section", { className: css.evidencePane, children: [_jsxs("h4", { className: css.boardHeading, children: [t('evidence.sourcesTitle'), " ", _jsx("span", { children: accepted.length })] }), _jsx("div", { className: css.evidenceGrid, children: accepted.map(item => _jsx(EvidenceCard, { evidence: item, t: t }, item.id)) })] })] });

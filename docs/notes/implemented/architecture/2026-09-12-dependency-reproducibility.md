@@ -122,3 +122,51 @@ version: link:../../../../../Applications/DSH Desktop.app/Contents/Resources/app
 - `dsh-deepresearch-local` 的 `@deepseek-ai/dsh-storage-sqlite` / `dsh-web-fetch-http` 在 `dependencies` 里是 `^0.1.1-rc.2`，而同名 devDependency 写的是 `^0.1.5-rc.1`（本轮删掉了不生效的那一侧，行为不变）。两者差一个大版本段，是否升到 `^0.1.5-rc.1` 需要一次带验证的迁移，不在本轮。
 - 未解：`dsh-preset-lint-local` 那次 `ERR_PNPM_OUTDATED_LOCKFILE` 只出现过一次，之后三轮均绿。新门禁绕开了这层不确定性，但这个现象本身没有解释。
 - 上一轮记下的 `.scratch` 明文密钥降级仍未做；本轮的现场记录只写进 `.scratch/dependency-reproducibility/README.md`，不入库。
+
+---
+
+# 第二轮（同一天）：5 个包的宿主类型改走内建运行时 tgz —— 以及为什么其中一个要整份闭包
+
+## Problem
+
+第一轮的接受标准没达成：干净检出里 `scripts-runnable` 红 5 个包。根因已量清——这 5 个包的 `@deepseek-ai/*` 是**手做的机器本地符号链接**（`/Applications/DSH Desktop.app/…` 或仓库根的 `.dsh-types/`），`pnpm install` 不会造出它们。
+
+第二轮把类型来源换掉之后，暴露出三层此前看不见的东西：
+
+1. **类型的语义第一次真实生效**。旧链接指向应用打包产物，那里**不带 `.d.ts`**（ADR-0017 的背景），加上 `noImplicitAny: false`，`defineTool` 之类全是 `any`——`tsc` 绿不代表查过。换上真类型后，两个包立刻报出真实错误：`dsh-overseas-tools` 的 `renderExa` 返回 `{type: string}` 未收窄（`TS2322`）；`dsh-wanzh-hulian` 19 个工具共用的 `additionalProperties: true` 输出 schema 被推成 `Record<string, JsonValue>`，而「可能缺席的可选字段」在 TS 里归一成 `?: undefined`，`undefined` 不是 `JsonValue`——19 个工具 × 2 条，一个都过不了。
+2. **`.dsh-types` 不是多余的，但它的可用性依赖「同名包必须是符号链接」**：`.dsh-types/node_modules/@deepseek-ai/` 是完整的扁平 251 个包，包内 symlink 的 realpath 落在那棵树里，任何传递 import 都能解析。一旦同名包以**实体目录**装进 `node_modules`，realpath 不再落在供给树里，机制静默失效——干净检出里 `dsh-agent-team-gui-local` 的 `TS2305 ConnectionRpcResult` 正是这个。
+3. **`tsc -b` 的增量状态会给出假绿**。`dsh-deepresearch-local` 的 `typecheck` 是 `tsc -b`：主仓里它退出 **0**，而 `tsc -b --force` 立刻报 `src/client/ResearchView.tsx(559,50): TS2741 Property 'labels' is missing`。干净检出（没有 `lib/*.tsbuildinfo`）报的正是后者。**「绿」必须用 `--force` 或干净检出定义**，否则量的是缓存。
+4. **宿主包的 `.d.ts` 互相 import，闭包不小**：`dsh-agent-team-gui-local` 的 client 半只 import 6 个入口包，而这 6 个的 `lib/types/**/*.d.ts` 引用闭包实测 **54 个包**；并入这些包 `dependencies`/`peerDependencies` 中运行时存在者得 **72 个**。
+
+## Decision
+
+1. **宿主类型逐条从内建运行时 tgz 声明**（`file:../../../vendor/dsh-desktop/vendor/dsh-runtime/0.1.2-rc.1/deepseek-ai-<name>-0.1.2-rc.1.tgz`，ADR-0017 决策 1 的落地）。`dsh-overseas-tools` 1 条、`dsh-wanzh-hulian` 2 条、`dsh-theme-local` 5 条、`dsh-deepresearch-local` 24 条。deepresearch 那 24 条同时把它原先从**注册表 npm 发布线**拉的 `^0.1.5-rc.1` 整条清掉——那条线是 ADR-0017 明确否决过的（「只用内置 alpha SDK，不引入 npm 发布线（防双实例）」），而且它与随应用交付的运行时不是同一份字节：源码一直是对着运行时写的，`@deepseek-ai/dsh-client-ui-primitives@0.1.5-rc.1` 的 `MarkdownText` 要 `labels`、运行时的那份不要，`TS2741` 就是这么来的。
+2. **类型图有传递依赖的包按闭包声明**：`dsh-agent-team-gui-local` 的 72 条逐条 tgz。少一个不是警告而是**静默变 any**：`dsh-client-ui-slots` 的 `SessionStandardProps` 是**空接口**，`sessionId` / `useSessions` 由 `dsh-client-ui-session` 的 `declare module` 合并进来；该包不在树里时 `skipLibCheck` 把未解析的 import 静默转成 `any`，报错落在源码上（`TS2339`），看不出病根。
+3. **判据不是「`tsc` 绿」，是「没有解析失败」**：`tsc --traceResolution` 里 `@deepseek-ai/*` 的解析失败条数（实测 0）。
+4. **上游声明的三条缺口写进入库的模块增强**：`Session.events`、`SessionHeader.seedLength`、`JsonValue` 重导出（运行时真有、`.d.ts` 里没有）。`scripts/gates/dsh-types.mjs::augmentDeclarations()` 一直在 `.dsh-types/` 里补这三条；走 tgz 直装的包看不到那份生成物，所以同样三条以 `packages/surfaces/dsh-agent-team-gui-local/types/upstream-declaration-gaps.d.ts` 表达，由 tsconfig 的 `files` 纳入。两处同源、交叉引用，上游修复后一起删。
+5. **`MarkdownText` 的 `labels` 按 locale 供一次、引用稳定**：新增三个 locale 键（`markdown.codeCopy` / `markdown.codeCopied` / `markdown.footnotes`），在 `ReportPane` 里用 `useMemo(..., [t])` 构造。上游声明写明这个对象必须引用稳定（换身份会丢掉流式渲染缓存），现造一个对象是不合规的。
+6. **真实类型错误修在类型上，不压掉**：`renderExa` 补显式 `@returns`；`textOutput()` 的输出 schema 从开放改成闭合五键（`ok`/`text`/`error`/`data`/`disconnected`——全部 execute 返回值的并集，静态枚举过）。
+
+## Alternatives considered
+
+- **沿用 `.dsh-types` 的符号链接供给。** 它其实是被低估的机制（见 Problem 2），而且不需要在 24 个清单里各写一遍类型来源。放弃的理由：那份供给是 gitignore 的生成物，`pnpm install` 不造它（`scripts/dsh-types.mjs --apply` 才会，而它没有被写进任何上手步骤）；更要紧的是它与「按清单装出来的实体目录」互斥——干净检出里 5 个包红正是这套机制被实体目录挡住的结果。tgz 直装把「类型从哪来」变成清单里可读的一行。
+- **只装直接依赖，传递的交给 `skipLibCheck`。** 就是 Problem 2 里描述的静默 any：绿与不绿都不说明类型检查真的跑过。ADR-0017 的立意正是「类型检查要有真实语义」。
+- **给 agent-team 加一条 `paths` 回落到 `.dsh-types`（实测不可行）。** `paths` 的替换是**字面路径**、不走 package `exports`：`@deepseek-ai/dsh-client-ui-session/client` 会去找 `.dsh-types/…/dsh-client-ui-session/client` 这个不存在的目录（真路径是 `lib/types/client`）——子路径导入一律落空。加 `baseUrl` 也一样。
+- **把 agent-team 的 client 半排除出 typecheck。** 最省事，等于承认它的类型是空的；而这个包的 client 半正是它的主体。
+- **用 `as any` / 放宽 tsconfig 压掉那 4 条新报的错误。** 那几条是真实缺陷被首次看见，压掉就等于把 ADR-0017 的收益重新交回去。
+
+## Consequences
+
+**正面**
+
+- **接受标准达成**：干净检出（`git worktree @ 84aba6d` + 本轮 5 包改动 + 接上嵌套 vendor 仓）里逐包 `pnpm install --frozen-lockfile` **24/24 退出 0**、`gate` quick **16/16**、`gate:full` **20/20**。中间那轮 19/20 的唯一红项是 `scripts-runnable` 的 `dsh-deepresearch-local`（`TS2741` `labels`），修掉后复跑得到 20/20。
+- 5 个包在**主仓树**里全绿（`dsh-deepresearch-local` 用 `tsc -b --force` 判定）：`dsh-overseas-tools` typecheck 0 / test 8 passed；`dsh-wanzh-hulian` typecheck 0（此前 38 条 `TS2322`）/ test 10 passed；`dsh-theme-local` typecheck 0 / test 20 passed；`dsh-deepresearch-local` `tsc -b` 0 / test 38 passed；`dsh-agent-team-gui-local` typecheck 0 / test **66 + 119** passed（含 `prepare` 里的完整构建）/ client program 解析失败 **0 条**。
+- 新门禁 `deps-reproducible` 在 quick 模式下对 24 个包报 0 条违规；`profile-metadata-sync` / `profile-files-sync` / `profile-bundle-sync` 按门禁提示同步后一并转绿，quick **17/17**。
+- `dsh-deepresearch-local` 从「typecheck 红」变成「按运行时 tgz 装出来 `tsc -b --force` 零错误、48 个测试全过」——顺带证明它的源码一直是对着内建运行时写的，注册表那条线才是漂移源；它的测试也从「`dsh-session` 被 peer 自动装成 **0.1.0-rc.8**、与运行时的 `dsh-llm` 对不上（`CallId` 在 0.1.2-rc.1 已改名 `ToolCallId`）」变成稳定。
+
+**负面**
+
+- `dsh-agent-team-gui-local` 的 `devDependencies` 从 23 条宿主 pin 涨到 87 条（闭包 72 + 工具链）。这是「DSH 运行时是个扁平完整集」的直接代价：宿主包之间不声明彼此的依赖，所以谁的类型图跨包，谁就得自己把闭包写全。换运行时版本时要整体重生成。
+- `dsh-wanzh-hulian` 的 19 个工具输出 schema 由开放收紧成闭合五键。现有返回路径的键全在这五个之内（静态枚举过），但这是一次**运行时 schema 收紧**，不是纯类型改动。
+- cordis 插件族仍有 peer 版本告警（`cordis-plugin-loader` 1.0.2 vs `^1.0.3`、`cordis-plugin-include` 1.0.6 vs `^1.0.7`），`pnpm install` 退出 0，本轮未处理。
+- **干净检出验收的口径要改**：`git worktree` 检出**不含嵌套 vendor 仓**（外层只 track `vendor/dsh-desktop.pin`），而 `file:` tgz 全在那棵树里。缺了它，6 个包的 `pnpm install` 直接崩（pnpm 读不到 tgz 目标），`scripts-runnable` 连带报 127「脚本执行体不存在」——这不是包的问题，是验收姿势的问题。干净检出必须把 `vendor/dsh-desktop` 接上。
