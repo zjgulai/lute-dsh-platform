@@ -29,19 +29,20 @@ say(){ echo "[assemble] $*"; }
 # 所以：装配开始前记一次指纹，两次拷贝都落盘后复核；不一致就作废本次装配（宁可不发）。
 FREEZE_START="$PKG_ROOT/staging/.freeze-$VERSION.start"
 FREEZE_END="$PKG_ROOT/staging/.freeze-$VERSION.end"
-source_fingerprint(){ # <输出文件>
-  : > "$1"
-  for f in "$PROFILE/package.json" "$PROFILE/cordis.patch.yml" "$PROFILE/pnpm-lock.yaml"; do
-    [ -f "$f" ] && shasum -a 256 "$f" >> "$1"
+source_fingerprint(){ # <输出文件> <profile 目录>
+  local out="$1" prof="$2"
+  : > "$out"
+  for f in "$prof/package.json" "$prof/cordis.patch.yml" "$prof/pnpm-lock.yaml"; do
+    [ -f "$f" ] && shasum -a 256 "$f" >> "$out"
   done
   find "$DSH_HOME_DIR/.agent-presets" -name 'agent.cordis.yml' -type f 2>/dev/null | sort \
-    | xargs shasum -a 256 >> "$1" 2>/dev/null || true
-  # node_modules 顶层清单：外部产品的挂载/摘除都会改它（只改内容不改目录名的情形由下面
-  # 的 profile 文件哈希兜住；node_modules 全树哈希代价太高，不在这里做）
-  { ls "$PROFILE/node_modules" 2>/dev/null | sort | shasum -a 256; } | sed 's/$/  node_modules-top-level/' >> "$1"
+    | xargs shasum -a 256 >> "$out" 2>/dev/null || true
+  # node_modules 顶层清单：外部产品的挂载/摘除都会改它（只改内容不改目录名的情形由上面的
+  # profile 文件哈希兜住；node_modules 全树哈希代价太高，不在这里做）
+  { ls "$prof/node_modules" 2>/dev/null | sort | shasum -a 256; } | sed 's/$/  node_modules-top-level/' >> "$out"
 }
 mkdir -p "$PKG_ROOT/staging"
-source_fingerprint "$FREEZE_START"
+source_fingerprint "$FREEZE_START" "$PROFILE"
 say "打包源指纹已记录（$(wc -l < "$FREEZE_START" | tr -d ' ') 项）：$(cut -c1-8 "$FREEZE_START" | tr '\n' ' ')"
 
 # ── 前置校验 ────────────────────────────────────────────────────────────────
@@ -81,6 +82,27 @@ fi
 FREE_KB="$(df -k "$PKG_ROOT" | awk 'NR==2{print $4}')"
 [ "${FREE_KB:-0}" -ge 6000000 ] || { echo "[assemble] 磁盘空间不足（需 ≥6G，现有 $((FREE_KB/1024))M）"; exit 1; }
 rm -rf "$STAGE"; mkdir -p "$PAYLOAD/tools"
+
+# ── 0. 打包源快照（先把「活的」变成「冻的」，之后全程只读快照）──────────────────
+# 打包源是本机 live profile + ~/.dsh/.agent-presets，它们是开发机的**运行时状态**：
+# 另一个会话、apply-patches、pnpm install 都会随时改它。2026-09-12 实测到并发改动
+# 落在装配中途 → 同一份载荷的两次拷贝内容不一致（内嵌副本 21:12 拷的无某包、
+# profile.tar.gz 21:30 打的有）。靠「请别人别改」不是工程解，靠事后比对只是**发现**问题。
+# 解是结构性的：动工前把源快照下来（APFS clone，秒级），此后 profile.tar.gz 与内嵌副本
+# 读的是同一份快照 → 同源是构造保证，而不是检查出来的。
+PROFILE_LIVE="$PROFILE"
+PROFILE="$STAGE/.profile-src"
+say "0/7 打包源快照（clone）…"
+cp -cR "$PROFILE_LIVE" "$PROFILE" 2>/dev/null || cp -R "$PROFILE_LIVE" "$PROFILE"
+[ -f "$PROFILE/package.json" ] || { echo "[assemble] 快照失败: $PROFILE/package.json 不存在"; exit 1; }
+SP="$STAGE/.sp"
+mkdir -p "$SP/skills" "$SP/presets"
+if [ -d "$DSH_HOME_DIR/.agent-presets" ]; then
+  # presets 与 profile 同一时刻落快照：剥离要**同时**看两者（外部包名只在未剥离的
+  # profile 里算得出来），技能选择也要读剥离后的副本。
+  cp -R "$DSH_HOME_DIR/.agent-presets/." "$SP/presets/"
+fi
+say "快照就绪（profile $(du -sh "$PROFILE" | cut -f1)，presets $(ls "$SP/presets" | wc -l | tr -d ' ') 个）"
 
 # ── 1. app 本体（增量缓存 → 暂存改写；签名与压缩推迟到 §2b 双落位之后）──────────
 say "1/6 暂存 app 本体（缓存命中则 APFS clone，秒级）"
@@ -236,13 +258,6 @@ node "$PKG_ROOT/scripts/rewrite-file-deps.mjs" "$STAGEP/profile"
 #     （内嵌副本 21:12 拷的没有该包，profile.tar.gz 21:30 打的有该包）。
 # 判据是结构性的（重写之后本仓库的包一律 file:./vendor/，其余 file: 即外部），不存清单。
 say "出货投影：剥离本机装配的外部产品（profile + presets 一次算清）…"
-SP="$STAGE/.sp"
-mkdir -p "$SP/skills" "$SP/presets"
-if [ -d "$DSH_HOME_DIR/.agent-presets" ]; then
-  # presets 在这里就落暂存（而不是等到 §3），因为剥离要**同时**看 profile 与 presets：
-  # 外部包名只在未剥离的 profile 里算得出来，第二次跑就再也算不出来了。
-  cp -R "$DSH_HOME_DIR/.agent-presets/." "$SP/presets/"
-fi
 node "$PKG_ROOT/scripts/strip-local-products.mjs" --profile "$STAGEP/profile" --presets "$SP/presets" \
   || { echo "[assemble] ✗ 出货投影失败（见上）：有剥离脚本不认识的残留形态，必须人工看。" >&2; exit 1; }
 
@@ -337,17 +352,20 @@ tar -czf "$PAYLOAD/skills-presets.tar.gz" --exclude '.DS_Store' -C "$SP" skills 
 rm -rf "$SP"
 say "技能+预设完成 ($(du -sh "$PAYLOAD/skills-presets.tar.gz" | cut -f1))"
 
-# 打包源冻结复核：profile.tar.gz 与 skills-presets.tar.gz 都已落盘，此刻源若被改过，
-# 两份拷贝就不是同一次快照 → 作废（见文件顶部 source_fingerprint 的说明与实测案例）。
-source_fingerprint "$FREEZE_END"
+# 打包源变更复核（**告警，不是失败**）：产物读的是 §0 的快照，所以中途改动不会让载荷
+# 自相矛盾（同源已是构造保证）；但「产物对应的是 T0 时刻的本机状态」这件事必须说出来，
+# 否则谁也不知道自己手上这份载荷对应哪个源。指纹同时写进 VERSION，供事后对照。
+source_fingerprint "$FREEZE_END" "$PROFILE_LIVE"
 if ! diff -q "$FREEZE_START" "$FREEZE_END" >/dev/null 2>&1; then
-  echo "[assemble] ✗ 打包源在装配过程中被改动——本次载荷不是一次快照，禁止发布。" >&2
-  echo "          差异（左=开始，右=结束）：" >&2
+  echo "[assemble] ⚠ 装配期间本机源被改动过（产物仍自洽：读的是 §0 快照）：" >&2
   diff "$FREEZE_START" "$FREEZE_END" | head -20 >&2
-  echo "          处置：等本机 profile / .agent-presets 安静下来后重跑装配。" >&2
-  exit 1
+  echo "          含义：本次载荷 = T0 快照，与该时刻之后的本机状态不同源。" >&2
+  SNAPSHOT_LINE="PROFILE_SNAPSHOT=$(shasum -a 256 "$FREEZE_START" | cut -c1-16)$(printf ' (源在装配期间有改动)')"
+else
+  say "打包源复核通过（装配期间 profile 与 presets 未被改动）"
+  SNAPSHOT_LINE="PROFILE_SNAPSHOT=$(shasum -a 256 "$FREEZE_START" | cut -c1-16)"
 fi
-say "打包源冻结复核通过（装配期间 profile 与 presets 未被改动）"
+printf '%s\n' "$SNAPSHOT_LINE" >> "$PAYLOAD/VERSION"
 
 # ── 4. 灵枢 venv 便携化（python-build-standalone 基底，免 venv 机制）──────────────
 say "4/6 灵枢 aeis 运行时便携化"
@@ -451,6 +469,10 @@ const m={name:'dsh-desktop-lute',version:process.argv[2],build:process.argv[3],d
 fs.writeFileSync(payload+'/manifest.json',JSON.stringify(m,null,2)+'\n');" "$PAYLOAD" "$VERSION" "$BUILD"
 
 # 完整性清单：所有 bundle/vendor/skills/presets 的权威列表（供 smoke 逐一比对）
+# 输入必须是**出货的那份** profile manifest（profile.tar.gz 里的），不是本机快照里的：
+# 出货投影会剥掉外部产品依赖与 bundle，读源 manifest 会把客户机上不存在的东西列进清单。
+tar -xzOf "$PAYLOAD/profile.tar.gz" ./package.json > "$STAGE/.shipped-package.json" 2>/dev/null \
+  || { echo "[assemble] ✗ 读不出出货 profile manifest（completeness 无法生成）" >&2; exit 1; }
 node -e "
 const fs=require('fs'),path=require('path');
 const p=require(process.argv[1]);
@@ -484,7 +506,7 @@ const out=process.argv[4]+'/completeness.json';
 fs.writeFileSync(out,JSON.stringify(c,null,2)+'\n');
 if(!fs.existsSync(out)){console.error('completeness.json 未写出: '+out);process.exit(1);}
 console.log('bundles='+c.bundles.length+' vendor='+c.vendor.length+' skills='+c.skills.length+' presets='+c.presets.length+' → '+out);
-" "$PROFILE/package.json" "$PAYLOAD" "$DSH_HOME_DIR" "$PAYLOAD"
+" "$STAGE/.shipped-package.json" "$PAYLOAD" "$DSH_HOME_DIR" "$PAYLOAD"
 [ -f "$PAYLOAD/completeness.json" ] || { echo "[assemble] ✗ completeness.json 未写进 payload（冒烟的清单比对会全红）" >&2; exit 1; }
 
 say "汇编完成：$PAYLOAD"
