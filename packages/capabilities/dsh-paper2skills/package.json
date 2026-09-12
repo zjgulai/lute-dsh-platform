@@ -1,0 +1,45 @@
+{
+  "name": "dsh-paper2skills",
+  "version": "0.1.0",
+  "luteOrigin": "self",
+  "luteOwner": "lute",
+  "lutePublish": false,
+  "description": "论文技能库：把 paper2skills 语料的技能卡按岗位矩阵 4 面 / 8 责任域 / 151 细分业务三层分类，适配为 DSH skill 并安装进技能库。",
+  "type": "module",
+  "exports": {
+    ".": "./lib/taxonomy.js",
+    "./taxonomy": "./lib/taxonomy.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/taxonomy.js",
+    "data/taxonomy.json",
+    "data/classification.json"
+  ],
+  "scripts": {
+    "build:code-availability": "python3 scripts/build-code-availability.py",
+    "build:code-recovery": "python3 scripts/build-source-code.py",
+    "build:provenance": "python3 scripts/build-provenance.py",
+    "build:taxonomy": "node scripts/build-taxonomy.mjs",
+    "classify:check": "node scripts/classify-check.mjs",
+    "classify:merge": "node scripts/merge-classification.mjs",
+    "eval:l6:cases": "node eval/build-cases.mjs",
+    "eval:l6:report": "node eval/l6-report.mjs",
+    "eval:l7:cases": "node eval/build-l7-cases.mjs",
+    "eval:static": "node eval/static-routing.mjs",
+    "extract:cards": "node scripts/extract-cards.mjs",
+    "install:skills": "node scripts/import-paper2skills.mjs",
+    "selftest:code-recovery": "python3 scripts/build-source-code.py --selftest",
+    "test": "node --test test/*.spec.mjs",
+    "typecheck": "tsc -p tsconfig.json --pretty false",
+    "verify:code-availability": "python3 scripts/build-code-availability.py --check",
+    "verify:code-recovery": "python3 scripts/build-source-code.py --check",
+    "verify:install": "node scripts/verify-install.mjs",
+    "verify:provenance": "python3 scripts/build-provenance.py --check"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "typescript": "5.6.3"
+  }
+}

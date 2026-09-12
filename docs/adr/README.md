@@ -47,6 +47,14 @@
 | ADR-0041 | 已安装的技能本体就是分类的运行时家；归位与接线必须分开显示 | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-algo-skills-surface.md) |
 | ADR-0042 | 外部插件注册 `settings.section` 必须走 `slots.inject`；直接 `register` 会静默丢行 | accepted（2026-09-12） | [Note](../notes/implemented/contract/2026-09-12-settings-slot-must-inject.md) |
 | ADR-0043 | 门禁报失败必须给出为它负责的读数：输出按流分流保留，退出码不得折算 | accepted（2026-09-12） | [Note](../notes/implemented/contract/2026-09-12-script-evidence-by-stream.md) |
+| ADR-0044 | 归位判定必须自带逐字证据、落在自己的家（不改接线、不写技能 frontmatter）；四层下钻里归位与接线分开显示 | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-overseas-skills-role-tree.md) |
+| ADR-0045 | 产品矩阵只列已产品化的产品、一张大卡一个产品；工作台与控制室的 UI 全部卸载（部分取代 ADR-0028 与 ADR-0033 第 6 条） | accepted（2026-09-12） | [Note](../notes/implemented/simplification/2026-09-12-newapp-product-matrix-ablation.md) |
+| ADR-0046 | 可选服务只能用 `ctx.get` 读（裸读会抛，`?? 兜底` 是假兜底）；Remote 三元组必须按位传参并读回 `ok:false` | accepted（2026-09-12） | [Note](../notes/implemented/contract/2026-09-12-newapp-card-open-context.md) |
+| ADR-0047 | p2s 语料的三行级缺陷改在流水线里修（不手改 1338 个文件）；出处按六档如实渲染，不做无差别还原 | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-paper2skills-corpus-rebuild.md) |
+| ADR-0048 | p2s 卡 ⑦ 段是 60 行上限的预览节选，卡面按实测口径渲染而非转发源站自述；卡页「路径」只作转述（部分取代 ADR-0047 的代价与边界两条） | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-paper2skills-code-availability.md) |
+| ADR-0049 | 完整实现从未丢失：读语料 vault 的 git 明文恢复（1,302/1,338），落 `references/implementation.py`；三档分层且无 oracle 的一档必须标注未核对（订正 ADR-0048 的两条全称断言） | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-paper2skills-source-code-recovery.md) |
+| ADR-0050 | 代码围栏按「宽松枚举候选 + 语法定终点」抽取，不按 Markdown 配对（确证 1,262→1,277、未恢复 36→21；订正 ADR-0049 的「那 21 张是真实的代际差异」） | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-paper2skills-fence-candidates.md) |
+| ADR-0051 | `parses=False` 拆成「源码写坏 5」与「判据未定终点 15」两类，逐卡带 `defect`/`defect_line`/`defect_detail`（订正 ADR-0049 收尾那句「20 张都因全角标点写坏」） | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-paper2skills-parse-defects.md) |
 
 > ADR-0007 ~ ADR-0018 是「LUTE 二开平台架构重构」的十二项决策，共享同一篇决策记录 Note。
 > ADR-0019 独立成篇（品牌皮肤锚点治理），决策记录见其 Note。
@@ -73,6 +81,30 @@
 > ADR-0040 独立成篇（开发脚本子进程的解释器必须是真 node，判据须先剥注释与字符串），决策记录见其 Note。
 > ADR-0041 独立成篇（分类的运行时家是已安装的技能本体；归位与接线分列），决策记录见其 Note。
 > ADR-0043 独立成篇（门禁失败证据按流分流、退出码不得折算），决策记录见其 Note。
+> ADR-0045 独立成篇（产品矩阵剪枝 + 卸载 dsh-worktable），决策记录见其 Note；它部分取代 ADR-0028 与 ADR-0033 第 6 条。
+> ADR-0046 独立成篇（可选服务读取纪律 + Remote 三元组的传参与返回值校验），决策记录见其 Note。
+> ADR-0047 独立成篇（p2s 语料三行级缺陷改在流水线里修 + 出处按档位渲染），决策记录见其 Note。
+> ADR-0048 独立成篇（p2s 卡 ⑦ 段是节选不是模板 + 卡页路径只作转述），**部分取代 ADR-0047
+> 「影响 · 代价与边界」里的两条**：那句「逐字节相同 1,283/1,283」应改按三类计（1,082 相同 /
+> 188 仅末尾纯空白差 / 3 处刻意脱敏）；「787 条悬空路径」量错了基准（换全量树后 838/838 全解析），
+> 且路径指向的代码树与本卡节选同名不同物。
+> ADR-0049 独立成篇（完整实现从语料 vault 的 git 明文恢复 + 落 references/implementation.py），
+> **订正 ADR-0048 的两条全称断言**：那句「卡的 code_path 838/838 全指向无编号树」有 **18 条反例**
+> （18 张卡指向带编号的代码代）；那句「预览是这份代码唯一存世的地方」也不成立 ——
+> iCloud 工作区的 1,353 个 vault `.md` 已是被改写的二进制容器，但**同一仓库的 git 历史里 1,338/1,338
+> 张卡都是明文**，1,277 张的卡面节选可校验为完整代码的开头（偏移恒为第 1 行；此数经 ADR-0050 修正，
+> 原记 1,262）。
+> ADR-0050 独立成篇（代码围栏按宽松候选枚举 + 语法定终点抽取），**订正 ADR-0049 的
+> 「那 21 张是真实的代际差异」**：19 张的实现一直在 vault 的 HEAD 里，是选围栏的正则漏读了
+> （不锚行首导致配对错位、只认 python 标注看不到 bash 首块），4 张首块是运行方式，
+> **只有 2 张是真正的源站独有**。同时修掉一条同类缺陷：卡里的 Python 会把整张 markdown 卡
+> 塞进三引号字符串，围栏边界落在串里，6 张已「确证」的卡其实是被截断的
+> （最大一张 66 行 → 443 行）。
+> ADR-0051 独立成篇（`parses=False` 拆两类），**订正 ADR-0049 收尾那句「余下 20 张是源码
+> 本身写坏（全角标点）」**：那 20 张是 **5 张源码写坏 + 15 张判据没定出终点（吞了卡正文）**。
+> 分界尺子是「被选中围栏之后还剩几个边界」，20/20 无例外；5 张的缺陷形态各不相同
+> （嵌套三引号 / 控制字符 U+0001 / 括号种类不匹配 / 三引号未收尾 / 模块名带连字符），
+> 没有一条来自批量标点替换 —— 全角 `（` 出现在 1,110 张卡的恢复区里，其中 1,091 张正常 parse。
 > 各插件历史决策（如 AI全栈 ADR-0001~0007、万物互联 D1-D5）保留在各插件 docs/ 内；历史 6 篇 ADR 的归档在三期进行（ADR-0015）。
 
 ## 双轨分职（ADR-0015）
