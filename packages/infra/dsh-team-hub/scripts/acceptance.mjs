@@ -18,6 +18,14 @@
  */
 import { spawn } from "node:child_process";
 import crypto from "node:crypto";
+import { electronNodeEnv, nodeCommand } from "../../../../scripts/lib/real-node.mjs";
+
+// 起子进程用的解释器：**不能**用 process.execPath——在 pnpm 生命周期脚本下它是宿主
+// Electron 可执行文件，子进程「退出码 0 且没有任何输出」。本脚本两种受害方式不同：
+//   · `run()` 只看退出码（空 stdout 也算成功），于是正则匹配不到密码 → `init 初始化` 失败；
+//   · `startServer()` 起的服务根本没起来 → `服务未就绪` 中止整轮验收。
+// 两种都在报告里指向**产品坏了**，真因却是**执行器不是 node**。判据见 scripts/gates/node-interpreter.mjs。
+const NODE = nodeCommand().command;
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -72,7 +80,7 @@ async function upstreamWorkspaces() {
 
 function run(cliArgs, env) {
   return new Promise((resolve, reject) => {
-    const child = spawn(process.execPath, [entry, ...cliArgs], { env, stdio: ["ignore", "pipe", "pipe"] });
+    const child = spawn(NODE, [entry, ...cliArgs], { env: { ...env, ...electronNodeEnv() }, stdio: ["ignore", "pipe", "pipe"] });
     let stdout = "", stderr = "";
     child.stdout.on("data", d => { stdout += d; });
     child.stderr.on("data", d => { stderr += d; });
@@ -82,7 +90,7 @@ function run(cliArgs, env) {
 }
 
 function startServer(env) {
-  const child = spawn(process.execPath, [entry, "start"], { env, stdio: ["ignore", "pipe", "pipe"] });
+  const child = spawn(NODE, [entry, "start"], { env: { ...env, ...electronNodeEnv() }, stdio: ["ignore", "pipe", "pipe"] });
   let output = "";
   child.stdout.on("data", d => { output += d; });
   child.stderr.on("data", d => { output += d; });

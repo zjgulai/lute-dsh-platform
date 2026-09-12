@@ -38,8 +38,15 @@ export interface SidebarEntryOptions {
   tooltip?(): string
   /** Click action (open/toggle the owning panel). */
   onToggle(): void
-  /** Family-block position: 'before' inserts ahead of sibling plugin rows, 'after' behind them. */
-  position: 'before' | 'after'
+  /**
+   * Row placement:
+   *   - `'before'` — insert ahead of the sibling plugin rows (family block);
+   *   - `'after'` — insert behind them;
+   *   - `'split'` — sit **beside** the official New Session button, sharing
+   *     its row 50/50. See {@link applySplitGeometry} for why that is done with
+   *     inline styles instead of a stylesheet rule.
+   */
+  position: 'before' | 'after' | 'split'
   /**
    * Selectors of the sibling plugin entry rows this package orders against
    * (its own row included — the placement guard excludes a row that is
@@ -62,10 +69,25 @@ function sidebarRoot(): HTMLElement | undefined {
   // Prefer the element that owns the logo row — the real sidebar UI root —
   // and fall back to the column's first child for legacy shells.
   const logoOwner = column.querySelector<HTMLElement>('[class*="logoRow"]')?.parentElement
-  return logoOwner ?? (column.firstElementChild as HTMLElement | undefined)
+  // `firstElementChild` is `Element | null`, NOT `| undefined`: a sidebar pane
+  // that exists while momentarily empty (a full-pane teardown/rebuild between
+  // frames) yields null. Every caller in this module guards on `undefined`
+  // alone, so returning that null would slip past the guard and throw inside a
+  // MutationObserver callback — measured, not theorised: the reconciliation
+  // probe reproduces it deterministically at whole-tree teardown. Normalise to
+  // undefined so the declared type is the truth the guards rely on.
+  return logoOwner ?? (column.firstElementChild as HTMLElement | null) ?? undefined
 }
 
-/** The New Session button: nested in the logo row on current shells, a direct child on legacy shells. */
+/**
+ * The New Session button is a **direct flex child of the sidebar root** on the
+ * shipping shell, not a descendant of the logo row: measured against
+ * @deepseek-ai/dsh-client-ui-sidebar's client bundle, the `logoRow` element's
+ * children array closes (offset 14744) before the `newSession` button is
+ * rendered (offset 15043). The `closest('[class*="logoRow"]')` probe below
+ * therefore does not match on this generation, and placement falls back to
+ * anchoring on the button itself.
+ */
 function newSessionButton(root: HTMLElement): HTMLButtonElement | undefined {
   const nested = root.querySelector<HTMLButtonElement>('button[class*="newSession"]')
   if (nested !== null) return nested
@@ -73,6 +95,66 @@ function newSessionButton(root: HTMLElement): HTMLButtonElement | undefined {
     if (child.tagName === 'BUTTON') return child as HTMLButtonElement
   }
   return undefined
+}
+
+/**
+ * Below this rendered width the official button is the collapsed rail icon
+ * (36px) rather than the full-width expanded button. Measured at runtime on
+ * purpose: the collapsed state is expressed through a hashed class name and
+ * through `align-self`/`width` inside the shell's own stylesheet, neither of
+ * which a plugin may pin (ADR-0019).
+ */
+const SPLIT_COLLAPSED_MAX_WIDTH = 60
+
+/** Exported for the contract test that pins the split arithmetic. */
+export const SPLIT_COLLAPSED_LIMIT = SPLIT_COLLAPSED_MAX_WIDTH
+
+/**
+ * Share the official New Session row 50/50 with the injected entry.
+ *
+ * Geometry, measured from the shell's own stylesheet rather than guessed: the
+ * root is `flex-direction: column`; the official button is `flex: none`,
+ * `height: 38px`, `margin: 0 2px 8px`, and expanded carries **no explicit
+ * width** — it stretches to the root's content box. Two siblings in a column
+ * container would stack, so the injected entry takes half the width, aligns to
+ * the far edge, and is pulled back up by exactly the official button's own
+ * vertical advance (height + margin-bottom). The pair then shares one visual
+ * band while the container's total height is unchanged, so nothing below it
+ * shifts.
+ *
+ * `calc(50% - 4px)` falls out of that: with the official button's 2px side
+ * margins on both boxes, `2 + W + 2 + 2 + W + 2 = 100%` gives `W = 50% - 4px`.
+ *
+ * Inline styles are used because the shell's stylesheet contains no
+ * `!important` (measured: zero occurrences in the shipped bundle), so inline
+ * always wins — and writing only `style` leaves the button's node identity,
+ * and therefore React's reconciliation, untouched.
+ *
+ * Collapsed rail: the content box is 36px wide while the icon inside is 18px,
+ * so two side-by-side entries would be ~17px each and clip the icon. The entry
+ * therefore stacks under the official button at the rail's own metric instead
+ * of forcing the split.
+ */
+export function applySplitGeometry(official: HTMLButtonElement, entry: HTMLButtonElement): void {
+  const rect = official.getBoundingClientRect()
+  if (rect.width === 0) return // not laid out yet; the resize observer retries
+
+  if (rect.width < SPLIT_COLLAPSED_MAX_WIDTH) {
+    official.style.removeProperty('width')
+    entry.style.removeProperty('width')
+    entry.style.removeProperty('margin-top')
+    entry.style.removeProperty('align-self')
+    entry.dataset.split = 'collapsed'
+    return
+  }
+
+  const marginBottom = Number.parseFloat(getComputedStyle(official).marginBottom)
+  const lift = rect.height + (Number.isNaN(marginBottom) ? 0 : marginBottom)
+  official.style.width = 'calc(50% - 4px)'
+  entry.style.width = 'calc(50% - 4px)'
+  entry.style.alignSelf = 'flex-end'
+  entry.style.marginTop = `-${lift}px`
+  entry.dataset.split = 'expanded'
 }
 
 /** Build the entry row (a detached button; insert once the shell is up). */
@@ -93,10 +175,21 @@ function createEntry(options: SidebarEntryOptions): HTMLButtonElement {
   return entry
 }
 
-/** Re-insert the entry after the New Session row (before the browser region). */
+/**
+ * Insert the entry: beside the New Session button in `split` mode, otherwise
+ * into the family block between that button and the browser region.
+ */
 function placeEntry(root: HTMLElement, entry: HTMLButtonElement, options: SidebarEntryOptions): boolean {
   const button = newSessionButton(root)
   if (button === undefined) return false
+  if (options.position === 'split') {
+    // Must be the button's *immediate* next sibling: the geometry stacks the
+    // pair with a negative top margin, which only lands in the same band when
+    // nothing sits between them.
+    if (entry.previousElementSibling !== button) button.after(entry)
+    applySplitGeometry(button, entry)
+    return true
+  }
   if (entry.parentElement !== root) {
     // Position relative to the family block (entries injected by sibling
     // plugins), never relative to transient logoRow geometry: every family
@@ -136,6 +229,18 @@ export function mountSidebarEntry(options: SidebarEntryOptions): () => void {
   let root: HTMLElement | undefined
   let placed = false
 
+  // Split geometry is a function of the root's rendered width, so it has to be
+  // re-measured when the sidebar is dragged wider, collapsed, or the window
+  // resizes — none of which is a childList mutation. Observing an already
+  // observed target is a no-op, so tryPlace may call observe() freely.
+  const resizeObserver = options.position === 'split' && typeof ResizeObserver !== 'undefined'
+    ? new ResizeObserver(() => {
+      if (root === undefined || !root.isConnected) return
+      const button = newSessionButton(root)
+      if (button !== undefined) applySplitGeometry(button, entry)
+    })
+    : undefined
+
   const tryPlace = (): void => {
     if (root !== undefined && !root.isConnected) {
       // The shell rebuilt the sidebar pane (whole-tree teardown); the root
@@ -158,6 +263,7 @@ export function mountSidebarEntry(options: SidebarEntryOptions): () => void {
     placed = placeEntry(root, entry, options)
     if (placed) {
       rootObserver.observe(root, { childList: true, subtree: true })
+      resizeObserver?.observe(root)
     }
   }
 
@@ -181,6 +287,15 @@ export function mountSidebarEntry(options: SidebarEntryOptions): () => void {
     }
     if (!root.contains(entry)) {
       placed = placeEntry(root, entry, options)
+    } else if (options.position === 'split') {
+      // The row survived, but a re-render may have replaced the official button
+      // node (taking the injected inline width with it) or changed the shell's
+      // collapsed state. Re-asserting is idempotent and touches no node identity.
+      const button = newSessionButton(root)
+      if (button !== undefined) {
+        if (entry.previousElementSibling !== button) button.after(entry)
+        applySplitGeometry(button, entry)
+      }
     }
   })
 
@@ -202,7 +317,12 @@ export function mountSidebarEntry(options: SidebarEntryOptions): () => void {
   return () => {
     waitObserver.disconnect()
     rootObserver.disconnect()
+    resizeObserver?.disconnect()
     unsubscribeActive?.()
+    // Undo the geometry we imposed on the official button so unmounting this
+    // package restores the shell's own layout exactly.
+    const button = root === undefined ? undefined : newSessionButton(root)
+    button?.style.removeProperty('width')
     entry.remove()
   }
 }

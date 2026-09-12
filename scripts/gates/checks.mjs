@@ -275,6 +275,35 @@ export function checkChangedPackages({ changed, packages, exempted }) {
 /** 命令未找到的退出码（脚本存在但执行体缺失时 shell 返回）。 */
 const EXIT_COMMAND_NOT_FOUND = 127
 
+/** 报失败证据时，每个流最多取几行非空输出。 */
+const EVIDENCE_LINES_PER_STREAM = 3
+
+/**
+ * 把失败输出整理成一行可读证据，stdout 与 stderr **各自标注、各自限额**。
+ *
+ * 为什么不合成一个 blob 再截尾（ADR-0043）：两者体量常常差一个数量级，合成后
+ * 取尾等于让大的那个流垄断证据位。实测 dsh-skill-center-local 跑 vitest，stdout
+ * 784 字节（含 `Test Files / Tests` 汇总）对 stderr 5821 字节（React `act()` 警告）
+ * ——截尾后汇总 100% 消失，报告只剩警告。分流标注后，警告仍在，但不再顶掉汇总。
+ * @param {{stdout?: string, stderr?: string, note?: string}} result 单次脚本执行结果
+ * @returns {string} 形如 `stdout: … ⏎ stderr: … ⏎ <note>`；全空时为空串
+ */
+function formatScriptEvidence(result) {
+  const parts = []
+  for (const [label, text] of [
+    ['stdout', result.stdout],
+    ['stderr', result.stderr],
+  ]) {
+    const lines = String(text ?? '')
+      .split('\n')
+      .filter(Boolean)
+      .slice(-EVIDENCE_LINES_PER_STREAM)
+    if (lines.length > 0) parts.push(`${label}: ${lines.join(' ⏎ ')}`)
+  }
+  if (result.note) parts.push(result.note)
+  return parts.join(' ⏎ ')
+}
+
 /**
  * 校验包声明的脚本能真实执行（ADR-0014）。
  * 动机（实测）：dsh-theme-local 与 dsh-loopx-plugin 的 typecheck 脚本存在，
@@ -283,7 +312,7 @@ const EXIT_COMMAND_NOT_FOUND = 127
  * `build` 也在校验范围内：ADR-0018 让 `types-fresh` 依赖构建产出来判断新鲜度，
  * 若某个包 build 跑不通，它的产物新鲜度就无从判定。把「build 能不能跑通」放在
  * 本校验而不是 `types-fresh`，同一个问题才不会在门禁里报两遍。
- * @param {{packages: Array<{relPath: string, scripts: Record<string, string>, results: Record<string, {code: number, output: string}>}>}} input
+ * @param {{packages: Array<{relPath: string, scripts: Record<string, string>, results: Record<string, {code: number|null, stdout?: string, stderr?: string, note?: string}>}>}} input
  *   逐包的脚本定义与实际执行结果（由调用方负责运行）
  * @returns {{passed: boolean, violations: string[]}}
  */
@@ -297,8 +326,9 @@ export function checkScriptsRunnable({ packages }) {
       if (result.code === EXIT_COMMAND_NOT_FOUND) {
         violations.push(`${relPath}: ${key} 脚本无法执行（退出码 127）——脚本存在但执行体不存在，属空转脚本（ADR-0014）`)
       } else if (result.code !== 0) {
-        const tail = (result.output ?? '').split('\n').filter(Boolean).slice(-3).join(' ⏎ ')
-        violations.push(`${relPath}: ${key} 脚本运行失败（退出码 ${result.code}）${tail ? ` — ${tail}` : ''}`)
+        const tail = formatScriptEvidence(result)
+        const verdict = result.code === null ? '脚本未给出退出码' : `脚本运行失败（退出码 ${result.code}）`
+        violations.push(`${relPath}: ${key} ${verdict}${tail ? ` — ${tail}` : ''}`)
       }
     }
   }

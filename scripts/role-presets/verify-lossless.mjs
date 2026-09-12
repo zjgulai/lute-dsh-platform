@@ -28,6 +28,13 @@ import { isDeepStrictEqual } from 'node:util'
 import { homedir } from 'node:os'
 import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
+import { nodeCommand } from '../lib/real-node.mjs'
+
+// 起 lint 子进程用的解释器。**不能**用 process.execPath：在 pnpm 生命周期脚本下它是宿主
+// Electron 可执行文件，子进程「退出码 0 且没有任何输出」→ L7 会报「lint 未返回 [ok]」，
+// 读起来像 50 个 preset 全部不合法，真因是执行器不是 node。判据见 scripts/gates/node-interpreter.mjs。
+// `env` 与 `command` 是同一件事的两半：只取 command 就等于把 bug 装回去。
+const { command: NODE, env: NODE_ENV } = nodeCommand()
 
 const MATERIAL_ROOT = process.env.ROLE_MATERIAL_ROOT || '/Users/lute/project/AI组织变革'
 const DOCS = join(MATERIAL_ROOT, 'docs')
@@ -355,7 +362,7 @@ function main() {
   } else {
     for (const d of presentDirs) {
       try {
-        const out = execFileSync(process.execPath, [lintPath, join(OUT_ROOT, d)], { encoding: 'utf8' })
+        const out = execFileSync(NODE, [lintPath, join(OUT_ROOT, d)], { encoding: 'utf8', env: NODE_ENV })
         if (!out.includes('[ok]')) fail('L7', `${d}: lint 未返回 [ok]：${out.trim().slice(0, 160)}`)
         else ok()
       } catch (error) {

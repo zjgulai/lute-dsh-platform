@@ -10,6 +10,7 @@
  */
 import { existsSync, lstatSync, readFileSync, readlinkSync, readdirSync, statSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
+import { homedir } from 'node:os'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
@@ -27,6 +28,11 @@ import {
   checkTrackedIgnored,
 } from './gates/checks.mjs'
 import { checkProfileFilesSync, checkProfileMetadata } from './gates/sync-profile.mjs'
+import { checkSharedSync } from './gates/sync-shared.mjs'
+import { checkThemeTokens } from './gates/theme-tokens.mjs'
+import { checkWorktableFence } from './gates/worktable-fence.mjs'
+import { checkNodeInterpreter } from './gates/node-interpreter.mjs'
+import { runScript } from './lib/run-script.mjs'
 import { collectPackages } from './gates/package-collect.mjs'
 import { renderCatalog } from './gen-catalog.mjs'
 
@@ -177,6 +183,13 @@ const CHECKS = [
     },
   },
   {
+    name: 'shared-sync',
+    remediation: '改共享层请改 shared/ 后跑 node scripts/sync-shared.mjs --write 把改动写回各副本（ADR-0009）',
+    run() {
+      return checkSharedSync(repoRoot)
+    },
+  },
+  {
     name: 'scripts-runnable',
     modes: ['full'],
     remediation: '补齐脚本依赖（如 devDependencies 加 typescript）或修复脚本本体，使其退出码为 0（ADR-0014）',
@@ -226,17 +239,62 @@ const CHECKS = [
       const script = join(repoRoot, 'packaging', 'verify-patches-v2.sh')
       const result = runScript(repoRoot, `DSH_APP="$DSH_APP_TEST" bash "${script}"`, 300000, { DSH_APP_TEST: appDir })
       if (result.code === 0) return { passed: true, violations: [] }
-      const lines = (result.output ?? '').split('\n').filter((line) => /^(MISSING|FAIL)/.test(line))
+      // 两个流都要扫：这里是按正则**过滤**，不存在 ADR-0043 的「体量大的流挤掉小的」
+      // 问题——那位移只在按位置截尾时发生。锚点明细写在哪个流由脚本自己决定。
+      const lines = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
+        .split('\n')
+        .filter((line) => /^(MISSING|FAIL)/.test(line))
+      const verdict =
+        result.code === null
+          ? `补丁锚点校验未给出退出码${result.note ? `（${result.note}）` : ''}`
+          : `补丁锚点校验失败（退出码 ${result.code}）`
       return {
         passed: false,
-        violations: lines.length > 0 ? lines : [`补丁锚点校验失败（退出码 ${result.code}）`],
+        violations: lines.length > 0 ? lines : [verdict],
       }
+    },
+  },
+  {
+    name: 'worktable-fence',
+    modes: ['full'],
+    remediation: '跑 node dsh-patches/worktable-fence/apply.mjs 重打栅栏；上游结构变了需人工重锚并 bump vendor/dsh-worktable.pin（ADR-0025、ADR-0029）',
+    run() {
+      // 环境相关：vendor 未 clone 或 profile 未安装时由 checkWorktableFence 自身报告跳过
+      // （与 patch-anchors、theme-tokens 同一语义）。
+      return checkWorktableFence({
+        repoRoot,
+        profileDir: join(homedir(), '.dsh', 'profiles', 'desktop'),
+      })
+    },
+  },
+  {
+    name: 'node-interpreter',
+    remediation: '开发脚本起子进程一律走 scripts/lib/real-node.mjs 的 nodeCommand()——process.execPath 在 pnpm 下是宿主 Electron，子进程会「退出码 0 且没有输出」（ADR-0040）',
+    run() {
+      return checkNodeInterpreter({ repoRoot })
+    },
+  },
+  {
+    name: 'theme-tokens',
+    modes: ['full'],
+    remediation: '改用真实 token（官方主题包或 dsh-theme-local 供给的名字）；存量违规登记在 scripts/gates/theme-tokens-baseline.json，该文件只减不增、条目失效即拒绝（ADR-0014、ADR-0028 的 C2 验收）',
+    run() {
+      const appDir = join('/', 'Applications', 'DSH Desktop.app')
+      // 环境相关：app 未安装时由 checkThemeTokens 自身报告跳过（与 patch-anchors 同一语义）。
+      return checkThemeTokens({
+        repoRoot,
+        appDir,
+        baseline: JSON.parse(readIfExists(THEME_TOKENS_BASELINE_PATH) || '[]'),
+      })
     },
   },
 ]
 
 /** 豁免登记文件（仓库根相对路径）。 */
 const EXEMPTIONS_PATH = 'scripts/gates/exemptions.json'
+
+/** 幻觉 token 基线（仓库根相对路径，只减不增）。 */
+const THEME_TOKENS_BASELINE_PATH = 'scripts/gates/theme-tokens-baseline.json'
 
 /**
  * 收集受管包 node_modules 顶层作用域内的符号链接及其可达性。
@@ -270,7 +328,7 @@ function collectDependencyLinks() {
 /**
  * 逐个运行受管包声明的 typecheck 与 test 脚本，收集真实退出码。
  * 只用于 full 模式：逐包执行耗时较长，且需要各包 node_modules 已安装。
- * @returns {Array<{relPath: string, scripts: Record<string, string>, results: Record<string, {code: number, output: string}>}>}
+ * @returns {Array<{relPath: string, scripts: Record<string, string>, results: Record<string, {code: number|null, stdout: string, stderr: string, note?: string}>}>}
  */
 function runPackageScripts() {
   const timeoutMs = 180000
@@ -286,34 +344,6 @@ function runPackageScripts() {
       return { relPath: entry.dir, scripts, results }
     })
     .filter((entry) => Object.keys(entry.results).length > 0)
-}
-
-/**
- * 运行一个包脚本并返回退出码与输出尾部。
- * @param {string} cwd 包目录
- * @param {string} script 脚本命令
- * @param {number} timeoutMs 超时毫秒
- * @returns {{code: number, output: string}} 超时按 124 记（与 coreutils timeout 一致）
- */
-/**
- * 保留的输出尾部长度。实测校准（2026-09-11）：patch-anchors 依赖的
- * verify-patches-v2.sh 会打印 35 行锚点结果（约 1 KB），而 FAIL/MISSING 明细
- * 出现在输出**开头**——原先的 500 字符只留到 OK 行与汇总，导致门禁只能报
- * 「退出码 1」而指不出漂移项。4000 足以容纳该脚本全部输出，仍远小于异常堆栈。
- */
-const SCRIPT_OUTPUT_TAIL = 4000
-
-function runScript(cwd, script, timeoutMs, extraEnv = {}) {
-  const binDir = join(cwd, 'node_modules', '.bin')
-  const env = { ...process.env, ...extraEnv, PATH: `${binDir}:${process.env.PATH ?? ''}` }
-  try {
-    const output = execFileSync('sh', ['-c', script], { cwd, env, encoding: 'utf8', timeout: timeoutMs, stdio: ['ignore', 'pipe', 'pipe'] })
-    return { code: 0, output: String(output).slice(-SCRIPT_OUTPUT_TAIL) }
-  } catch (error) {
-    if (error.killed) return { code: 124, output: `超时 ${timeoutMs}ms` }
-    const output = `${error.stdout ?? ''}${error.stderr ?? ''}`.slice(-SCRIPT_OUTPUT_TAIL)
-    return { code: typeof error.status === 'number' ? error.status : 1, output }
-  }
 }
 
 /**

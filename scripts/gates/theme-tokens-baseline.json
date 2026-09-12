@@ -1,0 +1,37 @@
+[
+  {
+    "token": "--dsw-alias-radius-lg",
+    "packages": ["dsh-agent-team-gui-local"],
+    "reason": "幻觉 token：官方与仓库都未定义圆角 token（只有 --dsw-alias-radius-md / -sm 这两个名字被引用过，而这两个本身也未定义）。整个 radius 家族在本平台不存在，改用字面圆角并去掉 var() 更诚实。"
+  },
+  {
+    "token": "--dsw-alias-radius-md",
+    "packages": ["dsh-theme-local", "dsh-agent-team-gui-local"],
+    "reason": "同上。注意 dsh-theme-local 是 token 的供给方，它引用一个自己没供给的名字，说明当时是按「应该有」写的而不是按「确有哪些」写的。"
+  },
+  {
+    "token": "--dsw-alias-radius-sm",
+    "packages": ["dsh-theme-local", "dsh-agent-team-gui-local"],
+    "reason": "同上。"
+  },
+  {
+    "token": "--dsw-alias-separator-primary",
+    "packages": ["dsh-root-brand-local"],
+    "reason": "幻觉 token。平台的分隔线语义由 --dsw-alias-border-l1/l2/l3/l4 表达，没有 separator 家族。改成 border-l1 即可（本包是官方 UI 覆盖层，改色值须与 ADR-0026 的注入顺序纪律一并回归）。"
+  },
+  {
+    "token": "--dsw-alias-shadow-lg",
+    "packages": ["dsh-agent-team-gui-local"],
+    "reason": "幻觉 token。官方阴影走 --dsw-shadow-* 家族（lv1/lv2/…），没有 alias-shadow-*。"
+  },
+  {
+    "token": "--dsw-alias-shadow-md",
+    "packages": ["dsh-deepresearch-local", "dsh-theme-local", "dsh-agent-team-gui-local"],
+    "reason": "同上。三处都写了完整的字面阴影兜底，说明作者当时看到的效果是对的——这正是它一直没被发现的原因：静默兜底在浅色下看不出问题。"
+  },
+  {
+    "token": "--dsw-alias-state-business-secondary",
+    "packages": ["dsh-skill-center-local"],
+    "reason": "幻觉 token。业务态在官方 token 里只有 --dsw-alias-state-business-primary / -tertiary；二级态可用 --dsw-alias-state-success-secondary 或直接用品牌绿的字面值加显式注释。"
+  }
+]

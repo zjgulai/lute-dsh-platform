@@ -31,6 +31,22 @@
 | ADR-0025 | `webServer.register` 一次只收一条路由；传数组会静默失效 | accepted（2026-09-12） | [Note](../notes/implemented/contract/2026-09-12-role-matrix-route-registration.md) |
 | ADR-0026 | 对官方 UI 的样式覆盖必须与注入顺序无关（!important + 样式标签居末） | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-root-brand-hero-override-cascade.md) |
 | ADR-0027 | 模态浮层进浏览器 top layer（`<dialog>` + `showModal()`），不参与 z-index 竞争 | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-role-matrix-top-layer-drawer.md) |
+| ADR-0028 | 启动器只拥有「连接」，不拥有事实；侧边栏启动位与官方键各占一半 | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-newapp-launcher-join-not-facts.md) |
+| ADR-0029 | 主题 Token 的判据要两侧共同证伪：真实 CSS 引擎 + 真实供给函数 | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-theme-token-verdicts-two-sided.md) |
+| ADR-0030 | 在 `/api` 下注册 exact 路由的插件绕开平台自己的来源栅栏——必须逐个插件打栅栏 | accepted（2026-09-12） | [Note](../notes/implemented/contract/2026-09-12-worktable-trust-fence.md) |
+| ADR-0031 | 技能分类必须与岗位矩阵同构；缺口认领必须与分类落点自洽 | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-paper2skills-preset-skills.md) |
+| ADR-0032 | 跨框架注入的共享核心：「未挂载」只有一种表示，且其契约必须在真框架环境证伪 | accepted（2026-09-12） | [Note](../notes/implemented/contract/2026-09-12-sidebar-entry-null-pane.md) |
+| ADR-0033 | Native Agent 产品 = 项目目录里的声明 + 实现包；启动器只发现与开入口 | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-native-agent-product-form.md) |
+| ADR-0034 | 功能的提示词骨架 = 多技能组合（岗位方法 + 产品契约）；功能内部下沉为 `steps[]` | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-native-agent-product-multiskill-skeleton.md) |
+| ADR-0035 | 技能效果的断言必须有实测背书；改动须过 held-out 验证门，未过门一律回滚 | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-paper2skills-effect-eval.md) |
+| ADR-0036 | 产品包由岗位 preset 的行挂载，且故意不声明 `dsh.bundle`——把「局部技能」变成结构上不可搞错的事 | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-product-package-preset-mount.md) |
+| ADR-0037 | 产品包挂两层，靠 `role` 分离；局部技能的机关从「缺声明」换成「显式关断」 | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-product-package-two-layer-mount.md) |
+| ADR-0038 | 共享来源栅栏的判据必须是「拒绝」而不是「抛异常」；可选服务查询一律尽力而为 | accepted（2026-09-12） | [Note](../notes/implemented/contract/2026-09-12-shared-fence-deny-not-throw.md) |
+| ADR-0039 | 语义 Token 三条法则（只引用官方已声明名 / 兜底=实测浅色值 / 品牌色非主题色）；门禁的「引用」只认 `var()` | accepted（2026-09-12） | [Note](../notes/implemented/contract/2026-09-12-theme-token-three-laws.md) |
+| ADR-0040 | 开发脚本起的子进程必须是真 node（`process.execPath` 在 pnpm 下是宿主 Electron，且「退出码 0 却没有输出」）；判据先剥注释与字符串 | accepted（2026-09-12） | [Note](../notes/implemented/contract/2026-09-12-node-interpreter-not-execpath.md) |
+| ADR-0041 | 已安装的技能本体就是分类的运行时家；归位与接线必须分开显示 | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-algo-skills-surface.md) |
+| ADR-0042 | 外部插件注册 `settings.section` 必须走 `slots.inject`；直接 `register` 会静默丢行 | accepted（2026-09-12） | [Note](../notes/implemented/contract/2026-09-12-settings-slot-must-inject.md) |
+| ADR-0043 | 门禁报失败必须给出为它负责的读数：输出按流分流保留，退出码不得折算 | accepted（2026-09-12） | [Note](../notes/implemented/contract/2026-09-12-script-evidence-by-stream.md) |
 
 > ADR-0007 ~ ADR-0018 是「LUTE 二开平台架构重构」的十二项决策，共享同一篇决策记录 Note。
 > ADR-0019 独立成篇（品牌皮肤锚点治理），决策记录见其 Note。
@@ -42,6 +58,21 @@
 > ADR-0025 独立成篇（宿主路由注册契约 + 替身即契约纪律），决策记录见其 Note。
 > ADR-0026 独立成篇（官方 UI 覆盖规则的顺序无关性），决策记录见其 Note。
 > ADR-0027 独立成篇（模态浮层的 top layer 纪律），决策记录见其 Note。
+> ADR-0028 独立成篇（启动器的所有权边界与半宽并排几何），决策记录见其 Note。
+> ADR-0029 独立成篇（主题 Token 的证伪必须落在真实引擎与真实供给两侧），决策记录见其 Note。
+> ADR-0030 独立成篇（第三方插件在 `/api` 下注册 exact 路由会压过平台的 `/api` 前缀栅栏，来源栅栏须逐插件补），决策记录见其 Note。
+> ADR-0031 独立成篇（技能分类与岗位矩阵同构 + 缺口认领自洽），决策记录见其 Note。
+> ADR-0032 独立成篇（跨框架注入共享核心的「未挂载」表示唯一化 + 注入契约须在真框架环境证伪），决策记录见其 Note。
+> ADR-0033 独立成篇（Native Agent 产品的声明之家与启动器的发现/开入口边界），决策记录见其 Note。
+> ADR-0034 独立成篇（产品的功能骨架分层与步骤级分工，M1 试点压出的修订），决策记录见其 Note。
+> ADR-0035 独立成篇（效果断言的实测背书要求 + held-out 门与回滚纪律，由 L6/L7 实测压出），决策记录见其 Note。
+> ADR-0036 独立成篇（产品包的挂载层契约），决策记录见其 Note；其决策 3 已由 ADR-0037 取代。
+> ADR-0037 独立成篇（产品包两层挂载与 `role: entry` 关断机关），决策记录见其 Note。
+> ADR-0038 独立成篇（共享栅栏「拒绝而非抛异常」），决策记录见其 Note。
+> ADR-0039 独立成篇（语义 Token 三条法则与门禁引用口径），决策记录见其 Note。
+> ADR-0040 独立成篇（开发脚本子进程的解释器必须是真 node，判据须先剥注释与字符串），决策记录见其 Note。
+> ADR-0041 独立成篇（分类的运行时家是已安装的技能本体；归位与接线分列），决策记录见其 Note。
+> ADR-0043 独立成篇（门禁失败证据按流分流、退出码不得折算），决策记录见其 Note。
 > 各插件历史决策（如 AI全栈 ADR-0001~0007、万物互联 D1-D5）保留在各插件 docs/ 内；历史 6 篇 ADR 的归档在三期进行（ADR-0015）。
 
 ## 双轨分职（ADR-0015）

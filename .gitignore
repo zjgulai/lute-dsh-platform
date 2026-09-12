@@ -26,6 +26,7 @@
 !packaging/**
 !packages/**
 !scripts/**
+!shared/**
 !dsh-patches/**
 !dsh-rootoutlet-heal/**
 

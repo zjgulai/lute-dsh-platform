@@ -390,13 +390,73 @@ test('脚本可运行校验：退出码 127 视为空转（脚本存在但执行
 test('脚本可运行校验：退出码 0 通过，非 0 非 127 报告为运行失败', () => {
   const result = checkScriptsRunnable({
     packages: [
-      { relPath: 'a', scripts: { typecheck: 'tsc --noEmit' }, results: { typecheck: { code: 0, output: '' } } },
-      { relPath: 'b', scripts: { test: 'node --test' }, results: { test: { code: 1, output: 'boom' } } },
+      { relPath: 'a', scripts: { typecheck: 'tsc --noEmit' }, results: { typecheck: { code: 0, stdout: '' } } },
+      { relPath: 'b', scripts: { test: 'node --test' }, results: { test: { code: 1, stdout: 'boom' } } },
     ],
   })
 
   assert.equal(result.passed, false)
-  assert.deepEqual(result.violations, ['b: test 脚本运行失败（退出码 1） — boom'])
+  assert.deepEqual(result.violations, ['b: test 脚本运行失败（退出码 1） — stdout: boom'])
+})
+
+test('脚本可运行校验：stderr 噪声不得挤掉 stdout 里的失败汇总（ADR-0043 实测比例）', () => {
+  // 复刻 dsh-skill-center-local 的真实体量：stdout 784 字节装汇总，
+  // stderr 5821 字节全是 React act() 警告。旧的「拼接后取尾 4000」会让
+  // stderr 整段覆盖汇总——本项就是钉住那个回归。
+  const stdout = 'Test Files  1 failed (11)\n  × panel.spec.tsx > forwards the displayed skill path\n'
+  const stderr = 'Warning: An update to Root inside a test was not wrapped in act(...).\n'.repeat(80)
+
+  const result = checkScriptsRunnable({
+    packages: [
+      {
+        relPath: 'packages/surfaces/dsh-skill-center-local',
+        scripts: { test: 'vitest run' },
+        results: { test: { code: 1, stdout, stderr } },
+      },
+    ],
+  })
+
+  assert.equal(result.passed, false)
+  const violation = result.violations[0]
+  assert.match(violation, /退出码 1/)
+  assert.match(violation, /stdout: .*Test Files {2}1 failed/)
+  assert.match(violation, /forwards the displayed skill path/)
+  assert.match(violation, /stderr: .*act\(\.\.\.\)/)
+})
+
+test('脚本可运行校验：没有退出码时不得折算成「退出码 1」（超限/信号与测试失败必须分得开）', () => {
+  const result = checkScriptsRunnable({
+    packages: [
+      {
+        relPath: 'packages/surfaces/dsh-big-local',
+        scripts: { test: 'vitest run' },
+        results: { test: { code: null, stdout: '', stderr: '', note: '输出超过 maxBuffer 16777216 字节' } },
+      },
+    ],
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, [
+    'packages/surfaces/dsh-big-local: test 脚本未给出退出码 — 输出超过 maxBuffer 16777216 字节',
+  ])
+  assert.doesNotMatch(result.violations[0], /退出码 1/)
+})
+
+test('脚本可运行校验：超时按 124 记，且说明是超时而非失败', () => {
+  const result = checkScriptsRunnable({
+    packages: [
+      {
+        relPath: 'packages/surfaces/dsh-slow-local',
+        scripts: { test: 'vitest run' },
+        results: { test: { code: 124, stdout: '', stderr: '', note: '超时 180000ms' } },
+      },
+    ],
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, [
+    'packages/surfaces/dsh-slow-local: test 脚本运行失败（退出码 124） — 超时 180000ms',
+  ])
 })
 
 test('脚本可运行校验：无脚本的包不由本项负责（交给 changed-packages 与豁免）', () => {

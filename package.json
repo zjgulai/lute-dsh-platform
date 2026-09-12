@@ -15,7 +15,10 @@
     "gate": "node scripts/gate.mjs --mode quick",
     "gate:full": "node scripts/gate.mjs --mode full",
     "gate:list": "node scripts/gate.mjs --list",
-    "test:gate": "node --test scripts/gate.test.mjs scripts/gates/checks.test.mjs",
-    "accept:root-brand": "node scripts/acceptance/root-brand-live-anchors.mjs"
+    "test:gate": "node --test scripts/gate.test.mjs 'scripts/gates/*.test.mjs' 'scripts/lib/*.test.mjs'",
+    "accept:root-brand": "node scripts/acceptance/root-brand-live-anchors.mjs",
+    "accept:theme-tokens": "node scripts/acceptance/theme-tokens-live.mjs",
+    "accept:worktable-fence": "node scripts/acceptance/worktable-fence-live.mjs",
+    "accept:newapp-products": "node scripts/acceptance/newapp-products-live.mjs"
   }
 }
