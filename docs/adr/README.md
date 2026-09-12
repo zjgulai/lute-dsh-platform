@@ -55,6 +55,9 @@
 | ADR-0049 | 完整实现从未丢失：读语料 vault 的 git 明文恢复（1,302/1,338），落 `references/implementation.py`；三档分层且无 oracle 的一档必须标注未核对（订正 ADR-0048 的两条全称断言） | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-paper2skills-source-code-recovery.md) |
 | ADR-0050 | 代码围栏按「宽松枚举候选 + 语法定终点」抽取，不按 Markdown 配对（确证 1,262→1,277、未恢复 36→21；订正 ADR-0049 的「那 21 张是真实的代际差异」） | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-paper2skills-fence-candidates.md) |
 | ADR-0051 | `parses=False` 拆成「源码写坏 5」与「判据未定终点 15」两类，逐卡带 `defect`/`defect_line`/`defect_detail`（订正 ADR-0049 收尾那句「20 张都因全角标点写坏」） | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-paper2skills-parse-defects.md) |
+| ADR-0052 | 第三方技能入库**不保留 `.git`**（改由锚定 commit SHA + 上游 tarball 承担可复现与回滚）；入库必须**挂岗或显式归为通用型**，不允许既无岗位也无通用分型的裸条目 | accepted（2026-09-12） | [Note](../notes/implemented/capability/2026-09-12-third-party-skill-intake.md) |
+| ADR-0053 | 岗位能力事实读它的家（preset manifest + 技能本体），**不派生第二份清单**；宿主路由现读现投影，挂载锚零哈希 | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-composer-role-capabilities.md) |
+| ADR-0054 | 改动生效的判据是**装载点的字节**（`profile/node_modules`，不是 `vendor/`）：门禁从「副本有没有这个文件」升到「字节一不一样」，且只钉可执行产物面 | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-loadpoint-bytes-drift.md) |
 | ADR-0055 | 依赖层可复现的判据：清单与锁文件逐条 specifier 相等、依赖不得指向机器绝对路径、同名不得跨字段重复声明，离线判定（`deps-reproducible`）；产物未入库的包 `build` 先于 `test` | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-dependency-reproducibility.md) |
 
 > ADR-0007 ~ ADR-0018 是「LUTE 二开平台架构重构」的十二项决策，共享同一篇决策记录 Note。
