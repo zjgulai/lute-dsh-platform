@@ -39,6 +39,7 @@ vendor/dsh-worktable/
 
 # —— 纳入目录内的常见排除 ——
 node_modules/
+__pycache__/
 .doctor-backup/
 staging/
 dist/
@@ -53,6 +54,7 @@ credentials*
 
 # —— 排除临时/备份文件（覆盖白名单，避免 git add -A 误纳入）——
 *.bak-*
+*.bak
 *.pre-*
 *.orig*
 dsh-overseas-skills/backup/
@@ -61,6 +63,9 @@ dsh-chatui-fix-backup/
 
 # 2.0.0 构建源（app 直补副本 + rc 时代 profile 源；可重建，勿入库）
 staging-src/
+
+# 打包流水线在 packaging/ 下解出的 .app 工作副本（549 MB / 20,177 文件；可重建）
+packaging/.app-cache/
 
 # —— dsh-patches 归档素材与 release 目录：受管资产，显式纳入以消除 tracked+ignored 漂移（ADR-0013）——
 !dsh-patches/archive/**
