@@ -56,6 +56,7 @@ ck "P0-7v2 首启兜底(main.js)"  "$LIB/main.js" "embeddedRoot"
 ck "P0-7v2 首启兜底(首启真实路径)"  "$LIB_PM" "embeddedRoot"
 ck "P0-7v2c wizard 状态保护"  "$LIB/main.js" 'activeProfileDir, "vendor")'
 ck "P0-8 pi-ai 磁盘化"      "$NM/dsh-llm-pi-ai/lib/index.js" "PI_AI_API_DIR"
+ck "P0-9 RootOutlet 兜底"   "$NM/dsh-client-ui-renderer/lib/client.js" "data-slot-waiting"
 ck "RECOVERY_DOCUMENT"      "$LIB/main.js" 'app.asar.unpacked'
 ck "clipboard fall-through" "$NM/dsh-client-ui-primitives/lib/index.js" "fall through to the legacy"
 ck "LB log 改名"            "$NM/dsh-session-log-export/lib/client.js" 'dsh-log-btn-fix'

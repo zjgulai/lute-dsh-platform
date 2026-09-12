@@ -1,0 +1,16 @@
+{
+  "name": "dsh-desktop-lute",
+  "version": "2.1.0",
+  "build": "20260911-110627",
+  "dsd_baseline": "2.0.5",
+  "arch": "arm64",
+  "created_at": "2026-09-11T03:06:29.699Z",
+  "files": {
+    "DSH Desktop.app.tar.gz": 453813165,
+    "profile.tar.gz": 211761539,
+    "skills-presets.tar.gz": 3773525,
+    "aeis-portable.tar.gz": 39768056,
+    "install.sh": 12320,
+    "LUTE Setup.app": 96
+  }
+}

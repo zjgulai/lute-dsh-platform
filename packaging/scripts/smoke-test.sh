@@ -64,7 +64,10 @@ for f in package.json cordis.patch.yml apply-patches.mjs; do
   assert "profile/$f 存在" yes "$([ -f "$P/$f" ] && echo yes)"
 done
 assert "node_modules 落位" yes "$([ -d "$P/node_modules/@deepseek-ai" ] && echo yes)"
-assert "vendor 落位" yes "$([ -d "$P/vendor/dsh-theme-local" ] && echo yes)"
+# vendor 路径不写死包名：归组（ADR-0011）后是 vendor/packages/<group>/<pkg>，扁平时代写死的
+# "vendor/dsh-theme-local" 在新布局下必然假红（正确产物被判失败）。这里只断言"落位且非空"，
+# 逐条比对交给下面的 completeness.vendor 循环（它读清单、与布局无关）。
+assert "vendor 落位（非空）" yes "$([ -n "$(find "$P/vendor" -maxdepth 4 -name package.json -print -quit 2>/dev/null)" ] && echo yes)"
 assert "overrides 落位" yes "$([ -d "$P/overrides/dsh-file-reference-local" ] && echo yes)"
 NOEMA_BIN="$P/node_modules/@zseven-w/dsh-noema-darwin-arm64/bin/noema-mcp"
 assert "noema darwin-arm64 二进制落位" yes "$([ -x "$NOEMA_BIN" ] && echo yes)"
@@ -124,7 +127,7 @@ cat "$SMOKE_HOME/sp.log"
 BUNDLED="$APP_TARGET/Contents/Resources/dsh-profile/profiles/desktop"
 assert "内嵌 dsh-profile 存在" yes "$([ -d "$BUNDLED" ] && echo yes)"
 assert "内嵌 node_modules 落位" yes "$([ -d "$BUNDLED/node_modules/@deepseek-ai" ] && echo yes)"
-assert "内嵌 vendor 落位" yes "$([ -d "$BUNDLED/vendor/dsh-theme-local" ] && echo yes)"
+assert "内嵌 vendor 落位（非空）" yes "$([ -n "$(find "$BUNDLED/vendor" -maxdepth 4 -name package.json -print -quit 2>/dev/null)" ] && echo yes)"
 # 除 cordis.patch.yml（内嵌保留占位、安装后已替换）与 node_modules（单独断言存在性）外应完全一致
 diff -rq --exclude node_modules --exclude cordis.patch.yml "$BUNDLED" "$P" > "$SMOKE_HOME/diff.log" 2>&1
 assert "内嵌 ≡ 安装后 profile" 0 "$?"

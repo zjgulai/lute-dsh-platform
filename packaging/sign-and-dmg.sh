@@ -9,9 +9,11 @@ VERSION="${2:-1.0.0}"
 PAYLOAD="$(cd "$PAYLOAD" && pwd)"
 REL="$PKG_ROOT/release/$VERSION"
 # 竞态锁：dmg/pkg 共用 release 目录，串行执行防互删（2026-09-10 实战竞态教训）
-LOCK="$REL/.build.lock"
+# 锁必须放在 $REL **之外**：下面有 `rm -rf "$REL"`（重制本版本目录），锁若在 $REL 内会被
+# 一并删掉，互斥窗口退化成「mkdir 到 rm -rf 之间」的毫秒级——等于没有锁（2026-09-12 实测）。
+LOCK="$PKG_ROOT/release/.build.lock"
 if [ -d "$LOCK" ]; then echo "[$(basename "$0")] 另一构建进行中（$LOCK 存在），请串行执行"; exit 1; fi
-mkdir -p "$REL" && mkdir "$LOCK"
+mkdir -p "$PKG_ROOT/release" && mkdir "$LOCK"
 trap 'rm -rf "$LOCK"' EXIT
 DMG="$REL/DSH-Desktop-LUTE-$VERSION-mac-arm64.dmg"
 VOLNAME="DSH Desktop LUTE $VERSION"

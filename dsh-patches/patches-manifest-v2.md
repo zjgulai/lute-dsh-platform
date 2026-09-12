@@ -1,7 +1,7 @@
 # DSH Desktop 2.0.5 补丁清单 v2（Patch Manifest v2 · LUTE 2.0.0 权威登记簿）
 
 > 基线：官方 DSH.Desktop-2.0.5-universal.dmg 解包 → packaging/staging/2.0.0/app
-> 校验：`packaging/verify-patches-v2.sh`（34 锚点，2026-09-10 ALL VERIFIED）
+> 校验：`packaging/verify-patches-v2.sh`（36 锚点，2026-09-12 ALL VERIFIED）
 > v1（2.0.4）见 [patches-manifest.md](patches-manifest.md)——**已标注为历史、非权威**；本清单是 2.0.0 的唯一权威登记簿
 > 纪律延续：.orig 备份 + count==1 锚点门 + node --check + 品牌 BRAND ALL VERIFIED
 
@@ -25,6 +25,7 @@
 | P0-3 | imageRequestPricing 可选调用 | dsh-llm/lib/index.js:1459 + lib/types/index.js:530 | `imageRequestPricing?.(provider, model)` | .p03.orig ×2 |
 | P0-4 | fiber.dispose 包装 | dsh-tool-subagent/lib/index.js:634、dsh-file-reference-local/lib/index.js:354 + lib/types/index.js:49 | `Promise.resolve(fiber.dispose())` | .p04.orig ×3 |
 | P0-8 | pi-ai 磁盘加载 | dsh-llm-pi-ai/lib/index.js:10-12 | 三行 lazy import → await import(process.resourcesPath…)（锚点与 2.0.4 逐字一致，pi-ai 0.84.3） | .p08.orig |
+| P0-9 | RootOutlet 白屏兜底 | dsh-client-ui-renderer/lib/client.js:886 | root 未注册**不再 throw** → `console.error` 保留诊断文本 + 渲染 `data-slot-waiting="root"` 的全屏「UI 正在装载… / UI is mounting…」占位（用官方 token `--dsw-alias-label-secondary` / `--dsw-alias-bg-base`；`useSyncExternalStore` 已订阅 root 槽，注册到达即自动重渲染）。来源：2026-09-07 的就地修复、2026-09-10 随 2.0.5 重打，**2026-09-12 固化为 NM 补丁**——此前它只存在于开发机 app，源码构建路径（BASE=source）发的是 pristine（`throw`），即客户机的白屏兜底一直是缺的。取证见 `.scratch/pre-dmg-diagnosis/diagnosis-report.md` B3 与 `docs/dsh-desktop-white-screen-playbook.md` §6.1 | .p09.orig |
 | cordis-clamp | 索引钳位 | cordis/lib/index.js:183 | `Math.max(0, index - info.offset)`（4.0.2 未修） | .cordis-fix.orig |
 | loader-B4 | EntryGroup 回滚 | cordis-plugin-loader/lib/index.js:98 | uid===null 提前返回前回滚 newMap（1.0.3 未修） | .b4.orig |
 | skill-title×21 | 中文标题透传 | 9 文件（dsh-skill/skill-filesystem/tool-skill/api-session-controller×4/api-remotes/client-ui-skill） | apply.py 重放 ALL OK（rc.1 逐字命中） | .skill-title.orig ×9 |

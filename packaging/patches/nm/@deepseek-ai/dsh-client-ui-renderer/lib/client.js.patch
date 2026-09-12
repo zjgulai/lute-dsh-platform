@@ -1,0 +1,19 @@
+--- a/@deepseek-ai/dsh-client-ui-renderer/lib/client.js
++++ b/@deepseek-ai/dsh-client-ui-renderer/lib/client.js
+@@ -885,7 +885,15 @@
+ 			const entry = host.entriesOfSlot("root")[0];
+ 			if (!entry) {
+ 				if (host.entriesOf("root").length > 0) return (0, react_jsx_runtime.jsx)("div", { "data-slot-error": "root" });
+-				throw new SlotAssemblyError("renderSlot('root') before any 'root' registration (boot order)");
++				console.error("renderSlot('root') before any 'root' registration (boot order) — keeping the shell mounted and waiting for the root registration to arrive");
++				return (0, react_jsx_runtime.jsx)("div", {
++					"data-slot": "root",
++					style: ANCHOR_STYLE,
++					children: (0, react_jsx_runtime.jsx)("div", {
++						"data-slot-waiting": "root",
++						style: { position: "fixed", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "system-ui, -apple-system, sans-serif", fontSize: 13, color: "var(--dsw-alias-label-secondary, #9a9aa0)", background: "var(--dsw-alias-bg-base, #141619)", zIndex: 2147483000 }
++					}, "UI 正在装载… / UI is mounting…")
++				});
+ 			}
+ 			return (0, react_jsx_runtime.jsx)("div", {
+ 				"data-slot": "root",

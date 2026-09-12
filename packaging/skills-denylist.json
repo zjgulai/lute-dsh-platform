@@ -1,0 +1,10 @@
+{
+  "note": "受限许可 / 合规原因不得随包分发的技能。判据是许可文本，不是好不好用——每一条都要写清理由与出处，便于将来复核或替换。",
+  "entries": [
+    {
+      "name": "lieflat-charts",
+      "reason": "PolyForm Noncommercial 1.0.0（禁商业用途）；上游 issue #17「企业内部使用是否可行」截至 2026-09-12 未答复。出处：~/.dsh/skills/lieflat-charts/LICENSE 首行 + README.md",
+      "recordedAt": "2026-09-12"
+    }
+  ]
+}

@@ -100,9 +100,11 @@ say "app-update.yml 已改写（禁用官方更新通道）"
   "$APP_STAGE/DSH Desktop.app/Contents/Info.plist"
 say "CFBundleVersion → 2.0.5-lute.${VERSION}"
 
-# 暂存改写：运行时层补丁重放（NM 层，24 个确定性补丁，2026-09-11 起入仓 packaging/patches/nm/）
-# 覆盖：P0-3/P0-4/P0-8（pi-ai 磁盘化）、cordis-clamp、loader-B4、skill-title×9、chatui×3、
-#       clipboard、PR-1/PR-2-5、LB-1~3。补丁 = pristine(源码构建) → patched(出厂) 的统一 diff。
+# 暂存改写：运行时层补丁重放（NM 层，25 个确定性补丁，2026-09-11 起入仓 packaging/patches/nm/；
+#            2026-09-12 增 P0-9 RootOutlet 白屏兜底）
+# 覆盖：P0-3/P0-4/P0-8（pi-ai 磁盘化）、P0-9（RootOutlet 白屏兜底）、cordis-clamp、loader-B4、
+#       skill-title×9、chatui×3、clipboard、PR-1/PR-2-5、LB-1~3。
+# 补丁 = pristine(源码构建) → patched(出厂) 的统一 diff。
 # BASE=source 时由 pristine 构建产物重放；BASE=dmg 时 app 源自带补丁，--forward 幂等跳过。
 NM_DIR="$APP_STAGE/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules"
 if [ -d "$NM_DIR" ]; then
@@ -148,8 +150,13 @@ const names=Object.entries(p.dependencies||{})
   .filter(([,v])=>typeof v==='string'&&(v.startsWith('file:../../../project/Magpie-Horch/')||v.startsWith('file:/Users/lute/project/Magpie-Horch/')))
   .map(([,v])=>v.startsWith('file:../../../project/Magpie-Horch/')?v.slice('file:../../../project/Magpie-Horch/'.length).replace(/\/+$/,''):v.slice('file:/Users/lute/project/Magpie-Horch/'.length).replace(/\/+$/,''));
 console.log(names.join(' '))" "$PROFILE/package.json")"
-say "vendor 列表: $vendor_dirs dsh-patches"
-for d in $vendor_dirs dsh-patches; do
+say "vendor 列表: $vendor_dirs"
+# 注意：**不**把 dsh-patches 拷进出货 profile 的 vendor。理由两条：
+#   ① 它不是装载点（ADR-0054：DSH 的包解析锚点是 profile 根 package.json → node_modules，
+#      vendor/ 只作「内嵌 profile 拷贝物化」的判别标记），运行时不读它；
+#   ② 里面有内部取证材料（锚点漂移取证、P0 修复清单、上游议题、UI-UX 审计包）——
+#      客户需要的是 payload/tools/ 下的校验与品牌工具，不是我们的工程留痕（决策 K10）。
+for d in $vendor_dirs; do
   [ -d "$DSH_VENDOR/$d" ] || { echo "[assemble] 缺少 vendor 源: $DSH_VENDOR/$d"; exit 1; }
   # --safe-links：跳过指向源树外的符号链接（如 dsh-theme-local/vendor 下指向
   # 构建机 app checkout 的开发期草稿链接），包内只保留树内相对链接
@@ -158,7 +165,7 @@ for d in $vendor_dirs dsh-patches; do
         --exclude 'preview-*.html' --exclude archive \
         --exclude staging --exclude backup \
         --exclude '.DS_Store' --exclude '*.bak-*' --exclude '*.pre-*' --exclude '*.orig*' \
-        --exclude '.git.disabled' --exclude coverage \
+        --exclude '.git.disabled' --exclude coverage --exclude output \
         "$DSH_VENDOR/$d/" "$STAGEP/profile/vendor/$d/" 2>/dev/null \
     || cp -R "$DSH_VENDOR/$d" "$STAGEP/profile/vendor/$d/"
 done
@@ -179,6 +186,7 @@ for d in $profile_vendor_dirs; do
         --exclude 'preview-*.html' --exclude archive \
         --exclude staging --exclude backup \
         --exclude '.DS_Store' --exclude '*.bak-*' --exclude '*.pre-*' --exclude '*.orig*' --exclude '*.lute-bak' \
+        --exclude coverage --exclude output \
         "$PROFILE/vendor/$d/" "$STAGEP/profile/vendor/$d/" 2>/dev/null \
     || cp -R "$PROFILE/vendor/$d" "$STAGEP/profile/vendor/$d/"
 done
@@ -192,9 +200,20 @@ done
 # file: 路径重写（包内自洽，决策 D4）→ 在暂存副本上执行，不触碰本机 profile
 node "$PKG_ROOT/scripts/rewrite-file-deps.mjs" "$STAGEP/profile"
 
-# cordis.patch.yml 内构建机绝对路径 → __DSH_HOME__ 占位（安装时按目标机 $HOME 替换；
-# 内嵌兜底路径由 main.js P0-7 首启 hook 按真实 DSH home 替换）
+# cordis.patch.yml 内构建机绝对路径 → 占位（安装时按目标机 $HOME 替换；
+# 内嵌兜底路径由 main.js P0-7 首启 hook 按真实 DSH home 替换）。
+#
+# 两个前缀都要替换，因为它们是**两个不同的**机器路径，只补第一个会漏：
+#   · $DSH_HOME_DIR  = <home>/.dsh          → __DSH_HOME__（profile 数据根）
+#   · $LUTE_PROJECT_ROOT = <home>/project   → __LUTE_PROJECT_ROOT__（项目根；
+#     实测 `ui-newapp-local.productRoots` 写着 `/Users/lute/project`，
+#     assemble 原先只替换第一个 → 该路径原样随包发出，客户机上指不到东西）
 sed -i '' "s|$DSH_HOME_DIR|__DSH_HOME__|g" "$STAGEP/profile/cordis.patch.yml"
+LUTE_PROJECT_ROOT="${LUTE_PROJECT_ROOT:-$HOME/project}"
+if [ "$LUTE_PROJECT_ROOT" != "$DSH_HOME_DIR" ]; then
+  sed -i '' "s|$LUTE_PROJECT_ROOT|__LUTE_PROJECT_ROOT__|g" "$STAGEP/profile/cordis.patch.yml"
+fi
+say "路径占位替换完成（__DSH_HOME__ / __LUTE_PROJECT_ROOT__）"
 
 # ── 2b. R2b 双落位：同源 profile 注入 app 内嵌 dsh-profile（首启兜底）──────────
 say "2b/6 同源注入内嵌 dsh-profile（首启兜底）"
@@ -219,6 +238,15 @@ if [ -n "$BROKEN_LINKS" ]; then
   echo "[assemble] 内嵌 dsh-profile 含断链，中止："; echo "$BROKEN_LINKS"; exit 1
 fi
 say "内嵌 dsh-profile 就绪 ($(du -sh "$BUNDLED" | cut -f1))"
+
+# 出货面「构建机绝对路径」守卫（只减不增，基线 packaging/machine-path-baseline.json）。
+# 为什么放在这里：$BUNDLED ≡ profile.tar.gz 的内容（同一份暂存 + 同一份离线 node_modules），
+# 且此刻尚未签名——机器路径漏出去的代价是客户机上静默指不到东西，历史上已发生三次
+# （KOL-Hunter 依赖、productRoots、插件脚本写死 /Users/lute）。基线缺失即失败，不静默通过。
+say "机器路径守卫（构建机 home 不得新增命中）…"
+node "$PKG_ROOT/scripts/scan-machine-paths.mjs" \
+  --root "$BUNDLED" --baseline "$PKG_ROOT/machine-path-baseline.json" \
+  || { echo "[assemble] 出货面出现新的构建机绝对路径，中止（见上）；修法见脚本头部。"; exit 1; }
 
 # adhoc 深签名（决策 D2；内容已改写 + 注入 dsh-profile，原签名失效，打包前重签）
 say "adhoc 深签名（含内嵌 dsh-profile）…"
@@ -246,11 +274,16 @@ say "profile 完成 ($(du -sh "$PAYLOAD/profile.tar.gz" | cut -f1))"
 rm -rf "$STAGEP"
 
 # ── 3. 技能 + 预设 ───────────────────────────────────────────────────────────
-say "3/6 暂存技能 + 预设"
+say "3/6 暂存技能 + 预设（技能面按「被引用 + 无受限许可」现算收敛）"
 SP="$STAGE/.sp"; mkdir -p "$SP/skills" "$SP/presets"
-[ -d "$DSH_HOME_DIR/skills" ] && cp -R "$DSH_HOME_DIR/skills/." "$SP/skills/"
-[ -d "$HOME/.agents/skills" ] && cp -R "$HOME/.agents/skills/." "$SP/skills/" 2>/dev/null || true
+# 决策 K5/K6：不再整份拷贝 ~/.dsh/skills（实测 1611 个目录 / 66M，其中 989 个 p2s 语料无人引用，
+# 并含 PolyForm 非商用的 lieflat-charts）。选择在打包时现算（preset 组合 + 仓库映射 → 被引用集，
+# 再减受限许可名单），不存第二份清单（ADR-0009）。明细与理由见 scripts/select-skills.mjs。
+DSH_HOME="$DSH_HOME_DIR" node "$PKG_ROOT/scripts/select-skills.mjs" --copy "$SP/skills"
 [ -d "$DSH_HOME_DIR/.agent-presets" ] && cp -R "$DSH_HOME_DIR/.agent-presets/." "$SP/presets/"
+# 打包后自检：落位的技能树里不得出现受限许可技能（与上面的选择互为独立判据）
+node "$PKG_ROOT/scripts/select-skills.mjs" --check "$SP/skills" \
+  || { echo "[assemble] ✗ 出货技能面含受限许可技能，中止（见上）"; exit 1; }
 # 清理元数据/临时文件（口径与 vendor/node_modules 一致）
 find "$SP" \( -name '.DS_Store' -o -name '*.bak-*' -o -name '*.pre-*' -o -name '*.orig*' \) -delete 2>/dev/null || true
 tar -czf "$PAYLOAD/skills-presets.tar.gz" --exclude '.DS_Store' -C "$SP" skills presets
@@ -275,11 +308,12 @@ cp "$PKG_ROOT/installer/install.sh" "$PAYLOAD/install.sh"
 chmod 755 "$PAYLOAD/install.sh"
 cp "$PKG_ROOT/scripts/rewrite-file-deps.mjs" "$PAYLOAD/tools/"
 cp "$PKG_ROOT/scripts/reloc-aeis.sh" "$PAYLOAD/tools/"
-cp "$DSH_VENDOR/dsh-patches/verify-patches.sh" "$PAYLOAD/tools/"
+# v1（verify-patches.sh）2026-09-11 已退役（exit 2），不再随包——随包只会让客户跑到
+# 「本脚本已退役」这句话，看起来像失败。唯一权威是 verify-patches-v2.sh（下一行）。
 cp "$PKG_ROOT/verify-patches-v2.sh" "$PAYLOAD/tools/" 2>/dev/null || true
 cp "$DSH_VENDOR/dsh-patches/brand-replay.sh" "$PAYLOAD/tools/" 2>/dev/null || true
 cp "$DSH_VENDOR/dsh-patches/brand-payload-wordmark.txt" "$PAYLOAD/tools/" 2>/dev/null || true
-cp "$DSH_VENDOR/dsh-patches/patches-manifest.md" "$PAYLOAD/tools/" 2>/dev/null || true
+# patches-manifest*.md 不随包（内部登记簿；决策 K10 = 剔除内部取证文档）
 # ROOT 品牌图标随包分发（brand-replay --apply 自愈用；真相源 packaging/assets/app-icon.icns）
 cp "$PKG_ROOT/assets/app-icon.icns" "$PAYLOAD/tools/app-icon.icns" 2>/dev/null || true
 chmod 755 "$PAYLOAD/tools/"*.sh "$PAYLOAD/tools/"*.mjs 2>/dev/null || true
@@ -311,7 +345,7 @@ cat > "$PAYLOAD/README.md" <<EOF
 - \`aeis-portable.tar.gz\`：灵枢 Python 运行时（可重定位 standalone 基底 + aeis 纯 Python 包，目标机免 Python）。
 - \`LUTE Setup.app\`：GUI 安装器（双击安装，进度可见）。
 - \`install.sh\`：命令行安装（等价于 Setup.app，幂等 + 回滚 + 升级保留数据）。
-- \`tools/\`：补丁锚点校验（verify-patches.sh）、品牌漂移检查（brand-replay.sh）、file: 重写工具。
+- \`tools/\`：补丁锚点校验（**verify-patches-v2.sh**，36 锚点）、品牌漂移检查（brand-replay.sh）、file: 重写工具、灵枢便携化工具。
 - \`SHA256SUMS\`：完整性校验。
 
 ## 安装（macOS，完全离线）
@@ -338,8 +372,7 @@ shasum -a 256 ../$(basename "$PWD").dmg  # 与发布方给的 SHA256 对照
 
 ## 校验
 \`\`\`bash
-bash tools/verify-patches.sh        # 2.0.4 锚点（旧基座）
-bash tools/verify-patches-v2.sh    # 2.0.5 锚点（本版 34 锚点，应 ALL VERIFIED）
+bash tools/verify-patches-v2.sh    # 2.0.5 锚点（本版 36 锚点，应 ALL VERIFIED）
 bash tools/brand-replay.sh --check  # 品牌锚点无漂移
 \`\`\`
 
@@ -367,15 +400,42 @@ const deps=Object.keys(p.dependencies||{});
 const vendorDirs=Object.entries(p.dependencies||{})
   .filter(([,v])=>typeof v==='string'&&(v.startsWith('file:../../../project/Magpie-Horch/')||v.startsWith('file:/Users/lute/project/Magpie-Horch/')||v.startsWith('file:./vendor/')))
   .map(([,v])=>v.startsWith('file:../../../project/Magpie-Horch/')?v.slice('file:../../../project/Magpie-Horch/'.length).replace(/\/+\$/,''):(v.startsWith('file:./vendor/')?v.slice('file:./vendor/'.length).replace(/\/+\$/,''):v.slice('file:/Users/lute/project/Magpie-Horch/'.length).replace(/\/+\$/,'')));
-vendorDirs.push('dsh-patches');
+// dsh-patches 不进出货 profile 的 vendor（见上方注释），故 completeness.vendor 也不含它
 const allBundles=[...new Set([...bundles,...deps.filter(d=>typeof p.dependencies[d]==='string'&&!p.dependencies[d].startsWith('file:'))])];
 const listDir=(d)=>fs.existsSync(d)?fs.readdirSync(d).filter(x=>fs.statSync(path.join(d,x)).isDirectory()).sort():[];
+// skills 必须读**出货的那一份**（skills-presets.tar.gz 里的清单），不能读源目录 ~/.dsh/skills：
+// 技能面已按 K5/K6 收敛（1611 → 约 539），读源目录会让 smoke 断言一个客户机上根本不存在的清单。
+const { execFileSync } = require('node:child_process');
+const tarSkills = () => {
+  const out = execFileSync('tar', ['-tzf', process.argv[2] + '/skills-presets.tar.gz'], { encoding: 'utf8', maxBuffer: 1 << 28 });
+  const names = new Set();
+  for (const line of out.split('\n')) {
+    const m = /^skills\/([^/]+)\/$/.exec(line);
+    if (m) names.add(m[1]);
+  }
+  return [...names].sort();
+};
 const c={bundles:allBundles.sort(),vendor:[...new Set(vendorDirs)].sort(),
-  skills:listDir(process.argv[2]+'/skills'),presets:listDir(process.argv[2]+'/.agent-presets')};
+  skills:tarSkills(),presets:listDir(process.argv[3]+'/.agent-presets')};
 fs.writeFileSync(process.argv[3]+'/completeness.json',JSON.stringify(c,null,2)+'\n');
 console.log('bundles='+c.bundles.length+' vendor='+c.vendor.length+' skills='+c.skills.length+' presets='+c.presets.length);
-" "$PROFILE/package.json" "$DSH_HOME_DIR" "$PAYLOAD"
+" "$PROFILE/package.json" "$PAYLOAD" "$DSH_HOME_DIR" "$PAYLOAD"
 
 say "汇编完成：$PAYLOAD"
+
+# ── 7. 出厂冒烟（隔离安装 + 完整性 + 补丁/品牌锚点）─────────────────────────────
+# 为什么放在汇编里而不是留给人工：冒烟此前只写在 README 与 SOLUTION 里当"推荐步骤"，
+# 而 assemble.sh 与 sign-and-dmg.sh 都不调用它——一个不跑就绿的产物会被直接打成 dmg。
+# 隔离式（SMOKE_HOME 默认 /tmp/dsh-smoke，不碰本机 /Applications 与 ~/.dsh），约 5 分钟。
+# 跳过只能显式声明：SKIP_SMOKE=1（会大声打印，便于在日志里追责）。
+if [ "${SKIP_SMOKE:-0}" = "1" ]; then
+  say "⚠ SKIP_SMOKE=1：跳过出厂冒烟（本轮产物未被验证，禁止据此发布）"
+else
+  say "7/7 出厂冒烟（隔离安装，约 5 分钟）…"
+  bash "$PKG_ROOT/scripts/smoke-test.sh" "$PAYLOAD" \
+    || { echo "[assemble] ✗ 冒烟未通过——产物不可发布（payload 保留在 $PAYLOAD 供排查）" >&2; exit 1; }
+  say "冒烟通过"
+fi
+
 ( cd "$PAYLOAD" && ls -la )
 du -sh "$STAGE"

@@ -59,6 +59,7 @@
 | ADR-0053 | 岗位能力事实读它的家（preset manifest + 技能本体），**不派生第二份清单**；宿主路由现读现投影，挂载锚零哈希 | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-composer-role-capabilities.md) |
 | ADR-0054 | 改动生效的判据是**装载点的字节**（`profile/node_modules`，不是 `vendor/`）：门禁从「副本有没有这个文件」升到「字节一不一样」，且只钉可执行产物面 | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-loadpoint-bytes-drift.md) |
 | ADR-0055 | 依赖层可复现的判据：清单与锁文件逐条 specifier 相等、依赖不得指向机器绝对路径、同名不得跨字段重复声明，离线判定（`deps-reproducible`）；产物未入库的包 `build` 先于 `test` | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-dependency-reproducibility.md) |
+| ADR-0056 | 出货的 preset **不烘焙任何外部产品行**（`PRODUCT_MOUNTS` 置空，本机产品走本机装配）；机器路径两个前缀都参数化（`__DSH_HOME__` / `__LUTE_PROJECT_ROOT__`）；出货树机器路径**只减不增**（签名前机读守卫） | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-shipping-surface.md) |
 
 > ADR-0007 ~ ADR-0018 是「LUTE 二开平台架构重构」的十二项决策，共享同一篇决策记录 Note。
 > ADR-0019 独立成篇（品牌皮肤锚点治理），决策记录见其 Note。

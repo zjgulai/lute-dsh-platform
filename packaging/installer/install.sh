@@ -135,6 +135,41 @@ if [ -d "$PROFILE_DIR" ]; then
   say "2/6 已有 profile → 包拥有的项备份为 $PROFILE_DIR.pre-lute-$STAMP"
   RESTORE_PROFILE="$PROFILE_DIR.pre-lute-$STAMP"
   mkdir -p "$RESTORE_PROFILE"
+  # 升级前的「客户自装插件」清点（2026-09-12 补）：node_modules 与 package.json 是整体替换的，
+  # 所以不在本包清单里的自装插件升级后不会自动装载。此前这条是**静默的**（旧副本被 mv 进备份
+  # 目录后再没人看这份列表）。这里改成装前清点 + 装后落一份清单文件。
+  #
+  # 判据（**不是**「node_modules 顶层不在清单里」——那会把 271 个传递依赖全算成自装插件，噪声
+  # 淹掉信号）：**旧 profile 的 package.json 声明过、而新包的 profile 没声明的条目**。
+  # 客户自装插件必经 `dsh plugin add` 写进 profile package.json，所以这个差集恰好就是它。
+  if [ -f "$PROFILE_DIR/package.json" ] && [ -f "$HERE/profile.tar.gz" ]; then
+    EXTRAS="$STAGING_DIR/upgrade-extras.txt"
+    mkdir -p "$STAGING_DIR"
+    node -e "
+      const fs = require('node:fs'), path = require('node:path')
+      const { execFileSync } = require('node:child_process')
+      const readJson = (p) => JSON.parse(fs.readFileSync(p, 'utf8'))
+      const names = (pkg) => {
+        const out = new Set(Object.keys(pkg.dependencies ?? {}))
+        for (const b of pkg.dsh?.profile?.bundles ?? []) out.add(typeof b === 'string' ? b : b.name)
+        return out
+      }
+      const oldPkg = readJson(process.argv[1])
+      const newPkg = JSON.parse(execFileSync('tar', ['-xzOf', process.argv[2], './package.json'], { encoding: 'utf8', maxBuffer: 1 << 26 }))
+      const oldSet = names(oldPkg), newSet = names(newPkg)
+      const extras = [...oldSet].filter((n) => !newSet.has(n)).sort()
+      fs.writeFileSync(process.argv[3], extras.join('\n') + (extras.length ? '\n' : ''))
+      console.log(extras.length)
+    " "$PROFILE_DIR/package.json" "$HERE/profile.tar.gz" "$EXTRAS" > "$STAGING_DIR/extras-count.txt" 2>/dev/null || echo 0 > "$STAGING_DIR/extras-count.txt"
+    EXTRAS_N="$(cat "$STAGING_DIR/extras-count.txt" 2>/dev/null || echo 0)"
+    if [ "${EXTRAS_N:-0}" != "0" ]; then
+      say "⚠ 本次升级不再包含 $EXTRAS_N 个原有条目（升级后不会自动装载）："
+      sed 's/^/      /' "$EXTRAS" 2>/dev/null || true
+      say "  旧副本（含 node_modules）已备份到 $RESTORE_PROFILE/；清单：$DSH_HOME_DIR/.lute-install/upgrade-extras.txt"
+      say "  恢复办法：把该插件目录从备份的 node_modules 拷回，并在 profile/package.json 的"
+      say "            dependencies + dsh.profile.bundles 里补回同名条目，然后重启 DSH。"
+    fi
+  fi
   for item in "${OWNED[@]}"; do
     if [ -e "$PROFILE_DIR/$item" ]; then mv "$PROFILE_DIR/$item" "$RESTORE_PROFILE/"; fi
   done
@@ -146,8 +181,24 @@ for item in "${OWNED[@]}"; do REMOVE+=("$PROFILE_DIR/$item"); done
 say "2/6 profile 就位（node_modules 已随包，无需联网安装）"
 
 # ── 3/6 路径占位替换 + file: 校验 + 补丁重放 ────────────────────────────────────
+# 两个占位都来自构建机路径，必须都替换（只替换第一个会让 productRoots 之类的配置
+# 指向打包机的 /Users/<builder>/project）：
+#   __DSH_HOME__           → 目标机 DSH 数据根
+#   __LUTE_PROJECT_ROOT__  → 目标机项目根默认值（新应用抽屉扫描产品的允许根；
+#                            目录不存在不报错，客户可在 cordis.patch.yml 里改成自己的路径）
 sed -i '' "s|__DSH_HOME__|$DSH_HOME_DIR|g" "$PROFILE_DIR/cordis.patch.yml"
-node "$HERE/tools/rewrite-file-deps.mjs" --check "$PROFILE_DIR" || true
+sed -i '' "s|__LUTE_PROJECT_ROOT__|$HOME/project|g" "$PROFILE_DIR/cordis.patch.yml"
+if grep -q '__LUTE_PROJECT_ROOT__\|__DSH_HOME__' "$PROFILE_DIR/cordis.patch.yml" 2>/dev/null; then
+  echo "[install] ⚠ cordis.patch.yml 仍有未替换的占位（打包侧与安装侧口径不一致）" >&2
+fi
+# 路径自检：出货 profile 不应含构建机 home 路径。历史三次同类缺陷都出在这里，
+# 所以这里**不再 `|| true`**——发现问题要响，而不是装完才知道。
+if node "$HERE/tools/rewrite-file-deps.mjs" --check "$PROFILE_DIR"; then
+  say "3/6 file: 路径自检通过"
+else
+  echo "[install] ✗ file: 依赖自检未通过（见上）——profile 里仍有构建机路径，安装中止" >&2
+  exit 1
+fi
 ( cd "$PROFILE_DIR" && node apply-patches.mjs )
 say "3/6 路径替换 + apply-patches.mjs 完成"
 
@@ -216,23 +267,36 @@ if [ -f "$HERE/aeis-portable.tar.gz" ]; then
   tar --no-same-owner -xzf "$HERE/aeis-portable.tar.gz" -C "$DSH_HOME_DIR"
   clear_qa "$DSH_HOME_DIR/aeis-venv"
   REMOVE+=("$DSH_HOME_DIR/aeis-venv")
-  bash "$HERE/tools/reloc-aeis.sh" --check "$DSH_HOME_DIR/aeis-venv" || say "⚠ 灵枢 venv 自检未通过，见 reloc-aeis.sh"
+  bash "$HERE/tools/reloc-aeis.sh" --check "$DSH_HOME_DIR/aeis-venv" \
+    || { echo "[install] ✗ 灵枢 venv 自检未通过（见上）" >&2; VERIFY_FAILED=1; }
 else
   say "6/6 本包未含灵枢 venv 载荷（跳过）"
 fi
+
+# 校验汇总语义（2026-09-12 改）：三处校验从「只 say 一条 ⚠」改成「收集全部失败 + 末尾非零退出」。
+# 动机：此前 verify-patches / brand 失败只打印警告、退出码仍是 0 —— 客户拿到一个「装完了」
+# 但补丁/品牌缺件的环境，而唯一信号是一行可能被忽略的警告（诊断报告 D3）。
+# 选择「响亮但**不回滚**」：装完的文件留在原地供排查，回滚留给用户决定（cordon 见下）。
+VERIFY_FAILED="${VERIFY_FAILED:-0}"
 if [ -f "$HERE/tools/verify-patches-v2.sh" ]; then
   say "运行补丁锚点校验（v2 · 2.0.5）…"
-  DSH_APP="$APP_TARGET" bash "$HERE/tools/verify-patches-v2.sh" || say "⚠ 补丁校验未全绿——先重启 DSH 再复验"
-elif [ -f "$HERE/tools/verify-patches.sh" ]; then
-  say "运行补丁锚点校验…"
-  DSH_APP="$APP_TARGET" DSH_HOME="$DSH_HOME_DIR" \
-    bash "$HERE/tools/verify-patches.sh" || say "⚠ 补丁校验未全绿——先重启 DSH 再复验"
+  DSH_APP="$APP_TARGET" bash "$HERE/tools/verify-patches-v2.sh" \
+    || { echo "[install] ✗ 补丁锚点未全绿（见上）——上面的 MISSING/FAIL 就是缺件清单" >&2; VERIFY_FAILED=1; }
+else
+  echo "[install] ✗ 载荷缺少 tools/verify-patches-v2.sh（2.0.5 的唯一权威校验器；v1 已于 2026-09-11 退役）" >&2
+  VERIFY_FAILED=1
 fi
 if [ -f "$HERE/tools/brand-replay.sh" ]; then
   say "运行品牌锚点校验…"
   DSH_APP="$APP_TARGET" bash "$HERE/tools/brand-replay.sh" --check \
-    || say "⚠ 品牌锚点漂移——可运行 brand-replay.sh --apply 重放"
+    || { echo "[install] ✗ 品牌锚点漂移（见上）；可运行 tools/brand-replay.sh --apply 重放" >&2; VERIFY_FAILED=1; }
 fi
 
 cleanup_tmp
-say "完成。① 重启 DSH Desktop；② 重新授权 TCC（录屏/辅助功能/自动化）；③ 校验：bash $HERE/tools/verify-patches-v2.sh"
+if [ "$VERIFY_FAILED" != "0" ]; then
+  echo "" >&2
+  echo "[install] ✗ 安装已落位，但校验未全部通过（退出码 1）。文件保留在原处以便排查；" >&2
+  echo "          确认要退回上一版：用 *.pre-lute-$STAMP 备份手工恢复（app / profiles/desktop / aeis-venv）。" >&2
+  exit 1
+fi
+say "完成。① 重启 DSH Desktop；② 重新授权 TCC（录屏/辅助功能/自动化）；③ 复验：bash $HERE/tools/verify-patches-v2.sh"

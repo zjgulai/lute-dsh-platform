@@ -213,10 +213,59 @@ function rowBlockRange(lines, id) {
 }
 
 /**
- * 组装 agent.cordis.yml：以 shipped standard 为基座（D5 决策），
- * 替换 persona 行块为岗位 persona，并在 skills 段追加 dsh-skill-subset 行。
+ * 产品装配表：哪些 Agent 产品包挂进哪个岗位的 agent-plane 组合。
+ *
+ * 这里与 `product.json` 的 `preset` 字段不是同一份事实，也不该合并：
+ *   · `product.json` 的 `preset` = **产品说它属于谁**（归属，产品自己的家）
+ *   · 本表 = **岗位说它挂谁**（装配，岗位组合的家）
+ * 两者必须一致；产品侧的 `run.mjs --check` 有一项专门读生成的 composition 断言这件事，
+ * 不一致即红——因为「挂错层」不会报错，只会让局部技能静默变成全局技能
+ * （技能注册表按挂载 scope 分层，宿主行→全局层，preset 行→该 preset 的层）。
+ *
+ * 产品包住在产品自己的目录里（ADR-0033：本仓库不吞并产品代码），由 profile 装进
+ * node_modules，因此这里只登记包名与行 id，不搬代码。
+ *
+ * ## 为什么本表现在是空的（2026-09-12，DMG 2.2.0 打包前）
+ *
+ * 出货的 preset 不得烘焙**任何**外部产品行，理由有两条，都不是风格问题：
+ *
+ * 1. **挂载是硬依赖。** 产品行一旦写进 `agent.cordis.yml`，客户机上就必须装到对应
+ *    包，否则该岗位组合装载失败（`plugin tree failed to load` → 恢复模式）。产品的家
+ *    在各自项目里（ADR-0033），本仓库无法保证任何客户机装过它——所以这个行只能在本机
+ *    为真的前提下写。
+ * 2. **它会带出机器路径。** `agt-033` 曾挂 `dsh-kol-hunter-local`，其 profile 依赖是
+ *    `file:/Users/lute/project/KOL-Hunter`：该路径既不进 vendor 抽取（前缀只认
+ *    本仓库）、也不被 `rewrite-file-deps.mjs` 重写（旧前缀表不含它），于是会原样打进
+ *    出货 profile（实测 23 条 `file:` 依赖中唯一漏网的一条）。
+ *
+ * 因此 KOL-Hunter 随本次移出产品面：本表清空、profile 不再引用该包。要恢复「本机挂载
+ * 自己的产品」，正确做法是给本机加一层**本地**装配（不进本仓库出货物），而不是把某台
+ * 机器的产品目录写回这里。
  */
-function renderComposition(personaText, skills) {
+const PRODUCT_MOUNTS = {}
+
+/**
+ * 渲染产品行：挂在 skill-subset 之后。
+ * 产品行必须由本函数生成，不能手改 agent.cordis.yml——本脚本每次都会重写全部 50 个组合。
+ */
+function renderProductRows(presetId) {
+  const mounts = PRODUCT_MOUNTS[presetId]
+  if (!mounts || mounts.length === 0) return []
+  const lines = ['', '# 本岗位挂载的 Agent 产品包（每行 = 一个产品；产品代码在各自项目里）。']
+  for (const m of mounts) {
+    lines.push(`# ${m.note}`)
+    lines.push(`- id: ${m.id}`)
+    lines.push(`  name: '${m.pkg}'`)
+  }
+  lines.push('')
+  return lines
+}
+
+/**
+ * 组装 agent.cordis.yml：以 shipped standard 为基座（D5 决策），
+ * 替换 persona 行块为岗位 persona，并在 skills 段追加 dsh-skill-subset 行与产品行。
+ */
+function renderComposition(personaText, skills, presetId) {
   const std = readFileSync(STANDARD_COMPOSITION, 'utf8')
   const lines = std.split('\n')
 
@@ -243,6 +292,9 @@ function renderComposition(personaText, skills) {
     '',
   ]
   lines.splice(tEnd, 0, ...subsetRow)
+
+  const [, pEndAfterSubset] = rowBlockRange(lines, 'skill-subset')
+  lines.splice(pEndAfterSubset, 0, ...renderProductRows(presetId))
 
   return lines.join('\n')
 }
@@ -461,10 +513,10 @@ function main() {
       roleCardSha: cardSha,
     }, renderSupplyStatus(skillMapping, playbookIds))
 
-    const composition = renderComposition(persona, skillIds)
+    const presetId = `agt-${id.slice(4)}`
+    const composition = renderComposition(persona, skillIds, presetId)
 
     const order = orders.get(id)
-    const presetId = `agt-${id.slice(4)}`
     const name = `${role.alias} · ${role.title}`
     const description =
       `【${plane.name}·${domain.name}】${role.mission}（标准产物：${role.artifact}）`

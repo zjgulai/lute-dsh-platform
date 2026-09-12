@@ -11,7 +11,7 @@
 import { existsSync, lstatSync, readFileSync, readlinkSync, readdirSync, statSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { homedir } from 'node:os'
-import { dirname, join } from 'node:path'
+import { dirname, join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   checkAdrIndex,
@@ -28,7 +28,7 @@ import {
   checkTrackedIgnored,
 } from './gates/checks.mjs'
 import { buildOutputRoot, checkDependencyReproducibility, packageScriptOrder } from './gates/dependency-reproducibility.mjs'
-import { checkProfileFilesSync, checkProfileMetadata } from './gates/sync-profile.mjs'
+import { checkProfileBundleSync, checkProfileFilesSync, checkProfileMetadata } from './gates/sync-profile.mjs'
 import { checkSharedSync } from './gates/sync-shared.mjs'
 import { checkThemeTokens } from './gates/theme-tokens.mjs'
 import { checkWorktableFence } from './gates/worktable-fence.mjs'
@@ -159,8 +159,10 @@ const CHECKS = [
   },
   {
     name: 'profile-metadata-sync',
-    remediation: '运行 node scripts/sync-profile.mjs --apply --only-metadata 同步 live profile 副本的 package.json',
+    remediation: '运行 node scripts/sync-profile.mjs --apply --only-metadata 同步内嵌副本（profile/vendor，非装载点）的 package.json',
     run() {
+      // 注意：vendor/ 不是装载点（DSH 从 profile/node_modules 解析包）。本项只保证
+      // 内嵌副本的元数据不漂；「改动是否生效」由下面的 profile-bundle-sync 断言。
       const profileVendor = join(process.env.HOME ?? '', '.dsh', 'profiles', 'desktop', 'vendor')
       if (!existsSync(profileVendor)) return { passed: true, violations: [] }
       return checkProfileMetadata(
@@ -199,6 +201,33 @@ const CHECKS = [
         })
       }
       return checkProfileFilesSync(pairs)
+    },
+  },
+  {
+    name: 'profile-bundle-sync',
+    remediation: '运行 node scripts/sync-profile.mjs --apply --loadpoint 把仓库产物按 tmp+mv 同步到装载点（否则应用重启后仍跑旧字节）',
+    run() {
+      const profile = join(process.env.HOME ?? '', '.dsh', 'profiles', 'desktop')
+      const target = join(profile, 'node_modules')
+      if (!existsSync(target)) return { passed: true, violations: [] }
+      const packages = new Map(collectManifests().filter((entry) => entry.dir !== '.').map((entry) => [entry.dir.split('/').pop(), entry]))
+      const pairs = []
+      for (const [name, spec] of Object.entries(installedProfileDependencies(profile))) {
+        if (!spec.startsWith('file:')) continue
+        const sourceDir = spec.slice('file:'.length)
+        if (!existsSync(join(sourceDir, 'package.json'))) continue
+        const entry = packages.get(sourceDir.split('/').pop())
+        // 只判本仓库受管的包：别的项目的 file: 依赖漂移是那个项目的事，
+        // 挂到这里只会让本仓库门禁为别人的状态变红，然后被加豁免。
+        if (entry === undefined) continue
+        pairs.push({
+          name,
+          sourceDir,
+          targetDir: join(target, name),
+          files: entry.manifest.files ?? [],
+        })
+      }
+      return checkProfileBundleSync(pairs)
     },
   },
   {
@@ -249,28 +278,77 @@ const CHECKS = [
     modes: ['full'],
     remediation: '运行 packaging/verify-patches-v2.sh 看 MISSING/FAIL 明细；补丁确实丢失时需重打并按 ADR-0018 的教训改用稳定锚（勿依赖内容哈希文件名）',
     run() {
-      const appDir = join('/', 'Applications', 'DSH Desktop.app')
-      // 环境相关：未安装 app 时报告为跳过（对照 profile-metadata-sync 的 pass 语义），
-      // 而不是假绿——真正跑起来时它必须能失败（已有负向验证）。
-      if (!existsSync(join(appDir, 'Contents', 'Resources', 'app.asar.unpacked'))) {
-        return { passed: true, violations: [] }
-      }
       const script = join(repoRoot, 'packaging', 'verify-patches-v2.sh')
-      const result = runScript(repoRoot, `DSH_APP="$DSH_APP_TEST" bash "${script}"`, 300000, { DSH_APP_TEST: appDir })
-      if (result.code === 0) return { passed: true, violations: [] }
-      // 两个流都要扫：这里是按正则**过滤**，不存在 ADR-0043 的「体量大的流挤掉小的」
-      // 问题——那位移只在按位置截尾时发生。锚点明细写在哪个流由脚本自己决定。
-      const lines = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
-        .split('\n')
-        .filter((line) => /^(MISSING|FAIL)/.test(line))
-      const verdict =
-        result.code === null
-          ? `补丁锚点校验未给出退出码${result.note ? `（${result.note}）` : ''}`
-          : `补丁锚点校验失败（退出码 ${result.code}）`
-      return {
-        passed: false,
-        violations: lines.length > 0 ? lines : [verdict],
+      /** 跑一棵 app 树，返回 { tree, passed, lines }。 */
+      const checkTree = (tree) => {
+        const result = runScript(repoRoot, `DSH_APP="$DSH_APP_TEST" bash "${script}"`, 300000, { DSH_APP_TEST: tree })
+        // 两个流都要扫：这里是按正则**过滤**，不存在 ADR-0043 的「体量大的流挤掉小的」
+        // 问题——那位移只在按位置截尾时发生。锚点明细写在哪个流由脚本自己决定。
+        const lines = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
+          .split('\n')
+          .filter((line) => /^(MISSING|FAIL)/.test(line))
+        const verdict =
+          result.code === null
+            ? `补丁锚点校验未给出退出码${result.note ? `（${result.note}）` : ''}`
+            : `补丁锚点校验失败（退出码 ${result.code}）`
+        return { passed: result.code === 0, lines: lines.length > 0 ? lines : [verdict] }
       }
+      // 两处 target，判据同一条：
+      //   ① 本机 /Applications —— 开发机运行时真值（未安装则跳过，不假绿）；
+      //   ② packaging/staging/*/app —— **打包面**。加这一处是因为「装配产物里补丁丢了」
+      //      与「本机 app 里补丁在」可以同时成立：P0-9(RootOutlet) 曾长期只在本机 app 上，
+      //      而 staging 树发的是 pristine（.scratch/pre-dmg-diagnosis B3）。旧 staging 是
+      //      历史快照，不重建就必然红——这是设计意图：陈旧产物不该被当成可发布物。
+      const targets = []
+      const appDir = join('/', 'Applications', 'DSH Desktop.app')
+      if (existsSync(join(appDir, 'Contents', 'Resources', 'app.asar.unpacked'))) targets.push(appDir)
+      const stagingRoot = join(repoRoot, 'packaging', 'staging')
+      if (existsSync(stagingRoot)) {
+        for (const version of readdirSync(stagingRoot).sort()) {
+          const tree = join(stagingRoot, version, 'app', 'DSH Desktop.app')
+          if (existsSync(join(tree, 'Contents', 'Resources', 'app.asar.unpacked'))) targets.push(tree)
+        }
+      }
+      if (targets.length === 0) return { passed: true, violations: [] }
+      const violations = []
+      for (const tree of targets) {
+        const { passed, lines } = checkTree(tree)
+        if (!passed) violations.push(...lines.map((line) => `${relative(repoRoot, tree)}: ${line}`))
+      }
+      return { passed: violations.length === 0, violations }
+    },
+  },
+  {
+    name: 'staging-freshness',
+    modes: ['full'],
+    remediation: '删掉陈旧 staging（rm -rf packaging/staging/<版本>）后重新装配：产物必须与仓库同源，否则「跑的是旧件」——历史两次教训见 packaging/RETROSPECTIVE.md 与 .scratch/pre-dmg-pipeline/spec.md 的 A1',
+    run() {
+      // 出货工具（payload/tools/*）必须与仓库同源。动机：2026-09-11 的 2.1.0 payload 是
+      // 11:05 的快照，而当天 21:29~23:31 才修好 verify-patches-v2 的默认路径、install.sh、
+      // sign-and-dmg、smoke——直接对那份 payload 制 dmg，客户跑校验工具默认必红。
+      const stagingRoot = join(repoRoot, 'packaging', 'staging')
+      if (!existsSync(stagingRoot)) return { passed: true, violations: [] }
+      const pairs = [
+        ['payload/tools/verify-patches-v2.sh', 'packaging/verify-patches-v2.sh'],
+        ['payload/tools/rewrite-file-deps.mjs', 'packaging/scripts/rewrite-file-deps.mjs'],
+        ['payload/tools/reloc-aeis.sh', 'packaging/scripts/reloc-aeis.sh'],
+        ['payload/install.sh', 'packaging/installer/install.sh'],
+      ]
+      const violations = []
+      for (const version of readdirSync(stagingRoot).sort()) {
+        const payload = join(stagingRoot, version, 'payload')
+        if (!existsSync(payload)) continue
+        for (const [inPayload, inRepo] of pairs) {
+          const a = join(payload, inPayload)
+          const b = join(repoRoot, inRepo)
+          if (!existsSync(a)) continue // 载荷没带这件工具（早代 payload 可能没有）→ 不判
+          if (!existsSync(b)) continue
+          if (!readFileSync(a).equals(readFileSync(b))) {
+            violations.push(`packaging/staging/${version}/${inPayload} 与仓库 ${inRepo} 不同源（陈旧快照，勿据此制 dmg）`)
+          }
+        }
+      }
+      return { passed: violations.length === 0, violations }
     },
   },
   {
