@@ -1,0 +1,697 @@
+/**
+ * New App launcher styles.
+ *
+ * Three hard constraints drive every rule here:
+ *
+ *  1. **The drawer lives in the browser's top layer.** It renders as a
+ *     `<dialog>` opened with `showModal()`, so no `z-index` anywhere in the
+ *     document can cover it. This is why the rule set below never sets a
+ *     `z-index` at all: a large number would be a guess that the next plugin
+ *     could outbid, and the measured evidence is that sibling overlays already
+ *     sit at 2500 / 99999 / 2147483000.
+ *  2. **Every colour is a harness token that the live engine resolves.** See
+ *     "the three token laws" below — each one is a failure this file has
+ *     already paid for once.
+ *  3. **Type rides the official font shorthands**, never a hand-paired
+ *     `font-size` + `line-height`: the pairing *is* the design decision, and
+ *     the shell already made it.
+ *
+ * The sidebar *entry* row has no geometry rule here: its geometry is imposed
+ * inline at runtime by the shared entry core, because inline wins over the
+ * shell's stylesheet (measured: zero `!important` in the shipped bundle) and
+ * because a stylesheet rule is what the shell's next rebuild invalidates.
+ *
+ * ─── The three token laws ───────────────────────────────────────────────────
+ *
+ * **Law 1 — a token name must be one the shell actually defines.** A name that
+ * exists nowhere is not a harmless typo: `var(--dsw-alias-fill-tsp-secondary)`
+ * is *valid CSS*, so the declaration silently falls back to its literal and the
+ * dark theme gets no fill at all. Eight such names are on record in
+ * `scripts/gates/theme-tokens-baseline.json`. The related trap is subtler and
+ * is why this file stopped using `--dsw-font-mono`: the name is defined by *our*
+ * theme plugin but never lands in the page (it is supplied on the non-contract
+ * path), so it resolves to nothing in both themes while a static gate reads it
+ * as "defined". **Only names the official theme bundle declares are safe here**
+ * — measured: 29/29 of the names in this file.
+ *
+ * **Law 2 — a fallback literal must be the value the token really resolves to**
+ * (light theme), so a missing token degrades to the truth instead of to a
+ * guess. Every literal below is the light-theme reading from
+ * `pnpm run accept:theme-tokens`.
+ *
+ * **Law 3 — brand colour is not a theme colour.** LUTE green stays a literal,
+ * because a brand does not flip with the theme; everything that expresses
+ * *state* uses the shell's state family instead. Both halves live in the single
+ * declaration block below, and a test asserts no colour literal appears outside
+ * it (tests/stylesheet.spec.ts). The tints are written as `rgba()` on purpose:
+ * `color-mix()` would be terser, but its failure mode is silent (an unsupported
+ * function makes the whole declaration invalid-at-computed-time and the `var()`
+ * fallback does *not* rescue it), and silent colour failure is the exact bug
+ * class this file keeps meeting.
+ */
+
+/* ── Brand block ────────────────────────────────────────────────────────────
+ *
+ * The one home for every literal in this file. The selector list carries both
+ * roots on purpose: the drawer (`.root`) and the sidebar row (`.entry`) are
+ * separate DOM subtrees — the row is injected into the shell's sidebar, not
+ * into the drawer — so there is no shared ancestor to hang these on, and
+ * duplicating the block would be the second home Law 3 exists to prevent.
+ */
+.root,
+.entry {
+  /* LUTE brand green. Fixed by brand, not by theme. */
+  --lute-brand: #58b848;
+  --lute-brand-deep: #3e9b33;
+  --lute-brand-soft: #8fd48a;
+  /* Tints of the same green, alpha-composed here so no rule below repeats a
+     channel value. */
+  --lute-brand-tint: rgba(88, 184, 72, 0.08);
+  --lute-brand-veil: rgba(88, 184, 72, 0.14);
+  --lute-brand-line: rgba(88, 184, 72, 0.45);
+  --lute-brand-line-strong: rgba(88, 184, 72, 0.7);
+  --lute-brand-shadow: rgba(88, 184, 72, 0.26);
+  --lute-brand-halo: rgba(88, 184, 72, 0.5);
+  --lute-brand-sheen: rgba(255, 255, 255, 0.28);
+  /* Text on a *fixed* brand fill must be white in both themes, so it rides the
+     shell's static (non-flipping) white rather than an inverted-label alias —
+     an alias would go dark in the dark theme and vanish on the green tile. */
+  --lute-on-brand: var(--dsw-static-neutral-bluish-00, #fff);
+}
+
+/* ── Drawer shell ─────────────────────────────────────────────────────────── */
+
+.root {
+  position: fixed;
+  inset: 0;
+  /* Full-viewport transparent modal box: the dimmed area is ::backdrop, this
+     element only owns the right-aligned panel inside it. */
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+}
+
+/* A closed <dialog> is display:none by default; the flex reset above would
+   otherwise keep an unmounted-looking panel on screen. */
+.root:not([open]) {
+  display: none;
+}
+
+.root::backdrop {
+  background: var(--dsw-alias-bg-mask-2, rgba(0, 0, 0, 0.12));
+  backdrop-filter: blur(1.5px);
+  animation: na-backdrop-in 160ms ease-out both;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: min(880px, 94vw);
+  height: 100%;
+  background: var(--dsw-alias-bg-layer-1, #fff);
+  border-left: 1px solid var(--dsw-alias-border-l2, rgba(0, 0, 0, 0.1));
+  color: var(--dsw-alias-label-primary, #0f1115);
+  /* The shell ships no drawer-elevation shadow — `--dsw-elevation-*` are all
+     hairline strokes and `--dsw-shadow-lv2/3` are 4-12px at 2% alpha. So the
+     edge depth stays a literal, but it rides the shell's *dim* colour, which
+     does flip with the theme (24% black in light, 50% in dark) — a plain
+     rgba(0,0,0,.22) would be the one shadow in the app that ignores the theme. */
+  box-shadow: -18px 0 48px var(--dsw-alias-bg-mask-1, rgba(0, 0, 0, 0.24));
+  animation: na-panel-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+
+.header {
+  position: relative;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.04));
+  background: linear-gradient(180deg, var(--lute-brand-tint), transparent 72%);
+}
+
+/* Brand strip: the same green the sidebar mark and the preset avatars carry. */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--lute-brand),
+    var(--lute-brand-soft) 58%,
+    transparent
+  );
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Identity tile — the sidebar entry's glyph in the brand tile, so the row the
+   user clicked and the panel that opened read as one object. */
+.mark {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  color: var(--lute-on-brand);
+  background: linear-gradient(150deg, var(--lute-brand), var(--lute-brand-deep));
+  box-shadow:
+    0 0 0 1px var(--lute-brand-halo),
+    0 6px 16px var(--lute-brand-shadow),
+    inset 0 1px 0 var(--lute-brand-sheen);
+}
+
+.mark svg {
+  display: block;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* `--dsw-font-m-18` is really 500 16px/28px — the official names carry a size
+   that does not always match their value, so this file reads the value. */
+.title {
+  margin: 0;
+  font: var(--dsw-font-m-18);
+  letter-spacing: 0.2px;
+}
+
+.subtitle {
+  margin: 0;
+  font: var(--dsw-font-xxs-12);
+  color: var(--dsw-alias-label-secondary, #61666b);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.ghost {
+  flex: none;
+  border: 1px solid var(--dsw-alias-border-l2, rgba(0, 0, 0, 0.1));
+  background: transparent;
+  color: var(--dsw-alias-label-secondary, #61666b);
+  font: var(--dsw-font-xxs-12);
+  padding: 5px 11px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 120ms ease-out, color 120ms ease-out;
+}
+
+.ghost:hover {
+  background: var(--dsw-alias-interactive-bg-hover, rgba(38, 49, 72, 0.06));
+  color: var(--dsw-alias-label-primary, #0f1115);
+}
+
+.close {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--dsw-alias-label-secondary, #61666b);
+  font: var(--dsw-font-s-14);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.close:hover {
+  background: var(--dsw-alias-interactive-bg-hover, rgba(38, 49, 72, 0.06));
+  color: var(--dsw-alias-label-primary, #0f1115);
+}
+
+.ghost:focus-visible,
+.close:focus-visible,
+.search:focus-visible {
+  outline: 2px solid var(--lute-brand);
+  outline-offset: 1px;
+}
+
+.totals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Counters, not statements: a module fill, not a brand tint. Light-theme
+   `bg-layer-2` is the same white as the panel, so a chip built on it has *no*
+   fill in light mode — the measured reason these moved to the module token. */
+.total {
+  font: var(--dsw-font-xxs-12);
+  padding: 2px 10px;
+  border-radius: 999px;
+  color: var(--dsw-alias-label-secondary, #61666b);
+  background: var(--dsw-alias-bg-module-platform, #f5f6f7);
+}
+
+/* ── Body ─────────────────────────────────────────────────────────────────── */
+
+.body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.state {
+  margin: 0;
+  font: var(--dsw-font-xs-13);
+  color: var(--dsw-alias-label-secondary, #61666b);
+}
+
+.stateError {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font: var(--dsw-font-xs-13);
+  color: var(--dsw-alias-state-error-primary, #ec1313);
+}
+
+/* Per-source degradation: named, never a bare "something failed" — the two
+   halves have different owners and the user's next action differs per source. */
+.notice {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.04));
+  background: var(--dsw-alias-bg-module-platform, #f5f6f7);
+}
+
+.noticeTitle {
+  font: var(--dsw-font-xxs-strong-12);
+  color: var(--dsw-alias-label-secondary, #61666b);
+}
+
+.noticeList {
+  margin: 0;
+  padding-left: 18px;
+  font: var(--dsw-font-xxs-12);
+  color: var(--dsw-alias-label-secondary, #61666b);
+}
+
+.sectionHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sectionTitle {
+  margin: 0;
+  font: var(--dsw-font-xs-strong-13);
+  color: var(--dsw-alias-label-primary, #0f1115);
+}
+
+.search {
+  flex: none;
+  width: min(260px, 46vw);
+  font: var(--dsw-font-xxs-12);
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--dsw-alias-border-l2, rgba(0, 0, 0, 0.1));
+  background: var(--dsw-alias-bg-base, #fff);
+  color: var(--dsw-alias-label-primary, #0f1115);
+}
+
+/* A chip is a *state*, so it wears the shell's state-success pair — copied
+   verbatim from `dsh-client-ui-cordis`:
+     background: var(--dsw-alias-state-success-tertiary);
+     color:      var(--dsw-alias-state-success-primary)
+   A brand-green tint would say "this is LUTE", which is not what a chip means,
+   and it would stop following the theme (Law 3). */
+.chip {
+  padding: 1px 8px;
+  border-radius: 999px;
+  color: var(--dsw-alias-state-success-primary, #22c55e);
+  background: var(--dsw-alias-state-success-tertiary, #e6faed);
+}
+
+.chipMuted {
+  padding: 1px 8px;
+  border-radius: 999px;
+  color: var(--dsw-alias-label-caption, #adb2b8);
+  background: var(--dsw-alias-bg-module-platform, #f5f6f7);
+}
+
+/* ── The matrix: one big card per product ─────────────────────────────────── */
+
+/* `auto-fill` + `minmax` is what makes this a matrix rather than a list: the
+   column count follows the viewport and the cards keep their size instead of
+   stretching to fill. Measured — not asserted — in real Chrome by
+   `scripts/geometry-probe.mjs` against a synthetic fixture, because jsdom
+   performs no layout and a test there would be measuring zero (M3). */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The card is keyed by **product**, and it is deliberately big: room for the
+   six facts the matrix shows and for a real primary button, because a card you
+   have to open in order to read it is a row.
+   `align-items: stretch` is the grid default, stated on purpose — the action is
+   pinned to the bottom, so a card has to fill its row rather than float in it. */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  padding: 16px;
+  min-height: 184px;
+  border-radius: 14px;
+  border: 1px solid var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.04));
+  background: var(--dsw-alias-bg-module-platform, #f5f6f7);
+}
+
+.cardHead {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cardLabel {
+  margin: 0;
+  font: var(--dsw-font-base-strong-16);
+  color: var(--dsw-alias-label-primary, #0f1115);
+}
+
+/* The directory, not the card's identity: the card is the product, and this is
+   where a session will open. Shown as the basename — the full path stays in the
+   element's `title`, because at card width a deep path would eat the summary.
+   The shell's code font is `--ds-font-family-code` (officially declared). This
+   used to be `--dsw-font-mono`, which nothing declares: it is supplied by our
+   own theme plugin on the non-contract path and never reaches the page, so the
+   declaration silently fell through to a literal stack while looking themed. */
+.cardDir {
+  /* The pair comes from the official ladder (11px/14px) and only the *face* is
+     overridden — so this is the second place the "override after the shorthand"
+     rule applies: `font:` resets font-family too. */
+  font: var(--dsw-font-xxxs-11);
+  font-family: var(--ds-font-family-code, ui-monospace, SFMono-Regular, Menlo, monospace);
+  color: var(--dsw-alias-label-caption, #adb2b8);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.cardSummary {
+  margin: 0;
+  font: var(--dsw-font-xxs-12);
+  color: var(--dsw-alias-label-secondary, #61666b);
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font: var(--dsw-font-xxxs-11);
+  color: var(--dsw-alias-label-caption, #adb2b8);
+}
+
+.cardNote {
+  margin: 0;
+  font: var(--dsw-font-xxxs-11);
+  color: var(--dsw-alias-label-secondary, #61666b);
+}
+
+.productFeatures {
+  margin: 0;
+  padding-left: 16px;
+  font: var(--dsw-font-xxxs-11);
+  color: var(--dsw-alias-label-secondary, #61666b);
+}
+
+/* The action column. A disabled button carries its reason as text instead of a
+   tooltip, because a tooltip is invisible to exactly the user who needs it. */
+.action {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+/* The shell's real primary button, copied verbatim from two official packages
+   (`dsh-client-ui-message-feedback`, `dsh-client-ui-settings-models`):
+     background: var(--dsw-alias-button-primary-fill);
+     color:      var(--dsw-alias-label-primary-foreground)
+   An earlier draft avoided the solid fill on the belief that "the shell defines
+   no label-on-fill token", and hand-rolled a translucent green tint with blue
+   text instead — a claim that was simply false, and the shape it produced was
+   the only button in the app that ignored the theme's primary-button colour.
+   Note what the pair really resolves to (measured, not assumed): the fill is
+   *inverted* — black on white in the light theme, near-white in the dark — so
+   the launch action reads as the shell's own primary button rather than as a
+   green LUTE control. Brand green stays where it means identity (the header
+   strip, the tile, the open-state sidebar row), not where it means "press me".
+   Fallbacks are the measured light readings (Law 2): #0f1115 / #43454a. */
+.primary {
+  padding: 5px 14px;
+  border: 0;
+  border-radius: 999px;
+  font: var(--dsw-font-xxs-strong-12);
+  cursor: pointer;
+  color: var(--dsw-alias-label-primary-foreground, #fff);
+  background: var(--dsw-alias-button-primary-fill, #0f1115);
+  transition: background 120ms ease-out, opacity 120ms ease-out;
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--dsw-alias-button-primary-hover, #43454a);
+}
+
+.primary:disabled {
+  cursor: not-allowed;
+  color: var(--dsw-alias-label-caption, #adb2b8);
+  background: var(--dsw-alias-bg-module-platform, #f5f6f7);
+}
+
+.primary:focus-visible {
+  outline: 2px solid var(--dsw-alias-button-primary-fill, #0f1115);
+  outline-offset: 2px;
+}
+
+.blocked {
+  font: var(--dsw-font-xxxs-11);
+  text-align: right;
+  color: var(--dsw-alias-label-caption, #adb2b8);
+}
+
+/* Outcome of the last launch. Success is a success state: this said
+   `state-business-primary` (the shell's blue business accent) for a message
+   that only ever reports "it worked". */
+.outcome {
+  margin: 0;
+  font: var(--dsw-font-xxs-12);
+  color: var(--dsw-alias-state-success-primary, #22c55e);
+}
+
+.outcomeError {
+  color: var(--dsw-alias-state-error-primary, #ec1313);
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────────── */
+
+.footer {
+  flex: none;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0;
+  padding: 10px 20px 14px;
+  border-top: 1px solid var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.04));
+  font: var(--dsw-font-xxxs-11);
+  color: var(--dsw-alias-label-caption, #adb2b8);
+}
+
+/* The undeclared-directory count (R3). Small print on purpose: it is a fact
+   about the machine, not an item on the page. */
+.footerNote {
+  flex: none;
+  text-align: right;
+}
+
+/* ── Sidebar entry row (split mode) ───────────────────────────────────────── */
+
+/*
+ * This row is styled as a **peer of the official New Session button**, not as
+ * one of the stacked nav rows: the shared core puts it in the same band and
+ * gives both boxes `calc(50% - 4px)`. Every metric below is copied from the
+ * shell's own `.newSession` rule, read verbatim out of
+ * `@deepseek-ai/dsh-client-ui-sidebar/lib/client.js`:
+ *
+ *   border:.5px solid var(--dsw-alias-border-l3);
+ *   background:var(--dsw-alias-button-elevated-fill); height:38px;
+ *   border-radius:12px; flex:none; gap:6px; margin:0 2px 8px;
+ *   padding:8px 16px; font-size:14px; font-weight:500; line-height:22px
+ *
+ * A first draft of this rule used an 8px radius and a transparent background —
+ * plausible-looking values that would have made the pair read as two unrelated
+ * controls sharing a line. Copying the four tokens the official button itself
+ * uses (`border-l3` / `button-elevated-fill`, plus `button-floating-hover` on
+ * hover) is what makes them read as one control with two choices, and it makes
+ * the pair theme together for free. Its type is now the official shorthand for
+ * the same metrics `--dsw-font-s-strong-14` = 500 14px/22px.
+ *
+ * Only the geometry that must vary at runtime (width, align-self, the negative
+ * top margin that lifts this row into the official button's band) is imposed
+ * inline by the core; everything visual stays here, where a theme can reach it.
+ *
+ * The `margin-bottom: 8px` is load-bearing and was **wrong in the first draft**,
+ * which set it to 0 with a comment confidently claiming the opposite ("a bottom
+ * margin of its own would double the advance"). It does not double anything — it
+ * is what cancels the lift. Flex column arithmetic, and the reason the first
+ * draft was measurable rather than merely arguable:
+ *
+ *   official contributes  height 38 + margin-bottom 8          = 46
+ *   entry    contributes  margin-top -46 + height 38 + bottom B = B - 8
+ *
+ * With B = 0 the pair advances the flow by 8px *less* than the shell's own
+ * layout, so the workspace region starts 8px higher and silently grows by 8px.
+ * Measured in real Chrome (scripts/geometry-probe.mjs): regionArea top 120 → 112.
+ * With B = 8 the contribution is exactly 46 and nothing below the pair moves.
+ *
+ * jsdom cannot catch this: it performs no layout at all. This is why the
+ * geometry probe drives a real browser.
+ */
+.entry {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-sizing: border-box;
+  height: 38px;
+  margin: 0 2px 8px;
+  padding: 8px 16px;
+  border: 0.5px solid var(--dsw-alias-border-l3, rgba(0, 0, 0, 0.12));
+  border-radius: 12px;
+  background: var(--dsw-alias-button-elevated-fill, #fff);
+  color: var(--dsw-alias-label-primary, #0f1115);
+  cursor: pointer;
+  font: var(--dsw-font-s-strong-14);
+  overflow: hidden;
+  transition: background 120ms ease-out, color 120ms ease-out, border-color 120ms ease-out;
+}
+
+.entry:hover {
+  background: var(--dsw-alias-button-floating-hover, #f1f3f5);
+}
+
+/* Open state: the brand green layered on the official button's own base, so the
+   row still reads as the same control while showing the drawer is up. This one
+   *is* brand rather than state — it says "the LUTE drawer is open". */
+.entry[data-active] {
+  border-color: var(--lute-brand-line-strong);
+  color: var(--lute-brand-deep);
+  background: var(--lute-brand-tint);
+}
+
+.entry:focus-visible {
+  outline: 2px solid var(--lute-brand);
+  outline-offset: -2px;
+}
+
+.entryIcon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.entryIcon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.entryLabel {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/*
+ * Collapsed rail. The core drops the split (36px of content against an 18px
+ * glyph would clip the icon) and stacks this row under the official button at
+ * the rail's own metric, so the row becomes an icon-only square in that state —
+ * matching the official button's own collapsed rule verbatim
+ * (`.collapsed .newSession { background:0 0; border-color:#0000; gap:0;
+ * width:36px; height:36px; margin:0 0 12px; padding:0 }`).
+ *
+ * The label is removed from the layout rather than merely shrunk: a 36px box
+ * cannot hold 「新应用」 at any legible size, and the tooltip plus aria-label
+ * still carry the name.
+ */
+.entry[data-split='collapsed'] {
+  width: 36px;
+  height: 36px;
+  margin: 0 0 12px;
+  padding: 0;
+  gap: 0;
+  border-color: transparent;
+  background: transparent;
+}
+
+.entry[data-split='collapsed']:hover {
+  background: var(--dsw-alias-interactive-bg-hover, rgba(38, 49, 72, 0.06));
+}
+
+.entry[data-split='collapsed'] .entryLabel {
+  display: none;
+}
+
+/* ── Motion ───────────────────────────────────────────────────────────────── */
+
+@keyframes na-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes na-panel-in {
+  from { transform: translateX(16px); opacity: 0.4; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root::backdrop,
+  .panel {
+    animation: none;
+  }
+}

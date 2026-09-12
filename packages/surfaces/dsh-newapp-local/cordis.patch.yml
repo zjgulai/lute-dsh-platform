@@ -1,0 +1,9 @@
+# bundle patch for the LUTE New App launcher: inserts its plugin row into the
+# desktop profile roster.
+#
+# Guarded by the anti-white-screen rule (plugin skill §1.5): a package listed in
+# a profile's `dsh.profile.bundles` MUST declare `dsh.bundle` in package.json and
+# ship a patch whose `insert` names a row id unique inside the composition tree.
+- insert:
+    - id: ui-newapp-local
+      name: 'dsh-newapp-local'

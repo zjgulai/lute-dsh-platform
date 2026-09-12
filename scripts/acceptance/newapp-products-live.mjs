@@ -450,14 +450,15 @@ try {
     detail: `→ scannedRoots=${JSON.stringify(scan.scannedRoots ?? [])}`,
   })
 
-  const declared = scan.cards?.find((c) => c.args === undefined && c.label === 'declared-project')
+  const declared = scan.cards?.find((c) => c.label === 'declared-project')
   record({
     id: 'declared-card', kind: 'contract', what: '有 product.json 的目录必须出一张卡，带 id / preset / 入口服务',
-    pass: declared?.declared === true
+    pass: declared !== undefined
+      && declared.products?.length > 0
       && declared.products?.[0]?.id === 'probe-product'
       && declared.products?.[0]?.preset === 'agt-033'
       && declared.products?.[0]?.entryService === 'probe-workbench',
-    expect: 'declared=true 且三字段齐全', actual: declared === undefined ? '(没有这张卡)' : JSON.stringify(declared.products?.[0] ?? null).slice(0, 120),
+    expect: '一张卡且三字段齐全', actual: declared === undefined ? '(没有这张卡)' : JSON.stringify(declared.products?.[0] ?? null).slice(0, 120),
     detail: declared === undefined ? '没有 declared-project 卡' : `→ ${declared.products?.[0]?.id} preset=${declared.products?.[0]?.preset} svc=${declared.products?.[0]?.entryService}`,
   })
 
@@ -475,12 +476,25 @@ try {
       : '响应体里没有 inputs —— 卡片能列、点开没有字段',
   })
 
+  // ★ ADR-0045 之后这条判据的**语义翻转**：没有 product.json 的目录不再是一张卡，
+  // 但它也不能从报告里消失——`undeclaredCount` 是它唯一的出口。
+  //
+  // 判据必须双侧：只断言「bare-project 不在卡里」会被一个**什么都不返回**的实现满足
+  // （空扫描同样没有这张卡，而空扫描是 bug 而不是通过）。所以同时要求
+  //   ① 那张卡确实不在；② 计数把它数进去了；③ cards.length 与 declaredCount 一致。
+  // 反向对照：把 undeclaredCount 恒置 0，②立刻转红。
   const bare = scan.cards?.find((c) => c.label === 'bare-project')
   record({
-    id: 'undeclared-listed', kind: 'contract', what: '没有 product.json 的目录必须**列出**并标明未产品化（不是消失）',
-    pass: bare !== undefined && bare.declared === false && /尚未产品化/.test(bare.note ?? ''),
-    expect: '列出且 note 含「尚未产品化」', actual: bare === undefined ? '(被丢弃了)' : bare.note,
-    detail: bare === undefined ? '目录消失了' : `→ declared=${bare.declared} note=${bare.note}`,
+    id: 'undeclared-counted', kind: 'contract',
+    what: '没有 product.json 的目录**不再出卡**，但必须被 undeclaredCount 数到（不是消失）',
+    pass: bare === undefined
+      && typeof scan.undeclaredCount === 'number' && scan.undeclaredCount >= 1
+      && scan.cards?.length === scan.declaredCount,
+    expect: 'bare-project 无卡 + undeclaredCount ≥ 1 + cards.length = declaredCount',
+    actual: `cards=${scan.cards?.length ?? 0} declared=${scan.declaredCount ?? '(缺)'} undeclared=${scan.undeclaredCount ?? '(缺)'}`,
+    detail: bare !== undefined
+      ? '未产品化目录又变回卡片了（ADR-0045 决议 2 被推翻）'
+      : `→ 卡片里没有 bare-project；undeclaredCount=${scan.undeclaredCount}`,
   })
 
   record({
@@ -547,11 +561,11 @@ try {
     detail: liveHealth.status === 200 ? '→ 200 newapp-local' : `→ ${liveHealth.status} ${body(liveHealth).slice(0, 60)}`,
   })
 
-  // 同一实例里的**正控**：worktable 那套栅栏（独立实现）对同一个头答 403。
-  // 它把「本机栅栏机制整体不工作」这种解释排除掉——差异只能出在被测的两条路由上。
-  const control = await curl(['-H', 'Sec-Fetch-Site: cross-site', `${LIVE_BASE}/api/worktable/health`])
-  report.stages.D = { ...(report.stages.D ?? {}), fenceControl: control.status }
-  console.log(`  ${control.status === 403 ? '✓' : '✗'} ${'live-fence-control'.padEnd(24)} worktable 对 cross-site 答 ${control.status}（同实例正控，期望 403）`)
+  // 曾经这里有一条**同实例正控**：拿 worktable 那套独立实现的栅栏对同一个头答 403，
+  // 好把「本机栅栏机制整体不工作」这种解释排除掉。dsh-worktable 已按 ADR-0045 卸载，
+  // 那条正控的前提没了——它现在只会答 404，而 404 证明不了任何关于栅栏的事。
+  // 正控的职责转给下面 `live-fence`：**同一个插件、同一套机制**对同一个头答 403，
+  // 是比跨插件对照更贴题的正控（要证的是本插件的栅栏活着，不是别人的还活着）。
 
   const liveProducts = await curl([`${LIVE_BASE}/api/dsh-newapp/products`])
   const restartRequired = liveProducts.status === 401
@@ -601,7 +615,7 @@ try {
   }
 
   const staleHost = restartRequired || staleHostFence
-  report.stages.D = { health: liveHealth.status, products: liveProducts.status, crossSite: liveCross.status, fenceControl: control.status, restartRequired, staleHost }
+  report.stages.D = { health: liveHealth.status, products: liveProducts.status, crossSite: liveCross.status, restartRequired, staleHost }
   report.results = results
   const failed = results.filter((r) => !r.pass)
   report.passed = results.length - failed.length
