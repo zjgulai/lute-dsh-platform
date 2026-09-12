@@ -33,6 +33,28 @@ FL_HOME="${FL_HOME:-/tmp/dsh-firstlaunch}"
 FL_APPS="${FL_APPS:-/tmp/dsh-firstlaunch-apps}"
 FL_PORT="${FL_PORT:-43910}"
 FL_ALIVE="${FL_ALIVE:-25}"
+
+# ── 前置条件：本机不得已有正在运行的 DSH 实例 ─────────────────────────────────
+# 2026-09-12 实测（三条，全部可复现）：
+#   · 本机主实例（旧 app）正常启动：全流程 6.5s，其中 profile-composition 593ms；
+#   · 新产物在同一隔离环境（独立 DSH_HOME + --user-data-dir + --port）**卡在
+#     profile-composition**：启动事件流停在 `startup.stage.started`，进程 0% CPU、
+#     无子进程、无网络连接、无 modal 会话（sample 显示主线程静在 AppKit 默认 runloop）；
+#   · 把**已知可用的旧 app**放进同一隔离环境，**同样卡在同一阶段**。
+# 结论：卡住的原因是「同一台机器上并存两个实例」，**不是产物的缺陷**。所以这里拒绝运行，
+# 而不是打一条会被误读成产品缺陷的红。真验收路径只有一条：
+#   装到 /Applications → **退出 DSH** → 重新启动（此时才是单实例）。
+# 注：用 ps 而不是 pgrep —— macOS 的 `pgrep -f` 对本机 GUI 实例匹配不到
+# （实测：同一条命令行，`ps -ax -o command=` 命中，`pgrep -f` 返回 1，原因不明）。
+RUNNING="$(ps -ax -o command= 2>/dev/null | grep -F 'DSH Desktop.app/Contents/MacOS/DSH Desktop' \
+  | grep -vE '(^| )grep |ps -ax -o command' | head -1)"
+if [ -n "$RUNNING" ]; then
+  echo "[firstlaunch] 跳过：本机已有 DSH 实例在运行。"
+  echo "              双实例并存时新实例会卡在 profile-composition——新产物与已知可用的旧 app 现象完全相同，"
+  echo "              这条红不代表产物有问题。真验收：装到 /Applications → 退出 DSH → 重新启动。"
+  exit 2
+fi
+
 H="$FL_HOME"
 DSH_HOME_FL="$H/.dsh"
 APP_TARGET="$FL_APPS/DSH Desktop.app"
@@ -47,7 +69,7 @@ mkdir -p "$H" "$FL_APPS"
 # 0. 装到隔离位置（APP_TARGET 在 /tmp → 走免提权直写路径；不碰 /Applications 与 ~/.dsh）
 DSH_HOME="$DSH_HOME_FL" APP_TARGET="$APP_TARGET" bash "$PAYLOAD/install.sh" > "$H/install.log" 2>&1
 rc=$?
-[ "$rc" = 0 ] && pass "install.sh exit 0" || bad "install.sh exit $rc（见 $H/install.log）"
+[ "$rc" = 0 ] && pass "install.sh exit 0" || bad "install.sh exit ${rc}（见 $H/install.log）"
 if [ ! -d "$APP_TARGET" ]; then
   bad "app 未落位：$APP_TARGET"; echo; echo "FIRSTLAUNCH FAILED"; exit 1
 fi
@@ -70,7 +92,7 @@ trap cleanup EXIT
 # 2. 存活判据
 sleep "$FL_ALIVE"
 if kill -0 "$APP_PID" 2>/dev/null; then
-  pass "启动 ${FL_ALIVE}s 后进程仍存活（pid=$APP_PID）"
+  pass "启动 ${FL_ALIVE}s 后进程仍存活（pid=${APP_PID}）"
 else
   bad "进程在 ${FL_ALIVE}s 内退出"
   echo "--- 日志尾部 ---"; tail -30 "$LOG"
