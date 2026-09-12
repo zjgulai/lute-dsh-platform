@@ -169,4 +169,5 @@ version: link:../../../../../Applications/DSH Desktop.app/Contents/Resources/app
 - `dsh-agent-team-gui-local` 的 `devDependencies` 从 23 条宿主 pin 涨到 87 条（闭包 72 + 工具链）。这是「DSH 运行时是个扁平完整集」的直接代价：宿主包之间不声明彼此的依赖，所以谁的类型图跨包，谁就得自己把闭包写全。换运行时版本时要整体重生成。
 - `dsh-wanzh-hulian` 的 19 个工具输出 schema 由开放收紧成闭合五键。现有返回路径的键全在这五个之内（静态枚举过），但这是一次**运行时 schema 收紧**，不是纯类型改动。
 - cordis 插件族仍有 peer 版本告警（`cordis-plugin-loader` 1.0.2 vs `^1.0.3`、`cordis-plugin-include` 1.0.6 vs `^1.0.7`），`pnpm install` 退出 0，本轮未处理。
+- **未做成门禁的那一条，量与做法都记下来**：本轮病（清单没声明、`node_modules` 里手做符号链接）只在**干净检出**里暴露，本机树上看不见。离线可判的版本是「扫 `src/`+`lib/` 里的 `@deepseek-ai/*` import，不在任一依赖字段里且不等于包自身名字即违规」——实测全仓命中 **1 个包**（`dsh-file-upload-local` → `@deepseek-ai/dsh-client-ui-primitives`），另有两处噪声需先排除（deepresearch 的自引用 `@deepseek-ai/dsh-deepresearch/remote`、browser-local 全在 `tests/` 里的 10 条）。没落这一条是因为它要改 `scripts/gate.mjs`，而那个文件当时有另一会话的在途改动；留作下一轮第一件事。
 - **干净检出验收的口径要改**：`git worktree` 检出**不含嵌套 vendor 仓**（外层只 track `vendor/dsh-desktop.pin`），而 `file:` tgz 全在那棵树里。缺了它，6 个包的 `pnpm install` 直接崩（pnpm 读不到 tgz 目标），`scripts-runnable` 连带报 127「脚本执行体不存在」——这不是包的问题，是验收姿势的问题。干净检出必须把 `vendor/dsh-desktop` 接上。
