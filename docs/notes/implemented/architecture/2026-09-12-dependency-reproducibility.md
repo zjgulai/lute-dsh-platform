@@ -85,7 +85,7 @@ version: link:../../../../../Applications/DSH Desktop.app/Contents/Resources/app
 
 **peerDependencies 只在「该名字没在本地声明过」时才要求锁文件记录它**——这也是 pnpm 的实际行为：`dsh-browser-local` 的 7 条 `*` peer 因为都已在 devDependencies 出现而被放行，`dsh-auto-compact-local` 的 3 条则被要求进锁文件。
 
-**修法**：`dsh-browser-local` 的 11 条绝对路径依赖换成精确钉到宿主实际版本（10 条 `0.1.2-rc.1`、`@deepseek-ai/cordis` `4.0.2`、`schemastery` `3.18.2`），`typescript` 从 `5.6.3` 提到 `~5.7.3`；`dsh-team-hub` 的 `package-lock.json` 换成 `pnpm-lock.yaml`；两处 `allowBuilds` 占位写成 `true`；`dsh-loopx-plugin` 新增 `pnpm-workspace.yaml`，对 5 个带构建脚本的传递依赖显式写 `false`；其余缺锁文件的补齐、过期的重生成。
+**修法**：`dsh-browser-local` 的 11 条绝对路径依赖按 **ADR-0017** 分两类落地——9 个 `@deepseek-ai/dsh-*` 改成内建运行时 tgz（`file:../../../vendor/dsh-desktop/vendor/dsh-runtime/0.1.2-rc.1/deepseek-ai-<name>-0.1.2-rc.1.tgz`），`@deepseek-ai/cordis` 用注册表精确钉 `4.0.2`（运行时 tgz 里没有 cordis 本体与 schemastery，它们本来就是宿主的第三方依赖）；`typescript` 从 `5.6.3` 提到 `~5.7.3`。`dsh-team-hub` 的 `package-lock.json` 换成 `pnpm-lock.yaml`；两处 `allowBuilds` 占位写成 `true`；`dsh-loopx-plugin` 新增 `pnpm-workspace.yaml`，对 5 个带构建脚本的传递依赖显式写 `false`；其余缺锁文件的补齐、过期的重生成。
 
 **full 模式的逐包脚本顺序改成判据驱动**（`packageScriptOrder`）：有 `build` 且产物根目录（由 `main`/`exports` 推导，本仓 9 个包全是 `lib`）**未入库** → `typecheck → build → test`；否则保持 `typecheck → test → build`。
 
@@ -102,19 +102,23 @@ version: link:../../../../../Applications/DSH Desktop.app/Contents/Resources/app
 **正面**
 
 - 新规则的可证伪对照：把清单与锁文件倒回 `c1f9572`，同一条规则报 **25 条违规、覆盖全部 7 个包**；当前状态报 **0 条**。两次都是同一条命令。
-- `dsh-browser-local` 从「照清单装出来 typecheck 红」变成：按已提交清单全新装 → `tsc -p tsconfig.json` **exit 0** → `pnpm test` **9 files / 111 tests passed** → `pnpm build` 成功，且锁文件里除了一条 `excludeLinksFromLockfile: false` 设置键之外**没有任何机器路径**。源码一个字没动。
+- `dsh-browser-local` 从「照清单装出来 typecheck 红」变成：按已提交清单全新装 → `tsc -p tsconfig.json` **exit 0** → `pnpm test` **9 files / 111 tests passed** → `pnpm build` 成功；锁文件里 9 个 `file:` 目标全部落在仓库内，机器路径 0 条。源码一个字没动。
 - 24/24 个包的 `pnpm install --frozen-lockfile --lockfile-only` 退出 0（修复前 16 OK / 3 FAIL / 4 装不上）。
 - 门禁从 16 项变 17 项，quick 全绿。
-- 干净检出里 `gate:full` 不再因为「测试跑在未构建的产物上」而红。
+- 干净检出（`git worktree add --detach 8f8cbdd` + 逐包 `pnpm install --frozen-lockfile`，23 OK / 1 FAIL / 0 空装）里 `gate:full` 收到 **19/20**；先前的「测试跑在未构建的产物上」不再出现。
 
 **负面**
 
 - 判据是「清单 ↔ 锁文件」的**自洽**，不是「解析结果可复现」。锁文件仍可能锁住一个已下架的版本；发现那一类问题仍需真的装一次。这条边界写在模块注释里，不假装覆盖。
 - 顺序判据对 `dsh-skill-center-local`（产物未入库但测试不读产物）会白跑一次 `build`。
 - 门禁多了一条要读 24 个锁文件的判据（纯文本解析，实测无 IO 压力）。
+- **接受标准没有完全达成**：干净检出里 `scripts-runnable` 仍红 5 个包。见下。
 
 **后续**
 
+- **下一轮的对象（本轮量清楚了，但没修）**：干净检出里 `scripts-runnable` 红 5 个包——`dsh-deepresearch-local`（`TS2741` MarkdownLabels 缺字段）、`dsh-overseas-tools` 与 `dsh-wanzh-hulian`（`TS2307` 找不到 `@deepseek-ai/dsh-tools`）、`dsh-theme-local`（`TS7006` 隐式 any）、`dsh-agent-team-gui-local`（`TS2305` `ConnectionRpcResult` / `TS2554`，且它的 `prepare` 让 `pnpm install` 退出 1）。
+  它们的病是同一个，而且**已经被 ADR-0017 判过**：`node_modules/@deepseek-ai/*` 是指向 `/Applications/DSH Desktop.app/…`（overseas-tools / wanzh-hulian / overseas-skills / deepresearch-local）或指向仓库根那份 gitignore 的 `.dsh-types/`（theme-local / agent-team-gui-local）的**手做绝对符号链接**；其中 7 条对应的包在清单里**根本没声明**（`overseas-skills` 2 条、`overseas-tools` 2 条、`wanzh-hulian` 3 条）。`pnpm install` 不会造出这些链接，所以「按清单全新装」必然红——这不是新病，是 ADR-0017 决策 1 还没被执行完。browser-local 现在就是那份样板。
+  `.dsh-types/` 本身是合规的（`.gitignore:78` 引 ADR-0017：「从内建运行时 tgz 解出的 DSH 类型来源，可重建，不入库」），问题只在于**没有任何入库的东西记录它怎么重建、也没有哪个包的清单声明它**。
 - `dsh-deepresearch-local` 的 `@deepseek-ai/dsh-storage-sqlite` / `dsh-web-fetch-http` 在 `dependencies` 里是 `^0.1.1-rc.2`，而同名 devDependency 写的是 `^0.1.5-rc.1`（本轮删掉了不生效的那一侧，行为不变）。两者差一个大版本段，是否升到 `^0.1.5-rc.1` 需要一次带验证的迁移，不在本轮。
 - 未解：`dsh-preset-lint-local` 那次 `ERR_PNPM_OUTDATED_LOCKFILE` 只出现过一次，之后三轮均绿。新门禁绕开了这层不确定性，但这个现象本身没有解释。
 - 上一轮记下的 `.scratch` 明文密钥降级仍未做；本轮的现场记录只写进 `.scratch/dependency-reproducibility/README.md`，不入库。

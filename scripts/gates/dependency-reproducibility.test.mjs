@@ -3,6 +3,8 @@ import assert from 'node:assert/strict'
 import {
   buildOutputRoot,
   checkDependencyReproducibility,
+  escapesRepo,
+  lockLinkTargets,
   packageScriptOrder,
   parseImporterSpecifiers,
 } from './dependency-reproducibility.mjs'
@@ -138,9 +140,24 @@ test('机器绝对路径 spec → 违规，且报文点出改进方向（本轮 
   assert.match(result.violations[0], /改用注册表版本区间/u)
 })
 
-test('锁文件里含逃出包目录的 link: 目标 → 违规（这是锁文件不可跨目录移植的真实形状）', () => {
-  // 逐字取自 HEAD(c1f9572) 的 dsh-browser-local/pnpm-lock.yaml：清单写绝对路径，
-  // pnpm 记成相对形式，而前缀随安装深度变（上一轮换个深度重装即从 5 个 .. 变成 6 个）。
+test('escapesRepo：出得了包目录但仍在仓库内 = 可移植（ADR-0017 的 vendor tgz 路线）', () => {
+  assert.equal(escapesRepo('packages/capabilities/dsh-browser-local', '../../../vendor/dsh-desktop/vendor/dsh-runtime/0.1.2-rc.1/x.tgz'), false)
+  assert.equal(escapesRepo('packages/capabilities/dsh-browser-local', './vendor/x'), false)
+  assert.equal(escapesRepo('packages/x/dsh-a', 'vendor/x'), false)
+})
+
+test('escapesRepo：逃出仓库根或本身绝对 = 不可移植', () => {
+  assert.equal(escapesRepo('packages/capabilities/dsh-browser-local', '../../../../Applications/DSH Desktop.app/x'), true)
+  assert.equal(escapesRepo('packages/x/dsh-a', '/Applications/x'), true)
+  assert.equal(escapesRepo('packages/x/dsh-a', '../../../../../etc/passwd'), true)
+})
+
+test('lockLinkTargets：剥掉 pnpm 附的 peer 指纹', () => {
+  const text = `  a:\n        version: file:../../../vendor/x.tgz(4813c357ced0eb6176c8101dfcb8977a)\n  b:\n        version: link:../sibling\n`
+  assert.deepEqual(lockLinkTargets(text), ['file:../../../vendor/x.tgz'.slice(5), 'link:../sibling'.slice(5)])
+})
+
+test('锁文件里的 link: 目标逃出仓库 → 违规（逐字取自 HEAD(c1f9572) 的 browser-local 锁文件）', () => {
   const text = `lockfileVersion: '9.0'\n\nimporters:\n\n  .:\n    dependencies:\n      '@deepseek-ai/cordis':\n        specifier: /Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/cordis\n        version: link:../../../../../Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/cordis\n\npackages:\n`
   const result = checkDependencyReproducibility({
     packages: one(
@@ -150,12 +167,17 @@ test('锁文件里含逃出包目录的 link: 目标 → 违规（这是锁文�
   })
 
   assert.equal(result.passed, false)
-  assert.match(result.violations.join('\n'), /pnpm-lock\.yaml 里含逃出包目录或绝对的/u)
+  assert.match(result.violations.join('\n'), /file:\/link: 目标逃出仓库/u)
 })
 
-test('包内自带的 file:./ 目标不算违规（它与包一起搬，不随安装深度变）', () => {
-  const text = `lockfileVersion: '9.0'\n\nimporters:\n\n  .:\n    dependencies:\n      'ws':\n        specifier: file:./vendor/ws\n        version: file:vendor/ws\n\npackages:\n`
-  const result = checkDependencyReproducibility({ packages: one({ dependencies: { ws: 'file:./vendor/ws' } }, text) })
+test('锁文件里的 file: 目标指向仓库内 → 不报（ADR-0017 的内建运行时 tgz 就是这么写的）', () => {
+  const text = `lockfileVersion: '9.0'\n\nimporters:\n\n  .:\n    devDependencies:\n      '@deepseek-ai/dsh-tools':\n        specifier: file:../../../vendor/dsh-desktop/vendor/dsh-runtime/0.1.2-rc.1/deepseek-ai-dsh-tools-0.1.2-rc.1.tgz\n        version: file:../../../vendor/dsh-desktop/vendor/dsh-runtime/0.1.2-rc.1/deepseek-ai-dsh-tools-0.1.2-rc.1.tgz(4813c357ced0eb6176c8101dfcb8977a)\n\npackages:\n`
+  const result = checkDependencyReproducibility({
+    packages: one(
+      { devDependencies: { '@deepseek-ai/dsh-tools': 'file:../../../vendor/dsh-desktop/vendor/dsh-runtime/0.1.2-rc.1/deepseek-ai-dsh-tools-0.1.2-rc.1.tgz' } },
+      text,
+    ),
+  })
 
   assert.equal(result.passed, true)
 })

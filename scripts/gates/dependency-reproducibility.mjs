@@ -36,17 +36,57 @@ const FIELD_PRECEDENCE = ['dependencies', 'optionalDependencies', 'devDependenci
 const MACHINE_ABSOLUTE_SPEC = /^\/|^~[\\/]|^[A-Za-z]:[\\/]/u
 
 /**
- * 锁文件文本里出现即视为不可移植的形状。
+ * 锁文件里 `file:` / `link:` 的目标行。
  *
  * 实测形状来自 HEAD(c1f9572) 的 dsh-browser-local/pnpm-lock.yaml——清单写的是
  * `/Applications/DSH Desktop.app/…`，pnpm 把它记成
  *   specifier: /Applications/DSH Desktop.app/…
  *   version: link:../../../../../Applications/DSH Desktop.app/…
  * 也就是说**锁文件里存的是相对形式**，而相对前缀取决于安装深度（换个深度重装即变一层）。
- * 所以这里判的是「目标绝对」或「目标用 ../ 逃出包目录」，而不是只判前导斜杠。
- * 包内自带的 `file:./vendor/x` 不在此列——它与包一起搬，不随安装深度变。
+ *
+ * 但「相对」不等于「不可移植」：ADR-0017 指定的内建运行时 tgz 走的就是
+ * `version: file:../../../vendor/dsh-desktop/vendor/dsh-runtime/<版本>/….tgz`——
+ * 它出得了包目录，但仍在仓库内，跟仓库一起搬，跨深度也照样解析到同一个文件。
+ * 所以判据是「**解析后有没有逃出仓库根**」，不是「有没有 ../」。
+ * 末尾的 `(...)` 是 pnpm 附的 peer 指纹，比对前先剥掉。
  */
-const MACHINE_ABSOLUTE_TEXT = /^\s+version:\s*(?:file|link):\s*(?:\/|~[\\/]|[A-Za-z]:[\\/]|\.\.\/)/mu
+const LOCK_LINK_TARGET = /^\s+version:\s*(?:file|link):\s*(.+?)\s*$/gmu
+
+/**
+ * 从锁文件文本里取出 file:/link: 目标（已剥掉 peer 指纹）。
+ * @param {string} lockfileText 锁文件全文
+ * @returns {string[]} 目标列表
+ */
+export function lockLinkTargets(lockfileText) {
+  const targets = []
+  for (const match of lockfileText.matchAll(LOCK_LINK_TARGET)) {
+    const raw = match[1]
+    const paren = raw.indexOf('(')
+    targets.push(paren === -1 ? raw : raw.slice(0, paren))
+  }
+  return targets
+}
+
+/**
+ * 把相对目标按包目录解析，判断它有没有逃出仓库根。
+ * @param {string} relPath 包相对仓库根的路径，如 `packages/capabilities/dsh-browser-local`
+ * @param {string} target `file:` / `link:` 的目标串
+ * @returns {boolean} true = 逃出仓库（不可移植）；false = 仍在仓库内
+ */
+export function escapesRepo(relPath, target) {
+  if (target.startsWith('/') || target.startsWith('~') || /^[A-Za-z]:[\\/]/u.test(target)) return true
+  const segments = relPath.split('/').filter((part) => part !== '')
+  for (const part of target.split('/')) {
+    if (part === '' || part === '.') continue
+    if (part === '..') {
+      if (segments.length === 0) return true
+      segments.pop()
+      continue
+    }
+    segments.push(part)
+  }
+  return false
+}
 
 /**
  * 去掉 YAML 标量两侧的引号。
@@ -219,9 +259,10 @@ export function checkDependencyReproducibility({ packages }) {
       )
       continue
     }
-    if (MACHINE_ABSOLUTE_TEXT.test(lockfileText)) {
+    const escaping = lockLinkTargets(lockfileText).filter((target) => escapesRepo(relPath, target))
+    if (escaping.length > 0) {
       violations.push(
-        `${relPath}: pnpm-lock.yaml 里含逃出包目录或绝对的 file:/link: 目标——该目标随安装深度或机器变，锁文件不可移植`,
+        `${relPath}: pnpm-lock.yaml 的 file:/link: 目标逃出仓库（${escaping[0]}）——该目标随安装深度或机器变，锁文件不可移植`,
       )
     }
     const recorded = parseImporterSpecifiers(lockfileText)
