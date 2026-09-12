@@ -259,6 +259,7 @@ node "$PKG_ROOT/scripts/rewrite-file-deps.mjs" "$STAGEP/profile"
 # 判据是结构性的（重写之后本仓库的包一律 file:./vendor/，其余 file: 即外部），不存清单。
 say "出货投影：剥离本机装配的外部产品（profile + presets 一次算清）…"
 node "$PKG_ROOT/scripts/strip-local-products.mjs" --profile "$STAGEP/profile" --presets "$SP/presets" \
+  --node-modules "$PROFILE/node_modules" \
   || { echo "[assemble] ✗ 出货投影失败（见上）：有剥离脚本不认识的残留形态，必须人工看。" >&2; exit 1; }
 
 # cordis.patch.yml 内构建机绝对路径 → 占位（安装时按目标机 $HOME 替换；

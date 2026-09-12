@@ -45,6 +45,11 @@ const opt = (name, dflt) => {
 }
 const PROFILE = opt('--profile')
 const PRESETS = opt('--presets')
+// node_modules 未必在暂存副本里：assemble 的暂存 profile 只放 manifest/vendor/overrides，
+// node_modules 是**从打包源快照**直接进内嵌副本与 profile.tar.gz 的。所以这里必须能
+// 单独指到那份 node_modules，否则「依赖删了、包目录还在」会静默漏进出货面——
+// 2026-09-12 实测：机器路径守卫当场抓到 node_modules/dsh-kol-hunter-local/…（它本来该被剥掉）。
+const NODE_MODULES = opt('--node-modules', PROFILE === undefined ? undefined : join(PROFILE, 'node_modules'))
 const DRY = argv.includes('--dry-run')
 if (PROFILE === undefined) {
   console.error('用法: node strip-local-products.mjs --profile <暂存 profile> [--presets <暂存 presets>]')
@@ -99,8 +104,8 @@ if (!DRY && extNames.size > 0) {
 }
 
 // ── 2. node_modules 里的外部包副本（含「依赖删了但目录还在」的孤儿）───────────
-// 同时按目录名与包内声明的 name 匹配：orphone 目录名的情形（改过别名的 fork）也要抓到。
-const nm = join(PROFILE, 'node_modules')
+// 同时按目录名与包内声明的 name 匹配：改过别名的 fork（目录名 ≠ 包名）也要抓到。
+const nm = NODE_MODULES ?? join(PROFILE, 'node_modules')
 if (existsSync(nm)) {
   for (const entry of readdirSync(nm)) {
     if (entry.startsWith('.')) continue
@@ -207,6 +212,43 @@ if (PRESETS !== undefined && existsSync(PRESETS)) {
   }
 }
 
+// ── 3b. pnpm-lock.yaml 的映射条目（键里带外部包名）─────────────────────────────
+// 锁文件是**映射型** YAML（不是列表），所以不能用上面的列表删法。实测形态（三条一起）：
+//     importers 里的 dependencies.<name>.{specifier,version}
+//     packages 里的 "<name>@file:../../…:"
+//     snapshots 里的 "<name>@file:../../…: {}"
+// 判据同一条：**键**里出现外部包名 → 删该键及其更深缩进的整块。
+// 不改锁文件的后果不是「难看」而是「客户机跑一次 pnpm install 就被指向不存在的目录」。
+const stripLock = (file) => {
+  if (!existsSync(file)) return
+  const lines = readFileSync(file, 'utf8').split('\n')
+  const out = []
+  let changed = false
+  for (let i = 0; i < lines.length; i += 1) {
+    const m = /^(\s*)(.*?):(\s|$)/.exec(lines[i])
+    if (m !== null && [...extNames].some((n) => m[2].includes(n))) {
+      const indent = m[1].length
+      let j = i + 1
+      while (j < lines.length) {
+        const next = lines[j]
+        if (next.trim() === '') {
+          j += 1
+          continue
+        }
+        if (next.match(/^\s*/)[0].length <= indent) break
+        j += 1
+      }
+      note('锁文件', `${file.split('/').slice(-1)[0]}: ${lines[i].trim()}`, `外部产品「${m[2].trim()}」的映射条目（留着会让客户机的 pnpm install 指向不存在的目录）`)
+      changed = true
+      i = j - 1
+      continue
+    }
+    out.push(lines[i])
+  }
+  if (changed && !DRY) writeFileSync(file, out.join('\n'))
+}
+stripLock(join(PROFILE, 'pnpm-lock.yaml'))
+
 // ── 4. 后置校验：剥离后不得再有残留（有不认识的形态就响亮失败）───────────────
 const residue = []
 const scanText = (label, file) => {
@@ -219,6 +261,7 @@ const scanText = (label, file) => {
 if (!DRY) {
   scanText('profile/package.json', pkgPath)
   scanText('profile/cordis.patch.yml', join(PROFILE, 'cordis.patch.yml'))
+  scanText('profile/pnpm-lock.yaml', join(PROFILE, 'pnpm-lock.yaml'))
   if (PRESETS !== undefined && existsSync(PRESETS)) {
     for (const entry of readdirSync(PRESETS)) {
       scanText(`presets/${entry}/agent.cordis.yml`, join(PRESETS, entry, 'agent.cordis.yml'))
