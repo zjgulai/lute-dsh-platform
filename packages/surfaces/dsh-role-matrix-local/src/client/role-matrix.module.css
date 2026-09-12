@@ -674,7 +674,13 @@
   margin: 0 4px 4px 0;
   padding: 0 7px;
   border-radius: 6px;
-  background: var(--dsw-alias-fill-tsp-secondary, rgba(0, 0, 0, 0.06));
+  /* Was `--dsw-alias-fill-tsp-secondary` — a name nothing defines, so this
+     always fell through to the literal and the chip had no fill at all in the
+     dark theme. The baseline prescribed `bg-layer-2`; the live instrument says
+     that is white in the light theme (measured, `accept:theme-tokens`), which
+     would move the invisible case instead of fixing it. The module fill is the
+     shell's "small surface on a bigger surface" token and resolves in both. */
+  background: var(--dsw-alias-bg-module-platform, #f5f6f7);
   color: var(--dsw-alias-label-secondary, #555);
   font-size: 11px;
   line-height: 1;
@@ -772,7 +778,9 @@
   margin-left: auto;
   flex: none;
   border-radius: 999px;
-  background: var(--dsw-alias-fill-tsp-secondary, rgba(0, 0, 0, 0.08));
+  /* Same replaced name as `.chip` above; this one sits on the sidebar entry's
+     elevated fill, which is white in the light theme. */
+  background: var(--dsw-alias-bg-module-platform, #f5f6f7);
   color: var(--dsw-alias-label-secondary, #666);
   font-size: 11px;
   padding: 1px 6px;
