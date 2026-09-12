@@ -115,3 +115,131 @@ bash scripts/preset_mount_probe.sh          # 预设挂载探测
 - 文档索引：`dsh-wanzh-hulian/docs/README.md`（产品形态总览 + 版本状态 + 导航）
 - 关键事实：/open 白名单（biji + shopify 域）、connections.json/mcp-servers.json（0600）、CREDENTIAL_REFS 动态收集、probe 注册表、MCP 宿主直挂 dsh-mcp-client（静态挂载重启生效）、getnote 19 工具 + 真移动语义（≤20/批）
 - 验收节奏：宿主变更需重启；客户端变更刷新即可；补丁变更重启/刷新
+
+## 12. 第三方技能入库 SOP（分类 → 归位 → 生效）
+
+> 适用范围：**非 81 系自研**、从外部仓库/市场引入的技能。
+> 自研 81 系的归位四步见 [skill-taxonomy-v2.md](skill-taxonomy-v2.md) 「新增技能归位 SOP」——两者判据不同，不要互相套用。
+> 已入库实例：[§8 AnySearch](#8-anysearch-技能用户级实时搜索)（工具接入型）、`lieflat-charts`（内容渲染型，2026-09-12 入库）。
+
+**硬规则：每一个进来的技能都必须落到「岗位归属」，或明确归为「通用型」。不允许既无岗位、也无通用分型的裸条目。**（用户 2026-09-12 定）
+
+### 12.1 第一步 · 形态判定（决定后面全部落点）
+
+| 形态 | 判据 | 安装去向 | 是否进 manifest |
+| --- | --- | --- | --- |
+| 纯文档 / 方法论参考 | 无 `SKILL.md` frontmatter | 不入技能目录 | 否 |
+| **技能（Agent Skills 格式）** | 根目录 `SKILL.md` + frontmatter | `~/.dsh/skills/<name>/` | **是（本 SOP 主体）** |
+| Python CLI / uv 工具 | `pyproject.toml` + `[project.scripts]` | `uv tool install`（可附技能） | 附带的技能才进 |
+| DSH 打包插件 | `package.json` 含 `dsh.bundle` 或 `cordis.patch.yml` | profile 依赖 + bundles | **否** —— 走插件流程，勿混入技能目录 |
+
+判据取自 frontmatter 而非目录名。**链接指向的仓库形态经常反直觉**（可能是发行版 monorepo、可能是工具而非插件）——判定结论要先与负责人对齐再动手。
+
+### 12.2 第二步 · 来源留底（决定升级与回滚怎么做）
+
+安装前必须记下三样，写进该技能的接口文档：
+
+1. **锚定 commit SHA**（不是分支名）——`git ls-remote <url> refs/heads/main`
+2. 上游仓库 URL
+3. 许可证
+
+**目录安装策略（2026-09-12 定，此前教训）**：技能目录**不要保留 `.git`**。
+
+- 理由：入库必然改写 `SKILL.md` frontmatter（补 §12.3 四件套），带 `.git` 时 `git pull` 会在 frontmatter 处冲突，每次更新都要 stash + 重放本地字段，是个会持续咬人的坑。
+- 代价：失去内置版本控制 → 用**锚定 SHA 写进文档 + 上游 tarball 版本化**替代。
+- （`lieflat-charts` 原本是 git clone，已按此改为纯目录安装，释放 18MB。）
+
+### 12.3 第三步 · 补齐元数据（四件套 + 溯源块）
+
+两道**都要做**，缺一不可 —— 它们服务不同的消费者：
+
+| 落点 | 字段 | 谁消费 |
+| --- | --- | --- |
+| `~/.dsh/skills/<name>/SKILL.md` frontmatter | `name`（kebab，必填）、`description`（必填）、`title`（中文显示名）、`user_summary`、`user_try` | DSH 会话技能目录、卡片「试试这样说」 |
+| `manifest/skills.json` | `name`、`title`、`category`、`categoryTitle`、`scenario`、`subcategory`、`toolBacked`、`importable`、`summaryZh` | 出海技能页卡片 |
+| `manifest/skill-icons.json` | `name` → LUTE 头像 data URI | 卡片头像 |
+
+**两个已实测的坑（会静默失效，不报错）**：
+
+- ⛔ **`manifest/skills.json` 里的 `icon` 字段对非 81 系技能无效**。构建器只认 `skill-icons.json`（及 81 系覆盖表），行内 icon 会被改写为 `""` 并回退到**分类默认头像**。表现是「卡片有头像但和同组其它技能一模一样」，容易误判为成功。**头像必须写 `skill-icons.json`。**
+- ⛔ **只改 `SKILL.md` 不写 manifest 无效**。宿主 `buildScenarios` 用 `skill.subcategory` 过滤 `SKILLS` 才能匹配到分组，manifest 里没有条目 → 卡片根本不出现。
+
+头像取值：`~/.dsh/skills/lute-brand-icons/assets/manifest.json` 的 `id → data URI`。
+生成器 `assign_lute_icons.py` 会**保留**非 81 系的手工条目（`if name not in SKILL_ASSIGN`），因此写进 `skill-icons.json` 是防抹的；重跑管线不会丢。
+
+### 12.4 第四步 · 场景归位（taxonomy v3）
+
+在 `manifest/taxonomy-v3.json` 补两处：`mapping["<name>"] = <细分场景key>` 与 `overseasNames` 数组。
+
+8 大场景 / 28 细分场景的 key 见该文件 `scenarios`。**判别口径是「这个技能的产出服务于出海链路哪个阶段」**，不是「它像哪类软件」。例：图表/报告生成 → `g-insight` / `g1-analytics`（与 `ecommerce-daily-report`、`ecommerce-sales-dashboard` 同格）。
+
+### 12.5 第五步 · 岗位归属或通用分型（本 SOP 的核心）
+
+写入 `manifest/role-assignments.json` 的 `skills{}`，`_meta` 明确它是「**归位**（技能属于哪些岗位，喂页面）」，与 `scripts/role-presets/skill-map.json` 的「**接线**（preset 实际挂载哪些技能）」是两件事，不要混。
+
+**两条互斥路径，必须二选一：**
+
+**路径 A · 挂岗** —— 技能的三条责任能对上《AI组织变革》某岗位的责任（词表见 `.scratch/overseas-skills-refactor/evidence/roles.json`）：
+
+```json
+{
+  "catalog": "overseas", "scenario": "<key>", "sub": "<key>",
+  "roles": [{ "id": "AGT-0NN", "responsibility": "<该岗三条责任之一，逐字>",
+              "source": "assigned", "confidence": "high|medium|low",
+              "evidence": { "from_skill": "<技能原文连续子串>", "from_role": "<岗位原文连续子串>" },
+              "note": "<边界说明：只服务哪个环节、不含什么>" }]
+}
+```
+
+硬约束：`responsibility` 必须**逐字**属于该岗三条之一；**≥3 岗时不得标 high**；`from_skill`/`from_role` 必须是两侧原文的连续子串（防伪造）。
+
+**路径 B · 通用型**（不挂岗）—— `roles: []`，且**必须**同时给分型与理由：
+
+| `no_role_kind` | 含义 | 典型 |
+| --- | --- | --- |
+| `GENERIC_METHOD` | 跨岗位通用的**方法论**：任何岗位都能用，但不承载某一岗的责任 | `tdd`、`code-review`、`doc-coauthoring`、`grilling` |
+| `TOOL_ONLY` | **纯工具/格式处理形态**：无业务语义，只做转换或呈现 | `docx`、`pptx`、`xlsx`、`pdf`、`anysearch` |
+| `OUT_OF_SCOPE` | 有明确业务语义，但不在本体系出海链路内 | `freemium-upgrade-optimizer`（面向 SaaS 付费墙） |
+| `OTHER` | 兜底（需在 `no_role_reason` 说清） | — |
+
+**判别要点：技能是「产出业务结论」还是「只做呈现/转换」。** 图表渲染输入任意数据、不选品不归因不做经营判断 → `TOOL_ONLY`；同组的 `ecommerce-sales-dashboard` 挂了 AGT-021/AGT-003，因为它**自带业务口径**——这是两者的分界，不能因为「都出报表」就抄同一个答案。
+
+`no_role_reason` 要写成能独立读懂的一段话（现状体例见该文件既有条目）。
+
+### 12.6 第六步 · 重建、验收、生效
+
+```bash
+cd ~/project/Magpie-Horch/packages/capabilities/dsh-overseas-skills
+
+# 1) 改动落 manifest 后重建（catalog.js / role-map.js 是构建产物，不要手改）
+python3 scripts/build_role_map.py            # manifest → lib/role-map.js
+python3 scripts/build_preset_catalog.py      # manifest → lib/catalog.js（自带 preset-skills.json 防清空守卫）
+
+# 2) 契约门（含 coverage 计数一致性）
+node --test test/*.spec.mjs                  # 期望全绿
+
+# 3) 重启桌面进程（catalog 在宿主内存里，不重启页面看不到新卡片）
+osascript -e 'tell application "DSH Desktop" to quit'; sleep 5; open -a "DSH Desktop"
+
+# 4) 运行层取证
+curl -s http://127.0.0.1:43120/api/dsh-overseas-skills/list | \
+  python3 -c "import json,sys;d=json.load(sys.stdin);[print(s['key'],len(x['items'])) for s in d['scenarios'] for x in s['subs'] if x['key']=='<细分场景key>']"
+```
+
+验收标准（四项缺一不可）：契约门全绿；目标细分场景条目数 **+1**；卡片 `title` 是中文名、`installed=true`、`modelEnabled=true`；头像与同组其它技能**不同**。
+
+### 12.7 已知陷阱（实测，重复运行会踩）
+
+| 陷阱 | 症状 | 处置 |
+| --- | --- | --- |
+| ✅ 已修（2026-09-12）：`build_preset_catalog.py` 曾无条件重写 `presets/preset-skills.json` | `PRESET_IDS` 里那 7 个 preset 已不在 `~/.dsh/.agent-presets`（现存 51 个 `agt-NNN`），重跑把它清成 `{"presets": []}`，混进提交 | 已加守卫：**本次解析出 0 个而文件已有内容时跳过写盘并告警**；确要清空用 `--force-empty-presets`。路径若再变，守卫会打印告警而非静默改写 |
+| ⚠️ 改了 manifest 不重启 | 页面上卡片不出现，但 curl 磁盘产物却已正确 —— 像「改了没生效」 | 宿主在内存持有 catalog 模块，必须重启进程 |
+| ⚠️ 启动「用 CLI 起隔离实例」验证 | `dsh --profile desktop` 在装载阶段即失败，**不是**忠实启动 | desktop profile 的启动合约含 Electron 壳侧步骤（package overlay、YAML `!!js` tag 解析）。实况验证只能在重启后的真实实例里做 |
+
+### 12.8 准入前置检查（许可证与署名）
+
+入库前必须核 `LICENSE` 与 `THIRD_PARTY_NOTICES`，把结论写进 §12.2 的来源留底：
+
+- **非商业许可（如 PolyForm Noncommercial）**：个人研究/内部试验可用，**对外商业交付超范围**。需先取得授权或明确放弃用于商业交付——这是业务决策，不是技术决策，必须留档。
+- **署名要求**：部分技能在 SKILL.md 里明文要求模型交付后署名。**照做，但不要写进产出物本身**（上游常明确禁止污染内容）。
+- **第三方依赖**：模板/脚本引外部 CDN、字体、地图数据时，记明联网依赖与各自许可证。

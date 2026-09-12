@@ -5,6 +5,10 @@ import { join } from "node:path";
 import { CATEGORIES, SKILLS, CATEGORIES_FS, SKILLS_FS } from "./catalog.js";
 import { getPromptTemplate } from "./templates.js";
 import { errorMessage, isValidSkillName, rebuildFrontmatter } from "./host-util.js";
+import { LAYER_ICONS, LAYER_ICON_SOURCES } from "./layer-icons.js";
+import { ROLE_ASSIGNMENTS, ROLE_ASSIGNMENT_META } from "./role-map.js";
+import { loadRoleSkeleton } from "./preset-roles.js";
+import { buildOrgTree } from "./org-tree.js";
 
 /**
  * dsh-overseas-skills — Host half.
@@ -175,6 +179,62 @@ async function handleFullstackList() {
   return { status: 200, body: { ok: true, scenarios, groups } };
 }
 
+/**
+ * 四层骨架（场景 → 面 → 责任域 → 岗位 → 卡）的负载。
+ *
+ * 单独一条路由而不是并进 /list：岗位头像 50 枚约 190KB，而 /list 会被胶囊组件
+ * 每 2 秒轮询一次——把头像塞进去等于每秒陪跑 95KB。本路由由设置页**只取一次**。
+ *
+ * 缓存 30 秒：骨架来自 preset 清单（重装 preset 才会变），与技能的开关状态无关。
+ */
+const ORG_TTL_MS = 30_000;
+/** @type {{ at: number, payload: Record<string, unknown>|null }} */
+let orgCache = { at: 0, payload: null };
+
+async function buildOrgPayload() {
+  const now = Date.now();
+  if (orgCache.payload !== null && now - orgCache.at < ORG_TTL_MS) return orgCache.payload;
+
+  const { roles, problems, dir } = await loadRoleSkeleton();
+  const tree = buildOrgTree({
+    scenarios: CATEGORIES,
+    items: SKILLS,
+    assignments: ROLE_ASSIGNMENTS,
+    roles,
+    layerIcons: LAYER_ICONS
+  });
+
+  // 头像单独走平面 map：岗位节点在 8 个场景下会重复出现，把 3.8KB 的 data URI
+  // 放进节点等于把同一张图发 8 遍。
+  const roleIcons = {};
+  for (const role of roles) if (role.icon) roleIcons[role.id] = role.icon;
+
+  const payload = {
+    ok: true,
+    generatedAt: now,
+    presets: { dir, count: roles.length, problems },
+    assignmentMeta: ROLE_ASSIGNMENT_META,
+    layerIcons: LAYER_ICONS,
+    layerSources: LAYER_ICON_SOURCES,
+    roleIcons,
+    roles: roles.map((r) => ({
+      id: r.id,
+      alias: r.alias,
+      title: r.title,
+      planeId: r.plane.id,
+      domainId: r.domain.id,
+      planeName: r.plane.name,
+      domainName: r.domain.name,
+      order: r.order,
+      artifact: r.artifact,
+      responsibilities: r.responsibilities
+    })),
+    tree
+  };
+  orgCache = { at: now, payload };
+  return payload;
+}
+
 async function handleToggle(body) {
   const skillName = typeof body?.name === "string" ? body.name : "";
   const enabled = body?.enabled === true;
@@ -246,6 +306,19 @@ export function apply(ctx) {
         }
       }
     });
+    const disposeOrg = ctx.webServer.register({
+      kind: "exact",
+      path: BASE + "/org",
+      handler: async (req, res) => {
+        if (!isLoopbackRequest(req)) return sendJson(res, 401, { error: "unauthorized" });
+        if (req.method !== "GET") return sendJson(res, 405, { error: "method not allowed" });
+        try {
+          sendJson(res, 200, await buildOrgPayload());
+        } catch (error) {
+          sendJson(res, 500, { ok: false, error: errorMessage(error) });
+        }
+      }
+    });
     const disposeToggle = ctx.webServer.register({
       kind: "exact",
       path: BASE + "/toggle",
@@ -303,6 +376,7 @@ export function apply(ctx) {
     return () => {
       disposeList();
       disposeFullstackList();
+      disposeOrg();
       disposeToggle();
       disposeCredential();
       disposePromptTemplate();

@@ -413,7 +413,8 @@
     "teach": "h2-agent-skill",
     "writing-for-agents": "h2-agent-skill",
     "ask-matt": "h2-agent-skill",
-    "wizard": "h2-agent-skill"
+    "wizard": "h2-agent-skill",
+    "lieflat-charts": "g1-analytics"
   },
   "overseasNames": [
     "1688-sourcing",
@@ -637,7 +638,8 @@
     "whitepapers",
     "win-loss-dataset",
     "xiaohongshu-content-creator",
-    "xlsx"
+    "xlsx",
+    "lieflat-charts"
   ],
   "fullstackNames": [
     "ask-matt",

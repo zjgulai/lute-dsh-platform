@@ -135,8 +135,25 @@ def main():
         if skills:
             presets.append({"id": pid, "title": title, "skills": skills})
 
-    json.dump({"presets": presets}, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    print(f"preset-skills.json 已写入：{len(presets)} 个 preset / {sum(len(p['skills']) for p in presets)} 条技能")
+    # ⚠️ 防误清空守卫（2026-09-12）：PRESET_IDS 指向 ~/.dsh/.agent-presets/<id>，但该目录
+    # 现存 51 个 agt-NNN，PRESET_IDS 里那 7 个已不存在 → presets 恒为空，而本行会无条件
+    # 把 OUT 重写成 {"presets": []}，把提交版里的 7 个 preset 静默抹掉并混进提交。
+    # v3 起该文件不再并入技能目录（见下方注释），故「已有内容 + 本次为空」时跳过写盘并告警。
+    _existing = 0
+    if os.path.isfile(OUT):
+        try:
+            _existing = len(json.load(open(OUT, encoding="utf-8")).get("presets", []))
+        except Exception:
+            _existing = 0
+    _new = len(presets)
+    if _new == 0 and _existing > 0 and "--force-empty-presets" not in sys.argv:
+        print(f"⚠️ 跳过写入 preset-skills.json：本次解析出 0 个 preset，但文件里已有 {_existing} 个。")
+        print("   原因：PRESET_IDS 的目录不在 ~/.dsh/.agent-presets（现存为 agt-NNN 命名）。")
+        print("   若确实要清空，请显式传 --force-empty-presets。")
+    else:
+        json.dump({"presets": presets}, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+        _note = "（--force-empty-presets 强制清空）" if _new == 0 else ""
+        print(f"preset-skills.json 已写入：{_new} 个 preset / {sum(len(p['skills']) for p in presets)} 条技能 {_note}".rstrip())
 
     # 重建 catalog.js：海外分组 + 营销新分类 + 81-Skills 新分类 + 7 个 preset 组
     cat_svg = {}

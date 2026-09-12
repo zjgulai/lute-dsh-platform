@@ -17,7 +17,12 @@
     "lib/catalog.js",
     "lib/client.js",
     "cordis.patch.yml",
-    "lib/templates.js"
+    "lib/templates.js",
+    "lib/layer-icons.js",
+    "lib/role-map.js",
+    "lib/org-tree.js",
+    "lib/preset-roles.js",
+    "manifest/role-assignments.json"
   ],
   "dsh": {
     "bundle": {
@@ -41,6 +46,8 @@
   },
   "scripts": {
     "typecheck": "tsc -p tsconfig.json --pretty false",
-    "test": "node --test test/*.spec.mjs"
+    "test": "node --test test/*.spec.mjs",
+    "icons": "node scripts/gen-layer-icons.mjs",
+    "role-map": "python3 scripts/build_role_map.py"
   }
 }

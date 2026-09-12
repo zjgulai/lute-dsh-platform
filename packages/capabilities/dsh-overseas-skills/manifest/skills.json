@@ -2289,6 +2289,18 @@
       "importable": true,
       "summaryZh": "发现快速上升的亚马逊利基与黑马品牌",
       "toolGap": "Jungle Scout MCP"
+    },
+    {
+      "name": "lieflat-charts",
+      "title": "图表与报告可视化",
+      "category": "analytics-finance",
+      "categoryTitle": "数据分析与财务",
+      "scenario": "g-insight",
+      "subcategory": "g1-analytics",
+      "toolBacked": false,
+      "importable": true,
+      "summaryZh": "把数据生成精致可交互的单文件 HTML 图表，或按 12 套整页模板生成中英双语 HTML 报告",
+      "toolGap": ""
     }
   ]
 }

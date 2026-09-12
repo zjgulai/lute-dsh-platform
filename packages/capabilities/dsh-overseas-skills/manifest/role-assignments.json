@@ -1,0 +1,5908 @@
+{
+  "_meta": {
+    "purpose": "出海技能（222）+ AI全栈（29）→ 《AI组织变革》50 岗位的归位判定；页面「出海技能」四层下钻的数据源。",
+    "vocabulary": "岗位/责任名取自材料 docs/05-agents/role-catalog.json 与 docs/04-organization/organization-graph.json（151 条责任名，一名唯一属一岗）。",
+    "relation_to_skill_map": "与 scripts/role-presets/skill-map.json 的关系：该文件是**接线**（责任名→技能供给，喂 50 个 preset）；本文件是**归位**（技能→岗位，喂页面）。source=skill-map 的条目即从前者继承。",
+    "generated": "2026-09-12 十批语义判定 + 机械校验（.scratch/overseas-skills-refactor/validate-assignments.py）"
+  },
+  "coverage": {
+    "skills": 252,
+    "with_roles": 217,
+    "without_roles": 35,
+    "role_ids_with_supply": 49
+  },
+  "skills": {
+    "1688-sourcing": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a4-selection",
+      "roles": [
+        {
+          "id": "AGT-015",
+          "responsibility": "采购比价",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "批量采购比价",
+            "from_role": "采购比价"
+          },
+          "note": "技能提供1688找货、批量采购比价与多条件筛选，只服务采购比价环节；不含订单协调与履约跟踪"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "product-supplier-sourcing": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a4-selection",
+      "roles": [
+        {
+          "id": "AGT-014",
+          "responsibility": "供应商评估",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "supplier discovery",
+            "from_role": "供应商评估"
+          },
+          "note": "既有映射为产能调查；技能实际在B2B平台锁定候选供应商与工厂，产出待评估的供应商集合，故挂三条责任中最贴近的供应商评估"
+        },
+        {
+          "id": "AGT-015",
+          "responsibility": "采购比价",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "compare items",
+            "from_role": "采购比价"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "dropshipping-supplier-integrator": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a5-supplier",
+      "roles": [
+        {
+          "id": "AGT-015",
+          "responsibility": "订单协调",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "订单自动路由",
+            "from_role": "订单协调"
+          }
+        },
+        {
+          "id": "AGT-047",
+          "responsibility": "接口契约",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "REST/GraphQL API",
+            "from_role": "接口契约"
+          },
+          "note": "技能定义供应商系统对接方式（API/CSV/EDI）与订单、库存接口要求，属集成契约与业务工具实现"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null,
+      "dropped": [
+        {
+          "id": "AGT-014",
+          "reason": "技能做的是零售代发供应商的订单/库存接口对接与履约对账，属系统集成与订单履约范畴；AGT-014 三条责任（供应商评估/产能调查/OEM协作）无对应工作"
+        }
+      ]
+    },
+    "supplier-performance-manager": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a5-supplier",
+      "roles": [
+        {
+          "id": "AGT-014",
+          "responsibility": "供应商评估",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "supplier evaluation",
+            "from_role": "供应商评估"
+          },
+          "note": "同一技能服务三岗：评分卡与交期指标用于供应商评估"
+        },
+        {
+          "id": "AGT-015",
+          "responsibility": "履约跟踪",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "lead-time tracking",
+            "from_role": "履约跟踪"
+          },
+          "note": "同一技能服务三岗：PO流程、收货核对与交期追踪用于采购履约跟踪"
+        },
+        {
+          "id": "AGT-018",
+          "responsibility": "质量分析",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Defect Rate",
+            "from_role": "质量分析"
+          },
+          "note": "同一技能服务三岗：来料质检与缺陷率指标用于生产质量分析"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "aliexpress-supplier-evaluator": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a5-supplier",
+      "roles": [
+        {
+          "id": "AGT-014",
+          "responsibility": "供应商评估",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "Vendor Evaluation",
+            "from_role": "供应商评估"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "sales-negotiator": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a5-supplier",
+      "roles": [
+        {
+          "id": "AGT-025",
+          "responsibility": "商务交付协调",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "B2B deal-making",
+            "from_role": "商务交付协调"
+          },
+          "note": "通用B2B谈判方法，落在成交与承诺环节；实际交付执行不在技能范围内"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "product-attribute-analyzer": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a4-selection",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "市场机会评估",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "结构机会验证",
+            "from_role": "市场机会评估"
+          },
+          "note": "同一技能服务三岗：属性结构与空白验证用于市场机会评估"
+        },
+        {
+          "id": "AGT-008",
+          "responsibility": "组合取舍",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "空白组合",
+            "from_role": "组合取舍"
+          },
+          "note": "同一技能服务三岗：把伪空白/真需求机会筛出来，供新品组合取舍"
+        },
+        {
+          "id": "AGT-026",
+          "responsibility": "价格敏感性",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "价位带价值弹性",
+            "from_role": "价格敏感性"
+          },
+          "note": "同一技能服务三岗：价位带属性价值弹性仅触及价格敏感性，不产出定价或促销方案，需人工复核"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "scenario-driven-product-scout": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a1-market-trend",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "市场机会评估",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "场景机会",
+            "from_role": "市场机会评估"
+          }
+        },
+        {
+          "id": "AGT-008",
+          "responsibility": "实验组合",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "可验证的产品方向",
+            "from_role": "实验组合"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "bestseller-pattern-decoder": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a1-market-trend",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "拆解 Amazon 畅销款",
+            "from_role": "竞品研究"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "company-research": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a2-competitor",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "竞品公司深挖前的信息准备",
+            "from_role": "竞品研究"
+          },
+          "note": "技能做具名公司的公司级调研（团队治理/竞争/风险），可承担竞品公司研究"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "competitor-deep-analysis": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a2-competitor",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "竞品情报",
+            "from_role": "竞品研究"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "competitive-landscape": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a2-competitor",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "市场机会评估",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "differentiation opportunities",
+            "from_role": "市场机会评估"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "customer-voice-analyzer": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a3-demand",
+      "roles": [
+        {
+          "id": "AGT-006",
+          "responsibility": "VOC编码",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "跨平台 VoC",
+            "from_role": "VOC编码"
+          },
+          "note": "同一技能服务四岗：产物是跨平台反馈重建的决策旅程，同时服务消费者VOC研究、售前需求识别、售后体验洞察与用户反馈"
+        },
+        {
+          "id": "AGT-036",
+          "responsibility": "需求识别",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "购买前犹豫点",
+            "from_role": "需求识别"
+          },
+          "note": "同一技能服务四岗：Amazon Q&A与犹豫未下单人群用于售前需求识别"
+        },
+        {
+          "id": "AGT-038",
+          "responsibility": "体验分析",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "决策旅程重建",
+            "from_role": "体验分析"
+          },
+          "note": "同一技能服务四岗：跨平台反馈到决策旅程的重建用于体验分析"
+        },
+        {
+          "id": "AGT-039",
+          "responsibility": "用户反馈",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "用户反馈",
+            "from_role": "用户反馈"
+          },
+          "note": "同一技能服务四岗：社群/私域反馈采集用于用户反馈，但非会员社区教育闭环，需人工复核"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "cross-border-selection": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a4-selection",
+      "roles": [
+        {
+          "id": "AGT-046",
+          "responsibility": "数据质量",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "Hard validation gates",
+            "from_role": "数据质量"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "review-analyst-agent": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a4-selection",
+      "roles": [
+        {
+          "id": "AGT-006",
+          "responsibility": "VOC编码",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "voice of customer",
+            "from_role": "VOC编码"
+          },
+          "note": "同一技能服务四岗：评论洞察与情感/要点编码服务VOC研究"
+        },
+        {
+          "id": "AGT-018",
+          "responsibility": "质量分析",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Top Complaints",
+            "from_role": "质量分析"
+          },
+          "note": "同一技能服务四岗：按频次与严重度排序的抱怨清单服务生产质量分析"
+        },
+        {
+          "id": "AGT-037",
+          "responsibility": "客诉分诊",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "customer complaints",
+            "from_role": "客诉分诊"
+          },
+          "note": "同一技能服务四岗：只做抱怨问题的分级排序，不含工单受理与售后处理，需人工复核"
+        },
+        {
+          "id": "AGT-038",
+          "responsibility": "体验分析",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "improvement recommendations",
+            "from_role": "体验分析"
+          },
+          "note": "同一技能服务四岗：改进优先级与行动方案服务体验分析与改进验证"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "review-summarizer": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a4-selection",
+      "roles": [
+        {
+          "id": "AGT-006",
+          "responsibility": "VOC编码",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "sentiment analysis",
+            "from_role": "VOC编码"
+          },
+          "note": "通用多平台评论抓取摘要工具（含 Yelp/TripAdvisor，用途标注为 arbitrage/affiliate），与 review-analyst-agent、customer-voice-analyzer 重叠，建议人工复核是否合并"
+        },
+        {
+          "id": "AGT-038",
+          "responsibility": "体验分析",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "Common complaints and cons",
+            "from_role": "体验分析"
+          },
+          "note": "同上：只提供评论摘要与情绪/优缺点提取，需人工复核去重"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "trend-stage-timing-analyzer": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a1-market-trend",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "趋势监测",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "公开趋势信号",
+            "from_role": "趋势监测"
+          }
+        },
+        {
+          "id": "AGT-017",
+          "responsibility": "生命周期分析",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "生命周期",
+            "from_role": "生命周期分析"
+          },
+          "note": "技能判断的是市场与子趋势的阶段时机，与 AGT-017 的SKU库存生命周期仅词面相邻，保留既有映射待人工复核"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "people-research": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a2-competitor",
+      "roles": [
+        {
+          "id": "AGT-004",
+          "responsibility": "培训与招聘支持",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "professional backgrounds",
+            "from_role": "培训与招聘支持"
+          },
+          "note": "既有映射含岗位能力分析：技能实际产出个人履历与专业背景画像，最贴近招聘/人才支持"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "social-network-mapper": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a2-competitor",
+      "roles": [],
+      "no_role_kind": "TOOL_ONLY",
+      "no_role_reason": "技能是以 Twitter/X 互动数据构建关系图谱并跑社群检测的工具步骤（networkx），由 org-structure-research 等调研任务调用，本身不产出任何岗位三条责任所要求的工作产物"
+    },
+    "market-insight-product-selection": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a3-demand",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "市场机会评估",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "值不值得做",
+            "from_role": "市场机会评估"
+          }
+        },
+        {
+          "id": "AGT-024",
+          "responsibility": "渠道研究",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "渠道打法",
+            "from_role": "渠道研究"
+          },
+          "note": "技能比较的是 Amazon 与 DTC 打法，属核心渠道而非 AGT-024 的其余渠道，保留既有映射待人工复核"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "market-viability-logic-auditor": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a3-demand",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "市场机会评估",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "市场机会",
+            "from_role": "市场机会评估"
+          },
+          "note": "同一技能服务三岗：区分市场机会与专属机会，服务机会评估"
+        },
+        {
+          "id": "AGT-008",
+          "responsibility": "阶段投资建议",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "值不值得 Momcozy 进入",
+            "from_role": "阶段投资建议"
+          },
+          "note": "同一技能服务三岗：进入/放弃裁决即阶段投资建议"
+        },
+        {
+          "id": "AGT-035",
+          "responsibility": "因果局限审查",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "结论往往会过于乐观",
+            "from_role": "因果局限审查"
+          },
+          "note": "同一技能服务三岗：只对结论过度乐观做提醒式审查，非因果推断复核，需人工复核"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "product-selection": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a4-selection",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "市场机会评估",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "follow-sell opportunities",
+            "from_role": "市场机会评估"
+          }
+        },
+        {
+          "id": "AGT-008",
+          "responsibility": "组合取舍",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "product selection workflow",
+            "from_role": "组合取舍"
+          },
+          "note": "技能输出“该卖什么”的候选商品证据，供新品组合取舍，需人工复核"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null,
+      "dropped": [
+        {
+          "id": "AGT-017",
+          "reason": "循证选品流程为行业→消费者→选品→供应商，全文不含库存分层、生命周期或调拨清货工作，无法承担 AGT-017 的任一条责任"
+        }
+      ]
+    },
+    "alibaba-amazon-market-intel": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a1-market-trend",
+      "roles": [
+        {
+          "id": "AGT-021",
+          "responsibility": "渠道经营分析",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "brand share of voice",
+            "from_role": "渠道经营分析"
+          },
+          "note": "同一技能服务三岗：销量估算与品牌声量数据服务Amazon渠道经营分析"
+        },
+        {
+          "id": "AGT-022",
+          "responsibility": "搜索意图分析",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "reverse-ASIN",
+            "from_role": "搜索意图分析"
+          },
+          "note": "同一技能服务三岗：关键词/反查ASIN等Amazon数据查询，分别服务搜索运营、Amazon经营分析与投放诊断"
+        },
+        {
+          "id": "AGT-032",
+          "responsibility": "投放诊断",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "PPC bid analysis",
+            "from_role": "投放诊断"
+          },
+          "note": "同一技能服务三岗：竞价与广告效果数据只作投放诊断输入，不含投放决策，需人工复核"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "org-structure-research": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a2-competitor",
+      "roles": [
+        {
+          "id": "AGT-004",
+          "responsibility": "岗位能力分析",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "employee profiles",
+            "from_role": "岗位能力分析"
+          },
+          "note": "技能面向外部公司组织结构与人员画像调研，与 AGT-004 的组织/岗位能力分析只间接相关，保留既有映射待人工复核"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "jungle-scout-deep-dive-analyzer": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a1-market-trend",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "市场机会评估",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "opportunity evaluation",
+            "from_role": "市场机会评估"
+          }
+        },
+        {
+          "id": "AGT-008",
+          "responsibility": "组合取舍",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "product recommendations",
+            "from_role": "组合取舍"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "video-prompt-guide": {
+      "catalog": "overseas",
+      "scenario": "b-product",
+      "sub": "b3-visual",
+      "roles": [
+        {
+          "id": "AGT-031",
+          "responsibility": "视频制作协作",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "视频生成提示词统一路由",
+            "from_role": "视频制作协作"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "image-prompt-guide": {
+      "catalog": "overseas",
+      "scenario": "b-product",
+      "sub": "b3-visual",
+      "roles": [
+        {
+          "id": "AGT-031",
+          "responsibility": "视觉简报",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "e-commerce image sets",
+            "from_role": "视觉简报"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "ai-product-designer": {
+      "catalog": "overseas",
+      "scenario": "b-product",
+      "sub": "b1-product-design",
+      "roles": [
+        {
+          "id": "AGT-009",
+          "responsibility": "产品需求定义",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "产品概念设计",
+            "from_role": "产品需求定义"
+          },
+          "note": "既有先验保留：概念方案是产品需求定义的上游输入，技能产出三档概念与交互逻辑，不产出需求条目、商业案例与范围决策。"
+        },
+        {
+          "id": "AGT-010",
+          "responsibility": "工业设计简报",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "工业设计方向",
+            "from_role": "工业设计简报"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "higgsfield-guide": {
+      "catalog": "overseas",
+      "scenario": "b-product",
+      "sub": "b3-visual",
+      "roles": [
+        {
+          "id": "AGT-031",
+          "responsibility": "视频制作协作",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Generate images and videos",
+            "from_role": "视频制作协作"
+          },
+          "note": "技能主体是 Higgsfield 平台的凭证与参数接入（工具接入形态），可交付的素材生成能力落在视频制作协作这条责任上。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "content-breakdown": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c1-content-social",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "结构、钩子与复用套路",
+            "from_role": "内容策划"
+          },
+          "note": "拆解产出复用套路与选题跟进建议，作为内容策划的输入；技能不直接交付内容方案，也不做内容实验。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "product-launch-planner": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e2-promo",
+      "roles": [
+        {
+          "id": "AGT-008",
+          "responsibility": "阶段投资建议",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "The 3-Phase Launch",
+            "from_role": "阶段投资建议"
+          },
+          "note": "既有先验保留：技能是分阶段发布编排（T-21 到 T+30），只在分阶段资源与节奏上与阶段投资建议间接对应，需人工复核。"
+        },
+        {
+          "id": "AGT-024",
+          "responsibility": "市场进入",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "multi-phase product launches",
+            "from_role": "市场进入"
+          },
+          "note": "新品上市的多阶段编排（waitlist、分层首发、多渠道协同），落在市场与渠道进入的执行面；技能侧重发布运营而非新市场战略。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "product-marketing-context": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e2-promo",
+      "roles": [
+        {
+          "id": "AGT-028",
+          "responsibility": "市场语境审查",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "product marketing context",
+            "from_role": "市场语境审查"
+          },
+          "note": "既有先验保留：技能产出单一市场的产品营销背景文档，只提供语境一致性材料，不做跨市场本地化与术语治理。"
+        },
+        {
+          "id": "AGT-029",
+          "responsibility": "品牌定位",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "positioning and messaging",
+            "from_role": "品牌定位"
+          },
+          "note": "三岗共用一份文档：主体产出是产品定位与信息表达基线（品牌定位），同一份基线同时服务本地化语境一致性（AGT-028）与售前问答的事实依据（AGT-036），故不标 high。"
+        },
+        {
+          "id": "AGT-036",
+          "responsibility": "产品问答",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "foundational information",
+            "from_role": "产品问答"
+          },
+          "note": "既有先验保留：该文档是售前产品问答的事实依据，技能本身不承接问答与选购指导。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "product-marketing-brief": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e2-promo",
+      "roles": [
+        {
+          "id": "AGT-009",
+          "responsibility": "产品需求定义",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "Synthesize product features",
+            "from_role": "产品需求定义"
+          },
+          "note": "既有先验保留：技能把规格与客户洞察汇总成营销简报，仅信息汇总这一面接近需求定义，不产出需求条目与商业约束。"
+        },
+        {
+          "id": "AGT-030",
+          "responsibility": "创意简报",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "comprehensive marketing brief",
+            "from_role": "创意简报"
+          },
+          "note": "简报作为营销与销售的信息源，为创意与内容工作提供输入。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "ecommerce-marketing": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e1-store-channel",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "整合营销策略",
+            "from_role": "传播规划"
+          },
+          "note": "技能是营销技能包主协调器：产出跨渠道整合营销策略并路由子技能，不亲自执行投放、内容与文案；按传播规划间接归入，需人工复核。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "vibe-marketing": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c1-content-social",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容实验",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "generate variations",
+            "from_role": "内容实验"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "content-strategy": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c1-content-social",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "content strategist",
+            "from_role": "内容策划"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "social-media-publisher": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c1-content-social",
+      "roles": [],
+      "no_role_kind": "TOOL_ONLY",
+      "no_role_reason": "该技能是 Instagram 与 X 的发布通道操作（容器化两步发布、hashtag 与 caption 格式化、accio-mcp-cli 调用），只解决平台侧发布与文案格式，不承担内容策划、渠道经营或传播规划的任何一条责任。"
+    },
+    "social-media-content-creator": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c1-content-social",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "platform-native content",
+            "from_role": "内容策划"
+          },
+          "note": "平台原生内容创作与内容支柱策略，服务内容策划；技能不含内容实验与传播规划责任。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "influencer-campaign-manager": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c2-influencer-partner",
+      "roles": [
+        {
+          "id": "AGT-033",
+          "responsibility": "达人筛选",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "Influencer Tier Selection",
+            "from_role": "达人筛选"
+          },
+          "note": "技能同时覆盖联盟门户与 ROI 复盘，此处按既有先验的主责任挂到达人筛选。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "copywriting": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c1-content-social",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "撰写营销文案",
+            "from_role": "内容策划"
+          },
+          "note": "文案执行（销售文案、品牌故事、产品描述、Landing Page）落在内容岗位的产出面；技能不含选题策划与内容实验。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "xiaohongshu-content-creator": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c1-content-social",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "小红书内容创作",
+            "from_role": "内容策划"
+          },
+          "note": "面向小红书算法的种草内容创作（标题、情绪、AI 合规），属内容岗位产出。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "launch-strategy": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e2-promo",
+      "roles": [
+        {
+          "id": "AGT-024",
+          "responsibility": "市场进入",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "GTM策略制定",
+            "from_role": "市场进入"
+          },
+          "note": "既有先验保留：技能围绕产品上市 GTM 与渠道分发；其自述边界排除新市场扩张战略（gtm-strategy-planning），此处按上市进入口径归入，需人工复核。"
+        },
+        {
+          "id": "AGT-035",
+          "responsibility": "实验设计",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "增长实验设计",
+            "from_role": "实验设计"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "marketing-ideas": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c1-content-social",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "创意简报",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "marketing ideas",
+            "from_role": "创意简报"
+          },
+          "note": "既有先验保留：140 条跨渠道打法库是创意与传播选题的输入，不单独承担某条可验收责任，需人工复核。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "marketing-psychology": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c1-content-social",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "创意简报",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "70+ mental models",
+            "from_role": "创意简报"
+          },
+          "note": "跨域心理模型库（说服、定价、转化），与 marketing-ideas 同类，按说服方法论挂到内容与创意岗位的简报支撑，需人工复核。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "instagram-marketing": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c1-content-social",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Instagram marketing content",
+            "from_role": "内容策划"
+          },
+          "note": "从商品 URL 生成 Instagram 内容包（图文与视频简报、文案、hashtag），主体是内容产出。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "remotion": {
+      "catalog": "overseas",
+      "scenario": "b-product",
+      "sub": "b3-visual",
+      "roles": [
+        {
+          "id": "AGT-031",
+          "responsibility": "视频制作协作",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "Video creation in React",
+            "from_role": "视频制作协作"
+          },
+          "note": "代码化视频生产的技术最佳实践（React、FFmpeg、字幕、音频可视化），落在素材生产的实现层，需工程协作，属间接对应。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "product-description-generator": {
+      "catalog": "overseas",
+      "scenario": "b-product",
+      "sub": "b2-listing",
+      "roles": [
+        {
+          "id": "AGT-022",
+          "responsibility": "Listing优化",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "backend keywords",
+            "from_role": "Listing优化"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "programmatic-seo-strategist": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d1-seo",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "站点运营",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "模板页批量生成",
+            "from_role": "站点运营"
+          },
+          "note": "程序化模板页与长尾落地页的规模化建设，属独立站站点运营；不含 Amazon 侧搜索运营。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "ecommerce-seo-optimizer": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d1-seo",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "站点运营",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "关键词密度",
+            "from_role": "站点运营"
+          },
+          "note": "商品页与文章页的站内 SEO、内链与内容质量优化属独立站站点运营；技能自述排除 Amazon Listing 埋词。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "serp-ranking-analyzer": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d1-seo",
+      "roles": [
+        {
+          "id": "AGT-022",
+          "responsibility": "搜索意图分析",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Intent Signal Detection",
+            "from_role": "搜索意图分析"
+          },
+          "note": "既有先验保留：技能做单一查询的 SERP 解剖与意图识别，对应搜索意图分析；站点侧归属需人工复核。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "amz-product-optimizer": {
+      "catalog": "overseas",
+      "scenario": "b-product",
+      "sub": "b2-listing",
+      "roles": [
+        {
+          "id": "AGT-022",
+          "responsibility": "商品诊断",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "CTR低于1%或CVR低于5%时的诊断优化",
+            "from_role": "提高商品信息质量和合规可发现性"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "amz-hot-keywords": {
+      "catalog": "overseas",
+      "scenario": "b-product",
+      "sub": "b2-listing",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "趋势监测",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "trend (up/down/flat)",
+            "from_role": "趋势监测"
+          },
+          "note": "low：工具只产出关键词周排名与趋势 CSV，属取数来源，不是岗位分析动作，需人工复核。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "amazon-listing-expert": {
+      "catalog": "overseas",
+      "scenario": "b-product",
+      "sub": "b2-listing",
+      "roles": [
+        {
+          "id": "AGT-021",
+          "responsibility": "行动组合",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "决策中断点和品牌优势提升转化",
+            "from_role": "对指定Amazon经营范围的增长方案负责"
+          },
+          "note": "low：Listing 改写属 Amazon 增长动作之一，但本技能不编排行动组合，保留人工先验待复核。"
+        },
+        {
+          "id": "AGT-022",
+          "responsibility": "Listing优化",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "创建或重写 Listing",
+            "from_role": "提高商品信息质量和合规可发现性"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "amazon-ppc-campaign-manager": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d2-ads",
+      "roles": [
+        {
+          "id": "AGT-021",
+          "responsibility": "行动组合",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "预算重分配方案",
+            "from_role": "对指定Amazon经营范围的增长方案负责"
+          },
+          "note": "low：广告预算是 Amazon 增长动作的组成部分，行动组合本身不由本技能编排。"
+        },
+        {
+          "id": "AGT-032",
+          "responsibility": "投放诊断",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "ACoS高于目标值时的诊断优化",
+            "from_role": "投放诊断"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "ab-test-setup": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d2-ads",
+      "roles": [
+        {
+          "id": "AGT-008",
+          "responsibility": "实验组合",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "实验设计",
+            "from_role": "实验组合"
+          },
+          "note": "通用实验设计方法（假设—单变量—样本量—统计显著），可同时服务多岗位的实验与验证责任；本技能共挂 6 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-010",
+          "responsibility": "可用性验证",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "button color",
+            "from_role": "可用性验证"
+          },
+          "note": "通用实验设计方法（假设—单变量—样本量—统计显著），可同时服务多岗位的实验与验证责任；本技能共挂 6 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-030",
+          "responsibility": "内容实验",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "variant copy",
+            "from_role": "内容实验"
+          },
+          "note": "通用实验设计方法（假设—单变量—样本量—统计显著），可同时服务多岗位的实验与验证责任；本技能共挂 6 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-034",
+          "responsibility": "复购实验",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Start with a Hypothesis",
+            "from_role": "复购实验"
+          },
+          "note": "通用实验设计方法（假设—单变量—样本量—统计显著），可同时服务多岗位的实验与验证责任；本技能共挂 6 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-035",
+          "responsibility": "实验设计",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "statistically valid",
+            "from_role": "区分真实增量、归因偏差与偶然波动"
+          },
+          "note": "通用实验设计方法（假设—单变量—样本量—统计显著），可同时服务多岗位的实验与验证责任；本技能共挂 6 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-038",
+          "responsibility": "改进验证",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "actionable results",
+            "from_role": "改进验证"
+          },
+          "note": "通用实验设计方法（假设—单变量—样本量—统计显著），可同时服务多岗位的实验与验证责任；本技能共挂 6 岗，故全部不标 high。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "etsy-seo-optimizer": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d1-seo",
+      "roles": [
+        {
+          "id": "AGT-024",
+          "responsibility": "平台运营",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "Etsy 平台 Listing 优化",
+            "from_role": "平台运营"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "google-shopping-feed-optimizer": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d2-ads",
+      "roles": [
+        {
+          "id": "AGT-024",
+          "responsibility": "平台运营",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "Optimize Google Shopping Feed",
+            "from_role": "平台运营"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "seo-keyword-research": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d1-seo",
+      "roles": [
+        {
+          "id": "AGT-022",
+          "responsibility": "搜索意图分析",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "classify search intent",
+            "from_role": "搜索意图分析"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "seo-competitor-analysis": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d1-seo",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "抓取并对比竞品页面、关键词与反向链接",
+            "from_role": "竞品研究"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "seo-page-audit": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d1-seo",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "站点运营",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "诊断网站结构、性能、移动适配与索引问题",
+            "from_role": "站点运营"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "tiktok-ads-strategy": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d2-ads",
+      "roles": [
+        {
+          "id": "AGT-032",
+          "responsibility": "广告实验",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "creative-first testing",
+            "from_role": "广告实验"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "warehouse-fulfillment-workflow": {
+      "catalog": "overseas",
+      "scenario": "f-fulfillment",
+      "sub": "f1-warehouse",
+      "roles": [
+        {
+          "id": "AGT-020",
+          "responsibility": "仓储协作",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "拣货、打包、打单仓库作业标准化",
+            "from_role": "仓储协作"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "ecommerce-gdpr-compliance": {
+      "catalog": "overseas",
+      "scenario": "b-product",
+      "sub": "b4-compliance",
+      "roles": [
+        {
+          "id": "AGT-044",
+          "responsibility": "隐私需求分析",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "cookie consent",
+            "from_role": "隐私需求分析"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "multi-currency-checkout": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e1-store-channel",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "站点运营",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "local currency",
+            "from_role": "改善品牌独立站的购买闭环与经营结果"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "multi-location-order-router": {
+      "catalog": "overseas",
+      "scenario": "f-fulfillment",
+      "sub": "f1-warehouse",
+      "roles": [
+        {
+          "id": "AGT-015",
+          "responsibility": "订单协调",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "the lifecycle of an order",
+            "from_role": "订单协调"
+          },
+          "note": "订单生命周期引擎，主责落在 AGT-020 履约仓储；订单协调与库存占用由另两岗责任边缘承接。本技能共挂 3 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-017",
+          "responsibility": "调拨清货建议",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "manage inventory reservations",
+            "from_role": "调拨清货建议"
+          },
+          "note": "订单生命周期引擎，主责落在 AGT-020 履约仓储；订单协调与库存占用由另两岗责任边缘承接。本技能共挂 3 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-020",
+          "responsibility": "仓储协作",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "multi-warehouse routing",
+            "from_role": "协调出库交付退货与库存状态"
+          },
+          "note": "订单生命周期引擎，主责落在 AGT-020 履约仓储；订单协调与库存占用由另两岗责任边缘承接。本技能共挂 3 岗，故全部不标 high。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "multichannel-inventory-sync": {
+      "catalog": "overseas",
+      "scenario": "f-fulfillment",
+      "sub": "f1-warehouse",
+      "roles": [
+        {
+          "id": "AGT-016",
+          "responsibility": "供需协调",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "prevent overselling",
+            "from_role": "供需协调"
+          },
+          "note": "多渠道库存单一事实源，主责在 AGT-045 主数据与 AGT-016 供需协调，库存分层为边缘承接。本技能共挂 3 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-017",
+          "responsibility": "库存分层",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "Accurate Stock Levels",
+            "from_role": "库存分层"
+          },
+          "note": "多渠道库存单一事实源，主责在 AGT-045 主数据与 AGT-016 供需协调，库存分层为边缘承接。本技能共挂 3 岗，故全部不标 high。"
+        },
+        {
+          "id": "AGT-045",
+          "responsibility": "账号商品映射",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "UPC/GTIN Barcodes",
+            "from_role": "让业务对象和指标有统一来源与责任"
+          },
+          "note": "多渠道库存单一事实源，主责在 AGT-045 主数据与 AGT-016 供需协调，库存分层为边缘承接。本技能共挂 3 岗，故全部不标 high。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "invoice-generator": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e1-store-channel",
+      "roles": [
+        {
+          "id": "AGT-040",
+          "responsibility": "收入与费用核对",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "every completed order",
+            "from_role": "贯通订单支付退款结算与财务记录"
+          }
+        },
+        {
+          "id": "AGT-042",
+          "responsibility": "税务资料",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "EU VAT regulations",
+            "from_role": "税务资料"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "chargeback-dispute-manager": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e4-service-review",
+      "roles": [
+        {
+          "id": "AGT-037",
+          "responsibility": "服务补救",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "disputes a transaction",
+            "from_role": "服务补救"
+          },
+          "note": "low：拒付属支付争议，与售后客诉仅场景相邻，保留人工先验待复核。"
+        },
+        {
+          "id": "AGT-043",
+          "responsibility": "争议证据组织",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "evidence automation",
+            "from_role": "争议证据组织"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "social-commerce-sync": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e1-store-channel",
+      "roles": [
+        {
+          "id": "AGT-024",
+          "responsibility": "平台运营",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "TikTok Shop",
+            "from_role": "验证其余渠道和潜力市场的增长路径"
+          }
+        },
+        {
+          "id": "AGT-045",
+          "responsibility": "账号商品映射",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "product catalogs",
+            "from_role": "让业务对象和指标有统一来源与责任"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "return-policy-designer": {
+      "catalog": "overseas",
+      "scenario": "f-fulfillment",
+      "sub": "f3-return",
+      "roles": [
+        {
+          "id": "AGT-020",
+          "responsibility": "退货分流",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "restocking fees",
+            "from_role": "协调出库交付退货与库存状态"
+          }
+        },
+        {
+          "id": "AGT-037",
+          "responsibility": "售后处理",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "return and refund policies",
+            "from_role": "售后处理"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "buy-now-pay-later-setup": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e1-store-channel",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "转化优化",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "installment payments",
+            "from_role": "转化优化"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "amazon-brand-protection": {
+      "catalog": "overseas",
+      "scenario": "b-product",
+      "sub": "b4-compliance",
+      "roles": [
+        {
+          "id": "AGT-027",
+          "responsibility": "规则监测",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "policy violations",
+            "from_role": "监测账号经营状态并推动规则问题解决"
+          }
+        },
+        {
+          "id": "AGT-043",
+          "responsibility": "知识产权检索",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "IP infringement claims",
+            "from_role": "识别合同权利与知识产权问题"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "amazon-fba-inventory-optimizer": {
+      "catalog": "overseas",
+      "scenario": "f-fulfillment",
+      "sub": "f1-warehouse",
+      "roles": [
+        {
+          "id": "AGT-016",
+          "responsibility": "补货模拟",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "restock quantities",
+            "from_role": "补货模拟"
+          }
+        },
+        {
+          "id": "AGT-017",
+          "responsibility": "调拨清货建议",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "清算（回收率报价对比）",
+            "from_role": "调拨清货建议"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "optimize-ecommerce-page-conversion": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e3-conversion",
+      "roles": [
+        {
+          "id": "AGT-010",
+          "responsibility": "可用性验证",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "热力图分析建议",
+            "from_role": "可用性验证"
+          }
+        },
+        {
+          "id": "AGT-023",
+          "responsibility": "漏斗诊断",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "转化漏斗分析",
+            "from_role": "漏斗诊断"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "payment-fraud-detector": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e4-service-review",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "站点运营",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "checkout flow",
+            "from_role": "站点运营"
+          },
+          "note": "low：支付风控在 50 岗中无对口职能，仅从 checkout 配置角度挂独立站站点运营，需人工复核。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "returns-exchange-automator": {
+      "catalog": "overseas",
+      "scenario": "f-fulfillment",
+      "sub": "f3-return",
+      "roles": [
+        {
+          "id": "AGT-037",
+          "responsibility": "售后处理",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "自动退款",
+            "from_role": "解决客户问题并使补救可追踪"
+          },
+          "note": "自助RMA门户/退换路由/自动退款与Store Credit直接执行售后问题处理与补救。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null,
+      "dropped": [
+        {
+          "id": "AGT-020",
+          "reason": "全文只覆盖自助退货门户、退换货路由与退款发放，无仓储侧退货收货/退货分流/在库处置的定位表述，对不上退货分流责任。"
+        }
+      ]
+    },
+    "etsy-pod-automation": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e1-store-channel",
+      "roles": [
+        {
+          "id": "AGT-024",
+          "responsibility": "平台运营",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "publishing",
+            "from_role": "验证其余渠道和潜力市场的增长路径"
+          },
+          "note": "Etsy 店铺的建品、上架发布与监测属其余平台运营。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "tiktok-shop-setup": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e1-store-channel",
+      "roles": [
+        {
+          "id": "AGT-024",
+          "responsibility": "平台运营",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "TikTok Shop",
+            "from_role": "验证其余渠道和潜力市场的增长路径"
+          },
+          "note": "TikTok Shop 开店、目录同步与订单履约同步属其余平台运营。"
+        },
+        {
+          "id": "AGT-033",
+          "responsibility": "联盟运营",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Creator Affiliate ecosystem",
+            "from_role": "把合作触达转为可追踪的品牌和销售结果"
+          },
+          "note": "含创作者联盟计划配置与运营，属联盟触达侧。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "tariff-search": {
+      "catalog": "overseas",
+      "scenario": "f-fulfillment",
+      "sub": "f2-tariff-tax",
+      "roles": [
+        {
+          "id": "AGT-019",
+          "responsibility": "关务资料检查",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "import tariffs",
+            "from_role": "关务资料检查"
+          },
+          "note": "HS 编码归类与税率查询是报关资料的直接依据。"
+        },
+        {
+          "id": "AGT-042",
+          "responsibility": "税务资料",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "Landed cost calculation",
+            "from_role": "提供不同市场和实体的税务资料与执行协调"
+          },
+          "note": "按起运国/目的国批量取税率，产出跨市场税务资料。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "international-shipping-customs": {
+      "catalog": "overseas",
+      "scenario": "f-fulfillment",
+      "sub": "f2-tariff-tax",
+      "roles": [
+        {
+          "id": "AGT-019",
+          "responsibility": "物流方案",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "承运商选择与关务合规",
+            "from_role": "运输方案与异常处置建议"
+          },
+          "note": "同一岗位两条责任同属本技能：技能同时产出物流方案与关务资料检查（报关要求、HS 编码建议、税费测算、禁限运检查）。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "sales-tax-vat-automator": {
+      "catalog": "overseas",
+      "scenario": "f-fulfillment",
+      "sub": "f2-tariff-tax",
+      "roles": [
+        {
+          "id": "AGT-042",
+          "responsibility": "税务资料",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "automated filing",
+            "from_role": "提供不同市场和实体的税务资料与执行协调"
+          },
+          "note": "同一岗位三条责任同属本技能覆盖：技能含经济关联(nexus)与注册义务判定（对应实体口径核对）及自动申报缴款记录（对应申报协作）。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "creating-financial-models": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g2-finance",
+      "roles": [
+        {
+          "id": "AGT-001",
+          "responsibility": "资源情景比较",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "scenario planning",
+            "from_role": "资源情景比较"
+          }
+        },
+        {
+          "id": "AGT-003",
+          "responsibility": "情景模拟",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "best/base/worst case scenarios",
+            "from_role": "提供可追溯的经营解释与备选方案"
+          }
+        },
+        {
+          "id": "AGT-009",
+          "responsibility": "商业案例",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "investment analysis",
+            "from_role": "产品定义与立项包"
+          }
+        },
+        {
+          "id": "AGT-041",
+          "responsibility": "资金预测",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Working capital",
+            "from_role": "资金预测"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "ecommerce-financial-dashboard": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g2-finance",
+      "roles": [
+        {
+          "id": "AGT-040",
+          "responsibility": "渠道对账",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "reconciling merchant payouts",
+            "from_role": "贯通订单支付退款结算与财务记录"
+          },
+          "note": "同一岗位两条责任同属本技能：技能把平台收款(Stripe/PayPal)与订单对齐，并把损益/资产负债/现金流整合为费用核对视图。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "ecommerce-sales-dashboard": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g1-analytics",
+      "roles": [
+        {
+          "id": "AGT-003",
+          "responsibility": "GMV归因分析",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Gross Merchandise Value (GMV)",
+            "from_role": "提供可追溯的经营解释与备选方案"
+          },
+          "note": "看板以 GMV/转化率/AOV 口径建立日周月经营视图，仅支撑可追溯的经营解释。"
+        },
+        {
+          "id": "AGT-021",
+          "responsibility": "渠道经营分析",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "channel performance",
+            "from_role": "对指定Amazon经营范围的增长方案负责"
+          },
+          "note": "渠道表现追踪可支撑 Amazon 渠道经营分析。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "ecommerce-budget-forecaster": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g2-finance",
+      "roles": [
+        {
+          "id": "AGT-001",
+          "responsibility": "经营目标拆解",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "rolling operating budgets",
+            "from_role": "目标与资源决策包"
+          }
+        },
+        {
+          "id": "AGT-003",
+          "responsibility": "经营预测",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Revenue Forecasting",
+            "from_role": "带来源的经营分析包"
+          }
+        },
+        {
+          "id": "AGT-032",
+          "responsibility": "预算分配",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "allocating monthly marketing",
+            "from_role": "将广告预算转成可解释的业务增长"
+          }
+        },
+        {
+          "id": "AGT-041",
+          "responsibility": "经营预算",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Inventory Open-to-Buy (OTB)",
+            "from_role": "经营预算"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "dynamic-pricing-engine": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e2-promo",
+      "roles": [
+        {
+          "id": "AGT-017",
+          "responsibility": "调拨清货建议",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "slow-moving inventory",
+            "from_role": "管理SKU状态、库存占用和退出策略"
+          },
+          "note": "自动降价与清货节奏针对滞销 SKU，服务清货建议侧。"
+        },
+        {
+          "id": "AGT-026",
+          "responsibility": "价格敏感性",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "elasticity",
+            "from_role": "价格与促销决策包"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "inventory-demand-forecaster": {
+      "catalog": "overseas",
+      "scenario": "f-fulfillment",
+      "sub": "f1-warehouse",
+      "roles": [
+        {
+          "id": "AGT-016",
+          "responsibility": "补货模拟",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "安全库存",
+            "from_role": "补货模拟"
+          },
+          "note": "同一岗位两条责任同属本技能：技能同时产出补货方案（ROP/EOQ、补货时点）与需求预测区间（历史趋势、季节性、安全库存）。"
+        },
+        {
+          "id": "AGT-017",
+          "responsibility": "库存分层",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "滞销预警",
+            "from_role": "管理SKU状态、库存占用和退出策略"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "profit-margin-analyzer": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g2-finance",
+      "roles": [
+        {
+          "id": "AGT-040",
+          "responsibility": "收入与费用核对",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Payment Processing Fees",
+            "from_role": "收入与费用核对"
+          },
+          "note": "按费用科目把收入拆到净利，可支撑费用侧核对。"
+        },
+        {
+          "id": "AGT-041",
+          "responsibility": "经济性分析",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "Contribution Margin",
+            "from_role": "使增长计划匹配现金和经营承受能力"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "freemium-upgrade-optimizer": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e2-promo",
+      "roles": [],
+      "no_role_kind": "OUT_OF_SCOPE",
+      "no_role_reason": "技能全程针对 SaaS 产品免费转付费：付费墙触发时机、Aha Moment、feature gate/usage limit/试用到期与付费墙文案要素，不涉及商品价格、促销机制或 DTC 购买闭环；材料《AI组织变革》的 50 个岗位中没有任何一条责任对应此职能。"
+    },
+    "sycm-analysis-skill": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g1-analytics",
+      "roles": [
+        {
+          "id": "AGT-003",
+          "responsibility": "GMV归因分析",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Weekly Business Report",
+            "from_role": "GMV归因分析"
+          },
+          "note": "取回店铺周报数据作为经营分析输入；仅取数，不含深层归因建模。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "marketing-roas-analyzer": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d2-ads",
+      "roles": [
+        {
+          "id": "AGT-003",
+          "responsibility": "GMV归因分析",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "platform-reported metrics",
+            "from_role": "提供可追溯的经营解释与备选方案"
+          },
+          "note": "区分平台口径与自有口径的回报差异，属可追溯的经营解释。"
+        },
+        {
+          "id": "AGT-032",
+          "responsibility": "投放诊断",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Analyze Marketing Spend",
+            "from_role": "投放诊断"
+          }
+        },
+        {
+          "id": "AGT-035",
+          "responsibility": "增量分析",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "incrementality testing",
+            "from_role": "区分真实增量、归因偏差与偶然波动"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "dcf-valuation": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g2-finance",
+      "roles": [
+        {
+          "id": "AGT-041",
+          "responsibility": "资金预测",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Project future cash flows",
+            "from_role": "资金预测"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null,
+      "dropped": [
+        {
+          "id": "AGT-001",
+          "reason": "技能是单一标的自上而下的 DCF 内在价值估值流程（取数→WACC→终值→目标价），不产出资源投放情景方案，对不上资源情景比较责任。"
+        }
+      ]
+    },
+    "product-review-intelligence-collector": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a4-selection",
+      "roles": [
+        {
+          "id": "AGT-018",
+          "responsibility": "质量分析",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "customer pain points",
+            "from_role": "推动生产质量、客诉与根因改进闭环"
+          }
+        },
+        {
+          "id": "AGT-038",
+          "responsibility": "改进验证",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "customer feedback",
+            "from_role": "把售后体验转为产品与经营改进证据"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "email-automation-flow-builder": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d3-email",
+      "roles": [
+        {
+          "id": "AGT-034",
+          "responsibility": "生命周期触达",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "弃购挽回",
+            "from_role": "生命周期触达"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "seasonal-campaign-automator": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e2-promo",
+      "roles": [
+        {
+          "id": "AGT-026",
+          "responsibility": "促销规划",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "discount scheduling",
+            "from_role": "价格与促销决策包"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "checkout-flow-optimizer": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e3-conversion",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "转化优化",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "abandonment",
+            "from_role": "改善品牌独立站的购买闭环与经营结果"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "helpdesk-order-integration": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e4-service-review",
+      "roles": [
+        {
+          "id": "AGT-015",
+          "responsibility": "订单协调",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "order history",
+            "from_role": "把采购需求转成可追踪的承诺与履约"
+          },
+          "note": "工单侧直接呈现订单与物流状态，支撑履约信息协调。"
+        },
+        {
+          "id": "AGT-036",
+          "responsibility": "产品问答",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "order details",
+            "from_role": "帮助客户理解产品适用场景并完成选择"
+          },
+          "note": "让客服在有订单依据的前提下答复客户。"
+        },
+        {
+          "id": "AGT-037",
+          "responsibility": "客诉分诊",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "VIP routing",
+            "from_role": "解决客户问题并使补救可追踪"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "customer-retention-automator": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g3-customer",
+      "roles": [
+        {
+          "id": "AGT-034",
+          "responsibility": "生命周期触达",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "personalized campaigns",
+            "from_role": "生命周期触达"
+          }
+        },
+        {
+          "id": "AGT-038",
+          "responsibility": "体验分析",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "decreasing order values",
+            "from_role": "把售后体验转为产品与经营改进证据"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "customer-ltv-calculator": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g3-customer",
+      "roles": [
+        {
+          "id": "AGT-034",
+          "responsibility": "分群",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "VIP programs, and win-back",
+            "from_role": "用户经营计划与实验结果"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null,
+      "dropped": [
+        {
+          "id": "AGT-033",
+          "reason": "技能只做客户级 LTV 计算与客户分层，不计算达人/联盟渠道的合作效果，对不上合作复盘责任。"
+        }
+      ]
+    },
+    "customer-winback-automator": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g3-customer",
+      "roles": [
+        {
+          "id": "AGT-034",
+          "responsibility": "复购实验",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "reactivation sequences",
+            "from_role": "复购实验"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null,
+      "dropped": [
+        {
+          "id": "AGT-037",
+          "reason": "技能内容是流失客户分层与阶梯折扣召回序列，不含客诉处理或补救动作，对不上售后客诉与服务补救责任。"
+        }
+      ]
+    },
+    "customer-rfm-analyzer": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g3-customer",
+      "roles": [
+        {
+          "id": "AGT-034",
+          "responsibility": "分群",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "RFM scoring, cohort retention",
+            "from_role": "围绕用户阶段提升有价值的复购"
+          },
+          "note": "RFM 与队列留存把客户按购买行为分成 Champion/VIP/流失风险等群，正是 AGT-034 分群责任的输入；既有 AGT-006 已删除。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null,
+      "dropped": [
+        {
+          "id": "AGT-006",
+          "reason": "该岗位的『需求分群』来自用户访谈与 VOC 的需求侧研究，本技能是对已有订单做 RFM 交易行为分层，不做访谈，故删除。"
+        }
+      ]
+    },
+    "review-request-automator": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e4-service-review",
+      "roles": [
+        {
+          "id": "AGT-034",
+          "responsibility": "生命周期触达",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "timed request sequences",
+            "from_role": "CRM留存与复购"
+          },
+          "note": "技能是购后 T+0/T+7/T+21 的定时触达序列与晒图激励，属生命周期触达机制；但其设计目的是社会证明与转化而非复购实验，故只挂这一条责任。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "cart-abandonment-recovery": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e3-conversion",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "转化优化",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "remind shoppers",
+            "from_role": "改善品牌独立站的购买闭环与经营结果"
+          },
+          "note": "以邮件+短信序列把已发起结账的流量赢回并完成下单，直接改善独立站购买闭环；触发条件（结账完成率低于 50%、降低 CPA）即转化优化场景。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "lifecycle-marketing-automator": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d3-email",
+      "roles": [
+        {
+          "id": "AGT-034",
+          "responsibility": "生命周期触达",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "personalized messaging",
+            "from_role": "围绕用户阶段提升有价值的复购"
+          },
+          "note": "技能按生命周期阶段定义转移触发器并做阶段化个性化触达，逐字对应『生命周期触达』。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "referral-program-builder": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e2-promo",
+      "roles": [
+        {
+          "id": "AGT-033",
+          "responsibility": "联盟运营",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "refer-a-friend programs",
+            "from_role": "把合作触达转为可追踪的品牌和销售结果"
+          },
+          "note": "唯一带追踪链接、双向激励与防作弊的合作方运营机制，落在联盟/合作运营；既有 AGT-039 已删除。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null,
+      "dropped": [
+        {
+          "id": "AGT-039",
+          "reason": "『会员活动』是存量会员的运营与反馈，本技能是推荐裂变拉新，机制与责任对象都不符，故删除。"
+        }
+      ]
+    },
+    "coupon-discount-manager": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e2-promo",
+      "roles": [
+        {
+          "id": "AGT-026",
+          "responsibility": "促销规划",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "seasonal promotional calendar",
+            "from_role": "在供给和经营边界内设计价格与组合"
+          },
+          "note": "折扣码规则、限额、有效期与分发节奏就是促销规划的执行件，技能自身也以 seasonal promotional calendar 为使用场景。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "discount-promotion-engine": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e2-promo",
+      "roles": [
+        {
+          "id": "AGT-026",
+          "responsibility": "促销规划",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "tiered quantity pricing",
+            "from_role": "价格与促销决策包"
+          },
+          "note": "阶梯定价/BOGO/购物车级促销的配置与叠加治理即促销规划内容，并以毛利保护为约束；同一岗位的『组合设计』（买赠与捆绑）也由本技能承担，但一个岗位只挂一条，故合并于此。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "loyalty-points-designer": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e2-promo",
+      "roles": [
+        {
+          "id": "AGT-039",
+          "responsibility": "会员活动",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "loyalty points program",
+            "from_role": "会员活动"
+          },
+          "note": "积分与 VIP 分层是会员体系的机制设计，交给负责会员活动与用户反馈的 AGT-039；既有 AGT-034 已删除。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "b2b-payment-terms-optimizer": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e4-service-review",
+      "roles": [
+        {
+          "id": "AGT-025",
+          "responsibility": "渠道方案",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "trade credit",
+            "from_role": "协调经销零售与B2B机会和交付"
+          },
+          "note": "账期、信用额度与自动开票是批发/B2B 渠道合作方案里可执行的部分，落在渠道方案责任；既有 AGT-043 已删除。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null,
+      "dropped": [
+        {
+          "id": "AGT-043",
+          "reason": "『合同审查支持』审的是合同权利与知识产权，本技能配置贸易信用、账期与应收催收，不审合同，故删除。"
+        }
+      ]
+    },
+    "lark-tools": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h1-docs",
+      "roles": [
+        {
+          "id": "AGT-004",
+          "responsibility": "人事行政流程",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Bitable/Base records",
+            "from_role": "人事行政流程"
+          },
+          "note": "飞书多维表格/文档/日历/任务/邮件是行政协作与流程台账的实际载体，套在人事行政流程上；因其为通用协作平台操作，行政属性需人工复核。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "create-website": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h1-docs",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "站点运营",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "HTML website directly",
+            "from_role": "独立站经营与实验包"
+          },
+          "note": "产出可直接上线的单文件 HTML 落地页，属独立站的站点建设与运营物料；技能不承担转化实验，故只挂站点运营。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "internal-comms": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h1-docs",
+      "roles": [
+        {
+          "id": "AGT-004",
+          "responsibility": "人事行政流程",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Company newsletters",
+            "from_role": "支持人才、培训、绩效、编制和行政协作"
+          },
+          "note": "内部通报、周报、FAQ、3P 与事故通报是行政协作与组织沟通的产物，落在该岗位的行政协作使命。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "doc-coauthoring": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h1-docs",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "文档共写流程是跨岗位通用的写作方法论，任何岗位都可按任务调用，不构成单一岗位的责任；既有 AGT-027 的申诉材料与 AGT-039 的使用教育都不以共写流程为责任内容，故不挂岗。",
+      "dropped": [
+        {
+          "id": "AGT-027",
+          "reason": "『申诉材料准备』是账号规则申诉材料，本技能是通用共写流程，不针对申诉场景，故删除。"
+        },
+        {
+          "id": "AGT-039",
+          "reason": "『会员活动』是存量会员的运营与反馈，本技能是推荐裂变拉新，机制与责任对象都不符，故删除。"
+        }
+      ]
+    },
+    "docx": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h1-docs",
+      "roles": [],
+      "no_role_kind": "TOOL_ONLY",
+      "no_role_reason": "纯文档格式处理（读写 .docx、修订与批注），属通用文件操作形态，不承担任何岗位责任。"
+    },
+    "gmail-assistant": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h1-docs",
+      "roles": [],
+      "no_role_kind": "TOOL_ONLY",
+      "no_role_reason": "纯 Gmail 接入与操作形态（搜索、草拟、标签、送达验证）且需外部 MCP，本身不构成岗位责任。"
+    },
+    "pdf": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h1-docs",
+      "roles": [],
+      "no_role_kind": "TOOL_ONLY",
+      "no_role_reason": "纯 PDF 解析、生成、合并拆分等格式处理工具形态，不承担任何岗位责任。"
+    },
+    "pptx": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h1-docs",
+      "roles": [],
+      "no_role_kind": "TOOL_ONLY",
+      "no_role_reason": "纯 PPTX 生成与编辑的格式处理工具形态，不承担任何岗位责任。"
+    },
+    "xlsx": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h1-docs",
+      "roles": [],
+      "no_role_kind": "TOOL_ONLY",
+      "no_role_reason": "纯 xlsx 表格读写与公式处理的格式工具形态，不承担任何岗位责任。"
+    },
+    "skill-vetter": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h2-agent-skill",
+      "roles": [
+        {
+          "id": "AGT-050",
+          "responsibility": "授权审查",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "Permission Scope Analysis",
+            "from_role": "授权审查"
+          },
+          "note": "技能核心步骤是逐项审查 fileRead/fileWrite/network/shell 权限的必要性，逐字对应授权审查；同一岗位的『访问控制』（判定技能权限边界、标红 network+shell 高危组合）与『安全事件处理』（凭据读取/外泄等红线的发现与阻断）也由本技能承担，因三岗同属 AGT-050 只挂一条。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "skill-finder": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h2-agent-skill",
+      "roles": [
+        {
+          "id": "AGT-002",
+          "responsibility": "能力匹配",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "and install agent skills",
+            "from_role": "能力匹配"
+          },
+          "note": "按能力描述检索并推荐可安装的技能/插件，只间接服务于 AGT-002 的能力匹配（该岗位要为场景选定主岗位与 Skills 装配），非直接执行该责任，需人工复核。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "skill-creator": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h2-agent-skill",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "技能创作方法论（模板、Iron Law 测试、渐进式披露与质量评估），任何岗位都可用来把流程固化成技能，不承担某一岗位的责任；AGT-048 需要的是知识溯源、技能版本与 Playbook 评估，本技能不产出其中任何一项。"
+    },
+    "self-improvement": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h2-agent-skill",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "跨岗位的通用自我改进机制（把会话错误、纠正写入 .learnings 笔记并提升到项目记忆），任何岗位都可用，本身不承载岗位责任；其触发边界也明确排除与经验沉淀无关的普通任务。"
+    },
+    "accio-mcp-cli": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h2-agent-skill",
+      "roles": [
+        {
+          "id": "AGT-047",
+          "responsibility": "业务工具实现",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "invoke MCP tools",
+            "from_role": "业务工具实现"
+          },
+          "note": "以 CLI 统一发现与调用 MCP 工具（Twitter/Gmail/Notion/Apify 等），为各岗位提供可复用的受控执行能力；技能是工具调用网关而非工具实现，故给 medium。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "amazon-prelaunch-ad-budget": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d2-ads",
+      "roles": [
+        {
+          "id": "AGT-032",
+          "responsibility": "预算分配",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "defensible",
+            "from_role": "将广告预算转成可解释的业务增长"
+          },
+          "note": "技能直接输出日/月/上线期广告预算、分关键词 CPC 表与盈亏平衡 ACoS/目标 ACoS，就是预算分配的可解释依据。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "amazon-prelaunch-competitor-teardown": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a2-competitor",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "competing Amazon ASIN",
+            "from_role": "竞品研究"
+          },
+          "note": "把竞品 ASIN/品牌拆成营收、价格史、关键词足迹与份额，输出可攻击弱点清单，逐字对应竞品研究。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "amazon-prelaunch-demand-check": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a3-demand",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "市场机会评估",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Amazon demand before sourcing",
+            "from_role": "发现市场变化与尚未满足的机会"
+          }
+        },
+        {
+          "id": "AGT-016",
+          "responsibility": "补货模拟",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "first-order quantity",
+            "from_role": "补货方案与预测区间"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "amazon-prelaunch-demand-mirror": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a3-demand",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "趋势监测",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "trend, seasonality",
+            "from_role": "发现市场变化与尚未满足的机会"
+          }
+        },
+        {
+          "id": "AGT-016",
+          "responsibility": "需求预测",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "so they stock ahead of it",
+            "from_role": "补货方案与预测区间"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "amazon-prelaunch-listing-builder": {
+      "catalog": "overseas",
+      "scenario": "b-product",
+      "sub": "b2-listing",
+      "roles": [
+        {
+          "id": "AGT-022",
+          "responsibility": "Listing优化",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "backend search terms",
+            "from_role": "Listing优化"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "amazon-prelaunch-margin-check": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a3-demand",
+      "roles": [
+        {
+          "id": "AGT-009",
+          "responsibility": "商业案例",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "GO/CAUTION/NO-GO verdict",
+            "from_role": "把需求变成可检验的产品和商业约束"
+          }
+        },
+        {
+          "id": "AGT-041",
+          "responsibility": "经济性分析",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "Landed cost per unit",
+            "from_role": "经济性分析"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "amazon-prelaunch-trend-scout": {
+      "catalog": "overseas",
+      "scenario": "b-product",
+      "sub": "b2-listing",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "趋势监测",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "fast-rising Amazon niches",
+            "from_role": "趋势监测"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "analytics": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g1-analytics",
+      "roles": [
+        {
+          "id": "AGT-046",
+          "responsibility": "数据管道",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "set up tracking",
+            "from_role": "数据管道"
+          },
+          "note": "埋点与事件追踪是数据采集管道的前端实现，非营销决策本身，故取 medium。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "attribution": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d2-ads",
+      "roles": [
+        {
+          "id": "AGT-003",
+          "responsibility": "GMV归因分析",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "caused this conversion",
+            "from_role": "GMV归因分析"
+          },
+          "note": "本技能为同一套归因方法服务三个岗位：解释GMV来源（经营分析）、归因合作触达效果（达人合作）、判定真实增量（增长实验），故按规则三岗挂载均不取 high。"
+        },
+        {
+          "id": "AGT-033",
+          "responsibility": "合作复盘",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "actually drives conversions",
+            "from_role": "把合作触达转为可追踪的品牌和销售结果"
+          },
+          "note": "既有映射保留：合作效果的可追踪归因依赖本技能的归因口径，三岗挂载故不取 high。"
+        },
+        {
+          "id": "AGT-035",
+          "responsibility": "增量分析",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "增量实验",
+            "from_role": "增量分析"
+          },
+          "note": "同上一处说明：归因模型与增量实验同源，服务增长实验的增量判定，三岗挂载故不取 high。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "brand-governance-os": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c3-brand-pr",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "品牌定位",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "brand governance programs",
+            "from_role": "保持Momcozy定位与市场传播一致"
+          },
+          "note": "既有映射保留：治理流程以审批与QA维持定位与传播一致，对上使命，非直接定位作业，故 medium。"
+        },
+        {
+          "id": "AGT-044",
+          "responsibility": "宣称审查",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "checklists for copy",
+            "from_role": "宣称审查"
+          },
+          "note": "既有映射保留：审批与QA清单覆盖文案与产品宣称的合规审查环节。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "brand-measurement-dashboard": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c3-brand-pr",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "品牌反馈",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "tracking brand health",
+            "from_role": "品牌反馈"
+          },
+          "note": "既有映射保留：品牌健康指标与报告为品牌反馈的度量输入。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "brand-narrative-playbook": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c3-brand-pr",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "品牌定位",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "core messaging pillars",
+            "from_role": "品牌定位"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "brand-voice-glossary": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c3-brand-pr",
+      "roles": [
+        {
+          "id": "AGT-028",
+          "responsibility": "术语治理",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "用词规范",
+            "from_role": "术语治理"
+          },
+          "note": "既有两条 AGT-028 映射合并为一条（同岗不重复挂载）：技能产出用词规范与禁忌清单，本条目按术语治理记账；多语言品牌适配与语调维度一致性作为市场语境审查侧的证据并入本条，不另立条目。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "experience-system-blueprint": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c3-brand-pr",
+      "roles": [
+        {
+          "id": "AGT-010",
+          "responsibility": "使用旅程",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Auditing touchpoints",
+            "from_role": "将产品需求转为可理解可验证的体验方案"
+          },
+          "note": "既有映射保留：蓝图是多触点体验与一致性规范，对上体验方案使命，非逐条旅程作业，故 medium。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "campaign-planning": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e2-promo",
+      "roles": [
+        {
+          "id": "AGT-026",
+          "responsibility": "促销规划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Audience & Offers",
+            "from_role": "在供给和经营边界内设计价格与组合"
+          },
+          "note": "新增：offer与人群映射对应促销规划，场景本身归入促销子域。"
+        },
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "multi-channel GTM efforts",
+            "from_role": "传播规划"
+          },
+          "note": "新增：活动目标、信息架构、渠道组合与工作计划即传播规划。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null,
+      "dropped": [
+        {
+          "id": "AGT-008",
+          "reason": "本技能只做活动策略与brief、KPI、工作计划，正文明确把新品上市分阶段策略转给 launch-strategy，无法承担新品孵化的实验组合责任。"
+        },
+        {
+          "id": "AGT-035",
+          "reason": "本技能无假设、对照组与测量协议，不产出实验设计，无法承担增长实验的实验设计责任。"
+        }
+      ]
+    },
+    "channel-integration": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e1-store-channel",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Cadence Alignment",
+            "from_role": "品牌原则与传播方案"
+          },
+          "note": "新增：跨渠道信息、节奏与追踪口径的统一属传播方案的执行层。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null,
+      "dropped": [
+        {
+          "id": "AGT-025",
+          "reason": "本技能的渠道指 email/social/paid 等营销渠道的信息与节奏编排，不产出零售与B2B的渠道机会与合作建议，无法承担渠道方案责任。"
+        }
+      ]
+    },
+    "performance-tracking": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e2-promo",
+      "roles": [
+        {
+          "id": "AGT-003",
+          "responsibility": "GMV归因分析",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "活动效果评估",
+            "from_role": "带来源的经营分析包"
+          }
+        },
+        {
+          "id": "AGT-026",
+          "responsibility": "促销规划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "优化促销策略和资源配置",
+            "from_role": "促销规划"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "co-marketing": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c2-influencer-partner",
+      "roles": [
+        {
+          "id": "AGT-025",
+          "responsibility": "线索评估",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Evaluating partnership fit",
+            "from_role": "线索评估"
+          }
+        },
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "joint launches or promotions",
+            "from_role": "传播规划"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "battlecard-library": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a2-competitor",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "competitive battlecards",
+            "from_role": "竞品研究"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "executive-briefing-kit": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a2-competitor",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "competitive threats",
+            "from_role": "竞品研究"
+          },
+          "note": "本技能是竞品情报的决策层打包格式，内容仍为竞争研究，故挂竞品但不取 high。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "market-signal-tracker": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a1-market-trend",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "趋势监测",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "competitor launches",
+            "from_role": "趋势监测"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "win-loss-dataset": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a2-competitor",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "win/loss insights",
+            "from_role": "竞品研究"
+          },
+          "note": "赢单输单数据含对手与失单动因，为竞争研究提供结构性证据，故 medium。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "competitor-profiling": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a2-competitor",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "竞品档案建立",
+            "from_role": "竞品研究"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "case-studies": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c3-brand-pr",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "customer stories",
+            "from_role": "将需求与产品事实转成可测试内容"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "editorial-ops": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c3-brand-pr",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "editorial calendars",
+            "from_role": "传播规划"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "seo-writing": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d1-seo",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "pillar/blog content",
+            "from_role": "内容策划"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "storytelling": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c1-content-social",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "narrative for campaigns",
+            "from_role": "内容策划"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "thought-leadership": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c3-brand-pr",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "Pre-brief PR/AR teams",
+            "from_role": "传播规划"
+          },
+          "note": "高管 POV、品类叙事与主题演讲内容由本技能策划，并预先对齐 PR/AR 口径以统一对外声音，属对外传播规划；既有映射保留。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "webinars": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c3-brand-pr",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "webinars or virtual events",
+            "from_role": "内容策划"
+          },
+          "note": "研讨会的选题、议程、演讲人 brief 与会后内容再利用属内容项目策划；技能不含投放与品牌定位，故 medium。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "whitepapers": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c3-brand-pr",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "research-heavy whitepapers",
+            "from_role": "内容策划"
+          },
+          "note": "研究型长文的论证结构、方法论、引用与图表规范属内容策划；合规声明与法务复核只是其中一步，不单独构成合规责任。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "influencer-marketing": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c2-influencer-partner",
+      "roles": [
+        {
+          "id": "AGT-033",
+          "responsibility": "达人筛选",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "finding and vetting partners",
+            "from_role": "达人筛选"
+          },
+          "note": "同一岗位的『联盟运营』（大使/联盟计划机制）与『合作复盘』（真实 ROI 测量）也由本技能覆盖，一个岗位只挂一条，故合并于此；既有映射保留。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "insights-repository-kit": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g3-customer",
+      "roles": [
+        {
+          "id": "AGT-048",
+          "responsibility": "知识溯源",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "changelog, superseded flags",
+            "from_role": "知识溯源"
+          },
+          "note": "调研资产的元数据（persona/方法/confidence/expiry）、版本与检索治理服务知识的溯源与复用；技能是库的治理模式而非岗位能力本体，故 medium。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "market-scenario-modeler": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a1-market-trend",
+      "roles": [
+        {
+          "id": "AGT-001",
+          "responsibility": "资源情景比较",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "required investments",
+            "from_role": "资源情景比较"
+          },
+          "note": "情景输出含投资触发点与所需投入，为资源方案的情景比较提供输入；不含现金与编制约束，故 medium。既有映射保留。"
+        },
+        {
+          "id": "AGT-003",
+          "responsibility": "情景模拟",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "Scenario Matrix",
+            "from_role": "情景模拟"
+          },
+          "note": "基准/乐观/悲观情景矩阵、敏感性分析与决策触发点即情景模拟。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "participant-operations-hub": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g3-customer",
+      "roles": [
+        {
+          "id": "AGT-006",
+          "responsibility": "用户访谈分析",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "调研招募、排期、同意与激励",
+            "from_role": "用户访谈分析"
+          },
+          "note": "承担访谈的运营侧（招募、筛查、排期、知情同意、激励发放与隐私隔离），是需求证据的生产管线；不做访谈内容分析，故 medium。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "research-brief-blueprint": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a1-market-trend",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "市场机会评估",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "市场调研项目立项的标准模板与检查清单",
+            "from_role": "发现市场变化与尚未满足的机会"
+          },
+          "note": "简报界定要支撑的决策、样本、方法与交付物，是市场机会评估的立项前置件；不执行评估本身，故 medium。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "co-marketing-governance": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c2-influencer-partner",
+      "roles": [
+        {
+          "id": "AGT-025",
+          "responsibility": "渠道方案",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Planning joint campaigns",
+            "from_role": "渠道方案"
+          },
+          "note": "与伙伴的联合活动立项、审批矩阵、MDF 预算与结项复盘属渠道合作方案的可执行部分；技能为 B2B 伙伴联合营销治理，需人工复核与经销零售渠道的契合度。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "joint-solution-blueprint": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c2-influencer-partner",
+      "roles": [
+        {
+          "id": "AGT-009",
+          "responsibility": "商业案例",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "customer outcomes, ROI proof",
+            "from_role": "商业案例"
+          },
+          "note": "合作方案的用例定义、价值叙事与 ROI 证明构成商业案例的内容；既有映射（kind=partial，材料缺专门立项模板）保留。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "partner-ecosystem-map": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c2-influencer-partner",
+      "roles": [
+        {
+          "id": "AGT-012",
+          "responsibility": "应用生态规划",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "whitespace analysis",
+            "from_role": "应用生态规划"
+          },
+          "note": "既有映射保留：伙伴分层、区域覆盖与空白分析是『应用生态规划』的最近供给；技能对象是渠道/合作方生态而非软件模块，需人工复核。"
+        },
+        {
+          "id": "AGT-025",
+          "responsibility": "线索评估",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "partner recruitment",
+            "from_role": "线索评估"
+          },
+          "note": "待招募优先段与缺口清单即伙伴线索来源，支撑线索评估；既有映射保留。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "partner-revenue-desk": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c2-influencer-partner",
+      "roles": [
+        {
+          "id": "AGT-025",
+          "responsibility": "渠道方案",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "MDF utilization tracker",
+            "from_role": "渠道方案"
+          },
+          "note": "伙伴来源营收口径、激励与 MDF 治理是渠道合作方案的运营执行件；既有映射保留。"
+        },
+        {
+          "id": "AGT-033",
+          "responsibility": "联盟运营",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "incentives, SPIFs",
+            "from_role": "联盟运营"
+          },
+          "note": "伙伴营收归因、激励发放与争议升级属联盟/伙伴运营；既有映射保留。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "crisis-playbooks": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c3-brand-pr",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "holding statements",
+            "from_role": "传播规划"
+          },
+          "note": "分级矩阵、升级路径、声明包与渠道时序构成危机传播预案；AGT-029 边界明写危机表态只能用已审批内容，故归此岗（对上使命与边界，非责任名逐字）。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "media-database": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c3-brand-pr",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "Building pitch lists",
+            "from_role": "传播规划"
+          },
+          "note": "记者分层、互动与禁运/同意记录是媒体关系基础设施，服务传播规划；技能本身不做发布与对外声明，故 medium。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "messaging-frameworks": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c3-brand-pr",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "Message house diagram",
+            "from_role": "传播规划"
+          },
+          "note": "信息屋（headline/pillars/proof）、FAQ 与发言人要点表就是对外传播的计划件，直接承担传播规划。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "public-relations": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c3-brand-pr",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "传播规划",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "earned media",
+            "from_role": "传播规划"
+          },
+          "note": "记者拓展、选题与发布会/播客预热属赢媒体传播规划；既有映射保留。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "social-content": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c1-content-social",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "批量生成多平台社交媒体内容",
+            "from_role": "内容策划"
+          },
+          "note": "按平台批量产出图文文案、短视频脚本与 hashtag 策略即内容策划；不产出视频/图片素材，故不挂素材生产。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "social-operations": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c3-brand-pr",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "趋势监测",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "TikTok Creative Center",
+            "from_role": "趋势监测"
+          },
+          "note": "平台/行业/受众/创作者四路监听与趋势评分（品牌契合、人群兴趣、风险等级）支撑趋势监测；舆情看板只做品牌侧读取。"
+        },
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "content calendars",
+            "from_role": "内容策划"
+          },
+          "note": "内容日历、审批矩阵与发布工具箱是内容生产的计划与流程侧，归内容策划；不含内容创作本身。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "geo-optimizer": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d1-seo",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "站点运营",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "生成式引擎可见性",
+            "from_role": "站点运营"
+          },
+          "note": "站点侧 Product/FAQ Schema 与 AI 搜索、AI Shopping 可见性优化属独立站站点运营；不含漏斗诊断与转化实验。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "gtm-strategy-planning": {
+      "catalog": "overseas",
+      "scenario": "e-sales",
+      "sub": "e2-promo",
+      "roles": [
+        {
+          "id": "AGT-024",
+          "responsibility": "市场进入",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "市场进入策略",
+            "from_role": "市场进入"
+          },
+          "note": "上市/市场进入/扩张战略与渠道、定价建议即市场进入责任；既有映射保留。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "jtbd-analyzer": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a3-demand",
+      "roles": [
+        {
+          "id": "AGT-006",
+          "responsibility": "用户访谈分析",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "用户访谈记录",
+            "from_role": "用户访谈分析"
+          },
+          "note": "本技能同时服务三岗：Jobs/痛点分析供 AGT-006 的需求侧分析、情境触发因素供 AGT-010 的使用旅程、购买动机供 AGT-036 的售前需求识别；挂 3 岗故不给 high（技能本体是需求研究方法，非任一岗位的专属执行件）。以评价/访谈为输入产出 Jobs 与机会矩阵；AI persona 只能作假设，不得当真实调研证据。既有映射保留。"
+        },
+        {
+          "id": "AGT-010",
+          "responsibility": "使用旅程",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "情境触发因素",
+            "from_role": "使用旅程"
+          },
+          "note": "任务情境与触发因素是使用旅程的输入侧；技能不产出设计简报与可用性验证，故 medium。既有映射保留。"
+        },
+        {
+          "id": "AGT-036",
+          "responsibility": "需求识别",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "购买动机",
+            "from_role": "需求识别"
+          },
+          "note": "既有两条映射（选购指导/需求识别）合并为一条：技能从数据识别用户任务与购买动机，可作为售前需求识别的依据，但不面向客户实时应答，故 medium。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "llm-tech-research": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h2-agent-skill",
+      "roles": [
+        {
+          "id": "AGT-048",
+          "responsibility": "知识溯源",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "为每条关键信息保留可追溯证据",
+            "from_role": "知识溯源"
+          },
+          "note": "证据卡（来源类型/发布者/URL/时间/置信度）与来源分级是知识溯源机制，用于技能与 Playbook 更新；技能是外部生态情报方法，非岗位能力本体。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "mece-knowledge-extractor": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h3-knowledge",
+      "roles": [
+        {
+          "id": "AGT-048",
+          "responsibility": "知识溯源",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "支持血缘追溯",
+            "from_role": "知识溯源"
+          },
+          "note": "每个知识单元带 chunk_id/start_line/snippet 来源血缘，逐字对应知识溯源；并产出可复用知识单元库供岗位能力使用。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "seo-controller": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d1-seo",
+      "roles": [
+        {
+          "id": "AGT-023",
+          "responsibility": "站点运营",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "为跨境电商独立站提供完整SEO整合方案",
+            "from_role": "站点运营"
+          },
+          "note": "技术审计/内容/竞品/多语言/GEO 五模块统筹产出独立站 SEO 整合方案，属站点运营；不承担 Amazon Listing 与广告投放。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "skill-optimizer": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h2-agent-skill",
+      "roles": [
+        {
+          "id": "AGT-048",
+          "responsibility": "Playbook评估",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "结构化评估报告",
+            "from_role": "Playbook评估"
+          },
+          "note": "以结构化评估报告为依据执行修复与版本改进，支撑 Playbook 评估之后的岗位能力更新；评估本身由 lute-skills-eval 生成，故 medium。既有映射保留。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "skill-family-manager": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h2-agent-skill",
+      "roles": [
+        {
+          "id": "AGT-002",
+          "responsibility": "能力匹配",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "按项目分组Skills",
+            "from_role": "能力匹配"
+          },
+          "note": "本技能按项目/场景装配与启停 Skills 组合、并做依赖关系管理，正是 Case Control 的能力装配环节。"
+        },
+        {
+          "id": "AGT-048",
+          "responsibility": "技能版本",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "配置持久化存储",
+            "from_role": "技能版本"
+          },
+          "note": "仅做 Skills 编组的持久化配置管理，不产出能力版本与评估记录，保留既有映射但降为低置信。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "skill-structure-doctor": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h2-agent-skill",
+      "roles": [
+        {
+          "id": "AGT-048",
+          "responsibility": "技能版本",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "检测 Skill 目录结构问题并执行自动修复",
+            "from_role": "能力版本与评估记录"
+          },
+          "note": "保证技能资产符合 Universal Skill Schema 并自动修复结构，可支撑技能资产的版本化维护，但不做质量评估。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "skill-evaluator": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h2-agent-skill",
+      "roles": [
+        {
+          "id": "AGT-048",
+          "responsibility": "Playbook评估",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "六维度深度评估",
+            "from_role": "Playbook评估"
+          },
+          "note": "六维度评分 + routing/loading 质量检查 + 结构化评估报告，直接就是技能与 Playbook 的评估能力。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "voc-sentiment-analyzer": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a3-demand",
+      "roles": [
+        {
+          "id": "AGT-006",
+          "responsibility": "VOC编码",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "客户之声（VOC）",
+            "from_role": "VOC编码"
+          },
+          "note": "把评价编码为情感分布、方面情感、痛点与 feature requests，是 VOC 编码的现成方法。"
+        },
+        {
+          "id": "AGT-038",
+          "responsibility": "客诉聚类",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "差评原因聚类",
+            "from_role": "客诉聚类"
+          },
+          "note": "差评聚类与 top complaints 排序，对上体验洞察的客诉聚类。"
+        },
+        {
+          "id": "AGT-039",
+          "responsibility": "用户反馈",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "痛点优先级排序",
+            "from_role": "用户反馈"
+          },
+          "note": "产出用户反馈的结构化结论，可作为该岗位服务反馈的输入，但不承担使用教育与会员活动。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "amazon-sorftime-research": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a1-market-trend",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "市场机会评估",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "市场机会识别",
+            "from_role": "市场机会评估"
+          },
+          "note": "供需平衡/CR5/新品友好度 + Top100 竞品打标，直接支撑市场机会评估。"
+        },
+        {
+          "id": "AGT-021",
+          "responsibility": "渠道经营分析",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "类目分析报告",
+            "from_role": "渠道经营分析"
+          },
+          "note": "Amazon 类目经营分析为该范围经营方案提供依据；本技能以选品验证为主，故为中等置信。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "amazon-competitor-monitor": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a2-competitor",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "竞品价格变动报告",
+            "from_role": "竞品研究"
+          },
+          "note": "价格/促销/评价/排名/Buy Box 的竞品动态分析，是竞品研究的核心动作。"
+        },
+        {
+          "id": "AGT-021",
+          "responsibility": "渠道经营分析",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "日常竞品价格监控",
+            "from_role": "渠道经营分析"
+          },
+          "note": "为 Amazon 经营范围提供竞品态势与应对建议，属渠道经营分析的输入。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "product-data-deep-analysis": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g1-analytics",
+      "roles": [
+        {
+          "id": "AGT-003",
+          "responsibility": "情景模拟",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "从静态描述到情景模拟",
+            "from_role": "情景模拟"
+          },
+          "note": "核心升级即情景模拟（换价格/切法/渠道会发生什么），直接对上经营分析的情景模拟。"
+        },
+        {
+          "id": "AGT-007",
+          "responsibility": "市场机会评估",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "品类深挖",
+            "from_role": "市场机会评估"
+          },
+          "note": "以市场与竞品数据给出进入倾向，可作机会评估依据；最终裁决明确不在本技能范围。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "product-research-matrix": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a4-selection",
+      "roles": [
+        {
+          "id": "AGT-008",
+          "responsibility": "组合取舍",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "多品类机会对比",
+            "from_role": "组合取舍"
+          },
+          "note": "多品类候选打分排序并给出进入/放弃建议，就是组合取舍。"
+        },
+        {
+          "id": "AGT-026",
+          "responsibility": "组合设计",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "选品决策支撑",
+            "from_role": "组合设计"
+          },
+          "note": "保留既有映射：矩阵排序可作为商品组合设计的输入，但不涉及价格敏感性与促销规划。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "paid-advertising": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d2-ads",
+      "roles": [
+        {
+          "id": "AGT-032",
+          "responsibility": "投放诊断",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "多平台广告账户审计",
+            "from_role": "投放诊断"
+          },
+          "note": "账户结构/追踪/预算/出价/受众的审计 + 0-100 健康评分 + P0-P3 问题清单，即投放诊断（同一岗位的预算分配亦由本技能支撑）。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "supplier-evaluation": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a5-supplier",
+      "roles": [
+        {
+          "id": "AGT-014",
+          "responsibility": "供应商评估",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "供应商画像、风险评估与准入建议",
+            "from_role": "供应商评估"
+          },
+          "note": "1688 调查 + 工商核查 + 验厂清单 + 准入建议，直接承担供应商评估与产能调查。"
+        },
+        {
+          "id": "AGT-015",
+          "responsibility": "采购比价",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "供应商对比",
+            "from_role": "采购比价"
+          },
+          "note": "多家供应商对比矩阵与推荐排序，可直接作为采购比价与采购建议的依据。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "supply-chain-controller": {
+      "catalog": "overseas",
+      "scenario": "f-fulfillment",
+      "sub": "f1-warehouse",
+      "roles": [
+        {
+          "id": "AGT-016",
+          "responsibility": "供需协调",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "供应链整体规划与风险评估",
+            "from_role": "供需协调"
+          },
+          "note": "统筹需求预测、供应商与物流三个环节，给出端到端补货与配送方案，正是供需协调。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "cold-email": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d3-email",
+      "roles": [
+        {
+          "id": "AGT-025",
+          "responsibility": "线索评估",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "兴趣确认回复",
+            "from_role": "线索评估"
+          },
+          "note": "B2B 冷外联与回复处理可支撑线索开发与意向确认，但本技能只产出邮件资产，不评估线索质量，需人工复核。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "single-post-intel-mining": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a1-market-trend",
+      "roles": [
+        {
+          "id": "AGT-006",
+          "responsibility": "VOC编码",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "VOC post mining",
+            "from_role": "VOC编码"
+          },
+          "note": "帖子类型识别 + 四层证据分层 + 结构化存储与数据字典，就是把用户原声编码为可复用证据。"
+        },
+        {
+          "id": "AGT-038",
+          "responsibility": "体验分析",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "业务动作建议",
+            "from_role": "体验分析"
+          },
+          "note": "从投诉/求助帖提取核心发现与反直觉洞察并转成改进动作，对上体验分析；但来源是公开帖子而非售后工单。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "brand-logo-designer": {
+      "catalog": "overseas",
+      "scenario": "b-product",
+      "sub": "b3-visual",
+      "roles": [
+        {
+          "id": "AGT-031",
+          "responsibility": "视觉简报",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "三套不同认知方向的 Logo 方案",
+            "from_role": "视觉简报"
+          },
+          "note": "产出带认知目标与记忆度评估的 Logo 方向方案，属视觉素材生产链路的方案环节。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "brand-mention-tracking": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c3-brand-pr",
+      "roles": [
+        {
+          "id": "AGT-029",
+          "responsibility": "品牌反馈",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "品牌舆情监测",
+            "from_role": "品牌反馈"
+          },
+          "note": "跨平台声量/情感/话题与舆情风险预警，是品牌反馈的采集与分析能力。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "outreach-automation": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d3-email",
+      "roles": [
+        {
+          "id": "AGT-025",
+          "responsibility": "线索评估",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "B2B潜在客户开发",
+            "from_role": "线索评估"
+          },
+          "note": "潜客筛选、个性化变量抽取与回复分流，直接服务 B2B 线索开发。"
+        },
+        {
+          "id": "AGT-033",
+          "responsibility": "达人筛选",
+          "source": "assigned",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "KOL/网红合作开发",
+            "from_role": "达人筛选"
+          },
+          "note": "ICP 定义 + 目标名单与排除条件 + 达人邀约 cadence + 合作转化追踪。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "multi-platform-listing-generator": {
+      "catalog": "overseas",
+      "scenario": "b-product",
+      "sub": "b2-listing",
+      "roles": [
+        {
+          "id": "AGT-022",
+          "responsibility": "Listing优化",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "多平台铺货上架",
+            "from_role": "Listing优化"
+          },
+          "note": "按平台规则生成标题/卖点/描述/后台关键词并做字符与合规校验，直接承担 Listing 优化。"
+        },
+        {
+          "id": "AGT-024",
+          "responsibility": "平台运营",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "新品全渠道发布",
+            "from_role": "平台运营"
+          },
+          "note": "覆盖 Walmart/Etsy/eBay 等非 Amazon 平台的商品信息生成，支撑其他平台的上架运营。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "multilingual-seo": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d1-seo",
+      "roles": [
+        {
+          "id": "AGT-028",
+          "responsibility": "本地化",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "本地化关键词研究",
+            "from_role": "本地化内容与差异清单"
+          },
+          "note": "多语言站点架构、地域定向与文化适配建议支撑本地化；主体是技术性 hreflang 配置，故中等置信。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "tech-pack-generator": {
+      "catalog": "overseas",
+      "scenario": "b-product",
+      "sub": "b1-product-design",
+      "roles": [
+        {
+          "id": "AGT-011",
+          "responsibility": "可制造性分析",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "DFM（可制造性）审查",
+            "from_role": "可制造性分析"
+          },
+          "note": "三视图/装配图/BOM + DFM 风险位（壁厚、脱模、公差）+ 打样前制造风险摘要，直接承担可制造性分析与 BOM 与材料分析。"
+        },
+        {
+          "id": "AGT-044",
+          "responsibility": "产品准入核对",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "母婴合规关注点",
+            "from_role": "产品准入核对"
+          },
+          "note": "输出适用标准方向与材料/结构敏感点清单，为产品准入核对提供待确认清单；不做法务合规终审。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null,
+      "dropped": [
+        {
+          "id": "AGT-010",
+          "reason": "本技能正文明确把产品概念提案与工业设计方向探索路由给产品设计师，产出的是面向工厂的技术包，不产出工业设计简报。"
+        }
+      ]
+    },
+    "platform-price-monitor": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g1-analytics",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "价格情报分析和竞争态势评估",
+            "from_role": "竞品研究"
+          },
+          "note": "只覆盖竞品价格这一个维度，缺品牌与产品层面研究，故为低置信。"
+        },
+        {
+          "id": "AGT-026",
+          "responsibility": "价格敏感性",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "制定自动化重定价策略",
+            "from_role": "价格敏感性"
+          },
+          "note": "竞品价格与促销情报、历史价格序列和重定价策略，是价格与促销决策包的输入。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null,
+      "dropped": [
+        {
+          "id": "AGT-027",
+          "reason": "本技能监控竞品价格与促销并给重定价建议，不监测平台规则、不诊断账号健康也不产出申诉材料，无法承担该岗的规则监测。"
+        }
+      ]
+    },
+    "ad-creative": {
+      "catalog": "overseas",
+      "scenario": "d-traffic",
+      "sub": "d2-ads",
+      "roles": [
+        {
+          "id": "AGT-032",
+          "responsibility": "广告实验",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "多版本A/B测试文案",
+            "from_role": "广告实验"
+          },
+          "note": "提供 3-5 个文案变体与测试优先级，是广告实验的创意供给；实验设计与增量判定不在本技能范围。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "file-history-manager": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h1-docs",
+      "roles": [
+        {
+          "id": "AGT-031",
+          "responsibility": "素材版本管理",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "找回历史版本",
+            "from_role": "素材版本管理"
+          },
+          "note": "通用文件历史与备份恢复工具，可支撑素材版本回退，但不识别素材语义、不产出带版本的渠道素材包。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "terminology-standardizer": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h3-knowledge",
+      "roles": [
+        {
+          "id": "AGT-028",
+          "responsibility": "术语治理",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "构建领域受控词表",
+            "from_role": "术语治理"
+          },
+          "note": "受控词表、同义词与变体合并、多语言术语对齐，就是术语治理本体。"
+        },
+        {
+          "id": "AGT-045",
+          "responsibility": "主数据治理",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "统一多来源数据中的术语表达",
+            "from_role": "主数据治理"
+          },
+          "note": "对 SKU 字段做术语归一，可作主数据治理的一环；不涉及指标契约与账号商品映射。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "viral-video-analyzer": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c1-content-social",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "结构优化（黄金3秒/高潮/CTA）",
+            "from_role": "内容策划"
+          },
+          "note": "短视频钩子与结构框架可用于内容策划，但本技能只做优化建议、不产出内容方案，故低置信。"
+        },
+        {
+          "id": "AGT-031",
+          "responsibility": "视频制作协作",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "脚本优化建议",
+            "from_role": "视频制作协作"
+          },
+          "note": "脚本结构、标题封面与节奏建议，是视频制作协作的前段输入。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "shipment-tracking": {
+      "catalog": "overseas",
+      "scenario": "f-fulfillment",
+      "sub": "f1-warehouse",
+      "roles": [
+        {
+          "id": "AGT-015",
+          "responsibility": "履约跟踪",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "预计到达时间",
+            "from_role": "履约跟踪"
+          },
+          "note": "在途运单状态与到货预测可作为履约跟踪的物理段证据；商业承诺与合同履约不在本技能范围。"
+        },
+        {
+          "id": "AGT-019",
+          "responsibility": "到货异常追踪",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "异常预警：检测滞留、延误、丢件",
+            "from_role": "到货异常追踪"
+          },
+          "note": "滞留/延误/丢件异常预警与 ETA 估算，直接承担到货异常追踪。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "icp-profiler": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a3-demand",
+      "roles": [
+        {
+          "id": "AGT-006",
+          "responsibility": "需求分群",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "一个产品可有多个 ICP",
+            "from_role": "从购买和使用旅程识别高价值未满足需求"
+          },
+          "note": "既有映射的 responsibility 由「用户访谈分析」改为「需求分群」：ICP 以画像与人群拆分为主，不执行访谈编码流程。多岗说明：同一份 ICP 画像分别作为需求分群依据、线索资格上游判据与选购指导依据，三岗用法不同，故整体压到 medium 及以下。"
+        },
+        {
+          "id": "AGT-025",
+          "responsibility": "线索评估",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "用于指导营销定向、销售与产品决策",
+            "from_role": "线索评估"
+          },
+          "note": "间接：画像可作为销售定向与线索资格的上游判据，但技能不产出经销商/B2B 线索判据，需人工复核。"
+        },
+        {
+          "id": "AGT-036",
+          "responsibility": "选购指导",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "购买动机",
+            "from_role": "帮助客户理解产品适用场景并完成选择"
+          },
+          "note": "间接：购买动机与人群特征可支撑售前选购建议，技能本身不面向客户对话。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "ecommerce-csv-processing": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g1-analytics",
+      "roles": [
+        {
+          "id": "AGT-045",
+          "responsibility": "主数据治理",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "字段名映射转换（自定义→标准）",
+            "from_role": "让业务对象和指标有统一来源与责任"
+          },
+          "note": "字段映射与标准字段规范服务主数据口径统一，但技能不定义跨系统口径契约。"
+        },
+        {
+          "id": "AGT-046",
+          "responsibility": "数据质量",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "数据质量报告",
+            "from_role": "带质量状态的数据产物"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "ecommerce-price-monitor": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g1-analytics",
+      "roles": [
+        {
+          "id": "AGT-026",
+          "responsibility": "价格敏感性",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "价格调整决策支持",
+            "from_role": "在供给和经营边界内设计价格与组合"
+          },
+          "note": "技能观测跨平台价格与趋势并给定价建议，不建模价格弹性，故 medium。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "ecommerce-analytics-controller": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g1-analytics",
+      "roles": [
+        {
+          "id": "AGT-001",
+          "responsibility": "月度经营复盘",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "需要生成经营报告（日报/月报/季度报告）",
+            "from_role": "月度经营复盘"
+          },
+          "note": "经月度/季度报告工作流覆盖月度经营复盘，但不承担目标拆解。"
+        },
+        {
+          "id": "AGT-002",
+          "responsibility": "需求分诊",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "不确定调用哪个具体子Skill",
+            "from_role": "维护场景分类、主岗位选择、Skills装配"
+          },
+          "note": "主控核心是子技能路由与装配判断。多岗说明：主控同时是数据技能路由（02）、经营报告编排（01/21）与 KPI 报告口径承接（45），故全部压到 medium 及以下。"
+        },
+        {
+          "id": "AGT-021",
+          "responsibility": "渠道经营分析",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "需要分析电商订单数据",
+            "from_role": "渠道经营分析"
+          },
+          "note": "须限定在明确渠道/账号范围内；技能自身不产出 Amazon 专属行动组合。"
+        },
+        {
+          "id": "AGT-045",
+          "responsibility": "指标契约",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "月度KPI、趋势分析、问题诊断",
+            "from_role": "让业务对象和指标有统一来源与责任"
+          },
+          "note": "仅间接：主控统合 KPI 报告结构，不建立指标契约。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null,
+      "dropped": [
+        {
+          "id": "AGT-023",
+          "reason": "主控只调度订单 CSV 经营报告类子技能，不产出独立站漏斗环节诊断，无法承担「漏斗诊断」。"
+        }
+      ]
+    },
+    "ecommerce-quarterly-strategy": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g1-analytics",
+      "roles": [
+        {
+          "id": "AGT-001",
+          "responsibility": "经营目标拆解",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "下季度目标设定建议",
+            "from_role": "经营目标拆解"
+          },
+          "note": "季度目标设定与资源分配建议直接对应目标拆解。"
+        },
+        {
+          "id": "AGT-003",
+          "responsibility": "经营预测",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "预测全年目标完成情况",
+            "from_role": "经营预测"
+          },
+          "note": "全年目标完成预测与增长驱动分析属经营预测/解释，非模型化预测。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "ecommerce-daily-report": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g1-analytics",
+      "roles": [
+        {
+          "id": "AGT-021",
+          "responsibility": "渠道经营分析",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "监控日常销售异常波动（销售额、订单量、客单价）",
+            "from_role": "渠道经营分析"
+          },
+          "note": "须限定为 Amazon 订单数据；技能为跨平台通用日报，不含渠道专属行动组合。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "ecommerce-monthly-review": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g1-analytics",
+      "roles": [
+        {
+          "id": "AGT-001",
+          "responsibility": "月度经营复盘",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "需要进行月度电商经营复盘",
+            "from_role": "月度经营复盘"
+          }
+        },
+        {
+          "id": "AGT-021",
+          "responsibility": "经营复盘",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "诊断未达标指标的原因",
+            "from_role": "经营复盘"
+          },
+          "note": "月度复盘报告可支撑渠道级经营复盘，但技能不产出渠道行动组合。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "ecommerce-ml-modeling-advisor": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g1-analytics",
+      "roles": [
+        {
+          "id": "AGT-003",
+          "responsibility": "经营预测",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "30 天复购预测、流失预警",
+            "from_role": "经营预测"
+          },
+          "note": "把复购/流失/LTV 预测问题转成建模方案，服务预测但不等同 GMV 预测。"
+        },
+        {
+          "id": "AGT-012",
+          "responsibility": "算法评估设计",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "设计验证：时间切分优先",
+            "from_role": "算法评估设计"
+          },
+          "note": "标签/特征/模型族/验证指标/漂移监控的设计即算法评估设计。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "ecommerce-business-insights": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g1-analytics",
+      "roles": [
+        {
+          "id": "AGT-003",
+          "responsibility": "GMV归因分析",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "需要归因分析与可落地的行动建议清单",
+            "from_role": "GMV归因分析"
+          },
+          "note": "多岗说明：同一份 REVIEW 报告同时承载 GMV 归因（03）、渠道经营复盘（21）与口径纪律承接（45），故全部压到 medium 及以下。"
+        },
+        {
+          "id": "AGT-021",
+          "responsibility": "经营复盘",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "需要从订单/销售 CSV 生成经营复盘报告",
+            "from_role": "经营复盘"
+          },
+          "note": "需限定渠道数据范围；技能为跨平台通用经营复盘。"
+        },
+        {
+          "id": "AGT-045",
+          "responsibility": "指标契约",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "缺少数据字段或口径不明确",
+            "from_role": "指标契约"
+          },
+          "note": "仅间接：技能遵守口径纪律并标注缺口，不制定指标契约。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "knowledge-similarity-analyzer": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h3-knowledge",
+      "roles": [
+        {
+          "id": "AGT-046",
+          "responsibility": "数据质量",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "知识库去重与合并",
+            "from_role": "数据质量"
+          },
+          "note": "对象是知识单元定义而非订单数据，映射置信度受限于此。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "knowledge-extraction-expert": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h3-knowledge",
+      "roles": [
+        {
+          "id": "AGT-048",
+          "responsibility": "知识溯源",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "绘制论证与证据地图",
+            "from_role": "把经验变成可复用可评估的岗位能力"
+          },
+          "note": "证据地图与反例拆解保持主张可回溯原文，属知识溯源；不产出用户教育内容。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null,
+      "dropped": [
+        {
+          "id": "AGT-039",
+          "reason": "技能面向个人深度阅读与行为转化，不产出面向用户的产品使用教育内容，仅「教育」词面重叠。"
+        },
+        {
+          "id": "AGT-046",
+          "reason": "「溯源监测」指数据血缘监测，本技能的证据地图是书籍论证结构，不是数据管道溯源。"
+        }
+      ]
+    },
+    "competitor-alternative-analysis": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a2-competitor",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "竞品研究",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "竞品功能对比矩阵",
+            "from_role": "竞品研究"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "web-scraping-plan-designer": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h1-docs",
+      "roles": [
+        {
+          "id": "AGT-045",
+          "responsibility": "指标契约",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "字段说明与指标字典",
+            "from_role": "指标契约"
+          },
+          "note": "指标字典与字段说明是采集口径定义，不等于企业指标契约。"
+        },
+        {
+          "id": "AGT-046",
+          "responsibility": "数据管道",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "设计自动化采集流程",
+            "from_role": "数据管道"
+          },
+          "note": "翻页/去重/断点续采/质量审计的流程设计属数据管道设计，技能不含实现。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "marketing-content-suite": {
+      "catalog": "overseas",
+      "scenario": "c-content-brand",
+      "sub": "c1-content-social",
+      "roles": [
+        {
+          "id": "AGT-030",
+          "responsibility": "内容策划",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "多渠道生成营销内容",
+            "from_role": "将需求与产品事实转成可测试内容"
+          },
+          "note": "多渠道内容与 A/B 版本即「可测试内容」。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "semantic-bucketer": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h3-knowledge",
+      "roles": [
+        {
+          "id": "AGT-048",
+          "responsibility": "技能版本",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "准备批量处理（如 Skill 生成）",
+            "from_role": "把经验变成可复用可评估的岗位能力"
+          },
+          "note": "分组对象是知识单元标签，服务技能单元生成前组织，故 low；据此删除既有 AGT-006/AGT-038。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null,
+      "dropped": [
+        {
+          "id": "AGT-006",
+          "reason": "分桶对象是知识单元标签（applicable_objects/domain_tags/logic_type），不是消费者需求分群。"
+        },
+        {
+          "id": "AGT-038",
+          "reason": "技能不处理客诉文本，聚类对象为知识单元标签，无法承担「客诉聚类」。"
+        }
+      ]
+    },
+    "semantic-density-analyzer": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h3-knowledge",
+      "roles": [
+        {
+          "id": "AGT-046",
+          "responsibility": "数据质量",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "内容质量评估与分级",
+            "from_role": "数据质量"
+          },
+          "note": "密度评分用于内容质量分级与筛选，服务知识类数据产品质量。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "semantic-doc-chunker": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h3-knowledge",
+      "roles": [
+        {
+          "id": "AGT-046",
+          "responsibility": "数据管道",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "构建 RAG 知识库，需要保持语义边界",
+            "from_role": "数据管道"
+          },
+          "note": "分块是 RAG 知识库入库管道步骤，技能不产出知识结论。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "cross-border-category-feasibility": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a3-demand",
+      "roles": [
+        {
+          "id": "AGT-007",
+          "responsibility": "市场机会评估",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "判断一个品类是否值得进入跨境市场",
+            "from_role": "市场机会评估"
+          },
+          "note": "多岗说明：同一份可行性报告同时提供市场机会、进入节奏、供应能力与准入证据，四岗用法不同，故全部压到 medium 及以下。"
+        },
+        {
+          "id": "AGT-014",
+          "responsibility": "供应商评估",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "列出 ≥3 家验证供应商",
+            "from_role": "供应商评估"
+          },
+          "note": "供应链成熟度模块给出验证供应商与 OEM/ODM、MOQ、交期指标，属供应商评估输入。"
+        },
+        {
+          "id": "AGT-024",
+          "responsibility": "市场进入",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "建议首发聚焦北美后再横向扩展",
+            "from_role": "市场进入"
+          },
+          "note": "首发市场与横向扩展建议支撑进入路径判断。"
+        },
+        {
+          "id": "AGT-044",
+          "responsibility": "产品准入核对",
+          "source": "skill-map",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "认证状态",
+            "from_role": "产品准入核对"
+          },
+          "note": "仅间接：认证状态作为供应链指标之一出现，技能不做准入结论。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "cross-border-intel-radar": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a1-market-trend",
+      "roles": [
+        {
+          "id": "AGT-048",
+          "responsibility": "技能版本",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "跨境电商领域的 Claude Skills 最新动态",
+            "from_role": "把经验变成可复用可评估的岗位能力"
+          },
+          "note": "情报雷达只做外部 Skills 动态扫描与分类，不做深度评测或版本结论，故 low。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "anchor-text-splitter": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h3-knowledge",
+      "roles": [
+        {
+          "id": "AGT-046",
+          "responsibility": "数据管道",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "基于锚点标记精确分割文本",
+            "from_role": "数据管道"
+          },
+          "note": "精确切分是文档入库管道的确定步骤，被 semantic-doc-chunker 递归剥离调用。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "anysearch": {
+      "catalog": "overseas",
+      "scenario": "a-market",
+      "sub": "a1-market-trend",
+      "roles": [],
+      "no_role_kind": "TOOL_ONLY",
+      "no_role_reason": "纯实时搜索工具接入（网页/垂直领域搜索、批量搜索、整页提取），任何岗位都可直接调用，本身不承担任何岗位责任。"
+    },
+    "agent-browser": {
+      "catalog": "overseas",
+      "scenario": "h-enable",
+      "sub": "h2-agent-skill",
+      "roles": [],
+      "no_role_kind": "TOOL_ONLY",
+      "no_role_reason": "纯浏览器自动化 CLI 工具（打开/点击/填表/抓取/截图），属平台操作形态的通用执行工具，不承担岗位责任。"
+    },
+    "grilling": {
+      "catalog": "fs",
+      "scenario": "fs-clarify",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "连续追问打磨方案是跨岗位通用的访谈方法论（协议 §5 明示『访谈』为通用方法示例），任何岗位都能用它澄清需求，不构成某一岗位的责任。"
+    },
+    "grill-me": {
+      "catalog": "fs",
+      "scenario": "fs-clarify",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "正文只有一句「调用 Skill tool，参数为 grilling」，是同一套通用访谈方法的转发壳，没有独立岗位责任。"
+    },
+    "grill-with-docs": {
+      "catalog": "fs",
+      "scenario": "fs-clarify",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "访谈加落档（CONTEXT.md 术语表与 ADR）是任何项目通用的澄清与记录方法，不产出某一岗位的标准产物。"
+    },
+    "wait-what": {
+      "catalog": "fs",
+      "scenario": "fs-clarify",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "停下来核对假设是跨岗位通用的对话纠偏方法，正文只要求用简化技术英语与 CONTEXT.md 通用语言重述背景，无岗位责任可言。"
+    },
+    "to-questionnaire": {
+      "catalog": "fs",
+      "scenario": "fs-clarify",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "把访谈问题整理成发给知情人的问卷，是跨岗位通用的信息采集方法（属协议 §5 所列『访谈』一族），不承担某一岗位的责任。"
+    },
+    "research": {
+      "catalog": "fs",
+      "scenario": "fs-clarify",
+      "sub": "",
+      "roles": [
+        {
+          "id": "AGT-048",
+          "responsibility": "知识溯源",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "把每一条论断追溯到其所属的源头",
+            "from_role": "知识溯源"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "teach": {
+      "catalog": "fs",
+      "scenario": "fs-clarify",
+      "sub": "",
+      "roles": [
+        {
+          "id": "AGT-004",
+          "responsibility": "培训与招聘支持",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "用户请你教他们一些东西",
+            "from_role": "培训与招聘支持"
+          },
+          "note": "只能支撑培训一侧（有状态的多会话学习工作区），与岗位能力矩阵/招聘无关，需人工复核。"
+        },
+        {
+          "id": "AGT-039",
+          "responsibility": "使用教育",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "课程是你产出的主要成果：知识与技能抵达用户的单元",
+            "from_role": "使用教育"
+          },
+          "note": "把概念教到真正理解的课程化教学，对上该岗教育内容的产物形态。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "to-spec": {
+      "catalog": "fs",
+      "scenario": "fs-spec",
+      "sub": "",
+      "roles": [
+        {
+          "id": "AGT-012",
+          "responsibility": "软件需求分析",
+          "source": "skill-map",
+          "confidence": "high",
+          "evidence": {
+            "from_skill": "产出一份规格说明（spec）",
+            "from_role": "软件需求分析"
+          }
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "to-tickets": {
+      "catalog": "fs",
+      "scenario": "fs-spec",
+      "sub": "",
+      "roles": [
+        {
+          "id": "AGT-009",
+          "responsibility": "产品范围管理",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "一个完成的切片自身即可演示或验证",
+            "from_role": "产品范围管理"
+          },
+          "note": "垂直切片界定本次交付进/不进的边界，供立项包的范围管理使用。"
+        },
+        {
+          "id": "AGT-013",
+          "responsibility": "研发计划",
+          "source": "skill-map",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "把一个计划、规格说明或对话拆分成一组",
+            "from_role": "研发计划"
+          },
+          "note": "工单+阻塞边构成研发工作的推进计划。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "wayfinder": {
+      "catalog": "fs",
+      "scenario": "fs-spec",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "把模糊大工程画成议题跟踪器上的决策工单地图，是通用的规划方法（正文明确『规划，而非执行』），任何岗位的大工作都可用，不对应单一岗位责任。"
+    },
+    "ask-matt": {
+      "catalog": "fs",
+      "scenario": "fs-spec",
+      "sub": "",
+      "roles": [
+        {
+          "id": "AGT-002",
+          "responsibility": "能力匹配",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "根据处境推荐本技能集内合适的技能",
+            "from_role": "能力匹配"
+          },
+          "note": "只在该技能集内部做处境到技能/流程的匹配，不覆盖场景分类与主岗位选择，需人工复核。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "wizard": {
+      "catalog": "fs",
+      "scenario": "fs-spec",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "生成 bash 向导带领人走完手动流程是跨岗位通用的引导方法，产出一次性脚本与 .env/secret 写入，不对应任何岗位的三条责任。"
+    },
+    "codebase-design": {
+      "catalog": "fs",
+      "scenario": "fs-architecture",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "深模块/接口/接缝/适配器是一套跨项目的设计词汇，服务的是代码库本身；协议明确禁止因『都写代码』挂到工程类岗位。"
+    },
+    "domain-modeling": {
+      "catalog": "fs",
+      "scenario": "fs-architecture",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "术语质疑、场景压力测试与就地更新 CONTEXT.md/ADR 是任何项目通用的领域建模方法；AGT-045 的指标契约与主数据治理面向业务对象与指标的来源与责任，本技能只维护代码库术语表，不治理主数据。"
+    },
+    "improve-codebase-architecture": {
+      "catalog": "fs",
+      "scenario": "fs-architecture",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "扫描深化机会并产出 HTML 报告是通用的内部代码改进方法，不对应任何岗位的三条责任。"
+    },
+    "prototype": {
+      "catalog": "fs",
+      "scenario": "fs-architecture",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "抛弃式代码回答设计问题是通用的设计验证方法；且 AGT-013 边界明确『不能以仿真或文档替代实物和适用合规验收』，原型不构成阶段验证。",
+      "dropped": [
+        {
+          "id": "AGT-013",
+          "reason": "原型是抛弃式代码验证设计决策，该岗边界明确不以仿真/文档替代实物验收，对不上阶段验证责任。"
+        }
+      ]
+    },
+    "implement": {
+      "catalog": "fs",
+      "scenario": "fs-implement",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "按规格或工单实施一段工作是任何岗位都成立的通用实施方法（比协议点名的 TDD 更通用），收尾只跑类型检查与测试套件，不产出验证报告与缺陷闭合记录。",
+      "dropped": [
+        {
+          "id": "AGT-013",
+          "reason": "通用实施方法，产出代码与提交，不组织阶段验收、不产出验证报告，对不上阶段验证责任。"
+        }
+      ]
+    },
+    "tdd": {
+      "catalog": "fs",
+      "scenario": "fs-implement",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "协议 §5 明确把 TDD 列为 GENERIC_METHOD 示例：红-绿-重构是跨岗位通用的工程纪律，测试是开发过程的产物而非岗位要求的测试方案。",
+      "dropped": [
+        {
+          "id": "AGT-013",
+          "reason": "TDD 是协议点名的通用工程方法，产出开发过程的测试，不产出该岗要求的测试方案与验证证据。"
+        }
+      ]
+    },
+    "code-review": {
+      "catalog": "fs",
+      "scenario": "fs-quality",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "协议 §5 明确把代码评审列为 GENERIC_METHOD 示例：标准×可疑双轴评审对任何仓库的 diff 都成立，不对应某一岗位的责任。"
+    },
+    "diagnosing-bugs": {
+      "catalog": "fs",
+      "scenario": "fs-quality",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "构建紧凑通过/失败循环、二分与收紧循环是任何岗位调试问题时通用的诊断纪律，不承担某一岗位的责任。"
+    },
+    "resolving-merge-conflicts": {
+      "catalog": "fs",
+      "scenario": "fs-quality",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "逐 hunk 保留双方意图并运行项目自动化检查，是任何仓库协作都成立的通用流程。"
+    },
+    "triage": {
+      "catalog": "fs",
+      "scenario": "fs-quality",
+      "sub": "",
+      "roles": [
+        {
+          "id": "AGT-002",
+          "responsibility": "需求分诊",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "按状态机对 issue 与外部 PR 分诊/归类/验证",
+            "from_role": "需求分诊"
+          },
+          "note": "对象是代码仓库 issue/PR 与 bug/enhancement 标签，需把对象与标签映射到业务 Case 才可用，需人工复核。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "setup-matt-pocock-skills": {
+      "catalog": "fs",
+      "scenario": "fs-infra",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "TOOL_ONLY",
+      "no_role_reason": "仓库级配置接线（issue tracker、triage 标签、CONTEXT.md/ADR 位置）是技能集的安装配置形态，不是可承担岗位责任的业务工作。"
+    },
+    "setup-pre-commit": {
+      "catalog": "fs",
+      "scenario": "fs-infra",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "TOOL_ONLY",
+      "no_role_reason": "husky + lint-staged + prettier 的工程配置操作，属开发环境搭建的工具形态，不对应任何岗位责任。"
+    },
+    "git-guardrails-claude-code": {
+      "catalog": "fs",
+      "scenario": "fs-infra",
+      "sub": "",
+      "roles": [
+        {
+          "id": "AGT-050",
+          "responsibility": "访问控制",
+          "source": "assigned",
+          "confidence": "low",
+          "evidence": {
+            "from_skill": "在 Claude 执行危险的 git 命令之前拦截并阻止它们",
+            "from_role": "访问控制"
+          },
+          "note": "按工具与参数阻断危险动作，与访问边界同型；当前形态是 Claude Code 的 hook 配置，须按本平台改造后可用。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "migrate-to-shoehorn": {
+      "catalog": "fs",
+      "scenario": "fs-infra",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "TOOL_ONLY",
+      "no_role_reason": "把测试里的 as 断言换成 shoehorn 的库级迁移配方，属纯工具改造形态，没有岗位责任。"
+    },
+    "scaffold-exercises": {
+      "catalog": "fs",
+      "scenario": "fs-infra",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "TOOL_ONLY",
+      "no_role_reason": "面向特定课程仓库（pnpm ai-hero-cli internal lint）的练习目录脚手架，是工程侧工具形态，不足以承担 AGT-004 的培训与招聘支持责任。"
+    },
+    "handoff": {
+      "catalog": "fs",
+      "scenario": "fs-collab",
+      "sub": "",
+      "roles": [
+        {
+          "id": "AGT-049",
+          "responsibility": "",
+          "source": "assigned",
+          "confidence": "medium",
+          "evidence": {
+            "from_skill": "让一个全新的 agent 能够继续这项工作",
+            "from_role": "保证任务状态可解释并能接管恢复"
+          },
+          "note": "只对上使命层的『任务状态可解释并能接管恢复』；运行监测/容量管理/失败恢复三条责任名都不字面成立，故 responsibility 留空。"
+        }
+      ],
+      "no_role_kind": null,
+      "no_role_reason": null
+    },
+    "writing-for-agents": {
+      "catalog": "fs",
+      "scenario": "fs-writing",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "为 agent 写文档与技能是跨岗位通用的写作方法论（上下文指针、两种负载、信息层级）；AGT-048 需要的是知识溯源、技能版本与 Playbook 评估，本技能不产出其中任何一项。"
+    },
+    "lieflat-charts": {
+      "catalog": "overseas",
+      "scenario": "g-insight",
+      "sub": "g1-analytics",
+      "roles": [],
+      "no_role_kind": "TOOL_ONLY",
+      "no_role_reason": "纯渲染与排版工具形态：输入任意数据，按 61 张图型与 12 套报告模板输出单文件 HTML，不含任何出海业务语义（不选品、不诊断、不归因、不做经营判断），因而不承担某一岗位的三条责任。其产出可服务多个岗位的汇报与交付环节，但每个岗位要的是分析结论，图表只是呈现外壳，与 docx/pptx/xlsx 同属格式处理形态。按协议§5 归 GENERIC 工具类，不挂岗。"
+    }
+  }
+}
