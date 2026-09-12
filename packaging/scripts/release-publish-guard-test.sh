@@ -10,6 +10,10 @@
 # PKG_ROOT 由 dirname "$0" 推出，因此 release/ 落在临时目录里——本测试**永不触碰**
 # 仓库里 packaging/release/ 下的真实产物，可安全地在任何时刻运行。
 #
+# G7 覆盖 ADR-0058：入库清单（仓库根 release/<version>.sha256）在产物就位后生成、
+# 带源凭据、可被 shasum -c 直接校验，且**失败版本不留清单**（清单绝不描述一份不存在
+# 的产物）。沙箱里 REPO_ROOT 同样是临时目录，因此也不会碰仓库根 release/。
+#
 # 用法: bash packaging/scripts/release-publish-guard-test.sh
 # 退出码: 0 = 全部通过；1 = 有断言失败
 set -u
@@ -64,7 +68,17 @@ mkapp "$P/LUTE Setup.app" setup
 mkapp "$SANDBOX/appbuild/DSH Desktop.app" dsh
 ( cd "$SANDBOX/appbuild" && tar -czf "$P/DSH Desktop.app.tar.gz" "DSH Desktop.app" )
 printf 'stub profile\n' | gzip > "$P/profile.tar.gz"
-printf 'LUTE_VERSION=9.9.9\n' > "$P/VERSION"; printf '{}\n' > "$P/manifest.json"
+# VERSION 带全套源凭据（ADR-0058）：G7 要求清单把它们**逐字**带出，而不是退化成 unknown
+cat > "$P/VERSION" <<'EOF'
+LUTE_VERSION=9.9.9
+BUILD=20260913-999999
+DSH_BASELINE=2.0.5
+ARCH=arm64
+SOURCE_COMMIT=deadbeefdeadbeefdeadbeefdeadbeefdeadbeef
+SOURCE_DIRTY=1
+PROFILE_SNAPSHOT=0123456789abcdef
+EOF
+printf '{}\n' > "$P/manifest.json"
 
 codesign --verify --deep --strict "$P/LUTE Setup.app" >/dev/null 2>&1
 check $? "合成载荷：LUTE Setup.app 已签名"
@@ -140,6 +154,21 @@ bash "$S" >/dev/null 2>&1;                              [ "$?" = "2" ] && ok "�
 bash "$S" -h >/dev/null 2>&1;                           [ "$?" = "0" ] && ok "-h → 退出码 0" || no "-h 退出码非 0"
 bash "$S" --nope x y >/dev/null 2>&1;                   [ "$?" = "2" ] && ok "未知选项 → 退出码 2" || no "未知选项退出码非 2"
 bash "$S" "$P" "$VER" extra >/dev/null 2>&1;            [ "$?" = "2" ] && ok "多余参数 → 退出码 2" || no "多余参数退出码非 2"
+
+echo
+echo "── G7. 入库清单（ADR-0058）：就位后生成、可校验、失败不留 ────────"
+MAN="$SANDBOX/release/$VER.sha256"
+[ -f "$MAN" ] && ok "清单已生成（仓库根 release/<ver>.sha256）" || no "清单未生成"
+grep -q '^# source_commit=deadbeefdeadbeefdeadbeefdeadbeefdeadbeef$' "$MAN" 2>/dev/null && ok "清单逐字带出 source_commit" || no "source_commit 未带出（退化成 unknown？）"
+grep -q '^# source_dirty=1$' "$MAN" 2>/dev/null && ok "清单逐字带出 source_dirty=1" || no "source_dirty 未带出"
+grep -q '^# profile_snapshot=0123456789abcdef$' "$MAN" 2>/dev/null && ok "清单逐字带出 profile_snapshot" || no "profile_snapshot 未带出"
+grep -q '^# build=20260913-999999$' "$MAN" 2>/dev/null && ok "清单逐字带出 build" || no "build 未带出"
+M_H="$(grep -E '^[0-9a-f]{64}  ' "$MAN" 2>/dev/null | awk '{print $1}')"
+[ "$M_H" = "$(shasum -a 256 "$DMG" | awk '{print $1}')" ] && ok "清单哈希 = 产物实际哈希" || no "清单哈希与产物不符"
+# 注释行必须被 shasum 跳过，否则清单就不能直接用 -c 校验（macOS shasum 6.02 实测）
+( cd "$REL" && shasum -a 256 -c "$MAN" ) >/dev/null 2>&1; check $? "清单可被 shasum -c 校验（# 注释行被跳过）"
+# 失败方向：清单绝不描述一份不存在的产物
+[ -f "$SANDBOX/release/$BVER.sha256" ] && no "终验失败版 $BVER 竟留下清单" || ok "失败版本无清单（不描述不存在的产物）"
 
 echo
 echo "════════════════════════════════════════════════════════"

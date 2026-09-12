@@ -61,6 +61,7 @@
 | ADR-0055 | 依赖层可复现的判据：清单与锁文件逐条 specifier 相等、依赖不得指向机器绝对路径、同名不得跨字段重复声明，离线判定（`deps-reproducible`）；产物未入库的包 `build` 先于 `test` | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-dependency-reproducibility.md) |
 | ADR-0056 | 出货的 preset **不烘焙任何外部产品行**（`PRODUCT_MOUNTS` 置空，本机产品走本机装配）；机器路径两个前缀都参数化（`__DSH_HOME__` / `__LUTE_PROJECT_ROOT__`）；出货树机器路径**只减不增**（签名前机读守卫） | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-shipping-surface.md) |
 | ADR-0057 | 发布产物的发布语义：`release/<版本>/` 要么不存在、要么是**完整且已全部通过终验**的集合；构建在临时区完成、**原子改名就位**；同号重制默认拒绝，`--force` 时旧产物**归档不删除**；构建锁记 pid（无主可回收、活锁仍拦截）；发布语义由沙箱化断言守护 | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-release-atomic-publish.md) |
+| ADR-0058 | 发布清单入库：仓库根 `release/<version>.sha256` 是**清单的家**（进 git），由 `sign-and-dmg.sh` 在产物**原子就位之后**生成，不再依赖 SOP 里的人工步骤；清单必须带源凭据（`source_commit` / `source_dirty` / `profile_snapshot`，由 `assemble.sh` 在**装配时刻**记录）；时序固定为**构建 → 提交清单 → 打 tag**，tag 才担保得住字节；失败方向是「产物完好、清单缺失」 | accepted（2026-09-13） | [Note](../notes/implemented/architecture/2026-09-13-release-manifest.md) |
 
 > ADR-0007 ~ ADR-0018 是「LUTE 二开平台架构重构」的十二项决策，共享同一篇决策记录 Note。
 > ADR-0019 独立成篇（品牌皮肤锚点治理），决策记录见其 Note。

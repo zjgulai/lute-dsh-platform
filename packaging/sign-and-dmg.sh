@@ -1,7 +1,8 @@
 #!/bin/bash
 # sign-and-dmg.sh —— Phase 3：payload → 可安装 dmg（hdiutil，含挂载后终验）
 # 用法: ./sign-and-dmg.sh <payload-dir> <version> [--force]
-# 产物: release/<version>/DSH-Desktop-LUTE-<version>-mac-arm64.dmg + SHA256SUMS + VERSION + manifest.json
+# 产物: packaging/release/<version>/DSH-Desktop-LUTE-<version>-mac-arm64.dmg + SHA256SUMS + VERSION + manifest.json
+#       （+ 仓库根 release/<version>.sha256 入库清单，见文末 §7 与 ADR-0058）
 #
 # ── 发布语义（ADR-0057）──────────────────────────────────────────────────────
 # release/<version>/ 只允许两种状态：**不存在**，或**一份完整且已通过终验的产物集合**。
@@ -17,8 +18,16 @@
 # 目录消失」经查**不是**本脚本所为（manifest/SHA256SUMS/VERSION 保留了原始 mtime，
 # 可证 rm -rf 未执行）；但它把这条风险摆到了明面上——只要有人重跑一次，上一份已交付
 # 的产物就会无声消失且无法找回。
+# ── 入库清单（ADR-0058）──────────────────────────────────────────────────────
+# 仓库里有两个 release/，别混：packaging/release/ 是**产物的家**（几百 MB 二进制，被
+# packaging/.gitignore 忽略，不进 git）；仓库根 release/ 是**清单的家**（几百字节，
+# 必须进 git）。产物走出仓库之后（飞书直传、GitHub Releases 附件），仓库侧唯一还能
+# 认领它的东西就是这份清单——它能回答「客户手上那串字节是不是我们发的」。
+# 但它**证明不了**「这份字节从哪个提交来」：那个答案在 source_commit 字段里，由
+# assemble.sh 在**装配**时刻记下（源是那一刻被读走的；制 dmg 时再取 HEAD 会记错）。
 set -euo pipefail
 PKG_ROOT="$(cd "$(dirname "$0")" && pwd)"   # 本脚本位于 packaging/ 根
+REPO_ROOT="$(cd "$PKG_ROOT/.." && pwd)"     # 仓库根：入库清单落在 $REPO_ROOT/release/
 
 # ── 参数 ────────────────────────────────────────────────────────────────────
 FORCE=0
@@ -49,6 +58,7 @@ VERSION="${ARG_VERSION:-1.0.0}"
 REL="$PKG_ROOT/release/$VERSION"
 DMG_NAME="DSH-Desktop-LUTE-$VERSION-mac-arm64.dmg"
 DMG="$REL/$DMG_NAME"
+MANIFEST="$REPO_ROOT/release/$VERSION.sha256"   # 入库清单（ADR-0058）
 VOLNAME="DSH Desktop LUTE $VERSION"
 MOUNT="/Volumes/$VOLNAME"
 say(){ echo "[dmg] $*"; }
@@ -59,11 +69,13 @@ LOCK="$PKG_ROOT/release/.build.lock"
 LOCK_HELD=0
 STAGING=""
 VERIFY_TMP=""
+MANIFEST_TMP=""
 MOUNTED=0
 cleanup(){
   set +e
   [ "$MOUNTED" = 1 ] && hdiutil detach "$MOUNT" >/dev/null 2>&1
   [ -n "$VERIFY_TMP" ] && rm -rf "$VERIFY_TMP"
+  [ -n "$MANIFEST_TMP" ] && rm -f "$MANIFEST_TMP"
   [ -n "$STAGING" ] && rm -rf "$STAGING"
   [ "$LOCK_HELD" = 1 ] && rm -rf "$LOCK"
   return 0
@@ -194,3 +206,49 @@ say "发布完成: $REL"
 ls -la "$REL"
 say "SHA256SUMS 复核："
 ( cd "$REL" && shasum -a 256 -c SHA256SUMS )
+
+# ── 7. 入库清单（ADR-0058）：把「哪个提交 → 哪份字节」写成能跑的文件 ──────────
+# 位置在就位**之后**。失败方向必须是「产物完好、清单缺失」，绝不能是「清单描述了一份
+# 并不存在的产物」——为此宁可放弃两者一起原子就位（它们分属两个父目录，本来也没法用
+# 一次改名同时落位）。
+# 为什么是脚本而不是 SOP 里的一句话：SOP 自 2026-09-06 起就写着「计算 shasum → 写入
+# release/<version>.sha256 清单（入库）」，十天里一次也没执行过——因为「算哈希 → 写
+# 文件 → 提交」每一步都得靠人记得。现在哈希由脚本算，人只剩「提交」一个动作。
+field(){ grep -m1 "^$1=" "$REL/VERSION" 2>/dev/null | cut -d= -f2- || true; }
+M_BUILD="$(field BUILD)"
+M_SRC="$(field SOURCE_COMMIT)"
+M_DIRTY="$(field SOURCE_DIRTY)"
+M_SNAP="$(field PROFILE_SNAPSHOT)"
+[ -n "$M_BUILD" ] || M_BUILD="unknown"
+[ -n "$M_SRC" ]   || M_SRC="unknown"
+[ -n "$M_DIRTY" ] || M_DIRTY="unknown"
+[ -n "$M_SNAP" ]  || M_SNAP="unknown"
+DMG_SHA="$(shasum -a 256 "$DMG" | awk '{print $1}')"
+
+mkdir -p "$REPO_ROOT/release"
+MANIFEST_TMP="$MANIFEST.tmp.$$"
+{
+  printf '# LUTE 发布清单（ADR-0058）—— 由 packaging/sign-and-dmg.sh 生成，勿手改\n'
+  printf '# 校验（DMG 与本文件同目录时）：shasum -a 256 -c %s\n' "$(basename "$MANIFEST")"
+  printf '# version=%s\n'          "$VERSION"
+  printf '# dmg=%s\n'              "$DMG_NAME"
+  printf '# build=%s\n'            "$M_BUILD"
+  printf '# source_commit=%s\n'    "$M_SRC"
+  printf '# source_dirty=%s\n'     "$M_DIRTY"
+  printf '# profile_snapshot=%s\n' "$M_SNAP"
+  printf '%s  %s\n' "$DMG_SHA" "$DMG_NAME"
+} > "$MANIFEST_TMP"
+mv "$MANIFEST_TMP" "$MANIFEST"
+MANIFEST_TMP=""
+say "入库清单已就位: $MANIFEST"
+sed 's/^/        /' "$MANIFEST"
+if [ "$M_DIRTY" = "1" ]; then
+  echo "[dmg] ⚠ source_dirty=1：本次载荷含未提交源码，source_commit 不足以重建它" >&2
+fi
+cat <<EOF
+
+        下一步（顺序不能换，ADR-0058）：
+          1) git add release/$VERSION.sha256 && git commit
+          2) git tag v$VERSION && git push origin v$VERSION    # tag 必须指向含清单的提交
+          3) DMG 上传 GitHub Releases 附件；清单内容一并贴进 release 说明
+EOF

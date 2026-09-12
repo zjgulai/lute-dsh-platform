@@ -47,7 +47,7 @@ pnpm add file:/Users/lute/project/Magpie-Horch/dsh-overseas-skills
 
 - 版本：平台侧使用单一版本 `vX.Y.Z`（git tag = 打包版本）；`CHANGELOG.md`（根）与 `packaging/CHANGELOG.md`（打包）双轨汇总。
 - 插件版本现状：各插件 `package.json` 保留自身版本，实测分布于 9 个取值（`0.0.3-alpha.1-port` … `1.0.1`），**尚未与平台版本对齐**；对齐机制与债务由 [ADR-0003](docs/adr/ADR-0003.md)、[ADR-0012](docs/adr/ADR-0012.md) 与门禁 `package-identity` 接管。
-- 发布：`packaging/` 构建 DMG → **GitHub Releases 附件**（二进制不进 git）+ `SHA256SUMS` 校验清单 + [安装卡](packaging/INSTALL-CARD.md) 客户安装卡。
+- 发布：`packaging/` 构建 DMG → **GitHub Releases 附件**（二进制不进 git）+ **入库清单** `release/<version>.sha256`（DMG 哈希 + 源凭据，由流水线生成、**先于 tag 提交**；[ADR-0058](docs/adr/ADR-0058.md)）+ [安装卡](packaging/INSTALL-CARD.md) 客户安装卡。
 - 交付形态：**DMG 单一格式**（挂载 → 终端 `install.sh` 或 `LUTE Setup.app`）；BUILD 号标识每次打包（防同名多代混淆）。
 - 流程 SOP：`docs/release-process.md`。
 

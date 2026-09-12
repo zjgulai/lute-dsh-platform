@@ -401,17 +401,43 @@ bash "$PKG_ROOT/scripts/build-setup-app.sh" "$PAYLOAD"
 # ── 6. 元数据（README / VERSION / SHA256SUMS / manifest.json）───────────────────
 say "6/6 元数据"
 BUILD="${BUILD:-$(date +%Y%m%d-%H%M%S)}"
+
+# 源凭据（ADR-0058）：本次载荷是从哪个提交装配的、那棵树当时是否干净。
+# 记在这里而不是 sign-and-dmg.sh：源是在**装配**时刻被读走的（§0 快照），制 dmg 时
+# 再取一次 HEAD 会记下一个更晚的提交——那是记错，比不记更糟。
+# dirty 的判据是**保守**的：整个仓库有任何未提交改动（含未跟踪文件）即判 1。宁可
+# 误报，不可漏报——2026-09-12 发出的 2.2.0 载荷里就含未提交源码，而当时没有任何
+# 字段说出这件事，于是那版产物谁也重建不出来。
+SOURCE_COMMIT="$(git -C "$PKG_ROOT" rev-parse HEAD 2>/dev/null || true)"
+[ -n "$SOURCE_COMMIT" ] || SOURCE_COMMIT="unknown"
+if [ -n "$(git -C "$PKG_ROOT" status --porcelain 2>/dev/null || true)" ]; then
+  SOURCE_DIRTY=1
+else
+  SOURCE_DIRTY=0
+fi
+
 cat > "$PAYLOAD/VERSION" <<EOF
 LUTE_VERSION=$VERSION
 BUILD=$BUILD
 DSH_BASELINE=2.0.5
 ARCH=arm64
+SOURCE_COMMIT=$SOURCE_COMMIT
+SOURCE_DIRTY=$SOURCE_DIRTY
 EOF
 # 打包源快照指纹：**必须在 VERSION 建好之后**追加。第一次实现把它写在 §3（复核处），
 # 而 VERSION 在 §6 才由 `cat >` 创建 → 追加的那行被整段覆盖（实测：VERSION 里没有它）。
 # 这一行是「本次载荷对应哪个源状态」的唯一凭据，丢了就只能靠猜。
 printf '%s\n' "$SNAPSHOT_LINE" >> "$PAYLOAD/VERSION"
 grep -q '^PROFILE_SNAPSHOT=' "$PAYLOAD/VERSION" || { echo "[assemble] ✗ VERSION 里缺 PROFILE_SNAPSHOT（载荷无法回溯到源状态）" >&2; exit 1; }
+# 源凭据自检（ADR-0058）：字段必须在。dirty 时**不中止构建**——中止与否是门禁该管的事
+# （见 ADR-0058 后续动作 N1），此处只保证记录不撒谎：把未提交改动当场念出来。
+grep -q '^SOURCE_COMMIT=' "$PAYLOAD/VERSION" || { echo "[assemble] ✗ VERSION 里缺 SOURCE_COMMIT（载荷无法对应到提交）" >&2; exit 1; }
+if [ "$SOURCE_DIRTY" = "1" ]; then
+  echo "[assemble] ⚠ 工作树有未提交改动，本次载荷可能含未入库源码：" >&2
+  git -C "$PKG_ROOT" status --porcelain 2>/dev/null | head -20 | sed 's/^/          /' >&2
+  echo "          含义：VERSION 的 SOURCE_COMMIT 不足以重建本载荷。" >&2
+  echo "          要一份可回溯的产物，请先提交再重跑装配（否则请让入库清单如实标注）。" >&2
+fi
 if [ -f "$PAYLOAD/aeis-portable.tar.gz" ]; then
   ( cd "$PAYLOAD" && shasum -a 256 "DSH Desktop.app.tar.gz" profile.tar.gz skills-presets.tar.gz aeis-portable.tar.gz > SHA256SUMS )
 else

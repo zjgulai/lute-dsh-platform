@@ -1,0 +1,17 @@
+# LUTE 发布清单（ADR-0058）
+# ⚠ 本文件是**事后补录**，不是流水线产出：2.2.0 的产物早于 ADR-0058，其装配过程没有
+#   留下任何源凭据。补录只补上了哈希（与产物内 SHA256SUMS、CHANGELOG 交叉核对一致），
+#   源凭据如实标注为不可回溯——不猜、不补。
+# 校验（DMG 与本文件同目录时）：shasum -a 256 -c 2.2.0.sha256
+# version=2.2.0
+# dmg=DSH-Desktop-LUTE-2.2.0-mac-arm64.dmg
+# build=20260912-222647
+# source_commit=afe641c26296777760c4bdad738c7f1f88c66296
+# source_dirty=1
+# source_reconstructible=no
+# profile_snapshot=ab32d6396c42fe77
+# source_commit 只是 tag v2.2.0 所指的提交，**它不足以重建本产物**：载荷里的
+#   vendor/packages/surfaces/dsh-newapp-local/src/client/launcher.ts 有 377 行，而该提交
+#   里是 337 行——多出的 40 行（probeChannels 探针 + agentPresets 双载体回退）不在任何
+#   提交里。证据与处置见 docs/notes/implemented/architecture/2026-09-13-release-manifest.md
+e74fb6d045fa33cc6174369b06408ed5be59dcdbe4ca22af279b6b6aff4ac86e  DSH-Desktop-LUTE-2.2.0-mac-arm64.dmg
