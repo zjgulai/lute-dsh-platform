@@ -34,6 +34,8 @@
 !vendor/
 !vendor/dsh-desktop.pin
 vendor/dsh-desktop/
+!vendor/dsh-worktable.pin
+vendor/dsh-worktable/
 
 # —— 纳入目录内的常见排除 ——
 node_modules/

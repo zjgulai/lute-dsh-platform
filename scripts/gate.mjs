@@ -257,10 +257,10 @@ const CHECKS = [
   {
     name: 'worktable-fence',
     modes: ['full'],
-    remediation: '跑 node dsh-patches/worktable-fence/apply.mjs 重打栅栏；上游结构变了需人工重锚并 bump vendor/dsh-worktable.pin（ADR-0025、ADR-0029）',
+    remediation: '若 dependencies / bundles / node_modules 任一处又出现 dsh-worktable：把它摘掉（ADR-0045）；若报「资产缺失」，从 git 恢复 vendor/dsh-worktable.pin 与 dsh-patches/worktable-fence/（卸载保留资产是为了可逆，不是漏删）',
     run() {
-      // 环境相关：vendor 未 clone 或 profile 未安装时由 checkWorktableFence 自身报告跳过
-      // （与 patch-anchors、theme-tokens 同一语义）。
+      // 环境相关：vendor 未 clone 时由 checkWorktableFence 自身报告跳过；但**安装面三项
+      // 不依赖 vendor**，照判——否则一个漏装的插件正好能让这条判据静默消失。
       return checkWorktableFence({
         repoRoot,
         profileDir: join(homedir(), '.dsh', 'profiles', 'desktop'),

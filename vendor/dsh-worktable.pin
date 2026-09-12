@@ -1,0 +1,26 @@
+# LUTE vendor pin —— dsh-worktable 上游插件（嵌套仓库，源码不入库）
+#
+# 门禁契约：dsh-patches/worktable-fence/apply.mjs 在打信任栅栏补丁前校验
+# vendor/dsh-worktable HEAD == upstream-sha，不一致即拒绝——补丁锚在 lib/index.js 的
+# 路由注册文本上，上游一改就可能落空。**升级上游必须先在此 bump**，然后重跑
+# apply.mjs 与 C0.4 的 5 类负向探针；未 bump 前不得升级。
+upstream-url: https://github.com/Aisland-SJL/dsh-worktable
+upstream-tag: v0.3.3
+upstream-sha: 2f4f6c87d5f2dc1d44d196cd555a8ed4377dd243
+package-dir: 01_content
+install-mode: profile-dependency
+install-entries: dependencies["dsh-worktable"]=link:<repo>/vendor/dsh-worktable/01_content + dsh.profile.bundles 追加 "dsh-worktable"
+# 为什么是 link: 而不是 file:（2026-09-12 实测，别改回去）
+# file: 在 profile 里落成**硬链接实体副本**而非符号链接（见 scripts/gates/sync-profile.mjs
+# 的实测记录），于是「patched 的 vendor 产物」与「运行时装载的那一份」是两份可各自漂移的
+# 文件：往 vendor 补打栅栏不会进副本，结果是运行时那份是干净的、而 vendor 侧过门禁也拦不住
+# （scripts/gates/worktable-fence.test.mjs 的「安装面被换成干净副本」一例正是这个形态）。
+# link: 让 profile/node_modules/dsh-worktable 成为指向 vendor 的符号链接，运行时装载的
+# 就是被补丁改写的那一个文件。门禁 ⑤ 现在同时查两件事：解析出的 realpath 必须落在 vendor
+# 树内（同一份文件），且与 vendor 产物逐字节相同（同一份内容）。
+fence-patch: dsh-patches/worktable-fence/
+fence-scope: 8 条 HTTP 路由 + 1 条 WebSocket 升级路由（term）
+# 为什么必须打栅栏：本插件 9 条入口原样不校验来源。回环监听不等于可信——
+# DNS rebinding 绕 Host 判据、跨站请求带 Sec-Fetch-Site、WS 升级带外来 Origin
+#（浏览器不对 WebSocket 施加同源策略）。/write 是任意文件写入、/term 是交互式 shell。
+checked-at: 2026-09-12
