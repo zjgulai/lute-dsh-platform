@@ -60,6 +60,9 @@ assert "aeis python 无 quarantine 残留" "" "$QA_PY"
 
 # 3. profile
 P="$DSH_HOME_SMOKE/profiles/desktop"
+# 内嵌副本路径（5c 与这里的占位判据都要用，故在此先定义一次；
+# set -u 下「用了才定义」会直接 unbound variable 把冒烟打断，而不是报一条红）
+BUNDLED="$APP_TARGET/Contents/Resources/dsh-profile/profiles/desktop"
 for f in package.json cordis.patch.yml apply-patches.mjs; do
   assert "profile/$f 存在" yes "$([ -f "$P/$f" ] && echo yes)"
 done
@@ -135,7 +138,7 @@ cat "$SMOKE_HOME/sp.log"
 
 # 5c. R2b 双落位一致性：内嵌 dsh-profile ≡ 安装后 profile
 # 2.0.5 布局：内嵌副本按 profiles/desktop 嵌套（与 P0-7v2 首启拷贝路径对齐）
-BUNDLED="$APP_TARGET/Contents/Resources/dsh-profile/profiles/desktop"
+# （BUNDLED 见 §3 顶部定义）
 assert "内嵌 dsh-profile 存在" yes "$([ -d "$BUNDLED" ] && echo yes)"
 assert "内嵌 node_modules 落位" yes "$([ -d "$BUNDLED/node_modules/@deepseek-ai" ] && echo yes)"
 assert "内嵌 vendor 落位（非空）" yes "$([ -n "$(find "$BUNDLED/vendor" -maxdepth 4 -name package.json -print -quit 2>/dev/null)" ] && echo yes)"
