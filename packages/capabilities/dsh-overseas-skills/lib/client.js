@@ -22,7 +22,7 @@ window.__ModuleLoader__.load({
 		/** @typedef {{id: string, name: string, icon?: string, total: number, roles: OverseasOrgRoleNode[]}} OverseasOrgDomainNode */
 		/** @typedef {{id: string, name: string, icon?: string, total: number, roleCount?: number, domains: OverseasOrgDomainNode[]}} OverseasOrgPlaneNode */
 		/** @typedef {{key: string, title: string, icon?: string, total: number, planes: OverseasOrgPlaneNode[], unassigned: {cards: string[], kinds: Record<string, number>}}} OverseasOrgScenarioNode */
-		/** @typedef {{scenarios: OverseasOrgScenarioNode[], wiredIndex: Record<string, string[]>, wiredOnlyByRole: Record<string, string[]>, stats: {cards:number, cardsAssigned:number, cardsUnassigned:number, roles:number, rolesWithCards:number, rows:number}, zeroCardRoles: Array<{id:string,alias:string,title:string,plane:string,domain:string}>}} OverseasOrgTree */
+		/** @typedef {{scenarios: OverseasOrgScenarioNode[], wiredIndex: Record<string, string[]>, wiredOnlyByRole: Record<string, string[]>, contractGate: {mode: string|null, pendingIndex: Record<string,string[]>, pendingSkills: string[], boundSkills: string[], rowsPending: number, rowsBound: number, rolesReporting: number}, stats: {cards:number, cardsAssigned:number, cardsUnassigned:number, roles:number, rolesWithCards:number, rows:number}, zeroCardRoles: Array<{id:string,alias:string,title:string,plane:string,domain:string}>}} OverseasOrgTree */
 		/** @typedef {{ok: boolean, presets: {dir: string, count: number, problems: string[]}, assignmentMeta: Record<string, number|null>, layerIcons: Record<string,string>, roleIcons: Record<string,string>, roles: Array<Record<string, unknown>>, tree: OverseasOrgTree}} OverseasOrgPayload */
 		/** @typedef {{key: string, title: string, icon?: string, subs: OverseasSkillGroup[]}} OverseasSkillScenario */
 		/** @typedef {{exa: null|{configured?: boolean}, saving: boolean, msg: null|string}} ExaCredState */
@@ -99,6 +99,10 @@ window.__ModuleLoader__.load({
 			'[data-plugin="dsh-overseas-skills"] .ovsBadgeNone { color:var(--dsw-alias-label-tertiary); border:1px dashed var(--dsw-alias-border-l1); }',
 			'[data-plugin="dsh-overseas-skills"] .ovsBadgeNew { color:var(--dsw-alias-brand-primary); border:1px solid color-mix(in srgb, var(--dsw-alias-brand-primary) 45%, transparent); }',
 			'[data-plugin="dsh-overseas-skills"] .ovsBadgeMulti { color:var(--dsw-alias-label-secondary); background:var(--dsw-alias-bg-layer-2); }',
+			// S12 / Q5：契约挂载态（正交于上面三枚接线徽标）。待挂契约用警示色——
+			// 过渡期它是绝大多数卡的状态，但它是一条**要收敛的债务**，不该长得像中性信息。
+			'[data-plugin="dsh-overseas-skills"] .ovsBadgePending { color:var(--dsw-alias-state-warning-primary, #b26a00); border:1px dashed color-mix(in srgb, var(--dsw-alias-state-warning-primary, #b26a00) 55%, transparent); }',
+			'[data-plugin="dsh-overseas-skills"] .ovsBadgeUnrecorded { color:var(--dsw-alias-label-tertiary); border:1px dotted var(--dsw-alias-border-l1); }',
 			'[data-plugin="dsh-overseas-skills"] .ovsLoose { display:flex; flex-direction:column; gap:6px; padding:8px 10px; border:1px dashed var(--dsw-alias-border-l1); border-radius:10px; }',
 			'[data-plugin="dsh-overseas-skills"] .ovsLooseTitle { font-size:12px; font-weight:500; line-height:18px; color:var(--dsw-alias-label-secondary); }',
 			'[data-plugin="dsh-overseas-skills"] .ovsDiagList { margin:0; padding-left:16px; font-size:11px; line-height:17px; color:var(--dsw-alias-label-secondary); }',
@@ -479,6 +483,26 @@ function OverseasSkillsPage(props) {
 				else badges.push(React.createElement("span", { key: "w", className: "ovsBadge ovsBadgeNone", title: "没有任何岗位的 preset 挂载它" }, "未接线"));
 				if ((node.newCards || []).indexOf(it.name) !== -1) badges.push(React.createElement("span", { key: "n", className: "ovsBadge ovsBadgeNew", title: "这条归位是本轮语义判定新增的（既有映射里没有）" }, "归位·本轮判定"));
 				if (roles.length > 1) badges.push(React.createElement("span", { key: "m", className: "ovsBadge ovsBadgeMulti", title: "同一张卡同时归这几个岗位" }, "跨 " + roles.length + " 岗"));
+
+				// S12 / Q5 第四枚徽标：契约挂载态。与上面三枚**正交**——接线回答「挂上了吗」，
+				// 这一枚回答「挂它算不算数」。判据来自宿主（tree.contractGate.pendingIndex 与
+				// node.pendingContract），此处只查表，与 wiringStatus 同一约定。
+				var gate = tree && tree.contractGate ? tree.contractGate : null;
+				if (gate && gate.mode && (node.pendingContract || []).indexOf(it.name) !== -1) {
+					badges.push(React.createElement("span", {
+						key: "c",
+						className: "ovsBadge ovsBadgePending",
+						title: "本岗白名单里有它，但**没有任何供给契约引用它**（S12/Q5）。过渡期只计数不硬拦；契约挂上后自动转「已挂契约」。",
+					}, "待挂契约"));
+				} else if (!gate || !gate.mode) {
+					// 「没记账」不等于「记了是零」：老版 manifest 没有 contract_gate 段时必须显式说出来，
+					// 否则页面会把「没法判」画成「都挂了契约」。
+					badges.push(React.createElement("span", {
+						key: "c",
+						className: "ovsBadge ovsBadgeUnrecorded",
+						title: "这批 preset 的 manifest 里没有 contract_gate 段 —— 闸门未记账，重跑 scripts/role-presets/generate.mjs 即可。",
+					}, "闸门未记账"));
+				}
 
 				return renderSkillCardWith(it, badges);
 			};

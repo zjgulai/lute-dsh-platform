@@ -29,7 +29,7 @@ function byPlaneThenDomainThenOrder(a, b) {
  * @param {Array<{key:string,title:string,icon?:string,subs?:Array<{key:string,title:string}>}>} input.scenarios 场景目录（catalog 的 CATEGORIES）
  * @param {Array<{name:string,category:string,subcategory?:string}>} input.items 技能（catalog 的 SKILLS，扁平）
  * @param {Record<string,{roles?:Array<{id:string,source?:string}>,no_role_kind?:string|null}>} input.assignments 归位表
- * @param {Array<{id:string,alias:string,title:string,plane:{id:string,name:string},domain:{id:string,name:string},order:number,icon?:string,artifact?:string,wired?:string[],responsibilities?:string[]}>} input.roles 岗位骨架（来自 preset 清单）
+ * @param {Array<{id:string,alias:string,title:string,plane:{id:string,name:string},domain:{id:string,name:string},order:number,icon?:string,artifact?:string,wired?:string[],responsibilities?:string[],contractGate?:string|null,contractBound?:string[],contractPending?:string[]}>} input.roles 岗位骨架（来自 preset 清单；后三项 = S12 消费口闸门的记账）
  * @param {Record<string,string>} [input.layerIcons] 面/责任域头像（键为 PLN-xxx 与 DOM-xxx）。
  *   头像**不放进树节点**：一枚 data URI 约 4KB，8 个场景 × 12 个层节点会让负载翻十倍；
  *   页面按 id 从 `/org` 的顶层 `layerIcons` 平面 map 里查（同一条理由见 roleIcons）。
@@ -50,6 +50,24 @@ export function buildOrgTree(input) {
     for (const name of role.wired ?? []) {
       if (!wiredIndex.has(name)) wiredIndex.set(name, []);
       wiredIndex.get(name).push(role.id);
+    }
+  }
+
+  // S12 契约闸门索引（Q5）：技能 → 哪个岗位的**白名单里有它、却没有契约引用它**。
+  //
+  // 这是「归位态」的第 3 个值。为什么不与接线三态（self/other/none）合并成一个枚举：
+  // 两者是**正交**的 —— 一张卡可以「本岗已接线 且 待挂契约」（过渡期 114 张里的绝大多数）。
+  // 合并会把两种信息压成一维，页面就没法回答「挂了，但挂它算不算数」。
+  //
+  // `contractGateMode` 为 null = 该 preset 的 manifest 没有这一段（老版生成器），
+  // 页面必须显示「未记账」而不是「零待挂契约」——「没记」不等于「记了是零」。
+  const contractPendingIndex = new Map();
+  const gateModes = new Set();
+  for (const role of roles) {
+    if (role.contractGate) gateModes.add(role.contractGate);
+    for (const name of role.contractPending ?? []) {
+      if (!contractPendingIndex.has(name)) contractPendingIndex.set(name, []);
+      contractPendingIndex.get(name).push(role.id);
     }
   }
 
@@ -112,6 +130,8 @@ export function buildOrgTree(input) {
       cards,
       newCards: cards.filter((n) => fresh.has(n)),
       wired: cards.filter((n) => (wiredIndex.get(n) ?? []).includes(role.id)),
+      /** 本岗挂了、但没有任何契约引用它的卡（S12 消费口闸门 / Q5）。 */
+      pendingContract: cards.filter((n) => (contractPendingIndex.get(n) ?? []).includes(role.id)),
     };
   };
 
@@ -140,6 +160,7 @@ export function buildOrgTree(input) {
           node.cards = node.cards.filter((n) => inScenario.has(n));
           node.newCards = node.newCards.filter((n) => inScenario.has(n));
           node.wired = node.wired.filter((n) => inScenario.has(n));
+          node.pendingContract = node.pendingContract.filter((n) => inScenario.has(n));
           if (node.cards.length > 0) nodes.push(node);
         }
         if (nodes.length === 0) continue;
@@ -181,6 +202,22 @@ export function buildOrgTree(input) {
     scenarios: scenarioNodes,
     wiredIndex: Object.fromEntries([...wiredIndex.entries()].map(([k, v]) => [k, v.slice().sort()])),
     wiredOnlyByRole,
+    /**
+     * S12 契约闸门（Q5）。`mode` 取值：
+     *   `count` / `enforce` = 生成器记过账（count = 过渡期只计数；enforce = 硬拦）
+     *   `null`              = **没有岗位报过账**（老版 manifest）⇒ 页面须显示「未记账」
+     *   `mixed`             = 同一批 preset 混着两个版本 ⇒ 本身就是一条要报的缺陷
+     */
+    contractGate: {
+      mode: gateModes.size === 0 ? null : (gateModes.size === 1 ? [...gateModes][0] : "mixed"),
+      /** 技能 → 白名单里有它、却没有契约引用它的岗位 id（跨岗位）。 */
+      pendingIndex: Object.fromEntries([...contractPendingIndex.entries()].map(([k, v]) => [k, v.slice().sort()])),
+      pendingSkills: [...contractPendingIndex.keys()].sort(),
+      boundSkills: [...new Set(roles.flatMap((r) => r.contractBound ?? []))].sort(),
+      rowsPending: roles.reduce((n, r) => n + (r.contractPending ?? []).length, 0),
+      rowsBound: roles.reduce((n, r) => n + (r.contractBound ?? []).length, 0),
+      rolesReporting: roles.filter((r) => r.contractGate).length,
+    },
     stats: {
       cards: items.length,
       cardsAssigned: assignedCount,
@@ -214,4 +251,23 @@ export function wiringStatus(skill, roleId, wiredIndex) {
   if (ids.includes(roleId)) return { kind: "self", roleIds: [] };
   if (ids.length > 0) return { kind: "other", roleIds: ids };
   return { kind: "none", roleIds: [] };
+}
+
+/**
+ * 一张卡的**契约挂载状态**（S12 / Q5 的第 4 枚徽标）：已挂契约 / 待挂契约 / 未记账。
+ *
+ * 与 `wiringStatus` 刻意分开：接线回答「挂上了吗」，这一支回答「挂它算不算数」。
+ * 合并成一句话就丢掉了过渡期最要紧的那条信息 —— 一张卡可以「本岗已接线，但待挂契约」，
+ * 而 Q5 的过渡期口径正是为这种卡设的（不硬拦，但要看得见）。
+ *
+ * @param {string} skill 技能名
+ * @param {string} roleId 当前岗位
+ * @param {{pendingIndex?:Record<string,string[]>, mode?:string|null}|null|undefined} gate buildOrgTree 的 `contractGate`（null = 未记账）
+ * @returns {{kind:"bound"|"pending"|"unrecorded", roleIds:string[]}}
+ */
+export function contractStatus(skill, roleId, gate) {
+  if (!gate || !gate.mode) return { kind: "unrecorded", roleIds: [] };
+  const ids = gate.pendingIndex?.[skill] ?? [];
+  if (ids.includes(roleId)) return { kind: "pending", roleIds: [] };
+  return { kind: "bound", roleIds: ids };
 }

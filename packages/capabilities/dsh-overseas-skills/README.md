@@ -55,7 +55,7 @@ python3 scripts/build_role_map.py           # 重新编译（改了 manifest 之
 python3 scripts/validate_assignments.py     # 断言判定本身对不对（**正确性**，见下）
 python3 scripts/validate_assignments.py --check-roles-live   # 岗位快照 vs 运行时 preset 漂移
 node scripts/gen-layer-icons.mjs            # 重新烘焙 12 枚层头像（改了品牌技能之后）
-npm run typecheck && npm test               # tsc + node --test（44 项）
+npm run typecheck && npm test               # tsc + node --test（49 项）
 ```
 
 ### `--check` 与 `validate_assignments.py` 不是一回事（R4，2026-09-13）

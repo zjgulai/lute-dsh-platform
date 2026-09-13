@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { buildOrgTree, wiringStatus } from "../lib/org-tree.js";
+import { buildOrgTree, wiringStatus, contractStatus } from "../lib/org-tree.js";
 
 /**
  * dsh-overseas-skills — 四层骨架（场景 → 面 → 责任域 → 岗位 → 卡）的契约测试。
@@ -190,4 +190,56 @@ test("buildOrgTree：空输入不炸，计数全零", () => {
   assert.equal(tree.stats.cards, 0);
   assert.equal(tree.stats.rows, 0);
   assert.deepEqual(tree.zeroCardRoles, []);
+});
+
+// ── S12 / Q5：契约挂载态（消费口闸门）的第四枚徽标 ────────────────────────────
+// 这一组锁的是**过渡期最要紧的那条信息**：一张卡可以「本岗已接线，却没有契约引用它」。
+// 与接线三态刻意正交 —— 合并成一维就答不了「挂了，但挂它算不算数」。
+
+const gateRoles = roles.map((r) =>
+  r.id === "AGT-014"
+    ? { ...r, contractGate: "count", contractBound: [], contractPending: ["supplier-sourcing"] }
+    : { ...r, contractGate: "count", contractBound: ["trend-scout"], contractPending: [] });
+
+test("buildOrgTree：待挂契约与接线正交（本岗已接线 且 待挂契约 同时成立）", () => {
+  const tree = buildOrgTree({ scenarios, items, assignments, roles: gateRoles, layerIcons });
+  const g014 = roleNodeOf(tree, "a-market", "AGT-014");
+  assert.deepEqual(g014.wired, ["supplier-sourcing"], "接线态不受闸门影响");
+  assert.deepEqual(g014.pendingContract, ["supplier-sourcing"], "同一张卡同时是「已接线」与「待挂契约」");
+  assert.equal(tree.contractGate.mode, "count");
+  assert.equal(tree.contractGate.rolesReporting, 3);
+  assert.equal(tree.contractGate.rowsPending, 1);
+  assert.deepEqual(tree.contractGate.pendingSkills, ["supplier-sourcing"]);
+});
+
+test("buildOrgTree：待挂契约索引按岗位归属，不把别岗的待挂态算到本岗头上", () => {
+  const tree = buildOrgTree({ scenarios, items, assignments, roles: gateRoles, layerIcons });
+  const g025 = roleNodeOf(tree, "a-market", "AGT-025");
+  assert.deepEqual(g025.pendingContract, [], "trend-scout 的待挂态不属于 025");
+  // 反向：索引里确实记着它归谁 —— 否则上面那条会「因为索引是空的」而恒过
+  assert.deepEqual(tree.contractGate.pendingIndex["supplier-sourcing"], ["AGT-014"]);
+});
+
+test("buildOrgTree：没有任何 preset 报过账 ⇒ mode=null（「没记」不等于「记了是零」）", () => {
+  const tree = buildOrgTree({ scenarios, items, assignments, roles, layerIcons });
+  assert.equal(tree.contractGate.mode, null, "老版 manifest 没有 contract_gate 段");
+  assert.equal(tree.contractGate.rolesReporting, 0);
+  assert.deepEqual(tree.contractGate.pendingSkills, []);
+  assert.equal(contractStatus("supplier-sourcing", "AGT-014", tree.contractGate).kind, "unrecorded");
+});
+
+test("buildOrgTree：一批 preset 里混着两种闸门模式 ⇒ mixed（本身是要报的缺陷）", () => {
+  const mixed = roles.map((r) =>
+    r.id === "AGT-014" ? { ...r, contractGate: "enforce", contractPending: [] } : { ...r, contractGate: "count", contractPending: [] });
+  const tree = buildOrgTree({ scenarios, items, assignments, roles: mixed, layerIcons });
+  assert.equal(tree.contractGate.mode, "mixed");
+});
+
+test("contractStatus：已挂契约 / 待挂契约 / 未记账 三态互斥", () => {
+  const gate = { mode: "count", pendingIndex: { "supplier-sourcing": ["AGT-014"] } };
+  assert.equal(contractStatus("supplier-sourcing", "AGT-014", gate).kind, "pending");
+  assert.equal(contractStatus("supplier-sourcing", "AGT-025", gate).kind, "bound");
+  assert.equal(contractStatus("trend-scout", "AGT-007", gate).kind, "bound");
+  assert.equal(contractStatus("trend-scout", "AGT-007", { mode: null }).kind, "unrecorded");
+  assert.equal(contractStatus("trend-scout", "AGT-007", null).kind, "unrecorded");
 });

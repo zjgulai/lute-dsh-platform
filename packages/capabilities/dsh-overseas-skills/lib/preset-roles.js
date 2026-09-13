@@ -57,6 +57,12 @@ export async function loadRoleSkeleton(options = {}) {
       artifact: record.artifact ?? "",
       responsibilities: Array.isArray(record.skills) ? record.skills.slice() : [],
       wired: Array.isArray(x.skills?.subset) ? x.skills.subset.slice() : [],
+      // S12 消费口闸门（Q5）：白名单里哪些卡被契约引用（bound）、哪些没有（pending）。
+      // 缺字段时留 `null` 而不是空数组 —— 「没记账」与「记了是零」是两件事，
+      // 页面据此显示「闸门未记账」，不会把一份老 manifest 画成「零待挂契约」（同 scan_secrets 的 exit 2 纪律）。
+      contractGate: typeof x.skills?.contract_gate?.mode === "string" ? x.skills.contract_gate.mode : null,
+      contractBound: Array.isArray(x.skills?.contract_gate?.bound) ? x.skills.contract_gate.bound.slice() : [],
+      contractPending: Array.isArray(x.skills?.contract_gate?.pending) ? x.skills.contract_gate.pending.slice() : [],
     });
   }
   return { roles, problems, dir };

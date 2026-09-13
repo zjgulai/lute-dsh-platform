@@ -33,6 +33,7 @@ import { createHash } from 'node:crypto'
 import { homedir } from 'node:os'
 import { fileURLToPath } from 'node:url'
 
+import { unmanagedRowBlocks, reinstateRows } from './unmanaged-rows.mjs'
 const HERE = dirname(fileURLToPath(import.meta.url))
 const MATERIAL_ROOT = process.env.ROLE_MATERIAL_ROOT || '/Users/lute/project/AI组织变革'
 const DOCS = join(MATERIAL_ROOT, 'docs')
@@ -65,6 +66,65 @@ const DRY_RUN = process.argv.includes('--dry-run')
 
 /** 平面 → order 千位基座。平面内再按「首次出现的责任域」分百位段，故扁平列表里平面与责任域都成块。 */
 const PLANE_BASE = { 'PLN-MGT': 1000, 'PLN-OPS': 2000, 'PLN-CTL': 3000, 'PLN-PLT': 4000 }
+
+// ── S12 消费口闸门（Q5）：白名单生成条件加「且该卡已被契约引用」 ─────────────────
+//
+// 判据只有一处：packages/capabilities/dsh-paper2skills/lib/contract-gate.js
+// （独立核对器 scripts/check-contract-gate.mjs 消费的是同一份 —— 风险 N2）。
+//
+// 为什么闸门落在这里：−0.95 的参数移植发生在卡**被模型调用**的那一刻。而实测 1338 张
+// p2s 卡全部 `disable-model-invocation: true`，只经本文件生成的岗位白名单逐岗露出
+// ⇒ 这里就是模型目录的入口。这不是新增一道门，是给一道已存在的门补判据。
+const CONTRACT_GATE_MODE = process.env.P2S_CONTRACT_GATE ?? 'count'
+if (!['count', 'enforce', 'off'].includes(CONTRACT_GATE_MODE)) {
+  console.error(`✗ P2S_CONTRACT_GATE 只认 count / enforce / off，拿到「${CONTRACT_GATE_MODE}」`)
+  process.exit(2)
+}
+const CONTRACT_GATE_LIB = join(HERE, '..', '..', 'packages', 'capabilities', 'dsh-paper2skills', 'lib', 'contract-gate.js')
+/** 契约引用索引；`off` 时为 null（显式退出，不是「静默跳过」）。 */
+let contractGate = null
+if (CONTRACT_GATE_MODE !== 'off') {
+  const gate = await import(CONTRACT_GATE_LIB)
+  const gateVault = process.env.P2S_VAULT ?? gate.DEFAULT_VAULT
+  const contractsDir = join(gateVault, gate.CONTRACTS_REL)
+  const clsPath = join(HERE, '..', '..', 'packages', 'capabilities', 'dsh-paper2skills', 'data', 'classification.json')
+  for (const [name, p] of [['契约目录', contractsDir], ['card-classification.json', join(gateVault, gate.CARD_CLASSIFICATION_REL)], ['classification.json', clsPath]]) {
+    if (!existsSync(p)) {
+      // 读不到契约就**不许**继续 —— 闸门「静默消失」比闸门判红危险得多（Q5 的存在理由）。
+      console.error(`✗ 契约闸门读不到输入：${name}（${p}）`)
+      console.error('  用 P2S_VAULT 指定 vault，或显式设 P2S_CONTRACT_GATE=off 退出闸门（会在收尾打印警告）。')
+      process.exit(2)
+    }
+  }
+  const { contracts } = gate.readContracts(contractsDir)
+  const cls = JSON.parse(readFileSync(clsPath, 'utf8')).items ?? []
+  const slugById = new Map(cls.filter((x) => x.id && x.slug).map((x) => [x.id, x.slug]))
+  const installedSlugs = new Set(cls.map((x) => x.slug).filter(Boolean))
+  const sel = JSON.parse(readFileSync(join(gateVault, gate.CARD_CLASSIFICATION_REL), 'utf8'))
+  const selIds = new Set((sel.items ?? sel.cards ?? []).map((x) => x.id).filter(Boolean))
+  const resolved = gate.resolveRefs({ contracts, slugById, installedSlugs, selIds })
+  contractGate = { lib: gate, mode: CONTRACT_GATE_MODE, vault: gateVault, contracts: contracts.length, resolved }
+}
+/** 全库汇总（跨岗位去重），收尾打印用。 */
+const contractGateBound = new Set()
+const contractGatePending = new Set()
+const contractGateRemoved = new Set()
+/** 被原样带过的手插行（跨岗位），收尾要点名报出来。 */
+const carriedRows = []
+
+/** 对一个岗位的白名单做闸门判定：返回 { mode, bound, pending, unboundContracts }。 */
+function contractGateFor(ids) {
+  if (!contractGate) return { mode: 'off', bound: [], pending: [], note: '闸门被 P2S_CONTRACT_GATE=off 显式关闭' }
+  const boundBySlug = new Map([...contractGate.resolved.bySlug.keys()].map((s) => [s, true]))
+  const bound = []
+  const pending = []
+  for (const id of ids) {
+    if (!id.startsWith('p2s-')) continue
+    if (boundBySlug.has(id)) bound.push(id)
+    else pending.push(id)
+  }
+  return { mode: contractGate.mode, bound: bound.sort(), pending: pending.sort() }
+}
 
 const SOURCE_FILES = {
   roleCard: (id) => `05-agents/roles/${id}.md`,
@@ -494,7 +554,24 @@ function main() {
     if (SUBSET_RESPECTS_FILE_FLAGS) {
       for (const id of ids) if (installedSkills.has(id) && isModelOff(id)) inertRefs.add(`${role.id} → ${id}`)
     }
-    return { ids: [...ids].sort(), mapping }
+    // ── S12 消费口闸门（Q5）：「一张卡只有被某份契约引用，才进模型目录」 ──────────
+    //
+    // 判据不在这里实现 —— 全部来自 packages/capabilities/dsh-paper2skills/lib/contract-gate.js，
+    // 与独立核对器 check-contract-gate.mjs **共用同一份**判据（风险 N2：判据只能有一处）。
+    //
+    // 三态由 `P2S_CONTRACT_GATE` 决定，默认 count：
+    //   count   = 过渡期口径（Q5 原文：先以「归位态可见 + 计数可查」的方式跑一轮，不硬拦）。
+    //             白名单不变，但每个岗位的 bound/pending 记进 manifest，页面据此显示「待挂契约」。
+    //   enforce = 硬拦：pending 的 p2s 条目从白名单移除。这是**对照测量的仪器**。
+    //   off     = 完全不读契约（显式退出，会在收尾打印一行警告；不是默认值）。
+    const gate = contractGateFor(ids)
+    if (gate.mode === 'enforce') {
+      for (const s of gate.pending) ids.delete(s)
+      for (const s of gate.pending) contractGateRemoved.add(`${role.id} → ${s}`)
+    }
+    for (const s of gate.bound) contractGateBound.add(s)
+    for (const s of gate.pending) contractGatePending.add(s)
+    return { ids: [...ids].sort(), mapping, contractGate: gate }
   }
 
   const rows = []
@@ -530,7 +607,7 @@ function main() {
     )
     const rosterRow = rosterLines.find((l) => l.includes(`[${id}](roles/${id}.md)`)) || null
 
-    const { ids: skillIds, mapping: skillMapping } = resolveSkills(role, playbookIds)
+    const { ids: skillIds, mapping: skillMapping, contractGate: roleContractGate } = resolveSkills(role, playbookIds)
 
     // 本岗位作为**队长**时的选路条件，逐条取自各流程的 primary_role_selector。
     // 材料对零匹配/多匹配一律定 WAIT —— 编队生成器不得在此猜测队长。
@@ -556,7 +633,16 @@ function main() {
     }, renderSupplyStatus(skillMapping, playbookIds))
 
     const presetId = `agt-${id.slice(4)}`
-    const composition = renderComposition(persona, skillIds, presetId)
+    const compositionRaw = renderComposition(persona, skillIds, presetId)
+    // 本生成器只认自己产出的行；既有文件里其余行块（手插的本机装配）**原样带过、插回原位**。
+    // 不这么做的话，「本机产品卡点了打不开」会以「生成器静默删行」的方式再次发生。
+    const existingPath = join(OUT_ROOT, presetId, 'agent.cordis.yml')
+    const managedIds = new Set([...compositionRaw.matchAll(/^- id: (\S+)\s*$/gm)].map((m) => m[1]))
+    const carried = unmanagedRowBlocks(existsSync(existingPath) ? readFileSync(existingPath, 'utf8') : '', managedIds)
+    const reinstated = carried.length === 0 ? { text: compositionRaw, repositioned: [], appended: [] } : reinstateRows(compositionRaw, carried)
+    const composition = reinstated.text
+    for (const bid of reinstated.repositioned) carriedRows.push(`${presetId} → ${bid}（原位）`)
+    for (const bid of reinstated.appended) carriedRows.push(`${presetId} → ${bid}（⚠️ 前驱行不存在，追加到末尾，位置已变）`)
 
     const order = orders.get(id)
     const name = `${role.alias} · ${role.title}`
@@ -664,6 +750,14 @@ function main() {
           mapping: skillMapping,
           gaps: skillMapping.filter((d) => d.kind === 'gap').map((d) => d.name),
           shared_playbook_skills: playbookIds.map((p) => p.toLowerCase()),
+          // S12 消费口闸门：本岗白名单里哪些卡被契约引用（bound）、哪些没有（pending）。
+          // 页面据此显示「待挂契约」——归位态的第 3 个值，不是静默暴露也不是断崖式移除。
+          contract_gate: {
+            mode: roleContractGate.mode,
+            bound: roleContractGate.bound,
+            pending: roleContractGate.pending,
+            ...(roleContractGate.note ? { note: roleContractGate.note } : {}),
+          },
         },
       },
     }
@@ -763,6 +857,34 @@ function main() {
   console.log(SUBSET_RESPECTS_FILE_FLAGS
     ? '★ 白名单全部生效（respectFileFlags: true，且名单内文件开关与之一致）'
     : '★ 白名单全部生效（respectFileFlags: false，岗位装配权威）')
+
+  // ── S12 消费口闸门：账与模式必须一起报（口径不能只留在代码里）────────────────
+  if (!contractGate) {
+    console.warn('⚠️ 契约闸门被 P2S_CONTRACT_GATE=off 显式关闭 —— 本次生成的模型目录**未经契约引用核对**。')
+    console.warn('   这不是默认状态；默认 count 会算账并写进 manifest。')
+  } else {
+    const { counts } = contractGate.resolved
+    const RK = contractGate.lib.REF_KIND
+    console.log('')
+    console.log(`契约闸门（S12/Q5）模式：${CONTRACT_GATE_MODE}  ·  契约 ${contractGate.contracts} 份  ·  vault ${contractGate.vault}`)
+    console.log(`  契约引用条目：绑定 ${counts[RK.BOUND]} / 待装线 ${counts[RK.PENDING_INSTALL]} / 无法解析 ${counts[RK.UNRESOLVABLE]}`)
+    console.log(`  白名单里的 p2s 条目（跨岗位去重）：${contractGateBound.size + contractGatePending.size}`)
+    console.log(`    ├ 已挂契约      ${contractGateBound.size}`)
+    console.log(`    └ 待挂契约      ${contractGatePending.size}   ← 已写进 manifest 的 x_lute.skills.contract_gate，页面显示「待挂契约」`)
+    if (CONTRACT_GATE_MODE === 'enforce') {
+      console.log(`  硬拦：已从白名单移除 ${contractGateRemoved.size} 条（跨岗位计），它们不再进模型目录`)
+    } else {
+      console.log('  过渡期口径（Q5）：只计数不硬拦。硬拦请用 P2S_CONTRACT_GATE=enforce（对照测量的仪器）。')
+    }
+  }
+  if (carriedRows.length > 0) {
+    console.log('')
+    console.log(`⚠️ 原样带过了 ${carriedRows.length} 个**非生成器产出**的行块（手插的本机装配）：`)
+    for (const r of carriedRows) console.log(`  ${r}`)
+    console.log('   本脚本只重写自己产出的行，不再删除别人的行。')
+    console.log('   按 AGENTS.md/ADR-0061，本机产品装配的正确位置是 profile 的 cordis.patch.yml；')
+    console.log('   留在生成的 preset 里会在下次重生成时被再次带过（不再消失，但也不该长期在这）。')
+  }
   if (!DRY_RUN) console.log(`已写入：${written} 个 preset 目录，跳过 ${skipped}`)
 }
 
