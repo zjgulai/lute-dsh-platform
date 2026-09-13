@@ -1,7 +1,7 @@
 # DSH Desktop 2.0.5 补丁清单 v2（Patch Manifest v2 · LUTE 2.0.0 权威登记簿）
 
 > 基线：官方 DSH.Desktop-2.0.5-universal.dmg 解包 → packaging/staging/2.0.0/app
-> 校验：`packaging/verify-patches-v2.sh`（36 锚点，2026-09-12 ALL VERIFIED）
+> 校验：`packaging/verify-patches-v2.sh`（38 锚点，2026-09-13 ALL VERIFIED，含 G1/G2 运行时守卫）
 > v1（2.0.4）见 [patches-manifest.md](patches-manifest.md)——**已标注为历史、非权威**；本清单是 2.0.0 的唯一权威登记簿
 > 纪律延续：.orig 备份 + count==1 锚点门 + node --check + 品牌 BRAND ALL VERIFIED
 
@@ -28,6 +28,8 @@
 | P0-9 | RootOutlet 白屏兜底 | dsh-client-ui-renderer/lib/client.js:886 | root 未注册**不再 throw** → `console.error` 保留诊断文本 + 渲染 `data-slot-waiting="root"` 的全屏「UI 正在装载… / UI is mounting…」占位（用官方 token `--dsw-alias-label-secondary` / `--dsw-alias-bg-base`；`useSyncExternalStore` 已订阅 root 槽，注册到达即自动重渲染）。来源：2026-09-07 的就地修复、2026-09-10 随 2.0.5 重打，**2026-09-12 固化为 NM 补丁**——此前它只存在于开发机 app，源码构建路径（BASE=source）发的是 pristine（`throw`），即客户机的白屏兜底一直是缺的。取证见 `.scratch/pre-dmg-diagnosis/diagnosis-report.md` B3 与 `docs/dsh-desktop-white-screen-playbook.md` §6.1 | .p09.orig |
 | cordis-clamp | 索引钳位 | cordis/lib/index.js:183 | `Math.max(0, index - info.offset)`（4.0.2 未修） | .cordis-fix.orig |
 | loader-B4 | EntryGroup 回滚 | cordis-plugin-loader/lib/index.js:98 | uid===null 提前返回前回滚 newMap（1.0.3 未修） | .b4.orig |
+| G1 | HMR 生产守卫（2026-09-13 白屏机制修复） | dsh-client-hmr/lib/index.js | `rehash` 开头加 `process.defaultApp !== true && DSH_DEV !== "1"` 守卫：生产模式只推进 watch 基线、不 re-hash、不推 rebuilt 帧（防「运行中替换 app bundle → HMR 热更崩渲染器 → 整屏白屏」） | runtime-guards/apply-fixes.sh |
+| G2 | renderer console 转发（可观测性） | electron-runtime-Bn05n5V2.js | `setPermissionRequestHandler` 与 `ready-to-show` 之间插 `console-message` 订阅，兼容新旧 Electron 事件签名，level≥3 走 logError | runtime-guards/apply-fixes.sh |
 | skill-title×21 | 中文标题透传 | 9 文件（dsh-skill/skill-filesystem/tool-skill/api-session-controller×4/api-remotes/client-ui-skill） | apply.py 重放 ALL OK（rc.1 逐字命中） | .skill-title.orig ×9 |
 | chatui×8 | 加载更早+上箭头回填 | api-session-controller/client.js + client-ui-chat/client.js + client-ui-conversation/client.js | loadOlder 自愈/lastOwnMessage/按钮门/recallPrevious；唯一漂移：arbitrate `=== "consumed"` → `!== "pass"`（语义等价，已适配） | .chatui.orig ×3 |
 | clipboard | execCommand fall-through | dsh-client-ui-primitives/lib/index.js | catch 不再 return false（rc.1 上游回归，恢复 LUTE 语义） | .clipboard.orig |

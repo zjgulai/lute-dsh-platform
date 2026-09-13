@@ -11,6 +11,7 @@
 - [ ] 项目级 `pnpm run gate` 通过（退出码 0）。
 - [ ] `vendor/dsh-desktop.pin` 的 `lute-sha` 与 `vendor/dsh-desktop` 当前 HEAD 一致。
 - [ ] 磁盘剩余空间 ≥ 6 GB。
+- [ ] **本机无运行中的 DSH 实例**（`pgrep -f "/Applications/DSH Desktop.app/Contents/MacOS/"` 为空；运行中替换 app bundle 会触发宿主 HMR 热更 → 生产 renderer 无完整热替换 runtime → 白屏，2026-09-13 实测）。
 - [ ] 目标版本目录 `packaging/release/<VERSION>/` 不存在；若存在且必须重制，使用 `--force`。
 
 ## 1. 环境准备
@@ -39,7 +40,7 @@ VERSION="$VERSION" ./assemble.sh
 - `staging/$VERSION/payload/DSH Desktop.app.tar.gz`
 - `staging/$VERSION/payload/profile.tar.gz`
 - `staging/$VERSION/payload/install.sh`
-- `staging/$VERSION/payload/tools/`
+- `staging/$VERSION/payload/tools/`（`verify-patches-v2.sh` 38 锚点、`brand-replay.sh`、`runtime-guards/`、`rewrite-file-deps.mjs`、`reloc-aeis.sh`）
 - 装配日志：`/tmp/lute-package-dir.log`
 
 **若失败**：根据脚本输出定位；常见失败点：
@@ -164,6 +165,7 @@ cat "release/$VERSION.sha256" | head   # 仓库根清单
 3. 临时移走或重命名现有 `~/.dsh`，模拟新用户首启。
 4. 打开 app，10 秒内应完成 profile 物化并进入主界面。
 5. 检查关键功能：侧边栏新应用按钮、至少一个核心插件面板。
+6. **白屏三问**（连续冷启动两次都要过）：① 窗口截图像素检查（非纯白，三栏可见）② `startup.jsonl` 的 `rendererStatus`/`finalStage` ③ 日志有 `[Renderer]` 转发通道（G2 生效时 renderer 报错可进宿主日志；renderer 无输出时本条天然为空，不算红）。
 
 ### 5.5 换签首次升级：一次性重授权（只此一次）
 
@@ -226,6 +228,7 @@ cat "release/$VERSION.sha256" | head   # 仓库根清单
 ## 7. 红线与回滚
 
 - **禁止直接修改已发布目录**：`packaging/release/$VERSION/` 只能是「不存在」或「完整通过终验」。任何中间态必须发生在 `release/.staging.XXXXXX`。
+- **禁止运行中替换 app bundle**：本机（或任何目标机）替换 `/Applications/DSH Desktop.app` 前必须先退出运行实例（安装器 `install.sh` 已内置 0b 步骤；手工替换同样适用）。运行中替换会触发宿主 HMR 热更，生产 renderer 无完整热替换 runtime，表现为整屏白屏（2026-09-13 实测；应急恢复 = `Cmd+R`）。
 - **禁止把机器绝对路径带出仓库**：出货树出现新的构建机路径（如 `/Users/lute/...`）时 `scan-machine-paths.mjs` 会中止；若必须新增，先更新 `machine-path-baseline.json` 并说明理由。
 - **重制必须 --force**：普通重跑会失败，防止意外覆盖已交付产物。
 - **回滚**：旧版本 DMG 始终保留在 `packaging/release/.archive/` 中，可直接取回。
@@ -239,6 +242,7 @@ cat "release/$VERSION.sha256" | head   # 仓库根清单
 | `scan-machine-paths 失败` | 出货树出现新的机器路径 | 检查新增 file: 依赖或源映射注释，必要时更新基线 |
 | `codesign --verify` 红 | 签名后又被修改 | 重新执行 sign-and-dmg.sh |
 | 首启卡在 profile-composition | 同机有旧实例在跑 | 退出旧实例或换干净环境测试 |
+| **启动后整屏白屏（无 renderSlot 日志）** | 运行中替换过 app bundle（HMR 热更崩渲染器）；或关机态改过 app bundle 内 client bundle 字节（combo rev 失配） | 先 `Cmd+R` 重载 renderer；无效则还原被改字节并完整重启；预防：替换 app 前先退出实例 |
 | DMG 挂载后 app 无法打开 | quarantine 属性 | 右键 → 打开一次，或 `xattr -d com.apple.quarantine` |
 
 ## 9. 版本号规则

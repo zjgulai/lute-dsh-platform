@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## [Unreleased]（2026-09-13 · HMR 生产守卫）
+
+- **G1 HMR 生产守卫**：`dsh-client-hmr/lib/index.js` 非 dev 模式不 re-hash、不推 rebuilt 帧（运行中替换 app bundle 白屏的机制修复）；幂等脚本 `dsh-patches/runtime-guards/apply-fixes.sh`，接入 `assemble.sh` 强制重放、随包 `tools/runtime-guards/`。
+- **G2 console 转发**：`electron-runtime-*.js` 订阅 `console-message`（兼容新旧 Electron 事件签名）。
+- **安装器退出实例**：`installer/install.sh` 0b 步骤——替换 `/Applications` 前退出运行实例（15s 超时中止）。
+- `verify-patches-v2.sh` 锚点 36→38；默认 `STAGE_VERSION` 2.1.0→2.3.1。
+- 决策：ADR-0065。
+
 ## [2.2.0]（2026-09-12）
 
 ### 交付形态：DMG 单一格式

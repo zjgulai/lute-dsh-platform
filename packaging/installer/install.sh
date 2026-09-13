@@ -96,6 +96,25 @@ EOF
 chmod +x "$NODE_SHIM"
 export PATH="$(dirname "$NODE_SHIM"):$PATH"
 
+# ── 0b/6 退出运行中的 DSH 实例（运行中替换 app bundle 会触发宿主 HMR 热更 →
+# 生产 renderer 无完整热替换 runtime → 白屏；2026-09-13 实测）。──────────────────
+QUIT_APP="${QUIT_APP:-DSH Desktop}"
+if pgrep -f "$APP_TARGET/Contents/MacOS/" >/dev/null 2>&1; then
+  say "0b/6 检测到运行中的 DSH 实例，先退出（运行中替换 app bundle 会导致白屏）…"
+  osascript -e "tell application \"$QUIT_APP\" to quit" >/dev/null 2>&1 || true
+  for _ in $(seq 1 15); do
+    pgrep -f "$APP_TARGET/Contents/MacOS/" >/dev/null 2>&1 || break
+    sleep 1
+  done
+  if pgrep -f "$APP_TARGET/Contents/MacOS/" >/dev/null 2>&1; then
+    echo "[install] ✗ DSH 实例未能在 15 秒内退出，中止安装（避免运行中替换 app bundle 导致白屏）" >&2
+    exit 1
+  fi
+  say "0b/6 运行实例已退出"
+else
+  say "0b/6 无运行中的 DSH 实例"
+fi
+
 # ── 1/6 解包 app（目标父目录不可写时提权）─────────────────────────────────────
 # pkg 模式（LUTE_INSTALL_APP=0）：app 已由 pkg 的 postinstall（root，Installer 已获
 # 管理员授权）落位 /Applications，此处只校验存在性，跳过解包与二次提权。

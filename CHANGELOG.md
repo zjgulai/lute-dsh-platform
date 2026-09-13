@@ -2,6 +2,26 @@
 
 本项目遵循语义化版本，版本号 = git tag = 打包版本（1.x 序列；历史 v0.1.0 视为早期实验）。
 
+## [Unreleased] - 2026-09-13（HMR 生产守卫：白屏机制修复 + 可观测性）
+
+决策留痕：[ADR-0065](docs/adr/ADR-0065.md) · Note [2026-09-13-hmr-production-guard](docs/notes/implemented/architecture/2026-09-13-hmr-production-guard.md)。
+
+- **白屏根因修复（G1）**：`dsh-client-hmr` host 侧加生产守卫——非 dev 模式（`process.defaultApp !== true` 且无 `DSH_DEV=1`）下 poll 到 bundle 变化只更新 watch 基线、不 re-hash、不推 rebuilt 帧。
+  根因：运行中替换 `/Applications` app bundle → 宿主推 rebuilt 帧 → 生产 renderer 无 dev:web runtime 热更崩溃 → 整窗白屏（`Cmd+R` 可恢复）。
+- **可观测性（G2）**：`electron-runtime-*.js` 恢复 `console-message` 转发（兼容新旧 Electron 事件签名），renderer 报错进宿主日志，不再静默。
+- **流程预防**：`installer/install.sh` 新增 0b 步骤——替换 `/Applications` 前退出运行实例（15s 超时中止）；SOP 同步补检查项/红线/异常表/白屏三问。
+- **打包基线**：新幂等脚本 `dsh-patches/runtime-guards/apply-fixes.sh` 接入 `assemble.sh` 强制重放、随包分发 `tools/runtime-guards/`；`verify-patches-v2.sh` 锚点 36→**38**（G1/G2）。
+- 配套：`docs/dsh-desktop-white-screen-playbook.md` 增补案例 3（HMR 白屏）与速查卡 B1/B2 二分；`packaging/README.md`/`INSTALL-CARD.md` 同步至 2.3.x 现状；修复 `~/.dsh/skills/dsh-desktop-diagnostics/SKILL.md` 的 YAML frontmatter。
+
+## [2.3.1] - 2026-09-13
+
+- 2.3.0 的补订版：build `20260913-125353`，清单 `release/2.3.1.sha256`（`source_commit=2534451`，`source_dirty=0`）。
+
+## [2.3.0] - 2026-09-13
+
+- **固定证书签名**（ADR-0063）：签名身份从 adhoc 改为自签 `LUTE Code Signing`，TCC 授权按证书 leaf 延续——「升级一次、重授一次」的终点；换签后首次升级需一次性重授（详见 SOP §5.5）。
+- build `20260913-123942`，清单 `release/2.3.0.sha256`（`source_commit=2171218`，`source_dirty=0`）。
+
 ## [2.2.0] - 2026-09-12（出货面最小闭环 + 输入框下方能力导引）
 
 决策留痕：[ADR-0056](docs/adr/ADR-0056.md) · Note [2026-09-12-shipping-surface](docs/notes/implemented/architecture/2026-09-12-shipping-surface.md)、

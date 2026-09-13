@@ -8,7 +8,7 @@ set -u
 # 变成结构性红灯：表现为 35 条 MISSING，与「补丁真的漂移」在输出上不可区分。
 # 改为可覆盖的版本变量，并在推导出的树不存在时响亮失败。
 PKG_ROOT="$(cd "$(dirname "$0")" && pwd)"
-STAGE_VERSION="${STAGE_VERSION:-2.1.0}"
+STAGE_VERSION="${STAGE_VERSION:-2.3.1}"
 DSH_APP="${DSH_APP:-}"
 if [ -z "$DSH_APP" ]; then
   if [ -d "$PKG_ROOT/staging/$STAGE_VERSION/app/DSH Desktop.app" ]; then
@@ -77,6 +77,8 @@ ck "chatui 按钮门"          "$NM/dsh-client-ui-chat/lib/client.js" "hasMore &
 ck "chatui 上箭头 recall"   "$NM/dsh-client-ui-conversation/lib/client.js" "recallPrevious"
 ck "cordis clamp"           "$NM/cordis/lib/index.js" "Math.max(0, index - info.offset)"
 ck "loader B-4 回滚"        "$NM/cordis-plugin-loader/lib/index.js" "Object.keys(newMap).reverse()"
+ck "G1 HMR 生产守卫"        "$NM/dsh-client-hmr/lib/index.js" "Production guard (2026-09-13)"
+ck "G2 console 转发"        "$LIB_ER" "console-message"
 echo
 [ "$fail" = "0" ] && echo "PATCHES v2 ALL VERIFIED" || echo "PATCHES v2 DRIFT"
 exit $fail
