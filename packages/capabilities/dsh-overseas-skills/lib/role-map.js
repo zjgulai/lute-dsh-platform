@@ -263,7 +263,8 @@ export const ROLE_ASSIGNMENTS = {
   "handoff": { roles: [{"id":"AGT-049","source":"assigned"}], noRoleKind: null },
   "writing-for-agents": { roles: [], noRoleKind: "GENERIC_METHOD" },
   "lieflat-charts": { roles: [], noRoleKind: "TOOL_ONLY" },
+  "simplify-codebase": { roles: [], noRoleKind: "GENERIC_METHOD" },
 };
 
 /** 覆盖面计数，供页面页脚与验收脚本回溯（数字由 manifest 决定，不在这里重算）。 */
-export const ROLE_ASSIGNMENT_META = {"skills": 252, "withRoles": 217, "withoutRoles": 35, "roleIdsWithSupply": 49};
+export const ROLE_ASSIGNMENT_META = {"skills": 253, "withRoles": 217, "withoutRoles": 36, "roleIdsWithSupply": 49};

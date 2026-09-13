@@ -414,7 +414,8 @@
     "writing-for-agents": "h2-agent-skill",
     "ask-matt": "h2-agent-skill",
     "wizard": "h2-agent-skill",
-    "lieflat-charts": "g1-analytics"
+    "lieflat-charts": "g1-analytics",
+    "simplify-codebase": "h2-agent-skill"
   },
   "overseasNames": [
     "1688-sourcing",
@@ -670,6 +671,7 @@
     "wait-what",
     "wayfinder",
     "wizard",
-    "writing-for-agents"
+    "writing-for-agents",
+    "simplify-codebase"
   ]
 }

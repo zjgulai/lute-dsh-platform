@@ -14,8 +14,12 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
-const SRC_ROOT = "/tmp/mattpocock-skills/skills";
 const SKILLS_DIR = path.join(process.env.HOME, ".dsh", "skills");
+// 源根多路回退：staging/third-party/（仓库内缓存，第三方技能）优先，mattpocock 本地缓存兜底
+const SRC_ROOTS = [
+  path.join(ROOT, "staging", "third-party"),
+  "/tmp/mattpocock-skills/skills",
+];
 const TRANSLATIONS = path.join(ROOT, "staging", "translations");
 const MAPPING = JSON.parse(fs.readFileSync(path.join(__dirname, "fullstack-mapping.json"), "utf8"));
 const DRY = process.argv.includes("--dry");
@@ -43,11 +47,19 @@ function validateFrontmatter(text, name, problems) {
   }
 }
 
+function resolveSrc(src) {
+  for (const root of SRC_ROOTS) {
+    const p = path.join(root, src, "SKILL.md");
+    if (fs.existsSync(p)) return p;
+  }
+  return null;
+}
+
 function main() {
   const report = { ok: [], translated: [], untranslated: [], problems: [] };
   for (const s of MAPPING.skills) {
-    const srcFile = path.join(SRC_ROOT, s.src, "SKILL.md");
-    if (!fs.existsSync(srcFile)) { report.problems.push(`${s.name}: 源缺失`); continue; }
+    const srcFile = resolveSrc(s.src);
+    if (!srcFile) { report.problems.push(`${s.name}: 源缺失（${s.src}）`); continue; }
     const text = fs.readFileSync(srcFile, "utf8");
     const m = /^---\r?\n[\s\S]*?\r?\n---\r?\n?([\s\S]*)$/.exec(text);
     const srcBody = m ? m[1] : text;

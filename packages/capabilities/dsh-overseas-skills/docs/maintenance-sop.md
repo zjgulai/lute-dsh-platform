@@ -243,3 +243,21 @@ curl -s http://127.0.0.1:43120/api/dsh-overseas-skills/list | \
 - **非商业许可（如 PolyForm Noncommercial）**：个人研究/内部试验可用，**对外商业交付超范围**。需先取得授权或明确放弃用于商业交付——这是业务决策，不是技术决策，必须留档。
 - **署名要求**：部分技能在 SKILL.md 里明文要求模型交付后署名。**照做，但不要写进产出物本身**（上游常明确禁止污染内容）。
 - **第三方依赖**：模板/脚本引外部 CDN、字体、地图数据时，记明联网依赖与各自许可证。
+
+### 12.9 变体 · AI 全栈技能入库（与出海路径的落点差异）
+
+出海技能进 `overseasNames` + `manifest/skills.json`；**AI 全栈技能进 `fullstackNames` + 全栈管线**，落点清单不同（2026-09-12 `simplify-codebase` 入库实测）：
+
+| 落点 | 出海路径（§12.3–12.4） | 全栈路径 |
+| --- | --- | --- |
+| 技能目录 | `~/.dsh/skills/<name>/`（tarball + 四件套 + metadata 溯源块） | 同左，但 **frontmatter 用全栈标准形态**（name/title/description/enabled/disable-model-invocation/user-invocable）——`verify-fullstack.mjs` 的正则**只允许纯标量行，metadata 块会报「非法fm行」**；溯源写进技能目录 `README.usage.md` |
+| 汉译 | — | `staging/translations/<name>.body.md`（正文汉译，references 保真英文原文） |
+| 安装管线 | 手动 tarball | `import-fullstack.mjs` 多根回退：`staging/third-party/<name>/` 优先（仓库内版本化缓存），`/tmp/mattpocock-skills/skills` 兜底 |
+| 映射表 | `manifest/skills.json` | **两处**：`scripts/fullstack-mapping.json`（安装+图标管线事实源，src/name/title/cat/summaryZh）+ `manifest/fullstack-skills.json`（catalog 构建读） |
+| taxonomy | `mapping` + `overseasNames` | `mapping["<name>"] = "h2-agent-skill"` + `fullstackNames` 数组 |
+| 归位 | `catalog: "overseas"` + 细分场景 | `role-assignments.json`：`catalog: "fs"` + `scenario: fs-*`（8 组：clarify/spec/architecture/implement/quality/infra/collab/writing）+ 挂岗或 `GENERIC_METHOD`/`TOOL_ONLY` |
+| 头像 | `skill-icons.json` | lute-brand-icons `scripts/catalog.js` 加 `sk-fs-<name>` 条目 → `node scripts/build.js` → `assign_lute_icons.py` 自动写 `skill-icons-fs.json` |
+| 计数闸门 | — | `verify-fullstack.mjs` 硬编码「29/29」等计数**必须同步 +1**（易漏） |
+| 验收接口 | `/api/.../list` | `/api/.../fullstack-list`：`groups[]` 目标 fs 组条目数 +1，卡片 installed/modelEnabled/icon 齐全 |
+
+判 `GENERIC_METHOD` 的对照锚：`codebase-design`、`improve-codebase-architecture`、`tdd`——跨仓库通用的工程方法论，不承载任一岗位三条责任。

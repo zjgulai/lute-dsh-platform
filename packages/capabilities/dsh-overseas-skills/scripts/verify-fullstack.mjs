@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /** verify-fullstack.mjs — AI全栈技能适配测试闸门（P2）
- * ① 29/29 安装 + frontmatter 解析/引号/name/description
+ * ① 30/30 安装 + frontmatter 解析/引号/name/description
  * ② diagnosing-bugs/scripts 的 Python 编译（py_compile）
  * ③ wizard/template.sh 与各 scripts 的 bash -n 语法
  * ④ 路由型 3 个冒烟（正文含目标技能名）
@@ -74,6 +74,6 @@ for (const n of ["tdd", "to-spec", "grill-me"]) {
   const p = join(PRESETS, "ai-product-developer", "skills", n, "SKILL.md");
   if (!existsSync(p)) problems.push(`预设副本丢失: ${n}`);
 }
-console.log(`AI全栈适配测试 | 安装 ${installed}/29 | 已汉译 ${translated}/29 | 问题 ${problems.length}`);
+console.log(`AI全栈适配测试 | 安装 ${installed}/30 | 已汉译 ${translated}/30 | 问题 ${problems.length}`);
 if (problems.length) { problems.forEach((x) => console.log("  - " + x)); process.exit(1); }
-console.log("✓ 29/29 全项通过");
+console.log("✓ 30/30 全项通过");

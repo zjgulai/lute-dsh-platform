@@ -6,9 +6,9 @@
     "generated": "2026-09-12 十批语义判定 + 机械校验（.scratch/overseas-skills-refactor/validate-assignments.py）"
   },
   "coverage": {
-    "skills": 252,
+    "skills": 253,
     "with_roles": 217,
-    "without_roles": 35,
+    "without_roles": 36,
     "role_ids_with_supply": 49
   },
   "skills": {
@@ -5903,6 +5903,14 @@
       "roles": [],
       "no_role_kind": "TOOL_ONLY",
       "no_role_reason": "纯渲染与排版工具形态：输入任意数据，按 61 张图型与 12 套报告模板输出单文件 HTML，不含任何出海业务语义（不选品、不诊断、不归因、不做经营判断），因而不承担某一岗位的三条责任。其产出可服务多个岗位的汇报与交付环节，但每个岗位要的是分析结论，图表只是呈现外壳，与 docx/pptx/xlsx 同属格式处理形态。按协议§5 归 GENERIC 工具类，不挂岗。"
+    },
+    "simplify-codebase": {
+      "catalog": "fs",
+      "scenario": "fs-architecture",
+      "sub": "",
+      "roles": [],
+      "no_role_kind": "GENERIC_METHOD",
+      "no_role_reason": "证据驱动的代码库简化是跨岗位通用的工程方法：Survey 审计与 Change 验证对任何语言、任何仓库都成立，不承载《AI组织变革》某一岗位的三条责任；产出是简化候选与验证回执，不是出海业务结论。与同组 improve-codebase-architecture（找深化机会）互为镜像。"
     }
   }
 }
