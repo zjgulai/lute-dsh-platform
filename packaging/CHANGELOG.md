@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## [Unreleased]（2026-09-13 · 出货面边界：预设白名单 + 载荷路径改写 + 产品级技能白名单）
+
+- **预设出货面改白名单**（ADR-0073）：`assemble.sh` §0 原先是整目录 `cp -R ~/.dsh/.agent-presets/.`，
+  于是「谁在打包机上新建一个预设，它就随下一版出给客户」是一条静默路径——实测本机自有的机器人
+  助理智能体预设 `bobo-cto` 自 2.3.0 起进了每版 payload（出货 `completeness.json` 的 presets = 52 条含它）。
+  改为 `scripts/select-presets.mjs` + `shipped-presets.json`：岗位按 `pattern` 准入且数量必须相符，
+  其余目录只有 `allow`（该发）/ `exclude`（已评审不发）两种合法状态，**两档都没登记即中止并点名**。
+- **技能出货面补产品级白名单**（ADR-0074）：排除 `bobo-cto` 后它**唯一**引用的 15 个工程技能一并掉出
+  （349 → 334），而同族的工程工艺技能本来就在出货面里——产品拿到的是「一半工艺层」，分界线取决于
+  打包机当时的引用图。改为 `(被引用 ∪ 白名单) − 受限许可`，新增 `shipped-skills.json`（15 条，每条带 `why`）；
+  白名单缺文件即中止（按空名单继续 = 15 个技能无声少发）；`--check` 升为「落位树逐名等于选择结果」。
+  出货技能数回到 **349**。
+- **出货副本的构建机路径改占位符**（ADR-0073）：`scripts/rewrite-build-paths.mjs` 按写了含义的映射表
+  最长前缀优先改写，未覆盖形态响亮失败；**本机 `~/.dsh` 原件不动**。同一版出货的 tarball 里
+  114 个含 `/Users/lute` 的文本文件 → 0。
+- **守卫学会看打包后的载荷**（ADR-0073）：`scan-machine-paths.mjs --tarball` 解包后用同一把尺扫。
+  盲点代价实测：内嵌 profile 报 `✓ 无新增` 的同时，同一版出货 `skills-presets.tar.gz` 里是
+  103 个含构建机路径的文件（tarball 是二进制，`grep` 一律跳过）。
+- 新增反向自测并进门禁：`shipped-presets-scope-selftest`、`build-path-rewrite-selftest`、
+  `machine-path-tarball-selftest`、`shipped-skills-scope-selftest`（各含恒真桩突变与符号链接沙箱用例）。
+
 ## [Unreleased]（2026-09-13 · HMR 生产守卫）
 
 - **G1 HMR 生产守卫**：`dsh-client-hmr/lib/index.js` 非 dev 模式不 re-hash、不推 rebuilt 帧（运行中替换 app bundle 白屏的机制修复）；幂等脚本 `dsh-patches/runtime-guards/apply-fixes.sh`，接入 `assemble.sh` 强制重放、随包 `tools/runtime-guards/`。

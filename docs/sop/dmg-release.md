@@ -300,6 +300,9 @@ cat "release/$VERSION.sha256" | head   # 仓库根清单
 | `pin 门禁失败` | `vendor/dsh-desktop.pin` 与 submodule HEAD 不一致 | 更新 pin 或 checkout 到 pin 的 sha |
 | `打包源指纹不一致` | 装配期间 live profile 被并发改动 | 停止其他会话改动后重跑 |
 | `scan-machine-paths 失败` | 出货树出现新的机器路径 | 检查新增 file: 依赖或源映射注释，必要时更新基线 |
+| `预设出货白名单判定失败`（`未登记的预设目录` / `数量不符` / `登记了但本机不存在`） | 打包机上多了一个预设目录，或岗位集合变了 | 三选一并对齐 [`packaging/shipped-presets.json`](../../packaging/shipped-presets.json)：从本机移走 / 登记进 `allow`（该发）/ 登记进 `exclude`（已评审不发）——**后两档都要写 `why`**。未登记 = 没人表过态，所以装配停下来问（ADR-0073） |
+| `技能出货面判定失败`（白名单缺失 / 名字不存在 / 与受限许可同名） | [`packaging/shipped-skills.json`](../../packaging/shipped-skills.json) 与现状不符 | 按报错点名逐条对齐；出货意图确实变了就改这份表并写 `why`，**不要靠改名绕过**。缺文件是判否而不是「等于空名单」——按空名单跑会让白名单里的技能无声少发（ADR-0074） |
+| `出货技能树与选择结果不符` | 落位数与选择结果不一致（静默少发 / 多发），或含受限技能 | 看报错点名的技能；用 `node packaging/scripts/select-skills.mjs --report` 复算。少发多因打包期间源被并发改动 |
 | `codesign --verify` 红 | 签名后又被修改 | 重新执行 sign-and-dmg.sh |
 | 首启卡在 profile-composition | 同机有旧实例在跑 | 退出旧实例或换干净环境测试 |
 | **启动后整屏白屏（无 renderSlot 日志）** | 运行中替换过 app bundle（HMR 热更崩渲染器）；或关机态改过 app bundle 内 client bundle 字节（combo rev 失配） | 先 `Cmd+R` 重载 renderer；无效则还原被改字节并完整重启；预防：替换 app 前先退出实例 |

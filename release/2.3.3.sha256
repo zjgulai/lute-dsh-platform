@@ -2,8 +2,8 @@
 # 校验（DMG 与本文件同目录时）：shasum -a 256 -c 2.3.3.sha256
 # version=2.3.3
 # dmg=DSH-Desktop-LUTE-2.3.3-mac-arm64.dmg
-# build=20260913-171448
-# source_commit=8d76ba98bfaaefd5675a4305c1761b782d2c4209
+# build=20260913-174543
+# source_commit=1d20ef0d7c418f37cee856544f17e0ee5978cf5c
 # source_dirty=1
 # profile_snapshot=63ce76120e9e9c9c
-41f55af7f5deed022a24fa1a19ae100053095a175a1d7c645ff5591b3a632632  DSH-Desktop-LUTE-2.3.3-mac-arm64.dmg
+7fb2d4771a0f5b04bd451df6436c03563c7984a761604f8f4c3933147947d724  DSH-Desktop-LUTE-2.3.3-mac-arm64.dmg
