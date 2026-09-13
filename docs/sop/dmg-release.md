@@ -80,6 +80,37 @@ VERSION="$VERSION" ./assemble.sh
 
 旧产物会被归档到 `packaging/release/.archive/`，不会被删除。
 
+### 签名身份（受门禁保护的构建输入，ADR-0063）
+
+`assemble.sh` 用**固定身份的证书**给 app 深签名；证书缺失或不可用即**失败**，不得回退 adhoc
+（回退等于静默恢复「TCC 授权随字节失效」这一缺陷，且失败方向恰是最糟的一种：产物照出、权限照丢）。
+
+| 项 | 值 |
+| --- | --- |
+| 证书名（CN，也是 `--sign` 的取值） | `LUTE Code Signing` |
+| 类型 | 自签代码签名证书（免费、离线可建、无外部依赖；非 Developer ID，故 Gatekeeper 面不变） |
+| 建立 / 重建 | `packaging/scripts/ensure-signing-identity.sh` |
+| SHA-256 指纹 | `7B:82:6F:76:BD:8A:0C:42:F7:AC:3A:70:8F:5B:D9:54:4B:34:C5:42:56:89:67:A9:A6:BD:03:7B:45:93:F9:E3` |
+| 有效期至 | **2036-09-10**（10 年）；到期会以「签不出来」的形式暴露，届时续建并重授一次 TCC |
+
+**私钥只在构建机钥匙串**，不进仓库、不进 profile、不进任何 Markdown（ADR-0008）。上表登记的是可公开的
+身份信息，用途是「换机重建时确认是不是同一个身份」——指纹一致，TCC 授权才谈得上延续。
+
+**重建身份（或换机）等于换身份**：TCC 条目按新身份重建，需重授一次。所以别为了「清一遍」随手重建证书；
+只有确认指纹与上表不符时才动手。
+
+复核身份（判据机读，两条都要）：
+
+```bash
+# ① 装配面（制 dmg 前即可验）
+codesign -d -r-  "packaging/staging/$VERSION/app/DSH Desktop.app"         # 指定要求：不得出现 cdhash
+codesign -dv --verbose=2 "packaging/staging/$VERSION/app/DSH Desktop.app" | grep Authority
+# ② 交付面（挂载 dmg 后解包复核；sign-and-dmg.sh 的终验已自动做这一步）
+```
+
+`Authority=` 为空即说明产物是 adhoc——正是 ADR-0063 要消除的形态。出厂冒烟
+（`packaging/scripts/smoke-test.sh`）已把这两条连同「指定要求可读出」（防空判据假绿）做成断言。
+
 ## 5. 终验
 
 ### 5.1 签名验证

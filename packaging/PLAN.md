@@ -28,7 +28,7 @@
 | # | 决策点 | 结论 |
 |---|---|---|
 | D1 | 打包形态 | **`.dmg` + 独立安装器 app**（`LUTE Setup.app`，swiftc 自研，带进度窗口；app 本体不加 bootstrap hook，职责分离） |
-| D2 | 签名 | **adhoc**（`codesign --deep --force --sign -`）；目标机右键打开/`xattr -cr` 绕过 Gatekeeper；TCC 重新授权一次 |
+| D2 | 签名 | ~~**adhoc**（`codesign --deep --force --sign -`）；目标机右键打开/`xattr -cr` 绕过 Gatekeeper；TCC 重新授权一次~~ → **已由 [ADR-0063](../docs/adr/ADR-0063.md) 修订**：改用**固定身份的证书签名**（自签 `LUTE Code Signing`）。原方案被低估的那半句是「一次」：adhoc 的指定要求字面上就是 CDHash，TCC 授权随字节失效，代价实为**每版一次**。Gatekeeper 面（右键打开/`xattr -cr`）语义不变 |
 | D3 | 官方更新通道 | **禁用更新检查**（包内改写 `app-update.yml` + 沿用 P0-1 已移除的静默执行；设置里残留入口点击后优雅失败） |
 | D4 | vendors 落位 | **包内自洽**：vendor 源随 profile 落位 `~/.dsh/profiles/desktop/vendor/`，安装时重写 8 个 `file:` 依赖为 `file:./vendor/<name>`；不污染 `~/project` |
 | D5 | 目标机网络 | **必须离线**：`node_modules`（475M）全量随包，目标机不跑 pnpm install；noema Rust 二进制随 node_modules 走；灵枢 venv 便携化随包（见 §4） |

@@ -79,9 +79,10 @@ VERSION=1.0.0 ./assemble.sh                    # 产出 staging/1.0.0/payload
 
 ## 目标机安装（Gatekeeper 必读）
 
-包为 **adhoc 签名、未公证**（Developer ID 公证是付费通道，未启用），macOS Gatekeeper
-会对下载分发的 dmg 施加隔离属性（quarantine）。本版安装器**解包后自动清除**，
-因此**推荐终端一条命令安装**：
+包**未公证**（Developer ID 公证是付费通道，未启用）。2.3.0 起签名身份从 adhoc 改为固定证书
+（自签 `LUTE Code Signing`，见 [ADR-0063](../docs/adr/ADR-0063.md)）——但**自签不等于被信任**，
+Gatekeeper 面与从前一样：macOS 会对下载分发的 dmg 施加隔离属性（quarantine）。本版安装器
+**解包后自动清除**，因此**推荐终端一条命令安装**：
 
 ```bash
 cd "/Volumes/DSH Desktop LUTE 1.2.0" && bash install.sh
