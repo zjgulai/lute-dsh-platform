@@ -32,6 +32,40 @@ SERVICES="kTCCServiceAccessibility kTCCServiceScreenCapture kTCCServiceListenEve
 
 export PATH="$HOME/.local/bin:$PATH"
 
+# ── 要求形态判读（判据④ 的「持久性」附加断言）────────────────
+# 判据④ 只说「此刻有权」，说不了「下一版还有权」。doctor 全 true 时，库里存的仍可能是
+# **cdhash 型**要求——自签证书不被 tccd 接受并退回字节哈希时就会存成那样；三项此刻照样全
+# true，但下一版一换字节即全部重置，正是本 ADR 要消除的失败模式，且要到下一版才暴露。
+# 故第 2 节解出的**要求形态**是 ⑤ 能否成立的唯一当场判据。
+#
+# 唯一实现：主流程与自测（`--judge-form`，从 stdin 读同一份 TSV）走的是这一段代码。
+# 输入：每行 "<service>\t<auth_value>\t<要求文本>"，即 snap_services 的输出。
+# 退出码：0 = 身份型（无 cdhash 且有 certificate leaf）⇒ ⑤ 具备成立条件
+#         3 = cdhash 型 ⇒ 授权绑在字节上，⑤ 必然失败
+#         4 = 形态未知 ⇒ 需人工判读
+judge_req_form() {
+  local tsv; tsv="$(cat)"
+  if printf '%s' "$tsv" | grep -q 'cdhash'; then
+    echo "  ⚠ 但库里存的仍是 **cdhash 型**要求（见第 2 节）："
+    printf '%s' "$tsv" | grep 'cdhash' | sed 's/^/      /'
+    echo "    ⇒ 判据④ 成立，但判据⑤ **必然失败**：授权此刻有效，却绑定在当前字节上，"
+    echo "      下一版换字节即全部重置。**不得**把本次读数当作「升级不再重置」的证据。"
+    return 3
+  fi
+  if printf '%s' "$tsv" | grep -q 'certificate leaf = H"'; then
+    echo "  ✓ 且库里存的是**身份型**要求（无 cdhash，钉在证书 leaf 上）——"
+    echo "    授权绑定身份而非字节，下一版换字节仍应有效：判据⑤ 具备成立条件。"
+    return 0
+  fi
+  echo "  ⚠ 库里要求既非 cdhash 型、也未见 certificate leaf —— 形态未知，请人工判读第 2 节。"
+  return 4
+}
+
+if [ "${1-}" = "--judge-form" ]; then
+  judge_req_form
+  exit $?
+fi
+
 # 找出承载本会话的 app 进程（沿父链上溯，取 DSH Desktop 那一层）
 app_ancestor() {
   local p="$PPID" i=0
@@ -168,6 +202,7 @@ if [ "$STALE" = "1" ]; then
   echo "    动作：重启 DSH Desktop → 打开一个会话重跑本脚本 → 按提示一次性重授。"
 elif [ "$ALL" = "true" ]; then
   echo "  判据④ 通过：本会话跑的就是已装 app，三项均为 true，授权已生效。"
+  printf '%s' "$SNAP_TSV" | judge_req_form
   echo "  下一步（判据⑤）：现在就是基线。升级到 2.3.1 → 重启 → 再跑一次 --diff，"
   echo "                   三项应保持不变。"
 else

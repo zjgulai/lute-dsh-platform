@@ -91,6 +91,7 @@ VERSION="$VERSION" ./assemble.sh
 | 类型 | 自签代码签名证书（免费、离线可建、无外部依赖；非 Developer ID，故 Gatekeeper 面不变） |
 | 建立 / 重建 | `packaging/scripts/ensure-signing-identity.sh` |
 | SHA-256 指纹 | `7B:82:6F:76:BD:8A:0C:42:F7:AC:3A:70:8F:5B:D9:54:4B:34:C5:42:56:89:67:A9:A6:BD:03:7B:45:93:F9:E3` |
+| SHA-1 指纹（**指定要求里钉的就是这个**，与 `codesign -d -r-` 的 `certificate leaf = H"…"` 直接可比） | `ba3372a39bf4fe09e467ab8565cfb3a0166babbe` |
 | 有效期至 | **2036-09-10**（10 年）；到期会以「签不出来」的形式暴露，届时续建并重授一次 TCC |
 
 **私钥只在构建机钥匙串**，不进仓库、不进 profile、不进任何 Markdown（ADR-0008）。上表登记的是可公开的
@@ -106,6 +107,9 @@ VERSION="$VERSION" ./assemble.sh
 codesign -d -r-  "packaging/staging/$VERSION/app/DSH Desktop.app"         # 指定要求：不得出现 cdhash
 codesign -dv --verbose=2 "packaging/staging/$VERSION/app/DSH Desktop.app" | grep Authority
 # ② 交付面（挂载 dmg 后解包复核；sign-and-dmg.sh 的终验已自动做这一步）
+# ③ 身份一致性（换机 / 疑心证书被重建时验）：DR 钉的 leaf 必须逐字节等于上表 SHA-1
+codesign -d -r- "packaging/staging/$VERSION/app/DSH Desktop.app" | grep -o 'certificate leaf = H"[0-9a-f]*"'
+# 期望：certificate leaf = H"ba3372a39bf4fe09e467ab8565cfb3a0166babbe"
 ```
 
 `Authority=` 为空即说明产物是 adhoc——正是 ADR-0063 要消除的形态。出厂冒烟
@@ -185,6 +189,20 @@ cat "release/$VERSION.sha256" | head   # 仓库根清单
    关掉再打开（三项都要）；
 3. 重跑该脚本取基线快照；升级到下一版并重启后再跑 `--diff`，三项应保持不变——
    这就是判据⑤ 的运行时读法。
+
+**这一步不是走过场：重授那一次就是判据⑤ 的判定实验。** 把本机 TCC 库全部 27 条带 `csreq` 的
+条目解码，形态只有两类——Apple 锚定系（`anchor apple`）与 cdhash 系，**唯一不含 `anchor apple`
+的就是我方那四条，且全是 cdhash 型**。因此「tccd 会不会原样保存一条**自签**的
+`identifier + certificate leaf = H"…"` 要求」在本机**没有先例可援**：会，则 ⑤ 成立；不会（因其
+不锚定到受信证书而退回存 cdhash），则 doctor 三项**照样全 true**、判据④ 照常通过，而失败要等到
+下一版升级才暴露——那正是本 ADR 要消除的「必然发生且失败时静默」。所以重授后**必须看要求形态**：
+
+- `verify-tcc-runtime.sh` 在判据④ 分支已顺带判读形态：存的仍是 `cdhash` 即当场判红，并写明
+  「⑤ 必然失败，不得把本次读数当作证据」；是 `certificate leaf` 才算 ⑤ 具备成立条件。
+- 该判读的反向自测：`bash packaging/scripts/verify-tcc-form-test.sh`（F1 用库里那两行 cdhash
+  **真实坏输入**，必须判红）。
+- 若重授后形态仍是 `cdhash`：**这是 ADR-0063 路线在自签前提下的失效**，须回到该 ADR 的备选路线
+  （Developer ID + 公证）决策，**不得**以「doctor 全 true」放行。
 
 **读 doctor 之前必须确认它归因于已装 app。** 被替换掉的旧进程可能仍在运行，此时 doctor 读的是
 旧支（换签前它恰好持有授权），会给出一个即将失效的 `true`。判据来自 `lsof`：承载会话的进程

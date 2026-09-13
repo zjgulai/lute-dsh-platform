@@ -116,3 +116,49 @@ ADR-0063 的四条机读判据里，前三条（无 cdhash、Authority 为证书
 - 脚本判定的是「**已存授权对新支是否仍然有效**」。若新支改了 bundle id 或换了证书，命题为假且**必须**为假——那是身份变了，不是判据失效。
 - 首次授权（从无到有）不在本判据范围内，仍需人工一次；本判据管的是**此后每一版**。
 - G1~G3 依赖本机存在发布身份「LUTE Code Signing」；缺失时自测**显式打印 [SKIP]** 并以 0 退出，不伪装成通过。
+
+### 判据④ 的漏洞：doctor 全 true 推不出判据⑤（本轮补上）
+
+ADR-0063 把判据④ 定成「装机后 `macos-harness doctor` 三项为 true」。本轮把本机 TCC 库**全部 27 条**
+带 `csreq` 的条目解码后，发现这个判据**可以在我方路线失效时照样通过**。
+
+形态只有两类：Apple 锚定系（`anchor apple`，以及
+`identifier + anchor apple generic + certificate leaf[subject.OU] = "<TeamID>"`）与 cdhash 系。
+**唯一不含 `anchor apple` 的就是我方那四条**（`ai.deepseek.dsh.desktop` 的 accessibility /
+screen capture / listen event / all files），且四条全是 cdhash 型。也就是说，「tccd 会接受并原样
+保存一条**自签**的 `identifier + certificate leaf = H"…"` 要求」在本机数据库里**没有先例可援**。
+
+于是存在一个此前没人写下来的分支：若 tccd 因该要求不锚定到受信证书而**退回存 cdhash**，那么——
+
+1. 用户重授后，doctor 三项**照样全 true**；
+2. 判据④ **照常通过**；
+3. 而授权绑定在当前字节上，下一版一换字节即全部重置：判据⑤ 失败。
+
+失败出现在**下一版**，而验收记录上写着「④ 已通过」。这与 ADR-0057 点名的「靠人记得不是工程解」
+同源，只是搬进了验收环节内部。
+
+**决定**：判据④ 增加一条附加断言——看**要求形态**本身，而不只看 doctor 的布尔值。
+`verify-tcc-runtime.sh` 第 2 节本就把 `csreq` 解码打印，现增加 `judge_req_form()`：
+
+| 形态 | 退出码 | 结论 |
+|---|---|---|
+| 含 `cdhash` | 3 | ④ 成立但 ⑤ **必然失败**，明写「不得把本次读数当作证据」 |
+| 含 `certificate leaf = H"` | 0 | 授权绑身份而非字节，⑤ 具备成立条件 |
+| 都不是 | 4 | 形态未知，要求人工判读 |
+
+实现唯一：主流程与自测走**同一段代码**（`--judge-form` 从 stdin 读同一份 TSV），不复制逻辑。
+反向自测 `packaging/scripts/verify-tcc-form-test.sh`：F1 用库里那两行 **cdhash 真实坏输入**必须
+退 3，F2 用真实产物 DR 退 0，F3 未知形态退 4，F4 空输入不得通过。已实测把实现换成恒真桩后
+F1/F3/F4 全红——它不是空转。
+
+**边界（重要）**：这条断言把「⑤ 会不会成立」从「下一版才知道」提前到「重授当场就知道」，但
+**不能**让 ⑤ 无条件成立。若重授后形态仍是 cdhash，那是 ADR-0063 的路线在自签前提下失效，须回到
+该 ADR 的备选（Developer ID + 公证）决策，**不得**继续调判据来让它变绿。
+
+### 未接线：这两个自测本身没有门禁在看
+
+`test:gate` 只跑 `scripts/gates/*.test.mjs`，全仓**没有任何门禁会运行 `packaging/scripts/*-test.sh`**；
+两个 TCC 自测目前只在 SOP 第 5.5 节以「请运行」的形式登记。即「这条判据会不会说不」**仍靠人记得**，
+与 ADR-0057 相抵。**未做**——原因是要留痕的取舍（glob 还是显式白名单、`first-launch-test.sh` 一类
+需入参的自测如何排除、`verify-tcc-persistence-test.sh` 依赖发布身份故只能声明跳过），不夹带在本次
+验收里；已登记为 ADR-0063 后续动作 ⑦。
