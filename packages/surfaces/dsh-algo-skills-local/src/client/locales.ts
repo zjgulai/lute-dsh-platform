@@ -40,7 +40,8 @@ export const zh = {
     '每张技能卡归到一个岗位名下（已分到岗位）；'
     + '岗位预设一开就自带它名下的卡（已设为岗位自带）。'
     + '卡右上角的开关管的是「模型能不能自动调用它」：'
-    + '关着时卡还在、斜杠仍能手动调用，只是模型不会自己挑它。',
+    + '关着时卡还在、斜杠仍能手动调用，只是模型不会自己挑它。'
+    + '岗位会话里由岗位装配决定——本岗带上的卡照常自动调用，开关管的是岗位之外的会话。',
 
   'switch.on': '模型可以自动调用它；点一下关掉',
   'switch.off': '模型不会自动调用它；点一下打开',
@@ -103,7 +104,9 @@ export const en: Record<AlgoSkillKey, string> = {
     'Every skill card is filed under one role (Assigned to a role); '
     + 'a role preset carries its own cards on open (Shipped with a role). '
     + 'The switch on a card governs one thing only — whether the MODEL may pick it up on its own: '
-    + 'switched off, the card is still installed and still callable by slash command, the model just will not reach for it.',
+    + 'switched off, the card is still installed and still callable by slash command, the model just will not reach for it. '
+    + 'Inside a role session the role\'s own assembly decides: the cards that role carries are invoked as usual, '
+    + 'and the switch governs sessions outside it.',
 
   'switch.on': 'Model may pick this card up on its own; click to switch off',
   'switch.off': 'Model will not pick this card up on its own; click to switch on',

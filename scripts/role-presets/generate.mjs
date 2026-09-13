@@ -40,6 +40,13 @@ const OUT_ROOT = process.env.ROLE_PRESET_OUT || join(homedir(), '.dsh', '.agent-
 const SKILLS_ROOT = process.env.ROLE_SKILLS_ROOT || join(homedir(), '.dsh', 'skills')
 const SKILL_MAP_PATH = join(HERE, 'skill-map.json')
 /**
+ * 生成的 skill-subset 行是否尊重技能文件的调用开关。
+ *
+ * 这是**唯一**的开关：它同时决定渲染进 preset 的值与收尾判据的算法，所以把它翻回去
+ * 不会得到「静默失效」，而是立刻得到一次红灯（理由见 renderComposition 里的注释）。
+ */
+const SUBSET_RESPECTS_FILE_FLAGS = false
+/**
  * 图标索引（lute-brand-icons 的产物）。
  *
  * 岗位 ↔ 头像的对应关系**不需要第二张映射表**：catalog 里的条目 id 与 preset id
@@ -288,7 +295,19 @@ function renderComposition(personaText, skills, presetId) {
     "  name: 'dsh-skill-subset'",
     '  config:',
     `    skills: [${skills.map((s) => `'${s}'`).join(', ')}]`,
-    '    respectFileFlags: true',
+    // respectFileFlags —— 白名单是授予，不能被文件开关否决。
+    //
+    // 这一行曾经是 `true`，两个机制就此互相抵消：语料里每张 p2s- 卡都按 ADR-0031
+    // 写着 disable-model-invocation: "true"（为了不让 1338 张卡挤进全局模型目录），
+    // 而 respectFileFlags: true 让正向注册去读这个开关，于是「挂上了」的卡仍然
+    // modelInvocable: false —— 实测 50 个岗位的 439 个白名单位里 275 个（62.6%）
+    // 是死的，没有一个岗位全部生效。ADR-0031 的「可见性只经白名单开放」与 I3 的
+    // 「设置页开关在岗位会话内也生效」在语料全库 model-off 的前提下不可能同时成立。
+    // 本产物取前者：岗位装配由岗位自己负责，设置页开关管的是岗位之外。
+    //
+    // 上面那句「重注册为模型可见」是这一行的原意，也是它被改成 true 时被违背的话。
+    // 收尾的「白名单生效性」判据会拦住任何把它翻回 true 却不同时修数据的改动。
+    `    respectFileFlags: ${SUBSET_RESPECTS_FILE_FLAGS}`,
     '',
   ]
   lines.splice(tEnd, 0, ...subsetRow)
@@ -440,6 +459,24 @@ function main() {
       .map((e) => e.name),
   )
   const danglingRefs = new Set()
+  const inertRefs = new Set()
+
+  /** 技能文件是否声明「模型不可自动调用」（与 dsh-skill-filesystem 同一读法，含引号形态）。 */
+  const modelOffCache = new Map()
+  function isModelOff(id) {
+    if (modelOffCache.has(id)) return modelOffCache.get(id)
+    let off = false
+    try {
+      const text = readFileSync(join(SKILLS_ROOT, id, 'SKILL.md'), 'utf8')
+      const block = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text)?.[1] ?? ''
+      const value = /^disable-model-invocation:[ \t]*"?([a-z]+)"?[ \t]*$/m.exec(block)?.[1]
+      off = value === 'true'
+    } catch {
+      off = false
+    }
+    modelOffCache.set(id, off)
+    return off
+  }
 
   /** 解析一个岗位的 skill-subset：映射供给并集 + 参与的 Playbook 技能；返回映射明细供 manifest 存档。 */
   function resolveSkills(role, playbookIds) {
@@ -452,6 +489,11 @@ function main() {
     for (const d of mapping) for (const s of d.supply) ids.add(s)
     for (const pb of playbookIds) ids.add(pb.toLowerCase())
     for (const id of ids) if (!installedSkills.has(id)) danglingRefs.add(`${role.id} → ${id}`)
+    // 只有在生成的这一行尊重文件开关时，「白名单是否生效」才需要逐张核对；
+    // 不尊重时正向注册恒为 modelInvocable: true，这条判据自然恒过。
+    if (SUBSET_RESPECTS_FILE_FLAGS) {
+      for (const id of ids) if (installedSkills.has(id) && isModelOff(id)) inertRefs.add(`${role.id} → ${id}`)
+    }
     return { ids: [...ids].sort(), mapping }
   }
 
@@ -706,6 +748,21 @@ function main() {
     process.exit(1)
   }
   console.log('★ skill-subset 全部引用真实存在的技能（0 悬空）')
+  // 白名单**生效性**：这一条与「悬空」是两种不同的静默失败。悬空 = 名字指向不存在的技能，
+  // 注册报错但被 catch 吞掉；死位 = 技能存在、注册成功，却因为 respectFileFlags 读到文件的
+  // disable-model-invocation: true 而 modelInvocable: false —— 岗位以为自己装配了它，
+  // 模型却永远不会挑它，界面上两边都正常。
+  if (inertRefs.size > 0) {
+    console.error(`\n✗ skill-subset 有 ${inertRefs.size} 个白名单位是死的（挂了它，但模型不会自动调用）：`)
+    for (const d of [...inertRefs].slice(0, 20)) console.error('  ' + d)
+    console.error('  两条出路，选一条并把语义写进本文件：')
+    console.error('    1) SUBSET_RESPECTS_FILE_FLAGS = false —— 岗位装配权威，设置页开关管岗位之外；')
+    console.error('    2) 打开这些卡的文件开关（disable-model-invocation: false）后保留 true。')
+    process.exit(1)
+  }
+  console.log(SUBSET_RESPECTS_FILE_FLAGS
+    ? '★ 白名单全部生效（respectFileFlags: true，且名单内文件开关与之一致）'
+    : '★ 白名单全部生效（respectFileFlags: false，岗位装配权威）')
   if (!DRY_RUN) console.log(`已写入：${written} 个 preset 目录，跳过 ${skipped}`)
 }
 
