@@ -123,28 +123,38 @@ POST="$(printf '%s' "$DOCTOR" | sed -n 's/.*"post_events": *\([a-z]*\).*/\1/p')"
 echo
 
 # ── 快照 ────────────────────────────────────────────────────
+# 快照是**证据**，不是日志。第一版把它当日志写，结果 dr 字段里的引号没转义、tcc 各条目之间
+# 没有逗号——文件看着像 JSON 却解析不了。凡产出一份要被后人引用的读数，就必须当场验它能解析。
+jesc() { printf '%s' "$1" | sed 's/\\/\\\\/g; s/"/\\"/g'; }
 mkdir -p "$SNAPDIR"
 TS="$(date '+%Y%m%d-%H%M%S')"
 SNAP="$SNAPDIR/$TS.json"
 {
   printf '{\n'
-  printf '  "at": "%s",\n' "$(date '+%F %T')"
-  printf '  "build": "%s",\n' "$BUILD"
-  printf '  "cdhash": "%s",\n' "$CDHASH"
-  printf '  "dr": "%s",\n' "$DR"
-  printf '  "running_exe": "%s",\n' "$(printf '%s' "$RUNNING_EXE" | sed 's/\\/\\\\/g; s/"/\\"/g')"
+  printf '  "at": "%s",\n' "$(jesc "$(date '+%F %T')")"
+  printf '  "build": "%s",\n' "$(jesc "$BUILD")"
+  printf '  "cdhash": "%s",\n' "$(jesc "$CDHASH")"
+  printf '  "dr": "%s",\n' "$(jesc "$DR")"
+  printf '  "running_exe": "%s",\n' "$(jesc "$RUNNING_EXE")"
   printf '  "running_is_installed": %s,\n' "$([ "$STALE" = "0" ] && echo true || echo false)"
   printf '  "doctor": {"accessibility": %s, "screen_recording": %s, "post_events": %s},\n' \
     "${ACC:-null}" "${SCR:-null}" "${POST:-null}"
   printf '  "tcc": {\n'
-  first=1
-  printf '%s\n' "$SNAP_TSV" | while IFS=$'\t' read -r svc v stored; do
-    esc="$(printf '%s' "$stored" | sed 's/\\/\\\\/g; s/"/\\"/g')"
-    printf '    "%s": {"auth_value": "%s", "csreq": "%s"}\n' "$svc" "$v" "$esc"
-  done
+  n="$(printf '%s\n' "$SNAP_TSV" | grep -c .)"
+  printf '%s\n' "$SNAP_TSV" | { i=0; while IFS=$'\t' read -r svc v stored; do
+    [ -n "$svc" ] || continue
+    i=$((i + 1)); sep=","; [ "$i" -eq "$n" ] && sep=""
+    printf '    "%s": {"auth_value": "%s", "csreq": "%s"}%s\n' \
+      "$(jesc "$svc")" "$(jesc "$v")" "$(jesc "$stored")" "$sep"
+  done; }
   printf '  }\n}\n'
-} > "$SNAP" 2>/dev/null
-printf '快照已写入: %s\n\n' "$SNAP"
+} > "$SNAP"
+
+if node -e 'JSON.parse(require("fs").readFileSync(process.argv[1],"utf8"))' "$SNAP" 2>/dev/null; then
+  printf '快照已写入: %s（JSON 可解析 ✓）\n\n' "$SNAP"
+else
+  printf '!! 快照 JSON 解析失败——本文件不可作为证据: %s\n\n' "$SNAP" >&2
+fi
 
 # ── 判读 ────────────────────────────────────────────────────
 ALL="true"
@@ -190,6 +200,17 @@ if [ "${1-}" = "--diff" ]; then
     done
     pa="$(sed -n 's/.*"cdhash": *"\([^"]*\)".*/\1/p' "$PREV" | head -1)"
     pb="$(sed -n 's/.*"cdhash": *"\([^"]*\)".*/\1/p' "$SNAP" | head -1)"
-    printf '    （字节确实变了: %s → %s）\n' "${pa:0:12}" "${pb:0:12}"
+    echo
+    # 配对断言：两次若是**同一支**，「三项未变」什么也没证明——app 根本没换。
+    # 判据⑤ 要的是「换了字节、授权仍在」，所以 CDHash 必须不同，否则这是一次空测试。
+    if [ "$pa" = "$pb" ]; then
+      printf '    [空测试] 两次读的是同一支（CDHash %s），\n' "${pa:0:12}"
+      printf '             故上面的「未变」不构成判据⑤ 的证据。\n'
+      printf '             要证明跨版本保持：升级到新版 → 重启 → 再跑 --diff，CDHash 必须不同。\n'
+      echo "    ⇒ 判据⑤ 本次未判定"
+    else
+      printf '    [PASS] 字节确实换了: %s → %s\n' "${pa:0:12}" "${pb:0:12}"
+      printf '           而三项读数保持不变 ⇒ 升级未重置授权，判据⑤ 成立。\n'
+    fi
   fi
 fi
