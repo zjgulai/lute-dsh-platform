@@ -135,7 +135,10 @@ M1 是把实现里唯一那处 `exit 3` 改成 `exit 0` 再跑 R1：R1 必须因
   1. **已结（2026-09-13 15:44）**：本机在身份版上的一次性重授完成，判据④ 通过；要求形态实测为
      **身份型**（`identifier "ai.deepseek.dsh.desktop" and certificate leaf = H"ba3372a3…"`，无 cdhash）
      ⇒ (a) 成立、(b) 被排除，ADR-0063 的路线在自签前提下站得住。基线快照在
-     `~/Library/Application Support/LUTE/tools/tcc-snapshots/`，判据⑤ 待升级 + 重启后取 `--diff`。
+     `~/Library/Application Support/LUTE/tools/tcc-snapshots/`。
+     **判据⑤ 已结（2026-09-13 16:14）**：装 2.3.3（`ad4eaff2…`）并重启后 `--diff` 与基线
+     `20260913-155315.json` 逐项相同（三项 true → true），而 CDHash 确实换了
+     （`ac1cf7e38fef` → `ad4eaff2d742`）——「升级不重置授权」第一次有了运行时实测。
   2. **「输入监控」是否真为必需——已判定：非必需**（2026-09-13 15:41 实验，见
      [ADR-0069](../../../adr/ADR-0069.md)）。本条此前写着「未定之前指引保持三项」，而同一批改动里的
      门禁把这句话变成了**强制校验**——六个出货面 + 单测一起把「第三项在输入监控下」钉死，
