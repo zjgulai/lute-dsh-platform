@@ -87,8 +87,53 @@ grilling
 
 ## 验证读数
 
+自测与选择判据：
+
 - `bash packaging/scripts/select-skills-test.sh` → **13 通过 0 失败**（S1–S9、P1、M1）。
 - `PRESET_ROOT=<出货 presets> node packaging/scripts/select-skills.mjs --report` → 被引用 335、
   **白名单救回未被引用 15 条**、实际出货 **349**。
 - `--copy` 后 `--check` → `✓ 落位技能树 ≡ 选择结果（349 个），且无受限许可技能`。
 - 与排除 `bobo-cto` 前的出货面逐名比对：`diff` 差异**恰好 15 条**（即救回的就是掉出的那 15 个）。
+
+## 重切 2.3.3（第二次同名归档）——装配与出货读数
+
+装配（`SMOKE PASSED`，退出码 0）：
+
+```
+[skills] 已拷贝 349 个到 …/.sp/skills（源 1612 = 本机 1612 + 官方 12；剔除未引用 1262、受限许可 1）
+[skills] · 产品级白名单 15 条，其中救回未被引用 15 条：agent-browser、code-review、…、writing-for-agents
+[skills] ✓ 落位技能树 ≡ 选择结果（349 个），且无受限许可技能
+completeness: bundles=39 vendor=23 skills=349 presets=51
+[smoke:ok] skills all present: 349, presets all present: 51
+SMOKE PASSED
+```
+
+出货 DMG（`release/2.3.3/DSH-Desktop-LUTE-2.3.3-mac-arm64.dmg`，611M / 640902391B，
+sha256 `7fb2d4771a0f5b04bd451df6436c03563c7984a761604f8f4c3933147947d724`，挂载后直读）：
+
+| 检查 | 第一次重切（334） | 本次（349） |
+| --- | --- | --- |
+| `completeness.json` 的 `skills` | 334 | **349** |
+| `completeness.json` 的 `presets` | 51 | 51（`bobo-cto` 不在其中） |
+| DMG 内 `skills-presets.tar.gz` 的 15 个白名单技能 | 0/15 | **15/15** |
+| DMG 内文本文件含 `/Users/lute` | 0 | **0** |
+| 其中占位符处数 | 173 | **182**（新增的 15 个里 2 个自带构建机路径） |
+| 出货 tarball 守卫（`--tarball`） | `✓ 无新增（0 条）` | `✓ 无新增（0 条）`，`exit 0` |
+| 载荷 `SHA256SUMS` 四个 tarball | OK | OK |
+
+旧副本两份都留着（未删除）：
+
+- `packaging/release/.archive/2.3.3-20260913-172037`（52 预设，含 `bobo-cto`）
+- `packaging/release/.archive/2.3.3-20260913-174848`（51 预设 / 334 技能）
+- 仓库外归档 `~/Library/Application Support/LUTE/releases/2.3.3.superseded-20260913-172040` 与
+  `2.3.3.superseded-20260913-174851`；现役 `…/releases/2.3.3` 已 `uchg` 锁定（ADR-0067）。
+
+**`source_dirty=1`（如实记录，与上一版同类）**：装配那一刻工作树上有**并行会话**的未跟踪文件
+（`packages/capabilities/dsh-paper2skills/eval/` 的 F6/F7 评测工具链）。已逐项核查**没有进载荷**：
+`dsh-paper2skills` 既不在 `completeness.json` 的 `bundles` 也不在 `vendor`，
+`profile.tar.gz` 与 `DSH Desktop.app.tar.gz` 里 `dsh-paper2skills/eval` 命中均为 **0**。
+即：脏的是**构建输入清单**，不是出货内容。装配期间那个会话还把 F7 提交了（`1d20ef0`），
+所以**清单落盘时工作树已经干净**——`source_dirty` 记的是**装配时刻**的状态（ADR-0058 的口径），
+不是清单提交时刻的状态。
+
+**门禁**：`pnpm run gate` **36/36**（新增的 `shipped-skills-scope-selftest` 在列）。
