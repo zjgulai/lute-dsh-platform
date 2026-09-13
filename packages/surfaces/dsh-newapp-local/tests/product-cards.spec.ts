@@ -101,6 +101,32 @@ describe('parseScanPayload', () => {
     expect(p.declaration['entry']).toEqual({ kind: 'panel', service: 'kol-hunter-workbench', action: 'open' })
   })
 
+  it('reads the raw declaration through a host view instead of wrapping it again', () => {
+    // Regression (2026-09-13): the host's ProductView carries summaries in its
+    // own `features[]` and the raw declaration under `.declaration`. This
+    // normalizer used to stash that whole view as `.declaration`, so one unwrap
+    // downstream landed on the host view — whose features have no `inputs` —
+    // and the entry panel opened with no fields (probe `dsh-kolhunter-probe`:
+    // hasDeclaration:true, inputCount:-1).
+    const hostView = {
+      ...DECLARATION,
+      entryService: 'kol-hunter-workbench',
+      features: [{ id: 'select-candidates', label: '选人条件 → 推荐名单', kind: 'model', steps: 2 }],
+      declaration: DECLARATION,
+    }
+    const parsed = parseScanPayload(payload({
+      cards: [{ dir: '/Users/lute/project/KOL-Hunter', label: 'KOL-Hunter', products: [hostView] }],
+    }))
+    if (!parsed.ok) throw new Error('fixture must parse')
+    const p = parsed.scan.cards[0]!.products[0]!
+    // The innermost raw declaration, by reference — not a view around it.
+    expect(p.declaration).toBe(DECLARATION)
+    expect((p.declaration['features'] as Array<Record<string, unknown>>)[0]!['inputs']).toHaveLength(3)
+    // The card's own counts come from the raw declaration, not the summary.
+    expect(p.features[0]!.inputs).toBe(3)
+    expect(p.features[0]!.steps).toBe(2)
+  })
+
   it('is total: a payload that is not a scan report returns a reason, not an empty scan', () => {
     const cases: Array<[unknown, RegExp]> = [
       [null, /不是一个对象/],
@@ -155,6 +181,27 @@ describe('parseScanPayload', () => {
     expect(parsed.scan.skipped).toEqual([{ root: '/nope', reason: 'ENOENT' }])
     expect(parsed.scan.unreadable).toEqual([{ dir: '/broken', reason: '不是合法 JSON' }])
     expect(parsed.scan.truncated).toBe(true)
+  })
+
+  it('reads the flat `entryService` field the host actually returns (ADR-0045)', () => {
+    // src/products.ts normalizes `entry.service` to `entryService`. A parser
+    // that only looked at `entry.service` would see an empty service and force
+    // every card into the session fallback.
+    const parsed = parseScanPayload(payload({
+      cards: [{
+        dir: '/d',
+        label: 'd',
+        products: [{
+          id: 'x',
+          preset: 'agt-1',
+          entryService: 'svc',
+        }],
+      }],
+    }))
+    if (!parsed.ok) throw new Error('must parse')
+    const p = parsed.scan.cards[0]!.products[0]!
+    expect(p.service).toBe('svc')
+    expect(p.entryAction).toBe('')
   })
 
   it('defaults a missing entry action to open rather than rendering an empty call', () => {

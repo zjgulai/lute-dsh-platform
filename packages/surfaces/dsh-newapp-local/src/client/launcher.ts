@@ -117,6 +117,17 @@ function method(target: unknown, name: string): ((...args: unknown[]) => unknown
   return typeof fn === 'function' ? (fn as (...args: unknown[]) => unknown) : undefined
 }
 
+/**
+ * Read a value as a plain record, or reject it.
+ *
+ * Used on the payload the drawer hands `run`: the panel branch peels through
+ * unknown shapes, and an array or a string masquerading as `.declaration` must
+ * fail the probe rather than the click.
+ */
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === 'object' && !Array.isArray(value)
+}
+
 /** Describe a thrown value without assuming it is an Error. */
 function message(error: unknown): string {
   return error instanceof Error ? error.message : String(error)
@@ -149,41 +160,82 @@ function describeFailure(verdict: unknown): string {
 }
 
 /**
- * Read the roster this machine publishes, for the preset check.
+ * The roster route, and the browser half's only copy of this literal.
  *
- * The roster is `dsh-role-matrix-local`'s route — the same one the drawer
- * already reads for the project cards. It is consulted here for one question
- * only: does the preset a product declares actually exist on this machine?
- * Without that check level 2 would select a preset that is not installed, which
- * is a silent no-op.
- * @param ctx - the client context (unused services are simply absent).
- * @param agentsRoute - the roster route.
- * @returns the preset ids, or `undefined` when the roster could not be read.
+ * `launcher.ts` reads the roster — for the preset check, for the systems
+ * section's role labels, and for nothing else. Keeping the literal here is what
+ * makes "one reader per published route" checkable by grepping, rather than a
+ * convention two modules have to remember.
  */
-async function fetchPresetIds(agentsRoute: string): Promise<Set<string> | undefined> {
+export const ROSTER_ROUTE = '/api/dsh-role-matrix/list'
+
+/** One role, as `dsh-role-matrix-local` publishes it. */
+export interface RoleLabel {
+  /** The preset id as the roster spells it (`agt-031`). */
+  id: string
+  name: string
+  plane: string
+  domain: string
+}
+
+/**
+ * Read the roster this machine publishes.
+ *
+ * The roster is `dsh-role-matrix-local`'s route, and **this module is its one
+ * reader** — a declared route literal for it appears here and nowhere else in
+ * the browser half, because two readers of one owner's route is the drift
+ * ADR-0009 forbids. The launcher wants it for one question (does the preset a
+ * product declares exist here?); the systems section wants the labels, to say
+ * which role owns which system. Both read this function's answer.
+ *
+ * The keys are the ids exactly as published (`agt-031`). Callers that join
+ * against data spelled differently normalise on their side, where the reason for
+ * the difference is visible.
+ * @param agentsRoute - the roster route.
+ * @returns role id → label, or `undefined` when the roster could not be read.
+ */
+export async function readRoster(agentsRoute: string): Promise<Map<string, RoleLabel> | undefined> {
   try {
     const response = await fetch(agentsRoute, { headers: { accept: 'application/json' } })
     if (!response.ok) return undefined
     const payload = (await response.json()) as unknown
     const planes = (payload as { planes?: unknown }).planes
     if (!Array.isArray(planes)) return undefined
-    const ids = new Set<string>()
+    const labels = new Map<string, RoleLabel>()
     for (const planeRaw of planes) {
-      const domains = (planeRaw as { domains?: unknown })?.domains
-      if (!Array.isArray(domains)) continue
-      for (const domainRaw of domains) {
-        const roles = (domainRaw as { roles?: unknown })?.roles
-        if (!Array.isArray(roles)) continue
-        for (const roleRaw of roles) {
-          const id = (roleRaw as { id?: unknown })?.id
-          if (typeof id === 'string' && id !== '') ids.add(id)
+      const plane = planeRaw as { name?: unknown; domains?: unknown }
+      const planeName = typeof plane.name === 'string' ? plane.name : ''
+      if (!Array.isArray(plane.domains)) continue
+      for (const domainRaw of plane.domains) {
+        const domain = domainRaw as { name?: unknown; roles?: unknown }
+        const domainName = typeof domain.name === 'string' ? domain.name : ''
+        if (!Array.isArray(domain.roles)) continue
+        for (const roleRaw of domain.roles) {
+          const role = roleRaw as { id?: unknown; name?: unknown }
+          if (typeof role.id !== 'string' || role.id === '') continue
+          labels.set(role.id, {
+            id: role.id,
+            name: typeof role.name === 'string' ? role.name : role.id,
+            plane: planeName,
+            domain: domainName,
+          })
         }
       }
     }
-    return ids
+    return labels
   } catch {
     return undefined
   }
+}
+
+/**
+ * The preset ids, for the launcher's one question.
+ * @param agentsRoute - the roster route.
+ * @returns the ids, or `undefined` when the roster could not be read.
+ */
+async function fetchPresetIds(agentsRoute: string): Promise<Set<string> | undefined> {
+  const labels = await readRoster(agentsRoute)
+  return labels === undefined ? undefined : new Set(labels.keys())
 }
 
 /**
@@ -198,7 +250,7 @@ async function fetchPresetIds(agentsRoute: string): Promise<Set<string> | undefi
  * @param agentsRoute - the roster route (injectable for tests).
  * @returns the launcher.
  */
-export function createLauncher(ctx: unknown, agentsRoute = '/api/dsh-role-matrix/list'): AppLauncher {
+export function createLauncher(ctx: unknown, agentsRoute = ROSTER_ROUTE): AppLauncher {
   const context = (ctx ?? {}) as ProbeableContext
   let presetIds: Set<string> | undefined
   let primed: Promise<void> | undefined
@@ -211,14 +263,60 @@ export function createLauncher(ctx: unknown, agentsRoute = '/api/dsh-role-matrix
     }
   }
 
-  /** The host connection's agentPresets channel, or undefined. */
+  /**
+   * The host agentPresets channel, or undefined.
+   *
+   * Two carriers exist. `ctx.get('agentPresets')` is the shell's own registry
+   * read — the same carrier `sessions` arrives through, so it is tried first.
+   * `connection.api.agentPresets` is the typert bridge shape this module was
+   * written against; it stays as the fallback because a shell that mirrors host
+   * services through `ctx` only partially (or an older shell) still answers on
+   * the connection api table. A candidate counts as a channel only when it
+   * actually carries a callable `select` — a truthy lookup without the method
+   * is a wrong guess, not a channel.
+   */
   const presetsChannel = (): unknown => {
-    const connection = lookup(context, 'connection') as { api?: { agentPresets?: unknown } } | undefined
-    return connection?.api?.agentPresets
+    const direct = lookup(context, 'agentPresets')
+    if (direct !== undefined && method(direct, 'select') !== undefined) return direct
+    const connection = lookup(context, 'connection') as
+      { api?: { agentPresets?: unknown }; remote?: { agentPresets?: unknown } } | undefined
+    const bridged = connection?.api?.agentPresets ?? connection?.remote?.agentPresets
+    if (bridged !== undefined && method(bridged, 'select') !== undefined) return bridged
+    return direct ?? bridged
+  }
+
+  /**
+   * One-shot channel probe: what the shell actually exposes, written to
+   * localStorage so the next launch can be diagnosed from the leveldb without
+   * asking for a DevTools paste. Never throws — a probe that takes the drawer
+   * down would be worse than the bug it hunts.
+   */
+  const probeChannels = (): void => {
+    try {
+      if (typeof localStorage === 'undefined') return
+      const connection = lookup(context, 'connection') as
+        { api?: unknown; remote?: unknown } | undefined
+      const api = connection?.api
+      const remote = connection?.remote
+      const apiIsObject = api !== null && typeof api === 'object'
+      const remoteIsObject = remote !== null && typeof remote === 'object'
+      localStorage.setItem('dsh-newapp-probe', JSON.stringify({
+        t: Date.now(),
+        connectionApiKeys: apiIsObject ? Object.keys(api as object) : null,
+        connectionApiHasAgentPresets: apiIsObject && 'agentPresets' in (api as object),
+        connectionRemoteKeys: remoteIsObject ? Object.keys(remote as object) : null,
+        connectionRemoteHasAgentPresets: remoteIsObject && 'agentPresets' in (remote as object),
+        ctxHasAgentPresets: lookup(context, 'agentPresets') !== undefined,
+        ctxHasSessions: lookup(context, 'sessions') !== undefined,
+      }))
+    } catch {
+      /* probe must never throw */
+    }
   }
 
   return {
     prime(): Promise<void> {
+      probeChannels()
       primed ??= fetchPresetIds(agentsRoute).then(
         (ids) => { presetIds = ids },
         () => { presetIds = undefined },
@@ -252,7 +350,40 @@ export function createLauncher(ctx: unknown, agentsRoute = '/api/dsh-role-matrix
           // The declaration goes over **verbatim** (the product owns its schema);
           // the directory travels beside it so a panel that wants to show or
           // reuse the working directory does not have to guess.
-          await open.call(service, { product: product.declaration, dir })
+          //
+          // The entry feature is resolved from workflow.entry when present so
+          // the panel never has to guess which feature is the entry point.
+          //
+          // The peel matters: production once delivered the drawer's view
+          // wrapped around the host's view (probe `dsh-kolhunter-probe`,
+          // 2026-09-13 — hasDeclaration:true, inputCount:-1), so peeling a
+          // single `.declaration` landed on a layer whose `features[]` were
+          // summaries without `inputs`. The raw declaration is the innermost
+          // layer; peel until no layer below it carries a `.declaration`.
+          let declaration: Record<string, unknown> = isRecord(product.declaration)
+            ? product.declaration
+            : product as unknown as Record<string, unknown>
+          for (let depth = 0; isRecord(declaration['declaration']) && depth < 3; depth += 1) {
+            declaration = declaration['declaration']
+          }
+          const features = Array.isArray(declaration['features'])
+            ? declaration['features'].filter(isRecord)
+            : []
+          const workflow = isRecord(declaration['workflow']) ? declaration['workflow'] : {}
+          const entryId = typeof workflow['entry'] === 'string' ? workflow['entry'] : ''
+          // Prefer the entry feature that actually declares inputs: a summary
+          // feature (an id without `inputs`) cannot drive a form, and the panel
+          // reconciles by id anyway (see the KOL-Hunter client's
+          // resolvePanelTarget).
+          const named = features.filter((f) => f['id'] === entryId)
+          const carriesInputs = (f: Record<string, unknown>): boolean =>
+            Array.isArray(f['inputs']) && f['inputs'].length > 0
+          const entryFeature = named.find(carriesInputs) ?? named[0] ?? features[0]
+          await open.call(service, {
+            product: declaration,
+            feature: entryFeature,
+            dir,
+          })
           return { ok: true, note: `已交给 ${plan.service} 打开入口面板。` }
         } catch (error) {
           warn(error)
@@ -260,8 +391,24 @@ export function createLauncher(ctx: unknown, agentsRoute = '/api/dsh-role-matrix
         }
       }
 
-      // Level 2 — the worktable's own verified triple, in its own order:
-      // create(cwd) → agentPresets.select → sessions.open.
+      // Level 2 — open the product's declared preset in a new session.
+      //
+      // Two shell generations exist and they expect different call shapes:
+      //
+      //   A. Current DSH base: `agentPresets` is NOT exposed to this client
+      //      plugin context, but `sessions.create({ cwd, agentPreset })` accepts
+      //      the preset at creation time. The host session controller mounts the
+      //      preset inside the agent factory setup, so a separate `select` call
+      //      is unnecessary.
+      //   B. Older typert-bridge shells: `agentPresets` IS exposed (via
+      //      `connection.api.agentPresets` or `ctx.agentPresets`) and the
+      //      creation call only accepts `cwd`; the preset must be selected in a
+      //      second RPC.
+      //
+      // We branch on whether a usable `agentPresets` channel exists: if it does,
+      // use the old triple (create → select → open); otherwise use the new pair
+      // (create with agentPreset → open). This avoids a failed create call on
+      // shells that reject unknown options.
       //
       // Read through `lookup`, never as `context.sessions`: a bare read of an
       // undeclared service **throws** (`cannot get property "sessions" without
@@ -275,44 +422,41 @@ export function createLauncher(ctx: unknown, agentsRoute = '/api/dsh-role-matrix
       const create = method(sessions, 'create')
       if (create === undefined) return { ok: false, note: '没有 sessions 服务，无法新建会话。' }
 
-      let created: unknown
-      try {
-        created = await create.call(sessions, { cwd: dir })
-      } catch (error) {
-        warn(error)
-        return { ok: false, note: `新建会话失败：${message(error)}` }
-      }
-      const record = created !== null && typeof created === 'object' ? created as Record<string, unknown> : {}
-      const sessionId = typeof created === 'string'
-        ? created
-        : [record['id'], record['sessionId']].find((v): v is string => typeof v === 'string' && v !== '')
-      if (sessionId === undefined) return { ok: false, note: 'sessions.create 没有回会话 id。' }
-
       const channel = presetsChannel()
       const select = method(channel, 'select')
+      let created: unknown
       let presetNote = ''
+
       if (select === undefined) {
-        presetNote = '（没有 agentPresets.select 通道，会话按默认岗位开）'
+        // Path A — create with preset.
+        try {
+          created = await create.call(sessions, { cwd: dir, agentPreset: plan.preset })
+        } catch (error) {
+          warn(error)
+          return { ok: false, note: `新建会话失败：${message(error)}` }
+        }
       } else {
-        // Two calls, both measured against the shipped implementation:
-        //
-        // (1) **positional** `(agentId, agentPreset)`. The generated contract is
-        //     `select: (agentId: SessionId, agentPreset: string)`; all arguments
-        //     are passed positionally and the transport binds them by index. A
-        //     single object argument fails arity validation in the gateway
-        //     ("expected 2 arguments, got 1") before the host sees it.
-        //
-        // (2) the result is a `RemoteResult`, so `ok: false` is a *returned*
-        //     failure, not a throw. Awaiting without reading it reported
-        //     "已新建会话（岗位 agt-033）" while the session kept its default
-        //     preset — a silent lie about the one thing the user checked.
+        // Path B — old triple: create(cwd) → select → open.
+        try {
+          created = await create.call(sessions, { cwd: dir })
+        } catch (error) {
+          warn(error)
+          return { ok: false, note: `新建会话失败：${message(error)}` }
+        }
+        const record = created !== null && typeof created === 'object' ? created as Record<string, unknown> : {}
+        const sessionId = typeof created === 'string'
+          ? created
+          : [record['id'], record['sessionId']].find((v): v is string => typeof v === 'string' && v !== '')
+        if (sessionId === undefined) return { ok: false, note: 'sessions.create 没有回会话 id。' }
+
+        // Positional `(agentId, agentPreset)` — the generated contract binds
+        // arguments by index; a single object argument fails arity validation.
+        // The result is a `RemoteResult`, so `ok: false` is a returned failure,
+        // not a throw.
         try {
           const selected = await select.call(channel, sessionId, plan.preset) as
             | { ok?: unknown; reason?: unknown; result?: { ok?: unknown } }
             | undefined
-          // Both shapes occur in the wild (`{ ok }` and `{ result: { ok } }`);
-          // `undefined` means the channel answered nothing, which is not a
-          // failure either — the note simply stays empty.
           const verdict = selected?.result ?? selected
           if (verdict?.ok === false) {
             presetNote = `（选中岗位 ${plan.preset} 失败：${describeFailure(verdict)}）`
@@ -322,6 +466,12 @@ export function createLauncher(ctx: unknown, agentsRoute = '/api/dsh-role-matrix
           presetNote = `（选中岗位 ${plan.preset} 失败：${message(error)}）`
         }
       }
+
+      const record = created !== null && typeof created === 'object' ? created as Record<string, unknown> : {}
+      const sessionId = typeof created === 'string'
+        ? created
+        : [record['id'], record['sessionId']].find((v): v is string => typeof v === 'string' && v !== '')
+      if (sessionId === undefined) return { ok: false, note: 'sessions.create 没有回会话 id。' }
 
       const open = method(sessions, 'open')
       if (open !== undefined) {

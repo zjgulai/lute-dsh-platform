@@ -59,6 +59,7 @@ import type { NewAppApi } from './api.ts'
 import type { AppLauncher, OpenOutcome } from './launcher.ts'
 import { tt } from './panel-helpers.ts'
 import { planOpen, productCardMatches, toProductCards, type BlockReason, type OpenPlan, type ProductCardView, type ProductView, type ScanView } from './product-cards.ts'
+import { SystemsSection } from './SystemsSection.tsx'
 import css from './newapp.module.css'
 
 /**
@@ -421,6 +422,13 @@ export function NewAppPanel({ api, launcher, onClose }: NewAppPanelProps): JSX.E
               ))}
             </ul>
           ) : null}
+
+          {/* The drawer's second section, with a deliberately different
+              contract: a product is something this machine has productized and
+              can start, a system is somebody else's site the OS browser opens.
+              Two card shapes, one page — see SystemsSection for why folding
+              them into one shape would produce a button that lies. */}
+          <SystemsSection />
         </div>
 
         {/* One line of small print, not a section and not a card (R3): the

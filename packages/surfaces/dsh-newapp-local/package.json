@@ -42,7 +42,11 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "probe:geometry": "node scripts/geometry-probe.mjs",
-    "probe:reconcile": "node scripts/reconcile-probe.mjs"
+    "probe:reconcile": "node scripts/reconcile-probe.mjs",
+    "sync:systems": "node scripts/sync-systems.mjs",
+    "sync:systems:check": "node scripts/sync-systems.mjs --check",
+    "probe:systems": "node scripts/probe-systems.mjs",
+    "probe:design": "node scripts/design-probe.mjs"
   },
   "peerDependencies": {
     "react": "^18.2.0"

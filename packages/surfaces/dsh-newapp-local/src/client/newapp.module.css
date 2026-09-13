@@ -73,6 +73,15 @@
   --lute-brand-shadow: rgba(88, 184, 72, 0.26);
   --lute-brand-halo: rgba(88, 184, 72, 0.5);
   --lute-brand-sheen: rgba(255, 255, 255, 0.28);
+  /* Text-safe brand greens — the same brand, measured rather than assumed.
+     The identity greens above are for fills, borders and glyphs. At 11–12px on
+     the card surface they resolve to 3.1–3.4:1, under the 4.5:1 floor for body
+     text, and a brand colour that cannot be *read* is not brand consistency —
+     it is a legibility bug wearing the brand. Two values, because one cannot
+     serve both surfaces: light needs the green darkened, dark needs it
+     lightened. Both readings come from `scripts/design-probe.mjs`. */
+  --lute-brand-ink: #2a722e;
+  --lute-brand-ink-dark: var(--lute-brand-soft);
   /* Text on a *fixed* brand fill must be white in both themes, so it rides the
      shell's static (non-flipping) white rather than an inverted-label alias —
      an alias would go dark in the dark theme and vanish on the green tile. */
@@ -677,6 +686,377 @@
   display: none;
 }
 
+/* ── Business systems: the second section, grouped by role ───────────────────
+ *
+ * What this section is: the LUTE portal's systems, one card each, grouped by
+ * the role that owns them. What it is not: products. The section above lists
+ * things this machine can *start*; these leave the app for somebody else's site.
+ * The visual language keeps that difference legible — a brand rule opens each
+ * role group, and the cards carry the portal's own icon in a brand tile rather
+ * than the shapes the product cards use.
+ *
+ * Every colour below is either a shell token or one of the brand variables
+ * declared in the brand block at the top of this file, which `.root` puts in
+ * scope for the whole drawer. No new literal is introduced (Law A).
+ */
+
+.systems {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  /* The hairline is the boundary between "yours, and opens here" and "theirs,
+   * and opens elsewhere". It is the one structural signal that survives a
+   * colour-blind reader and a monochrome theme. */
+  margin-top: 4px;
+  padding-top: 18px;
+  border-top: 1px solid var(--dsw-alias-border-l2, rgba(0, 0, 0, 0.1));
+}
+
+.systemsMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  font: var(--dsw-font-xxxs-11);
+  color: var(--dsw-alias-label-caption, #adb2b8);
+}
+
+/* The one fact this section must not let a reader assume: nothing here signs in
+ * for you. Said in small print rather than discovered at the login page. */
+.systemsMetaNote {
+  color: var(--dsw-alias-label-caption, #adb2b8);
+}
+
+.roleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.roleHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Identity, not state: this mark says "a role group starts here", so it wears
+ * the brand green — the same green as the drawer's own header strip and mark. */
+.roleRule {
+  flex: none;
+  width: 3px;
+  height: 26px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--lute-brand), var(--lute-brand-soft));
+}
+
+.roleTitles {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.roleTitle {
+  margin: 0;
+  font: var(--dsw-font-xs-strong-13);
+  color: var(--dsw-alias-label-primary, #0f1115);
+}
+
+.rolePath {
+  margin: 0;
+  font: var(--dsw-font-xxxs-11);
+  color: var(--dsw-alias-label-secondary, #61666b);
+}
+
+/* A role the roster does not publish. It is a *degradation*, so it wears the
+ * shell's warn pair rather than brand colour: the brand is not the thing that
+ * went wrong here. */
+.roleUnknown {
+  flex: none;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font: var(--dsw-font-xxxs-11);
+  color: var(--dsw-static-amber-900, #27241f);
+  background: var(--dsw-alias-state-warn-tertiary, #fef5e7);
+}
+
+body[data-ds-dark-theme] .roleUnknown {
+  color: var(--dsw-alias-state-warn-primary, #f59e0b);
+}
+
+.roleCount {
+  flex: none;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font: var(--dsw-font-xxxs-11);
+  color: var(--dsw-alias-label-caption, #adb2b8);
+  background: var(--dsw-alias-bg-module-platform, #f5f6f7);
+}
+
+/* Narrower than the product grid's 280px on purpose: a system card carries a
+ * shorter summary, and the extra column is what keeps 31 systems from becoming
+ * a page you scroll instead of a page you scan. */
+.sysGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(264px, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sysItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* The whole card is the button. One focus stop, one accessible name, and no
+ * button nested inside a button — which is why the role chips below are labels
+ * and not links to their group.
+ *
+ * `flex: 1` is load-bearing and was **wrong in the first draft**, which let the
+ * card size to its own content: a grid stretches its *items* (the `<li>`), not
+ * whatever is inside them, so a row whose summaries differ in length ended with
+ * its cards 102px apart at the bottom edge — measured by
+ * `scripts/design-probe.mjs`, which is the only instrument here that can see it,
+ * because jsdom performs no layout. */
+.sysCard {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding: 14px;
+  text-align: left;
+  border-radius: 13px;
+  border: 1px solid var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.04));
+  background: var(--dsw-alias-bg-module-platform, #f5f6f7);
+  color: inherit;
+  cursor: pointer;
+  font: var(--dsw-font-xxs-12);
+  transition: border-color 120ms ease-out, box-shadow 140ms ease-out, transform 140ms ease-out;
+}
+
+/* Hover is where the brand arrives: the border and the shadow take the green
+ * the section is marked with, and the card lifts by one pixel. A hover that
+ * only changed the cursor would leave 31 identical tiles with no answer to
+ * "which one am I about to open". */
+.sysCard:hover:not(:disabled) {
+  border-color: var(--lute-brand-line);
+  box-shadow: 0 8px 20px var(--lute-brand-shadow);
+  transform: translateY(-1px);
+}
+
+.sysCard:focus-visible {
+  outline: 2px solid var(--lute-brand);
+  outline-offset: 2px;
+}
+
+/* A refused card stays readable rather than vanishing: it is the reason text
+ * underneath that carries the answer, and this only says "not now". */
+.sysCard:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.sysHead {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* The portal's own glyph in a brand tile — the same shape as the drawer's
+ * identity mark, one size down, so a card reads as part of this drawer rather
+ * than as a screenshot of somebody else's page. */
+.sysIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  color: var(--lute-brand-deep);
+  background: linear-gradient(150deg, var(--lute-brand-tint), transparent 78%);
+  box-shadow: inset 0 0 0 1px var(--lute-brand-line);
+  transition: background 140ms ease-out, color 140ms ease-out;
+}
+
+.sysCard:hover:not(:disabled) .sysIcon {
+  color: var(--lute-on-brand);
+  background: linear-gradient(150deg, var(--lute-brand), var(--lute-brand-deep));
+}
+
+.sysTitles {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.sysName {
+  font: var(--dsw-font-s-strong-14);
+  color: var(--dsw-alias-label-primary, #0f1115);
+}
+
+/* The English name is a subtitle, not a translation to read: it is how the
+ * system is named in the material and in conversation, so it is kept but
+ * demoted. */
+.sysNameEn {
+  font: var(--dsw-font-xxxs-11);
+  /* Not the shell's caption grey: measured, `label-caption` on the card surface
+     is 1.97:1 in the light theme, which is unreadable rather than subtle. The
+     English name is how a system is named in the material, so it is read. */
+  color: var(--dsw-alias-label-secondary, #61666b);
+  letter-spacing: 0.3px;
+}
+
+.sysKind {
+  flex: none;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font: var(--dsw-font-xxxs-11);
+  color: var(--dsw-alias-label-secondary, #61666b);
+  background: var(--dsw-alias-bg-base, #fff);
+  box-shadow: inset 0 0 0 1px var(--dsw-alias-border-l2, rgba(0, 0, 0, 0.1));
+}
+
+/* Two lines and then an ellipsis. The full text is in the catalog and in the
+ * card's accessible name; a card that grows to fit every summary is a card
+ * whose height stops meaning anything. */
+.sysDesc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+  font: var(--dsw-font-xxs-12);
+  color: var(--dsw-alias-label-secondary, #61666b);
+}
+
+.sysTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.sysTag {
+  padding: 1px 7px;
+  border-radius: 999px;
+  font: var(--dsw-font-xxxs-11);
+  /* Content, not decoration: a technology tag is read. The shell's caption grey
+     measures 2.13:1 here, which is why this is the secondary label. */
+  color: var(--dsw-alias-label-secondary, #61666b);
+  background: var(--dsw-alias-bg-base, #fff);
+}
+
+/* `margin-top: auto` is what pins the footer to the bottom edge, so the action
+ * lines up across cards of different heights — a grid of cards whose buttons
+ * sit at four different heights reads as broken, not as varied. */
+.sysFoot {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: auto;
+}
+
+/* The primary role is identity, so it takes the brand tint. The secondary roles
+ * are kept visually quieter: they belong to the system, they do not decide
+ * where it is filed. */
+.sysRole {
+  padding: 1px 8px;
+  border-radius: 999px;
+  font: var(--dsw-font-xxxs-11);
+  color: var(--lute-brand-ink);
+  background: var(--lute-brand-tint);
+  box-shadow: inset 0 0 0 1px var(--lute-brand-line);
+}
+
+.sysRoleMore {
+  padding: 1px 7px;
+  border-radius: 999px;
+  font: var(--dsw-font-xxxs-11);
+  color: var(--dsw-alias-label-secondary, #61666b);
+  background: var(--dsw-alias-bg-base, #fff);
+}
+
+.sysSpacer {
+  flex: 1;
+}
+
+.sysFlags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* "The entry is the login page" is a warning about what the click will do, not
+ * a success and not an error — the shell's warn pair, which is the same message
+ * the unknown-role chip carries. */
+.sysFlag {
+  padding: 1px 8px;
+  border-radius: 999px;
+  font: var(--dsw-font-xxxs-11);
+  /* The shell's warn pair is a *surface* pair — `state-warn-tertiary` behind
+     `state-warn-primary` — and measured on the light theme it reads 1.99:1 for
+     11px text, which is a warning nobody can read. Dark ink on the warn surface
+     in light, the warn amber on the warn surface in dark: both measured, both
+     above 4.5:1. */
+  color: var(--dsw-static-amber-900, #27241f);
+  background: var(--dsw-alias-state-warn-tertiary, #fef5e7);
+}
+
+body[data-ds-dark-theme] .sysFlag {
+  color: var(--dsw-alias-state-warn-primary, #f59e0b);
+}
+
+.sysAction {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--lute-brand-ink);
+  font: var(--dsw-font-xxs-strong-12);
+  transition: color 120ms ease-out;
+}
+
+/* The shell toggles the dark theme by putting this attribute on `<body>`
+   (verbatim from `dsh-client-ui-theme`'s own switch), so one selector is enough
+   to swap the ink without a second colour rule per component. */
+body[data-ds-dark-theme] .sysRole,
+body[data-ds-dark-theme] .sysAction {
+  color: var(--lute-brand-ink-dark);
+}
+
+/* The portal's own call to action, not a generic 「打开」: each system names the
+ * verb it wants ("打开知识库", "打开 BOS 工作台"), and that is the copy its own
+ * users already recognise. */
+.sysActionLabel {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sysAction svg {
+  flex: none;
+  transition: transform 140ms ease-out;
+}
+
+.sysCard:hover:not(:disabled) .sysAction svg {
+  transform: translateX(2px);
+}
+
+.sysNote {
+  margin: 0;
+  font: var(--dsw-font-xxxs-11);
+  color: var(--dsw-alias-label-caption, #adb2b8);
+}
+
+.sysNoteError {
+  color: var(--dsw-alias-state-error-primary, #ec1313);
+}
+
 /* ── Motion ───────────────────────────────────────────────────────────────── */
 
 @keyframes na-backdrop-in {
@@ -693,5 +1073,14 @@
   .root::backdrop,
   .panel {
     animation: none;
+  }
+  /* The hover lift and the arrow's nudge are the same kind of motion as the
+     drawer's own slide-in, and they are the ones a user meets 31 times. */
+  .sysCard,
+  .sysCard:hover:not(:disabled),
+  .sysAction svg,
+  .sysCard:hover:not(:disabled) .sysAction svg {
+    transition: none;
+    transform: none;
   }
 }

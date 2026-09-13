@@ -163,7 +163,7 @@ describe('stylesheet tokens', () => {
     // `prefers-reduced-motion` is the accessibility regression that ships
     // silently because nobody runs the OS setting during review.
     expect(code).toMatch(/@media\s*\(prefers-reduced-motion:\s*reduce\)/)
-    for (const selector of ['.ghost:focus-visible', '.close:focus-visible', '.search:focus-visible', '.primary:focus-visible', '.entry:focus-visible']) {
+    for (const selector of ['.ghost:focus-visible', '.close:focus-visible', '.search:focus-visible', '.primary:focus-visible', '.entry:focus-visible', '.sysCard:focus-visible']) {
       expect(code, `missing ${selector}`).toContain(selector)
     }
   })
@@ -181,7 +181,11 @@ describe('stylesheet tokens', () => {
  */
 function askersAndDefinitions(): { asked: Set<string>; defined: Set<string> } {
   const asked = new Set<string>()
-  for (const file of ['NewAppPanel.tsx', 'sidebar-entry-core.ts']) {
+  // Every file that renders against this stylesheet. The section files joined
+  // the list when the drawer gained its second section: a class defined but
+  // never asked for is dead CSS, and the check is only worth running if it
+  // covers the components that exist.
+  for (const file of ['NewAppPanel.tsx', 'SystemsSection.tsx', 'sidebar-entry-core.ts']) {
     const text = stripComments(readFileSync(join(process.cwd(), 'src/client', file), 'utf8'))
     for (const match of text.matchAll(/css\['([A-Za-z0-9_-]+)'\]/g)) asked.add(match[1]!)
   }

@@ -63,6 +63,34 @@ export const zh = {
 
   'footer.hint': '本页面只读。产品是各自目录里的 product.json，岗位名册归官方预设——这里只做连接，不复制、不代管。',
   'footer.undeclared': '另有 {count} 个目录尚未产品化（没有可用的 product.json），不在本页列出。',
+
+  // ── 业务系统（外部域名）────────────────────────────────────────────────
+  //
+  // 「业务系统」是这一段的唯一名词，刻意不与「产品」「岗位」混用：产品是**本机**
+  // 已产品化的 Agent（点开直接跑），岗位是组织里的一个位置，而业务系统是**别人的
+  // 站点**（点开离开本应用）。三个词各指一件事，混用会让用户分不清哪个按钮会
+  // 把他带到别处。
+  'systems.section': '业务系统',
+  'systems.subtitle': '路特主域名下的系统入口——点开在系统默认浏览器里打开',
+  'systems.search': '搜索系统（名称 / 英文名 / 岗位 / 域名）…',
+  'systems.searchEmpty': '没有匹配的系统。换个关键词试试。',
+  'systems.coverage': '{systems} 个系统 · 覆盖 {touched}/{total} 个岗位 · 可达性读数 {date}',
+  'systems.coverageNoRoster': '{systems} 个系统 · 岗位名册未读到，分组按编号显示',
+  'systems.loading': '正在读取系统清单…',
+  'systems.empty': '系统清单是空的。catalog/systems.json 由 scripts/sync-systems.mjs 生成。',
+  'systems.dropped': '有 {count} 条清单记录没有通过校验，未在此列出：',
+  'systems.open': '打开系统',
+  'systems.opening': '打开中…',
+  'systems.opened': '已交给系统默认浏览器',
+  'systems.roleUnknown': '岗位名册里没有这个编号',
+  'systems.unreachable': '上次巡检不可达',
+  'systems.loginRequired': '入口即登录页',
+  'systems.alsoMore': '+{count}',
+  'systems.count': '{count} 个',
+  'systems.readOnly': '这里只列入口，不代理登录——各系统的账号归各系统。',
+
+  'systems.blocked.noHref': '清单里没有可用地址。',
+  'systems.blocked.noOpener': '宿主半边未加载，无法调用系统浏览器（重启后生效）。',
 } as const
 
 export type NewAppKey = keyof typeof zh
@@ -114,4 +142,26 @@ export const en: Record<NewAppKey, string> = {
 
   'footer.hint': 'This page is read-only. Products are the product.json files in their own directories; the roster owns the presets — this surface only joins them.',
   'footer.undeclared': '{count} more directories are not productized (no usable product.json) and are not listed here.',
+
+  'systems.section': 'Business systems',
+  'systems.subtitle': 'Entry points under the LUTE domain — opening one leaves this app for your default browser',
+  'systems.search': 'Search systems (name / English name / role / host)…',
+  'systems.searchEmpty': 'No system matches. Try another keyword.',
+  'systems.coverage': '{systems} systems · {touched}/{total} roles covered · reachability read {date}',
+  'systems.coverageNoRoster': '{systems} systems · roster unread, groups show role ids',
+  'systems.loading': 'Reading the systems catalog…',
+  'systems.empty': 'The systems catalog is empty. catalog/systems.json is produced by scripts/sync-systems.mjs.',
+  'systems.dropped': '{count} catalog entries did not pass validation and are not listed:',
+  'systems.open': 'Open system',
+  'systems.opening': 'Opening…',
+  'systems.opened': 'Handed to the default browser',
+  'systems.roleUnknown': 'the roster has no such id',
+  'systems.unreachable': 'unreachable at the last probe',
+  'systems.loginRequired': 'entry is the login page',
+  'systems.alsoMore': '+{count}',
+  'systems.count': '{count}',
+  'systems.readOnly': 'This section only lists entry points and never proxies a login — each system keeps its own account.',
+
+  'systems.blocked.noHref': 'The catalog holds no usable address for this system.',
+  'systems.blocked.noOpener': 'The host half is not loaded, so the default browser cannot be called (restart to apply).',
 }

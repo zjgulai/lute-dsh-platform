@@ -69,10 +69,17 @@ describe('host ↔ client route agreement', () => {
       expect(source.owner).not.toBe('')
       expect(source.owns).not.toBe('')
     }
-    // This package owns no data source of its own — the health probe only
-    // reports. A route here that looks like data would mean the ownership rule
-    // has already been broken.
-    expect(Object.keys(ROUTES).sort()).toEqual(['health', 'products'])
+    // This package owns **exactly one** dataset, and the route list is where it
+    // says so. `systems` reads it (the external systems catalog bundled under
+    // src/catalog/), and `openSystem` is the one route that acts on it. The
+    // other two own nothing: `products` reads `product.json` files that live in
+    // their own directories, and `health` only reports that this plugin loaded.
+    //
+    // The list stays pinned, because the rule it guards has now been amended
+    // once and the amendment is the interesting part: this package used to own
+    // no data at all (ADR-0045), and adding a *second* owned dataset is a
+    // decision someone has to make on purpose rather than a diff that slips in.
+    expect(Object.keys(ROUTES).sort()).toEqual(['health', 'openSystem', 'products', 'systems'])
   })
 
   it('carries every client-called route inside the built bundle', () => {

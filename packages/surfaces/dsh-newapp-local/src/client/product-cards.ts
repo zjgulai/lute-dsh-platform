@@ -172,7 +172,24 @@ function toProduct(raw: unknown): ProductView | undefined {
   if (p === undefined) return undefined
   const id = str(p['id'])
   if (id === '') return undefined
+  // The scan payload carries one of two shapes: the raw declaration, or the
+  // host's normalized view whose `.declaration` **is** the raw one. Resolve to
+  // the innermost object before reading anything feature-related: every layer
+  // above the raw declaration carries only feature summaries. A view wrapped
+  // around a view went to production on 2026-09-13 and cost the entry panel
+  // its `features[].inputs` (probe `dsh-kolhunter-probe`: inputCount:-1) —
+  // the card rendered, its button opened a panel with no fields.
+  const declared = obj(p['declaration']) ?? p
+  // The host normalizes `entry.service` into the flat `entryService` field
+  // (see src/products.ts). We read that first, and keep the nested shape as a
+  // fallback so older payloads / manual callers still work. When the flat field
+  // is present, the nested `entry` is considered a legacy/normalized shadow and
+  // its `action` must not override the default.
   const entry = obj(p['entry'])
+  const entryService = str(p['entryService'])
+  const nestedService = entry === undefined ? '' : str(entry['service'])
+  const nestedAction = entry === undefined ? '' : str(entry['action'])
+  const useFlat = entryService !== ''
   return {
     id,
     name: str(p['name']) !== '' ? str(p['name']) : id,
@@ -181,9 +198,9 @@ function toProduct(raw: unknown): ProductView | undefined {
     status: p['status'] === 'ready' ? 'ready' : 'draft',
     statusReason: str(p['statusReason']),
     preset: str(p['preset']),
-    service: entry === undefined ? '' : str(entry['service']),
-    entryAction: entry === undefined ? '' : str(entry['action']),
-    features: arr(p['features']).flatMap((f) => {
+    service: useFlat ? entryService : nestedService,
+    entryAction: useFlat ? '' : nestedAction,
+    features: arr(declared['features']).flatMap((f) => {
       const feature = obj(f)
       if (feature === undefined) return []
       const featureId = str(feature['id'])
@@ -196,7 +213,7 @@ function toProduct(raw: unknown): ProductView | undefined {
         inputs: arr(feature['inputs']).length,
       }]
     }),
-    declaration: p,
+    declaration: declared,
   }
 }
 

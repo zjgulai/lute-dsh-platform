@@ -1,0 +1,1351 @@
+{
+  "source": "https://lute-tlz-dddd.top/systems.html",
+  "iconVocabulary": {
+    "elements": [
+      "circle",
+      "line",
+      "path",
+      "rect"
+    ],
+    "attributes": [
+      "cx",
+      "cy",
+      "d",
+      "fill",
+      "height",
+      "r",
+      "rx",
+      "stroke",
+      "stroke-linecap",
+      "stroke-linejoin",
+      "stroke-width",
+      "width",
+      "x",
+      "y"
+    ]
+  },
+  "systems": [
+    {
+      "slug": "ana",
+      "name": "财经经营洞察",
+      "nameEn": "Momcozy DataPilot",
+      "desc": "Momcozy 经营数据驾驶舱 · 财经分析 · 指标追踪",
+      "descEn": "Dockerized DataPilot workspace for financial and operating insight review",
+      "kind": "Docker 应用",
+      "tags": [
+        "DataPilot",
+        "Finance Insight"
+      ],
+      "cta": "打开 DataPilot",
+      "href": "https://ana.lute-tlz-dddd.top",
+      "host": "ana.lute-tlz-dddd.top",
+      "sourceCategory": "insight",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M4 19V5",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M4 19h16",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M8 15l3-4 3 2 5-7",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "asset",
+      "name": "品牌资产智能中台",
+      "nameEn": "BrandOS Asset Intelligence",
+      "desc": "BrandOS · 母婴品牌 AI 大脑 · SKU 资产与决策智能",
+      "descEn": "Static BrandOS site for brand asset intelligence and SKU decision workflows",
+      "kind": "静态站点",
+      "tags": [
+        "BrandOS",
+        "Asset Intelligence"
+      ],
+      "cta": "打开 BrandOS",
+      "href": "https://asset.lute-tlz-dddd.top",
+      "host": "asset.lute-tlz-dddd.top",
+      "sourceCategory": "growth",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M4 5h16v14H4z",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M8 9h8M8 13h5M8 17h3",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M17 14l3 3-3 3",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "audit",
+      "name": "AI 审计一体化协作平台",
+      "nameEn": "Medical Audit Collaboration",
+      "desc": "审计协作 · 问题闭环 · 证据与整改追踪",
+      "descEn": "Integrated AI audit collaboration for evidence review, remediation and operational closure",
+      "kind": "Docker 应用",
+      "tags": [
+        "Audit",
+        "Collaboration"
+      ],
+      "cta": "打开审计协作平台",
+      "href": "https://audit.lute-tlz-dddd.top",
+      "host": "audit.lute-tlz-dddd.top",
+      "sourceCategory": "operations",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M6 4h12v16H6z",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M9 9h6M9 13h4M9 17h3",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M9 4V2h6v2",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "bos",
+      "name": "品牌经营操作系统",
+      "nameEn": "BOS AI Brand Operations",
+      "desc": "AI 品牌经营工作台 · 数据洞察 · 策略协同 · 经营执行",
+      "descEn": "Dockerized brand operating workspace for insight, strategy collaboration and execution",
+      "kind": "Docker 应用",
+      "tags": [
+        "BOS Platform",
+        "Brand Operations"
+      ],
+      "cta": "打开 BOS 工作台",
+      "href": "https://bos.lute-tlz-dddd.top",
+      "host": "bos.lute-tlz-dddd.top",
+      "sourceCategory": "growth",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M4 7h16v12H4z",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M8 7V5h8v2",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M8 12h8M8 16h5",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "brand",
+      "name": "品牌战略引擎",
+      "nameEn": "Brand Strategy Engine",
+      "desc": "路特星链品牌战略应用 · 专属 Docker 前端 · 已接入统一网关",
+      "descEn": "Dockerized Starlink brand strategy frontend behind the shared product-card gateway",
+      "kind": "Docker 应用",
+      "tags": [
+        "Starlink Brand",
+        "Dedicated Upstream"
+      ],
+      "cta": "打开品牌战略引擎",
+      "href": "https://brand.lute-tlz-dddd.top",
+      "host": "brand.lute-tlz-dddd.top",
+      "sourceCategory": "growth",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M4 6h16M4 12h10M4 18h7",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M17 12l3 3-3 3",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "business",
+      "name": "商业机会点",
+      "nameEn": "Business Insight Hub",
+      "desc": "566 亿母婴 AI 市场 · 五大反直觉创新方案 · 六大洞察框架",
+      "descEn": "NurtureLink: Heartbeat Cocoon · DadQuest · SafeBox · WarmMom · FamilyBridge — market research to product strategy",
+      "kind": "静态站点",
+      "tags": [
+        "5 创新方案",
+        "React + Vite"
+      ],
+      "cta": "打开洞察平台",
+      "href": "https://business.lute-tlz-dddd.top",
+      "host": "business.lute-tlz-dddd.top",
+      "sourceCategory": "growth",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M2 20h20M4 20V10l8-7 8 7v10",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M9 20v-6h6v6",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "flowise",
+      "name": "AI 流程编排平台",
+      "nameEn": "Flowise Agent Builder",
+      "desc": "可视化编排 · Agent 工作流 · 模型与工具集成",
+      "descEn": "Visual AI workflow orchestration for agents, models, tools and reusable execution flows",
+      "kind": "Docker 应用",
+      "tags": [
+        "Flowise",
+        "Agent Workflow"
+      ],
+      "cta": "打开流程编排平台",
+      "href": "https://flowise.lute-tlz-dddd.top",
+      "host": "flowise.lute-tlz-dddd.top",
+      "sourceCategory": "ai",
+      "icon": [
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "6",
+            "cy": "6",
+            "r": "2",
+            "stroke": "currentColor",
+            "stroke-width": "1.8"
+          }
+        },
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "18",
+            "cy": "6",
+            "r": "2",
+            "stroke": "currentColor",
+            "stroke-width": "1.8"
+          }
+        },
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "12",
+            "cy": "18",
+            "r": "2",
+            "stroke": "currentColor",
+            "stroke-width": "1.8"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M8 6h8M7 8l4 8M17 8l-4 8",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "kb",
+      "name": "经营咨询工作台",
+      "nameEn": "Consultant Agent",
+      "desc": "角色知识库 · 咨询交付 · 本地检索",
+      "descEn": "Consultant delivery workbench backed by local retrieval and role knowledge base",
+      "kind": "Docker 应用",
+      "tags": [
+        "KB",
+        "Consulting"
+      ],
+      "cta": "打开咨询工作台",
+      "href": "https://kb.lute-tlz-dddd.top",
+      "host": "kb.lute-tlz-dddd.top",
+      "sourceCategory": "ai",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M5 4h14v16H5z",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M8 8h8M8 12h8M8 16h5",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "kg",
+      "name": "AI 知识图谱",
+      "nameEn": "AI Knowledge Garden",
+      "desc": "803 条精选 AI 提示词与技能 · 六维分类 · 全文搜索 · 角色筛选",
+      "descEn": "Curated prompts, skills, hooks, MCP tools, agents & open-source projects — 14 professional roles, instant search",
+      "kind": "Docker 应用",
+      "tags": [
+        "193 提示词",
+        "610 技能"
+      ],
+      "cta": "打开知识库",
+      "href": "https://kg.lute-tlz-dddd.top",
+      "host": "kg.lute-tlz-dddd.top",
+      "sourceCategory": "ai",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M12 2L2 7l10 5 10-5-10-5z",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M2 17l10 5 10-5",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M2 12l10 5 10-5",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "kgraph",
+      "name": "DocCanvas 工作台",
+      "nameEn": "DocCanvas Knowledge Graph",
+      "desc": "文档画布 · 知识关系建模 · 图谱探索 · 协作工作流",
+      "descEn": "Document canvas and knowledge-graph workspace for relationship modeling and exploration",
+      "kind": "Docker 应用",
+      "tags": [
+        "DocCanvas",
+        "Knowledge Graph"
+      ],
+      "cta": "打开 DocCanvas",
+      "href": "https://kgraph.lute-tlz-dddd.top",
+      "host": "kgraph.lute-tlz-dddd.top",
+      "sourceCategory": "ai",
+      "icon": [
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "6",
+            "cy": "7",
+            "r": "2",
+            "stroke": "currentColor",
+            "stroke-width": "1.8"
+          }
+        },
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "18",
+            "cy": "7",
+            "r": "2",
+            "stroke": "currentColor",
+            "stroke-width": "1.8"
+          }
+        },
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "12",
+            "cy": "18",
+            "r": "2",
+            "stroke": "currentColor",
+            "stroke-width": "1.8"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M8 8l3 8M16 8l-3 8M8 7h8",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "label",
+      "name": "VOC 标签工作台",
+      "nameEn": "VOC Label Workbench",
+      "desc": "标签工程 · 标注审核 · 数据治理",
+      "descEn": "VOC label engineering workbench for taxonomy, review and data governance",
+      "kind": "Docker 应用",
+      "tags": [
+        "Labeling",
+        "Taxonomy"
+      ],
+      "cta": "打开标签工作台",
+      "href": "https://label.lute-tlz-dddd.top",
+      "host": "label.lute-tlz-dddd.top",
+      "sourceCategory": "insight",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M4 7h16M4 12h10M4 17h7",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M17 13l3 3-3 3",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "llm",
+      "name": "大模型选型",
+      "nameEn": "LLM Compare Hub",
+      "desc": "PoYo.ai vs 硅基流动 · BAI · EasyRouter · 4 平台横向对比 · API 文档 · 费用计算",
+      "descEn": "Multi-platform LLM API explorer: pricing, capabilities & curl examples across 130+ models — text, image, video, music & more",
+      "kind": "静态站点",
+      "tags": [
+        "130+ 模型",
+        "API Explorer"
+      ],
+      "cta": "打开选型指南",
+      "href": "https://llm.lute-tlz-dddd.top",
+      "host": "llm.lute-tlz-dddd.top",
+      "sourceCategory": "ai",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M4 6h16M4 10h10M4 14h16M4 18h10",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        },
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "19",
+            "cy": "10",
+            "r": "3",
+            "stroke": "currentColor",
+            "stroke-width": "1.6"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "mas",
+      "name": "科学经营决策系统",
+      "nameEn": "VOA MAS",
+      "desc": "VOA 科学经营决策与执行闭环平台 · 专属 Docker 应用 · 已接入统一网关",
+      "descEn": "Dockerized MAS decision platform with a dedicated upstream behind the shared gateway",
+      "kind": "Docker 应用",
+      "tags": [
+        "VOA MAS",
+        "Dedicated Upstream"
+      ],
+      "cta": "打开决策系统",
+      "href": "https://mas.lute-tlz-dddd.top",
+      "host": "mas.lute-tlz-dddd.top",
+      "sourceCategory": "growth",
+      "icon": [
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "6",
+            "cy": "7",
+            "r": "3",
+            "stroke": "currentColor",
+            "stroke-width": "1.8"
+          }
+        },
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "18",
+            "cy": "7",
+            "r": "3",
+            "stroke": "currentColor",
+            "stroke-width": "1.8"
+          }
+        },
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "12",
+            "cy": "17",
+            "r": "3",
+            "stroke": "currentColor",
+            "stroke-width": "1.8"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M8.5 9.5l2 4M15.5 9.5l-2 4",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "melwater",
+      "name": "Melwater 分析",
+      "nameEn": "Melwater VOC",
+      "desc": "社媒舆情 · VOC 决策 · 评审状态管理",
+      "descEn": "Melwater VOC decision workbench for social listening and review-state workflows",
+      "kind": "Docker 应用",
+      "tags": [
+        "VOC",
+        "Review State"
+      ],
+      "cta": "打开 Melwater",
+      "href": "https://melwater.lute-tlz-dddd.top",
+      "host": "melwater.lute-tlz-dddd.top",
+      "sourceCategory": "insight",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M4 18V6M4 18h16",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M7 15l4-4 3 3 5-7",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "mkt",
+      "name": "市场洞察工作台",
+      "nameEn": "Market Insight Platform",
+      "desc": "Momcozy 母婴品牌全球市场分析 · 竞品追踪 · 用户画像 · 行业趋势",
+      "descEn": "Global baby care market intelligence: competitive analysis, consumer profiles, industry trends & Momcozy brand deep-dive",
+      "kind": "静态站点",
+      "tags": [
+        "竞品分析",
+        "用户画像"
+      ],
+      "cta": "打开市场看板",
+      "href": "https://mkt.lute-tlz-dddd.top",
+      "host": "mkt.lute-tlz-dddd.top",
+      "sourceCategory": "insight",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M3 20h18M5 20V10l4-4 4 4 4-6v16",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "person",
+      "name": "数字员工",
+      "nameEn": "AI Digital Employee",
+      "desc": "55 种专业 AI 数字员工 · 2721 个业务模型 · 战略 / 数据 / 营销 / 法律 / 财务全覆盖",
+      "descEn": "On-demand AI employee rental: 55 roles, 2,721 models across strategy, data science, marketing, legal & finance",
+      "kind": "静态站点",
+      "tags": [
+        "55 专业角色",
+        "2721 业务模型"
+      ],
+      "cta": "进入数字员工平台",
+      "href": "https://person.lute-tlz-dddd.top",
+      "host": "person.lute-tlz-dddd.top",
+      "sourceCategory": "ai",
+      "icon": [
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "12",
+            "cy": "7",
+            "r": "4",
+            "stroke": "currentColor",
+            "stroke-width": "1.8"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M4 20c0-4 3.6-7 8-7s8 3 8 7",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M16 11l1.5 1.5L21 9",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "platform-shopify",
+      "name": "Shopify AI 经营知识库",
+      "nameEn": "Shopify AI Knowledge Base",
+      "desc": "独立站经营知识库 · Neo4j 图谱 · AI 问答工作台",
+      "descEn": "Dockerized Shopify operation knowledge base with graph-backed retrieval and AI workflows",
+      "kind": "Docker 应用",
+      "tags": [
+        "Neo4j",
+        "Knowledge Base"
+      ],
+      "cta": "打开知识库",
+      "href": "https://platform.shopify.lute-tlz-dddd.top",
+      "host": "platform.shopify.lute-tlz-dddd.top",
+      "sourceCategory": "growth",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M5 4h14v16H5z",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M8 8h8M8 12h8M8 16h5",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "plugin",
+      "name": "插件中心",
+      "nameEn": "VOC Hub",
+      "desc": "浏览器插件 · VOC 工作流 · API 服务",
+      "descEn": "Plugin Hub for VOC tooling, browser extension workflows and API services",
+      "kind": "Docker 应用",
+      "tags": [
+        "Plugin Hub",
+        "Extension"
+      ],
+      "cta": "打开插件中心",
+      "href": "https://plugin.lute-tlz-dddd.top",
+      "host": "plugin.lute-tlz-dddd.top",
+      "sourceCategory": "ai",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M8 4h8v6h4v10H4V10h4V4z",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M9 15h6",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "present",
+      "name": "发布资产工厂",
+      "nameEn": "HTML Anything",
+      "desc": "HTML 资产生成 · 发布材料 · 产品表达",
+      "descEn": "Product release asset factory for HTML pages and structured presentation material",
+      "kind": "Docker 应用",
+      "tags": [
+        "HTML",
+        "Release Assets"
+      ],
+      "cta": "打开资产工厂",
+      "href": "https://present.lute-tlz-dddd.top",
+      "host": "present.lute-tlz-dddd.top",
+      "sourceCategory": "creation",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M4 5h16v14H4z",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M8 9h8M8 13h5",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "product",
+      "name": "AI 选品平台",
+      "nameEn": "AI Product Selection",
+      "desc": "全球智能选品中心 · 店铺/商品/达人资产 · 跨境电商机会筛选",
+      "descEn": "AI product selection workspace with shop, product and creator assets for cross-border e-commerce decisions",
+      "kind": "静态站点",
+      "tags": [
+        "Product Assets",
+        "Shop Data"
+      ],
+      "cta": "打开选品平台",
+      "href": "https://product.lute-tlz-dddd.top",
+      "host": "product.lute-tlz-dddd.top",
+      "sourceCategory": "growth",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M4 6h16v12H4z",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M8 10h8M8 14h5",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "redbook",
+      "name": "AI 效能公式链",
+      "nameEn": "AI Content Production",
+      "desc": "热点发现 · 智能创作 · 内容评审 · 发布闭环",
+      "descEn": "Intelligent content production platform for research, drafting, review and publishing workflows",
+      "kind": "Docker 应用",
+      "tags": [
+        "Hot Article",
+        "Content Workflow"
+      ],
+      "cta": "打开内容生产平台",
+      "href": "https://redbook.lute-tlz-dddd.top",
+      "host": "redbook.lute-tlz-dddd.top",
+      "sourceCategory": "creation",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M5 4h14v16H5z",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M8 8h8M8 12h5M8 16h4",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M16 13l3 3-3 3",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "reddit",
+      "name": "Reddit 舆情工作台",
+      "nameEn": "Reddit Insight Workbench",
+      "desc": "社区舆情 · 主题洞察 · 品牌机会 · 数据报告",
+      "descEn": "Reddit intelligence workspace for community signals, themes and brand opportunities",
+      "kind": "Docker 应用",
+      "tags": [
+        "Reddit Insights",
+        "VOC"
+      ],
+      "cta": "打开舆情工作台",
+      "href": "https://reddit.lute-tlz-dddd.top",
+      "host": "reddit.lute-tlz-dddd.top",
+      "sourceCategory": "insight",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M5 7h14v10H9l-4 3V7z",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M8 11h8M8 14h5",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        },
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "18",
+            "cy": "5",
+            "r": "2",
+            "stroke": "currentColor",
+            "stroke-width": "1.6"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "report",
+      "name": "E2E 洞察报告",
+      "nameEn": "VOC Insight Report",
+      "desc": "Momcozy 喂养电器全链路洞察 · 六源交叉验证 · ECharts 可视化",
+      "descEn": "End-to-end insight report: 19,098 Amazon reviews × Meltwater 75,291 posts × 6-source cross-validation",
+      "kind": "静态报告",
+      "tags": [
+        "Amazon VOC 19,098",
+        "Meltwater 75,291"
+      ],
+      "cta": "查看洞察报告",
+      "href": "https://report.lute-tlz-dddd.top",
+      "host": "report.lute-tlz-dddd.top",
+      "sourceCategory": "insight",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M9 17H7A5 5 0 0 1 7 7h2",
+            "stroke": "currentColor",
+            "stroke-width": "2",
+            "stroke-linecap": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M15 7h2a5 5 0 0 1 0 10h-2",
+            "stroke": "currentColor",
+            "stroke-width": "2",
+            "stroke-linecap": "round"
+          }
+        },
+        {
+          "tag": "line",
+          "attrs": {
+            "stroke": "currentColor",
+            "stroke-width": "2",
+            "stroke-linecap": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "scm",
+      "name": "供应链治理",
+      "nameEn": "SCM Governance",
+      "desc": "数据开发 · 治理工作台 · 角色追踪",
+      "descEn": "Supply-chain data governance workbench for AIP-SCM operations",
+      "kind": "Docker 应用",
+      "tags": [
+        "SCM",
+        "Governance"
+      ],
+      "cta": "打开 SCM 工作台",
+      "href": "https://scm.lute-tlz-dddd.top",
+      "host": "scm.lute-tlz-dddd.top",
+      "sourceCategory": "operations",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M3 8h18v10H3z",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M7 8V5h10v3M8 13h3M14 13h2",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "scrapy",
+      "name": "数据采集平台",
+      "nameEn": "Data Intelligence Hub",
+      "desc": "采集任务 · 数据处理 · 智能分析工作台",
+      "descEn": "Scrapy deployment for data collection, processing and intelligence workflows",
+      "kind": "Docker 应用",
+      "tags": [
+        "Scrapy",
+        "Next.js"
+      ],
+      "cta": "打开采集平台",
+      "href": "https://scrapy.lute-tlz-dddd.top",
+      "host": "scrapy.lute-tlz-dddd.top",
+      "sourceCategory": "operations",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M4 5h16v5H4zM4 14h16v5H4z",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M8 10v4M16 10v4",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "shopify",
+      "name": "独立站监控",
+      "nameEn": "Shopify Audit Report",
+      "desc": "Momcozy M1 v2.0 · Top 15 病灶 · 15 条 Liquid PR 代码 · 8 站竞品对标",
+      "descEn": "Playwright performance audit: LCP 4.92s → 2s roadmap, CVR 0.88% fix plan, estimated +.7M/month revenue recovery",
+      "kind": "静态报告",
+      "tags": [
+        "Playwright 实测",
+        "Top 15 病灶"
+      ],
+      "cta": "查看诊断报告",
+      "href": "https://shopify.lute-tlz-dddd.top",
+      "host": "shopify.lute-tlz-dddd.top",
+      "sourceCategory": "growth",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M3 3h18v4H3z",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M3 7l2 14h14l2-14",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M9 12h6M9 16h4",
+            "stroke": "currentColor",
+            "stroke-width": "1.6",
+            "stroke-linecap": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "skills",
+      "name": "AI 技能库",
+      "nameEn": "paper2skills",
+      "desc": "母婴跨境品牌技能 · playbooks · agent 方法库",
+      "descEn": "Reusable AI playbooks and operating skills for cross-border brand teams",
+      "kind": "静态站点",
+      "tags": [
+        "Skills",
+        "Playbooks"
+      ],
+      "cta": "打开技能库",
+      "href": "https://skills.lute-tlz-dddd.top",
+      "host": "skills.lute-tlz-dddd.top",
+      "sourceCategory": "creation",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M12 4l8 4-8 4-8-4 8-4z",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M4 12l8 4 8-4M4 16l8 4 8-4",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "video",
+      "name": "AI 原生视频系统",
+      "nameEn": "AI Native Video",
+      "desc": "AI 视频生成 · 资产管理 · 长视频与品牌内容工作流",
+      "descEn": "Native AI video creation platform for scripted generation, media assets and production workflows",
+      "kind": "Docker 应用",
+      "tags": [
+        "AI Video",
+        "Next.js"
+      ],
+      "cta": "打开视频系统",
+      "href": "https://video.lute-tlz-dddd.top",
+      "host": "video.lute-tlz-dddd.top",
+      "sourceCategory": "creation",
+      "icon": [
+        {
+          "tag": "rect",
+          "attrs": {
+            "x": "3",
+            "y": "5",
+            "width": "18",
+            "height": "14",
+            "rx": "2",
+            "stroke": "currentColor",
+            "stroke-width": "1.8"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M10 9l5 3-5 3V9z",
+            "fill": "currentColor"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "voc",
+      "name": "客户声音分析平台",
+      "nameEn": "Voice of Customer",
+      "desc": "Apache Superset · 跨境电商 NLP 增量处理 · 评论/反馈/舆情挖掘",
+      "descEn": "Customer review analytics & sentiment dashboards on Apache Superset",
+      "kind": "Docker 应用",
+      "tags": [
+        "Apache Superset",
+        "VOC NLP"
+      ],
+      "cta": "打开数据平台",
+      "href": "https://voc.lute-tlz-dddd.top",
+      "host": "voc.lute-tlz-dddd.top",
+      "sourceCategory": "insight",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M3 12h4l2-7 4 14 2-7h6",
+            "stroke": "currentColor",
+            "stroke-width": "2",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "wct",
+      "name": "微信公众号文章批量下载",
+      "nameEn": "WeChat Content Toolkit",
+      "desc": "文章采集 · 批量下载 · 内容资产沉淀",
+      "descEn": "Batch collection and download toolkit for WeChat articles and reusable content assets",
+      "kind": "Docker 应用",
+      "tags": [
+        "WeChat",
+        "Content Assets"
+      ],
+      "cta": "打开文章下载工具",
+      "href": "https://wct.lute-tlz-dddd.top",
+      "host": "wct.lute-tlz-dddd.top",
+      "sourceCategory": "creation",
+      "icon": [
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M5 4h14v16H5z",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linejoin": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M8 8h8M8 12h8M8 16h5",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M16 15l2 2 3-4",
+            "stroke": "currentColor",
+            "stroke-width": "1.8",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "xmind",
+      "name": "前车之鉴 · 思维模型工作台",
+      "nameEn": "Oriental Thinking Workbench",
+      "desc": "2789 个思维模型 · 13 个认知章节 · 19 个 Agent 角色 · 场景匹配与组合路线",
+      "descEn": "Thinking-model workspace for scenario matching, model combinations and agent decision routes",
+      "kind": "Docker 应用",
+      "tags": [
+        "Thinking Models",
+        "Agent Router"
+      ],
+      "cta": "打开思维模型工作台",
+      "href": "https://xmind.lute-tlz-dddd.top",
+      "host": "xmind.lute-tlz-dddd.top",
+      "sourceCategory": "ai",
+      "icon": [
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "12",
+            "cy": "12",
+            "r": "3",
+            "stroke": "currentColor",
+            "stroke-width": "1.8"
+          }
+        },
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "5",
+            "cy": "6",
+            "r": "2",
+            "stroke": "currentColor",
+            "stroke-width": "1.6"
+          }
+        },
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "19",
+            "cy": "6",
+            "r": "2",
+            "stroke": "currentColor",
+            "stroke-width": "1.6"
+          }
+        },
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "5",
+            "cy": "18",
+            "r": "2",
+            "stroke": "currentColor",
+            "stroke-width": "1.6"
+          }
+        },
+        {
+          "tag": "circle",
+          "attrs": {
+            "cx": "19",
+            "cy": "18",
+            "r": "2",
+            "stroke": "currentColor",
+            "stroke-width": "1.6"
+          }
+        },
+        {
+          "tag": "path",
+          "attrs": {
+            "d": "M7 7.5l3 2.8M17 7.5l-3 2.8M7 16.5l3-2.8M17 16.5l-3-2.8",
+            "stroke": "currentColor",
+            "stroke-width": "1.6",
+            "stroke-linecap": "round"
+          }
+        }
+      ]
+    }
+  ]
+}

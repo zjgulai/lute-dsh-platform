@@ -1,0 +1,353 @@
+{
+  "startedAt": "2026-09-13T04:21:44.101Z",
+  "installedEntry": "/Users/lute/.dsh/profiles/desktop/node_modules/dsh-newapp-local/lib/index.js",
+  "liveBase": "http://127.0.0.1:43120",
+  "expectedSystems": 31,
+  "stages": {
+    "A": {
+      "port": 61095,
+      "routes": {
+        "exact": [
+          "/api/dsh-newapp/health",
+          "/api/dsh-newapp/open-system",
+          "/api/dsh-newapp/products",
+          "/api/dsh-newapp/systems"
+        ],
+        "prefix": []
+      },
+      "plugin": {
+        "name": "newapp-local",
+        "inject": [
+          "webServer"
+        ]
+      }
+    },
+    "D": {
+      "health": 200,
+      "systems": 200,
+      "crossSite": 403,
+      "restartRequired": false,
+      "staleHost": false
+    }
+  },
+  "results": [
+    {
+      "id": "srv-alive",
+      "kind": "instrument",
+      "what": "一条不存在的路由必须 404（证明服务真在派发）",
+      "pass": true,
+      "expect": 404,
+      "actual": 404,
+      "detail": "→ 404 "
+    },
+    {
+      "id": "health",
+      "kind": "instrument",
+      "what": "health 必须 200 且自称 newapp-local（栅栏负例的正控）",
+      "pass": true,
+      "expect": 200,
+      "actual": 200,
+      "detail": "→ 200 {\"ok\":true,\"plugin\":\"newapp-local\",\"version\":\"0.1.0\",\"detect"
+    },
+    {
+      "id": "curl-alive",
+      "kind": "instrument",
+      "what": "连没人监听的端口必须失败（证明 curl 的失败看得见）",
+      "pass": true,
+      "expect": "curl 非零退出",
+      "actual": 7,
+      "detail": "→ curl exit 7"
+    },
+    {
+      "id": "node-interpreter",
+      "kind": "instrument",
+      "what": "冷进程模式要用的解释器必须真的把脚本当 node 跑",
+      "pass": true,
+      "expect": "子进程回话",
+      "actual": "回话",
+      "detail": "→ /opt/homebrew/Cellar/node/26.0.0/bin/node（node，node 26.0.0） → 子进程回话 LUTE-NODE-OK"
+    },
+    {
+      "id": "systems-ok",
+      "kind": "control",
+      "what": "默认请求（回环 + 同源）必须 200 —— 负例的差分基准",
+      "pass": true,
+      "expect": 200,
+      "actual": 200,
+      "detail": "→ 200 systems=31 分组=14 已分类=31 openRoute=/api/dsh-newapp/open-system"
+    },
+    {
+      "id": "systems-cross-site",
+      "kind": "negative",
+      "what": "只加 Sec-Fetch-Site: cross-site",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "detail": "→ 403 {\"error\":\"forbidden: loopback-only\"}"
+    },
+    {
+      "id": "systems-foreign-origin",
+      "kind": "negative",
+      "what": "只加 Origin: http://evil.example",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "detail": "→ 403 {\"error\":\"forbidden: loopback-only\"}"
+    },
+    {
+      "id": "systems-foreign-host",
+      "kind": "negative",
+      "what": "只把 Host 换成非回环权威",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "detail": "→ 403 {\"error\":\"forbidden: loopback-only\"}"
+    },
+    {
+      "id": "systems-method",
+      "kind": "negative",
+      "what": "POST 必须 405（目录是读，不是写）",
+      "pass": true,
+      "expect": 405,
+      "actual": 405,
+      "detail": "→ 405 {\"error\":\"method not allowed: POST\"}"
+    },
+    {
+      "id": "open-cross-site",
+      "kind": "negative",
+      "what": "跨站请求不许开浏览器（动作路由也必须过栅栏）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "detail": "→ 403 {\"error\":\"forbidden: loopback-only\"}"
+    },
+    {
+      "id": "open-method",
+      "kind": "negative",
+      "what": "GET open-system 必须 405（开浏览器不是一次读取）",
+      "pass": true,
+      "expect": 405,
+      "actual": 405,
+      "detail": "→ 405 {\"error\":\"method not allowed: GET\"}"
+    },
+    {
+      "id": "open-empty-body",
+      "kind": "negative",
+      "what": "空 body 必须 400 并说明形状（不是 500，也不是静默成功）",
+      "pass": true,
+      "expect": 400,
+      "actual": 400,
+      "detail": "→ 400 {\"error\":\"body must be {\\\"slug\\\": \\\"<catalog key>\\\"}\"}"
+    },
+    {
+      "id": "open-cross-site-on-health",
+      "kind": "negative",
+      "what": "health 也必须过栅栏（不是只有业务路由被包住）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "detail": "→ 403 {\"error\":\"forbidden: loopback-only\"}"
+    },
+    {
+      "id": "catalog-embedded",
+      "kind": "contract",
+      "what": "三份 catalog JSON 必须内联进产物（文件头那句\"import 让它内联\"是关于构建的主张，这是证据）",
+      "pass": true,
+      "expect": "systems 数组非空",
+      "actual": "systems=31",
+      "detail": "→ systems=31"
+    },
+    {
+      "id": "catalog-size",
+      "kind": "contract",
+      "what": "源页面 31 张卡必须一张不少地进目录（期望值写死，不用实测兜底）",
+      "pass": true,
+      "expect": "31",
+      "actual": 31,
+      "detail": "→ 31 条"
+    },
+    {
+      "id": "slug-unique",
+      "kind": "contract",
+      "what": "slug 必须唯一（它是 open-system 的唯一键，重复 = 有一张卡永远打不开）",
+      "pass": true,
+      "expect": "31 个唯一 slug",
+      "actual": "31 个",
+      "detail": "→ 31 个唯一"
+    },
+    {
+      "id": "host-unique",
+      "kind": "contract",
+      "what": "31 个唯一域名（源页面无重复 href）",
+      "pass": true,
+      "expect": "31 个唯一域名",
+      "actual": "31 个",
+      "detail": "→ 31 个唯一"
+    },
+    {
+      "id": "href-allowlist",
+      "kind": "contract",
+      "what": "每个 href 必须落在 *.lute-tlz-dddd.top 且为 https（open-system 打开的地址全部来自这里）",
+      "pass": true,
+      "expect": "0 条越界",
+      "actual": "0 条",
+      "detail": "→ 31/31 在白名单内"
+    },
+    {
+      "id": "all-classified",
+      "kind": "contract",
+      "what": "每个系统都必须有主岗位（没有 = role-map 漏了一条，不该由 UI 的「未分类」组兜住）",
+      "pass": true,
+      "expect": "0 条未分类",
+      "actual": "0 条",
+      "detail": "→ 31/31 已分类"
+    },
+    {
+      "id": "role-vocabulary",
+      "kind": "contract",
+      "what": "主岗位与兼属岗位都必须是 AGT-001…AGT-050 内的 id（材料的那套编号，不是 preset 目录名）",
+      "pass": true,
+      "expect": "0 条越界",
+      "actual": "主岗 0 条 / 兼属 0 条",
+      "detail": "→ 主岗 31/31、兼属全部在 AGT-001…AGT-050"
+    },
+    {
+      "id": "grouping-exact",
+      "kind": "contract",
+      "what": "分组后不重不漏且组数 = 14（集合与仓库源文件相等；组数是写死的期望值，一次静默重新归类不该悄悄改掉它）",
+      "pass": true,
+      "expect": "集合相等且 14 组",
+      "actual": "组数 14，集合相等",
+      "detail": "→ 14 个主岗位分组，覆盖 31/31 个 slug"
+    },
+    {
+      "id": "coverage-honest",
+      "kind": "contract",
+      "what": "coverage 必须是自洽的读数（systems 与 byKind 都要对得上，页脚拿它如实报数）",
+      "pass": true,
+      "expect": "coverage.systems = 31 且 byKind 求和相等",
+      "actual": "systems=31 byKindΣ=31",
+      "detail": "→ byKind={\"Docker 应用\":22,\"静态站点\":7,\"静态报告\":2}"
+    },
+    {
+      "id": "icon-vocabulary",
+      "kind": "contract",
+      "what": "每张卡的图标标签与属性名都必须落在 catalog 声明的封闭词汇表里（不在 = 一张画不出来的卡，且不报错）",
+      "pass": true,
+      "expect": "0 条越界",
+      "actual": "0 条",
+      "detail": "→ elements [circle, line, path, rect] / attributes 14 个，31/31 合规"
+    },
+    {
+      "id": "icon-attrs-defined",
+      "kind": "contract",
+      "what": "图标属性不得带 undefined 值（能活过一跳、在下一跳炸掉的值）",
+      "pass": true,
+      "expect": "0 条",
+      "actual": "0 条",
+      "detail": "→ 31/31 属性全部有值"
+    },
+    {
+      "id": "open-route-published",
+      "kind": "contract",
+      "what": "systems 响应体里的 openRoute 必须逐字等于 open-system 的路径（客户端靠它决定画不画按钮）",
+      "pass": true,
+      "expect": "/api/dsh-newapp/open-system",
+      "actual": "/api/dsh-newapp/open-system",
+      "detail": "→ 逐字相符"
+    },
+    {
+      "id": "catalog-matches-source",
+      "kind": "contract",
+      "what": "产物答出的 slug 集合必须与仓库 catalog 源文件逐字一致（路由不许自己编一份）",
+      "pass": true,
+      "expect": "31 个 slug 集合相等",
+      "actual": "相等",
+      "detail": "→ 31/31 逐字一致"
+    },
+    {
+      "id": "open-unknown-slug",
+      "kind": "negative",
+      "what": "目录里没有的 slug 必须 404 —— 这是\"不是 URL opener\"的边界本身",
+      "pass": true,
+      "expect": 404,
+      "actual": 404,
+      "detail": "→ 404 {\"error\":\"unknown system: definitely-not-a-system\"}"
+    },
+    {
+      "id": "open-url-not-honoured",
+      "kind": "negative",
+      "what": "只送 url（不送 slug）必须 400 —— 客户端送不进任意地址（P0-6v2 的正面实现）",
+      "pass": true,
+      "expect": 400,
+      "actual": 400,
+      "detail": "→ 400 {\"error\":\"body must be {\\\"slug\\\": \\\"<catalog key>\\\"}\"}"
+    },
+    {
+      "id": "open-slug-not-string",
+      "kind": "negative",
+      "what": "slug 不是字符串必须 400（不是 500，也不是被 String() 化）",
+      "pass": true,
+      "expect": 400,
+      "actual": 400,
+      "detail": "→ 400 {\"error\":\"body must be {\\\"slug\\\": \\\"<catalog key>\\\"}\"}"
+    },
+    {
+      "id": "open-non-object-body",
+      "kind": "negative",
+      "what": "body 不是 JSON 对象必须 400（不是 500）",
+      "pass": true,
+      "expect": 400,
+      "actual": 400,
+      "detail": "→ 400 {\"error\":\"body must be {\\\"slug\\\": \\\"<catalog key>\\\"}\"}"
+    },
+    {
+      "id": "live-health",
+      "kind": "live",
+      "what": "运行中的实例装载了本插件（exact 路由无需 cookie 即应答）",
+      "pass": true,
+      "expect": 200,
+      "actual": 200,
+      "detail": "→ 200 newapp-local"
+    },
+    {
+      "id": "live-systems",
+      "kind": "live",
+      "what": "运行中的实例已在服务 systems 目录",
+      "pass": true,
+      "expect": 200,
+      "actual": 200,
+      "detail": "→ 200 {\"ok\":true,\"owns\":\"src/catalog/{systems,role-map,reachabilit"
+    },
+    {
+      "id": "live-catalog-matches-build",
+      "kind": "live",
+      "what": "实况服的目录条数必须与产物一致（能答 200 但答旧 catalog 的宿主比 401 更危险）",
+      "pass": true,
+      "expect": "31",
+      "actual": 31,
+      "detail": "→ 31 条，与产物一致"
+    },
+    {
+      "id": "live-fence",
+      "kind": "live",
+      "what": "运行中的实例对本插件路由的 cross-site 请求答 403（栅栏的判决，不是被兜住的异常）",
+      "pass": true,
+      "expect": 403,
+      "actual": 403,
+      "detail": "→ 403 forbidden: loopback-only"
+    }
+  ],
+  "notes": [
+    "装载点 realpath：/Users/lute/.dsh/profiles/desktop/node_modules/dsh-newapp-local/lib/index.js",
+    "仓库 catalog：31 条；装载点 mtime 未知（见 ADR-0054：判据是字节，由 profile-files-sync 门禁守）",
+    "精确路由表：[/api/dsh-newapp/health, /api/dsh-newapp/open-system, /api/dsh-newapp/products, /api/dsh-newapp/systems]",
+    "实况目录：systems=31 分组=14"
+  ],
+  "restartRequired": false,
+  "liveSystemsStatus": 200,
+  "liveFenceStatus": 403,
+  "staleHostFence": false,
+  "passed": 34,
+  "total": 34
+}

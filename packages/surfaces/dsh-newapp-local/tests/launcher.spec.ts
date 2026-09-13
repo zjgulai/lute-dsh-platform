@@ -90,11 +90,46 @@ describe('createLauncher — level 1 (the product\u2019s own panel)', () => {
     })
     expect(outcome.ok).toBe(true)
     expect(open).toHaveBeenCalledTimes(1)
-    const arg = open.mock.calls[0]![0] as { product: unknown; dir: string }
+    const arg = open.mock.calls[0]![0] as { product: unknown; feature: unknown; dir: string }
     // By reference-equal content: the panel renders its form from `inputs[]`,
     // so anything short of the whole declaration is a panel with no fields.
     expect(arg.product).toEqual(PRODUCT.declaration)
+    expect(arg.feature).toEqual((PRODUCT.declaration.features as unknown[])[0])
     expect(arg.dir).toBe('/Users/lute/project/KOL-Hunter')
+  })
+
+  it('peels a double-wrapped view down to the declaration the panel renders from', async () => {
+    // Regression (2026-09-13): the drawer's view and the host's view both
+    // carry a `.declaration`; peeling one layer landed on the host view, whose
+    // `features[]` are summaries without `inputs`, and the panel opened with
+    // no fields (probe `dsh-kolhunter-probe`: hasDeclaration:true,
+    // inputCount:-1).
+    const raw = {
+      id: 'kol-hunter',
+      preset: 'agt-033',
+      workflow: { entry: 'f' },
+      features: [{ id: 'f', inputs: [{ key: 'a' }] }],
+    }
+    const summary = [{ id: 'f', label: 'F', kind: 'model', steps: 1 }]
+    const double: ProductView = {
+      ...PRODUCT,
+      features: [],
+      declaration: { features: summary, declaration: raw },
+    } as unknown as ProductView
+    const open = vi.fn()
+    const launcher = createLauncher({ get: () => ({ open }) })
+    const outcome = await launcher.run({
+      plan: { level: 1, kind: 'panel', service: 'kol-hunter-workbench', action: 'open' },
+      dir: DIR,
+      product: double,
+    })
+    expect(outcome.ok).toBe(true)
+    const arg = open.mock.calls[0]![0] as { product: unknown; feature: { id?: string; inputs?: unknown[] } }
+    // The innermost raw declaration is the only layer whose features carry
+    // `inputs` — anything above it is a card/summary view.
+    expect(arg.product).toBe(raw)
+    expect(arg.feature.id).toBe('f')
+    expect(arg.feature.inputs).toHaveLength(1)
   })
 
   it('reports an entry panel that throws instead of leaving a button that did nothing', async () => {
@@ -215,13 +250,16 @@ describe('createLauncher — level 2 (session fallback)', () => {
     expect(outcome.note).toContain('会话 id')
   })
 
-  it('still reports success but names the gap when there is no preset channel', async () => {
-    // The session really was created — saying "failed" would be the opposite
-    // lie. The missing preset is appended instead.
-    const launcher = createLauncher(sessionsOnly({ create: async () => 's2' }))
+  it('passes agentPreset directly to sessions.create when there is no preset channel', async () => {
+    // Current DSH base does not expose agentPresets to this plugin, but
+    // sessions.create accepts the preset at creation time. No separate select
+    // call should be attempted.
+    const create = vi.fn(async () => 's2')
+    const launcher = createLauncher(sessionsOnly({ create, open: async () => {} }))
     const outcome = await launcher.run({ plan: { level: 2, kind: 'session', preset: 'agt-033' }, dir: DIR, product: PRODUCT })
     expect(outcome.ok).toBe(true)
-    expect(outcome.note).toContain('agentPresets')
+    expect(create).toHaveBeenCalledWith({ cwd: DIR, agentPreset: 'agt-033' })
+    expect(outcome.note).toContain('agt-033')
   })
 
   it('reports a select that threw without losing the fact that the session exists', async () => {
