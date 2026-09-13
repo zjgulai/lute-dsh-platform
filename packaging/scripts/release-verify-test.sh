@@ -67,6 +67,8 @@ fresh(){  # 重置沙箱状态（每例都从干净开始）
   rm -rf "$SANDBOX/pkg/release" "$SANDBOX/archive" "$SANDBOX/src"
   mkdir -p "$SANDBOX/pkg/release" "$SANDBOX/archive" "$SANDBOX/src"
   rm -f "$SANDBOX"/release/*.sha256
+  # 宣告台账也要清：V7/V8 会植入 `.lost`，漏清就会泄漏到后续用例（同上一条锁的教训）。
+  rm -f "$SANDBOX"/release/*.lost
 }
 
 seed(){   # seed —— 造一份「完整且已通过终验」的产物集合 + 入库清单
@@ -137,6 +139,29 @@ if [ "$rc" = "0" ] && printf '%s' "$out" | grep -q 'SKIP'; then
   ok "V6 版本目录整体不存在 → rc=0 且 SKIP（不假红）"
 else
   no "V6 缺席版本应 SKIP 而非判红（rc=${rc}）"; printf '%s\n' "$out" | sed 's/^/       /'
+fi
+
+# ── V7 已宣告丢失、但字节已在位（豁免过期）→ 红 ─────────────────────────────
+# 2026-09-13 的 2.3.1：由飞书副本找回、产物位重新完整并锁定，而 `release/2.3.1.lost` 仍在。
+# 当时 verify 对 `.lost` 无条件 `continue`，于是**从不核对该版本的字节**，每次都照旧念
+# 「已宣告丢失」——一个可找回的版本被钉成「不可重建」，且今后再丢也不会有人报错。
+# 这一例钉住：宣告只在字节确实缺席时才成立，字节回来了就必须撤下宣告。
+fresh; seed; : > "$SANDBOX/release/${V}.lost"
+out="$(verify)"; rc=$?
+if [ "$rc" = "1" ] && printf '%s' "$out" | grep -q '字节已在位'; then
+  ok "V7 字节已在位却还留着 .lost → rc=1 且要求撤下宣告"
+else
+  no "V7 过期豁免必须判红（rc=${rc}）"; printf '%s\n' "$out" | sed 's/^/       /'
+fi
+
+# ── V8 字节确实缺席 + 已宣告丢失 → 绿 ───────────────────────────────────────
+# V7 的反向护栏：真的丢了、也如实宣告了，不该被 V7 误伤成红。两条一起才说明这判据「分得清」。
+fresh; seed; rm -f "$(dmg_path "$V")"; : > "$SANDBOX/release/${V}.lost"
+out="$(verify)"; rc=$?
+if [ "$rc" = "0" ] && printf '%s' "$out" | grep -q '已宣告丢失'; then
+  ok "V8 字节确实缺席且已宣告丢失 → rc=0（如实宣告仍被承认）"
+else
+  no "V8 已宣告的缺席不该判红（rc=${rc}）"; printf '%s\n' "$out" | sed 's/^/       /'
 fi
 
 # ── R1 找回时清单必须随行（2026-09-13 15:19 的 2.3.2 形态）────────────────────

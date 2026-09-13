@@ -282,8 +282,24 @@ cat "release/$VERSION.sha256" | head   # 仓库根清单
   bash packaging/scripts/release-verify.sh                            # 复核（`pnpm run gate` 也会跑这条）
   ```
 
-  产物确已不可找回时（如 2.3.1：本机无任何副本、无 APFS 本地快照），用 `release/<版本>.lost`
-  **宣告丢失**并写明原因与找回办法。这是事实记录、不是豁免：其余任何「清单在、字节没了」一律红灯。
+  产物确已不可找回时，用 `release/<版本>.lost` **宣告丢失**并写明原因与找回办法。这是事实记录、
+  不是豁免：其余任何「清单在、字节没了」一律红灯。
+- **「不可找回」的判据是遍历，不是搜索**（2026-09-13 订正）：2.3.1 曾以「Spotlight 全盘查不到」
+  宣告丢失，而副本当时就在 `~/Downloads`（飞书收到、`hdiutil verify` VALID、哈希与清单逐位相同）
+  ——**搜索工具的沉默不是缺席的证据**。错宣告的代价不只是「少一份文件」：它把一个本可核验收回的
+  版本钉成了「不可重建」，并让 `release-verify.sh` 从此对该版本**短路跳过字节核对**。宣告前必须跑
+  文件系统遍历并把命令与输出写进 `.lost` 的取证段，重点排查 IM 落地目录（收文件的默认去处正是
+  `~/Downloads`）与外接卷：
+
+  ```bash
+  find ~/Downloads ~/Desktop ~/Documents /Volumes \
+       "$HOME/Library/Application Support/LUTE/releases" \
+       -name "DSH-Desktop-LUTE-<版本>-mac-arm64.dmg" 2>/dev/null
+  ```
+
+- **豁免会过期**：字节找回后必须撤下 `release/<版本>.lost`——改名为 `release/<版本>.recovered`
+  （保留原文作为教训）并补记找回读数。留着旧 `.lost` 会让该版本被**永久**豁免于字节核对，今后再丢
+  也不报错。`release-verify.sh` 对「字节已在位、却还留着 `.lost`」直接判红。
 - **找回要连账目一起找回**（2026-09-13 补写）：`release-restore.sh` 把 dmg 与其三件清单
   （`SHA256SUMS` / `VERSION` / `manifest.json`）**一并**恢复。只回字节不回清单会留下
   「字节在、清单不全」的半截状态——它同样是红灯（`release-verify.sh` 与门禁

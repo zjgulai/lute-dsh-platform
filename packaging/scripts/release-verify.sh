@@ -9,7 +9,7 @@
 #
 # 判据（对 release/*.sha256 里每一个已发布的版本）：
 #   · 版本目录整体不存在            → SKIP（本机从未发布过该版本：新克隆/新机器，不假红）
-#   · 版本目录在、但 dmg 不在        → **FAIL**（这正是 2.3.1 的形态）
+#   · 版本目录在、但 dmg 不在        → **FAIL**（2026-09-13 的 2.3.1 曾是这个形态，后由飞书副本找回）
 #   · dmg 在、哈希与清单不符         → **FAIL**（被替换或损坏）
 #   · dmg 在、清单三件缺任何一件      → **FAIL**（字节与清单分家：2026-09-13 15:19 的 2.3.2
 #                                      形态——一次丢失演练里 release-restore.sh 把整目录改名
@@ -20,8 +20,10 @@
 # 用法: bash packaging/scripts/release-verify.sh [--no-hash] [--lock]
 #   --no-hash  跳过哈希（只查存在；快速循环用）
 #   --lock     给缺锁的产物补上 uchg（把历史版本也纳入「删不掉」）
-#   release/<版本>.lost 是「已宣告丢失」的台账：列进去的版本不判红（但仍每次念出来），
+#   release/<版本>.lost 是「已宣告丢失」的台账：**字节确实缺席**时不判红（但仍每次念出来），
 #   其余任何「清单在、字节没了」一律红灯——包括刚刚才丢的那一个。
+#   台账不是永久豁免：字节已在位却还留着 `.lost` 判红——宣告过期必须撤下，否则该版本被永久
+#   短路于字节核对。2026-09-13 的 2.3.1 就是这个形态（由飞书副本找回后 `.lost` 仍在）。
 # 退出码: 0 全部通过；1 有 FAIL
 set -uo pipefail
 
@@ -64,16 +66,34 @@ for manifest in "$REPO_ROOT"/release/*.sha256; do
     report "$version" "清单里读不出哈希/文件名——清单坏了"
     FAIL=$((FAIL+1)); continue
   fi
-  if [ -f "$REPO_ROOT/release/${version}.lost" ]; then
-    report "$version" "已宣告丢失（release/${version}.lost）——清单承诺的字节不在本机，且不可重建；有外部副本即可核验收回"
-    LOST=$((LOST+1)); continue
-  fi
-
   expect="$(printf '%s' "$line" | awk '{print $1}')"
   dmg_name="$(printf '%s' "$line" | awk '{print $2}')"
   rel="$PKG_ROOT/release/$version"
   repo_dmg="$rel/$dmg_name"
   arch_dmg="$ARCHIVE_ROOT/$version/$dmg_name"
+
+  if [ -f "$REPO_ROOT/release/${version}.lost" ]; then
+    # 豁免会过期（2026-09-13 补）：字节回来了、`.lost` 还留着，是这类事故里最坏的一种静默——
+    # `continue` 会把本版本**永久**短路于字节核对，今后再丢也没人报错，而每次门禁还在念
+    # 「已宣告丢失」，看起来像"已知且已处理"。2.3.1 由飞书副本找回后就正是这个形态：
+    # 产物位已完整且锁定，门禁照旧说它不在本机。宣告只在字节确实缺席时才成立。
+    if [ -f "$repo_dmg" ]; then
+      stale_hash="未核"
+      if [ "$DO_HASH" = "1" ]; then
+        if [ "$(shasum -a 256 "$repo_dmg" | awk '{print $1}')" = "$expect" ]; then
+          stale_hash="一致"
+        else
+          stale_hash="不符"
+        fi
+      fi
+      report "$version" "✗ 已宣告丢失、但字节已在位（哈希${stale_hash}）——撤下 release/${version}.lost（改名为 ${version}.recovered 并补记找回读数）；留着它，本版本被永久豁免于字节核对"
+      FAIL=$((FAIL+1))
+    else
+      report "$version" "已宣告丢失（release/${version}.lost）——清单承诺的字节不在本机；有外部副本即可核验收回"
+      LOST=$((LOST+1))
+    fi
+    continue
+  fi
 
   # 版本目录整体不存在 → 本机没有发布过它，跳过（不假红）
   if [ ! -d "$rel" ]; then
