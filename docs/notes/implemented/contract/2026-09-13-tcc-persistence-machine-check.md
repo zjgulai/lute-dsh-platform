@@ -47,9 +47,33 @@ ADR-0063 的四条机读判据里，前三条（无 cdhash、Authority 为证书
 
 自测 G1~G4：**8 通过 / 0 失败**。
 
-### 得到一条可证伪的预测
+### 得到一条可证伪的预测（当日 13:13 已验证）
 
 `auth_value=2`（TCC 记着「允许」）**不等于**「新 app 已授权」——那行记录绑定的是旧字节。因此预期：重启后 `macos-harness doctor` 三项为 **false**，直到人工重授。若重启后直接为 true，说明推断有误，须重新查因，不得当作好消息收下。
+
+同日 13:13 直读系统库（`/Library/Application Support/com.apple.TCC/TCC.db`，需完全磁盘访问）把这个预期变成了读数，三项逐一落定：
+
+| service | auth_value | 库里存的 `csreq` |
+|---|---|---|
+| `kTCCServiceAccessibility` | 2 | `cdhash H"595283898d…" or cdhash H"3d09f5a3…"` |
+| `kTCCServiceScreenCapture` | 2 | 同上（逐字节相同） |
+| `kTCCServiceListenEvent` | 2 | 同上（逐字节相同） |
+
+三项正是 doctor 的 `accessibility` / `screen_recording` / `post_events`。用库里这条要求判已装 2.3.0（CDHash `3833cbbc…`）得 `codesign rc=3`（不满足）；而旧支（回滚副本）的 CDHash 实测**就是** `595283898d…`。于是「TCC 仍写着允许」与「新支不满足该授权」在同一屏上同时成立——预测成立，且失败模式被完整复现。
+
+### 第四次假绿：读数没错，但测的不是你以为的那个对象
+
+上面第 3 条假绿的探针（读数互相矛盾）同日在 `verify-tcc.sh` 上又触发了一次，形态是新的：
+
+13:13 系统 TCC 库明写「已装 app 不满足这三条要求」，而 `macos-harness doctor` 同时报 `true/true/true`。两个读数都对，却指向**不同对象**：doctor 归因于**进程**，而授权要求约束的是**路径上的字节**。`lsof` 给出判决——承载会话的进程实际执行的是
+
+```
+…/LUTE/rollback/DSH Desktop-2.0.5-lute.2.0.0-20260913-125713.app/Contents/MacOS/DSH Desktop
+```
+
+即换签前的旧支仍在内存里运行（它已被 `mv` 到回滚位，`ps` 显示的却是 `/Applications/...` 这个已不存在的路径）。**「doctor 为 true」与「已装 app 有权」是两个命题。**
+
+这条已修进 `tools/verify-tcc.sh`：先比对进程实际执行的文件与 `/Applications/DSH Desktop.app/Contents/MacOS/DSH Desktop`，不一致就**拒绝**给出判据④ 结论并说明原因。四条假绿的共同点仍是那一条——**判据没有能力指出「我测的不是这个」**；区别只在于，第 4 条的对象错误连读数本身都是真的，只有跨读数交叉才能发现。
 
 ### 三次假绿，同一族（本 Note 的方法论来源）
 

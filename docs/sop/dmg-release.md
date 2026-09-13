@@ -161,6 +161,36 @@ cat "release/$VERSION.sha256" | head   # 仓库根清单
 4. 打开 app，10 秒内应完成 profile 物化并进入主界面。
 5. 检查关键功能：侧边栏新应用按钮、至少一个核心插件面板。
 
+### 5.5 换签首次升级：一次性重授权（只此一次）
+
+§5.1 的 `verify-tcc-persistence.sh` 证明的是**换签之后**各版本之间授权不再重置。从 adhoc 旧支
+升到首个稳定身份版本这一步，系统必然要求重新授权一次——因为 TCC 库里存的授权要求就是旧支的
+字节哈希本身。2026-09-13 直读系统库实测
+（`/Library/Application Support/com.apple.TCC/TCC.db`，三项的 `csreq` 逐字节相同）：
+
+| service | auth_value | 库里存的要求（`csreq`） |
+| --- | --- | --- |
+| `kTCCServiceAccessibility` | 2 | `cdhash H"595283898d…" or cdhash H"3d09f5a3…"` |
+| `kTCCServiceScreenCapture` | 2 | 同上 |
+| `kTCCServiceListenEvent` | 2 | 同上 |
+
+三者存的都是旧 adhoc 支的 CDHash，而首个稳定身份版本 2.3.0 的 CDHash 是 `3833cbbc…`，不在该
+集合内（`codesign --verify -R='<上述要求>'` 对已装 app 返回 rc=3）。故换签后首次启动这三项
+**会先变 false**，这是一次性迁移代价，不是用户把开关关掉了。操作：
+
+1. 重启 DSH Desktop，打开一个会话；
+2. `bash packaging/scripts/verify-tcc-runtime.sh`（本机也部署在
+   `$HOME/Library/Application Support/LUTE/tools/verify-tcc.sh`），按提示到
+   系统设置 → 隐私与安全性 → 辅助功能 / 屏幕录制 / 输入监控，把「LUTE Agentic System」
+   关掉再打开（三项都要）；
+3. 重跑该脚本取基线快照；升级到下一版并重启后再跑 `--diff`，三项应保持不变——
+   这就是判据⑤ 的运行时读法。
+
+**读 doctor 之前必须确认它归因于已装 app。** 被替换掉的旧进程可能仍在运行，此时 doctor 读的是
+旧支（换签前它恰好持有授权），会给出一个即将失效的 `true`。判据来自 `lsof`：承载会话的进程
+实际执行的文件若不是 `/Applications/DSH Desktop.app/Contents/MacOS/DSH Desktop`，该读数就不
+属于已装 app。`verify-tcc-runtime.sh` 已内置这条检查，并在不匹配时**拒绝**给出判据④ 结论。
+
 ## 6. 发布
 
 1. **提交入库清单**：仓库根 `release/$VERSION.sha256` 必须随源码一起提交。
