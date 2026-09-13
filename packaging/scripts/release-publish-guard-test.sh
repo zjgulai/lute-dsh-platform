@@ -104,7 +104,7 @@ H_GOOD=$(shasum -a 256 "$DMG" | awk '{print $1}')
 echo
 echo "── G2. 同一版本重跑（不带 --force）：必须拒绝且产物一字不动 ──────"
 OUT=$(bash "$S" "$P" "$VER" 2>&1); RC=$?
-[ "$RC" = "1" ] && ok "退出码 1" || no "退出码 $RC，应为 1"
+[ "$RC" = "1" ] && ok "退出码 1" || no "退出码 ${RC}，应为 1"
 echo "$OUT" | grep -q "拒绝覆盖" && ok "给出拒绝覆盖说明" || no "未给出拒绝说明"
 [ "$(shasum -a 256 "$DMG" | awk '{print $1}')" = "$H_GOOD" ] && ok "产物字节未变" || no "产物被改动！"
 
@@ -128,7 +128,7 @@ printf 'x' > "$SANDBOX/badapp/DSH Desktop.app/Contents/MacOS/stub"   # 签名后
 ( cd "$SANDBOX/badapp" && tar -czf "$BAD/DSH Desktop.app.tar.gz" "DSH Desktop.app" )
 BVER=9.9.8
 OUT=$(bash "$S" "$BAD" "$BVER" 2>&1); RC=$?
-[ "$RC" = "1" ] && ok "终验失败被拦下（退出码 1）" || no "退出码 $RC，应为 1"
+[ "$RC" = "1" ] && ok "终验失败被拦下（退出码 1）" || no "退出码 ${RC}，应为 1"
 [ -e "$SANDBOX/pkg/release/$BVER" ] && no "release/$BVER 竟然存在（留下半成品）" || ok "目标目录未出现（无半成品）"
 ls -d "$SANDBOX/pkg/release/.staging."* >/dev/null 2>&1 && no "临时区未清理" || ok "临时区已清理"
 [ -d "$LOCK" ] && no "锁未清理" || ok "锁已清理"

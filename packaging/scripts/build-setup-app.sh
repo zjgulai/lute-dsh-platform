@@ -40,4 +40,4 @@ if ! security find-identity -v -p codesigning 2>/dev/null | grep -qF "\"${LUTE_S
   exit 1
 fi
 codesign --force --deep --sign "${LUTE_SIGN_IDENTITY}" "$APP"
-say "编译完成: $APP（身份：${LUTE_SIGN_IDENTITY}）"
+say "编译完成: ${APP}（身份：${LUTE_SIGN_IDENTITY}）"

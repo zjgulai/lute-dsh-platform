@@ -43,7 +43,7 @@ say "app 就位 $APP_TARGET"
 su - "$USER_NAME" -c "env DSH_HOME='$USER_HOME/.dsh' APP_TARGET='$APP_TARGET' LUTE_INSTALL_APP=0 bash '$INSTALL_SH'"
 RC=$?
 if [ $RC -ne 0 ]; then
-  say "profile 安装失败（install.sh exit=$RC）——app 已落位，请修复后重跑：LUTE_INSTALL_APP=0 bash '$INSTALL_SH'"
+  say "profile 安装失败（install.sh exit=${RC}）——app 已落位，请修复后重跑：LUTE_INSTALL_APP=0 bash '$INSTALL_SH'"
   exit $RC
 fi
 say "LUTE $USER_NAME 安装完成：app + profile + 技能/预设 + 灵枢均已落位"
