@@ -133,18 +133,24 @@
   对方文件挪了位置，就要搜一遍谁在指向它。
 - **详见**：[ADR-0071](adr/ADR-0071.md)
 
-## P-10 · 出货边界由构建机的目录状态决定，而守卫看不见打包后的载荷
+## P-10 · 出货边界由构建机的状态决定，而守卫看不见打包后的载荷
 
 - **症状**：客户拿到的产物里有构建机上「碰巧存在」的东西——私有预设、私有目录结构、
-  只在那一台机器上成立的绝对路径——而所有守卫都是绿的。
-- **根因类**：把「开发机的运行时状态」当成出货源，**且只检查了未打包的树**。
-  打包后的二进制载荷（tarball）既不在扫描面里，也天生被文本扫描跳过（`grep` 把它当二进制）。
-  两层叠加的形态是：边界没有机制（谁多放一个目录它就随包走），仪器也看不见边界之外。
-- **已落地机制**：`gate:shipped-presets-scope-selftest`、`gate:build-path-rewrite-selftest`、
-  `gate:machine-path-tarball-selftest`、`script:packaging/scripts/select-presets.mjs`、
-  `script:packaging/scripts/rewrite-build-paths.mjs`、`script:packaging/shipped-presets.json`
-- **下一版默认动作**：往 payload 里加任何「从本机状态拷来的东西」之前先问两句——
+  只在那一台机器上成立的绝对路径——而所有守卫都是绿的。**反过来也发生**：产品该有的能力
+  只因打包那台机器当时没引用它，就静默地少发了，而全部读数是绿的。
+- **根因类**：把「开发机的状态」当成出货源，**且只检查了未打包的树**。这里的「状态」有两种形态：
+  ① 一个目录列表（本机有什么就发什么）；② **一张引用图**（谁引用了就发谁）。两类都答不了
+  「产品要不要发它」——引用图能证明的只有「有人用」。叠加的第三层是仪器：打包后的二进制载荷
+  （tarball）既不在扫描面里，也天生被文本扫描跳过（`grep` 把它当二进制）。
+- **已落地机制**：`gate:shipped-presets-scope-selftest`、`gate:shipped-skills-scope-selftest`、
+  `gate:build-path-rewrite-selftest`、`gate:machine-path-tarball-selftest`、
+  `script:packaging/scripts/select-presets.mjs`、`script:packaging/scripts/select-skills.mjs`、
+  `script:packaging/scripts/rewrite-build-paths.mjs`、`script:packaging/shipped-presets.json`、
+  `script:packaging/shipped-skills.json`
+- **下一版默认动作**：往 payload 里加任何「从本机状态推出来的东西」之前先问三句——
   ① 出货面是不是**白名单**（没登记就该中止，而不是默默带上）？
-  ② 这项内容**打成包之后**还有哪个判据看得见它？看不见就先给守卫开一个能看进去的口，
+  ② 这项内容是**算出来的**吗？若是，产品自己要发的部分有没有一次**显式表态**，
+     以及这份表态**缺文件时是否响亮失败**（而不是退化成空名单）？
+  ③ 这项内容**打成包之后**还有哪个判据看得见它？看不见就先给守卫开一个能看进去的口，
   再用真实坏输入证明它会说「不」。同族前科：P-02（仪器假绿）、P-08（用纪律守边界）。
-- **详见**：[ADR-0073](adr/ADR-0073.md)、[ADR-0056](adr/ADR-0056.md)
+- **详见**：[ADR-0073](adr/ADR-0073.md)、[ADR-0074](adr/ADR-0074.md)、[ADR-0056](adr/ADR-0056.md)

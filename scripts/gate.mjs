@@ -507,6 +507,26 @@ const CHECKS = [
     },
   },
   {
+    name: 'shipped-skills-scope-selftest',
+    remediation:
+      '跑 bash packaging/scripts/select-skills-test.sh 看红在哪条：「技能出货面 = 引用集 ∪ 产品级白名单 − 受限许可」这条判据必须能说「不」。S1 钉住白名单救回未被引用的技能——2026-09-13 实测排除 bobo-cto 后它引用的 15 个工程技能一并掉出（349 → 334），因为它们从未被产品显式要过；S2/S3/S4/S5 钉住名单的四种腐烂（名字不存在、与受限许可同名、缺 why、文件缺失不得当空名单）；S6/S7/S8 钉住落位树必须逐名等于选择结果（少发与多发同罪）；S9 钉住冗余条目仍须打印；P1 钉住符号链接路径下的入口判定；M1 在恒真桩突变下必须失效（ADR-0074）',
+    run() {
+      const script = join(repoRoot, 'packaging', 'scripts', 'select-skills-test.sh')
+      const result = runScript(repoRoot, `bash "${script}"`, 120000)
+      if (result.code === 0) return { passed: true, violations: [] }
+      const text = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
+      const lines = text
+        .split('\n')
+        .filter((line) => /\[FAIL\]/.test(line))
+        .map((line) => line.trim())
+      const verdict = result.code === null ? '未给出退出码' : `退出码 ${result.code}`
+      return {
+        passed: false,
+        violations: lines.length > 0 ? lines : [`技能出货白名单判据自测失败（${verdict}）`],
+      }
+    },
+  },
+  {
     name: 'pitfalls-playbook',
     remediation:
       '按 docs/pitfalls-playbook.md 头部写明的契约补齐：每条 `## P-NN · 标题` 必须有「症状 / 根因类 / 已落地机制 / 下一版默认动作」四段；「已落地机制」必须点名真实存在的 `gate:<名字>`（见 node scripts/gate.mjs --list）或 `script:<路径>`——机制没有名字就等于自我安慰；编号自 P-01 起连续；相对链接可达；且 AGENTS.md 与 docs/README.md 都必须链接本账（没入口的总账等于不存在）',

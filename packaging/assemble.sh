@@ -366,17 +366,25 @@ say "profile 完成 ($(du -sh "$PAYLOAD/profile.tar.gz" | cut -f1))"
 rm -rf "$STAGEP"
 
 # ── 3. 技能 + 预设 ───────────────────────────────────────────────────────────
-say "3/6 暂存技能 + 预设（技能面按「被引用 + 无受限许可」现算收敛）"
+say "3/6 暂存技能 + 预设（技能面按「被引用 ∪ 产品级白名单 − 受限许可」现算收敛）"
 SP="$STAGE/.sp"; mkdir -p "$SP/skills" "$SP/presets"
 # 决策 K5/K6：不再整份拷贝 ~/.dsh/skills（实测 1611 个目录 / 66M，其中 989 个 p2s 语料无人引用，
-# 并含 PolyForm 非商用的 lieflat-charts）。选择在打包时现算（preset 组合 + 仓库映射 → 被引用集，
-# 再减受限许可名单），不存第二份清单（ADR-0009）。明细与理由见 scripts/select-skills.mjs。
+# 并含 PolyForm 非商用的 lieflat-charts）。选择在打包时现算（剥离后的 preset 组合 + 仓库映射 →
+# 被引用集），**再并入产品级白名单**（packaging/shipped-skills.json），最后减受限许可名单。
+#
+# 2026-09-13 补白名单（ADR-0074）：引用集只回答「谁引用了它」，答不了「产品要不要发它」。
+# 实测代价：排除 bobo-cto 后，**唯一**引用它的 15 个工程技能一并掉出（349 → 334），
+# 而同族的工程工艺技能（tdd/to-spec/to-tickets/write-spec/prototype/research）本来就在出货面里
+# ——产品拿到的是「一半工艺层」，分界线取决于打包机当时的引用图。白名单缺文件即中止
+# （按空名单继续 = 15 个技能无声少发）；明细与理由见 scripts/select-skills.mjs。
 # 读的是**剥离后的** preset 副本（$SP/presets，§2a 已落）：本机 preset 可能挂着外部产品行，
 # 它的技能不该随包——读本机 preset 会让「被引用」判据把客户机上不存在的技能算进来。
-PRESET_ROOT="$SP/presets" DSH_HOME="$DSH_HOME_DIR" node "$PKG_ROOT/scripts/select-skills.mjs" --copy "$SP/skills"
-# 打包后自检：落位的技能树里不得出现受限许可技能（与上面的选择互为独立判据）
+PRESET_ROOT="$SP/presets" DSH_HOME="$DSH_HOME_DIR" node "$PKG_ROOT/scripts/select-skills.mjs" --copy "$SP/skills" \
+  || { echo "[assemble] ✗ 技能出货面判定失败，中止（见上）；白名单登记处见 packaging/shipped-skills.json"; exit 1; }
+# 打包后自检：落位的技能树必须**逐名等于**选择结果，且不含受限许可技能。
+# 「选择说发 N 个、树里只有 N−1 个」原先没有任何判据看得见——静默少发与静默多发是同一类事故。
 node "$PKG_ROOT/scripts/select-skills.mjs" --check "$SP/skills" \
-  || { echo "[assemble] ✗ 出货技能面含受限许可技能，中止（见上）"; exit 1; }
+  || { echo "[assemble] ✗ 出货技能树与选择结果不符（或含受限许可技能），中止（见上）"; exit 1; }
 # 清理元数据/临时文件（口径与 vendor/node_modules 一致）
 find "$SP" \( -name '.DS_Store' -o -name '*.bak-*' -o -name '*.pre-*' -o -name '*.orig*' \) -delete 2>/dev/null || true
 # 构建机路径改写（ADR-0073）：skills + presets 的**出货副本**里，构建机 home 一律换占位符。

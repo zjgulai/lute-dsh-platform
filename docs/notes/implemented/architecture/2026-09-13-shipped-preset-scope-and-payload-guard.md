@@ -145,14 +145,17 @@ cp -R "$DSH_HOME_DIR/.agent-presets/." "$SP/presets/"
 | 占位符落位 | — | `__LUTE_MATERIAL_ROOT__` 150、`__BUILD_DESKTOP__` 13、`__LUTE_REPO__` 9、`__DSH_HOME__` 1（= 173，与改写器读数一致） |
 | 守卫对出货 tarball | 盲（看不见） | `✓ 无新增（当前 0 条）` |
 
-**连带后果（要人来确认的一条）**：`bobo-cto` 是 15 个工程技能的**唯一**引用者，排除它以后这 15 个
+**连带后果（同批次内已处理）**：`bobo-cto` 是 15 个工程技能的**唯一**引用者，排除它以后这 15 个
 技能也随之退出出货面（`agent-browser`、`code-review`、`codebase-design`、`diagnosing-bugs`、
 `domain-modeling`、`dsh-plugin-acquire`、`git-guardrails-claude-code`、`grilling`、`handoff`、
 `improve-codebase-architecture`、`macos-harness`、`resolving-merge-conflicts`、`simplify-codebase`、
 `wait-what`、`writing-for-agents`），技能数 349 → 334。选择规则是「被出货预设引用 + 无受限许可」，
 所以这是**规则的正确结果**，但它同时说明：**这些技能此前进包是靠 bobo-cto 顺带的，不是产品决定**。
-若产品确实要发其中若干，正确做法是给 `select-skills` 一份**产品级的显式清单**，而不是继续靠
-某个预设的引用关系——这件事单独立项，不在本条里顺手做。
+
+> **后续（同一批次）**：用户批复「那就一起打包吧」，这 15 个技能改为由一份**产品级白名单**
+> 显式出货，技能面回到 349；本表的 334 那一行随即被第二次重切取代（同名 2.3.3）。
+> 决定见 [ADR-0074](../../../adr/ADR-0074.md)，事实与读数见
+> [它的 Note](2026-09-13-shipped-skills-allowlist.md)——本条不再复述。
 
 **`source_dirty=1`（如实记录）**：装配那一刻工作树上有 7 个**别人会话的未跟踪文件**
 （`packages/capabilities/dsh-paper2skills/eval/*.mjs`），故 `release/2.3.3.sha256` 标注

@@ -1,0 +1,65 @@
+{
+  "note": "产品级技能白名单（ADR-0074）。出货技能面 =（被引用集 ∪ 本名单）− 受限许可名单。\n\n为什么还需要一份名单：被引用集回答的是「谁引用了它」——那是**当时那台机器的引用图**。2026-09-13 实测：本机自有的机器人助理智能体预设 `bobo-cto` 被排除出出货面（ADR-0073）后，它引用的 15 个工程技能一并掉出（349 → 334），因为**它们从来没有被产品显式要过，只是被顺带引用**。引用图能证明「有人用」，表达不了「产品要发」。\n\n与 ADR-0009 不冲突：全量清单仍是第二份事实（会随引用图漂移，故仍不存）；本名单只记**产品意图的增量**，且由判据保证它不腐烂——名字在本机候选集里不存在即中止、与受限许可冲突即中止、每次装配都打印「本名单实际救回了几个 / 有几个已被引用图覆盖」。\n\n新增条目 = 一次显式决定，必须写 why。",
+  "allow": [
+    {
+      "name": "agent-browser",
+      "why": "浏览器自动化（打开/点击/填表/抓文本/截图/多会话隔离）。产品侧用途：采集与验收环节要在真实页面上取数、留证。同族的自动化能力 agent-browser 此前随 bobo-cto 出货，出货面的「采集」一半是对客承诺的一部分。"
+    },
+    {
+      "name": "code-review",
+      "why": "工程工艺层：沿标准×可疑双轴评审改动。同族的 tdd / to-spec / to-tickets / write-spec / prototype 已挂在 agt-009/012/013 并随包出货（见 scripts/role-presets/skill-map.json），本技能此前只因 bobo-cto 引用而顺带出货。产品既交付工程岗位的工艺层，就不该只交付一半。"
+    },
+    {
+      "name": "codebase-design",
+      "why": "工程工艺层：深模块设计的词汇与接口评审。与 code-review / simplify-codebase 同族，同一条理由（工艺层不拆半）。"
+    },
+    {
+      "name": "diagnosing-bugs",
+      "why": "工程工艺层：硬 bug 与性能回归的诊断循环。PB-006（业务需求到数据产品与工具）的工程环节要用。"
+    },
+    {
+      "name": "domain-modeling",
+      "why": "工程工艺层：领域建模（术语 / ADR / 词汇表）。与 write-spec（已出货）配套使用。"
+    },
+    {
+      "name": "dsh-plugin-acquire",
+      "why": "插件安装前评估与安装闭环（形态识别 → 兼容性/冗余性评估 → 安装与生效 → 分层测试）。客户机要装第三方 DSH 插件时，这是唯一一个把「装上去了但没生效」当缺陷处理的技能。"
+    },
+    {
+      "name": "git-guardrails-claude-code",
+      "why": "工程工艺层：git 危险操作护栏。与 resolving-merge-conflicts 同族（工艺层不拆半）。"
+    },
+    {
+      "name": "grilling",
+      "why": "工程工艺层：连续追问打磨方案与设计。注意本机另有 grill-me / grill-with-docs 两个**转发器**（不在本名单内）——它们只是调用本技能的入口，出货面缺的是被调用的本体。"
+    },
+    {
+      "name": "handoff",
+      "why": "工程工艺层：会话交接文档。与 write-spec / to-tickets（已出货）同属「把上下文写成可传阅的产物」这一族。"
+    },
+    {
+      "name": "improve-codebase-architecture",
+      "why": "工程工艺层：架构深化扫描（扫描 → 报告 → 逐项访谈）。与 simplify-codebase 同族（工艺层不拆半）。"
+    },
+    {
+      "name": "macos-harness",
+      "why": "macOS 整机自动化（截图 / 定位输入 / 辅助功能 / Apple Events / CDP）。产品侧用途：验收与演示要在不占用物理光标的前提下驱动整机。与 agent-browser 同属自动化能力族。"
+    },
+    {
+      "name": "resolving-merge-conflicts",
+      "why": "工程工艺层：消解进行中的 git 合并/变基冲突。与 git-guardrails-claude-code 同族（工艺层不拆半）。"
+    },
+    {
+      "name": "simplify-codebase",
+      "why": "工程工艺层：先证明再删除的代码库简化。许可为 MIT（本机 ~/.dsh/skills/simplify-codebase/LICENSE 首行已核）。"
+    },
+    {
+      "name": "wait-what",
+      "why": "工程工艺层：感觉不对劲时停下核对假设。体量极小（8K）、无外部依赖，是交付面里最便宜的「纠偏」能力。"
+    },
+    {
+      "name": "writing-for-agents",
+      "why": "工程工艺层：为 AI agent 编写清晰文档与指令。岗位材料与技能卡本身就是 agent 的输入，这一族直接服务 PB-008（经营资源与组织能力复盘）的能力沉淀。"
+    }
+  ]
+}
