@@ -193,8 +193,10 @@ export function collectRepoDefinedTokens(repoRoot) {
 export function checkThemeTokens({ repoRoot, appDir, baseline }) {
   const official = join(appDir, 'Contents', 'Resources', 'app.asar.unpacked', 'node_modules', '@deepseek-ai')
   if (!existsSync(official)) {
-    // 与 patch-anchors 同一语义：环境不存在时跳过，不假绿也不假红。
-    return { passed: true, violations: [], note: '官方主题包不可达，本项跳过' }
+    // 与 patch-anchors 同一语义：环境不存在时**跳过**（`skipped`），不假绿也不假红。
+    // 只报 `passed: true` 是不够的：空射程会被读成「全部合规」，而本项实际一个 token
+    // 都没读到。gate.mjs 的读数现在分 ok / skip / fail 三种（ADR-0075）。
+    return { passed: true, skipped: true, violations: [], note: '官方主题包不可达，本项跳过' }
   }
 
   const referenced = collectReferencedTokens(repoRoot)

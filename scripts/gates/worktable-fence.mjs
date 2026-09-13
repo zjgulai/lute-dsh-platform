@@ -127,6 +127,10 @@ export function checkWorktableFence({ repoRoot, profileDir }) {
   if (!vendorPresent && missingInRepo.length === 0 && violations.length === 0) {
     return {
       passed: true,
+      // vendor 资产的判据这一路**没量到东西**：安装面三项照判（上面已过），
+      // 但「资产仍是 pin 的那一份」这件事本机无从核起。报 skip 让它与「都量过且都合格」
+      // 在读数上分开（ADR-0075）。
+      skipped: true,
       violations,
       note: `${PACKAGE_NAME} 未安装；vendor 树未 clone（嵌套仓按需拉取），pin 与补丁在位`,
     }

@@ -44,6 +44,7 @@ import {
   PLAYBOOK_REL_PATH,
 } from './gates/pitfalls-playbook.mjs'
 import { checkDocsLinkIntegrity } from './gates/docs-links.mjs'
+import { selectAnchorTargets } from './gates/patch-anchor-scope.mjs'
 import { runScript } from './lib/run-script.mjs'
 import { nodeCommand } from './lib/real-node.mjs'
 import { collectPackages } from './gates/package-collect.mjs'
@@ -429,7 +430,7 @@ const CHECKS = [
   {
     name: 'release-verify-selftest',
     remediation:
-      '跑 bash packaging/scripts/release-verify-test.sh 看红在哪条：「已发布产物不许被删、也不许只剩半截」这条判据必须能说「不」。V2/V3 钉住新增的「字节在、清单不全」红灯（2026-09-13 release-restore 把整目录改名留档却只拷回 dmg，清单滞留在 *.replaced-* 里而无人报错）；V4/V5 钉住「清单在、字节没了」与哈希不符；V6 钉住「本机没发布过」不假红；R1/R2/R3 钉住找回时清单随行、不重复留档、哈希不符拒收（ADR-0057 / ADR-0058）',
+      '跑 bash packaging/scripts/release-verify-test.sh 看红在哪条：「已发布产物不许被删、也不许只剩半截」这条判据必须能说「不」。V2/V3 钉住新增的「字节在、清单不全」红灯（2026-09-13 release-restore 把整目录改名留档却只拷回 dmg，清单滞留在 *.replaced-* 里而无人报错）；V4/V5 钉住「清单在、字节没了」与哈希不符；V6 钉住「本机没发布过」不假红；V7/V8 钉住「豁免会过期」——字节已在位却还留着 .lost 判红（2026-09-13 的 2.3.1 由飞书副本找回后正是这形态），而如实宣告的缺席仍判绿；R1/R2/R3 钉住找回时清单随行、不重复留档、哈希不符拒收（ADR-0057 / ADR-0058）',
     run() {
       const script = join(repoRoot, 'packaging', 'scripts', 'release-verify-test.sh')
       const result = runScript(repoRoot, `bash "${script}"`, 120000)
@@ -598,7 +599,8 @@ const CHECKS = [
   {
     name: 'patch-anchors',
     modes: ['full'],
-    remediation: '运行 packaging/verify-patches-v2.sh 看 MISSING/FAIL 明细；补丁确实丢失时需重打并按 ADR-0018 的教训改用稳定锚（勿依赖内容哈希文件名）',
+    remediation:
+      '运行 packaging/verify-patches-v2.sh 看 MISSING/FAIL 明细；补丁确实丢失时需重打并按 ADR-0018 的教训改用稳定锚（勿依赖内容哈希文件名）。注意本项的**射程**：只量本机 /Applications 与**未打 tag** 的 staging 树——打过 tag 的版本由产物（DMG + 入库清单哈希，ADR-0067）负责，不在这里量（ADR-0075）',
     run() {
       const script = join(repoRoot, 'packaging', 'verify-patches-v2.sh')
       /** 跑一棵 app 树，返回 { tree, passed, lines }。 */
@@ -616,28 +618,59 @@ const CHECKS = [
         return { passed: result.code === 0, lines: lines.length > 0 ? lines : [verdict] }
       }
       // 两处 target，判据同一条：
-      //   ① 本机 /Applications —— 开发机运行时真值（未安装则跳过，不假绿）；
-      //   ② packaging/staging/*/app —— **打包面**。加这一处是因为「装配产物里补丁丢了」
+      //   ① 本机 /Applications —— 开发机运行时真值（未安装则不在射程内）；
+      //   ② packaging/staging/*/app —— **待发布**的装配产物。加这一处是因为「装配产物里补丁丢了」
       //      与「本机 app 里补丁在」可以同时成立：P0-9(RootOutlet) 曾长期只在本机 app 上，
-      //      而 staging 树发的是 pristine（.scratch/pre-dmg-diagnosis B3）。旧 staging 是
-      //      历史快照，不重建就必然红——这是设计意图：陈旧产物不该被当成可发布物。
-      const targets = []
+      //      而 staging 树发的是 pristine（.scratch/pre-dmg-diagnosis B3）。
+      //
+      // 射程曾经是「staging 下**所有** app 树」，于是它把**随时间单调增长的锚点清单**套到
+      // **随时间累积的历史产物**上：任何一棵在「某条锚」出现之前装配的树都永久判红，而这个红
+      // 与「本次装配把补丁弄丢了」在输出上不可区分——清理历史于是成了让本项变绿的唯一手段。
+      // 而且它的绿也不可信：实测 `staging/2.3.1/app` 在该版发布之后被就地改过（守卫文件 mtime
+      // 晚于发布时刻），那棵树的绿不证明任何出厂字节。判据移入 gates/patch-anchor-scope.mjs
+      // （纯函数 + 反向自测），射程 = 本机 app ∪ 未打 tag 的树；射程为空时报**跳过**，不报通过。
       const appDir = join('/', 'Applications', 'DSH Desktop.app')
-      if (existsSync(join(appDir, 'Contents', 'Resources', 'app.asar.unpacked'))) targets.push(appDir)
+      const appInstalled = existsSync(join(appDir, 'Contents', 'Resources', 'app.asar.unpacked'))
       const stagingRoot = join(repoRoot, 'packaging', 'staging')
-      if (existsSync(stagingRoot)) {
-        for (const version of readdirSync(stagingRoot).sort()) {
-          const tree = join(stagingRoot, version, 'app', 'DSH Desktop.app')
-          if (existsSync(join(tree, 'Contents', 'Resources', 'app.asar.unpacked'))) targets.push(tree)
+      const stagingVersions = existsSync(stagingRoot)
+        ? readdirSync(stagingRoot).filter((version) =>
+            existsSync(
+              join(stagingRoot, version, 'app', 'DSH Desktop.app', 'Contents', 'Resources', 'app.asar.unpacked'),
+            ),
+          )
+        : []
+      const scope = selectAnchorTargets({
+        stagingVersions,
+        taggedVersions: releasedVersions(),
+        appInstalled,
+      })
+      if (scope.vacuous) {
+        // 「没量任何东西」与「量了都合格」必须分开报：空射程报 skip（见 ADR-0075 / P-02）。
+        return {
+          passed: true,
+          skipped: true,
+          violations: [],
+          note: `${scope.note}——本项本次**未校验任何树**（不是「补丁都在」）`,
         }
       }
-      if (targets.length === 0) return { passed: true, violations: [] }
+      const targets = [
+        ...(scope.checkInstalledApp ? [appDir] : []),
+        ...scope.scanStaging.map((version) => join(stagingRoot, version, 'app', 'DSH Desktop.app')),
+      ]
       const violations = []
       for (const tree of targets) {
         const { passed, lines } = checkTree(tree)
         if (!passed) violations.push(...lines.map((line) => `${relative(repoRoot, tree)}: ${line}`))
       }
-      return { passed: violations.length === 0, violations }
+      return { passed: violations.length === 0, violations, note: scope.note }
+    },
+  },
+  {
+    name: 'patch-anchors-scope-selftest',
+    remediation:
+      '跑 node --test scripts/gates/patch-anchor-scope.test.mjs 看红在哪条：扫描集判据必须能说「不」——已打 tag 的树必须退出扫描、未打 tag 的（含同号重制的新树）必须纳入、射程为空必须报空而不是报通过。重点是恒真桩突变：把过滤换成「无条件纳入」或把空射程恒置 false，用例必须失效；测不出来的判据等于没有判据（P-02 / P-11）',
+    run() {
+      return runNodeTestFile('scripts/gates/patch-anchor-scope.test.mjs', '补丁锚点扫描集判据的反向自测失败')
     },
   },
   {
@@ -969,6 +1002,29 @@ function readIfExists(path) {
 }
 
 /**
+ * 已打 tag 的版本号（去掉 `v` 前缀）。
+ *
+ * 这是「某版本已发布」的**权威家**（ADR-0058：清单入库 → 打 tag，tag 才担保得住字节），
+ * 给 `patch-anchors` 定射程用：打过 tag 的版本不再由发布前门禁度量。
+ *
+ * 读不到 tag（浅克隆、新克隆、git 不可用）时返回空数组——**默认错误方向选「多量」**：
+ * 判据宁可多量几棵已发布的树，也不能因为读不到 tag 而把一棵待发布的新树放行。
+ *
+ * @returns {string[]}
+ */
+function releasedVersions() {
+  try {
+    return execFileSync('git', ['-C', repoRoot, 'tag', '--list', 'v*'], { encoding: 'utf8' })
+      .split('\n')
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .map((tag) => tag.replace(/^v/, ''))
+  } catch {
+    return []
+  }
+}
+
+/**
  * 读取 live profile 的已安装依赖表（package.json 的 dependencies）。
  * 返回空对象表示该 profile 未安装或不可读——调用方据此跳过校验。
  */
@@ -1026,10 +1082,20 @@ function main() {
 
   const active = CHECKS.filter((check) => !check.modes || check.modes.includes(mode))
   let failed = 0
+  let skipped = 0
   for (const check of active) {
     const result = check.run()
+    // 三种读数，不许合并：`ok` / `skip`（射程为空——本项**没量到任何东西**）/ `fail`。
+    // 先前这里把 `note` 丢掉，于是「跳过」与「校验通过」在读数上完全同形：
+    // 几处 check 的注释写着「环境不存在时跳过，不假绿也不假红」，而输出里两者都是
+    // `ok contract <名字>`。模型里有这个区分、读数里没有，等于没有（P-02 的第二种形态）。
+    if (result.skipped) {
+      skipped += 1
+      process.stdout.write(`skip contract ${check.name}${result.note ? `（${result.note}）` : ''}\n`)
+      continue
+    }
     if (result.passed) {
-      process.stdout.write(`ok   contract ${check.name}\n`)
+      process.stdout.write(`ok   contract ${check.name}${result.note ? `（${result.note}）` : ''}\n`)
       continue
     }
     failed += 1
@@ -1038,11 +1104,13 @@ function main() {
     process.stdout.write(`     → ${check.remediation}\n`)
   }
 
-  const passed = active.length - failed
+  // 通过数不再把跳过算进去：`40/41` 里的 41 是「参与本模式的项数」，跳过项单列出来。
+  const passed = active.length - failed - skipped
+  const skipTail = skipped > 0 ? `，跳过 ${skipped}` : ''
   process.stdout.write(
     failed === 0
-      ? `ok ${passed}/${active.length} 项通过（mode=${mode}）\n`
-      : `fail ${passed}/${active.length} 项通过（mode=${mode}）\n`,
+      ? `ok ${passed}/${active.length} 项通过（mode=${mode}${skipTail}）\n`
+      : `fail ${passed}/${active.length} 项通过（mode=${mode}${skipTail}）\n`,
   )
   process.exitCode = failed === 0 ? 0 : 1
 }
