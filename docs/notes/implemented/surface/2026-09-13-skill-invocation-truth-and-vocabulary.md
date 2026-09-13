@@ -123,11 +123,15 @@ tree 回读 `modelEnabled=true`，反向写回后 sha256 与改前一致（`3009
     （照 `exemptions.json` 的规矩）。它落地时当场抓到了一条我自己写错的清单条目
     （`nav` 其实是接线的），即「清单只能减」这条判据在第一次运行就生效了。
 - **负面 / 边界**：
-  - **修复落在仓库的 fork 里，尚未到达运行中的界面。** 线上技能中心跑的是 npm
+  - **修复原落在仓库 fork 里，本机装配已完成**：线上技能中心本来跑的是 npm
     `@linxin666/dsh-client-ui-skill-explorer@0.3.6`（`/api/dsh-skill-explorer/health` 回
-    `{"plugin":"skill-explorer"}`），其 `lib/index.js:407-409` 是与 fork 同一处的缺陷；
-    仓库 fork `dsh-skill-center-local`（health 会回 `skill-center-local`）**没有装进 profile**。
-    本轮同步进 profile 的只有算法技能页（`dsh-algo-skills-local` 是本地装配）。
+    `{"plugin":"skill-explorer"}`），其 `lib/index.js:407-409` 是与 fork 同一处的缺陷。
+    已按 ADR-0061 把 fork `dsh-skill-center-local` 装进本机 profile（vendor 与装载点两份
+    与仓库产物逐字节一致），并在 profile patch 里停用 npm 那一行——两者会注册同一组
+    `/api/dsh-skill-explorer/*` 路由与同一个侧边栏入口。`dsh plugin --profile desktop` 被
+    CLI 拒绝（「managed exclusively by the Electron application」），故为手工装配。
+    **生效需重启应用**（插件花名册在加载期读取），重启后 health 的 `plugin` 字段应从
+    `skill-explorer` 变为 `skill-center-local`。
   - 遮蔽在预设作用域内**依然存在且是对的**；面板只保证「这张卡在文件层面开不开」，
     不承诺「在某个岗位会话里一定可达」。这两个问题现在是分开的两个问题——这正是缺陷 C。
   - 算法技能页的 1338 个开关仍然默认关着（数据未动）。
