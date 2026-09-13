@@ -83,3 +83,35 @@
   （`<版本>.replaced-<时间戳>`）当成「缺产物」——一次 `release-restore` 就能让门禁变红。已限定只认
   裸版本号目录名。
 - 覆盖范围仅本机：产物离开本机后（飞书直传、Releases 附件）的存续取决于远端保留策略。
+
+## 事后补记（2026-09-13 16:17）：演练自己留下的半截目录，当时无人报错
+
+上面「机制实证」里那次丢失演练（把 2.3.2 的 dmg 搬走 → `release-restore.sh 2.3.2` 从归档找回）
+**留下了一个当时没被发现的副作用**：
+
+- `release-restore.sh` 的留档分支是 `mv "$dest" "$KEEP"`——**整目录**搬走；
+- 而它把字节拷回来时只拷 **dmg**（`cp "$SRC" "$dest/$DMG_NAME"`），
+  `SHA256SUMS` / `VERSION` / `manifest.json` 于是留在了 `2.3.2.replaced-20260913-151944/` 里；
+- 回填清单的那段循环（`for f in SHA256SUMS VERSION manifest.json`）只从**归档目录**取，
+  而归档按设计只存 dmg —— 那条路**永远不会命中**；
+- 结果：`packaging/release/2.3.2/` 变成「有字节、没清单」，而门禁只核对「dmg 在不在、哈希对不对」，
+  对此**一言不发**——ADR-0057 的「要么缺席要么完整」被违反，没有任何读数为此负责。
+
+注意这次的诱因**不是新的丢失事件**：字节由归档原样救回、哈希逐位相同（`7756564e…`），
+`.replaced-*` 里连一个 dmg 都没有，正是「演练搬走、随后原样取回」的签名。真正的问题是**判据的覆盖缺口**。
+
+修法三条（同一批）：
+
+1. **穷尽修复**：`release-restore.sh` 在留档分支里把三件清单**随行**拷进新目录（`cp -p` 保留 mtime），
+   使「找回后就位」与「产物集合完整」成为同一件事；
+2. **新增判据**：`release-verify.sh` 对每个已发布版本核对 `SHA256SUMS`/`VERSION`/`manifest.json` 齐全，
+   缺任何一件即 **FAIL** 并在报告行里指名缺件（`清单缺: manifest.json`）；
+3. **新增反向自测**：`packaging/scripts/release-verify-test.sh`（9 条：V1 完整→绿、V2/V3 缺清单→红、
+   V4 字节没了→红、V5 哈希不符→红、V6 本机没发布过→绿、R1 清单随行、R2 不重复留档、R3 拒收不改动），
+   由 `scripts/gate.mjs` 的 `release-verify-selftest` 每次门禁执行。
+   自测第一次跑就抓到两个真问题：`release-restore.sh` 里 `$f（` 的多字节变量名解析（ADR-0064 的老坑，
+   在 `set -u` 下直接致命）、以及自测自身因 `uchg` 未解锁导致的**状态泄漏假通过**。
+
+已按上述修法手工把 `packaging/release/2.3.2/` 的三件清单归位并重锁，逐项对账：
+`SHA256SUMS` 与 dmg 实际哈希一致、`VERSION.BUILD=20260913-151032` 与 `release/2.3.2.sha256` 的
+`build` 一致、`SOURCE_COMMIT` 前缀 `f9035b4` 一致。

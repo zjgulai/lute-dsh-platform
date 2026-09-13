@@ -69,6 +69,7 @@ fi
 # 就位（两处都写：仓库产物位 + 归档）。已存在的先改名留档，永不删除。
 mkdir -p "$ARCHIVE_ROOT"
 for dest in "$REL" "$ARCHIVE_VER"; do
+  KEEP=""
   # 已经就位且哈希正确的那一份不动它——否则每次「补归档」都要白白多留一份 600MB 的
   # `*.replaced-*`（把补归档做成了复制灾难）。
   if [ -f "$dest/$DMG_NAME" ]; then
@@ -87,6 +88,20 @@ for dest in "$REL" "$ARCHIVE_VER"; do
   mkdir -p "$dest"
   # 来源就是目标本身（例如从归档恢复归档那一份）时不要自拷贝。
   [ "$SRC" = "$dest/$DMG_NAME" ] || cp "$SRC" "$dest/$DMG_NAME"
+  # 被改名留档的那一份里的清单必须**跟过来**。上一行 mv 是整目录搬走，而这里只拷回 dmg：
+  # `SHA256SUMS` / `VERSION` / `manifest.json` 会留在 `*.replaced-*` 里，`release/<版本>/`
+  # 从此处于「有字节、没清单」的半截状态——ADR-0057 只允许「要么缺席要么完整」，而当时
+  # **没有任何一处会因此报错**。2026-09-13 15:19 的 2.3.2 就是这个形态，诱因是那次「把 dmg
+  # 搬走来证明机制」的丢失演练（不是新的丢失事件：字节由归档原样救回，哈希逐位相同），
+  # 但留下的半截目录直到人工翻目录才被发现，清单靠手工归位。下面这个循环就是那次教训的固化。
+  if [ -n "$KEEP" ]; then
+    for f in SHA256SUMS VERSION manifest.json; do
+      if [ -f "$KEEP/$f" ] && [ ! -f "$dest/$f" ]; then
+        cp -p "$KEEP/$f" "$dest/$f"
+        echo "[restore] 清单随行: ${f}（取自 $(basename "$KEEP")）"
+      fi
+    done
+  fi
 done
 
 # 同一目录下若有同版本的 SHA256SUMS/VERSION/manifest.json（归档或旧产物里带），一并带回仓库产物位，

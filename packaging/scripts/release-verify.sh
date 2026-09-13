@@ -11,6 +11,9 @@
 #   · 版本目录整体不存在            → SKIP（本机从未发布过该版本：新克隆/新机器，不假红）
 #   · 版本目录在、但 dmg 不在        → **FAIL**（这正是 2.3.1 的形态）
 #   · dmg 在、哈希与清单不符         → **FAIL**（被替换或损坏）
+#   · dmg 在、清单三件缺任何一件      → **FAIL**（字节与清单分家：2026-09-13 15:19 的 2.3.2
+#                                      形态——一次丢失演练里 release-restore.sh 把整目录改名
+#                                      留档、却只拷回 dmg，清单滞留在 *.replaced-* 而无人报错）
 #   · 归档副本（仓库外，uchg 锁定）   → 存在且一致 = OK；缺失不判红（早于归档机制的版本本就没有）
 #   · 锁定状态（uchg）               → 只报告，不判红；补锁用 `--lock`
 #
@@ -85,6 +88,22 @@ for manifest in "$REPO_ROOT"/release/*.sha256; do
     FAIL=$((FAIL+1)); continue
   fi
 
+  # 「完整」不只是 dmg 在（ADR-0057：要么缺席要么完整）。SHA256SUMS / VERSION / manifest.json
+  # 是那次终验的产物集合；它们与 dmg 分家过一次，而且**分家时无人报错**：2026-09-13 15:19 的
+  # 一次 `release-restore.sh 2.3.2` 把整个目录改名留档成 `*.replaced-*`，却只把 dmg 拷回来，
+  # `release/2.3.2/` 于是变成「有字节、没清单」，直到人工翻目录才发现。本行就是当时缺的那一处；
+  # 留档目录里那份清单可直接取回（同时核对 VERSION 的 BUILD 与入库清单的 build 一致）。
+  meta_missing=""
+  for f in SHA256SUMS VERSION manifest.json; do
+    [ -f "$rel/$f" ] || meta_missing="$meta_missing $f"
+  done
+  if [ -n "$meta_missing" ]; then
+    meta_state="✗ 清单缺:${meta_missing}"
+    FAIL=$((FAIL+1))
+  else
+    meta_state="清单齐全"
+  fi
+
   hash_state="跳过"
   if [ "$DO_HASH" = "1" ]; then
     got="$(shasum -a 256 "$repo_dmg" | awk '{print $1}')"
@@ -110,7 +129,7 @@ for manifest in "$REPO_ROOT"/release/*.sha256; do
     fi
   fi
 
-  report "$version" "产物在；哈希=${hash_state}；${arch_state}；${lock_state}"
+  report "$version" "产物在；哈希=${hash_state}；${meta_state}；${arch_state}；${lock_state}"
   CHECKED=$((CHECKED+1))
 done
 

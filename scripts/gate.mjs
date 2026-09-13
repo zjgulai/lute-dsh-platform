@@ -420,6 +420,26 @@ const CHECKS = [
     },
   },
   {
+    name: 'release-verify-selftest',
+    remediation:
+      '跑 bash packaging/scripts/release-verify-test.sh 看红在哪条：「已发布产物不许被删、也不许只剩半截」这条判据必须能说「不」。V2/V3 钉住新增的「字节在、清单不全」红灯（2026-09-13 release-restore 把整目录改名留档却只拷回 dmg，清单滞留在 *.replaced-* 里而无人报错）；V4/V5 钉住「清单在、字节没了」与哈希不符；V6 钉住「本机没发布过」不假红；R1/R2/R3 钉住找回时清单随行、不重复留档、哈希不符拒收（ADR-0057 / ADR-0058）',
+    run() {
+      const script = join(repoRoot, 'packaging', 'scripts', 'release-verify-test.sh')
+      const result = runScript(repoRoot, `bash "${script}"`, 120000)
+      if (result.code === 0) return { passed: true, violations: [] }
+      const text = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
+      const lines = text
+        .split('\n')
+        .filter((line) => /\[FAIL\]/.test(line))
+        .map((line) => line.trim())
+      const verdict = result.code === null ? '未给出退出码' : `退出码 ${result.code}`
+      return {
+        passed: false,
+        violations: lines.length > 0 ? lines : [`发布产物判据自测失败（${verdict}）`],
+      }
+    },
+  },
+  {
     name: 'changed-packages',
     remediation: '为本次改动的包补 typecheck 与 test 脚本，或按 ADR-0014 登记豁免（只减不增）',
     run() {
