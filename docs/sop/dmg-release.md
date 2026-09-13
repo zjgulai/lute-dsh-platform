@@ -122,6 +122,19 @@ codesign --verify --deep --strict \
 
 应返回无错误。
 
+**跨版本身份延续（每一版都要跑）**：换签的全部目的是「用户升级后不必重新授权」。这条不是
+只能靠人工复测的经验问题——TCC 存的授权要求取自 app 的指定要求，故它等价于：
+
+```bash
+bash packaging/scripts/verify-tcc-persistence.sh \
+  "$HOME/Library/Application Support/LUTE/staged/<上一版>/DSH Desktop.app" \
+  "packaging/release/$VERSION/DSH Desktop.app"
+```
+
+退出码 0 表示「新支满足旧支的指定要求 ⇒ 已存授权在升级后继续有效」。判据自带反向对照
+（虚构身份必须被判不满足）与封条前置，因此不会以「恒真」或「读数为空」的形式假绿。
+其反向自测：`bash packaging/scripts/verify-tcc-persistence-test.sh`。
+
 ### 5.2 挂载与内容验证
 
 ```bash
