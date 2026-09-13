@@ -68,26 +68,52 @@ export function readConfig(path) {
       throw new Error(`allow 条目 "${entry.name}" 缺少 why——登记而不写理由的名单会腐烂成谎话`)
     }
   }
-  return { pattern, expectPatternCount: raw.expectPatternCount, allow }
+  // `exclude`：本机确有、且**已经评审过「不发它」**的预设。
+  //
+  // 为什么必须有这一档：只有「准入 / 未登记即中止」两态时，装配在**正确配置**下也跑不起来——
+  // 2026-09-13 实测：本机留着 bobo-cto（本机自有的机器人助理智能体，用户明确它不参与打包），
+  // 于是白名单判据把装配整个拦住。而「从本机移走」不是解法：那样就等于为了出货而搬走本机
+  // 正在用的资产。第三态把「已决定不发」写成一次可评审的表态，判据的牙仍留在真正的未知目录上
+  // （未登记 = 没人表态过 = 必须停下来问一句）。
+  const exclude = Array.isArray(raw.exclude) ? raw.exclude : []
+  for (const entry of exclude) {
+    if (typeof entry?.name !== 'string' || entry.name.length === 0) {
+      throw new Error('exclude 条目缺少 name')
+    }
+    if (typeof entry?.why !== 'string' || entry.why.trim().length === 0) {
+      throw new Error(`exclude 条目 "${entry.name}" 缺少 why——同样不能只登记不写理由`)
+    }
+    if (allow.some((a) => a.name === entry.name)) {
+      throw new Error(`"${entry.name}" 同时出现在 allow 与 exclude——同一件事两个相反结论，先删一个`)
+    }
+  }
+  return { pattern, expectPatternCount: raw.expectPatternCount, allow, exclude }
 }
 
 /**
- * 纯判定：把磁盘上的目录名分成「出货 / 未登记」两拨，并算出各种不一致。
+ * 纯判定：把磁盘上的目录名分成「出货 / 已评审不发 / 未登记」三拨，并算出各种不一致。
  * 抽成纯函数是为了让自测能直接喂坏输入，不必搭一整套假装配环境。
  * @param {string[]} names 磁盘上实际存在的预设目录名
- * @param {{pattern: RegExp, expectPatternCount: number, allow: {name: string}[]}} config
+ * @param {{pattern: RegExp, expectPatternCount: number, allow: {name: string}[], exclude: {name: string}[]}} config
  */
 export function classify(names, config) {
   const dirs = [...names].sort()
   const matched = dirs.filter((n) => config.pattern.test(n))
   const allowed = new Set(config.allow.map((e) => e.name))
-  const allowedFound = config.allow.map((e) => e.name).filter((n) => dirs.includes(n))
-  const unregistered = dirs.filter((n) => !config.pattern.test(n) && !allowed.has(n))
+  const excluded = new Set(config.exclude.map((e) => e.name))
+  const unregistered = dirs.filter(
+    (n) => !config.pattern.test(n) && !allowed.has(n) && !excluded.has(n),
+  )
   const missingAllowed = config.allow.map((e) => e.name).filter((n) => !dirs.includes(n))
+  // 登记的 exclude 在本机已不存在 = 名单过期。**告警不判红**：这一档的失效方向是安全的
+  // （少一条「不发」的声明不会让任何东西被发出去），为一次本机清理弄红整条发布流水线不值得。
+  const staleExclude = config.exclude.map((e) => e.name).filter((n) => !dirs.includes(n))
   return {
     ship: dirs.filter((n) => config.pattern.test(n) || allowed.has(n)),
+    excluded: dirs.filter((n) => excluded.has(n)),
     unregistered,
     missingAllowed,
+    staleExclude,
     patternCount: matched.length,
     patternCountOk: matched.length === config.expectPatternCount,
   }
@@ -110,7 +136,8 @@ function main() {
     problems.push(
       `本机有 ${verdict.unregistered.length} 个未登记的预设目录，拒绝打包（它们会静默出给客户）：\n` +
         verdict.unregistered.map((n) => `    · ${n}`).join('\n') +
-        `\n  出路二选一：① 从 ${from} 移走；② 在 packaging/shipped-presets.json 的 allow 里登记并写明 why。`,
+        `\n  出路三选一：① 从 ${from} 移走；② 它该出货 → 在 packaging/shipped-presets.json 的 allow 里登记；` +
+        `③ 已评审「不发它」→ 登记进 exclude（同样要写 why）。未登记 = 没人表过态，所以必须停下来问一句。`,
     )
   }
   if (verdict.missingAllowed.length > 0) {
@@ -139,8 +166,19 @@ function main() {
   if (!args.quiet) {
     console.log(
       `[presets] ✓ 出货 ${verdict.ship.length} 个预设（岗位 ${verdict.patternCount} 个 + 登记 ${config.allow.length} 个：` +
-        `${config.allow.map((e) => e.name).join('、') || '无'}）；本机其余 ${verdict.unregistered.length} 个目录不在出货面`,
+        `${config.allow.map((e) => e.name).join('、') || '无'}）`,
     )
+    // 已评审「不发」的逐个点名：白名单的意义包括让「本机有什么、其中什么没发」是可读的，
+    // 而不是「没发的东西一声不吭地消失」。
+    if (verdict.excluded.length > 0) {
+      console.log(`[presets] · 本机保留、明确不发（${verdict.excluded.length} 个）：${verdict.excluded.join('、')}`)
+    }
+    if (verdict.staleExclude.length > 0) {
+      console.log(
+        `[presets] ⚠ exclude 里登记的 ${verdict.staleExclude.join('、')} 在本机已不存在——名单过期了，` +
+          `要么它回来了，要么把这条登记删掉（告警不判红：少一条「不发」的声明不会让任何东西被发出去）`,
+      )
+    }
   }
   return 0
 }

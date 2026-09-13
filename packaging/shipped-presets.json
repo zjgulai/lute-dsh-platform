@@ -1,11 +1,17 @@
 {
-  "note": "出货预设白名单：只有 pattern 命中的岗位预设 + 下面显式登记的目录会进 skills-presets.tar.gz。磁盘上多出任何未登记的 preset 目录即中止装配（ADR-0073）。\n理由：2026-09-13 实测，assemble.sh 原先的整目录 `cp -R ~/.dsh/.agent-presets/. → $SP/presets/` 把本机自有的机器人助理智能体预设 `bobo-cto`（材料根 /Users/lute/project/BoBo）静默发进了 2.3.0~2.3.3 的 payload：出货 completeness.json 的 presets = 52 条，其中就有它。「开发机的运行时状态」不是一个能靠纪律守住的出货边界。",
+  "note": "出货预设白名单（ADR-0073）：出货面**只**由 pattern + allow 决定。数字面 ≡ 每个岗位预设必须出货且数量相符；其余目录只有两档——allow（该发）与 exclude（已评审、不发）。两档都没登记的目录 = 没人表过态，装配**中止**并点名。\n理由：2026-09-13 实测，assemble.sh 原先的整目录 `cp -R ~/.dsh/.agent-presets/. → $SP/presets/` 让「谁在这台机器上新建一个预设，它就随下一版出给客户」成为静默路径——本机自有的机器人助理智能体预设 `bobo-cto`（材料根 /Users/lute/project/BoBo）就是这样进了 2.3.0~2.3.3 的 payload（出货 completeness.json 的 presets = 52 条含它）。「开发机的运行时状态」不是一个能靠纪律守住的出货边界。\n为什么有 exclude 这一档：第一次真跑（2026-09-13 重切 2.3.3）时，只有「准入 / 未登记即中止」两态的判据在**正确配置**下把装配整个拦住了——本机就该留着 bobo-cto。让它可跑的唯一正当办法不是「把本机资产搬走」，而是把「已决定不发」也写成一次可评审的表态；未知目录照样停下来问。",
   "pattern": "^agt-\\d{3}$",
   "expectPatternCount": 50,
   "allow": [
     {
       "name": "lute-cordis",
       "why": "ADR-0024：承载确定性压缩后端（@aiwayds/dsh-dcp）的预设副本，2026-09-12 起为默认预设，2.2.0 起随包出货。它不是开发机私有产物。"
+    }
+  ],
+  "exclude": [
+    {
+      "name": "bobo-cto",
+      "why": "本机自有的机器人助理智能体预设，用户 2026-09-13 明确它不参与当前 LUTE Agentic System 的打包。留它在 exclude、不在 allow，出货面才与「它本机照常可用、客户拿不到」一致。"
     }
   ]
 }

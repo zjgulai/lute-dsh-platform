@@ -49,8 +49,9 @@ cp -R "$DSH_HOME_DIR/.agent-presets/." "$SP/presets/"
 
 见 [ADR-0073](../../../adr/ADR-0073.md)：
 
-1. **预设出货面 = 白名单**（`select-presets.mjs` + `shipped-presets.json`）：`pattern` 命中且数量
-   相符 + 显式登记（必须写 `why`）；未登记目录即中止并点名；登记了但不存在、数量不符也中止。
+1. **预设出货面 = 白名单**（`select-presets.mjs` + `shipped-presets.json`）：出货面只由 `pattern`
+   （岗位且数量相符）与 `allow`（显式登记 + `why`）决定；本机其余目录只有 `allow` / `exclude`
+   两种合法状态；两档都没登记即中止并点名；登记了但不存在、数量不符也中止。
 2. **出货副本的构建机路径改占位符**（`rewrite-build-paths.mjs`，作用于 `$STAGE/.sp`）：
    最长前缀优先的映射表；未覆盖形态响亮失败；本机原件不动。
 3. **守卫学会看 tarball**（`scan-machine-paths.mjs --tarball`）：解包后用同一把尺扫，命中记
@@ -89,9 +90,34 @@ cp -R "$DSH_HOME_DIR/.agent-presets/." "$SP/presets/"
     `main()` 不执行、**退出码 0**（一个预设不挑、一处路径不改，装配却报成功）。两侧都取 realpath，
     并留 `P1` 用例把脚本复制进沙箱再跑。
 
+## 第一次真跑：判据把**正确配置**拦住了
+
+重切 2.3.3 的第一次装配**中止**了，而且是新机制干的：
+
+```
+[presets] ✗ 本机有 1 个未登记的预设目录，拒绝打包（它们会静默出给客户）：
+    · bobo-cto
+[assemble] ✗ 预设出货白名单判定失败，中止（见上）
+```
+
+这是好消息也是坏消息。好消息：机制在真机上确实会说「不」，而且点名点到了正主。
+坏消息：**它在正确配置下把流水线拦住了**——本机就该留着 `bobo-cto`，它本来也不该出厂。
+当时只有两态（准入 / 未登记即中止），于是「本机确有、已评审不发」这件事无处表达，
+只能二选一地烂掉：要么把本机资产搬走（为出货让路，方向反了），要么把 `bobo-cto` 写进 `allow`
+（正好是这次要修的事）。
+
+所以补第三态：`exclude`（已评审「不发」，同样必须写 `why`）。**这不是把机制退回黑名单**——
+出货面仍只由 `pattern` + `allow` 决定，未知目录照样中止；`exclude` 只是把「已经表过态」记下来，
+免去每次装配重复问一遍。同时补两条自测钉住它：
+`S6`（exclude 不发、装配照常、并逐个点名「本机保留、明确不发」）、
+`S7`（exclude 登记在本机已不存在 → **告警不判红**：这一档失效方向安全，为一次本机清理弄红
+整条发布流水线不值得）、`S8`（同名同时进 `allow`/`exclude` → 配置判坏）。
+
+教训一句话：**一条只会拦住正确配置的判据，不是判据，是路障。**
+
 ## 验证读数（改后）
 
-- `bash packaging/scripts/select-presets-test.sh` → **8 通过 0 失败**（S1–S5、P1、M1）。
+- `bash packaging/scripts/select-presets-test.sh` → **11 通过 0 失败**（S1–S8、P1、M1）。
 - `bash packaging/scripts/rewrite-build-paths-test.sh` → **6 通过 0 失败**（R1–R4、P1、M1）。
 - `bash packaging/scripts/scan-machine-paths-test.sh` → **5 通过 0 失败**（T1–T4、M1）。
-- 对真实出货载荷的读数与重切结果见本 Note 的「重切」小节（下方，装配完成后补写）。
+- 重切 2.3.3 的装配/出货读数见下节。

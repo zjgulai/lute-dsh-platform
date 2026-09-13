@@ -32,9 +32,9 @@ make_fixture(){
     printf 'plugins: []\n' > "$SANDBOX/from/$n/agent.cordis.yml"
   done
 }
-write_config(){ # <pattern> <expect> <allow-json>
+write_config(){ # <pattern> <expect> <allow-json> [exclude-json]
   cat > "$SANDBOX/config.json" <<JSON
-{ "note": "自测夹具", "pattern": "$1", "expectPatternCount": $2, "allow": $3 }
+{ "note": "自测夹具", "pattern": "$1", "expectPatternCount": $2, "allow": $3, "exclude": ${4:-[]} }
 JSON
 }
 run(){ # [script-path] → stdout+exit
@@ -95,6 +95,47 @@ else
   no "S5 缺 why 的登记项必须被拒（rc=${rc}）"; printf '%s\n' "$out" | sed 's/^/       /'
 fi
 
+# ── S6 第三态：本机确有、已评审「不发」→ 出货面不含它，且装配照常跑得起来 ──────
+# 这是第一次真跑暴露出来的缺口：只有「准入 / 未登记即中止」两态时，判据在**正确配置**下
+# 把重切 2.3.3 整个拦住（本机就该留着 bobo-cto）。让流水线可跑的唯一正当办法不是
+# 「把本机资产搬走」，而是把「已决定不发」也写成一次可评审的表态。
+make_fixture agt-001 agt-002 agt-003 lute-cordis bobo-cto
+write_config '^agt-\\d{3}$' 3 '[{"name":"lute-cordis","why":"ADR-0024：产品默认预设"}]' \
+  '[{"name":"bobo-cto","why":"本机自有，用户明确不参与打包"}]'
+out="$(run)"; rc=$?
+shipped="$(ls "$SANDBOX/into" 2>/dev/null | sort | tr '\n' ' ')"
+if [ "$rc" = "0" ] && [ "$shipped" = "agt-001 agt-002 agt-003 lute-cordis " ] \
+  && printf '%s' "$out" | grep -q '明确不发.*bobo-cto'; then
+  ok "S6 已登记的 exclude 不发、装配照常（且逐个点名「本机保留、明确不发」）"
+else
+  no "S6 exclude 语义不对（rc=${rc} shipped=${shipped:-无}）"; printf '%s\n' "$out" | sed 's/^/       /'
+fi
+
+# ── S7 exclude 登记在本机已不存在 → 只告警，不拦发布 ────────────────────────
+# 这一档的失效方向是安全的（少一条「不发」的声明不会让任何东西被发出去），
+# 为一次本机清理弄红整条流水线不值得；但它必须**说出来**，否则名单会烂在原地。
+make_fixture agt-001 agt-002 agt-003 lute-cordis
+write_config '^agt-\\d{3}$' 3 '[{"name":"lute-cordis","why":"ADR-0024：产品默认预设"}]' \
+  '[{"name":"bobo-cto","why":"本机自有，用户明确不参与打包"}]'
+out="$(run)"; rc=$?
+if [ "$rc" = "0" ] && printf '%s' "$out" | grep -q '名单过期'; then
+  ok "S7 过期的 exclude 登记 → 告警但不判红"
+else
+  no "S7 过期的 exclude 应告警且不判红（rc=${rc}）"; printf '%s\n' "$out" | sed 's/^/       /'
+fi
+
+# ── S8 同一个名字同时进 allow 与 exclude → 配置判坏 ─────────────────────────
+make_fixture agt-001 agt-002 agt-003 lute-cordis bobo-cto
+write_config '^agt-\\d{3}$' 3 \
+  '[{"name":"bobo-cto","why":"发"},{"name":"lute-cordis","why":"ADR-0024"}]' \
+  '[{"name":"bobo-cto","why":"不发"}]'
+out="$(run)"; rc=$?
+if [ "$rc" = "2" ] && printf '%s' "$out" | grep -q '相反结论'; then
+  ok "S8 allow/exclude 同名冲突 → 配置判坏（rc=2）"
+else
+  no "S8 同名冲突必须被拒（rc=${rc}）"; printf '%s\n' "$out" | sed 's/^/       /'
+fi
+
 # ── P1 入口判定：脚本从沙箱副本里跑也必须真的干活 ────────────────────────────
 # 回归钉：`import.meta.url` 是 realpath、`process.argv[1]` 保留传入形式，macOS 的
 # `$TMPDIR` 走 /var → /private/var，字符串比较会判成「被 import」→ main 不执行、
@@ -118,9 +159,9 @@ node -e '
 const fs=require("fs");const src=process.argv[1],dst=process.argv[2];
 let t=fs.readFileSync(src,"utf8");
 const before=t;
-t=t.replace(/const unregistered = dirs\.filter\(\(n\) => !config\.pattern\.test\(n\) && !allowed\.has\(n\)\)/,
-            "const unregistered = []");
-if(t===before){console.error("突变未生效：找不到 unregistered 判据");process.exit(3)}
+// 把「有未登记目录就报错」这条判据本身桩掉（恒假），看 S2 是否随之失效。
+t=t.replace(/if \(verdict\.unregistered\.length > 0\) \{/, "if (false) {");
+if(t===before){console.error("突变未生效：找不到 unregistered 判据的使用处");process.exit(3)}
 fs.writeFileSync(dst,t);
 ' "$SRC" "$MUT" || no "M1 突变注入失败（判据形状变了？）"
 if [ -f "$MUT" ]; then
