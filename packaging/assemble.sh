@@ -426,7 +426,14 @@ cp "$PKG_ROOT/assets/app-icon.icns" "$PAYLOAD/tools/app-icon.icns" 2>/dev/null |
 chmod 755 "$PAYLOAD/tools/"*.sh "$PAYLOAD/tools/"*.mjs 2>/dev/null || true
 
 # LUTE Setup.app（GUI 安装器，swiftc 编译；随 payload 根分发）
-bash "$PKG_ROOT/scripts/build-setup-app.sh" "$PAYLOAD"
+# 版本必须传进去并与载荷一致：向导靠 CFBundleVersion 在多个候选载荷里认出「本次要装的那一份」。
+# 装配后当场复核，不让「向导版本与载荷不一致」以静默退化的形式发出去（ADR-0066）。
+bash "$PKG_ROOT/scripts/build-setup-app.sh" "$PAYLOAD" "$VERSION"
+SETUP_PLIST="$PAYLOAD/LUTE Setup.app/Contents/Info.plist"
+SETUP_VER="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$SETUP_PLIST" 2>/dev/null || true)"
+[ "$SETUP_VER" = "2.0.5-lute.$VERSION" ] \
+  || { echo "[assemble] ✗ 向导 CFBundleVersion=${SETUP_VER}，应为 2.0.5-lute.${VERSION}（版本消歧会失效）" >&2; exit 1; }
+say "向导版本复核：$SETUP_VER"
 
 # ── 6. 元数据（README / VERSION / SHA256SUMS / manifest.json）───────────────────
 say "6/6 元数据"

@@ -178,7 +178,10 @@ else
   DSH_APP="$APP_TARGET" DSH_HOME="$DSH_HOME_SMOKE" bash "$PAYLOAD/tools/verify-patches.sh" > "$SMOKE_HOME/verify.log" 2>&1
   assert "verify-patches ALL PATCHES VERIFIED" 0 "$?"
 fi
-grep -c '^\[ok\]' "$SMOKE_HOME/verify.log" | xargs -I{} echo "  锚点通过数: {}"
+# verify-patches-v2 的通过行是 `OK   <锚点名>`（v1 才是 `[ok]`）；此前这里数的是 v1 的格式，
+# 于是在 v2 下恒为 0——「锚点通过数: 0」与上面那句 ALL VERIFIED 同时出现，读数自相矛盾。
+# 判据本身是上面那条 assert（退出码），这里只是把它已经验证过的数量念出来。
+grep -c '^OK' "$SMOKE_HOME/verify.log" | xargs -I{} echo "  锚点通过数: {}"
 
 # 7. 品牌锚点
 DSH_APP="$APP_TARGET" bash "$PAYLOAD/tools/brand-replay.sh" --check > "$SMOKE_HOME/brand.log" 2>&1
