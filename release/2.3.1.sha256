@@ -1,0 +1,9 @@
+# LUTE 发布清单（ADR-0058）—— 由 packaging/sign-and-dmg.sh 生成，勿手改
+# 校验（DMG 与本文件同目录时）：shasum -a 256 -c 2.3.1.sha256
+# version=2.3.1
+# dmg=DSH-Desktop-LUTE-2.3.1-mac-arm64.dmg
+# build=20260913-125353
+# source_commit=2534451cf2bd6669f637ec94f3d2d51a42fa2fe3
+# source_dirty=0
+# profile_snapshot=567cb12c7c093b7f
+339cf853db30ffda338e4a7ba3f2fca97b11a7bffd56a1eb959407432780bbc9  DSH-Desktop-LUTE-2.3.1-mac-arm64.dmg
