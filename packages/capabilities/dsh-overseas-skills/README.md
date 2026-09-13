@@ -1,7 +1,7 @@
 # dsh-overseas-skills
 
 DSH Desktop 设置页「出海技能」插件：从 Accio 导入的跨境电商技能目录（8 大场景 / 28 细分 /
-222 项），按 **L1 场景 → L2 面 → L3 责任域 → L4 岗位 → 技能卡** 四级下钻呈现，
+223 项），按 **L1 场景 → L2 面 → L3 责任域 → L4 岗位 → 技能卡** 四级下钻呈现，
 并提供搜索与「模型可见 + `/` 菜单可见」开关。
 
 页面要回答的是**「这些技能服务于组织里的谁」**——组织骨架（4 面 / 8 责任域 / 50 岗位）来自
@@ -9,20 +9,20 @@ DSH Desktop 设置页「出海技能」插件：从 Accio 导入的跨境电商�
 （[ADR-0044](../../../../docs/adr/ADR-0044.md)）。
 
 > 页面位于 设置 → 出海技能（侧边导航 order 26）。AI全栈技能（order 27）共用同一个组件但**不带
-> `org` 属性**，因此保持原有分组视图——那 29 条没有场景轴。
+> `org` 属性**，因此保持原有分组视图——那 30 条没有场景轴。
 
 ## 结构
 
 | 文件 | 职责 |
 | --- | --- |
 | `lib/index.js` | Host：`/api/dsh-overseas-skills/{list,fullstack-list,org,toggle,credential,prompt-template}`（全部 loopback 栅栏）；toggle 写 frontmatter 的 `disable-model-invocation` + `user-invocable` |
-| `lib/catalog.js` | 场景 / 细分 / 222 项目录 + AI全栈 29 项（由 `scripts/build_preset_catalog.py` 从 `manifest/*.json` 生成） |
+| `lib/catalog.js` | 场景 / 细分 / 223 项目录 + AI全栈 30 项（由 `scripts/build_preset_catalog.py` 从 `manifest/*.json` 生成） |
 | `lib/org-tree.js` | **纯函数**：把场景目录 × 归位表 × 岗位骨架拼成四层树（含计数、诊断、接线索引）；有单测 |
 | `lib/preset-roles.js` | 读 `~/.dsh/.agent-presets/agt-*/manifest.json` 的 `x_lute`（面 / 责任域 / order / 责任名 / 接线 subset / 头像）——组织骨架的运行时家 |
 | `lib/role-map.js` | **构建产物**：`manifest/role-assignments.json` → 宿主可 import 的归位表，由 `scripts/build_role_map.py` 生成（`--check` 供门禁用） |
 | `lib/layer-icons.js` | **构建产物**：4 面 + 8 责任域的 12 枚头像，由 `scripts/gen-layer-icons.mjs` 从 lute-brand-icons 烘焙；与算法技能页**逐字节相同**（有跨包测试） |
 | `lib/client.js` | settings.section 页面（id `overseas-skills`、order 26）与输入框胶囊（`ovp*`）：四层下钻 + 搜索 + 开关，全部 `dsw-*` 语义 Token |
-| `manifest/role-assignments.json` | **归位判定的唯一事实源**：251 条技能 → 岗位（含 `source` / `confidence` / 逐字证据 / 删除理由） |
+| `manifest/role-assignments.json` | **归位判定的唯一事实源**：253 条技能 → 岗位（含 `source` / `confidence` / 逐字证据 / 删除理由） |
 | `manifest/skills.json` 等 | 目录的权威映射（name / 中文 title / 场景 / 细分 / toolBadcked） |
 | `scripts/build_role_map.py` | 编译归位表（`--check` 断言 lib 与 manifest 一致） |
 | `scripts/gen-layer-icons.mjs` | 烘焙 12 枚层头像 |
@@ -31,10 +31,14 @@ DSH Desktop 设置页「出海技能」插件：从 Accio 导入的跨境电商�
 
 ## 页面报什么数（三个数必须分开读）
 
+> **本表每一行都由 `test/doc-counts.spec.mjs` 对着代码实测断言**（2026-09-13 建立）。
+> 改 `lib/catalog.js` 或 `manifest/role-assignments.json` 而没同步本表 ⇒ `npm test` 会红。
+> 这张表此前是**手写的**，于是漂移了 1–2 条却无人发现 —— 那些数字是页面读数的上游。
+
 | 事实 | 数字 | 页面怎么说 |
 | --- | --- | --- |
-| 技能卡 | 222 | 「技能卡 222」 |
-| 归位 / 未归岗 | 209 / 13 | 「归位 209　未归岗 13」；未归岗按场景成组，带分型计数 |
+| 技能卡 | 223 | 「技能卡 223」 |
+| 归位 / 未归岗 | 209 / 14 | 「归位 209　未归岗 14」；未归岗按场景成组，带分型计数 |
 | **行数** | **319** | 「行数 319」+ 一句话解释：一张卡归多个岗位就会在多处出现，**行数 ≠ 卡片数**，开关按卡走 |
 | 岗位 | 50（有卡 47） | 零卡的 3 个岗位（AGT-013 / AGT-005 / AGT-049）在诊断条里逐个点名 |
 | 接线 | 逐卡三态 | 「本岗已接线」/「接线到 AGT-0xx」/「未接线」；另有「preset 挂了但未归本岗」的独立账 |
@@ -46,15 +50,36 @@ DSH Desktop 设置页「出海技能」插件：从 Accio 导入的跨境电商�
 ## 两条命令
 
 ```sh
-python3 scripts/build_role_map.py --check   # 断言 lib/role-map.js 与 manifest 一致
+python3 scripts/build_role_map.py --check   # 只断言 lib/role-map.js 与 manifest 一致（**一致性**）
 python3 scripts/build_role_map.py           # 重新编译（改了 manifest 之后）
+python3 scripts/validate_assignments.py     # 断言判定本身对不对（**正确性**，见下）
+python3 scripts/validate_assignments.py --check-roles-live   # 岗位快照 vs 运行时 preset 漂移
 node scripts/gen-layer-icons.mjs            # 重新烘焙 12 枚层头像（改了品牌技能之后）
-npm run typecheck && npm test               # tsc + node --test（22 项）
+npm run typecheck && npm test               # tsc + node --test（44 项）
 ```
 
+### `--check` 与 `validate_assignments.py` 不是一回事（R4，2026-09-13）
+
+`build_role_map.py --check` 比的是**导出物与源文件**：两边一致它就绿。
+于是 `evidence.from_skill` 一旦被改成一句**技能原文里根本没有**的话，
+`--check` 照样绿 —— 它看的是「有没有变形」，不是「是不是真的」。
+
+`scripts/validate_assignments.py` 只做后者，六条判据（词表 / 证据连续子串 /
+多岗不得 high / 无岗必留痕 / 去重 / 删除留痕），全部确定性、无模型参与。
+它**先报复核覆盖率**，语料覆盖不到的按「不可复核」计数、**绝不计入通过**；
+输入为空时退出码 **2**（「没东西可查」不等于「查过了没问题」）。
+`--selftest` 用构造样本证明每条判据都会打红（含「两碎片拼接」这种
+两边都在原文里、拼起来不是的伪造）。
+
+依赖两份**标注了来历的快照**（`manifest/role-records.json`、
+`manifest/skill-evidence-corpus.json`）：它们是**复核基线，不是事实源** ——
+岗位的事实源是各 preset 的 manifest（页面运行时读它），技能目录的事实源是 `lib/catalog.js`。
+
 归位判定的生成链（一次性，产物已入库）：`.scratch/overseas-skills-refactor/`
-——`PROTOCOL.md`（判定规则）、`validate-assignments.py`（机械校验）、`merge-assignments.py`
-（合并成 manifest）、`probe-client-render.mjs`（真负载 + 真组件渲染实测）。
+——`PROTOCOL.md`（判定规则）、`merge-assignments.py`（合并成 manifest）、
+`probe-client-render.mjs`（真负载 + 真组件渲染实测）。
+⚠️ 该目录里的 `validate-assignments.py` 是**当年的一次性脚本**，只吃 `.scratch` 的批次输入；
+可复跑的那份已按上述搬进包内 `scripts/validate_assignments.py`。
 
 ## 安装（已完成）
 

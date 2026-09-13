@@ -1,9 +1,9 @@
 {
   "_meta": {
-    "purpose": "出海技能（222）+ AI全栈（29）→ 《AI组织变革》50 岗位的归位判定；页面「出海技能」四层下钻的数据源。",
+    "purpose": "出海技能（223）+ AI全栈（30）→ 《AI组织变革》50 岗位的归位判定；页面「出海技能」四层下钻的数据源。",
     "vocabulary": "岗位/责任名取自材料 docs/05-agents/role-catalog.json 与 docs/04-organization/organization-graph.json（151 条责任名，一名唯一属一岗）。",
     "relation_to_skill_map": "与 scripts/role-presets/skill-map.json 的关系：该文件是**接线**（责任名→技能供给，喂 50 个 preset）；本文件是**归位**（技能→岗位，喂页面）。source=skill-map 的条目即从前者继承。",
-    "generated": "2026-09-12 十批语义判定 + 机械校验（.scratch/overseas-skills-refactor/validate-assignments.py）"
+    "generated": "2026-09-12 十批语义判定 + 机械校验（校验器见本包 test/role-map.spec.mjs 与 scripts/validate_assignments.py，2026-09-13 起入库；此前只在未入库的 .scratch/ 里）"
   },
   "coverage": {
     "skills": 253,
