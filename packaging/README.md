@@ -93,4 +93,4 @@ cd "/Volumes/DSH Desktop LUTE 1.2.0" && bash install.sh
 - GUI 方式（备选）：双击 `LUTE Setup.app`；被 Gatekeeper 拦时**右键 → 打开**。
 - 版本核对：`cat VERSION`（含 BUILD 构建号），dmg 的 SHA256 与发布方公告对照。
 - 分发建议：U 盘/局域网拷贝不会带 quarantine；网盘/微信下载则靠安装器自动清除。
-- 安装完成后重新授权 TCC（录屏/辅助功能/自动化），并重启 DSH Desktop。
+- 安装完成后重新授权 TCC（辅助功能/屏幕录制/输入监控），并重启 DSH Desktop。

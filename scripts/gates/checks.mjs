@@ -457,3 +457,44 @@ export function checkDmgReadmeTccPanes({ assembleScript }) {
   }
   return { passed: violations.length === 0, violations }
 }
+
+/**
+ * 授权指引必须**写在每一个会教用户授权的出货面上**，且每一处都写对。
+ *
+ * 起因（2026-09-13）：`assemble.sh` 生成的 README 段已改正为三项，但同一句话还散在
+ * `install.sh` 的收尾提示、`pkg-postinstall.sh` 的提示、`INSTALL-CARD.md` 与两个 `README.md` 里
+ * ——**五处全写着「自动化」**。装完机器最后看到的那行提示，恰恰是错的那一行。
+ * 一条只守一个文件的判据，会对另外四处的错法说「全部通过」；这正是 ADR-0009
+ * 「一份事实只有一个家」要防的漂移。
+ *
+ * 判法：凡同时提到「授权 / 隐私与安全」与授权项名的行，必须含「输入监控」。
+ * 不禁止正文解释「不要授权自动化」——权威 README 正是要讲清楚这一点的那一处。
+ *
+ * shell 脚本里 `#` 开头的行是给人看的注释，**不发到用户面前**，故跳过：`assemble.sh` 里正有
+ * 一段注释在解释本缺陷的机制（「TCC 授权（辅助功能 / 屏幕录制 / 事件投递）」），它写得对，
+ * 只是没在同一行点出第三项。发出去的那一行不会以 `#` 开头（heredoc 正文亦不以 `#` 列出授权项）。
+ */
+const TCC_GUIDANCE_PANE_WORDS = ['辅助功能', '录屏', '屏幕录制', '自动化']
+const isShellComment = (path, line) => /\.sh$/.test(path) && line.trimStart().startsWith('#')
+
+export function checkTccPaneGuidance({ files }) {
+  const violations = []
+  for (const { path, text } of files) {
+    // 文件列了却读不到 = 被改名或删了却没人改这份清单。不能当通过。
+    if (!text || !text.trim()) {
+      violations.push(`${path}: 已登记为出货授权指引面，但读不到内容——清单与实际出货面已漂移`)
+      continue
+    }
+    text.split('\n').forEach((line, i) => {
+      if (isShellComment(path, line)) return
+      if (!/授权|隐私与?安全/.test(line)) return
+      if (!TCC_GUIDANCE_PANE_WORDS.some((word) => line.includes(word))) return
+      if (line.includes('输入监控')) return
+      violations.push(
+        `${path}:${i + 1}: 授权指引缺「输入监控」——实际三项是 ${TCC_REQUIRED_PANES.join(' / ')}。` +
+          '写成「自动化」不会报错，用户授了它 mac.key/mac.click 仍静默失败（ADR-0063）',
+      )
+    })
+  }
+  return { passed: violations.length === 0, violations }
+}

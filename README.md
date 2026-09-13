@@ -27,7 +27,7 @@
 
 1. 从 [Releases](https://github.com/zjgulai/lute-dsh-platform/releases) 下载 `DSH-Desktop-LUTE-<版本>-mac-arm64.dmg`
 2. 双击挂载 → 终端 `cd "/Volumes/DSH Desktop LUTE <版本>" && bash install.sh`；或双击 `LUTE Setup.app` 走向导
-3. 安装后重启 DSH Desktop，重新授权 TCC（录屏/辅助功能/自动化）
+3. 安装后重启 DSH Desktop，重新授权 TCC（辅助功能/屏幕录制/输入监控）
 
 > 仅支持 Apple 芯片 Mac（arm64，macOS 13+）。包为 adhoc 签名、**未公证**，首启会被 Gatekeeper 拦（右键 → 打开）。
 > 完整步骤、Gatekeeper 处置表、完整性校验与常见问题一律见 [安装卡](packaging/INSTALL-CARD.md)。

@@ -299,4 +299,4 @@ if [ "$VERIFY_FAILED" != "0" ]; then
   echo "          确认要退回上一版：用 *.pre-lute-$STAMP 备份手工恢复（app / profiles/desktop / aeis-venv）。" >&2
   exit 1
 fi
-say "完成。① 重启 DSH Desktop；② 重新授权 TCC（录屏/辅助功能/自动化）；③ 复验：bash $HERE/tools/verify-patches-v2.sh"
+say "完成。① 重启 DSH Desktop；② 重新授权 TCC（辅助功能 / 屏幕录制 / 输入监控——第三项在「输入监控」下，不在「自动化」下）；③ 复验：bash $HERE/tools/verify-patches-v2.sh"

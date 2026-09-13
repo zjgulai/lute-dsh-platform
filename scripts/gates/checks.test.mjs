@@ -15,6 +15,7 @@ import {
   checkPinConsistency,
   checkScriptsRunnable,
   checkShellVarAdjacentMultibyte,
+  checkTccPaneGuidance,
   checkTrackedIgnored,
 } from './checks.mjs'
 
@@ -588,4 +589,93 @@ test('出货 README 的 TCC 三项：段落在但少了面板同样判红', () =
 
   assert.equal(result.passed, false)
   assert.match(result.violations[0], /缺少「输入监控」/)
+})
+
+// ── 授权指引的「出货面清单」（checkTccPaneGuidance）────────────────
+// 起因：README 段改对之后，同一句话在另外五处仍是错的，其中 install.sh 的收尾提示
+// 是用户装完机器最后看到的那一行。判据只守一个文件时，会对那五处说「全部通过」。
+
+test('授权指引：安装器收尾提示里真实发生过的错法（录屏/辅助功能/自动化）必须判红', () => {
+  // 2026-09-13 之前 packaging/installer/install.sh 末行就是这一句，装机后用户看到的就是它。
+  const result = checkTccPaneGuidance({
+    files: [
+      {
+        path: 'packaging/installer/install.sh',
+        text: 'say "完成。① 重启 DSH Desktop；② 重新授权 TCC（录屏/辅助功能/自动化）；③ 复验：bash verify.sh"\n',
+      },
+    ],
+  })
+
+  assert.equal(result.passed, false)
+  assert.equal(result.violations.length, 1)
+  assert.match(result.violations[0], /install\.sh:1/)
+  assert.match(result.violations[0], /输入监控/)
+})
+
+test('授权指引：改正后（辅助功能 / 屏幕录制 / 输入监控）必须放行', () => {
+  const result = checkTccPaneGuidance({
+    files: [
+      {
+        path: 'README.md',
+        text: '3. 安装后重启 DSH Desktop，重新授权 TCC（辅助功能/屏幕录制/输入监控）\n',
+      },
+    ],
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('授权指引：正文解释「不在自动化下」不算违规', () => {
+  const result = checkTccPaneGuidance({
+    files: [
+      {
+        path: 'packaging/assemble.sh',
+        text: '  第三项在「输入监控」下而**不在「自动化」下**——授权「自动化」不会让 `post_events` 变 true，\n',
+      },
+    ],
+  })
+
+  assert.equal(result.passed, true)
+})
+
+test('授权指引：登记了却读不到内容的出货面必须判红（清单漂移不得静默通过）', () => {
+  const result = checkTccPaneGuidance({
+    files: [{ path: 'packaging/INSTALL-CARD.md', text: '' }],
+  })
+
+  assert.equal(result.passed, false)
+  assert.match(result.violations[0], /读不到内容/)
+})
+
+test('授权指引：与授权项无关的普通行不受影响', () => {
+  const result = checkTccPaneGuidance({
+    files: [{ path: 'README.md', text: '# 标题\n- 这是一段与授权无关的说明。\n' }],
+  })
+
+  assert.equal(result.passed, true)
+})
+
+test('授权指引：shell 注释里的机制说明不算违规（它不发到用户面前）', () => {
+  // assemble.sh 里真有一段这样的注释，解释的是本缺陷的机制；它写得对，只是没在同一行点出第三项。
+  // 这条测试同时也钉住「跳过注释」只在 .sh 生效——下一测试管 .md。
+  const result = checkTccPaneGuidance({
+    files: [
+      {
+        path: 'packaging/assemble.sh',
+        text: '# 于是「换一版 app」在 macOS 看来等于「换了一个 app」，TCC 授权（辅助功能 / 屏幕录制 /\n',
+      },
+    ],
+  })
+
+  assert.equal(result.passed, true)
+})
+
+test('授权指引：markdown 里的 # 是标题不是注释，仍须检查', () => {
+  const result = checkTccPaneGuidance({
+    files: [{ path: 'README.md', text: '# 重新授权 TCC（录屏/辅助功能/自动化）\n' }],
+  })
+
+  assert.equal(result.passed, false)
+  assert.match(result.violations[0], /输入监控/)
 })

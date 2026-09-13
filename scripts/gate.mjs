@@ -27,6 +27,7 @@ import {
   checkPinConsistency,
   checkScriptsRunnable,
   checkShellVarAdjacentMultibyte,
+  checkTccPaneGuidance,
   checkTrackedIgnored,
 } from './gates/checks.mjs'
 import { buildOutputRoot, checkDependencyReproducibility, packageScriptOrder } from './gates/dependency-reproducibility.mjs'
@@ -44,6 +45,20 @@ const MODES = ['quick', 'full']
 
 /** 不参与包身份校验的目录（无 package.json 或属外部依赖）。 */
 const SCAN_SKIP = new Set(['node_modules', 'vendor', '.git', 'packaging', 'docs', '.scratch'])
+
+/**
+ * 会教用户授权 TCC 的出货面。清单本身也是判据：新增一处指引而没登记进来，
+ * 等于新增一处「写错了也没人说」的地方（2026-09-13 实测：README 改对后，
+ * 另外五处仍写着「自动化」，其中包括安装器最后一行提示）。
+ */
+const TCC_GUIDANCE_SURFACES = [
+  'packaging/assemble.sh',
+  'packaging/installer/install.sh',
+  'packaging/installer/pkg-postinstall.sh',
+  'packaging/INSTALL-CARD.md',
+  'packaging/README.md',
+  'README.md',
+]
 
 /** 校验项注册表：新增校验在此登记，name 会出现在 --list 输出中。 */
 const CHECKS = [
@@ -263,6 +278,19 @@ const CHECKS = [
     run() {
       return checkDmgReadmeTccPanes({
         assembleScript: readIfExists(join(repoRoot, 'packaging', 'assemble.sh')) ?? '',
+      })
+    },
+  },
+  {
+    name: 'tcc-pane-guidance',
+    remediation:
+      '把该处授权指引改成「辅助功能 / 屏幕录制 / 输入监控」：第三项在「输入监控」下而非「自动化」下，写错不会报错，用户会照着一个不存在的授权静默失败（ADR-0063 / ADR-0009）',
+    run() {
+      return checkTccPaneGuidance({
+        files: TCC_GUIDANCE_SURFACES.map((rel) => ({
+          path: rel,
+          text: readIfExists(join(repoRoot, rel)) ?? '',
+        })),
       })
     },
   },
