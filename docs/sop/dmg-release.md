@@ -230,8 +230,24 @@ cat "release/$VERSION.sha256" | head   # 仓库根清单
 - **禁止直接修改已发布目录**：`packaging/release/$VERSION/` 只能是「不存在」或「完整通过终验」。任何中间态必须发生在 `release/.staging.XXXXXX`。
 - **禁止运行中替换 app bundle**：本机（或任何目标机）替换 `/Applications/DSH Desktop.app` 前必须先退出运行实例（安装器 `install.sh` 已内置 0b 步骤；手工替换同样适用）。运行中替换会触发宿主 HMR 热更，生产 renderer 无完整热替换 runtime，表现为整屏白屏（2026-09-13 实测；应急恢复 = `Cmd+R`）。
 - **禁止把机器绝对路径带出仓库**：出货树出现新的构建机路径（如 `/Users/lute/...`）时 `scan-machine-paths.mjs` 会中止；若必须新增，先更新 `machine-path-baseline.json` 并说明理由。
+- **禁止删除已发布/历史发布的产物**（ADR-0067）：发布成功的产物会被**仓库外归档**
+  （`$HOME/Library/Application Support/LUTE/releases/<版本>/`）并在两处加 `uchg` 锁定——
+  `rm` / `mv` 一律 `Operation not permitted`。唯一合法解锁点是 `sign-and-dmg.sh` 重制时的归档改名；
+  任何其他删除都必须先显式 `chflags -R nouchg <路径>`（把误删变成「必须表过态才可能发生」）。
+- **产物丢了要找回，不要重做**：同号不同字节会让「客户手上那版对应哪份源码」无法回答（ADR-0057）。
+  重制出来的是另一串字节，**不是**那一版。找回：
+
+  ```bash
+  bash packaging/scripts/release-restore.sh <版本>                    # 从仓库外归档
+  bash packaging/scripts/release-restore.sh <版本> --from <dmg 路径>  # 从客户/聊天软件里的副本（哈希对上才收）
+  bash packaging/scripts/release-verify.sh                            # 复核（`pnpm run gate` 也会跑这条）
+  ```
+
+  产物确已不可找回时（如 2.3.1：本机无任何副本、无 APFS 本地快照），用 `release/<版本>.lost`
+  **宣告丢失**并写明原因与找回办法。这是事实记录、不是豁免：其余任何「清单在、字节没了」一律红灯。
 - **重制必须 --force**：普通重跑会失败，防止意外覆盖已交付产物。
-- **回滚**：旧版本 DMG 始终保留在 `packaging/release/.archive/` 中，可直接取回。
+- **回滚**：旧版本 DMG 始终保留在 `packaging/release/.archive/` 与仓库外归档
+  `$HOME/Library/Application Support/LUTE/releases/` 中，可直接取回。
 
 ## 8. 常见异常
 
@@ -244,6 +260,8 @@ cat "release/$VERSION.sha256" | head   # 仓库根清单
 | 首启卡在 profile-composition | 同机有旧实例在跑 | 退出旧实例或换干净环境测试 |
 | **启动后整屏白屏（无 renderSlot 日志）** | 运行中替换过 app bundle（HMR 热更崩渲染器）；或关机态改过 app bundle 内 client bundle 字节（combo rev 失配） | 先 `Cmd+R` 重载 renderer；无效则还原被改字节并完整重启；预防：替换 app 前先退出实例 |
 | DMG 挂载后 app 无法打开 | quarantine 属性 | 右键 → 打开一次，或 `xattr -d com.apple.quarantine` |
+| 门禁 `release-artifacts-intact` 红 | 某个已发布版本的 dmg 不在了（清单还在） | 跑 `release-restore.sh <版本>` 找回；找回不了就按 ADR-0067 写 `release/<版本>.lost` 宣告丢失 |
+| `rm`/`mv` 已发布产物报 Operation not permitted | 产物被 `uchg` 锁定（这是设计意图，不是故障） | 确认确实要动：`chflags -R nouchg <路径>` 后再操作 |
 
 ## 9. 版本号规则
 

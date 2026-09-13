@@ -316,6 +316,26 @@ const CHECKS = [
     },
   },
   {
+    name: 'release-artifacts-intact',
+    remediation:
+      '已发布版本的产物不见了：清单（release/<版本>.sha256，已进 git）承诺过那串字节。找回：bash packaging/scripts/release-restore.sh <版本>（从仓库外归档），或 --from <外部副本>（客户/聊天软件里那份，哈希对上才收）。禁止用同一版本号重制（ADR-0057）',
+    run() {
+      const script = join(repoRoot, 'packaging', 'scripts', 'release-verify.sh')
+      const result = runScript(repoRoot, `bash "${script}"`, 300000)
+      if (result.code === 0) return { passed: true, violations: [] }
+      const text = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
+      const lines = text
+        .split('\n')
+        .filter((line) => /✗|\[release-verify\]/.test(line))
+        .map((line) => line.trim())
+      const verdict = result.code === null ? '未给出退出码' : `退出码 ${result.code}`
+      return {
+        passed: false,
+        violations: lines.length > 0 ? lines : [`发布产物核对失败（${verdict}）`],
+      }
+    },
+  },
+  {
     name: 'changed-packages',
     remediation: '为本次改动的包补 typecheck 与 test 脚本，或按 ADR-0014 登记豁免（只减不增）',
     run() {

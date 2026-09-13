@@ -70,6 +70,7 @@
 | ADR-0064 | shell 变量名边界纳入门禁：`$VAR` 紧跟多字节字符（如全角括号）会被 bash 并入变量名，`set -u` 下直接中断——实测让 2.3.0 首次装配在 §5 作废，且 4 处现场中有一处恰在**错误报告路径**上；修复统一改 `${VAR}`，新增 `shell-var-multibyte` 硬校验（注释与位置参数不报） | accepted（2026-09-13） | [Note](../notes/implemented/contract/2026-09-13-shell-var-multibyte-guard.md) |
 | ADR-0065 | 生产模式禁用 HMR 热更：运行中替换 app bundle → 宿主推 rebuilt 帧 → 生产 renderer 无 dev:web runtime 热更崩溃 → 整屏白屏（2026-09-13 实测，Cmd+R 可恢复）；机制修复为 host 侧生产守卫（`process.defaultApp`/`DSH_DEV` 判定），流程修复为安装器替换前强制退出运行实例，并恢复 `console-message` 转发消除静默 | accepted（2026-09-13） | [Note](../notes/implemented/architecture/2026-09-13-hmr-production-guard.md) |
 | ADR-0066 | 安装向导必须自己定位载荷：`Setup.app` 只认「同级目录」时，从挂载 dmg 里双击必被 macOS 随机重定位（App Translocation）→ 同级没有载荷 → 线上报「未找到 install.sh」；改为「同级 → 挂载卷/下载/桌面」多候选搜索 + 载荷指纹 + 版本消歧，去掉不必要的可执行位检查，失败打印读数并加 `--print-payload-root` 诊断模式（可被门禁自测），客户安装手册随包分发 | accepted（2026-09-13） | [Note](../notes/implemented/surface/2026-09-13-setup-app-payload-locator.md) |
+| ADR-0067 | 已发布的产物不允许被删除：发布即写仓库外归档（`~/Library/Application Support/LUTE/releases/`）并给两处副本加 `uchg` 锁定（`rm`/`mv` 一律 EPERM，唯一解锁点是重制时的归档改名）；判据 `release-verify.sh` 进门禁 `release-artifacts-intact`（清单在而字节没了即红灯），`release-restore.sh` 负责从归档或**外部副本**核验收回；不可找回者用 `release/<版本>.lost` 宣告（事实记录，不是豁免）。起因：产物两次从 release/ 消失且查不出人、本机无快照可回滚 | accepted（2026-09-13） | [Note](../notes/implemented/contract/2026-09-13-release-artifacts-immutable.md) |
 
 > ADR-0007 ~ ADR-0018 是「LUTE 二开平台架构重构」的十二项决策，共享同一篇决策记录 Note。
 > ADR-0019 独立成篇（品牌皮肤锚点治理），决策记录见其 Note。

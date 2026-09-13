@@ -192,6 +192,9 @@ ls -la "$STAGING" | sed 's/^/        /'
 
 # ── 5. 归档旧产物（改名，不删除）────────────────────────────────────────────
 if [ -e "$REL" ]; then
+  # 已发布产物是 uchg 锁定的（见 §8）：不先解锁就 mv 不动。这里是**唯一**的解锁点——
+  # 锁的意义就是让别处的删除/搬移在这里失败，而不是在别处悄悄成功。
+  chflags -R nouchg "$REL" 2>/dev/null || true
   mkdir -p "$PKG_ROOT/release/.archive"
   ARCHIVE="$PKG_ROOT/release/.archive/$VERSION-$(date +%Y%m%d-%H%M%S)"
   [ -e "$ARCHIVE" ] && ARCHIVE="$ARCHIVE-$$"
@@ -245,6 +248,50 @@ sed 's/^/        /' "$MANIFEST"
 if [ "$M_DIRTY" = "1" ]; then
   echo "[dmg] ⚠ source_dirty=1：本次载荷含未提交源码，source_commit 不足以重建它" >&2
 fi
+
+# ── 8. 不可变归档 + 锁定（「发布的版本不允许被删除」）───────────────────────────
+# 背景：发布过的 dmg 已经**两次**从 release/<版本>/ 里消失（2026-09-12、2026-09-13 的 2.3.1），
+# 每次都只剩 manifest/SHA256SUMS/VERSION——即「清单还在、清单描述的字节没了」。两次都没查出
+# 是谁删的（本脚本经 mtime 取证已排除；本机无 APFS 本地快照，也无法回滚找回）。既然查不出人，
+# 就让它**删不掉**，而不是继续加一句「请注意不要删」：
+#
+#   ① 仓库外归档：$HOME/Library/Application Support/LUTE/releases/<版本>/
+#      —— 与构建树分离，`git clean -xdf`、`rm -rf packaging/release`、重装仓库都碰不到它；
+#   ② uchg 锁定（用户不可变标志）：两处副本一起锁。删除/改名/覆盖一律 EPERM 失败，
+#      要动它必须显式 `chflags nouchg`——把「误删」变成「必须表过态才可能发生」；
+#   ③ 归档后**回读校验**：归档那份的 sha256 必须与已发布那份逐字节相同，否则本次发布算失败。
+#
+# 判据侧由 `scripts/gate.mjs` 的 `release-artifacts-intact` 守着：清单在而产物缺，就是红灯。
+# 找回用 `packaging/scripts/release-restore.sh <版本>`（从归档恢复并核对清单哈希）。
+ARCHIVE_ROOT="${LUTE_RELEASES_ARCHIVE:-$HOME/Library/Application Support/LUTE/releases}"
+ARCHIVE_VER="$ARCHIVE_ROOT/$VERSION"
+mkdir -p "$ARCHIVE_ROOT"
+if [ -e "$ARCHIVE_VER" ]; then
+  chflags -R nouchg "$ARCHIVE_VER" 2>/dev/null || true
+  OLD_ARCHIVE="$ARCHIVE_VER.superseded-$(date +%Y%m%d-%H%M%S)"
+  mv "$ARCHIVE_VER" "$OLD_ARCHIVE"
+  say "归档中旧的同版本副本已改名保留（未删除）: $OLD_ARCHIVE"
+fi
+mkdir -p "$ARCHIVE_VER"
+cp "$REL/$DMG_NAME" "$REL/SHA256SUMS" "$REL/VERSION" "$REL/manifest.json" "$ARCHIVE_VER/"
+ARCH_SHA="$(shasum -a 256 "$ARCHIVE_VER/$DMG_NAME" | awk '{print $1}')"
+if [ "$ARCH_SHA" != "$DMG_SHA" ]; then
+  echo "[dmg] ✗ 归档副本与已发布产物哈希不一致——归档不可信，本次发布视为失败" >&2
+  echo "      发布：$DMG_SHA" >&2
+  echo "      归档：$ARCH_SHA  ($ARCHIVE_VER/$DMG_NAME)" >&2
+  exit 1
+fi
+say "归档完成并回读校验一致: $ARCHIVE_VER"
+
+# 锁定（两处一起）。锁不上就是机制失效，必须响亮——不能出现「以为锁了其实没锁」。
+for target in "$REL" "$ARCHIVE_VER"; do
+  chflags -R uchg "$target" || {
+    echo "[dmg] ✗ 无法锁定 ${target}（uchg）——发布产物仍可被删除，本次发布视为失败" >&2
+    exit 1
+  }
+done
+say "已锁定（uchg）：${REL} 与 ${ARCHIVE_VER}（删除/改名会失败；显式解锁：chflags -R nouchg <路径>）"
+
 cat <<EOF
 
         下一步（顺序不能换，ADR-0058）：

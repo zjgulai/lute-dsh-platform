@@ -27,6 +27,7 @@
 | [upgrade-2.0.5-window-plan.md](upgrade-2.0.5-window-plan.md) | **升级窗口执行方案**（基座升级时整窗执行；含品牌/主题/导航的锚点处置现状与窗口复验清单） |
 | [release-process.md](release-process.md) | 版本发布 SOP |
 | [../packaging/INSTALL-GUIDE.md](../packaging/INSTALL-GUIDE.md) | **客户安装手册（用户版）**：逐步操作 / 授权三项 / 失败对照表 / 卸载回退；随 DMG 分发，是客户侧安装事实的唯一 home（速查卡：[../packaging/INSTALL-CARD.md](../packaging/INSTALL-CARD.md)） |
+| [plans/2026-09-13-auto-update-route.md](plans/2026-09-13-auto-update-route.md) | **自动更新路线（待 Developer ID）**：换身份的代价（TCC 再重授一次）、公证链、feed 与信任链、灰度/回滚、以及「现在就能做且不白做」的两步 |
 | [adr/](adr/) | 架构决策记录（ADR-NNNN，模板与索引见目录内 README） |
 
 ## 子产品文档入口

@@ -15,8 +15,11 @@ packaging/
   scripts/setup-app-locate-test.sh  # 向导定位逻辑的自测（含 App Translocation 布局的回归）
   scripts/rewrite-file-deps.mjs  # file: 依赖路径重写（包内自洽，决策 D4）
   scripts/reloc-aeis.sh        # 灵枢 venv 便携化（Phase 2 实现）
+  scripts/release-verify.sh    # 「已发布版本的产物还在吗」的唯一判据（门禁 release-artifacts-intact 调它）
+  scripts/release-restore.sh   # 从仓库外归档 / 外部副本找回产物（先对 git 清单的哈希，对不上拒收）
   staging/<VERSION>/           # 生成物：payload（暂存，不入库）
-  release/<VERSION>/           # 生成物：签名后 dmg + SHA256SUMS（Phase 3 起）
+  release/<VERSION>/           # 生成物：签名后 dmg + SHA256SUMS（Phase 3 起）；发布后 uchg 锁定，不可删除（ADR-0067）
+                               #   （仓库外另有一份归档：$HOME/Library/Application Support/LUTE/releases/<版本>/）
 ```
 
 ## 阶段状态（历史里程碑，保留备查）
