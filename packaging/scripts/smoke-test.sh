@@ -48,8 +48,21 @@ tail -5 "$SMOKE_HOME/install.log"
 assert "app 存在" yes "$([ -d "$APP_TARGET" ] && echo yes)"
 assert "app-update.yml 已禁用" yes "$([ -s "$APP_TARGET/Contents/Resources/app-update.yml" ] && grep -q '禁用' "$APP_TARGET/Contents/Resources/app-update.yml" && echo yes)"
 assert "Electron 二进制存在" yes "$([ -x "$APP_TARGET/Contents/MacOS/DSH Desktop" ] && echo yes)"
+# 签名判据（ADR-0063）：解包后 ① seal 有效；② 指定要求是**身份**而非 cdhash；③ Authority 是证书名。
+# 为什么 ②③ 必须验，而不是只验「seal 有效」：adhoc 的 seal 同样有效——而 adhoc 正是 ADR-0063 要消除
+# 的形态（其指定要求字面上就是二进制哈希，TCC 授权随每次重建失效）。「签不出来即失败」不能只靠
+# assemble.sh 签前的**身份存在性**检查，还要在这里验签出来的**结果**；否则一次静默回退 adhoc
+# 会以「签名有效」的面目通过全部验收。
+SIGN_IDENTITY="${LUTE_SIGN_IDENTITY:-LUTE Code Signing}"
 codesign --verify --deep --strict "$APP_TARGET" >/dev/null 2>&1
-assert "app adhoc 签名有效（解包后）" 0 "$?"
+assert "app 签名 seal 有效（解包后）" 0 "$?"
+# `codesign -d -r-` 的前缀随 DR 来源而变：隐式 DR（adhoc）打成 `# designated => …`，
+# 显式 DR（证书签名）打成 `designated => …`。锚点必须容忍可选的 `# `——2026-09-13 实测：
+# 只锚 `^designated =>` 时对 adhoc 取到空串，`grep -c cdhash` 于是得 0，判据会**放行 adhoc**。
+APP_DR="$(codesign -d -r- "$APP_TARGET" 2>&1 | sed -n 's/^#* *designated => //p')"
+assert "app 指定要求可读出（防空判据假绿）" "yes" "$([ -n "$APP_DR" ] && echo yes)"
+assert "app 指定要求不含 cdhash（ADR-0063）" 0 "$(printf '%s\n' "$APP_DR" | grep -c 'cdhash' || true)"
+assert "app Authority 为 ${SIGN_IDENTITY}" "$SIGN_IDENTITY" "$(codesign -dv --verbose=2 "$APP_TARGET" 2>&1 | sed -n 's/^Authority=//p' | head -1)"
 assert "CFBundleVersion 带 lute 后缀" 1 "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$APP_TARGET/Contents/Info.plist" | grep -c 'lute\.' || true)"
 
 # 2b. quarantine 清除断言（Gatekeeper 防拦：install.sh 解包后必须清除隔离属性）
