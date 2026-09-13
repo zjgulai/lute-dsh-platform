@@ -17,7 +17,7 @@
 
 | 文档 | 说明 |
 | --- | --- |
-| [dsh-desktop-white-screen-playbook.md](dsh-desktop-white-screen-playbook.md) | **DSH Desktop 白屏排查手册**：速查卡 + 两次白屏实战案例 + 二次开发红线清单 + 修复工具箱。二次开发遇到白屏先查这里（唯一 home，`_doc-notes/` 下的旧副本已移除）。 |
+| [dsh-desktop-white-screen-playbook.md](dsh-desktop-white-screen-playbook.md) | **DSH Desktop 白屏排查手册**：速查卡（主区白屏 / 整窗白屏二分）+ 三类白屏实战案例（root 槽竞态 ×2、HMR 热更 ×1）+ 二次开发红线清单 + 修复工具箱（RootOutlet 兜底 / runtime-guards G1/G2）。二次开发遇到白屏先查这里（唯一 home，`_doc-notes/` 下的旧副本已移除）。 |
 
 ## 架构与流程
 
@@ -26,6 +26,7 @@
 | [architecture.md](architecture.md) | 平台架构与维护/生效语义（含万物互联与出海技能当前产品形态，2026-09-09 对齐） |
 | [upgrade-2.0.5-window-plan.md](upgrade-2.0.5-window-plan.md) | **升级窗口执行方案**（基座升级时整窗执行；含品牌/主题/导航的锚点处置现状与窗口复验清单） |
 | [release-process.md](release-process.md) | 版本发布 SOP |
+| [../packaging/INSTALL-GUIDE.md](../packaging/INSTALL-GUIDE.md) | **客户安装手册（用户版）**：逐步操作 / 授权三项 / 失败对照表 / 卸载回退；随 DMG 分发，是客户侧安装事实的唯一 home（速查卡：[../packaging/INSTALL-CARD.md](../packaging/INSTALL-CARD.md)） |
 | [adr/](adr/) | 架构决策记录（ADR-NNNN，模板与索引见目录内 README） |
 
 ## 子产品文档入口

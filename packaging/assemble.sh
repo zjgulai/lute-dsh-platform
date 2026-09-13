@@ -177,6 +177,14 @@ if [ -f "$DSH_VENDOR/dsh-patches/brand-replay.sh" ]; then
 else
   echo "[assemble] 警告：缺少 brand-replay.sh（Info.plist/web 标题品牌跳过）"
 fi
+# 运行时守卫补丁（2026-09-13 白屏事故）：G1 HMR 生产模式不推 rebuilt 帧（白屏机制修复）
+# + G2 renderer console 转发（可观测性）。幂等脚本，锚点 count==1 才落笔。
+if [ -f "$DSH_VENDOR/dsh-patches/runtime-guards/apply-fixes.sh" ]; then
+  DSH_APP="$APP_STAGE/DSH Desktop.app" bash "$DSH_VENDOR/dsh-patches/runtime-guards/apply-fixes.sh" apply 2>&1 | tail -6 \
+    || { echo "[assemble] ✗ runtime-guards 补丁重放失败（见上）"; exit 1; }
+else
+  echo "[assemble] ✗ 缺少 dsh-patches/runtime-guards/apply-fixes.sh（G1/G2 守卫必须随包）"; exit 1
+fi
 
 # 签名与压缩推迟到 §2b：须先同源注入 dsh-profile 再 codesign --deep，否则首启兜底内容不在签名面内。
 
@@ -396,6 +404,12 @@ fi
 say "5/6 装配安装器与工具"
 cp "$PKG_ROOT/installer/install.sh" "$PAYLOAD/install.sh"
 chmod 755 "$PAYLOAD/install.sh"
+# 安装手册（用户版）随包分发：客户「不知道怎么装」时看的就是它，所以它必须在 dmg 里，
+# 而不是只躺在仓库里。版本号在打包时注入（手册里写 {{VERSION}}）——写死版本号的手册
+# 一定会漂：本次 2.3.1 的 README 就同时留着上一版的卷名与版本串。
+sed "s/{{VERSION}}/$VERSION/g" "$PKG_ROOT/INSTALL-GUIDE.md" > "$PAYLOAD/INSTALL-GUIDE.md"
+grep -q '{{VERSION}}' "$PAYLOAD/INSTALL-GUIDE.md" \
+  && { echo "[assemble] ✗ 安装手册里仍有未替换的 {{VERSION}}（版本注入失败）" >&2; exit 1; }
 cp "$PKG_ROOT/scripts/rewrite-file-deps.mjs" "$PAYLOAD/tools/"
 cp "$PKG_ROOT/scripts/reloc-aeis.sh" "$PAYLOAD/tools/"
 # v1（verify-patches.sh）2026-09-11 已退役（exit 2），不再随包——随包只会让客户跑到
@@ -403,6 +417,9 @@ cp "$PKG_ROOT/scripts/reloc-aeis.sh" "$PAYLOAD/tools/"
 cp "$PKG_ROOT/verify-patches-v2.sh" "$PAYLOAD/tools/" 2>/dev/null || true
 cp "$DSH_VENDOR/dsh-patches/brand-replay.sh" "$PAYLOAD/tools/" 2>/dev/null || true
 cp "$DSH_VENDOR/dsh-patches/brand-payload-wordmark.txt" "$PAYLOAD/tools/" 2>/dev/null || true
+# runtime-guards 随包分发：客户机安装后可用 --check 体检、--apply 自愈（升级重打包后重放）。
+mkdir -p "$PAYLOAD/tools/runtime-guards"
+cp "$DSH_VENDOR/dsh-patches/runtime-guards/apply-fixes.sh" "$PAYLOAD/tools/runtime-guards/" 2>/dev/null || true
 # patches-manifest*.md 不随包（内部登记簿；决策 K10 = 剔除内部取证文档）
 # ROOT 品牌图标随包分发（brand-replay --apply 自愈用；真相源 packaging/assets/app-icon.icns）
 cp "$PKG_ROOT/assets/app-icon.icns" "$PAYLOAD/tools/app-icon.icns" 2>/dev/null || true
@@ -466,11 +483,14 @@ cat > "$PAYLOAD/README.md" <<EOF
 - \`aeis-portable.tar.gz\`：灵枢 Python 运行时（可重定位 standalone 基底 + aeis 纯 Python 包，目标机免 Python）。
 - \`LUTE Setup.app\`：GUI 安装器（双击安装，进度可见）。
 - \`install.sh\`：命令行安装（等价于 Setup.app，幂等 + 回滚 + 升级保留数据）。
-- \`tools/\`：补丁锚点校验（**verify-patches-v2.sh**，36 锚点）、品牌漂移检查（brand-replay.sh）、file: 重写工具、灵枢便携化工具。
+- \`INSTALL-GUIDE.md\`：**安装手册（用户版）**——逐步操作、授权三项、失败对照表与卸载/回退。
+  发给客户的第二份东西；本 README 只给最短路径与原理。
+- \`tools/\`：补丁锚点校验（**verify-patches-v2.sh**，38 锚点，含 G1/G2 运行时守卫）、品牌漂移检查（brand-replay.sh）、运行时守卫重放/体检（**runtime-guards/**）、file: 重写工具、灵枢便携化工具。
 - \`SHA256SUMS\`：完整性校验。
 
 ## 安装（macOS，完全离线）
-**推荐：终端一条命令**（自动处理 Gatekeeper 隔离属性，最可靠）：
+**逐步操作见随包 \`INSTALL-GUIDE.md\`**（含两种装法、每个对话框、授权与失败对照表）。
+最短路径：**推荐终端一条命令**（自动处理 Gatekeeper 隔离属性，最可靠）：
 
 \`\`\`bash
 cd "/Volumes/DSH Desktop LUTE $VERSION" && bash install.sh
@@ -479,6 +499,9 @@ cd "/Volumes/DSH Desktop LUTE $VERSION" && bash install.sh
 - 写 /Applications 一步会弹管理员密码框，**其余全程用户态**。
 - **切勿用 sudo 运行**：sudo 会污染 ~/.dsh 文件属主，导致后续无法覆盖。
 - GUI 方式（备选）：双击 \`LUTE Setup.app\`。若被 Gatekeeper 拦，右键 → 打开 → 弹框点「打开」。
+  向导会自己定位载荷：同级找不到时到挂载的磁盘映像里找（macOS 对未公证包会把向导复制到
+  随机只读位置运行，那时同级没有载荷——正常现象，向导已自愈；找不到时它会打印读数并给出
+  「复制终端命令」按钮）。
 - 启动后：**首次安装需授权三项**（系统设置 → 隐私与安全性，授权「LUTE Agentic System」）：
   **辅助功能**、**屏幕录制**、**输入监控**。
   这三项正是 `macos-harness doctor` 的 `accessibility` / `screen_recording` / `post_events`；
@@ -505,8 +528,9 @@ shasum -a 256 ../$(basename "$PWD").dmg  # 与发布方给的 SHA256 对照
 
 ## 校验
 \`\`\`bash
-bash tools/verify-patches-v2.sh    # 2.0.5 锚点（本版 36 锚点，应 ALL VERIFIED）
+bash tools/verify-patches-v2.sh    # 2.0.5 锚点（本版 38 锚点，含 G1/G2 运行时守卫，应 ALL VERIFIED）
 bash tools/brand-replay.sh --check  # 品牌锚点无漂移
+bash tools/runtime-guards/apply-fixes.sh --check  # G1/G2 运行时守卫体检（升级重打包后可用 --apply 自愈）
 \`\`\`
 
 ## 未随包（用户决策）

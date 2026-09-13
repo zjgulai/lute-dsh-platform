@@ -1,9 +1,12 @@
 # LUTE Agentic System 安装卡（客户版）
 
-**版本**：2.2.0 · DSH 基座 2.0.5（runtime 0.1.2-rc.1）· 仅支持 Apple 芯片 Mac（macOS 13+）
+**版本**：2.3.2 · DSH 基座 2.0.5（runtime 0.1.2-rc.1）· 仅支持 Apple 芯片 Mac（macOS 13+）
 
 > 交付格式：**只有 DMG**。本版起不再提供 `.pkg`——历史文档里「pkg · 主交付格式」的说法已作废：
 > 全仓没有任何 `.pkg` 产物，继续承诺它等于让客户拿着一个不存在的文件名去核对。
+>
+> 这张卡是一页速查。**逐步操作、每个对话框、失败处置与 FAQ 见 [安装手册](INSTALL-GUIDE.md)**——
+> 发给客户时两张一起给，卡用来扫一眼，手册用来照做。
 
 ---
 
@@ -11,11 +14,11 @@
 
 ### 方式一：终端一条命令（推荐，最省事）
 
-1. 双击 `DSH-Desktop-LUTE-2.2.0-mac-arm64.dmg` 挂载
+1. 双击 `DSH-Desktop-LUTE-2.3.2-mac-arm64.dmg` 挂载
 2. 打开「终端」，粘贴：
 
 ```bash
-cd "/Volumes/DSH Desktop LUTE 2.2.0" && bash install.sh
+cd "/Volumes/DSH Desktop LUTE 2.3.2" && bash install.sh
 ```
 
 3. 写 `/Applications` 一步会弹管理员密码框，输入即可；**其余全程用户态**
@@ -24,6 +27,11 @@ cd "/Volumes/DSH Desktop LUTE 2.2.0" && bash install.sh
 ### 方式二：双击 LUTE Setup.app
 
 挂载 DMG → 双击 `LUTE Setup.app` → 按向导走（进度可见）。
+
+向导会自己定位安装载荷：同级找不到时，会到挂载的磁盘映像里找（macOS 对未公证包会把向导
+复制到随机只读位置再运行，那时同级已经没有载荷了——这是正常现象，向导已自愈）。
+窗口第一行会打印「安装包：…」；若它报「未找到可用的安装包」，窗口里会同时给出读数与
+「复制终端命令」按钮，照提示走即可。
 
 ---
 
@@ -58,7 +66,7 @@ Gatekeeper 不认自签身份），所以：
 
 ```bash
 /usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "/Applications/DSH Desktop.app/Contents/Info.plist"
-# 应显示：2.0.5-lute.2.2.0
+# 应显示：2.0.5-lute.2.3.2
 ```
 
 ## 完整性校验（安装前）
@@ -66,11 +74,11 @@ Gatekeeper 不认自签身份），所以：
 DMG 未公证，完整性由**发布方公示的 SHA256** 承担：
 
 ```bash
-shasum -a 256 DSH-Desktop-LUTE-2.2.0-mac-arm64.dmg
+shasum -a 256 DSH-Desktop-LUTE-2.3.2-mac-arm64.dmg
 # 与发布页公示值一致方可安装
 ```
 
-打包侧的权威清单（与 dmg 同目录）：`release/2.2.0/SHA256SUMS`。
+打包侧的权威清单（与 dmg 同目录）：`release/2.3.2/SHA256SUMS`。
 载荷内部还有一层自校验（`payload/SHA256SUMS`：四个 tar.gz + 安装器），安装前可先跑
 `shasum -a 256 -c SHA256SUMS`。
 
@@ -92,6 +100,7 @@ shasum -a 256 DSH-Desktop-LUTE-2.2.0-mac-arm64.dmg
 | 现象 | 处理 |
 |---|---|
 | 双击 dmg / Setup.app 打不开 | 右键 → 打开（未公证包的标准绕过，见上） |
+| 向导点「开始安装」后提示**「未找到 install.sh」/「未找到可用的安装包」** | 2.3.2 之前的向导只会看自己同级目录；从挂载的 dmg 里双击时，macOS 会把向导复制到随机只读位置运行，同级于是没有载荷（App Translocation）。**三选一**：① 用方式一（终端一条命令）；② 点向导里的「复制终端命令」→「打开终端」→ 粘贴回车；③ 装 2.3.2 或更新版（向导已自愈） |
 | 安装报 Operation not permitted | 本版已自动处理；重跑一次安装器即可 |
 | 反复回滚装不上 | 之前用 sudo 装过：`sudo chown -R $(whoami) ~/.dsh/profiles ~/.dsh/aeis-venv` 后重装 |
 | 升级旧版 | 直接装新版即可，会话数据自动保留 |
@@ -108,6 +117,6 @@ skills-presets.tar.gz    技能 + 预设
 aeis-portable.tar.gz     灵枢 Python 运行时（可重定位，目标机免装 Python）
 LUTE Setup.app           GUI 安装器
 install.sh               命令行安装器（与 Setup.app 等价）
-tools/                   校验与品牌工具（verify-patches-v2.sh / brand-replay.sh / …）
+tools/                   校验与品牌工具（verify-patches-v2.sh / brand-replay.sh / runtime-guards/ / …）
 VERSION / SHA256SUMS / manifest.json / README.md
 ```

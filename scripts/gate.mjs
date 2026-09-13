@@ -56,6 +56,7 @@ const TCC_GUIDANCE_SURFACES = [
   'packaging/installer/install.sh',
   'packaging/installer/pkg-postinstall.sh',
   'packaging/INSTALL-CARD.md',
+  'packaging/INSTALL-GUIDE.md',
   'packaging/README.md',
   'README.md',
 ]
@@ -292,6 +293,26 @@ const CHECKS = [
           text: readIfExists(join(repoRoot, rel)) ?? '',
         })),
       })
+    },
+  },
+  {
+    name: 'setup-app-locator',
+    remediation:
+      '跑 bash packaging/scripts/setup-app-locate-test.sh 看红在哪条：安装器必须能在「同级没有载荷」时从挂载卷找到安装包（从 dmg 里双击就会被 macOS 随机重定位，这是常态），也不得要求 install.sh 有可执行位（脚本是用 /bin/bash 跑的）。缺 swiftc 时先 xcode-select --install（ADR-0066）',
+    run() {
+      const script = join(repoRoot, 'packaging', 'scripts', 'setup-app-locate-test.sh')
+      const result = runScript(repoRoot, `bash "${script}"`, 300000)
+      if (result.code === 0) return { passed: true, violations: [] }
+      const text = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
+      const lines = text
+        .split('\n')
+        .filter((line) => /✗|TEST FAILED|缺少 swiftc/.test(line))
+        .map((line) => line.trim())
+      const verdict = result.code === null ? '未给出退出码' : `退出码 ${result.code}`
+      return {
+        passed: false,
+        violations: lines.length > 0 ? lines : [`安装器定位自测失败（${verdict}）`],
+      }
     },
   },
   {

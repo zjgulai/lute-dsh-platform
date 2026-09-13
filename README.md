@@ -4,7 +4,7 @@
 
 > 当前版本：**v2.2.0**（2026-09-12，DSH 基座 2.0.5 / runtime 0.1.2-rc.1）· 仓库：monorepo · 变更历史见 [CHANGELOG.md](CHANGELOG.md)（2.0.0 升级全链研究见 docs/research/）
 >
-> **客户安装**：下载 `DSH-Desktop-LUTE-<版本>-mac-arm64.dmg`，挂载后按 [安装卡](packaging/INSTALL-CARD.md) 安装（终端一条命令，或双击 `LUTE Setup.app`）。
+> **客户安装**：下载 `DSH-Desktop-LUTE-<版本>-mac-arm64.dmg`，挂载后按 [安装手册](packaging/INSTALL-GUIDE.md) 安装（终端一条命令，或双击 `LUTE Setup.app`；一页速查见 [安装卡](packaging/INSTALL-CARD.md)）。
 > **本版起只发 DMG**：全仓无 `.pkg` 产物，「pkg 为主交付」的历史说法自 2.2.0 起作废。
 
 ## 平台组成
@@ -29,8 +29,9 @@
 2. 双击挂载 → 终端 `cd "/Volumes/DSH Desktop LUTE <版本>" && bash install.sh`；或双击 `LUTE Setup.app` 走向导
 3. 安装后重启 DSH Desktop，重新授权 TCC（辅助功能/屏幕录制/输入监控）
 
-> 仅支持 Apple 芯片 Mac（arm64，macOS 13+）。包为 adhoc 签名、**未公证**，首启会被 Gatekeeper 拦（右键 → 打开）。
-> 完整步骤、Gatekeeper 处置表、完整性校验与常见问题一律见 [安装卡](packaging/INSTALL-CARD.md)。
+> 仅支持 Apple 芯片 Mac（arm64，macOS 13+）。签名身份为固定自签证书（`LUTE Code Signing`）但**未公证**，
+> 首启会被 Gatekeeper 拦（右键 → 打开）；**未公证与签名身份是两件事**：前者决定放行，后者决定 TCC 授权能否跨版本存活。
+> 逐步操作、Gatekeeper 处置表、授权三项、完整性校验与常见问题一律见 [安装手册](packaging/INSTALL-GUIDE.md)（速查：[安装卡](packaging/INSTALL-CARD.md)）。
 
 ### 本机开发安装（profile file: 依赖）
 
