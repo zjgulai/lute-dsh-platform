@@ -121,3 +121,42 @@ cp -R "$DSH_HOME_DIR/.agent-presets/." "$SP/presets/"
 - `bash packaging/scripts/rewrite-build-paths-test.sh` → **6 通过 0 失败**（R1–R4、P1、M1）。
 - `bash packaging/scripts/scan-machine-paths-test.sh` → **5 通过 0 失败**（T1–T4、M1）。
 - 重切 2.3.3 的装配/出货读数见下节。
+
+## 重切 2.3.3（同名归档）——装配与出货读数
+
+装配日志（`packaging/staging/2.3.3`，`SMOKE PASSED`，退出码 0）：
+
+```
+[presets] ✓ 出货 51 个预设（岗位 50 个 + 登记 1 个：lute-cordis）
+[presets] · 本机保留、明确不发（1 个）：bobo-cto
+[rewrite-paths] 改写 112 个文件 / 173 处构建机路径（/Users/lute）
+[rewrite-paths] ✓ 出货副本已不含构建机路径（/Users/lute）
+[assemble] 技能+预设完成 (3.8M)
+```
+
+出货 DMG（`release/2.3.3/DSH-Desktop-LUTE-2.3.3-mac-arm64.dmg`，挂载后直读）：
+
+| 检查 | 改前（旧 2.3.3） | 改后（新 2.3.3） |
+| --- | --- | --- |
+| 出货 `completeness.json` 的 `presets` | 52（含 `bobo-cto`） | **51**（`bobo-cto` 不在其中） |
+| DMG 内 `skills-presets.tar.gz` 的 `presets/bobo-cto/` 命中 | 19 条 | **0** |
+| 出货技能数 | 349 | **334**（见下「连带」） |
+| DMG 内文本文件含 `/Users/lute` | 114（presets 101 + skills 13） | **0** |
+| 占位符落位 | — | `__LUTE_MATERIAL_ROOT__` 150、`__BUILD_DESKTOP__` 13、`__LUTE_REPO__` 9、`__DSH_HOME__` 1（= 173，与改写器读数一致） |
+| 守卫对出货 tarball | 盲（看不见） | `✓ 无新增（当前 0 条）` |
+
+**连带后果（要人来确认的一条）**：`bobo-cto` 是 15 个工程技能的**唯一**引用者，排除它以后这 15 个
+技能也随之退出出货面（`agent-browser`、`code-review`、`codebase-design`、`diagnosing-bugs`、
+`domain-modeling`、`dsh-plugin-acquire`、`git-guardrails-claude-code`、`grilling`、`handoff`、
+`improve-codebase-architecture`、`macos-harness`、`resolving-merge-conflicts`、`simplify-codebase`、
+`wait-what`、`writing-for-agents`），技能数 349 → 334。选择规则是「被出货预设引用 + 无受限许可」，
+所以这是**规则的正确结果**，但它同时说明：**这些技能此前进包是靠 bobo-cto 顺带的，不是产品决定**。
+若产品确实要发其中若干，正确做法是给 `select-skills` 一份**产品级的显式清单**，而不是继续靠
+某个预设的引用关系——这件事单独立项，不在本条里顺手做。
+
+**`source_dirty=1`（如实记录）**：装配那一刻工作树上有 7 个**别人会话的未跟踪文件**
+（`packages/capabilities/dsh-paper2skills/eval/*.mjs`），故 `release/2.3.3.sha256` 标注
+`source_dirty=1`、`source_commit` 不足以单独重建本载荷。已核查这 7 个文件**没有**进载荷：
+`dsh-paper2skills` 既不在 `completeness.json` 的 `bundles` 也不在 `vendor`，
+`profile.tar.gz` 里 `dsh-paper2skills/eval/` 命中 0。即：脏的是**构建输入清单**，不是出货内容。
+SOP §0 要求「工作树干净」，本机有并行会话时做不到——这条要在下次发布前决定怎么守（结论待定）。
