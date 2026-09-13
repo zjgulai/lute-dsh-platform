@@ -25,6 +25,7 @@ import {
   checkPackageIdentity,
   checkPinConsistency,
   checkScriptsRunnable,
+  checkShellVarAdjacentMultibyte,
   checkTrackedIgnored,
 } from './gates/checks.mjs'
 import { buildOutputRoot, checkDependencyReproducibility, packageScriptOrder } from './gates/dependency-reproducibility.mjs'
@@ -248,6 +249,13 @@ const CHECKS = [
     },
   },
   {
+    name: 'shell-var-multibyte',
+    remediation: '把 `$VAR` 写成 `${VAR}`：bash 会把紧跟其后的多字节字符并入变量名，set -u 下直接中断（2026-09-13 实测装配 §5 中断，ADR-0064）',
+    run() {
+      return checkShellVarAdjacentMultibyte({ files: collectShellScripts() })
+    },
+  },
+  {
     name: 'changed-packages',
     remediation: '为本次改动的包补 typecheck 与 test 脚本，或按 ADR-0014 登记豁免（只减不增）',
     run() {
@@ -392,6 +400,35 @@ const EXEMPTIONS_PATH = 'scripts/gates/exemptions.json'
 
 /** 幻觉 token 基线（仓库根相对路径，只减不增）。 */
 const THEME_TOKENS_BASELINE_PATH = 'scripts/gates/theme-tokens-baseline.json'
+
+/** 扫描时不进入的目录：第三方源码、VCS 元数据与装配产物（本检查只针对仓库自有脚本）。 */
+const SHELL_SCAN_SKIP_DIRS = new Set(['node_modules', '.git', 'vendor'])
+
+/**
+ * 收集全仓 shell 脚本供 `shell-var-multibyte` 校验（ADR-0064）。
+ * 范围 = `*.sh`（排除 `.bak` 备份），跳过 node_modules / .git / vendor / packaging/staging。
+ * 只扫 shell：本陷阱是 bash 词法问题，别的语言里同样两个相邻字面量不会出事。
+ * @returns {Array<{relPath: string, text: string}>}
+ */
+function collectShellScripts() {
+  const out = []
+  const walk = (dir) => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, entry.name)
+      const rel = relative(repoRoot, full)
+      if (entry.isDirectory()) {
+        if (SHELL_SCAN_SKIP_DIRS.has(entry.name)) continue
+        if (rel === join('packaging', 'staging')) continue
+        walk(full)
+        continue
+      }
+      if (!entry.name.endsWith('.sh') || entry.name.endsWith('.bak')) continue
+      out.push({ relPath: rel, text: readFileSync(full, 'utf8') })
+    }
+  }
+  walk(repoRoot)
+  return out
+}
 
 /**
  * 收集受管包 node_modules 顶层作用域内的符号链接及其可达性。

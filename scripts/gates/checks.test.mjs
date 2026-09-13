@@ -13,6 +13,7 @@ import {
   checkPackageIdentity,
   checkPinConsistency,
   checkScriptsRunnable,
+  checkShellVarAdjacentMultibyte,
   checkTrackedIgnored,
 } from './checks.mjs'
 
@@ -487,4 +488,53 @@ test('依赖链接校验：全部链接可达时通过', () => {
 
   assert.equal(result.passed, true)
   assert.deepEqual(result.violations, [])
+})
+
+test('shell 变量多字节校验：$VAR 紧跟全角字符必须被拒绝', () => {
+  const result = checkShellVarAdjacentMultibyte({
+    files: [
+      { relPath: 'a.sh', text: 'say "编译完成: $APP（身份：x）"\n' },
+      { relPath: 'b.sh', text: 'echo "退出码 $RC，应为 1"\n' },
+    ],
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, [
+    'a.sh:1: $APP（ —— 变量名被后续多字节字符吞掉，请写成 ${VAR} 形式',
+    'b.sh:1: $RC， —— 变量名被后续多字节字符吞掉，请写成 ${VAR} 形式',
+  ])
+})
+
+test('shell 变量多字节校验：加花括号、ASCII 边界、位置参数均通过', () => {
+  const result = checkShellVarAdjacentMultibyte({
+    files: [
+      { relPath: 'ok.sh', text: 'say "编译完成: ${APP}（身份：x）"\n' },
+      { relPath: 'ascii.sh', text: 'echo "$RC, expected 1"\n' },
+      { relPath: 'positional.sh', text: 'echo "$1（第一个参数）"\n' },
+      { relPath: 'braced.sh', text: 'echo "${VAR}x"\n' },
+    ],
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('shell 变量多字节校验：注释里的写法不算违规', () => {
+  const result = checkShellVarAdjacentMultibyte({
+    files: [
+      { relPath: 'comment.sh', text: '# `$IDENTITY」` 会被解析成变量名\nSTAGING=""   # 已属于 $REL，不再管理\necho ok\n' },
+    ],
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('shell 变量多字节校验：引号内的 # 不是注释起点', () => {
+  const result = checkShellVarAdjacentMultibyte({
+    files: [{ relPath: 'quoted.sh', text: 'echo "# tag $VAR，尾" > /dev/null\n' }],
+  })
+
+  assert.equal(result.passed, false)
+  assert.deepEqual(result.violations, ['quoted.sh:1: $VAR， —— 变量名被后续多字节字符吞掉，请写成 ${VAR} 形式'])
 })

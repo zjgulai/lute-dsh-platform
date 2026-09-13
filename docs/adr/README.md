@@ -67,6 +67,7 @@
 | ADR-0061 | 新应用抽屉同时兼容 `ctx.agentPresets` 与 `connection.api.agentPresets` 两种 preset 选择器载体；深链星探 KOL-Hunter 走本机 profile 本地装配，不再烘焙进出货 preset；新增 DMG 打包发布 SOP | accepted（2026-09-13） | [Note](../notes/implemented/surface/2026-09-13-newapp-agentpresets-channel-and-kol-hunter-local.md) |
 | ADR-0062 | 新应用抽屉增加「业务系统」第二分区：外链只由宿主打开且只接受 slug；本包从此拥有一份 catalog（部分修订 ADR-0045） | accepted（2026-09-13） | [Note](../notes/implemented/surface/2026-09-13-newapp-systems-section.md) |
 | ADR-0063 | 出货 app 改用固定身份的证书签名：adhoc 的指定要求字面上就是 CDHash，TCC 授权因此随字节失效——「重新授权一次」实为**每版一次**；改建自签身份后换签只付一次；签名身份升为「签不出来即失败」的受门禁保护构建输入（修订 PLAN 决策 D2） | accepted（2026-09-13） | [Note](../notes/implemented/architecture/2026-09-13-signing-identity-tcc-stability.md) |
+| ADR-0064 | shell 变量名边界纳入门禁：`$VAR` 紧跟多字节字符（如全角括号）会被 bash 并入变量名，`set -u` 下直接中断——实测让 2.3.0 首次装配在 §5 作废，且 4 处现场中有一处恰在**错误报告路径**上；修复统一改 `${VAR}`，新增 `shell-var-multibyte` 硬校验（注释与位置参数不报） | accepted（2026-09-13） | [Note](../notes/implemented/contract/2026-09-13-shell-var-multibyte-guard.md) |
 
 > ADR-0007 ~ ADR-0018 是「LUTE 二开平台架构重构」的十二项决策，共享同一篇决策记录 Note。
 > ADR-0019 独立成篇（品牌皮肤锚点治理），决策记录见其 Note。

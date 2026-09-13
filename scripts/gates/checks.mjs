@@ -336,6 +336,72 @@ export function checkScriptsRunnable({ packages }) {
 }
 
 /**
+ * 剔除 shell 行里的注释部分（`#` 在未加引号且**位于词首**时才开始注释）。
+ * 为什么需要：`sign-and-dmg.sh:204` 形如 `STAGING=""   # 已属于 $REL，不再…`，
+ * 变量在注释里、不参与展开，若整行匹配就会误报——硬门槛不接受假红。
+ * @param {string} line 原始行
+ * @returns {string} 去掉注释后的代码部分
+ */
+function stripShellComment(line) {
+  let inSingle = false
+  let inDouble = false
+  for (let i = 0; i < line.length; i += 1) {
+    const ch = line[i]
+    if (ch === '\\' && !inSingle) {
+      i += 1
+      continue
+    }
+    if (ch === "'" && !inDouble) {
+      inSingle = !inSingle
+      continue
+    }
+    if (ch === '"' && !inSingle) {
+      inDouble = !inDouble
+      continue
+    }
+    if (ch === '#' && !inSingle && !inDouble && (i === 0 || /\s/.test(line[i - 1]))) {
+      return line.slice(0, i)
+    }
+  }
+  return line
+}
+
+/**
+ * 校验 shell 脚本里没有「$VAR 紧跟非 ASCII 字符」的写法（ADR-0064）。
+ *
+ * 动机（2026-09-13 实测，代价是一整轮装配）：`build-setup-app.sh` 末行
+ * `say "编译完成: $APP（身份：…）"` 让 2.3.0 首次装配在 §5 中断，退出码 1：
+ *   build-setup-app.sh: line 43: APP<坏字节>: unbound variable
+ * 成因不是拼错变量名，而是 bash 的词法——`（` 的字节 EF BC 88 被当作标识符字符
+ * 并入变量名，引用的成了从未定义过的「APP（」。脚本开头 `set -euo pipefail`，
+ * 于是硬中断。**加花括号即解**：`${APP}（` 把变量名边界钉死。
+ *
+ * 为什么必须是机器判据：`ensure-signing-identity.sh:27` 早就把这条陷阱写在注释里，
+ * 「知道」却没能拦住 4 处新犯（其中 `pkg-postinstall.sh:46` 恰在**错误报告路径**上，
+ * 自身一炸反而掩盖真实错误）。这正是 ADR-0057 那句「靠人记得不是工程解，机读判据才是」。
+ *
+ * 判定范围：`$` + 标识符首字符 [A-Za-z_] + 后续 [A-Za-z0-9_]*，其后紧跟码点 ≥ 0x80。
+ * 位置参数不受影响（`$1（` 中 bash 只按数字取参，`（` 不会被并入），故本正则不覆盖 `$1`。
+ *
+ * @param {{files: Array<{relPath: string, text: string}>}} input 待校验的 shell 脚本
+ * @returns {{passed: boolean, violations: string[]}}
+ */
+export function checkShellVarAdjacentMultibyte({ files }) {
+  const violations = []
+  for (const { relPath, text } of files) {
+    const lines = text.split('\n')
+    for (let i = 0; i < lines.length; i += 1) {
+      const code = stripShellComment(lines[i])
+      const match = code.match(/\$[A-Za-z_][A-Za-z0-9_]*[^\x00-\x7f]/)
+      if (match) {
+        violations.push(`${relPath}:${i + 1}: ${match[0]} —— 变量名被后续多字节字符吞掉，请写成 \${VAR} 形式`)
+      }
+    }
+  }
+  return { passed: violations.length === 0, violations }
+}
+
+/**
  * 校验包内依赖符号链接未断链（ADR-0016 的目录可迁移性）。
  * 动机（实测）：dsh-browser-local 的 @deepseek-ai/* 曾是指向应用包目录的相对符号链接，
  * 包目录从 1 层移到 3 层后相对路径失效，11 个测试套件全部无法收集——而门禁此前看不到。
