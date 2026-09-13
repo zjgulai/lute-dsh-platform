@@ -8,6 +8,7 @@ import {
   checkGitignoreWhitelist,
   checkChangedPackages,
   checkDependencyLinks,
+  checkDmgReadmeTccPanes,
   checkExemptions,
   checkNestedRepositories,
   checkPackageIdentity,
@@ -537,4 +538,54 @@ test('shell 变量多字节校验：引号内的 # 不是注释起点', () => {
 
   assert.equal(result.passed, false)
   assert.deepEqual(result.violations, ['quoted.sh:1: $VAR， —— 变量名被后续多字节字符吞掉，请写成 ${VAR} 形式'])
+})
+
+test('出货 README 的 TCC 三项：写全三块面板时通过', () => {
+  const result = checkDmgReadmeTccPanes({
+    assembleScript:
+      '- 启动后：**首次安装需授权三项**（系统设置 → 隐私与安全性）：\n' +
+      '  **辅助功能**、**屏幕录制**、**输入监控**。\n',
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('出货 README 的 TCC 三项：机器上真实发生过的错法（写「自动化」）必须判红', () => {
+  // 这条是回归测试：2026-09-13 之前 README 写的就是这一行，而系统 TCC 库里没有 PostEvent 行，
+  // 用户照着授「自动化」不会让 post_events 变 true。历史输入，必须能被判红。
+  const result = checkDmgReadmeTccPanes({
+    assembleScript:
+      '- 启动后：**首次安装需授权 TCC**（系统设置 → 隐私与安全 → 屏幕录制/辅助功能/自动化，授权 LUTE Agentic System）。\n',
+  })
+
+  assert.equal(result.passed, false)
+  assert.equal(result.violations.length, 1)
+  assert.match(result.violations[0], /缺少「输入监控」/)
+})
+
+test('出货 README 的 TCC 三项：正文解释「不要授权自动化」不算违规', () => {
+  const result = checkDmgReadmeTccPanes({
+    assembleScript:
+      '- 启动后：**首次安装需授权三项**：辅助功能、屏幕录制、输入监控。\n' +
+      '  第三项在「输入监控」下而**不在「自动化」下**。\n',
+  })
+
+  assert.equal(result.passed, true)
+})
+
+test('出货 README 的 TCC 三项：整段缺失时判红并说明后果', () => {
+  const result = checkDmgReadmeTccPanes({ assembleScript: '# 什么都没有\n' })
+
+  assert.equal(result.passed, false)
+  assert.match(result.violations[0], /缺少「首次安装需授权」段落/)
+})
+
+test('出货 README 的 TCC 三项：段落在但少了面板同样判红', () => {
+  const result = checkDmgReadmeTccPanes({
+    assembleScript: '- 启动后：**首次安装需授权三项**：辅助功能、屏幕录制。\n',
+  })
+
+  assert.equal(result.passed, false)
+  assert.match(result.violations[0], /缺少「输入监控」/)
 })

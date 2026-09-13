@@ -83,6 +83,24 @@ ADR-0063 的四条机读判据里，前三条（无 cdhash、Authority 为证书
 
 **一条自我适用**：本 Note 记录的三次假绿都出在「判据」上，而第四次之后新增的两处（快照 JSON、空测试）出在**我自己新写的仪器**上。仪器也是判据，同样要能被证伪；`verify-tcc-runtime.sh` 因此对快照做了 `JSON.parse` 断言、对 `--diff` 做了 CDHash 配对断言——两条都是「产出必须当场证明自己能解析、能区分」。
 
+### 用户照着做的那句话本身是错的
+
+判据做对了，指引却是错的：出货 README 让用户授权「屏幕录制/辅助功能/**自动化**」，而实测三项是
+`kTCCServiceAccessibility` / `kTCCServiceScreenCapture` / **`kTCCServiceListenEvent`**——第三项在
+**输入监控**下，系统 TCC 库里**根本没有 `PostEvent` 行**（`post_events` 由「输入监控」承载）。
+用户按 README 授了「自动化」，`mac.key` / `mac.click` 仍会静默失败：**一份写错的指引，与一条不会
+判否的判据，产生同一种后果**——能力死了而没人收到通知。
+
+修法与守住它的方式：
+
+- 改正 `packaging/assemble.sh` 生成的 README 段（三项 + 说明第三项为什么不在「自动化」下）；
+- 新增门禁 `dmg-readme-tcc-panes`（`scripts/gates/checks.mjs: checkDmgReadmeTccPanes`），要求该段
+  三项齐备，并配 5 条单测——其中一条**特意用机器上真实发生过的错法（写「自动化」）做输入**，
+  它必须判红。判据只要求齐备、不禁止正文解释「不要授权自动化」，因为那正是需要讲清楚的地方。
+
+**这类「指引」和判据一样属于契约面**：它不会被编译器检查，错了也没有报错，唯一能拦住它的是把它
+也做成机读判据。
+
 ### 三次假绿，同一族（本 Note 的方法论来源）
 
 | # | 形态 | 表面读数 | 真相 |

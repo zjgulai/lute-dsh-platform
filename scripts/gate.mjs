@@ -19,6 +19,7 @@ import {
   checkCatalogFresh,
   checkChangedPackages,
   checkDependencyLinks,
+  checkDmgReadmeTccPanes,
   checkExemptions,
   checkGitignoreWhitelist,
   checkNestedRepositories,
@@ -253,6 +254,16 @@ const CHECKS = [
     remediation: '把 `$VAR` 写成 `${VAR}`：bash 会把紧跟其后的多字节字符并入变量名，set -u 下直接中断（2026-09-13 实测装配 §5 中断，ADR-0064）',
     run() {
       return checkShellVarAdjacentMultibyte({ files: collectShellScripts() })
+    },
+  },
+  {
+    name: 'dmg-readme-tcc-panes',
+    remediation:
+      '出货 README 的授权段必须写全「辅助功能 / 屏幕录制 / 输入监控」三项：写错一项不报错，用户会照着授了「自动化」而 mac.key/mac.click 静默失败（ADR-0063）',
+    run() {
+      return checkDmgReadmeTccPanes({
+        assembleScript: readIfExists(join(repoRoot, 'packaging', 'assemble.sh')) ?? '',
+      })
     },
   },
   {

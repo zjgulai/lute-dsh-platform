@@ -479,7 +479,13 @@ cd "/Volumes/DSH Desktop LUTE $VERSION" && bash install.sh
 - 写 /Applications 一步会弹管理员密码框，**其余全程用户态**。
 - **切勿用 sudo 运行**：sudo 会污染 ~/.dsh 文件属主，导致后续无法覆盖。
 - GUI 方式（备选）：双击 \`LUTE Setup.app\`。若被 Gatekeeper 拦，右键 → 打开 → 弹框点「打开」。
-- 启动后：**首次安装需授权 TCC**（系统设置 → 隐私与安全 → 屏幕录制/辅助功能/自动化，授权 LUTE Agentic System）。
+- 启动后：**首次安装需授权三项**（系统设置 → 隐私与安全性，授权「LUTE Agentic System」）：
+  **辅助功能**、**屏幕录制**、**输入监控**。
+  这三项正是 `macos-harness doctor` 的 `accessibility` / `screen_recording` / `post_events`；
+  第三项在「输入监控」下而**不在「自动化」下**——授权「自动化」不会让 `post_events` 变 true，
+  缺它时 `mac.key` / `mac.click` 会静默失败（2026-09-13 实测：三项的 TCC 记录为
+  `kTCCServiceAccessibility` / `kTCCServiceScreenCapture` / `kTCCServiceListenEvent`，
+  库中根本没有 `PostEvent` 行）。
   自本版起 app 使用**固定签名身份**，后续升级**不再要求重新授权**——这是「升级一次、重授一次」的终点。
   从更早的 adhoc 版升上来的机器仍要重授这一次：身份变了，旧授权不会自动继承。
 

@@ -419,3 +419,41 @@ export function checkDependencyLinks({ links }) {
       ),
   }
 }
+
+/**
+ * 校验出货 README 里让用户授权的那三项，与 `macos-harness doctor` 实际检查的三项一致。
+ *
+ * 为什么这值得一条门禁：这三项是终端用户**唯一**的授权指引，而写错其中一项不会产生任何
+ * 报错——用户照着授了「自动化」，`mac.key` / `mac.click` 却因缺「输入监控」静默失败。
+ * 这正是 ADR-0063 要消除的那类失败（能力静默死亡），且它已经真实发生过一次：
+ * README 原写「屏幕录制/辅助功能/自动化」，而 2026-09-13 实测三项对应的是
+ * `kTCCServiceAccessibility` / `kTCCServiceScreenCapture` / `kTCCServiceListenEvent`，
+ * 系统 TCC 库里**根本没有 `PostEvent` 行**（`post_events` 由「输入监控」承载）。
+ *
+ * 判据只要求三项齐备——不禁止正文解释「不要授权自动化」，因为那正是需要写清楚的地方。
+ * @param {{assembleScript: string}} input packaging/assemble.sh 的全文
+ * @returns {{passed: boolean, violations: string[]}}
+ */
+const TCC_REQUIRED_PANES = ['辅助功能', '屏幕录制', '输入监控']
+const TCC_README_MARKER = '首次安装需授权'
+
+export function checkDmgReadmeTccPanes({ assembleScript }) {
+  const violations = []
+  const lines = assembleScript.split('\n')
+  const idx = lines.findIndex((line) => line.includes(TCC_README_MARKER))
+  if (idx === -1) {
+    violations.push(
+      `packaging/assemble.sh: 出货 README 缺少「${TCC_README_MARKER}」段落——用户将拿不到授权指引`,
+    )
+    return { passed: false, violations }
+  }
+  const block = lines.slice(idx, idx + 10).join('\n')
+  for (const pane of TCC_REQUIRED_PANES) {
+    if (!block.includes(pane)) {
+      violations.push(
+        `packaging/assemble.sh: 出货 README 的授权段缺少「${pane}」——需授权的三项是 ${TCC_REQUIRED_PANES.join(' / ')}（ADR-0063）`,
+      )
+    }
+  }
+  return { passed: violations.length === 0, violations }
+}
