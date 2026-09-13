@@ -153,11 +153,15 @@ export function checkAdrNoteLinks({ adrDocs, readNote, exists }) {
 
 /**
  * 把文档内的相对链接归一化为仓库根相对路径（链接以所在文档目录为基准）。
+ *
+ * 导出是为了让 `pitfalls-playbook.mjs` 复用同一份实现：链接解析规则若有第二份
+ * 拷贝，两边迟早对「锚点算不算路径」「`..` 越界怎么办」给出不同答案，而分歧只会
+ * 在某个链接恰好踩到边界时暴露（ADR-0009：一份事实只有一个家）。
  * @param {string} fromPath 链接所在文档的仓库根相对路径
  * @param {string} link 链接字面量
  * @returns {string} 归一化后的仓库根相对路径
  */
-function resolveDocLink(fromPath, link) {
+export function resolveDocLink(fromPath, link) {
   const segments = fromPath.split('/').slice(0, -1)
   for (const part of link.split('/')) {
     if (part === '.' || part === '') continue

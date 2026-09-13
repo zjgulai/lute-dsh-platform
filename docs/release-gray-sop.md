@@ -14,7 +14,7 @@
 - 发灰度前复核：`shasum -a 256 -c SHA256SUMS`，再对**挂载后**的 app 验签：
   `codesign --verify --deep --strict "/Volumes/DSH Desktop LUTE <ver>/DSH Desktop.app"`。
   用 `codesign` 而非 `pkgutil --check-signature`：签名是**自签证书**（非 Developer ID），且 `pkgutil` 只认 `.pkg`——
-  本版起交付面没有 `.pkg`（见 [INSTALL-CARD](packaging/INSTALL-CARD.md) 完整性说明）。
+  本版起交付面没有 `.pkg`（见 [INSTALL-CARD](../packaging/INSTALL-CARD.md) 完整性说明）。
   2.3.0 起还应连带验**身份**（ADR-0063）：`codesign -d -r-` 的指定要求必须是
   `identifier "…" and certificate leaf = H"…"`，**不得出现 `cdhash`**——adhoc 的指定要求
   字面上就是二进制哈希，那正是「每升一版 TCC 就重授一次」的根因。

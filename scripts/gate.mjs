@@ -38,7 +38,14 @@ import { checkSharedSync } from './gates/sync-shared.mjs'
 import { checkThemeTokens } from './gates/theme-tokens.mjs'
 import { checkWorktableFence } from './gates/worktable-fence.mjs'
 import { checkNodeInterpreter } from './gates/node-interpreter.mjs'
+import {
+  checkPitfallsPlaybook,
+  PLAYBOOK_BACKLINK_PATHS,
+  PLAYBOOK_REL_PATH,
+} from './gates/pitfalls-playbook.mjs'
+import { checkDocsLinkIntegrity } from './gates/docs-links.mjs'
 import { runScript } from './lib/run-script.mjs'
+import { nodeCommand } from './lib/real-node.mjs'
 import { collectPackages } from './gates/package-collect.mjs'
 import { renderCatalog } from './gen-catalog.mjs'
 
@@ -440,6 +447,49 @@ const CHECKS = [
     },
   },
   {
+    name: 'pitfalls-playbook',
+    remediation:
+      '按 docs/pitfalls-playbook.md 头部写明的契约补齐：每条 `## P-NN · 标题` 必须有「症状 / 根因类 / 已落地机制 / 下一版默认动作」四段；「已落地机制」必须点名真实存在的 `gate:<名字>`（见 node scripts/gate.mjs --list）或 `script:<路径>`——机制没有名字就等于自我安慰；编号自 P-01 起连续；相对链接可达；且 AGENTS.md 与 docs/README.md 都必须链接本账（没入口的总账等于不存在）',
+    run() {
+      return checkPitfallsPlaybook({
+        playbookText: readIfExists(join(repoRoot, PLAYBOOK_REL_PATH)),
+        // 注册表的**实时**名字列表：条目点名一个被改名或删掉的门禁，当场红灯。
+        gateNames: CHECKS.map((check) => check.name),
+        fileExists: (path) => existsSync(join(repoRoot, path)),
+        backlinkTexts: Object.fromEntries(
+          PLAYBOOK_BACKLINK_PATHS.map((path) => [path, readIfExists(join(repoRoot, path))]),
+        ),
+      })
+    },
+  },
+  {
+    name: 'pitfalls-playbook-selftest',
+    remediation:
+      '跑 node --test scripts/gates/pitfalls-playbook.test.mjs 看红在哪条：总账校验必须能说「不」。缺段/空段/跳号/重号/链接不可达/缺入口各有一条反例，重点是「恒真桩突变」——把每条机制换成「有门禁守着」这类永远成立的免责话，校验必须失效；只会判绿的清单校验比没有校验更坏（P-02 / P-03）',
+    run() {
+      return runNodeTestFile('scripts/gates/pitfalls-playbook.test.mjs', '总账校验的反向自测失败')
+    },
+  },
+  {
+    name: 'docs-link-integrity',
+    remediation:
+      '按报错里的「链接 → 解析后的路径」改正层级：相对链接以**本文件所在目录**为基准。最常见的一种是 Note（住在 docs/notes/<lifecycle>/<class>/ 下）指向 docs/adr/ 的 ADR 时写成两层上溯——正确的三层是 ../../../adr/ADR-00XX.md；写错时它不会「点不开」，而是把「没有依据」伪装成「有依据」。代码块与行内代码里的链接不校验（模板占位符与示例不算链接）',
+    run() {
+      return checkDocsLinkIntegrity({
+        docs: collectDocFiles(),
+        fileExists: (path) => existsSync(join(repoRoot, path)),
+      })
+    },
+  },
+  {
+    name: 'docs-link-integrity-selftest',
+    remediation:
+      '跑 node --test scripts/gates/docs-links.test.mjs 看红在哪条：文档链接校验必须能说「不」（层级少写一层要判红并报出解析后的错误路径），也必须不误报（代码块模板占位符、行内代码示例、外链、页内锚点、带锚点的相对链接都不该判红）——会误报的校验很快会被当成噪声关掉（P-02）',
+    run() {
+      return runNodeTestFile('scripts/gates/docs-links.test.mjs', '文档链接校验的反向自测失败')
+    },
+  },
+  {
     name: 'changed-packages',
     remediation: '为本次改动的包补 typecheck 与 test 脚本，或按 ADR-0014 登记豁免（只减不增）',
     run() {
@@ -611,6 +661,56 @@ function collectShellScripts() {
     }
   }
   walk(repoRoot)
+  return out
+}
+
+/**
+ * 跑一个 `node:test` 测试文件，把失败用例名抽成门禁的违规明细。
+ *
+ * 为什么不用 `process.execPath`：在 pnpm 生命周期脚本下它是**宿主 Electron 可执行文件**，
+ * Electron 不认为自己在当 node 而是再开一个 app 实例，单实例锁之下立刻以 0 退出——
+ * 父进程看到的是「退出码 0、stdout 空」，而 `runScript` 只读退出码，
+ * 于是**测试一条都没跑也会判绿**（ADR-0040 / `scripts/lib/real-node.mjs`）。
+ * 这正是总账 P-02「仪器假绿」的形状，所以这里必须走 `nodeCommand()`。
+ * @param {string} relPath 测试文件的仓库根相对路径
+ * @param {string} failureLabel 没有任何可解析失败行时的兜底说明
+ * @returns {{passed: boolean, violations: string[]}}
+ */
+function runNodeTestFile(relPath, failureLabel) {
+  const { command, env } = nodeCommand()
+  const script = join(repoRoot, relPath)
+  const result = runScript(repoRoot, `"${command}" --test "${script}"`, 120000, env)
+  if (result.code === 0) return { passed: true, violations: [] }
+  const text = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
+  const lines = text
+    .split('\n')
+    .filter((line) => /^\s*✖/.test(line) || /AssertionError/.test(line))
+    .map((line) => line.trim())
+  const verdict = result.code === null ? '未给出退出码' : `退出码 ${result.code}`
+  return { passed: false, violations: lines.length > 0 ? lines : [`${failureLabel}（${verdict}）`] }
+}
+
+/**
+ * 收集 `docs-link-integrity` 要校验的文档：`docs/` 全部 Markdown + 仓库根的两份。
+ *
+ * 范围是刻意的：包内文档（各包的 `docs/`、`packaging/` 下的 Markdown）是另一个面，
+ * 未纳入本项。边界写在 `scripts/gates/docs-links.mjs` 的模块注释里。
+ * @returns {Array<{path: string, text: string}>}
+ */
+function collectDocFiles() {
+  const out = []
+  const walk = (dir) => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      if (entry.name === 'node_modules' || entry.name === '.git') continue
+      const full = join(dir, entry.name)
+      if (entry.isDirectory()) walk(full)
+      else if (entry.name.endsWith('.md')) out.push({ path: relative(repoRoot, full), text: readFileSync(full, 'utf8') })
+    }
+  }
+  walk(join(repoRoot, 'docs'))
+  for (const rel of ['AGENTS.md', 'README.md']) {
+    if (existsSync(join(repoRoot, rel))) out.push({ path: rel, text: readFileSync(join(repoRoot, rel), 'utf8') })
+  }
   return out
 }
 

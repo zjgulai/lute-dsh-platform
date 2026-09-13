@@ -18,6 +18,7 @@
 | 文档 | 说明 |
 | --- | --- |
 | [dsh-desktop-white-screen-playbook.md](dsh-desktop-white-screen-playbook.md) | **DSH Desktop 白屏排查手册**：速查卡（主区白屏 / 整窗白屏二分）+ 三类白屏实战案例（root 槽竞态 ×2、HMR 热更 ×1）+ 二次开发红线清单 + 修复工具箱（RootOutlet 兜底 / runtime-guards G1/G2）。二次开发遇到白屏先查这里（唯一 home，`_doc-notes/` 下的旧副本已移除）。 |
+| [pitfalls-playbook.md](pitfalls-playbook.md) | **复发故障总账**（开工前先读）：按**根因**而非日期组织的复发故障清单——每条写「症状 / 根因类 / 已落地机制 / 下一版默认动作」，机制一律点名到具体的门禁名或脚本。结构由门禁 `pitfalls-playbook` 守着（四条规则 + 恒真桩突变的反向自测），所以它不会腐烂成一份说谎的清单。 |
 
 ## 架构与流程
 

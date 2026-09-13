@@ -2,7 +2,7 @@
 
 - 日期：2026-09-13
 - 状态：implemented
-- 对应 ADR：[ADR-0061](../../adr/ADR-0061.md)
+- 对应 ADR：[ADR-0061](../../../adr/ADR-0061.md)
 - 相关：ADR-0045（产品矩阵剪枝后 `kol-hunter-workbench` 已存在）、ADR-0056（出货 preset 不烘焙外部产品行，本机走本地装配）
 
 ## Problem

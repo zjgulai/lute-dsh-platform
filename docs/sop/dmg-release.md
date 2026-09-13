@@ -1,8 +1,10 @@
 # SOP · DSH Desktop × Magpie-Horch DMG 打包发布
 
 > 适用范围：从本仓库源码构建并发布 macOS arm64 版 DMG。
-> 决策来源：[ADR-0056](docs/adr/ADR-0056.md)、[ADR-0057](docs/adr/ADR-0057.md)、[ADR-0058](docs/adr/ADR-0058.md)。
+> 决策来源：[ADR-0056](../adr/ADR-0056.md)、[ADR-0057](../adr/ADR-0057.md)、[ADR-0058](../adr/ADR-0058.md)。
 > 相关脚本：`packaging/assemble.sh`、`packaging/sign-and-dmg.sh`。
+> 开工前先读**复发故障总账** [../pitfalls-playbook.md](../pitfalls-playbook.md)：其中 P-02（仪器假绿）、
+> P-06（把平台行为当常量）、P-08（用纪律守只有机制能守住的东西）三条与本 SOP 直接相关。
 
 ## 0. 发布前检查清单
 
@@ -282,6 +284,11 @@ cat "release/$VERSION.sha256" | head   # 仓库根清单
 
   产物确已不可找回时（如 2.3.1：本机无任何副本、无 APFS 本地快照），用 `release/<版本>.lost`
   **宣告丢失**并写明原因与找回办法。这是事实记录、不是豁免：其余任何「清单在、字节没了」一律红灯。
+- **找回要连账目一起找回**（2026-09-13 补写）：`release-restore.sh` 把 dmg 与其三件清单
+  （`SHA256SUMS` / `VERSION` / `manifest.json`）**一并**恢复。只回字节不回清单会留下
+  「字节在、清单不全」的半截状态——它同样是红灯（`release-verify.sh` 与门禁
+  `release-artifacts-intact` 都判它），因为**半截比缺席更坏**：缺席看得出来，半截看起来是好的。
+  其反向自测是 `packaging/scripts/release-verify-test.sh`（V2/V3 钉住半截红灯，R1~R3 钉住找回随行）。
 - **重制必须 --force**：普通重跑会失败，防止意外覆盖已交付产物。
 - **回滚**：旧版本 DMG 始终保留在 `packaging/release/.archive/` 与仓库外归档
   `$HOME/Library/Application Support/LUTE/releases/` 中，可直接取回。
