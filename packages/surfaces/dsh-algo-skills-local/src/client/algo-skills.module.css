@@ -96,6 +96,37 @@
   color: var(--dsw-alias-state-warn-primary);
 }
 
+/* ── 口径说明 ─────────────────────────────────────────── */
+/* Sits directly under the tiles it explains. No fixed width: the settings seat
+   is 564px and the block must wrap inside it. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 10px;
+  background: var(--dsw-alias-bg-layer-1);
+  min-width: 0;
+}
+
+.legendTitle {
+  flex: none;
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 600;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.legendBody {
+  flex: 1;
+  min-width: 0;
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--dsw-alias-label-tertiary);
+}
+
 /* ── 工具行 ───────────────────────────────────────────── */
 .toolbar {
   display: flex;
@@ -466,6 +497,14 @@
 }
 
 .chipOff {
+  color: var(--dsw-alias-label-tertiary);
+  border: 1px solid var(--dsw-alias-border-l2);
+  background: transparent;
+}
+
+/* 「本岗会带上 · 本岗之外不自动调用」——不是矛盾，是两件事：岗位装配由岗位负责，
+   开关管的是岗位之外。所以用中性色，不报警。 */
+.chipModelOff {
   color: var(--dsw-alias-label-tertiary);
   border: 1px solid var(--dsw-alias-border-l2);
   background: transparent;

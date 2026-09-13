@@ -250,8 +250,11 @@ export function buildPayload(skills: SkillEntry[], complete: boolean, cwd: strin
 
 /**
  * Collect grouped skills: filesystem scanning (primary) + registry supplement.
- * Filesystem entries win on name conflicts; the registry fills whenToUse and
- * invocation flags, and contributes bundled/runtime entries of its own.
+ * Filesystem entries win on name conflicts, and they keep the fields the scan
+ * itself answered — provider and the two invocation flags — because a same-name
+ * registry entry can be a preset-scoped shadow rather than the same skill. The
+ * registry adds whenToUse/title where the file is silent, and contributes
+ * bundled/runtime entries of its own (flags intact, since those have no file).
  * @param options - collection options.
  * @returns skills and whether the registry snapshot was complete.
  */
@@ -270,8 +273,9 @@ export async function collectSkills(options: CollectOptions): Promise<CollectRes
   scanTasks.push(scanSkillRoot(join(agentsHome, 'skills'), 'user-agents', byName))
   await Promise.all(scanTasks)
 
-  // Registry supplement: same-name skills get whenToUse / invocation flags
-  // filled in; registry-only skills (bundled / runtime) join as-is.
+  // Registry supplement: a same-name skill only gets whenToUse/title filled in
+  // where the file is silent; registry-only skills (bundled / runtime) join
+  // as-is, flags included.
   // Query the registry for primary cwd and any other active project roots so
   // project-level providers are captured.
   const snapshotCwds = new Set<string>([cwd, ...roots])
@@ -287,10 +291,24 @@ export async function collectSkills(options: CollectOptions): Promise<CollectRes
           byName.set(skill.name, serialized)
         } else {
           if (serialized.whenToUse !== undefined) existing.whenToUse = serialized.whenToUse
-          if (serialized.provider !== undefined) existing.provider = serialized.provider
           if (existing.title === undefined && serialized.title !== undefined) existing.title = serialized.title
-          existing.modelInvocable = serialized.modelInvocable
-          existing.userInvocable = serialized.userInvocable
+          // Provider and invocation are NOT taken from the registry here.
+          //
+          // The scan already answered both from the entry that won on
+          // precedence: `provider: 'filesystem'`, and the file's own
+          // `disable-model-invocation` / `user-invocable`. A same-name registry
+          // entry may be a preset-scoped SHADOW rather than the same skill:
+          // `dsh-skill-subset` mounts in every agt-* preset with `hideOthers`
+          // defaulting to on, and re-registers every skill outside that preset's
+          // subset as {modelInvocable:false, userInvocable:false} with provider
+          // 'runtime'. Letting that win made this panel show OFF for skills
+          // whose file says ON — and because the toggle writes the FILE, the
+          // switch snapped back after every click: a frozen switch. It could
+          // hide the opposite direction too (a registry entry enabling a
+          // file-disabled skill).
+          //
+          // Registry-only entries keep their own flags: they arrive through the
+          // `existing === undefined` branch and have no file to be right about.
         }
       }
     } catch {

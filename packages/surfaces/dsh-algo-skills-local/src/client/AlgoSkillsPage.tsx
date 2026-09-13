@@ -67,6 +67,7 @@ function SkillCard({
           role="switch"
           aria-checked={card.modelEnabled ? 'true' : 'false'}
           aria-label={card.title}
+          title={card.modelEnabled ? tt('switch.on') : tt('switch.off')}
           className={`${css['switch'] ?? ''}${card.modelEnabled ? ` ${css['switchOn'] ?? ''}` : ''}`}
           disabled={busy}
           onClick={() => { onToggle(card.name, !card.modelEnabled) }}
@@ -85,6 +86,22 @@ function SkillCard({
         ) : null}
         {!card.wired && card.wiredElsewhere.length === 0 ? (
           <span className={`${css['chip'] ?? ''} ${css['chipOff'] ?? ''}`}>{tt('chip.unwired')}</span>
+        ) : null}
+        {/* Two facts that used to be one word: this role's preset DOES carry the
+            card (green chip above), while the file flag keeps it out of every
+            session that is not this role's. Before 2026-09-13 the preset's
+            registration was itself vetoed by that flag, so 275 of 439
+            whitelisted slots were dead and the page never said so. Now the
+            grant holds inside the role and the switch explains itself for the
+            outside — so this chip states the scope rather than an alarm. */}
+        {card.wired && !card.modelEnabled ? (
+          <span
+            className={`${css['chip'] ?? ''} ${css['chipModelOff'] ?? ''}`}
+            data-dsh-part="algo-chip-model-off"
+            title={tt('chip.off.fix')}
+          >
+            {tt('chip.off')}
+          </span>
         ) : null}
         {card.alsoServes.slice(0, 2).map((name) => (
           <span key={name} className={css['chip'] ?? ''}>{fill(tt('chip.also'), { name })}</span>
@@ -210,11 +227,21 @@ export function AlgoSkillsPage(): JSX.Element {
       </header>
 
       <div className={css['stats'] ?? ''}>
-        <Stat value={totals.skills} label={tt('stat.skills')} />
-        <Stat value={totals.placed} label={tt('stat.placed')} />
-        {totals.unplaced > 0 ? <Stat value={totals.unplaced} label={tt('stat.unplaced')} warn /> : null}
-        <Stat value={totals.wired} label={tt('stat.wired')} />
-        {totals.emptyRoles > 0 ? <Stat value={totals.emptyRoles} label={tt('stat.emptyRoles')} warn /> : null}
+        <Stat value={totals.skills} label={tt('stat.skills')} hint={tt('stat.skills.hint')} />
+        <Stat value={totals.placed} label={tt('stat.placed')} hint={tt('stat.placed.hint')} />
+        {totals.unplaced > 0 ? <Stat value={totals.unplaced} label={tt('stat.unplaced')} hint={tt('stat.unplaced.hint')} warn /> : null}
+        <Stat value={totals.wired} label={tt('stat.wired')} hint={tt('stat.wired.hint')} />
+        {totals.emptyRoles > 0 ? <Stat value={totals.emptyRoles} label={tt('stat.emptyRoles')} hint={tt('stat.emptyRoles.hint')} warn /> : null}
+      </div>
+
+      {/* The labels above are the organization's own words, and a first-time
+          reader does not have them. Spelling the model out once here is the
+          difference between 「已设为岗位自带 127」 reading as a fact and reading
+          as jargon — a tooltip alone is not enough, because nobody hovers a
+          number they have not decided to care about yet. */}
+      <div className={css['legend'] ?? ''} data-dsh-part="algo-legend">
+        <span className={css['legendTitle'] ?? ''}>{tt('legend.title')}</span>
+        <span className={css['legendBody'] ?? ''}>{tt('legend.body')}</span>
       </div>
 
       <div className={css['toolbar'] ?? ''}>
@@ -369,10 +396,14 @@ export function AlgoSkillsPage(): JSX.Element {
   )
 }
 
-/** One stat tile. */
-function Stat({ value, label, warn }: { value: number; label: string; warn?: boolean }): JSX.Element {
+/** One stat tile. The hint is the tile's tooltip; the same wording is spelled out in the legend. */
+function Stat({ value, label, hint, warn }: { value: number; label: string; hint?: string; warn?: boolean }): JSX.Element {
   return (
-    <div className={`${css['stat'] ?? ''}${warn === true ? ` ${css['statWarn'] ?? ''}` : ''}`} data-dsh-part="algo-stat">
+    <div
+      className={`${css['stat'] ?? ''}${warn === true ? ` ${css['statWarn'] ?? ''}` : ''}`}
+      data-dsh-part="algo-stat"
+      title={hint}
+    >
       <span className={css['statValue'] ?? ''}>{value}</span>
       <span className={css['statLabel'] ?? ''}>{label}</span>
     </div>

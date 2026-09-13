@@ -74,6 +74,8 @@
 | ADR-0068 | 授权状态必须同时读两个事实：TCC 一条授权 = 开关值（`auth_value`，隐私界面只显示它）+ 绑定对象（`csreq`）；换签后新 app 不满足旧要求而开关值原样留着 → 面板显示「已开启」而能力已死（本机实测 2.5 小时无人察觉，且 11:58 那次重授发生在仍是 adhoc 的 app 上 = 一次性代价花在了错误时刻）。判定唯一实现 `tcc-grant-status.sh`（3=死授权 / 4=判不了 / 0=含「尚未授权」），安装收尾强制调用并随包分发，指引必须写明「关掉再打开」，三处连线由门禁 `tcc-dead-grant` 守，检出器的反向自测（含恒真桩突变）由 `tcc-grant-status-selftest` 每次门禁跑 | accepted（2026-09-13） | [Note](../notes/implemented/contract/2026-09-13-tcc-dead-grant-detection.md) |
 | ADR-0069 | 「输入监控」不是必需项：`post_events` 由「辅助功能」承载（2026-09-13 15:41 实测——库里**无** `kTCCServiceListenEvent` 行时 `doctor` 三项仍全 true，harness 源码零引用且自报 `input_monitoring_required: false`）。这与第一版错法（写「自动化」）同源：把未验证的事实写进出货面；**更坏的是门禁把它变成了强制校验**，六个出货面 + 单测一起钉死了它，谁改对反而判红。改为：必需面板两项、非必需项只可见不下结论、门禁禁把「输入监控/自动化」写成待授项（否定式说明除外）、`--format=tsv` 为唯一取数契约且机读列用 ASCII、「无记录 / 解不出 / 死授权」三态分开 | accepted（2026-09-13） | [Note](../notes/implemented/contract/2026-09-13-tcc-input-monitoring-not-required.md) |
 
+| ADR-0070 | 技能「开没开」的真值只有一个家：**技能文件**。宿主级技能管理器合并注册表时，扫描到的条目保留自己回答过的 `provider` 与两个调用开关，注册表只能补 `whenToUse`/`title` 并贡献 bundled/runtime 独有条目——判据来自已定的优先级（扫描条目是同名冲突的胜者，胜者不该被落败者改写）。预设作用域内的 `dsh-skill-subset` 遮蔽（`hideOthers` 默认开）**仍然合法**，但不得冒充全局事实：实测它使面板对 77 张「文件说开」的卡显示关闭，而开关写的是文件 → 点一下亮一下又灭回去。同批：面向使用方的词必须自解释且**在页面上**给出解释（`chip.off` 定义了却从未渲染，等于没写），矛盾状态（本岗会带上 + 模型不会自动调用）必须在卡上明说 | accepted（2026-09-13） | [Note](../notes/implemented/surface/2026-09-13-skill-invocation-truth-and-vocabulary.md) |
+
 > ADR-0007 ~ ADR-0018 是「LUTE 二开平台架构重构」的十二项决策，共享同一篇决策记录 Note。
 > ADR-0019 独立成篇（品牌皮肤锚点治理），决策记录见其 Note。
 > ADR-0020 独立成篇（岗位小队编队契约），决策记录见其 Note。

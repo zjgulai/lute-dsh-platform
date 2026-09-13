@@ -325,11 +325,32 @@ describe('AlgoSkillsPage', () => {
 
     const stats = parts(container, 'algo-stat').map((el) => el.textContent)
     expect(stats).toEqual([
-      '4已装技能卡',
-      '3已归位',
-      '1未归类',
-      '1本岗已接线',
-      '1空白岗位',
+      '4技能卡总数',
+      '3已分到岗位',
+      '1没分到岗位',
+      '1已设为岗位自带',
+      '1还没配卡的岗位',
+    ])
+  })
+
+  it('explains the tile vocabulary on the page, and again on each tile', async () => {
+    const container = await mount()
+
+    // 使用方读不懂「已归位 / 未归类 / 本岗已接线 / 空白岗位」——所以解释必须在
+    // 页面上（悬停 tooltip 不算，没人会去悬停一个自己还没打算在意的数字）。
+    const legend = parts(container, 'algo-legend')
+    expect(legend).toHaveLength(1)
+    expect(legend[0]!.textContent).toContain('这些数字怎么看')
+    expect(legend[0]!.textContent).toContain('模型能不能自动调用')
+
+    // 每个数字自己也带一句短解释（tooltip）。
+    const hints = parts(container, 'algo-stat').map((el) => el.getAttribute('title'))
+    expect(hints).toEqual([
+      '本机装好的技能卡总数',
+      '已归到某个岗位名下的卡；其余卡没有岗位收',
+      '没有哪条岗位责任装得下它们，不参与岗位装配',
+      '岗位预设一开就自带的卡；其余卡要在设置里打开，模型才会自动调用',
+      '岗位已经建好，但库里还没有对得上的卡',
     ])
   })
 
@@ -373,11 +394,38 @@ describe('AlgoSkillsPage', () => {
       return card.textContent ?? ''
     }
 
-    expect(chips('p2s-wired-here')).toContain('本岗已接线')
-    expect(chips('p2s-drift')).toContain('接线到 AGT-019')
-    expect(chips('p2s-nowhere')).toContain('未接线')
+    expect(chips('p2s-wired-here')).toContain('本岗会带上')
+    expect(chips('p2s-drift')).toContain('在 AGT-019 会带上')
+    expect(chips('p2s-nowhere')).toContain('暂无岗位会带')
     // A card that also serves another responsibility says so.
     expect(chips('p2s-wired-here')).toContain('兼 经营目标拆解与优先级排序')
+  })
+
+  it('states the scope of the switch on a carried-but-file-off card', async () => {
+    const container = await mount()
+    click(headOf(container, 'algo-plane', 'plane', 'PLN-MGT'))
+    click(headOf(container, 'algo-domain', 'domain', 'DOM-01'))
+    click(headOf(container, 'algo-role', 'role', 'AGT-001'))
+
+    const chipFor = (name: string): Element | null =>
+      container.querySelector(`[data-skill="${name}"] [data-dsh-part="algo-chip-model-off"]`)
+
+    // The card that is carried and switched on says nothing extra: the chip
+    // marks a scope, not a state, so it must not fire on every card.
+    expect(chipFor('p2s-wired-here')).toBeNull()
+
+    // p2s-drifted-in is carried by its own role AND file-off. Since the role's
+    // preset no longer lets the file flag veto its grant, that card IS invoked
+    // inside this role's session — the chip must say so and scope the switch to
+    // everything outside it, instead of claiming the role cannot reach it.
+    click(headOf(container, 'algo-plane', 'plane', 'PLN-OPS'))
+    click(headOf(container, 'algo-domain', 'domain', 'DOM-03'))
+    click(headOf(container, 'algo-role', 'role', 'AGT-019'))
+    const off = chipFor('p2s-drifted-in')
+    expect(off).not.toBeNull()
+    expect(off?.textContent).toBe('本岗之外不自动调用')
+    expect(off?.getAttribute('title')).toContain('本岗会话里照常自动调用')
+    expect(off?.getAttribute('title')).toContain('点开关可以打开')
   })
 
   it('reflects model availability on the card switch', async () => {
@@ -390,6 +438,10 @@ describe('AlgoSkillsPage', () => {
     const off = container.querySelector('[data-skill="p2s-nowhere"] [role="switch"]')
     expect(on?.getAttribute('aria-checked')).toBe('true')
     expect(off?.getAttribute('aria-checked')).toBe('false')
+    // The switch says what it governs and which way it will move — 「冻结」的观感
+    // 有一半来自这里：开关只画了位置，从没说过它是干什么的。
+    expect(on?.getAttribute('title')).toBe('模型可以自动调用它；点一下关掉')
+    expect(off?.getAttribute('title')).toBe('模型不会自动调用它；点一下打开')
   })
 
   it('says an empty role is empty rather than rendering it as absent', async () => {
@@ -406,7 +458,7 @@ describe('AlgoSkillsPage', () => {
 
     const unplaced = parts(container, 'algo-unplaced')
     expect(unplaced).toHaveLength(1)
-    expect(unplaced[0]!.textContent).toContain('未归类（矩阵空白）')
+    expect(unplaced[0]!.textContent).toContain('没分到岗位的卡（矩阵空白）')
     expect(unplaced[0]!.textContent).toContain('1 张')
 
     click(unplaced[0]!.querySelector('button'))

@@ -127,6 +127,24 @@ describe('collectSkills', () => {
     expect(skills.some((s) => s.name === 'poc-first')).toBe(true)
   })
 
+  it('scanned entries keep the provider that found them', async () => {
+    const { skills } = await collectSkills({
+      cwd: PROJ,
+      projectRoots: [PROJ],
+      customSkillDirs: [CUSTOM],
+      dshHome: HOME,
+      agentsHome: AGENTS,
+      registry,
+    })
+    const byName = Object.fromEntries(skills.map((s) => [s.name, s]))
+    // Registry-only entries keep whatever provider registered them…
+    expect(byName['computer-use'].provider).toBe('orca')
+    // …but a file-scanned skill is provided by the filesystem, and a same-name
+    // registry entry must not relabel it.
+    expect(byName['poc-first'].provider).toBe('filesystem')
+    expect(byName['user-tool'].provider).toBe('filesystem')
+  })
+
   it('queries registry snapshot for all project roots (#1139)', async () => {
     const calledCwds: string[] = []
     const multiRegistry = {
@@ -150,6 +168,95 @@ describe('collectSkills', () => {
     expect(calledCwds).toContain(PROJ)
     expect(calledCwds).toContain('/virtual/proj-b')
     expect(skills.some((s) => s.name === 'proj-b-skill')).toBe(true)
+  })
+})
+
+describe('invocation truth under a preset-scoped shadow', () => {
+  // The live bug this pins: `dsh-skill-subset` mounts in every agt-* preset with
+  // `hideOthers` defaulting to true, and re-registers every skill outside the
+  // preset's subset as {modelInvocable:false, userInvocable:false} with provider
+  // 'runtime'. That registration is visible to the host-level snapshot this
+  // panel reads, and the merge used to let it overwrite the scanned entry.
+  // Measured on the real machine: `code-review/SKILL.md` carries
+  // `disable-model-invocation: false` (invocable) while the panel showed OFF;
+  // POST set-enabled answered modelInvocable:true and left the file
+  // byte-identical (sha256 unchanged), yet the list still reported OFF — so the
+  // switch flipped back on every click. The scan wins on precedence, therefore
+  // the file's own answer is the one the panel must show.
+  const shadowing = (name: string, invocation: { modelInvocable: boolean; userInvocable: boolean }) => ({
+    snapshot: async () => ({
+      skills: [
+        { name, description: '（本预设未启用）', provider: 'runtime', source: 'runtime', invocation },
+      ] as RegistrySkill[],
+      complete: true,
+    }),
+  })
+
+  const collectWith = async (registryImpl: unknown) =>
+    collectSkills({
+      cwd: PROJ,
+      projectRoots: [PROJ],
+      customSkillDirs: [],
+      dshHome: HOME,
+      agentsHome: AGENTS,
+      registry: registryImpl as never,
+    })
+
+  it('a file that allows model invocation stays invocable when a shadow says otherwise', async () => {
+    const { skills } = await collectWith(shadowing('user-tool', { modelInvocable: false, userInvocable: false }))
+    const entry = skills.find((s) => s.name === 'user-tool')
+    expect(entry?.path).toBe(join(HOME, 'skills', 'user-tool', 'SKILL.md'))
+    expect(entry?.modelInvocable).toBe(true)
+    expect(entry?.userInvocable).toBe(true)
+    // The shadow's own labels are not the file's facts.
+    expect(entry?.provider).toBe('filesystem')
+    expect(entry?.description).toBe('用户级技能')
+  })
+
+  it('a file that disables model invocation stays disabled when the registry says enabled', async () => {
+    const tmp = mkdtempSync(join(tmpdir(), 'skill-explorer-file-off-'))
+    const home = join(tmp, 'home')
+    write(
+      join(home, 'skills', 'file-off', 'SKILL.md'),
+      '---\nname: file-off\ndescription: 文件层已关闭\ndisable-model-invocation: true\n---\n',
+    )
+    const { skills } = await collectSkills({
+      cwd: tmp,
+      projectRoots: [tmp],
+      customSkillDirs: [],
+      dshHome: home,
+      agentsHome: join(tmp, 'agents'),
+      registry: {
+        snapshot: async () => ({
+          skills: [
+            {
+              name: 'file-off',
+              description: '注册表说开着',
+              provider: 'filesystem',
+              source: 'user-dsh',
+              invocation: { modelInvocable: true, userInvocable: true },
+            },
+          ] as RegistrySkill[],
+          complete: true,
+        }),
+      } as never,
+    })
+    const entry = skills.find((s) => s.name === 'file-off')
+    expect(entry?.modelInvocable).toBe(false)
+    rmSync(tmp, { recursive: true, force: true })
+  })
+
+  it('registry-only entries still carry their own invocation flags', async () => {
+    // Non-regression: the file-first rule must not flatten registry-only skills
+    // (bundled / runtime) into any default — they have no file to be right about.
+    const { skills } = await collectWith(registry)
+    const runtimeOnly = skills.find((s) => s.name === 'embedded-hello')
+    expect(runtimeOnly?.path).toBeUndefined()
+    expect(runtimeOnly?.modelInvocable).toBe(true)
+    expect(runtimeOnly?.userInvocable).toBe(true)
+    const bundledOnly = skills.find((s) => s.name === 'computer-use')
+    expect(bundledOnly?.modelInvocable).toBe(true)
+    expect(bundledOnly?.userInvocable).toBe(false)
   })
 })
 
