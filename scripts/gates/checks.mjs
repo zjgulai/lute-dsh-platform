@@ -498,3 +498,55 @@ export function checkTccPaneGuidance({ files }) {
   }
   return { passed: violations.length === 0, violations }
 }
+
+/**
+ * 「界面会骗人」这条必须写进用户指引，且必须**有机器在查**。
+ *
+ * 起因（2026-09-13 实测，见 ADR-0068）：TCC 库里一次授权由两个互相独立的事实组成——开关值
+ * （`auth_value`，隐私界面只显示这一个）与绑定对象（`csreq`）。换签名身份后，新 app 不再满足
+ * 旧的要求，而**开关值原样留着**：于是隐私界面把三项显示成「已开启」，`macos-harness doctor`
+ * 三项全 false，本机上这种状态持续了 2.5 小时无人察觉。用户去面板里看，只会觉得「我明明开了」。
+ *
+ * 判据分两半，缺一不可：
+ *   ① 指引必须在（`关掉再打开` 这句处置写在用户真的会读的那两处：手册与出货 README）——
+ *      否则用户撞上这个状态时没有任何线索，而界面上又看不出异常；
+ *   ② **机器必须在查**（安装收尾调用 `tools/tcc-grant-status.sh`，且该脚本随包分发）——
+ *      只写文档等于把一条必然发生、失败时静默的判定，重新记回人的记性上（ADR-0057）。
+ *
+ * @param {{installScript: string, assembleScript: string, installGuide: string}} input
+ * @returns {{passed: boolean, violations: string[]}}
+ */
+const TCC_DEAD_GRANT_MARKER = '关掉再打开'
+
+export function checkTccDeadGrantRule({ installScript, assembleScript, installGuide }) {
+  const violations = []
+  const surfaces = [
+    ['packaging/INSTALL-GUIDE.md', installGuide],
+    ['packaging/assemble.sh（出货 README 段）', assembleScript],
+  ]
+  for (const [path, text] of surfaces) {
+    if (!text || !text.trim()) {
+      violations.push(`${path}: 读不到内容——判据无法判定（不是通过）`)
+      continue
+    }
+    if (!text.includes(TCC_DEAD_GRANT_MARKER)) {
+      violations.push(
+        `${path}: 缺少「${TCC_DEAD_GRANT_MARKER}」这句处置——界面把死授权显示成「已开启」，` +
+          '用户照界面判断就会以为已经授权好了（ADR-0068）',
+      )
+    }
+  }
+  if (!installScript.includes('tcc-grant-status.sh')) {
+    violations.push(
+      'packaging/installer/install.sh: 安装收尾没有调用 tools/tcc-grant-status.sh —— ' +
+        '「死授权能不能被检出来」于是只剩文档承诺，而文档不会在用户机器上执行（ADR-0057）',
+    )
+  }
+  if (!assembleScript.includes('tcc-grant-status.sh')) {
+    violations.push(
+      'packaging/assemble.sh: 没有把 tcc-grant-status.sh 放进 payload/tools/ —— ' +
+        '安装器调用的那个路径在客户机上是空的',
+    )
+  }
+  return { passed: violations.length === 0, violations }
+}

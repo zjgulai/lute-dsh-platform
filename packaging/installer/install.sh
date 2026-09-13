@@ -318,4 +318,15 @@ if [ "$VERIFY_FAILED" != "0" ]; then
   echo "          确认要退回上一版：用 *.pre-lute-$STAMP 备份手工恢复（app / profiles/desktop / aeis-venv）。" >&2
   exit 1
 fi
+# ── TCC 收尾体检 ─────────────────────────────────────────────────────────────
+# 安装这一刻，正是「死授权」最可能出现的时刻：新 app 刚就位，而系统 TCC 库里可能还留着
+# 上一支 app（旧签名身份 / 旧字节）的授权行——那条行的开关值仍是「允许」，隐私界面会把它
+# 显示成**已开启**，而它的绑定对象已经对不上新 app，能力其实是死的。2026-09-13 本机实测：
+# 这种状态持续了 2.5 小时，界面上看不出任何异常（ADR-0068）。
+# 检出即把处置方式发到用户面前；**不因此判安装失败**——app 已就位，报「安装失败」会误导。
+if [ -f "$HERE/tools/tcc-grant-status.sh" ]; then
+  echo ""
+  LUTE_TCC_APP="$APP_TARGET" bash "$HERE/tools/tcc-grant-status.sh" || true
+  echo ""
+fi
 say "完成。① 重启 DSH Desktop；② 重新授权 TCC（辅助功能 / 屏幕录制 / 输入监控——第三项在「输入监控」下，不在「自动化」下）；③ 复验：bash $HERE/tools/verify-patches-v2.sh"

@@ -27,6 +27,7 @@ import {
   checkPinConsistency,
   checkScriptsRunnable,
   checkShellVarAdjacentMultibyte,
+  checkTccDeadGrantRule,
   checkTccPaneGuidance,
   checkTrackedIgnored,
 } from './gates/checks.mjs'
@@ -293,6 +294,38 @@ const CHECKS = [
           text: readIfExists(join(repoRoot, rel)) ?? '',
         })),
       })
+    },
+  },
+  {
+    name: 'tcc-dead-grant',
+    remediation:
+      '把「关掉再打开」这句处置写进 packaging/INSTALL-GUIDE.md 与出货 README，并让安装收尾真的调用 tools/tcc-grant-status.sh：换签名身份后，隐私界面会把「绑在旧代码上」的授权显示成「已开启」，界面上看不出异常（ADR-0068）',
+    run() {
+      return checkTccDeadGrantRule({
+        installScript: readIfExists(join(repoRoot, 'packaging', 'installer', 'install.sh')) ?? '',
+        assembleScript: readIfExists(join(repoRoot, 'packaging', 'assemble.sh')) ?? '',
+        installGuide: readIfExists(join(repoRoot, 'packaging', 'INSTALL-GUIDE.md')) ?? '',
+      })
+    },
+  },
+  {
+    name: 'tcc-grant-status-selftest',
+    remediation:
+      '跑 bash packaging/scripts/tcc-grant-status-test.sh 看红在哪条：死授权检出器必须能说「不」（R1 死授权→3、R2 有效→0、R3 封条破损→4 且不误报、R4 无记录→0），并在恒真桩突变下失效（M1）。缺签名身份时自测声明跳过，不算失败（ADR-0068）',
+    run() {
+      const script = join(repoRoot, 'packaging', 'scripts', 'tcc-grant-status-test.sh')
+      const result = runScript(repoRoot, `bash "${script}"`, 120000)
+      if (result.code === 0) return { passed: true, violations: [] }
+      const text = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
+      const lines = text
+        .split('\n')
+        .filter((line) => /\[FAIL\]/.test(line))
+        .map((line) => line.trim())
+      const verdict = result.code === null ? '未给出退出码' : `退出码 ${result.code}`
+      return {
+        passed: false,
+        violations: lines.length > 0 ? lines : [`死授权检出器自测失败（${verdict}）`],
+      }
     },
   },
   {

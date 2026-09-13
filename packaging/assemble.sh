@@ -417,6 +417,10 @@ grep -q '{{VERSION}}' "$PAYLOAD/INSTALL-GUIDE.md" \
   && { echo "[assemble] ✗ 安装手册里仍有未替换的 {{VERSION}}（版本注入失败）" >&2; exit 1; }
 cp "$PKG_ROOT/scripts/rewrite-file-deps.mjs" "$PAYLOAD/tools/"
 cp "$PKG_ROOT/scripts/reloc-aeis.sh" "$PAYLOAD/tools/"
+# 「死授权」体检器随包分发：换签名身份后，系统 TCC 库里会留下「开关写着允许、绑的却是旧代码」
+# 的行——隐私界面把它显示成「已开启」，而能力其实是死的（2026-09-13 本机实测 2.5 小时无人察觉）。
+# 安装收尾、以及用户日后自查，都靠它（判据见 docs/adr/ADR-0068.md）。
+cp "$PKG_ROOT/scripts/tcc-grant-status.sh" "$PAYLOAD/tools/"
 # v1（verify-patches.sh）2026-09-11 已退役（exit 2），不再随包——随包只会让客户跑到
 # 「本脚本已退役」这句话，看起来像失败。唯一权威是 verify-patches-v2.sh（下一行）。
 cp "$PKG_ROOT/verify-patches-v2.sh" "$PAYLOAD/tools/" 2>/dev/null || true
@@ -523,6 +527,12 @@ cd "/Volumes/DSH Desktop LUTE $VERSION" && bash install.sh
   库中根本没有 `PostEvent` 行）。
   自本版起 app 使用**固定签名身份**，后续升级**不再要求重新授权**——这是「升级一次、重授一次」的终点。
   从更早的 adhoc 版升上来的机器仍要重授这一次：身份变了，旧授权不会自动继承。
+- ⚠️ **从旧版升上来的机器：面板里可能已经显示「已开启」，但那是上一版应用的授权。**
+  界面只显示开关值，不显示这个开关绑在哪个应用上——此时截图/点击会完全没反应，而界面上
+  看不出异常。处置：把该项**关掉再打开**；仍不行就跑
+  \`tccutil reset Accessibility ai.deepseek.dsh.desktop\`（换 \`ScreenCapture\` 再来一次），
+  再用列表下方的 ＋ 把应用加回来。安装收尾会自动跑一次
+  \`tools/tcc-grant-status.sh\`，把这种状态直接读出来并告诉你处置方式。
 
 ## Gatekeeper 说明（未公证包）
 本包已改为**固定证书签名**（不再是 adhoc），但**仍未公证**——没有走 Apple Developer ID，
