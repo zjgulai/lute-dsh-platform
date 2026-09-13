@@ -25,3 +25,13 @@
 - 插件按能力归入 5 组：`capabilities/` `surfaces/` `platform/` `contract/` `infra/`（[ADR-0011](docs/adr/ADR-0011.md)）。
 - 包的治理性质写在 `package.json` 的 `luteOrigin` / `luteOwner` / `lutePublish` 三字段里，`npm-pinned` 的包不在本仓库内（[ADR-0010](docs/adr/ADR-0010.md)、[ADR-0012](docs/adr/ADR-0012.md)）。
 - 当前重构分期与本次范围见 [.scratch/lute-refactor/spec.md](.scratch/lute-refactor/spec.md)。
+
+## 产品矩阵与外部产品
+
+- **外部产品不进出货 preset**：`scripts/role-presets/generate.mjs` 的 `PRODUCT_MOUNTS` 保持为空；任何 `file:` 指向仓库外的产品包都不得烘焙进 `agt-*` 出货组合（[ADR-0056](docs/adr/ADR-0056.md)）。
+- **本机使用外部产品走 profile 本地装配**：在 `~/.dsh/profiles/<profile>/cordis.patch.yml` 里显式挂载，并确保包仍在 `dsh.profile.bundles`；装配只改运行时 profile，不进仓库出货物（[ADR-0061](docs/adr/ADR-0061.md)）。
+- **新应用抽屉读取可选 host 服务须双通道探测**：`ctx.get('agentPresets')` 与 `connection.api.agentPresets` 都要试，以是否存在可调用 `select` 为准，不得假设单一载体（[ADR-0061](docs/adr/ADR-0061.md)）。
+
+## 发布与 SOP
+
+- **DMG 打包发布按 SOP 执行**：步骤见 [docs/sop/dmg-release.md](docs/sop/dmg-release.md)；关键红线（原子就位、清单入库、同号归档、机器路径只减不增）来自 [ADR-0056](docs/adr/ADR-0056.md) / [ADR-0057](docs/adr/ADR-0057.md) / [ADR-0058](docs/adr/ADR-0058.md)。

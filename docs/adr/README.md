@@ -62,6 +62,10 @@
 | ADR-0056 | 出货的 preset **不烘焙任何外部产品行**（`PRODUCT_MOUNTS` 置空，本机产品走本机装配）；机器路径两个前缀都参数化（`__DSH_HOME__` / `__LUTE_PROJECT_ROOT__`）；出货树机器路径**只减不增**（签名前机读守卫） | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-shipping-surface.md) |
 | ADR-0057 | 发布产物的发布语义：`release/<版本>/` 要么不存在、要么是**完整且已全部通过终验**的集合；构建在临时区完成、**原子改名就位**；同号重制默认拒绝，`--force` 时旧产物**归档不删除**；构建锁记 pid（无主可回收、活锁仍拦截）；发布语义由沙箱化断言守护 | accepted（2026-09-12） | [Note](../notes/implemented/architecture/2026-09-12-release-atomic-publish.md) |
 | ADR-0058 | 发布清单入库：仓库根 `release/<version>.sha256` 是**清单的家**（进 git），由 `sign-and-dmg.sh` 在产物**原子就位之后**生成，不再依赖 SOP 里的人工步骤；清单必须带源凭据（`source_commit` / `source_dirty` / `profile_snapshot`，由 `assemble.sh` 在**装配时刻**记录）；时序固定为**构建 → 提交清单 → 打 tag**，tag 才担保得住字节；失败方向是「产物完好、清单缺失」 | accepted（2026-09-13） | [Note](../notes/implemented/architecture/2026-09-13-release-manifest.md) |
+| ADR-0059 | 中转站接入以**逐模型实测工具调用**（`tool_choice: "auto"`）为准入判据——schema 是否声明 `tools` 不可作依据（实测二者无关且方向相反：全部 Claude Opus/Sonnet 系接受 `tools` 却不产出 `tool_calls`）；PoYo 拆 `poyo`（11 个实测稳定）/ `poyo-responses`（3 个）两条路由共用一份凭据；pi-ai 的 `detectCompat` 对未特判站点落默认值，5 处与站方 schema 不一致必须显式纠偏；因上游稳定性未达标不写进任何默认位 | accepted（2026-09-13，同日修订） | [Note](../notes/implemented/capability/2026-09-13-poyo-relay-route-intake.md) |
+| ADR-0060 | 模型准入判据补两关：**tool_call 必须回灌验证**（缺 `type:"function"` 只在客户端回传路径上暴露，单轮测不出）+ **多轮重复**（实测 33% 间歇静默失败）；判据由三关升为四关；抽测只作并列决胜、不得据此宣称模型更强；筛选目标是「每族一条当代最好的」而非「不漏掉任何可用项」——硅基流动清单据此 25 → 9 | accepted（2026-09-13） | [Note](../notes/implemented/capability/2026-09-13-siliconflow-model-audit.md) |
+| ADR-0061 | 新应用抽屉同时兼容 `ctx.agentPresets` 与 `connection.api.agentPresets` 两种 preset 选择器载体；深链星探 KOL-Hunter 走本机 profile 本地装配，不再烘焙进出货 preset；新增 DMG 打包发布 SOP | accepted（2026-09-13） | [Note](../notes/implemented/surface/2026-09-13-newapp-agentpresets-channel-and-kol-hunter-local.md) |
+| ADR-0062 | 新应用抽屉增加「业务系统」第二分区：外链只由宿主打开且只接受 slug；本包从此拥有一份 catalog（部分修订 ADR-0045） | accepted（2026-09-13） | [Note](../notes/implemented/surface/2026-09-13-newapp-systems-section.md) |
 
 > ADR-0007 ~ ADR-0018 是「LUTE 二开平台架构重构」的十二项决策，共享同一篇决策记录 Note。
 > ADR-0019 独立成篇（品牌皮肤锚点治理），决策记录见其 Note。
@@ -90,6 +94,8 @@
 > ADR-0043 独立成篇（门禁失败证据按流分流、退出码不得折算），决策记录见其 Note。
 > ADR-0045 独立成篇（产品矩阵剪枝 + 卸载 dsh-worktable），决策记录见其 Note；它部分取代 ADR-0028 与 ADR-0033 第 6 条。
 > ADR-0046 独立成篇（可选服务读取纪律 + Remote 三元组的传参与返回值校验），决策记录见其 Note。
+> ADR-0062 **部分修订 ADR-0045**：产品分区的目标函数一字未改，抽屉只是多了一个「业务系统」分区；
+> 被改掉的是「这个抽屉只放产品」的收口，以及 M1/M2 的适用范围。理由与实测读数见其 Note。
 > ADR-0047 独立成篇（p2s 语料三行级缺陷改在流水线里修 + 出处按档位渲染），决策记录见其 Note。
 > ADR-0048 独立成篇（p2s 卡 ⑦ 段是节选不是模板 + 卡页路径只作转述），**部分取代 ADR-0047
 > 「影响 · 代价与边界」里的两条**：那句「逐字节相同 1,283/1,283」应改按三类计（1,082 相同 /
