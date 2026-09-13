@@ -100,7 +100,16 @@ mkdir -p "$SP/skills" "$SP/presets"
 if [ -d "$DSH_HOME_DIR/.agent-presets" ]; then
   # presets 与 profile 同一时刻落快照：剥离要**同时**看两者（外部包名只在未剥离的
   # profile 里算得出来），技能选择也要读剥离后的副本。
-  cp -R "$DSH_HOME_DIR/.agent-presets/." "$SP/presets/"
+  #
+  # 2026-09-13 修（ADR-0073）：这里原先是整目录 `cp -R ~/.dsh/.agent-presets/. → $SP/presets/`，
+  # 于是**谁在这台机器上新建一个预设，它就随下一版出给客户**——静默、无日志、无读数。
+  # 实测代价：本机自有的机器人助理智能体预设 bobo-cto 进了 2.3.0~2.3.3 的 payload
+  # （出货 completeness.json 的 presets = 52 条含它）。改为白名单：岗位预设按 pattern 准入，
+  # 其余必须在 packaging/shipped-presets.json 里显式登记并写明理由，未登记即中止。
+  node "$PKG_ROOT/scripts/select-presets.mjs" \
+    --from "$DSH_HOME_DIR/.agent-presets" --into "$SP/presets" \
+    --config "$PKG_ROOT/shipped-presets.json" \
+    || { echo "[assemble] ✗ 预设出货白名单判定失败，中止（见上）；理由与登记处见 packaging/shipped-presets.json"; exit 1; }
 fi
 say "快照就绪（profile $(du -sh "$PROFILE" | cut -f1)，presets $(ls "$SP/presets" | wc -l | tr -d ' ') 个）"
 
@@ -370,9 +379,27 @@ node "$PKG_ROOT/scripts/select-skills.mjs" --check "$SP/skills" \
   || { echo "[assemble] ✗ 出货技能面含受限许可技能，中止（见上）"; exit 1; }
 # 清理元数据/临时文件（口径与 vendor/node_modules 一致）
 find "$SP" \( -name '.DS_Store' -o -name '*.bak-*' -o -name '*.pre-*' -o -name '*.orig*' \) -delete 2>/dev/null || true
+# 构建机路径改写（ADR-0073）：skills + presets 的**出货副本**里，构建机 home 一律换占位符。
+# 放在 select-skills 之后：技能引用面读的是原内容（语义不变），改写只作用于要发出去的那一份。
+# 本机 ~/.dsh 下的原件不动——在那台机器上这些路径是有用的。
+# 表里没覆盖到的形态会让这一步响亮失败（新形态该由人决定，不由脚本猜）。
+node "$PKG_ROOT/scripts/rewrite-build-paths.mjs" --root "$SP" \
+  || { echo "[assemble] ✗ 出货副本仍含未登记的构建机路径形态，中止（见上）"; exit 1; }
 tar -czf "$PAYLOAD/skills-presets.tar.gz" --exclude '.DS_Store' -C "$SP" skills presets
 rm -rf "$SP"
 say "技能+预设完成 ($(du -sh "$PAYLOAD/skills-presets.tar.gz" | cut -f1))"
+
+# 出货 tarball 的机器路径守卫（ADR-0073）：上面那次守卫扫的是 app 内嵌 profile，
+# 看不见 payload 里的 tarball——而 tarball 是二进制，grep 一律跳过。实测这一盲点里
+# 藏着 103 个含构建机路径的文件（100 个 agt-* 的材料出处 + bobo-cto + lute-cordis）。
+# 为什么只补这一个 tarball：
+#   · profile.tar.gz ≡ 已扫过的 $BUNDLED（同一份 §0 快照 + 同一份离线 node_modules，构造保证）；
+#   · DSH Desktop.app.tar.gz 除内嵌 profile 外实测 0 命中（`tar -xzO --exclude 'Contents/Resources/dsh-profile/*'`）；
+#   · aeis-portable.tar.gz 是第三方 python 运行时，路径由 reloc-aeis.sh 在安装时重定位。
+node "$PKG_ROOT/scripts/scan-machine-paths.mjs" \
+  --tarball "$PAYLOAD/skills-presets.tar.gz" --quiet \
+  --baseline "$PKG_ROOT/machine-path-baseline.json" \
+  || { echo "[assemble] ✗ 出货 payload tarball 里出现新的构建机绝对路径，中止（见上）"; exit 1; }
 
 # 打包源变更复核（**告警，不是失败**）：产物读的是 §0 的快照，所以中途改动不会让载荷
 # 自相矛盾（同源已是构造保证）；但「产物对应的是 T0 时刻的本机状态」这件事必须说出来，

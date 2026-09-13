@@ -1,0 +1,11 @@
+{
+  "note": "出货预设白名单：只有 pattern 命中的岗位预设 + 下面显式登记的目录会进 skills-presets.tar.gz。磁盘上多出任何未登记的 preset 目录即中止装配（ADR-0073）。\n理由：2026-09-13 实测，assemble.sh 原先的整目录 `cp -R ~/.dsh/.agent-presets/. → $SP/presets/` 把本机自有的机器人助理智能体预设 `bobo-cto`（材料根 /Users/lute/project/BoBo）静默发进了 2.3.0~2.3.3 的 payload：出货 completeness.json 的 presets = 52 条，其中就有它。「开发机的运行时状态」不是一个能靠纪律守住的出货边界。",
+  "pattern": "^agt-\\d{3}$",
+  "expectPatternCount": 50,
+  "allow": [
+    {
+      "name": "lute-cordis",
+      "why": "ADR-0024：承载确定性压缩后端（@aiwayds/dsh-dcp）的预设副本，2026-09-12 起为默认预设，2.2.0 起随包出货。它不是开发机私有产物。"
+    }
+  ]
+}

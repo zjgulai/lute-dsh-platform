@@ -447,6 +447,66 @@ const CHECKS = [
     },
   },
   {
+    name: 'shipped-presets-scope-selftest',
+    remediation:
+      '跑 bash packaging/scripts/select-presets-test.sh 看红在哪条：「预设出货面只能由白名单决定」这条判据必须能说「不」。S2 是本次缺陷的回归钉——2026-09-13 实测 assemble.sh 的整目录 `cp -R ~/.dsh/.agent-presets/.` 把本机自有的机器人助理智能体预设 bobo-cto 静默发进 2.3.0~2.3.3 的 payload（出货 completeness.json 的 presets = 52 条含它）；S3/S4/S5 钉住「登记了但不存在」「岗位数量不符」「登记不写理由」三种腐烂；P1 钉住入口判定在符号链接路径下不许静默不干活；M1 在恒真桩突变下必须失效（ADR-0073）',
+    run() {
+      const script = join(repoRoot, 'packaging', 'scripts', 'select-presets-test.sh')
+      const result = runScript(repoRoot, `bash "${script}"`, 120000)
+      if (result.code === 0) return { passed: true, violations: [] }
+      const text = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
+      const lines = text
+        .split('\n')
+        .filter((line) => /\[FAIL\]/.test(line))
+        .map((line) => line.trim())
+      const verdict = result.code === null ? '未给出退出码' : `退出码 ${result.code}`
+      return {
+        passed: false,
+        violations: lines.length > 0 ? lines : [`预设出货白名单判据自测失败（${verdict}）`],
+      }
+    },
+  },
+  {
+    name: 'build-path-rewrite-selftest',
+    remediation:
+      '跑 bash packaging/scripts/rewrite-build-paths-test.sh 看红在哪条：「出货副本里的构建机路径必须换成占位符」这条判据必须改得动、也必须在改不完时喊。R1 钉住五类已知前缀（含带空格的 Application Support 路径）；R2 钉住未登记形态响亮失败；R3 幂等；R4 二进制不误伤；P1 钉住符号链接路径下的入口判定；M1 抹掉一条映射后 R1 必须失效（ADR-0073）',
+    run() {
+      const script = join(repoRoot, 'packaging', 'scripts', 'rewrite-build-paths-test.sh')
+      const result = runScript(repoRoot, `bash "${script}"`, 120000)
+      if (result.code === 0) return { passed: true, violations: [] }
+      const text = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
+      const lines = text
+        .split('\n')
+        .filter((line) => /\[FAIL\]/.test(line))
+        .map((line) => line.trim())
+      const verdict = result.code === null ? '未给出退出码' : `退出码 ${result.code}`
+      return {
+        passed: false,
+        violations: lines.length > 0 ? lines : [`构建机路径改写判据自测失败（${verdict}）`],
+      }
+    },
+  },
+  {
+    name: 'machine-path-tarball-selftest',
+    remediation:
+      '跑 bash packaging/scripts/scan-machine-paths-test.sh 看红在哪条：「守卫能看见 payload tarball 里面」这条判据必须能说「不」。T1 钉住 tarball 内的命中被看见且带 tarball 名前缀——2026-09-13 实测守卫在内嵌 profile 上报 `✓ 无新增（当前 37 条，基线 39 条）`，而同一版出货的 skills-presets.tar.gz 解开再扫是 103 个含构建机路径的文件；T2 钉住干净 tarball 判绿；T3 钉住二进制成员不误报；T4 钉住缺失的 tarball 响亮失败；M1 在恒真桩突变下必须失效（ADR-0073）',
+    run() {
+      const script = join(repoRoot, 'packaging', 'scripts', 'scan-machine-paths-test.sh')
+      const result = runScript(repoRoot, `bash "${script}"`, 120000)
+      if (result.code === 0) return { passed: true, violations: [] }
+      const text = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
+      const lines = text
+        .split('\n')
+        .filter((line) => /\[FAIL\]/.test(line))
+        .map((line) => line.trim())
+      const verdict = result.code === null ? '未给出退出码' : `退出码 ${result.code}`
+      return {
+        passed: false,
+        violations: lines.length > 0 ? lines : [`出货 tarball 机器路径判据自测失败（${verdict}）`],
+      }
+    },
+  },
+  {
     name: 'pitfalls-playbook',
     remediation:
       '按 docs/pitfalls-playbook.md 头部写明的契约补齐：每条 `## P-NN · 标题` 必须有「症状 / 根因类 / 已落地机制 / 下一版默认动作」四段；「已落地机制」必须点名真实存在的 `gate:<名字>`（见 node scripts/gate.mjs --list）或 `script:<路径>`——机制没有名字就等于自我安慰；编号自 P-01 起连续；相对链接可达；且 AGENTS.md 与 docs/README.md 都必须链接本账（没入口的总账等于不存在）',

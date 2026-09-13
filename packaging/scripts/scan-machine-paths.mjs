@@ -22,12 +22,16 @@
  *
  * 用法：
  *   node packaging/scripts/scan-machine-paths.mjs --root <dir> [--root <dir>…]
+ *        [--tarball <payload.tar.gz>…]
  *        [--baseline packaging/machine-path-baseline.json] [--write-baseline]
  *        [--quiet]
+ *
+ * `--tarball` 是 2026-09-13 补的：payload 里的 tarball 是二进制、grep 一律跳过，所以
+ * 「解到客户机上才算数」的那部分出货面对守卫是全盲的。详见 scanTarball() 的注释。
  */
 import { execFileSync } from 'node:child_process'
-import { existsSync, readFileSync, writeFileSync } from 'node:fs'
-import { homedir } from 'node:os'
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { homedir, tmpdir } from 'node:os'
 import { dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -36,17 +40,51 @@ const DEFAULT_BASELINE = join(HERE, '..', 'machine-path-baseline.json')
 
 /** 解析命令行（只接受长选项，未知选项即失败——不静默吞）。 */
 function parseArgs(argv) {
-  const out = { roots: [], baseline: DEFAULT_BASELINE, write: false, quiet: false }
+  const out = { roots: [], tarballs: [], baseline: DEFAULT_BASELINE, write: false, quiet: false }
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i]
     if (a === '--root') out.roots.push(argv[++i])
+    else if (a === '--tarball') out.tarballs.push(argv[++i])
     else if (a === '--baseline') out.baseline = resolve(argv[++i])
     else if (a === '--write-baseline') out.write = true
     else if (a === '--quiet') out.quiet = true
     else throw new Error(`未知参数: ${a}`)
   }
-  if (out.roots.length === 0) throw new Error('至少需要一个 --root <dir>')
+  if (out.roots.length === 0 && out.tarballs.length === 0) {
+    throw new Error('至少需要一个 --root <dir> 或 --tarball <file>')
+  }
   return out
+}
+
+/**
+ * 扫描一个 payload tarball 的**内容**（解到临时目录再扫）。
+ *
+ * 为什么必须有这条路：payload 里的 tarball 是**二进制**，`grep` 一律跳过，于是守卫对
+ * 「解到客户机上才算数」的那部分出货面是全盲的。2026-09-13 实测：守卫在 app 内嵌 profile 上
+ * 报 `✓ 无新增（当前 37 条，基线 39 条）`，而把同一版出货的 `skills-presets.tar.gz` 解开再扫，
+ * 是 **103 个文件**含构建机路径（100 个 `agt-*` 的材料出处 + `bobo-cto` + `lute-cordis`）。
+ * 仪器全绿而面在漏——这是 P-02 那一类，第四次换入口复发。
+ *
+ * 命中以 `<tarball 文件名>!<成员路径>` 记，避免与 --root 的相对路径撞名。
+ * @param {string} tarball 绝对路径
+ * @param {string} needle 构建机 home
+ * @returns {string[]} 带 tarball 前缀的命中项（已排序）
+ */
+function scanTarball(tarball, needle) {
+  const abs = resolve(tarball)
+  if (!existsSync(abs)) throw new Error(`扫描 tarball 不存在: ${abs}`)
+  const tmp = mkdtempSync(join(tmpdir(), 'machine-paths-'))
+  try {
+    try {
+      execFileSync('tar', ['-xzf', abs, '-C', tmp], { maxBuffer: 1 << 28, stdio: 'pipe' })
+    } catch (err) {
+      throw new Error(`解包失败（${abs}）：${err instanceof Error ? err.message : String(err)}`)
+    }
+    const label = abs.split('/').pop()
+    return scanRoot(tmp, needle).map((rel) => `${label}!${rel}`)
+  } finally {
+    rmSync(tmp, { recursive: true, force: true })
+  }
 }
 
 /**
@@ -89,6 +127,9 @@ function main() {
     if (!existsSync(abs)) throw new Error(`扫描根不存在: ${abs}`)
     for (const rel of scanRoot(abs, needle)) current.add(rel)
   }
+  for (const tarball of args.tarballs) {
+    for (const hit of scanTarball(tarball, needle)) current.add(hit)
+  }
   const currentSorted = [...current].sort()
 
   if (args.write) {
@@ -117,7 +158,8 @@ function main() {
   if (added.length > 0) {
     console.error(`[machine-paths] ✗ 出货树新增 ${added.length} 个含构建机路径的文件（基线只减不增）：`)
     for (const p of added) console.error(`    + ${p}`)
-    console.error('[machine-paths] 修法：把路径改成占位（__DSH_HOME__ / __LUTE_PROJECT_ROOT__）或仓库相对形式；')
+    console.error('[machine-paths] 修法：出货侧路径改占位——预设/技能面由 rewrite-build-paths.mjs 自动改写；')
+    console.error('[machine-paths] 其余面把路径改成占位（__DSH_HOME__ / __LUTE_PROJECT_ROOT__）或仓库相对形式；')
     console.error('[machine-paths] 确属无法改的第三方产物，需在基线里显式登记并写明理由。')
     return 1
   }
