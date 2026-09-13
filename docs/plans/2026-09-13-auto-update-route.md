@@ -10,8 +10,8 @@
 
 ## 0. 先记住一件会被忽略的代价：换 Developer ID = 再付一次 TCC 重授
 
-ADR-0063 把签名身份从 adhoc 换成了固定自签证书 `LUTE Code Signing`，代价是**一次性**重授三项 TCC
-（辅助功能 / 屏幕录制 / 输入监控）。Developer ID 是**另一个身份**：TCC 库里存的授权要求是
+ADR-0063 把签名身份从 adhoc 换成了固定自签证书 `LUTE Code Signing`，代价是**一次性**重授 TCC
+（辅助功能 / 屏幕录制两项；第三项能力 `post_events` 由「辅助功能」承载，见 ADR-0069）。Developer ID 是**另一个身份**：TCC 库里存的授权要求是
 `identifier "…" and certificate leaf = H"…"`，leaf 变了，三项授权就与当前 app 不再匹配——
 **换 Developer ID 那一版，用户必须再重授一次**（三项关掉再打开）。
 

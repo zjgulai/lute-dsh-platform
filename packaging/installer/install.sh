@@ -329,4 +329,4 @@ if [ -f "$HERE/tools/tcc-grant-status.sh" ]; then
   LUTE_TCC_APP="$APP_TARGET" bash "$HERE/tools/tcc-grant-status.sh" || true
   echo ""
 fi
-say "完成。① 重启 DSH Desktop；② 重新授权 TCC（辅助功能 / 屏幕录制 / 输入监控——第三项在「输入监控」下，不在「自动化」下）；③ 复验：bash $HERE/tools/verify-patches-v2.sh"
+say "完成。① 重启 DSH Desktop；② 重新授权 TCC（只需辅助功能 / 屏幕录制两项——不要授「输入监控」，它并非必需；授「自动化」也不会生效）；③ 复验：bash $HERE/tools/verify-patches-v2.sh"

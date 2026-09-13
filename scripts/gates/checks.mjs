@@ -421,20 +421,26 @@ export function checkDependencyLinks({ links }) {
 }
 
 /**
- * 校验出货 README 里让用户授权的那三项，与 `macos-harness doctor` 实际检查的三项一致。
+ * 校验出货 README 里让用户授权的那几项，与 `macos-harness doctor` 实际检查的项一致。
  *
- * 为什么这值得一条门禁：这三项是终端用户**唯一**的授权指引，而写错其中一项不会产生任何
- * 报错——用户照着授了「自动化」，`mac.key` / `mac.click` 却因缺「输入监控」静默失败。
- * 这正是 ADR-0063 要消除的那类失败（能力静默死亡），且它已经真实发生过一次：
- * README 原写「屏幕录制/辅助功能/自动化」，而 2026-09-13 实测三项对应的是
- * `kTCCServiceAccessibility` / `kTCCServiceScreenCapture` / `kTCCServiceListenEvent`，
- * 系统 TCC 库里**根本没有 `PostEvent` 行**（`post_events` 由「输入监控」承载）。
+ * 为什么这值得一条门禁：这些项是终端用户**唯一**的授权指引，而写错其中一项不会产生任何
+ * 报错——用户照着授了「自动化」，`mac.key` / `mac.click` 却因缺「辅助功能」静默失败。
+ * 这正是 ADR-0063 要消除的那类失败（能力静默死亡），且它已经真实发生过两次：
+ *   ① README 原写「屏幕录制/辅助功能/自动化」——2026-09-13 之前；
+ *   ② 随后改成「辅助功能/屏幕录制/**输入监控**」——**这一条也是错的**。
  *
- * 判据只要求三项齐备——不禁止正文解释「不要授权自动化」，因为那正是需要写清楚的地方。
+ * ②错在哪（2026-09-13 15:41 实测，见 ADR-0069）：只授权「辅助功能」+「屏幕录制」后，
+ * `doctor` 三项读数全为 true，而系统 TCC 库里 `kTCCServiceListenEvent`（输入监控）
+ * **连一行记录都没有**；harness 源码里 `post_events` 读的是 `CGPreflightPostEventAccess()`，
+ * 全库**没有任何** `kTCCServiceListenEvent` 引用，并自报 `input_monitoring_required: false`。
+ * 即：`post_events` 由「辅助功能」承载，「输入监控」非必需——让用户去授它，等于白给一个
+ * 「读取全部按键」的高敏权限，还让用户以为不授就不工作。
+ *
+ * 判据：出货 README 必须同时写出「辅助功能」与「屏幕录制」，且不得把「输入监控」写成待授项。
  * @param {{assembleScript: string}} input packaging/assemble.sh 的全文
  * @returns {{passed: boolean, violations: string[]}}
  */
-const TCC_REQUIRED_PANES = ['辅助功能', '屏幕录制', '输入监控']
+const TCC_REQUIRED_PANES = ['辅助功能', '屏幕录制']
 const TCC_README_MARKER = '首次安装需授权'
 
 export function checkDmgReadmeTccPanes({ assembleScript }) {
@@ -451,30 +457,54 @@ export function checkDmgReadmeTccPanes({ assembleScript }) {
   for (const pane of TCC_REQUIRED_PANES) {
     if (!block.includes(pane)) {
       violations.push(
-        `packaging/assemble.sh: 出货 README 的授权段缺少「${pane}」——需授权的三项是 ${TCC_REQUIRED_PANES.join(' / ')}（ADR-0063）`,
+        `packaging/assemble.sh: 出货 README 的授权段缺少「${pane}」——需授权的两项是 ${TCC_REQUIRED_PANES.join(' / ')}（ADR-0063 / ADR-0069）`,
       )
     }
   }
+  block.split('\n').forEach((line, i) => {
+    if (line.includes('输入监控') && !TCC_NEGATION.test(line)) {
+      violations.push(
+        `packaging/assemble.sh:${idx + i + 1}: 出货 README 把「输入监控」写成了要授的项——它并非必需，` +
+          '`post_events` 由「辅助功能」承载（2026-09-13 实测：库里没有该行时 doctor 仍全 true，ADR-0069）',
+      )
+    }
+  })
   return { passed: violations.length === 0, violations }
 }
 
 /**
  * 授权指引必须**写在每一个会教用户授权的出货面上**，且每一处都写对。
  *
- * 起因（2026-09-13）：`assemble.sh` 生成的 README 段已改正为三项，但同一句话还散在
+ * 起因（2026-09-13）：`assemble.sh` 生成的 README 段已改正，但同一句话还散在
  * `install.sh` 的收尾提示、`pkg-postinstall.sh` 的提示、`INSTALL-CARD.md` 与两个 `README.md` 里
  * ——**五处全写着「自动化」**。装完机器最后看到的那行提示，恰恰是错的那一行。
  * 一条只守一个文件的判据，会对另外四处的错法说「全部通过」；这正是 ADR-0009
  * 「一份事实只有一个家」要防的漂移。
  *
- * 判法：凡同时提到「授权 / 隐私与安全」与授权项名的行，必须含「输入监控」。
- * 不禁止正文解释「不要授权自动化」——权威 README 正是要讲清楚这一点的那一处。
+ * 判法（每条「提到授权 + 提到面板名」的行都要过）：**不得把「输入监控」或「自动化」写成待授项**
+ * ——除非同行有否定词（「不要授权自动化」「输入监控并非必需」正是在把这两件事讲清楚，
+ * 不能反过来判红）。
+ *
+ * 这里**不**做「每一行都要写全两项」的完整性判据：单面板的行是合法的（「进辅助功能面板把
+ * 开关关掉再打开」这类排错句只该讲一个面板），逐行强制写全会把正确文档判红——判据一旦开始
+ * 冤枉人，人就会绕过它。完整性由 `checkDmgReadmeTccPanes` 守在权威 README 那一处。
+ *
+ * 对「输入监控」的禁止是 2026-09-13 加上的（ADR-0069）：此前这条判据**强制**要求每一处
+ * 都写「输入监控」，于是把一条错误的事实钉进了六个出货面——判据本身成了错误事实的守门人。
  *
  * shell 脚本里 `#` 开头的行是给人看的注释，**不发到用户面前**，故跳过：`assemble.sh` 里正有
- * 一段注释在解释本缺陷的机制（「TCC 授权（辅助功能 / 屏幕录制 / 事件投递）」），它写得对，
- * 只是没在同一行点出第三项。发出去的那一行不会以 `#` 开头（heredoc 正文亦不以 `#` 列出授权项）。
+ * 一段注释在解释本缺陷的机制，它写得对，只是没在同一行点出必需项。发出去的那一行不会以 `#` 开头。
  */
-const TCC_GUIDANCE_PANE_WORDS = ['辅助功能', '录屏', '屏幕录制', '自动化']
+const TCC_PANES = [
+  { label: '辅助功能', words: ['辅助功能'] },
+  { label: '屏幕录制', words: ['屏幕录制', '录屏'] },
+  { label: '输入监控', words: ['输入监控'] },
+  { label: '自动化', words: ['自动化'] },
+]
+// 否定词表：一句话在**否定**某个面板需要授权时，必须能被认出来，否则「讲清楚不要授什么」
+// 这种正确写法会被判红——判据逼着文档删掉警示，是最坏的一种假红。
+const TCC_NEGATION = /不|无需|非必需|并非|而非|不会|不需要/
+const TCC_FORBIDDEN_AS_REQUIRED = ['输入监控', '自动化']
 const isShellComment = (path, line) => /\.sh$/.test(path) && line.trimStart().startsWith('#')
 
 export function checkTccPaneGuidance({ files }) {
@@ -488,14 +518,81 @@ export function checkTccPaneGuidance({ files }) {
     text.split('\n').forEach((line, i) => {
       if (isShellComment(path, line)) return
       if (!/授权|隐私与?安全/.test(line)) return
-      if (!TCC_GUIDANCE_PANE_WORDS.some((word) => line.includes(word))) return
-      if (line.includes('输入监控')) return
-      violations.push(
-        `${path}:${i + 1}: 授权指引缺「输入监控」——实际三项是 ${TCC_REQUIRED_PANES.join(' / ')}。` +
-          '写成「自动化」不会报错，用户授了它 mac.key/mac.click 仍静默失败（ADR-0063）',
+      const labels = TCC_PANES.filter((pane) => pane.words.some((word) => line.includes(word))).map(
+        (pane) => pane.label,
       )
+      if (labels.length === 0) return
+      if (TCC_NEGATION.test(line)) return
+      for (const pane of TCC_FORBIDDEN_AS_REQUIRED) {
+        if (labels.includes(pane)) {
+          violations.push(
+            `${path}:${i + 1}: 授权指引把「${pane}」写成了要授的项——实际只有 ${TCC_REQUIRED_PANES.join(' / ')} 两项。` +
+              (pane === '输入监控'
+                ? '「输入监控」非必需（post_events 由「辅助功能」承载，ADR-0069），授它等于白给一个读全部按键的权限'
+                : '授权「自动化」不会让键盘鼠标类能力可用，用户会以为授过了（ADR-0063）'),
+          )
+        }
+      }
     })
   }
+  return { passed: violations.length === 0, violations }
+}
+
+/**
+ * 出货 README 的 heredoc 必须是**字面文本**：它是 `<<EOF`（未加引号），shell 会对正文做参数展开
+ * 与**命令替换**。
+ *
+ * 起因（2026-09-13，在同一份产物上抓出两处）：
+ *   ① 授权段里的裸反引号在打包时真的执行了 `macos-harness doctor`，把**原始 JSON** 打进了给客户
+ *      看的 README——客户看到的是 `{ "platform": "macOS", … }`，`accessibility` / `post_events`
+ *      等词则被替换成空串；
+ *   ② `$(basename "$PWD")` 在打包时被展开成**构建机上的目录名**，客户看到的是一条跑不通的
+ *      `shasum -a 256 ../packaging.dmg`（归档载荷 `release/2.3.2` 里两处都有物证）。
+ * 两处都随本次更正修掉，本判据防的是同一个成因再回来。
+ *
+ * 判法：README heredoc 正文里反引号必须写成 `\``，命令替换必须写成 `\$(`。
+ * **参数展开是有意的**（`$VERSION` 就该在打包时展开成版本号），故只禁命令替换，不禁 `$VAR`。
+ */
+const README_HEREDOC_ANCHOR = 'cat > "$PAYLOAD/README.md" <<EOF'
+
+export function checkReadmeHeredocIsLiteral({ assembleScript }) {
+  const violations = []
+  const lines = assembleScript.split('\n')
+  const start = lines.findIndex((line) => line.trim() === README_HEREDOC_ANCHOR)
+  if (start === -1) {
+    return {
+      passed: false,
+      violations: [
+        `packaging/assemble.sh: 找不到出货 README 的 heredoc 锚点（${README_HEREDOC_ANCHOR}）——清单与实际出货面已漂移`,
+      ],
+    }
+  }
+  let end = lines.length
+  for (let i = start + 1; i < lines.length; i += 1) {
+    if (lines[i].trim() === 'EOF') {
+      end = i
+      break
+    }
+  }
+  lines.slice(start + 1, end).forEach((line, i) => {
+    const at = start + i + 2
+    const hazards = [
+      { token: '`', what: '裸反引号', fix: '\\`' },
+      { token: '$(', what: '命令替换', fix: '\\$(' },
+    ]
+    for (const { token, what, fix } of hazards) {
+      let idx = line.indexOf(token)
+      while (idx !== -1) {
+        if (idx === 0 || line[idx - 1] !== '\\') {
+          violations.push(
+            `packaging/assemble.sh:${at}: 出货 README 的 heredoc 里有${what}——未加引号的 heredoc 会在**打包时**执行它，` +
+              `客户拿到的是展开后的结果。写成 ${fix}（ADR-0069）`,
+          )
+        }
+        idx = line.indexOf(token, idx + 1)
+      }
+    }
+  })
   return { passed: violations.length === 0, violations }
 }
 

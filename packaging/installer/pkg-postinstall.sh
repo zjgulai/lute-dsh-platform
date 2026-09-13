@@ -47,5 +47,5 @@ if [ $RC -ne 0 ]; then
   exit $RC
 fi
 say "LUTE $USER_NAME 安装完成：app + profile + 技能/预设 + 灵枢均已落位"
-say "提示：重启 DSH Desktop 后重新授权 TCC（辅助功能/屏幕录制/输入监控）"
+say "提示：重启 DSH Desktop 后重新授权 TCC（只需辅助功能/屏幕录制两项，不要授「输入监控」——它并非必需）"
 exit 0

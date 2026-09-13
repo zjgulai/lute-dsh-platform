@@ -7,7 +7,7 @@
 ```
 packaging/
   PLAN.md                      # 方案定稿（六项用户决策 + 阶段计划 + 风险登记）
-  INSTALL-GUIDE.md             # **安装手册（用户版）**：逐步操作 / 授权三项 / 失败对照表（随包分发，版本号打包时注入）
+  INSTALL-GUIDE.md             # **安装手册（用户版）**：逐步操作 / 授权两项 / 失败对照表（随包分发，版本号打包时注入）
   INSTALL-CARD.md              # 安装卡（客户版）：一页速查，指向手册
   assemble.sh                  # 组装流水线（本机跑，产出 staging/<VERSION>/payload）
   installer/install.sh         # 目标机离线安装器（随包 payload 根，幂等/回滚/保留数据）
@@ -103,4 +103,4 @@ cd "/Volumes/DSH Desktop LUTE <版本>" && bash install.sh
   这条路径由 `scripts/setup-app-locate-test.sh` 守着（含该布局的回归）。
 - 版本核对：`cat VERSION`（含 BUILD 构建号），dmg 的 SHA256 与发布方公告对照。
 - 分发建议：U 盘/局域网拷贝不会带 quarantine；网盘/微信下载则靠安装器自动清除。
-- 安装完成后重新授权 TCC（辅助功能/屏幕录制/输入监控），并重启 DSH Desktop。
+- 安装完成后重新授权 TCC（只需**辅助功能**与**屏幕录制**两项——不要授「输入监控」，它并非必需），并重启 DSH Desktop。

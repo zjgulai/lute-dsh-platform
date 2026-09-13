@@ -61,8 +61,8 @@ putrow(){ # $1=db $2=service $3=client $4=auth_value $5=要求文本
   sqlite3 "$1" "insert into access(service,client,auth_value,csreq) values('$2','$3',$4,readfile('$TMP/req.bin'));"
 }
 
-run(){ # $1=脚本 $2=db $3=app → 回显退出码，正文落 $TMP/out
-  LUTE_TCC_DB="$2" LUTE_TCC_APP="$3" LUTE_TCC_BUNDLE_ID="$4" bash "$1" >"$TMP/out" 2>&1
+run(){ # $1=脚本 $2=db $3=app $4=bundle id [其余参数原样转发给被测脚本] → 回显退出码，正文落 $TMP/out
+  LUTE_TCC_DB="$2" LUTE_TCC_APP="$3" LUTE_TCC_BUNDLE_ID="$4" bash "$1" "${@:5}" >"$TMP/out" 2>&1
   echo $?
 }
 
@@ -102,6 +102,56 @@ mkdb "$TMP/r4.db"
 rc="$(run "$SUT" "$TMP/r4.db" "$TMP/b.app" com.lute.rv-b)"
 if [ "$rc" = "0" ] && grep -q '尚未授权' "$TMP/out"; then ok "R4 无记录 → 退出 0 且判「尚未授权」（不制造假警报）"
 else no "R4 期望「退出 0 + 尚未授权」，实得 rc=$rc"; fi
+
+# ── R5 有记录但要求解不出：既不能说满足，也不能说死授权 ─────────────────────
+# 真实形态：该行的 csreq 为 NULL（某些服务确实会这样）。此时 csreq 会在 stderr 抱怨
+# 「No such file or directory」。早先的实现把**这条错误文本**当成了「库里存的要求」，
+# 于是打印出一行假的要求、并给出「授权绑定在旧字节上，需重授一次」这个错误处置。
+mkdb "$TMP/r5.db"
+sqlite3 "$TMP/r5.db" "insert into access(service,client,auth_value,csreq) values('kTCCServiceAccessibility','com.lute.rv-b',2,NULL);"
+rc="$(run "$SUT" "$TMP/r5.db" "$TMP/b.app" com.lute.rv-b)"
+# 断言里不能直接 grep '死授权'：判「判不了」那段正文里就有「也不能判它是死授权」这句话
+# ——第一版断言就是这么被自己的措辞绊倒的。要断言的是**没走到死授权那一支**，即以 ✗ 开头的判决行。
+if [ "$rc" = "4" ] && grep -q '解不出' "$TMP/out" && ! grep -q '✗' "$TMP/out" && ! grep -q 'No such file' "$TMP/out"; then
+  ok "R5 要求解不出 → 退出 4，且不把工具错误文本当要求、不谎报死授权"
+else no "R5 期望「退出 4 + 解不出 + 无死授权 + 无工具错误文本」，实得 rc=$rc / $(head -c 240 "$TMP/out" | tr '\n' ' ')"; fi
+
+# R5b：同一情形下 TSV 不得出现空字段。`IFS=$'\t' read` 会把连续制表符之间的空字段折叠掉
+# （制表符是 IFS 空白，空白分隔符的连续段算一个），后面的列会集体左移——这一条正是 R5
+# 抓出来的第二个缺陷：判定列读到了形态列的值，「判不了」被算成「1 项授权有效」。
+run "$SUT" "$TMP/r5.db" "$TMP/b.app" com.lute.rv-b --format=tsv >/dev/null
+empty="$(awk -F'\t' '{for(i=1;i<=NF;i++) if($i=="") n++} END{print n+0}' "$TMP/out")"
+if [ "$empty" = "0" ] && [ "$(awk -F'\t' 'NF!=6' "$TMP/out" | wc -l | tr -d ' ')" = "0" ]; then
+  ok "R5b 解不出的行在 TSV 里仍占满 6 列（空字段已用占位符，列不左移）"
+else no "R5b TSV 有 $empty 个空字段 / 列数异常：$(head -c 200 "$TMP/out" | tr '\n' ' ')"; fi
+
+# ── R6 非必需项的假死授权，不得污染结论 ─────────────────────────────────────
+# 「输入监控」在 2026-09-13 被实测排除在必需项之外（post_events 由辅助功能承载）。
+# 若把非必需项算进结论，一条残留的旧授权就会让安装收尾对用户喊「死授权、去重授」——
+# 而那一项授了也没有任何用。必需项全绿时，结论必须是绿。
+mkdb "$TMP/r6.db"
+putrow "$TMP/r6.db" kTCCServiceAccessibility com.lute.rv-b 2 "$(dr_of "$TMP/b.app")"
+putrow "$TMP/r6.db" kTCCServiceScreenCapture com.lute.rv-b 2 "$(dr_of "$TMP/b.app")"
+putrow "$TMP/r6.db" kTCCServiceListenEvent  com.lute.rv-b 2 'identifier "com.lute.someone-else" and certificate leaf = H"0000000000000000000000000000000000000000"'
+rc="$(run "$SUT" "$TMP/r6.db" "$TMP/b.app" com.lute.rv-b)"
+if [ "$rc" = "0" ] && grep -q '2 项授权有效' "$TMP/out" && grep -q '非必需' "$TMP/out"; then
+  ok "R6 非必需项的死授权不影响结论（仍判 2 项有效）"
+else no "R6 期望「退出 0 + 2 项有效」，实得 rc=$rc / $(head -c 240 "$TMP/out" | tr '\n' ' ')"; fi
+
+# ── R7 TSV 契约：verify-tcc-runtime.sh 靠它取数，列义漂移必须当场暴露 ────────
+mkdb "$TMP/r7.db"
+putrow "$TMP/r7.db" kTCCServiceAccessibility com.lute.rv-b 2 "$(dr_of "$TMP/b.app")"
+rc="$(run "$SUT" "$TMP/r7.db" "$TMP/b.app" com.lute.rv-b --format=tsv)"
+bad=""
+[ "$(printf '%s\n' "$(cat "$TMP/out")" | grep -c .)" = "4" ] || bad="行数不是 4"
+[ "$(awk -F'\t' 'NF!=6' "$TMP/out" | wc -l | tr -d ' ')" = "0" ] || bad="有行不是 6 列"
+[ "$(awk -F'\t' '$2!="required" && $2!="optional"' "$TMP/out" | wc -l | tr -d ' ')" = "0" ] || bad="kind 列不是 ASCII required/optional"
+[ "$(cut -f2 "$TMP/out" | grep -c '^required$')" = "2" ] || bad="required 行数应为 2（辅助功能 + 屏幕录制）"
+[ "$(cut -f2 "$TMP/out" | grep -c '^optional$')" = "2" ] || bad="optional 行数应为 2"
+[ "$(sed -n '1p' "$TMP/out" | cut -f1)" = "kTCCServiceAccessibility" ] || bad="首行不是必需项"
+grep -q '结论' "$TMP/out" && bad="stdout 混进了散文"
+if [ "$rc" = "0" ] && [ -z "$bad" ]; then ok "R7 --format=tsv 输出 4 行 × 6 列、必需在前、stdout 只有数据"
+else no "R7 期望「退出 0 + 干净 6 列 TSV」，实得 rc=$rc / ${bad:-ok}"; fi
 
 # ── M1 恒真桩突变：证明 R1 有牙 ─────────────────────────────────────────────
 # 把实现里唯一那一处 `exit 3` 改成 `exit 0`，再跑 R1。R1 必须因此失败——

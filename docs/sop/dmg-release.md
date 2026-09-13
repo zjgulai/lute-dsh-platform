@@ -172,24 +172,28 @@ cat "release/$VERSION.sha256" | head   # 仓库根清单
 §5.1 的 `verify-tcc-persistence.sh` 证明的是**换签之后**各版本之间授权不再重置。从 adhoc 旧支
 升到首个稳定身份版本这一步，系统必然要求重新授权一次——因为 TCC 库里存的授权要求就是旧支的
 字节哈希本身。2026-09-13 直读系统库实测
-（`/Library/Application Support/com.apple.TCC/TCC.db`，三项的 `csreq` 逐字节相同）：
+（`/Library/Application Support/com.apple.TCC/TCC.db`，两项的 `csreq` 逐字节相同）：
 
 | service | auth_value | 库里存的要求（`csreq`） |
 | --- | --- | --- |
 | `kTCCServiceAccessibility` | 2 | `cdhash H"595283898d…" or cdhash H"3d09f5a3…"` |
 | `kTCCServiceScreenCapture` | 2 | 同上 |
-| `kTCCServiceListenEvent` | 2 | 同上 |
 
-三者存的都是旧 adhoc 支的 CDHash，而首个稳定身份版本 2.3.0 的 CDHash 是 `3833cbbc…`，不在该
-集合内（`codesign --verify -R='<上述要求>'` 对已装 app 返回 rc=3）。故换签后首次启动这三项
+`post_events` 归 `kTCCServiceAccessibility`，由「辅助功能」承载，**不另占面板**：2026-09-13
+15:41–15:44 复读该库，`kTCCServiceListenEvent` 一行记录都没有，而 `post_events` 的判定是
+`CGPreflightPostEventAccess()`。故**不要**为它去授「输入监控」——它并非必需；早期文档把第三项
+记在它名下，是被 `CGRequestPostEventAccess()` 单次调用写下的瞬态行误导的，本次一并更正。
+
+这两行存的都是旧 adhoc 支的 CDHash，而首个稳定身份版本 2.3.0 的 CDHash 是 `3833cbbc…`，不在该
+集合内（`codesign --verify -R='<上述要求>'` 对已装 app 返回 rc=3）。故换签后首次启动这两项
 **会先变 false**，这是一次性迁移代价，不是用户把开关关掉了。操作：
 
 1. 重启 DSH Desktop，打开一个会话；
 2. `bash packaging/scripts/verify-tcc-runtime.sh`（本机也部署在
    `$HOME/Library/Application Support/LUTE/tools/verify-tcc.sh`），按提示到
-   系统设置 → 隐私与安全性 → 辅助功能 / 屏幕录制 / 输入监控，把「LUTE Agentic System」
-   关掉再打开（三项都要）；
-3. 重跑该脚本取基线快照；升级到下一版并重启后再跑 `--diff`，三项应保持不变——
+   系统设置 → 隐私与安全性 → 辅助功能 / 屏幕录制，把「LUTE Agentic System」
+   关掉再打开（两项都要）；
+3. 重跑该脚本取基线快照；升级到下一版并重启后再跑 `--diff`，这两项应保持不变——
    这就是判据⑤ 的运行时读法。
 
 **这一步不是走过场：重授那一次就是判据⑤ 的判定实验。** 把本机 TCC 库全部 27 条带 `csreq` 的
@@ -229,7 +233,7 @@ cat "release/$VERSION.sha256" | head   # 仓库根清单
 不显示这个开关绑在谁身上（`csreq`）。换签后残留的旧行会以「已开启」的样子留在面板里，
 而能力是死的。故：
 
-- 看到那三项已经显示「已开启」时，**不能据此跳过**——要把它们**关掉再打开**；
+- 看到那**两项**已经显示「已开启」时，**不能据此跳过**——要把它们**关掉再打开**；
 - 机读判定唯一实现在 `packaging/scripts/tcc-grant-status.sh`（随包分发到 `tools/`，并由
   `install.sh` 收尾自动调用）：它同时读两个事实，**退出码 3 = 检出死授权**（界面会骗人），
   4 = 判不了（库/app/封条读不出），0 = 无死授权（可能是「尚未授权」，那不算错）；

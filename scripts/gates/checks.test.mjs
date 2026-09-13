@@ -13,6 +13,7 @@ import {
   checkNestedRepositories,
   checkPackageIdentity,
   checkPinConsistency,
+  checkReadmeHeredocIsLiteral,
   checkScriptsRunnable,
   checkShellVarAdjacentMultibyte,
   checkTccPaneGuidance,
@@ -541,54 +542,70 @@ test('shell 变量多字节校验：引号内的 # 不是注释起点', () => {
   assert.deepEqual(result.violations, ['quoted.sh:1: $VAR， —— 变量名被后续多字节字符吞掉，请写成 ${VAR} 形式'])
 })
 
-test('出货 README 的 TCC 三项：写全三块面板时通过', () => {
+test('出货 README 的 TCC 两项：写全两块面板时通过', () => {
   const result = checkDmgReadmeTccPanes({
     assembleScript:
-      '- 启动后：**首次安装需授权三项**（系统设置 → 隐私与安全性）：\n' +
-      '  **辅助功能**、**屏幕录制**、**输入监控**。\n',
+      '- 启动后：**首次安装需授权两项**（系统设置 → 隐私与安全性）：\n' +
+      '  **辅助功能**、**屏幕录制**。\n',
   })
 
   assert.equal(result.passed, true)
   assert.deepEqual(result.violations, [])
 })
 
-test('出货 README 的 TCC 三项：机器上真实发生过的错法（写「自动化」）必须判红', () => {
-  // 这条是回归测试：2026-09-13 之前 README 写的就是这一行，而系统 TCC 库里没有 PostEvent 行，
-  // 用户照着授「自动化」不会让 post_events 变 true。历史输入，必须能被判红。
-  const result = checkDmgReadmeTccPanes({
-    assembleScript:
-      '- 启动后：**首次安装需授权 TCC**（系统设置 → 隐私与安全 → 屏幕录制/辅助功能/自动化，授权 LUTE Agentic System）。\n',
+test('授权指引：出货 README 的历史错法（写「自动化」）必须判红', () => {
+  // 这一行就是 2026-09-13 之前 assemble.sh 生成的出货 README 原文，用户照着授「自动化」，
+  // 键盘鼠标类能力始终没反应。README 段的**完整性**由 checkDmgReadmeTccPanes 管
+  // （这一行其实写全了两项），「把自动化/输入监控写成要授的项」由 checkTccPaneGuidance 管
+  // ——它扫的正是 assemble.sh 的 heredoc 正文，两条判据合起来才是完整防线。
+  const historical =
+    '- 启动后：**首次安装需授权 TCC**（系统设置 → 隐私与安全 → 屏幕录制/辅助功能/自动化，授权 LUTE Agentic System）。\n'
+  const result = checkTccPaneGuidance({
+    files: [{ path: 'packaging/assemble.sh', text: historical }],
   })
 
   assert.equal(result.passed, false)
   assert.equal(result.violations.length, 1)
-  assert.match(result.violations[0], /缺少「输入监控」/)
+  assert.match(result.violations[0], /自动化/)
 })
 
-test('出货 README 的 TCC 三项：正文解释「不要授权自动化」不算违规', () => {
+test('出货 README 的 TCC 两项：把「输入监控」写成第三项也必须判红（2026-09-13 的第二版错法）', () => {
+  // 第一次改正时把第三项改成了「输入监控」——同样是错的：post_events 由「辅助功能」承载，
+  // 库里没有 ListenEvent 行时 doctor 三项照样全 true（ADR-0069）。判据当时还**强制**要求
+  // 每一处都这么写，于是把这个错误事实钉进了六个出货面。这条测试钉住：它不能再回来。
   const result = checkDmgReadmeTccPanes({
     assembleScript:
-      '- 启动后：**首次安装需授权三项**：辅助功能、屏幕录制、输入监控。\n' +
-      '  第三项在「输入监控」下而**不在「自动化」下**。\n',
+      '- 启动后：**首次安装需授权三项**：辅助功能、屏幕录制、输入监控。\n',
+  })
+
+  assert.equal(result.passed, false)
+  assert.match(result.violations[0], /输入监控/)
+})
+
+test('出货 README 的 TCC 两项：正文解释「不要授权自动化」不算违规', () => {
+  const result = checkDmgReadmeTccPanes({
+    assembleScript:
+      '- 启动后：**首次安装需授权两项**：辅助功能、屏幕录制。\n' +
+      '  **不要授权「自动化」**——授了它不会让键盘鼠标类能力可用。\n',
   })
 
   assert.equal(result.passed, true)
 })
 
-test('出货 README 的 TCC 三项：整段缺失时判红并说明后果', () => {
+test('出货 README 的 TCC 两项：整段缺失时判红并说明后果', () => {
   const result = checkDmgReadmeTccPanes({ assembleScript: '# 什么都没有\n' })
 
   assert.equal(result.passed, false)
   assert.match(result.violations[0], /缺少「首次安装需授权」段落/)
 })
 
-test('出货 README 的 TCC 三项：段落在但少了面板同样判红', () => {
+test('出货 README 的 TCC 两项：段落在但少了面板同样判红', () => {
   const result = checkDmgReadmeTccPanes({
-    assembleScript: '- 启动后：**首次安装需授权三项**：辅助功能、屏幕录制。\n',
+    assembleScript: '- 启动后：**首次安装需授权两项**：辅助功能。\n',
   })
 
   assert.equal(result.passed, false)
-  assert.match(result.violations[0], /缺少「输入监控」/)
+  assert.match(result.violations[0], /缺少「屏幕录制」/)
 })
 
 // ── 授权指引的「出货面清单」（checkTccPaneGuidance）────────────────
@@ -609,10 +626,12 @@ test('授权指引：安装器收尾提示里真实发生过的错法（录屏/�
   assert.equal(result.passed, false)
   assert.equal(result.violations.length, 1)
   assert.match(result.violations[0], /install\.sh:1/)
-  assert.match(result.violations[0], /输入监控/)
+  assert.match(result.violations[0], /自动化/)
 })
 
-test('授权指引：改正后（辅助功能 / 屏幕录制 / 输入监控）必须放行', () => {
+test('授权指引：把「输入监控」写成要授的项必须判红（第二版错法，六个出货面都这么写过）', () => {
+  // 这一条同时是判据自身的回归：改错之前，判据**要求**这一行必须含「输入监控」——
+  // 判据成了错误事实的守门人，谁把文档改对反而判红。
   const result = checkTccPaneGuidance({
     files: [
       {
@@ -622,16 +641,49 @@ test('授权指引：改正后（辅助功能 / 屏幕录制 / 输入监控）�
     ],
   })
 
+  assert.equal(result.passed, false)
+  assert.equal(result.violations.length, 1)
+  assert.match(result.violations[0], /输入监控/)
+})
+
+test('授权指引：改正后（辅助功能 / 屏幕录制）必须放行', () => {
+  const result = checkTccPaneGuidance({
+    files: [
+      {
+        path: 'README.md',
+        text: '3. 安装后重启 DSH Desktop，重新授权 TCC（辅助功能/屏幕录制）\n',
+      },
+    ],
+  })
+
   assert.equal(result.passed, true)
   assert.deepEqual(result.violations, [])
 })
 
-test('授权指引：正文解释「不在自动化下」不算违规', () => {
+test('授权指引：只讲一个面板的行是合法的（排错句不该被判红）', () => {
+  // 判据一旦开始冤枉正确文档，人就会绕过它。单面板排错句（「进辅助功能面板把开关打开」）
+  // 不该被要求写全两项——完整性只由 checkDmgReadmeTccPanes 守在权威 README 那一处。
+  const result = checkTccPaneGuidance({
+    files: [
+      {
+        path: 'packaging/INSTALL-GUIDE.md',
+        text: '| 点了没反应 | 授权是死的 | 进「辅助功能」面板，把该应用**关掉再打开** |\n',
+      },
+    ],
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('授权指引：否定式说明不算违规（判据不得逼着文档删掉警示）', () => {
   const result = checkTccPaneGuidance({
     files: [
       {
         path: 'packaging/assemble.sh',
-        text: '  第三项在「输入监控」下而**不在「自动化」下**——授权「自动化」不会让 `post_events` 变 true，\n',
+        text:
+          '  **不要授权「自动化」**——授了它不会让 `mac.key` 可用。\n' +
+          '  也**不要去授「输入监控」**：它并非必需，post_events 由「辅助功能」承载。\n',
       },
     ],
   })
@@ -657,13 +709,14 @@ test('授权指引：与授权项无关的普通行不受影响', () => {
 })
 
 test('授权指引：shell 注释里的机制说明不算违规（它不发到用户面前）', () => {
-  // assemble.sh 里真有一段这样的注释，解释的是本缺陷的机制；它写得对，只是没在同一行点出第三项。
+  // assemble.sh 里真有一段这样的注释，解释的是本缺陷的机制——它逐字写着旧的三项说法。
+  // 历史记录必须能留在注释里（否则没人敢记「我们曾经错在哪」），故 .sh 的注释行一律跳过。
   // 这条测试同时也钉住「跳过注释」只在 .sh 生效——下一测试管 .md。
   const result = checkTccPaneGuidance({
     files: [
       {
         path: 'packaging/assemble.sh',
-        text: '# 于是「换一版 app」在 macOS 看来等于「换了一个 app」，TCC 授权（辅助功能 / 屏幕录制 /\n',
+        text: '# 早先的授权指引写的是「辅助功能 / 屏幕录制 / 输入监控」，那是错的：输入监控并非必需\n',
       },
     ],
   })
@@ -677,5 +730,61 @@ test('授权指引：markdown 里的 # 是标题不是注释，仍须检查', ()
   })
 
   assert.equal(result.passed, false)
-  assert.match(result.violations[0], /输入监控/)
+  assert.match(result.violations[0], /自动化/)
+})
+
+// ── 出货 README 的 heredoc 必须是字面文本（checkReadmeHeredocIsLiteral）──────
+// 起因：unquoted heredoc + 裸反引号 = 打包时真的执行。2026-09-13 在同一份产物上抓到两处，
+// 客户拿到的 README 里真的印着 `macos-harness doctor` 的原始 JSON 与构建机的目录名。
+
+const heredoc = (body) => `cat > "$PAYLOAD/README.md" <<EOF\n${body}\nEOF\n`
+
+test('出货 README heredoc：真实发生过的错法（裸反引号打进了 doctor 的 JSON）必须判红', () => {
+  const result = checkReadmeHeredocIsLiteral({
+    assembleScript: heredoc('这三项正是 `macos-harness doctor` 的读数：`accessibility`、`post_events`。'),
+  })
+
+  assert.equal(result.passed, false)
+  // 三对反引号 = 6 处未转义，逐处点名（每一处都会真的执行一次）
+  assert.equal(result.violations.length, 6)
+  assert.match(result.violations[0], /assemble\.sh:2/)
+  assert.match(result.violations[0], /裸反引号/)
+})
+
+test('出货 README heredoc：真实发生过的第二处（$(basename "$PWD")）必须判红', () => {
+  const result = checkReadmeHeredocIsLiteral({
+    assembleScript: heredoc('shasum -a 256 ../$(basename "$PWD").dmg  # 与发布方给的 SHA256 对照'),
+  })
+
+  assert.equal(result.passed, false)
+  assert.equal(result.violations.length, 1)
+  assert.match(result.violations[0], /命令替换/)
+})
+
+test('出货 README heredoc：转义后的写法放行，参数展开（$VERSION）不算违规', () => {
+  const result = checkReadmeHeredocIsLiteral({
+    assembleScript: heredoc(
+      '# DSH Desktop LUTE $VERSION 离线完整包\n' +
+        '这三项正是 \\`macos-harness doctor\\` 的读数。\n' +
+        'shasum -a 256 ~/Downloads/DSH-Desktop-LUTE-$VERSION-mac-arm64.dmg\n',
+    ),
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('出货 README heredoc：锚点漂移必须判红（找不到段就不能当通过）', () => {
+  const result = checkReadmeHeredocIsLiteral({ assembleScript: '# 什么都没有\n' })
+
+  assert.equal(result.passed, false)
+  assert.match(result.violations[0], /找不到出货 README 的 heredoc 锚点/)
+})
+
+test('出货 README heredoc：段外的裸反引号不受影响（只审判这一段）', () => {
+  const result = checkReadmeHeredocIsLiteral({
+    assembleScript: `echo \`date\`\n${heredoc('全部字面文本。')}`,
+  })
+
+  assert.equal(result.passed, true)
 })

@@ -25,6 +25,7 @@ import {
   checkNestedRepositories,
   checkPackageIdentity,
   checkPinConsistency,
+  checkReadmeHeredocIsLiteral,
   checkScriptsRunnable,
   checkShellVarAdjacentMultibyte,
   checkTccDeadGrantRule,
@@ -276,7 +277,7 @@ const CHECKS = [
   {
     name: 'dmg-readme-tcc-panes',
     remediation:
-      '出货 README 的授权段必须写全「辅助功能 / 屏幕录制 / 输入监控」三项：写错一项不报错，用户会照着授了「自动化」而 mac.key/mac.click 静默失败（ADR-0063）',
+      '出货 README 的授权段必须写全「辅助功能 / 屏幕录制」两项，且不得把「输入监控」写成待授项：写错一项不报错，用户会照着授了「自动化」而 mac.key/mac.click 静默失败；「输入监控」则根本不需要（post_events 由「辅助功能」承载，ADR-0063 / ADR-0069）',
     run() {
       return checkDmgReadmeTccPanes({
         assembleScript: readIfExists(join(repoRoot, 'packaging', 'assemble.sh')) ?? '',
@@ -286,7 +287,7 @@ const CHECKS = [
   {
     name: 'tcc-pane-guidance',
     remediation:
-      '把该处授权指引改成「辅助功能 / 屏幕录制 / 输入监控」：第三项在「输入监控」下而非「自动化」下，写错不会报错，用户会照着一个不存在的授权静默失败（ADR-0063 / ADR-0009）',
+      '把该处授权指引改成「辅助功能 / 屏幕录制」两项：不要写「输入监控」（非必需，post_events 由「辅助功能」承载，ADR-0069），也不要写「自动化」（授了不会让键盘鼠标类能力可用，ADR-0063）；要讲清这两件事就加否定词（「不要授权自动化」「输入监控并非必需」）',
     run() {
       return checkTccPaneGuidance({
         files: TCC_GUIDANCE_SURFACES.map((rel) => ({
@@ -311,7 +312,7 @@ const CHECKS = [
   {
     name: 'tcc-grant-status-selftest',
     remediation:
-      '跑 bash packaging/scripts/tcc-grant-status-test.sh 看红在哪条：死授权检出器必须能说「不」（R1 死授权→3、R2 有效→0、R3 封条破损→4 且不误报、R4 无记录→0），并在恒真桩突变下失效（M1）。缺签名身份时自测声明跳过，不算失败（ADR-0068）',
+      '跑 bash packaging/scripts/tcc-grant-status-test.sh 看红在哪条：死授权检出器必须能说「不」（R1 死授权→3、R2 有效→0、R3 封条破损→4 且不误报、R4 无记录→0、R5 要求解不出→4 且不把工具错误文本当要求、R6 非必需项的残留不污染结论、R7 --format=tsv 契约），并在恒真桩突变下失效（M1）。缺签名身份时自测声明跳过，不算失败（ADR-0068）',
     run() {
       const script = join(repoRoot, 'packaging', 'scripts', 'tcc-grant-status-test.sh')
       const result = runScript(repoRoot, `bash "${script}"`, 120000)
@@ -326,6 +327,56 @@ const CHECKS = [
         passed: false,
         violations: lines.length > 0 ? lines : [`死授权检出器自测失败（${verdict}）`],
       }
+    },
+  },
+  {
+    name: 'tcc-form-selftest',
+    remediation:
+      '跑 bash packaging/scripts/verify-tcc-form-test.sh 看红在哪条：判据⑤（升级不重置授权）能否成立，取决于库里那条要求是**身份型**还是 cdhash 型，而两种形态下 doctor 都报 true。F1/F2 用真实读数做正反例，F5 钉住「非必需项不得污染判决」，F6 钉住「读不懂的格式默认不通过」（ADR-0063 / ADR-0069）',
+    run() {
+      const script = join(repoRoot, 'packaging', 'scripts', 'verify-tcc-form-test.sh')
+      const result = runScript(repoRoot, `bash "${script}"`, 120000)
+      if (result.code === 0) return { passed: true, violations: [] }
+      const text = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
+      const lines = text
+        .split('\n')
+        .filter((line) => /\[FAIL\]/.test(line))
+        .map((line) => line.trim())
+      const verdict = result.code === null ? '未给出退出码' : `退出码 ${result.code}`
+      return {
+        passed: false,
+        violations: lines.length > 0 ? lines : [`要求形态判读自测失败（${verdict}）`],
+      }
+    },
+  },
+  {
+    name: 'tcc-persistence-selftest',
+    remediation:
+      '跑 bash packaging/scripts/verify-tcc-persistence-test.sh 看红在哪条：判据⑤（升级不重置授权）在出货前的唯一静态证明，必须同时满足「新版仍被旧授权接受」与「换字节即被拒」——只会说通过的那一支等于没判（ADR-0063）',
+    run() {
+      const script = join(repoRoot, 'packaging', 'scripts', 'verify-tcc-persistence-test.sh')
+      const result = runScript(repoRoot, `bash "${script}"`, 120000)
+      if (result.code === 0) return { passed: true, violations: [] }
+      const text = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
+      const lines = text
+        .split('\n')
+        .filter((line) => /\[FAIL\]/.test(line))
+        .map((line) => line.trim())
+      const verdict = result.code === null ? '未给出退出码' : `退出码 ${result.code}`
+      return {
+        passed: false,
+        violations: lines.length > 0 ? lines : [`判据⑤ 静态证明自测失败（${verdict}）`],
+      }
+    },
+  },
+  {
+    name: 'readme-heredoc-literal',
+    remediation:
+      '出货 README 的 heredoc 是 `<<EOF`（未加引号），正文里的裸反引号与 `$(` 会在**打包时**被 shell 执行：2026-09-13 实测两起——`macos-harness doctor` 的原始 JSON 被打进客户 README、`$(basename "$PWD")` 被展开成构建机目录名（客户看到跑不通的 `shasum ../packaging.dmg`）。反引号写成 \\`，命令替换写成 \\$(；`$VERSION` 一类参数展开是有意的，放行（ADR-0069）',
+    run() {
+      return checkReadmeHeredocIsLiteral({
+        assembleScript: readIfExists(join(repoRoot, 'packaging', 'assemble.sh')) ?? '',
+      })
     },
   },
   {

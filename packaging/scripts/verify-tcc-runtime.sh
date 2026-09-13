@@ -1,50 +1,70 @@
 #!/bin/bash
-# 换签后验收 —— ADR-0063 判据④ 与判据⑤ 的运行时确认
+# verify-tcc-runtime.sh —— 换签后验收 · ADR-0063 判据④ 与判据⑤ 的运行时确认
 #
 # 必须在**跑着新 app 的会话**里执行：TCC 的授权查询归因于当前进程所属的 app，
 # 因此本脚本的 doctor 读数就是「这个 app 现在有没有被授权」。
 #
 # 用法:
-#   bash verify-tcc.sh          # 打印读数并写一份快照
-#   bash verify-tcc.sh --diff   # 与上一份快照对比（判据⑤ 的运行时读法）
+#   bash verify-tcc-runtime.sh          # 打印读数并写一份快照
+#   bash verify-tcc-runtime.sh --diff   # 与上一份快照对比（判据⑤ 的运行时读法）
 #
 # ## 为什么判据⑤ 需要「快照 + 对比」
 #
-# 判据⑤ 的命题是「升级**不改变**这三项读数」。单独一次读 true 说明不了它——必须在
+# 判据⑤ 的命题是「升级**不改变**这两项读数」。单独一次读 true 说明不了它——必须在
 # 授权生效后取一次基线，升级并重启后再取一次，两次逐项相同才算成立。
 # 因此本脚本把每次读数落成 JSON，--diff 做逐项比较。
 #
-# ## 这次升级预期会看到什么（2026-09-13 实测，非推测）
+# ## 读库这件事只有一份实现（2026-09-13 修正）
 #
-# 旧 app（2.0.5-lute.2.0.0，adhoc 签名）的 CDHash 是 595283898d…，而系统 TCC 库里
-# 三项授权存的要求正是：
-#     cdhash H"595283898d…" or cdhash H"3d09f5a3…"
-# 已装 2.3.0 的 CDHash 是 3833cbbc…，**不在**这个集合里，且它的身份已改为证书钉定。
-# 所以本支首次以新身份启动时，三项会先变成 false，需要一次性重授；那之后授权就绑定
-# 在证书身份上，2.3.1 及后续版本不再需要重授（判据⑤ 已在出货前静态证明 9/9）。
+# 第 2 节早先自带一份 `snap_services()`，与 `tcc-grant-status.sh` 各读一遍库。两份实现里
+# 只有一份有测试，于是错的那一份活了很久，并在今天真实骗了一次人：库里**根本没有**那项授权
+# （`auth_value` 读不出）时，`writefile()` 没写出文件，`csreq` 把
+# `/tmp/.csreq-….bin: No such file or directory` 打到 **stdout**，那份实现把**这句错误文本**
+# 当成了「库里存的要求」打印出来，还据此给出「授权绑定在旧字节上，需重授一次」——
+# 一个把「从来没有授权」说成「重授一次就好」的假阴性。
+# 现在第 2 节改为调 `tcc-grant-status.sh --format=tsv` 取数（ADR-0009：一份事实只有一个家），
+# 那份实现有 9 条反向断言 + 一次恒真桩突变守着，错的形态不会再活下来。
+#
+# ## 这次换签的完整时间线（2026-09-13 实测，非推测）
+#
+# 11:58–12:00 用户在**还是 adhoc 的** app 上重授过一次（库写入 cdhash 型要求，auth_value=2）；
+# 12:57       固定身份的 2.3.0 就位 → 那三条要求立即失配，而开关值原样留着；
+# 12:57–15:26 三项能力静默死亡 2.5 小时，隐私界面里它们一直显示「已开启」；
+# 15:41–15:44 用户在**新身份**的 app 上重授两项 → 库里改写为
+#             `identifier "ai.deepseek.dsh.desktop" and certificate leaf = H"ba3372a3…"`，
+#             已装 app 满足它 → 判据④ 通过。这条**身份型**要求就是判据⑤ 的前提：
+#             它绑在证书上而不是字节上，下一版换字节仍应有效。
+#
+# 第三项 `post_events` 由「辅助功能」承载，「输入监控」非必需——见 tcc-grant-status.sh 文件头。
 set -uo pipefail
 
-SDB="/Library/Application Support/com.apple.TCC/TCC.db"
-BID="ai.deepseek.dsh.desktop"
+HERE="$(cd "$(dirname "$0")" && pwd)"
+DETECTOR="$HERE/tcc-grant-status.sh"
 APP="/Applications/DSH Desktop.app"
 SNAPDIR="$HOME/Library/Application Support/LUTE/tools/tcc-snapshots"
-SERVICES="kTCCServiceAccessibility kTCCServiceScreenCapture kTCCServiceListenEvent"
 
 export PATH="$HOME/.local/bin:$PATH"
 
 # ── 要求形态判读（判据④ 的「持久性」附加断言）────────────────
 # 判据④ 只说「此刻有权」，说不了「下一版还有权」。doctor 全 true 时，库里存的仍可能是
-# **cdhash 型**要求——自签证书不被 tccd 接受并退回字节哈希时就会存成那样；三项此刻照样全
+# **cdhash 型**要求——自签证书不被 tccd 接受并退回字节哈希时就会存成那样；两项此刻照样全
 # true，但下一版一换字节即全部重置，正是本 ADR 要消除的失败模式，且要到下一版才暴露。
 # 故第 2 节解出的**要求形态**是 ⑤ 能否成立的唯一当场判据。
 #
+# 只看**必需项**：非必需项的残留（例如早年被旧文档引导授过的「输入监控」）与 ⑤ 无关，
+# 让它参与判决会得出「⑤ 必然失败」这种与自己无关的结论。
+#
 # 唯一实现：主流程与自测（`--judge-form`，从 stdin 读同一份 TSV）走的是这一段代码。
-# 输入：每行 "<service>\t<auth_value>\t<要求文本>"，即 snap_services 的输出。
+# 输入：`tcc-grant-status.sh --format=tsv` 的 6 列 TSV（第 2 列是 必需/非必需）。
+#       旧格式（3 列、无 kind 列）会被过滤成空输入，从而判「形态未知」——fail-closed，
+#       不认识的格式不许说通过。
 # 退出码：0 = 身份型（无 cdhash 且有 certificate leaf）⇒ ⑤ 具备成立条件
 #         3 = cdhash 型 ⇒ 授权绑在字节上，⑤ 必然失败
 #         4 = 形态未知 ⇒ 需人工判读
 judge_req_form() {
-  local tsv; tsv="$(cat)"
+  # 只看 required 行。第 2 列必须是 ASCII 的 required/optional：本机 awk 实测把中文串
+  # 「非必需」判成等于「必需」，用中文做过滤会把非必需项当成必需项（见 tcc-grant-status.sh 契约）。
+  local tsv; tsv="$(awk -F'\t' 'NF>=6 && $2=="required"')"
   if printf '%s' "$tsv" | grep -q 'cdhash'; then
     echo "  ⚠ 但库里存的仍是 **cdhash 型**要求（见第 2 节）："
     printf '%s' "$tsv" | grep 'cdhash' | sed 's/^/      /'
@@ -57,7 +77,7 @@ judge_req_form() {
     echo "    授权绑定身份而非字节，下一版换字节仍应有效：判据⑤ 具备成立条件。"
     return 0
   fi
-  echo "  ⚠ 库里要求既非 cdhash 型、也未见 certificate leaf —— 形态未知，请人工判读第 2 节。"
+  echo "  ⚠ 必需项里既未见 cdhash 型、也未见 certificate leaf —— 形态未知，请人工判读第 2 节。"
   return 4
 }
 
@@ -84,19 +104,6 @@ BUILD="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$APP/Contents/Info
 CDHASH="$(codesign -d --verbose=4 "$APP" 2>&1 | sed -n 's/^CDHash=//p' | head -1)"
 DR="$(codesign -d -r- "$APP" 2>&1 | sed -n 's/^#* *designated => //p')"
 AUTH="$(codesign -dv --verbose=2 "$APP" 2>&1 | sed -n 's/^Authority=//p' | head -1)"
-
-snap_services() {  # 输出 "<service>\t<auth_value>\t<csreq 文本>" 三行
-  local svc v blob stored
-  for svc in $SERVICES; do
-    v="$(sqlite3 "$SDB" "select auth_value from access where client='$BID' and service='$svc';" 2>/dev/null)"
-    blob="/tmp/.csreq-$$.bin"; rm -f "$blob"
-    sqlite3 "$SDB" "select writefile('$blob', csreq) from access where client='$BID' and service='$svc';" >/dev/null 2>&1
-    # csreq 的 -t 是「输出为文本」，不是「对目标判定」——只用它把库里存的 csreq 解码。
-    stored="$(csreq -r "$blob" -t 2>&1 | head -1)"
-    rm -f "$blob"
-    printf '%s\t%s\t%s\n' "$svc" "${v:-none}" "${stored:-<空>}"
-  done
-}
 
 echo "=============================================================="
 echo " 换签后验收 · $(date '+%F %T')"
@@ -127,24 +134,37 @@ else
 fi
 echo
 
-echo "── 2. 系统 TCC 库里存的三项授权 ────────────────────────────"
-SNAP_TSV="$(snap_services)"
-if [ ! -r "$SDB" ]; then
-  printf '  读不出 %s（缺「完全磁盘访问权限」）—— 第 3 节 doctor 仍是权威读数。\n' "$SDB"
+echo "── 2. 系统 TCC 库里存的授权（唯一实现: tcc-grant-status.sh）──"
+SNAP_TSV=""
+if [ ! -x "$DETECTOR" ] && [ ! -f "$DETECTOR" ]; then
+  printf '  判不了：找不到 %s —— 本脚本**不再自带一份读库实现**（那样会出现两份逻辑、\n' "$DETECTOR"
+  printf '  只有一份有测试）。请从仓库或出货包 tools/ 里取回该脚本后重跑。\n'
 else
-  printf '%s\n' "$SNAP_TSV" | while IFS=$'\t' read -r svc v stored; do
-    printf '  %-28s auth_value=%s %s\n' "$svc" "$v" "$([ "$v" = 2 ] && echo '(允许)')"
+  SNAP_TSV="$(bash "$DETECTOR" --format=tsv 2>/dev/null || true)"
+fi
+if [ -z "${SNAP_TSV//[$'\n']/}" ]; then
+  printf '  判不了：取不到库读数（%s 执行失败或输出为空）。第 3 节 doctor 仍是权威读数。\n' "$DETECTOR"
+else
+  printf '%s\n' "$SNAP_TSV" | while IFS=$'\t' read -r svc kind v stored form sat; do
+    [ -n "$svc" ] || continue
+    printf '  [%s] %s\n' "$([ "$kind" = "required" ] && echo 必需 || echo 非必需)" "$svc"
+    if [ "$v" = "无记录" ]; then
+      printf '    库里没有这一项的任何记录：从未授权过（界面上就是「关着」的）。\n'
+      continue
+    fi
+    printf '    auth_value=%s%s\n' "$v" "$([ "$v" = 2 ] && echo '（允许）')"
     printf '    TCC 存的要求 : %s\n' "$stored"
     # 拿**库里存的那条要求**判已装 app。踩过的坑：早先用 app 自己的 DR 去判，测的其实是
     # 「app 满足它自己」，恒真——一条假绿。
-    if [ -n "$stored" ] && [ "$stored" != "<空>" ]; then
-      if codesign --verify -R="$stored" "$APP" >/dev/null 2>&1; then
-        printf '    → 已装 app 满足它 : 是（授权对本支有效，无需重授）\n'
-      else
-        printf '    → 已装 app 满足它 : 否（授权绑定在旧字节上，需重授一次）\n'
-      fi
+    if [ "$stored" = "<解不出>" ]; then
+      printf '    → 判不了：库里这一行的要求解不出，不能当有效、也不能当死授权。\n'
+    elif codesign --verify -R="$stored" "$APP" >/dev/null 2>&1; then
+      printf '    → 已装 app 满足它 : 是（授权对本支有效，无需重授）\n'
+    else
+      printf '    → 已装 app 满足它 : 否（授权绑定在旧字节上，需重授一次）\n'
     fi
   done
+  printf '  注：非必需项（如「输入监控」）的残留不影响任何能力，也不参与下面的判决。\n'
 fi
 echo
 
@@ -175,11 +195,11 @@ SNAP="$SNAPDIR/$TS.json"
     "${ACC:-null}" "${SCR:-null}" "${POST:-null}"
   printf '  "tcc": {\n'
   n="$(printf '%s\n' "$SNAP_TSV" | grep -c .)"
-  printf '%s\n' "$SNAP_TSV" | { i=0; while IFS=$'\t' read -r svc v stored; do
+  printf '%s\n' "$SNAP_TSV" | { i=0; while IFS=$'\t' read -r svc kind v stored form sat; do
     [ -n "$svc" ] || continue
     i=$((i + 1)); sep=","; [ "$i" -eq "$n" ] && sep=""
-    printf '    "%s": {"auth_value": "%s", "csreq": "%s"}%s\n' \
-      "$(jesc "$svc")" "$(jesc "$v")" "$(jesc "$stored")" "$sep"
+    printf '    "%s": {"kind": "%s", "auth_value": "%s", "csreq": "%s", "form": "%s", "satisfaction": "%s"%s\n' \
+      "$(jesc "$svc")" "$(jesc "$kind")" "$(jesc "$v")" "$(jesc "$stored")" "$(jesc "$form")" "$(jesc "$sat")" "}$sep"
   done; }
   printf '  }\n}\n'
 } > "$SNAP"
@@ -198,21 +218,25 @@ echo "── 判读 ────────────────────
 if [ "$STALE" = "1" ]; then
   echo "  ⚠ 本会话跑的是换签前的旧支，本脚本**不能**替你判判据④。"
   echo "    第 3 节的 true 属于那个即将消失的进程，不属于已装 app。"
-  echo "    依第 2 节：已装 app 不满足库里存的三条要求 ⇒ 重启后三项会先变 false。"
+  echo "    依第 2 节：已装 app 不满足库里存的那条要求 ⇒ 重启后两项会先变 false。"
   echo "    动作：重启 DSH Desktop → 打开一个会话重跑本脚本 → 按提示一次性重授。"
 elif [ "$ALL" = "true" ]; then
-  echo "  判据④ 通过：本会话跑的就是已装 app，三项均为 true，授权已生效。"
-  printf '%s' "$SNAP_TSV" | judge_req_form
-  echo "  下一步（判据⑤）：现在就是基线。升级到 2.3.1 → 重启 → 再跑一次 --diff，"
-  echo "                   三项应保持不变。"
+  echo "  判据④ 通过：本会话跑的就是已装 app，三项读数均为 true，授权已生效。"
+  if [ -n "${SNAP_TSV//[$'\n']/}" ]; then
+    printf '%s\n' "$SNAP_TSV" | judge_req_form
+  else
+    echo "  ⚠ 但取不到库读数（第 2 节）——⑤ 的前提（要求形态）本次**未判定**。"
+  fi
+  echo "  下一步（判据⑤）：现在就是基线。升级到下一版 → 重启 → 再跑一次 --diff，"
+  echo "                   三项应保持不变，且 CDHash 必须不同。"
 else
   echo "  判据④ 未通过：三项尚有为 false 的。"
   if [ "$(printf '%s' "$SNAP_TSV" | grep -c 'auth_value.*2' || true)" -gt 0 ]; then
     echo "  库里 auth_value 仍写着「允许」，但要求不匹配新身份 —— 这是换签的一次性代价，"
     echo "  不是用户把开关关掉了。"
   fi
-  echo "  请到 系统设置 → 隐私与安全性 → 辅助功能 / 屏幕录制 / 输入监控，"
-  echo "  把「LUTE Agentic System」关掉再打开（三项都要），然后重跑本脚本。"
+  echo "  请到 系统设置 → 隐私与安全性 → 辅助功能 / 屏幕录制（只需这两项；"
+  echo "  「输入监控」非必需，不要去授它），把「LUTE Agentic System」关掉再打开，然后重跑本脚本。"
 fi
 
 if [ "${1-}" = "--diff" ]; then

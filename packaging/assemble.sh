@@ -499,7 +499,7 @@ cat > "$PAYLOAD/README.md" <<EOF
 - \`aeis-portable.tar.gz\`：灵枢 Python 运行时（可重定位 standalone 基底 + aeis 纯 Python 包，目标机免 Python）。
 - \`LUTE Setup.app\`：GUI 安装器（双击安装，进度可见）。
 - \`install.sh\`：命令行安装（等价于 Setup.app，幂等 + 回滚 + 升级保留数据）。
-- \`INSTALL-GUIDE.md\`：**安装手册（用户版）**——逐步操作、授权三项、失败对照表与卸载/回退。
+- \`INSTALL-GUIDE.md\`：**安装手册（用户版）**——逐步操作、授权两项、失败对照表与卸载/回退。
   发给客户的第二份东西；本 README 只给最短路径与原理。
 - \`tools/\`：补丁锚点校验（**verify-patches-v2.sh**，38 锚点，含 G1/G2 运行时守卫）、品牌漂移检查（brand-replay.sh）、运行时守卫重放/体检（**runtime-guards/**）、file: 重写工具、灵枢便携化工具。
 - \`SHA256SUMS\`：完整性校验。
@@ -518,13 +518,16 @@ cd "/Volumes/DSH Desktop LUTE $VERSION" && bash install.sh
   向导会自己定位载荷：同级找不到时到挂载的磁盘映像里找（macOS 对未公证包会把向导复制到
   随机只读位置运行，那时同级没有载荷——正常现象，向导已自愈；找不到时它会打印读数并给出
   「复制终端命令」按钮）。
-- 启动后：**首次安装需授权三项**（系统设置 → 隐私与安全性，授权「LUTE Agentic System」）：
-  **辅助功能**、**屏幕录制**、**输入监控**。
-  这三项正是 `macos-harness doctor` 的 `accessibility` / `screen_recording` / `post_events`；
-  第三项在「输入监控」下而**不在「自动化」下**——授权「自动化」不会让 `post_events` 变 true，
-  缺它时 `mac.key` / `mac.click` 会静默失败（2026-09-13 实测：三项的 TCC 记录为
-  `kTCCServiceAccessibility` / `kTCCServiceScreenCapture` / `kTCCServiceListenEvent`，
-  库中根本没有 `PostEvent` 行）。
+- 启动后：**首次安装需授权两项**（系统设置 → 隐私与安全性，授权「LUTE Agentic System」）：
+  **辅助功能**、**屏幕录制**。
+  这两项覆盖 \`macos-harness doctor\` 的三项读数——\`accessibility\`、\`screen_recording\`，
+  以及 \`post_events\`：**第三项能力由「辅助功能」承载**，不另开面板，
+  缺它时 \`mac.key\` / \`mac.click\` 会静默失败。
+  所以**不要**去授「输入监控」——它并非必需，早期文档把它写成第三项是错的；
+  也**不要**指望「自动化」——授权「自动化」不会让 \`post_events\` 变 true。
+  （2026-09-13 15:41–15:44 实测：只授上面这两项，doctor 三项读数全为 true；
+  系统 TCC 库里 \`kTCCServiceListenEvent\` 一行记录都没有，而 \`post_events\` 的判定是
+  \`CGPreflightPostEventAccess()\`。）
   自本版起 app 使用**固定签名身份**，后续升级**不再要求重新授权**——这是「升级一次、重授一次」的终点。
   从更早的 adhoc 版升上来的机器仍要重授这一次：身份变了，旧授权不会自动继承。
 - ⚠️ **从旧版升上来的机器：面板里可能已经显示「已开启」，但那是上一版应用的授权。**
@@ -545,7 +548,7 @@ cd "/Volumes/DSH Desktop LUTE $VERSION" && bash install.sh
 ## 版本核对
 \`\`\`bash
 cat VERSION            # LUTE_VERSION + BUILD（构建号，唯一标识本次打包）
-shasum -a 256 ../$(basename "$PWD").dmg  # 与发布方给的 SHA256 对照
+shasum -a 256 ~/Downloads/DSH-Desktop-LUTE-$VERSION-mac-arm64.dmg  # 与发布方给的 SHA256 对照（路径按实际下载位置调整）
 \`\`\`
 
 ## 校验

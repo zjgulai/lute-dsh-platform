@@ -17,6 +17,12 @@
 #   F2 库里是身份型要求（**真实产物 DR 文本**）        → 必须退 0
 #   F3 形态未知（apple 锚定等非我方形态）              → 必须退 4（不得当作通过）
 #   F4 空输入                                          → 必须不为 0（防空转恒真）
+#   F5 只有**非必需项**是 cdhash 型                    → 必须退 4，**不得**退 3
+#   F6 旧格式（3 列、无 kind 列）                      → 必须不为 0（fail-closed）
+#
+# F5/F6 的由来（2026-09-13）：`post_events` 由「辅助功能」承载，「输入监控」已实测定为非必需。
+# 若判决还去看非必需项，一条早年被旧文档引导授过的残留就会让验收喊「⑤ 必然失败」——一个与
+# 自己无关的结论。而格式一旦漂移（列数变了却没人改判据），判据必须拒绝作答而不是默认通过。
 #
 # 全程只做文本判读，不读 TCC 库、不触碰 /Applications 与 ~/.dsh。
 #
@@ -43,20 +49,22 @@ judge(){ # $1=TSV 文本 → 打印 "rc=<n>"
 
 echo "── TCC 要求形态判读 · 反向自测 ─────────────────────────────"
 
+# 夹具格式 = `tcc-grant-status.sh --format=tsv` 的 6 列（kind 列是 ASCII，见该脚本「契约」）：
+#   service <TAB> required|optional <TAB> auth_value <TAB> 要求文本 <TAB> 形态 <TAB> 判定
 # F1：真实历史坏输入 —— 2026-09-13 直读 /Library/.../TCC.db 得到的换签前 adhoc 支要求
-CDHASH_TSV="$(printf 'kTCCServiceAccessibility\t2\tcdhash H"595283898d1adbeffda047410679fc9480b67d05" or cdhash H"3d09f5a367190a09a4ac253f006ceabb21973731"')"
+CDHASH_TSV="$(printf 'kTCCServiceAccessibility\trequired\t2\tcdhash H"595283898d1adbeffda047410679fc9480b67d05" or cdhash H"3d09f5a367190a09a4ac253f006ceabb21973731"\tcdhash 型（绑字节）\t不满足')"
 r="$(judge "$CDHASH_TSV")"
 if [ "$r" = "rc=3" ]; then ok "F1 cdhash 型要求被判红（${r}）"
 else no "F1 期望 rc=3，实得 $r —— 会把「⑤ 必然失败」误判为通过"; fi
 
-# F2：真实产物文本 —— 已装 2.3.0 的 `codesign -d -r-` 指定要求
-LEAF_TSV="$(printf 'kTCCServiceAccessibility\t2\tidentifier "ai.deepseek.dsh.desktop" and certificate leaf = H"ba3372a39bf4fe09e467ab8565cfb3a0166babbe"')"
+# F2：真实产物文本 —— 2026-09-13 15:41 用户在新身份 app 上重授后，库里实际存下的那条要求
+LEAF_TSV="$(printf 'kTCCServiceAccessibility\trequired\t2\tidentifier "ai.deepseek.dsh.desktop" and certificate leaf = H"ba3372a39bf4fe09e467ab8565cfb3a0166babbe"\t身份型（绑证书）\t满足')"
 r="$(judge "$LEAF_TSV")"
 if [ "$r" = "rc=0" ]; then ok "F2 身份型要求被放行（${r}）"
 else no "F2 期望 rc=0，实得 $r —— 正例被判红"; fi
 
 # F3：形态未知 —— 不得当通过（我方 app 正常不可能是这个形态）
-r="$(judge "$(printf 'kTCCServiceAccessibility\t2\tidentifier "com.apple.Terminal" and anchor apple')")"
+r="$(judge "$(printf 'kTCCServiceAccessibility\trequired\t2\tidentifier "com.apple.Terminal" and anchor apple\t形态未知\t不满足')")"
 if [ "$r" = "rc=4" ]; then ok "F3 未知形态不被当作通过（${r}）"
 else no "F3 期望 rc=4，实得 $r"; fi
 
@@ -64,6 +72,17 @@ else no "F3 期望 rc=4，实得 $r"; fi
 r="$(judge '')"
 if [ "$r" != "rc=0" ]; then ok "F4 空输入不通过（${r}）"
 else no "F4 空输入竟判通过 —— 实现已退化为恒真"; fi
+
+# F5：非必需项是 cdhash 型 —— 与判据⑤ 无关，必须**不**触发「必然失败」
+NONREQ_TSV="$(printf 'kTCCServiceListenEvent\toptional\t2\tcdhash H"595283898d1adbeffda047410679fc9480b67d05"\tcdhash 型（绑字节）\t不满足')"
+r="$(judge "$NONREQ_TSV")"
+if [ "$r" = "rc=4" ]; then ok "F5 非必需项的 cdhash 型残留不影响 ⑤（判形态未知，不判必败）"
+else no "F5 期望 rc=4（只有非必需项时无可判形态），实得 $r —— 非必需项污染了判决"; fi
+
+# F6：旧格式（3 列，无 kind 列）—— 格式漂移必须 fail-closed
+r="$(judge "$(printf 'kTCCServiceAccessibility\t2\tidentifier "ai.deepseek.dsh.desktop" and certificate leaf = H"ba3372a39bf4fe09e467ab8565cfb3a0166babbe"')")"
+if [ "$r" != "rc=0" ]; then ok "F6 旧格式不被当作通过（${r}）"
+else no "F6 旧格式竟判通过 —— 判据在读不懂的输入上默认放行"; fi
 
 echo
 printf '断言：%d 通过 / %d 失败\n' "$PASS" "$FAIL"
