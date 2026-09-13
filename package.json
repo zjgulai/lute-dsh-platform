@@ -19,6 +19,10 @@
     "accept:root-brand": "node scripts/acceptance/root-brand-live-anchors.mjs",
     "accept:theme-tokens": "node scripts/acceptance/theme-tokens-live.mjs",
     "accept:worktable-fence": "node scripts/acceptance/worktable-fence-live.mjs",
-    "accept:newapp-products": "node scripts/acceptance/newapp-products-live.mjs"
+    "accept:newapp-products": "node scripts/acceptance/newapp-products-live.mjs",
+    "accept:newapp-systems": "node scripts/acceptance/newapp-systems-live.mjs"
+  },
+  "dependencies": {
+    "@poyoapi/cli": "^0.1.11"
   }
 }
