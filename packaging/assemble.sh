@@ -310,11 +310,24 @@ node "$PKG_ROOT/scripts/scan-machine-paths.mjs" \
   --root "$BUNDLED" --baseline "$PKG_ROOT/machine-path-baseline.json" \
   || { echo "[assemble] 出货面出现新的构建机绝对路径，中止（见上）；修法见脚本头部。"; exit 1; }
 
-# adhoc 深签名（决策 D2；内容已改写 + 注入 dsh-profile，原签名失效，打包前重签）
-say "adhoc 深签名（含内嵌 dsh-profile）…"
-codesign --force --deep --sign - "$APP_STAGE/DSH Desktop.app"
+# 固定身份深签名（ADR-0063，修订原决策 D2 的 adhoc）。内容已改写 + 注入 dsh-profile，
+# 原签名必然失效，打包前必须重签——这一点 D2 的理由成立；被修订的是**用什么身份签**：
+# adhoc 的指定要求就是 CDHash 本身（实测 `cdhash H"5952…" or cdhash H"3d09…"`），
+# 于是「换一版 app」在 macOS 看来等于「换了一个 app」，TCC 授权（辅助功能 / 屏幕录制 /
+# 事件投递）随字节全部失配，且失效是**静默**的。改为证书签名后指定要求变成
+# `identifier + certificate leaf`，与字节无关，重建不再重置授权。
+LUTE_SIGN_IDENTITY="${LUTE_SIGN_IDENTITY:-LUTE Code Signing}"
+if ! security find-identity -v -p codesigning 2>/dev/null | grep -qF "\"${LUTE_SIGN_IDENTITY}\""; then
+  echo "[assemble] 签名身份不可用：${LUTE_SIGN_IDENTITY}" >&2
+  echo "[assemble] 建立它：packaging/scripts/ensure-signing-identity.sh" >&2
+  echo "[assemble] 这里**不**回退 adhoc——回退等于静默恢复 ADR-0063 要消除的那个缺陷，" >&2
+  echo "[assemble] 而且失败方向最糟：产物照出、权限照丢。" >&2
+  exit 1
+fi
+say "证书深签名（身份：${LUTE_SIGN_IDENTITY}）…"
+codesign --force --deep --sign "${LUTE_SIGN_IDENTITY}" "$APP_STAGE/DSH Desktop.app"
 bash "$PKG_ROOT/scripts/verify-app-signature.sh" "$APP_STAGE/DSH Desktop.app" "签名后立即自验" || exit 1
-say "app adhoc 深签名完成"
+say "app 证书深签名完成"
 
 # 归档前的第二次断言：签名与 tar 之间若有任何写入，seal 会失效且无声。
 # 实测（2026-09-11）：签名后追加一个字节 → codesign 退出码 1；此前该位置无断言，
@@ -466,11 +479,17 @@ cd "/Volumes/DSH Desktop LUTE $VERSION" && bash install.sh
 - 写 /Applications 一步会弹管理员密码框，**其余全程用户态**。
 - **切勿用 sudo 运行**：sudo 会污染 ~/.dsh 文件属主，导致后续无法覆盖。
 - GUI 方式（备选）：双击 \`LUTE Setup.app\`。若被 Gatekeeper 拦，右键 → 打开 → 弹框点「打开」。
-- 启动后：**重新授权 TCC**（系统设置 → 隐私与安全 → 屏幕录制/辅助功能/自动化，授权 LUTE Agentic System）。
+- 启动后：**首次安装需授权 TCC**（系统设置 → 隐私与安全 → 屏幕录制/辅助功能/自动化，授权 LUTE Agentic System）。
+  自本版起 app 使用**固定签名身份**，后续升级**不再要求重新授权**——这是「升级一次、重授一次」的终点。
+  从更早的 adhoc 版升上来的机器仍要重授这一次：身份变了，旧授权不会自动继承。
 
 ## Gatekeeper 说明（未公证包）
-本包为 adhoc 签名、未公证，下载分发的 dmg 会带隔离属性。本版安装器
-**解包后自动清除**，终端安装不受影响；仅 GUI 双击需要右键打开一次。
+本包已改为**固定证书签名**（不再是 adhoc），但**仍未公证**——没有走 Apple Developer ID，
+因此从网络下载的 dmg 仍会带隔离属性、GUI 双击仍需右键打开一次。本版安装器
+**解包后自动清除**，终端安装不受影响。
+
+> 未公证与签名身份是两件事：前者决定 Gatekeeper 是否放行，后者决定 TCC 授权**能否跨版本存活**。
+> 本次修的是后者；前者要等 Developer ID。
 
 ## 版本核对
 \`\`\`bash

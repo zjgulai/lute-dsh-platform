@@ -29,6 +29,9 @@ trap 'rm -f "$REPORT"' EXIT
 
 # 判定必须用**不带 --verbose** 的形式：adhoc 签名没有证书，`codesign --verify --verbose=N`
 # 会因「does not satisfy its designated Requirement」返回 3 —— 那会同时掩盖「好」与「坏」两种情况。
+# 注（2026-09-13，ADR-0063）：本仓库的 app 已从 adhoc 改为固定证书签名，上面这条返回 3 的
+# 现象对本包不再出现；但「判定不带 verbose」仍是正确选择——它把判定与报告分开，对两种
+# 签名形态都成立，换成证书签名后若改回 verbose，反而会让判据依赖签名形态。
 # 实测矩阵（2026-09-11，adhoc 签名的最小 bundle）：
 #   --verify / --verify --strict / --verify --deep / --verify --deep --strict
 #       → 未改=0、改一字节=1（可区分）

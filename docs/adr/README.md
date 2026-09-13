@@ -66,6 +66,7 @@
 | ADR-0060 | 模型准入判据补两关：**tool_call 必须回灌验证**（缺 `type:"function"` 只在客户端回传路径上暴露，单轮测不出）+ **多轮重复**（实测 33% 间歇静默失败）；判据由三关升为四关；抽测只作并列决胜、不得据此宣称模型更强；筛选目标是「每族一条当代最好的」而非「不漏掉任何可用项」——硅基流动清单据此 25 → 9 | accepted（2026-09-13） | [Note](../notes/implemented/capability/2026-09-13-siliconflow-model-audit.md) |
 | ADR-0061 | 新应用抽屉同时兼容 `ctx.agentPresets` 与 `connection.api.agentPresets` 两种 preset 选择器载体；深链星探 KOL-Hunter 走本机 profile 本地装配，不再烘焙进出货 preset；新增 DMG 打包发布 SOP | accepted（2026-09-13） | [Note](../notes/implemented/surface/2026-09-13-newapp-agentpresets-channel-and-kol-hunter-local.md) |
 | ADR-0062 | 新应用抽屉增加「业务系统」第二分区：外链只由宿主打开且只接受 slug；本包从此拥有一份 catalog（部分修订 ADR-0045） | accepted（2026-09-13） | [Note](../notes/implemented/surface/2026-09-13-newapp-systems-section.md) |
+| ADR-0063 | 出货 app 改用固定身份的证书签名：adhoc 的指定要求字面上就是 CDHash，TCC 授权因此随字节失效——「重新授权一次」实为**每版一次**；改建自签身份后换签只付一次；签名身份升为「签不出来即失败」的受门禁保护构建输入（修订 PLAN 决策 D2） | accepted（2026-09-13） | [Note](../notes/implemented/architecture/2026-09-13-signing-identity-tcc-stability.md) |
 
 > ADR-0007 ~ ADR-0018 是「LUTE 二开平台架构重构」的十二项决策，共享同一篇决策记录 Note。
 > ADR-0019 独立成篇（品牌皮肤锚点治理），决策记录见其 Note。

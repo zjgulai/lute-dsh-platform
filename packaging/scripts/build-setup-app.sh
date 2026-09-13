@@ -31,6 +31,13 @@ cat > "$APP/Contents/Info.plist" <<'EOF'
 </plist>
 EOF
 say(){ echo "[setup] $*"; }
-# adhoc 签名（决策 D2；与 app 同策略）
-codesign --force --deep --sign - "$APP"
-say "编译完成: $APP"
+# 固定身份签名（ADR-0063）。此处跟随 app 的身份，不是为了权限——Setup.app 不需要 TCC——
+# 而是为了让「本包已改为固定证书签名、不再是 adhoc」这句话对**包内每一个可执行体**都成立；
+# 一处遗留 adhoc 会让客户在两个不同的 Gatekeeper 提示之间困惑。
+LUTE_SIGN_IDENTITY="${LUTE_SIGN_IDENTITY:-LUTE Code Signing}"
+if ! security find-identity -v -p codesigning 2>/dev/null | grep -qF "\"${LUTE_SIGN_IDENTITY}\""; then
+  echo "[setup] 签名身份不可用：${LUTE_SIGN_IDENTITY}（建立：packaging/scripts/ensure-signing-identity.sh）" >&2
+  exit 1
+fi
+codesign --force --deep --sign "${LUTE_SIGN_IDENTITY}" "$APP"
+say "编译完成: $APP（身份：${LUTE_SIGN_IDENTITY}）"
