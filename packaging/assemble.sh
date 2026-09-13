@@ -380,7 +380,12 @@ say "技能+预设完成 ($(du -sh "$PAYLOAD/skills-presets.tar.gz" | cut -f1))"
 source_fingerprint "$FREEZE_END" "$PROFILE_LIVE"
 if ! diff -q "$FREEZE_START" "$FREEZE_END" >/dev/null 2>&1; then
   echo "[assemble] ⚠ 装配期间本机源被改动过（产物仍自洽：读的是 §0 快照）：" >&2
-  diff "$FREEZE_START" "$FREEZE_END" | head -20 >&2
+  # `|| true` 不是装饰：diff 在**有差异时**（= 这条路径唯一的进入条件）退出码为 1，
+  # 而 `set -euo pipefail` 会因为这条管道整条非零而**当场终止装配**。于是这条被注释
+  # 声明为「告警，不是失败」的路径，实际行为是：打印差异 → 静默死掉，连下面那行
+  # 「含义：…」都不打（2026-09-13 实测：2.3.2 第二次装配就是这样失败的，退出码 1、
+  # 无任何错误信息）。判据要能给出为它负责的读数，告警路径本身也不能是个陷阱。
+  diff "$FREEZE_START" "$FREEZE_END" | head -20 >&2 || true
   echo "          含义：本次载荷 = T0 快照，与该时刻之后的本机状态不同源。" >&2
   SNAPSHOT_LINE="PROFILE_SNAPSHOT=$(shasum -a 256 "$FREEZE_START" | cut -c1-16)$(printf ' (源在装配期间有改动)')"
 else
