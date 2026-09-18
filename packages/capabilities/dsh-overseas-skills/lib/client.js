@@ -101,7 +101,12 @@ window.__ModuleLoader__.load({
 			'[data-plugin="dsh-overseas-skills"] .ovsBadgeMulti { color:var(--dsw-alias-label-secondary); background:var(--dsw-alias-bg-layer-2); }',
 			// S12 / Q5：契约挂载态（正交于上面三枚接线徽标）。待挂契约用警示色——
 			// 过渡期它是绝大多数卡的状态，但它是一条**要收敛的债务**，不该长得像中性信息。
-			'[data-plugin="dsh-overseas-skills"] .ovsBadgePending { color:var(--dsw-alias-state-warning-primary, #b26a00); border:1px dashed color-mix(in srgb, var(--dsw-alias-state-warning-primary, #b26a00) 55%, transparent); }',
+			// 2026-09-18：这里原写作 `--dsw-alias-state-warning-primary`，平台没有这个
+			// 名字（state 族是 `warn` 不是 `warning`），于是它一直在走 `#b26a00` 字面兜底、
+			// 不随主题——同文件另外两处（`.ovsToolGap` / `.ovpTag`）写的都是正确的
+			// `--dsw-alias-state-warn-primary`。错名连同它的字面兜底一起删掉，解析交还主题；
+			// 之所以此前没有判据拦住：本包无 `src/`，而 theme-tokens 的射程当时只覆盖 `src/`。
+			'[data-plugin="dsh-overseas-skills"] .ovsBadgePending { color:var(--dsw-alias-state-warn-primary); border:1px dashed color-mix(in srgb, var(--dsw-alias-state-warn-primary) 55%, transparent); }',
 			'[data-plugin="dsh-overseas-skills"] .ovsBadgeUnrecorded { color:var(--dsw-alias-label-tertiary); border:1px dotted var(--dsw-alias-border-l1); }',
 			'[data-plugin="dsh-overseas-skills"] .ovsLoose { display:flex; flex-direction:column; gap:6px; padding:8px 10px; border:1px dashed var(--dsw-alias-border-l1); border-radius:10px; }',
 			'[data-plugin="dsh-overseas-skills"] .ovsLooseTitle { font-size:12px; font-weight:500; line-height:18px; color:var(--dsw-alias-label-secondary); }',

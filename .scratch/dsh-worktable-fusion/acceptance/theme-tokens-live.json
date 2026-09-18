@@ -1,12 +1,12 @@
 {
-  "checkedAt": "2026-09-12T05:50:35.337Z",
+  "checkedAt": "2026-09-17T10:38:33.306Z",
   "themeBundle": "/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-client-ui-theme/lib/client.js",
-  "browser": "chromium 153.0.8010.36",
+  "browser": "chromium 153.0.8010.48",
   "cssBlobs": 8,
   "cssDefinedTokens": 356,
   "officialDefinedTokens": 393,
   "repoSuppliedTokens": 67,
-  "referenced": 54,
+  "referenced": 78,
   "instrument": [
     {
       "name": "正控解析成功",
@@ -35,15 +35,15 @@
     }
   ],
   "summary": {
-    "agreeOfficial": 47,
+    "agreeOfficial": 54,
     "agreeRepo": 0,
-    "agreeAbsent": 7,
+    "agreeAbsent": 24,
     "gateFalsePositiveOfficial": 0,
     "gateFalsePositiveRepo": 0,
     "gateFalseNegative": 0,
-    "followTheme": 30,
+    "followTheme": 33,
     "newappUnresolved": 0,
-    "newappFlatWithSurface": 4
+    "newappFlatWithSurface": 3
   },
   "newappTokens": [
     {
@@ -146,24 +146,6 @@
       "sameAsSurfaceDark": false
     },
     {
-      "token": "--dsw-alias-button-primary-fill",
-      "resolves": true,
-      "followTheme": true,
-      "light": "rgb(15, 17, 21)",
-      "dark": "rgb(249, 250, 251)",
-      "sameAsSurfaceLight": false,
-      "sameAsSurfaceDark": false
-    },
-    {
-      "token": "--dsw-alias-button-primary-hover",
-      "resolves": true,
-      "followTheme": true,
-      "light": "rgb(67, 69, 74)",
-      "dark": "rgb(235, 238, 242)",
-      "sameAsSurfaceLight": false,
-      "sameAsSurfaceDark": false
-    },
-    {
       "token": "--dsw-alias-interactive-bg-hover",
       "resolves": true,
       "followTheme": true,
@@ -188,15 +170,6 @@
       "light": "rgb(15, 17, 21)",
       "dark": "rgb(249, 250, 251)",
       "sameAsSurfaceLight": false,
-      "sameAsSurfaceDark": false
-    },
-    {
-      "token": "--dsw-alias-label-primary-foreground",
-      "resolves": true,
-      "followTheme": true,
-      "light": "rgb(255, 255, 255)",
-      "dark": "rgb(15, 17, 21)",
-      "sameAsSurfaceLight": true,
       "sameAsSurfaceDark": false
     },
     {
@@ -232,6 +205,33 @@
       "followTheme": true,
       "light": "rgb(230, 250, 237)",
       "dark": "rgb(35, 60, 44)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-state-warn-primary",
+      "resolves": true,
+      "followTheme": false,
+      "light": "rgb(245, 158, 11)",
+      "dark": "rgb(245, 158, 11)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-alias-state-warn-tertiary",
+      "resolves": true,
+      "followTheme": true,
+      "light": "rgb(254, 245, 231)",
+      "dark": "rgb(39, 36, 31)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
+      "token": "--dsw-font-base-strong-16",
+      "resolves": true,
+      "followTheme": false,
+      "light": "rgba(0, 0, 0, 0)",
+      "dark": "rgba(0, 0, 0, 0)",
       "sameAsSurfaceLight": false,
       "sameAsSurfaceDark": false
     },
@@ -308,6 +308,15 @@
       "sameAsSurfaceDark": false
     },
     {
+      "token": "--dsw-static-amber-900",
+      "resolves": true,
+      "followTheme": false,
+      "light": "rgb(39, 36, 31)",
+      "dark": "rgb(39, 36, 31)",
+      "sameAsSurfaceLight": false,
+      "sameAsSurfaceDark": false
+    },
+    {
       "token": "--dsw-static-neutral-bluish-00",
       "resolves": true,
       "followTheme": false,
@@ -325,11 +334,6 @@
     },
     {
       "token": "--dsw-alias-button-elevated-fill",
-      "sameAsSurfaceLight": true,
-      "sameAsSurfaceDark": false
-    },
-    {
-      "token": "--dsw-alias-label-primary-foreground",
       "sameAsSurfaceLight": true,
       "sameAsSurfaceDark": false
     },

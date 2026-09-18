@@ -39,6 +39,7 @@ import { execFileSync } from 'node:child_process'
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { stripComments } from '../lib/strip-comments.mjs'
+import { appNodeModules } from '../lib/app-resources.mjs'
 
 /**
  * 平台 token 的命名空间。
@@ -88,13 +89,24 @@ function isCompleteToken(token) {
   return new RegExp(`^${NAMESPACE}[a-z0-9]+(?:-[a-z0-9]+)+$`).test(token)
 }
 
-/** 递归列出目录下的文本文件（跳过 node_modules / lib / build / dist）。 */
-function walk(dir, out = []) {
+/** 扫源码目录时跳过的子目录：`lib` 是构建产物，不是源头。 */
+const SKIP_UNDER_SRC = new Set(['node_modules', 'lib', 'build', 'dist'])
+
+/**
+ * 扫 `lib/` 作为源头时跳过的子目录。
+ *
+ * 这里**不能**再跳 `lib` 自己——否则本函数对「lib 即源头」的包恒返回空，
+ * 正是它要修的那个形态（跳过 `lib` 在 `src/` 语境下是对的，换个语境就成了盲区）。
+ */
+const SKIP_UNDER_LIB = new Set(['node_modules', 'build', 'dist'])
+
+/** 递归列出目录下的文本文件。 */
+function walk(dir, out = [], skip = SKIP_UNDER_SRC) {
   if (!existsSync(dir)) return out
   for (const name of readdirSync(dir)) {
-    if (name === 'node_modules' || name === 'lib' || name === 'build' || name === 'dist') continue
+    if (skip.has(name)) continue
     const full = join(dir, name)
-    if (statSync(full).isDirectory()) walk(full, out)
+    if (statSync(full).isDirectory()) walk(full, out, skip)
     else if (/\.(ts|tsx|js|mjs|cjs|css)$/.test(name)) out.push(full)
   }
   return out
@@ -102,6 +114,23 @@ function walk(dir, out = []) {
 
 /**
  * 受管包引用到的全部 token → 引用它的文件清单。
+ *
+ * ## 射程为什么对「无 src 的包」落到 lib/
+ *
+ * 本项原先只扫 `packages/<组>/<包>/src/`。对有 TypeScript 源的包这是对的
+ * （`lib/` 是构建产物，扫它等于把同一处引用数两遍）。但本仓库有一批**纯 JS 包**：
+ * 没有 `src/`，`lib/client.js` 就是**源头**。对它们 `walk(srcDir)` 目录不存在、
+ * 静默返回空，于是**整个包一条引用都扫不到**——射程为空，读数上却与「全合规」同形。
+ *
+ * 2026-09-18 实测该盲区的代价：14 个无 `src` 的包里 5 个正在引用平台 token，
+ * 其中 3 个是**幻觉 token**（`--dsh-layer-drawer`、`--dsw-alias-label-on-accent`、
+ * `--dsw-alias-state-warning-primary`，后者是 `-warn-` 的错别字）。
+ * 它们全都写了字面兜底，所以页面上**看不出问题**，只是那些元素不随主题变化——
+ * 与基线的 7 条旧违规是同一个失效方式（总账 P-02 的「静默兜底」）。
+ *
+ * 所以射程按包的**实际形态**分流：有 `src/` 扫 `src/`，没有则扫 `lib/`。
+ * 两个分支都保留目录跳过规则，且 `lib/` 分支不再跳 `lib` 自己。
+ *
  * @param repoRoot 仓库根
  * @returns {Map<string, string[]>} token → 仓库相对路径列表
  */
@@ -113,8 +142,12 @@ export function collectReferencedTokens(repoRoot) {
     const groupDir = join(packs, group)
     if (!statSync(groupDir).isDirectory()) continue
     for (const pkg of readdirSync(groupDir)) {
-      const srcDir = join(groupDir, pkg, 'src')
-      for (const file of walk(srcDir)) {
+      const pkgDir = join(groupDir, pkg)
+      const srcDir = join(pkgDir, 'src')
+      const files = existsSync(srcDir)
+        ? walk(srcDir)
+        : walk(join(pkgDir, 'lib'), [], SKIP_UNDER_LIB)
+      for (const file of files) {
         const text = stripComments(readFileSync(file, 'utf8'))
         for (const match of text.matchAll(TOKEN_IN_VAR)) {
           const token = match[1]
@@ -136,7 +169,8 @@ export function collectReferencedTokens(repoRoot) {
  * @returns {Set<string>} 已定义 token
  */
 export function collectDefinedTokens(appDir) {
-  const official = join(appDir, 'Contents', 'Resources', 'app.asar.unpacked', 'node_modules', '@deepseek-ai')
+  const modules = appNodeModules(appDir)
+  const official = modules === null ? '' : join(modules, '@deepseek-ai')
   if (!existsSync(official)) return new Set()
   let output = ''
   try {
@@ -250,12 +284,26 @@ export function collectLocallyScopedTokens(repoRoot, referenced, deps = {}) {
 }
 
 /**
- * 缺省的文件枚举：某包 `src/` 下的候选源文件（仓库相对路径）。
+ * 缺省的文件枚举：某包的**源头**候选文件（仓库相对路径）。
+ *
+ * 射程与 `collectReferencedTokens` **必须对齐**：那边按包的实际形态分流（有 `src/`
+ * 扫 `src/`，没有则扫 `lib/`），这边如果一律只扫 `src/`，就会出现「引用被收下、
+ * 声明却不被看见」的不对称——一个无 `src` 的包在 `lib/` 里声明了局部变量又在同处
+ * 引用它（`dsh-my-quotes/lib/client.js` 的 `--dsh-scrollbar-thumb` 就是这个形状），
+ * 会被判成幻觉 token。那是**假红**，而假红的长相与真缺陷一模一样（P-02）。
+ *
  * @param repoRoot 仓库根
  * @returns {(packageDir: string) => string[]} 枚举函数
  */
 function defaultListSourceFiles(repoRoot) {
-  return (packageDir) => walk(join(repoRoot, packageDir, 'src')).map((abs) => abs.slice(repoRoot.length + 1))
+  return (packageDir) => {
+    const pkgDir = join(repoRoot, packageDir)
+    const srcDir = join(pkgDir, 'src')
+    const files = existsSync(srcDir)
+      ? walk(srcDir)
+      : walk(join(pkgDir, 'lib'), [], SKIP_UNDER_LIB)
+    return files.map((abs) => abs.slice(repoRoot.length + 1))
+  }
 }
 
 /**
@@ -267,7 +315,8 @@ function defaultListSourceFiles(repoRoot) {
  * @returns {{passed: boolean, violations: string[], note?: string}}
  */
 export function checkThemeTokens({ repoRoot, appDir, baseline }) {
-  const official = join(appDir, 'Contents', 'Resources', 'app.asar.unpacked', 'node_modules', '@deepseek-ai')
+  const modules = appNodeModules(appDir)
+  const official = modules === null ? '' : join(modules, '@deepseek-ai')
   if (!existsSync(official)) {
     // 与 patch-anchors 同一语义：环境不存在时**跳过**（`skipped`），不假绿也不假红。
     // 只报 `passed: true` 是不够的：空射程会被读成「全部合规」，而本项实际一个 token

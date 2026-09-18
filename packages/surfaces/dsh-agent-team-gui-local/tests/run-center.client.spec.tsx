@@ -418,7 +418,7 @@ describe('Team Run Center', () => {
       members: base.members.map(({ usage: _usage, ...member }) => ({ ...member, output: [] })),
     }
     const shellView = vi.fn()
-    render(<button type="button" onClick={shellView}>小队运行</button>)
+    render(<button id="agent-team-runs-tab" type="button" onClick={shellView}>小队运行</button>)
     const controller = new AgentTeamController(async <T,>(endpoint: string, payload: unknown) => {
       calls.push([endpoint, payload])
       if (endpoint === 'run/list') return { runs: [live] } as T
@@ -431,8 +431,15 @@ describe('Team Run Center', () => {
     expect(dock).toHaveTextContent('部分计量')
     dock.focus(); fireEvent.keyDown(dock, { key: 'Enter' }); fireEvent.click(dock)
     expect(dock).toHaveAttribute('aria-expanded', 'true')
+    expect(dock).toHaveAttribute('aria-controls')
+    const panel = screen.getByRole('dialog', { name: /查看运行: Delivery/ })
+    fireEvent.keyDown(panel, { key: 'Escape' })
+    expect(dock).toHaveAttribute('aria-expanded', 'false')
+    expect(document.activeElement).toBe(dock)
+    fireEvent.click(dock)
     fireEvent.click(screen.getByRole('button', { name: '查看运行' }))
     expect(shellView).toHaveBeenCalledOnce()
+    fireEvent.click(dock)
     fireEvent.click(screen.getByRole('button', { name: '停止运行' }))
     await waitFor(() => { expect(calls).toContainEqual(['run/cancel', { id: 'run-1' }]) })
   })

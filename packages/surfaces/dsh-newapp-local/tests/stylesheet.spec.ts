@@ -228,3 +228,44 @@ describe('matrix layout (M3)', () => {
     expect(missing, 'class names the components ask for but the stylesheet lacks').toEqual([])
   })
 })
+
+describe('Codex drawer visual contract (B4-UI-405A)', () => {
+  function block(selector: string): string {
+    const start = code.indexOf(`${selector} {`)
+    expect(start, `missing ${selector} block`).toBeGreaterThanOrEqual(0)
+    return code.slice(start, code.indexOf('}', start) + 1)
+  }
+
+  it('keeps drawer actions on one 32px hit-target baseline with a shared focus ring', () => {
+    const controls = block('.ghost,\n.close,\n.primary')
+    expect(controls).toContain('box-sizing: border-box')
+    expect(controls).toContain('min-height: 32px')
+    expect(block('.close')).toMatch(/width:\s*32px[\s\S]*height:\s*32px/)
+    expect(code).toMatch(
+      /\.ghost:focus-visible,\s*\.close:focus-visible,\s*\.primary:focus-visible\s*\{[\s\S]*outline:\s*2px solid var\(--lute-brand\)[\s\S]*outline-offset:\s*2px/,
+    )
+  })
+
+  it('keeps product and system cards quiet, while retaining semantic state styling', () => {
+    expect(block('.card')).not.toContain('box-shadow')
+    expect(block('.sysCard')).not.toContain('box-shadow')
+    expect(block('.sysIcon')).not.toContain('box-shadow')
+    expect(block('.sysKind')).not.toContain('box-shadow')
+    expect(block('.sysRole')).not.toContain('box-shadow')
+    expect(block('.sysCard')).toContain('border-radius: 10px')
+    expect(block('.state')).toContain('label-secondary')
+    expect(block('.stateError')).toContain('state-error-primary')
+    expect(block('.primary:disabled')).toContain('cursor: not-allowed')
+    expect(block('.sysCard:disabled')).toContain('opacity: 0.6')
+  })
+
+  it('allows status copy and both grids to reflow on narrow drawers', () => {
+    expect(block('.panel')).toContain('box-sizing: border-box')
+    const mobile = code.slice(code.indexOf('@media (max-width: 700px)'))
+    expect(mobile).toMatch(/\.panel\s*\{[\s\S]*width:\s*100vw[\s\S]*max-width:\s*100vw/)
+    expect(mobile).toMatch(/\.titleRow\s*\{[\s\S]*flex-wrap:\s*wrap/)
+    expect(mobile).toMatch(/\.sectionHead\s*\{[\s\S]*flex-wrap:\s*wrap/)
+    expect(mobile).toMatch(/\.grid,\s*\.sysGrid\s*\{[\s\S]*grid-template-columns:\s*minmax\(0,\s*1fr\)/)
+    expect(block('.stateError')).toContain('flex-wrap: wrap')
+  })
+})

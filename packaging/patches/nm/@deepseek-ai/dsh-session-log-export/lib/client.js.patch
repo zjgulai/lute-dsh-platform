@@ -1,24 +1,6 @@
 --- a/@deepseek-ai/dsh-session-log-export/lib/client.js
 +++ b/@deepseek-ai/dsh-session-log-export/lib/client.js
-@@ -206,7 +206,7 @@
- 		const NS = "session-log-download";
- 		/** Simplified-Chinese Session export strings. */
- 		const zh = {
--			"header.action": "Session 日志",
-+			"header.action": "log",
- 			"dialog.preparingTitle": "正在导出 Session",
- 			"dialog.preparingDescription": "正在准备包含当前 Session、子 Session 和附件的 ZIP 文件。",
- 			"dialog.successTitle": "Session 导出已开始下载",
-@@ -217,7 +217,7 @@
- 		};
- 		/** English Session export strings. */
- 		const en = {
--			"header.action": "Session log",
-+			"header.action": "log",
- 			"dialog.preparingTitle": "Exporting Session",
- 			"dialog.preparingDescription": "Preparing a ZIP containing this Session, its sub-Sessions, and attachments.",
- 			"dialog.successTitle": "Session download started",
-@@ -247,6 +247,72 @@
+@@ -271,6 +271,72 @@
  			ctx.on("command/executed", (sessionId, commandName, result) => {
  				if (commandName === "export" && result.kind === "success") controller.download(sessionId);
  			});

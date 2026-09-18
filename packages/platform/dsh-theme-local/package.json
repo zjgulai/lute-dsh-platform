@@ -1,7 +1,7 @@
 {
   "name": "dsh-theme",
   "description": "Live theme editor for DeepSeek Harness with curated palettes and typography controls.",
-  "version": "0.1.0-local.1",
+  "version": "0.2.0-local.1",
   "luteOrigin": "self",
   "luteOwner": "lute",
   "lutePublish": false,

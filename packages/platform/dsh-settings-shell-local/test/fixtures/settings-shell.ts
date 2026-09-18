@@ -43,7 +43,7 @@ export interface FixtureOptions {
   readonly sectionIds?: readonly string[];
   readonly activeIndex?: number;
   /** 破坏结构的方式，用来驱动 drift 分支。 */
-  readonly broken?: "no-nav" | "split-parents";
+  readonly broken?: "no-nav" | "split-parents" | "no-current" | "duplicate-current";
 }
 
 /** 官方形状的设置面板；页面上可再有别的 dialog 以模拟误伤场景。 */
@@ -62,11 +62,13 @@ export function settingsShellFixture(options: FixtureOptions = {}): Document {
   const panel = doc.createElement("div");
   panel.setAttribute("role", "dialog");
   panel.setAttribute("aria-modal", "true");
+  panel.setAttribute("aria-labelledby", "settings-shell-fixture-title");
 
   if (options.broken !== "no-nav") {
     const nav = doc.createElement("nav");
 
     const title = doc.createElement("div");
+    title.id = "settings-shell-fixture-title";
     title.textContent = "设置";
     nav.appendChild(title);
 
@@ -74,7 +76,11 @@ export function settingsShellFixture(options: FixtureOptions = {}): Document {
     ids.forEach((id, index) => {
       const button = doc.createElement("button");
       button.type = "button";
-      if (index === (options.activeIndex ?? 0)) button.setAttribute("aria-current", "true");
+      const activeIndex = options.activeIndex ?? 0;
+      const isCurrent = options.broken === "duplicate-current"
+        ? index < 2
+        : options.broken !== "no-current" && index === activeIndex;
+      if (isCurrent) button.setAttribute("aria-current", "true");
       const label = doc.createElement("span");
       label.textContent = id;
       button.appendChild(label);

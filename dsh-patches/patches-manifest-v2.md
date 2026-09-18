@@ -1,5 +1,6 @@
-# DSH Desktop 2.0.5 补丁清单 v2（Patch Manifest v2 · LUTE 2.0.0 权威登记簿）
+# DSH Desktop 2.0.5 补丁清单 v2（Patch Manifest v2 · **历史归档，非权威**）
 
+> ⚠️ 2026-09-17 起被 [patches-manifest-v3.md](patches-manifest-v3.md)（2.0.10/0.1.5-rc.2 锚集）取代；本文件只作 2.0.5 时代回滚对照。
 > 基线：官方 DSH.Desktop-2.0.5-universal.dmg 解包 → packaging/staging/2.0.0/app
 > 校验：`packaging/verify-patches-v2.sh`（38 锚点，2026-09-13 ALL VERIFIED，含 G1/G2 运行时守卫）
 > v1（2.0.4）见 [patches-manifest.md](patches-manifest.md)——**已标注为历史、非权威**；本清单是 2.0.0 的唯一权威登记簿

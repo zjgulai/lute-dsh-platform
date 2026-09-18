@@ -155,12 +155,12 @@
 
 ### TODO
 
-- [ ] 固化当前 CSS 会命中所有 modal 的 Red，并加入至少一个结构相似的非 Settings `[role=dialog][aria-modal=true]` 负例。
-- [ ] 只给“已被 Settings 解析器成功解析”的面板根节点添加 Shell 自有稳定 marker，例如 `data-dsh-settings-shell-root`；不得仅凭通用 modal 属性猜测。
-- [ ] JS 解析、marker 生命周期和 CSS 命中使用同一契约；解析失败保持官方原样并自报，关闭、替换或 parser drift 时移除 marker。
-- [ ] 所有 Shell 布局、导航和按钮规则都以前述 marker 为最外层作用域；删除对任意 modal、任意直接子 `nav` 和任意通用按钮的全局副作用。
+- [x] 固化当前 CSS 会命中所有 modal 的 Red，并加入至少一个结构相似的非 Settings `[role=dialog][aria-modal=true]` 负例。
+- [x] 只给“已被 Settings 解析器成功解析”的面板根节点添加 Shell 自有稳定 marker，例如 `data-dsh-settings-shell-root`；不得仅凭通用 modal 属性猜测。
+- [x] JS 解析、marker 生命周期和 CSS 命中使用同一契约；解析失败保持官方原样并自报，关闭、替换或 parser drift 时移除 marker。
+- [x] 所有 Shell 布局、导航和按钮规则都以前述 marker 为最外层作用域；删除对任意 modal、任意直接子 `nav` 和任意通用按钮的全局副作用。
 - [ ] 覆盖滚动、选中、焦点、Esc、关闭后焦点恢复。
-- [ ] 分组 registry 不可读或数量不符时保持 fail-safe，不猜顺序。
+- [x] 分组 registry 不可读或数量不符时保持 fail-safe，不猜顺序。
 - [ ] 将 QG-003、REL-001 的 clean checkout/入口证据链接到本卡，产品侧只验证“干净安装能打开 Settings”，不另写一份 release 结论。
 - [ ] 重新执行 unit、真实 Chrome 几何、运行中 DSH 和视觉验收，并保存本次候选截图；历史截图或 Note 不代替本次结果。
 
@@ -168,11 +168,11 @@
 
 - [ ] 18 个设置入口逐项可达。
 - [ ] 1280×720、1580×960、200% zoom 下导航和正文可用。
-- [ ] DOM fixture 证明只有成功解析的 Settings 面板获得 marker；解析失败、面板替换和 dispose 后 marker 为 0。
-- [ ] 非 Settings modal 负例证明 onboarding、确认框、New App、Role Matrix、Skill Center dialog 的尺寸、直接子 `nav` 和按钮 computed style 不被 Shell CSS 改写。
+- [x] DOM fixture 证明只有成功解析的 Settings 面板获得 marker；解析失败、面板替换和 dispose 后 marker 为 0。
+- [x] 非 Settings modal 负例证明 onboarding、确认框、New App、Role Matrix、Skill Center dialog 的尺寸、直接子 `nav` 和按钮 computed style 不被 Shell CSS 改写。
 - [ ] clean checkout 中入口存在性与可加载性由 QG-003、REL-001 验证；本卡引用其证据 ID，且测试不得读取开发机被忽略的构建产物。
 - [ ] 纯键盘路径、焦点恢复、reduced-motion 测试通过。
-- [ ] parser drift 会自报而非静默注入。
+- [x] parser drift 会自报而非静默注入。
 
 ### 人工 / live / a11y 验收
 
@@ -197,6 +197,19 @@
 - 任一非 Settings modal 的几何、导航或按钮 computed style 发生变化即阻塞候选，不以“仍可点击”降级通过。
 - clean checkout 入口缺失或加载失败归 QG-003/REL-001 阻塞；本卡不得以本机存在的 ignored/stale `lib/` 证明用户可用。
 - live/a11y 验收未覆盖当前候选版本时，状态只能是未验证，不能沿用历史截图或历史 Note。
+
+### 2026-09-16 本地实施记录
+
+- 状态：`local scope contract complete; live/a11y/clean-install unverified`。正式决策见
+  [ADR-0098](../../../../docs/adr/ADR-0098.md)。
+- Red：先增加 parser/marker/registry/关闭/替换负例，旧实现稳定出现 7 个失败；实现后 package
+  suite 48/48、typecheck、bundle validator 通过。
+- parser 现在要求唯一 Settings 候选、direct nav、`aria-labelledby` 直接标题、共同按钮父容器和唯一
+  current；CSS 每条 selector 都由 `data-dsh-settings-shell-root` 起步。
+- 五类非 Settings fixture 的 panel width、nav overflow 与 button position 保持原值；关闭、替换、
+  drift、异常、registry 降级和 dispose 均回收不再可信的自有 DOM。
+- 未完成项继续保留：真实 Chrome/DSH 几何、1280×720/1580×960/200% zoom、纯键盘、焦点恢复、
+  reduced-motion、VoiceOver、明暗主题截图、clean checkout/干净安装。QG-003/REL-001 仍是入口与产物前置。
 
 ## PROD-003 · 统一 Onboarding 与健康中心
 

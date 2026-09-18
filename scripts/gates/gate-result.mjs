@@ -146,6 +146,19 @@ export function normalizeGateResult(raw, { name = 'unnamed-check' } = {}) {
   }
 
   if ('status' in raw) {
+    // 混用两份合同的对象必须先被点名，而不是被 `pickCanonicalResult` 悄悄丢掉字段。
+    //
+    // 实测（2026-09-17）：一份同时带 `status` 与 `passed` 的读数，`pickCanonicalResult`
+    // 只挑 canonical 字段 → 挑出来的 `skipped` 等字段在源对象里可能是 legacy 的布尔值
+    // 或干脆缺失 → 报「result schema invalid」，**完全不提 `passed` 这个真正的原因**。
+    // 读的人会去查 schema，而问题其实是他混用了两份合同。
+    const legacyFields = ['passed', 'ok', 'skipped_reason'].filter((field) => field in raw)
+    if (legacyFields.length > 0) {
+      return invalidResult(name, [
+        `canonical result must not mix legacy fields: ${legacyFields.join(', ')}`
+          + '（一份读数只能属于一份合同：要么 canonical(status/expected/checked/skipped/failed/typedSkips/reason)，要么 legacy(passed/skipped 布尔)）',
+      ])
+    }
     const canonical = pickCanonicalResult(raw)
     const validation = validateGateResult(canonical)
     return validation.valid ? canonical : invalidResult(name, validation.errors)
@@ -158,11 +171,15 @@ export function normalizeGateResult(raw, { name = 'unnamed-check' } = {}) {
  * Run synchronous checker functions and return normalized results plus a
  * summary. No filesystem or process state is touched here.
  *
+ * `notCovered` 由调用方传入（只有 `gate.mjs` 知道完整的 `CHECKS` 注册表）：它是
+ * **本次模式没有跑到的校验项**。它不参与判据、不改变退出码，只进摘要的读数——
+ * 「分母 = 这个模式看得见的全部校验项」而不是「这次恰好跑了哪些」（ADR-0102）。
+ *
  * @param {Array<{name: string, run: () => unknown, remediation?: string}>} checks
- * @param {{requireNoSkip?: boolean}} [options]
+ * @param {{requireNoSkip?: boolean, notCovered?: string[]}} [options]
  * @returns {{results: Array<GateResult & {name: string, remediation?: string}>, summary: ReturnType<typeof summarizeGateResults>, exitCode: number}}
  */
-export function runGateChecks(checks, { requireNoSkip = false } = {}) {
+export function runGateChecks(checks, { requireNoSkip = false, notCovered = [] } = {}) {
   const safeChecks = Array.isArray(checks) ? checks : []
   const results = safeChecks.map((check, index) => {
     const name = typeof check?.name === 'string' && check.name.trim() !== '' ? check.name : `unnamed-check-${index + 1}`
@@ -183,7 +200,7 @@ export function runGateChecks(checks, { requireNoSkip = false } = {}) {
       ...(typeof check?.remediation === 'string' ? { remediation: check.remediation } : {}),
     }
   })
-  const summary = summarizeGateResults(results, { requireNoSkip })
+  const summary = summarizeGateResults(results, { requireNoSkip, notCovered })
   return { results, summary, exitCode: summary.exitCode }
 }
 
@@ -192,9 +209,9 @@ export function runGateChecks(checks, { requireNoSkip = false } = {}) {
  * function is also fail-closed when called outside runGateChecks().
  *
  * @param {unknown[]} results
- * @param {{requireNoSkip?: boolean}} [options]
+ * @param {{requireNoSkip?: boolean, notCovered?: string[]}} [options]
  */
-export function summarizeGateResults(results, { requireNoSkip = false } = {}) {
+export function summarizeGateResults(results, { requireNoSkip = false, notCovered = [] } = {}) {
   const normalized = (Array.isArray(results) ? results : []).map((result, index) => {
     const name = isRecord(result) && typeof result.name === 'string' ? result.name : `summary-result-${index + 1}`
     return normalizeGateResult(result, { name })
@@ -206,6 +223,11 @@ export function summarizeGateResults(results, { requireNoSkip = false } = {}) {
   const strictSkipFailure = requireNoSkip && skipped > 0
   const exitCode = failed > 0 || strictSkipFailure || empty ? 1 : 0
   const status = exitCode !== 0 ? 'fail' : skipped > 0 ? 'skip' : 'pass'
+
+  // 未被本模式覆盖的校验项。它只是读数、**不参与 exitCode**：「这次没跑它」与
+  // 「它失败了」是两件事，把两者压进同一个退出码，正是 QG-001 收掉的那种坍缩。
+  const uncovered = (Array.isArray(notCovered) ? notCovered : [])
+    .filter((name) => typeof name === 'string' && name.trim() !== '')
 
   return {
     status,
@@ -220,9 +242,76 @@ export function summarizeGateResults(results, { requireNoSkip = false } = {}) {
     failedObjects: sum(normalized, 'failed'),
     requireNoSkip,
     exitCode,
+    notCovered: uncovered,
     ...(empty ? { reason: 'no gate checks were supplied' } : {}),
     ...(strictSkipFailure ? { reason: 'requireNoSkip rejected one or more skipped checks' } : {}),
   }
+}
+
+/**
+ * 某个校验项在本次模式下**是否会被执行**。
+ *
+ * 未声明 `modes` = 所有模式都跑（`gate.mjs` 原来的 `!check.modes` 语义，原样保留）。
+ *
+ * @param {{modes?: string[]}} check
+ * @param {string} mode
+ * @returns {boolean}
+ */
+export function isCheckActive(check, mode) {
+  return !check?.modes || check.modes.includes(mode)
+}
+
+/**
+ * 本次模式**没有跑到**的校验项名字——激活谓词的**严格补集**。
+ *
+ * 为什么一定要写成补集、而不是重写一遍判断条件：两者一旦各写各的，就会出现
+ * 「既没跑、也没报未覆盖」或「跑了、又被报成未覆盖」的项，而**分母的守恒
+ * （`跑到的 + 未覆盖的 = 注册表全量`）恰恰是这条读数唯一的判据**（ADR-0102）。
+ * 补集由构造保证守恒，重复一遍判断条件则要靠两份代码永远同步——那是纪律，不是机制。
+ *
+ * 为什么这条逻辑住在这里、而不是写在 `gate.mjs` 里：`scripts/gate.mjs` 导入即执行
+ * `main()`，因此**住在里面的逻辑没有任何门禁测得到**——`scripts/gate.test.mjs` 那一族
+ * CLI 测试只挂在 `pnpm run test:gate` 上，不在 `pnpm run gate` 的射程内
+ * （2026-09-17 实测：83 个注册项里没有一条跑它）。挪到这里，才由 `gate-result-selftest` 守着。
+ *
+ * @param {Array<{name?: string, modes?: string[]}>} checks 注册表全量
+ * @param {string} mode 本次模式
+ * @returns {string[]} 未覆盖的校验项名（保持注册顺序）
+ */
+export function computeNotCovered(checks, mode) {
+  return (Array.isArray(checks) ? checks : [])
+    .filter((check) => !isCheckActive(check, mode))
+    .map((check) => check?.name)
+    .filter((name) => typeof name === 'string' && name.trim() !== '')
+}
+
+/**
+ * 注册表级自检：每个注册项都必须声明**非空** `remediation`，否则判红并点名。
+ *
+ * 为什么这条逻辑存在：判红文案点名「怎么修」是 quick/full 摘要的一部分
+ * （`gate.mjs` 打印 `→ remediation`），但没有任何机制要求新判据声明它——
+ * 第 87 条可以悄悄不写，摘要里静默少一行「怎么修」（P-08：用纪律守只有
+ * 机制能守住的东西）。`gate.mjs` 在 `CHECKS` 构造后、`main()` 之前调用本函数，
+ * 违规即启动失败，不依赖任何测试去跑它。
+ *
+ * 返回 `{ valid, errors }` 与 `validateGateResult` 同形：纯函数、不抛，
+ * 垃圾输入也判红（fail-closed），而不是静默通过。
+ *
+ * @param {unknown} checks 注册表全量
+ * @returns {{valid: boolean, errors: string[]}}
+ */
+export function assertRemediationDeclared(checks) {
+  if (!Array.isArray(checks)) {
+    return { valid: false, errors: ['checks must be an array'] }
+  }
+  const errors = []
+  checks.forEach((check, index) => {
+    const name = typeof check?.name === 'string' && check.name.trim() !== '' ? check.name : `unnamed-check-${index + 1}`
+    if (typeof check?.remediation !== 'string' || check.remediation.trim() === '') {
+      errors.push(`${name}: remediation must be a non-empty string`)
+    }
+  })
+  return { valid: errors.length === 0, errors }
 }
 
 /** @param {Record<string, unknown>} raw @returns {GateResult} */

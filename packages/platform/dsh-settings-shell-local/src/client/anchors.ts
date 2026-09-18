@@ -14,8 +14,11 @@
  * 绝不静默失效。
  */
 
-/** 设置面板：官方 shell 的 dialog 只有它内部直接挂 `<nav>`（onboarding 等对话框不会命中）。 */
+/** 设置面板的公开 modal 语义。这只是候选集，不是足够的 Settings 身份证据。 */
 const PANEL_SELECTOR = '[role="dialog"][aria-modal="true"]';
+
+/** 只有 parser 成功后才会出现的 CSS 根 marker。 */
+export const SHELL_ROOT_MARKER_ATTR = "data-dsh-settings-shell-root";
 
 /** 解析成功后的可操作节点。 */
 export interface SettingsShellDom {
@@ -68,13 +71,50 @@ function resolveNavList(nav: HTMLElement): { list?: HTMLElement; reason?: string
 /**
  * 解析选项。
  *
- * `sawShellBefore` 用来把「设置页此刻没开」与「设置面板结构变了」分开：
- * 页面上随时可能有别的 modal（onboarding、确认框），它们没有 `<nav>` 是**正常**的，
- * 一律报漂移会变成噪声、最终被无视。只有在**曾经成功解析过**设置面板之后，
- * 「dialog 还在但 nav 不见了」才判定为漂移。
+ * `previousPanel` 用节点身份把「Settings 已关闭」与「同一 panel 原地漂移」分开：
+ * 旧节点已离线后再打开普通 modal 是 absent；旧节点仍连在文档却不再匹配才是 drift。
+ * `sawShellBefore` 只为纯 parser 历史用例保留，运行时不使用它。
  */
 export interface ResolveOptions {
+  /** 上一次成功解析的具体 panel；用节点身份区分“关闭”与“原地漂移”。 */
+  readonly previousPanel?: HTMLElement | undefined;
+  /** 仅保留给源码级解析用例；运行时使用 `previousPanel` 而非永久布尔值。 */
   readonly sawShellBefore?: boolean;
+}
+
+type PanelCandidate =
+  | { readonly kind: "ignore" }
+  | { readonly kind: "invalid"; readonly reason: string }
+  | { readonly kind: "ok"; readonly dom: SettingsShellDom };
+
+/**
+ * 官方 Settings panel 不只是“modal 里有 nav”：`aria-labelledby` 必须指向
+ * nav 的直接标题节点，并且导航必须恰有一个当前项。这些都是官方
+ * `SettingsRoot` 的 ARIA/DOM 契约，不依赖本地化文案或 CSS-module 哈希。
+ */
+function parsePanel(panel: HTMLElement): PanelCandidate {
+  const nav = directNavChild(panel);
+  if (nav === undefined) return { kind: "ignore" };
+
+  const labelledBy = panel.getAttribute("aria-labelledby")?.trim();
+  if (!labelledBy) return { kind: "ignore" };
+  const title = Array.from(nav.querySelectorAll<HTMLElement>("[id]"))
+    .find((node) => node.id === labelledBy);
+  if (title === undefined || title.parentElement !== nav) return { kind: "ignore" };
+
+  const { list, reason } = resolveNavList(nav);
+  if (list === undefined) {
+    return { kind: "invalid", reason: reason ?? "unknown nav-list drift" };
+  }
+  const buttons = Array.from(list.querySelectorAll<HTMLButtonElement>("button"));
+  const current = buttons.filter((button) => button.getAttribute("aria-current") === "true");
+  if (current.length !== 1) {
+    return {
+      kind: "invalid",
+      reason: `settings nav must contain exactly one aria-current button; found ${current.length}`,
+    };
+  }
+  return { kind: "ok", dom: { panel, nav, navList: list, buttons } };
 }
 
 /**
@@ -88,16 +128,30 @@ export function resolveSettingsShell(
 ): SettingsShellResolution {
   const panels = Array.from(doc.querySelectorAll<HTMLElement>(PANEL_SELECTOR));
 
-  for (const panel of panels) {
-    const nav = directNavChild(panel);
-    if (nav === undefined) continue;
+  const parsed = panels.map(parsePanel);
+  const valid = parsed.filter(
+    (candidate): candidate is Extract<PanelCandidate, { kind: "ok" }> => candidate.kind === "ok",
+  );
+  const invalid = parsed.find(
+    (candidate): candidate is Extract<PanelCandidate, { kind: "invalid" }> =>
+      candidate.kind === "invalid",
+  );
 
-    const { list, reason } = resolveNavList(nav);
-    if (list === undefined) {
-      return { kind: "drift", reason: reason ?? "unknown nav-list drift" };
-    }
-    const buttons = Array.from(list.querySelectorAll<HTMLButtonElement>("button"));
-    return { kind: "ok", dom: { panel, nav, navList: list, buttons } };
+  if (valid.length > 1) {
+    return { kind: "drift", reason: `ambiguous settings panels: found ${valid.length}` };
+  }
+  const onlyValid = valid[0];
+  if (onlyValid !== undefined && valid.length === 1 && invalid === undefined) {
+    return { kind: "ok", dom: onlyValid.dom };
+  }
+  if (invalid !== undefined) return { kind: "drift", reason: invalid.reason };
+
+  const previous = options.previousPanel;
+  if (previous !== undefined && previous.isConnected) {
+    const reason = directNavChild(previous) === undefined
+      ? "settings panel lost its direct <nav> child"
+      : "previous settings panel no longer matches its semantic contract";
+    return { kind: "drift", reason };
   }
 
   // 有 dialog 但都没有直接子 nav。见过设置面板才算漂移，否则是「没打开」。

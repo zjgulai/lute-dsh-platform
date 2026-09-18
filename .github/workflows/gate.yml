@@ -90,10 +90,18 @@ jobs:
           fi
 
       - name: 门禁 quick
-        run: node scripts/gate.mjs --mode quick --json | tee gate-quick.json
+        run: |
+          # `pipefail` 不是装饰：`node … | tee out.json` 的退出码来自 `tee`（永远 0），
+          # 于是门禁判红而步骤判绿。2026-09-17 首跑就是这样"全绿"的——同一份日志里
+          # gate-quick.json 写着 `"status": "fail", "failed": 6`。本仓库把这类缺陷叫做
+          # 「仪器假绿」，判据 `ci-workflow-contract` 现在会拦住没有 pipefail 的管道。
+          set -o pipefail
+          node scripts/gate.mjs --mode quick --json | tee gate-quick.json
 
       - name: 见证：门禁没有改动被见证的仓库
-        run: node scripts/gate.mjs --attest scripts/gate.mjs --mode quick --json | tee attestation-quick.json
+        run: |
+          set -o pipefail
+          node scripts/gate.mjs --attest scripts/gate.mjs --mode quick --json | tee attestation-quick.json
 
       - name: 失败也留证据
         if: always()
@@ -144,10 +152,14 @@ jobs:
           fi
 
       - name: 门禁 full
-        run: node scripts/gate.mjs --mode full --json | tee gate-full.json
+        run: |
+          set -o pipefail
+          node scripts/gate.mjs --mode full --json | tee gate-full.json
 
       - name: 见证：门禁没有改动被见证的仓库
-        run: node scripts/gate.mjs --attest scripts/gate.mjs --mode full --json | tee attestation-full.json
+        run: |
+          set -o pipefail
+          node scripts/gate.mjs --attest scripts/gate.mjs --mode full --json | tee attestation-full.json
 
       - name: 失败也留证据
         if: always()

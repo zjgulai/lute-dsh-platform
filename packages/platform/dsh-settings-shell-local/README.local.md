@@ -17,8 +17,8 @@
 
 ## 分层：L1 不依赖任何服务
 
-- **L1 样式层**（`src/client/shell.css`）：尺寸、滚动、品牌色点缀。
-  纯 CSS 注入，`slots` 服务读不到也照样生效。
+- **L1 样式层**（`src/client/shell.css`）：尺寸、滚动、品牌色点缀。parser 成功后只消费
+  `data-dsh-settings-shell-root`；不依赖 `slots`，所以注册表读不到仍可生效。
 - **L2 分组层**（`src/client/index.tsx`）：读 `ctx.slots.entries("settings.section")`
   拿**真实注册表**，按登记表注入标题。
 
@@ -40,14 +40,16 @@ L2 的三条纪律：
 
 | 锚 | 选择器 |
 | --- | --- |
-| 面板 | `[role="dialog"][aria-modal="true"]`（且直接子元素含 `<nav>`） |
+| 面板候选 | `[role="dialog"][aria-modal="true"]`；单凭这两个通用属性绝不加样式 |
+| Settings 身份 | 直接 `<nav>` + `aria-labelledby` 指向 nav 直接标题 + 恰好一个 current + 唯一完整候选 |
 | 导航列 | 面板的直接 `<nav>` 子元素 |
 | 导航项 | `nav` 内 `button`；当前项带 `aria-current="true"` |
 | 列表容器 | 由按钮**反推**共同父元素（不写 `div:last-child` 这类结构猜法） |
+| CSS 作用域 | parser 成功后添加的 `[data-dsh-settings-shell-root]`；关闭/替换/drift/dispose 时回收 |
 
-ARIA 是给无障碍工具用的公开契约，上游重建不会动它；这比包路径锚还少依赖一层
-「模块文件名」。`scripts/validate-build.mjs` 里有反向自测：产物中一旦出现
-哈希形状的选择器即判红。
+ARIA 是给无障碍工具用的公开契约，比 CSS-module 哈希少依赖一层构建细节；它仍可能随
+上游语义变化，所以 parser 不唯一或失配时 fail-closed 并写 `drift:`。`scripts/validate-build.mjs`
+还会检查每一条 Shell CSS selector 都含 root marker，并拒绝哈希形状选择器。
 
 ## 三态诊断
 
@@ -61,8 +63,8 @@ ARIA 是给无障碍工具用的公开契约，上游重建不会动它；这比
 
 读法：`document.documentElement.dataset.dshSettingsShell`。
 
-「见过才判漂移」是刻意的：页面上随时可能有别的 modal（onboarding、确认框），
-它们没有 `<nav>` 是正常的，一律报漂移会让读数变成噪声、最终被无视。
+运行时只记上一次成功解析的**具体 panel 节点**：节点仍在线却失配才判 drift；节点已离线
+就是正常关闭，随后出现 onboarding、确认框等普通 modal 仍为 absent，不继承永久历史状态。
 
 ## 分组登记表
 
@@ -87,12 +89,16 @@ order 序列 `0,1,5,10,15,20,21,25,26,27,28,28,29,40,60,98,100,100`）：
 
 ## 品牌色：只做点缀
 
-品牌绿 `#58B848` 在原色状态下的对比度：深色面板（实测 `#342f30`）上 5.24:1，
-但浅色面板（`#fff`）上只有 2.51:1 —— **不达标**。因此浅色模式用加深变体
-`#3d8a33`（白底 4.30:1），深色模式用原色。
+品牌色从 `dsh-theme-local` 的 `--dsw-alias-state-business-primary` 语义 token 读取；
+没有主题 token 时才回退到本包的浅色可访问变体 `#3d8a33`。当前默认主题提供浅色
+`#347A2F`、深色 `#58B848`，并由主题层负责三态（浅色/深色/系统）切换。
 
 用法克制：当前项的**左侧指示条** + 键盘焦点环。不铺大面积底色 ——
 那会同时破坏浅色可读性与 14 个第三方设置页的既有观感。
+
+面板、侧栏、边界、文字和 hover 状态全部消费主题语义 token；设置内容保持「固定分组导航
++ 单一滚动内容区」结构。过渡默认 180ms，并在 `prefers-reduced-motion: reduce` 下关闭平滑滚动
+与长过渡。
 
 ## 与第三方插件共存
 
@@ -132,19 +138,26 @@ order 序列 `0,1,5,10,15,20,21,25,26,27,28,28,29,40,60,98,100,100`）：
 
 ```
 pnpm run accept:settings-shell          # 加 --out <dir> 落一份 JSON 报告
+# 严格发布前路径：在上面命令末尾加 --require-no-skip
 ```
 
-退出码：`0` 已生效且达标 · `1` 已生效但判据未达标 · `2` 前置/仪器不可用（**不产出判决**）·
-**`3` = 实例早于本包，需要重启才能判决**。重启前它会给出基线读数（面板 800 CSS px、
-`滚动区域 无`、`导航独立滚动=false`）并退出 3 —— 那是正常读数，不是失败。
+退出码：`0` 已生效且达标 · `1` 已生效但判据未达标 · `2` 前置/仪器 typed unavailable
+（**不产出判决**）· **`3` = 实例早于本包，需要重启才能判决**。`--require-no-skip`
+把 typed unavailable 升为 exit 1。重启前如读到官方 800 CSS px、无分组、导航不独立滚动，
+会退出 3；那是“当前实例未装载候选”的真实判决，不是仪器失败。
 
 判据（**都取自无障碍几何，不依赖肉眼**）：
 
-- **L1**：设置对话框里出现滚动区域（`AXScrollArea`），**且**对末项执行
-  `AXScrollToVisible` 后**只有导轨位移、右侧内容区不动**。
-  基线里两者会**一起**位移（滚的是 panel 的 `overflow:hidden`，程序滚得动、用户滚不动）。
-- **L2**：面板 960 CSS px（官方 800）；左栏出现
+- **独立校准**：scale 只取 upstream Settings 的 nav 宽 188 CSS px 与 close 28×28 CSS px
+  （两个 AX 节点、三个信号）；目标导航按钮不参与 scale。目标按钮在校准后必须为 40±2 CSS px。
+- **L1**：对末项执行 `AXScrollToVisible` 后**只有导轨位移、右侧内容区不动**，并且末项
+  滚到底后取得至少目标全高的 80%。基线里两列会一起位移，且末项始终只有约 1px。
+- **L2**：面板命中 `min(960px, viewport - 48px)`（官方对照是
+  `min(800px, viewport - 48px)`）；左栏出现
   `通用 / 智能体 / 技能与能力 / 扩展 / 界面与个人` 五个分组标题。
+
+锚缺失/冲突、取错窗口、非正尺寸、权限不足或 timeout 都写入结构化 `typedSkips`，不回退到
+目标按钮自校准。当前视口使 960/800 两档容差带重叠时同样拒绝判决。
 
 **不要用「最后一项底边落在面板内」当判据**：本包生效后导航是**可滚**的，
 静止时末项本来就会被裁在滚动区外 —— 那条判据在两态下都会红，射程为零。
@@ -162,7 +175,8 @@ pnpm run accept:settings-shell          # 加 --out <dir> 落一份 JSON 报告
 
 | 锚点 | 复查方法 |
 | --- | --- |
-| `[role="dialog"][aria-modal="true"]` + 直接子 `<nav>` | 打开设置页，读 `dataset.dshSettingsShell`；`drift:` 前缀即结构已变 |
-| `aria-current="true"` 标当前项 | 同上 |
+| modal + 直接 nav + `aria-labelledby` 直接标题 | 打开设置页，读 `dataset.dshSettingsShell`；`drift:` 前缀即结构已变 |
+| 恰好一个 `aria-current="true"` 标当前项 | 同上；0 个或多个都不加 root marker |
+| upstream nav 188px / close 28×28px | 跑 probe `--self-test`；pin 升级时复核 `SettingsRoot.module.css`，不得用目标按钮回退校准 |
 | `settings.section` 契约仍只投影 `id`/`order`/`label` | 读 `@deepseek-ai/dsh-client-ui-settings` 的 `contract/slots.d.ts` |
 | 第三方是否新增导航注入 | 重跑 `groups.ts` 的实测清单核对 |

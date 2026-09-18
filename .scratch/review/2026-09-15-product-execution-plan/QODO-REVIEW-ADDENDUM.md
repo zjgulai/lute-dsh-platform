@@ -87,17 +87,18 @@ Qodo 审查使用了以下时点事实：
 ### R02 / R06 / R10：Settings 实现、产物与验收仪器
 
 - [ ] 用户先完成 `DEC-010`，选择 Settings 的 artifact policy 和正式发布权威输入。
-- [ ] `PROD-UX-001` 把 CSS 锚收窄到已确认的 Settings 容器，保留非 Settings dialog 负控。
+- [x] `PROD-UX-001` 把 CSS 锚收窄到已确认的 Settings 容器，保留非 Settings dialog 负控。
 - [ ] `QG-003` 和 `REL-001` 在 exact commit 的 clean checkout 中构建、解析 `main`/`exports`/`files` 和 DSH entry；开发机 ignored `lib` 不能作唯一证据。
-- [ ] `QG-012` 使用不包含目标按钮尺寸的独立 AX/CSS 锚；目标尺寸 mutation 必须稳定打红。
-- [ ] 代码修复、build contract 和验收仪器分别出证据，避免用同一假设同时产生实现和判据。
+- [x] `QG-012` 使用不包含目标按钮尺寸的独立 AX/CSS 锚；目标尺寸 mutation 必须稳定打红。
+- [x] 代码修复与验收仪器已分别给出 Red/Green，且 probe mutation 位于 QG-006A owned fixture。
+- [ ] build contract 仍由 `QG-003`/`REL-001` 在 clean checkout 独立出证据，不能用本批 package build 代替。
 
 ### R09：live-presets 射程
 
 - [x] `QG-002` 使用结构化 row 解析枚举插件，不再用模块说明符前缀猜射程。
 - [x] bare/scoped/file/relative/absolute/builtin、disabled 与未知表达式分别进入 checked、typed skip 或 failed。
 - [x] `expected = checked + typed skipped + failed`，根存在但零行不能报告健康。
-- [ ] `QG-006A/QG-006B` 仍需补齐跨 suite 的 fixture 隔离、并发与零副作用证明；不反向撤销 QG-002 的本地契约结果。
+- [x] `QG-006A` 已补齐 owned fixture 与现存 suite 隔离；`QG-006B` 的聚合并发、SIGTERM 与全工作树零副作用证明仍待独立批次，不反向撤销 QG-002 的本地契约结果。
 
 ## 4. Qodo 未覆盖但独立审查保留的高优先级项
 

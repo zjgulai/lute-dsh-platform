@@ -38,12 +38,17 @@ import { fileURLToPath } from 'node:url'
  * - `__LUTE_REPO__`：本仓库根（技能文档里的做法示例）；
  * - `__DSH_HOME__`：DSH 用户目录（客户机上是 `~/.dsh`）；
  * - `__DSH_APP_SUPPORT__`：桌面应用的支持目录（含 `runtime-commands/pnpm`）；
- * - `__BUILD_DESKTOP__`：构建机的桌面目录（技能自测报告里的样例文件路径）。
+ * - `__BUILD_DESKTOP__`：构建机的桌面目录（技能自测报告里的样例文件路径）；
+ * - `__SKILL_INTAKE_SOURCE__`：构建机上技能导入包的存放根。仅在技能
+ *   `README.usage.md`「原始单元」行里出现（intake 工具写入的导入出处，
+ *   形态 `~/Downloads/skills/<源>/<文件>.zip`）；占位符保留「从哪个包导入」的
+ *   出处语义，剥离「在哪台机器的哪个目录」。
  */
 const MAP = [
   ['/Library/Application Support/DSH Desktop', '__DSH_APP_SUPPORT__'],
   ['/project/Magpie-Horch', '__LUTE_REPO__'],
   ['/project/AI组织变革', '__LUTE_MATERIAL_ROOT__'],
+  ['/Downloads/skills', '__SKILL_INTAKE_SOURCE__'],
   ['/Desktop', '__BUILD_DESKTOP__'],
   ['/.dsh', '__DSH_HOME__'],
 ]

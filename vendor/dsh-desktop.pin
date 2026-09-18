@@ -3,11 +3,15 @@
 # 门禁契约：assemble.sh 读取本文件并校验 vendor/dsh-desktop HEAD == lute-sha，
 # 不一致即拒绝构建。每次上游合并窗口 bump 本文件（与 patches-manifest 同步更新）。
 upstream-url: https://github.com/anywhere-labs/dsh-desktop
-upstream-tag: v2.0.5
-upstream-sha: 423406fe225442995902015cb6f10eed670ff115
-lute-branch: lute-v2.0.5
-lute-sha: 4e23031e926de35898cf79500be49eedbdd27b9a
-harness-submodule: a66e4702047846cdaa10c66c9d3df3951f5ea70d
+upstream-tag: v2.0.10
+upstream-sha: 697e7d782cbfc2b9e8fa0ac862ef26bba9ac1326
+lute-branch: lute-v2.0.10
+lute-sha: 62c600f8e5c3f45c69439ed96ce3b51adc630795
+harness-submodule: fb2c4b9e698e30edb738bca4cf0618587db7d203
 harness-submodule-role: read-only-ref（ADR-0008：只作源码参照系，不参与构建；运行时仍取 harness-runtime-source）
-harness-runtime-source: vendor/dsh-runtime/0.1.2-rc.1/manifest.json
-checked-at: 2026-09-11
+# 运行时源（2.0.10 / 0.1.5-rc.2）：D 轨道 270/270 tgz 物化落在 vendor checkout
+# node_modules（dsh-plugin-desktop 层，dist 内嵌同源）；vendor/dsh-runtime/0.1.2-rc.1/
+# 仅作 2.0.5 回滚对照保留，不再被构建消费。物化链与验证记录见
+# docs/research/13-upgrade-2.0.10-execution-plan.md §7-§8。
+harness-runtime-source: vendor/dsh-desktop/dsh-plugin-desktop/node_modules（0.1.5-rc.2 物化）
+checked-at: 2026-09-17

@@ -1,15 +1,14 @@
 import assert from 'node:assert/strict'
 import {
   mkdirSync,
-  mkdtempSync,
   readFileSync,
   symlinkSync,
   writeFileSync,
 } from 'node:fs'
-import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { test } from 'node:test'
 
+import { mutationRoot } from '../../../../scripts/lib/mutation-fixture.mjs'
 import {
   FullstackInstallError,
   buildInstallPlan,
@@ -21,8 +20,17 @@ import {
 } from '../scripts/install-fullstack-core.mjs'
 import { runInstallerCli } from '../scripts/install-fullstack-skills.mjs'
 
+/**
+ * 每个用例一棵自有临时树。
+ *
+ * 这里原先写 `mkdtempSync(join(tmpdir(), 'fullstack-installer-'))` 且**从不清理**：
+ * 2026-09-17 在真实 TMPDIR 上数出 1,555 个 `fullstack-installer-*` 残留根
+ * （约 26 MB），全部来自历次 `pnpm run gate`。改用 `mutationRoot()` 后，
+ * 前缀仍然随机，但根登记进进程回收表：正常退出、断言抛错、SIGTERM 都会回收
+ * （机制与依据见 scripts/lib/mutation-fixture.mjs 的 reaper 注释）。
+ */
 function fixture() {
-  const root = mkdtempSync(join(tmpdir(), 'fullstack-installer-'))
+  const root = mutationRoot('fullstack-installer-')
   const skillsRoot = join(root, 'skills')
   const translationsRoot = join(root, 'translations')
   const mp = join(root, 'third-party', 'mp')

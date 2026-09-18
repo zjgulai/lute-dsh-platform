@@ -161,7 +161,7 @@ The repair command has no arguments. Extra input returns a usage error before an
 model work or CLI probe. A valid invocation queues a bounded start followup on
 the exact receiving Agent, then probes the current LoopX installation. When the
 CLI is missing or lacks the DSH-native skill contract, it runs exactly one
-fixed-argv `pip install --upgrade --target <plugin-runtime> 'loopx>=0.5.4'`, writes a
+fixed-argv `pip install --no-deps --target <plugin-runtime> 'loopx==0.5.4'`, writes a
 small managed Python launcher beside that target, then uses that same
 interpreter and launcher to install and read back the skills. Driver and
 GoalBar resolve this same managed runtime, including after an explicit repair.

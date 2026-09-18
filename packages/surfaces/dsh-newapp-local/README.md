@@ -66,7 +66,7 @@ LUTE 的**启动器**面：侧边栏里与官方「新会话」**并排各占一
 - id: ui-newapp-local
   config:
     productRoots:
-      - /Users/lute/project
+      - /Users/you/project
 ```
 
 「读不到」与「没有产品」必须在界面上可区分，所以报告逐类分开：

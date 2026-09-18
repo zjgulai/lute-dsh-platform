@@ -248,85 +248,97 @@ export function RecipesWorkspace({ controller, data, busy, t, run, setNotice }: 
     })
   }
 
-  return <div className="atg-data-page" data-testid="agent-team-recipes">
-    <section className="atg-data-card">
-      <header><div><h3>{t('recipeTitle')}</h3><p>{t('recipeHint')}</p></div></header>
-      <div className="atg-two">
-        <RecipeSelect label={t('teams')} value={selectedSquad} options={data.squads.map(item => [item.id, item.name])} onChange={setSelectedSquad} />
-        <div className="atg-field"><span>{t('export')}</span><button type="button" className="atg-button ghost" disabled={busy || selectedSquad === ''} onClick={() => { void exportRecipe() }}>{t('export')} JSON</button></div>
-      </div>
-      <label className="atg-field"><span>{t('recipeJson')}</span><textarea value={recipeText} onChange={event => { setRecipeText(event.currentTarget.value) }} placeholder="{ ... }" /></label>
-      <div className="atg-toolbar">
-        <button type="button" className="atg-button ghost" onClick={() => { fileRef.current?.click() }}>{t('recipeFile')}</button>
-        <button type="button" className="atg-button primary" disabled={previewBusy || recipeText.trim() === ''} onClick={() => { void parseAndPreview(recipeText) }}>{previewBusy ? t('loading') : t('preview')}</button>
-        <input ref={fileRef} hidden type="file" accept="application/json,.json" onChange={event => {
-          const file = event.currentTarget.files?.[0]
-          if (file !== undefined) void readRecipe(file)
-          event.currentTarget.value = ''
-        }} />
-      </div>
-      {localError !== '' && <div className="atg-alert" role="alert">{localError}</div>}
-      {data.capabilities?.remoteRecipeFetch === true && <div className="atg-two">
-        <RecipeField id="recipe-url" label={t('recipeUrl')} value={url} placeholder="https://github.com/…/recipe.json" onChange={setUrl} />
-        <div className="atg-field"><span>{t('preview')}</span><button type="button" className="atg-button ghost" disabled={!url.startsWith('https://')} onClick={() => { void fetchRecipe() }}>{t('fetchPreview')}</button></div>
-      </div>}
-      {preview !== null && <div className={`atg-recipe-preview${preview.valid ? ' is-valid' : ' is-invalid'}`}>
-        <header><strong>{preview.valid ? t('validRecipe') : t('invalidRecipe')}</strong><span>{preview.squad?.name ?? ''}</span></header>
-        <RecipeConflictList values={preview.conflicts} t={t} />
-        <MissingRouteList values={preview.missingRoutes} agents={preview.agents ?? []} t={t} />
-        {policy === 'merge' && (preview.affectedSquads ?? []).length > 0 && <div className="atg-warning" role="alert">{t('recipeAffectedTeams', { names: (preview.affectedSquads ?? []).map(item => item.squadName).join(', ') })}</div>}
-        {missing.map(item => {
-          const route = routeRemap[item.agentId] ?? routeFromAgent(preview.agents?.find(agent => agent.id === item.agentId))
-          const provider = item.kind === 'primary' ? route.provider : route.fallbackProvider ?? ''
-          const model = item.kind === 'primary' ? route.model : route.fallbackModel ?? ''
-          return <div className="atg-route-remap" key={`${item.agentId}:${item.kind}`}>
-            <strong>{item.label}</strong>
-            <RecipeSelect label={t('provider')} value={provider} options={data.models.map(group => [group.provider, group.name])} onChange={nextProvider => {
-              const nextModel = data.models.find(group => group.provider === nextProvider)?.models[0]?.id ?? ''
-              remapRoute(item.agentId, item.kind, { provider: nextProvider, model: nextModel })
-            }} />
-            <RecipeSelect label={t('model')} value={model} options={(data.models.find(group => group.provider === provider)?.models ?? []).map(item => [item.id, item.name])} onChange={nextModel => {
-              remapRoute(item.agentId, item.kind, { provider, model: nextModel })
+  return <div className="atg-data-page atg-recipes-page" data-testid="agent-team-recipes">
+    <section className="atg-data-card atg-data-panel atg-recipe-panel">
+      <header className="atg-data-panel-header"><div><h3>{t('recipeTitle')}</h3><p>{t('recipeHint')}</p></div></header>
+      <div className={`atg-recipe-layout${preview !== null ? ' has-preview' : ''}`}>
+        <div className="atg-recipe-source">
+          <div className="atg-two atg-recipe-toolbar">
+            <RecipeSelect label={t('teams')} value={selectedSquad} options={data.squads.map(item => [item.id, item.name])} onChange={setSelectedSquad} />
+            <div className="atg-field"><span>{t('export')}</span><button type="button" className="atg-button ghost" disabled={busy || selectedSquad === ''} onClick={() => { void exportRecipe() }}>{t('export')} JSON</button></div>
+          </div>
+          <label className="atg-field"><span>{t('recipeJson')}</span><textarea value={recipeText} onChange={event => { setRecipeText(event.currentTarget.value) }} placeholder="{ ... }" /></label>
+          <div className="atg-toolbar atg-recipe-actions">
+            <button type="button" className="atg-button ghost" onClick={() => { fileRef.current?.click() }}>{t('recipeFile')}</button>
+            <button type="button" className="atg-button primary" disabled={previewBusy || recipeText.trim() === ''} onClick={() => { void parseAndPreview(recipeText) }}>{previewBusy ? t('loading') : t('preview')}</button>
+            <input ref={fileRef} hidden type="file" accept="application/json,.json" onChange={event => {
+              const file = event.currentTarget.files?.[0]
+              if (file !== undefined) void readRecipe(file)
+              event.currentTarget.value = ''
             }} />
           </div>
-        })}
-        <div className="atg-two">
-          <RecipeSelect label={t('mergePolicy')} value={policy} options={[["copy", t('copyPolicy')], ['merge', t('merge')]]} onChange={value => {
-            const next = value as 'merge' | 'copy'; setPolicy(next)
-            if (recipeDoc !== null) void previewRecipe(recipeDoc, routeRemap, next)
-          }} />
-          <button type="button" className="atg-button primary atg-align-end" disabled={previewBusy || !preview.valid || previewFingerprint !== (recipeDoc === null ? '' : recipeFingerprint(recipeDoc, routeRemap, policy)) || missing.some(item => !routeReady(item, routeRemap[item.agentId]))} onClick={() => { void applyRecipe() }}>{t('applyRecipe')}</button>
+          {localError !== '' && <div className="atg-alert" role="alert">{localError}</div>}
+          {data.capabilities?.remoteRecipeFetch === true && <div className="atg-two atg-recipe-toolbar">
+            <RecipeField id="recipe-url" label={t('recipeUrl')} value={url} placeholder="https://github.com/…/recipe.json" onChange={setUrl} />
+            <div className="atg-field"><span>{t('preview')}</span><button type="button" className="atg-button ghost" disabled={!url.startsWith('https://')} onClick={() => { void fetchRecipe() }}>{t('fetchPreview')}</button></div>
+          </div>}
         </div>
-      </div>}
-    </section>
-    <section className="atg-data-card">
-      <header><div><h3>{t('backup')}</h3><p>{t('backupHint')}</p></div></header>
-      <div className="atg-toolbar">
-        <RecipeSelect label={t('mergePolicy')} value={backupMode} options={[["merge", t('mergeImport')], ['replace', t('replaceImport')]]} onChange={value => {
-          const next = value as 'merge' | 'replace'; setBackupMode(next)
-          if (backupDoc !== null) void previewBackup(backupDoc, next)
-        }} />
-        <button type="button" className="atg-button ghost" onClick={() => { void exportBackup() }}>{t('export')}</button>
-        <button type="button" className="atg-button ghost" onClick={() => { backupRef.current?.click() }}>{t('import')}</button>
-        <input ref={backupRef} hidden type="file" accept="application/json,.json" onChange={event => {
-          const file = event.currentTarget.files?.[0]
-          if (file !== undefined) void readBackup(file)
-          event.currentTarget.value = ''
-        }} />
+        <aside className="atg-recipe-side" aria-label={t('preview')}>
+          {preview !== null && <div className={`atg-recipe-preview atg-validation-panel${preview.valid ? ' is-valid' : ' is-invalid'}`}>
+            <header><strong>{preview.valid ? t('validRecipe') : t('invalidRecipe')}</strong><span>{preview.squad?.name ?? ''}</span></header>
+            <RecipeConflictList values={preview.conflicts} t={t} />
+            <MissingRouteList values={preview.missingRoutes} agents={preview.agents ?? []} t={t} />
+            {policy === 'merge' && (preview.affectedSquads ?? []).length > 0 && <div className="atg-warning" role="alert">{t('recipeAffectedTeams', { names: (preview.affectedSquads ?? []).map(item => item.squadName).join(', ') })}</div>}
+            {missing.map(item => {
+              const route = routeRemap[item.agentId] ?? routeFromAgent(preview.agents?.find(agent => agent.id === item.agentId))
+              const provider = item.kind === 'primary' ? route.provider : route.fallbackProvider ?? ''
+              const model = item.kind === 'primary' ? route.model : route.fallbackModel ?? ''
+              return <div className="atg-route-remap" key={`${item.agentId}:${item.kind}`}>
+                <strong>{item.label}</strong>
+                <RecipeSelect label={t('provider')} value={provider} options={data.models.map(group => [group.provider, group.name])} onChange={nextProvider => {
+                  const nextModel = data.models.find(group => group.provider === nextProvider)?.models[0]?.id ?? ''
+                  remapRoute(item.agentId, item.kind, { provider: nextProvider, model: nextModel })
+                }} />
+                <RecipeSelect label={t('model')} value={model} options={(data.models.find(group => group.provider === provider)?.models ?? []).map(item => [item.id, item.name])} onChange={nextModel => {
+                  remapRoute(item.agentId, item.kind, { provider, model: nextModel })
+                }} />
+              </div>
+            })}
+            <footer className="atg-validation-footer">
+              <RecipeSelect label={t('mergePolicy')} value={policy} options={[["copy", t('copyPolicy')], ['merge', t('merge')]]} onChange={value => {
+                const next = value as 'merge' | 'copy'; setPolicy(next)
+                if (recipeDoc !== null) void previewRecipe(recipeDoc, routeRemap, next)
+              }} />
+              <button type="button" className="atg-button primary atg-align-end" disabled={previewBusy || !preview.valid || previewFingerprint !== (recipeDoc === null ? '' : recipeFingerprint(recipeDoc, routeRemap, policy)) || missing.some(item => !routeReady(item, routeRemap[item.agentId]))} onClick={() => { void applyRecipe() }}>{t('applyRecipe')}</button>
+            </footer>
+          </div>}
+        </aside>
       </div>
-      {backupError !== '' && <div className="atg-alert" role="alert">{backupError}</div>}
-      {backupDoc !== null && backupPreview === null && backupError === '' && <div className="atg-loading">{t('loading')}</div>}
-      {backupPreview !== null && <div className={`atg-backup-preview${backupMode === 'replace' ? ' is-danger' : ''}`}>
-        <strong>{t('definitionCounts', { agents: backupPreview.incoming.agents, squads: backupPreview.incoming.squads })}</strong>
-        <span>{t('definitionConflicts', { agents: backupPreview.conflicts.agentIds.length, squads: backupPreview.conflicts.squadIds.length })}</span>
-        {(backupPreview.affectedSquads ?? []).length > 0 && <div className="atg-warning" role="alert">{t('definitionAffectedTeams', { names: (backupPreview.affectedSquads ?? []).map(item => item.squadName).join(', ') })}</div>}
-        {backupMode === 'replace' && <div className="atg-warning" role="alert">{t('definitionDeletions', {
-          agents: backupPreview.deletions.agents, squads: backupPreview.deletions.squads,
-          modes: backupPreview.deletions.sessionModes + backupPreview.deletions.nextModes,
-          projects: backupPreview.deletions.projectDefaults, versions: backupPreview.deletions.squadVersions,
-        })}</div>}
-        <div className="atg-actions"><button type="button" className="atg-button ghost" onClick={cancelBackup}>{t('cancel')}</button><button type="button" className={`atg-button ${backupMode === 'replace' ? 'danger' : 'primary'}`} disabled={busy} onClick={() => { void importBackup() }}>{t('applyDefinitionBackup')}</button></div>
-      </div>}
+    </section>
+    <section className="atg-data-card atg-data-panel atg-backup-panel">
+      <header className="atg-data-panel-header"><div><h3>{t('backup')}</h3><p>{t('backupHint')}</p></div></header>
+      <div className={`atg-backup-layout${backupPreview !== null ? ' has-preview' : ''}`}>
+        <div className="atg-backup-main">
+          <div className="atg-toolbar atg-backup-toolbar">
+            <RecipeSelect label={t('mergePolicy')} value={backupMode} options={[["merge", t('mergeImport')], ['replace', t('replaceImport')]]} onChange={value => {
+              const next = value as 'merge' | 'replace'; setBackupMode(next)
+              if (backupDoc !== null) void previewBackup(backupDoc, next)
+            }} />
+            <button type="button" className="atg-button ghost" onClick={() => { void exportBackup() }}>{t('export')}</button>
+            <button type="button" className="atg-button ghost" onClick={() => { backupRef.current?.click() }}>{t('import')}</button>
+            <input ref={backupRef} hidden type="file" accept="application/json,.json" onChange={event => {
+              const file = event.currentTarget.files?.[0]
+              if (file !== undefined) void readBackup(file)
+              event.currentTarget.value = ''
+            }} />
+          </div>
+          {backupError !== '' && <div className="atg-alert" role="alert">{backupError}</div>}
+          {backupDoc !== null && backupPreview === null && backupError === '' && <div className="atg-loading">{t('loading')}</div>}
+        </div>
+        <aside className="atg-backup-side" aria-label={t('preview')}>
+          {backupPreview !== null && <div className={`atg-backup-preview atg-validation-panel${backupMode === 'replace' ? ' is-danger' : ' is-valid'}`}>
+            <strong>{t('definitionCounts', { agents: backupPreview.incoming.agents, squads: backupPreview.incoming.squads })}</strong>
+            <span>{t('definitionConflicts', { agents: backupPreview.conflicts.agentIds.length, squads: backupPreview.conflicts.squadIds.length })}</span>
+            {(backupPreview.affectedSquads ?? []).length > 0 && <div className="atg-warning" role="alert">{t('definitionAffectedTeams', { names: (backupPreview.affectedSquads ?? []).map(item => item.squadName).join(', ') })}</div>}
+            {backupMode === 'replace' && <div className="atg-warning" role="alert">{t('definitionDeletions', {
+              agents: backupPreview.deletions.agents, squads: backupPreview.deletions.squads,
+              modes: backupPreview.deletions.sessionModes + backupPreview.deletions.nextModes,
+              projects: backupPreview.deletions.projectDefaults, versions: backupPreview.deletions.squadVersions,
+            })}</div>}
+            <footer className="atg-validation-footer"><button type="button" className="atg-button ghost" onClick={cancelBackup}>{t('cancel')}</button><button type="button" className={`atg-button ${backupMode === 'replace' ? 'danger' : 'primary'}`} disabled={busy} onClick={() => { void importBackup() }}>{t('applyDefinitionBackup')}</button></footer>
+          </div>}
+        </aside>
+      </div>
     </section>
     <section className="atg-data-card"><header><div><h3>{t('retention')}</h3><p>{t('retentionHint')}</p></div></header></section>
   </div>

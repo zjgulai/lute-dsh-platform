@@ -4,7 +4,7 @@
  				async candidates(session, { query, signal }) {
  					const skills = await fetchCatalog(session.sessionId);
  					if (signal.aborted) return [];
--					return skills.filter((skill) => skill.name.startsWith(query)).map((skill) => ({
+-					return (0, _deepseek_ai_dsh_client_ui_primitives.rankByName)(skills, query).map((skill) => ({
 -						name: skill.name,
 -						description: skill.modelInvocable ? skill.description : `${t("menu.userOnly")} · ${skill.description}`
 +					const needle = query.toLowerCase();

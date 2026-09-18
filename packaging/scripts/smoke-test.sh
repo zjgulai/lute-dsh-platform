@@ -4,7 +4,7 @@
 # 环境: SMOKE_HOME（默认 /tmp/dsh-smoke，安装的 DSH_HOME 为其下的 .dsh）
 #       SMOKE_APPS（默认 /tmp/dsh-smoke-apps，APP_TARGET 父目录）
 # 断言：安装 exit 0、app/profile/aeis/skills 落位、cordis 占位已替换、
-#       verify-patches 31 锚点全绿、aeis --check 通过、SHA256SUMS 一致、
+#       verify-patches-v2 全绿（锚集随包自带）、aeis --check 通过、SHA256SUMS 一致、
 #       R2b 双落位一致性、bundle/vendor/skills 逐一存在。
 set -uo pipefail
 PAYLOAD="${1:?用法: ./smoke-test.sh <payload-dir>}"
@@ -122,15 +122,22 @@ assert "presets 落位" yes "$([ -d "$DSH_HOME_SMOKE/.agent-presets" ] && echo y
 
 # 5b. 完整性清单比对（每个插件/组件/skill 逐一存在）
 assert "completeness.json 存在" yes "$([ -f "$CJ" ] && echo yes)"
+# app 侧 node_modules 根随布局而变（2.0.10 起 no-ASAR = Resources/app/node_modules；旧 2.0.5
+# = app.asar.unpacked/node_modules）。判定唯一家是 scripts/lib/app-resources.mjs——双形态
+# 迁移时本脚本是被漏掉的第 5 个消费面（2026-09-17 补接）。跑在仓库内，直接调用它；
+# 判不了就落一条红，不许拿猜的固定路径冒充比对（P-02）。
+REL_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+APP_NM="$(node "$REL_ROOT/scripts/lib/app-resources.mjs" "$APP_TARGET" 2>/dev/null | sed -n 's/^node_modules=//p')"; APP_NM="${APP_NM:-}"
+assert "app node_modules 根可判定（布局探测）" yes "$([ -n "$APP_NM" ] && echo yes)"
 node -e "
 const fs=require('fs');const c=JSON.parse(fs.readFileSync(process.argv[1]));
 const prof=process.argv[2]+'/node_modules';
-const app=process.argv[3]+'/Contents/Resources/app.asar.unpacked/node_modules';
+const app=process.argv[3];
 let miss=[];
 for(const b of c.bundles){
   if(!fs.existsSync(prof+'/'+b)&&!fs.existsSync(app+'/'+b))miss.push(b);}
 if(miss.length){console.error('MISSING BUNDLES:',miss.join(', '));process.exit(1);}
-console.log('bundles all present: '+c.bundles.length);" "$CJ" "$P" "$APP_TARGET" > "$SMOKE_HOME/bundles.log" 2>&1
+console.log('bundles all present: '+c.bundles.length);" "$CJ" "$P" "$APP_NM" > "$SMOKE_HOME/bundles.log" 2>&1
 assert "全部 bundle 逐一存在" 0 "$?"
 cat "$SMOKE_HOME/bundles.log"
 node -e "
@@ -153,7 +160,7 @@ assert "skills/presets 清单比对" 0 "$?"
 cat "$SMOKE_HOME/sp.log"
 
 # 5c. R2b 双落位一致性：内嵌 dsh-profile ≡ 安装后 profile
-# 2.0.5 布局：内嵌副本按 profiles/desktop 嵌套（与 P0-7v2 首启拷贝路径对齐）
+# 内嵌副本按 profiles/desktop 嵌套（与 P0-7v2 首启物化路径对齐；2.0.5 与 2.0.10 基座同构）
 # （BUNDLED 见 §3 顶部定义）
 assert "内嵌 dsh-profile 存在" yes "$([ -d "$BUNDLED" ] && echo yes)"
 assert "内嵌 node_modules 落位" yes "$([ -d "$BUNDLED/node_modules/@deepseek-ai" ] && echo yes)"

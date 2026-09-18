@@ -1,5 +1,5 @@
 #!/bin/bash
-# LUTE Agentic System 目标机离线安装器（DSH Desktop 2.0.5 + Magpie-Horch 全量定制层）
+# LUTE Agentic System 目标机离线安装器（DSH Desktop 基座随包 + Magpie-Horch 全量定制层；版本凭据见载荷 VERSION）
 #
 # 特性：
 #   - 完全离线：不跑 pnpm / 不访问网络；node_modules 随包、node 运行时复用 Electron 二进制
@@ -259,8 +259,16 @@ say "3/6 路径替换 + apply-patches.mjs 完成"
 # 状态路径：<userData>/profile-setup/<sha256(profileDir)>/state.json；
 # 只写「不存在时」，不覆盖用户已完成的向导决定（升级路径同理）。
 if [ -f "$HERE/tools/rewrite-file-deps.mjs" ]; then :; fi
+# 版本凭据必须取自**载荷自己的 VERSION**（assemble 于装配时写入）——这条 state.json
+# 会被首启的 profile-channel-admission 读作「这份 profile 是在哪个版本下 setup 的」证据，
+# 写一个猜来的版本串（2026-09-17 前硬编码 2.0.5/0.1.2-rc.1）等于给 2.0.10 时代的载荷
+# 埋假凭据。读不出就跳过整段预写（首启多见一次可跳过的向导），不编造。
+PAYLOAD_BASELINE="$(sed -n 's/^DSH_BASELINE=//p' "$HERE/VERSION" 2>/dev/null | head -1)"
+PAYLOAD_RUNTIME="$(sed -n 's/^DSH_RUNTIME=//p' "$HERE/VERSION" 2>/dev/null | head -1)"
 WIZARD_HASH="$(node -e "const{createHash}=require('crypto');console.log(createHash('sha256').update(process.argv[1]).digest('hex'))" "$PROFILE_DIR" 2>/dev/null || true)"
-if [ -n "$WIZARD_HASH" ]; then
+if [ -z "$PAYLOAD_BASELINE" ] || [ -z "$PAYLOAD_RUNTIME" ]; then
+  say "3b/6 跳过预写（载荷 VERSION 缺 DSH_BASELINE/DSH_RUNTIME——baseline=${PAYLOAD_BASELINE:-无} runtime=${PAYLOAD_RUNTIME:-无}，不编造版本凭据）"
+elif [ -n "$WIZARD_HASH" ]; then
   WIZARD_ROOT="$USERDATA_DIR/profile-setup"
   WIZARD_DIR="$WIZARD_ROOT/$WIZARD_HASH"
   WIZARD_STATE="$WIZARD_DIR/state.json"
@@ -272,14 +280,14 @@ if [ -n "$WIZARD_HASH" ]; then
   "version": 2,
   "profileHash": "$WIZARD_HASH",
   "outcome": "skipped",
-  "desktopVersion": "2.0.5",
-  "dshVersion": "0.1.2-rc.1",
+  "desktopVersion": "$PAYLOAD_BASELINE",
+  "dshVersion": "$PAYLOAD_RUNTIME",
   "setupRevision": 1,
   "recordedAt": "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
 }
 EOF
     chmod 600 "$WIZARD_STATE"
-    say "3b/6 setup-wizard skip 状态已预写（700 权限）"
+    say "3b/6 setup-wizard skip 状态已预写（700 权限；desktopVersion=${PAYLOAD_BASELINE} dshVersion=${PAYLOAD_RUNTIME}）"
   else
     say "3b/6 setup-wizard 状态已存在，保留不覆盖"
   fi
@@ -375,7 +383,7 @@ fi
 # 选择「响亮但**不回滚**」：装完的文件留在原地供排查，回滚留给用户决定（cordon 见下）。
 VERIFY_FAILED="${VERIFY_FAILED:-0}"
 if [ -f "$HERE/tools/verify-patches-v2.sh" ]; then
-  say "运行补丁锚点校验（v2 · 2.0.5）…"
+  say "运行补丁锚点校验（verify v2 · 锚集 v3）…"
   DSH_APP="$APP_TARGET" bash "$HERE/tools/verify-patches-v2.sh" \
     || { echo "[install] ✗ 补丁锚点未全绿（见上）——上面的 MISSING/FAIL 就是缺件清单" >&2; VERIFY_FAILED=1; }
 else

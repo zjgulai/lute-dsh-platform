@@ -304,7 +304,12 @@ export function RoleMatrixPanel({ api, onClose }: RoleMatrixPanelProps): JSX.Ele
   // Fallback close path: with showModal() unavailable the dialog is not modal,
   // so Escape would not cancel it natively.
   useEffect(() => {
-    const onKey = (event: KeyboardEvent): void => { if (event.key === 'Escape') onClose() }
+    const onKey = (event: KeyboardEvent): void => {
+      if (event.key !== 'Escape') return
+      const target = event.target as HTMLElement | null
+      if (target instanceof HTMLElement && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.tagName === 'SELECT' || target.isContentEditable)) return
+      onClose()
+    }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
   }, [onClose])

@@ -19,3 +19,22 @@ test("admin UI references assets via absolute /admin/ paths (no relative-path mi
   assert.ok(html.includes('src="/admin/app.js"'), "script must use absolute /admin/ path");
   assert.ok(!html.includes("./styles.css") && !html.includes("./app.js"), "no relative asset refs");
 });
+
+test("admin UI keeps visual styles out of inline HTML attributes", () => {
+  const html = fs.readFileSync(path.join(root, "admin-ui", "index.html"), "utf8");
+  assert.doesNotMatch(html, /\sstyle\s*=\s*["'][^"']*["']/i, "visual inline styles are not allowed");
+});
+
+test("admin UI keeps the Codex visual contract in its standalone stylesheet", () => {
+  const css = fs.readFileSync(path.join(root, "admin-ui", "styles.css"), "utf8");
+  assert.match(css, /--dsw-accent/);
+  assert.match(css, /data-theme="light"/);
+  assert.match(css, /data-theme="dark"/);
+  assert.match(css, /:disabled/);
+  assert.match(css, /user-invalid/);
+  assert.match(css, /@media \(prefers-color-scheme: dark\)/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(css, /focus-visible/);
+  assert.match(css, /180ms/);
+  assert.doesNotMatch(css, /linear-gradient/);
+});

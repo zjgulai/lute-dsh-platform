@@ -1,12 +1,19 @@
-import { test } from 'node:test'
+import { afterEach, test } from 'node:test'
 import assert from 'node:assert/strict'
-import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs'
-import { tmpdir } from 'node:os'
+import { mkdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { collectPackages } from './package-collect.mjs'
+import { collectManagedManifests, collectPackages } from './package-collect.mjs'
+import { createMutationFixture } from '../lib/mutation-fixture.mjs'
+
+const fixtures = []
+afterEach(() => {
+  while (fixtures.length > 0) fixtures.pop().cleanup()
+})
 
 function fixture(entries) {
-  const root = mkdtempSync(join(tmpdir(), 'lute-collect-'))
+  const owned = createMutationFixture({ prefix: 'lute-collect' })
+  fixtures.push(owned)
+  const root = owned.repo
   for (const [rel, manifest] of Object.entries(entries)) {
     mkdirSync(join(root, rel), { recursive: true })
     writeFileSync(join(root, rel, 'package.json'), JSON.stringify(manifest))
@@ -38,4 +45,15 @@ test('包收集：根包单列，不混入受管包列表', () => {
 
   assert.equal(rootManifest.name, 'root')
   assert.deepEqual(packages.map((entry) => entry.relPath), ['packages/platform/dsh-a'])
+})
+
+test('身份判定面：根包与受管包由同一收集器给出，根包固定登记为点路径', () => {
+  const root = fixture({
+    'packages/platform/dsh-a': { name: 'a', luteOrigin: 'self' },
+    '.': { name: 'root', luteOrigin: 'self' },
+  })
+
+  const entries = collectManagedManifests(root)
+
+  assert.deepEqual(entries.map((entry) => entry.dir), ['.', 'packages/platform/dsh-a'])
 })

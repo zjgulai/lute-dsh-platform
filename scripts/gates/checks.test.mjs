@@ -17,6 +17,7 @@ import {
   checkScriptsRunnable,
   checkShellVarAdjacentMultibyte,
   checkTccPaneGuidance,
+  checkThemeTokensBaselineFrozen,
   checkTrackedIgnored,
 } from './checks.mjs'
 
@@ -322,7 +323,12 @@ test('变更包校验：改动的包缺 typecheck/test 必须被拒绝', () => {
     exempted: [],
   })
 
-  assert.equal(result.passed, false)
+  // QG-001 规范三态：两个改动包是**两个对象**，各失败一次；缺哪个脚本在
+  // violations 里各自成行，但对象级 failed 不重复计数（否则题面 = 分数）。
+  assert.equal(result.status, 'fail')
+  assert.equal(result.expected, 2)
+  assert.equal(result.failed, 2)
+  assert.equal(result.checked, 0)
   assert.deepEqual(result.violations, [
     'packages/capabilities/dsh-overseas-skills: 改动了本包但缺少 typecheck 脚本（ADR-0014：变更包立即纳入硬门槛）',
     'packages/capabilities/dsh-overseas-skills: 改动了本包但缺少 test 脚本（ADR-0014：变更包立即纳入硬门槛）',
@@ -330,15 +336,43 @@ test('变更包校验：改动的包缺 typecheck/test 必须被拒绝', () => {
   ])
 })
 
-test('变更包校验：豁免登记中的包不参与校验', () => {
+test('变更包校验：豁免登记中的包记成 typed skip，而不是「核对过」', () => {
   const result = checkChangedPackages({
     changed: ['packages/contract/dsh-skill-subset'],
     packages: [{ relPath: 'packages/contract/dsh-skill-subset', manifest: { scripts: {} } }],
     exempted: ['packages/contract/dsh-skill-subset'],
   })
 
-  assert.equal(result.passed, true)
+  assert.equal(result.status, 'skip')
+  assert.equal(result.expected, 1)
+  assert.equal(result.checked, 0)
+  assert.equal(result.skipped, 1)
+  assert.equal(result.failed, 0)
   assert.deepEqual(result.violations, [])
+  assert.deepEqual(result.typedSkips.map((entry) => entry.type), ['adr-0014-exemption'])
+})
+
+test('变更包校验：射程为空必须是 skip，不能记成「核对过且合规」', () => {
+  const result = checkChangedPackages({ changed: [], packages: [], exempted: [] })
+
+  // 旧实现返回老式 {passed:true}，被规范化成 checked=1 —— 把「没看」
+  // 记成了「看过且没问题」。这是 P-02 的记账形态。
+  assert.equal(result.status, 'skip')
+  assert.equal(result.checked, 0)
+  assert.equal(result.skipped, 1)
+  assert.deepEqual(result.typedSkips.map((entry) => entry.type), ['no-changes-in-range'])
+})
+
+test('变更包校验：射程命中了不受管的路径必须判红，不能静默忽略', () => {
+  const result = checkChangedPackages({
+    changed: ['packages/ghost/not-in-inventory'],
+    packages: [],
+    exempted: [],
+  })
+
+  assert.equal(result.status, 'fail')
+  assert.equal(result.failed, 1)
+  assert.match(result.violations[0], /不在受管包清单里/)
 })
 
 test('变更包校验：已补齐的包通过', () => {
@@ -350,8 +384,33 @@ test('变更包校验：已补齐的包通过', () => {
     exempted: [],
   })
 
-  assert.equal(result.passed, true)
+  assert.equal(result.status, 'pass')
+  assert.equal(result.checked, 1)
   assert.deepEqual(result.violations, [])
+})
+
+test('变更包校验：命中的治理规则进账目，并在 note 里写明基线可追溯', () => {
+  const result = checkChangedPackages({
+    changed: ['packages/contract/dsh-skill-subset'],
+    packages: [
+      { relPath: 'packages/contract/dsh-skill-subset', manifest: { scripts: { typecheck: 'tsc', test: 'node --test' } } },
+    ],
+    exempted: [],
+    scope: {
+      base: { sha: 'a'.repeat(40), source: 'remote-tracking', ref: 'origin/main' },
+      sources: { committed: ['x'], staged: [], unstaged: ['pnpm-lock.yaml'], untracked: [] },
+      directPackages: ['packages/contract/dsh-skill-subset'],
+      rules: ['workspace-dependency-graph'],
+      otherRootPaths: [],
+      expandAllPackages: false,
+    },
+  })
+
+  assert.equal(result.status, 'pass')
+  assert.equal(result.expected, 2)
+  assert.equal(result.checked, 2)
+  assert.match(result.note, /origin\/main@aaaaaaaa/)
+  assert.match(result.note, /workspace-dependency-graph/)
 })
 
 test('豁免冻结校验：豁免文件首次入库时允许初始登记', () => {
@@ -787,4 +846,58 @@ test('出货 README heredoc：段外的裸反引号不受影响（只审判这�
   })
 
   assert.equal(result.passed, true)
+})
+
+test('主题 token 基线冻结：新增条目必须被拒绝（登记等于承认不修它）', () => {
+  const result = checkThemeTokensBaselineFrozen({
+    entries: [{ token: '--dsw-alias-radius-lg' }, { token: '--dsw-alias-newly-registered' }],
+    baseline: [{ token: '--dsw-alias-radius-lg' }],
+  })
+
+  assert.equal(result.passed, false)
+  assert.equal(result.violations.length, 1, '只该报新增那一条，不得连带报出已冻结的条目')
+  assert.match(result.violations[0], /--dsw-alias-newly-registered/)
+  assert.match(result.violations[0], /只减不增/)
+})
+
+test('主题 token 基线冻结：删除条目必须放行（这是「只减」那一半）', () => {
+  const result = checkThemeTokensBaselineFrozen({
+    entries: [{ token: '--dsw-alias-radius-lg' }],
+    baseline: [{ token: '--dsw-alias-radius-lg' }, { token: '--dsw-alias-shadow-md' }],
+  })
+
+  assert.equal(result.passed, true)
+  assert.deepEqual(result.violations, [])
+})
+
+test('主题 token 基线冻结：基线文件未入库时不拦（首次登记的引导期）', () => {
+  const result = checkThemeTokensBaselineFrozen({
+    entries: [{ token: '--dsw-alias-radius-lg' }],
+    baseline: [],
+    baselineExists: false,
+  })
+
+  assert.equal(result.passed, true)
+})
+
+test('主题 token 基线冻结：原样保持放行——且证明它不是恒真桩', () => {
+  const unchanged = checkThemeTokensBaselineFrozen({
+    entries: [{ token: '--dsw-alias-radius-lg' }, { token: '--dsw-alias-shadow-md' }],
+    baseline: [{ token: '--dsw-alias-radius-lg' }, { token: '--dsw-alias-shadow-md' }],
+  })
+
+  // 关键：这一条若恒真，上面「新增必须被拒」就失去意义——判据会永远说「没问题」。
+  assert.equal(unchanged.passed, true)
+
+  const gained = checkThemeTokensBaselineFrozen({
+    entries: [
+      { token: '--dsw-alias-radius-lg' },
+      { token: '--dsw-alias-shadow-md' },
+      { token: '--dsw-alias-one-more' },
+    ],
+    baseline: [{ token: '--dsw-alias-radius-lg' }, { token: '--dsw-alias-shadow-md' }],
+  })
+
+  assert.equal(gained.passed, false, '判据必须能说「不」')
+  assert.equal(gained.violations.length, 1)
 })

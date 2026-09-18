@@ -1,0 +1,70 @@
+{
+  "$schema": "./ruleset.schema.json",
+  "schemaVersion": "qg008-ruleset-declaration/v1",
+  "repository": "zjgulai/lute-dsh-platform",
+  "purpose": "声明 main 与 v* tag 上应当存在的保护。这是**唯一的事实之家**：审计（scripts/gates/ruleset-audit.mjs）只比对 API 返回值与这份声明，不自行解释规则应当是什么。",
+  "requiredChecks": {
+    "comment": "检查名必须与 .github/workflows/gate.yml 里 job 的 `name:` 逐字一致——GitHub 的 required check 匹配的是那个字符串，不是 job id。改 workflow 里的显示名会让这里的两个名字变成永不满足的条件，所有 PR 会被永久卡死（这正是本卡 `失败边界` 说的那种误阻塞）。",
+    "names": ["gate (quick)", "gate (full)"]
+  },
+  "branchRules": [
+    {
+      "id": "main-protection",
+      "target": "refs/heads/main",
+      "enforcement": "active",
+      "rules": [
+        { "type": "deletion" },
+        { "type": "non_fast_forward" },
+        {
+          "type": "pull_request",
+          "parameters": {
+            "comment": "GitHub 对这个 rule 有 5 个**必填**参数（dismiss_stale_reviews_on_push / require_code_owner_review / require_last_push_approval / required_approving_review_count / required_review_thread_resolution）。凭记忆写会得到 HTTP 422 `data matches no input`——第一版就是这样被拒的，所以这份声明现在逐字对齐官方 schema。required_approving_review_count 取 0：单人仓库要求 review 等于自我审批，是**名义保护**（比没有保护更糟，因为它看起来像保护）。",
+            "required_approving_review_count": 0,
+            "dismiss_stale_reviews_on_push": false,
+            "require_code_owner_review": false,
+            "require_last_push_approval": false,
+            "required_review_thread_resolution": false,
+            "allowed_merge_methods": ["merge", "squash"]
+          }
+        },
+        {
+          "type": "required_status_checks",
+          "parameters": {
+            "strict_required_status_checks_policy": false,
+            "required_status_checks": [
+              { "context": "gate (quick)" },
+              { "context": "gate (full)" }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "tagRules": [
+    {
+      "id": "release-tag-protection",
+      "target": "refs/tags/v*",
+      "enforcement": "active",
+      "rules": [
+        { "type": "deletion" },
+        { "type": "non_fast_forward" },
+        { "type": "update" }
+      ],
+      "comment": "`update` 是 tag 保护与分支保护的关键差别：分支上 `non_fast_forward` 就够，tag 还需要禁止**移动**（同一个 tag 名指到另一个提交），那正是 ADR-0058 说的「客户手上那版对应哪份源码」被毁掉的方式。" 
+    }
+  ],
+  "bypassActors": {
+    "comment": "空数组是**声明**，不是遗漏：本仓库当前是单人维护，任何 bypass 都会让「保护」变成一句可以随时绕过的话。要临时放行就改这一处并留决策记录，而不是在 GitHub UI 里点一下（那里留下的痕迹没人审计）。",
+    "actors": []
+  },
+  "breakGlass": {
+    "comment": "断玻璃是**流程**，不是配置：GitHub 的 ruleset bypass 不留审计事件，所以本仓库的断玻璃形式是「用一个带说明的提交改回这份声明 + 在合并信息里写明原因」，且必须随后恢复。",
+    "procedure": [
+      "1. 确认误阻塞：读 ruleset-audit 的读数与失败检查的原文输出，确认是规则过紧而不是提交有问题",
+      "2. 只在需要合并的那一次把目标规则的 enforcement 改为 `evaluate`（dry-run），**不**删除规则",
+      "3. 合并后立刻改回 `active`，并在同一个 PR 的说明里写下：为什么、影响面、恢复时间",
+      "4. 若 24 小时内未恢复，视为事故（本卡失败边界：不得长期忽略失败，也不得整体关闭保护——只调整具体规则）"
+    ],
+    "owner": "仓库管理员（当前：zjgulai）"
+  }
+}

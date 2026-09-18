@@ -2,6 +2,7 @@ import { spawn } from "node:child_process";
 import { stat } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { homedir } from "node:os";
+import { buildSanitizedChildEnv } from "./env-policy.js";
 //#region build-temp/host/cli.js
 var LoopXCliError = class extends Error {
 	kind;
@@ -29,7 +30,7 @@ const runFile = (file, args, options) => new Promise((resolve, reject) => {
 	}
 	const child = spawn(file, [...args], {
 		cwd: options.cwd,
-		env: options.env ?? process.env,
+		env: buildSanitizedChildEnv(options.env ?? {}),
 		shell: false,
 		stdio: [
 			"ignore",

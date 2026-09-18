@@ -25,7 +25,7 @@ interface Registry {
 }
 
 interface ShellSyncState {
-  sawShell: boolean;
+  previousPanel?: HTMLElement;
 }
 
 interface ClientExports {
@@ -59,6 +59,119 @@ async function loadClient(): Promise<ClientExports> {
 }
 
 describe("syncShell", () => {
+  it("把 Settings 视觉契约接到主题 token，并提供 reduced-motion 降级", async () => {
+    await loadClient();
+    const css = document.querySelector<HTMLStyleElement>(
+      'style[data-plugin-css="dsh-settings-shell/shell.css"]',
+    )?.textContent ?? "";
+
+    expect(css).toContain("--dsw-alias-bg-layer-1");
+    expect(css).toContain("--dsw-specific-sidebar-fill");
+    expect(css).toContain("--dsw-alias-label-secondary");
+    expect(css).toContain("--dsh-settings-shell-panel-width");
+    expect(css).toContain('[role="presentation"]:has(> [data-dsh-settings-shell-root])');
+    expect(css).toContain("--dsh-settings-shell-modal-layer");
+    expect(css).toContain("2147483001");
+    expect(css).toContain("body:has([data-dsh-settings-shell-root]) > #root");
+    expect(css).toContain("--dsh-settings-shell-root-layer");
+    expect(css).toContain("2147483002");
+    expect(css).toContain("[data-dsh-settings-shell-root] > nav + * > :nth-child(2)");
+    expect(css).toContain("display: flex");
+    expect(css).toContain("flex-direction: column");
+    expect(css).toContain("overflow-x: hidden");
+    expect(css).toContain("overflow-y: auto");
+    expect(css).toContain("scrollbar-gutter: stable");
+    expect(css).toContain("min-width: 0");
+    expect(css).toContain("--dsh-settings-shell-control-height");
+    expect(css).toContain("--dsh-settings-shell-control-radius");
+    expect(css).toContain("border-top: 1px solid var(--dsh-settings-shell-border)");
+    expect(css).toContain(":focus-visible");
+    expect(css).toContain(":disabled");
+    expect(css).toContain("@media (max-width: 720px)");
+    expect(css).toContain("@media (max-width: 560px)");
+    expect(css).toContain("180ms");
+    expect(css).toContain("prefers-reduced-motion: reduce");
+  });
+
+  it("只给成功解析的 Settings panel 加 root marker，五类非 Settings dialog 的样式不变", async () => {
+    const client = await loadClient();
+    const doc = settingsShellFixture({ sectionIds: MEASURED_SECTIONS });
+
+    const makeDialog = (kind: string): HTMLElement => {
+      const dialog = doc.createElement("section");
+      dialog.setAttribute("role", "dialog");
+      dialog.setAttribute("aria-modal", "true");
+      dialog.dataset.fixtureKind = kind;
+      return dialog;
+    };
+
+    const onboarding = makeDialog("onboarding");
+    const onboardingForm = doc.createElement("form");
+    onboardingForm.append(doc.createElement("input"), doc.createElement("button"));
+    onboarding.appendChild(onboardingForm);
+
+    const confirmation = makeDialog("deep-research-confirm");
+    confirmation.append(doc.createElement("p"), doc.createElement("button"), doc.createElement("button"));
+
+    const newApp = makeDialog("new-app-direct-nav");
+    const nav = doc.createElement("nav");
+    const list = doc.createElement("div");
+    const navButton = doc.createElement("button");
+    navButton.setAttribute("aria-current", "true");
+    list.appendChild(navButton);
+    nav.appendChild(list);
+    newApp.appendChild(nav); // 故意没有 Settings 的 aria-labelledby → title 直接子契约
+
+    const roleMatrix = makeDialog("role-matrix");
+    const aside = doc.createElement("aside");
+    aside.appendChild(doc.createElement("button"));
+    roleMatrix.appendChild(aside);
+
+    const skillCenter = makeDialog("skill-center");
+    skillCenter.append(doc.createElement("header"), doc.createElement("button"));
+
+    const decoys = [onboarding, confirmation, newApp, roleMatrix, skillCenter];
+    doc.body.prepend(...decoys);
+    const before = decoys.map((dialog) => ({
+      dialog,
+      width: getComputedStyle(dialog).width,
+      navOverflowY: dialog.querySelector("nav") === null
+        ? null
+        : getComputedStyle(dialog.querySelector("nav")!).overflowY,
+      buttonPositions: Array.from(dialog.querySelectorAll("button"))
+        .map((node) => getComputedStyle(node).position),
+    }));
+    const pluginStyle = document.querySelector<HTMLStyleElement>(
+      'style[data-plugin-css="dsh-settings-shell/shell.css"]',
+    );
+    expect(pluginStyle).not.toBeNull();
+    doc.head.appendChild(pluginStyle!.cloneNode(true));
+
+    expect(client.syncShell(doc, registryOf(MEASURED_SECTIONS))).toBe("grouped:5");
+    const settings = Array.from(doc.querySelectorAll<HTMLElement>('[role="dialog"]'))
+      .find((panel) => panel.querySelectorAll("nav button").length === MEASURED_SECTIONS.length);
+    expect(settings?.getAttribute("data-dsh-settings-shell-root")).toBe("true");
+    expect(getComputedStyle(settings!.querySelector("nav")!).overflowY).toBe("auto");
+    expect(getComputedStyle(settings!.querySelector("nav button")!).position).toBe("relative");
+    const content = settings!.children[1] as HTMLElement;
+    const options = content.children[1] as HTMLElement;
+    expect(getComputedStyle(content).display).toBe("flex");
+    expect(getComputedStyle(content).flexDirection).toBe("column");
+    expect(getComputedStyle(options).overflowY).toBe("auto");
+    expect(getComputedStyle(options).overflowX).toBe("hidden");
+    for (const snapshot of before) {
+      expect(snapshot.dialog.hasAttribute("data-dsh-settings-shell-root")).toBe(false);
+      expect(getComputedStyle(snapshot.dialog).width).toBe(snapshot.width);
+      if (snapshot.navOverflowY !== null) {
+        expect(getComputedStyle(snapshot.dialog.querySelector("nav")!).overflowY)
+          .toBe(snapshot.navOverflowY);
+      }
+      expect(Array.from(snapshot.dialog.querySelectorAll("button"))
+        .map((node) => getComputedStyle(node).position))
+        .toEqual(snapshot.buttonPositions);
+    }
+  });
+
   it("数量一致时注入 5 个分组标题，位置与按钮对应", async () => {
     const client = await loadClient();
     const doc = settingsShellFixture({ sectionIds: MEASURED_SECTIONS });
@@ -125,6 +238,25 @@ describe("syncShell", () => {
     expect(groupTitles(doc)).toEqual([]);
   });
 
+  it("注册表后续不可读或数量不一致时清掉旧分组，但保留 L1 marker", async () => {
+    const client = await loadClient();
+    const doc = settingsShellFixture({ sectionIds: MEASURED_SECTIONS });
+    const syncState = client.createShellSyncState();
+    client.syncShell(doc, registryOf(MEASURED_SECTIONS), syncState);
+    expect(groupTitles(doc)).toHaveLength(5);
+
+    expect(client.syncShell(doc, undefined, syncState)).toBe("ungrouped:no-registry");
+    expect(groupTitles(doc)).toHaveLength(0);
+    expect(doc.querySelectorAll("[data-dsh-settings-shell-root]")).toHaveLength(1);
+
+    client.syncShell(doc, registryOf(MEASURED_SECTIONS), syncState);
+    expect(groupTitles(doc)).toHaveLength(5);
+    expect(client.syncShell(doc, registryOf(MEASURED_SECTIONS.slice(0, -1)), syncState))
+      .toBe("ungrouped:count 17!=18");
+    expect(groupTitles(doc)).toHaveLength(0);
+    expect(doc.querySelectorAll("[data-dsh-settings-shell-root]")).toHaveLength(1);
+  });
+
   it("entries 抛异常时按读不到处理，不往外抛", async () => {
     const client = await loadClient();
     const doc = settingsShellFixture({ sectionIds: MEASURED_SECTIONS });
@@ -140,6 +272,38 @@ describe("syncShell", () => {
     const client = await loadClient();
     const doc = document.implementation.createHTMLDocument("empty");
     expect(client.syncShell(doc, registryOf(MEASURED_SECTIONS))).toBe("absent");
+  });
+
+  it("设置 panel 关闭后再打开普通 modal 仍是 absent，不沿用历史 drift", async () => {
+    const client = await loadClient();
+    const doc = settingsShellFixture({ sectionIds: MEASURED_SECTIONS });
+    const syncState = client.createShellSyncState();
+    expect(client.syncShell(doc, registryOf(MEASURED_SECTIONS), syncState)).toBe("grouped:5");
+    doc.body.firstElementChild?.remove();
+    const other = doc.createElement("div");
+    other.setAttribute("role", "dialog");
+    other.setAttribute("aria-modal", "true");
+    doc.body.appendChild(other);
+
+    expect(client.syncShell(doc, registryOf(MEASURED_SECTIONS), syncState)).toBe("absent");
+    expect(doc.querySelectorAll("[data-dsh-settings-shell-root]")).toHaveLength(0);
+  });
+
+  it("React 替换 panel 时 marker 迁移，离线旧 panel 也被回收", async () => {
+    const client = await loadClient();
+    const doc = settingsShellFixture({ sectionIds: MEASURED_SECTIONS });
+    const syncState = client.createShellSyncState();
+    client.syncShell(doc, registryOf(MEASURED_SECTIONS), syncState);
+    const oldPanel = doc.querySelector<HTMLElement>('[role="dialog"]')!;
+    const replacementDoc = settingsShellFixture({ sectionIds: MEASURED_SECTIONS });
+    const replacementOverlay = replacementDoc.body.firstElementChild!;
+    doc.body.firstElementChild?.replaceWith(doc.importNode(replacementOverlay, true));
+
+    client.syncShell(doc, registryOf(MEASURED_SECTIONS), syncState);
+    const newPanel = doc.querySelector<HTMLElement>('[role="dialog"]')!;
+    expect(newPanel).not.toBe(oldPanel);
+    expect(newPanel.getAttribute("data-dsh-settings-shell-root")).toBe("true");
+    expect(oldPanel.hasAttribute("data-dsh-settings-shell-root")).toBe(false);
   });
 
   it("结构漂移（按钮不同父）时状态带 drift 前缀", async () => {
@@ -231,6 +395,7 @@ describe("installSettingsShell", () => {
 
     dispose();
     expect(groupTitles(doc)).toEqual([]);
+    expect(doc.querySelectorAll("[data-dsh-settings-shell-root]")).toHaveLength(0);
     expect(doc.documentElement.dataset.dshSettingsShell).toBeUndefined();
     // 按钮仍原样保留 —— disposer 只回收自己的节点
     expect(doc.querySelectorAll("nav button")).toHaveLength(18);

@@ -3,11 +3,11 @@
  * 50 岗位 preset 的**全量保真校验器**（「信息不要少了」的机器契约）
  *
  * 它回答的不是「文件在不在」，而是：材料里关于某个岗位的**每一条信息**，
- * 是否都逐字进了该岗位的 preset。校验分 10 层，任一层失败即非零退出：
+ * 是否都逐字进了该岗位的 preset。校验分 12 层，任一层失败即非零退出：
  *
  *   L1 覆盖   材料里的 50 个岗位与产物目录一一对应，不多不少
- *   L2 全文   岗位卡全文（逐字）出现在 agent.cordis.yml 的 persona 字面块里
- *   L3 小节   岗位卡 7 个 ## 小节逐个逐字出现（合计 350 节，0 缺失）
+ *   L2 归档   岗位卡全文（逐字）归档在 manifest，persona 只保留身份与 Soul 摘要
+ *   L3 小节   岗位卡 7 个 ## 小节逐个逐字出现在 manifest（合计 350 节，0 缺失）
  *   L4 字段   role-catalog 的 20 个字段逐个 deepEqual，且**反向**无丢字段
  *   L5 归集   org / mgmt / lifecycle / collab / flow-catalog / playbooks / roster 七项来源
  *            逐条 deepEqual（含该岗位涉及的边）
@@ -16,6 +16,8 @@
  *   L8 技能   skill-subset 引用的每一个技能都真实存在（0 悬空）
  *   L9 编队   squad 契约与材料选路规则逐条一致，且零/多匹配一律 WAIT
  *   L10 头像  preset.yml 的 icon 存在、与图标库同一字符串、50 枚互不重样
+ *   L11 角色资产  Soul / Role Playbook / Blueprint / Skill descriptor / Bundle 引用闭合
+ *   L12 快照  source revision、generator revision、索引哈希和设计期运行边界可重算
  *
  * 用法：
  *   node scripts/role-presets/verify-lossless.mjs                 # 校验默认输出根
@@ -43,6 +45,14 @@ const SKILLS_ROOT = process.env.ROLE_SKILLS_ROOT || join(homedir(), '.dsh', 'ski
 
 const raw = (rel) => readFileSync(join(DOCS, rel), 'utf8')
 const sha256 = (t) => createHash('sha256').update(t, 'utf8').digest('hex')
+const canonicalize = (value) => {
+  if (Array.isArray(value)) return value.map(canonicalize)
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, canonicalize(value[key])]))
+  }
+  return value
+}
+const canonicalJson = (value) => JSON.stringify(canonicalize(value))
 const SOURCE_FILES = {
   roleCatalog: '05-agents/role-catalog.json',
   organizationGraph: '04-organization/organization-graph.json',
@@ -52,6 +62,39 @@ const SOURCE_FILES = {
   flowCatalog: '03-scenarios/FLOW-CATALOG.md',
   playbooks: '06-playbooks/PLAYBOOKS.md',
   roster: '05-agents/ROSTER.md',
+}
+const ROLE_ASSET_FILES = {
+  rolePlaybookIndex: '06-playbooks/role-playbooks/index.json',
+  presetBlueprintManifest: '10-platform/deepseek-harness/preset-blueprints/manifest.json',
+  soul: (id) => `05-agents/roles/souls/${id}.soul.md`,
+  rolePlaybook: (id) => `06-playbooks/role-playbooks/${id}.md`,
+  presetBlueprint: (id) => `10-platform/deepseek-harness/preset-blueprints/${id}.json`,
+}
+
+function soulSection(soulText, heading) {
+  const lines = soulText.split('\n')
+  const start = lines.findIndex((line) => line.trim() === `## ${heading}`)
+  if (start < 0) return null
+  const body = []
+  for (let i = start; i < lines.length; i++) {
+    if (i > start && lines[i].startsWith('## ')) break
+    body.push(lines[i])
+  }
+  return body.join('\n').replace(/\s+$/, '')
+}
+
+function expectedSoulSummary(soulText, soulPath, soulSha) {
+  const sections = ['我是谁', '我的灵魂原则', '我绝不做什么', '我的停止信号']
+  const bodies = sections.map((heading) => soulSection(soulText, heading))
+  if (bodies.some((body) => body === null)) return null
+  return [
+    '── Soul Contract 摘要（身份 / 灵魂 / 硬边界 / 停止信号）────────────────',
+    '',
+    `来源：${soulPath}；sha256 ${soulSha}`,
+    '以下摘要是常驻身份约束；完整 Soul Contract 与 Role Playbook 只在 manifest 的角色资产区按需寻址。',
+    '',
+    ...bodies.flatMap((body) => [body, '']),
+  ].join('\n').replace(/\n+$/, '')
 }
 
 const failures = []
@@ -92,6 +135,9 @@ function main() {
   for (const [key, rel] of Object.entries(SOURCE_FILES)) {
     if (!existsSync(join(DOCS, rel))) fail('L0', `源文件缺失：${rel}`)
   }
+  for (const rel of [ROLE_ASSET_FILES.rolePlaybookIndex, ROLE_ASSET_FILES.presetBlueprintManifest]) {
+    if (!existsSync(join(DOCS, rel))) fail('L0', `角色资产索引缺失：${rel}`)
+  }
   if (failures.length) return report()
 
   const roleCatalog = JSON.parse(raw(SOURCE_FILES.roleCatalog))
@@ -102,6 +148,18 @@ function main() {
   const flowCatalogText = raw(SOURCE_FILES.flowCatalog)
   const playbooksText = raw(SOURCE_FILES.playbooks)
   const rosterText = raw(SOURCE_FILES.roster)
+  const rolePlaybookIndexText = raw(ROLE_ASSET_FILES.rolePlaybookIndex)
+  const presetBlueprintManifestText = raw(ROLE_ASSET_FILES.presetBlueprintManifest)
+  const rolePlaybookIndex = JSON.parse(rolePlaybookIndexText)
+  const presetBlueprintManifest = JSON.parse(presetBlueprintManifestText)
+  const playbooksByRole = new Map((rolePlaybookIndex.roles || []).map((entry) => [entry.role_id, entry]))
+  const blueprintsByRole = new Map((presetBlueprintManifest.roles || []).map((entry) => [entry.role_id, entry]))
+  for (const role of roleCatalog.roles) {
+    for (const rel of [ROLE_ASSET_FILES.soul(role.id), ROLE_ASSET_FILES.rolePlaybook(role.id), ROLE_ASSET_FILES.presetBlueprint(role.id)]) {
+      if (!existsSync(join(DOCS, rel))) fail('L0', `${role.id}: 角色资产缺失：${rel}`)
+    }
+  }
+  if (failures.length) return report()
 
   const orgEdges = new Map()
   for (const e of orgGraph.edges) for (const s of ['from', 'to']) {
@@ -123,6 +181,44 @@ function main() {
   const sourceHashes = Object.fromEntries(
     Object.entries(SOURCE_FILES).map(([k, rel]) => [k, sha256(raw(rel))]),
   )
+  const assetIndexHashes = {
+    rolePlaybookIndex: sha256(rolePlaybookIndexText),
+    presetBlueprintManifest: sha256(presetBlueprintManifestText),
+  }
+  const roleAssetSource = new Map()
+  for (const role of roleCatalog.roles) {
+    const profileText = raw(`05-agents/roles/${role.id}.md`)
+    const soulText = raw(ROLE_ASSET_FILES.soul(role.id))
+    const rolePlaybookText = raw(ROLE_ASSET_FILES.rolePlaybook(role.id))
+    const presetBlueprintText = raw(ROLE_ASSET_FILES.presetBlueprint(role.id))
+    roleAssetSource.set(role.id, {
+      profileText,
+      soulText,
+      rolePlaybookText,
+      presetBlueprintText,
+      blueprint: JSON.parse(presetBlueprintText),
+      hashes: {
+        roleCard: sha256(profileText),
+        soul: sha256(soulText),
+        rolePlaybook: sha256(rolePlaybookText),
+        presetBlueprint: sha256(presetBlueprintText),
+      },
+    })
+  }
+  const sourceRevisionPayload = {
+    shared: sourceHashes,
+    indexes: assetIndexHashes,
+    roles: [...roleAssetSource.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([id, assets]) => ({
+      id,
+      roleCard: assets.hashes.roleCard,
+      soul: assets.hashes.soul,
+      rolePlaybook: assets.hashes.rolePlaybook,
+      presetBlueprint: assets.hashes.presetBlueprint,
+    })),
+  }
+  const expectedSourceRevision = process.env.ROLE_SOURCE_REVISION || `source-hash:${sha256(canonicalJson(sourceRevisionPayload))}`
+  const generatePath = fileURLToPath(new URL('./generate.mjs', import.meta.url))
+  const expectedGeneratorRevision = process.env.ROLE_GENERATOR_REVISION || sha256(readFileSync(generatePath, 'utf8'))
 
   // ── L1 覆盖 ──
   const expectedIds = roleCatalog.roles.map((r) => r.id).sort()
@@ -155,13 +251,15 @@ function main() {
     const cardText = raw(`05-agents/roles/${id}.md`)
     cardBytesTotal += Buffer.byteLength(cardText, 'utf8')
 
-    // ── L2 全文 ──
+    // ── L2 全文归档 / persona 摘要 ──
     const persona = extractPersonaText(composition)
     if (persona === null) {
       fail('L2', `${dirId}: 找不到 persona 字面块（    text: |-）`)
     } else {
       const card = cardText.replace(/\s+$/, '')
-      if (!persona.includes(card)) fail('L2', `${dirId}: persona 未逐字包含岗位卡全文`)
+      if (persona.includes(card)) fail('L2', `${dirId}: 完整岗位卡不应常驻 persona，应归档在 manifest.material.role_card`)
+      else if (!persona.includes(`岗位 ${id} ${role.title}`)) fail('L2', `${dirId}: persona 缺少岗位身份摘要`)
+      else if (!manifest.material.role_card.text.includes(card)) fail('L2', `${dirId}: manifest 未逐字归档岗位卡全文`)
       else ok()
     }
 
@@ -170,10 +268,6 @@ function main() {
     if (sections.length !== 7) fail('L3', `${dirId}: 岗位卡小节数为 ${sections.length}，期望 7`)
     for (const sec of sections) {
       sectionTotal++
-      if (persona === null || !persona.includes(sec)) {
-        const h = sec.split('\n')[0]
-        fail('L3', `${dirId}: 小节未逐字保真 → ${h}`)
-      } else ok()
       if (!manifest.material.role_card.sections.some((s) => s.body === sec)) {
         fail('L3', `${dirId}: manifest 未收录该小节 → ${sec.split('\n')[0]}`)
       } else ok()
@@ -251,12 +345,113 @@ function main() {
     if (!manifest.material.role_card.text.includes(cardText.replace(/\s+$/, ''))) {
       fail('L6', `${dirId}: manifest 内的岗位卡快照不完整`)
     } else ok()
+
+    // ── L11 角色资产（Soul / Role Playbook / Blueprint / Skill / Bundle）──
+    const sourceAsset = roleAssetSource.get(id)
+    const assets = manifest.role_assets
+    const expectedPresetId = dirId
+    const playbookIndexEntry = playbooksByRole.get(id)
+    const blueprintIndexEntry = blueprintsByRole.get(id)
+    if (!assets || assets.role_id !== id || assets.preset_id !== expectedPresetId) {
+      fail('L11', `${dirId}: manifest.role_assets 缺失或 role_id/preset_id 不一致`)
+    } else ok()
+    if (!playbookIndexEntry || !blueprintIndexEntry) {
+      fail('L11', `${dirId}: 角色资产索引缺少该岗位引用`)
+    } else ok()
+    if (assets?.role_profile?.ref !== `docs/05-agents/roles/${id}.md` ||
+        assets?.role_profile?.sha256 !== sourceAsset?.hashes.roleCard) {
+      fail('L11', `${dirId}: role_profile 引用或哈希不一致`)
+    } else ok()
+    const soulPath = ROLE_ASSET_FILES.soul(id)
+    const rolePlaybookPath = ROLE_ASSET_FILES.rolePlaybook(id)
+    const blueprintPath = ROLE_ASSET_FILES.presetBlueprint(id)
+    const soul = assets?.soul
+    if (soul?.ref !== `docs/${soulPath}` || soul?.sha256 !== sourceAsset?.hashes.soul || soul?.text !== sourceAsset?.soulText) {
+      fail('L11', `${dirId}: Soul Contract 资产未逐字闭合`)
+    } else ok()
+    const summary = expectedSoulSummary(sourceAsset?.soulText || '', `docs/${soulPath}`, sourceAsset?.hashes.soul)
+    if (!summary || soul?.persona_summary_sha256 !== sha256(summary) || persona === null || !persona.includes(summary)) {
+      fail('L11', `${dirId}: persona 未包含可重算的 Soul 摘要`)
+    } else ok()
+    const rolePlaybook = assets?.role_playbook
+    const skillId = `role-playbook-${dirId}`
+    if (rolePlaybook?.ref !== `docs/${rolePlaybookPath}` ||
+        rolePlaybook?.sha256 !== sourceAsset?.hashes.rolePlaybook ||
+        rolePlaybook?.body_sha256 !== sourceAsset?.hashes.rolePlaybook ||
+        rolePlaybook?.text !== sourceAsset?.rolePlaybookText ||
+        rolePlaybook?.skill_id !== skillId ||
+        rolePlaybook?.user_invocable !== false ||
+        rolePlaybook?.installed !== false ||
+        typeof rolePlaybook?.source !== 'string' || rolePlaybook.source.length === 0 ||
+        rolePlaybook?.loader !== 'target-host-to-be-verified') {
+      fail('L11', `${dirId}: Role Playbook Skill descriptor 或正文不一致`)
+    } else ok()
+    if (persona !== null && persona.includes(sourceAsset?.rolePlaybookText?.replace(/\s+$/, ''))) {
+      fail('L11', `${dirId}: 完整 Role Playbook 不得常驻 persona`)
+    } else ok()
+    const blueprint = assets?.preset_blueprint
+    if (blueprint?.ref !== `docs/${blueprintPath}` ||
+        blueprint?.sha256 !== sourceAsset?.hashes.presetBlueprint ||
+        blueprint?.record === undefined ||
+        !isDeepStrictEqual(blueprint.record, sourceAsset?.blueprint)) {
+      fail('L11', `${dirId}: Preset Blueprint 资产未逐字闭合`)
+    } else ok()
+    const bundle = assets?.role_release_bundle_ref
+    const bundleInput = {
+      role_id: id,
+      preset_id: dirId,
+      version: sourceAsset?.blueprint?.version,
+      role_card_sha256: sourceAsset?.hashes.roleCard,
+      soul_contract_sha256: sourceAsset?.hashes.soul,
+      role_playbook_sha256: sourceAsset?.hashes.rolePlaybook,
+      preset_blueprint_sha256: sourceAsset?.hashes.presetBlueprint,
+      production_authorized: false,
+    }
+    const expectedBundleHash = `sha256:${sha256(canonicalJson(bundleInput))}`
+    if (bundle?.bundle_id !== `RRB-${id}` || bundle?.version !== sourceAsset?.blueprint?.version ||
+        bundle?.content_hash !== expectedBundleHash || bundle?.status !== 'blueprint_only_not_importable') {
+      fail('L11', `${dirId}: Role Release Bundle 引用不可重算或状态不正确`)
+    } else ok()
   }
 
   // ── 汇总断言 ──
   if (sectionTotal !== expectedIds.length * 7) {
     fail('L3', `小节总数 ${sectionTotal}，期望 ${expectedIds.length * 7}`)
   } else ok()
+
+  // ── L12 输入快照与设计期边界 ──
+  for (const role of roleCatalog.roles) {
+    const dirId = `agt-${role.id.slice(4)}`
+    const manPath = join(OUT_ROOT, dirId, 'manifest.json')
+    if (!existsSync(manPath)) continue
+    const man = JSON.parse(readFileSync(manPath, 'utf8'))
+    const snapshot = man.source_snapshot
+    const sourceAsset = roleAssetSource.get(role.id)
+    if (!snapshot || snapshot.source_revision !== expectedSourceRevision ||
+        snapshot.generator_revision !== expectedGeneratorRevision ||
+        snapshot.generator_rules_revision !== expectedGeneratorRevision ||
+        !isDeepStrictEqual(snapshot.shared_source_hashes, sourceHashes) ||
+        !isDeepStrictEqual(snapshot.asset_index_hashes, assetIndexHashes) ||
+        !isDeepStrictEqual(snapshot.source_hashes, {
+          role_card: sourceAsset.hashes.roleCard,
+          soul_contract: sourceAsset.hashes.soul,
+          role_playbook: sourceAsset.hashes.rolePlaybook,
+          preset_blueprint: sourceAsset.hashes.presetBlueprint,
+        })) {
+      fail('L12', `${dirId}: source_snapshot 无法按当前输入快照重算`)
+    } else ok()
+    const runtime = man?.role_assets?.runtime_contract
+    const bp = sourceAsset.blueprint
+    if (runtime?.status !== 'blueprint_only_not_importable' ||
+        runtime?.production_authorized !== false ||
+        runtime?.composition_owner !== 'external_case_control' ||
+        runtime?.peer_chat !== false || runtime?.re_delegation !== false ||
+        runtime?.can_execute_assets !== false ||
+        runtime?.action_boundary !== 'action_intent_only_to_model_external_policy_gate' ||
+        bp?.assurance?.production_authorized !== false) {
+      fail('L12', `${dirId}: 设计期运行边界或生产授权标记不符合契约`)
+    } else ok()
+  }
 
   // ── L8 技能引用真实性（skill-subset 的每个 id 必须在技能库真实存在）──
   const installedSkills = new Set(
@@ -422,7 +617,7 @@ function main() {
 
 function report() {
   if (failures.length === 0) {
-    console.log('\n★ 全量保真校验通过：L1 覆盖 / L2 全文 / L3 小节 / L4 字段 / L5 归集 / L6 哈希 / L7 官方lint / L8 技能引用 / L9 编队契约 / L10 头像 全部无损')
+    console.log('\n★ 全量保真校验通过：L1 覆盖 / L2 归档与摘要 / L3 小节 / L4 字段 / L5 归集 / L6 哈希 / L7 官方lint / L8 技能引用 / L9 编队契约 / L10 头像 / L11 角色资产 / L12 输入快照 全部闭合')
     process.exit(0)
   }
   console.log(`\n✗ 全量保真校验失败：${failures.length} 条`)

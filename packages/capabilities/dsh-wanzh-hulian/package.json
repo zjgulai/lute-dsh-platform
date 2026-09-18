@@ -14,10 +14,13 @@
   },
   "files": [
     "lib/index.js",
+    "lib/atomic-store.js",
     "lib/boards.js",
+    "lib/bounded-body.js",
     "lib/business-meta.js",
-    "lib/host-util.js",
     "lib/client.js",
+    "lib/host-util.js",
+    "lib/oauth-flow.js",
     "cordis.patch.yml"
   ],
   "dsh": {

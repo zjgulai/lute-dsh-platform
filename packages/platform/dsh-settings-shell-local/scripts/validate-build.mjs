@@ -4,10 +4,11 @@ const clientPath = new URL("../lib/client.js", import.meta.url);
 const hostPath = new URL("../lib/index.js", import.meta.url);
 const budget = 120_000;
 
-const [{ size }, client, host] = await Promise.all([
+const [{ size }, client, host, shellCss] = await Promise.all([
   stat(clientPath),
   readFile(clientPath, "utf8"),
   stat(hostPath).then(() => readFile(hostPath, "utf8")),
+  readFile(new URL("../src/client/shell.css", import.meta.url), "utf8"),
 ]);
 
 if (size > budget) {
@@ -96,6 +97,26 @@ if (!client.includes("aria-modal")) {
 
 if (!client.includes("data-dsh-ss-group")) {
   throw new Error("Client bundle lost the group marker attribute");
+}
+
+if (!client.includes("data-dsh-settings-shell-root")) {
+  throw new Error("Client bundle lost the parser-owned settings root marker");
+}
+
+/**
+ * CSS 不得自己从全局 modal/nav/button 里猜 Settings。每个普通规则的每条选择器
+ * 都必须消费 parser 成功后添加的 root marker；这样 JS 身份判定和 CSS
+ * 作用域只有一份事实。
+ */
+const cssWithoutComments = shellCss.replace(/\/\*[\s\S]*?\*\//g, "");
+for (const match of cssWithoutComments.matchAll(/([^{}]+)\{/g)) {
+  const selectorBlock = match[1]?.trim() ?? "";
+  if (selectorBlock === "" || selectorBlock.startsWith("@")) continue;
+  for (const selector of selectorBlock.split(",").map((value) => value.trim())) {
+    if (!selector.includes("[data-dsh-settings-shell-root]")) {
+      throw new Error(`Shell CSS selector is not scoped by the parser-owned root marker: ${selector}`);
+    }
+  }
 }
 
 if (!host.includes("function apply")) {

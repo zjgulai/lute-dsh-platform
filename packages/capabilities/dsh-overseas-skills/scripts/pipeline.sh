@@ -17,9 +17,9 @@ echo "== [2/7] 分配 LUTE 头像（出海 + AI全栈） =="
 python3 scripts/assign_lute_icons.py
 
 echo "== [3/8] AI全栈技能安装（幂等） =="
-node scripts/import-fullstack.mjs || true
-node scripts/normalize-zh.mjs || true
-node scripts/verify-fullstack.mjs || true
+node scripts/import-fullstack.mjs
+node scripts/normalize-zh.mjs
+node scripts/verify-fullstack.mjs
 
 echo "== [4/8] 指令软化（幂等） =="
 node scripts/soften-clarify.mjs || true

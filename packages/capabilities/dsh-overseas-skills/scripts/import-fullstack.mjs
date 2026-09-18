@@ -15,10 +15,9 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const SKILLS_DIR = path.join(process.env.HOME, ".dsh", "skills");
-// 源根多路回退：staging/third-party/（仓库内缓存，第三方技能）优先，mattpocock 本地缓存兜底
+// 源根：必须严格受控于仓库内 staging/third-party/，禁止 /tmp 等未版本控制的浮动回退（SEC-RT-002）
 const SRC_ROOTS = [
   path.join(ROOT, "staging", "third-party"),
-  "/tmp/mattpocock-skills/skills",
 ];
 const TRANSLATIONS = path.join(ROOT, "staging", "translations");
 const MAPPING = JSON.parse(fs.readFileSync(path.join(__dirname, "fullstack-mapping.json"), "utf8"));

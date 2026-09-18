@@ -10,28 +10,44 @@ import * as React from "react";
 import {
   CODE_FONT_IDS,
   CODE_FONT_SIZES,
-  isHexColor,
   UI_FONT_IDS,
   UI_FONT_SIZES,
   type CodeFontId,
   type CodeFontSize,
   type ThemeColorField,
+  type ThemeContrastField,
   type ThemeStudioSettings,
   type ThemeTypographyField,
   type UiFontId,
   type UiFontSize,
 } from "../theme-settings.js";
+import { AccentSwatches } from "./AccentSwatches.js";
+import { AdvancedDisclosure } from "./AdvancedDisclosure.js";
+import { ColorChip } from "./ColorChip.js";
+import { ContrastSlider } from "./ContrastSlider.js";
+import { ShareString } from "./ShareString.js";
+import { SizeStepper } from "./SizeStepper.js";
+import {
+  ACCENT_SWATCHES,
+  activeAccentSwatchId,
+  type AccentSwatchId,
+} from "./accent-swatches.js";
+import type { ThemeStudioPrefs } from "./persistence.js";
 import {
   THEME_PRESETS,
   themePresetIdOf,
   type ThemePresetId,
 } from "./presets.js";
 import type { createThemeStudioStore } from "./store.js";
+import { CODE_FONT_STACKS, UI_FONT_STACKS } from "./theme-tokens.js";
 
 export interface ThemeStudioInjected {
   applyPreset: (id: ThemePresetId) => void;
+  applySettings: (settings: ThemeStudioSettings) => void;
   resetTheme: () => void;
   setColor: (field: ThemeColorField, value: string) => void;
+  setContrast: (field: ThemeContrastField, value: number) => void;
+  setPrefs: (patch: Partial<ThemeStudioPrefs>) => void;
   setTheme: (preference: ThemePreference) => void;
   setTypography: <Field extends ThemeTypographyField>(
     field: Field,
@@ -44,95 +60,29 @@ type ThemeStudioProps = PropsRuntime<"settings.section"> &
   PropsLocale<"dsh.theme"> &
   ThemeStudioInjected;
 
-interface ColorFieldProps {
-  field: ThemeColorField;
-  invalidMessage: string;
-  label: string;
-  onChange: (field: ThemeColorField, value: string) => void;
-  value: string;
-}
-
 interface SettingSelectProps {
   label: string;
   onChange: (value: string) => void;
-  options: readonly { label: string; value: string }[];
+  options: readonly { fontFamily?: string; label: string; value: string }[];
   value: string;
 }
 
-const COLOR_ROWS = [
-  ["accent", "color.accent"],
-  ["background", "color.background"],
-  ["foreground", "color.foreground"],
-  ["surface", "color.surface"],
-  ["inlineCode", "color.inlineCode"],
-  ["sidebar", "color.sidebar"],
-] as const;
-
 const MODE_OPTIONS = ["system", "light", "dark"] as const;
+const REDUCE_MOTION_OPTIONS = ["system", "on", "off"] as const;
+const VARIANTS = ["light", "dark"] as const;
+const ADVANCED_SUFFIXES = ["surface", "inlineCode", "sidebar"] as const;
 
-function ColorField({
-  field,
-  invalidMessage,
-  label,
-  onChange,
-  value,
-}: ColorFieldProps) {
-  const [draft, setDraft] = React.useState(value);
-  const valid = isHexColor(draft);
+type VariantMode = (typeof VARIANTS)[number];
 
-  React.useEffect(() => setDraft(value), [value]);
-
-  const commit = (next: string) => {
-    const normalized = next.toUpperCase();
-    setDraft(normalized);
-    if (isHexColor(normalized)) onChange(field, normalized);
-  };
-
-  const inputId = `appearance-${field}`;
-
-  return (
-    <div data-appearance-color-row>
-      <label htmlFor={inputId}>{label}</label>
-      <div data-appearance-color-control>
-        <input
-          aria-label={`${label} color picker`}
-          data-appearance-swatch
-          type="color"
-          value={value}
-          onChange={(event) => commit(event.currentTarget.value)}
-        />
-        <input
-          id={inputId}
-          aria-describedby={valid ? undefined : `${inputId}-error`}
-          aria-invalid={!valid}
-          autoComplete="off"
-          data-appearance-input
-          inputMode="text"
-          maxLength={7}
-          pattern="#[0-9A-Fa-f]{6}"
-          spellCheck={false}
-          value={draft}
-          onBlur={() => {
-            if (!valid) setDraft(value);
-          }}
-          onChange={(event) => commit(event.currentTarget.value)}
-        />
-      </div>
-      {!valid && (
-        <span id={`${inputId}-error`} data-appearance-field-error>
-          {invalidMessage}
-        </span>
-      )}
-    </div>
-  );
+function colorFieldOf(mode: VariantMode, suffix: string): ThemeColorField {
+  return `${mode}${suffix.charAt(0).toUpperCase()}${suffix.slice(1)}` as ThemeColorField;
 }
 
-function SettingSelect({
-  label,
-  onChange,
-  options,
-  value,
-}: SettingSelectProps) {
+function contrastFieldOf(mode: VariantMode): ThemeContrastField {
+  return mode === "light" ? "lightContrast" : "darkContrast";
+}
+
+function SettingSelect({ label, onChange, options, value }: SettingSelectProps) {
   return (
     <label data-appearance-setting-row>
       <span>{label}</span>
@@ -142,7 +92,15 @@ function SettingSelect({
         onChange={(event) => onChange(event.currentTarget.value)}
       >
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
+          <option
+            key={option.value}
+            style={
+              option.fontFamily === undefined
+                ? undefined
+                : { fontFamily: option.fontFamily }
+            }
+            value={option.value}
+          >
             {option.label}
           </option>
         ))}
@@ -192,8 +150,11 @@ function PalettePreview({
 
 export function ThemeStudio({
   applyPreset,
+  applySettings,
   resetTheme,
   setColor,
+  setContrast,
+  setPrefs,
   setTheme,
   setTypography,
   t,
@@ -201,29 +162,32 @@ export function ThemeStudio({
 }: ThemeStudioProps) {
   const activeScheme = useStore((state) => state.activeScheme);
   const preference = useStore((state) => state.preference);
+  const prefs = useStore((state) => state.prefs);
   const saveStatus = useStore((state) => state.saveStatus);
   const settings = useStore((state) => state.settings);
   const activePreset = themePresetIdOf(settings);
-  const [paletteMode, setPaletteMode] = React.useState<"light" | "dark">(
-    activeScheme,
-  );
+  const activeAccent = activeAccentSwatchId(settings);
 
   const uiFontOptions = UI_FONT_IDS.map((value) => ({
     value,
     label: t(`font.${value}`),
+    fontFamily: UI_FONT_STACKS[value],
   }));
   const codeFontOptions = CODE_FONT_IDS.map((value) => ({
     value,
     label: t(`font.${value}`),
+    fontFamily: CODE_FONT_STACKS[value],
   }));
-  const uiSizeOptions = UI_FONT_SIZES.map((value) => ({
-    value: String(value),
-    label: `${value} px`,
-  }));
-  const codeSizeOptions = CODE_FONT_SIZES.map((value) => ({
-    value: String(value),
-    label: `${value} px`,
-  }));
+
+  const applyAccentSwatch = (id: AccentSwatchId) => {
+    const swatch = ACCENT_SWATCHES.find((candidate) => candidate.id === id);
+    if (swatch === undefined) return;
+    applySettings({
+      ...settings,
+      lightAccent: swatch.light,
+      darkAccent: swatch.dark,
+    });
+  };
 
   const statusText =
     saveStatus === "saving"
@@ -250,97 +214,145 @@ export function ThemeStudio({
       </header>
 
       <div data-appearance-content>
-        <div data-appearance-mode-grid>
-          {MODE_OPTIONS.map((mode) => (
-            <button
-              key={mode}
-              aria-pressed={preference === mode}
-              data-appearance-mode
-              data-selected={preference === mode ? "true" : "false"}
-              type="button"
-              onClick={() => setTheme(mode)}
-            >
-              <ModePreview mode={mode} />
-              <span>{t(`mode.${mode}`)}</span>
-            </button>
-          ))}
-        </div>
-
-        <section data-appearance-presets>
-          <div data-appearance-subheading>
+        <section data-appearance-card data-card="theme">
+          <div data-appearance-card-header>
             <h3>{t("preset.title")}</h3>
             <p>{t("preset.description")}</p>
           </div>
-          <div data-appearance-theme-picker>
-            <select
-              aria-label={t("preset.title")}
-              data-appearance-select
-              value={activePreset ?? ""}
-              onChange={(event) => {
-                const id = event.currentTarget.value;
-                if (id !== "") applyPreset(id as ThemePresetId);
-              }}
-            >
-              {activePreset === undefined && (
-                <option value="">{t("preset.custom")}</option>
-              )}
-              {THEME_PRESETS.map((preset) => (
-                <option key={preset.id} value={preset.id}>
-                  {t(`preset.${preset.id}`)}
-                </option>
-              ))}
-            </select>
-            <PalettePreview mode={activeScheme} settings={settings} />
-          </div>
-        </section>
+          <ShareString settings={settings} t={t} onImport={applySettings} />
 
-        <section data-appearance-palette>
           <div
-            aria-label={t("preset.title")}
-            data-appearance-tabs
-            role="tablist"
+            aria-label={t("mode.title")}
+            data-appearance-mode-grid
+            role="radiogroup"
           >
-            {(["light", "dark"] as const).map((mode) => (
-              <button
+            {MODE_OPTIONS.map((mode) => (
+              <label
                 key={mode}
-                aria-selected={paletteMode === mode}
-                data-selected={paletteMode === mode ? "true" : "false"}
-                role="tab"
-                type="button"
-                onClick={() => setPaletteMode(mode)}
+                data-appearance-mode
+                data-selected={preference === mode ? "true" : "false"}
               >
-                {t(`palette.${mode}`)}
-              </button>
+                <input
+                  checked={preference === mode}
+                  data-appearance-sr
+                  name="appearance-mode"
+                  type="radio"
+                  value={mode}
+                  onChange={() => setTheme(mode)}
+                />
+                <ModePreview mode={mode} />
+                <span>{t(`mode.${mode}`)}</span>
+              </label>
             ))}
           </div>
-          {(["light", "dark"] as const).map((mode) => (
-            <div
-              key={mode}
-              data-appearance-fields
-              hidden={paletteMode !== mode}
-              role="tabpanel"
-            >
-              {COLOR_ROWS.map(([suffix, labelKey]) => {
-                const field =
-                  `${mode}${suffix[0]?.toUpperCase()}${suffix.slice(1)}` as ThemeColorField;
-                return (
-                  <ColorField
-                    key={field}
-                    field={field}
-                    invalidMessage={t("input.invalid")}
-                    label={t(labelKey)}
-                    value={settings[field]}
-                    onChange={setColor}
+
+          <div
+            aria-label={t("preset.title")}
+            data-appearance-preset-grid
+            role="radiogroup"
+          >
+            {THEME_PRESETS.map((preset) => {
+              const selected = activePreset === preset.id;
+              return (
+                <label
+                  key={preset.id}
+                  data-appearance-preset
+                  data-selected={selected ? "true" : "false"}
+                >
+                  <input
+                    checked={selected}
+                    data-appearance-sr
+                    name="appearance-preset"
+                    type="radio"
+                    value={preset.id}
+                    onChange={() => applyPreset(preset.id)}
                   />
-                );
-              })}
-            </div>
+                  <PalettePreview
+                    mode={activeScheme}
+                    settings={{ ...settings, ...preset.palette }}
+                  />
+                  <span>{t(`preset.${preset.id}`)}</span>
+                </label>
+              );
+            })}
+            {activePreset === undefined && (
+              <span
+                data-appearance-preset
+                data-custom="true"
+                data-selected="true"
+              >
+                <span data-appearance-preset-custom>{t("preset.custom")}</span>
+              </span>
+            )}
+          </div>
+
+          <div data-appearance-accent-group>
+            <AccentSwatches
+              activeId={activeAccent}
+              customLabel={t("accent.custom")}
+              label={t("accent.label")}
+              labelOf={(id) => t(`accent.${id}`)}
+              onSelect={applyAccentSwatch}
+            />
+          </div>
+
+          {VARIANTS.map((mode) => (
+            <section
+              key={mode}
+              aria-labelledby={`appearance-variant-${mode}`}
+              data-appearance-variant
+            >
+              <h4 id={`appearance-variant-${mode}`}>{t(`variant.${mode}`)}</h4>
+              <div data-appearance-fields>
+                <ColorChip
+                  field={colorFieldOf(mode, "background")}
+                  invalidMessage={t("input.invalid")}
+                  label={t("color.background")}
+                  value={settings[colorFieldOf(mode, "background")]}
+                  onChange={setColor}
+                />
+                <ColorChip
+                  field={colorFieldOf(mode, "foreground")}
+                  invalidMessage={t("input.invalid")}
+                  label={t("color.foreground")}
+                  value={settings[colorFieldOf(mode, "foreground")]}
+                  onChange={setColor}
+                />
+                <ContrastSlider
+                  description={t("contrast.description")}
+                  highLabel={t("contrast.high")}
+                  label={t("contrast.label")}
+                  lowLabel={t("contrast.low")}
+                  standardLabel={t("contrast.standard")}
+                  value={settings[contrastFieldOf(mode)]}
+                  onChange={(value) => setContrast(contrastFieldOf(mode), value)}
+                />
+                <AdvancedDisclosure
+                  description={t("advanced.description")}
+                  title={t("advanced.title")}
+                >
+                  {ADVANCED_SUFFIXES.map((suffix) => (
+                    <ColorChip
+                      key={suffix}
+                      field={colorFieldOf(mode, suffix)}
+                      invalidMessage={t("input.invalid")}
+                      label={t(`color.${suffix}`)}
+                      value={settings[colorFieldOf(mode, suffix)]}
+                      onChange={setColor}
+                    />
+                  ))}
+                </AdvancedDisclosure>
+              </div>
+            </section>
           ))}
         </section>
 
-        <section data-appearance-typography>
+        <section data-appearance-card data-card="prefs">
+          <div data-appearance-card-header>
+            <h3>{t("prefs.title")}</h3>
+          </div>
           <div data-appearance-subheading>
-            <h3>{t("typography.title")}</h3>
+            <h4>{t("typography.title")}</h4>
             <p>{t("typography.description")}</p>
           </div>
           <div data-appearance-setting-list>
@@ -358,22 +370,76 @@ export function ThemeStudio({
                 setTypography("codeFont", value as CodeFontId)
               }
             />
-            <SettingSelect
+            <SizeStepper
+              decreaseLabel={t("size.decrease")}
+              increaseLabel={t("size.increase")}
               label={t("typography.uiFontSize")}
-              options={uiSizeOptions}
-              value={String(settings.uiFontSize)}
+              value={settings.uiFontSize}
+              values={UI_FONT_SIZES}
               onChange={(value) =>
-                setTypography("uiFontSize", Number(value) as UiFontSize)
+                setTypography("uiFontSize", value as UiFontSize)
               }
             />
-            <SettingSelect
+            <SizeStepper
+              decreaseLabel={t("size.decrease")}
+              increaseLabel={t("size.increase")}
               label={t("typography.codeFontSize")}
-              options={codeSizeOptions}
-              value={String(settings.codeFontSize)}
+              value={settings.codeFontSize}
+              values={CODE_FONT_SIZES}
               onChange={(value) =>
-                setTypography("codeFontSize", Number(value) as CodeFontSize)
+                setTypography("codeFontSize", value as CodeFontSize)
               }
             />
+          </div>
+
+          <div data-appearance-subheading>
+            <h4>{t("prefs.render.title")}</h4>
+          </div>
+          <div data-appearance-setting-list>
+            <div data-appearance-setting-row>
+              <div data-appearance-setting-copy>
+                <span>{t("prefs.reduceMotion")}</span>
+                <p>{t("prefs.reduceMotion.description")}</p>
+              </div>
+              <div
+                aria-label={t("prefs.reduceMotion")}
+                data-appearance-segment
+                role="radiogroup"
+              >
+                {REDUCE_MOTION_OPTIONS.map((option) => (
+                  <label
+                    key={option}
+                    data-selected={prefs.reduceMotion === option ? "true" : "false"}
+                  >
+                    <input
+                      checked={prefs.reduceMotion === option}
+                      data-appearance-sr
+                      name="appearance-reduce-motion"
+                      type="radio"
+                      value={option}
+                      onChange={() => setPrefs({ reduceMotion: option })}
+                    />
+                    <span>{t(`segment.${option}`)}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div data-appearance-setting-row>
+              <div data-appearance-setting-copy>
+                <span>{t("prefs.fontSmoothing")}</span>
+                <p>{t("prefs.fontSmoothing.description")}</p>
+              </div>
+              <button
+                aria-checked={prefs.fontSmoothing}
+                aria-label={t("prefs.fontSmoothing")}
+                data-appearance-switch
+                role="switch"
+                type="button"
+                onClick={() => setPrefs({ fontSmoothing: !prefs.fontSmoothing })}
+              >
+                <span aria-hidden="true" data-appearance-switch-thumb />
+              </button>
+            </div>
           </div>
         </section>
 

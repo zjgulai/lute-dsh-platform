@@ -98,6 +98,7 @@ const out = {
   repos: classification.repoAudits.map((repo) => ({
     id: repo.id,
     repo: repo.repo,
+    commit: repo.commit,
     note: repo.note,
     accounting: {
       upstream: repo.upstream,

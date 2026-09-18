@@ -3,10 +3,9 @@
  *
  * 选择器纪律（架构红线第 7 条「官方 UI 改写锚禁止钉哈希」）：
  * 本文件**不含任何 CSS-module 哈希**（官方那份是 `MI-_Aa_panel` 这类内容哈希，
- * 每次上游重建都会变）。全部锚点取自官方 DOM 的 **ARIA 语义**：
- *   panel = [role="dialog"][aria-modal="true"]      （且直接子元素含 <nav>）
- *   nav   = 上面那个 panel 的直接 <nav> 子元素
- *   item  = nav 内的 button；当前项带 aria-current="true"
+ * 每次上游重建都会变）。JS 先用官方 ARIA/DOM 契约解析 Settings，
+ * 只有成功的 panel 才获得 `data-dsh-settings-shell-root` marker。CSS 只消费
+ * 这个 parser-owned marker，不再自己猜测任意 modal/nav/button。
  *
  * 优先级核算：官方是单类选择器 (0,1,0)；本文件的锚都是双属性以上
  * (0,2,0) 起步，因此**不需要 !important** 就能稳赢，且不会与官方样式打架。
@@ -14,34 +13,196 @@
 
 /* 品牌色：路特创新绿。浅色背景下原色对比度只有 2.51:1，达不到无障碍下限，
  * 故浅色用加深变体（白底实测 4.30:1），深色用原色（实测 5.24:1）。 */
-:root {
-  --dsh-settings-shell-brand: #3d8a33;
+[data-dsh-settings-shell-root] {
+  --dsh-settings-shell-brand: var(--dsw-alias-state-business-primary, #3d8a33);
+  --dsh-settings-shell-panel: var(--dsw-alias-bg-layer-1, #ffffff);
+  --dsh-settings-shell-sidebar: var(--dsw-specific-sidebar-fill, #f1f4ef);
+  --dsh-settings-shell-control: var(--dsw-alias-bg-layer-2, #f7f8f7);
+  --dsh-settings-shell-border: var(--dsw-alias-border-l1, rgb(0 0 0 / 8%));
+  --dsh-settings-shell-text: var(--dsw-alias-label-primary, #1e221f);
+  --dsh-settings-shell-muted: var(--dsw-alias-label-secondary, #5d645e);
+  --dsh-settings-shell-control-height: 32px;
+  --dsh-settings-shell-control-radius: 10px;
+  --dsh-settings-shell-motion: 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-body[data-ds-dark-theme] {
-  --dsh-settings-shell-brand: #58b848;
+/* The upstream overlay owns the stacking context; raising the dialog itself
+ * cannot escape its parent's z-index. SettingsRoot is rendered from the
+ * sidebar slot in the real frame, so its presentation wrapper is not a direct
+ * child of body. Select only the wrapper whose direct child is the
+ * parser-validated Settings panel, wherever that wrapper is mounted. */
+[role="presentation"]:has(> [data-dsh-settings-shell-root]) {
+  --dsh-settings-shell-modal-layer: 2147483001;
+  z-index: var(--dsh-settings-shell-modal-layer);
+}
+
+/* The desktop root is a transformed stacking context. Some right-side
+ * surfaces are body-level fixed hosts, so a descendant layer cannot outrank
+ * them by itself. Promote only the app root while the parser-validated
+ * Settings modal exists; keep the native chrome's reserved max layer above it. */
+body:has([data-dsh-settings-shell-root]) > #root {
+  --dsh-settings-shell-root-layer: 2147483002;
+  z-index: var(--dsh-settings-shell-root-layer);
 }
 
 /* ── 面板尺寸：保守档 ──────────────────────────────────────────────
  * 官方是 width:800px / height:min(800px, 100vh - 48px) —— 只保护小屏、
  * 不放大屏（1580px 窗口里面板仅占 60.6%）。这里把上限提到 960px 并把
  * 纵向边距从 48px 收到 32px；小屏保护原样保留。 */
-[role="dialog"][aria-modal="true"] {
-  width: min(960px, 100vw - 48px);
-  height: min(920px, 100vh - 32px);
+[data-dsh-settings-shell-root] {
+  --dsh-settings-shell-panel-width: min(960px, max(0px, calc(100vw - 48px)));
+  width: var(--dsh-settings-shell-panel-width);
+  min-width: var(--dsh-settings-shell-panel-width);
+  max-width: var(--dsh-settings-shell-panel-width);
+  height: min(920px, max(0px, calc(100vh - 32px)));
+  box-sizing: border-box;
+  display: flex;
+  overflow: hidden;
+  border: 1px solid var(--dsh-settings-shell-border);
+  border-radius: 24px;
+  background: var(--dsh-settings-shell-panel);
+  color: var(--dsh-settings-shell-text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* 内容列只负责分配高度；不要让它成为第二个滚动容器。 */
+[data-dsh-settings-shell-root] > nav + * {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--dsh-settings-shell-panel);
+  color: var(--dsh-settings-shell-text);
+}
+
+/* Header is the stable action rail; the following direct child is the official
+ * options seat. Structural selectors intentionally avoid upstream hashes. */
+[data-dsh-settings-shell-root] > nav + * > :first-child {
+  flex: none;
+  min-width: 0;
+  border-bottom: 1px solid var(--dsh-settings-shell-border);
+}
+
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+  padding: 24px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+}
+
+/* Settings sections are direct children of options. A quiet divider and a
+ * shared vertical rhythm separate business groups without turning every row
+ * into a card. */
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) > * {
+  min-width: 0;
+}
+
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) > * + * {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--dsh-settings-shell-border);
+}
+
+/* Keep this fallback low-specificity so a section-owned error/heading style
+ * remains authoritative. */
+:where([data-dsh-settings-shell-root] > nav + * > :nth-child(2) h1,
+  [data-dsh-settings-shell-root] > nav + * > :nth-child(2) h2,
+  [data-dsh-settings-shell-root] > nav + * > :nth-child(2) h3) {
+  margin: 0 0 12px;
+  color: var(--dsh-settings-shell-text);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22px;
+}
+
+/* Paragraphs inherit by default; this muted fallback must not override
+ * section-owned success/error/status colors. */
+:where([data-dsh-settings-shell-root] > nav + * > :nth-child(2) p) {
+  color: var(--dsh-settings-shell-muted);
+}
+
+/* Shared form baseline for third-party sections. Existing section behavior,
+ * labels and validation semantics remain owned by the section itself. */
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) button,
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) input,
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) select,
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) textarea {
+  box-sizing: border-box;
+  font: inherit;
+}
+
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]),
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) select,
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) textarea {
+  width: min(100%, 520px);
+  min-height: var(--dsh-settings-shell-control-height);
+  padding: 6px 10px;
+  border: 1px solid var(--dsh-settings-shell-border);
+  border-radius: var(--dsh-settings-shell-control-radius);
+  background: var(--dsh-settings-shell-control);
+  color: var(--dsh-settings-shell-text);
+  transition:
+    background var(--dsh-settings-shell-motion),
+    border-color var(--dsh-settings-shell-motion),
+    box-shadow var(--dsh-settings-shell-motion);
+}
+
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) input[type="checkbox"],
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) input[type="radio"] {
+  accent-color: var(--dsh-settings-shell-brand);
+}
+
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) button:focus-visible,
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) input:focus-visible,
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) select:focus-visible,
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) textarea:focus-visible {
+  outline: 2px solid var(--dsh-settings-shell-brand);
+  outline-offset: 2px;
+}
+
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) button:disabled,
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) input:disabled,
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) select:disabled,
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):hover,
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) select:hover,
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) textarea:hover {
+  border-color: var(--dsh-settings-shell-brand);
 }
 
 /* ── 导航：修「点不到」 ────────────────────────────────────────────
  * 实测 18 项导航需要 852px，而面板可用 752px —— 官方 nav 没有 overflow、
  * panel 是 overflow:hidden，于是最后两项被裁成 1px 高、完全不可达且不报错。
  * 这一条是本包存在的首要理由，不是外观调整。 */
-[role="dialog"][aria-modal="true"] > nav {
+[data-dsh-settings-shell-root] > nav {
+  /* upstream owns the 188px calibration width; this shell only makes the
+   * existing rail independently scrollable. */
+  box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
-  /* 与内容区拉开层次：从当前主题的文字色派生 4%，自动适配明暗两态 */
-  background: color-mix(in oklab, var(--dsw-alias-label-primary, #000) 4%, transparent);
-  border-right: 1px solid color-mix(in oklab, var(--dsw-alias-label-primary, #000) 8%, transparent);
+  min-height: 0;
+  /* 侧栏由主题 token 提供，避免各页面各自调一层灰。 */
+  background: var(--dsh-settings-shell-sidebar);
+  border-right: 1px solid var(--dsh-settings-shell-border);
   /* 滚动到底部时最后一项不贴圆角 */
   padding-bottom: 14px;
 }
@@ -49,11 +210,14 @@ body[data-ds-dark-theme] {
 /* ── 导航项：品牌色只做点缀，不铺底色 ─────────────────────────────
  * 大面积染品牌色会同时破坏浅色可读性与第三方页面的既有观感，
  * 因此当前项只用一条左侧指示条表达归属。 */
-[role="dialog"][aria-modal="true"] nav button {
+[data-dsh-settings-shell-root] nav button {
   position: relative;
+  transition:
+    background var(--dsh-settings-shell-motion),
+    color var(--dsh-settings-shell-motion);
 }
 
-[role="dialog"][aria-modal="true"] nav button[aria-current="true"]::before {
+[data-dsh-settings-shell-root] nav button[aria-current="true"]::before {
   content: "";
   position: absolute;
   left: 3px;
@@ -63,13 +227,22 @@ body[data-ds-dark-theme] {
   height: 18px;
   border-radius: 2px;
   background: var(--dsh-settings-shell-brand);
+  transition:
+    height var(--dsh-settings-shell-motion),
+    opacity var(--dsh-settings-shell-motion),
+    transform var(--dsh-settings-shell-motion);
   pointer-events: none;
 }
 
 /* 键盘焦点：同一个品牌色，保证「看到焦点」与「看到当前项」是同一套语言 */
-[role="dialog"][aria-modal="true"] nav button:focus-visible {
+[data-dsh-settings-shell-root] nav button:focus-visible {
   outline: 2px solid var(--dsh-settings-shell-brand);
   outline-offset: -2px;
+}
+
+/* Shared labels retain the section's semantics while aligning mixed controls. */
+[data-dsh-settings-shell-root] > nav + * > :nth-child(2) label {
+  color: var(--dsh-settings-shell-text);
 }
 
 /* ── 分组标题 ─────────────────────────────────────────────────────
@@ -77,17 +250,73 @@ body[data-ds-dark-theme] {
  * 标题是纯文本节点：不包裹按钮、不改任何按钮的 ARIA —— 与第三方
  * 导航注入（如 dsh-better-sidebar 按 `[role="dialog"] nav button` 打标记）
  * 互不干扰。 */
-[data-dsh-ss-group] {
+[data-dsh-settings-shell-root] [data-dsh-ss-group] {
   padding: 13px 12px 3px;
   font-size: 11px;
   font-weight: 600;
   line-height: 16px;
   letter-spacing: 0.3px;
-  color: color-mix(in oklab, var(--dsw-alias-label-primary, #000) 52%, transparent);
+  color: var(--dsh-settings-shell-muted);
   pointer-events: none;
   user-select: none;
 }
 
-[data-dsh-ss-group]:first-child {
+[data-dsh-settings-shell-root] [data-dsh-ss-group]:first-child {
   padding-top: 2px;
+}
+
+/* 动效上限保持在 150–220ms；用户偏好减少动效时不再平滑滚动或过渡。 */
+@media (prefers-reduced-motion: reduce) {
+  [data-dsh-settings-shell-root],
+  [data-dsh-settings-shell-root] *,
+  [data-dsh-settings-shell-root] *::before,
+  [data-dsh-settings-shell-root] *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    scroll-behavior: auto;
+    transition-duration: 0.01ms;
+  }
+}
+
+@media (max-width: 720px) {
+  [data-dsh-settings-shell-root] {
+    --dsh-settings-shell-panel-width: min(960px, max(0px, calc(100vw - 24px)));
+    width: var(--dsh-settings-shell-panel-width);
+    min-width: var(--dsh-settings-shell-panel-width);
+    max-width: var(--dsh-settings-shell-panel-width);
+    height: min(920px, max(0px, calc(100vh - 24px)));
+  }
+
+  [data-dsh-settings-shell-root] > nav + * > :nth-child(2) {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 560px) {
+  [data-dsh-settings-shell-root] {
+    display: flex;
+    flex-direction: column;
+    width: calc(100vw - 16px);
+    min-width: calc(100vw - 16px);
+    max-width: calc(100vw - 16px);
+    height: calc(100vh - 16px);
+  }
+
+  [data-dsh-settings-shell-root] > nav {
+    width: 100%;
+    max-height: 164px;
+    padding: 16px;
+    border-right: 0;
+    border-bottom: 1px solid var(--dsh-settings-shell-border);
+  }
+
+  [data-dsh-settings-shell-root] > nav + * {
+    min-height: 0;
+    height: auto;
+    flex: 1 1 auto;
+  }
+
+  [data-dsh-settings-shell-root] > nav + * > :nth-child(2) {
+    padding: 16px;
+  }
 }

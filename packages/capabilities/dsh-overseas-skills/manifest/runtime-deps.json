@@ -2,10 +2,10 @@
   "_meta": {
     "generated": "2026-09-15T03:07:58.021Z",
     "generator": "scripts/scan-runtime-deps.mjs",
-    "from": "/Users/lute/Downloads/skills",
+    "from": "__SKILL_INTAKE_SOURCE__",
     "partialScan": true,
     "note": "本次是局部扫描（--skills），已并入既有 manifest。全量重扫请不带 --skills。",
-    "venvPython": "/Users/lute/.dsh/skills-runtime/.venv/bin/python"
+    "venvPython": "__DSH_HOME__/skills-runtime/.venv/bin/python"
   },
   "scan": {
     "units": 1,

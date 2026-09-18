@@ -2,10 +2,10 @@
 /**
  * 50 岗位 AI 分身 Preset 生成器（全量保真 / lossless）
  *
- * 目标：把《AI组织变革》材料里散落在 9 个来源的**每一个岗位**的全部信息，
+ * 目标：把《AI组织变革》材料里散落在 12 个来源的**每一个岗位**的全部信息，
  * 逐字落成一个可挂载的 DSH preset，不摘要、不改名、不丢字段。
  *
- * 每个岗位信息的 9 个来源：
+ * 每个岗位信息的 12 个来源：
  *   1. docs/05-agents/roles/AGT-NNN.md          岗位卡全文（7 个 ## 小节）
  *   2. docs/05-agents/role-catalog.json         该岗位 20 字段结构化记录
  *   3. docs/04-organization/organization-graph.json   平面/责任域归属 + 组织边
@@ -15,12 +15,15 @@
  *   7. docs/03-scenarios/FLOW-CATALOG.md              该岗位作为能力贡献者的流程条目
  *   8. docs/06-playbooks/PLAYBOOKS.md                 该岗位参与的手册全文
  *   9. docs/05-agents/ROSTER.md                       总表行
+ *  10. docs/05-agents/roles/souls/AGT-NNN.soul.md     独立 Soul Contract
+ *  11. docs/06-playbooks/role-playbooks/AGT-NNN.md    独立 Role Playbook
+ *  12. docs/10-platform/deepseek-harness/preset-blueprints/AGT-NNN.json  Preset Blueprint
  *
  * 落点（DSH preset 目录）：
  *   ~/.dsh/.agent-presets/agt-001/
  *     preset.yml        官方显示字段 name/description/order + icon（官方卡片把它渲染成头像）
- *     manifest.json     material 命名空间逐字归档 9 个来源 + x_lute 命名空间放平台扩展
- *     agent.cordis.yml  以 shipped standard 行集为基座，persona 换成岗位卡全文
+ *     manifest.json     material 命名空间逐字归档旧来源 + role_assets / source_snapshot + x_lute
+ *     agent.cordis.yml  以 shipped standard 行集为基座，persona 注入身份与 Soul 摘要
  *
  * 用法：
  *   node scripts/role-presets/generate.mjs                # 生成到 ~/.dsh/.agent-presets
@@ -34,6 +37,7 @@ import { homedir } from 'node:os'
 import { fileURLToPath } from 'node:url'
 
 import { unmanagedRowBlocks, reinstateRows } from './unmanaged-rows.mjs'
+import { appNodeModules } from '../lib/app-resources.mjs'
 const HERE = dirname(fileURLToPath(import.meta.url))
 const MATERIAL_ROOT = process.env.ROLE_MATERIAL_ROOT || '/Users/lute/project/AI组织变革'
 const DOCS = join(MATERIAL_ROOT, 'docs')
@@ -77,7 +81,7 @@ const ICON_MANIFEST =
   join(SKILLS_ROOT, 'lute-brand-icons', 'assets', 'manifest.json')
 const STANDARD_COMPOSITION =
   process.env.ROLE_STANDARD_COMPOSITION ||
-  '/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-agent-presets/presets/standard/agent.cordis.yml'
+  join(appNodeModules() ?? '', '@deepseek-ai/dsh-agent-presets/presets/standard/agent.cordis.yml')
 const SNAPSHOT_DATE = '2026-09-11'
 const SOURCE_DSH_VERSION = '2.0.5'
 const DRY_RUN = process.argv.includes('--dry-run')
@@ -178,6 +182,11 @@ function contractGateFor(ids) {
 
 const SOURCE_FILES = {
   roleCard: (id) => `05-agents/roles/${id}.md`,
+  soul: (id) => `05-agents/roles/souls/${id}.soul.md`,
+  rolePlaybook: (id) => `06-playbooks/role-playbooks/${id}.md`,
+  presetBlueprint: (id) => `10-platform/deepseek-harness/preset-blueprints/${id}.json`,
+  rolePlaybookIndex: '06-playbooks/role-playbooks/index.json',
+  presetBlueprintManifest: '10-platform/deepseek-harness/preset-blueprints/manifest.json',
   roleCatalog: '05-agents/role-catalog.json',
   organizationGraph: '04-organization/organization-graph.json',
   managementGraph: '05-agents/agent-management-graph.json',
@@ -191,6 +200,16 @@ const SOURCE_FILES = {
 const raw = (rel) => readFileSync(join(DOCS, rel), 'utf8')
 const json = (rel) => JSON.parse(raw(rel))
 const sha256 = (text) => createHash('sha256').update(text, 'utf8').digest('hex')
+const canonicalize = (value) => {
+  if (Array.isArray(value)) return value.map(canonicalize)
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, canonicalize(value[key])]))
+  }
+  return value
+}
+const canonicalJson = (value) => JSON.stringify(canonicalize(value))
+const GENERATOR_REVISION = process.env.ROLE_GENERATOR_REVISION ||
+  sha256(readFileSync(fileURLToPath(import.meta.url), 'utf8'))
 
 /** 把一段 Markdown 按 `## <prefix>` 标题切成 { heading, body } 列表（body 含标题行本身，逐字）。 */
 function splitSections(markdown, startsWith) {
@@ -208,9 +227,6 @@ function splitSections(markdown, startsWith) {
   if (cur) out.push(cur)
   return out.map((s) => ({ heading: s.heading, body: s.body.join('\n').replace(/\s+$/, '') }))
 }
-
-/** 岗位卡全文（逐字）。 */
-const cardOf = (id) => raw(SOURCE_FILES.roleCard(id))
 
 /** 岗位卡的 7 个 ## 小节（逐字，含标题行）。 */
 function cardSections(cardText) {
@@ -276,21 +292,54 @@ function renderSupplyStatus(skillMapping, playbookIds) {
 }
 
 /**
- * 把岗位卡全文渲染进 persona：字面块标量 `|-`（不是 `>-`，折叠标量会把行粘成一段、毁掉原文结构）。
- * 头部只加身份与来源说明，文末追加供给实况；**不改写、不摘要原文任何一个字**。
+ * 从独立 Soul Contract 提取常驻 persona 所需的最小摘要。
+ *
+ * Soul 原文仍会进入 manifest.role_assets；persona 只常驻身份、灵魂原则、硬边界和停止
+ * 信号，避免把完整 Role Playbook 或整份 Soul 长期压进每个回合的上下文。
+ */
+function soulSection(soulText, heading) {
+  const lines = soulText.split('\n')
+  const marker = `## ${heading}`
+  const start = lines.findIndex((line) => line.trim() === marker)
+  if (start < 0) throw new Error(`Soul Contract 缺少章节：${marker}`)
+  const body = []
+  for (let i = start; i < lines.length; i++) {
+    if (i > start && lines[i].startsWith('## ')) break
+    body.push(lines[i])
+  }
+  return body.join('\n').replace(/\s+$/, '')
+}
+
+function renderSoulSummary(soulText, soulPath, soulSha) {
+  const sections = ['我是谁', '我的灵魂原则', '我绝不做什么', '我的停止信号']
+  return [
+    '── Soul Contract 摘要（身份 / 灵魂 / 硬边界 / 停止信号）────────────────',
+    '',
+    `来源：${soulPath}；sha256 ${soulSha}`,
+    '以下摘要是常驻身份约束；完整 Soul Contract 与 Role Playbook 只在 manifest 的角色资产区按需寻址。',
+    '',
+    ...sections.flatMap((heading) => [soulSection(soulText, heading), '']),
+  ].join('\n').replace(/\n+$/, '')
+}
+
+/**
+ * 渲染岗位 persona：字面块标量 `|-`（不是 `>-`，折叠标量会把行粘成一段、毁掉原文结构）。
+ * 常驻层只放身份与 Soul 摘要；岗位卡全文归档在 manifest，完整 Role Playbook 通过独立 Skill
+ * descriptor 按需寻址，避免把长正文压进每个回合的上下文。
  * @param {object} role - 材料 role-catalog 记录。
- * @param {string} cardText - 岗位卡全文（逐字）。
  * @param {object} provenance - 平面/责任域名与源文件溯源信息。
+ * @param {string} soulSummary - Soul Contract 的常驻摘要。
  * @param {string} supplyStatus - {@link renderSupplyStatus} 的产物。
  * @returns {string} persona 正文。
  */
-function renderPersona(role, cardText, provenance, supplyStatus) {
+function renderPersona(role, provenance, soulSummary, supplyStatus) {
   const header = [
     `你是 {{model}} 驱动的 AI 岗位分身「${role.alias}」，岗位 ${role.id} ${role.title}，` +
       `所属组织平面「${provenance.planeName}」，责任域「${provenance.domainName}」。你的工作目录是 {{cwd}}。`,
     '',
-    `以下是你作为该岗位分身的完整定义，**逐字保留**自项目《AI组织变革》的岗位卡原文` +
-      `（材料快照 ${SNAPSHOT_DATE}；源文件 ${provenance.roleCardPath}；sha256 ${provenance.roleCardSha}）。`,
+    `你的完整岗位卡已逐字归档在 manifest.material.role_card；当前 persona 常驻身份与 Soul 摘要` +
+      `（材料快照 ${SNAPSHOT_DATE}；source revision ${provenance.sourceRevision}；` +
+      `源文件 ${provenance.roleCardPath}；sha256 ${provenance.roleCardSha}）。`,
     '',
     `材料原文保留其撰写时点的表述，其中的相对链接（如 ../../06-playbooks/PLAYBOOKS.md）指向材料仓库` +
       `（根目录 ${MATERIAL_ROOT}）。`,
@@ -299,16 +348,14 @@ function renderPersona(role, cardText, provenance, supplyStatus) {
       `本 preset 是该岗位定义的结构化落地方案。岗位的生产授权状态仍为 false（production_authorized=false），` +
       `这与 ADR-0005/D-023 的 Role Release Bundle 七状态门禁一致——本 preset 属设计期草案，不构成生产授权。`,
     '',
-    '── 岗位卡原文（逐字）─────────────────────────────────────────────',
+    soulSummary,
     '',
   ].join('\n')
   const footer = [
     '',
-    '── 岗位卡原文结束 ─────────────────────────────────────────────',
-    '',
     supplyStatus,
   ].join('\n')
-  return `${header}${cardText.replace(/\s+$/, '')}${footer}`
+  return `${header}${footer}`
 }
 
 /** 以一个缩进级别把多行文本渲染成 YAML 字面块标量体。 */
@@ -463,6 +510,88 @@ function loadSources() {
     text[key] = raw(rel)
     hashes[key] = sha256(text[key])
   }
+  const rolePlaybookIndex = JSON.parse(raw(SOURCE_FILES.rolePlaybookIndex))
+  const presetBlueprintManifest = JSON.parse(raw(SOURCE_FILES.presetBlueprintManifest))
+  const assetIndexHashes = {
+    rolePlaybookIndex: sha256(raw(SOURCE_FILES.rolePlaybookIndex)),
+    presetBlueprintManifest: sha256(raw(SOURCE_FILES.presetBlueprintManifest)),
+  }
+  const playbooksByRole = new Map((rolePlaybookIndex.roles || []).map((entry) => [entry.role_id, entry]))
+  const blueprintsByRole = new Map((presetBlueprintManifest.roles || []).map((entry) => [entry.role_id, entry]))
+  const roleAssets = new Map()
+
+  for (const role of JSON.parse(text.roleCatalog).roles || []) {
+    const id = role.id
+    const roleCardPath = SOURCE_FILES.roleCard(id)
+    const soulPath = SOURCE_FILES.soul(id)
+    const rolePlaybookPath = SOURCE_FILES.rolePlaybook(id)
+    const presetBlueprintPath = SOURCE_FILES.presetBlueprint(id)
+    const profileText = raw(roleCardPath)
+    const soulText = raw(soulPath)
+    const rolePlaybookText = raw(rolePlaybookPath)
+    const presetBlueprintText = raw(presetBlueprintPath)
+    const blueprint = JSON.parse(presetBlueprintText)
+    const playbookIndexEntry = playbooksByRole.get(id)
+    const blueprintIndexEntry = blueprintsByRole.get(id)
+    const expectedPresetId = `dsh.role.${id.toLowerCase()}.v1`
+
+    if (!playbookIndexEntry || !blueprintIndexEntry) {
+      throw new Error(`${id}: Role Playbook index 或 Blueprint manifest 缺少角色引用`)
+    }
+    if (playbookIndexEntry.playbook_ref !== `docs/${rolePlaybookPath}` ||
+        playbookIndexEntry.soul_ref !== `docs/${soulPath}` ||
+        playbookIndexEntry.preset_id !== expectedPresetId ||
+        blueprintIndexEntry.preset_id !== expectedPresetId) {
+      throw new Error(`${id}: index 引用与源路径或 preset_id 不一致`)
+    }
+    if (blueprint.role_id !== id || blueprint.preset_id !== expectedPresetId ||
+        blueprint.role_profile_ref !== `docs/${roleCardPath}` ||
+        blueprint.soul_ref !== `docs/${soulPath}` ||
+        blueprint.role_playbook_ref !== `docs/${rolePlaybookPath}`) {
+      throw new Error(`${id}: Blueprint 角色 ID、preset_id 或引用路径不一致`)
+    }
+    for (const [field, value] of Object.entries({
+      alias: role.alias,
+      title: role.title,
+      mission: role.mission,
+      personality: role.personality,
+      soul_principle: role.principle,
+    })) {
+      if (blueprint.identity?.[field] !== value) throw new Error(`${id}: Blueprint identity.${field} 与 role-catalog 不一致`)
+    }
+    if (blueprint.status !== 'blueprint_only_not_importable' ||
+        blueprint.assurance?.production_authorized !== false ||
+        blueprint.modes?.standalone?.can_execute_assets !== false ||
+        blueprint.modes?.composition?.orchestration_owner !== 'external_case_control' ||
+        blueprint.modes?.composition?.peer_chat !== false ||
+        blueprint.modes?.composition?.re_delegation !== false ||
+        blueprint.tools?.action_boundary !== 'action_intent_only_to_model_external_policy_gate' ||
+        blueprint.tools?.credentials !== 'never_visible_to_model') {
+      throw new Error(`${id}: Blueprint 运行边界不符合设计期外部 Case Control 契约`)
+    }
+
+    roleAssets.set(id, {
+      roleProfile: { path: roleCardPath, text: profileText, sha256: sha256(profileText) },
+      soul: { path: soulPath, text: soulText, sha256: sha256(soulText) },
+      rolePlaybook: { path: rolePlaybookPath, text: rolePlaybookText, sha256: sha256(rolePlaybookText) },
+      presetBlueprint: { path: presetBlueprintPath, text: presetBlueprintText, sha256: sha256(presetBlueprintText), record: blueprint },
+      playbookIndexEntry,
+      blueprintIndexEntry,
+    })
+  }
+
+  const revisionPayload = {
+    shared: hashes,
+    indexes: assetIndexHashes,
+    roles: [...roleAssets.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([id, assets]) => ({
+      id,
+      roleCard: assets.roleProfile.sha256,
+      soul: assets.soul.sha256,
+      rolePlaybook: assets.rolePlaybook.sha256,
+      presetBlueprint: assets.presetBlueprint.sha256,
+    })),
+  }
+  const sourceRevision = process.env.ROLE_SOURCE_REVISION || `source-hash:${sha256(canonicalJson(revisionPayload))}`
   return {
     text,
     hashes,
@@ -471,6 +600,11 @@ function loadSources() {
     managementGraph: JSON.parse(text.managementGraph),
     lifecycle: JSON.parse(text.lifecycle),
     collaborationGraph: JSON.parse(text.collaborationGraph),
+    rolePlaybookIndex,
+    presetBlueprintManifest,
+    assetIndexHashes,
+    roleAssets,
+    sourceRevision,
   }
 }
 
@@ -636,6 +770,10 @@ function main() {
   }
 
   const rows = []
+  // 先在内存完成 50 个岗位的全部解析、匹配和 manifest 构建；任何输入错误都在写盘前失败。
+  // 这样源材料缺件、ID 错配或 Blueprint 越权不会留下半批新 preset。I/O 原子替换仍由
+  // 后续 Host 适配门继续验证，当前阶段不触碰 resolver 或生产目录事务。
+  const pendingWrites = []
   let written = 0
   let skipped = 0
 
@@ -644,10 +782,14 @@ function main() {
     const org = orgRoles.get(id)
     const plane = planes.get(org.plane_id)
     const domain = domains.get(org.domain_view_id)
-    const cardText = cardOf(id)
-    const cardSha = sha256(cardText)
+    const assets = src.roleAssets.get(id)
+    if (!assets) throw new Error(`${id}: 角色资产未加载`)
+    const cardText = assets.roleProfile.text
+    const cardSha = assets.roleProfile.sha256
     const cardPath = SOURCE_FILES.roleCard(id)
     const sections = cardSections(cardText)
+    const soulSummary = renderSoulSummary(assets.soul.text, `docs/${assets.soul.path}`, assets.soul.sha256)
+    const soulSummarySha = sha256(soulSummary)
 
     const contribution = contributions.get(id)
     const flowIds = [...new Set([...(contribution?.eligible_flow_ids || []), ...(role.flows || [])])].sort()
@@ -686,12 +828,13 @@ function main() {
         }))
     })
 
-    const persona = renderPersona(role, cardText, {
+    const persona = renderPersona(role, {
       planeName: plane.name,
       domainName: domain.name,
-      roleCardPath: join(MATERIAL_ROOT, cardPath),
+      roleCardPath: join(MATERIAL_ROOT, 'docs', cardPath),
       roleCardSha: cardSha,
-    }, renderSupplyStatus(skillMapping, playbookIds))
+      sourceRevision: src.sourceRevision,
+    }, soulSummary, renderSupplyStatus(skillMapping, playbookIds))
 
     const presetId = `agt-${id.slice(4)}`
     const compositionRaw = renderComposition(persona, skillIds, presetId)
@@ -719,6 +862,19 @@ function main() {
     }
     const presetYml = renderPresetYml(name, description, order, icon)
 
+    const blueprint = assets.presetBlueprint.record
+    const bundleInput = {
+      role_id: id,
+      preset_id: presetId,
+      version: blueprint.version,
+      role_card_sha256: cardSha,
+      soul_contract_sha256: assets.soul.sha256,
+      role_playbook_sha256: assets.rolePlaybook.sha256,
+      preset_blueprint_sha256: assets.presetBlueprint.sha256,
+      production_authorized: false,
+    }
+    const rolePlaybookSkillId = `role-playbook-${presetId}`
+
     const manifest = {
       format: 'dsh-preset',
       version: 2,
@@ -728,6 +884,69 @@ function main() {
       sourceDshVersion: SOURCE_DSH_VERSION,
       // 与 preset.yml 里那一份**同一个字符串**：官方卡片与自建矩阵面板读到的头像必然一致。
       icon,
+      source_snapshot: {
+        schema_version: 'rp-m2',
+        snapshot_date: SNAPSHOT_DATE,
+        source_root: MATERIAL_ROOT,
+        source_revision: src.sourceRevision,
+        generator_revision: GENERATOR_REVISION,
+        generator_rules_revision: GENERATOR_REVISION,
+        dependency_versions: { dsh: SOURCE_DSH_VERSION, node: process.version },
+        shared_source_hashes: src.hashes,
+        asset_index_hashes: src.assetIndexHashes,
+        source_hashes: {
+          role_card: cardSha,
+          soul_contract: assets.soul.sha256,
+          role_playbook: assets.rolePlaybook.sha256,
+          preset_blueprint: assets.presetBlueprint.sha256,
+        },
+      },
+      role_assets: {
+        role_id: id,
+        preset_id: presetId,
+        role_profile: {
+          ref: `docs/${assets.roleProfile.path}`,
+          sha256: cardSha,
+        },
+        soul: {
+          ref: `docs/${assets.soul.path}`,
+          sha256: assets.soul.sha256,
+          persona_summary_sha256: soulSummarySha,
+          text: assets.soul.text,
+        },
+        role_playbook: {
+          ref: `docs/${assets.rolePlaybook.path}`,
+          sha256: assets.rolePlaybook.sha256,
+          skill_id: rolePlaybookSkillId,
+          loader: 'target-host-to-be-verified',
+          source: `ai-org-material:${assets.rolePlaybook.path}`,
+          body_sha256: assets.rolePlaybook.sha256,
+          user_invocable: false,
+          installed: false,
+          text: assets.rolePlaybook.text,
+        },
+        preset_blueprint: {
+          ref: `docs/${assets.presetBlueprint.path}`,
+          sha256: assets.presetBlueprint.sha256,
+          version: blueprint.version,
+          record: blueprint,
+        },
+        runtime_contract: {
+          status: blueprint.status,
+          production_authorized: blueprint.assurance?.production_authorized === true,
+          composition_owner: blueprint.modes?.composition?.orchestration_owner,
+          peer_chat: blueprint.modes?.composition?.peer_chat,
+          re_delegation: blueprint.modes?.composition?.re_delegation,
+          can_execute_assets: blueprint.modes?.standalone?.can_execute_assets,
+          action_boundary: blueprint.tools?.action_boundary,
+        },
+        role_release_bundle_ref: {
+          bundle_id: `RRB-${id}`,
+          version: blueprint.version,
+          content_hash: `sha256:${sha256(canonicalJson(bundleInput))}`,
+          status: blueprint.status,
+        },
+      },
       material: {
         snapshot_date: SNAPSHOT_DATE,
         source_root: MATERIAL_ROOT,
@@ -849,6 +1068,11 @@ function main() {
     })
 
     if (DRY_RUN) continue
+    pendingWrites.push({ dir, dirId, presetYml, manifest, composition })
+  }
+
+  // 只有 50 个岗位全部完成内存构建后才进入派生输出写盘阶段。
+  for (const { dir, dirId, presetYml, manifest, composition } of pendingWrites) {
     mkdirSync(dir, { recursive: true })
     for (const stale of ['preset.yml', 'manifest.json', 'agent.cordis.yml']) {
       const p = join(dir, stale)

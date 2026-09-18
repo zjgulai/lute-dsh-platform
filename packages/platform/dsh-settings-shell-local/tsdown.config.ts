@@ -17,6 +17,11 @@ const CLIENT_EXTERNALS = [
   "@deepseek-ai/dsh-client-web-react",
 ] as const;
 
+// 稳定虚拟 id → 磁盘绝对路径。id 必须用 basename：rolldown 把模块 id 原样写进
+// 产物的 //#region 注释，绝对路径形式的 id 会把构建机 home 带进出货面
+//（packaging/machine-path-baseline.json 只减不增，ADR-0073）。
+const cssSources = new Map<string, string>();
+
 function inlineCssPlugin() {
   return {
     name: "dsh-settings-shell-inline-css",
@@ -24,11 +29,14 @@ function inlineCssPlugin() {
       if (!source.endsWith(".css")) return null;
       const file =
         importer === undefined ? source : resolve(dirname(importer), source);
-      return `${CSS_PREFIX}${file}${CSS_SUFFIX}`;
+      const id = `${CSS_PREFIX}${basename(file)}${CSS_SUFFIX}`;
+      cssSources.set(id, file);
+      return id;
     },
     async load(id: string) {
       if (!id.startsWith(CSS_PREFIX)) return null;
-      const file = id.slice(CSS_PREFIX.length, -CSS_SUFFIX.length);
+      const file = cssSources.get(id);
+      if (file === undefined) throw new Error(`unknown css module id: ${id}`);
       const css = await readFile(file, "utf8");
       const tagId = `${PLUGIN_ID}/${basename(file)}`;
 

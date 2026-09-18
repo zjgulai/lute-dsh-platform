@@ -6,6 +6,10 @@
     {
       "name": "lute-cordis",
       "why": "ADR-0024：承载确定性压缩后端（@aiwayds/dsh-dcp）的预设副本，2026-09-12 起为默认预设，2.2.0 起随包出货。它不是开发机私有产物。"
+    },
+    {
+      "name": "agent-fullstack",
+      "why": "ADR-0092 当时留白「发不发是产品决策」；2026-09-17 用户拍板随包出货。它承载 M00–M13 全栈 playbook 人格与 89 条技能白名单（批准链见 ADR-0096 的 manifest/agent-fullstack-whitelist.json），是产品能力的一部分，客户机与开发机同形——不是开发机私有产物。"
     }
   ],
   "exclude": [

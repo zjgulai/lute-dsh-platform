@@ -67,7 +67,12 @@
   `gate:profile-bundle-sync`（**断言面留了个洞等于没断言**：`loadPointFiles` 把
   `package.json` 整个排除在外，理由是「pnpm 在装载点重写它（剥 scripts/devDependencies）」——
   实测该前提在本机**不成立**，于是清单漂移在装载点一侧**一台仪器都没有**；
-  现按装载字段子集 `main`/`exports`/`dsh` 对账，既补上洞又不会因 pnpm 真去剥那两个字段而误红）
+  现按装载字段子集 `main`/`exports`/`dsh` 对账，既补上洞又不会因 pnpm 真去剥那两个字段而误红）、
+  `gate:changed-packages` + `gate:changed-packages-selftest`、`gate:plugin-entry-contract` +
+  `gate:plugin-entry-contract-selftest`、`gate:profile-metadata-sync` / `gate:profile-files-sync` /
+  `gate:profile-bundle-sync` 三面共用的 `gate:profile-coverage-selftest`
+  （**分母 = 被检查对象的完整集合**：三处判据统一成 `expected = checked + skipped + failed`，
+  射程收缩一律判红，见下条同族前科）
 - **下一版默认动作**：写任何仪器先定「读不到时输出什么」——必须是**失败**或**显式的跳过**，
   不是通过；凡读状态一律「值 + 绑定身份」两项一起读；交付前做一次恒真桩突变，红不了就是没测。
   **清单里的命令也是仪器**：它会被人照着跑，所以一条返回空输出的命令比没有命令更坏——
@@ -82,8 +87,34 @@
   三枚图标给出**一模一样**的外溢数字。**「三枚数字完全一样」本身就是仪器坏了的读数** ——
   真实缺陷不会这么整齐。所以改判据前的第一件事固定为：**先拿已验收的一批跑一遍，它必须静默**；
   判红时先问「是不是我在量错了对象」，再问「产物是不是真坏了」。
+  **同族前科（2026-09-16，SEC-RT-006/007）**：同一形态一天里出现两次，而且两次都出在**新写的判据**上。
+  ① 一条断言的名字写着「旧实现会读成 `enabled:true`」，而它实际量的是**另一个字段**——
+  拿旧实现重放时它照样通过：判据与它宣称要拦的缺陷不是同一件事，**改名永远不会让它变红**，
+  只有 RED 重放（把工作树换成缺陷版本真跑一遍）才会。② 一条「预建 0644 → 写后 0600」的断言，
+  在**去掉那一步 `chmod` 之后仍然全绿**——把权限位带上新 inode 的其实是 `open(…, mode)`，
+  那条 `chmod` 只在受限 umask 下承重，默认 umask 下它看起来就是装饰。两条都不是「没写测试」，
+  而是**测试了别的东西**。所以「红不了就是没测」只能按**变异**判，不能按「这条断言看起来在测它」判。
+  **同族前科（2026-09-17，QG-003 / QG-004 / QG-005）**：一天里三张卡各有一个 Red，
+  形状不同、根因同一个——**射程变小与「没有问题」在读数上同形**。
+  ① `changedPackages` 的三条来源里有 `git diff --name-only main...HEAD`：在 `main` 上
+  它就是 `main...main`，**自比较**，恒为空。临时仓库实测：本地超前 `origin/main` 两个提交、
+  两个包被改，三条来源合起来是空集；真实仓库里 31 个 untracked 文件一个都不在集内，
+  新包在 `git add` 之前对门槛完全隐形。② `plugin-entry-contract` 硬编码 `<dir>/lib/index.js`，
+  读不到就 `continue`、不导出 `apply` 也 `continue`，于是 23 个候选里有 2 个从分母里消失、
+  门禁报「核对 21 个」并退出 0——而这两个**本来就是插件**（默认导出是 Cordis `Service` 子类），
+  且这个模块当时**从未被任何东西 import**（P-04 的形态叠在 P-02 上）。
+  ③ `installedProfileDependencies()` 的失败路径是 `catch { return {} }`，
+  把 profile 的 `package.json` 写成截断 JSON 之后，三个 profile 门禁**全部绿**，
+  `profile-bundle-sync` 的读数还写着「对比 0/0 个 file: 依赖」——它的守卫
+  `fileDeps > 0` 防的是「声明了却一个都没对上」，防不住「声明本身就没了」。
+  **共同的错法**：守卫挂在「已经读到的东西」上，而不是挂在「应该被读到的完整集合」上。
+  所以现在三处的第一句都是先算分母（`expected`），再要求每个对象落在且只落在一个桶里。
+  **同一天还有一条更便宜的复发路径**：`changed-packages` 在射程为空时返回老式
+  `{passed: true}`，被规范化器换算成 `checked=1`——「没看」被记成「看过且没问题」。
+  空射程只能是 `skip`，且必须带类型化的跳过理由。
 - **详见**：[ADR-0068](adr/ADR-0068.md)、[ADR-0063](adr/ADR-0063.md)、[ADR-0075](adr/ADR-0075.md)、
-  [ADR-0080](adr/ADR-0080.md)、[ADR-0081](adr/ADR-0081.md)、[ADR-0094](adr/ADR-0094.md)
+  [ADR-0080](adr/ADR-0080.md)、[ADR-0081](adr/ADR-0081.md)、[ADR-0094](adr/ADR-0094.md)、
+  [ADR-0099](adr/ADR-0099.md)、[ADR-0102](adr/ADR-0102.md)
 
 ## P-03 · 「知道」没有变成「拦住」
 
@@ -183,6 +214,11 @@
   `collectDocLinks`），而不是两边都改对，并配一对用例把取舍钉住：行内代码里逐字引用的
   坏链**不得**判红（误报会让校验被当成噪声关掉），同一段里**真实的**坏链仍必须判红
   ——否则「跳过一切」也能让误报消失，校验就退化成只会判绿的装饰。
+  次日第五例（2026-09-16，SEC-RT-006）：同一条缺陷（`writeFile` 直写最终路径）在这一个包里住了
+  **十三个家**——四个 JSON 状态文件加九处技能 Markdown。任务清单只点了前四个，而"改完点名的那些"
+  之后，剩下九个家一模一样地活着、且没有任何读数会说话。收成一家（`script:packages/capabilities/dsh-wanzh-hulian/lib/atomic-store.js`）
+  而不是逐个改对，才是这次的修法；判据是"仓库里不再出现直写最终路径的调用"，而不是"我改了那几个"。
+  见 [ADR-0099](adr/ADR-0099.md)。
 - **详见**：[ADR-0069](adr/ADR-0069.md)、[ADR-0009](adr/ADR-0009.md)、[ADR-0079](adr/ADR-0079.md)、
   [ADR-0080](adr/ADR-0080.md)、[ADR-0081](adr/ADR-0081.md)
 
@@ -649,10 +685,25 @@
   之前只打印 note、remediation 空转）、
   `spec:scripts/gates/sync-profile.test.mjs`（两条回归钉：缺失必须判红；判红靠 lib 顶层
   规则而不是 files 清单——把 files 清单置空也必须红）。
-- **下一版默认动作**：给包新增一个会被 `lib/index.js` 运行时 import 的文件时，**同一次提交**
-  把它加进该包 package.json 的 `files`；改完跑 `pnpm run gate` 与
-  `node scripts/sync-profile.mjs --check --loadpoint`。缺文件时用 `--apply --loadpoint`
-  补齐，不要手抄路径（手抄会再制造一个「事实多个家」）。
+- **复发记录（2026-09-16，同一根因第二次）**：`dsh-wanzh-hulian` 的 `files` 清单漏了
+  `lib/atomic-store.js` 与 `lib/oauth-flow.js`（SEC-RT-006/007 新增，`lib/index.js` 正在 import 两者）。
+  `npm pack --dry-run` 实测只打 8 个文件、两者均不在内——即**全新 `file:` 安装会 `ERR_MODULE_NOT_FOUND`**。
+  而上面那条机制**保持全绿**：它判的是「装载点缺文件」，而装载点当时有这两个文件
+  （上一批手工 `--apply --loadpoint` 补过）。**机制守住了症状，没守住根因。**
+  这条复发同时说明「下一版默认动作」里的那句纪律（同一次提交把文件加进 `files`）
+  正是本账 P-08 点名的形态：用纪律守只有机制能守住的东西。
+  **复发后补上的机制（2026-09-16，同一日内）**：`gate:package-files-coverage` —— 断言
+  「包里**运行时模块图**上的每个文件都在该包 `files` 射程内」，判据面取**声明入口的可达闭包**，
+  刻意不取「`lib/` 顶层所有 bundle」（那是装载点判据的口径，搬到交付清单侧会在开发期模块上假红）；
+  判定器与真实 `npm pack` 对全部受管包逐文件校准，立论基础（`pnpm` 对 `file:` 依赖按 `files` 物化）
+  由 `spec:scripts/gates/package-files-coverage.test.mjs` 的一条真 `pnpm` 前提钉守着。
+  与它配对的 `gate:package-files-coverage-selftest` 里有一支恒真桩突变：把射程判定改成永远为真，
+  上面那条复发形状必须**漏过**——漏不过就说明拦住它的不是这段逻辑（P-02）。
+  决策与取舍见 [ADR-0101](adr/ADR-0101.md)。
+- **下一版默认动作**：给包新增一个会被入口运行时 import 的文件时，**同一次提交**
+  把它加进该包 package.json 的 `files`；漏了会在 `pnpm run gate` 的 `package-files-coverage`
+  上判红并点名文件。缺文件时用 `--apply --loadpoint` 补齐装载点，不要手抄路径
+  （手抄会再制造一个「事实多个家」）——但**装载点是止血，不是修复**：全新安装没有同步步骤。
 
 ## P-25 · 判据的射程从没被验证：恒为同一个值，于是把「已达标」读成「未达标」
 
@@ -670,10 +721,14 @@
   对话框里 role 含 Scroll 的节点为 **0 个**，官方那半（内容区同样可滚）也是 0，
   即该判据无论修好没修好都恒为空集。同一份探针此前已经犯过两次同类错（`curl` 拿 404
   当「实例里没装这个包」；「`AXScrollToVisible` 调用成功」——基线里它同样成功）。
-  **三次的共同点是「判据写了，却从没拿一个该判红的状态跑过它」。**
+  后续 QG-012 又发现同类**假绿**：用目标按钮高度算 `scale=height/40`，再算
+  `height/scale`，24/32/40/48/60/80 任一输入都会恒等于 40。四次的共同点都是
+  **判据写了，却没有用独立证据并拿一个该判红的状态跑它**。
 - **已落地机制**：`gate:settings-shell-criteria-selftest`（探针自带 `--self-test`：把
-  5 个已知状态读数喂进纯函数 `judge()`，逐条断言该红该绿；并对 `l1Ok` / `l2Ok` /
-  `pluginLoaded` 分别做**恒真桩突变**，突变不红即判失败）、
+  14 个已知状态、27 条断言喂进纯函数 `judge()`；AX scale 只取 pinned upstream 的
+  188px nav 与 28×28px close 两个节点，目标按钮集合不参与校准；并对目标尺寸恒真、
+  `button/(button/40)` 恒等式、锚冲突旁路、`l1Ok` / `l2Ok` / `pluginLoaded` 做 mutation，
+  任一突变不红即失败）、
   `gate:dead-instrument`（「滚动区域当可滚性证据」已登记进
   `scripts/gates/dead-instruments.json`，文档与脚本里再用它会被拦下）、
   `script:scripts/acceptance/settings-shell-live.mjs`（L1 改用两条几何读数：导轨独立滚动 +
@@ -792,3 +847,168 @@
 - **下一版默认动作**：只要一个产品列表由两份以上输入组成，checker 必须 import 与生成器相同的合并实现，
   分母从版本化输入推导；产品“选择”再单独有一份 owner 批准的 exact set，不能用 live、安装结果或总数反推。
   catalog 与 selection 必须在 gate summary 里保留两个分母，任一缺失都不能被另一边的绿遮住。
+
+## P-31 · finally 写回旧字节不是隔离：测试会覆盖并发合法修改
+
+- **症状**：mutation test 为制造 Red 直接覆写真实根 `package.json` 或真实 vendor pin，结束时再把
+  开始前读到的内容写回；另一个自测把固定名字的 mutant 写进仓库目录。单独运行通常全绿，但并发任务
+  会互相删 fixture，或把测试期间真实产生的合法修改恢复成旧字节。局部 fixture 还可能因 checker 的缺省
+  参数读取真实 `~/.dsh`，使“临时目录测试”实际依赖本机状态。
+- **根因类**：把“最终看起来恢复了”误当成 ownership。finally 只知道一份旧快照，不知道目标在此期间
+  是否已归属别人；固定路径同样没有 case owner。测试用于证明 fail-closed，却在自己的失败/中断路径上
+  没有 containment，是 P-08（用纪律守机制问题）与 P-28（先改后验）的测试基础设施形态。
+- **已落地机制**：`gate:mutation-fixture-selftest`（唯一临时根、prepare→commit、path containment、
+  dev/inode ownership、半失败与 assertion+cleanup 双失败反例、SIGTERM/SIGINT 也必须回收自有根）、
+  `script:scripts/lib/mutation-fixture.mjs`（独立 repo/home/profile/tmp 与幂等 cleanup；进程级 live 根注册表 +
+  `process.on('exit')` + 信号先回收再重发默认处置）、`script:scripts/lib/repo-attest.mjs`（六条结束路径的
+  before/after 见证）。现存真实写入 mutation 已改为显式注入临时 root；真实 checkout/profile 只保留标明边界的
+  read-only 正控。
+- **下一版默认动作**：写 mutation test 时先创建 owned fixture，再把 checker 所需的 repo、HOME、profile、
+  icon、输出路径全部显式传入；不得先改真实文件再恢复。需要多个进程时仍使用 task 专属根。**并发、SIGTERM 与
+  工作树 before/after 证明已在 QG-006B 落地**（`gate:repo-attest-selftest` 的六条路径 + `gate:gate-concurrency-selftest`
+  的 10 轮 × 2 条完整 gate），不能再拿单 case cleanup 冒充，也不能再以「还没做」为由跳过。
+
+## P-32 · 成对动作各写一份清单：注册了 12 条，回收只写了 9 条
+
+- **症状**：能力在正常路径上一切正常，只在**卸载、异常、超时**这些平时没人走的路径上泄漏——
+  插件卸掉后路由仍挂在宿主表上，其中一条还会新建 loopback listener；定时器句柄被记下来却没有
+  任何东西读它，于是端口一直听着直到进程退出。所有绿读数都看不出来，因为**泄漏发生在没人观测的时刻**。
+- **根因类**：「注册了什么」与「回收了什么」是同一件事实的两份手工清单，而两者之间没有任何机制
+  要求**全等**。写的时候两份清单就在同一个文件里相邻几十行，仍然会漏——因为漏一条不会让任何东西变红。
+  叠加一层：`expiresAt` 这类「记下来的承诺」被当成了「已经生效的机制」（本账 P-03 的形态）。
+- **已落地机制**：`script:packages/capabilities/dsh-wanzh-hulian/test/oauth-routes.spec.mjs`
+  （成对清单按标识双向全等，并断言注册数本身——第一次运行就以 `12 !== 11` 打红，
+  证明它在量真东西而不是恒真）、`script:packages/capabilities/dsh-wanzh-hulian/lib/oauth-flow.js`
+  （所有权集中：到期定时器、幂等 `close(reason)`、`dispose()` 后拒绝新建，使「忘记收尾」没有落脚点）
+- **下一版默认动作**：凡成对动作——注册/回收、开端口/关端口、加锁/解锁、监听/解除、启用/停用——
+  先写出成对清单，让判据断言**两个集合全等**，而不是「各自都被调用过」；再给**卸载与异常路径**
+  各写一条真实用例（只在主路径上验证过的回收等于没有回收）。写下 `expiresAt`、`ttl`、`retryAfter`
+  这类字段时立刻问一句：**谁在读它**；没有读者的承诺就是装饰。
+- **详见**：[ADR-0099](adr/ADR-0099.md)、
+  [Note](notes/implemented/capability/2026-09-16-wanzh-persistence-and-oauth-lifecycle.md)
+
+## P-33 · try 里 return promise 不 await：拒绝逃出 catch，变成「永远没有响应」
+
+- **症状**：请求进了处理器、日志里能看到它开始执行，**却永远没有响应**——客户端挂到超时、
+  连接不关，同时冒出一个未处理拒绝。而错误处理代码整段都在、读起来完全正常。
+  2026-09-16 实测：`dsh-team-hub` 的 admin 控制台、RPC、代理三条主通路全部如此，
+  任何异常都退化成「静默悬挂」而不是 500；做 SEC-RT-005 时被自己的测试逼出来
+  （代理面超限用例拿不到任何响应，插桩显示请求已进入处理器、`readBoundedBody` 也已正确拒绝，
+  于是问题不在新代码而在错误传播路径）。
+- **根因类**：`async` 函数 `try` 块里 `return f()` 与 `return await f()` 语义不同——
+  前者把 promise **交出去**，此时 `catch` 已经退出，拒绝不再经过它；后者在 `try` 内结算。
+  这是**看起来对、读起来也对**的写法缺陷，静态眼检几乎不可能发现；而它的表现（悬挂）
+  与「网络慢」「客户端问题」同形，很容易被归因到别处。与本账 P-04 的合体形态：
+  错误处理**写了**，却在真实路径上从没跑到。
+- **已落地机制**：`script:packages/infra/dsh-team-hub/test/bounded-body.test.mjs`
+  （三条真实用例分别守三条通路：代理面异常必须回 500、admin 面异常必须回 500、
+  代理面超限必须回 413；**变异自测 3/3 判红**——把三处 `return await` 分别改回 `return`，
+  对应用例全部失败，证明它们不是恒真的）、
+  同一脚本内的失败模式硬化（`request()` 自带 5s 超时、`server.closeAllConnections()`）：
+  缺这两条时「少一个 await」的失败表现是整个测试文件**挂住**而不是判红，
+  仪器本身会假绿——同一根因在测试侧再犯一次。
+- **下一版默认动作**：`try` 块里返回 promise 一律写 `return await`。写错误处理路径的用例时，
+  先注入变异确认它会响，再相信它——**没响过的判据等于没有判据**。
+  断言「有响应」的用例必须自带超时，否则被测缺陷会让测试挂住而非判红，把它伪装成「环境慢」。
+  另外，一处修复配一条判据：本批三处修复最初只写了「代理面超限」一条，而那条走的是
+  `handleApiPost`，**根本没在守 `proxyRequest`**——判据数与修复数相等不代表覆盖面相等，
+  要靠逐条变异来验。
+
+## P-34 · 回收只写在顺利走完的那条路径上：被信号打断时一个都不收
+
+- **症状**：门禁/测试一个个都过，机器却在悄悄变脏。2026-09-17 实测：`kill -TERM` 一个正在跑的
+  `node scripts/gate.mjs --mode quick` 之后，`TMPDIR` 里留下 8 个残留根（6 × `fullstack-installer-*`、
+  1 × `wanzh-routes-*`、`node-compile-cache`），另有一个门禁子进程被 init 收养继续跑；再数一次真实
+  `TMPDIR`，两天内累积 **2,066** 个残留根、**35 MB**——而没有任何一份报告提过它们。三个来源各自
+  「看起来没问题」：一个每用例 `mkdtempSync` 且从不清理，一个同样只建不清，一个有 `test.after(() =>
+  rmSync(...))`——而 `test.after` 只在正常跑完时执行。
+- **根因类**：「回收代码存在」被当成「回收真的发生」。`finally` 与 `test.after` 的覆盖面止于
+  **进程正常走到那里**；信号、超时、kill 三条路径上它们一次都不跑，而这三条恰好是 CI 里最常见的
+  结束方式。与本账 P-31 同族（把「最终看起来恢复了」当成 ownership），但更隐蔽：P-31 至少还有一个
+  写回动作，这里连动作都没执行，因此**执行痕迹只留在文件系统上**，而门禁看的全是它自己的读数。
+  叠加一层 P-02：门禁跑前跑后都是同一份脏工作树，「没看」与「看过且干净」在读数上同形。
+- **已落地机制**：`gate:mutation-fixture-selftest`（真子进程 SIGTERM/SIGINT 用例：自有根必须被回收，
+  且退出方式必须仍是**信号死亡**而不是被改写成正常退出）、
+  `script:scripts/lib/mutation-fixture.mjs`（live 根注册表 + `process.on('exit')` + `SIGINT`/`SIGTERM`/`SIGHUP`
+  先回收再以默认处置重发；`mutationRoot()` 是给「只想要一个不会泄漏的临时根」的窄接口）、
+  `script:scripts/lib/repo-snapshot.mjs`（before/after 快照：tracked/untracked 内容哈希、声明根名录、
+  未声明 ignored 区域、HEAD/refs/index 字节；空射程与目录折叠一律判红）、
+  `gate:repo-attest-selftest` 与 `script:scripts/lib/repo-attest.test.mjs`（六条结束路径逐条见证）、
+  `gate:gate-concurrency-selftest`（10 轮 × 2 条完整 gate 并发，仓库零差异 + lane 读数不得分裂）。
+- **下一版默认动作**：给临时资源写回收时，先问「进程被 kill 时谁收」——只写 `finally` 等于没写。
+  凡「某某没被改动」这类断言，先立一份可复算的 before/after 快照契约再断言，不要用「跑两遍 `git status`
+  看起来一样」代替。数的对象要**真的去数**（`ls -d $TMPDIR/prefix-* | wc -l`），不要凭印象说「应该没有残留」。
+- **详见**：[ADR-0103](adr/ADR-0103.md)、
+  [Note](notes/implemented/contract/2026-09-17-self-attestation-and-process-reaping.md)
+
+## P-35 · 管道把退出码换成了末端命令的：判红被写成判绿
+
+- **症状**：CI 上 workflow 显示**全绿**，而同一份 artifact 里的门禁 JSON 写着
+  `"status": "fail", "failed": 6`。2026-09-17 实测：`gate (quick)` 与 `gate (full)` 两个 job 都是
+  success，`pnpm`/下载 artifact 全部正常，只有人去看 JSON 才会发现六个检查失败。
+- **根因类**：`cmd | tee out.json` 的退出码来自 `tee`（永远 0），被测命令的退出码**在管道里被丢掉**。
+  这与 P-02（仪器假绿）同族但形状不同：P-02 是判据**没看**，这里是判据**看了、判红了，
+  而它的返回值在进程组合的某一层被替换掉**。危险在于它比 `|| true` 隐蔽得多——`|| true` 一眼可疑，
+  而 `| tee` 是"为了留下证据"这个**正确动机**带来的副作用。本仓库的整个门禁哲学（退出码即契约）
+  因此在这条管道上失效。
+- **已落地机制**：`gate:ci-workflow-contract`（判据 `MASKED_PIPE_PATTERN`：管道末端是
+  `tee`/`cat`/`head`/`tail`/`grep`/`sort`/`uniq` 且该步骤的 `run` 里没有 `set -o pipefail` 即判红；
+  变异 22 与一条「基线里每个含管道的步骤都必须真有 pipefail」的反向断言守着它）、
+  `script:.github/workflows/gate.yml`（四个含管道的步骤都先 `set -o pipefail`）、
+  `gate:ci-workflow-contract-selftest`（29 条反向自测）。
+- **下一版默认动作**：写 CI 步骤时，只要命令进管道，先写 `set -o pipefail`；能不用管道就不用
+  （`> file` 重定向不会丢退出码）。审别人的 workflow 时，**不要看 GitHub 的绿勾判断门禁是否通过**——
+  打开 artifact 读 JSON 里的 `status`，绿勾只说明"步骤没非零退出"，那正是本条要说的事。
+- **详见**：[ADR-0105](adr/ADR-0105.md)、
+  [Note](notes/implemented/contract/2026-09-17-ci-workflow-contract-and-clean-runner-simulation.md)
+
+## P-36 · 判据读错端点，把「保护在」判成「保护不在」
+
+- **症状**：保护面审计报「API 里没有任何 ruleset 覆盖 `refs/heads/main`」，
+  而此刻**保护已经生效**——同一次会话里 `DELETE /git/refs/tags/v2.4.1` 正被服务端 422 拒绝。
+  2026-09-17 实测：`GET /repos/{r}/rulesets`（列表端点）**刻意只返回摘要**
+  （`_links/created_at/enforcement/id/name/node_id/source/source_type/target/updated_at`），
+  **不带 `conditions` 也不带 `rules`**；拿列表去逐条比对规则，每一条都必然「不存在」。
+- **根因类**：判据的输入端与它以为的输入端不是同一个东西。这是 P-02 的**镜像**——P-02 是假绿，
+  本条是假红；而假红有自己的危害：它让人去"修"一个不存在的问题，或更糟，让人开始不信判据
+  （一旦某条判据被证明会假红，它下一次真红也会被当成噪声）。根子在于**读一个 API 之前没有确认
+  它返回的字段集**：端点名对了、HTTP 200 了、JSON 也能解析，唯独少读了两个字段，而缺字段与
+  「字段为空」在比对逻辑里长得一样。
+- **已落地机制**：`gate:ruleset-audit`（先 `GET /rulesets` 列 id，再逐条 `GET /rulesets/{id}` 取详情；
+  退出码 0/1/2 = 全等 / 不符 / **拿不到读数**，第三种必须与前两种分开）、
+  `gate:ruleset-declaration-selftest` 与 `script:scripts/gates/ruleset-audit.test.mjs`
+  （15 条反向自测，其中一条专门用**真实摘要形状**做负例：判据必须判红，而不是判成「保护不在」）、
+  `script:scripts/gates/fixtures/rulesets-live.json`（基线取自真实 API 读数而非手写样本）。
+- **下一版默认动作**：读一个 API 之前，先把它**实际返回的字段集**打出来对一遍（`gh api … --jq 'keys'`），
+  不要凭 schema 记忆。凡是"某东西不存在"的结论，先问一句：**找不到，是因为它真的没有，
+  还是因为我查的地方本来就不放它？** 拿到「不存在」时，用法一次**已知存在**的同类对象做对照实验。
+- **详见**：[ADR-0106](adr/ADR-0106.md)、
+  [Note](notes/implemented/contract/2026-09-17-branch-and-tag-protection.md)
+
+## P-37 · 射程里的一个特殊对象让整批判据停下来：悬空软链与 `git hash-object`
+
+- **症状**：门禁的并发见证项整条抛错退出——`RepoSnapshotError: git hash-object 失败`，
+  栈里没有路径、没有哪个文件、没有说为什么。2026-09-17 实测：checkout 里有一个悬空软链
+  `packaging/backup/pre-2.0.10-migration/DSH Desktop.app/…/Electron Framework.framework/Helpers
+  -> Versions/Current/Helpers`，git 对它的回答是
+  `fatal: could not open '…/Helpers' for reading: No such file or directory`，
+  而 `<stdin-paths>` 模式**在第一个坏路径上就停**，于是整批 256 个路径一起丢。
+- **根因类**：把「射程里的每一个对象都是普通文件」当成了前提。软链是一种**不同类型**的对象，
+  而判据按「内容哈希」这一个维度处理它：`lstatSync` 对悬空软链**是成功的**（链接本身存在），
+  所以它顺着存在性检查一路走到了 `git hash-object` 才炸——失败点与缺陷点隔了两层，
+  错误信息里除了 git 的原文什么都没有。叠加一层 P-13（隔着解释器写字面量）的变体：
+  真正的判据（`git`）在另一个进程里，它的失败被包成一句自己的错误，现场就丢了。
+  更隐蔽的是它**依赖机器状态**：干净检出上没有软链，所有自测全绿；一旦有人在 checkout 里
+  放了个软链（哪怕是打包备份），门禁才开始红。
+- **已落地机制**：`script:scripts/lib/repo-snapshot.mjs`（untracked 射程先分拣：符号链接走
+  `readlinkSync` 记目标字符串、普通文件才交给 `git hash-object`；悬空与有效软链都能读，
+  且「目标 A → 目标 B」与「有效 → 悬空」都是可见变化）、
+  `script:scripts/lib/repo-snapshot.test.mjs`（新增回归用例：仓库里同时放悬空软链与有效软链，
+  必须各自成条目、digest 互不相同、连拍两次逐字相同、目标一变必须点名判红）、
+  `gate:repo-snapshot-selftest`。
+- **下一版默认动作**：给一批对象做内容哈希（或任何批量外部命令）时，先问一句：**这批东西里
+  有没有不是普通文件的对象？**（软链、FIFO、socket、设备节点）。批量命令在第一个坏输入上
+  停下来的行为很常见，所以「一个坏输入」要按**整批失败**来设计错误信息——把路径与原因带出来，
+  不要只留一句"命令失败"。写完记得用**含该特殊对象的真实形状**跑一遍，不要只用干净夹具。
+- **详见**：[ADR-0102](adr/ADR-0102.md)、
+  [Note](notes/implemented/contract/2026-09-17-self-attestation-and-process-reaping.md)

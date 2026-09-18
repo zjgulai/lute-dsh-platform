@@ -138,6 +138,7 @@ export function auditThirdPartyClassification({ inventory, imported = [], skippe
     repoAudits.push({
       id,
       repo: repo.repo,
+      commit: repo.commit,
       note: repo.note,
       upstream: upstream.size,
       imported: terminals.imported.size,

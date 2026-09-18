@@ -1,12 +1,19 @@
-import { test } from 'node:test'
+import { afterEach, test } from 'node:test'
 import assert from 'node:assert/strict'
-import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs'
-import { tmpdir } from 'node:os'
+import { mkdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { discoverPackages, packageRelPath } from './package-layout.mjs'
+import { createMutationFixture } from '../lib/mutation-fixture.mjs'
+
+const fixtures = []
+afterEach(() => {
+  while (fixtures.length > 0) fixtures.pop().cleanup()
+})
 
 function fixture(relPaths) {
-  const root = mkdtempSync(join(tmpdir(), 'lute-layout-'))
+  const owned = createMutationFixture({ prefix: 'lute-layout' })
+  fixtures.push(owned)
+  const root = owned.repo
   for (const rel of relPaths) {
     mkdirSync(join(root, rel), { recursive: true })
     writeFileSync(join(root, rel, 'package.json'), JSON.stringify({ name: rel.split('/').pop() }))

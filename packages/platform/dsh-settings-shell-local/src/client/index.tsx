@@ -19,6 +19,7 @@ import {
   GROUP_MARKER_ATTR,
   recordShellState,
   resolveSettingsShell,
+  SHELL_ROOT_MARKER_ATTR,
   type SettingsShellDom,
 } from "./anchors.js";
 import { groupLang, planGroups, type PlannedGroup } from "./groups.js";
@@ -42,16 +43,16 @@ export interface ClientContext {
 }
 
 /**
- * 跨次同步的记忆：是否**曾经**成功解析过设置面板。
- * 用来把「设置页没开」与「面板结构变了」分开（见 `anchors.ts`）。
- * 状态放在实例里而不是模块级，避免多个文档/多次测试互相污染。
+ * 跨次同步只记上一次成功解析的**具体 panel 节点**。
+ * 节点仍在线却失配才是 drift；旧节点已离线则是正常关闭，不把随后出现的普通 modal
+ * 误报为 Settings 漂移。状态放在实例里，避免多个文档/多次测试互相污染。
  */
 export interface ShellSyncState {
-  sawShell: boolean;
+  previousPanel?: HTMLElement | undefined;
 }
 
 export function createShellSyncState(): ShellSyncState {
-  return { sawShell: false };
+  return {};
 }
 
 /** 设置页 section 的 slot 名。 */
@@ -91,6 +92,30 @@ function existingGroupTitles(dom: SettingsShellDom): HTMLElement[] {
     (child): child is HTMLElement =>
       child instanceof HTMLElement && child.hasAttribute(GROUP_MARKER_ATTR),
   );
+}
+
+/** 清掉指定 panel 里的 Shell 自有分组标题。 */
+function clearGroupTitles(dom: SettingsShellDom): void {
+  for (const node of existingGroupTitles(dom)) node.remove();
+}
+
+/** 回收所有 Shell 自有 DOM；旧 panel 即使已离线也要去掉 marker。 */
+function clearOwnedDom(doc: Document, state?: ShellSyncState): void {
+  state?.previousPanel?.removeAttribute(SHELL_ROOT_MARKER_ATTR);
+  for (const panel of doc.querySelectorAll(`[${SHELL_ROOT_MARKER_ATTR}]`)) {
+    panel.removeAttribute(SHELL_ROOT_MARKER_ATTR);
+  }
+  for (const node of doc.querySelectorAll(`[${GROUP_MARKER_ATTR}]`)) node.remove();
+}
+
+/** marker 与 parser 共用同一个 panel 对象，不再让 CSS 自己猜 modal。 */
+function markResolvedPanel(doc: Document, panel: HTMLElement, state: ShellSyncState): void {
+  if (state.previousPanel !== panel) state.previousPanel?.removeAttribute(SHELL_ROOT_MARKER_ATTR);
+  for (const marked of doc.querySelectorAll(`[${SHELL_ROOT_MARKER_ATTR}]`)) {
+    if (marked !== panel) marked.removeAttribute(SHELL_ROOT_MARKER_ATTR);
+  }
+  panel.setAttribute(SHELL_ROOT_MARKER_ATTR, "true");
+  state.previousPanel = panel;
 }
 
 /** 期望状态是否已经成立：数量、组 id、文案、锚点按钮逐项一致。 */
@@ -139,17 +164,20 @@ export function syncShell(
   slots: SlotsService | undefined,
   state: ShellSyncState = createShellSyncState(),
 ): string {
-  const resolution = resolveSettingsShell(doc, { sawShellBefore: state.sawShell });
+  const resolution = resolveSettingsShell(doc, { previousPanel: state.previousPanel });
 
   let next: string;
   if (resolution.kind === "absent") {
     // 设置页没开是正常状态，不是失败 —— 与 drift 必须分开。
+    clearOwnedDom(doc, state);
+    state.previousPanel = undefined;
     next = "absent";
   } else if (resolution.kind === "drift") {
+    clearOwnedDom(doc, state);
     console.warn(`[dsh-settings-shell] settings shell drift: ${resolution.reason}`);
     next = `drift:${resolution.reason}`;
   } else {
-    state.sawShell = true;
+    markResolvedPanel(doc, resolution.dom.panel, state);
     next = groupShell(resolution.dom, slots, doc);
   }
 
@@ -167,10 +195,12 @@ function groupShell(
 
   if (sectionIds === undefined) {
     // 注册表读不到：只保留 CSS 层（尺寸与滚动仍生效），不猜 DOM 顺序。
+    clearGroupTitles(dom);
     return "ungrouped:no-registry";
   }
   if (sectionIds.length !== dom.buttons.length) {
     // 注册表与 DOM 数量不一致：**放弃注入**，避免把标题插到错误的位置。
+    clearGroupTitles(dom);
     console.warn(
       `[dsh-settings-shell] section count mismatch: registry=${sectionIds.length} dom=${dom.buttons.length}; grouping skipped`,
     );
@@ -208,6 +238,7 @@ export function installSettingsShell(
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       console.warn(`[dsh-settings-shell] sync failed: ${message}`);
+      clearOwnedDom(doc, state);
       recordShellState(doc, `error:${message}`);
     }
   };
@@ -229,8 +260,9 @@ export function installSettingsShell(
   return () => {
     disposed = true;
     observer.disconnect();
-    // 只回收自己插入的节点，不动官方结构。
-    for (const node of doc.querySelectorAll(`[${GROUP_MARKER_ATTR}]`)) node.remove();
+    // 只回收自己的 marker/标题，不动官方结构。
+    clearOwnedDom(doc, state);
+    state.previousPanel = undefined;
     delete doc.documentElement.dataset.dshSettingsShell;
   };
 }

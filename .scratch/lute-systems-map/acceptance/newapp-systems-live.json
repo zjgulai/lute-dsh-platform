@@ -1,11 +1,11 @@
 {
-  "startedAt": "2026-09-13T04:21:44.101Z",
+  "startedAt": "2026-09-17T10:38:53.802Z",
   "installedEntry": "/Users/lute/.dsh/profiles/desktop/node_modules/dsh-newapp-local/lib/index.js",
   "liveBase": "http://127.0.0.1:43120",
   "expectedSystems": 31,
   "stages": {
     "A": {
-      "port": 61095,
+      "port": 53228,
       "routes": {
         "exact": [
           "/api/dsh-newapp/health",

@@ -1,0 +1,87 @@
+{
+  "capturedFrom": "zjgulai/lute-dsh-platform",
+  "capturedAt": "2026-09-16T20:33:46.839Z",
+  "note": "真实 API 读数（已裁剪为审计读取的字段并排序）。fixture 必须来自事实，否则变异测试守的是一份想象。",
+  "rulesets": [
+    {
+      "id": 23564403,
+      "name": "main-protection",
+      "target": "branch",
+      "enforcement": "active",
+      "conditions": {
+        "ref_name": {
+          "exclude": [],
+          "include": [
+            "refs/heads/main"
+          ]
+        }
+      },
+      "rules": [
+        {
+          "type": "deletion"
+        },
+        {
+          "type": "non_fast_forward"
+        },
+        {
+          "type": "pull_request",
+          "parameters": {
+            "required_approving_review_count": 0,
+            "dismiss_stale_reviews_on_push": false,
+            "required_reviewers": [],
+            "require_code_owner_review": false,
+            "require_last_push_approval": false,
+            "required_review_thread_resolution": false,
+            "require_extra_approval_for_unattributed_changes": true,
+            "allowed_merge_methods": [
+              "merge",
+              "squash"
+            ]
+          }
+        },
+        {
+          "type": "required_status_checks",
+          "parameters": {
+            "strict_required_status_checks_policy": false,
+            "do_not_enforce_on_create": false,
+            "required_status_checks": [
+              {
+                "context": "gate (quick)"
+              },
+              {
+                "context": "gate (full)"
+              }
+            ]
+          }
+        }
+      ],
+      "bypass_actors": []
+    },
+    {
+      "id": 23564404,
+      "name": "release-tag-protection",
+      "target": "tag",
+      "enforcement": "active",
+      "conditions": {
+        "ref_name": {
+          "exclude": [],
+          "include": [
+            "refs/tags/v*"
+          ]
+        }
+      },
+      "rules": [
+        {
+          "type": "deletion"
+        },
+        {
+          "type": "non_fast_forward"
+        },
+        {
+          "type": "update"
+        }
+      ],
+      "bypass_actors": []
+    }
+  ]
+}

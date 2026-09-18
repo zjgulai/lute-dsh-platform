@@ -22,6 +22,7 @@
  */
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
+import { existsSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { collectLocallyScopedTokens, collectReferencedTokens } from './theme-tokens.mjs'
@@ -125,4 +126,90 @@ test('反空转：局部集合必须真的是子集，且不含平台供给的 t
     `局部集合(${local.size}) 不小于引用总量(${referenced.size})——判据已经退化成恒真桩`,
   )
   assert.equal(local.has('--dsw-alias-bg-layer-1'), false, '平台供给的 token 不得被判成局部')
+})
+
+/* ── 射程：按包的实际形态分流（2026-09-18）────────────────────────────────────
+ *
+ * 原先射程只覆盖 `packages/<组>/<包>/src/`。对有 TypeScript 源的包这是对的，
+ * 但仓库里有一批**纯 JS 包**（无 `src/`，`lib/client.js` 就是源头）：对它们
+ * `walk(srcDir)` 目录不存在、静默返回空，于是**整个包一条引用都扫不到**——
+ * 射程为空，读数上却与「全合规」同形（P-02 最便宜的失效路径）。
+ *
+ * 当天实测该盲区的代价：14 个无 `src` 的包里 5 个正在引用平台 token，其中 3 个是
+ * 幻觉 token（`--dsh-layer-drawer`、`--dsw-alias-label-on-accent`、
+ * `--dsw-alias-state-warning-primary`）。三者都写了字面兜底，所以页面上看不出问题，
+ * 只是那些元素不随主题变化——与基线的 7 条旧违规同一个失效方式。
+ *
+ * 下面两条是**互补**的：一条守「无 src 的包必须进射程」，一条守「有 src 的包不得
+ * 重复扫 lib」——只加前者会让「干脆所有包都扫 src+lib」这种过度修法也能变绿，
+ * 而那会把每一处引用数两遍，并让 `lib/` 里过期的构建产物造出假红。
+ */
+
+test('射程：无 src 的包（lib 即源头）必须被扫到——改回「只扫 src」本条即红', () => {
+  const srcLessPkg = 'packages/capabilities/dsh-wanzh-hulian'
+  assert.equal(
+    existsSync(join(repoRoot, srcLessPkg, 'src')),
+    false,
+    `前提失效：${srcLessPkg} 现在有了 src/，本用例的「无 src」前提需重立（换一个仍无 src 的包或改判据）`,
+  )
+
+  const referenced = collectReferencedTokens(repoRoot)
+  const fromLib = [...referenced.values()].filter((files) =>
+    files.some((f) => f.startsWith(`${srcLessPkg}/lib/`)))
+
+  assert.ok(
+    fromLib.length > 0,
+    `${srcLessPkg} 无 src/，其 lib/ 就是源头，却一条引用都没扫到——`
+    + '射程为空在读数上与「全合规」同形。把 collectReferencedTokens 的分支改回只扫 src，本条必须变红',
+  )
+})
+
+test('射程：有 src 的包只扫 src，不得重复扫 lib——改成 src+lib 全扫本条即红', () => {
+  const packageWithSrc = 'packages/platform/dsh-theme-local'
+  assert.equal(
+    existsSync(join(repoRoot, packageWithSrc, 'src')),
+    true,
+    `前提失效：${packageWithSrc} 失去了 src/，本用例不再是「有 src 的包」`,
+  )
+
+  const referenced = collectReferencedTokens(repoRoot)
+  const fromLib = [...referenced.values()]
+    .flat()
+    .filter((f) => f.startsWith(`${packageWithSrc}/lib/`))
+
+  assert.deepEqual(
+    fromLib,
+    [],
+    '有 src 的包不该再扫 lib/：lib 是构建产物，扫它等于把同一处引用数两遍，'
+    + '且会让 lib 里过期的字节造出假红——射程要按包的实际形态分流，不是简单取并集',
+  )
+})
+
+test('射程对齐：无 src 的包在 lib/ 里「声明 + 同包引用」必须认作局部——声明侧只扫 src 本条即红', () => {
+  const srcLess = 'packages/surfaces/dsh-my-quotes'
+  const declFile = `${srcLess}/lib/client.js`
+  const token = '--dsh-scrollbar-thumb-hover'
+
+  assert.equal(
+    existsSync(join(repoRoot, srcLess, 'src')),
+    false,
+    `前提失效：${srcLess} 现在有 src/ 了，本用例的「无 src」前提需重立`,
+  )
+  assert.match(
+    readFileSync(join(repoRoot, declFile), 'utf8'),
+    new RegExp(`${token}\\s*:`),
+    `前提失效：${declFile} 不再声明 ${token}，本用例失去射程`,
+  )
+
+  // 引用侧是**构造的**：本用例量的是「声明侧能不能看见 lib/」，不是「谁引用了它」——
+  // 后者由默认的 collectReferencedTokens 负责，那一条在真实仓库里可能随时变化。
+  const local = collectLocallyScopedTokens(repoRoot, new Map([[token, [declFile]]]))
+
+  assert.equal(
+    local.has(token),
+    true,
+    '无 src 的包其 lib/ 就是源头。声明侧若仍只扫 src/，就会出现「引用被收下、声明看不见」的'
+    + '不对称，同包声明+同包引用当场被判成幻觉 token——那是假红，长相与真缺陷一模一样（P-02）。'
+    + '把 defaultListSourceFiles 改回只扫 src，本条必须变红',
+  )
 })

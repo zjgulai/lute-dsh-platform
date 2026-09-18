@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useSyncExternalStore, type ReactNode } from 'react'
+import { useEffect, useId, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from 'react'
 import type { InjectFace, PropsRuntime } from '@deepseek-ai/dsh-client-ui-slots'
 import type {} from '@deepseek-ai/dsh-client-ui-conversation/client'
 import type { InsightsBucket, InsightsView, QualityMemberView, QualityResultView, RunMemberStatus, RunView, TokenUsageView } from './contracts.ts'
@@ -264,7 +264,28 @@ function TeamRunDockContent({ controller, sessionId }: TeamRunDockProps): ReactN
   const { store, snapshot } = useRunStore(controller, sessionId, 3)
   const [open, setOpen] = useState(false)
   const [error, setError] = useState('')
+  const dockRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
+  const panelId = useId()
   const live = snapshot.runs.find(run => isLive(run.status))
+  const close = (): void => { setOpen(false); triggerRef.current?.focus() }
+  useEffect(() => {
+    if (!open) return
+    requestAnimationFrame(() => { panelRef.current?.focus() })
+    const onPointer = (event: PointerEvent): void => {
+      if (event.target instanceof Node && dockRef.current?.contains(event.target) !== true) close()
+    }
+    const onKey = (event: KeyboardEvent): void => {
+      if (event.key === 'Escape') { event.preventDefault(); close() }
+    }
+    document.addEventListener('pointerdown', onPointer)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('pointerdown', onPointer)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
   if (live === undefined) return null
   const done = live.members.filter(member => member.status === 'completed' || member.status === 'failed' || member.status === 'cancelled' || member.status === 'interrupted' || member.status === 'timed-out').length
   const displayUsage = usageWithLive(live)
@@ -272,12 +293,16 @@ function TeamRunDockContent({ controller, sessionId }: TeamRunDockProps): ReactN
   const stop = async (): Promise<void> => {
     try { await controller.runs.cancel(live.id); store.refresh() } catch (reason) { setError(errorText(reason)) }
   }
-  return <div className="atg-run-dock-wrap"><button type="button" className="atg-run-dock" aria-expanded={open} onClick={() => { setOpen(value => !value) }}><span className="atg-live-pulse" /><strong>{live.squadName}</strong><span>{live.status === 'planning' ? t('statusPlanning') : `${done}/${live.members.length} ${t('members')}`}</span><span>{displayUsage.providerReported ? `${formatTokens(displayUsage.totalTokens)} ${t('tokens')}${coverage.partial > 0 ? ` · ${t('partialMetering')}` : ''}` : t('metering')}</span><span aria-hidden="true">{open ? '⌃' : '⌄'}</span></button>{open && <div className="atg-dock-panel" role="status"><span>{truncate(live.task, 120)}</span>{error !== '' && <small role="alert">{error}</small>}<div><button type="button" className="atg-button ghost" onClick={openRunCenter}>{t('viewRun')}</button><button type="button" className="atg-button danger" onClick={() => { void stop() }}>{t('stopRun')}</button></div></div>}</div>
+  return <div ref={dockRef} className="atg-run-dock-wrap"><button ref={triggerRef} type="button" className="atg-run-dock" aria-haspopup="dialog" aria-expanded={open} aria-controls={panelId} aria-label={live.squadName} onClick={() => { setOpen(value => !value) }}><span className="atg-live-pulse" /><strong>{live.squadName}</strong><span>{live.status === 'planning' ? t('statusPlanning') : `${done}/${live.members.length} ${t('members')}`}</span><span>{displayUsage.providerReported ? `${formatTokens(displayUsage.totalTokens)} ${t('tokens')}${coverage.partial > 0 ? ` · ${t('partialMetering')}` : ''}` : t('metering')}</span><span aria-hidden="true">{open ? '⌃' : '⌄'}</span></button>{open && <div ref={panelRef} id={panelId} className="atg-dock-panel" role="dialog" aria-label={`${t('viewRun')}: ${live.squadName}`} aria-describedby={`${panelId}-task`} tabIndex={-1}><span id={`${panelId}-task`} role="status" aria-live="polite">{truncate(live.task, 120)}</span>{error !== '' && <small role="alert">{error}</small>}<div><button type="button" className="atg-button ghost" onClick={() => { close(); openRunCenter() }}>{t('viewRun')}</button><button type="button" className="atg-button danger" onClick={() => { void stop() }}>{t('stopRun')}</button></div></div>}</div>
 }
 
 /** DSH has no public imperative conversation-view selection service yet; use the host's semantic tab. */
 export function openRunCenter(): void {
-  const button = [...document.querySelectorAll<HTMLButtonElement>('button')]
-    .find(item => ['小队运行', 'Team runs'].includes(item.textContent?.trim() ?? ''))
-  button?.click()
+  const button = document.getElementById('agent-team-runs-tab')
+  if (button instanceof HTMLButtonElement) {
+    button.click()
+    button.focus()
+    return
+  }
+  document.querySelector<HTMLElement>('[data-testid="agent-team-run-center"] [role="tab"][aria-controls="agent-team-runs-panel"]')?.click()
 }

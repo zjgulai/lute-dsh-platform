@@ -1,4 +1,5 @@
 import http from "node:http";
+import https from "node:https";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -16,37 +17,67 @@ import { transformSettingsHostMode, CACHE_BUST_PARAM } from "./settings-transfor
 import { filterMemberStreamItem, classifyMemberStreamOpen } from "./ws-filter.mjs";
 import { injectSpaShim } from "./spa-shim.mjs";
 import { compatibilityReport } from "./compat.mjs";
+import {
+  readBoundedBody,
+  readBoundedJson,
+  BodyLimitError,
+  PASSTHROUGH_MAX_BYTES,
+  PASSTHROUGH_READ_DEADLINE_MS,
+  FORM_MAX_BYTES,
+  FORM_READ_DEADLINE_MS,
+  ADMIN_API_MAX_BYTES,
+  ADMIN_API_READ_DEADLINE_MS,
+} from "./bounded-body.mjs";
+import { evaluateHttpRoutePolicy } from "./route-guard.mjs";
+import { LoginRateLimiter } from "./login-limiter.mjs";
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const ADMIN_UI = path.join(ROOT, "admin-ui");
+
 const COOKIE = "dsh_team_hub_session";
 const HOP_BY_HOP = new Set(["connection", "keep-alive", "transfer-encoding", "upgrade", "host", "content-length", "content-encoding"]);
 
-// 插件注册的宿主级 HTTP 路由：只对 admin 开放（GET/POST/WS 全拦）。
-// 精确匹配或路径边界匹配，避免误伤 /api/events.mux 等核心路由。
-const ADMIN_ONLY_ROUTE_PREFIXES = [
-  "/api/task-board",
+/** 预置的 body 读取上限配置。 */
+const PASSTHROUGH_BODY = {
+  maxBytes: PASSTHROUGH_MAX_BYTES,
+  readDeadlineMs: PASSTHROUGH_READ_DEADLINE_MS,
+};
+const FORM_BODY = {
+  maxBytes: FORM_MAX_BYTES,
+  readDeadlineMs: FORM_READ_DEADLINE_MS,
+};
+const ADMIN_BODY = {
+  maxBytes: ADMIN_API_MAX_BYTES,
+  readDeadlineMs: ADMIN_API_READ_DEADLINE_MS,
+};
+
+/**
+ * 宿主级插件的 HTTP 路由前缀（仅 admin 可直通，member 拦截）。
+ * @see docs/adr/ADR-0104.md
+ */
+const PLUGIN_HOST_ROUTES = [
+  "/api/dsh-wanzh-hulian",
+  "/api/dsh-remote-web-ui",
+  "/api/mcp-servers",
   "/api/dsh-ssh",
-  "/api/dsh-skill-explorer",
-  "/api/pair",
-  "/api/approvals",
   "/api/events", // dsh-remote-web-ui 的 SSE（注意不带 .mux/.host 后缀）
 ];
 
-function isAdminOnlyRoute(pathname) {
-  return ADMIN_ONLY_ROUTE_PREFIXES.some(p => pathname === p || pathname.startsWith(p + "/"));
+function isPluginHostRoute(pathname) {
+  return PLUGIN_HOST_ROUTES.some(prefix => pathname === prefix || pathname.startsWith(prefix + "/"));
 }
 
 function send(res, status, body, headers = {}) {
-  const text = typeof body === "string" ? body : JSON.stringify(body);
-  res.writeHead(status, { "content-type": typeof body === "string" ? "text/plain; charset=utf-8" : "application/json", ...headers });
-  res.end(text);
+  const isJson = typeof body === "object" && !Buffer.isBuffer(body);
+  const payload = isJson ? JSON.stringify(body) : body;
+  res.writeHead(status, {
+    "content-type": isJson ? "application/json" : "text/plain; charset=utf-8",
+    ...headers
+  });
+  res.end(payload);
 }
 
-async function collect(req) {
-  const chunks = [];
-  for await (const chunk of req) chunks.push(chunk);
-  return Buffer.concat(chunks);
+function collect(req) {
+  return readBoundedBody(req, PASSTHROUGH_BODY);
 }
 
 function loginPage(next = "/", error = "") {
@@ -71,6 +102,83 @@ function errorText(reason) {
 }
 
 /**
+ * 获取请求的真实客户端 IP（只信任配置中的受信反向代理）
+ * @param {import("node:http").IncomingMessage} req
+ * @param {any} config
+ * @returns {string}
+ */
+export function getClientIp(req, config) {
+  const remoteIp = req.socket?.remoteAddress || "127.0.0.1";
+  const trusted = Array.isArray(config.trustedProxies) ? config.trustedProxies : ["127.0.0.1", "::1"];
+  const isTrusted = trusted.includes(remoteIp) || remoteIp === "127.0.0.1" || remoteIp === "::1" || remoteIp === "::ffff:127.0.0.1";
+
+  if (isTrusted && req.headers["x-forwarded-for"]) {
+    const parts = String(req.headers["x-forwarded-for"]).split(",");
+    return parts[0].trim();
+  }
+  return remoteIp;
+}
+
+/**
+ * 判断当前请求是否属于 HTTPS（直接 TLS 或受信代理 X-Forwarded-Proto）
+ * @param {import("node:http").IncomingMessage} req
+ * @param {any} config
+ * @returns {boolean}
+ */
+export function isHttpsRequest(req, config) {
+  if (req.socket && "encrypted" in req.socket && req.socket.encrypted) return true;
+  const remoteIp = req.socket?.remoteAddress || "127.0.0.1";
+  const trusted = Array.isArray(config.trustedProxies) ? config.trustedProxies : ["127.0.0.1", "::1"];
+  const isTrusted = trusted.includes(remoteIp) || remoteIp === "127.0.0.1" || remoteIp === "::1" || remoteIp === "::ffff:127.0.0.1";
+
+  if (isTrusted && req.headers["x-forwarded-proto"]) {
+    return String(req.headers["x-forwarded-proto"]).trim().toLowerCase() === "https";
+  }
+  return false;
+}
+
+/**
+ * 校验跨站 Origin/Referer（防止 CSRF 修改凭证或越权状态）
+ * @param {import("node:http").IncomingMessage} req
+ * @returns {boolean}
+ */
+export function verifySameOrigin(req) {
+  const origin = req.headers.origin;
+  const host = req.headers.host;
+  if (!host) return false;
+  if (!origin) {
+    const referer = req.headers.referer;
+    if (!referer) return true; // 无 Referer 且无 Origin（如同源直接请求/同机工具）放行
+    try {
+      const refUrl = new URL(referer);
+      return refUrl.host === host;
+    } catch {
+      return false;
+    }
+  }
+  try {
+    const origUrl = new URL(origin);
+    return origUrl.host === host;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * 构造 Cookie Header
+ * @param {string} name
+ * @param {string} value
+ * @param {object} opts
+ * @returns {string}
+ */
+export function formatCookie(name, value, { isHttps = false, maxAge, path = "/" } = {}) {
+  let cookie = `${name}=${encodeURIComponent(value)}; Path=${path}; HttpOnly; SameSite=Lax`;
+  if (isHttps) cookie += "; Secure";
+  if (typeof maxAge === "number") cookie += `; Max-Age=${maxAge}`;
+  return cookie;
+}
+
+/**
  * @param {any} config 运行配置
  * @param {import('node:http').IncomingMessage} req 请求
  * @param {import('node:http').ServerResponse} res 响应
@@ -87,13 +195,10 @@ async function proxyRequest(config, req, res, { bodyOverride, injectShim = false
   // 上游只接受自己的源——网关已做认证，这里把 Origin/Referer 统一改写成上游源。
   headers.origin = upstream.origin;
   if (typeof headers.referer === "string") {
-    const reqOrigin = new URL(req.url ?? "/", "http://local").origin;
     headers.referer = headers.referer.replace(/^https?:\/\/[^/]+/, upstream.origin);
   }
   const body = bodyOverride !== undefined ? bodyOverride : ["GET", "HEAD"].includes(req.method ?? "") ? undefined : await collect(req);
   // 网关注入的缓存破坏参数（thub）只对浏览器有意义，转发上游前剥掉。
-  // 注意：不能用 URL/URLSearchParams——combo 路径里的 `??` 会被重编码为 %3F，
-  // 上游路由不认（实测 404）。纯字符串剥离。
   const targetUrl = config.upstream + (req.url ?? "/").replace(new RegExp(`[&?]${CACHE_BUST_PARAM}=[^&]*`), "");
   let response = await fetch(targetUrl, {
     method: req.method,
@@ -111,148 +216,312 @@ async function proxyRequest(config, req, res, { bodyOverride, injectShim = false
       redirect: "manual"
     });
   }
-  /** @type {Record<string, any>} */
   const outHeaders = {};
-  for (const [key, value] of response.headers.entries()) if (!HOP_BY_HOP.has(key)) outHeaders[key] = value;
-  let out = Buffer.from(await response.arrayBuffer());
-  if (injectShim && (outHeaders["content-type"] || "").includes("text/html")) {
-    out = Buffer.from(injectSpaShim(out.toString("utf8")));
-    delete outHeaders["content-length"];
-    // SPA 页不缓存：保证成员总能拿到最新的（带缓存破坏参数的）combo URL
-    outHeaders["cache-control"] = "no-store";
+  response.headers.forEach((value, key) => { if (!HOP_BY_HOP.has(key)) outHeaders[key] = value; });
+  if (response.headers.has("location")) {
+    const loc = response.headers.get("location") || "/";
+    outHeaders.location = loc.replace(new RegExp(`^https?://${upstream.host}`), "");
   }
-  // 设置页修复：对 JS 响应做 in-flight 转换（settings 强制 host 模式）。
-  // 只改发往浏览器的字节；Desktop 磁盘与 rev 哈希管线零接触（白屏教训）。
-  if ((outHeaders["content-type"] || "").includes("javascript")) {
-    const transformed = transformSettingsHostMode(out, outHeaders["content-encoding"]);
-    if (transformed !== null) {
-      out = transformed.body;
-      if (!transformed.keepEncoding) delete outHeaders["content-encoding"];
-      delete outHeaders["content-length"];
+  const contentType = response.headers.get("content-type") || "";
+  const isHtml = contentType.includes("text/html");
+  const isJs = contentType.includes("javascript");
+  const contentEncoding = (response.headers.get("content-encoding") || "").toLowerCase();
+
+  if (isJs && (contentEncoding === "" || contentEncoding === "gzip" || contentEncoding === "br")) {
+    const rawBuf = Buffer.from(await response.arrayBuffer());
+    const transformed = transformSettingsHostMode(rawBuf, contentEncoding);
+    if (transformed) {
+      outHeaders["content-length"] = String(transformed.byteLength);
+      res.writeHead(response.status, outHeaders);
+      res.end(transformed);
+      return;
     }
+    delete outHeaders["content-encoding"];
+    outHeaders["content-length"] = String(rawBuf.byteLength);
+    res.writeHead(response.status, outHeaders);
+    res.end(rawBuf);
+    return;
+  }
+
+  if (isHtml && injectShim) {
+    delete outHeaders["content-length"];
+    delete outHeaders["content-encoding"];
+    res.writeHead(response.status, outHeaders);
+    res.end(injectSpaShim(await response.text()));
+    return;
   }
   res.writeHead(response.status, outHeaders);
-  res.end(out);
-}
-
-function rpcError(res, rpcId, code, message, status = 200) {
-  // DSH 客户端只认识固定的错误码集合；自定义码（如 forbidden）会让客户端
-  // 连错误信封都解析不了，直接弹 zod 原始错误。统一映射为 internal，消息保留。
-  // Desktop 客户端严格校验失败信封：code/message 字符串 + details 必须是对象
-  // （缺 details 会抛 "connection: invalid server-response failure"）。
-  const CLIENT_CODES = new Set(["bad-request", "cancelled", "session-not-found", "model-unavailable", "session-conflict", "workspace-not-found", "workspace-invalid-path", "internal"]);
-  const safeCode = CLIENT_CODES.has(code) ? code : "internal";
-  send(res, status, { type: "server-response", rpcId, result: { ok: false, error: { code: safeCode, message, details: {} } } });
-}
-
-async function refreshOwnership(context) {
-  try {
-    // Desktop 无 workspace.list：从 session/list 的 cwd 学习会话归属。
-    const sessions = await upstreamRpc(context.config, "session/list", { args: { _request: {} } });
-    for (const row of sessions.items || []) {
-      learnSession(context.config, context.ownership, row.sessionId, row.cwd, row.parentSessionId);
-    }
-    return true;
-  } catch (error) {
-    context.audit.write("system.ownership-refresh-failed", { error: errorText(error) });
-    return false;
+  if (!response.body) { res.end(); return; }
+  const reader = response.body.getReader();
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    res.write(Buffer.from(value));
   }
+  res.end();
 }
 
-async function ensureMemberWorkspaces(context) {
-  for (const user of context.config.users) {
-    if (user.role !== "member" || (user.status || "active") !== "active") continue;
-    const root = path.join(context.config.workspaceRoot, user.name);
-    fs.mkdirSync(root, { recursive: true, mode: 0o700 });
-    const existing = [...context.ownership.workspaceOwner.entries()].find(([, owner]) => owner === user.name);
-    if (existing) continue;
-    try {
-      const created = await upstreamRpc(context.config, "workspace/create", { args: { request: { path: root } } });
-      const view = created?.workspace;
-      learnWorkspace(context.config, context.ownership, view);
-      if (view && view.title !== user.name) {
-        await upstreamRpc(context.config, "workspace/rename", { args: { request: { workspaceId: view.workspaceId, title: user.name } } });
-      }
-      context.audit.write("workspace.created", { user: user.name });
-    } catch (error) {
-      context.audit.write("workspace.create-failed", { user: user.name, error: errorText(error) });
+function rpcError(res, id, code, message, status = 200) {
+  send(res, status, { id, error: { code, message } });
+}
+
+async function handleRpc(context, user, req, res) {
+  const parsed = await readBoundedJson(req, PASSTHROUGH_BODY);
+  const { id = null, method, args, payload } = parsed;
+  const rpcPayload = payload ?? args ?? {};
+
+  if (user.role === "member") {
+    const guard = guardMemberRequest({ config: context.config, ownership: context.ownership, user, method, payload: rpcPayload });
+    if (!guard.pass) {
+      context.audit.write("policy.denied", { user: user.name, method, reason: guard.reason });
+      return rpcError(res, id, "forbidden", guard.reason || "forbidden", 403);
     }
   }
-}
 
-async function handleApiPost(context, user, req, res, method) {
-  const raw = await collect(req);
-  let message;
-  try { message = JSON.parse(raw.toString("utf8")); } catch { return rpcError(res, null, "bad-request", "invalid JSON", 400); }
-  const { rpcId, payload } = message;
-  if (user.role === "admin") return proxyRequest(context.config, req, res, { bodyOverride: raw });
-  const guard = guardMemberRequest({ config: context.config, ownership: context.ownership, user, method, payload });
-  if (!guard.ok) {
-    context.audit.write("policy.denied", { user: user.name, method, reason: guard.message });
-    return rpcError(res, rpcId, "forbidden", guard.message);
-  }
   const upstream = new URL(context.config.upstream);
-  const response = await fetch(`${context.config.upstream}/api/${method}`, {
+  const target = new URL(req.url ?? "/api/", upstream.origin);
+  const upstreamRes = await fetch(target, {
     method: "POST",
     headers: withBridge({ "content-type": "application/json", host: upstream.host }, context.config),
-    body: JSON.stringify({ ...message, payload: { args: guard.args } })
+    body: JSON.stringify(parsed)
   });
-  /** @type {any} */
-  const body = await response.json();
-  if (body.result?.ok) body.result.value = filterMemberResponse({ ownership: context.ownership, user, method, value: body.result.value });
-  context.audit.write("policy.allowed", { user: user.name, method });
-  send(res, response.status, body, { "content-type": "application/json" });
+  const data = await upstreamRes.json();
+  const filtered = user.role === "member"
+    ? filterMemberResponse({ ownership: context.ownership, user, method, value: data.result ?? data.value ?? data })
+    : (data.result ?? data.value ?? data);
+
+  const out = "result" in data ? { id: data.id ?? id, result: filtered }
+    : "value" in data ? { id: data.id ?? id, value: filtered }
+    : filtered;
+  send(res, upstreamRes.status, out);
+}
+
+function serveAdminUi(res, reqPath) {
+  const norm = path.normalize(reqPath || "/").replace(/^(\.\.[/\\])+/, "");
+  const target = path.join(ROOT, "admin-ui", norm === "/" ? "index.html" : norm);
+  if (!target.startsWith(path.join(ROOT, "admin-ui")) || !fs.existsSync(target) || fs.statSync(target).isDirectory()) {
+    return false;
+  }
+  const ext = path.extname(target);
+  const types = { ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".js": "application/javascript; charset=utf-8" };
+  send(res, 200, fs.readFileSync(target), { "content-type": types[ext] || "application/octet-stream" });
+  return true;
 }
 
 async function handleAdminApi(context, req, res, pathname, query) {
   const api = context.adminApi;
+  if (!api) return send(res, 500, { error: "admin api unavailable" });
   if (req.method === "GET" && pathname === "/overview") return send(res, 200, api.overview());
+  if (req.method === "GET" && pathname === "/status") return send(res, 200, api.overview());
   if (req.method === "GET" && pathname === "/users") return send(res, 200, api.users());
   if (req.method === "POST" && pathname === "/users") {
-    const body = JSON.parse((await collect(req)).toString("utf8") || "{}");
+    const body = await readBoundedJson(req, ADMIN_BODY);
     return send(res, 200, api.createUser(body));
   }
   const statusMatch = pathname.match(/^\/users\/([^/]+)\/status$/);
   if (req.method === "POST" && statusMatch) {
-    const body = JSON.parse((await collect(req)).toString("utf8") || "{}");
+    const body = await readBoundedJson(req, ADMIN_BODY);
     return send(res, 200, api.setUserStatus(decodeURIComponent(statusMatch[1]), body.status));
   }
   const resetMatch = pathname.match(/^\/users\/([^/]+)\/reset-password$/);
-  if (req.method === "POST" && resetMatch) return send(res, 200, api.resetPassword(decodeURIComponent(resetMatch[1])));
+  if (req.method === "POST" && resetMatch) {
+    return send(res, 200, api.resetPassword(decodeURIComponent(resetMatch[1])));
+  }
   const nameMatch = pathname.match(/^\/users\/([^/]+)\/display-name$/);
   if (req.method === "POST" && nameMatch) {
-    const body = JSON.parse((await collect(req)).toString("utf8") || "{}");
+    const body = await readBoundedJson(req, ADMIN_BODY);
     return send(res, 200, api.setDisplayName(decodeURIComponent(nameMatch[1]), body.displayName));
   }
   if (req.method === "GET" && pathname === "/workspaces") return send(res, 200, api.workspaces());
   if (req.method === "GET" && pathname === "/debug/ownership") return send(res, 200, api.ownershipDebug());
-  if (req.method === "GET" && pathname === "/audit") return send(res, 200, api.audit({ limit: Number(query.get("limit") || 200), user: query.get("user"), type: query.get("type") }));
-  if (req.method === "GET" && pathname === "/system") return send(res, 200, { upstream: context.config.upstream, users: context.config.users.length, node: process.version });
+  if (req.method === "GET" && pathname === "/audit") {
+    const limit = Number(query.get("limit") || 50);
+    return send(res, 200, api.audit({ limit, user: query.get("user"), type: query.get("type") }));
+  }
+  if (req.method === "GET" && pathname === "/system") {
+    return send(res, 200, { upstream: context.config.upstream, users: context.config.users.length, node: process.version });
+  }
   if (req.method === "POST" && pathname === "/selftest") return send(res, 200, await compatibilityReport(context.config));
-  send(res, 404, { error: "not found" });
+  return send(res, 404, { error: "not found" });
 }
 
-function serveAdminUi(res, pathname) {
-  const file = pathname === "/" || pathname === "/index.html" ? "index.html" : pathname.slice(1);
-  const target = path.resolve(ADMIN_UI, file);
-  if (!target.startsWith(ADMIN_UI) || !fs.existsSync(target) || !fs.statSync(target).isFile()) return false;
-  const type = file.endsWith(".js") ? "text/javascript" : file.endsWith(".css") ? "text/css" : "text/html";
-  // readFileSync 返回 Buffer，send() 会对非 string body 走 JSON.stringify，
-  // 导致 admin 页面返回 {"type":"Buffer","data":[...]} 而不是 HTML（Issue #1）。
-  // 显式读成 utf8 字符串，让 send 按文本发送。
-  send(res, 200, fs.readFileSync(target, "utf8"), { "content-type": type + "; charset=utf-8" });
-  return true;
+async function ensureMemberWorkspaces(context) {
+  for (const user of context.config.users) {
+    if (user.role !== "member") continue;
+    try {
+      const created = await upstreamRpc(context.config, "workspace/create", {
+        args: { request: { title: user.name, path: path.join(context.config.workspaceRoot, user.name) } }
+      });
+      learnWorkspace(context.config, context.ownership, created.workspace || created);
+    } catch (error) {
+      console.warn(`[workspace] 为成员 ${user.name} 确保工作区失败:`, errorText(error));
+    }
+  }
+}
+
+/**
+ * 构造核心 HTTP 请求处理器
+ * @param {{ context: any, reloadConfigIfChanged: () => void, limiter?: LoginRateLimiter }} options 选项
+ * @returns {(req: import("node:http").IncomingMessage, res: import("node:http").ServerResponse) => Promise<unknown>} 请求处理器
+ */
+export function createRequestHandler({ context, reloadConfigIfChanged, limiter = new LoginRateLimiter() }) {
+  const home = context.home;
+  return async (req, res) => {
+    try {
+      reloadConfigIfChanged();
+      const url = new URL(req.url ?? "/", "http://local");
+      const isHttps = isHttpsRequest(req, context.config);
+      const cookies = parseCookies(req);
+      const session = resolveSession(home, cookies[COOKIE]);
+      const user = session && context.config.users.find(u => u.name === session.username && (u.status || "active") === "active");
+      const clientIp = getClientIp(req, context.config);
+
+      if (url.pathname === "/login" && req.method === "GET") {
+        return send(res, 200, loginPage(url.searchParams.get("next") || "/"), { "content-type": "text/html; charset=utf-8" });
+      }
+
+      if (url.pathname === "/login" && req.method === "POST") {
+        // SEC-RT-009 CSRF 与 Origin 检查
+        if (!verifySameOrigin(req)) {
+          context.audit.write("auth.login-rejected", { reason: "cross-origin-login", ip: clientIp });
+          return send(res, 403, "Forbidden: Cross-origin request rejected");
+        }
+
+        const form = new URLSearchParams((await readBoundedBody(req, FORM_BODY)).toString("utf8"));
+        const username = String(form.get("username") || "").trim();
+        const password = String(form.get("password") || "");
+
+        // SEC-RT-009 登录限速与指数退避检查
+        const limitCheck = limiter.check(clientIp, username);
+        if (!limitCheck.allowed) {
+          const retrySec = Math.ceil(limitCheck.retryAfterMs / 1000);
+          context.audit.write("auth.login-rate-limited", { user: username, ip: clientIp, retrySec });
+          res.setHeader("Retry-After", String(retrySec));
+          return send(res, 429, loginPage(String(form.get("next") || "/"), `登录失败过多，请在 ${retrySec} 秒后重试`), {
+            "content-type": "text/html; charset=utf-8",
+            "Retry-After": String(retrySec)
+          });
+        }
+
+        const found = authenticate(context.config, username, password);
+        if (!found) {
+          const failRecord = limiter.recordFailure(clientIp, username);
+          context.audit.write("auth.login-failed", { user: username, ip: clientIp, attempts: failRecord.attempts });
+          const errMsg = failRecord.blocked
+            ? `登录失败次数过多，已被暂时锁定 ${Math.ceil(failRecord.retryAfterMs / 1000)} 秒`
+            : "用户名或密码错误";
+          const status = failRecord.blocked ? 429 : 401;
+          if (failRecord.blocked) {
+            res.setHeader("Retry-After", String(Math.ceil(failRecord.retryAfterMs / 1000)));
+          }
+          return send(res, status, loginPage(String(form.get("next") || "/"), errMsg), { "content-type": "text/html; charset=utf-8" });
+        }
+
+        limiter.recordSuccess(clientIp, username);
+        const issued = issueSession(home, found.name);
+        context.audit.write("auth.login", { user: found.name, ip: clientIp });
+        const next = found.mustChangePassword ? "/change-password" : String(form.get("next") || "/");
+        const cookieHeader = formatCookie(COOKIE, issued.token, { isHttps });
+        return send(res, 302, "", { location: next, "set-cookie": cookieHeader });
+      }
+
+      if (url.pathname === "/logout") {
+        // SEC-RT-009: 注销统一要求 POST（GET 兼容 302 重定向到前端或在同源下处理，POST 执行真实注销与 CSRF 防御）
+        if (req.method === "POST" && !verifySameOrigin(req)) {
+          return send(res, 403, "Forbidden: Cross-origin logout rejected");
+        }
+        revokeSession(home, cookies[COOKIE]);
+        context.audit.write("auth.logout", { user: session?.username || "", ip: clientIp });
+        const clearCookie = formatCookie(COOKIE, "", { isHttps, maxAge: 0 });
+        return send(res, 302, "", { location: "/login", "set-cookie": clearCookie });
+      }
+
+      if (!user) {
+        if (url.pathname.startsWith("/api/")) return rpcError(res, null, "unauthorized", "not logged in", 401);
+        return send(res, 302, "", { location: "/login?next=" + encodeURIComponent(req.url ?? "/") });
+      }
+
+      if (url.pathname === "/__teamhub/whoami") {
+        return send(res, 200, { name: user.name, displayName: user.displayName || user.name, role: user.role });
+      }
+
+      if (user.mustChangePassword && url.pathname !== "/change-password") return send(res, 302, "", { location: "/change-password" });
+      if (url.pathname === "/change-password") {
+        if (req.method === "GET") return send(res, 200, changePasswordPage(), { "content-type": "text/html; charset=utf-8" });
+        if (req.method === "POST") {
+          // SEC-RT-009: 改密必须防跨站请求伪造
+          if (!verifySameOrigin(req)) {
+            return send(res, 403, "Forbidden: Cross-origin password change rejected");
+          }
+          const form = new URLSearchParams((await readBoundedBody(req, FORM_BODY)).toString("utf8"));
+          try {
+            changePassword(context.config, user.name, String(form.get("current") || ""), String(form.get("next") || ""));
+            saveConfig(home, context.config);
+            context.audit.write("auth.password-changed", { user: user.name, ip: clientIp });
+            return send(res, 302, "", { location: "/" });
+          } catch (error) {
+            return send(res, 400, changePasswordPage(errorText(error)), { "content-type": "text/html; charset=utf-8" });
+          }
+        }
+      }
+
+      if (url.pathname === "/admin" || url.pathname.startsWith("/admin/")) {
+        if (user.role !== "admin") return send(res, 403, "admin only");
+        if (url.pathname === "/admin") return send(res, 302, "", { location: "/admin/" });
+        return serveAdminUi(res, url.pathname.slice("/admin".length)) || send(res, 404, "not found");
+      }
+
+      if (url.pathname.startsWith("/__teamhub/api/")) {
+        if (user.role !== "admin") return send(res, 403, { error: "admin only" });
+        if (["POST", "PUT", "DELETE", "PATCH"].includes(req.method ?? "") && !verifySameOrigin(req)) {
+          return send(res, 403, { error: "Cross-origin state modification rejected" });
+        }
+        return await handleAdminApi(context, req, res, url.pathname.slice("/__teamhub/api".length), url.searchParams);
+      }
+
+      // SEC-RT-004 · HTTP 路由 default-deny（任何插件端点对 member 默认拒绝，仅放行经过审查的白名单）
+      const routeVerdict = evaluateHttpRoutePolicy({
+        method: req.method ?? "GET",
+        pathname: url.pathname,
+        role: user.role
+      });
+      if (!routeVerdict.allowed) {
+        context.audit.write("policy.denied", {
+          user: user.name,
+          role: user.role,
+          method: req.method,
+          pathname: url.pathname,
+          reason: routeVerdict.reason
+        });
+        return send(res, 403, { error: "forbidden", reason: routeVerdict.reason });
+      }
+
+      if (req.method === "POST" && (url.pathname === "/api" || url.pathname === "/api/")) {
+        return await handleRpc(context, user, req, res);
+      }
+
+      const injectShim = (url.pathname === "/" || url.pathname === "/index.html");
+      await proxyRequest(context.config, req, res, { injectShim });
+    } catch (error) {
+      if (error instanceof BodyLimitError) {
+        context.audit.write("system.body-rejected", { code: error.code });
+        if (!res.headersSent) {
+          send(res, error.status, { error: error.message, code: error.code }, { connection: "close" });
+        }
+        return;
+      }
+      context.audit.write("system.request-error", { error: errorText(error) });
+      send(res, 500, { error: errorText(error) });
+    }
+  };
 }
 
 export async function startServer() {
   const { home, file: configFile, config } = loadConfig();
-  // 进程级崩溃防护：未捕获异常记录日志而不退出进程。
-  // node 默认 uncaughtException 会直接终止——一次上游响应体超时（undici
-  // UND_ERR_BODY_TIMEOUT）就会断开所有成员的连接（实测崩溃过一次）。
   const crashGuard = (kind) => (error) => {
     try {
       fs.appendFileSync(path.join(home, "logs", "crash.log"), `${new Date().toISOString()} [${kind}] ${error?.stack || error}\n`);
-    } catch { /* 日志写不进去也不能再抛 */ }
+    } catch {}
   };
   process.on("uncaughtException", crashGuard("uncaughtException"));
   process.on("unhandledRejection", crashGuard("unhandledRejection"));
@@ -264,7 +533,6 @@ export async function startServer() {
     ownership: createOwnership(),
     audit: new AuditLog(home)
   };
-  // CLI（user add/disable 等）直接改 config.json；运行中的网关需要在下次请求时感知。
   let ensuring = false;
   function reloadConfigIfChanged() {
     try {
@@ -273,7 +541,6 @@ export async function startServer() {
       configMtime = mtime;
       context.config = loadConfig(home).config;
       context.audit.write("system.config-reloaded", {});
-      // 新增的成员需要就地建工作区，否则要等下次重启
       if (!ensuring) {
         ensuring = true;
         ensureMemberWorkspaces(context).finally(() => { ensuring = false; });
@@ -287,107 +554,44 @@ export async function startServer() {
     ownership: context.ownership,
     audit: context.audit
   });
-  // 远程设置补丁：对 DSH Desktop 会破坏 UI（白屏实测），已默认禁用。
-  // 仅当 config.enableSettingsPatch === true 且上游是 standalone dsh web 时才执行。
-  // Desktop 场景绝不写 DSH 安装目录。
+
   try {
     const dshRoot = context.config.enableSettingsPatch === true ? findDshRoot(context.config.dshRoot) : null;
     if (dshRoot) {
-      const result = applySettingsPatch(dshRoot);
-      if (result === "applied") context.audit.write("system.settings-patch-applied", { dshRoot });
-      else if (result === "missing") context.audit.write("system.settings-patch-missing", { dshRoot });
-    } else {
-      context.audit.write("system.settings-patch-skipped", { reason: context.config.enableSettingsPatch === true ? "dsh root not found" : "disabled (Desktop safe mode)" });
+      const status = settingsPatchStatus(dshRoot);
+      if (status === "unpatched") {
+        applySettingsPatch(dshRoot);
+        console.log(`[settings] 已自动对 ${dshRoot} 应用 host 模式补丁`);
+      }
     }
+  } catch (err) {
+    console.warn("[settings] 补丁自动应用跳过:", errorText(err));
+  }
+
+  try {
+    const sessions = await upstreamRpc(context.config, "session/list", { args: { _request: {} } });
+    for (const row of sessions.items || []) {
+      learnSession(context.config, context.ownership, row.sessionId, row.cwd, row.parentSessionId);
+    }
+    console.log(`[init] 从上游已存在的会话中学习了 ${context.ownership.sessionOwner.size} 个会话所有权`);
   } catch (error) {
-    context.audit.write("system.settings-patch-error", { error: errorText(error) });
+    console.warn("[init] 启动时学习上游会话归属跳过（上游可能尚未就绪）:", errorText(error));
   }
 
-  // 启动时上游可能还没就绪（比如同时重启）：后台重试直到同步成功；
-  // 之后每 5 分钟兜底重同步一次，防止事件丢失导致归属表漂移。
-  const syncOwnership = async () => {
-    if (await refreshOwnership(context)) await ensureMemberWorkspaces(context);
-  };
-  await syncOwnership();
-  if (context.ownership.workspaceOwner.size === 0) {
-    const retry = setInterval(async () => {
-      if (await refreshOwnership(context)) {
-        clearInterval(retry);
-        await ensureMemberWorkspaces(context);
-        context.audit.write("system.ownership-refresh-recovered", {});
-      }
-    }, 3000);
-    retry.unref?.();
-  }
-  const periodic = setInterval(() => { syncOwnership(); }, 5 * 60 * 1000);
-  periodic.unref?.();
-
-  const server = http.createServer(async (req, res) => {
-    try {
-      reloadConfigIfChanged();
-      const url = new URL(req.url ?? "/", "http://local");
-      const cookies = parseCookies(req);
-      const session = resolveSession(home, cookies[COOKIE]);
-      const user = session && context.config.users.find(u => u.name === session.username && (u.status || "active") === "active");
-
-      if (url.pathname === "/login" && req.method === "GET") return send(res, 200, loginPage(url.searchParams.get("next") || "/"), { "content-type": "text/html; charset=utf-8" });
-      if (url.pathname === "/login" && req.method === "POST") {
-        const form = new URLSearchParams((await collect(req)).toString("utf8"));
-        const found = authenticate(context.config, String(form.get("username") || ""), String(form.get("password") || ""));
-        if (!found) {
-          context.audit.write("auth.login-failed", { user: String(form.get("username") || "") });
-          return send(res, 401, loginPage(String(form.get("next") || "/"), "用户名或密码错误"), { "content-type": "text/html; charset=utf-8" });
-        }
-        const issued = issueSession(home, found.name);
-        context.audit.write("auth.login", { user: found.name });
-        const next = found.mustChangePassword ? "/change-password" : String(form.get("next") || "/");
-        return send(res, 302, "", { location: next, "set-cookie": `${COOKIE}=${encodeURIComponent(issued.token)}; Path=/; HttpOnly; SameSite=Lax` });
-      }
-      if (url.pathname === "/logout") {
-        revokeSession(home, cookies[COOKIE]);
-        context.audit.write("auth.logout", { user: session?.username || "" });
-        return send(res, 302, "", { location: "/login", "set-cookie": `${COOKIE}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0` });
-      }
-      if (!user) {
-        if (url.pathname.startsWith("/api/")) return rpcError(res, null, "unauthorized", "not logged in", 401);
-        return send(res, 302, "", { location: "/login?next=" + encodeURIComponent(req.url ?? "/") });
-      }
-      if (url.pathname === "/__teamhub/whoami") {
-        return send(res, 200, { name: user.name, displayName: user.displayName || user.name, role: user.role });
-      }
-      if (user.mustChangePassword && url.pathname !== "/change-password") return send(res, 302, "", { location: "/change-password" });
-      if (url.pathname === "/change-password") {
-        if (req.method === "GET") return send(res, 200, changePasswordPage(), { "content-type": "text/html; charset=utf-8" });
-        const form = new URLSearchParams((await collect(req)).toString("utf8"));
-        try {
-          changePassword(context.config, user.name, String(form.get("current") || ""), String(form.get("next") || ""));
-          saveConfig(home, context.config);
-          context.audit.write("auth.password-changed", { user: user.name });
-          return send(res, 302, "", { location: "/" });
-        } catch (error) { return send(res, 400, changePasswordPage(errorText(error)), { "content-type": "text/html; charset=utf-8" }); }
-      }
-      if (url.pathname === "/admin" || url.pathname.startsWith("/admin/")) {
-        if (user.role !== "admin") return send(res, 403, "admin only");
-        // 无尾斜杠的 /admin 统一 302 到 /admin/：index.html 里的资源用绝对路径
-        // /admin/... 引用，若直接服务 /admin 会导致相对解析错位（Issue #1 二次修复）。
-        if (url.pathname === "/admin") return send(res, 302, "", { location: "/admin/" });
-        return serveAdminUi(res, url.pathname.slice("/admin".length)) || send(res, 404, "not found");
-      }
-      if (url.pathname.startsWith("/__teamhub/api/")) {
-        if (user.role !== "admin") return send(res, 403, { error: "admin only" });
-        return handleAdminApi(context, req, res, url.pathname.slice("/__teamhub/api".length), url.searchParams);
-      }
-      if (user.role !== "admin" && isAdminOnlyRoute(url.pathname)) {
-        context.audit.write("policy.denied", { user: user.name, method: "route:" + url.pathname, reason: "插件宿主路由仅 admin 可用" });
-        return send(res, 403, { error: "admin only" });
-      }
-      if (url.pathname.startsWith("/api/") && req.method === "POST") return handleApiPost(context, user, req, res, url.pathname.slice("/api/".length));
-      return proxyRequest(context.config, req, res, { injectShim: url.pathname === "/" || url.pathname === "/index.html" });
-    } catch (error) {
-      context.audit.write("system.request-error", { error: errorText(error) });
-      send(res, 500, { error: errorText(error) });
-    }
+  ensureMemberWorkspaces(context).catch(error => {
+    console.warn("[init] 确保成员工作区跳过:", errorText(error));
   });
+
+  const requestHandler = createRequestHandler({ context, reloadConfigIfChanged });
+
+  let server;
+  if (config.tls && config.tls.enabled && config.tls.cert && config.tls.key) {
+    const cert = fs.readFileSync(config.tls.cert);
+    const key = fs.readFileSync(config.tls.key);
+    server = https.createServer({ cert, key }, requestHandler);
+  } else {
+    server = http.createServer(requestHandler);
+  }
 
   const wss = new WebSocketServer({ noServer: true });
   server.on("upgrade", async (req, socket, head) => {
@@ -397,16 +601,12 @@ export async function startServer() {
     const user = session && context.config.users.find(u => u.name === session.username && (u.status || "active") === "active");
     if (!user) { socket.destroy(); return; }
     const url = new URL(req.url ?? "/", "http://local");
-    // Desktop 的事件流端点是 /api/remote.mux（Typert Remote 流复用），
-    // 与 standalone dsh web 的 /api/events.mux|host 不同。admin 直通转发原始帧；
-    // member 需按流过滤（阶段 2），当前拒绝。
     const stream = url.pathname === "/api/events.mux" ? "mux"
       : url.pathname === "/api/events.host" ? "host"
       : url.pathname === "/api/remote.mux" ? "remote"
       : null;
     if (!stream) { socket.destroy(); return; }
     if (user.mustChangePassword) { socket.destroy(); return; }
-    // Desktop 部署只有 /api/remote.mux 存在；legacy mux/host 仅 admin 直通（上游不存在自然失败）。
     if (stream !== "remote" && user.role !== "admin") {
       context.audit.write("ws.legacy-stream-member-denied", { user: user.name, stream });
       socket.destroy();
@@ -416,37 +616,33 @@ export async function startServer() {
       const upstreamUrl = new URL(context.config.upstream);
       upstreamUrl.protocol = upstreamUrl.protocol === "https:" ? "wss:" : "ws:";
       upstreamUrl.pathname = url.pathname;
-      // Desktop 的 WS 升级同样过 browser-auth cookie 墙：握手头带 host + 签名 cookie
       const wsHeaders = { host: upstreamUrl.host };
-      const bridge = withBridge({}, context.config);
-      if (bridge.cookie) wsHeaders.cookie = bridge.cookie;
-      const upstream = new WebSocket(upstreamUrl, { headers: wsHeaders });
+      const cookie = mintBrowserSessionCookie(undefined, upstreamUrl.host);
+      if (cookie) wsHeaders.cookie = `${cookie.name}=${cookie.value}`;
+      const upstream = new WebSocket(upstreamUrl.toString(), {
+        headers: wsHeaders,
+        rejectUnauthorized: false
+      });
       const pending = [];
-      // member 的流授权表：streamId -> {kind, sessionId?}（remote.mux 专用）
       const memberStreams = new Map();
-      upstream.on("error", () => { context.audit.write("ws.upstream-error", { stream }); downstream.close(); });
-      upstream.on("unexpected-response", () => {
-        context.audit.write("ws.upstream-rejected", { stream });
-        resetBridge();
-        downstream.close();
-      });
       upstream.on("open", () => {
-        context.audit.write("ws.upstream-open", { stream });
-        pending.splice(0).forEach(data => upstream.send(data));
+        for (const msg of pending) upstream.send(msg);
+        pending.length = 0;
       });
-      // 注意：DSH 协议全部使用文本帧。ws 库 send(Buffer) 会发二进制帧，
-      // DSH 客户端会把二进制帧当作畸形帧丢弃——必须按原始帧类型转发。
       downstream.on("message", (data, isBinary) => {
-        if (isBinary) return;
-        let msg;
-        try { msg = JSON.parse(data.toString("utf8")); } catch { return; }
-        if (user.role === "member" && stream === "remote") {
-          // 开流守卫：$events / session/control 全局流放行（帧级再过滤），
-          // session/follow 按 address 归属授权，其余一律拒绝。
-          if (msg.type === "open" && typeof msg.streamId === "string" && typeof msg.endpoint === "string") {
-            const meta = classifyMemberStreamOpen({ ownership: context.ownership, user, endpoint: msg.endpoint, payload: msg.payload });
+        if (isBinary) { downstream.close(1003, "binary not supported"); return; }
+        if (user.role === "member") {
+          let msg;
+          try { msg = JSON.parse(data.toString("utf8")); } catch { return; }
+          if (msg.type === "open") {
+            const meta = classifyMemberStreamOpen({
+              ownership: context.ownership,
+              user,
+              endpoint: msg.endpoint,
+              payload: msg.payload
+            });
             if (!meta) {
-              context.audit.write("ws.stream-open-denied", { user: user.name, endpoint: msg.endpoint });
+              context.audit.write("ws.member-stream-denied", { user: user.name, endpoint: msg.endpoint });
               if (downstream.readyState === downstream.OPEN) {
                 downstream.send(JSON.stringify({ type: "error", streamId: msg.streamId, error: { name: "Error", message: "forbidden" } }));
               }
@@ -454,7 +650,7 @@ export async function startServer() {
             }
             memberStreams.set(msg.streamId, meta);
           } else if (msg.type === "cancel" && typeof msg.streamId === "string" && !memberStreams.has(msg.streamId)) {
-            return; // 未授权流：静默丢弃
+            return;
           }
         }
         const out = data.toString("utf8");
@@ -467,7 +663,7 @@ export async function startServer() {
         if (user.role === "member" && stream === "remote") {
           if (frame.type === "item" && typeof frame.streamId === "string") {
             const meta = memberStreams.get(frame.streamId);
-            if (meta === undefined) return; // 未授权流：丢弃
+            if (meta === undefined) return;
             const verdict = filterMemberStreamItem({
               config: context.config,
               ownership: context.ownership,
@@ -487,7 +683,7 @@ export async function startServer() {
             if (memberStreams.has(frame.streamId)) downstream.send(JSON.stringify(frame));
             return;
           }
-          return; // 其余帧类型对成员默认丢弃
+          return;
         }
         downstream.send(data.toString("utf8"));
       });
@@ -497,6 +693,7 @@ export async function startServer() {
   });
 
   await new Promise((resolve) => { server.listen(config.listenPort, config.listenHost, () => { resolve(undefined) }) });
-  console.log(`dsh-team-hub listening on http://${config.listenHost}:${config.listenPort}`);
-  console.log(`Admin console: http://${config.listenHost}:${config.listenPort}/admin`);
+  const proto = config.tls && config.tls.enabled ? "https" : "http";
+  console.log(`dsh-team-hub listening on ${proto}://${config.listenHost}:${config.listenPort}`);
+  console.log(`Admin console: ${proto}://${config.listenHost}:${config.listenPort}/admin`);
 }

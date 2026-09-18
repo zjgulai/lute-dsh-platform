@@ -18,6 +18,7 @@ import { createServer } from "node:http";
 import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
+import { appNodeModules } from '../lib/app-resources.mjs'
 import { fileURLToPath } from "node:url";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
@@ -26,9 +27,9 @@ const DEFAULT_BUNDLE = join(
   ".dsh/profiles/desktop/node_modules/dsh-root-brand/lib/client.js",
 );
 const CONVERSATION_BUNDLE =
-  "/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-client-ui-conversation/lib/client.js";
+  join(appNodeModules() ?? "", "@deepseek-ai/dsh-client-ui-conversation/lib/client.js");
 const CHAT_BUNDLE =
-  "/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-client-ui-chat/lib/client.js";
+  join(appNodeModules() ?? "", "@deepseek-ai/dsh-client-ui-chat/lib/client.js");
 const HERO_MODULE_ID = "@deepseek-ai/dsh-client-ui-conversation/HeroShell.module.css";
 const STATS_MODULE_ID = "@deepseek-ai/dsh-client-ui-chat/StatsLine.module.css";
 

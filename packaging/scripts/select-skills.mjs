@@ -52,7 +52,7 @@ import {
   statSync,
 } from 'node:fs'
 import { homedir } from 'node:os'
-import { dirname, join, resolve } from 'node:path'
+import { dirname, join, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
@@ -279,12 +279,27 @@ function main() {
           `${extra.slice(0, 12).join('、')}${extra.length > 12 ? ' …' : ''}`,
       )
     }
+    // pycache 判据：拷贝侧的 filter 只保证「这次拷贝不带」；源根里哪天再冒出
+    // __pycache__（比如有人手动跑了技能脚本）要靠这里拦住——拷贝时净化 + 校验时
+    // 判罚，两个机制缺一不可。
+    const pyfiles = present.flatMap((s) =>
+      readdirSync(join(dir, s), { recursive: true })
+        .map((e) => String(e))
+        .filter((e) => e.split(sep).includes('__pycache__'))
+        .map((e) => `${s}/${e}`),
+    )
+    if (pyfiles.length > 0) {
+      problems.push(
+        `该树含 ${pyfiles.length} 个 __pycache__ 缓存条目（构建机路径钉在 co_filename 里，出货面不带）：` +
+          `${pyfiles.slice(0, 8).join('、')}${pyfiles.length > 8 ? ' …' : ''}`,
+      )
+    }
     if (problems.length > 0) {
       for (const p of problems) console.error(`[skills] ✗ ${p}`)
       return 1
     }
     if (!args.quiet) {
-      console.log(`[skills] ✓ 落位技能树 ≡ 选择结果（${present.length} 个），且无受限许可技能`)
+      console.log(`[skills] ✓ 落位技能树 ≡ 选择结果（${present.length} 个），无受限许可技能、无 __pycache__`)
     }
     return 0
   }
@@ -315,7 +330,14 @@ function main() {
     }
     rmSync(dst, { recursive: true, force: true })
     mkdirSync(dst, { recursive: true })
-    for (const [name, from] of sources) cpSync(from, join(dst, name), { recursive: true })
+    // `__pycache__` 是解释器在源树里留下的字节码缓存：co_filename 钉死构建机绝对
+    // 路径（ADR-0056 机器路径只减不增的漏网载体），跨 CPython 版本还会失效。
+    // 历史上 2.4.x 原样带出了 18 个 .pyc，从 2.5.0 起出货面不再携带。
+    for (const [name, from] of sources)
+      cpSync(from, join(dst, name), {
+        recursive: true,
+        filter: (src) => !src.split(sep).includes('__pycache__'),
+      })
     if (!args.quiet) {
       console.log(
         `[skills] 已拷贝 ${sources.size} 个到 ${dst}（源 ${sel.all.length} = 本机 ${sel.own.length} + 官方 ${sel.agents.length}；` +

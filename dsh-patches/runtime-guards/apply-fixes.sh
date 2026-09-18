@@ -23,13 +23,22 @@
 set -euo pipefail
 
 DSH_APP="${DSH_APP:-/Applications/DSH Desktop.app}"
-UNP="$DSH_APP/Contents/Resources/app.asar.unpacked"
+# 资源根双形态（2026-09-17，2.0.10 基座迁移）：no-ASAR 布局 Resources/app ⇄ 旧 2.0.5
+# app.asar.unpacked。判定规则的唯一家是主仓 scripts/lib/app-resources.mjs；本脚本随包
+# 分发不能 import 主仓，所以内联等价判定（app 存在且无 app.asar[.unpacked] → no-asar）。
+# 两处须单向同步：改判定规则时以 app-resources.mjs 为准。
+_RES="$DSH_APP/Contents/Resources"
+if [ -d "$_RES/app" ] && [ ! -e "$_RES/app.asar" ] && [ ! -e "$_RES/app.asar.unpacked" ]; then
+  UNP="$_RES/app"
+else
+  UNP="$_RES/app.asar.unpacked"
+fi
 G1_FILE="$UNP/node_modules/@deepseek-ai/dsh-client-hmr/lib/index.js"
 G2_FILE="$(ls "$UNP"/lib/electron-runtime-*.js 2>/dev/null | grep -v '\.map$' | grep -v '\.orig' | head -1 || true)"
 MODE="${1:-apply}"
 
 if [ ! -d "$UNP" ]; then
-  echo "[runtime-guards] ✗ 找不到 app.asar.unpacked: $UNP" >&2
+  echo "[runtime-guards] ✗ 找不到 app 资源根（双形态探测均落空）: 期望 $_RES/app（no-ASAR）或 $_RES/app.asar.unpacked（ASAR）" >&2
   exit 1
 fi
 
@@ -61,10 +70,14 @@ G1_NEW = """\tconst rehash = (id, watch, current) => {
 \t\ttry {
 \t\t\tctx.clientModules.rebuilt(id);"""
 
-G2_OLD = """\t\twindow.webContents.session?.setPermissionRequestHandler?.((_wc, permission, callback) => callback(permission === "clipboard-sanitized-write" || permission === "clipboard-write"));
+# 2.0.10 重锚（2026-09-17）：上游把权限门的目标 webContents 收窄为
+# compatibilityShell?.webContents ?? window.webContents（2.0.5 时代直接
+# window.webContents）。G2 订阅挂在同一目标上，旧锚串在 2.0.10 pristine 上
+# count=0 → apply 时按 anchor mismatch abort（正确拒绝，本节随基座重锚）。
+G2_OLD = """\t\t(this.compatibilityShell?.webContents ?? window.webContents).session?.setPermissionRequestHandler?.((_wc, permission, callback) => callback(permission === "clipboard-sanitized-write" || permission === "clipboard-write"));
 \t\twindow.once("ready-to-show", revealStartupSurface);"""
-G2_NEW = """\t\twindow.webContents.session?.setPermissionRequestHandler?.((_wc, permission, callback) => callback(permission === "clipboard-sanitized-write" || permission === "clipboard-write"));
-\t\twindow.webContents.on("console-message", (_event, ...args) => {
+G2_NEW = """\t\t(this.compatibilityShell?.webContents ?? window.webContents).session?.setPermissionRequestHandler?.((_wc, permission, callback) => callback(permission === "clipboard-sanitized-write" || permission === "clipboard-write"));
+\t\t(this.compatibilityShell?.webContents ?? window.webContents).on?.("console-message", (_event, ...args) => {
 \t\t\tlet level, message, line, sourceId;
 \t\t\tif (args.length >= 1 && typeof args[0] === "object" && args[0] !== null && "message" in args[0]) {
 \t\t\t\tconst d = args[0];

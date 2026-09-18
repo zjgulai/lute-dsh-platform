@@ -23,3 +23,22 @@ export function collectPackages(repoRoot) {
   }))
   return { rootManifest, packages }
 }
+
+/**
+ * 收集 package-identity 的完整判定面。根包必须显式成为 `.` 条目，不能由调用方
+ * 临时拼接；否则目录墙与身份门禁仍可能在“根包算不算包”这件事上分叉。
+ * @param {string} repoRoot 仓库根绝对路径
+ * @returns {Array<{relPath: string, dir: string, group?: string, manifest: Record<string, unknown>}>}
+ */
+export function collectManagedManifests(repoRoot) {
+  const { rootManifest, packages } = collectPackages(repoRoot)
+  return [
+    { relPath: '.', dir: '.', manifest: rootManifest },
+    ...packages.map((entry) => ({
+      relPath: entry.relPath,
+      dir: entry.relPath,
+      group: entry.group,
+      manifest: entry.manifest,
+    })),
+  ]
+}

@@ -1,14 +1,16 @@
 {
-  "startedAt": "2026-09-12T07:37:31.446Z",
+  "startedAt": "2026-09-17T10:38:49.589Z",
   "installedEntry": "/Users/lute/.dsh/profiles/desktop/node_modules/dsh-newapp-local/lib/index.js",
-  "fixtureRoot": "/var/folders/wp/t77hdxr93bs86v8r0dbwf8940000gn/T/newapp-live-xLLOZY",
+  "fixtureRoot": "/var/folders/wp/t77hdxr93bs86v8r0dbwf8940000gn/T/newapp-live-hYzg0I",
   "stages": {
     "A": {
-      "port": 51407,
+      "port": 53196,
       "routes": {
         "exact": [
           "/api/dsh-newapp/health",
-          "/api/dsh-newapp/products"
+          "/api/dsh-newapp/open-system",
+          "/api/dsh-newapp/products",
+          "/api/dsh-newapp/systems"
         ],
         "prefix": []
       },
@@ -125,7 +127,7 @@
       "pass": true,
       "expect": "三个根都在 scannedRoots 里",
       "actual": "3 个",
-      "detail": "→ scannedRoots=[\"/var/folders/wp/t77hdxr93bs86v8r0dbwf8940000gn/T/newapp-live-xLLOZY\",\"/var/folders/wp/t77hdxr93bs86v8r0dbwf8940000gn/T/newapp-live-does-not-exist-xyz\",\"/var/folders/wp/t77hdxr93bs86v8r0dbwf8940000gn/T/newapp-live-xLLOZY/declared-project/product.json\"]"
+      "detail": "→ scannedRoots=[\"/var/folders/wp/t77hdxr93bs86v8r0dbwf8940000gn/T/newapp-live-hYzg0I\",\"/var/folders/wp/t77hdxr93bs86v8r0dbwf8940000gn/T/newapp-live-does-not-exist-xyz\",\"/var/folders/wp/t77hdxr93bs86v8r0dbwf8940000gn/T/newapp-live-hYzg0I/declared-project/product.json\"]"
     },
     {
       "id": "declared-card",
@@ -220,7 +222,7 @@
   ],
   "notes": [
     "装载点 realpath：/Users/lute/.dsh/profiles/desktop/node_modules/dsh-newapp-local/lib/index.js",
-    "精确路由表：[/api/dsh-newapp/health, /api/dsh-newapp/products]",
+    "精确路由表：[/api/dsh-newapp/health, /api/dsh-newapp/open-system, /api/dsh-newapp/products, /api/dsh-newapp/systems]",
     "实况扫描：roots=[\"/Users/lute/project\"] cards=1 declared=1"
   ],
   "restartRequired": false,

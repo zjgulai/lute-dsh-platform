@@ -7,7 +7,8 @@
 ## 1. 版本（单平台版本 vX.Y.Z）
 
 1. 各插件 package.json 版本对齐 → `CHANGELOG.md` 汇总变更。
-2. 提交（Conventional Commits）→ PR（main 分支保护）→ 合并。
+2. 提交（Conventional Commits）→ PR（**main 受 ruleset 保护**：禁止 force-push/删除、必须走 PR、required check 为 `gate (quick)` 与 `gate (full)`）→ 合并。
+   保护的现状用只读审计核对：`node scripts/gates/audit-rulesets.mjs`（退出码 0=与声明全等）；声明是唯一事实之家 `scripts/gates/ruleset-declaration.json`（ADR-0106）。
 3. 确认工作树干净（`git status` 无输出）。载荷含未提交源码时，入库清单只能标 `source_dirty=1`，
    那一版就不可回溯——2026-09-12 发出的 2.2.0 正是这种情况（载荷里 40 行源码不在任何提交里）。
 

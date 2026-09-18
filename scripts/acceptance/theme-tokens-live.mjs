@@ -47,14 +47,14 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import { dirname, join, resolve } from 'node:path'
+import { appNodeModules } from '../lib/app-resources.mjs'
 import { fileURLToPath } from 'node:url'
 import { collectDefinedTokens, collectReferencedTokens, collectRepoDefinedTokens } from '../gates/theme-tokens.mjs'
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
 const APP_DIR = '/Applications/DSH Desktop.app'
 const THEME_BUNDLE = join(
-  APP_DIR, 'Contents', 'Resources', 'app.asar.unpacked', 'node_modules',
-  '@deepseek-ai', 'dsh-client-ui-theme', 'lib', 'client.js',
+  appNodeModules(APP_DIR) ?? '', '@deepseek-ai', 'dsh-client-ui-theme', 'lib', 'client.js',
 )
 const BASELINE = join(REPO_ROOT, 'scripts', 'gates', 'theme-tokens-baseline.json')
 

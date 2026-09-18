@@ -6,8 +6,7 @@
  * The payload carries no conversation data and no identifiers beyond a random
  * UUID generated in localStorage; the server hashes it with a deployment salt
  * before storage and never persists IP addresses. Sends are fire-and-forget:
- * failures stay silent and simply retry on a later mount or day. The system
- * is documented in docs/telemetry.md.
+ * failures stay silent and simply retry on a later mount or day.
  */
 
 export type TelemetryChannel = 'market' | 'npm' | 'unknown'

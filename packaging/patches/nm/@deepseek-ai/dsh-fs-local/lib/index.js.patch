@@ -1,0 +1,39 @@
+--- a/@deepseek-ai/dsh-fs-local/lib/index.js
++++ b/@deepseek-ai/dsh-fs-local/lib/index.js
+@@ -140,8 +140,17 @@
+ }
+ /** Opaque version token from high-resolution identity and freshness metadata. */
+ function versionOf(info) {
+-	return FsVersion(`${info.dev}:${info.ino}:${info.size}:${info.mtimeNs}:${info.ctimeNs}`);
++	return FsVersion(`${info.dev}:${info.ino}:${info.size}:${info.mtimeNs ?? info.mtimeMs}:${info.ctimeNs ?? info.ctimeMs}`);
+ }
++/*
++ * Electron's js2c asar_fs_wrapper (RUN_AS_NODE included) answers stats for .asar
++ * paths with `new fs.Stats(number fields)` and no mtimeNs/ctimeNs; native
++ * fs.stat({bigint:true}) answers real BigInts. Normalize both shapes before the
++ * BigInt bit-ops so probe() survives either backend.
++ */
++function statModeBits(info) {
++	return (typeof info.mode === "bigint" ? info.mode : BigInt(info.mode ?? 0)) & 512n;
++}
+ /**
+ * Resolve a path to its absolute display path and realpath identity. For a missing target,
+ * realpath the nearest existing ancestor and append the missing suffix, preserving identity
+@@ -222,7 +231,7 @@
+ 	if (!info) return null;
+ 	return {
+ 		version: versionOf(info),
+-		mode: Number(info.mode & 511n),
++		mode: Number(statModeBits(info)),
+ 		type: pathType(info),
+ 		size: Number(info.size)
+ 	};
+@@ -237,7 +246,7 @@
+ 	if (!info) return null;
+ 	return {
+ 		version: versionOf(info),
+-		mode: Number(info.mode & 511n),
++		mode: Number(statModeBits(info)),
+ 		type: pathLinkType(info),
+ 		size: Number(info.size)
+ 	};

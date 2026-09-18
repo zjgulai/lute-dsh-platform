@@ -41,4 +41,12 @@ describe("brand CSS 不再钉住官方哈希", () => {
     expect(BRAND_CSS_STYLE_ID).toBe("dsh-root-brand-css");
     expect(BRAND_CSS).toContain('data-plugin="dsh-root-brand"');
   });
+
+  it("品牌强调遵循 Codex 视觉基线，不使用渐变或装饰性辉光", () => {
+    expect(BRAND_CSS).not.toContain("linear-gradient");
+    expect(BRAND_CSS).not.toContain("box-shadow");
+    expect(BRAND_CSS).toContain("--dsw-font-m-18");
+    expect(BRAND_CSS).toContain("prefers-reduced-motion");
+    expect(BRAND_CSS).toContain("transition: none !important");
+  });
 });

@@ -13,21 +13,29 @@ interface Palette {
   surface: string;
   inlineCode: string;
   sidebar: string;
+  /**
+   * Scales neutral blend amounts for this scheme's contrast setting.
+   * k(50) = 1, so the preset baseline stays byte-identical (frozen by the
+   * golden assertions in theme-tokens.test.ts). Only neutral grays ride on
+   * k — borders, raised surfaces, secondary labels, hover/active veils;
+   * accent-derived blends keep their tuned ratios at every contrast.
+   */
+  scale: (amount: number) => number;
 }
 
-const UI_FONT_STACKS: Record<UiFontId, string> = {
+export const UI_FONT_STACKS: Record<UiFontId, string> = {
   system:
     '-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif',
   inter:
     'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif',
   avenir:
-    '"Avenir Next", Avenir, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif',
+    '"Avenir Next", Avenir, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif',
   rounded:
     '"SF Pro Rounded", "Nunito Sans", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif',
   serif: '"Iowan Old Style", "Songti SC", "Noto Serif CJK SC", Georgia, serif',
 };
 
-const CODE_FONT_STACKS: Record<CodeFontId, string> = {
+export const CODE_FONT_STACKS: Record<CodeFontId, string> = {
   "sf-mono":
     '"SF Mono", "JetBrains Mono", "Fira Code", Consolas, "Liberation Mono", monospace',
   jetbrains:
@@ -36,7 +44,7 @@ const CODE_FONT_STACKS: Record<CodeFontId, string> = {
     '"Fira Code", "SF Mono", "JetBrains Mono", Consolas, "Liberation Mono", monospace',
   menlo: 'Menlo, Monaco, "SF Mono", Consolas, "Liberation Mono", monospace',
   cascadia:
-    '"Cascadia Code", "SF Mono", Consolas, "Liberation Mono", monospace',
+    '"Cascadia Code", "SF Mono", "JetBrains Mono", Consolas, "Liberation Mono", monospace',
 };
 
 function same(value: string) {
@@ -126,6 +134,9 @@ function palette(
   mode: "light" | "dark",
 ): Palette {
   const prefix = mode === "light" ? "light" : "dark";
+  // 0.6 at contrast 0, 1.4 at contrast 100, exactly 1 at the 50 baseline —
+  // see Palette.scale for what does and does not ride on this factor.
+  const factor = 0.6 + 0.8 * (settings[`${prefix}Contrast`] / 100);
   return {
     accent: settings[`${prefix}Accent`],
     background: settings[`${prefix}Background`],
@@ -133,6 +144,7 @@ function palette(
     surface: settings[`${prefix}Surface`],
     inlineCode: settings[`${prefix}InlineCode`],
     sidebar: settings[`${prefix}Sidebar`],
+    scale: (amount: number) => Math.round(amount * factor),
   };
 }
 
@@ -155,36 +167,36 @@ export function buildThemeTokenOverrides(
     "--dsw-alias-bg-base": pair((colors) => colors.background),
     "--dsw-alias-bg-layer-1": pair((colors) => colors.surface),
     "--dsw-alias-bg-layer-2": {
-      light: mix(light.background, 30, "#FFFFFF"),
-      dark: mix("#FFFFFF", 6, dark.surface),
+      light: mix(light.background, light.scale(30), "#FFFFFF"),
+      dark: mix("#FFFFFF", dark.scale(6), dark.surface),
     },
     "--dsw-alias-bg-layer-3": {
-      light: mix(light.background, 15, "#FFFFFF"),
-      dark: mix("#FFFFFF", 10, dark.surface),
+      light: mix(light.background, light.scale(15), "#FFFFFF"),
+      dark: mix("#FFFFFF", dark.scale(10), dark.surface),
     },
     "--dsw-alias-bg-module-platform": {
-      light: mix("#000000", 4, light.surface),
-      dark: mix("#FFFFFF", 6, dark.surface),
+      light: mix("#000000", light.scale(4), light.surface),
+      dark: mix("#FFFFFF", dark.scale(6), dark.surface),
     },
     "--dsw-alias-bg-overlay": {
-      light: mix(light.background, 10, "#FFFFFF"),
-      dark: mix("#FFFFFF", 12, dark.surface),
+      light: mix(light.background, light.scale(10), "#FFFFFF"),
+      dark: mix("#FFFFFF", dark.scale(12), dark.surface),
     },
     "--dsw-alias-border-l1": {
-      light: mix("#000000", 8, light.background),
-      dark: mix("#FFFFFF", 10, dark.background),
+      light: mix("#000000", light.scale(8), light.background),
+      dark: mix("#FFFFFF", dark.scale(10), dark.background),
     },
     "--dsw-alias-border-l2": {
-      light: mix("#000000", 12, light.background),
-      dark: mix("#FFFFFF", 16, dark.background),
+      light: mix("#000000", light.scale(12), light.background),
+      dark: mix("#FFFFFF", dark.scale(16), dark.background),
     },
     "--dsw-alias-border-l3": {
-      light: mix("#000000", 18, light.background),
-      dark: mix("#FFFFFF", 22, dark.background),
+      light: mix("#000000", light.scale(18), light.background),
+      dark: mix("#FFFFFF", dark.scale(22), dark.background),
     },
     "--dsw-alias-border-l4": {
-      light: mix("#000000", 26, light.background),
-      dark: mix("#FFFFFF", 30, dark.background),
+      light: mix("#000000", light.scale(26), light.background),
+      dark: mix("#FFFFFF", dark.scale(30), dark.background),
     },
     "--dsw-alias-brand-primary": pair((colors) => colors.accent),
     "--dsw-alias-button-info-fill": pair((colors) => colors.accent),
@@ -194,16 +206,16 @@ export function buildThemeTokenOverrides(
     },
     "--dsw-alias-label-primary": pair((colors) => colors.foreground),
     "--dsw-alias-label-secondary": pair((colors) =>
-      mix(colors.foreground, 62, colors.background),
+      mix(colors.foreground, colors.scale(62), colors.background),
     ),
     "--dsw-alias-label-tertiary": pair((colors) =>
-      mix(colors.foreground, 50, colors.background),
+      mix(colors.foreground, colors.scale(50), colors.background),
     ),
     "--dsw-alias-label-caption": pair((colors) =>
-      mix(colors.foreground, 40, colors.background),
+      mix(colors.foreground, colors.scale(40), colors.background),
     ),
     "--dsw-alias-label-dimmed": pair((colors) =>
-      mix(colors.foreground, 28, colors.background),
+      mix(colors.foreground, colors.scale(28), colors.background),
     ),
     "--dsw-alias-markdown-inline-code": pair(
       (colors) => colors.inlineCode,
@@ -213,31 +225,31 @@ export function buildThemeTokenOverrides(
       mix(colors.accent, 12, colors.background),
     ),
     "--dsw-alias-interactive-bg-hover": {
-      light: mix("#000000", 5, light.background),
-      dark: mix("#FFFFFF", 7, dark.background),
+      light: mix("#000000", light.scale(5), light.background),
+      dark: mix("#FFFFFF", dark.scale(7), dark.background),
     },
     "--dsw-alias-interactive-bg-hover-solid": {
-      light: mix("#000000", 5, light.surface),
-      dark: mix("#FFFFFF", 7, dark.surface),
+      light: mix("#000000", light.scale(5), light.surface),
+      dark: mix("#FFFFFF", dark.scale(7), dark.surface),
     },
     "--dsw-alias-interactive-bg-hover-accent": pair((colors) =>
       mix(colors.accent, 10, colors.background),
     ),
     "--dsw-alias-interactive-bg-active": {
-      light: mix("#000000", 9, light.background),
-      dark: mix("#FFFFFF", 11, dark.background),
+      light: mix("#000000", light.scale(9), light.background),
+      dark: mix("#FFFFFF", dark.scale(11), dark.background),
     },
     "--dsw-specific-sidebar-fill": pair((colors) => colors.sidebar),
     "--dsw-specific-sidebar-nav-item-active-accent": pair((colors) =>
       mix(colors.accent, 12, colors.sidebar),
     ),
     "--dsw-specific-sidebar-nav-item-active": {
-      light: mix("#000000", 9, light.sidebar),
-      dark: mix("#FFFFFF", 11, dark.sidebar),
+      light: mix("#000000", light.scale(9), light.sidebar),
+      dark: mix("#FFFFFF", dark.scale(11), dark.sidebar),
     },
     "--dsw-specific-sidebar-nav-item-hover": {
-      light: mix("#000000", 5, light.sidebar),
-      dark: mix("#FFFFFF", 7, dark.sidebar),
+      light: mix("#000000", light.scale(5), light.sidebar),
+      dark: mix("#FFFFFF", dark.scale(7), dark.sidebar),
     },
     "--dsw-specific-bubble": pair((colors) =>
       mix(colors.accent, 10, colors.background),

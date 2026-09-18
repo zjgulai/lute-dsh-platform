@@ -292,15 +292,14 @@ function ModeChoice({ groupName, checked, disabled, label, description, onChange
  * user-visible Settings → Teams path still works.
  */
 export function openTeamSettings(): void {
-  const dialog = document.querySelector<HTMLElement>('[role="dialog"]')
   const selectTeamSection = (): boolean => {
-    const root = document.querySelector<HTMLElement>('[role="dialog"]')
+    const root = document.querySelector<HTMLElement>('[data-dsh-settings-shell-root]')
     if (root === null) return false
-    const button = [...root.querySelectorAll<HTMLButtonElement>('button')].find(item => ['小队', 'Teams'].includes(item.textContent?.trim() ?? ''))
+    const button = [...root.querySelectorAll<HTMLButtonElement>('nav button')].find(item => ['小队', 'Teams'].includes(item.textContent?.trim() ?? ''))
     button?.click()
     return button !== undefined
   }
-  if (dialog !== null && selectTeamSection()) return
+  if (selectTeamSection()) return
   const trigger = [...document.querySelectorAll<HTMLButtonElement>('button[aria-haspopup="dialog"]')]
     .find(item => /设置|settings/i.test(`${item.getAttribute('aria-label') ?? ''} ${item.textContent ?? ''}`))
   trigger?.click()

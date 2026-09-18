@@ -14,10 +14,11 @@ import { join } from 'node:path'
 import { homedir } from 'node:os'
 import { spawn } from 'node:child_process'
 import { createInterface } from 'node:readline'
+import { appNodeModules } from '../lib/app-resources.mjs'
 
-/** 默认 shipped preset 根（部署目录内，随应用升级而变）。 */
+/** 默认 shipped preset 根（部署目录内，随应用升级而变；兼容 no-ASAR 与 ASAR 形态）。 */
 export const DEFAULT_SHIPPED_ROOT =
-  '/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-agent-presets/presets'
+  join(appNodeModules() ?? '', '@deepseek-ai/dsh-agent-presets/presets')
 
 /** 默认会话根。 */
 export const DEFAULT_SESSIONS_ROOT = join(homedir(), '.dsh', 'sessions')

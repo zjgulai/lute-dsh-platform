@@ -43,6 +43,26 @@ async function run(config, options) {
   return registrations
 }
 
+/**
+ * 判据：每条注册载荷都必须带非空字符串 source。
+ *
+ * 为什么单列成函数：`dsh-skill` 的 `validateRuntimeSkill()` 不检查 source（注册必成功），
+ * 而加载路径的 `validateDefinition()` 要求它是字符串（加载必炸）。漏传的症状是
+ * 「注册成功、调用失败」——目录里看得见这条技能，`skill` 工具一调就报
+ * `loaded skill "<name>" source must be a string`。
+ * 本函数同时被文末的自测打靶，保证它不是一条恒真判据。
+ */
+function assertEveryRegistrationHasSource(registrations) {
+  for (const skill of registrations) {
+    assert.equal(
+      typeof skill.source,
+      'string',
+      `注册 ${skill.name} 漏传 source —— dsh-skill 加载时会抛 "source must be a string"`,
+    )
+    assert.notEqual(skill.source, '', `注册 ${skill.name} 的 source 不可为空串`)
+  }
+}
+
 test('子集内技能以可调用状态注册，正文来自 SKILL.md', async () => {
   const skillsDir = skillDir({
     'alpha-skill': 'name: alpha-skill\ndescription: 甲技能',
@@ -69,6 +89,46 @@ test('子集外的技能被遮蔽为不可见', async () => {
   assert.equal(beta.description, '（本预设未启用）')
   assert.deepEqual(beta.invocation, { modelInvocable: false, userInvocable: false })
   assert.equal(beta.metadata.hidden, true)
+})
+
+test('正向与遮蔽两条注册路径都必须带 source（回归：2026-09-16 两处均漏传）', async () => {
+  const skillsDir = skillDir({
+    'alpha-skill': 'name: alpha-skill\ndescription: 甲技能',
+    'beta-skill': 'name: beta-skill\ndescription: 乙技能',
+  })
+
+  const registered = await run({ skills: ['alpha-skill'], skillsDir })
+
+  // 两条路径都要过判据：只修正向、漏掉遮蔽，等于没修。
+  assertEveryRegistrationHasSource(registered)
+  // 自定义根 → custom（默认根 ~/.dsh/skills 才是 user-dsh）。
+  assert.equal(registered.find((s) => s.name === 'alpha-skill').source, 'custom')
+  assert.equal(registered.find((s) => s.name === 'beta-skill').source, 'custom')
+})
+
+test('遮蔽注册沿用 catalog 里该技能的真实来源，取不到才兜底', async () => {
+  const skillsDir = skillDir({ 'alpha-skill': 'name: alpha-skill\ndescription: 甲技能' })
+
+  const registered = await run(
+    { skills: ['alpha-skill'], skillsDir },
+    { catalog: [{ name: 'alpha-skill', source: 'user-dsh' }, { name: 'bundled-skill', source: 'bundled' }, { name: 'origin-less-skill' }] },
+  )
+
+  assertEveryRegistrationHasSource(registered)
+  assert.equal(registered.find((s) => s.name === 'bundled-skill').source, 'bundled')
+  assert.equal(registered.find((s) => s.name === 'origin-less-skill').source, 'dsh-skill-subset')
+})
+
+test('source 判据自测：恒真桩突变下必须变红', () => {
+  // 没有这条自测，「每条都带 source」可以退化成恒真断言而没人发现。
+  assert.throws(
+    () => assertEveryRegistrationHasSource([{ name: 'stub-skill', description: 'd', content: '' }]),
+    /漏传 source/,
+  )
+  assert.throws(
+    () => assertEveryRegistrationHasSource([{ name: 'stub-skill', description: 'd', content: '', source: '' }]),
+    /不可为空串/,
+  )
 })
 
 test('hideOthers 为 false 时不产生任何遮蔽注册', async () => {

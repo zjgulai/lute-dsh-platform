@@ -1,10 +1,10 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
-import { mkdtempSync, mkdirSync, writeFileSync, copyFileSync, readFileSync } from 'node:fs'
-import { tmpdir } from 'node:os'
+import { mkdirSync, writeFileSync, copyFileSync, readFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { mutationRoot } from '../../../../scripts/lib/mutation-fixture.mjs'
 import { nodeCommand } from '../../../../scripts/lib/real-node.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
@@ -60,7 +60,7 @@ function minimalLocalize() {
  * @param {{ staging?: boolean, manifest?: string | null, localize?: object | null }} [opts]
  */
 function makeTree({ staging = false, manifest = null, localize = null } = {}) {
-  const root = mkdtempSync(join(tmpdir(), 'gn-check-'))
+  const root = mutationRoot('gn-check-')
   mkdirSync(join(root, 'scripts'), { recursive: true })
   mkdirSync(join(root, 'manifest'), { recursive: true })
   copyFileSync(BUILDER, join(root, 'scripts', 'build-generic-manifest.mjs'))
@@ -97,7 +97,7 @@ test('G2 源在、而清单与它不一致：退出码必须是 1，且不许出
 test('G3 源在但坏了：同样是 1，不许退化成「跳过」', () => {
   // 派生源存在却读不动（坏 JSON）——这是数据缺陷，不是环境不在。
   // 退出码 2 只留给「源根本不在本机」这一种情形，否则跳过会变成坏数据的避难所。
-  const root = mkdtempSync(join(tmpdir(), 'gn-check-'))
+  const root = mutationRoot('gn-check-')
   mkdirSync(join(root, 'scripts'), { recursive: true })
   mkdirSync(join(root, 'staging'), { recursive: true })
   copyFileSync(BUILDER, join(root, 'scripts', 'build-generic-manifest.mjs'))

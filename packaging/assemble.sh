@@ -1,5 +1,5 @@
 #!/bin/bash
-# LUTE 打包组装器 —— DSH Desktop 2.0.5 + Magpie-Horch 全量定制层 → 可分发 payload
+# LUTE 打包组装器 —— DSH Desktop（基座版本随 pin）+ Magpie-Horch 全量定制层 → 可分发 payload
 # 产出：staging/<VERSION>/payload/（安装器 + 载荷 tarball + 校验工具），Phase 3 由此制 dmg。
 #
 # 用法: VERSION=1.0.0 ./assemble.sh            # 默认 BASE=source（源码构建，彻底解耦）
@@ -124,7 +124,7 @@ APP_CACHE="$PKG_ROOT/.app-cache"
 # 源码主路径：指纹追加 vendor HEAD sha（源码一变，缓存必须失效）
 VENDOR_STAMP=""
 [ "$BASE" = "source" ] && VENDOR_STAMP="-$(git -C "$VENDOR_REPO" rev-parse HEAD | cut -c1-12)"
-APP_SRC_STAMP="$(stat -f '%m' "$DSH_APP/Contents/Resources/app.asar" "$DSH_APP/Contents/Resources/icon.icns" "$DSH_APP/Contents/Resources/app-update.yml" "$DSH_APP/Contents/Info.plist" 2>/dev/null | sort -rn | head -1)-$(find "$DSH_APP" -type f -not -path '*/dsh-profile/*' 2>/dev/null | wc -l | tr -d ' ')$VENDOR_STAMP"
+APP_SRC_STAMP="$(stat -f '%m' "$DSH_APP/Contents/Resources/app.asar" "$DSH_APP/Contents/Resources/app" "$DSH_APP/Contents/Resources/icon.icns" "$DSH_APP/Contents/Resources/app-update.yml" "$DSH_APP/Contents/Info.plist" 2>/dev/null | sort -rn | head -1)-$(find "$DSH_APP" -type f -not -path '*/dsh-profile/*' 2>/dev/null | wc -l | tr -d ' ')$VENDOR_STAMP"
 APP_SRC_STAMP="${APP_SRC_STAMP:--0}"
 if [ -f "$APP_CACHE/.src-stamp" ] && [ "$(cat "$APP_CACHE/.src-stamp")" = "$APP_SRC_STAMP" ] \
    && [ -d "$APP_CACHE/DSH Desktop.app/Contents/MacOS" ]; then
@@ -149,23 +149,40 @@ cat > "$APP_RES/app-update.yml" <<'EOF'
 EOF
 say "app-update.yml 已改写（禁用官方更新通道）"
 
-# 暂存改写：CFBundleVersion 加 lute 后缀（系统构建标识，防同版本重装被跳过；
-# ShortVersionString 保持 2.0.5 对齐 DSH 基线，避免内部版本判断漂移）
-/usr/libexec/PlistBuddy -c "Set :CFBundleVersion 2.0.5-lute.$VERSION" \
+# 暂存改写：CFBundleVersion 加 lute 后缀（系统构建标识，防同版本重装被跳过）。
+# 基线版本串（2.0.5 / 2.0.10 / …）不在这里硬编码：它是所装 app 的 ShortVersionString，
+# 唯一事实源就是这份 Info.plist 本身——写死任何一代基线都会在下次升级时变成畸形版本戳
+# （2026-09-17 实测确认：upstream 2.0.10 若沿用 `2.0.5-lute.<VER>` 会谎报基线）。
+# ShortVersionString 保持基线原值对齐 DSH，避免内部版本判断漂移。
+DSH_BASELINE="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' \
+  "$APP_STAGE/DSH Desktop.app/Contents/Info.plist" 2>/dev/null || true)"
+case "$DSH_BASELINE" in
+  ''|*[!0-9.]*) echo "[assemble] ✗ 读不出合法基线版本（ShortVersionString=${DSH_BASELINE:-空}），版本戳中止" >&2; exit 1 ;;
+esac
+/usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${DSH_BASELINE}-lute.$VERSION" \
   "$APP_STAGE/DSH Desktop.app/Contents/Info.plist"
-say "CFBundleVersion → 2.0.5-lute.${VERSION}"
+STAMPED_VER="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$APP_STAGE/DSH Desktop.app/Contents/Info.plist" 2>/dev/null || true)"
+[ "$STAMPED_VER" = "${DSH_BASELINE}-lute.${VERSION}" ] \
+  || { echo "[assemble] ✗ 版本戳写后复核失败：${STAMPED_VER}（应为 ${DSH_BASELINE}-lute.${VERSION}）" >&2; exit 1; }
+say "CFBundleVersion → ${DSH_BASELINE}-lute.${VERSION}"
 
-# 暂存改写：运行时层补丁重放（NM 层，25 个确定性补丁，2026-09-11 起入仓 packaging/patches/nm/；
+# 暂存改写：运行时层补丁重放（NM 层，确定性补丁，2026-09-11 起入仓 packaging/patches/nm/；
 #            2026-09-12 增 P0-9 RootOutlet 白屏兜底）
 # 覆盖：P0-3/P0-4/P0-8（pi-ai 磁盘化）、P0-9（RootOutlet 白屏兜底）、cordis-clamp、loader-B4、
 #       skill-title×9、chatui×3、clipboard、PR-1/PR-2-5、LB-1~3。
 # 补丁 = pristine(源码构建) → patched(出厂) 的统一 diff。
 # BASE=source 时由 pristine 构建产物重放；BASE=dmg 时 app 源自带补丁，--forward 幂等跳过。
-NM_DIR="$APP_STAGE/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules"
+# 2.0.10 起 app 为 no-ASAR 布局（Resources/app/）；旧 2.0.5 是 app.asar.unpacked/。
+# 形态探测唯一家：scripts/lib/app-resources.mjs（CLI 面），此处不复制判定规则。
+NM_PROBE="$(node "$DSH_VENDOR/scripts/lib/app-resources.mjs" "$APP_STAGE/DSH Desktop.app")" \
+  || { echo "[assemble] ✗ staged app 资源形态探测失败（无 app/app.asar 布局）"; exit 1; }
+NM_FORM="$(printf '%s\n' "$NM_PROBE" | sed -n 's/^form=//p')"
+NM_DIR="$(printf '%s\n' "$NM_PROBE" | sed -n 's/^node_modules=//p')"
+say "staged app 形态：${NM_FORM}（arch: $(lipo -info "$APP_STAGE/DSH Desktop.app/Contents/MacOS/DSH Desktop" 2>/dev/null | sed 's/.*: //' || echo unknown)）"
 if [ -d "$NM_DIR" ]; then
   python3 "$PKG_ROOT/scripts/apply-nm-patches.py" "$NM_DIR"
 else
-  echo "[assemble] 警告：未找到 app.asar.unpacked/node_modules（NM 补丁跳过）"
+  echo "[assemble] ✗ 未找到 app node_modules（$NM_FORM 布局，NM 补丁中止）"; exit 1
 fi
 
 # 暂存改写：品牌 app 图标（lute-brand-icons 生成引擎产出，替换官方 icon.icns）
@@ -492,7 +509,8 @@ cp "$DSH_VENDOR/dsh-patches/runtime-guards/apply-fixes.sh" "$PAYLOAD/tools/runti
 # ROOT 品牌图标随包分发（brand-replay --apply 自愈用；真相源 packaging/assets/app-icon.icns）
 cp "$PKG_ROOT/assets/app-icon.icns" "$PAYLOAD/tools/app-icon.icns" 2>/dev/null || true
 # ROOT 运行时图标随包分发（Dock / 托盘）：dsh-plugin-desktop 启动时用 app.dock.setIcon()
-# 覆盖 Finder 图标，取的是 app.asar.unpacked/build/app-icon-mac.png——那一套必须一起品牌化，
+# 覆盖 Finder 图标，取的是主资源根 build/app-icon-mac.png（2026-09-17 起：no-ASAR 布局
+# Resources/app/build/，旧 2.0.5 是 app.asar.unpacked/build/）——那一套必须一起品牌化，
 # 否则「Finder 里是 ROOT、Dock 里是 DSH 原生」（2026-09-13 实测，见 brand-replay.sh 第 5 块）。
 mkdir -p "$PAYLOAD/tools/brand-icons"
 cp "$PKG_ROOT/assets/brand-icons/"*.png "$PAYLOAD/tools/brand-icons/" 2>/dev/null || true
@@ -501,11 +519,11 @@ chmod 755 "$PAYLOAD/tools/"*.sh "$PAYLOAD/tools/"*.mjs 2>/dev/null || true
 # LUTE Setup.app（GUI 安装器，swiftc 编译；随 payload 根分发）
 # 版本必须传进去并与载荷一致：向导靠 CFBundleVersion 在多个候选载荷里认出「本次要装的那一份」。
 # 装配后当场复核，不让「向导版本与载荷不一致」以静默退化的形式发出去（ADR-0066）。
-bash "$PKG_ROOT/scripts/build-setup-app.sh" "$PAYLOAD" "$VERSION"
+bash "$PKG_ROOT/scripts/build-setup-app.sh" "$PAYLOAD" "$VERSION" "$DSH_BASELINE"
 SETUP_PLIST="$PAYLOAD/LUTE Setup.app/Contents/Info.plist"
 SETUP_VER="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$SETUP_PLIST" 2>/dev/null || true)"
-[ "$SETUP_VER" = "2.0.5-lute.$VERSION" ] \
-  || { echo "[assemble] ✗ 向导 CFBundleVersion=${SETUP_VER}，应为 2.0.5-lute.${VERSION}（版本消歧会失效）" >&2; exit 1; }
+[ "$SETUP_VER" = "${DSH_BASELINE}-lute.$VERSION" ] \
+  || { echo "[assemble] ✗ 向导 CFBundleVersion=${SETUP_VER}，应为 ${DSH_BASELINE}-lute.${VERSION}（版本消歧会失效）" >&2; exit 1; }
 say "向导版本复核：$SETUP_VER"
 
 # ── 6. 元数据（README / VERSION / SHA256SUMS / manifest.json）───────────────────
@@ -526,10 +544,22 @@ else
   SOURCE_DIRTY=0
 fi
 
+# 运行时版本（dshVersion）：事实源是**staged app** 的 @deepseek-ai/dsh（运行时 bundle 在 app 侧
+# node_modules——live profile 侧没有这个包，第一版写成 $PROFILE/node_modules 是路径臆断，实测取空）。
+# NM_DIR 是 §1 布局探测的产物（双形态），此处直接复用；BASE=source 时 staged app 即 vendor dist 之复本。
+# 读不出就中止：VERSION 撒谎（写个猜来的值）比缺字段更糟——install.sh 会拿它预写
+# setup-wizard 的版本凭据（state.json 的 desktopVersion/dshVersion），假凭据跟着客户机走。
+DSH_RUNTIME="$(node -p "require('$NM_DIR/@deepseek-ai/dsh/package.json').version" 2>/dev/null || true)"
+case "$DSH_RUNTIME" in
+  ''|*[!0-9a-z.-]*) echo "[assemble] ✗ 读不出出货运行时版本（@deepseek-ai/dsh: ${DSH_RUNTIME:-无}），VERSION 无法如实记录" >&2; exit 1 ;;
+esac
+say "出货运行时：@deepseek-ai/dsh@${DSH_RUNTIME}（基线 ${DSH_BASELINE}）"
+
 cat > "$PAYLOAD/VERSION" <<EOF
 LUTE_VERSION=$VERSION
 BUILD=$BUILD
-DSH_BASELINE=2.0.5
+DSH_BASELINE=$DSH_BASELINE
+DSH_RUNTIME=$DSH_RUNTIME
 ARCH=arm64
 SOURCE_COMMIT=$SOURCE_COMMIT
 SOURCE_DIRTY=$SOURCE_DIRTY
@@ -565,7 +595,7 @@ cat > "$PAYLOAD/README.md" <<EOF
 - \`install.sh\`：命令行安装（等价于 Setup.app，幂等 + 回滚 + 升级保留数据）。
 - \`INSTALL-GUIDE.md\`：**安装手册（用户版）**——逐步操作、授权两项、失败对照表与卸载/回退。
   发给客户的第二份东西；本 README 只给最短路径与原理。
-- \`tools/\`：补丁锚点校验（**verify-patches-v2.sh**，38 锚点，含 G1/G2 运行时守卫）、品牌漂移检查（brand-replay.sh）、运行时守卫重放/体检（**runtime-guards/**）、file: 重写工具、灵枢便携化工具。
+- \`tools/\`：补丁锚点校验（**verify-patches-v2.sh**，锚集 v3 / ${DSH_BASELINE}，含 G1/G2 运行时守卫）、品牌漂移检查（brand-replay.sh）、运行时守卫重放/体检（**runtime-guards/**）、file: 重写工具、灵枢便携化工具。
 - \`SHA256SUMS\`：完整性校验。
 
 ## 安装（macOS，完全离线）
@@ -617,7 +647,7 @@ shasum -a 256 ~/Downloads/DSH-Desktop-LUTE-$VERSION-mac-arm64.dmg  # 与发布�
 
 ## 校验
 \`\`\`bash
-bash tools/verify-patches-v2.sh    # 2.0.5 锚点（本版 38 锚点，含 G1/G2 运行时守卫，应 ALL VERIFIED）
+bash tools/verify-patches-v2.sh    # $DSH_BASELINE 锚点（锚集 v3，含 G1/G2 运行时守卫，应 ALL VERIFIED）
 bash tools/brand-replay.sh --check  # 品牌锚点无漂移
 bash tools/runtime-guards/apply-fixes.sh --check  # G1/G2 运行时守卫体检（升级重打包后可用 --apply 自愈）
 \`\`\`
@@ -632,10 +662,10 @@ const fs=require('fs');
 const size=p=>fs.existsSync(p)?fs.statSync(p).size:0;
 const payload=process.argv[1];
 const files=['DSH Desktop.app.tar.gz','profile.tar.gz','skills-presets.tar.gz','aeis-portable.tar.gz','install.sh','LUTE Setup.app'];
-const m={name:'dsh-desktop-lute',version:process.argv[2],build:process.argv[3],dsd_baseline:'2.0.5',arch:'arm64',
+const m={name:'dsh-desktop-lute',version:process.argv[2],build:process.argv[3],dsd_baseline:process.argv[4]||null,arch:'arm64',
   created_at:new Date().toISOString(),
   files:Object.fromEntries(files.map(f=>[f,size(payload+'/'+f)]))};
-fs.writeFileSync(payload+'/manifest.json',JSON.stringify(m,null,2)+'\n');" "$PAYLOAD" "$VERSION" "$BUILD"
+fs.writeFileSync(payload+'/manifest.json',JSON.stringify(m,null,2)+'\n');" "$PAYLOAD" "$VERSION" "$BUILD" "$DSH_BASELINE"
 
 # 完整性清单：所有 bundle/vendor/skills/presets 的权威列表（供 smoke 逐一比对）
 # 输入必须是**出货的那份** profile manifest（profile.tar.gz 里的），不是本机快照里的：

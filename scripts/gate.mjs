@@ -8,7 +8,7 @@
  * 用法：node scripts/gate.mjs [--mode quick|full] [--list] [--json] [--require-no-skip]
  *   quick（默认）提交前使用；full 推送前使用（含变更包 typecheck/test，二期接入 git 钩子后启用）。
  */
-import { existsSync, lstatSync, readFileSync, readlinkSync, readdirSync, statSync } from 'node:fs'
+import { existsSync, lstatSync, readFileSync, readlinkSync, readdirSync, rmSync, statSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { homedir } from 'node:os'
 import { dirname, join, relative } from 'node:path'
@@ -30,13 +30,25 @@ import {
   checkShellVarAdjacentMultibyte,
   checkTccDeadGrantRule,
   checkTccPaneGuidance,
+  checkThemeTokensBaselineFrozen,
   checkTrackedIgnored,
 } from './gates/checks.mjs'
 import { buildOutputRoot, checkDependencyReproducibility, packageScriptOrder } from './gates/dependency-reproducibility.mjs'
 import { checkProfileBundleSync, checkProfileFilesSync, checkProfileMetadata } from './gates/sync-profile.mjs'
+import { checkPackageFilesCoverage, createFileSource, listPackageTree } from './gates/package-files-coverage.mjs'
+import { checkPluginEntryContract } from './gates/plugin-entry-contract.mjs'
+import { buildExpectedSet, readProfileManifest, summarizeTarget } from './gates/profile-coverage.mjs'
 import { checkSharedSync } from './gates/sync-shared.mjs'
 import { checkLivePresetsAgainstInventory, toCanonicalLivePresetResult } from './gates/live-presets.mjs'
-import { runGateChecks } from './gates/gate-result.mjs'
+import { assertRemediationDeclared, computeNotCovered, isCheckActive, runGateChecks } from './gates/gate-result.mjs'
+import { appResourcesRoot } from './lib/app-resources.mjs'
+import { identical as snapshotIdentical, snapshotRepo } from './lib/repo-snapshot.mjs'
+import {
+  WORKFLOW_CHECK_AUTHORITY,
+  WORKFLOW_REL_PATH,
+  checkCiWorkflow,
+  readWorkflow,
+} from './gates/ci-workflow.mjs'
 import { checkAgentFullstack } from '../packages/capabilities/dsh-overseas-skills/scripts/verify-agent-fullstack.mjs'
 import {
   auditApprovedWhitelist,
@@ -45,6 +57,7 @@ import {
   toCanonicalWhitelistResult,
 } from '../packages/capabilities/dsh-overseas-skills/scripts/fullstack-contract.mjs'
 import { checkThirdPartyIntake } from './gates/third-party-intake.mjs'
+import { checkImmutableSupplyChain } from './gates/immutable-supply-chain.mjs'
 import { checkThemeTokens } from './gates/theme-tokens.mjs'
 import { checkWorktableFence } from './gates/worktable-fence.mjs'
 import { checkNodeInterpreter } from './gates/node-interpreter.mjs'
@@ -78,7 +91,8 @@ import {
 } from './gates/changelog-release-sections.mjs'
 import { runScript } from './lib/run-script.mjs'
 import { nodeCommand } from './lib/real-node.mjs'
-import { collectPackages } from './gates/package-collect.mjs'
+import { collectManagedManifests, collectPackages } from './gates/package-collect.mjs'
+import { LOCAL_BASE_REF, createGitRunner, resolveChangedScope } from './gates/changed-packages.mjs'
 import { renderCatalog } from './gen-catalog.mjs'
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -113,10 +127,174 @@ const CHECKS = [
     },
   },
   {
+    name: 'mutation-fixture-selftest',
+    remediation:
+      '跑 node --test scripts/lib/mutation-fixture.test.mjs；fixture 必须独占 repo/home/profile/tmp，越界或 ownership 漂移时拒绝清理，SIGTERM/SIGINT 也必须回收自有根（ADR-0097 / ADR-0103）',
+    run() {
+      return runNodeTestFile('scripts/lib/mutation-fixture.test.mjs', 'mutation fixture 隔离与生命周期自测失败')
+    },
+  },
+  {
+    name: 'ruleset-declaration-selftest',
+    // 离线那一半进 quick：它守的是「声明与真实 API 读数形状的比对逻辑」，用采下来的
+    // fixture 跑，不需要网络。真实读数那一半见 ruleset-audit。
+    remediation:
+      '跑 node --test scripts/gates/ruleset-audit.test.mjs；删 required check、改检查名、加 bypass、'
+      + '去掉 tag 的 update 规则、降级成 evaluate、多一条未登记 ruleset、API 403、列表端点缺字段'
+      + '——每一条都必须判红，且 403 不得被解释成「未配置所以通过」（ADR-0106）',
+    run() {
+      return runNodeTestFile('scripts/gates/ruleset-audit.test.mjs', '保护面判据的反向自测失败')
+    },
+  },
+  {
+    name: 'ruleset-audit',
+    // L2 只读 API 取证：**需要网络与 gh 凭证**，拿不到读数时给类型化 skip 而不是判红
+    // （本机/CI 都可能没有 gh；ADR-0102：空射程与真通过必须长得不一样）。
+    remediation:
+      '跑 node scripts/gates/audit-rulesets.mjs；退出码 0=与声明全等，1=不符，2=拿不到读数。'
+      + '不符时按输出逐条对齐 scripts/gates/ruleset-declaration.json；'
+      + '**不要**在 GitHub UI 里手改规则——那样声明与事实会立刻分家（ADR-0106）',
+    run() {
+      const audit = runRulesetAudit()
+      if (audit.status === 'no-reading') {
+        return {
+          status: 'skip',
+          expected: 1,
+          discovered: 1,
+          checked: 0,
+          skipped: 1,
+          failed: 0,
+          typedSkips: [{ type: 'api-unavailable', count: 1, reason: audit.reason }],
+          violations: [],
+          reason: `保护面审计本次无读数：${audit.reason}`,
+          note: '读数拿不到 ≠ 没有配置保护；本项在拿到读数之前不给结论',
+        }
+      }
+      const passed = audit.exitCode === 0
+      return {
+        status: passed ? 'pass' : 'fail',
+        expected: 1,
+        discovered: 1,
+        checked: passed ? 1 : 0,
+        skipped: 0,
+        failed: passed ? 0 : 1,
+        typedSkips: [],
+        reason: passed ? '保护面与声明全等' : `保护面与声明不符：${audit.violations.length} 处`,
+        violations: audit.violations,
+        note: `证据层级 ${audit.authority}；规则来自 ${audit.declarationPath}；`
+          + `required check：${(audit.facts['main-protection']?.statusChecks ?? []).join('、') || '（无）'}`,
+      }
+    },
+  },
+  {
+    name: 'ci-workflow-contract',
+    // 证据层级是 **L1 静态**：它审 workflow 文件本身，不证明「CI 已建立」——那需要一次
+    // 真实 runner 上的 run（L2/L3）。读数里固定带这句，不允许被读成后者（卡面的 Red 条款）。
+    remediation:
+      '修 .github/workflows/gate.yml：必须有 quick（PR+push）与 full（push-only）两个 job，各带数值型 timeout-minutes、'
+      + '门禁步骤（`node scripts/gate.mjs --mode …`）、其后的 `--attest` 见证、`if: always()` 的 evidence 上传；'
+      + '顶层必须有只读 permissions、concurrency.cancel-in-progress、钉住的 NODE_VERSION/PNPM_VERSION；'
+      + '不得出现 continue-on-error、`|| true`、secrets.* 或机器路径（ADR-0104）',
+    run() {
+      const workflowText = readWorkflow(repoRoot)
+      const check = checkCiWorkflow({
+        workflowText,
+        gateNames: CHECKS.map((entry) => entry.name),
+        allowedActionRefs: ['actions/checkout@', 'actions/setup-node@', 'actions/upload-artifact@', 'pnpm/action-setup@'],
+      })
+      // 交 **canonical** 读数（ADR-0094 的三态 + 守恒账目），不要图省事写 legacy 的
+      // `{passed, violations}`：`passed` 一旦与 canonical 字段混在一份对象里，聚合层
+      // 会走 legacy 分支并把 canonical 字段整片丢掉，最终报一句与真实原因无关的
+      // 「result schema invalid」（实测 2026-09-17）。
+      return {
+        status: check.passed ? 'pass' : 'fail',
+        expected: 1,
+        discovered: 1,
+        checked: check.passed ? 1 : 0,
+        skipped: 0,
+        failed: check.passed ? 0 : 1,
+        typedSkips: [],
+        reason: check.passed
+          ? `workflow 静态契约合格（${check.facts.jobs.join('、')} 两个 job）`
+          : `workflow 静态契约不合规：${check.violations.length} 处`,
+        violations: check.violations,
+        note: `证据层级 ${WORKFLOW_CHECK_AUTHORITY}（静态审计，不等于 CI 已验证）；`
+          + `workflow=${WORKFLOW_REL_PATH}；jobs=${(check.facts.jobs ?? []).join('、') || '无'}；`
+          + `钉住版本 node=${check.facts.pinnedVersions?.node ?? '未钉'} pnpm=${check.facts.pinnedVersions?.pnpm ?? '未钉'}`,
+      }
+    },
+  },
+  {
+    name: 'ci-workflow-contract-selftest',
+    remediation:
+      '跑 node --test scripts/gates/ci-workflow.test.mjs；12 条变异（缺 job、缺 timeout、缺 attest、缺上传、'
+      + '缺权限、缺并发取消、continue-on-error、`|| true`、secrets、机器路径、未钉版本、错误 mode）'
+      + '每一条都必须让判据判红（ADR-0104）',
+    run() {
+      return runNodeTestFile('scripts/gates/ci-workflow.test.mjs', 'CI workflow 判据的反向自测失败')
+    },
+  },
+  {
+    name: 'repo-snapshot-selftest',
+    remediation:
+      '跑 node --test scripts/lib/repo-snapshot.test.mjs；tracked/untracked/声明根/ignored 区域/HEAD/refs/index 必须逐个可判据，空射程判红、声明根不可收缩、差异必须点名到路径（ADR-0103）',
+    run() {
+      return runNodeTestFile('scripts/lib/repo-snapshot.test.mjs', '见证快照判据的反向自测失败')
+    },
+  },
+  {
+    name: 'repo-attest-selftest',
+    remediation:
+      '跑 node --test scripts/lib/repo-attest.test.mjs；正常、断言失败、非零退出、fixture setup 失败、cleanup 失败与 SIGTERM 六条结束路径都必须 before_digest == after_digest（ADR-0103）',
+    run() {
+      return runNodeTestFile('scripts/lib/repo-attest.test.mjs', '侧效应见证六条结束路径的反向自测失败')
+    },
+  },
+  {
+    name: 'gate-concurrency-selftest',
+    // full-only：一轮就是两条完整 gate，实测单轮约 44 秒（本机 10 核），
+    // 默认 10 轮是进入 CI 前的聚合收口，不属于提交前该跑的那一档（P-04）。
+    modes: ['full'],
+    remediation:
+      '跑 DSH_GATE_CONCURRENCY_ROUNDS=10 node --test scripts/lib/repo-attest-concurrency.test.mjs；两条完整 gate 并发 10 轮期间被见证仓库必须零差异，且两条 lane 的 pass/skip/fail 读数不得分裂（ADR-0103）。若本项报「并发窗口内有外部写入」，那是**别人的写入**而不是门禁副作用：用 DSH_ATTEST_REPO=<独占副本> 指向一份 clean clone 再跑，不要放宽判据',
+    run() {
+      // 前置判定：并发稳定性读数只有在**没有别的写入者**时才有意义（ADR-0103 的失败边界）。
+      // 本工作树长期有多个会话在写（实测：本会话、Codex 会话、另一个 agent 会话各命中过一次），
+      // 直接跑会（正确地）被判红，而那条红说的是「别人在写仓库」，不是「门禁有副作用」。
+      // 与其让读的人每次自己分辨，不如在这里先量一次「有没有人在写」，并给出**类型化 skip**
+      // 与可执行出路——空射程与真通过必须长得不一样（ADR-0102）。
+      const quiet = measureQuietWindow(repoRoot)
+      if (!quiet.quiet) {
+        return {
+          status: 'skip',
+          expected: 1,
+          discovered: 1,
+          checked: 0,
+          skipped: 1,
+          failed: 0,
+          typedSkips: [{
+            type: 'concurrent-writers-detected',
+            count: 1,
+            reason: '并发窗口内检测到外部写入，未产生稳定的 10 轮读数',
+          }],
+          violations: [],
+          reason: `并发见证窗口内有外部写入（${quiet.diffs.join('、')}）——这不是「门禁有副作用」，也不是「并发安全」；`
+            + `本项在此环境下无读数。用 DSH_ATTEST_REPO=<独占副本> 指向 clean clone 再跑（${quiet.witness}）`,
+          note: `前置安静度探测：${quiet.probes} 次快照、观察到 ${quiet.diffs.length} 处外部变化`,
+        }
+      }
+      return runNodeTestFile(
+        'scripts/lib/repo-attest-concurrency.test.mjs',
+        '聚合并发见证失败',
+        30 * 60 * 1000,
+      )
+    },
+  },
+  {
     name: 'package-identity',
     remediation: '在每个受管 package.json 补 luteOrigin / luteOwner / lutePublish（ADR-0012）',
     run() {
-      return checkPackageIdentity(repoRoot, collectManifests())
+      return checkPackageIdentity(repoRoot, collectManagedManifests(repoRoot))
     },
   },
   {
@@ -231,132 +409,83 @@ const CHECKS = [
   },
   {
     name: 'profile-metadata-sync',
-    remediation: '运行 node scripts/sync-profile.mjs --apply --only-metadata 同步内嵌副本（profile/vendor，非装载点）的 package.json',
+    remediation:
+      '先确认 profile 的 package.json 是合法 JSON（坏了会直接判红，不再被吞成「没有 file: 依赖」）；'
+      + '再运行 node scripts/sync-profile.mjs --apply --only-metadata 同步内嵌副本（profile/vendor，**不是**装载点）的 package.json',
     run() {
       // 注意：vendor/ 不是装载点（DSH 从 profile/node_modules 解析包）。本项只保证
       // 内嵌副本的元数据不漂；「改动是否生效」由下面的 profile-bundle-sync 断言。
-      const profileVendor = join(process.env.HOME ?? '', '.dsh', 'profiles', 'desktop', 'vendor')
-      if (!existsSync(profileVendor)) {
-        return {
-          passed: true,
-          skipped: true,
-          violations: [],
-          note: '可选 profile/vendor 不存在——本项未核对任何内嵌副本',
-        }
-      }
-      // targetDir 必须用**归组后**的 repo 相对路径：vendor 的实际布局是
-      // `vendor/packages/<组>/<包>`。这里曾经写的是 `entry.dir.split('/').pop()`
-      // （扁平 basename），于是每个目标都落在不存在的路径上、被 checkProfileMetadata
-      // 的 `existsSync` 静默 continue —— 本项因此**永远绿**，连它自己给出的
-      // remediation（`--apply --only-metadata`，同样写错了路径）也是空射程的（P-02）。
-      // 现在同时断言「真的比过」，换个布局不会再假装通过。
-      const pairs = collectManifests()
-        .filter((entry) => entry.dir !== '.')
-        .map((entry) => ({
-          name: entry.dir,
-          sourceDir: join(repoRoot, entry.dir),
-          targetDir: join(profileVendor, entry.dir),
-        }))
-      const compared = pairs.filter((pair) => existsSync(join(pair.targetDir, 'package.json')))
-      if (pairs.length > 0 && compared.length === 0) {
-        return {
-          passed: false,
-          violations: [
-            `内嵌副本一个包都没比到（受管 ${pairs.length} 个，vendor 里 0 个含 package.json）——`
-              + '路径布局可能又变了，这不是「都一致」',
-          ],
-        }
-      }
-      return checkProfileMetadata(pairs)
+      //
+      // 期望集由 profile-coverage 从「profile 声明了什么」推出来，保留完整
+      // `packages/<组>/<包>` 相对路径。旧实现曾经用 `entry.dir.split('/').pop()`
+      // （扁平 basename）拼目标路径，于是每个目标都落在不存在的路径上、被
+      // `existsSync` 静默 continue —— 本项因此**永远绿**（P-02）。
+      return runProfileTarget('metadata')
     },
   },
   {
     name: 'profile-files-sync',
-    remediation: '按 package.json 的 files 清单修正：陈旧条目从 files 中删除；真缺件用 tmp+mv 语义补齐 profile 副本（勿直接覆盖）',
+    remediation:
+      '按 package.json 的 files 清单修正：陈旧条目从 files 中删除；真缺件用 tmp+mv 语义补齐装载点副本（勿直接覆盖）。'
+      + '若报的是「期望集里的包在装载点不存在」，先跑 node scripts/sync-profile.mjs --apply --loadpoint 或重装 profile',
     run() {
-      const profile = join(process.env.HOME ?? '', '.dsh', 'profiles', 'desktop')
       // 盯 node_modules：`file:` 依赖是硬链接实体副本，且这是 DSH 真实装载点
       // （2026-09-11 实测报错路径即 profiles/desktop/node_modules/dsh-preset-lint-local/lib/...）。
-      // vendor/ 是另一份命名不同的副本，两份都缺 linter——本项只对装载点断言。
-      const target = join(profile, 'node_modules')
-      if (!existsSync(target)) {
-        return {
-          passed: true,
-          skipped: true,
-          violations: [],
-          note: '可选 profile/node_modules 不存在——本项未核对任何装载文件',
-        }
-      }
-      const packages = new Map(collectManifests().filter((entry) => entry.dir !== '.').map((entry) => [entry.dir.split('/').pop(), entry]))
-      const pairs = []
-      for (const [name, spec] of Object.entries(installedProfileDependencies(profile))) {
-        if (!spec.startsWith('file:')) continue
-        const sourceDir = spec.slice('file:'.length)
-        if (!existsSync(join(sourceDir, 'package.json'))) continue
-        const entry = packages.get(sourceDir.split('/').pop())
-        pairs.push({
-          name,
-          sourceDir,
-          targetDir: join(target, name),
-          files: entry?.manifest.files ?? [],
-        })
-      }
-      return checkProfileFilesSync(pairs)
+      // vendor/ 是另一份命名不同的副本，本项只对装载点断言。
+      return runProfileTarget('files')
     },
   },
   {
     name: 'profile-bundle-sync',
-    remediation: '运行 node scripts/sync-profile.mjs --apply --loadpoint 把仓库产物按 tmp+mv 同步到装载点（否则应用重启后仍跑旧字节）',
+    remediation:
+      '运行 node scripts/sync-profile.mjs --apply --loadpoint 把仓库产物按 tmp+mv 同步到装载点（否则应用重启后仍跑旧字节）。'
+      + '若报的是「期望集里的包在装载点不存在」，那是安装没落到位而不是字节漂移——先补齐装载点再谈同步',
     run() {
-      const profile = join(process.env.HOME ?? '', '.dsh', 'profiles', 'desktop')
-      const target = join(profile, 'node_modules')
-      if (!existsSync(target)) {
-        return {
-          passed: true,
-          skipped: true,
-          violations: [],
-          note: '可选装载点不存在——本项未校验任何包',
-        }
-      }
-      const packages = new Map(collectManifests().filter((entry) => entry.dir !== '.').map((entry) => [entry.dir.split('/').pop(), entry]))
-      const pairs = []
-      let fileDeps = 0
-      for (const [name, spec] of Object.entries(installedProfileDependencies(profile))) {
-        if (!spec.startsWith('file:')) continue
-        fileDeps += 1
-        // `file:` 的基准是**声明它的那份 package.json 所在的目录**（即 profile），
-        // 不是本进程的 cwd。2026-09-13 实测：旧实现直接拿 spec 里的相对路径
-        // （`./vendor/packages/surfaces/dsh-skill-center-local`）去 `existsSync`，
-        // 而门禁是从仓库根跑的，仓库根下没有 `vendor/packages/`——于是 23 个
-        // `file:` 依赖**全部**在此被 `continue` 掉，pairs 恒为空、本项恒绿。
-        // 这正是 P-02（仪器假绿）：修的是「应用重启后仍跑旧字节」，而它自己
-        // 一个包都没对着看过。仓库路径的唯一来源是 collectManifests() 的 dir。
-        const entry = packages.get(spec.slice('file:'.length).split('/').pop())
-        // 只判本仓库受管的包：别的项目的 file: 依赖漂移是那个项目的事，
-        // 挂到这里只会让本仓库门禁为别人的状态变红，然后被加豁免。
-        if (entry === undefined) continue
-        pairs.push({
-          name,
-          sourceDir: entry.dir,
-          targetDir: join(target, name),
-          files: entry.manifest.files ?? [],
-        })
-      }
-      // 空射程必须**自己**报出来，而不是长得和「都一致」一样（P-02 / P-03）。
-      // 旧实现里「一个都没对上」与「逐字节全一致」在读数上完全同形，本项就是那次
-      // 假绿发生的**位置**；这里让「声明了 file: 依赖却一个都没对上」直接判红。
-      const note = `对比 ${pairs.length}/${fileDeps} 个 file: 依赖`
-      if (fileDeps > 0 && pairs.length === 0) {
-        return {
-          passed: false,
-          violations: [
-            `profile 声明了 ${fileDeps} 个 file: 依赖，但没有任何一个对上本仓库受管的包——`
-              + '本项**未校验任何包**，不是「都一致」（P-02：仪器假绿）',
-          ],
-          note,
-        }
-      }
-      return { ...checkProfileBundleSync(pairs), note }
+      return runProfileTarget('bundle')
+    },
+  },
+  {
+    name: 'plugin-entry-contract',
+    remediation:
+      '按报错点名的入口修：入口路径以 package.json 的 main/exports 为准（不是约定俗成的 lib/index.js）；'
+      + '`const inject = [...]` 忘了 `export` 就补 `export { name, inject }`；'
+      + '访问了 `ctx.<服务>` 而 inject 名单里没有就补进名单；'
+      + 'Service 子类的 inject 必须是 `static` 字段。判红里的 `library` 与 `unresolved` 需要人来判：'
+      + '要么补回入口/apply，要么从 package.json 的 dsh.bundle.patch 里去掉声明',
+    run() {
+      return checkPluginEntryContract(collectManifests(), readRepoText)
+    },
+  },
+  {
+    name: 'plugin-entry-contract-selftest',
+    remediation:
+      '跑 node --test scripts/gates/plugin-entry-contract.test.mjs 看红在哪条：本项必须能说「不」——删入口、悬空转出口、转出口成环、移除 apply、Service 的 inject 缺 static、访问名单外的服务、注释/字符串里的假 ctx 命中都必须判红，候选总数恒等于 checked+skipped+failed；也必须不误报——只有方法调用、`try { … } catch {}` 里的刻意探测、内置属性 root/scope/parent/logger、清单入口不是 lib/index.js 的转出口壳都要放行（P-02 / P-03）',
+    run() {
+      return runNodeTestFile('scripts/gates/plugin-entry-contract.test.mjs', '插件入口契约判据的反向自测失败')
+    },
+  },
+  {
+    name: 'package-files-coverage',
+    remediation:
+      '把报错点名的文件加进该包 package.json 的 files 清单（或改用能覆盖它的目录/通配条目），**不要**靠 `sync-profile.mjs --apply --loadpoint` 补救：pnpm 对 `file:` 依赖按 files 白名单物化（实测），全新安装路径上没有任何同步步骤，缺件就是 ERR_MODULE_NOT_FOUND 进恢复模式。改完跑 `node scripts/sync-profile.mjs --check --loadpoint` 复核装载点，并跑 `pnpm run test:gate` 看校准（判定器必须与真实 npm pack 的产出逐文件全等）',
+    run() {
+      return checkPackageFilesCoverage(collectPackageTrees())
+    },
+  },
+  {
+    name: 'package-files-coverage-selftest',
+    remediation:
+      '跑 node --test scripts/gates/package-files-coverage.test.mjs 看红在哪条：本项必须能说「不」——P-24 的复发形状（`lib/index.js` 正在 import 的模块不在 files 里）必须判红并点名文件，`new URL(…, import.meta.url)` 定位的运行时文件同理（MUT3 把这条规则关掉后必须漏过）；也必须不误报——`main`/README/LICENSE 永远被打包、裸目录条目覆盖整棵子树、无 files 白名单的包不构成「漏项」、可达闭包之外的 lib bundle 只报读数不判红（假红会把真信号一起拖下水）。`CALIB npm` 是判定器的校准锚：逐文件比对真实 `npm pack` 的产出，不一致即说明 glob 语义建模有偏；`CALIB 前提钉` 用真实 pnpm `file:` 安装复核「缺件到底会不会发生」这一条立论基础（P-02 / P-03）',
+    run() {
+      return runNodeTestFile('scripts/gates/package-files-coverage.test.mjs', '交付白名单完整性判据的反向自测失败')
+    },
+  },
+  {
+    name: 'profile-coverage-selftest',
+    remediation:
+      '跑 node --test scripts/gates/profile-coverage.test.mjs 看红在哪条：本项必须能说「不」——profile package.json 坏 JSON、根在但清单读不到、装载点/vendor 目录整个不存在、期望集里 0/1/N-1 个包在目标里缺件，都必须判红并点名是哪个包；也必须不误报——不受管的 `file:` 依赖只进读数、受管但未声明的包只进读数（本机 profile 裁剪是合法的）、目录存在但真的全绿才算过。期望集按**完整相对路径**对齐，basename 相同的包不得互相顶替（P-02 / P-03）',
+    run() {
+      return runNodeTestFile('scripts/gates/profile-coverage.test.mjs', 'profile 覆盖率判据的反向自测失败')
     },
   },
   {
@@ -394,6 +523,21 @@ const CHECKS = [
         'scripts/gates/preset-maintenance-transaction.test.mjs',
         'packages/capabilities/dsh-overseas-skills/test/install-fullstack-skills.spec.mjs',
       ], 'preset/skill 破坏性事务契约自测失败')
+    },
+  },
+  {
+    name: 'wanzh-persistence-and-oauth',
+    remediation:
+      '跑 node --test packages/capabilities/dsh-wanzh-hulian/test/{atomic-store,persistence,persistence-failclosed,persistence-inventory,oauth-flow,oauth-routes}.spec.mjs 看红在哪条：状态落盘必须只经原子写入器（同目录临时文件 + fsync + rename 前校验权限位 + 目录 fsync）；损坏或形状不对的配置必须 fail-closed 且原字节不改写；「文件不存在」与「内容损坏」必须是两个读数；OAuth 流程同时最多一个 listener、到期必须关端口、注册与回收必须全等。重点是恒真桩突变（P-02 / P-32）：去掉 chmod、去掉 rename 前校验、改回直写、去掉排他槽位、去掉到期定时器、去掉 supersede、去掉 closeAllConnections 都必须有用例变红（ADR-0099）',
+    run() {
+      return runNodeTestFiles([
+        'packages/capabilities/dsh-wanzh-hulian/test/atomic-store.spec.mjs',
+        'packages/capabilities/dsh-wanzh-hulian/test/persistence.spec.mjs',
+        'packages/capabilities/dsh-wanzh-hulian/test/persistence-failclosed.spec.mjs',
+        'packages/capabilities/dsh-wanzh-hulian/test/persistence-inventory.spec.mjs',
+        'packages/capabilities/dsh-wanzh-hulian/test/oauth-flow.spec.mjs',
+        'packages/capabilities/dsh-wanzh-hulian/test/oauth-routes.spec.mjs',
+      ], 'Wanzh 原子持久化与 OAuth 生命周期契约自测失败')
     },
   },
   {
@@ -469,6 +613,50 @@ const CHECKS = [
       return runNodeTestFile(
         'packages/capabilities/dsh-overseas-skills/test/build-third-party-intake.spec.mjs',
         'third-party intake 分类守恒与原子写入的反向自测失败',
+      )
+    },
+  },
+  {
+    name: 'immutable-supply-chain',
+    remediation:
+      '排查浮动供应链版本：MCP 配置禁止未锁版本的 npx -y 与 @latest；LoopX 禁止 loopx>= 与 --upgrade；第三方技能源必须绑定 40 位不可变 commit，禁止 trees/HEAD 与 /HEAD/ 浮动取件；import-fullstack 禁止 /tmp 回退（SEC-RT-002 / ADR-0113）',
+    run() {
+      const mcpServersSource = readIfExists('packages/capabilities/dsh-wanzh-hulian/lib/index.js')
+      const loopxInitSource = readIfExists('packages/capabilities/dsh-loopx-plugin/lib/init-command.js')
+      const thirdPartyInventoryRaw = readIfExists('packages/capabilities/dsh-overseas-skills/scripts/third-party-source-inventory.json')
+      const thirdPartyInventory = thirdPartyInventoryRaw ? JSON.parse(thirdPartyInventoryRaw) : null
+      const thirdPartyFetchSource = readIfExists('packages/capabilities/dsh-overseas-skills/scripts/fetch-third-party-skills.mjs')
+
+      const result = checkImmutableSupplyChain({
+        mcpServersSource,
+        loopxInitSource,
+        thirdPartyInventory,
+        thirdPartyFetchSource,
+      })
+      return {
+        status: result.passed ? 'pass' : 'fail',
+        expected: 4,
+        discovered: 4,
+        checked: 4,
+        skipped: 0,
+        failed: result.violations.length,
+        typedSkips: [],
+        reason: result.passed
+          ? 'MCP、LoopX 与第三方技能供应链已全面固化为不可变来源'
+          : result.violations.join('；'),
+        note: 'SEC-RT-002 immutable supply chain contract',
+        violations: result.violations,
+      }
+    },
+  },
+  {
+    name: 'immutable-supply-chain-selftest',
+    remediation:
+      '运行 node --test scripts/gates/immutable-supply-chain.test.mjs；测试覆盖浮动 npx、@latest、loopx>= 范围、--upgrade 与 HEAD 浮动引用拦截（SEC-RT-002）',
+    run() {
+      return runNodeTestFile(
+        'scripts/gates/immutable-supply-chain.test.mjs',
+        '不可变供应链门禁的反向自测失败',
       )
     },
   },
@@ -990,15 +1178,9 @@ const CHECKS = [
             .map((name) => ({ name, bytes: readFileSync(join(dir, name)) }))
         : []
       // 目标侧（已装 app）：读不到就传 null —— 那是「未核查」，本项会报 skip 而不是通过。
-      const buildDir = join(
-        '/',
-        'Applications',
-        'DSH Desktop.app',
-        'Contents',
-        'Resources',
-        'app.asar.unpacked',
-        'build',
-      )
+      // 2.0.10 起 no-ASAR（Resources/app/build），双形态探测见 scripts/lib/app-resources.mjs。
+      const buildRoot = appResourcesRoot(join('/', 'Applications', 'DSH Desktop.app'))
+      const buildDir = buildRoot === null ? '' : join(buildRoot, 'build')
       let installedBuildDirEntries = null
       try {
         installedBuildDirEntries = readdirSync(buildDir)
@@ -1039,25 +1221,57 @@ const CHECKS = [
   },
   {
     name: 'changed-packages',
-    remediation: '为本次改动的包补 typecheck 与 test 脚本，或按 ADR-0014 登记豁免（只减不增）',
+    remediation:
+      '为本次改动的包补 typecheck 与 test 脚本，或按 ADR-0014 登记豁免（只减不增）。'
+      + '若报的是「改动射程未知」，那是基线问题而不是包的问题：CI 请设置 DSH_GATE_BASE_SHA（事件 base SHA 且必须已 fetch），'
+      + `本地请确认 ${LOCAL_BASE_REF} 存在并已 fetch——未知射程不得退化成「无改动」`,
     run() {
       const manifests = collectManifests().filter((entry) => entry.dir !== '.')
       const exempted = JSON.parse(readIfExists(EXEMPTIONS_PATH) || '[]').map((row) => row.package)
+      const scope = resolveChangedScope({
+        git: createGitRunner({ cwd: repoRoot }),
+        env: process.env,
+        packages: manifests,
+      })
+      if (!scope.ok) {
+        // 射程未知时**不能**退化成空集：空集会让本项少看几个包，而读数上
+        // 与「这些包都合规」完全同形（P-02）。这里直接判红并把原因原样带出。
+        return {
+          status: 'fail',
+          expected: 1,
+          discovered: 0,
+          checked: 0,
+          skipped: 0,
+          failed: 1,
+          typedSkips: [],
+          reason: '改动射程未知',
+          violations: [scope.reason],
+        }
+      }
       return checkChangedPackages({
-        changed: changedPackages(manifests),
+        changed: scope.packages,
         packages: manifests,
         exempted,
+        scope,
       })
+    },
+  },
+  {
+    name: 'changed-packages-selftest',
+    remediation:
+      '跑 node --test scripts/gates/changed-packages.test.mjs 看红在哪条：本项必须能说「不」——本地 main 超前 origin/main 时 `main...HEAD` 自比较恒为空（MUT 关掉 untracked 来源后有 5 条判红）、untracked 新包必须进射程、base 不可解析必须判红而不是返回空集、rename 必须同时映射旧包与新包、分叉的事件 base 必须被拒；也必须不误报——路径按分段边界归属（`packages/a/b` 不得冒领 `packages/a/bc`）、只有被证明为空的完整并集才算空射程、未登记治理规则的根级改动只进读数桶。`L2` 一节对当前仓库**只读**对账 `git status`，证明没有路径在中间消失（P-02 / P-03）',
+    run() {
+      return runNodeTestFile('scripts/gates/changed-packages.test.mjs', '改动射程判据的反向自测失败')
     },
   },
   {
     name: 'exemptions-frozen',
     remediation: '不得新增豁免条目；补齐后请删除条目，期限不可延后（ADR-0014）',
     run() {
-      const baselineExists = baselineExemptionsExist()
+      const baselineExists = baselineFileExists(EXEMPTIONS_PATH)
       return checkExemptions({
         exemptions: JSON.parse(readIfExists(EXEMPTIONS_PATH) || '[]'),
-        baseline: baselineExists ? readBaselineExemptions() : [],
+        baseline: baselineExists ? readBaselineFile(EXEMPTIONS_PATH) : [],
         today: new Date().toISOString().slice(0, 10),
         baselineExists,
       })
@@ -1097,13 +1311,13 @@ const CHECKS = [
       // 晚于发布时刻），那棵树的绿不证明任何出厂字节。判据移入 gates/patch-anchor-scope.mjs
       // （纯函数 + 反向自测），射程 = 本机 app ∪ 未打 tag 的树；射程为空时报**跳过**，不报通过。
       const appDir = join('/', 'Applications', 'DSH Desktop.app')
-      const appInstalled = existsSync(join(appDir, 'Contents', 'Resources', 'app.asar.unpacked'))
+      // 2.0.10 起官方产物 no-ASAR（Resources/app/），2.0.5 及以前为 app.asar.unpacked；
+      // 双形态探测让本判据在迁移期（生产 2.0.5 与 2.5.0 staging 并存）两侧都能找到目标。
+      const appInstalled = appResourcesRoot(appDir) !== null
       const stagingRoot = join(repoRoot, 'packaging', 'staging')
       const stagingVersions = existsSync(stagingRoot)
         ? readdirSync(stagingRoot).filter((version) =>
-            existsSync(
-              join(stagingRoot, version, 'app', 'DSH Desktop.app', 'Contents', 'Resources', 'app.asar.unpacked'),
-            ),
+            appResourcesRoot(join(stagingRoot, version, 'app', 'DSH Desktop.app')) !== null,
           )
         : []
       const scope = selectAnchorTargets({
@@ -1312,7 +1526,7 @@ const CHECKS = [
   {
     name: 'settings-shell-criteria-selftest',
     remediation:
-      '跑 node --test scripts/gates/settings-shell-criteria.test.mjs 看红在哪条：设置页探针的判据必须**有射程**——它至今写错过三条零射程判据（curl 拿 404 当「没装」、AXScrollToVisible 调用成功、AX 树里出现滚动区域），共同点是「判据写了，却从没拿一个该判红的状态试过它」。本项把探针自带的 --self-test（5 个已知状态的读数喂进纯函数 judge()）跑起来，并做**突变控制**：把 l1Ok / l2Ok / pluginLoaded 分别改成恒真桩，自检必须当场判红并点名是哪条——突变不红，就说明拦住缺陷的不是判据本身（P-02 / P-08）。纯函数用例，不碰 GUI、不需要应用在跑',
+      '跑 node --test scripts/gates/settings-shell-criteria.test.mjs 看红在哪条：设置页探针必须用独立的 188px nav 与 28x28px close 锚校准，目标按钮不得反向参与 scale。自检覆盖 14 个已知状态与 typed unavailable；突变控制会把 target size、代数恒等式、锚冲突、L1、L2、pluginLoaded 分别改坏并要求稳定判红。纯函数用例，不碰 GUI、不需要应用在跑（P-02 / P-08 / P-25）',
     run() {
       return runNodeTestFile('scripts/gates/settings-shell-criteria.test.mjs', '设置页探针判据的射程自测失败')
     },
@@ -1320,7 +1534,7 @@ const CHECKS = [
   {
     name: 'theme-tokens',
     modes: ['full'],
-    remediation: '改用真实 token（官方主题包或 dsh-theme-local 供给的名字）；存量违规登记在 scripts/gates/theme-tokens-baseline.json，该文件只减不增、条目失效即拒绝（ADR-0014、ADR-0028 的 C2 验收）。若被引用的是一个**组件自有的局部自定义属性**（声明它的文件与引用它的文件同属一个包），那是假红而不是违规——见 theme-tokens-selftest',
+    remediation: '改用真实 token（官方主题包或 dsh-theme-local 供给的名字）；存量违规登记在 scripts/gates/theme-tokens-baseline.json，该文件只减不增、条目失效即拒绝（ADR-0014、ADR-0028 的 C2 验收）——「只减不增」由 theme-tokens-baseline-frozen 判据守着，不是靠这句话。若被引用的是一个**组件自有的局部自定义属性**（声明它的文件与引用它的文件同属一个包），那是假红而不是违规——见 theme-tokens-selftest',
     run() {
       const appDir = join('/', 'Applications', 'DSH Desktop.app')
       // 环境相关：app 未安装时由 checkThemeTokens 自身报告跳过（与 patch-anchors 同一语义）。
@@ -1340,7 +1554,33 @@ const CHECKS = [
       return runNodeTestFile('scripts/gates/theme-tokens.test.mjs', '主题 token 可达性判据的反向自测失败')
     },
   },
+  {
+    name: 'theme-tokens-baseline-frozen',
+    remediation:
+      '不得新增主题 token 基线条目（只减不增，ADR-0014）。新发现的幻觉 token 请改源头——换用真实 token，或去掉 var() 走字面兜底；登记进基线只是承认「它不随主题变化」并且不去修它，而且不会有到期日。若确需放宽这一条，请连同理由改本判据自身，让放宽显式可见（2026-09-18 前这条纪律只有文字声明，没有任何判据守着）。',
+    run() {
+      const baselineExists = baselineFileExists(THEME_TOKENS_BASELINE_PATH)
+      return checkThemeTokensBaselineFrozen({
+        entries: JSON.parse(readIfExists(THEME_TOKENS_BASELINE_PATH) || '[]'),
+        baseline: baselineExists ? readBaselineFile(THEME_TOKENS_BASELINE_PATH) : [],
+        baselineExists,
+      })
+    },
+  },
 ]
+
+// 注册表级自检（P-08）：每个注册项必须声明非空 remediation——第 87 条悄悄不写时，
+// 摘要会静默少一行「怎么修」。此断言在任何模式启动前执行，违规即响亮退出，
+// 不依赖任何测试去跑它（断言函数本身由 gate-result-selftest 守着）。
+{
+  const remediationCheck = assertRemediationDeclared(CHECKS)
+  if (!remediationCheck.valid) {
+    for (const message of remediationCheck.errors) {
+      process.stderr.write(`gate 注册表缺 remediation：${message}\n`)
+    }
+    process.exit(1)
+  }
+}
 
 /** 豁免登记文件（仓库根相对路径）。 */
 const EXEMPTIONS_PATH = 'scripts/gates/exemptions.json'
@@ -1425,12 +1665,15 @@ function collectPrescriptionSurfaces() {
  * 这正是总账 P-02「仪器假绿」的形状，所以这里必须走 `nodeCommand()`。
  * @param {string} relPath 测试文件的仓库根相对路径
  * @param {string} failureLabel 没有任何可解析失败行时的兜底说明
+ * @param {number} [timeoutMs] 超时上限；默认 120s。**并发/见证类用例必须显式抬高**：
+ *   QG-006B 的聚合并发一轮就是两次完整 gate，按住默认值会得到「超时判红」而不是
+ *   「并发不安全」——那正是 P-18 的形态（环境读数被当成代码缺陷）。
  * @returns {{passed: boolean, violations: string[]}}
  */
-function runNodeTestFile(relPath, failureLabel) {
+function runNodeTestFile(relPath, failureLabel, timeoutMs = 120000) {
   const { command, env } = nodeCommand()
   const script = join(repoRoot, relPath)
-  const result = runScript(repoRoot, `"${command}" --test "${script}"`, 120000, env)
+  const result = runScript(repoRoot, `"${command}" --test "${script}"`, timeoutMs, env)
   if (result.code === 0) return { passed: true, violations: [] }
   const text = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
   const lines = text
@@ -1442,10 +1685,10 @@ function runNodeTestFile(relPath, failureLabel) {
 }
 
 /** Run one node:test process over a related contract suite. */
-function runNodeTestFiles(relPaths, failureLabel) {
+function runNodeTestFiles(relPaths, failureLabel, timeoutMs = 120000) {
   const { command, env } = nodeCommand()
   const scripts = relPaths.map((relPath) => `"${join(repoRoot, relPath)}"`).join(' ')
-  const result = runScript(repoRoot, `"${command}" --test ${scripts}`, 120000, env)
+  const result = runScript(repoRoot, `"${command}" --test ${scripts}`, timeoutMs, env)
   if (result.code === 0) return { passed: true, violations: [] }
   const text = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
   const lines = text
@@ -1557,39 +1800,13 @@ function runPackageScripts() {
 }
 
 /**
- * 找出本次改动涉及的受管包（未提交改动 ∪ 与 main 的差异）。
- * @param {Array<{dir: string}>} manifests 受管包清单
- * @returns {string[]} 包相对路径
- */
-function changedPackages(manifests) {
-  const files = new Set()
-  for (const args of [
-    ['diff', '--name-only', 'HEAD'],
-    ['diff', '--name-only', '--cached'],
-    ['diff', '--name-only', 'main...HEAD'],
-  ]) {
-    try {
-      const out = execFileSync('git', ['-C', repoRoot, ...args], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] })
-      for (const line of out.split('\n')) if (line) files.add(line)
-    } catch {
-      // main 不存在或仓库无该引用时忽略该来源
-    }
-  }
-  const changed = new Set()
-  for (const entry of manifests) {
-    const prefix = `${entry.dir}/`
-    if ([...files].some((file) => file === entry.dir || file.startsWith(prefix))) changed.add(entry.dir)
-  }
-  return [...changed]
-}
-
-/**
- * 判断豁免登记文件是否已存在于 git HEAD（未入库即处于初始登记引导期）。
+ * 判断某仓库相对路径的文件是否已存在于 git HEAD（未入库即处于初始登记引导期）。
+ * @param {string} relPath 仓库根相对路径
  * @returns {boolean}
  */
-function baselineExemptionsExist() {
+function baselineFileExists(relPath) {
   try {
-    execFileSync('git', ['-C', repoRoot, 'cat-file', '-e', `HEAD:${EXEMPTIONS_PATH}`], { stdio: 'ignore' })
+    execFileSync('git', ['-C', repoRoot, 'cat-file', '-e', `HEAD:${relPath}`], { stdio: 'ignore' })
     return true
   } catch {
     return false
@@ -1597,12 +1814,17 @@ function baselineExemptionsExist() {
 }
 
 /**
- * 从 git HEAD 读取豁免登记基线；文件尚未入库或仓库尚无提交时返回空数组。
+ * 从 git HEAD 读取某个 JSON 基线文件；文件尚未入库或仓库尚无提交时返回空数组。
+ *
+ * 「冻结基线 = HEAD 版本，工作区比 HEAD 多即为新增」是 `exemptions-frozen` 与
+ * `theme-tokens-baseline-frozen` 共用的口径——**不必另存一份快照文件**，也就不会
+ * 出现「快照与基线各说一套」的第二个家（ADR-0009）。
+ * @param {string} relPath 仓库根相对路径
  * @returns {Array<Record<string, unknown>>}
  */
-function readBaselineExemptions() {
+function readBaselineFile(relPath) {
   try {
-    const text = execFileSync('git', ['-C', repoRoot, 'show', `HEAD:${EXEMPTIONS_PATH}`], {
+    const text = execFileSync('git', ['-C', repoRoot, 'show', `HEAD:${relPath}`], {
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'ignore'],
     })
@@ -1622,22 +1844,33 @@ function listAdrFiles() {
     .map((name) => `docs/adr/${name}`)
 }
 
-/**
- * 收集仓库根与全部受管包的清单（根包自身也受身份契约约束）。
- * 与目录墙生成器共用 collectPackages，避免两侧包集合分叉。
- * @returns {Array<{dir: string, manifest: Record<string, unknown>}>}
- */
+/** 收集仓库根与全部受管包；实现位于可注入 repo root 的单一事实源。 */
 function collectManifests() {
-  const { rootManifest, packages } = collectPackages(repoRoot)
-  return [
-    { relPath: '.', dir: '.', manifest: rootManifest },
-    ...packages.map((entry) => ({
-      relPath: entry.relPath,
-      dir: entry.relPath,
-      group: entry.group,
-      manifest: entry.manifest,
-    })),
-  ]
+  return collectManagedManifests(repoRoot)
+}
+
+/**
+ * 组装 `package-files-coverage` 的输入：受管包（根包不参与——它不是交付单位）
+ * 的磁盘文件/目录清单，加上一个**注入**的文件读取器。
+ *
+ * 读取器由装配处提供而不是让判定器自己去读盘，是 QG-006A 的隔离契约：
+ * 判定器保持纯函数，测试可以喂内存树，不必先造一棵真树。
+ * @returns {Array<{relPath: string, manifest: Record<string, unknown>, files: Set<string>, dirs: Set<string>, readSource: (relPath: string) => string|null}>}
+ */
+function collectPackageTrees() {
+  return collectManifests()
+    .filter((entry) => entry.dir !== '.')
+    .map((entry) => {
+      const dir = join(repoRoot, entry.dir)
+      const { files, dirs } = listPackageTree(dir)
+      return {
+        relPath: entry.dir,
+        manifest: entry.manifest,
+        files: new Set(files),
+        dirs: new Set(dirs),
+        readSource: createFileSource(dir),
+      }
+    })
 }
 
 /** 读取子模块实际 HEAD；未初始化或不可读时返回 undefined。 */
@@ -1652,6 +1885,91 @@ function submoduleHead() {
 
 function readIfExists(path) {
   return existsSync(path) ? readFileSync(path, 'utf8') : ''
+}
+
+/**
+ * 判定器读仓库相对路径文本；读不到返回 null（区别于空文件）。
+ *
+ * 判定器保持纯函数、读取器由装配处注入，是 QG-006A 的隔离契约：测试可以喂内存树，
+ * 不必先造一棵真树。这里的 `null` 必须是「读不到」而不是「读到了空内容」——
+ * 入口文件缺失与入口文件为空是两件事，前者要判红。
+ */
+function readRepoText(relPath) {
+  try {
+    const target = join(repoRoot, relPath)
+    return existsSync(target) ? readFileSync(target, 'utf8') : null
+  } catch {
+    return null
+  }
+}
+
+/** 读绝对路径文本；读不到返回 null（区别于空文件）。 */
+function readAbsText(path) {
+  try {
+    return existsSync(path) ? readFileSync(path, 'utf8') : null
+  } catch {
+    return null
+  }
+}
+
+/**
+ * 跑一个 profile 断言面（QG-004）。
+ *
+ * 三个面（metadata / files / bundle）**共用同一个期望集**，各自结账、互不代替：
+ * 「内嵌副本元数据一致」不能推出「装载点字节一致」，反过来也一样。
+ * 期望集来自「这份 profile 声明了什么」而不是「目标目录里有什么」——后者会让
+ * 缺件的包从分母里掉出去，那正是 QG-004 的 Red 形状。
+ *
+ * @param {'metadata'|'files'|'bundle'} target
+ * @returns {object} 规范门禁结果
+ */
+function runProfileTarget(target) {
+  const profileDir = join(process.env.HOME ?? '', '.dsh', 'profiles', 'desktop')
+  if (!existsSync(profileDir)) {
+    // 唯一允许的 skip：profile 根整体不存在。根在、node_modules 或 vendor 不在，
+    // 都走 summaryTarget 的判红分支——那份清单声明了 file: 依赖，安装没落到位
+    // 就意味着应用加载不到这些包。
+    return {
+      status: 'skip',
+      expected: 1,
+      discovered: 0,
+      checked: 0,
+      skipped: 1,
+      failed: 0,
+      typedSkips: [{
+        type: 'profile-root-absent',
+        count: 1,
+        reason: `可选 profile 根不存在（${profileDir}）——本项未核对任何包`,
+      }],
+      reason: 'profile 根不存在',
+      violations: [],
+    }
+  }
+
+  const manifest = readProfileManifest({ readText: readAbsText, profileDir })
+  const packages = collectManifests()
+  const byRelPath = new Map(packages.filter((entry) => entry.relPath !== '.').map((entry) => [entry.relPath, entry]))
+  const set = buildExpectedSet({
+    profileDir,
+    repoRoot,
+    dependencies: manifest.ok ? manifest.dependencies : {},
+    packages,
+  })
+
+  const judge = (item) => {
+    const entry = byRelPath.get(item.relPath)
+    const files = entry?.manifest.files ?? []
+    if (target === 'metadata') {
+      // 内嵌副本的 name 用**完整相对路径**：basename 在报错里认不出是哪个包。
+      return checkProfileMetadata([{ name: item.relPath, sourceDir: item.sourceDir, targetDir: item.vendorDir }])
+    }
+    if (target === 'files') {
+      return checkProfileFilesSync([{ name: item.name, sourceDir: item.sourceDir, targetDir: item.loadDir, files }])
+    }
+    return checkProfileBundleSync([{ name: item.name, sourceDir: item.sourceDir, targetDir: item.loadDir, files }])
+  }
+
+  return summarizeTarget({ target, profileDir, exists: existsSync, manifest, set, judge })
 }
 
 /**
@@ -1723,29 +2041,40 @@ function listFilesRecursive(root, relPrefix = '', depth = 0) {
 }
 
 /**
- * 读取 live profile 的已安装依赖表（package.json 的 dependencies）。
- * 返回空对象表示该 profile 未安装或不可读——调用方据此跳过校验。
+ * 读取 live profile 的已安装依赖表 —— **已删除**。
+ *
+ * 它曾经是三个 profile 门禁的唯一输入，而它的失败路径是
+ * `catch { return {} }`：JSON 坏了与「没有 file: 依赖」返回同一个值。
+ * 2026-09-17 实测（QG-004 的 Red）：把 profile package.json 写成截断的 JSON，
+ * 三个 profile 门禁**全部绿**，`profile-bundle-sync` 的读数还是「对比 0/0 个
+ * file: 依赖」。它的射程守卫（`fileDeps > 0`）防的是「声明了却一个都没对上」，
+ * 防不住「声明本身就没了」。
+ *
+ * 现在由 `gates/profile-coverage.mjs` 的 `readProfileManifest()` 负责，解析失败
+ * **直接判红**。这里刻意不留一个同名的「安全版本」——留着就会被下一次顺手用回去，
+ * 而它的失败路径正是这轮要收掉的东西。
  */
-function installedProfileDependencies(profileDir) {
-  const manifest = join(profileDir, 'package.json')
-  if (!existsSync(manifest)) return {}
-  try {
-    return JSON.parse(readFileSync(manifest, 'utf8')).dependencies ?? {}
-  } catch {
-    return {}
-  }
-}
 
 function parseArgs(argv) {
   let mode = 'quick'
   let list = false
   let json = false
   let requireNoSkip = false
+  let attest = null
   for (let i = 0; i < argv.length; i += 1) {
     if (argv[i] === '--list') list = true
     else if (argv[i] === '--json') json = true
     else if (argv[i] === '--require-no-skip') requireNoSkip = true
-    else if (argv[i] === '--mode') {
+    else if (argv[i] === '--attest') {
+      // `--attest` 可带值（被见证的命令，默认 node scripts/gate.mjs）；
+      // 不带值时也要能识别，所以先看下一个参数是不是另一个开关。
+      if (argv[i + 1] !== undefined && !argv[i + 1].startsWith('--')) {
+        attest = argv[i + 1]
+        i += 1
+      } else {
+        attest = `${join(repoRoot, 'scripts', 'gate.mjs')}`
+      }
+    } else if (argv[i] === '--mode') {
       if (argv[i + 1] === undefined) return { error: '--mode 缺少值（quick / full）' }
       mode = argv[i + 1]
       i += 1
@@ -1754,7 +2083,7 @@ function parseArgs(argv) {
     }
   }
   if (!MODES.includes(mode)) return { error: `未知模式：${mode}（可用：${MODES.join(' / ')}）` }
-  return { mode, list, json, requireNoSkip }
+  return { mode, list, json, requireNoSkip, attest }
 }
 
 /**
@@ -1770,12 +2099,184 @@ function trackedTypeFiles(dir) {
   return output.split('\n').filter(Boolean)
 }
 
+/**
+ * 跑一次只读保护面审计（QG-008）。
+ *
+ * 分三种结果，**不合并**：`ok`（与声明全等）、`mismatch`（拿得到读数但不符）、
+ * `no-reading`（gh 不存在 / 未认证 / 网络不可用 / 声明读不到）。第三种必须能与前两种
+ * 分开——把「没读到」混进「不符」会让人以为已经比对过，混进「通过」更糟（卡面负例）。
+ *
+ * @returns {{status: 'ok'|'mismatch'|'no-reading', exitCode: number, violations: string[], facts: object, authority: string, declarationPath: string, reason?: string}}
+ */
+function runRulesetAudit() {
+  const script = join(repoRoot, 'scripts', 'gates', 'audit-rulesets.mjs')
+  // 走 `nodeCommand()` 的 env 而不是裸 `process.execPath`：后者在 pnpm 下是宿主 Electron，
+  // 子进程会「退出码 0 且没有输出」（ADR-0040 / P-02）。第一版就是这么写的，
+  // 被门禁自己的 `node-interpreter` 判据当场抓住——判据拦住了它本来要拦的那种事故。
+  const { command, env } = nodeCommand()
+  const result = runScript(repoRoot, `"${command}" "${script}" --json`, 120000, env)
+  let payload = null
+  try {
+    payload = JSON.parse(result.stdout ?? '')
+  } catch {
+    payload = null
+  }
+  const fallback = {
+    authority: 'L2-readonly-api',
+    declarationPath: 'scripts/gates/ruleset-declaration.json',
+  }
+  if (payload === null) {
+    return {
+      status: 'no-reading',
+      exitCode: 2,
+      violations: [],
+      facts: {},
+      ...fallback,
+      reason: (result.stderr ?? '').trim().split('\n')[0] || `审计脚本没有输出可解析的 JSON（退出码 ${String(result.code)}）`,
+    }
+  }
+  return {
+    status: payload.exitCode === 0 ? 'ok' : payload.exitCode === 1 ? 'mismatch' : 'no-reading',
+    exitCode: payload.exitCode,
+    violations: payload.violations ?? [],
+    facts: payload.facts ?? {},
+    authority: payload.authority ?? fallback.authority,
+    declarationPath: payload.facts?.declarationPath ?? fallback.declarationPath,
+    reason: payload.exitCode === 2 ? (payload.violations ?? []).join('；') : undefined,
+  }
+}
+
+/**
+ * 量一量被见证仓库在一小段时间内是不是**没有别的写入者**（QG-006B 的前置判定）。
+ *
+ * 为什么需要它：并发稳定性读数只有在「这段时间没有别人在写」时才有意义，而本工作树
+ * 长期有多个会话同时写（实测三次里两次命中：本会话、Codex 会话、另一个 agent 会话）。
+ * 与其让读的人自己分辨「红的是门禁还是邻居」，不如先量一次安静度，把「无读数」与
+ * 「读数为通过」分成两种结果（ADR-0102）。
+ *
+ * 探测刻意很短：4 次快照、间隔 3 秒。它只负责说「现在不干净」，不负责证明「接下来干净」——
+ * 后者由 10 轮见证自己用 before/after 判。
+ *
+ * @param {string} repoRoot 被见证的仓库根
+ * @returns {{quiet: boolean, probes: number, diffs: string[], witness: string}}
+ */
+function measureQuietWindow(repoRoot) {
+  const probes = 4
+  const gapMs = 3000
+  let previous = snapshotRepo(repoRoot)
+  const diffs = []
+  for (let index = 1; index < probes; index += 1) {
+    // 同步等待：门禁的校验循环是同步的，而探测必须夹在两次快照之间。
+    // 用 `Atomics.wait` 而不是起 `sleep` 子进程——后者每轮要 fork 一次，
+    // 在一个只为「量安静度」的探测里不值得。
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, gapMs)
+    const current = snapshotRepo(repoRoot)
+    const verdict = snapshotIdentical(previous, current)
+    for (const diff of verdict.diffs) diffs.push(`${diff.kind}:${diff.path}`)
+    previous = current
+    if (diffs.length > 0) break
+  }
+  return {
+    quiet: diffs.length === 0,
+    probes,
+    diffs: [...new Set(diffs)].slice(0, 5),
+    witness: 'node scripts/gate.mjs --attest <目标> --mode full --json 可对同一副本复算同一份快照契约',
+  }
+}
+
+/**
+ * `--attest`：见证一次门禁运行，证明它没有改动被见证的仓库（QG-006B）。
+ *
+ * 为什么这个入口必须由门禁自己提供、而不是只存在于测试里：CI（QG-007）要在
+ * **独立 runner** 上用同一份快照契约复算同一件事，而测试文件在 runner 上不是
+ * 一个可调用的契约面。快照格式、声明根集合与差异类型都来自
+ * `scripts/lib/repo-snapshot.mjs`，此处只负责「跑一次、比两次、说人话」。
+ *
+ * 证据写在见证者自己的临时根里，**不写回被见证的仓库**——否则见证本身就成了
+ * 它要测的那种副作用。
+ * @param {string} target 被见证的可执行文件
+ * @param {string} mode quick/full，作为 `--mode` 传给被见证的命令
+ * @param {boolean} json
+ * @returns {Promise<number>} 退出码
+ */
+async function runAttestation(target, mode, json) {
+  const { attestCommand } = await import('./lib/repo-attest.mjs')
+  const { mkdtempSync } = await import('node:fs')
+  const { tmpdir } = await import('node:os')
+
+  const witnessRoot = mkdtempSync(join(tmpdir(), 'gate-attest-'))
+  const verdict = await attestCommand({
+    repoRoot,
+    command: process.execPath,
+    args: [target, '--mode', mode, '--json'],
+    tmpRoot: witnessRoot,
+    timeoutMs: 30 * 60 * 1000,
+  })
+  const report = {
+    schemaVersion: 1,
+    kind: 'gate-attestation',
+    mode,
+    target,
+    witnessRoot,
+    authority: 'L2-local',
+    outcome: verdict.outcome,
+    exitCode: verdict.exitCode,
+    exitSignal: verdict.exitSignal,
+    identical: verdict.identical,
+    unexplained: verdict.unexplained,
+    concurrentActivity: verdict.concurrentActivity,
+    beforeDigest: verdict.beforeDigest,
+    afterDigest: verdict.afterDigest,
+    diffCount: verdict.diffCount,
+    diffs: verdict.diffs,
+    plan: verdict.plan,
+  }
+  if (json) {
+    process.stdout.write(`${JSON.stringify(report, null, 2)}\n`)
+  } else {
+    process.stdout.write(
+      `${verdict.identical ? 'ok' : 'fail'} 见证 ${target}（mode=${mode}）：`
+      + `before=${verdict.beforeDigest.slice(0, 16)} after=${verdict.afterDigest.slice(0, 16)} `
+      + `identical=${verdict.identical} 差异=${verdict.diffCount}\n`,
+    )
+    for (const diff of verdict.diffs) {
+      process.stdout.write(`     - ${diff.kind} ${diff.path}\n`)
+    }
+    process.stdout.write(`     见证者临时根（证据，不入库）：${witnessRoot}\n`)
+  }
+
+  // 通过时把见证者根收掉，判红时**留着**。
+  //
+  // 这条不是顺手加的：本卡在自己的结论里刚数过「2,066 个残留根来自从不清理的临时目录」，
+  // 而 `--attest` 每次成功都会建一个空根——不清理就是同一个缺陷换了个地方复发。
+  // 反向的那一半同样重要：判红时留下的证据是「为什么红」的唯一现场，删掉它等于
+  // 把失败变成一句无法复查的话。
+  if (verdict.identical) {
+    try {
+      rmSync(witnessRoot, { recursive: true, force: true })
+    } catch { /* 删不掉不影响判定；临时目录不是判据面 */ }
+  }
+  report.witnessRootRetained = !verdict.identical
+  return verdict.identical ? 0 : 1
+}
+
 /** 程序入口：解析参数、跑校验、按失败数设置退出码。 */
 function main() {
-  const { mode, list, json, requireNoSkip, error } = parseArgs(process.argv.slice(2))
+  const { mode, list, json, requireNoSkip, attest, error } = parseArgs(process.argv.slice(2))
   if (error) {
     process.stderr.write(`${error}\n`)
     process.exitCode = 2
+    return
+  }
+  if (attest !== null) {
+    // 异步入口：见证要等子进程真的结束（含信号路径），不能靠顶层 await 之外的
+    // 同步流程。退出码由 runAttestation 决定，与门禁自身的失败数分开。
+    runAttestation(attest, mode, json).then((code) => {
+      process.exitCode = code
+    }, (failure) => {
+      process.stderr.write(`见证失败：${failure?.message ?? String(failure)}\n`)
+      process.exitCode = 2
+    })
     return
   }
   if (list) {
@@ -1786,8 +2287,18 @@ function main() {
     return
   }
 
-  const active = CHECKS.filter((check) => !check.modes || check.modes.includes(mode))
-  const report = runGateChecks(active, { requireNoSkip })
+  // 分母的两半由**同一个谓词**推出：跑哪些（`isCheckActive`）与哪些没跑
+  // （`computeNotCovered` = 它的补集）。两者一旦各写各的，就会出现「既没跑、
+  // 也没报未覆盖」的项，而守恒（跑到的 + 未覆盖的 = 注册表全量）正是这条读数
+  // 唯一的判据（ADR-0102）。
+  const active = CHECKS.filter((check) => isCheckActive(check, mode))
+  // 未被本模式覆盖的校验项（`scripts-runnable` 等 7 条是 full-only）。它们不进入分母，
+  // 因此必须**在读数里被说出来**：否则「75/76 项通过」会被读成「门禁看过了 76 项，
+  // 其余不存在」，而实际是这个模式根本没碰过它们。2026-09-16 的 typecheck 回归
+  // （10 处 TS2339 + 6 处测试类型错）正是这样对提交前门禁隐形的——只跑了 quick 就
+  // 声称通过，是 P-04 的变体。
+  const notCovered = computeNotCovered(CHECKS, mode)
+  const report = runGateChecks(active, { requireNoSkip, notCovered })
   if (json) {
     process.stdout.write(`${JSON.stringify({
       schemaVersion: 1,
@@ -1816,6 +2327,14 @@ function main() {
       `${prefix} ${summary.passed}/${summary.total} 项通过（mode=${mode}${skipTail}${strictTail}；`
       + `objects: expected=${summary.expected}, discovered=${summary.discovered}, checked=${summary.checked}, skipped=${summary.skippedObjects}, failed=${summary.failedObjects}）\n`,
     )
+    // 分母的另一半：这个模式没跑到的那些，逐条点名。用 `MODES` 的反集而不是写死
+    // 「full」，是因为射程随模式集合变化，写死会在加第三个模式时静默说谎（P-06）。
+    if (summary.notCovered.length > 0) {
+      const otherModes = MODES.filter((candidate) => candidate !== mode).join('/')
+      process.stdout.write(
+        `     本次未覆盖 ${summary.notCovered.length} 条（仅 ${otherModes}）：${summary.notCovered.join('、')}\n`,
+      )
+    }
   }
   process.exitCode = report.exitCode
 }

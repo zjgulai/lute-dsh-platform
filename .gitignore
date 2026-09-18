@@ -76,3 +76,24 @@ packaging/.app-cache/
 # ADR-0017：从内建运行时 tgz 解出的 DSH 类型来源，可重建，不入库
 .dsh-types/
 *.tsbuildinfo
+
+# —— 迁移快照：大体积二进制与 .app 不得进对象库（SEC-RT-011 / ADR-0121）——
+# 背景：2026-09-18 实测 packaging/backup/pre-2.0.10-migration/ 下的 6.8 GB
+# dsh-home-snapshot.tar 曾被 git add，经 codex checkpoint 的 write-tree 静默写入对象库，
+# 内含活凭证 .dsh/.credentials.yaml（与磁盘上当时在用那份逐字节相同）。
+# 该对象已定点移除，此规则防止复发。射程刻意收窄到体积型二进制：
+# 若整目录排除，会让已跟踪的 packaging/backup/README.md 变成 tracked+ignored 漂移（ADR-0013）。
+packaging/backup/**/*.tar
+packaging/backup/**/*.tar.gz
+packaging/backup/**/*.tgz
+packaging/backup/**/*.dmg
+packaging/backup/**/*.zip
+packaging/backup/**/*.pkg
+packaging/backup/**/*.app/
+
+# —— .scratch 研究工具的编译产物：与 .swift 源码同名、无扩展名，可重建（swiftc x.swift -o x）——
+# 源码 .swift 入库，编译出的 Mach-O 不入库（本文件开头即声明「构建产物/临时文件不入库」）。
+# 2026-09-18 实测：scanrow（54 KB Mach-O）在 .scratch 下未被忽略，一次 git add -A 就会进对象库。
+# 射程收窄到具体产物名而非「.scratch 下所有无扩展名文件」——后者会误伤将来可能有意的数据文件。
+# 新工具编译出产物后请在此追加一行；这是纪律，不是机制，故门禁 gitignore-whitelist 不守它。
+.scratch/sidebar-research/scanrow

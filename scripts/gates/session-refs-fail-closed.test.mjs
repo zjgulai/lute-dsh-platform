@@ -1,13 +1,20 @@
 import assert from 'node:assert/strict'
-import { chmodSync, mkdirSync, mkdtempSync, symlinkSync, writeFileSync } from 'node:fs'
-import { tmpdir } from 'node:os'
+import { chmodSync, mkdirSync, symlinkSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { test } from 'node:test'
+import { afterEach, test } from 'node:test'
 
 import { scanSessions } from '../role-presets/session-refs.mjs'
+import { createMutationFixture } from '../lib/mutation-fixture.mjs'
+
+const fixtures = []
+afterEach(() => {
+  while (fixtures.length > 0) fixtures.pop().cleanup()
+})
 
 function fixtureRoot() {
-  return mkdtempSync(join(tmpdir(), 'session-refs-fail-closed-'))
+  const fixture = createMutationFixture({ prefix: 'session-refs-fail-closed' })
+  fixtures.push(fixture)
+  return fixture.repo
 }
 
 function writeSession(root) {

@@ -15,11 +15,6 @@
     "reason": "同上。"
   },
   {
-    "token": "--dsw-alias-separator-primary",
-    "packages": ["dsh-root-brand-local"],
-    "reason": "幻觉 token。平台的分隔线语义由 --dsw-alias-border-l1/l2/l3/l4 表达，没有 separator 家族。改成 border-l1 即可（本包是官方 UI 覆盖层，改色值须与 ADR-0026 的注入顺序纪律一并回归）。"
-  },
-  {
     "token": "--dsw-alias-shadow-lg",
     "packages": ["dsh-agent-team-gui-local"],
     "reason": "幻觉 token。官方阴影走 --dsw-shadow-* 家族（lv1/lv2/…），没有 alias-shadow-*。"

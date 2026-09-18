@@ -14,7 +14,7 @@ const PIP_VERSION_ARGS = Object.freeze([
 	"pip",
 	"--version"
 ]);
-const LOOPX_REQUIREMENT = "loopx>=0.5.4";
+const LOOPX_REQUIREMENT = "loopx==0.5.4";
 const MANAGED_LAUNCHER_SOURCE = [
 	"from pathlib import Path",
 	"import runpy",
@@ -149,7 +149,7 @@ async function installCli(options, runtimeDir) {
 			"install",
 			"--disable-pip-version-check",
 			"--no-input",
-			"--upgrade",
+			"--no-deps",
 			"--target",
 			sitePackages,
 			LOOPX_REQUIREMENT

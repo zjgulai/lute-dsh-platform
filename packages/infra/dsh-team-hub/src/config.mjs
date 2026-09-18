@@ -11,14 +11,22 @@ export function defaultHome(env = process.env) {
 
 /**
  * 默认运行配置。
+ * 遵循 SEC-RT-009：默认仅绑定 127.0.0.1 (loopback-only)。
  * @param {string} [home] 网关数据目录
- * @returns {{ listenHost: string, listenPort: number, upstream: string, dshRoot: string | null, workspaceRoot: string, sharedRoot: string, users: any[] }} 配置对象
+ * @returns {{ listenHost: string, listenPort: number, upstream: string, mode: "single" | "lan", trustedProxies: string[], tls: { enabled: boolean, cert?: string, key?: string }, dshRoot: string | null, workspaceRoot: string, sharedRoot: string, users: any[] }} 配置对象
  */
 export function defaultConfig(home = defaultHome()) {
   return {
-    listenHost: "0.0.0.0",
+    listenHost: "127.0.0.1",
     listenPort: DEFAULT_PORT,
     upstream: DEFAULT_UPSTREAM,
+    mode: "single", // "single" (单机/本地回环) | "lan" (多用户共享局域网模式)
+    trustedProxies: ["127.0.0.1", "::1"], // 仅信任配置的代理转发头（X-Forwarded-*）
+    tls: {
+      enabled: false,
+      cert: null,
+      key: null
+    },
     // 可选的 dsh 安装目录（@deepseek-ai/dsh）。缺省时自动探测：
     // npm root -g → 当前目录向上 → 常见路径。用于远程设置补丁。
     dshRoot: null,
@@ -57,6 +65,18 @@ export function validateConfig(config) {
     if (!["active", "disabled"].includes(user.status || "active")) throw new Error(`非法用户状态：${user.name}`);
   }
   if (!config.users.some(u => u.role === "admin" && (u.status || "active") === "active")) throw new Error("至少需要一个启用状态的 admin");
+
+  // SEC-RT-009 启动与模式安全约束
+  const host = String(config.listenHost || "").trim();
+  const isWildcard = host === "0.0.0.0" || host === "::" || host === "";
+  const isLanMode = config.mode === "lan";
+  const hasTls = config.tls && config.tls.enabled === true;
+
+  // 正式模式（或配置显式为 lan）且为 0.0.0.0 时，禁止明文 HTTP
+  if ((isLanMode || config.mode === "production") && isWildcard && !hasTls) {
+    throw new Error("SEC-RT-009: 局域网/多用户模式 (lan) 监听 0.0.0.0 时禁止使用纯明文 HTTP，必须配置 TLS 或置于受信 TLS 代理后");
+  }
+
   return true;
 }
 

@@ -11,6 +11,14 @@ import { homedir } from "node:os";
  * 2) 负向（hideOthers，默认开）：把目录中其余全部技能注册为
  *    { modelInvocable: false, userInvocable: false } 遮蔽 → 该 preset 的模型目录与 "/" 菜单只显示子集。
  * 内容直读 ~/.dsh/skills/<name>/SKILL.md；注册随 preset scope 生命周期自动撤销。
+ *
+ * ⚠️ 两条注册路径都**必须**带 `source`（非空字符串），两个方向都要：
+ *   ① dsh-skill 的 `validateRuntimeSkill()` **不检查** source —— 漏传时 `register()` 照样成功；
+ *   ② 加载路径的 `validateDefinition()` 要求 `typeof source === "string"` —— 漏传时抛
+ *      `loaded skill "<name>" source must be a string`。
+ *   于是症状是「注册成功、调用失败」：目录里看得见这条技能，`skill` 工具一调就炸。
+ *   2026-09-16 实测本 preset 89 条白名单技能全部踩此坑（测试只断言了
+ *   description/content/invocation/metadata，source 从未被量过）。
  */
 /**
  * @typedef {object} SkillFile
@@ -44,6 +52,12 @@ const inject = ["skills"];
 
 const NAME_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const SKILLS_DIR = join(homedir(), ".dsh", "skills");
+
+/**
+ * 遮蔽注册的 `source` 兜底值：该技能的原始来源不可解析时，至少如实说明
+ * 「这条定义是子集插件注册的」，而不是借用某个具体来源的名义。
+ */
+const SHADOW_FALLBACK_SOURCE = "dsh-skill-subset";
 
 /**
  * 去掉 frontmatter 值两侧的引号。
@@ -104,6 +118,9 @@ export function apply(ctx, config = {}) {
   // I3 严格语义（默认 false = 现状：子集内全部可调用；true = 尊重文件开关）
   const respectFileFlags = config.respectFileFlags === true;
   const skillsDir = typeof config.skillsDir === "string" && config.skillsDir !== "" ? config.skillsDir : SKILLS_DIR;
+  // 正向注册的来源标签与官方 filesystem provider 对同一目录的叫法保持一致：
+  // 默认根 ~/.dsh/skills 是 "user-dsh"，自定义根是 "custom"。
+  const dirSource = skillsDir === SKILLS_DIR ? "user-dsh" : "custom";
   const invalid = list.filter((n) => typeof n !== "string" || !NAME_PATTERN.test(n));
   if (invalid.length > 0) throw new Error(`dsh-skill-subset: invalid skill names in config: ${invalid.join(", ")}`);
   ctx.effect(async () => {
@@ -131,6 +148,8 @@ export function apply(ctx, config = {}) {
           ...(parsed.title ? { title: parsed.title } : {}),
           description: parsed.description,
           content: parsed.content,
+          // 必传：漏传的症状是「注册成功、加载即炸」，见文件头注释。
+          source: dirSource,
           invocation: {
             modelInvocable: respectFileFlags ? !parsed.disableModel : true,
             userInvocable: respectFileFlags ? parsed.userInvocable !== false : true,
@@ -146,7 +165,13 @@ export function apply(ctx, config = {}) {
     // 名单 = 目录枚举（user-dsh 全集，不依赖 list() 完整性）∪ catalog（shipped/运行时等）。
     if (hideOthers) {
       const shadowed = new Set();
+      // 遮蔽也要带 source（同一条加载期校验），且优先沿用该技能**真实的**来源：
+      // catalog 里的条目自带 source；目录枚举出来的条目来源就是 skillsDir。
+      const catalogSource = new Map();
+      const fromDirectory = new Set();
       for (const skill of catalog) {
+        if (typeof skill.name !== "string") continue;
+        if (typeof skill.source === "string" && skill.source !== "") catalogSource.set(skill.name, skill.source);
         if (!wanted.has(skill.name)) shadowed.add(skill.name);
       }
       try {
@@ -154,6 +179,7 @@ export function apply(ctx, config = {}) {
         for (const d of dirs) {
           if (!d.isDirectory() || !NAME_PATTERN.test(d.name) || wanted.has(d.name)) continue;
           shadowed.add(d.name);
+          fromDirectory.add(d.name);
         }
       } catch (error) {
         ctx.logger?.warn?.(`dsh-skill-subset: 目录枚举失败: ${errorMessage(error)}`);
@@ -164,6 +190,7 @@ export function apply(ctx, config = {}) {
             name: skillName,
             description: "（本预设未启用）",
             content: "",
+            source: catalogSource.get(skillName) ?? (fromDirectory.has(skillName) ? dirSource : SHADOW_FALLBACK_SOURCE),
             invocation: { modelInvocable: false, userInvocable: false },
             metadata: { subsetSource: "dsh-skill-subset", hidden: true }
           });

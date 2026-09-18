@@ -1,5 +1,7 @@
 // @vitest-environment jsdom
 
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import React from 'react'
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
@@ -7,6 +9,8 @@ import { ResearchView } from '../src/client/ResearchView.tsx'
 import type { ResearchViewApi } from '../src/client/view-types.ts'
 import { zh, type DeepResearchKey } from '../src/client/locales.ts'
 import { ResearchEvidenceId, ResearchId, ResearchQuestionId, type ResearchProject } from '../src/types.ts'
+import { themePresetSettings } from '../../../platform/dsh-theme-local/src/client/presets.ts'
+import { buildThemeTokenOverrides } from '../../../platform/dsh-theme-local/src/client/theme-tokens.ts'
 
 const t = (key: DeepResearchKey, params?: Record<string, unknown>) =>
   Object.entries(params ?? {}).reduce((text, [name, value]) => text.replaceAll(`{${name}}`, String(value)), zh[key])
@@ -51,6 +55,63 @@ function props(api: Partial<ResearchViewApi>): Parameters<typeof ResearchView>[0
 }
 
 afterEach(cleanup)
+
+const visualCss = [
+  readFileSync(resolve(process.cwd(), 'src/client/overlay.module.css'), 'utf8'),
+  readFileSync(resolve(process.cwd(), 'src/client/views.module.css'), 'utf8'),
+  readFileSync(resolve(process.cwd(), 'src/client/sidebar-entry.module.css'), 'utf8'),
+].join('\n')
+const researchViewSource = readFileSync(resolve(process.cwd(), 'src/client/ResearchView.tsx'), 'utf8')
+
+describe('Deep Research Codex visual contract', () => {
+  it('uses the shared canvas, panel, and modal token hierarchy', () => {
+    expect(visualCss).toContain('var(--dsw-alias-bg-base)')
+    expect(visualCss).toContain('var(--dsw-alias-bg-layer-1)')
+    expect(visualCss).toContain('var(--dsw-alias-bg-layer-2)')
+    expect(visualCss).toContain('var(--dsw-alias-bg-overlay)')
+    expect(visualCss).toContain('var(--dsw-alias-shadow-md)')
+    expect(visualCss).not.toMatch(/#[0-9a-f]{3,8}/i)
+    expect(visualCss).not.toContain('gradient')
+  })
+
+  it('keeps project cards on neutral light/dark surfaces with business emphasis tokens', () => {
+    const settings = themePresetSettings('codex')
+    const tokens = buildThemeTokenOverrides(settings)
+    expect(tokens['--dsw-alias-bg-layer-1']).toEqual({ light: settings.lightSurface, dark: settings.darkSurface })
+    expect(tokens['--dsw-alias-bg-layer-2']).toEqual({
+      light: expect.stringContaining(settings.lightBackground),
+      dark: expect.stringContaining(settings.darkSurface),
+    })
+    expect(tokens['--dsw-alias-state-business-primary']).toEqual({ light: settings.lightAccent, dark: settings.darkAccent })
+    expect(tokens['--dsw-alias-state-business-tertiary']).toEqual({
+      light: expect.stringContaining(settings.lightAccent),
+      dark: expect.stringContaining(settings.darkAccent),
+    })
+    expect(visualCss).toContain('background: var(--dsw-alias-bg-layer-1)')
+    expect(visualCss).toContain('background: var(--dsw-alias-bg-layer-2)')
+    expect(visualCss).toContain('var(--dsw-alias-state-business-primary)')
+    expect(visualCss).toContain('var(--dsw-alias-state-business-tertiary)')
+    expect(researchViewSource).not.toContain(['CARD', 'TONES'].join('_'))
+    expect(researchViewSource).not.toContain(['--card', 'tint'].join('-'))
+    expect(researchViewSource).not.toMatch(/#[0-9a-f]{3,8}/i)
+  })
+
+  it('keeps controls accessible and motion consistent across themes and narrow screens', () => {
+    expect(visualCss).toContain('180ms')
+    expect(visualCss).toMatch(/:focus-visible/)
+    expect(visualCss).toMatch(/@media\s*\(prefers-reduced-motion:\s*reduce\)/)
+    expect(visualCss).toContain('calc(100vw - 16px)')
+    expect(visualCss).toContain('@media (max-width: 620px)')
+  })
+
+  it('uses semantic modal layers below the Settings shell', () => {
+    expect(visualCss).toContain('--dsh-deepresearch-modal-layer: 2147481000')
+    expect(visualCss).toContain('--dsh-deepresearch-confirm-layer: 2147481100')
+    expect(visualCss).toMatch(/z-index:\s*var\(--dsh-deepresearch-modal-layer\)/)
+    expect(visualCss).toMatch(/z-index:\s*var\(--dsh-deepresearch-confirm-layer\)/)
+    expect(visualCss).not.toMatch(/z-index:\s*(?:100|110)\b/)
+  })
+})
 
 describe('Deep Research view', () => {
   it('submits an editable starter plan through the mounted API', async () => {

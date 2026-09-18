@@ -20,7 +20,15 @@
 set -u
 # 路径参数化（随包分发时由安装器/smoke 显式传入）：DSH_APP（默认 /Applications/DSH Desktop.app）
 DSH_APP="${DSH_APP:-/Applications/DSH Desktop.app}"
-CHK="$DSH_APP/Contents/Resources/app.asar.unpacked"
+# 资源根双形态（2026-09-17，2.0.10 基座迁移）：no-ASAR 布局 Resources/app ⇄ 旧 2.0.5
+# app.asar.unpacked。判定规则的唯一家是主仓 scripts/lib/app-resources.mjs；本脚本随包
+# 分发不能 import 主仓，内联等价判定（app 存在且无 app.asar[.unpacked] → no-asar）。
+_RES="$DSH_APP/Contents/Resources"
+if [ -d "$_RES/app" ] && [ ! -e "$_RES/app.asar" ] && [ ! -e "$_RES/app.asar.unpacked" ]; then
+  CHK="$_RES/app"
+else
+  CHK="$_RES/app.asar.unpacked"
+fi
 ASSETS="$CHK/node_modules/@deepseek-ai/dsh-web-frontend/dist/assets"
 PAYLOAD="$(dirname "$0")/brand-payload-wordmark.txt"
 MODE="${1:---check}"
@@ -55,6 +63,14 @@ for rel in "${FILES[@]}"; do
   l=$(grep -c "LUTE Agentic System" "$f" 2>/dev/null || true)
   if [ "$d" = "0" ] && [ "$l" -gt 0 ]; then
     say "OK   $rel (LUTE×$l)"
+  elif [ "$d" = "0" ] && [ "$l" = "0" ]; then
+    # 2026-09-17（2.0.10 重锚）：上游基座个别文件已彻底移除品牌串
+    #（如 desktop-terminal.js D0+L0）。旧的判定矩阵没这个分支 → D0+L0 落进
+    # DRIFT（假阳性：apply 也无事可做）。D0+L0 = 该文件在本基座上已无判定面，
+    # 报 N/A，不算 DRIFT、不置 fail。
+    # 注意 `${rel}` 花括号形式：旧 bash（macOS /usr/bin/bash 3.2）会把
+    # `$rel（D0` 的多字节 `（` 吞进变量名 → 报 `rel…: unbound variable`。
+    say "N/A  ${rel}（D0+L0：本基座该文件无品牌串，无判定面）"
   elif [ "$MODE" = "--apply" ]; then
     if [ "$rel" = "lib/main.js" ]; then
       # 豁免 userData 路径行，只替换其余显示串

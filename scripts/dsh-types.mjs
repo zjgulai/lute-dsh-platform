@@ -14,6 +14,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { discoverPackages } from './gates/package-layout.mjs'
 import { applyTypeLinks, augmentDeclarations, buildVendoredDeclarations, linkTypeScope, normalizeExportMaps, dshPackagesInManifest, dshPackagesInSource, extractRuntimeTypes, mergeVendoredTypes, planTypeLinks, stripDanglingSourceMaps } from './gates/dsh-types.mjs'
+import { appNodeModules } from './lib/app-resources.mjs'
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 
@@ -26,10 +27,9 @@ function runtimeDir() {
   return join(base, versions[0])
 }
 
-/** 应用内 node_modules（提供 @standard-schema 等第三方依赖）。 */
+/** 应用内 node_modules（提供 @standard-schema 等第三方依赖；兼容 2.0.5 ASAR 与 2.0.10 no-ASAR 两种形态）。 */
 function appNodeModulesDir() {
-  const path = '/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules'
-  return existsSync(path) ? path : undefined
+  return appNodeModules() ?? undefined
 }
 
 /** 查找可用于生成声明文件的 tsc（取任一已装 typescript 的受管包）。 */

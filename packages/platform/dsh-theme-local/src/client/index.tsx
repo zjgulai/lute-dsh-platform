@@ -43,6 +43,7 @@ import "./studio.css";
 import {
   DEFAULT_THEME_STUDIO_SETTINGS,
   type ThemeColorField,
+  type ThemeContrastField,
   type ThemeStudioField,
   type ThemeStudioSettings,
   type ThemeTypographyField,
@@ -50,9 +51,17 @@ import {
 import { en, NS, type ThemeStudioKey, zh } from "./locales.js";
 import {
   browserThemeStudioStorage,
+  loadThemeStudioPrefs,
   loadThemeStudioSettings,
+  saveThemeStudioPrefs,
   saveThemeStudioSettings,
+  type ThemeStudioPrefs,
 } from "./persistence.js";
+import {
+  PREFS_CSS,
+  REDUCE_MOTION_QUERY,
+  prefsAttributes,
+} from "./prefs-css.js";
 import { themePresetSettings, type ThemePresetId } from "./presets.js";
 import { createThemeStudioStore } from "./store.js";
 import { ThemeStudio, type ThemeStudioInjected } from "./ThemeStudio.js";
@@ -106,10 +115,13 @@ export const inject = [
 export function apply(ctx: ClientContext): void {
   const storage = browserThemeStudioStorage();
   let currentSettings = loadThemeStudioSettings(storage);
-  const store = createThemeStudioStore(currentSettings);
+  let currentPrefs = loadThemeStudioPrefs(storage);
+  const store = createThemeStudioStore(currentSettings, currentPrefs);
   let actions: ThemeStudioActions | undefined;
   let releaseOverride: () => void = () => {};
   let cssTag: HTMLStyleElement | undefined;
+  let prefsTag: HTMLStyleElement | undefined;
+  let motionQuery: MediaQueryList | undefined;
 
   const applyCssVars = (tokens: Record<string, TokenPair>): void => {
     if (cssTag !== undefined) {
@@ -136,8 +148,23 @@ export function apply(ctx: ClientContext): void {
     document.head.appendChild(cssTag);
   };
 
+  const applyPrefs = (): void => {
+    const body = document.body;
+    const attributes = prefsAttributes(
+      currentPrefs,
+      motionQuery?.matches ?? false,
+    );
+
+    if (attributes.reduceMotion) body.dataset.luteReduceMotion = "reduce";
+    else delete body.dataset.luteReduceMotion;
+
+    if (attributes.fontSmoothing) body.dataset.luteFontSmoothing = "on";
+    else delete body.dataset.luteFontSmoothing;
+  };
+
   const syncStore = () => {
     actions?.syncSettings(currentSettings);
+    actions?.syncPrefs(currentPrefs);
   };
 
   const applyPreview = () => {
@@ -178,6 +205,10 @@ export function apply(ctx: ClientContext): void {
     setSetting(field, value);
   };
 
+  const setContrast = (field: ThemeContrastField, value: number) => {
+    setSetting(field, value);
+  };
+
   const setTypography = <Field extends ThemeTypographyField>(
     field: Field,
     value: ThemeStudioSettings[Field],
@@ -190,6 +221,13 @@ export function apply(ctx: ClientContext): void {
     syncStore();
     applyPreview();
     persist();
+  };
+
+  const setPrefs = (patch: Partial<ThemeStudioPrefs>) => {
+    currentPrefs = { ...currentPrefs, ...patch };
+    syncStore();
+    applyPrefs();
+    saveThemeStudioPrefs(storage, currentPrefs);
   };
 
   const applyPreset = (id: ThemePresetId) => {
@@ -222,6 +260,31 @@ export function apply(ctx: ClientContext): void {
     };
   }, "dsh-theme: live theme override");
 
+  ctx.effect(() => {
+    prefsTag = document.createElement("style");
+    prefsTag.dataset.plugin = THEME_SOURCE;
+    prefsTag.dataset.pluginCss = `${THEME_SOURCE}/prefs`;
+    prefsTag.textContent = PREFS_CSS;
+    document.head.appendChild(prefsTag);
+
+    motionQuery =
+      typeof window.matchMedia === "function"
+        ? window.matchMedia(REDUCE_MOTION_QUERY)
+        : undefined;
+    const onMotionChange = () => applyPrefs();
+    motionQuery?.addEventListener("change", onMotionChange);
+    applyPrefs();
+
+    return () => {
+      motionQuery?.removeEventListener("change", onMotionChange);
+      delete document.body.dataset.luteReduceMotion;
+      delete document.body.dataset.luteFontSmoothing;
+      if (prefsTag !== undefined) prefsTag.remove();
+      prefsTag = undefined;
+      motionQuery = undefined;
+    };
+  }, "dsh-theme: presentation prefs");
+
   const injectProps = (bound: ThemeStudioActions): ThemeStudioInjected => {
     actions = bound;
     syncStore();
@@ -230,10 +293,13 @@ export function apply(ctx: ClientContext): void {
 
     return {
       applyPreset,
+      applySettings,
       resetTheme,
       setColor,
-      setTypography,
+      setContrast,
+      setPrefs,
       setTheme: (preference: ThemePreference) => ctx.theme.setTheme(preference),
+      setTypography,
     };
   };
 

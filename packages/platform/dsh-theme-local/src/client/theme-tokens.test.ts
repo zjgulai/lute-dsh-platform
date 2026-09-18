@@ -133,3 +133,131 @@ describe("theme token overrides", () => {
     });
   });
 });
+
+describe("contrast scaling", () => {
+  // Golden freeze: at the baseline contrast every neutral blend must stay
+  // byte-identical to the implementation before contrast existed. These
+  // literals are copied from that implementation, not regenerated.
+  it("keeps the baseline palette byte-identical with explicit contrast 50", () => {
+    const tokens = buildThemeTokenOverrides({
+      ...DEFAULT_THEME_STUDIO_SETTINGS,
+      lightContrast: 50,
+      darkContrast: 50,
+    });
+    expect(tokens).toEqual(
+      buildThemeTokenOverrides(DEFAULT_THEME_STUDIO_SETTINGS),
+    );
+
+    expect(tokens["--dsw-alias-bg-layer-2"]).toEqual({
+      light: "color-mix(in oklch, #F6F7F4 30%, #FFFFFF)",
+      dark: "color-mix(in oklch, #FFFFFF 6%, #202420)",
+    });
+    expect(tokens["--dsw-alias-bg-layer-3"]).toEqual({
+      light: "color-mix(in oklch, #F6F7F4 15%, #FFFFFF)",
+      dark: "color-mix(in oklch, #FFFFFF 10%, #202420)",
+    });
+    expect(tokens["--dsw-alias-bg-module-platform"]).toEqual({
+      light: "color-mix(in oklch, #000000 4%, #FFFFFF)",
+      dark: "color-mix(in oklch, #FFFFFF 6%, #202420)",
+    });
+    expect(tokens["--dsw-alias-bg-overlay"]).toEqual({
+      light: "color-mix(in oklch, #F6F7F4 10%, #FFFFFF)",
+      dark: "color-mix(in oklch, #FFFFFF 12%, #202420)",
+    });
+    expect(tokens["--dsw-alias-border-l1"]).toEqual({
+      light: "color-mix(in oklch, #000000 8%, #F6F7F4)",
+      dark: "color-mix(in oklch, #FFFFFF 10%, #171A17)",
+    });
+    expect(tokens["--dsw-alias-border-l2"]).toEqual({
+      light: "color-mix(in oklch, #000000 12%, #F6F7F4)",
+      dark: "color-mix(in oklch, #FFFFFF 16%, #171A17)",
+    });
+    expect(tokens["--dsw-alias-border-l3"]).toEqual({
+      light: "color-mix(in oklch, #000000 18%, #F6F7F4)",
+      dark: "color-mix(in oklch, #FFFFFF 22%, #171A17)",
+    });
+    expect(tokens["--dsw-alias-border-l4"]).toEqual({
+      light: "color-mix(in oklch, #000000 26%, #F6F7F4)",
+      dark: "color-mix(in oklch, #FFFFFF 30%, #171A17)",
+    });
+    expect(tokens["--dsw-alias-label-secondary"]).toEqual({
+      light: "color-mix(in oklch, #1E221F 62%, #F6F7F4)",
+      dark: "color-mix(in oklch, #F1F4F0 62%, #171A17)",
+    });
+    expect(tokens["--dsw-alias-label-tertiary"]).toEqual({
+      light: "color-mix(in oklch, #1E221F 50%, #F6F7F4)",
+      dark: "color-mix(in oklch, #F1F4F0 50%, #171A17)",
+    });
+    expect(tokens["--dsw-alias-label-caption"]).toEqual({
+      light: "color-mix(in oklch, #1E221F 40%, #F6F7F4)",
+      dark: "color-mix(in oklch, #F1F4F0 40%, #171A17)",
+    });
+    expect(tokens["--dsw-alias-label-dimmed"]).toEqual({
+      light: "color-mix(in oklch, #1E221F 28%, #F6F7F4)",
+      dark: "color-mix(in oklch, #F1F4F0 28%, #171A17)",
+    });
+    expect(tokens["--dsw-alias-interactive-bg-hover"]).toEqual({
+      light: "color-mix(in oklch, #000000 5%, #F6F7F4)",
+      dark: "color-mix(in oklch, #FFFFFF 7%, #171A17)",
+    });
+    expect(tokens["--dsw-alias-interactive-bg-hover-solid"]).toEqual({
+      light: "color-mix(in oklch, #000000 5%, #FFFFFF)",
+      dark: "color-mix(in oklch, #FFFFFF 7%, #202420)",
+    });
+    expect(tokens["--dsw-alias-interactive-bg-active"]).toEqual({
+      light: "color-mix(in oklch, #000000 9%, #F6F7F4)",
+      dark: "color-mix(in oklch, #FFFFFF 11%, #171A17)",
+    });
+    expect(tokens["--dsw-specific-sidebar-nav-item-active"]).toEqual({
+      light: "color-mix(in oklch, #000000 9%, #F1F4EF)",
+      dark: "color-mix(in oklch, #FFFFFF 11%, #191C1A)",
+    });
+    expect(tokens["--dsw-specific-sidebar-nav-item-hover"]).toEqual({
+      light: "color-mix(in oklch, #000000 5%, #F1F4EF)",
+      dark: "color-mix(in oklch, #FFFFFF 7%, #191C1A)",
+    });
+  });
+
+  it("scales neutral blends per variant while leaving accent derivations and the other variant untouched", () => {
+    const tokens = buildThemeTokenOverrides({
+      ...DEFAULT_THEME_STUDIO_SETTINGS,
+      lightContrast: 100,
+    });
+
+    // k(100) = 1.4: 8 * 1.4 = 11.2 -> 11, 62 * 1.4 = 86.8 -> 87
+    expect(tokens["--dsw-alias-border-l1"]).toEqual({
+      light: "color-mix(in oklch, #000000 11%, #F6F7F4)",
+      dark: "color-mix(in oklch, #FFFFFF 10%, #171A17)",
+    });
+    expect(tokens["--dsw-alias-label-secondary"]).toEqual({
+      light: "color-mix(in oklch, #1E221F 87%, #F6F7F4)",
+      dark: "color-mix(in oklch, #F1F4F0 62%, #171A17)",
+    });
+    // Accent-derived blends keep their tuned ratios regardless of contrast.
+    expect(tokens["--dsw-specific-bubble"]).toEqual({
+      light: "color-mix(in oklch, #347A2F 10%, #F6F7F4)",
+      dark: "color-mix(in oklch, #58B848 10%, #171A17)",
+    });
+    expect(tokens["--dsw-alias-interactive-bg-hover-accent"]).toEqual({
+      light: "color-mix(in oklch, #347A2F 10%, #F6F7F4)",
+      dark: "color-mix(in oklch, #58B848 10%, #171A17)",
+    });
+  });
+
+  it("lowers neutral blend strength at the lower bound", () => {
+    const tokens = buildThemeTokenOverrides({
+      ...DEFAULT_THEME_STUDIO_SETTINGS,
+      darkContrast: 0,
+    });
+
+    // k(0) = 0.6: 12 * 0.6 = 7.2 -> 7, 6 * 0.6 = 3.6 -> 4
+    expect(tokens["--dsw-alias-border-l2"]).toEqual({
+      light: "color-mix(in oklch, #000000 12%, #F6F7F4)",
+      dark: "color-mix(in oklch, #FFFFFF 10%, #171A17)",
+    });
+    expect(tokens["--dsw-alias-bg-layer-2"]).toEqual({
+      light: "color-mix(in oklch, #F6F7F4 30%, #FFFFFF)",
+      dark: "color-mix(in oklch, #FFFFFF 4%, #202420)",
+    });
+  });
+});

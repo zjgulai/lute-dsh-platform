@@ -1,10 +1,13 @@
-import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { readFile, mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { spawn } from "node:child_process";
 import { createServer } from "node:http";
 import { randomBytes, createHash } from "node:crypto";
+import { atomicStore, CorruptStateError, isPlainObject } from "./atomic-store.js";
+import { createOauthFlowRegistry } from "./oauth-flow.js";
+import { BodyLimitError, readBoundedJson, SETTINGS_JSON_MAX_BYTES, SETTINGS_READ_DEADLINE_MS } from "./bounded-body.js";
 import { defineTool } from "@deepseek-ai/dsh-tools";
 import { PIXPIX_BUSINESS_META, SHOPIFY_BUSINESS_META, APIFY_BUSINESS_META, MCP_STATIC_TOOL_META, staticToolMetaFor } from "./business-meta.js";
 import * as McpClient from "@deepseek-ai/dsh-mcp-client";
@@ -29,7 +32,8 @@ const inject = ["webServer", "credentials", "tools"];
 const BASE = "/api/dsh-wanzh-hulian";
 async function collectCredentialRefs() {
   const refs = new Set();
-  for (const conn of await readConnections()) {
+  const { connections } = await readConnections();
+  for (const conn of connections) {
     for (const f of conn.authFields ?? []) if (typeof f?.ref === "string" && f.ref) refs.add(f.ref);
   }
   return [...refs];
@@ -84,41 +88,180 @@ function isLoopbackRequest(request) {
   }
 }
 
-function sendJson(res, status, body) {
-  res.writeHead(status, { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" });
+function sendJson(res, status, body, extraHeaders = {}) {
+  res.writeHead(status, { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", ...extraHeaders });
   res.end(JSON.stringify(body));
 }
-function readBody(req) {
-  return new Promise((resolve, reject) => {
-    const chunks = [];
-    req.on("data", (c) => chunks.push(c));
-    req.on("end", () => {
-      try { resolve(chunks.length > 0 ? JSON.parse(Buffer.concat(chunks).toString("utf8")) : {}); }
-      catch (e) { reject(e); }
+/**
+ * 路由统一的错误出口。
+ *
+ * 损坏状态单列 409 + 结构化 body：设置页要能显示「哪一类损坏、哪个文件、为什么」，
+ * 而 500 + 一句 message 让所有失败长得一样（这正是本卡要修的那种不可解释）。
+ * 其余错误保持 500 原样。
+ */
+function sendError(res, e) {
+  if (e?.code === "CORRUPT_STATE") {
+    return sendJson(res, 409, {
+      ok: false,
+      code: "CORRUPT_STATE",
+      error: e.message,
+      file: displayPath(String(e.file ?? "")),
+      reason: String(e.reason ?? "")
     });
-    req.on("error", reject);
-  });
+  }
+  // 请求体被有界读取器拒绝（SEC-RT-005）。状态码由错误自带（413/408/400），
+  // body 只有上限数值与原因，**不含原文**——凭证不会顺着错误回显出去。
+  // connection: close 是必须的：请求体没读完，这条连接不能再复用。
+  if (e instanceof BodyLimitError) {
+    return sendJson(res, e.status, { ok: false, code: e.code, error: e.message }, { connection: "close" });
+  }
+  return sendJson(res, 500, { ok: false, error: errorMessage(e) });
+}
+/**
+ * 设置类端点的请求体读取（SEC-RT-005）。
+ *
+ * 本插件 12 条路由中读 body 的 7 条（toggle / credential / probe / oauth-start /
+ * mcp-servers / open / default-topic）全部是「小型设置」形态：id、开关布尔值、
+ * 一条凭证字符串、或一个 URL。最大者是凭证字符串，远小于 64 KiB，
+ * 因此统一用一个上限，没有需要单独放宽的代理端点。
+ * 上限、deadline 与错误语义见 bounded-body.js。
+ */
+function readBody(req) {
+  return readBoundedJson(req, { maxBytes: SETTINGS_JSON_MAX_BYTES, deadlineMs: SETTINGS_READ_DEADLINE_MS });
 }
 
 /* ── 连接状态（双层开关） ────────────────────────────────────────────── */
 const DEFAULT_STATE = { enabled: true, modelInvoke: false };
-async function readState() {
-  try {
-    if (existsSync(STATE_FILE)) {
-      const raw = JSON.parse(await readFile(STATE_FILE, "utf8"));
-      return {
-        enabled: raw?.enabled !== false,
-        modelInvoke: raw?.modelInvoke === true
-      };
-    }
-  } catch { /* 损坏则回退默认 */ }
-  return { ...DEFAULT_STATE };
+/**
+ * 状态文件的健康读数（SEC-RT-006）。
+ *
+ * 旧实现 `catch { return { ...DEFAULT_STATE } }` 把两种完全不同的处境混成一种：
+ * 「文件不存在」（用户从没动过开关 → 用默认值）与「文件损坏」（JSON 被截断 →
+ * 旧实现**照样回退到 enabled:true**，于是能力在配置不可读的情况下保持开启，
+ * 而用户看到的是一个正常的开关）。损坏必须 fail-closed 并且可解释。
+ * @typedef {{ ok: true, source: "file" | "default" } | { ok: false, code: "state_corrupt", file: string, reason: string, excerpt: string }} StateHealth
+ */
+
+/** 把绝对路径折成 `~/…` 供设置页显示（不外传，仅本机渲染）。 */
+function displayPath(file) {
+  const home = homedir();
+  return file.startsWith(home) ? `~${file.slice(home.length)}` : file;
 }
+
+/** 健康读数为好。`source: "default"` 表示文件不存在、用的是内置默认值。 */
+function okHealth(source = "file") {
+  return { ok: true, source };
+}
+
+/**
+ * 结构化损坏读数：给设置页足以解释「哪一类损坏、哪个文件、为什么」的最小信息。
+ *
+ * `excerpt` 默认只带前 200 字符——它进的是**本机设置页**，不外传、不落日志。
+ * 但凭证类文件（OAuth token）必须**整段不回显**：它的正文本身就是密钥，而
+ * 「损坏时保留原字节取证」这条原则的受益者是磁盘上的原文件，不是 HTTP 响应体。
+ * @param {string} code 机器可读的损坏类别。
+ * @param {string} file 损坏文件路径。
+ * @param {unknown} reason 解析失败原因。
+ * @param {string} [raw] 损坏的原始字节。
+ * @param {{ redactRaw?: boolean }} [options] `redactRaw=true` 时不回显任何原文（凭证类文件）。
+ * @returns {object} 健康读数。
+ */
+function corruptHealth(code, file, reason, raw, { redactRaw = false } = {}) {
+  return {
+    ok: false,
+    code,
+    file: displayPath(file),
+    reason: String(reason ?? "未知原因"),
+    excerpt: redactRaw ? "" : typeof raw === "string" ? raw.slice(0, 200) : ""
+  };
+}
+
+/**
+ * 读一个 store 文件，**永不抛出**。
+ *
+ * `readJson` 把 ENOENT 转成结果、其余 fs 错误原样抛出——那是原语该有的诚实形状。
+ * 但读出问题若能让一条路由以 rejected promise 结束，用户看到的就是「点了没反应」
+ * （独立审证 2026-09-16 实测：token 文件是目录时 `/oauth/status` 请求悬挂）。
+ * 因此这一层把任何 I/O 失败也降级成健康读数：能力照样关闭，原因照样可读，
+ * 但没有一条读操作能炸掉调用方。`reason` 用独立的 `unreadable`，与「内容损坏」分开。
+ * @param {string} file 目标文件。
+ * @returns {Promise<object>} `readJson` 的结果，或 `{ok:false, reason:"unreadable"}`。
+ */
+async function readStoreJson(file) {
+  try {
+    return await atomicStore.readJson(file);
+  } catch (e) {
+    return { ok: false, reason: "unreadable", error: errorMessage(e), file };
+  }
+}
+
+/** 损坏时的可执行指引（只给路径与动作，不指向尚不存在的界面）。 */
+function repairHint(file) {
+  return `请修复或删除 ${displayPath(file)} 后重试（该文件已损坏，能力不会用默认值覆盖它）。`;
+}
+
+/** 汇总多个健康读数：全好才算好，否则把问题逐条列出。 */
+function mergeHealth(...readings) {
+  const issues = readings.filter((h) => h?.ok === false);
+  if (issues.length === 0) return { ok: true, issues: [] };
+  return { ok: false, issues };
+}
+
+/** 一份状态文件坏了就必须停止写入的守卫（覆盖它等于抹掉唯一的取证来源）。 */
+function assertWritable(health, file) {
+  if (health?.ok === false) throw new CorruptStateError(file, health.reason, health.excerpt ?? "");
+}
+
+/**
+ * 读取连接总开关 / 模型自动调用开关。
+ *
+ * 损坏时返回 **enabled:false + 结构化 health**，并把损坏的原始字节摘要一并带回：
+ * 原文件不被改写（取证），能力保持关闭，设置页据此显示修复指引。
+ * @returns {Promise<{ enabled: boolean, modelInvoke: boolean, defaultTopicId?: string | null, health: StateHealth }>} 归一化后的状态与健康读数。
+ */
+async function readState() {
+  const r = await readStoreJson(STATE_FILE);
+  if (r.ok && isPlainObject(r.value)) {
+    return {
+      enabled: r.value.enabled !== false,
+      modelInvoke: r.value.modelInvoke === true,
+      defaultTopicId: typeof r.value.defaultTopicId === "string" ? r.value.defaultTopicId : null,
+      health: { ok: true, source: "file" }
+    };
+  }
+  if (!r.ok && r.reason === "missing") {
+    // 文件不存在：用户从未改过开关，用默认值（与损坏是两回事，不得混同）。
+    return { ...DEFAULT_STATE, defaultTopicId: null, health: { ok: true, source: "default" } };
+  }
+  // 损坏**或形状不对**（可解析但不是对象、读不出来）一律 fail-closed。
+  // 判据必须与写路径同一把尺子：`updateJson` 用 `isPlainObject` 拒写，
+  // 若读路径用 `?.enabled !== false`，同一个文件会「读说健康、写说损坏」——
+  // 而 `{"enabled": tru` 之外，`null` / `[]` / `123` 这些**可解析**的形状同样不可信。
+  return {
+    enabled: false,
+    modelInvoke: false,
+    defaultTopicId: null,
+    health: corruptHealth(
+      r.reason === "unreadable" ? "state_unreadable" : "state_corrupt",
+      STATE_FILE,
+      r.error ?? "内容不是 JSON 对象",
+      r.raw
+    )
+  };
+}
+/**
+ * 更新状态文件。
+ *
+ * 走原子 store 的串行读-改-写：同一句话说的「读到的旧值 + 本次变更」不会因为
+ * 并发 toggle 互相覆盖，写失败也不会留下半个 JSON。损坏文件上**拒绝写入**
+ * （`CorruptStateError` 由路由层转成结构化错误），因为覆盖它等于抹掉证据。
+ * @param {Record<string, unknown>} next 本次要合并进去的字段。
+ * @returns {Promise<Record<string, any>>} 合并后的完整状态。
+ */
 async function writeState(next) {
-  await mkdir(INTEGRATION_DIR, { recursive: true, mode: 0o700 });
-  const state = { ...(await readState()), ...next };
-  await writeFile(STATE_FILE, JSON.stringify(state, null, 2), { mode: 0o600 });
-  return state;
+  return atomicStore.updateJson(STATE_FILE, (current) => ({ ...current, ...next }), {
+    initial: { ...DEFAULT_STATE }
+  });
 }
 
 /* ── 引导技能（getnote-brain）：安装 + 模型自动调用开关写 flag ────────── */
@@ -249,7 +392,7 @@ user-invocable: true
 async function ensurePixpixSkill() {
   if (!existsSync(PIXPIX_SKILL_FILE)) {
     await mkdir(PIXPIX_SKILL_DIR, { recursive: true });
-    await writeFile(PIXPIX_SKILL_FILE, PIXPIX_SKILL_TEMPLATE, "utf8");
+    await atomicStore.writeText(PIXPIX_SKILL_FILE, PIXPIX_SKILL_TEMPLATE, { mode: 0o644 });
     return;
   }
   // 模板升级（幂等）：缺「业务场景速查」章节时用新模板重写，保留旧文件的模型调用/可用性 flag
@@ -261,13 +404,13 @@ async function ensurePixpixSkill() {
     let next = PIXPIX_SKILL_TEMPLATE;
     if (dis) next = next.replace("disable-model-invocation: false", "disable-model-invocation: " + dis[1]);
     if (usr) next = next.replace("user-invocable: true", "user-invocable: " + usr[1]);
-    await writeFile(PIXPIX_SKILL_FILE, next, "utf8");
+    await atomicStore.writeText(PIXPIX_SKILL_FILE, next, { mode: 0o644 });
   }
 }
 async function ensureSkill() {
   if (!existsSync(SKILL_FILE)) {
     await mkdir(SKILL_DIR, { recursive: true });
-    await writeFile(SKILL_FILE, SKILL_TEMPLATE, "utf8");
+    await atomicStore.writeText(SKILL_FILE, SKILL_TEMPLATE, { mode: 0o644 });
     return;
   }
   // 模板升级（幂等）：缺「整理分类」章节时用新模板重写，保留旧文件的模型调用/可用性 flag
@@ -279,7 +422,7 @@ async function ensureSkill() {
     let next = SKILL_TEMPLATE;
     if (dis) next = next.replace("disable-model-invocation: true", `disable-model-invocation: ${dis[1]}`);
     if (usr) next = next.replace("user-invocable: true", `user-invocable: ${usr[1]}`);
-    await writeFile(SKILL_FILE, next, "utf8");
+    await atomicStore.writeText(SKILL_FILE, next, { mode: 0o644 });
   }
 }
 /* ── Shopify 店铺运营技能（模型侧入口，与 business-meta 单一数据源联动） ────── */
@@ -339,7 +482,7 @@ async function ensureShopifySkill() {
   const next = buildShopifySkillTemplate();
   if (!existsSync(SHOPIFY_SKILL_FILE)) {
     await mkdir(SHOPIFY_SKILL_DIR, { recursive: true });
-    await writeFile(SHOPIFY_SKILL_FILE, next, "utf8");
+    await atomicStore.writeText(SHOPIFY_SKILL_FILE, next, { mode: 0o644 });
     return;
   }
   const text = await readFile(SHOPIFY_SKILL_FILE, "utf8");
@@ -350,7 +493,7 @@ async function ensureShopifySkill() {
     let out = next;
     if (dis) out = out.replace("disable-model-invocation: false", "disable-model-invocation: " + dis[1]);
     if (usr) out = out.replace("user-invocable: true", "user-invocable: " + usr[1]);
-    await writeFile(SHOPIFY_SKILL_FILE, out, "utf8");
+    await atomicStore.writeText(SHOPIFY_SKILL_FILE, out, { mode: 0o644 });
   }
 }
 
@@ -414,7 +557,7 @@ async function ensureApifySkill() {
   const next = buildApifySkillTemplate();
   if (!existsSync(APIFY_SKILL_FILE)) {
     await mkdir(APIFY_SKILL_DIR, { recursive: true });
-    await writeFile(APIFY_SKILL_FILE, next, "utf8");
+    await atomicStore.writeText(APIFY_SKILL_FILE, next, { mode: 0o644 });
     return;
   }
   const text = await readFile(APIFY_SKILL_FILE, "utf8");
@@ -425,15 +568,18 @@ async function ensureApifySkill() {
     let out = next;
     if (dis) out = out.replace("disable-model-invocation: false", "disable-model-invocation: " + dis[1]);
     if (usr) out = out.replace("user-invocable: true", "user-invocable: " + usr[1]);
-    await writeFile(APIFY_SKILL_FILE, out, "utf8");
+    await atomicStore.writeText(APIFY_SKILL_FILE, out, { mode: 0o644 });
   }
 }
 
 async function setSkillModelInvoke(on) {
   await ensureSkill();
-  const text = await readFile(SKILL_FILE, "utf8");
-  const next = text.replace(/^disable-model-invocation:\s*(true|false)\s*$/m, `disable-model-invocation: ${on ? "false" : "true"}`);
-  if (next !== text) await writeFile(SKILL_FILE, next, "utf8");
+  // 读-改-写进排他槽位：两个并发的 modelInvoke 切换否则会各自读到同一份旧文本。
+  await atomicStore.runExclusive(async () => {
+    const text = await readFile(SKILL_FILE, "utf8");
+    const next = text.replace(/^disable-model-invocation:\s*(true|false)\s*$/m, `disable-model-invocation: ${on ? "false" : "true"}`);
+    if (next !== text) await atomicStore.writeText(SKILL_FILE, next, { mode: 0o644 });
+  });
 }
 
 /* ── 得到大脑 REST 客户端 ────────────────────────────────────────────── */
@@ -464,7 +610,7 @@ const DEFAULT_CONNECTIONS = [
     capabilities: ["知识库列表", "库内语义搜索", "全局语义搜索", "保存笔记（文本/链接）", "最近笔记", "按 ID 读笔记", "调用配额", "修改笔记", "加/删标签", "移入/移出知识库", "创建知识库", "库内笔记列表", "文件夹管理", "删除笔记（回收站）"],
     note: "OpenAPI 仅对得到大脑会员开放；知识库创建每日上限 50 个（429 quota_daily_exceeded）。",
     command: { slug: "得到大脑", allSearch: "/得到大脑 在全部笔记中搜索：", allSave: "/得到大脑 保存笔记（默认库）：" },
-    oauthCmd: "npx @getnote/cli@latest auth login",
+    oauthCmd: "npx @getnote/cli@1.7.2 auth login",
     platformUrl: "https://www.biji.com/openapi",
     docUrl: "https://www.biji.com/openapi?tab=skill",
     logo: GETNOTE_LOGO
@@ -510,22 +656,71 @@ const DEFAULT_CONNECTIONS = [
     logo: ""
   }
 ];
+/**
+ * 连接注册表（含健康读数）。
+ *
+ * 损坏时**不回退默认清单**：内置默认里 `getnote-brain` 是 `enabled:true`，
+ * 回退等于把一个用户可能已经关掉的连接重新打开——这正是本卡要消灭的 fail-open。
+ * 正确形态是保留卡片元数据（否则设置页连卡片都画不出来）但**逐条强制关闭**，
+ * 同时把结构化 health 交回调用方。
+ * @returns {Promise<{ connections: any[], health: object }>} 连接清单与健康读数。
+ */
 async function readConnections() {
-  try {
-    const raw = await readFile(CONNECTIONS_FILE, "utf8");
-    const d = JSON.parse(raw);
-    if (Array.isArray(d?.connections) && d.connections.length > 0) {
-      // 合并内置默认（新增连接字段的向后兼容）
-      const byId = new Map(DEFAULT_CONNECTIONS.map((x) => [x.id, x]));
-      return d.connections.map((x) => ({ ...(byId.get(x.id) ?? {}), ...x }));
+  const r = await readStoreJson(CONNECTIONS_FILE);
+  if (r.ok && isPlainObject(r.value) && Array.isArray(r.value.connections)) {
+    const declared = r.value.connections;
+    if (declared.length === 0) {
+      // 合法 JSON、正确形状、但声明为空：文件**没坏**，只是没有任何连接被声明。
+      // 保留内置卡片（设置页要留一个恢复入口）却逐条关闭——既不静默恢复默认的启用态，
+      // 也不把这种情况判成损坏（判成损坏会让写入口一并拒绝，用户就再也没有恢复路径了）。
+      return { connections: closedConnections(), health: okHealth() };
     }
-  } catch { /* 缺省/损坏回退内置 */ }
-  return DEFAULT_CONNECTIONS;
+    // 合并内置默认（新增连接字段的向后兼容）
+    const byId = new Map(DEFAULT_CONNECTIONS.map((x) => [x.id, x]));
+    return { connections: declared.map((x) => ({ ...(byId.get(x.id) ?? {}), ...x })), health: okHealth() };
+  }
+  if (!r.ok && r.reason === "missing") {
+    // 文件不存在：用户从没改过连接清单 → 用内置默认（与损坏是两回事）。
+    return { connections: DEFAULT_CONNECTIONS, health: okHealth("default") };
+  }
+  // 其余一切（不可解析 / 读不出来 / 顶层不是对象 / 缺 `connections` 字段或它不是数组）
+  // 都按「不放行 + 拒绝写入 + 保留取证」处理。**没有 `connections` 字段不等于「没配过」**：
+  // 文件已经在盘上，只是没有声明任何可用内容，拿默认清单顶上就是把功能重新打开。
+  return {
+    connections: closedConnections(),
+    health: corruptHealth(
+      r.reason === "unreadable" ? "connections_unreadable" : r.reason === "corrupt" ? "connections_corrupt" : "connections_schema",
+      CONNECTIONS_FILE,
+      r.error ?? "connections 不是数组",
+      r.raw
+    )
+  };
 }
-async function writeConnections(connections) {
-  const dir = CONNECTIONS_FILE.slice(0, CONNECTIONS_FILE.lastIndexOf("/"));
-  await mkdir(dir, { recursive: true, mode: 0o700 });
-  await writeFile(CONNECTIONS_FILE, JSON.stringify({ schemaVersion: 1, connections }, null, 2), { mode: 0o600 });
+/** 保留卡片元数据、逐条关闭：损坏或声明为空时，设置页仍能渲染且没有任何连接是放行的。 */
+function closedConnections() {
+  return DEFAULT_CONNECTIONS.map((c) => ({ ...c, enabled: false }));
+}
+/**
+ * 连接注册表的读-改-写，整段进同一个排他槽位。
+ *
+ * 旧写法由调用方先 `readConnections()` 再 `writeConnections()`，中间隔着一个 await——
+ * 两个并发 toggle 会各自读到同一份旧值，后写的吞掉先写的，而**两个请求都返回 200**
+ * （独立审证 2026-09-16 实测 LOST UPDATE）。排他槽位把这段窗口关掉。
+ *
+ * 注意：槽位内部一律用**不排队**的 `writeJson`。在槽位里再调会排队的入口等于等自己，
+ * 队列会当场抛错（挂死没有读数，报错才有）。
+ * @template T
+ * @param {(connections: any[]) => T | Promise<T>} mutator 在最新清单上做修改，返回要落盘的清单。
+ * @returns {Promise<T>} mutator 的结果。
+ */
+async function mutateConnections(mutator) {
+  return atomicStore.runExclusive(async () => {
+    const { connections, health } = await readConnections();
+    assertWritable(health, CONNECTIONS_FILE);
+    const next = await mutator(connections);
+    await atomicStore.writeJson(CONNECTIONS_FILE, { schemaVersion: 1, connections: next });
+    return next;
+  });
 }
 
 const MCP_FILE = join(homedir(), ".dsh", "integrations", "wanzh-hulian", "mcp-servers.json");
@@ -536,7 +731,7 @@ const DEFAULT_MCP_SERVERS = [
     enabled: false,
     transport: "stdio",
     command: "npx",
-    args: ["-y", "shopify-mcp"],
+    args: ["-y", "shopify-mcp@1.0.8"],
     envRefs: { SHOPIFY_CLIENT_ID: "shopify_client_id", SHOPIFY_CLIENT_SECRET: "shopify_client_secret", MYSHOPIFY_DOMAIN: "shopify_domain" },
     capabilities: ["商品管理", "订单查询", "客户管理", "库存同步", "折扣/营销", "Shopify Admin GraphQL"],
     toolCount: 14,
@@ -566,7 +761,7 @@ const DEFAULT_MCP_SERVERS = [
     enabled: false,
     transport: "stdio",
     command: "npx",
-    args: ["-y", "@getnote/mcp"],
+    args: ["-y", "@getnote/mcp@1.7.2"],
     envRefs: { GETNOTE_API_KEY: "getnote_api_key", GETNOTE_CLIENT_ID: "getnote_client_id" },
     capabilities: ["记笔记", "找笔记", "知识库管理", "内容订阅", "上传与配额", "删除与清理"],
     toolCount: 38,
@@ -585,26 +780,59 @@ const DEFAULT_MCP_SERVERS = [
   }
 ];
 const OAUTH_FILE = join(homedir(), ".dsh", "integrations", "wanzh-hulian", "oauth-pixpix.json");
-let pendingOauth = null; // { verifier, redirectUri, expiresAt }
+// 授权流程状态已收进 `oauthFlows`（见 oauth-flow.js）：这里不再有第二个家。
 
 /* ── PixPix 工具业务化映射（业务视角：业务名 + 业务描述 + 场景分组） ─────────── */
 
 function b64url(buf) { return Buffer.from(buf).toString("base64url"); }
+/**
+ * 读取 PixPix OAuth token。
+ *
+ * 损坏时返回 `token: null`（= 未授权，fail-closed），并带回结构化 health：
+ * 旧实现 `catch { return null }` 把「没授权过」与「token 文件坏了」混成同一读数，
+ * 于是「为什么突然要重新授权」在界面上无从解释。
+ * @returns {Promise<{ token: { accessToken: string, refreshToken: string, expiresAt: number, scope: string } | null, health: object }>} token 与健康读数。
+ */
 async function readOauthToken() {
-  try {
-    const d = JSON.parse(await readFile(OAUTH_FILE, "utf8"));
+  const r = await readStoreJson(OAUTH_FILE);
+  if (r.ok && isPlainObject(r.value)) {
     return {
-      accessToken: typeof d?.access_token === "string" ? d.access_token : "",
-      refreshToken: typeof d?.refresh_token === "string" ? d.refresh_token : "",
-      expiresAt: typeof d?.expires_at === "number" ? d.expires_at : 0,
-      scope: typeof d?.scope === "string" ? d.scope : ""
+      token: {
+        accessToken: typeof r.value.access_token === "string" ? r.value.access_token : "",
+        refreshToken: typeof r.value.refresh_token === "string" ? r.value.refresh_token : "",
+        expiresAt: typeof r.value.expires_at === "number" ? r.value.expires_at : 0,
+        scope: typeof r.value.scope === "string" ? r.value.scope : ""
+      },
+      health: okHealth()
     };
-  } catch { return null; }
+  }
+  if (!r.ok && r.reason === "missing") return { token: null, health: okHealth("default") };
+  // `redactRaw`：这个文件的正文**本身就是密钥**。「损坏时保留原字节取证」的受益者是
+  // 磁盘上的原文件，不是 HTTP 响应体或渲染进程（独立审证 2026-09-16 实测会把 access_token 回显）。
+  return {
+    token: null,
+    health: corruptHealth(
+      r.reason === "unreadable" ? "oauth_token_unreadable" : "oauth_token_corrupt",
+      OAUTH_FILE,
+      r.error ?? "内容不是 JSON 对象",
+      r.raw,
+      { redactRaw: true }
+    )
+  };
 }
+/**
+ * 写 token（原子 + 0600）。
+ *
+ * 与其余三个 store 不同：损坏时**归档后重写**而不是拒绝写入。这是本卡唯一的例外，
+ * 理由是「拒绝写入」在这里等于把人关死——token 文件没有界面删除入口，而重新授权
+ * 是唯一能把它写回正常的动作；拒绝写入则让重新授权**永远不可能成功**
+ * （回调里抛错 → 浏览器收不到响应 → listener 要等 TTL 才收口）。
+ * 原字节仍以 `<file>.corrupt-<ts>`（0600）留在盘上供取证。
+ * @param {Record<string, unknown>} d token 载荷。
+ * @returns {Promise<{ archived: string | null }>} 归档路径（无损坏内容时为 null）。
+ */
 async function writeOauthToken(d) {
-  const dir = OAUTH_FILE.slice(0, OAUTH_FILE.lastIndexOf("/"));
-  await mkdir(dir, { recursive: true, mode: 0o700 });
-  await writeFile(OAUTH_FILE, JSON.stringify(d, null, 2), { mode: 0o600 });
+  return atomicStore.replaceAfterArchive(OAUTH_FILE, d);
 }
 async function exchangeOauthToken(auth, params) {
   const res = await fetch(auth.tokenEndpoint, {
@@ -625,10 +853,15 @@ async function exchangeOauthToken(auth, params) {
 }
 /** 挂载前保证 token 可用（过期则 refresh） */
 async function ensureOauthToken(auth) {
-  const tok = await readOauthToken();
+  const { token: tok, health } = await readOauthToken();
+  if (health.ok === false) {
+    // token 文件损坏 → 一律按未授权处理（能力关闭），并明确记录原因，不静默当「没授权过」。
+    console.error(`[wanzh-hulian] PixPix OAuth token 文件损坏（${health.file}）：${health.reason}；已按未授权处理，请重新授权`);
+    return null;
+  }
   if (!tok || !tok.accessToken) return null;
   if (tok.expiresAt > Date.now() + 60_000) {
-    // C1 健康面：过期前置检测（提前 48h 告警，避免到期当天才发现死链）
+    // C1 健康面：过期前置检测（提前 48h 告警，避免到期当天才发现链路断）
     const remainingMs = tok.expiresAt - Date.now();
     if (remainingMs < 48 * 3600_000) {
       console.warn(`[wanzh-hulian] PixPix OAuth token 将在 ${Math.round(remainingMs / 3600_000)} 小时内过期，请留意设置页授权状态（自动刷新到期即触发）`);
@@ -646,45 +879,108 @@ async function ensureOauthToken(auth) {
     // refreshFailed 状态经 token 元数据带回（挂载处据此标记 unhealthy 并提示重新授权）
     console.error(`[wanzh-hulian] PixPix OAuth refresh failed: ${r.error}（请在设置页重新授权）`);
     try {
-      const d = JSON.parse(await readFile(OAUTH_FILE, "utf8"));
-      await writeOauthToken({ ...d, _refresh_failed_at: Date.now(), _refresh_error: String(r.error).slice(0, 200) });
+      // 只在文件此刻仍可解析时才补元数据：`writeOauthToken` 对损坏文件会「归档后重写」，
+      // 而这里手上只有元数据字段——拿它去覆盖等于把 token 换成一份没有 token 的文件。
+      const raw = await readOauthTokenRaw();
+      if (raw !== null) {
+        await writeOauthToken({ ...raw, _refresh_failed_at: Date.now(), _refresh_error: String(r.error).slice(0, 200) });
+      }
     } catch { /* 元数据写入失败不阻塞 */ }
     return tok;
   }
-  return readOauthToken();
+  return (await readOauthToken()).token;
 }
-/** 发起授权：生成 PKCE + loopback 监听 + 打开系统浏览器 */
+/** 原样读回 token 文件对象；不可解析/读不出来时返回 null（调用方不得据此覆盖文件）。 */
+async function readOauthTokenRaw() {
+  const r = await readStoreJson(OAUTH_FILE);
+  return r.ok && isPlainObject(r.value) ? r.value : null;
+}
+/**
+ * 发起授权：生成 PKCE + loopback 监听 + 打开系统浏览器。
+ *
+ * 流程状态全部交给 registry 持有（SEC-RT-007）。旧实现把 `state`/`verifier`/
+ * `redirectUri`/`expiresAt` 摊在一个模块级 `pendingOauth` 里，于是：
+ *  - `expiresAt` 没有任何定时器读它 → 用户不完成授权，端口就永远听着；
+ *  - 连点两次「授权」，第二次直接覆盖变量，第一次的 server 既没关、也不可能
+ *    再校验成功 → 每次点击泄漏一个 listener；
+ *  - 回调校验读的是**全局** state，而不是「这条 server 自己的 flow」。
+ *
+ * 现在：重复 start 采用「关闭旧 flow 后新建」（`superseded`），回调只认自己那条
+ * flow 的 state/verifier/redirectUri，成功/失败/异常都走同一个幂等 close。
+ * @param {any} auth entry 的 oauth-pkce 配置。
+ * @param {string} entryId 连接 id（仅用于日志与回执）。
+ * @returns {Promise<{ ok: true, port: number, authorizeUrl: string, expiresAt: number, superseded: boolean, hint: string }>} 授权入口信息。
+ */
 async function startOauthFlow(auth, entryId) {
   const verifier = b64url(randomBytes(48));
   const challenge = b64url(createHash("sha256").update(verifier).digest());
   const state = b64url(randomBytes(16));
-  let server;
+  /** @type {any} 先声明后赋值：回调句柄在 listen 之前就要引用它。 */
+  let flow = null;
+  const server = createServer(async (req, res) => {
+    const url = new URL(req.url ?? "/", "http://127.0.0.1");
+    res.setHeader("content-type", "text/html; charset=utf-8");
+    // 只在 callback 路径上做交换；其他路径一律不接触 verifier。
+    if (url.pathname !== "/callback") {
+      res.end("<h3>无效回调</h3>");
+      return;
+    }
+    if (flow === null || flow.closed) {
+      // 已经超时/被取代/被卸载：这条监听不该再收到请求，如实拒绝而不是"成功"。
+      res.end("<h3>授权流程已结束（超时或已被新的授权请求取代），请回到 DSH 设置页重新发起。</h3>");
+      return;
+    }
+    const callbackState = url.searchParams.get("state") ?? "";
+    const code = url.searchParams.get("code");
+    if (!code || callbackState !== flow.state) {
+      // state 不匹配**不**消耗当前 flow：一个过期标签页的回调不应该把用户正在
+      // 进行的授权打断（本机回环 + 仍在有效期内，flow 会由定时器自己收尾）。
+      res.end("<h3>无效回调</h3>");
+      return;
+    }
+    // 回调整段必须有错误边界：这里任何一个 await 抛错（网络失败、token 落盘失败、
+    // 配置损坏）都会让 `res.end` 与 `flow.close` **一起被跳过** —— 用户浏览器停在空白页，
+    // listener 一直留到 TTL 才收口，而"重新授权"恰恰是唯一能修好 token 文件的操作
+    // （独立审证 2026-09-16 从代码链逐环指出）。finally 保证两条收尾都发生。
+    let outcome = "provider-error";
+    try {
+      const r = await exchangeOauthToken(auth, {
+        grant_type: "authorization_code",
+        code,
+        redirect_uri: flow.redirectUri ?? "",
+        client_id: auth.clientId,
+        code_verifier: flow.verifier ?? "",
+        resource: auth.resource ?? ""
+      });
+      if (r.ok) outcome = "success";
+      res.end(r.ok ? "<h3>授权成功 ✓ 可关闭此页并返回 DSH 设置页</h3>" : `<h3>授权失败</h3><p>${r.error ?? ""}</p>`);
+    } catch (e) {
+      // 兜底路径自己也不能再抛：它要把真实错误告诉用户，而不是制造一个新的静默失败。
+      try {
+        res.end(`<h3>授权失败</h3><p>${String(errorMessage(e))}</p><p>请回到 DSH 设置页重试；若反复失败，请检查 ${displayPath(OAUTH_FILE)} 是否可写。</p>`);
+      } catch { /* 响应已经结束 */ }
+    } finally {
+      flow.close(outcome);
+    }
+  });
   const port = await new Promise((resolve, reject) => {
-    server = createServer(async (req, res) => {
-      const url = new URL(req.url ?? "/", "http://127.0.0.1");
-      res.setHeader("content-type", "text/html; charset=utf-8");
-      if (url.pathname === "/callback" && url.searchParams.get("code") && url.searchParams.get("state") === (pendingOauth?.state ?? "")) {
-        const code = url.searchParams.get("code");
-        const r = await exchangeOauthToken(auth, {
-          grant_type: "authorization_code",
-          code,
-          redirect_uri: pendingOauth?.redirectUri ?? "",
-          client_id: auth.clientId,
-          code_verifier: pendingOauth?.verifier ?? "",
-          resource: auth.resource ?? ""
-        });
-        res.end(r.ok ? "<h3>授权成功 ✓ 可关闭此页并返回 DSH 设置页</h3>" : `<h3>授权失败</h3><p>${r.error ?? ""}</p>`);
-        pendingOauth = null;
-        server.close();
-      } else {
-        res.end("<h3>无效回调</h3>");
-      }
-    });
     server.on("error", reject);
-    server.listen(0, "127.0.0.1", () => resolve(server.address().port));
+    server.listen(0, "127.0.0.1", () => {
+      const address = server.address();
+      resolve(typeof address === "object" && address !== null ? address.port : 0);
+    });
   });
   const redirectUri = `http://127.0.0.1:${port}/callback`;
-  pendingOauth = { verifier, redirectUri, state, expiresAt: Date.now() + 10 * 60_000 };
+  const superseded = oauthFlows.activeCount() > 0;
+  try {
+    flow = oauthFlows.adopt({ server, port, state, verifier, redirectUri });
+  } catch (error) {
+    // adopt 被拒（registry 已卸载）时，这个 listener 还没有所有者：必须当场关掉，
+    // 否则「拒绝新建」本身会变成一条新的端口泄漏路径。
+    try { server.closeAllConnections?.(); } catch { /* 老版本没有该方法 */ }
+    try { server.close(); } catch { /* 已经关了 */ }
+    throw error;
+  }
   const params = new URLSearchParams({
     client_id: auth.clientId,
     redirect_uri: redirectUri,
@@ -698,31 +994,81 @@ async function startOauthFlow(auth, entryId) {
   const authorizeUrl = auth.authorizationEndpoint + "?" + params.toString();
   const child = spawn("open", [authorizeUrl], { detached: true, stdio: "ignore" });
   child.unref();
-  return { ok: true, port, authorizeUrl, hint: "已在系统浏览器打开 PixPix 授权页；完成授权后自动回跳并保存 token。" };
+  return {
+    ok: true,
+    port,
+    authorizeUrl,
+    expiresAt: flow.expiresAt,
+    superseded,
+    hint: superseded
+      ? "已取代上一次未完成的授权（旧端口已关闭）；已在系统浏览器打开 PixPix 授权页。"
+      : "已在系统浏览器打开 PixPix 授权页；完成授权后自动回跳并保存 token。"
+  };
 }
+/**
+ * 进行中的 PixPix 授权流程（唯一所有者）。
+ *
+ * **每次 `apply()` 都建一个新的**：registry 一旦 dispose 就拒绝新建 flow，
+ * 若它是个跨 apply 的模块级单例，宿主的同进程重挂载会让授权入口永久失效。
+ * 卸载时由 routes 的 disposer 关闭本 apply 自己的那一个。
+ */
+let oauthFlows = createOauthFlowRegistry();
 
+/**
+ * MCP 服务器清单（含健康读数）。
+ *
+ * 损坏时**逐条强制 enabled:false** 而不是回退默认清单：默认清单里
+ * `shopify` 的 `command` 是 `npx -y`，回退等于在配置不可读时仍然去拉起外部进程。
+ * 卡片元数据保留（设置页要能画出来），但没有任何一条是放行的。
+ * @returns {Promise<{ servers: any[], health: object }>} 服务器清单与健康读数。
+ */
 async function readMcpServers() {
-  try {
-    const raw = await readFile(MCP_FILE, "utf8");
-    const d = JSON.parse(raw);
-    if (Array.isArray(d?.servers)) {
-      // 按 id 合并：用户文件覆盖 enabled 等运行时状态，默认条目补齐静态元数据（capabilities/toolCount/auth）
-      const fileMap = new Map(d.servers.map((s) => [s.id, s]));
-      const merged = DEFAULT_MCP_SERVERS.map((def) => (fileMap.has(def.id) ? { ...def, ...fileMap.get(def.id) } : def));
-      // 对称合并：保留用户文件中非默认 id 的条目（自定义 MCP 不丢失，追加在默认之后）
-      const mergedIds = new Set(merged.map((s) => s.id));
-      for (const s of d.servers) {
-        if (s && s.id && !mergedIds.has(s.id)) merged.push(s);
-      }
-      return merged;
+  const r = await readStoreJson(MCP_FILE);
+  if (r.ok && isPlainObject(r.value) && Array.isArray(r.value.servers)) {
+    const declared = r.value.servers;
+    // 按 id 合并：用户文件覆盖 enabled 等运行时状态，默认条目补齐静态元数据（capabilities/toolCount/auth）
+    const fileMap = new Map(declared.map((s) => [s.id, s]));
+    const merged = DEFAULT_MCP_SERVERS.map((def) => (fileMap.has(def.id) ? { ...def, ...fileMap.get(def.id) } : def));
+    // 对称合并：保留用户文件中非默认 id 的条目（自定义 MCP 不丢失，追加在默认之后）
+    const mergedIds = new Set(merged.map((s) => s.id));
+    for (const s of declared) {
+      if (s && s.id && !mergedIds.has(s.id)) merged.push(s);
     }
-  } catch { /* 缺省 */ }
-  return DEFAULT_MCP_SERVERS;
+    return { servers: merged, health: okHealth() };
+  }
+  if (!r.ok && r.reason === "missing") {
+    return { servers: DEFAULT_MCP_SERVERS, health: okHealth("default") };
+  }
+  // 与 connections 同一把尺子：不可解析 / 读不出来 / 顶层不是对象 / 缺 servers 字段或它不是数组
+  // 一律「不放行 + 拒绝写入 + 保留取证」，绝不拿默认清单（里面有 `npx -y`）顶上。
+  return {
+    servers: closedMcpServers(),
+    health: corruptHealth(
+      r.reason === "unreadable" ? "mcp_unreadable" : r.reason === "corrupt" ? "mcp_corrupt" : "mcp_schema",
+      MCP_FILE,
+      r.error ?? "servers 不是数组",
+      r.raw
+    )
+  };
 }
-async function writeMcpServers(servers) {
-  const dir = MCP_FILE.slice(0, MCP_FILE.lastIndexOf("/"));
-  await mkdir(dir, { recursive: true, mode: 0o700 });
-  await writeFile(MCP_FILE, JSON.stringify({ servers }, null, 2), { mode: 0o600 });
+/** 保留卡片元数据、逐条关闭（损坏时不拉起任何外部进程）。 */
+function closedMcpServers() {
+  return DEFAULT_MCP_SERVERS.map((s) => ({ ...s, enabled: false }));
+}
+/**
+ * MCP 清单的读-改-写，整段进同一个排他槽位（理由同 `mutateConnections`）。
+ * @template T
+ * @param {(servers: any[]) => T | Promise<T>} mutator 在最新清单上做修改，返回要落盘的清单。
+ * @returns {Promise<T>} mutator 的结果。
+ */
+async function mutateMcpServers(mutator) {
+  return atomicStore.runExclusive(async () => {
+    const { servers, health } = await readMcpServers();
+    assertWritable(health, MCP_FILE);
+    const next = await mutator(servers);
+    await atomicStore.writeJson(MCP_FILE, { servers: next });
+    return next;
+  });
 }
 const globalMcpToolMeta = new Map();
 /** 抓取 streamable-http 服务器的工具元数据（15s 超时、失败静默、不阻塞挂载） */
@@ -779,7 +1125,10 @@ async function fetchMcpToolMeta(entry, headers) {
 
 /** 挂载启用中的 MCP 服务器（内置 dsh-mcp-client，工具名 mcp__<server>__<tool>） */
 async function mountMcpServers(ctx, credentials) {
-  const servers = await readMcpServers();
+  const { servers, health } = await readMcpServers();
+  if (health.ok === false) {
+    console.error(`[wanzh-hulian] MCP 清单损坏（${health.file}）：${health.reason}；本次不挂载任何 MCP 服务器`);
+  }
   const states = [];
   for (const s of servers) {
     if (s?.enabled !== true) { states.push({ id: s.id, enabled: false, status: "disabled" }); continue; }
@@ -937,8 +1286,23 @@ async function getnoteRequest(credentials, method, path, params, data, signal) {
 }
 
 /* ── 工具执行入口（连接开关热闸门） ──────────────────────────────────── */
+/**
+ * 连接总开关（工具执行入口的热生效点）。
+ *
+ * 损坏配置也走「断开」，但**必须带原因**：否则用户看到的是
+ * 「请打开连接总开关」，而开关此时根本写不进去（损坏文件拒绝写入），
+ * 于是一条误导性的指路把用户关进死循环。原因是现成的中文句子，
+ * 复用 `error` 字段回传（闭合 schema 不加键，见 ADR-0055）。
+ * @returns {Promise<{ disconnected: boolean, reason?: string }>} 断开时 `reason` 给出可直接显示的原因。
+ */
 async function gate() {
   const state = await readState();
+  if (state.health.ok === false) {
+    return {
+      disconnected: true,
+      reason: `得到大脑配置状态文件不可用（${state.health.file}：${state.health.reason}），能力已按安全默认关闭。${repairHint(STATE_FILE)}`
+    };
+  }
   if (!state.enabled) return { disconnected: true };
   return { disconnected: false };
 }
@@ -949,7 +1313,11 @@ async function gate() {
  * @returns {Array<{ type: "text", text: string }>} 内容块。
  */
 function renderText(_args, value) {
-  if (value?.disconnected === true) return [{ type: "text", text: "得到大脑连接已断开：请在 设置 → 万物互联 → 得到大脑 卡片打开连接总开关。" }];
+  if (value?.disconnected === true) {
+    // 有原因时优先报原因：配置损坏时「请打开连接总开关」是错的方向（开关同样写不进去）。
+    const reason = typeof value?.error === "string" && value.error !== "" ? value.error : "";
+    return [{ type: "text", text: reason || "得到大脑连接已断开：请在 设置 → 万物互联 → 得到大脑 卡片打开连接总开关。" }];
+  }
   if (value?.ok !== true) return [{ type: "text", text: value?.error ?? "得到大脑操作失败" }];
   return [{ type: "text", text: typeof value.text === "string" ? value.text : JSON.stringify(value.data ?? value, null, 2) }];
 }
@@ -985,7 +1353,7 @@ function textOutput() {
 async function handleList(credentials) {
   const state = await readState();
   const creds = await resolveCreds(credentials);
-  const conns = await readConnections();
+  const { connections: conns, health: connsHealth } = await readConnections();
   const connections = [];
   for (const conn of conns) {
     const item = { ...conn };
@@ -1019,9 +1387,12 @@ async function handleList(credentials) {
     connections.push(item);
   }
   const boards = buildBoards({ boards: BOARDS, connections });
+  const { health: mcpHealth } = await readMcpServers();
   return {
     status: 200,
-    body: { ok: true, boards, connections }
+    // health 是给设置页的结构化读数：损坏的持久化文件在这里逐条列出，
+    // 能力侧已按 fail-closed 关闭（connections 逐条 enabled:false）。
+    body: { ok: true, boards, connections, health: mergeHealth(state.health, connsHealth, mcpHealth) }
   };
 }
 
@@ -1047,21 +1418,40 @@ async function handleDefaultTopic(body) {
 
 async function handleToggle(credentials, body) {
   const id = typeof body?.id === "string" ? body.id : "";
-  const conns = await readConnections();
-  const conn = conns.find((x) => x.id === id);
-  if (!conn) return { status: 400, body: { ok: false, error: "未知连接 id" } };
   const field = body?.field;
   const value = body?.value === true;
   if (field === "enabled") {
-    conn.enabled = value;
-    await writeConnections(conns);
-    // 联动：kind=mcp 的连接同步其 mcp-servers 条目 enabled
-    if (typeof conn.mcpServerId === "string" && conn.mcpServerId) {
-      const mcp = await readMcpServers();
-      const idx = mcp.findIndex((s) => s.id === conn.mcpServerId);
-      if (idx >= 0) { mcp[idx].enabled = value; await writeMcpServers(mcp); }
-    }
-    return { status: 200, body: { ok: true, id, enabled: value, restart: true, hint: "已保存；MCP 挂载变更重启 DSH 生效。" } };
+    // 一号槽位里做完整件事（读 → 检查 → 写），两个理由：
+    //  ① 并发窗口：先读后写在两个并发 toggle 下会丢更新，而两边都返回 200；
+    //  ② 全或无：connections 落盘后 mcp 才抛错的话，用户看到「已拒绝写入」，
+    //     刷新后开关却已经翻过去了——错误读数与磁盘状态不一致。
+    //     所以**两份清单的健康度都在动任何字节之前检查**。
+    return atomicStore.runExclusive(async () => {
+      const { connections: conns, health: connsHealth } = await readConnections();
+      assertWritable(connsHealth, CONNECTIONS_FILE);
+      const conn = conns.find((x) => x.id === id);
+      if (!conn) return { status: 400, body: { ok: false, error: "未知连接 id" } };
+
+      const linkedId = typeof conn.mcpServerId === "string" && conn.mcpServerId !== "" ? conn.mcpServerId : "";
+      let mcp = null;
+      if (linkedId) {
+        const r = await readMcpServers();
+        assertWritable(r.health, MCP_FILE);
+        mcp = r.servers;
+      }
+
+      conn.enabled = value;
+      await atomicStore.writeJson(CONNECTIONS_FILE, { schemaVersion: 1, connections: conns });
+      // 联动：kind=mcp 的连接同步其 mcp-servers 条目 enabled
+      if (mcp) {
+        const idx = mcp.findIndex((s) => s.id === linkedId);
+        if (idx >= 0) {
+          mcp[idx].enabled = value;
+          await atomicStore.writeJson(MCP_FILE, { servers: mcp });
+        }
+      }
+      return { status: 200, body: { ok: true, id, enabled: value, restart: true, hint: "已保存；MCP 挂载变更重启 DSH 生效。" } };
+    });
   }
   if (field === "modelInvoke" && id === "getnote-brain") {
     const state = await writeState({ modelInvoke: value });
@@ -1247,6 +1637,9 @@ async function handleOpenUrl(body) {
 export function apply(ctx) {
   const credentials = ctx.credentials ?? ctx.get("credentials");
   toolCtx = { credentials };
+  // 本次 apply 独占一个授权流程所有权（见 oauthFlows 的说明）。
+  oauthFlows = createOauthFlowRegistry();
+  const registry = oauthFlows;
   ctx.effect(() => {
     mountMcpServers(ctx, credentials).then((states) => { globalMcpStates = states; }).catch(() => {});
   }, "dsh-wanzh-hulian: mcp mount");
@@ -1278,7 +1671,7 @@ export function apply(ctx) {
         try {
           const r = await handleList(credentials);
           sendJson(res, r.status, r.body);
-        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
+        } catch (e) { sendError(res, e); }
       }
     });
     const disposeToggle = ctx.webServer.register({
@@ -1290,7 +1683,7 @@ export function apply(ctx) {
         try {
           const r = await handleToggle(credentials, await readBody(req));
           sendJson(res, r.status, r.body);
-        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
+        } catch (e) { sendError(res, e); }
       }
     });
     const disposeCredential = ctx.webServer.register({
@@ -1305,7 +1698,7 @@ export function apply(ctx) {
             return sendJson(res, r.status, r.body);
           }
           return sendJson(res, 405, { error: "method not allowed" });
-        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
+        } catch (e) { sendError(res, e); }
       }
     });
     const disposeProbe = ctx.webServer.register({
@@ -1317,12 +1710,12 @@ export function apply(ctx) {
         try {
           const body = await readBody(req);
           const id = typeof body?.id === "string" ? body.id : "getnote-brain";
-          const conns = await readConnections();
+          const { connections: conns } = await readConnections();
           const conn = conns.find((x) => x.id === id);
           if (!conn) return sendJson(res, 404, { ok: false, error: "未知连接 id" });
           const r = await probeConnection(credentials, conn);
           sendJson(res, 200, r);
-        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
+        } catch (e) { sendError(res, e); }
       }
     });
     const disposeOauthStart = ctx.webServer.register({
@@ -1334,12 +1727,12 @@ export function apply(ctx) {
         try {
           const body = await readBody(req);
           const entryId = typeof body?.id === "string" ? body.id : "pixpix";
-          const mcp = await readMcpServers();
+          const { servers: mcp } = await readMcpServers();
           const entry = mcp.find((s) => s.id === entryId);
           if (!entry || entry.auth?.type !== "oauth-pkce") return sendJson(res, 400, { ok: false, error: "该条目不支持 OAuth 授权" });
           const r = await startOauthFlow(entry.auth, entryId);
           sendJson(res, 200, r);
-        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
+        } catch (e) { sendError(res, e); }
       }
     });
     const disposeOauthStatus = ctx.webServer.register({
@@ -1348,22 +1741,28 @@ export function apply(ctx) {
       handler: async (req, res) => {
         if (!isLoopbackRequest(req)) return sendJson(res, 401, { error: "unauthorized" });
         if (req.method !== "GET") return sendJson(res, 405, { error: "method not allowed" });
-        const tok = await readOauthToken();
-        if (!tok || !tok.accessToken) return sendJson(res, 200, { ok: true, authed: false });
-        let refreshFailed = false;
+        // 这是 12 条路由里唯一曾经没有错误边界的一条：读路径一旦抛错，请求就悬挂
+        // （前端 `.then` 永远不跑、`.catch` 什么都不做），用户看到"刷新按钮点了没反应"。
         try {
-          const d = JSON.parse(await readFile(OAUTH_FILE, "utf8"));
-          refreshFailed = typeof d?._refresh_failed_at === "number";
-        } catch { /* 无元数据 */ }
-        sendJson(res, 200, {
-          ok: true, authed: true,
-          expiresAt: tok.expiresAt,
-          expiresInHours: tok.expiresAt > 0 ? Math.max(0, Math.round((tok.expiresAt - Date.now()) / 3600_000 * 10) / 10) : null,
-          expired: tok.expiresAt > 0 && tok.expiresAt <= Date.now() + 60_000,
-          refreshFailed,
-          hasRefresh: Boolean(tok.refreshToken),
-          scope: tok.scope
-        });
+          const { token: tok, health: tokHealth } = await readOauthToken();
+          const flow = oauthFlows.describe();
+          if (tokHealth.ok === false) {
+            return sendJson(res, 200, { ok: true, authed: false, health: tokHealth, flow });
+          }
+          if (!tok || !tok.accessToken) return sendJson(res, 200, { ok: true, authed: false, flow });
+          const meta = await readStoreJson(OAUTH_FILE);
+          const refreshFailed = meta.ok && typeof meta.value?._refresh_failed_at === "number";
+          sendJson(res, 200, {
+            ok: true, authed: true,
+            expiresAt: tok.expiresAt,
+            expiresInHours: tok.expiresAt > 0 ? Math.max(0, Math.round((tok.expiresAt - Date.now()) / 3600_000 * 10) / 10) : null,
+            expired: tok.expiresAt > 0 && tok.expiresAt <= Date.now() + 60_000,
+            refreshFailed,
+            hasRefresh: Boolean(tok.refreshToken),
+            scope: tok.scope,
+            flow
+          });
+        } catch (e) { sendError(res, e); }
       }
     });
     const disposeMcpList = ctx.webServer.register({
@@ -1373,15 +1772,16 @@ export function apply(ctx) {
         if (!isLoopbackRequest(req)) return sendJson(res, 401, { error: "unauthorized" });
         try {
           if (req.method === "GET") {
-            const servers = await readMcpServers();
+            const { servers, health: mcpHealth } = await readMcpServers();
             const states = globalMcpStates ?? servers.map((s) => ({ id: s.id, enabled: s?.enabled === true, status: "unknown" }));
-            const tok = await readOauthToken();
+            const { token: tok, health: tokHealth } = await readOauthToken();
             const oauthState = !tok || !tok.accessToken
-              ? { authed: false }
+              ? { authed: false, ...(tokHealth.ok === false ? { health: tokHealth } : {}) }
               : { authed: true, expired: tok.expiresAt > 0 && tok.expiresAt <= Date.now() + 60_000, scope: tok.scope };
             return sendJson(res, 200, {
               ok: true,
               oauthState,
+              health: mcpHealth,
               servers: servers.map((s) => {
                 let toolMeta = globalMcpToolMeta.get(s.id) ?? null;
                 // 静态保底：三张卡永远有业务化清单（不再依赖实时抓取）；实时抓取仅作增强
@@ -1396,15 +1796,17 @@ export function apply(ctx) {
           }
           if (req.method === "POST") {
             const body = await readBody(req);
-            const servers = await readMcpServers();
-            const idx = servers.findIndex((s) => s.id === body?.id);
-            if (idx < 0) return sendJson(res, 404, { ok: false, error: "未知服务器 id" });
-            if (typeof body?.enabled === "boolean") servers[idx].enabled = body.enabled;
-            await writeMcpServers(servers);
+            const r = await mutateMcpServers((servers) => {
+              const idx = servers.findIndex((s) => s.id === body?.id);
+              if (idx < 0) return null;
+              if (typeof body?.enabled === "boolean") servers[idx].enabled = body.enabled;
+              return servers;
+            });
+            if (r === null) return sendJson(res, 404, { ok: false, error: "未知服务器 id" });
             return sendJson(res, 200, { ok: true, restart: true, hint: "MCP 服务器挂载在宿主启动时生效，请重启 DSH Desktop。" });
           }
           return sendJson(res, 405, { error: "method not allowed" });
-        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
+        } catch (e) { sendError(res, e); }
       }
     });
     const disposeAuthLogin = ctx.webServer.register({
@@ -1441,7 +1843,7 @@ export function apply(ctx) {
         try {
           const r = await handleOpenUrl(await readBody(req));
           sendJson(res, r.status, r.body);
-        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
+        } catch (e) { sendError(res, e); }
       }
     });
     const disposeTopics = ctx.webServer.register({
@@ -1453,7 +1855,7 @@ export function apply(ctx) {
         try {
           const r = await handleTopics(credentials);
           sendJson(res, r.status, r.body);
-        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
+        } catch (e) { sendError(res, e); }
       }
     });
     const disposeDefaultTopic = ctx.webServer.register({
@@ -1465,7 +1867,7 @@ export function apply(ctx) {
         try {
           const r = await handleDefaultTopic(await readBody(req));
           sendJson(res, r.status, r.body);
-        } catch (e) { sendJson(res, 500, { ok: false, error: errorMessage(e) }); }
+        } catch (e) { sendError(res, e); }
       }
     });
     return () => {
@@ -1473,11 +1875,18 @@ export function apply(ctx) {
       disposeToggle();
       disposeCredential();
       disposeProbe();
+      // SEC-RT-007：这三条此前注册了却从未被 dispose —— 插件卸载后
+      // `/oauth/start`、`/oauth/status`、`/mcp-servers` 仍然挂在宿主路由表上。
+      disposeOauthStart();
+      disposeOauthStatus();
+      disposeMcpList();
       disposeOpen();
       disposeAuthLogin();
       disposeAuthStatus();
       disposeTopics();
       disposeDefaultTopic();
+      // 进行中的授权流程随本次 apply 一起收口：不留下一个永不关闭的 loopback listener。
+      registry.dispose();
     };
   }, "dsh-wanzh-hulian: routes");
 }
@@ -1494,7 +1903,7 @@ toolDefs.getnote_topics = defineTool({
   isConcurrencySafe: () => true,
   async execute(_args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const ctx2 = toolCtx;
     const r = await getnoteRequest(ctx2.credentials, "GET", "/resource/knowledge/list", { scope: "DEFAULT" }, undefined, exec?.signal);
     if (r.ok !== true) return r;
@@ -1515,7 +1924,7 @@ toolDefs.getnote_recall = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const query = String(args?.query ?? "").trim();
     if (!query) return { ok: false, error: "query 不能为空" };
     const top_k = Math.min(10, Math.max(1, Number(args?.top_k) || 5));
@@ -1544,7 +1953,7 @@ toolDefs.getnote_recall_kb = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const topic_id = String(args?.topic_id ?? "").trim();
     const query = String(args?.query ?? "").trim();
     if (!topic_id) return { ok: false, error: "topic_id 不能为空（先调 getnote_topics 获取）" };
@@ -1576,7 +1985,7 @@ toolDefs.getnote_save = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const content = String(args?.content ?? "").trim();
     if (!content) return { ok: false, error: "content 不能为空" };
     const isLink = /^https?:\/\//i.test(content);
@@ -1611,7 +2020,7 @@ toolDefs.getnote_list = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const limit = Math.min(100, Math.max(1, Number(args?.limit) || 20));
     const params = { limit };
     if (typeof args?.cursor === "string" && args.cursor) params.cursor = args.cursor;
@@ -1640,7 +2049,7 @@ toolDefs.getnote_get = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const note_id = String(args?.note_id ?? "").trim();
     if (!note_id) return { ok: false, error: "note_id 不能为空" };
     const r = await getnoteRequest(toolCtx.credentials, "GET", "/resource/note/detail", { id: note_id }, undefined, exec?.signal);
@@ -1662,7 +2071,7 @@ toolDefs.getnote_quota = defineTool({
   isConcurrencySafe: () => true,
   async execute(_args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const r = await getnoteRequest(toolCtx.credentials, "GET", "/resource/rate-limit/quota", undefined, undefined, exec?.signal);
     if (r.ok !== true) return r;
     const fmt = (b) => b ? `used ${b.used} / limit ${b.limit}（remaining ${b.remaining}）` : "无数据";
@@ -1689,7 +2098,7 @@ toolDefs.getnote_update_note = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const note_id = String(args?.note_id ?? "").trim();
     if (!note_id) return { ok: false, error: "note_id 不能为空" };
     const body = { note_id };
@@ -1714,7 +2123,7 @@ toolDefs.getnote_add_tags = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const note_id = String(args?.note_id ?? "").trim();
     const tags = Array.isArray(args?.tags) ? args.tags.map((t) => String(t).trim()).filter(Boolean).slice(0, 20) : [];
     if (!note_id) return { ok: false, error: "note_id 不能为空" };
@@ -1737,7 +2146,7 @@ toolDefs.getnote_delete_tag = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const note_id = String(args?.note_id ?? "").trim();
     const tag_id = String(args?.tag_id ?? "").trim();
     if (!note_id || !tag_id) return { ok: false, error: "note_id 与 tag_id 均不能为空" };
@@ -1759,7 +2168,7 @@ toolDefs.getnote_topic_notes = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const topic_id = String(args?.topic_id ?? "").trim();
     if (!topic_id) return { ok: false, error: "topic_id 不能为空（先 getnote_topics）" };
     const page = Math.max(1, Number(args?.page) || 1);
@@ -1785,7 +2194,7 @@ toolDefs.getnote_move_to_topic = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const topic_id = String(args?.topic_id ?? "").trim();
     const note_ids = Array.isArray(args?.note_ids) ? args.note_ids.map((x) => String(x).trim()).filter(Boolean).slice(0, 20) : [];
     if (!topic_id || note_ids.length === 0) return { ok: false, error: "topic_id 与 note_ids 均不能为空（单次 ≤20 条）" };
@@ -1838,7 +2247,7 @@ toolDefs.getnote_remove_from_topic = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const topic_id = String(args?.topic_id ?? "").trim();
     const note_ids = Array.isArray(args?.note_ids) ? args.note_ids.map((x) => String(x).trim()).filter(Boolean).slice(0, 50) : [];
     if (!topic_id || note_ids.length === 0) return { ok: false, error: "topic_id 与 note_ids 均不能为空（单次 ≤50 条）" };
@@ -1864,7 +2273,7 @@ toolDefs.getnote_create_topic = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const name = String(args?.name ?? "").trim();
     if (!name) return { ok: false, error: "name 不能为空" };
     const body = { name };
@@ -1887,7 +2296,7 @@ toolDefs.getnote_topic_directories = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const topic_id = String(args?.topic_id ?? "").trim();
     if (!topic_id) return { ok: false, error: "topic_id 不能为空" };
     const params = { topic_id };
@@ -1917,7 +2326,7 @@ toolDefs.getnote_create_directory = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const topic_id = String(args?.topic_id ?? "").trim();
     const name = String(args?.name ?? "").trim();
     if (!topic_id || !name) return { ok: false, error: "topic_id 与 name 均不能为空" };
@@ -1943,7 +2352,7 @@ toolDefs.getnote_update_directory = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const topic_id = String(args?.topic_id ?? "").trim();
     const directory_id = String(args?.directory_id ?? "").trim();
     if (!topic_id || !directory_id) return { ok: false, error: "topic_id 与 directory_id 均不能为空" };
@@ -1968,7 +2377,7 @@ toolDefs.getnote_delete_directory = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const topic_id = String(args?.topic_id ?? "").trim();
     const directory_id = String(args?.directory_id ?? "").trim();
     if (!topic_id || !directory_id) return { ok: false, error: "topic_id 与 directory_id 均不能为空" };
@@ -1989,7 +2398,7 @@ toolDefs.getnote_delete_note = defineTool({
   isConcurrencySafe: () => true,
   async execute(args, exec) {
     const g = await gate();
-    if (g.disconnected) return { disconnected: true };
+    if (g.disconnected) return { disconnected: true, error: g.reason };
     const note_id = String(args?.note_id ?? "").trim();
     if (!note_id) return { ok: false, error: "note_id 不能为空" };
     const r = await getnoteRequest(toolCtx.credentials, "POST", "/resource/note/delete", undefined, { note_id }, exec?.signal);

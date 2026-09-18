@@ -1,7 +1,8 @@
-import type {
-  ThemeColorField,
-  ThemeStudioSettings,
-  ThemeTypographyField,
+import {
+  CONTRAST_DEFAULT,
+  type ThemeColorField,
+  type ThemeStudioSettings,
+  type ThemeTypographyField,
 } from "../theme-settings.js";
 
 export const THEME_PRESET_IDS = [
@@ -39,18 +40,18 @@ export const THEME_PRESETS: readonly ThemePreset[] = [
   {
     id: "codex",
     palette: {
-      lightAccent: "#0169CC",
-      lightBackground: "#FFFFFF",
-      lightForeground: "#0D0D0D",
-      lightSurface: "#F7F7F7",
-      lightInlineCode: "#F0F0F0",
-      lightSidebar: "#FFFFFF",
-      darkAccent: "#5AA7F2",
-      darkBackground: "#111111",
-      darkForeground: "#F4F4F4",
-      darkSurface: "#1A1A1A",
-      darkInlineCode: "#282828",
-      darkSidebar: "#111111",
+      lightAccent: "#347A2F",
+      lightBackground: "#F6F7F4",
+      lightForeground: "#1E221F",
+      lightSurface: "#FFFFFF",
+      lightInlineCode: "#EEF1EC",
+      lightSidebar: "#F1F4EF",
+      darkAccent: "#58B848",
+      darkBackground: "#171A17",
+      darkForeground: "#F1F4F0",
+      darkSurface: "#202420",
+      darkInlineCode: "#292D29",
+      darkSidebar: "#191C1A",
     },
     typography: {
       uiFont: "system",
@@ -391,14 +392,26 @@ export function getThemePreset(id: ThemePresetId): ThemePreset {
 
 export function themePresetSettings(id: ThemePresetId): ThemeStudioSettings {
   const preset = getThemePreset(id);
-  return { ...preset.palette, ...preset.typography };
+  // Presets ship the baseline contrast only; bending the slider (or any
+  // color/typography value) makes the theme custom via themePresetIdOf.
+  return {
+    lightContrast: CONTRAST_DEFAULT,
+    darkContrast: CONTRAST_DEFAULT,
+    ...preset.palette,
+    ...preset.typography,
+  };
 }
 
 export function themePresetIdOf(
   settings: ThemeStudioSettings,
 ): ThemePresetId | undefined {
   return THEME_PRESETS.find((preset) => {
-    const expected = { ...preset.palette, ...preset.typography };
+    const expected = {
+      lightContrast: CONTRAST_DEFAULT,
+      darkContrast: CONTRAST_DEFAULT,
+      ...preset.palette,
+      ...preset.typography,
+    };
     return Object.entries(expected).every(([field, value]) => {
       const actual = settings[field as keyof ThemeStudioSettings];
       return typeof value === "string" && value.startsWith("#")

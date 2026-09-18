@@ -46,12 +46,13 @@ import { execFile } from 'node:child_process'
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync, mkdirSync as mkdir } from 'node:fs'
 import { homedir, tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
+import { appNodeModules } from '../lib/app-resources.mjs'
 import { fileURLToPath } from 'node:url'
 import { promisify } from 'node:util'
 import { assertNodeUsable, nodeCommand } from '../lib/real-node.mjs'
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
-const APP_MODULES = '/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai'
+const APP_MODULES = join(appNodeModules() ?? '', '@deepseek-ai')
 const PROFILE_DIR = join(homedir(), '.dsh', 'profiles', 'desktop')
 /** 走 node_modules 硬链接副本——运行时装载的那一条路径，不是仓库里的源码。 */
 const INSTALLED_ENTRY = join(PROFILE_DIR, 'node_modules', 'dsh-newapp-local', 'lib', 'index.js')

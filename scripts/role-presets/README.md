@@ -21,7 +21,7 @@
 | 文件 | 作用 |
 | --- | --- |
 | `generate.mjs` | 生成器。幂等：重跑产物逐字节一致（已实测） |
-| `verify-lossless.mjs` | 全量保真校验器。10 层断言，任一层失败即非零退出 |
+| `verify-lossless.mjs` | 全量保真校验器。L1–L12 断言，任一层失败即非零退出 |
 | `session-refs.mjs` | 会话↔preset 引用面的共享实现（解码纪律、roster 判定、扫描） |
 | `scan-session-refs.mjs` | **删除前的引用面门禁**，含 `--would-remove` 预检 |
 | `remove-preset.mjs` | 默认 dry-run 的唯一删除入口；SHA-256 归档后 rename 到 quarantine |
@@ -29,6 +29,10 @@
 | `recover-preset-transaction.mjs` | 检视/回滚 retained journal；显式、受证明约束地接管 orphan lock |
 | `install-playbook-skills.mjs` | 把 8 份 Playbook 装成共享技能 |
 | `skill-map.json` | 151 个中文业务技能名 → 英文 skill id 的人工语义映射 |
+
+后续 DSH Host 取证、岗位 Skill 投影、真实 mount、Case Control、业务 Sandbox、Shadow、
+Limited 与 Production 门禁统一见 [后续落地交接文档](../../.scratch/role-presets-handoff/handoff.md)。
+该文档只定义可执行顺序和停止条件，不授予生产权限。
 
 ## 用法
 
@@ -42,7 +46,7 @@ node scripts/role-presets/generate.mjs
 # 只看分类与 order 表，不写盘
 node scripts/role-presets/generate.mjs --dry-run
 
-# 全量保真校验（L1–L10）
+# 全量保真校验（L1–L12）
 node scripts/role-presets/verify-lossless.mjs
 
 # 删除任何 preset 之前：先预检会打断哪些会话
@@ -102,11 +106,11 @@ node scripts/role-presets/recover-preset-transaction.mjs --from <transaction-roo
 4. **别用 `cmd | head && echo OK` 读退出码**。管道末端命令的退出码会掩盖真实失败——我因此
    差点放过一个语法错误。用 `cmd; echo exit=$?` 或 `${PIPESTATUS[0]}`。
 
-## 一个岗位的信息来自 9 个来源，一处都不许丢
+## 一个岗位的信息来自旧来源与三类角色资产，一处都不许丢
 
 | # | 来源 | 落到哪里 |
 | --- | --- | --- |
-| 1 | `docs/05-agents/roles/AGT-NNN.md`（岗位卡全文，7 个 `##` 小节） | `agent.cordis.yml` 的 persona 字面块 **+** `manifest.json` 快照 |
+| 1 | `docs/05-agents/roles/AGT-NNN.md`（岗位卡全文，7 个 `##` 小节） | `manifest.material.role_card` 快照；persona 只保留身份与 Soul 摘要 |
 | 2 | `docs/05-agents/role-catalog.json`（该岗位 20 字段记录） | `manifest.material.role_catalog.record`（逐字） |
 | 3 | `docs/04-organization/organization-graph.json`（平面/责任域归属 + 该岗位的边） | `manifest.material.organization_graph` |
 | 4 | `docs/05-agents/agent-management-graph.json`（五契约绑定 + 治理边） | `manifest.material.agent_management_graph` |
@@ -115,6 +119,13 @@ node scripts/role-presets/recover-preset-transaction.mjs --from <transaction-roo
 | 7 | `docs/03-scenarios/FLOW-CATALOG.md`（该岗位为贡献者的流程条目全文） | `manifest.material.flow_catalog.sections` |
 | 8 | `docs/06-playbooks/PLAYBOOKS.md`（该岗位参与的手册全文） | `manifest.material.playbooks.sections` |
 | 9 | `docs/05-agents/ROSTER.md`（总表行） | `manifest.material.roster.row` |
+| 10 | `docs/05-agents/roles/souls/AGT-NNN.soul.md`（Soul Contract） | `manifest.role_assets.soul` + persona 四段摘要 |
+| 11 | `docs/06-playbooks/role-playbooks/AGT-NNN.md`（岗位专属 Role Playbook） | `manifest.role_assets.role_playbook` 的 Skill descriptor 与逐字快照 |
+| 12 | `docs/10-platform/deepseek-harness/preset-blueprints/AGT-NNN.json`（Preset Blueprint） | `manifest.role_assets.preset_blueprint` + Role Release Bundle 引用 |
+
+两个索引 `06-playbooks/role-playbooks/index.json` 和
+`10-platform/deepseek-harness/preset-blueprints/manifest.json` 也会进入
+`source_snapshot.asset_index_hashes`，用于闭合 50 个角色的引用集合。
 
 `manifest.json` 的 `x_lute` 命名空间放**平台侧扩展**（平面/责任域/order/生命周期标注/
 编队契约 `squad`），与 `material` 命名空间的材料原文严格分开，来源清楚。
@@ -124,9 +135,14 @@ node scripts/role-presets/recover-preset-transaction.mjs --from <transaction-roo
 ```
 ~/.dsh/.agent-presets/agt-007/
 ├── preset.yml        仅官方 3 字段 name/description/order
-├── manifest.json     9 源归集（material）+ 平台扩展（x_lute）
-└── agent.cordis.yml  基座 = shipped standard 行集；persona 换成本岗位卡全文；追加 skill-subset
+├── manifest.json     旧来源归集（material）+ source_snapshot + role_assets + 平台扩展（x_lute）
+└── agent.cordis.yml  基座 = shipped standard 行集；persona = 身份 + Soul 摘要；追加 skill-subset
 ```
+
+`role_assets.role_playbook` 的 `skill_id` 是岗位专属的可寻址入口，正文和 hash 已随
+manifest 快照注入；当前 `loader: target-host-to-be-verified`、`installed: false` 明确表示
+目标 DSH Host 尚未核实岗位 Skill 的实际加载器，不把“有引用”冒充成“已运行”。后续 Host
+适配阶段必须以同一 hash 派生 `SKILL.md` 并单独验证挂载。
 
 **preset.yml 只写官方 3 个字段。** `icon` 不在 `@deepseek-ai/dsh-agent-presets` 的
 `PresetMetadata` 里（`metadata.d.ts` 原文："The file carries display text ONLY"），
@@ -269,13 +285,13 @@ node scripts/role-presets/install-playbook-skills.mjs             # 装
 
 **不要**把 base64 手写进 `preset.yml`——下次生成会被覆盖，且 L10 会判为与图标库不一致。
 
-## 全量保真校验的 10 层（`verify-lossless.mjs`）
+## 全量保真校验的 12 层（`verify-lossless.mjs`）
 
 | 层 | 断言 |
 | --- | --- |
 | L1 覆盖 | 材料 50 个岗位 ↔ 产物 50 个目录一一对应，不多不少 |
-| L2 全文 | 岗位卡全文逐字出现在 persona 字面块里 |
-| L3 小节 | 岗位卡 7 个 `##` 小节逐个逐字出现（**350 节**），且 manifest 也收录 |
+| L2 归档与摘要 | 完整岗位卡逐字归档在 `manifest.material.role_card`；persona 只含岗位身份与 Soul 摘要 |
+| L3 小节 | 岗位卡 7 个 `##` 小节逐个逐字出现在 manifest（**350 节**） |
 | L4 字段 | `role-catalog` 记录 deepEqual，且**反向**逐 key 检查无丢字段 |
 | L5 归集 | org / mgmt / lifecycle / collab / flow-catalog / playbooks / roster 逐条 deepEqual；材料声明的每条 `flows` / `playbooks` / `scenarios` 都必须进产物 |
 | L6 哈希 | manifest 记录的源 sha256 与源文件当前哈希一致（快照可追溯） |
@@ -283,15 +299,17 @@ node scripts/role-presets/install-playbook-skills.mjs             # 装
 | L8 技能引用 | `subset` 里每个 id 在技能库真实存在；映射明细的每条 `supply` 都进了 subset；`agent.cordis.yml` 的 skills 数组与 `manifest.x_lute.skills.subset` 三者一致 |
 | L9 编队契约 | `can_be_primary` 由材料算出（非常量）；`primary_flows`/`eligible_flows`/`lead_rules` 与材料 deepEqual；`lead_rules` 只指向本岗位参与的流程；处置必须为 `WAIT` |
 | L10 头像 | `preset.yml` 有 `icon`、是内联 SVG data URI、与图标库和 `manifest.json` **三者同一字符串**、且 50 枚互不重样 |
+| L11 角色资产 | Soul、Role Playbook、Blueprint 原文/hash、Skill descriptor、Bundle content hash 与索引引用闭合；完整 Playbook 不进入 persona |
+| L12 输入快照 | source revision、generator revision、索引哈希、资产哈希和 `production_authorized=false` / external Case Control 边界可重算 |
 
-### 实测结果（2026-09-12，含 L10 头像）
+### 实测结果（2026-09-17，含 RP-M2 L11–L12）
 
 ```
 岗位数：50 → 目录 50
 岗位卡小节：350（期望 350）
 岗位卡字节：142085
-断言通过：4060
-★ 全量保真校验通过：L1 覆盖 / L2 全文 / L3 小节 / L4 字段 / L5 归集 / L6 哈希 / L7 官方lint / L8 技能引用 / L9 编队契约 / L10 头像 全部无损
+断言通过：5106
+★ 全量保真校验通过：L1 覆盖 / L2 归档与摘要 / L3 小节 / L4 字段 / L5 归集 / L6 哈希 / L7 官方lint / L8 技能引用 / L9 编队契约 / L10 头像 / L11 角色资产 / L12 输入快照 全部闭合
 ```
 
 L10 的效力经**变异测试**确认（不只是「绿」）：
@@ -299,7 +317,7 @@ L10 的效力经**变异测试**确认（不只是「绿」）：
 ```
 抽掉 agt-001 的 icon 行  → exit 1，2 条 L10 红
 换成 agt-002 的头像      → exit 1，1 条 L10 红
-复原                    → exit 0，4060 全绿
+复原                    → exit 0，5106 全绿
 ```
 
 另有独立实测：生成器幂等（重跑前后产物总哈希一致）、26 个行包名全部可解析

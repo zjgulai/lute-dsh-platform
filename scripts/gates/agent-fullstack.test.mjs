@@ -29,10 +29,10 @@
  */
 import { test, afterEach } from 'node:test'
 import assert from 'node:assert/strict'
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
-import { tmpdir } from 'node:os'
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
+import { createMutationFixture } from '../lib/mutation-fixture.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const PKG = join(HERE, '..', '..', 'packages', 'capabilities', 'dsh-overseas-skills')
@@ -45,15 +45,15 @@ const { auditFullstackCatalog } = await import(contractUrl)
 
 const REAL_SOUL = join(PKG, 'presets', 'agent-fullstack', 'SOUL.md')
 
-const temps = []
+const fixtures = []
 afterEach(() => {
-  while (temps.length > 0) rmSync(temps.pop(), { recursive: true, force: true })
+  while (fixtures.length > 0) fixtures.pop().cleanup()
 })
 
 function makeRoot() {
-  const dir = mkdtempSync(join(tmpdir(), 'agent-fullstack-'))
-  temps.push(dir)
-  return dir
+  const fixture = createMutationFixture({ prefix: 'agent-fullstack' })
+  fixtures.push(fixture)
+  return fixture.repo
 }
 
 /** 由人格正文反推出 SOUL.md 的可读形态（正文前加一段人类注释，模拟真实文件形状）。 */
@@ -79,7 +79,13 @@ function writeFixture(root, { soulBody, personaBody, soulText, breakAnchor = fal
 
 /** 跑门禁，只取人格层判据。 */
 function personaProblems(root, soulPath) {
-  const { problems } = checkAgentFullstack({ presetRoot: root, soulPath: soulPath ?? join(root, 'SOUL.md') })
+  const { problems } = checkAgentFullstack({
+    presetRoot: root,
+    soulPath: soulPath ?? join(root, 'SOUL.md'),
+    skillsDir: join(root, 'isolated-skills'),
+    profileBase: join(root, 'isolated-profile'),
+    iconManifest: join(root, 'isolated-icon-manifest.json'),
+  })
   return problems.filter((p) => p.startsWith('[人格] '))
 }
 
@@ -209,6 +215,8 @@ function writeIconManifest(root, icon = uriOf(BADGE)) {
 function avatarProblems(root, manifest) {
   const { problems } = checkAgentFullstack({
     presetRoot: root,
+    skillsDir: join(root, 'isolated-skills'),
+    profileBase: join(root, 'isolated-profile'),
     iconManifest: manifest ?? writeIconManifest(root),
   })
   return problems.filter((p) => p.startsWith('[头像] '))
@@ -335,7 +343,12 @@ test('W0/W1/W2 live 白名单消费 approved set；同数替换与节点错挂�
   writeFileSync(join(root, 'preset.yml'), "name: 三无 · Agent全栈专家\ndescription: 这是用于批准白名单集成回归的最小 fixture，其他层问题不在本用例射程\norder: 1\n")
   writeFileSync(join(root, 'agent.cordis.yml'), whitelistYml(APPROVED_WHITELIST.skillIds))
 
-  const clean = checkAgentFullstack({ presetRoot: root, skillsDir, profileBase: root })
+  const clean = checkAgentFullstack({
+    presetRoot: root,
+    skillsDir,
+    profileBase: root,
+    iconManifest: join(root, 'isolated-icon-manifest.json'),
+  })
   assert.deepEqual(clean.problems.filter((problem) => problem.startsWith('[批准白名单]')), [])
   assert.equal(clean.facts.subset.approved, 89)
   assert.equal(clean.facts.subset.owner, 'lute')
@@ -345,7 +358,12 @@ test('W0/W1/W2 live 白名单消费 approved set；同数替换与节点错挂�
     join(root, 'agent.cordis.yml'),
     whitelistYml(APPROVED_WHITELIST.skillIds, { 'writing-for-agents': 'M00' }),
   )
-  const placementProblems = checkAgentFullstack({ presetRoot: root, skillsDir, profileBase: root }).problems
+  const placementProblems = checkAgentFullstack({
+    presetRoot: root,
+    skillsDir,
+    profileBase: root,
+    iconManifest: join(root, 'isolated-icon-manifest.json'),
+  }).problems
     .filter((problem) => problem.startsWith('[批准白名单]'))
   assert.ok(
     placementProblems.some((problem) => problem.includes('节点归属不符')
@@ -357,7 +375,12 @@ test('W0/W1/W2 live 白名单消费 approved set；同数替换与节点错挂�
   const removed = mutated.pop()
   mutated.push('grill-me')
   writeFileSync(join(root, 'agent.cordis.yml'), whitelistYml(mutated))
-  const problems = checkAgentFullstack({ presetRoot: root, skillsDir, profileBase: root }).problems
+  const problems = checkAgentFullstack({
+    presetRoot: root,
+    skillsDir,
+    profileBase: root,
+    iconManifest: join(root, 'isolated-icon-manifest.json'),
+  }).problems
     .filter((problem) => problem.startsWith('[批准白名单]'))
   assert.ok(problems.some((problem) => problem.includes(`missing：${removed}`)), problems.join('\n'))
   assert.ok(problems.some((problem) => problem.includes('unexpected：grill-me')), problems.join('\n'))

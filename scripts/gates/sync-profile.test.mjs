@@ -1,12 +1,19 @@
-import { test } from 'node:test'
+import { afterEach, test } from 'node:test'
 import assert from 'node:assert/strict'
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, linkSync, statSync } from 'node:fs'
-import { tmpdir } from 'node:os'
+import { mkdirSync, writeFileSync, readFileSync, linkSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { applySync, checkProfileBundleSync, checkProfileMetadata, loadPointFiles, planSync } from './sync-profile.mjs'
+import { createMutationFixture } from '../lib/mutation-fixture.mjs'
+
+const fixtures = []
+afterEach(() => {
+  while (fixtures.length > 0) fixtures.pop().cleanup()
+})
 
 function fixture() {
-  const root = mkdtempSync(join(tmpdir(), 'lute-sync-'))
+  const owned = createMutationFixture({ prefix: 'lute-sync' })
+  fixtures.push(owned)
+  const root = owned.repo
   const src = join(root, 'src')
   const dst = join(root, 'dst')
   mkdirSync(src)

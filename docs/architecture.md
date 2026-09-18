@@ -24,8 +24,14 @@
 | `gitignore-whitelist` | 是 | 白名单条目必须指向真实路径，禁止幽灵条目（ADR-0013） |
 | `adr-index` | 是 | ADR 编号连续、索引与文件一致（ADR-0015） |
 | `adr-note-links` | 是 | ADR 的「决策记录」链接可达，且 Note 正文回引该 ADR 编号（ADR-0015） |
+| `mutation-fixture-selftest` | 是 | mutation test 只在自有临时 `repo/home/profile/tmp` 内写入；prepare/commit、路径 containment 与 cleanup ownership 必须通过反向自测（[ADR-0097](adr/ADR-0097.md)） |
+| `settings-shell-criteria-selftest` | 是 | Settings AX 只用 188px nav 与 28×28px close 独立校准；目标按钮不得参与 scale。合法 zoom、目标尺寸、锚冲突/缺失、错窗、权限和 timeout 由纯函数与 mutation 负控验证（[ADR-0098](adr/ADR-0098.md)） |
 | `exemptions-frozen` | 是 | 豁免条目只减不增、期限不延后、到期即失败（ADR-0014） |
-| `profile-files-sync` | 是 | profile 副本必须与包 `package.json` 的 `files` 清单一致：清单声明但源码无（陈旧清单）、源码有而副本缺（真缺件）都失败。盯 `node_modules`（真实装载点）；`vendor` 侧由既有 `profile-metadata-sync` 负责（见 `docs/notes/implemented/contract/2026-09-11-preset-lint-and-profile-files-sync.md`） |
+| `profile-files-sync` | 是 | profile 副本必须与包 `package.json` 的 `files` 清单一致：清单声明但源码无（陈旧清单）、源码有而副本缺（真缺件）都失败。盯 `node_modules`（真实装载点）；`vendor` 侧由既有 `profile-metadata-sync` 负责（见 `docs/notes/implemented/contract/2026-09-11-preset-lint-and-profile-files-sync.md`）。
+**期望集**（分母）由 `gates/profile-coverage.mjs` 从「这份 profile 声明了什么」按**完整相对路径**推出，不是由「目标里恰好有什么」推出：坏 JSON 直接判红、期望集里的包在目标缺失判红、只允许「profile 根整体不存在」一种 skip（[ADR-0102](adr/ADR-0102.md)）。`profile-metadata-sync` / `profile-files-sync` / `profile-bundle-sync` 三面共用同一个期望集、各自结账 |
+| `plugin-entry-contract` | 是 | 带 `dsh.bundle.patch` 的候选包：入口**按清单解析**（`exports['.']` 条件目标 → `main`）并跟随 `export * from` 转出口；候选分 `plugin-apply` / `plugin-service` / `library` / `unresolved` **四态且四态都进分母**，后两种判红。`apply` 型核对 inject 名单与**未加 `try` 防护**的 `ctx.<服务>` 属性访问；Service 型核对 `inject` 是否为 `static` 字段（[ADR-0102](adr/ADR-0102.md)，总账 P-02）。`plugin-entry-contract-selftest` 是它的反向自测 |
+| `changed-packages` | 是 | 本次改动涉及的受管包必须已有 `typecheck` 与 `test`（ADR-0014）。射程 = `merge-base(HEAD, 基线)..HEAD` 与 staged / unstaged / untracked 求并集，rename 同时映射旧、新路径；基线按「CI 事件 SHA（`DSH_GATE_BASE_SHA`，须可达且确为 merge-base）→ 分支 upstream → `origin/main`」解析，**不含本地 `main`**（与 HEAD 常是同一对象，落回它就是自比较）；基线不可解析一律判红。根治理文件变更按已登记规则归类，工作区级的把射程扩到全部包（[ADR-0102](adr/ADR-0102.md)，总账 P-02） |
+| `package-files-coverage` | 是 | **交付清单侧**（与上面两项的**装载点侧**互补，不是同一个判据）：包里运行时模块图上的每个文件都必须在 `files` 射程内。`pnpm` 对 `file:` 依赖按 `files` 物化，所以缺件命中的是**全新安装**而不只是发布面，而全新安装没有同步步骤可补救（[ADR-0101](adr/ADR-0101.md)，总账 P-24）。判定器与真实 `npm pack` 对全部受管包逐文件校准；`package-files-coverage-selftest` 是它的反向自测 |
 | `skill-lines` | 是 | 三条技能线（出海 / AI全栈 / 通用）各自的验证器必须判绿。此前 `verify_static.mjs` 只写在 SOP §4 与 `pipeline.sh` 里、**不在 `pnpm run gate` 射程内**——规则只活在文档与人的自觉里（[ADR-0085](adr/ADR-0085.md)，总账 P-20）。本项与 `skill-runtime-preconditions` 是「装得上 / 跑得起来 / **挂得上**」三个不同问题各自的调用点；环境不在本机时跳过并写明（P-21） |
 
 退出码：`0` 全部通过 · `1` 存在失败校验 · `2` 用法错误。`--list` 输出全部校验项名称。
@@ -39,7 +45,9 @@
 
 - Skill 契约：`name` 必须英文 kebab（加载与运行时双重校验）；目录一层扫描；`.system` 跳过；frontmatter 首行必须是且仅是一个 `---`（重复 `---` 会静默忽略技能，见诊断案例 12）。
 - 插件：`dsh.bundle` + profile `file:` 硬链接安装；bundles 列表注册。
-- 设置页：`settings.section` Slot（id/order/label/locale）。
+- 设置页：`settings.section` Slot（id/order/label/locale）。Settings Shell 只有在 ARIA/DOM parser 唯一确认
+  panel 后才添加 `data-dsh-settings-shell-root`，所有二开样式只消费该 marker；实况几何按
+  [ADR-0098](adr/ADR-0098.md) 使用与目标控件不相交的 upstream 锚校准。
 - 输入区：`conversation.input.*` / `sidebar.footer.action` / `shell.overlay`（ownerProps 以实测为准——历史教训：root 级 slot 无 inputActions）。
 - 工具：`ctx.tools.register(defineTool(...))`；工具名 DeepSeek 契约（≤64 字符、[A-Za-z0-9_-]）；MCP 宿主直挂 `dsh-mcp-client`（ctx.plugin），工具名 `mcp__<server>__<raw>`（连字符原样保留）。
 - 凭证：credentials 服务（resolve/set/describe），页面不回显；文件类配置 0600。
@@ -55,7 +63,11 @@
 4. 编辑工具会打破 file: 硬链接 inode——改后必须 tmp+mv 同步 profile。
 5. 补丁（patch-cn-slash 等）锚点为精确原文，restore 会回滚全部补丁。
 6. MCP 工具模型侧描述不可覆写（dsh-mcp-client 无钩子）——业务中文层走「技能速查表」桥接（宿主 ensure*Skill 幂等写入）。
-7. **官方 UI 改写锚禁止钉哈希**：对官方 DOM 的改写（隐藏或替换官方文案/角标等）必须**运行时**解析类名——用官方样式标签的包路径锚 `style[data-plugin-css="<包路径>/<模块>.module.css"]`，配模块局部名负向断言算出完整类名；禁止把 CSS-module 哈希前缀写进产品代码或测试断言；解析失败必须自报（`console.warn` + `document.documentElement.dataset` 诊断属性），最坏表现是降级而非静默失效。依赖哈希的改写每次上游重建必失效（DSH 2.0.4→2.0.5 的 `_37cUPa_*`→`zNic4G_*`、`q2FAPq_root`→`bxNl9a_root` 即实例，见 [ADR-0019](adr/ADR-0019.md)）；上游改**模块文件名**才需重锚模块 id，改哈希前缀无需维护。
+7. **官方 UI 改写锚禁止钉哈希**：有足够公开 ARIA/DOM 语义时，由唯一 parser 确认节点后添加二开
+   marker，CSS 只消费 marker（Settings 见 [ADR-0098](adr/ADR-0098.md)）；没有足够公开语义、必须命中
+   私有 CSS 节点时，按 [ADR-0019](adr/ADR-0019.md) 在运行时用官方样式标签的包路径锚
+   `style[data-plugin-css="<包路径>/<模块>.module.css"]` 加模块局部名负向断言算出完整类名。两条路径都
+   禁止把 CSS-module 哈希前缀写进产品代码或测试断言，解析失败必须自报并降级，不能静默失效。
 
 ## 3. 模块地图
 

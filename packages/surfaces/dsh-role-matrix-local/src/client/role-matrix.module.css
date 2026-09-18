@@ -13,8 +13,8 @@
  *     hidden despite the `display: flex` reset below.
  *  2. **Colours ride harness semantic tokens**, never component class names, so
  *     light, dark and future themes resolve without a per-theme override. The
- *     one fixed literal is the LUTE brand green (#58B848) — a brand colour, not
- *     a theme colour, exactly as `dsh-root-brand` treats it.
+ *     business accent token carries the existing LUTE brand green; no new
+ *     component colour is introduced here.
  */
 
 /* ── Drawer shell ─────────────────────────────────────────────────────────── */
@@ -47,20 +47,20 @@
 
 .root::backdrop {
   background: var(--dsw-alias-bg-mask-2, rgba(8, 11, 18, 0.46));
-  backdrop-filter: blur(1.5px);
-  animation: rm-backdrop-in 160ms ease-out both;
+  animation: rm-backdrop-in 180ms ease-out both;
 }
 
 .panel {
   display: flex;
   flex-direction: column;
-  width: min(980px, 94vw);
+  width: min(960px, 92vw);
+  max-width: calc(100vw - 16px);
   height: 100%;
   background: var(--dsw-alias-bg-layer-1, #fff);
   border-left: 1px solid var(--dsw-alias-border-l2, rgba(0, 0, 0, 0.1));
   color: var(--dsw-alias-label-primary, #111);
-  box-shadow: -18px 0 48px rgba(0, 0, 0, 0.22);
-  animation: rm-panel-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  box-shadow: -6px 0 20px var(--dsw-alias-bg-mask-1, rgba(0, 0, 0, 0.12));
+  animation: rm-panel-in 180ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 /* ── Header ───────────────────────────────────────────────────────────────── */
@@ -70,10 +70,10 @@
   flex: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 18px 20px 14px;
+  gap: 10px;
+  padding: 18px 24px 14px;
   border-bottom: 1px solid var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.07));
-  background: linear-gradient(180deg, rgba(88, 184, 72, 0.07), rgba(88, 184, 72, 0) 72%);
+  background: var(--dsw-alias-bg-layer-1, #fff);
 }
 
 /* Brand strip: the same green the sidebar mark and the preset avatars carry. */
@@ -81,31 +81,28 @@
   content: "";
   position: absolute;
   inset: 0 0 auto 0;
-  height: 3px;
-  background: linear-gradient(90deg, #58b848, #8fd48a 58%, rgba(88, 184, 72, 0));
+  height: 2px;
+  background: var(--dsw-alias-state-business-primary, #347a2f);
 }
 
 .titleRow {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 /* Identity tile — the sidebar entry's grid glyph in the brand tile, so the row
    the user clicked and the panel that opened read as one object. */
 .mark {
   flex: none;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   display: grid;
   place-items: center;
-  border-radius: 11px;
-  color: #fff;
-  background: linear-gradient(150deg, #58b848, #3e9b33);
-  box-shadow:
-    0 0 0 1px rgba(88, 184, 72, 0.5),
-    0 6px 16px rgba(88, 184, 72, 0.26),
-    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  border-radius: 10px;
+  border: 1px solid var(--dsw-alias-state-business-primary, #347a2f);
+  color: var(--dsw-alias-state-business-primary, #347a2f);
+  background: var(--dsw-alias-state-business-tertiary, rgba(52, 122, 47, 0.12));
 }
 
 .mark svg {
@@ -121,16 +118,13 @@
 
 .title {
   margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 24px;
+  font: var(--dsw-font-m-18);
   letter-spacing: 0.2px;
 }
 
 .subtitle {
   margin: 0;
-  font-size: 12px;
-  line-height: 18px;
+  font: var(--dsw-font-xxs-12);
   color: var(--dsw-alias-label-secondary, #666);
 }
 
@@ -142,8 +136,8 @@
    squeezed by a long title or a wrapped subtitle. */
 .close {
   flex: none;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   display: grid;
   place-items: center;
   padding: 0;
@@ -152,7 +146,7 @@
   background: transparent;
   color: var(--dsw-alias-label-secondary, #666);
   cursor: pointer;
-  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
 }
 
 .close svg {
@@ -166,21 +160,21 @@
 }
 
 .close:focus-visible {
-  outline: 2px solid #58b848;
+  outline: 2px solid var(--dsw-alias-state-business-primary, #347a2f);
   outline-offset: 2px;
 }
 
 .toolbar {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
 .searchWrap {
   position: relative;
   flex: 1;
-  min-width: 240px;
+  min-width: 220px;
   display: flex;
   align-items: center;
 }
@@ -196,15 +190,14 @@
 
 .search {
   width: 100%;
-  height: 34px;
+  height: 32px;
   padding: 0 32px 0 30px;
-  font: inherit;
-  font-size: 13px;
+  font: var(--dsw-font-xxs-12);
   color: inherit;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid var(--dsw-alias-border-l2, rgba(0, 0, 0, 0.14));
   background: var(--dsw-alias-bg-base, rgba(0, 0, 0, 0.015));
-  transition: border-color 120ms ease, box-shadow 120ms ease;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .search::placeholder {
@@ -221,8 +214,13 @@
 
 .search:focus {
   outline: none;
-  border-color: rgba(88, 184, 72, 0.6);
-  box-shadow: 0 0 0 3px rgba(88, 184, 72, 0.16);
+  border-color: var(--dsw-alias-state-business-primary, #347a2f);
+  box-shadow: 0 0 0 3px var(--dsw-alias-state-business-tertiary, rgba(52, 122, 47, 0.16));
+}
+
+.search:focus-visible {
+  outline: 2px solid var(--dsw-alias-state-business-primary, #347a2f);
+  outline-offset: 2px;
 }
 
 .searchClear {
@@ -238,6 +236,7 @@
   background: transparent;
   color: var(--dsw-alias-label-caption, #999);
   cursor: pointer;
+  transition: background 180ms ease, color 180ms ease;
 }
 
 .searchClear:hover {
@@ -246,12 +245,11 @@
 }
 
 .searchClear:focus-visible {
-  outline: 2px solid #58b848;
+  outline: 2px solid var(--dsw-alias-state-business-primary, #347a2f);
   outline-offset: 1px;
 }
 
-/* Stat capsules — the brand glass treatment the ROOT badge uses, so the panel's
-   counts read in the same visual family as the rest of the LUTE skin. */
+/* Totals are compact metadata, not decorative cards. */
 .totals {
   display: flex;
   flex-wrap: wrap;
@@ -262,23 +260,20 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  height: 22px;
+  height: 20px;
   padding: 0 9px;
   border-radius: 999px;
   border: 1px solid var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.11));
   background: var(--dsw-alias-bg-layer-2, rgba(0, 0, 0, 0.03));
   color: var(--dsw-alias-label-secondary, #666);
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 1;
+  font: var(--dsw-font-xxxs-11);
   white-space: nowrap;
 }
 
 .totalAccent {
-  color: var(--dsw-alias-state-business-primary, #3e9b33);
-  border-color: rgba(88, 184, 72, 0.45);
-  background: linear-gradient(120deg, rgba(88, 184, 72, 0.18), rgba(88, 184, 72, 0.05));
-  box-shadow: 0 0 8px rgba(88, 184, 72, 0.16);
+  color: var(--dsw-alias-state-business-primary, #347a2f);
+  border-color: var(--dsw-alias-state-business-primary, #347a2f);
+  background: var(--dsw-alias-state-business-tertiary, rgba(52, 122, 47, 0.12));
 }
 
 .totalAccent::before {
@@ -286,7 +281,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #58b848;
+  background: var(--dsw-alias-state-business-primary, #347a2f);
   flex: none;
 }
 
@@ -297,7 +292,7 @@
   min-height: 0;
   overflow: auto;
   overscroll-behavior: contain;
-  padding: 14px 20px 32px;
+  padding: 20px 24px 24px;
 }
 
 .state {
@@ -306,11 +301,10 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  min-height: 260px;
+  min-height: 220px;
   padding: 32px 16px;
   text-align: center;
-  font-size: 13px;
-  line-height: 1.6;
+  font: var(--dsw-font-xs-13);
   color: var(--dsw-alias-label-secondary, #666);
 }
 
@@ -325,33 +319,40 @@
 }
 
 .stateError .stateIcon {
-  background: rgba(192, 57, 43, 0.1);
-  color: var(--dsw-alias-state-error-primary, #c0392b);
+  background: color-mix(in srgb, var(--dsw-alias-state-error-primary) 10%, var(--dsw-alias-bg-layer-2));
+  color: var(--dsw-alias-state-error-primary);
 }
 
 .error {
-  color: var(--dsw-alias-state-error-primary, #c0392b);
+  color: var(--dsw-alias-state-error-primary);
 }
 
 .retry {
-  height: 30px;
+  min-height: 32px;
   padding: 0 14px;
   border-radius: 8px;
-  border: 1px solid rgba(88, 184, 72, 0.45);
-  background: linear-gradient(120deg, rgba(88, 184, 72, 0.16), rgba(88, 184, 72, 0.05));
-  color: var(--dsw-alias-state-business-primary, #3e9b33);
-  font: inherit;
-  font-size: 12px;
-  font-weight: 500;
+  border: 1px solid var(--dsw-alias-state-business-primary, #347a2f);
+  background: var(--dsw-alias-state-business-tertiary, rgba(52, 122, 47, 0.12));
+  color: var(--dsw-alias-state-business-primary, #347a2f);
+  font: var(--dsw-font-xxs-strong-12);
   cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
 .retry:hover {
-  border-color: rgba(88, 184, 72, 0.7);
+  border-color: var(--dsw-alias-state-business-primary, #347a2f);
+}
+
+.retry:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  border-color: var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.07));
+  background: var(--dsw-alias-bg-layer-2, rgba(0, 0, 0, 0.03));
+  color: var(--dsw-alias-label-dimmed, #999);
 }
 
 .retry:focus-visible {
-  outline: 2px solid #58b848;
+  outline: 2px solid var(--dsw-alias-state-business-primary, #347a2f);
   outline-offset: 2px;
 }
 
@@ -369,13 +370,13 @@
    cards scroll cleanly underneath instead of appearing at its sides. */
 .planeHead {
   position: sticky;
-  top: -14px;
+  top: -20px;
   z-index: 1;
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 0 -20px;
-  padding: 9px 20px;
+  margin: 0 -24px;
+  padding: 9px 24px;
   background: var(--dsw-alias-bg-layer-1, #fff);
   border-bottom: 1px solid var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.07));
 }
@@ -386,12 +387,11 @@
   width: 3px;
   height: 14px;
   border-radius: 2px;
-  background: linear-gradient(180deg, #58b848, #8fd48a);
+  background: var(--dsw-alias-state-business-primary, #347a2f);
 }
 
 .planeName {
-  font-size: 14px;
-  font-weight: 600;
+  font: var(--dsw-font-s-strong-14);
   letter-spacing: 0.2px;
 }
 
@@ -400,7 +400,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 11px;
+  font: var(--dsw-font-xxxs-11);
   color: var(--dsw-alias-label-caption, #999);
 }
 
@@ -414,7 +414,7 @@
   border-radius: 999px;
   border: 1px solid var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.1));
   background: var(--dsw-alias-bg-layer-2, rgba(0, 0, 0, 0.03));
-  font-size: 11px;
+  font: var(--dsw-font-xxxs-11);
   color: var(--dsw-alias-label-secondary, #666);
   white-space: nowrap;
 }
@@ -439,14 +439,13 @@
 }
 
 .domainName {
-  font-size: 12px;
-  font-weight: 600;
+  font: var(--dsw-font-xxs-strong-12);
   letter-spacing: 0.3px;
   color: var(--dsw-alias-label-secondary, #666);
 }
 
 .domainCount {
-  font-size: 11px;
+  font: var(--dsw-font-xxxs-11);
   color: var(--dsw-alias-label-caption, #999);
 }
 
@@ -471,36 +470,43 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 11px 12px 12px;
+  padding: 12px;
   text-align: left;
   font: inherit;
   border: 1px solid var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.09));
-  border-radius: 12px;
-  background: var(--dsw-alias-bg-layer-1, #fff);
+  border-radius: 10px;
+  background: transparent;
   color: inherit;
   cursor: pointer;
-  transition: border-color 120ms ease, background 120ms ease, box-shadow 120ms ease, transform 120ms ease;
+  transition: border-color 180ms ease, background 180ms ease;
 }
 
 .card:hover {
-  border-color: rgba(88, 184, 72, 0.42);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
-  transform: translateY(-1px);
+  border-color: var(--dsw-alias-state-business-tertiary, rgba(52, 122, 47, 0.32));
+  background: var(--dsw-alias-interactive-bg-hover, rgba(0, 0, 0, 0.05));
 }
 
 .card:focus-visible {
-  outline: 2px solid #58b848;
+  outline: 2px solid var(--dsw-alias-state-business-primary, #347a2f);
   outline-offset: 2px;
 }
 
 .cardOpen {
-  border-color: rgba(88, 184, 72, 0.55);
-  background: linear-gradient(180deg, rgba(88, 184, 72, 0.07), rgba(88, 184, 72, 0.02));
-  box-shadow: 0 4px 16px rgba(88, 184, 72, 0.12);
+  border-color: var(--dsw-alias-state-business-primary, #347a2f);
+  background: var(--dsw-alias-state-business-tertiary, rgba(52, 122, 47, 0.12));
+}
+
+.card:disabled,
+.card:disabled:hover {
+  cursor: not-allowed;
+  opacity: 0.6;
+  border-color: var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.07));
+  background: var(--dsw-alias-bg-layer-2, rgba(0, 0, 0, 0.03));
+  color: var(--dsw-alias-label-dimmed, #999);
 }
 
 .cardDegraded {
-  border-color: rgba(192, 57, 43, 0.45);
+  border-color: color-mix(in srgb, var(--dsw-alias-state-error-primary) 45%, var(--dsw-alias-border-l1));
 }
 
 .cardTop {
@@ -513,16 +519,14 @@
 /* Mirror of the official preset card's avatar treatment: the same brand-green
    ring and glow, sized down because this grid is denser than the picker's. */
 .cardAvatar {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: 10px;
   overflow: hidden;
   object-fit: contain;
   flex: none;
-  background: var(--dsw-alias-bg-layer-2, rgba(0, 0, 0, 0.04));
-  box-shadow:
-    0 0 0 1px rgba(88, 184, 72, 0.4),
-    0 3px 8px rgba(88, 184, 72, 0.18);
+  background: var(--dsw-alias-bg-base, rgba(0, 0, 0, 0.04));
+  box-shadow: inset 0 0 0 1px var(--dsw-alias-border-l2, rgba(0, 0, 0, 0.12));
 }
 
 .cardHeadText {
@@ -533,9 +537,7 @@
 }
 
 .cardAlias {
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 20px;
+  font: var(--dsw-font-s-strong-14);
   letter-spacing: 0.2px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -543,8 +545,7 @@
 }
 
 .cardTitle {
-  font-size: 11.5px;
-  line-height: 16px;
+  font: var(--dsw-font-xxxs-11);
   color: var(--dsw-alias-label-secondary, #666);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -557,12 +558,12 @@
   width: 14px;
   height: 14px;
   color: var(--dsw-alias-label-caption, #aaa);
-  transition: transform 160ms ease;
+  transition: transform 180ms ease, color 180ms ease;
 }
 
 .chevronOpen {
   transform: rotate(180deg);
-  color: var(--dsw-alias-state-business-primary, #3e9b33);
+  color: var(--dsw-alias-state-business-primary, #347a2f);
 }
 
 .cardMeta {
@@ -570,7 +571,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 5px;
-  font-size: 11px;
+  font: var(--dsw-font-xxxs-11);
   color: var(--dsw-alias-label-caption, #888);
 }
 
@@ -581,8 +582,7 @@
   padding: 0 7px;
   border-radius: 999px;
   border: 1px solid var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.1));
-  font-size: 10.5px;
-  line-height: 1;
+  font: var(--dsw-font-xxxs-11);
   color: var(--dsw-alias-label-secondary, #666);
 }
 
@@ -596,22 +596,21 @@
 }
 
 .badgeGap {
-  color: var(--dsw-alias-state-error-primary, #c0392b);
-  border-color: rgba(192, 57, 43, 0.4);
-  background: rgba(192, 57, 43, 0.08);
+  color: var(--dsw-alias-state-error-primary);
+  border-color: color-mix(in srgb, var(--dsw-alias-state-error-primary) 40%, var(--dsw-alias-border-l1));
+  background: color-mix(in srgb, var(--dsw-alias-state-error-primary) 8%, var(--dsw-alias-bg-layer-2));
 }
 
 .badgeSkills {
-  color: var(--dsw-alias-state-business-primary, #3e9b33);
-  border-color: rgba(88, 184, 72, 0.38);
+  color: var(--dsw-alias-state-business-primary, #347a2f);
+  border-color: var(--dsw-alias-state-business-primary, #347a2f);
 }
 
 .cardArtifact {
   display: flex;
   gap: 6px;
   min-width: 0;
-  font-size: 11.5px;
-  line-height: 16px;
+  font: var(--dsw-font-xxxs-11);
   color: var(--dsw-alias-label-secondary, #666);
 }
 
@@ -635,8 +634,8 @@
   gap: 7px;
   margin-top: 2px;
   padding-top: 10px;
-  border-top: 1px dashed var(--dsw-alias-border-l2, rgba(0, 0, 0, 0.12));
-  font-size: 12px;
+  border-top: 1px solid var(--dsw-alias-border-l2, rgba(0, 0, 0, 0.12));
+  font: var(--dsw-font-xxs-12);
   cursor: default;
 }
 
@@ -648,13 +647,11 @@
 }
 
 .detailLabel {
-  font-size: 11px;
-  line-height: 18px;
+  font: var(--dsw-font-xxxs-11);
   color: var(--dsw-alias-label-caption, #999);
 }
 
 .detailValue {
-  line-height: 18px;
   color: var(--dsw-alias-label-primary, #111);
   word-break: break-word;
 }
@@ -664,7 +661,7 @@
 }
 
 .detailGap {
-  color: var(--dsw-alias-state-error-primary, #c0392b);
+  color: var(--dsw-alias-state-error-primary);
 }
 
 .chip {
@@ -682,14 +679,13 @@
      shell's "small surface on a bigger surface" token and resolves in both. */
   background: var(--dsw-alias-bg-module-platform, #f5f6f7);
   color: var(--dsw-alias-label-secondary, #555);
-  font-size: 11px;
-  line-height: 1;
+  font: var(--dsw-font-xxxs-11);
   white-space: nowrap;
 }
 
 .chipGap {
-  background: rgba(192, 57, 43, 0.1);
-  color: var(--dsw-alias-state-error-primary, #c0392b);
+  background: color-mix(in srgb, var(--dsw-alias-state-error-primary) 10%, var(--dsw-alias-bg-layer-2));
+  color: var(--dsw-alias-state-error-primary);
 }
 
 /* ── Footer ───────────────────────────────────────────────────────────────── */
@@ -699,11 +695,10 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px 14px;
+  padding: 10px 24px 14px;
   border-top: 1px solid var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.07));
   background: var(--dsw-alias-bg-layer-1, #fff);
-  font-size: 11px;
-  line-height: 16px;
+  font: var(--dsw-font-xxxs-11);
   color: var(--dsw-alias-label-caption, #888);
 }
 
@@ -713,7 +708,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #58b848;
+  background: var(--dsw-alias-state-business-primary, #347a2f);
 }
 
 /* ── Injected sidebar row (plain DOM, mirrors the shell's nav entry look) ─── */
@@ -742,9 +737,9 @@
   background: transparent;
   color: var(--dsw-alias-label-secondary, #666);
   cursor: pointer;
-  font: inherit;
-  font-size: 13px;
+  font: var(--dsw-font-xs-13);
   text-align: left;
+  transition: background 180ms ease, color 180ms ease;
 }
 
 .entry:hover,
@@ -753,8 +748,13 @@
   color: var(--dsw-alias-label-primary, #111);
 }
 
+.entryActive {
+  background: var(--dsw-alias-state-business-tertiary, rgba(52, 122, 47, 0.12));
+  color: var(--dsw-alias-state-business-primary, #347a2f);
+}
+
 .entry:focus-visible {
-  outline: 2px solid #58b848;
+  outline: 2px solid var(--dsw-alias-state-business-primary, #347a2f);
   outline-offset: -2px;
 }
 
@@ -794,7 +794,7 @@
      elevated fill, which is white in the light theme. */
   background: var(--dsw-alias-bg-module-platform, #f5f6f7);
   color: var(--dsw-alias-label-secondary, #666);
-  font-size: 11px;
+  font: var(--dsw-font-xxxs-11);
   padding: 1px 6px;
 }
 
@@ -815,6 +815,12 @@
   .panel {
     animation: none;
   }
+  .root *,
+  .root *::before,
+  .root *::after {
+    transition: none;
+    scroll-behavior: auto;
+  }
   .card,
   .chevron,
   .search,
@@ -829,6 +835,18 @@
 @media (max-width: 720px) {
   .panel {
     width: 100vw;
+  }
+  .header,
+  .body,
+  .footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .planeHead {
+    margin-left: -16px;
+    margin-right: -16px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
   .cards {
     grid-template-columns: 1fr;

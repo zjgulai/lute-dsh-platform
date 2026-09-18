@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { en, zh } from "./locales.js";
+import { DEFAULT_THEME_STUDIO_SETTINGS } from "../theme-settings.js";
 import {
   THEME_PRESET_IDS,
   THEME_PRESETS,
@@ -28,6 +29,10 @@ function contrast(first: string, second: string): number {
 }
 
 describe("theme presets", () => {
+  it("keeps the default LUTE palette aligned with the Codex-style preset", () => {
+    expect(themePresetSettings("codex")).toEqual(DEFAULT_THEME_STUDIO_SETTINGS);
+  });
+
   it("keeps the public preset id list aligned with the palettes", () => {
     const presetIds = THEME_PRESETS.map((preset) => preset.id);
 
@@ -46,6 +51,18 @@ describe("theme presets", () => {
         lightAccent: "#775533",
       }),
     ).toBeUndefined();
+  });
+
+  it("treats contrast edits as customization instead of mislabeling a preset", () => {
+    expect(
+      themePresetIdOf({
+        ...themePresetSettings("proof"),
+        darkContrast: 80,
+      }),
+    ).toBeUndefined();
+    expect(
+      themePresetIdOf(themePresetSettings("proof")),
+    ).toBe("proof");
   });
 
   it("treats typography edits as customization instead of mislabeling a preset", () => {

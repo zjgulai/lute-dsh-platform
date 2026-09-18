@@ -46,6 +46,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import { dirname, join } from 'node:path'
+import { appNodeModules } from '../lib/app-resources.mjs'
 import { fileURLToPath } from 'node:url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
@@ -54,7 +55,7 @@ const REPO_ROOT = join(HERE, '..', '..')
 const CORE_TS = join(REPO_ROOT, 'packages', 'surfaces', 'dsh-role-matrix-local', 'src', 'client', 'hero-entry-core.ts')
 const ENTRY_CSS = join(REPO_ROOT, 'packages', 'surfaces', 'dsh-role-matrix-local', 'src', 'client', 'hero-entry.module.css')
 const PKG_ROOT = join(REPO_ROOT, 'packages', 'surfaces', 'dsh-role-matrix-local')
-const CONVERSATION_BUNDLE = '/Applications/DSH Desktop.app/Contents/Resources/app.asar.unpacked/node_modules/@deepseek-ai/dsh-client-ui-conversation/lib/client.js'
+const CONVERSATION_BUNDLE = join(appNodeModules() ?? '', '@deepseek-ai/dsh-client-ui-conversation/lib/client.js')
 const ARCHIVED_BUNDLE = join(REPO_ROOT, 'dsh-patches', 'archive', 'chatui-orig-bundles', 'dsh-client-ui-conversation-client.js.orig')
 
 /** 缺前置条件就带原因退出，绝不「跳过」成一个绿色结果。 */

@@ -1,9 +1,14 @@
-import { test } from 'node:test'
+import { afterEach, test } from 'node:test'
 import assert from 'node:assert/strict'
-import { mkdtemp, mkdir, writeFile } from 'node:fs/promises'
-import { tmpdir } from 'node:os'
+import { mkdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { checkProfileFilesSync } from './sync-profile.mjs'
+import { createMutationFixture } from '../lib/mutation-fixture.mjs'
+
+const fixtures = []
+afterEach(() => {
+  while (fixtures.length > 0) fixtures.pop().cleanup()
+})
 
 /**
  * 构造一个「源码目录 + profile 副本目录」对。
@@ -11,7 +16,9 @@ import { checkProfileFilesSync } from './sync-profile.mjs'
  * copyEntries 只写入副本目录（用于制造两侧各自的缺件）。
  */
 async function makePair({ files, sourceEntries = [], copyEntries = [] }) {
-  const root = await mkdtemp(join(tmpdir(), 'profile-files-'))
+  const fixture = createMutationFixture({ prefix: 'profile-files' })
+  fixtures.push(fixture)
+  const root = fixture.repo
   const sourceDir = join(root, 'source')
   const targetDir = join(root, 'target')
   for (const entry of sourceEntries) await write(join(sourceDir, entry))

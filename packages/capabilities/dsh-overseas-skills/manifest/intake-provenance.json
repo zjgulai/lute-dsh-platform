@@ -1,13 +1,13 @@
 {
   "_meta": {
     "purpose": "第三方技能来源留底（SOP §12.2）：批次 / 原始单元 / 逐文件 sha256 / 许可证结论 / 已应用的修补。失去 .git 内置版本控制后，靠它做升级比对与回滚。",
-    "from": "/Users/lute/Downloads/skills",
+    "from": "__SKILL_INTAKE_SOURCE__",
     "updated": "2026-09-15T12:20:09.736Z"
   },
   "skills": {
     "meeting-minutes": {
       "batch": "manus",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/meeting-minutes.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/meeting-minutes.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T03:05:39.732Z",
@@ -27,7 +27,7 @@
     },
     "humanizer-zh": {
       "batch": "kimi",
-      "sourceUnit": "/Users/lute/Downloads/skills/kimi/skills/humanizer-zh",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/kimi/skills/humanizer-zh",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T03:05:39.740Z",
@@ -50,7 +50,7 @@
     },
     "validate-data": {
       "batch": "manus",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/validate-data.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/validate-data.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T03:05:39.782Z",
@@ -70,7 +70,7 @@
     },
     "copy-editor": {
       "batch": "kimi",
-      "sourceUnit": "/Users/lute/Downloads/skills/kimi/skills/copy-editor",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/kimi/skills/copy-editor",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T03:05:39.789Z",
@@ -92,7 +92,7 @@
     },
     "audience-adapter": {
       "batch": "kimi",
-      "sourceUnit": "/Users/lute/Downloads/skills/kimi/skills/audience-adapter",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/kimi/skills/audience-adapter",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T03:05:39.791Z",
@@ -113,7 +113,7 @@
     },
     "work-report-writer": {
       "batch": "kimi",
-      "sourceUnit": "/Users/lute/Downloads/skills/kimi/skills/work-report-writer",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/kimi/skills/work-report-writer",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T03:05:39.792Z",
@@ -134,7 +134,7 @@
     },
     "sop-writer": {
       "batch": "kimi",
-      "sourceUnit": "/Users/lute/Downloads/skills/kimi/skills/sop-writer",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/kimi/skills/sop-writer",
       "license": "Apache-2.0",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T03:05:39.793Z",
@@ -158,7 +158,7 @@
     },
     "weighted-scoring": {
       "batch": "kimi",
-      "sourceUnit": "/Users/lute/Downloads/skills/kimi/skills/weighted-scoring",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/kimi/skills/weighted-scoring",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T03:05:39.795Z",
@@ -180,7 +180,7 @@
     },
     "xindaya-translator": {
       "batch": "kimi",
-      "sourceUnit": "/Users/lute/Downloads/skills/kimi/skills/xindaya-translator",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/kimi/skills/xindaya-translator",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T03:05:39.796Z",
@@ -201,7 +201,7 @@
     },
     "markdown-mermaid-writing": {
       "batch": "manus",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/markdown-mermaid-writing.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/markdown-mermaid-writing.zip",
       "license": "Apache-2.0",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T03:05:40.523Z",
@@ -259,7 +259,7 @@
     },
     "guizang-ppt-skill": {
       "batch": "kimi",
-      "sourceUnit": "/Users/lute/Downloads/skills/kimi/skills/guizang-ppt-skill",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/kimi/skills/guizang-ppt-skill",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T03:05:40.753Z",
@@ -298,7 +298,7 @@
     },
     "chart-gen": {
       "batch": "kimi",
-      "sourceUnit": "/Users/lute/Downloads/skills/kimi/skills/chart-gen",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/kimi/skills/chart-gen",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T03:05:40.758Z",
@@ -329,7 +329,7 @@
     },
     "sn-da-excel-workflow": {
       "batch": "manus",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/sn-da-excel-workflow.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/sn-da-excel-workflow.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T03:05:41.609Z",
@@ -396,7 +396,7 @@
     },
     "sn-da-non-spreadsheet-analysis": {
       "batch": "manus",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/sn-da-non-spreadsheet-analysis.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/sn-da-non-spreadsheet-analysis.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T03:05:41.980Z",
@@ -423,7 +423,7 @@
     },
     "minimax-pdf": {
       "batch": "minmax",
-      "sourceUnit": "/Users/lute/Downloads/skills/MinMax/skills/minimax-pdf",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/MinMax/skills/minimax-pdf",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T03:05:42.010Z",
@@ -455,7 +455,7 @@
     "git-commit": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/git-commit.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/git-commit.zip",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T10:22:45.272Z",
@@ -477,7 +477,7 @@
     "api-designer": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/api-designer.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/api-designer.zip",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T10:22:45.431Z",
@@ -504,7 +504,7 @@
     "incident-retrospective": {
       "batch": "kimi",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/kimi/skills/incident-retrospective",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/kimi/skills/incident-retrospective",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T10:22:45.478Z",
@@ -528,7 +528,7 @@
     "spec-driven-development": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/spec-driven-development.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/spec-driven-development.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:23:32.985Z",
@@ -550,7 +550,7 @@
     "writing-plans": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/writing-plans.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/writing-plans.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:23:33.062Z",
@@ -573,7 +573,7 @@
     "graphql-architect": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/graphql-architect.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/graphql-architect.zip",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T10:27:30.423Z",
@@ -601,7 +601,7 @@
     "content-modeling-best-practices": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/content-modeling-best-practices.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/content-modeling-best-practices.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:23:33.464Z",
@@ -627,7 +627,7 @@
     "clickhouse-architecture-advisor": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/clickhouse-architecture-advisor.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/clickhouse-architecture-advisor.zip",
       "license": "Apache-2.0",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T10:27:30.837Z",
@@ -663,7 +663,7 @@
     "langchain-architecture": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/langchain-architecture.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/langchain-architecture.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:27:31.011Z",
@@ -686,7 +686,7 @@
     "refactor": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/refactor.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/refactor.zip",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T10:23:34.292Z",
@@ -708,7 +708,7 @@
     "dependency-updater": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/dependency-updater.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/dependency-updater.zip",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T10:23:34.422Z",
@@ -733,7 +733,7 @@
     "make-repo-contribution": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/make-repo-contribution.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/make-repo-contribution.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:23:34.576Z",
@@ -757,7 +757,7 @@
     "ci-cd-and-automation": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/ci-cd-and-automation.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/ci-cd-and-automation.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:23:34.882Z",
@@ -779,7 +779,7 @@
     "observability-and-instrumentation": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/observability-and-instrumentation.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/observability-and-instrumentation.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:23:34.969Z",
@@ -801,7 +801,7 @@
     "slo-implementation": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/slo-implementation.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/slo-implementation.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:23:35.063Z",
@@ -824,7 +824,7 @@
     "prometheus-configuration": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/prometheus-configuration.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/prometheus-configuration.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:23:35.171Z",
@@ -847,7 +847,7 @@
     "postgres": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/postgres.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/postgres.zip",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T12:20:10.312Z",
@@ -893,7 +893,7 @@
     "dbt-transformation-patterns": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/dbt-transformation-patterns.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/dbt-transformation-patterns.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:23:36.109Z",
@@ -916,7 +916,7 @@
     "sql-queries": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/sql-queries.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/sql-queries.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:23:36.207Z",
@@ -938,7 +938,7 @@
     "markdown-to-html": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/markdown-to-html.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/markdown-to-html.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:27:31.444Z",
@@ -977,7 +977,7 @@
     "crafting-effective-readmes": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/crafting-effective-readmes.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/crafting-effective-readmes.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:23:37.235Z",
@@ -1016,7 +1016,7 @@
     "agent-md-refactor": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/agent-md-refactor.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/agent-md-refactor.zip",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T10:27:31.619Z",
@@ -1041,7 +1041,7 @@
     "prompt-engineer": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/prompt-engineer.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/prompt-engineer.zip",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T10:27:31.811Z",
@@ -1069,7 +1069,7 @@
     "spark-optimization": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/spark-optimization.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/spark-optimization.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:24:01.563Z",
@@ -1092,7 +1092,7 @@
     "data-context-extractor": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/data-context-extractor.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/data-context-extractor.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:24:01.764Z",
@@ -1119,7 +1119,7 @@
     "turborepo": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/turborepo.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/turborepo.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:24:02.479Z",
@@ -1166,7 +1166,7 @@
     "pnpm-upgrade": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/pnpm-upgrade.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/pnpm-upgrade.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:27:31.966Z",
@@ -1190,7 +1190,7 @@
     "supabase-postgres-best-practices": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/supabase-postgres-best-practices.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/supabase-postgres-best-practices.zip",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T10:24:03.852Z",
@@ -1247,7 +1247,7 @@
     "dispatching-parallel-agents": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/dispatching-parallel-agents.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/dispatching-parallel-agents.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:24:04.229Z",
@@ -1269,7 +1269,7 @@
     "git-workflow-and-versioning": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/git-workflow-and-versioning.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/git-workflow-and-versioning.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:24:04.303Z",
@@ -1291,7 +1291,7 @@
     "finishing-a-development-branch": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/finishing-a-development-branch.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/finishing-a-development-branch.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:24:04.374Z",
@@ -1313,7 +1313,7 @@
     "github-gem-seeker": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/github-gem-seeker.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/github-gem-seeker.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:27:32.054Z",
@@ -1335,7 +1335,7 @@
     "agentic-eval": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/agentic-eval.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/agentic-eval.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:27:29.356Z",
@@ -1357,7 +1357,7 @@
     "verification-before-completion": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/verification-before-completion.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/verification-before-completion.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:27:29.409Z",
@@ -1379,7 +1379,7 @@
     "performance": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/performance.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/performance.zip",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T10:27:29.510Z",
@@ -1403,7 +1403,7 @@
     "web-perf": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/web-perf.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/web-perf.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:27:29.583Z",
@@ -1425,7 +1425,7 @@
     "accessibility": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/accessibility.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/accessibility.zip",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T10:27:29.684Z",
@@ -1449,7 +1449,7 @@
     "sql-optimization-patterns": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/sql-optimization-patterns.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/sql-optimization-patterns.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:27:29.774Z",
@@ -1472,7 +1472,7 @@
     "code-documenter": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/code-documenter.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/code-documenter.zip",
       "license": "MIT",
       "licenseBasis": "实测 LICENSE 文件或 frontmatter 声明",
       "installedAt": "2026-09-15T10:27:30.006Z",
@@ -1506,7 +1506,7 @@
     "web-design-reviewer": {
       "batch": "manus",
       "line": "fs",
-      "sourceUnit": "/Users/lute/Downloads/skills/Manus/skill02/web-design-reviewer.zip",
+      "sourceUnit": "__SKILL_INTAKE_SOURCE__/Manus/skill02/web-design-reviewer.zip",
       "license": "internal-only",
       "licenseBasis": "无 LICENSE 文件且 frontmatter 未声明",
       "installedAt": "2026-09-15T10:27:30.146Z",

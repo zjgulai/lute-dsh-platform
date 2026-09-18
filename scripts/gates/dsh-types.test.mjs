@@ -1,12 +1,23 @@
-import { test } from 'node:test'
+import { afterEach, test } from 'node:test'
 import assert from 'node:assert/strict'
-import { mkdtempSync, mkdirSync, writeFileSync, existsSync, readFileSync } from 'node:fs'
-import { tmpdir } from 'node:os'
+import { mkdirSync, writeFileSync, existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { applyTypeLinks, dshPackagesInManifest, dshPackagesInSource, planTypeLinks } from './dsh-types.mjs'
+import { createMutationFixture } from '../lib/mutation-fixture.mjs'
+
+const fixtures = []
+afterEach(() => {
+  while (fixtures.length > 0) fixtures.pop().cleanup()
+})
+
+function tempRepo(prefix) {
+  const fixture = createMutationFixture({ prefix })
+  fixtures.push(fixture)
+  return fixture.repo
+}
 
 function pkg(files) {
-  const root = mkdtempSync(join(tmpdir(), 'lute-types-'))
+  const root = tempRepo('lute-types')
   for (const [rel, content] of Object.entries(files)) {
     const target = join(root, rel)
     mkdirSync(join(target, '..'), { recursive: true })
@@ -54,10 +65,10 @@ test('类型链接计划：只为存在对应 tgz 的包生成链接，缺 tgz �
 })
 
 test('类型链接执行：目标存在时建立可达的符号链接', () => {
-  const source = mkdtempSync(join(tmpdir(), 'lute-types-src-'))
+  const source = tempRepo('lute-types-src')
   mkdirSync(join(source, 'dsh-tools'), { recursive: true })
   writeFileSync(join(source, 'dsh-tools', 'package.json'), '{"name":"@deepseek-ai/dsh-tools"}')
-  const target = mkdtempSync(join(tmpdir(), 'lute-types-dst-'))
+  const target = tempRepo('lute-types-dst')
   mkdirSync(join(target, 'node_modules', '@deepseek-ai'), { recursive: true })
 
   const written = applyTypeLinks({ root: target, source, links: ['@deepseek-ai/dsh-tools'] })
@@ -67,10 +78,10 @@ test('类型链接执行：目标存在时建立可达的符号链接', () => {
 })
 
 test('类型链接执行：不覆盖已存在的实体目录（包自装依赖优先）', () => {
-  const source = mkdtempSync(join(tmpdir(), 'lute-types-src2-'))
+  const source = tempRepo('lute-types-src2')
   mkdirSync(join(source, 'dsh-tools'), { recursive: true })
   writeFileSync(join(source, 'dsh-tools', 'package.json'), '{}')
-  const target = mkdtempSync(join(tmpdir(), 'lute-types-dst2-'))
+  const target = tempRepo('lute-types-dst2')
   const ownDir = join(target, 'node_modules', '@deepseek-ai', 'dsh-tools')
   mkdirSync(ownDir, { recursive: true })
   writeFileSync(join(ownDir, 'package.json'), '{"own":true}')

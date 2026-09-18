@@ -69,6 +69,49 @@ describe("resolveSettingsShell", () => {
     const doc = settingsShellFixture({ sectionIds: [] });
     expect(resolveSettingsShell(doc).kind).toBe("drift");
   });
+
+  it("结构相似但没有官方 title 链接的 direct-nav dialog 不会被当成 Settings", () => {
+    const doc = settingsShellFixture({ sectionIds: ["general", "models", "plugins"] });
+    const decoy = doc.createElement("aside");
+    decoy.setAttribute("role", "dialog");
+    decoy.setAttribute("aria-modal", "true");
+    const nav = doc.createElement("nav");
+    const list = doc.createElement("div");
+    const button = doc.createElement("button");
+    button.setAttribute("aria-current", "true");
+    list.appendChild(button);
+    nav.appendChild(list);
+    decoy.appendChild(nav);
+    doc.body.prepend(decoy);
+
+    const result = resolveSettingsShell(doc);
+    expect(result.kind).toBe("ok");
+    if (result.kind !== "ok") return;
+    expect(result.dom.panel).not.toBe(decoy);
+  });
+
+  it("没有唯一 aria-current 的 direct-nav dialog 不是可接受的 Settings 面板", () => {
+    for (const broken of ["no-current", "duplicate-current"] as const) {
+      const doc = settingsShellFixture({
+        sectionIds: ["general", "models", "plugins"],
+        broken,
+      });
+      expect(resolveSettingsShell(doc).kind).not.toBe("ok");
+    }
+  });
+
+  it("两个完整 Settings 形状同时出现时 fail closed，不选第一个", () => {
+    const doc = settingsShellFixture({ sectionIds: ["general", "models", "plugins"] });
+    const secondDoc = settingsShellFixture({ sectionIds: ["general", "models", "plugins"] });
+    const secondOverlay = secondDoc.body.firstElementChild;
+    expect(secondOverlay).not.toBeNull();
+    doc.body.appendChild(doc.importNode(secondOverlay!, true));
+
+    const result = resolveSettingsShell(doc);
+    expect(result.kind).toBe("drift");
+    if (result.kind !== "drift") return;
+    expect(result.reason).toContain("ambiguous");
+  });
 });
 
 describe("recordShellState", () => {

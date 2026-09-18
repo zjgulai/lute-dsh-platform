@@ -71,8 +71,8 @@ export function RootMark({ size = 24, className }: BrandMarkProps): ReactElement
  * Sidebar brand-name occupant: 路特创新 wordmark + the "AgenticOS" badge.
  *
  * 宿主名字槽仅约 114px 宽（mark 由 host 固定 size=24），一行须压缩：
- * 名字 11px/字距0.5 + 徽标 8px 紧凑胶囊（fit-content，不拉伸）。
- * 蒙版用纯渐变+描边+辉光（不用 backdrop-filter，避免 Electron 叠层合成下不渲染）。
+ * 名字使用主题字体 token，徽标保持紧凑胶囊（fit-content，不拉伸）。
+ * 品牌绿只保留在标识与强调边界，不用渐变或装饰性辉光。
  */
 export function SidebarRootName(): ReactElement {
   return jsxs("span", {
@@ -118,9 +118,7 @@ export const BRAND_CSS = `
   color: var(--dsw-alias-label-primary);
 }
 [data-plugin="dsh-root-brand"].dsh-rb-hero .dsh-rb-hero-name {
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 26px;
+  font: var(--dsw-font-m-18, 500 18px/26px var(--dsw-font-family, system-ui, sans-serif));
   letter-spacing: 0.2px;
   white-space: nowrap;
 }
@@ -132,13 +130,11 @@ export const BRAND_CSS = `
   min-width: 0;
   max-width: 100%;
   color: ${BRAND_GREEN};
-  font-weight: 600;
-  font-size: 11px;
-  line-height: 18px;
+  font: var(--dsw-font-xxs-12, 600 12px/18px var(--dsw-font-family, system-ui, sans-serif));
   letter-spacing: 0.5px;
   white-space: nowrap;
 }
-/* "AgenticOS" badge — 胶囊结构 + 品牌绿玻璃辉光（一行紧凑版，适配 ~114px 名字槽） */
+/* "AgenticOS" badge — 紧凑的中性胶囊（一行版，适配 ~114px 名字槽） */
 [data-plugin="dsh-root-brand"] .dsh-rb-agentic {
   display: inline-flex;
   align-items: center;
@@ -147,16 +143,13 @@ export const BRAND_CSS = `
   height: 15px;
   padding: 0 5px;
   border-radius: 999px;
-  font-size: 8px;
-  font-weight: 600;
-  line-height: 1;
+  font: var(--dsw-font-xxxs-11, 600 11px/16px var(--dsw-font-family, system-ui, sans-serif));
   letter-spacing: 0;
   white-space: nowrap;
   flex: 0 0 auto;
-  color: var(--dsw-alias-label-primary, #e8e8ea);
-  background: linear-gradient(120deg, rgba(88, 184, 72, 0.34), rgba(88, 184, 72, 0.12));
-  border: 1px solid rgba(88, 184, 72, 0.65);
-  box-shadow: 0 0 8px rgba(88, 184, 72, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.10);
+  color: var(--dsw-alias-state-business-primary, #58b848);
+  background: var(--dsw-alias-state-business-tertiary, rgba(88, 184, 72, 0.12));
+  border: 1px solid var(--dsw-alias-state-business-primary, #58b848);
 }
 [data-plugin="dsh-root-brand"] .dsh-rb-agentic::before {
   content: "";
@@ -166,7 +159,9 @@ export const BRAND_CSS = `
   background: var(--dsw-alias-state-business-primary, #58b848);
 }
 @media (max-width: 640px) {
-  [data-plugin="dsh-root-brand"].dsh-rb-hero .dsh-rb-hero-name { font-size: 14px; }
+  [data-plugin="dsh-root-brand"].dsh-rb-hero .dsh-rb-hero-name {
+    font: var(--dsw-font-s-14, 500 14px/20px var(--dsw-font-family, system-ui, sans-serif));
+  }
 }
 
 /* P1.5a 统计条折叠的视觉留在下面（选择器由 live-selectors 在运行时解析）。 */
@@ -185,6 +180,13 @@ export const BRAND_CSS = `
   outline: 2px solid var(--dsw-alias-state-business-primary, #58b848);
   outline-offset: 2px;
   border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-plugin="dsh-root-brand"] *,
+  [data-plugin="dsh-root-brand"] *::before,
+  [data-plugin="dsh-root-brand"] *::after {
+    transition: none !important;
+  }
 }
 `;
 

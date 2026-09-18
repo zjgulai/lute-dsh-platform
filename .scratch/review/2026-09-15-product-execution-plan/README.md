@@ -1,10 +1,10 @@
 # LUTE 产品项目推荐执行计划（临时 Review）
 
 - 创建日期：2026-09-15
-- 最近复核：2026-09-16（Qodo deep review + Understand 全量知识图谱 + 本地独立复核）
-- 状态：`active-plan`；`QG-010/QG-011` 已完成本地实现与分层验收，本 checkpoint 只固化这两项；QG-007 远端 required check 仍 deferred
+- 最近复核：2026-09-16（Qodo deep review + Understand 全量知识图谱 + 本地独立复核；其后同日内完成 `SEC-RT-005` 与新增的 `QG-013` 两轮）
+- 状态：`active-plan`；`QG-010/QG-011` 已由 GitHub checkpoint `cc6f1ac` 固化；`QG-006A`、`PROD-UX-001/QG-012`、`SEC-RT-005`、`SEC-RT-006/007`、`QG-013`、`QG-003/004/005`、`QG-006B` 为**本地已完成但未提交**；`QG-007` 的 workflow 与离线判据（L1）已落地并**已推送到远端 main**（`623404375e95`）；`QG-008` 的 main 与 v* tag 保护**已生效**（ruleset 23564403 / 23564404），只读审计与声明全等
 - 适用仓库：LUTE Agentic System / Magpie-Horch
-- 当前权限：选择性 commit 并仅 push `QG-010/QG-011` 到 GitHub，确认 Codeup 不变后只实施 `QG-006A`；不得进入 `QG-006B`、远端 CI、安装、发布或其他任务
+- 当前权限：授权按轮次逐个圈定。本轮授权范围为「授权并继续下一批 QG-008」，用户在两个选项中选择了「**两步都授权**：先用 API 推 workflow 到 main，跑起来后再建 ruleset」。本轮内**未** commit 本地源码改动、未进入 live GUI、未跑 Codeup、未安装或发布。远端只做了两件事：新增 `.github/workflows/gate.yml`（一个文件）与创建两条 ruleset——两者都有变更前快照与恢复方式。
 
 ## 1. 计划目标
 
@@ -62,10 +62,13 @@
 
 ### 当前执行断点
 
-- 最近已推送 checkpoint：`cdf50c85`，仅在 GitHub `origin/main`；Codeup 仍停在 `44f49940`。
+- 最近已推送 checkpoint：`cc6f1ac3025fe778f636a9c049bd26e88e6bfd33`，仅在 GitHub `origin/main`；推送后复核 Codeup 仍停在 `44f49940be70574519da6afbfeef3638fb0b97ad`。
 - `QG-010` 已闭合 catalog 138/138、owner 批准 whitelist 89/89 与 live 节点归属；`QG-011` 已闭合第三方 intake 互斥终态、守恒与错误非零退出。两项只代表本地工程证据，QG-007 远端 required CI 未开始。
-- 本文件所在 checkpoint 只纳入 `QG-010/QG-011` 及其 ADR/Note/计划证据；未验收的 `QG-003` candidate 不得混入。
-- checkpoint 推送并确认 Codeup 不变后，只执行 `QG-006A` mutation fixture 隔离基础设施；完成后停止，不自动进入 `QG-006B`。
+- GitHub checkpoint 只纳入 `QG-010/QG-011` 及其 ADR/Note/计划证据；未验收的 `QG-003` candidate 没有混入。
+- `QG-006A` 已新增 owned mutation fixture、迁移四类真实污染点并补齐六组临时树 cleanup；本地改动未提交。完整并发/SIGTERM/全工作树 snapshot 仍是 `QG-006B`，本轮不进入。
+- `PROD-UX-001` 已把 Settings CSS 收到 parser-owned marker，并以五类非 Settings modal 负控证明无跨 dialog 污染；`QG-012` 已用 upstream 188px nav + 28×28px close 独立校准，离线状态为 14 cases/27 assertions、criteria 9/9（含 6 个 mutation control）。
+- Settings 当前只能报告 `local scope contract complete; instrument verified; live unverified`：未操作 profile/DSH GUI，真实 Chrome、两种 zoom、键盘/VoiceOver、clean checkout/干净安装继续等待各自验收。
+- 本批根 `test:gate` 412/412；quick 67/69、full 74/76，唯一 fail 为当前 profile 仍装载旧 Settings bundle，另一个非 pass 是 159 条 disabled live-presets typed skip。未越权执行 profile 同步，故根 gate 如实保持非零。
 - Advisor 父运行时本轮不可用，没有可归因结论；Understand 全量图谱已在用户确认 `.ua/.understandignore` 后完成，新增事实、限制与校验见 [Understand 图谱证据](UNDERSTAND-GRAPH-EVIDENCE.md)。
 
 ## 4. 文件导航

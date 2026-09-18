@@ -320,7 +320,9 @@ LoopX、pip/Python、MCP 和后续子进程只继承运行所需变量，不继�
 
 - `node --test` 定向事务套件：50/50 通过，覆盖 path/link、同尺寸篡改、fault、硬退出恢复与真实双进程争锁。
 - `dsh-overseas-skills`：82/82 包级测试通过，`tsc -p tsconfig.json --pretty false` 通过。
+  - **superseded（2026-09-16 重采）**：按包自身脚本 `npm test`（`node --test test/*.spec.mjs`）实测 **113/113 pass / 0 fail**，exit 0；原 82 是陈旧读数。注意 `node --test test/`（目录形式）会拣到非 spec fixture 并报 fail，必须用包声明的 glob。
 - `pnpm run gate:full`：71/71 仓库契约通过，含 `destructive-preset-skill-transactions`、自检与 Node interpreter 门禁。
+  - **superseded（2026-09-16 重采）**：`gate:full` 现为 **76 项 / 75 pass / 1 typed skip / 0 fail**，exit 0；分母 71 是注册表扩容前的旧值（HEAD 注册 75 条，工作树 76 条）。同一命令含 `destructive-preset-skill-transactions`、自检与 Node interpreter 门禁，结论不变。
 - 真实 HOME 只执行 dry-run 与第三方 `--apply` 拒绝验证；后者以 `APPROVAL_LEDGER_MISSING`、退出码 2 结束且无写入。
 
 ### 人工验收
@@ -409,27 +411,49 @@ LoopX、pip/Python、MCP 和后续子进程只继承运行所需变量，不继�
 
 ### TODO
 
-- [ ] 清点每个 endpoint 的正常 payload 大小和内容类型。
-- [ ] 建立有硬上限、deadline、abort 和结构化错误的 bounded reader。
-- [ ] 小型设置/API 初始建议 64 KiB；代理或特殊端点必须单独声明上限。
-- [ ] 同时检查 Content-Length 和实际累计字节，覆盖 chunked 绕过。
-- [ ] 超限 413、超时 408/504、parse error 400；错误不回显原 body。
-- [ ] 超限后停止缓存并销毁/排空请求，确保 handler 不执行。
+- [x] 清点每个 endpoint 的正常 payload 大小和内容类型。wanzh 12 条路由中 7 条读 body，全部为小型设置形态（id / 开关布尔 / 一条凭证字符串 / 一个 URL），最大者远小于 64 KiB；team-hub 分「透传面（代理与 `/api/*`）／网关自有面（登录改密表单、admin 控制台）」两档。
+- [x] 建立有硬上限、deadline、abort 和结构化错误的 bounded reader。`lib/bounded-body.js`（wanzh）与 `src/bounded-body.mjs`（team-hub），错误码 `BODY_TOO_LARGE` / `BODY_TIMEOUT` / `BODY_ABORTED` / `BODY_PARSE_ERROR`，各自带 `status`。两份实现是**结构约束**不是偏好：两个包都无构建步，运行时导入不了 `.ts` 共享源（见 ADR-0100 备选方案）。
+- [x] 小型设置/API 初始建议 64 KiB；代理或特殊端点必须单独声明上限。wanzh 统一 64 KiB；team-hub 透传 32 MiB、表单 8 KiB、admin 64 KiB。**32 MiB 有测量依据**：Desktop profile 实际挂载 `dsh-file-upload`，其 `MAX_JSON_BYTES = 18 MiB`，取 32 MiB 留 ~1.8× 余量。
+- [x] 同时检查 Content-Length 和实际累计字节，覆盖 chunked 绕过。头部声明超限走快路径（一个字节都不读）；**放行一律以实际累计字节为准**，`Content-Length` 只用于提前拒绝。
+- [x] 超限 413、超时 408/504、parse error 400；错误不回显原 body。用 408 而非 504（超时发生在读取阶段，不是上游未响应）。错误文本只含上限数值，另有断言证明响应里不含 secret canary。
+- [x] 超限后停止缓存并销毁/排空请求，确保 handler 不执行。拒绝时立即清空已读 chunk、`req.pause()`，响应带 `connection: close`；有断言证明 `connections.json` 一个字节都没被改写。
 
 ### 自动验收
 
-- [ ] 边界值、+1 byte、伪造长度、chunked 和 slow body 全覆盖。
-- [ ] 超限不会进入业务 handler 或写配置。
-- [ ] 受控并发下 RSS 不随传输总量线性增长。
-- [ ] 正常登录、改密、设置、代理测试不回归。
+- [x] 边界值、+1 byte、chunked 和 slow body 全覆盖。**「伪造长度」不在其中且不可表达**——HTTP/1.1 下 Node 把 `Content-Length` 当帧边界，多出的字节会被当成下一个管线请求，拿到的是解析层 400 而不是我们的 413（初版用例正是这么写错的，见 CHANGELOG 更正）。替代覆盖两个真实对抗形态：无 `Content-Length` 的分块传输、多小块逐个合法但累计超限。
+- [x] 超限不会进入业务 handler 或写配置。team-hub 侧断言审计里**没有** `auth.login-failed`（超限请求根本没进入认证逻辑）且**有** `system.body-rejected`；wanzh 侧断言状态文件字节不变。
+- [ ] 受控并发下 RSS 不随传输总量线性增长。**未实测**——本轮只验证了单请求的上限生效，未做并发压测。
+- [x] 正常登录、改密、设置、代理测试不回归。两侧全量套件 wanzh 86/86、team-hub 87/87；`typecheck` 与 `pnpm run gate` 均 exit 0。
 
 ### 人工验收
 
-- [ ] 正常交互无变化；超限提示明确且请求不永久挂起。
+- [x] 超限提示明确且请求不永久挂起。由真实 socket 用例覆盖（`hung === false` 断言）。
+- [ ] 正常交互无变化。**需重启后人工确认**：wanzh 已同步到 profile 装载点（重启 DSH 生效）；team-hub 的部署形态是**仓库源码**（launchd `com.dshteamhub.gateway` 直接跑仓库路径，实测运行时持有的 profile 副本 fd 数为 0），需重启该服务生效。
 
 ### 失败与回滚
 
 真实业务超阈值时按 endpoint 调整有测量依据的值；不得恢复无限读取。
+
+### 实施证据（2026-09-16）
+
+- 新增 `packages/capabilities/dsh-wanzh-hulian/lib/bounded-body.js` 与
+  `packages/infra/dsh-team-hub/src/bounded-body.mjs`。
+- 接线：wanzh 的 7 个调用点经 `readBody` 统一收口、`sendError` 映射错误码；
+  team-hub 的 6 个调用点分档，并把 `createRequestHandler` 从 `startServer()` 提取成可测的缝
+  （`startServer()` 不返回 server 句柄且 listen 后不返回，测试起它会让进程挂住）。
+- 新增测试 25 条（wanzh 10 + team-hub 15），全部走**真实 socket 与真请求处理器**——
+  假 req 对象造不出 chunked、slow body、「超限后连接不挂起」这些形态。
+- **变异自测 3/3 判红**：把三处 `return await` 分别改回 `return`，对应用例全部失败。
+  这一步抓到了初版的问题：最初只有「代理面超限」一条用例，而它走的是 `handleApiPost`，
+  **根本没在守 `proxyRequest`**——判据数与修复数相等不代表覆盖面相等。
+- **同批修掉两个既有缺陷**（非本卡引入，做本卡时被测试逼出）：
+  1. team-hub 三条主通路（admin 控制台 / RPC / 代理）`try` 内 `return promise` 不 `await`，
+     任何异常都退化成「永远没有响应」而非 500 → 登记为 P-33；
+  2. `dsh-wanzh-hulian` 的 `files` 清单漏了 `lib/atomic-store.js` 与 `lib/oauth-flow.js`
+     （`npm pack --dry-run` 实测不含），属 **P-24 复发** → 已补齐清单并补记。
+- 决策记录：[ADR-0100](../../../../docs/adr/ADR-0100.md)、
+  [Note](../../../../docs/notes/implemented/capability/2026-09-16-bounded-request-bodies.md)。
+
 
 ## SEC-RT-006 · Wanzh 配置与 token 原子持久化
 
@@ -444,30 +468,49 @@ LoopX、pip/Python、MCP 和后续子进程只继承运行所需变量，不继�
 
 ### TODO
 
-- [ ] 列出 Wanzh 所有持久化文件和 owner。
-- [ ] 建立同目录 temp、0600、flush/fsync、rename、目录 fsync 的 atomic writer。
-- [ ] 每个文件的 read-modify-write 在同一串行 mutation queue 中完成。
-- [ ] 写后校验最终权限，既有 0644 必须收紧。
-- [ ] JSON 损坏时保留原字节，连接保持关闭，设置页显示结构化健康错误。
-- [ ] 不再把损坏 state 回退到 `enabled:true`。
-- [ ] 新旧 schema 只做有明确规则的兼容读取。
+- [x] 列出 Wanzh 所有持久化文件和 owner（见下方实施证据；清单即 `test/persistence-inventory.spec.mjs` 的 `INVENTORY`，新增一处不登记就判红）。
+- [x] 建立同目录 temp、0600、flush/fsync、rename、目录 fsync 的 atomic writer（`lib/atomic-store.js`）。
+- [x] 每个文件的 read-modify-write 在同一串行 mutation queue 中完成（`updateJson`；**边界**：串行只覆盖同进程，跨进程互斥未做）。
+- [x] 写后校验最终权限，既有 0644 必须收紧（校验在 **rename 之前**，失败即不 rename）。
+- [ ] JSON 损坏时保留原字节，连接保持关闭，设置页显示结构化健康错误 → **host 侧已完成**（原字节不改写、能力逐条关闭、`/list` 返回结构化 health）；**设置页渲染未做**（客户端需重启 app 才取得真实页面证据，登记为剩余项）。
+- [x] 不再把损坏 state 回退到 `enabled:true`。
+- [x] 新旧 schema 只做有明确规则的兼容读取（规则＝缺失用内置默认、可用则归一化读取、损坏或顶层不是对象一律 fail-closed；**无投机迁移**，见 ADR-0099 备选方案）。
 
 ### 自动验收
 
-- [ ] kill-before-rename 后旧文件完整。
-- [ ] 100 次并发 toggle/set 不损坏 JSON、不丢已确认更新。
-- [ ] 预建 0644 文件，成功写入后为 0600。
-- [ ] 损坏 JSON 下能力关闭，原文件仍可取证。
-- [ ] 静态清单禁止直接覆盖最终路径。
+- [x] kill-before-rename 后旧文件完整。
+- [x] 100 次并发 toggle/set 不损坏 JSON、不丢已确认更新。
+- [x] 预建 0644 文件，成功写入后为 0600。
+- [x] 损坏 JSON 下能力关闭，原文件仍可取证。
+- [x] 静态清单禁止直接覆盖最终路径（`lib/` 下除写入器外零直写调用 ＋ 清单双向登记）。
 
 ### 人工验收
 
-- [ ] 配置连接后重启 DSH，状态/token 正常保留。
-- [ ] 在测试 profile 人工损坏配置，UI 显示修复指引且不启用连接。
+- [ ] 配置连接后重启 DSH，状态/token 正常保留。（需重启，本轮未做）
+- [ ] 在测试 profile 人工损坏配置，UI 显示修复指引且不启用连接。（**host 侧读数已具备**；UI 渲染未实现，未做）
 
 ### 失败与回滚
 
 写失败必须保留旧文件并向调用方返回失败；不得出现“内存显示成功、磁盘未成功”。
+
+### 2026-09-16 实施证据（SEC-RT-006）
+
+- 持久化清单与 owner：`~/.dsh/integrations/getnote/config.json`（连接总开关/模型自动调用/默认知识库）、
+  `~/.dsh/integrations/wanzh-hulian/connections.json`（连接注册表）、`…/mcp-servers.json`（MCP 清单）、
+  `…/oauth-pixpix.json`（PixPix token，**仅真实 token 交换写**）、
+  `~/.dsh/skills/{getnote-brain,pixpix-ecommerce,shopify-store-ops,apify-mcp}/SKILL.md`。
+  改动前有 **13 处**直写最终路径（4 JSON + 9 技能写点），任务清单只点了前 4 处。
+- Red/Green（把工作树换成 `git show HEAD:…lib/index.js` 重放）：`test/persistence.spec.mjs`
+  **9 tests / 0 pass / 9 fail**；恢复后 **9/9 pass**。旧版下 `node --test` 不退出，需 `--test-force-exit`
+  才拿得到读数（新版正常退出）。
+- 变异自测（恒真桩突变必须变红）：去掉 `chmod` → umask 用例红；去掉 rename 前权限校验 → 越权用例红；
+  改回直写最终路径 → 静态清单用例红 ＋ 三个动态用例红；去掉串行队列 → 并发用例红；
+  **目录 fsync 去掉不变红**（进程级无判别力，只做显式标注射程的结构性断言）。
+- 静态清单判据：`test/persistence-inventory.spec.mjs` 把「13 个家」变成两个方向的断言——`lib/` 下除写入器外
+  零直写调用（变异：把一处改回 `writeFile` → 4 条用例变红）＋ 每个文件在真实写入口之后按权限存在且无临时残留。
+  清单里唯一标 `live:true` 的是 token 文件（离线没有写出它的路径），并**断言它不会被任何离线路径写出**。
+- 包内 `node --test test/*.spec.mjs` **76 tests / 76 pass / 0 fail**；`tsc -p tsconfig.json` exit 0。
+- 第二轮（独立审证后修订）：见文末「2026-09-16 复审修订」小节。
 
 ## SEC-RT-007 · OAuth flow 生命周期、超时和 disposer
 
@@ -482,27 +525,41 @@ LoopX、pip/Python、MCP 和后续子进程只继承运行所需变量，不继�
 
 ### TODO
 
-- [ ] 把 state/verifier/server/timer/expiresAt 收进单一 flow 对象。
-- [ ] 明确重复 start 行为：关闭旧 flow 后新建，或返回 409。
-- [ ] 到期自动关闭 server 并清理 state/verifier。
-- [ ] 成功、provider error、state mismatch、客户端断开、dispose 共用幂等 cleanup。
-- [ ] 清点并调用 OAuth start/status、MCP list 等全部 route disposer。
-- [ ] token 写入统一走 SEC-RT-006。
+- [x] 把 state/verifier/server/timer/expiresAt 收进单一 flow 对象（`lib/oauth-flow.js`）。
+- [x] 明确重复 start 行为：**关闭旧 flow 后新建**（原因 `superseded`，回执带 `superseded: true`）。
+- [x] 到期自动关闭 server 并清理 state/verifier（定时器 `unref()`，不吊住进程退出）。
+- [x] 成功、provider error、客户端断开、dispose 共用幂等 cleanup。**state mismatch 例外**：明确**不**消耗当前 flow（400 + 由到期定时器收尾），因为过期标签页的回调不该打断用户正在进行的授权；取舍见 ADR-0099。
+- [x] 清点并调用 OAuth start/status、MCP list 等全部 route disposer（实测注册 12 条只 dispose 9 条，已补齐为 12/12）。
+- [x] token 写入统一走 SEC-RT-006（`writeOauthToken` → 原子 store）。
 
 ### 自动验收
 
-- [ ] 连续 start 两次最多一个 listener。
-- [ ] 时间推进到过期后端口关闭、状态清空。
-- [ ] 成功/拒绝/error/state mismatch 不泄漏 active handle。
-- [ ] plugin dispose 后路由失效、端口不可连接。
+- [x] 连续 start 两次最多一个 listener（真实 loopback：旧 server `listening === false` 且端口拒连）。
+- [x] 时间推进到过期后端口关闭、状态清空（注入时钟确定性重放 + 真实端口用例）。
+- [x] 成功/拒绝/error/state mismatch 不泄漏 active handle（四类终止路径都回到 `active() === null`；mismatch 按上条保留但受 TTL 约束）。
+- [x] plugin dispose 后路由失效、端口不可连接（12/12 回收 ＋ registry `dispose()` 关闭进行中的 flow；端口拒连由 flow 单元的真实端口用例证明）。
 
 ### 人工验收
 
-- [ ] 正常授权、用户关闭浏览器、拒绝、超时后均能重新发起，不必重启 DSH。
+- [ ] 正常授权、用户关闭浏览器、拒绝、超时后均能重新发起，不必重启 DSH。（需要真实 PixPix 授权与本机浏览器，本轮未做）
 
 ### 失败与回滚
 
 OAuth 控制面异常时关闭新授权入口并保留已有有效 token；不得保留无限期 listener。
+
+### 2026-09-16 实施证据（SEC-RT-007）
+
+- Red/Green：`test/oauth-routes.spec.mjs` 对 HEAD 版重放 **4 tests / 0 pass / 4 fail**；恢复后 **4/4 pass**。
+  `test/oauth-flow.spec.mjs` 对旧实现为**模块不存在**（新模块），其判别力由变异自测证明：
+  去掉到期定时器（3 红）、去掉 supersede（2 红）、去掉 `closeAllConnections`（3 红）、去掉 `unref`（1 红）。
+  其中 `closeAllConnections` 的判别力**在「既存连接有没有被断开」上**（真实 loopback 用例以 `waitFor` 超时变红），
+  不在「端口还能不能被连上」——初版自评把这两者混为一谈，独立审证纠正。
+- 无法在测试内重放的旧缺陷：旧实现「连点两次泄漏 listener」需要真的走 `/oauth/start`，而它会
+  `spawn("open", …)` 打开系统浏览器——因此该条只有源码事实（`pendingOauth` 覆盖 + 无定时器）与新实现的
+  真实端口用例，没有旧行为的运行时重放。这条限制写在这里，不当作已验证。
+- 包内全量 **76/76**；`tsc` exit 0；根门禁 quick 70 项（69 pass / 1 skip / 0 fail）、full 77 项（76 pass / 1 skip / 0 fail），
+  两者 exit 0；新增门禁项 `wanzh-persistence-and-oauth` 收编 6 个 spec（恒真桩突变下会红）。
+- 第二轮（独立审证后修订）：见文末「2026-09-16 复审修订」小节。
 
 ## SEC-RT-008 · Team Hub session 原子存储、清理和性能
 
@@ -662,3 +719,24 @@ TLS 部署失败只能回退 loopback-only，不能回退默认明文 LAN。
 ### 失败与回滚
 
 总门禁或证据链自身失败时，不修改产品状态、不重跑破坏性 live 场景、不覆盖上一份有效证据；候选保持未发布。只能修复门禁后从对应 Red/Green 层重新执行，不能通过删测试、降级为 warn、计入 skip 或恢复动态下载来收口。
+
+### 2026-09-16 复审修订（SEC-RT-006 / 007）
+
+与实现上下文分离的独立审证复现了全部 Red/Green 与三条自选变异（哈希前后一致），结论「有条件放行」，
+给出 4 条 Important，经核对**全部成立并已修复**：
+
+- **I-1** 损坏 token 文件 + 回调无错误边界 = 「重新授权」永远不可能成功（浏览器空白页、listener 留到 TTL）。
+  修：回调 `try/catch/finally`（`finally` 无条件 `flow.close`）＋ token 走「归档后重写」（原字节留证）。
+- **I-2** fail-closed 只覆盖不可解析字节：`null`/`[]`/`123`/`"str"` 被读成开启，而同一文件写路径却 409（两把尺子）；
+  `connections.json` 的 `{}` 回退到默认清单。修：谓词从 store 导出共用；四个 store 统一「形状不对 = 损坏」。
+- **I-3** `/oauth/status` 是唯一没有错误边界的路由，本次改动给它的读路径会抛 → 请求悬挂（**本次引入的回归**）。
+  修：`readStoreJson` 把 I/O 失败降级成 `*_unreadable` 健康读数；该路由补 `catch → sendError`。
+- **I-4** 「所有写入口在同一条链上」不成立：并发 toggle **两边 200 而磁盘只落一条**。修：`runExclusive` 排他槽位
+  ＋ toggle 全或无（先查两份清单健康度再落盘）＋ 队列重入即报错。
+- Minor 5 条同样修掉（token excerpt 回显、gate 指引指向不存在的界面、spec 依赖 cwd、注释数字、spec 不在门禁射程）。
+  最后一条按「知道 → 拦住」处理：新增门禁项并做恒真桩突变验证。
+
+修订后读数：包内 **76/76**；门禁 quick **70 项 69/1/0**、full **77 项 76/1/0**，均 exit 0；装载点已再次同步并逐字节复核。
+
+**仍未解决**：跨进程互斥；真实 OAuth 回调端到端复现（需真实 tokenEndpoint）；客户端渲染 `health`；
+宿主对未处理 rejection 的策略（审证未定位到 `ctx.webServer` 派发实现）。

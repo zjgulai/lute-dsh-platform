@@ -4,6 +4,7 @@
     {
       "id": "pm",
       "repo": "phuryn/pm-skills",
+      "commit": "8607e3b077817f89bf4a9b623246219734ac3be0",
       "note": "产品管理技能集；本机 clone 不可靠，走 trees+raw",
       "accounting": {
         "upstream": 69,
@@ -671,6 +672,7 @@
     {
       "id": "mp",
       "repo": "mattpocock/skills",
+      "commit": "74ca5fe077456a0b3b2f5310cf9430999fd0b5fd",
       "note": "工程技能集；clone 可用，但统一走 trees+raw 以共用一条取件路径",
       "accounting": {
         "upstream": 37,
